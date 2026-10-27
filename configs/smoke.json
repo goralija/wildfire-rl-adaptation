@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "label": "synthetic-smoke",
+  "backend": "synthetic-v1",
+  "scenario": {
+    "rows": 20,
+    "cols": 20,
+    "ignition": [
+      210
+    ],
+    "nonfuel": [
+      85,
+      105,
+      125,
+      145,
+      165,
+      185,
+      225,
+      245,
+      265,
+      285,
+      305
+    ],
+    "priority": [
+      93,
+      94,
+      95,
+      96,
+      113,
+      114,
+      115,
+      116,
+      133,
+      134,
+      135,
+      136,
+      153,
+      154,
+      155,
+      156
+    ],
+    "spread_probability": 0.35,
+    "burn_duration": 3,
+    "warmup_steps": 4,
+    "horizon": 240
+  },
+  "budgets": [
+    0,
+    2
+  ],
+  "seeds": [
+    200,
+    201
+  ],
+  "policies": [
+    "none",
+    "random",
+    "min_l2",
+    "max_l2",
+    "priority"
+  ]
+}

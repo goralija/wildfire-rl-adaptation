@@ -1,0 +1,29 @@
+# Izvori i literatura
+
+Provjereno 2026-10-28. Primarni izvori; postojeći rad nije naš rezultat.
+
+| ID | Izvor | Uloga / ograničenje |
+| --- | --- | --- |
+| S-001 | [Firehose projekat, Shen & Curtis, 2022](https://williamshen-nz.github.io/firehose/) | polazni rad, baseline i već postojeće priority zone |
+| S-002 | [Firehose rad](https://williamshen-nz.github.io/firehose/firehose-paper.pdf) | definicija idealizirane intervencije i eksperimenti; studentski projektni izvještaj |
+| S-003 | [Firehose izvor](https://github.com/aidan-curtis/firehose/tree/e49a52a9a987a1585d25ddca2f711222ca500ffb) | pregledani kod i modeli, pin u manifestu |
+| S-004 | [Pais et al., Cell2Fire, 2021](https://doi.org/10.3389/ffgc.2021.692706) | naučna osnova simulatora; nije validacija našeg adaptera |
+| S-005 | [Originalni Cell2Fire](https://github.com/cell2fire/Cell2Fire) | build dokumentacija i upućivanje na drugi fork |
+| S-006 | [MITRE SimFire](https://github.com/mitrefireline/simfire), [docs](https://mitrefireline.github.io/simfire/) | alternativni Python backend; ovdje nije instaliran ni benchmarkovan |
+| S-007 | [MITRE SimHarness](https://github.com/mitrefireline/simharness) | alternativni RL harness; nema dokaza prenosa Firehose težina |
+| S-008 | [Fire2A C2F-W](https://github.com/fire2a/C2F-W) | drugi model goriva/razvoj; nije drop-in Firehose backend |
+| S-009 | [Schulman et al., PPO, 2017](https://arxiv.org/abs/1707.06347) | razlog izbora PPO porodice, ne obećanje učinka |
+| S-010 | [Huang & Ontañón, 2020](https://arxiv.org/abs/2006.14171) | teorija i empirija invalid action masking |
+| S-011 | [Agarwal et al., 2021](https://arxiv.org/abs/2108.13264) | motivacija za intervale i više treninga |
+| S-012 | [Gymnasium custom env](https://gymnasium.farama.org/introduction/create_custom_env/) | trenutni reset/step kontrakt, provjeren kroz Context7 |
+| S-013 | [MaskablePPO dokumentacija](https://sb3-contrib.readthedocs.io/en/master/modules/ppo_mask.html) | maske pri učenju i predict/evaluation |
+
+Činjenice iz korisničke prepiske i slike imaju lokalnu provenance evidenciju, ne javni URL.
+
+## Razlika prema polaznom radu
+
+Firehose već obuhvata CNN politike, maskiranje, više ignition postavki i prioritetne
+nagrade. Naš predloženi doprinos je kontrolisano ispitivanje adaptacije preko budžeta,
+uz jasne troškove, kumulativnu štetu, uparene scenarije i analizu ukupne/prioritetne
+štete. Originalnost tog uskog doprinosa još zahtijeva širi pregled literature prije
+konačne tvrdnje; nije provedena sistematska literature review.

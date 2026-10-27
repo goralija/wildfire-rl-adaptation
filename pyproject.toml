@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wildfire-rl-adaptation"
+version = "0.1.0"
+description = "Reproducible budget-constrained wildfire RL research scaffold"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+rl = ["gymnasium>=1.2,<2", "numpy>=2,<3", "stable-baselines3>=2.7,<3", "sb3-contrib>=2.7,<3"]
+
+[project.scripts]
+wildfire = "wildfire_rl.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
