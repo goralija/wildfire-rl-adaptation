@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "label": "SYNTHETIC PILOT \u2014 not research evidence",
+  "created_utc": "2026-10-27T23:46:29.910520+00:00",
+  "config": {
+    "schema_version": 1,
+    "label": "synthetic-pilot-v1",
+    "backend": "synthetic-v1",
+    "scenario": {
+      "rows": 20,
+      "cols": 20,
+      "ignition": [
+        210
+      ],
+      "nonfuel": [
+        85,
+        105,
+        125,
+        145,
+        165,
+        185,
+        225,
+        245,
+        265,
+        285,
+        305
+      ],
+      "priority": [
+        93,
+        94,
+        95,
+        96,
+        113,
+        114,
+        115,
+        116,
+        133,
+        134,
+        135,
+        136,
+        153,
+        154,
+        155,
+        156
+      ],
+      "spread_probability": 0.35,
+      "burn_duration": 3,
+      "warmup_steps": 4,
+      "horizon": 240
+    },
+    "budgets": [
+      0,
+      2,
+      4,
+      8,
+      16
+    ],
+    "seeds": [
+      200,
+      201,
+      202,
+      203,
+      204,
+      205,
+      206,
+      207,
+      208,
+      209,
+      210,
+      211
+    ],
+    "policies": [
+      "none",
+      "random",
+      "min_l2",
+      "max_l2",
+      "priority"
+    ]
+  },
+  "config_sha256": "b3e9d0ab864b4e28fd1ddfd86cbbd3e8b749e8780dc7af3dc4bce041675cf1c8",
+  "source_sha256": "d84977b06867fb923d65ab564e697bd67d7fcf4f4b9291eed9f35041edf7006f",
+  "git_commit": "948ab5392de258bd6cf07117b40271c8151fdfd8",
+  "git_dirty": false,
+  "python": "3.13.11",
+  "platform": "macOS-26.3.1-arm64-arm-64bit-Mach-O"
+}
