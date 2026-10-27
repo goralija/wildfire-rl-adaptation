@@ -18,3 +18,6 @@ Napor je okvirni agentov prijedlog u aktivnim radnim satima, bez roka i dodjele 
 Dependency: 001→002→003→004→005→006→007→009; 004b samo nakon dokumentovanog FAIL.
 Odmah planirati mape/weather licences i test split tokom TASK-004, bez velikih preuzimanja.
 Nema obaveze implementacije svakog proširenja: glavni minimum i kvalitet evaluacije imaju prednost.
+
+TASK-010 (P2 minor, ~15 min): make malformed root JSON config (`null`, list) return
+ValueError/CLI usage error rather than traceback. Test first. Does not block valid runs.
