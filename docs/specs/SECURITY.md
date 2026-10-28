@@ -1,3 +1,8 @@
+---
+type: Specification
+title: Privatnost, licence i sigurno izvršavanje
+status: draft
+---
 # Privatnost, licence i sigurno izvršavanje
 
 Javni rezultat ne treba email adrese ili originalnu privatnu prepisku. Originali su

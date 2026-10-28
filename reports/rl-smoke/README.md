@@ -1,3 +1,7 @@
+---
+type: Experiment Report
+title: RL smoke — samo tehnički dokaz
+---
 # RL smoke — samo tehnički dokaz
 
 CPU, novi MaskablePPO, 6×6 synthetic, 1,024 koraka. Learn/save/load i masked rollout

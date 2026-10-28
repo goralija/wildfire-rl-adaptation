@@ -1,3 +1,7 @@
+---
+type: Experiment Report
+title: Sintetički pilot — tehnička provjera
+---
 # Sintetički pilot — tehnička provjera
 
 Izvršeno 300 epizoda; horizon=240; 0 epizoda završava uz aktivan požar.

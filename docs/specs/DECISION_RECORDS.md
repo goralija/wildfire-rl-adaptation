@@ -1,3 +1,7 @@
+---
+type: Decision Log
+title: Odluke (append-only)
+---
 # Odluke (append-only)
 
 ## ADR-001 — trajna projektna memorija u repozitoriju, accepted 2026-10-28
@@ -87,3 +91,19 @@ Dogrib/CFSDS preporuke ostaju provisional; preuzimanje/profilisanje nije konača
 ili spreman evaluacijski dataset. Ovaj zapis usvaja redoslijed, ne zatvara te odluke.
 TASK-004c ostaje poznati tehnički nastavak prema usaglašenom obimu i preduslov glavne
 evaluacije postojećeg pristupa. Runtime nalazi i svi raniji dokazi ostaju važeći.
+
+## ADR-010 — repo kao OKF 0.2 knowledge bundle, accepted 2026-10-28
+Korisnik je zatražio samostalnu bazu znanja u repozitoriju, OKF 0.2 i agent onboarding,
+u istom PR-u. Biramo repo root kao bundle root: postojeći docs/reports ostaju kanonski
+koncepti, dodaju se typed frontmatter, lowercase indeksi, root log i knowledge playbookovi.
+Ne pravimo paralelne kopije cijelog docs stabla niti vanjski servis/MCP kao preduslov.
+
+Root index/AGENTS usmjeravaju čitanje; mali CLAUDE/GEMINI/Copilot ulazi dijele ista
+pravila. Spec pin je GoogleCloudPlatform/open-knowledge-format commit ad30107c….
+Validator i odvojeni CI knowledge job provjeravaju strukturu i projektne lokalne
+linkove/dostupnost; PyYAML je samo alatna zavisnost, osnovni engine ostaje bez nje.
+Migracija ne dodaje izmišljenu provenance, ljudsku potvrdu ili naučnu verifikaciju.
+
+TASK-012 ostaje prvi istraživački korak; dataset odluke su otvorene. Raw/težine,
+treći repo, environmenti i privatni originali ostaju van bundlea uz recovery manifeste.
+Lokalni START_HERE/backup i chat nisu izvor istine ili preduslov za novog saradnika.

@@ -1,3 +1,8 @@
+---
+type: Specification
+title: API i CLI ugovori
+status: draft
+---
 # API i CLI ugovori
 
 Nema mrežnog API-ja.

@@ -1,3 +1,8 @@
+---
+type: Specification
+title: Pojmovi i životni ciklus
+status: draft
+---
 # Pojmovi i životni ciklus
 
 Ćelija: indeks `row * cols + col`, od nule, konstantna prostorna jedinica u istoj mapi.

@@ -1,3 +1,8 @@
+---
+type: Specification
+title: Tokovi rada
+status: draft
+---
 # Tokovi rada
 
 Nova sesija: STATUS -> NEXT_SESSION -> odluke/protokol -> git status -> testovi -> prvi otvoreni task.

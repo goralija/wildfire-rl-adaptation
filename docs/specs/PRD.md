@@ -1,3 +1,8 @@
+---
+type: Specification
+title: Zahtjevi
+status: draft
+---
 # Zahtjevi
 
 | ID | Zahtjev | Faza | Prihvat |

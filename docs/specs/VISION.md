@@ -1,3 +1,8 @@
+---
+type: Specification
+title: Vizija i granice
+status: draft
+---
 # Vizija i granice
 
 G-001: ponovljivo istražiti adaptaciju pretrained RL politike različitim budžetima.

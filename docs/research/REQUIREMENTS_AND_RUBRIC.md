@@ -1,3 +1,7 @@
+---
+type: Requirements
+title: Zahtjevi i kriteriji profesora
+---
 # Zahtjevi i kriteriji profesora
 
 Izvori: privatna prepiska od 2026-10-21 i slika rubrike koju je korisnik dostavio

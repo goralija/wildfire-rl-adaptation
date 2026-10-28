@@ -1,4 +1,19 @@
+---
+type: Project Status
+title: Trenutno stanje — 2026-10-28
+sources:
+- resource: /reports/firehose-verification/verification.json
+- resource: /docs/WORK_LOG.md
+---
 # Trenutno stanje — 2026-10-28
+
+## Baza znanja u repozitoriju
+Repo je OKF 0.2 bundle s [root indeksom](../index.md),
+[sažetim kontekstom](../knowledge/project-context.md), [mapom koda](../knowledge/code-map.md)
+i [pravilima održavanja](../knowledge/maintenance.md). Dokumenti imaju tipove,
+lowercase indekse i navigaciju; agent ulazi dijele isti AGENTS kontekst. Zaseban
+knowledge checker/CI čuva strukturu i lokalne linkove. Migracija ne zatvara dataset
+refinement niti uvodi naučnu/humanu verifikaciju sadržaja.
 
 ## Najnoviji pomak
 **Cell2Fire je kompajliran i oba postojeća 20×20 Firehose PPO checkpointa rade.**

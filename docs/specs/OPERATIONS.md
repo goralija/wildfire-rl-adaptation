@@ -1,3 +1,8 @@
+---
+type: Specification
+title: Environment i runbook
+status: draft
+---
 # Environment i runbook
 
 Core: Python >=3.11; bez pip biblioteka, `PYTHONPATH=src` za sve komande.
@@ -14,8 +19,9 @@ adapteru; ne tretirati puknut proces kao uspješno završenu epizodu.
 
 Oporavak: Git branch + lokalni bundle; environment se ponovo kreira iz izvora/requirements.
 Provjeri source hash za tačan replay; runtime i created_utc se prirodno razlikuju.
-Originalni privatni attachmenti i lokalni modeli nisu u bundleu; zasebna lokalna kopija
-je dostupna dok ovaj worktree ostaje sačuvan.
+Privatni originali i lokalni modeli nisu u bundleu. Privatni originali nisu preduslov
+za tehnički nastavak; javni sažetak i manifesti čuvaju potreban kontekst. Za modele
+i raw podatke koristiti pinovane javne izvore iz HANDOFF-a, ne tuđu lokalnu putanju.
 Open Questions: udaljena pohrana velikih artefakata i timski compute.
 
 Legacy runtime je sada ostvaren preko `docker/firehose/Dockerfile`: pinned Python base,

@@ -1,3 +1,8 @@
+---
+type: Specification
+title: Istraživački interfejs i vizualizacije
+status: draft
+---
 # Istraživački interfejs i vizualizacije
 
 Sadašnji interfejs je CLI i Markdown. Nema potrebe za dashboardom u ovoj fazi.

@@ -1,3 +1,7 @@
+---
+type: Experiment Report
+title: Izvršena Firehose provjera
+---
 # Izvršena Firehose provjera
 
 `verification.json`: 12/12 uspješnih rollouta, replay/seed/budget/weights checks.

@@ -1,3 +1,8 @@
+---
+type: Specification
+title: Verifikacija
+status: draft
+---
 # Verifikacija
 
 Core: `PYTHONPATH=src python3 -m unittest discover -s tests -v`.

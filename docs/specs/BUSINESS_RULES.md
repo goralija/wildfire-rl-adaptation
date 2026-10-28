@@ -1,3 +1,8 @@
+---
+type: Specification
+title: Pravila i metrike
+status: draft
+---
 # Pravila i metrike
 
 BR-001: B je nenegativan cijeli broj; validna nova intervencija košta 1.

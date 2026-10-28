@@ -1,0 +1,23 @@
+{
+  "okf_version": "0.2",
+  "bundle_root": ".",
+  "scope": "Git-visible public Markdown; ignored raw/private/third-party/runtime artifacts excluded",
+  "canonical_spec": {
+    "repository": "https://github.com/GoogleCloudPlatform/open-knowledge-format",
+    "commit": "ad30107c31c06aec8a7d5636e0d1058118604e6f",
+    "url": "https://github.com/GoogleCloudPlatform/open-knowledge-format/blob/ad30107c31c06aec8a7d5636e0d1058118604e6f/SPEC.md"
+  },
+  "entry_points": [
+    "index.md",
+    "AGENTS.md",
+    "HANDOFF.md",
+    "knowledge/project-context.md"
+  ],
+  "current_research_task": "TASK-012 dataset refinement; final selection/scope open",
+  "quality_command": "python3 scripts/validate_knowledge.py --strict",
+  "project_extensions": [
+    "strict local links",
+    "all Markdown reachable from root index"
+  ],
+  "verification_scope": "structure and navigation only; no scientific/human verification inferred"
+}

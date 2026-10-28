@@ -1,3 +1,8 @@
+---
+type: Design
+title: Bootstrap design — 2026-10-28
+status: draft
+---
 # Bootstrap design — 2026-10-28
 
 Intent: an MPVI research project about adapting a pretrained wildfire intervention policy
