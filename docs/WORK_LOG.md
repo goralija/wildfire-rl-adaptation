@@ -119,3 +119,9 @@ Fresh host verification before publication: all 26 tests passed; synthetic smoke
 executed. Reviewed 139 reachable historical blobs for ignored raw/private directories,
 private-key/token patterns and file email addresses: no matches. Handoff links pass.
 This bounded publication check does not change the research-readiness limitations.
+
+Portable handoff verification: cloned feature/project-bootstrap into a fresh temporary
+directory using Git transport (no hardlinks), created a new venv without installing
+dependencies, passed 22 core tests with four optional skips, and executed the documented
+synthetic smoke successfully. Clone contains no external/raw/private/local-venv assets.
+Only documentation changed during PR preparation; research/runtime code was preserved.
