@@ -10,6 +10,7 @@
 ## Istraživački dokazi
 - [Izvršen Firehose/Cell2Fire i oba modela](research/FIREHOSE_VERIFICATION.md).
 - [Dataset data card i plan splitova](research/DATASET.md).
+- [Stvarni požari: preporuka Dogrib/CFSDS, mali uzorci i ograničenja](research/REAL_FIRE_DATASETS.md).
 - [Legacy Docker runbook](../docker/firehose/README.md).
 - [Profesorovi zahtjevi i bodovanje](research/REQUIREMENTS_AND_RUBRIC.md).
 - [Eksperimentalni protokol](research/PROTOCOL.md).

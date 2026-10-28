@@ -22,3 +22,17 @@ Nema obaveze implementacije svakog proširenja: glavni minimum i kvalitet evalua
 
 TASK-010 (P2 minor, ~15 min): make malformed root JSON config (`null`, list) return
 ValueError/CLI usage error rather than traceback. Test first. Does not block valid runs.
+
+TASK-011 (P1 ograničena historijska provjera; poslije TASK-004c, nije novi preduslov
+za svako RL poređenje): izvori i mali uzorci već su pregledani; vidjeti
+research/REAL_FIRE_DATASETS.md i reports/real-fire-data/.
+
+- 011a: Dogrib vremenski/prostorni/provenance alignment, nonfuel neslaganja i kratki
+  simulator-only replay. Prihvat: isti početni perimetar, domen i završni trenutak,
+  documented weather/timezone, IoU/F1/area error uz seedove; bez tvrdnje o nezavisnoj
+  generalizaciji i bez tihe kalibracije na testu. Prvo timebox 2–4 h za izvedivost.
+- 011b: 3–5 drugih CFSDS događaja samo ako se mogu pripremiti kompletni FBP/terrain
+  i weather inputi; event holdout prije tuninga, provjera rasterskih oznaka i licence.
+  Prvo timebox 2–4 h za izvedivost; ako inputi nisu dostupni, dokumentovati budući rad.
+- Ne pretvarati temu u novi model predikcije širenja i ne preuzimati WildfireSpreadTS
+  arhivu od 48.4 GB radi početne provjere.

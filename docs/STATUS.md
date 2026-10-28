@@ -11,6 +11,17 @@ kontejneru sa SB3/contrib 1.5.0 i Gym 0.21.0. Runtime gate je prošao.
 - Zabilježen input hash, izvorni commitovi, model hashovi, verzije i Docker image ID.
 - Dataset card: 141 fajl, 400 ćelija (307 gorivih), 130 weather fajlova sa po 8 redova.
 
+## Novi nalazi o stvarnim požarima
+Preuzeti su mali historijski uzorci Dogrib/CFSDS, ukupno 3.68 MB; hashovi i offline
+provjera su sačuvani. [Preporuka](research/REAL_FIRE_DATASETS.md): Dogrib kao prvi
+historijski slučaj za simulator, mali CFSDS podskup za kasniju nezavisnu provjeru.
+Stvarni podaci nisu strogi preduslov za osnovno RL poređenje; kvalitet ulaza i granice
+zaključaka moraju biti jasni. Fizika simulatora na ovim uzorcima još nije validirana.
+
+Dogrib gorivo/elevation dijele blok sa Sub20 mapom, pa nije nezavisan test prostorne
+generalizacije. Sub20 origin ne odgovara tom izrezu. CFSDS uzorak ima 38 rastera i
+372 dnevna reda; treba dopunu FBP mapa i vremena za Cell2Fire. TASK-011 čuva tačan obim.
+
 ## Ograničenja koja su stvarno potvrđena
 Početni upstream reset vraća prazno stanje iako warmup ima 7 pogođenih ćelija.
 U fixed-model provjeri brojač je 206 umjesto 207 iz grid historije; eksplicitna

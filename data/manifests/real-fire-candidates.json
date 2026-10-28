@@ -1,0 +1,120 @@
+{
+  "reviewed_on": "2026-10-28",
+  "purpose": "dataset suitability for simulator validation; no policy training or physical validation performed",
+  "recommended_sequence": [
+    "dogrib-case-study",
+    "cfsds-small-independent-subset"
+  ],
+  "candidates": [
+    {
+      "id": "dogrib-case-study",
+      "name": "Dogrib Fire 2001 reference case",
+      "role": "first Cell2Fire-compatible historical case / sanity check, not independent generalization test",
+      "repository": "https://github.com/humnetlab/Cell2Fire",
+      "commit": "84e3c817ad866358d8db28e87c9445b42aaf7908",
+      "paper_doi": "10.1038/s41598-025-05706-6",
+      "grid": [
+        223,
+        357
+      ],
+      "cell_size_m": 100,
+      "downloaded_files": 16,
+      "downloaded_bytes": 3390138,
+      "has_observed_outcome": true,
+      "observed_outcome_file": "dogrib/real_scar_dogrib.csv",
+      "observed_burned_pixels": 10210,
+      "license_status": "repository declares MIT; separate originating Prometheus/Alberta data terms not confirmed",
+      "limitations": [
+        "shared fuel/elevation patch with Firehose Sub20",
+        "historical suppression present in case chronology",
+        "observation and simulation time windows must be reconciled",
+        "663 observed-burn pixels coincide with nonfuel code101; no silent label filtering",
+        "full map is incompatible with existing 400-action policy without explicit cropping/scaling design"
+      ]
+    },
+    {
+      "id": "cfsds",
+      "name": "Canadian Fire Spread Dataset",
+      "role": "broader independent historical validation candidate after input preparation",
+      "url": "https://osf.io/f48ry/",
+      "doi": "10.17605/OSF.IO/F48RY",
+      "paper_doi": "10.1038/s41597-024-03436-4",
+      "project_modified_at": "2025-11-05T17:57:53.166235",
+      "license": "CC-By Attribution 4.0 International",
+      "license_id": "563c1cf88c5e4a3877f9e96a",
+      "published_v1": {
+        "years": "2002-2021",
+        "resolution_m": 180,
+        "minimum_fire_ha": 1000,
+        "fires": 3269
+      },
+      "inspected_osf_release": {
+        "label": "v1_1",
+        "release_date": "2025-06-12",
+        "years": "2002-2024",
+        "resolution_m": 90,
+        "minimum_fire_ha": 500,
+        "beta_warning_present": true,
+        "version_record_url": "https://osf.io/download/8fe4u/"
+      },
+      "downloaded_sample": {
+        "year": 2020,
+        "bytes": 293731,
+        "fires": 38,
+        "daily_rows": 372,
+        "columns": 60,
+        "duplicate_fire_day_rows": 0,
+        "matched_rasters": 38,
+        "missing_bui_rows": 2
+      },
+      "limitations": [
+        "daily interpolated day-of-burning, not minute-level observed front",
+        "reviewed daily table lacks wind direction and is not a complete spatial fuel grid",
+        "release history documents beta/topology/points-update caveats; per-event QC required",
+        "observed outcomes do not identify counterfactual outcomes under new RL actions"
+      ]
+    },
+    {
+      "id": "wildfirespreadts",
+      "name": "WildfireSpreadTS",
+      "role": "alternative for daily spread forecasting; lower priority for current Cell2Fire controller",
+      "url": "https://zenodo.org/records/8006177",
+      "doi": "10.5281/zenodo.8006177",
+      "years": "2018-2021",
+      "fires": 607,
+      "resolution_m": 375,
+      "temporal_resolution_hours": 24,
+      "license": {
+        "id": "cc-by-4.0"
+      },
+      "files": [
+        {
+          "name": "WildfireSpreadTS_Documentation.pdf",
+          "bytes": 7841847,
+          "checksum": "md5:1abb9a9975a0dae1dbd0324a782d00dc"
+        },
+        {
+          "name": "WildfireSpreadTS.zip",
+          "bytes": 48359369821,
+          "checksum": "md5:dc1a04e63ccc70037b277d585b8fe761"
+        }
+      ],
+      "downloaded": false,
+      "limitations": [
+        "48.4 GB full archive",
+        "US remote-sensing feature stack requires conversion to Canadian FBP simulator inputs"
+      ]
+    },
+    {
+      "id": "burnmd",
+      "name": "MITRE BurnMD",
+      "role": "conditional alternative if SimFire is later selected",
+      "url": "https://github.com/mitrefireline/burnmd",
+      "commit": "a9e423f15906bc9860be6d80b56e71e4a6ee307c",
+      "archive_bytes": 362131110,
+      "archive_sha256_from_lfs": "4eefcbfdabce4966d68e0009e8a4b88dd34294a2cb5dee6aea84dd017eb334c7",
+      "downloaded": false,
+      "inspection_level": "LFS metadata only; archive content not verified"
+    }
+  ]
+}

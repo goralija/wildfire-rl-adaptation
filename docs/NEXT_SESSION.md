@@ -13,6 +13,10 @@
    timeout/cleanup i razliku weather-horizon/containment. Tek potom dataset split i fine-tuning.
 8. Za ponavljanje postojećeg testa koristi `docker/firehose/README.md`; lokalni image
    je `wildfire-firehose-probe:20261028`, rezultati u `runs/firehose-verification-final/`.
+9. Za historijske reference pročitaj `docs/research/REAL_FIRE_DATASETS.md` i TASK-011.
+   Dogrib/CFSDS mali uzorci su već lokalno preuzeti. Ne preuzimati gigabajte niti
+   proglašavati Dogrib nezavisnim testom: dijeli teren s Firehose Sub20. Raw ulazi
+   i opaženi ishodi su odvojeni; fizička validacija još nije izvršena.
 
 ## Lokalne lokacije ove sesije
 - Workspace: `/Users/harungoralija/Desktop/mpvi` (ulazni START_HERE.md).
