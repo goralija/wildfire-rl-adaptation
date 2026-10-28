@@ -68,3 +68,7 @@ Confirmed state semantics: C++ outputGrid=1 merges burning and burnt; done may b
 horizon, so no containment claims. Datacard inventories 141 files, 400 cells (307 fuel),
 base weather plus 129 variants; current rows mode reads only base Weather.csv.
 No raw dataset/model/image published, no remote pushes, no training or paid compute.
+
+Evidence packaging correction: the global runs/ ignore also matched the nested report
+folder named runs. Moved the twelve small JSON evidence files to reports/.../probes/
+so model actions/state hashes are actually versioned; raw grids/logs remain ignored.

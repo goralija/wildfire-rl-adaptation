@@ -1,0 +1,565 @@
+{
+  "policy": "none",
+  "simulator_seed": 123,
+  "budget": 0,
+  "sync_reset": false,
+  "no_training": true,
+  "success": true,
+  "firehose_commit": "e49a52a9a987a1585d25ddca2f711222ca500ffb",
+  "contrib_commit": "43b7fe6fcdda71c2c10de7af0d20f39e48ae5df3",
+  "script_sha256": "1ea9b2ae0817ec8f94354876f8132467456c2e45be35ec5fbcd3134e4c525815",
+  "python": "3.8.20",
+  "platform": "Linux-6.12.54-linuxkit-aarch64-with-glibc2.34",
+  "packages": {
+    "numpy": "1.23.5",
+    "torch": "1.13.1",
+    "gym": "0.21.0",
+    "stable-baselines3": "1.5.0",
+    "sb3-contrib": "1.5.0",
+    "cloudpickle": "2.0.0"
+  },
+  "simulator_command": "/opt/firehose/cell2fire/Cell2FireC/Cell2Fire --input-instance-folder /opt/firehose/cell2fire/../input/Sub20x20_2026-10-28_08-25-09_HI9STU/ --output-folder /outputs/final/none-123-a/simulator/results/Sub20x20_2026-10-28_08-25-09_HI9STU/run_0/ --ignitions --sim-years 1 --nsims 1 --grids --final-grid --Fire-Period-Length 1.0 --output-messages --weather rows --nweathers 1 --ROS-CV 0.5 --IgnitionRad 0 --seed 123 --nthreads 1 --ROS-Threshold 0.1 --HFI-Threshold 0.1 --steps-action 8 --steps-before 20 --HarvestPlan",
+  "input_sha256": "cdefe5d27b0e079a71a69109def036e8a3e8a810777773d1d3c5be385a9beb21",
+  "ignition_cell_one_based": 372,
+  "weather_file": "Weather.csv (rows mode)",
+  "weather_horizon_minutes": 480,
+  "upstream_nonfuel_mask_cells": 93,
+  "warmup_affected_cells": 7,
+  "upstream_reset_state_matches_csv": false,
+  "decisions": 58,
+  "actions": [
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1
+  ],
+  "interventions_requested": 0,
+  "transitions": [
+    {
+      "decision": 0,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 10,
+      "upstream_cumulative": 10,
+      "state_sha256": "a226fd57c7344162979b3a9a78db4418d5d5177336a87ba3068f12ec9a0ec7c5"
+    },
+    {
+      "decision": 1,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 18,
+      "upstream_cumulative": 18,
+      "state_sha256": "9f6030064d95f1da9748be17c8ef9175ba7413db5234cbaae663860c38e9d9e8"
+    },
+    {
+      "decision": 2,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 21,
+      "upstream_cumulative": 21,
+      "state_sha256": "04c22aa76c08dd749f7c1566defc51b50822a2cecd89ad32aadb66a7ab10b9b8"
+    },
+    {
+      "decision": 3,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 29,
+      "upstream_cumulative": 29,
+      "state_sha256": "a92a6f133f36ae44e7552dc9838eee9f36f09d83ae44f5e73a023f2728092593"
+    },
+    {
+      "decision": 4,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 38,
+      "upstream_cumulative": 38,
+      "state_sha256": "aebf49d6bd96243db710f5bd2ab0f03eb1a9c6a854f1060cc456ba1ba168a024"
+    },
+    {
+      "decision": 5,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 48,
+      "upstream_cumulative": 48,
+      "state_sha256": "719301f1374b2914b936637d3ae37db61558af61f8207a6413167a9d51a557eb"
+    },
+    {
+      "decision": 6,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 55,
+      "upstream_cumulative": 55,
+      "state_sha256": "d9471d051ac1db61b0b7d7a9ba3a9fa135037ba88e6b387b162a6d07c83f98a2"
+    },
+    {
+      "decision": 7,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 65,
+      "upstream_cumulative": 65,
+      "state_sha256": "32077a53a09dfab4c8d7d52bce241484213aae89c04f8fec57562cb439a38ef2"
+    },
+    {
+      "decision": 8,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 74,
+      "upstream_cumulative": 74,
+      "state_sha256": "36a41f45e96db34fa83359c46f050de519bbc19dfc75d12e6f458e3c5a79908f"
+    },
+    {
+      "decision": 9,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 84,
+      "upstream_cumulative": 84,
+      "state_sha256": "15bdf55d09cefd8001dcad3c2c540f3e876e257cb29fecdf86c0e9644009b548"
+    },
+    {
+      "decision": 10,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 91,
+      "upstream_cumulative": 91,
+      "state_sha256": "a6165ecf2b660ee54f09bf39eaa72b52d717ef8071631b7147afef956ebda23c"
+    },
+    {
+      "decision": 11,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 98,
+      "upstream_cumulative": 98,
+      "state_sha256": "24fd356496a9cef987c89865926972319c6cc624c3284a4c10483bc3faeed843"
+    },
+    {
+      "decision": 12,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 108,
+      "upstream_cumulative": 108,
+      "state_sha256": "84426d5578106fc7319864cca70fb2b2390c2e1fb3bf45dee3da3f516d9e4bc2"
+    },
+    {
+      "decision": 13,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 114,
+      "upstream_cumulative": 114,
+      "state_sha256": "605401e425433abf2f350fd275f2ed6cfb9d24422c01597843dc5b0f8f0719ce"
+    },
+    {
+      "decision": 14,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 119,
+      "upstream_cumulative": 119,
+      "state_sha256": "6bd25f9f52e86aeb86eec100fb9be498560ef49c7a7ae968e2fd5f512e163e94"
+    },
+    {
+      "decision": 15,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 125,
+      "upstream_cumulative": 125,
+      "state_sha256": "bfd9443d0672bbc8c6370083e7b7bc81a57eef992420fd016ea6ffc734837c95"
+    },
+    {
+      "decision": 16,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 135,
+      "upstream_cumulative": 135,
+      "state_sha256": "c34b765b06a9f3c79946a51e7ca35e5459aeb61d4aba245d2e19c0a34873cf53"
+    },
+    {
+      "decision": 17,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 138,
+      "upstream_cumulative": 138,
+      "state_sha256": "13675824e17f2e4f2dd0b94abff93688469bec08e04dd4bde328ff39644193d6"
+    },
+    {
+      "decision": 18,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 142,
+      "upstream_cumulative": 142,
+      "state_sha256": "21abd03bbde98987495a68955bb1c48e022c079e766da189d1668b17ab43aefd"
+    },
+    {
+      "decision": 19,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 148,
+      "upstream_cumulative": 148,
+      "state_sha256": "e5b59d5988370166cf30a70b55b715e6748219103bb8512d599a415a4fffc21c"
+    },
+    {
+      "decision": 20,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 151,
+      "upstream_cumulative": 151,
+      "state_sha256": "43e7149aea95a21cc2232afdc2c79a3217c63154a262b66c5a4657f78ec30d6e"
+    },
+    {
+      "decision": 21,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 155,
+      "upstream_cumulative": 155,
+      "state_sha256": "7edf3b02064a2d950fda72a61604a34dc64359c6fc21f5e5e5c4665a0ed49da9"
+    },
+    {
+      "decision": 22,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 158,
+      "upstream_cumulative": 158,
+      "state_sha256": "8b212d7410689dff1ad059ec6a7b595b97e6ff8bbfbdfb2ea98c76cfde776b18"
+    },
+    {
+      "decision": 23,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 162,
+      "upstream_cumulative": 162,
+      "state_sha256": "88082146a4476b0e299495a2420a736d7622c1a9437f5f3988c9cbcc017d7563"
+    },
+    {
+      "decision": 24,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 164,
+      "upstream_cumulative": 164,
+      "state_sha256": "30e459a164242a2048062cd424315d2ae4e22b599279b50c9a755b07c7086fa5"
+    },
+    {
+      "decision": 25,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 168,
+      "upstream_cumulative": 168,
+      "state_sha256": "a0f505bc5adf8c105e9289de24f0918e7135a91c62c75ab210a602f43fe04ebb"
+    },
+    {
+      "decision": 26,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 169,
+      "upstream_cumulative": 169,
+      "state_sha256": "ffe4dee75d677f39019641657dce656e652313b02ef70ffa14c8004032a66b58"
+    },
+    {
+      "decision": 27,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 173,
+      "upstream_cumulative": 173,
+      "state_sha256": "3346b1deddc190c15c31527f9cd7c8ecd6eac2fa72cb2437a1a52445f8561220"
+    },
+    {
+      "decision": 28,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 177,
+      "upstream_cumulative": 177,
+      "state_sha256": "254714f4e09fe3a2e1eeb630c5024bb8f8696eacd8ddfa74a19c562d6e355546"
+    },
+    {
+      "decision": 29,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 179,
+      "upstream_cumulative": 179,
+      "state_sha256": "b5f7390c49e017125cb3b4005ac16ff14fd2e294b2069ff9c9e3ea5b83812b77"
+    },
+    {
+      "decision": 30,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 181,
+      "upstream_cumulative": 181,
+      "state_sha256": "22b3062eaf55a0979e83614a6c22f19ffe5587ac475bdd9c869343bb61d082dd"
+    },
+    {
+      "decision": 31,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 184,
+      "upstream_cumulative": 184,
+      "state_sha256": "ba5c661747810fd96e62916a6f95bd9caa61c081423aecec05630229729a3044"
+    },
+    {
+      "decision": 32,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 184,
+      "upstream_cumulative": 184,
+      "state_sha256": "ba5c661747810fd96e62916a6f95bd9caa61c081423aecec05630229729a3044"
+    },
+    {
+      "decision": 33,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 187,
+      "upstream_cumulative": 187,
+      "state_sha256": "eda886eedfb792a8f65a344e85e516374b3767733b8d77d1f5234b09a95a2233"
+    },
+    {
+      "decision": 34,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 190,
+      "upstream_cumulative": 190,
+      "state_sha256": "faca86ea510ff16540d1b71867a45e2e000888bc8739aec4f300392f436dd7bb"
+    },
+    {
+      "decision": 35,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 191,
+      "upstream_cumulative": 191,
+      "state_sha256": "fde6dbabd896b5d09de0977f29b19a28855279413b460362819bdce3956cac41"
+    },
+    {
+      "decision": 36,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 194,
+      "upstream_cumulative": 194,
+      "state_sha256": "0189fe7941fb2ba5726e41ff624d60faa93a60307dc9e160de64d7efdd1db713"
+    },
+    {
+      "decision": 37,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 195,
+      "upstream_cumulative": 195,
+      "state_sha256": "05c729ca296340044ed378b88881d37f4493c959c225e1d3495044515b7b0924"
+    },
+    {
+      "decision": 38,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 197,
+      "upstream_cumulative": 197,
+      "state_sha256": "7ead316a42ce25cec4eea89ad00ec185ec247e22ba82590dc8ac750e97072241"
+    },
+    {
+      "decision": 39,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 199,
+      "upstream_cumulative": 199,
+      "state_sha256": "ad6fcc2d3285c681cae95012351d1663ccc2739805e6c31acfac60bcc2ea705f"
+    },
+    {
+      "decision": 40,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 199,
+      "upstream_cumulative": 199,
+      "state_sha256": "ad6fcc2d3285c681cae95012351d1663ccc2739805e6c31acfac60bcc2ea705f"
+    },
+    {
+      "decision": 41,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 201,
+      "upstream_cumulative": 201,
+      "state_sha256": "d2fc619039f9dadea0e837159e3710bb0e8007af576c4d57236552bc79503b7a"
+    },
+    {
+      "decision": 42,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 201,
+      "upstream_cumulative": 201,
+      "state_sha256": "d2fc619039f9dadea0e837159e3710bb0e8007af576c4d57236552bc79503b7a"
+    },
+    {
+      "decision": 43,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 203,
+      "upstream_cumulative": 203,
+      "state_sha256": "5483d6bc8d716010aae180d1dcd05ef6e1be1ed17db8eedc8c4e52e27f52d309"
+    },
+    {
+      "decision": 44,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 204,
+      "upstream_cumulative": 204,
+      "state_sha256": "e55f54d7d5b99b2ee3dd41d6bf82cf65a155b8a69b2a930475e7114c7e973095"
+    },
+    {
+      "decision": 45,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 204,
+      "upstream_cumulative": 204,
+      "state_sha256": "e55f54d7d5b99b2ee3dd41d6bf82cf65a155b8a69b2a930475e7114c7e973095"
+    },
+    {
+      "decision": 46,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 205,
+      "upstream_cumulative": 205,
+      "state_sha256": "56b8281fd780728f30764116c72e7acda594dc784b82e94ff06f964e2c7038e4"
+    },
+    {
+      "decision": 47,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 207,
+      "upstream_cumulative": 207,
+      "state_sha256": "54cf20443b7c8d3b1de36d410ffe0f2577c22cd5bfb7492774f182c150550f6c"
+    },
+    {
+      "decision": 48,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 208,
+      "upstream_cumulative": 208,
+      "state_sha256": "ded5ed883569c68113b45e67741965c6ab24d2046e1655eb0539a8cd278b3ec4"
+    },
+    {
+      "decision": 49,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 208,
+      "upstream_cumulative": 208,
+      "state_sha256": "ded5ed883569c68113b45e67741965c6ab24d2046e1655eb0539a8cd278b3ec4"
+    },
+    {
+      "decision": 50,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 210,
+      "upstream_cumulative": 210,
+      "state_sha256": "dc12f2d426dad17688ccc685822353bfd5814863f38becd965b6de6d987ad1cd"
+    },
+    {
+      "decision": 51,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 211,
+      "upstream_cumulative": 211,
+      "state_sha256": "61a31e886a9b459eb1ad7064e1c18fc0879747eaa2e2c354153b1ef29b810a08"
+    },
+    {
+      "decision": 52,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 213,
+      "upstream_cumulative": 213,
+      "state_sha256": "4f7afedca406cfd0254f8d211d51ccd9c8258fd7f67982d1b5d1f7278333d428"
+    },
+    {
+      "decision": 53,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 214,
+      "upstream_cumulative": 214,
+      "state_sha256": "eed7387aab69ed96349039aa0c50285717069b2b86fa2b0f5a67bda3aab0a133"
+    },
+    {
+      "decision": 54,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 216,
+      "upstream_cumulative": 216,
+      "state_sha256": "12998539027e57d1a3ee3206cf1a2feb2fcfdccd36e02f3744f5070608d3fb92"
+    },
+    {
+      "decision": 55,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 216,
+      "upstream_cumulative": 216,
+      "state_sha256": "12998539027e57d1a3ee3206cf1a2feb2fcfdccd36e02f3744f5070608d3fb92"
+    },
+    {
+      "decision": 56,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 217,
+      "upstream_cumulative": 217,
+      "state_sha256": "7028b4d64ae1b1e9f65a3e107b9d365c21da62ae9195863c6e32dd701d210e31"
+    },
+    {
+      "decision": 57,
+      "action": -1,
+      "used": 0,
+      "affected_snapshot": 217,
+      "upstream_cumulative": 217,
+      "state_sha256": "7028b4d64ae1b1e9f65a3e107b9d365c21da62ae9195863c6e32dd701d210e31"
+    }
+  ],
+  "nonfuel_requests": 0,
+  "observed_ever_affected_cells": 217,
+  "upstream_cumulative_cells": 217,
+  "simulator_reported_finished": true,
+  "termination_reason": "upstream_done; containment vs weather horizon not exposed",
+  "budget_exhausted_followed_by_noops": true,
+  "subprocess_returncode": 0,
+  "runtime_seconds": 2.2016172930016182
+}
