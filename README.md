@@ -17,7 +17,9 @@ Tim: Amar Hodžić, Belmin Durmo, Harun Goralija. Predmet MPVI.
    [trenutno stanje](docs/STATUS.md) i [upute za narednu sesiju](docs/NEXT_SESSION.md).
 2. Pogledaj [istraživački protokol](docs/research/PROTOCOL.md),
    [provjeru simulatora](docs/research/SIMULATOR_AUDIT.md) i [odluke](docs/specs/DECISION_RECORDS.md).
-3. Pokreni testove i pilot ispod. Glavni sljedeći zadatak je **TASK-004c: ispravan observation/metrics adapter**.
+3. Pokreni testove i pilot ispod. Glavni sljedeći korak je **TASK-012: dataset refinement**
+   — uloga, izbor i obim podataka još nisu usaglašeni. TASK-004c je naredni poznati
+   tehnički posao nakon tog razjašnjenja.
 
 ## Pokretanje bez dodatnih biblioteka
 

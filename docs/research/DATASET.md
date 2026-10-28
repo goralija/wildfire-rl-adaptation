@@ -4,7 +4,8 @@
 fajlovi su ulazi za simulaciju; agent interakcijom stvara RL iskustvo. Oni sami nisu
 skup stvarnih ishoda niti oznaka ispravnih intervencija. Sada su zasebno preuzeti i
 pregledani mali Dogrib/CFSDS historijski uzorci. Preporuka i ograničenja su u
-[REAL_FIRE_DATASETS](REAL_FIRE_DATASETS.md).
+[REAL_FIRE_DATASETS](REAL_FIRE_DATASETS.md). Konačna uloga, izbor i obim još nisu
+usaglašeni; TASK-012 dataset refinement je neposredni sljedeći korak.
 
 ## Postojeći Firehose Sub20x20 — data card
 

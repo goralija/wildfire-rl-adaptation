@@ -125,3 +125,13 @@ directory using Git transport (no hardlinks), created a new venv without install
 dependencies, passed 22 core tests with four optional skips, and executed the documented
 synthetic smoke successfully. Clone contains no external/raw/private/local-venv assets.
 Only documentation changed during PR preparation; research/runtime code was preserved.
+
+2026-10-28 — User corrected the handoff priority: dataset refinement is not complete
+or agreed. Verified that handoff/README/status/backlog/PR all prematurely selected
+TASK-004c as the immediate project step, although source recommendations remained
+provisional. Added TASK-012 and ADR-009: clarify data roles, choice/scope, model/domain
+mapping and scenario/evaluation contract first. Keep the known adapter fixes as the
+technical follow-up before experiments. Updated handoff prompts and data selection
+status; no dataset was newly adopted, no code/data/experiments changed.
+Verification after the correction: 26 tests pass, synthetic smoke succeeds, changed
+document links/candidate JSON validate and Git whitespace check passes.
