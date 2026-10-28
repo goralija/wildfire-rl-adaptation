@@ -121,7 +121,9 @@ def validate(root, strict=False):
                 if metadata is None or not isinstance(metadata.get('type'), str) or not metadata['type'].strip():
                     raise ValueError('concept needs YAML frontmatter with nonempty string type')
                 metadata_checks(metadata)
-            links = re.findall(r'\[[^\]\n]*\]\(\s*(<[^>\n]*>|[^\s)\n]+)', visible)
+            # Equal-length backtick code spans contain examples, not navigation.
+            link_text = re.sub(r'(?s)(?<!`)(`+)(?!`).*?(?<!`)\1(?!`)', '', visible)
+            links = re.findall(r'\[[^\]\n]*\]\(\s*(<[^>\n]*>|[^\s)\n]+)', link_text)
             if metadata:
                 links += [s['resource'] for s in metadata.get('sources', [])
                           if s['resource'].startswith(('/', './', '../'))]
