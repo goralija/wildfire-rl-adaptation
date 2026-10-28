@@ -20,6 +20,9 @@ najbližeg `index.md`; ne izmišljati sources, generated/verified ili ljudsku po
 CI checker provjerava strukturu/linkove, ne istinitost naučnih nalaza.
 
 - Radi u izdvojenom task worktreeu; sačuvaj tuđe izmjene.
+- Worktree-i ovog projekta idu u `.worktrees/` glavnog klona, prema
+  [workspace rasporedu](knowledge/workspace-layout.md). Prvo provjeri `git worktree list`;
+  nastavi u odgovarajućem postojećem worktreeu. `.local/` je ignorisan radni prostor.
 - Prije implementacije navedi pretpostavke i provjerljivi cilj; promjene drži malim.
 - Činjenice, pretpostavke i prijedloge označi odvojeno. Uz vanjski nalaz navedi izvor i datum.
 - Sintetički pilot ne prikazuj kao Cell2Fire, fizički validiran simulator ili istraživački rezultat.

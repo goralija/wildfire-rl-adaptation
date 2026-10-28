@@ -17,6 +17,10 @@ Tim: Amar Hodžić, Belmin Durmo, Harun Goralija. Predmet MPVI.
 
 ## Nastavak za pet minuta
 
+Lokalni raspored je **glavni klon → `.worktrees/` → task checkout**, uz ignorisani
+`.local/` za radne CSV-ove/grafove/backupe. [Workspace runbook](knowledge/workspace-layout.md)
+opisuje rad i trenutni main/PR odnos.
+
 Repo je samostalan **OKF 0.2 knowledge bundle**. [Glavni index.md](index.md) je ulaz
 za ljude i agente; [kratki kontekst](knowledge/project-context.md) razlikuje dokaze,
 prijedloge i otvorene odluke. [Pravila održavanja](knowledge/maintenance.md) i
