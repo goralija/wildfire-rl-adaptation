@@ -182,3 +182,22 @@ worktree clean; one linked worktree, same published head; no managed app worktre
 Plan: record ignore/layout policy -> snapshot Git/assets -> Git move linked checkout ->
 promote existing .git and repair links -> preserve backups in .local and fix local venv
 paths -> verify identities, ignores, tests/smoke and OKF -> update same PR. No PR/main merge.
+
+Layout complete: existing .git is now at mpvi root; linked checkout moved with Git
+to .worktrees/project-bootstrap and repaired after main Git metadata promotion.
+main stayed 9e24b48; feature stayed 3615632 during relocation. Both statuses clean;
+Git fsck exit 0. Previous backups and START_HERE preserved under ignored .local.
+A temporary ignored main-checkout AGENTS pointer routes to canonical PR knowledge.
+
+Integrity: all 13,246 non-venv/non-Git/cache file hashes matched, all 11 backup hashes
+and original START_HERE hash matched; 18 raw sample hashes independently passed.
+Both upstream clones remain clean at their pins. Local venv relocated by repairing
+15 text path files and 5 wheel RECORDs, backing up originals; all 19 installed
+distribution versions unchanged. Editable import, pip and wildfire executable point
+at the new worktree. No package downloads/retraining/merge required.
+
+Verification after relocation: 26 app tests, 15 knowledge tests, smoke and strict
+64-Markdown validation pass. Replayed new HANDOFF main-clone/nested-worktree recipe
+in a fresh temporary clone: core 22 pass/four optional skips, clean main/worktree,
+strict knowledge passes. Public summary: reports/workspace-relocation.json; complete
+local snapshots/repair details stay ignored in .local/migration. TASK-012 stays first.

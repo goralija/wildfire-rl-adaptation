@@ -3,6 +3,7 @@
 ## 2026-10-28: Workspace raspored
 
 - [Runbook](knowledge/workspace-layout.md) definiše mpvi glavni klon, .worktrees i ignorisani .local prostor, uz očuvanje PR-a i dataset prioriteta.
+- [Dokaz preseljenja](reports/workspace-relocation.json) čuva hash/package/test provjere i ponovljeni setup iz novog klona.
 
 ## 2026-10-28: OKF 0.2 bundle u repozitoriju
 
