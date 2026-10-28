@@ -17,6 +17,15 @@ refinement niti uvodi naučnu/humanu verifikaciju sadržaja.
 Provjera: [63 Markdown fajla, 15 knowledge testova i clean-clone dokaz](../reports/knowledge-validation.json).
 Osnovni aplikacijski paket i dalje nema dodatne zavisnosti; PyYAML je samo knowledge alat.
 
+## Lokalni workspace
+Glavni klon je sada direktno `mpvi/`, a aktivni PR checkout je u
+`.worktrees/project-bootstrap/`. `.local/` čuva scratch/backupe, uz verzionisanu
+ignore politiku; [runbook](../knowledge/workspace-layout.md) opisuje rad. Main još
+ima samo početni commit dok PR nije spojen. Kanonski projektni fajlovi su u PR worktreeu.
+[Provjera preseljenja](../reports/workspace-relocation.json): 13,246 ne-venv fajlova
+i 11 backup fajlova sa istim hashovima, 19 sačuvanih verzija paketa, ispravljene
+lokalne venv putanje, 26 aplikacijskih/15 knowledge testova i 64-file OKF provjera.
+
 ## Najnoviji pomak
 **Cell2Fire je kompajliran i oba postojeća 20×20 Firehose PPO checkpointa rade.**
 Izvršeno je 12 kratkih inference rollouta, bez treniranja, u odvojenom Linux ARM64

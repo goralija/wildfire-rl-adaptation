@@ -1,0 +1,43 @@
+{
+  "verified_on": "2026-10-28",
+  "layout": {
+    "primary_clone": "mpvi/",
+    "primary_branch": "main",
+    "pr_worktree": ".worktrees/project-bootstrap/",
+    "pr_branch": "feature/project-bootstrap",
+    "local_scratch": ".local/scratch/",
+    "local_backups": ".local/backups/"
+  },
+  "main_sha_preserved": "9e24b48455c81b7a24cc0a7bc5fe32efac0290e2",
+  "feature_sha_at_relocation_preserved": "361563200039293f4c619a6b728580ca33ba95a2",
+  "integrity": {
+    "worktree_files_sha256_unchanged": 13246,
+    "scope": "all files except Git administration, .venv and transient caches",
+    "backup_files_sha256_unchanged": 11,
+    "legacy_entry_sha256_unchanged": true,
+    "raw_sample_files_sha256_verified": 18,
+    "upstream_checkouts_clean_and_pinned": true,
+    "git_fsck_exit_code": 0
+  },
+  "venv": {
+    "distribution_versions_unchanged": 19,
+    "text_paths_repaired": 15,
+    "RECORD_files_updated": 5,
+    "editable_import_from_new_path": true,
+    "pip_and_project_entrypoints_work": true,
+    "original_changed_text_backed_up_locally": true
+  },
+  "checks": {
+    "application_tests_passed": 26,
+    "knowledge_tests_passed": 15,
+    "okf_markdown_files": 64,
+    "strict_knowledge_validation": "passed",
+    "synthetic_smoke": "passed",
+    "main_and_worktree_local_ignores": "passed",
+    "new_clone_nested_worktree_recipe": "passed",
+    "new_clone_core_tests_passed": 22,
+    "new_clone_optional_tests_skipped": 4
+  },
+  "publication": "configuration and documentation in PR #1; no main/PR merge",
+  "current_research_task": "TASK-012 dataset refinement remains open/first"
+}
