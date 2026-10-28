@@ -74,3 +74,16 @@ HANDOFF.md daje prenosive upute bez Harunovih lokalnih putanja/okruženja. Objav
 se naš kod, dokumentacija, mali rezultati i manifesti. Raw podaci, težine, treći repo,
 image, .venv i privatni originali ostaju izvan Gita. Ovo nije izbor licence za tim
 niti dozvola za redistribuciju tuđih modela/podataka. Sljedeći tehnički posao ostaje TASK-004c.
+
+## ADR-009 — dataset refinement je prvi projektni korak, accepted 2026-10-28
+Korisnik je nakon handoffa ukazao da uloga, izbor i obim podataka nisu do kraja
+usaglašeni. Raniji handoff je pomiješao poznati sljedeći tehnički posao sa sljedećim
+projektnim korakom. Ovo zamjenjuje redoslijed iz ADR-007/008 gdje se može čitati
+da TASK-004c treba odmah početi, prije refinementa.
+
+Prvi fokus je TASK-012: dokumentovati i usaglasiti uloge simulator inputa, RL iskustva
+i stvarnih referenci, izbor/obim, mapiranje na model, scenarije/splitove i metrike.
+Dogrib/CFSDS preporuke ostaju provisional; preuzimanje/profilisanje nije konačan izbor
+ili spreman evaluacijski dataset. Ovaj zapis usvaja redoslijed, ne zatvara te odluke.
+TASK-004c ostaje poznati tehnički nastavak prema usaglašenom obimu i preduslov glavne
+evaluacije postojećeg pristupa. Runtime nalazi i svi raniji dokazi ostaju važeći.

@@ -11,10 +11,12 @@ kontejneru sa SB3/contrib 1.5.0 i Gym 0.21.0. Runtime gate je prošao.
 - Zabilježen input hash, izvorni commitovi, model hashovi, verzije i Docker image ID.
 - Dataset card: 141 fajl, 400 ćelija (307 gorivih), 130 weather fajlova sa po 8 redova.
 
-## Novi nalazi o stvarnim požarima
+## Podaci: pregled kandidata završen, izbor i obim otvoreni
 Preuzeti su mali historijski uzorci Dogrib/CFSDS, ukupno 3.68 MB; hashovi i offline
-provjera su sačuvani. [Preporuka](research/REAL_FIRE_DATASETS.md): Dogrib kao prvi
-historijski slučaj za simulator, mali CFSDS podskup za kasniju nezavisnu provjeru.
+provjera su sačuvani. [Prijedlog](research/REAL_FIRE_DATASETS.md) je Dogrib kao prvi
+historijski slučaj za simulator i mali CFSDS podskup za kasniju nezavisnu provjeru;
+korisnik još nije usaglasio konačni izbor, ulogu i obim. **TASK-012 — dataset refinement
+je neposredni sljedeći korak**, prije konkretizacije glavnog eksperimenta.
 Stvarni podaci nisu strogi preduslov za osnovno RL poređenje; kvalitet ulaza i granice
 zaključaka moraju biti jasni. Fizika simulatora na ovim uzorcima još nije validirana.
 
@@ -40,9 +42,11 @@ Prethodni sintetički artefakti ostaju historijski dokaz; nisu Cell2Fire rezulta
 - 26 testova prolazi s modernim optional environmentom; 22 core + 4 optional RL testa.
 - Originalni Firehose i contrib checkouti ostaju neizmijenjeni; samo build flagovi i
   eksplicitna dijagnostika reset/seed ponašanja su dodani u naš kod.
-- Docker/legacy i moderni .venv su odvojeni. Nema treninga, remote push-a ili plaćenog compute-a.
+- Docker/legacy i moderni .venv su odvojeni. Legacy inference je bez treniranja i
+  plaćenog compute-a. Kod/dokumentacija su objavljeni kroz [PR #1](https://github.com/goralija/wildfire-rl-adaptation/pull/1).
 
-Glavni sljedeći korak: TASK-004c, zatim freeze scenarija, frozen benchmark i tek fine-tuning.
+Redoslijed: TASK-012 dataset refinement → usaglašen obim → odgovarajući TASK-004c
+adapter → freeze scenarija/splitova → frozen benchmark → plan fine-tuninga.
 Nema provjere fizike simulatora na BiH podacima, potvrde RL prednosti ili generalizacije.
 Deadline/compute i licence za sirove podatke ostaju otvoreni.
 
@@ -54,7 +58,7 @@ JSON null config u synthetic CLI-u daje traceback umjesto uredne poruke.
 
 ## Handoff za kolegu
 [HANDOFF](../HANDOFF.md) sadrži prenosiv clone/setup, put do legacy runtimea,
-pribavljanje ignorisanih podataka i prvi zadatak s kriterijima prihvata.
+pribavljanje ignorisanih podataka i dataset refinement kao prvi zadatak.
 Za objavu ponovo prolazi svih 26 testova u modernom environmentu. Čisti lokalni
 Git klon s novim venvom i bez dodatnih paketa prolazi 22 testa (4 optional preskočena)
 i synthetic smoke; originalni lokalni setup nije preduslov za taj početak.

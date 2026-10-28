@@ -4,6 +4,10 @@ Stanje 2026-10-28. Ovaj dokument je dovoljan ulaz bez prethodne chat historije.
 Istraživačko pitanje: može li prilagodba postojećeg RL agenta različitim budžetima
 intervencija poboljšati rezultate u odnosu na zamrznuti model i heuristike?
 
+**Aktuelni fokus: TASK-012 — dataset refinement.** Izvori i mali uzorci su pregledani;
+uloga stvarnih podataka, konačni izbor i obim evaluacije još nisu usaglašeni.
+Dogrib/CFSDS su kandidati i prijedlog, ne zamrznut istraživački dataset.
+
 ## Preuzimanje i prvo pokretanje
 
 Dok PR nije spojen, preuzmi implementacijsku granu:
@@ -47,7 +51,28 @@ cross-platform lock. Optional suite uključuje kratko učenje radi provjere save
 RL adaptacije, fizička validacija na historijskim požarima ili validacija za BiH.
 Sintetički pilot i runtime provjera nisu glavni istraživački rezultati.
 
-## Prvi zadatak: TASK-004c
+## Prvi zadatak: TASK-012 — dataset refinement
+
+Počni od [trenutnog stanja podataka i otvorenih odluka](docs/research/REAL_FIRE_DATASETS.md).
+Dosad imamo inventar Firehose simulator inputa, male Dogrib/CFSDS uzorke i provjere
+njihove strukture. To još ne definiše glavni eksperimentalni skup.
+
+Refinement treba dati kratak prijedlog koji razdvaja potvrđeno od otvorenog:
+
+1. Uloga svakog sloja: ulazi/scenariji simulatora, iskustvo za RL i historijske
+   reference. Odrediti koje tvrdnje želimo podržati stvarnim podacima.
+2. Kandidati i obim: Dogrib, mali CFSDS podskup ili drugi opravdan izvor; konkretni
+   događaji/mape, potrebni inputi, licence i realan trošak pripreme.
+3. Veza s modelom: domen, rezolucija, vremenski korak i šta stvarno može koristiti
+   postojeća 20×20/400-action politika. Puna historijska mapa nije automatski RL scenarij.
+4. Evaluacija: jedinica scenarija, razdvajanje kalibracije/train/validation/test,
+   metrike i granice generalizacije. Označiti šta nedostaje za izabrani pristup.
+
+Prihvat: dokumentovan prijedlog obima i jasne otvorene odluke za usaglašavanje.
+Status izbora ostaje provisional dok dogovor nije zabilježen. Preuzeti uzorak i
+uspješan parser nisu potvrda da je dataset spreman. Tehnički plan prilagoditi tom obimu.
+
+## Tehnički nastavak nakon refinementa: TASK-004c
 
 Prvo pročitaj [STATUS](docs/STATUS.md), [runtime nalaze](docs/research/FIREHOSE_VERIFICATION.md),
 [protokol](docs/research/PROTOCOL.md) i [odluke](docs/specs/DECISION_RECORDS.md).
@@ -69,7 +94,8 @@ politikama. Prihvat: regresijski testovi za warmup/207 ćelija, budžet, determi
 replay, cleanup i containment/weather-horizon razliku. Ne mijenjati reward i glavu
 modela usput bez zasebne odluke i kontrola.
 
-Nakon toga: zamrznuti scenarije/splitove, izmjeriti trošak kratkog benchmarka, pa
+Nakon usaglašenog obima i odgovarajućeg adaptera: zamrznuti scenarije/splitove,
+izmjeriti trošak kratkog benchmarka, pa
 tek planirati fine-tuning. [BACKLOG](docs/BACKLOG.md) čuva TASK-005/006 i dalje.
 TASK-010 je poznata manja CLI greška za root JSON `null`, ne blokira validne runove.
 
@@ -113,10 +139,11 @@ inpute; rad iz 2024 opisuje drugo, 180 m izdanje. [TASK-011 i detalji](docs/rese
 
 ## Spreman prompt za kolegu ili coding agenta
 
-> Nastavi wildfire-rl-adaptation od TASK-004c. Pročitaj HANDOFF, STATUS,
-> FIREHOSE_VERIFICATION i PROTOCOL. Oba postojeća Firehose modela već su izvršena
-> bez treniranja na Linux ARM64 Docker runtimeu. Implementiraj i testiraj
-> warmup observation, kumulativnu štetu i active/burnt/termination export uz očuvanje
-> RGB 3×20×20 / Discrete(400). Primijeni iste uslove na sve politike. Ne pokreći
-> dugo treniranje, plaćeni compute ili merge bez naloga. Nalaze i odluke zapiši u
-> bazu znanja; ograničenja podataka su u REAL_FIRE_DATASETS.
+> Nastavi wildfire-rl-adaptation od TASK-012 — dataset refinement. Pročitaj HANDOFF,
+> STATUS, DATASET, REAL_FIRE_DATASETS i PROTOCOL. Imamo inventar simulator inputa
+> i pregledane male Dogrib/CFSDS uzorke; konačni izbor, uloga i obim nisu usaglašeni.
+> Pripremi prijedlog izvora/podskupa, veze sa 20×20 modelom, vremenske/prostorne
+> rezolucije, scenarija/splitova, metrika i granica zaključaka. Odvoji preporuke od
+> odluka. Firehose runtime je već provjeren; TASK-004c je poznati tehnički nastavak
+> nakon refinementa. Ne pokreći dugo treniranje, velika preuzimanja, plaćeni compute
+> ili merge bez naloga. Nalaze i otvorene odluke zapiši u bazu znanja.

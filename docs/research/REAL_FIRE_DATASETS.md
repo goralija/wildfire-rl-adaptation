@@ -3,6 +3,24 @@
 Provjereno 2026-10-28. Ovo je izbor izvora i pregled malih uzoraka. Nismo još
 validirali fiziku simulatora, izvršili historijski replay niti trenirali politiku na njima.
 
+## Status: refinement otvoren — TASK-012
+
+Korisnik je pojasnio da izbor i uloga dataseta još nisu usaglašeni. Naredni projektni
+korak je refinement podataka; preporuke ispod su istraženi kandidati, ne konačna odluka.
+Tehnički TASK-004c ostaje potreban prije glavne evaluacije postojećim Firehose pristupom.
+
+| Dio | Šta imamo | Šta ostaje otvoreno |
+| --- | --- | --- |
+| Simulator inputi | pinovan Sub20 teren/gorivo/weather inventar i izvršeni rollouti | koje mape, weather i ignition kombinacije čine glavni eksperiment |
+| Historijski podaci | mali Dogrib/CFSDS uzorci, izvor/hash/profil i poznata ograničenja | uloga validacije, konačni izvor/podskup, kompletni ulazi i vremenski/prostorni alignment |
+| RL iskustvo | kratki moderni synthetic smoke i legacy inference provjera | podaci/scenariji za glavni fine-tuning, ako se pristup potvrdi |
+| Evaluacija | metodološki draft i sintetički pilot | konačni scenario kontrakt, kalibracija/holdout, split manifesti, metrike i granice tvrdnji |
+
+Isporuka TASK-012 je kratak prijedlog za usaglašavanje: uloga svakog sloja, izvor i
+obim, odnos pune mape i 20×20 politike, rezolucija/korak, potrebni inputi i evaluacija.
+Posebno označiti otvorene odluke i šta je dodatni obim. Izbor ostaje provisional dok
+dogovor nije zabilježen; pregled uzoraka sam po sebi ne zatvara refinement.
+
 ## Treba li nam takav dataset?
 
 Za osnovno pitanje — da li prilagodba postojeće RL politike različitim budžetima
@@ -24,7 +42,7 @@ Odvajamo tri stvari:
 Opaženi požari uključuju stvarne intervencije, nepoznate uslove i greške mjerenja.
 Podudaranje sa njima samo po sebi ne dokazuje korist naše politike u stvarnom svijetu.
 
-## Preporuka: Dogrib prvo, mali CFSDS podskup zatim
+## Dosadašnji prijedlog za razmatranje: Dogrib prvo, mali CFSDS podskup zatim
 
 | Kandidat | Šta nudi | Uloga za nas | Provjera i pristup |
 | --- | --- | --- | --- |
@@ -100,16 +118,19 @@ nemaju zajednički teren s Dogrib/Firehose mapama; nezavisnost potvrditi prostor
 
 ## Ograničeni naredni koraci
 
-1. Završiti postojeći TASK-004c adapter; dataset istraživanje ga ne zamjenjuje.
-2. TASK-011a: uskladiti Dogrib ulaze, perimetre i vremenski prozor, razjasniti nonfuel
+1. TASK-012: razjasniti i usaglasiti ulogu, izbor i obim podataka te scenario/model
+   kontrakt. Koristiti postojeći pregled kao podlogu, bez pretpostavke da je izbor zatvoren.
+2. Prema usaglašenom obimu završiti TASK-004c adapter prije glavnih RL eksperimenata.
+3. Ako se historijska provjera uključi u obim, TASK-011a: uskladiti Dogrib ulaze,
+   perimetre i vremenski prozor, razjasniti nonfuel
    neslaganja i uslove podataka. Tek zatim kratak no-action replay i poređenje na
    istom domenu/vremenu: IoU/F1 opožarenog područja i greška površine, uz više seedova.
    Ako se bilo šta kalibriše na Dogribu, on je kalibracijski slučaj, ne holdout test.
-3. TASK-011b: provjeriti izvedivost 3–5 drugih CFSDS požara s kompletnim inputima.
+4. U istom uslovnom obimu, TASK-011b: provjeriti izvedivost 3–5 drugih CFSDS požara s kompletnim inputima.
    Prije tuninga odvojiti kalibraciju i holdout po cijelim događajima; ne dijeliti
    susjedne piksele/dane istog požara u train i test. Ako inputi nisu dostupni u
    ograničenom naporu, ostaviti CFSDS kao dokumentovan budući rad.
-4. Glavno poređenje politika ostaje upareno unutar kontrolisanih simulator scenarija.
+5. Glavno poređenje politika ostaje upareno unutar kontrolisanih simulator scenarija.
    Odvojeno izvještavati vjerodostojnost simulatora i dobitak RL adaptacije.
 
 ## Lokalni dokazi i ponavljanje

@@ -1,6 +1,8 @@
 {
   "reviewed_on": "2026-10-28",
   "purpose": "dataset suitability for simulator validation; no policy training or physical validation performed",
+  "selection_status": "candidate review only; final role, selection and scope not agreed",
+  "next_task": "TASK-012 dataset refinement",
   "recommended_sequence": [
     "dogrib-case-study",
     "cfsds-small-independent-subset"
