@@ -1,6 +1,7 @@
 # Indeks baze znanja
 
 ## Najprije
+- [Handoff za kolegu i čisti Git klon](../HANDOFF.md).
 - [STATUS](STATUS.md): šta radi, šta je provjereno i šta nedostaje.
 - [NEXT_SESSION](NEXT_SESSION.md): tačan redoslijed nastavka.
 - [WORK_LOG](WORK_LOG.md), [IMPLEMENTATION_PLAN](IMPLEMENTATION_PLAN.md), [DESIGN](DESIGN.md).

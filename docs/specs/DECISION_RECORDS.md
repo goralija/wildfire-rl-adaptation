@@ -62,3 +62,15 @@ preduslovi su za vanjske tvrdnje, ne razlog da odgađamo popravku TASK-004c.
 Pinovati CFSDS fajlove: rad opisuje 180 m v1, pregledani v1_1 uzorak ima 90 m.
 Raw ostaje ignorisan, manifesti/hashovi/profili i odluke idu u Git. Detalji i
 ograničenja: research/REAL_FIRE_DATASETS.md; implementacija provjere je TASK-011.
+
+## ADR-008 — objava grane i PR za timski handoff, accepted 2026-10-28
+Korisnik je sada izričito zatražio commit, PR cijelog dosadašnjeg rada i handoff
+za kolegu. Time je odobrena remote objava koja je u ADR-005 bila odgođena.
+GitHub repo je i dalje prazan: objaviti postojeći prazni bazni commit kao `main`,
+zatim `feature/project-bootstrap` sa cjelokupnim radom i otvoriti PR prema mainu.
+Ne mergeati PR automatski. Sačuvati historiju, postojeći worktree i lokalne artefakte.
+
+HANDOFF.md daje prenosive upute bez Harunovih lokalnih putanja/okruženja. Objavljuju
+se naš kod, dokumentacija, mali rezultati i manifesti. Raw podaci, težine, treći repo,
+image, .venv i privatni originali ostaju izvan Gita. Ovo nije izbor licence za tim
+niti dozvola za redistribuciju tuđih modela/podataka. Sljedeći tehnički posao ostaje TASK-004c.

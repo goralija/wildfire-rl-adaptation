@@ -102,3 +102,20 @@ conditional small independent event subset. Preserve TASK-004c as next technical
 Do not mix 2024 CFSDS paper v1 (180 m) with inspected v1_1 files (90 m, beta caveats).
 Raw samples/PDF remain ignored; only manifests/profiles/checks/source notes are versioned.
 No physical validation, training, full large-archive download or remote writes performed.
+
+2026-10-28 — User explicitly authorized committing/publishing all work as a PR and
+preparing a colleague handoff. Reused feature/project-bootstrap worktree. Remote
+inspection confirmed the GitHub repository still has no branches; main must first
+receive only the existing empty base commit, leaving the full implementation in PR.
+ADR-008 records the new remote authorization; no automatic merge is authorized.
+
+Added portable HANDOFF.md: clone/setup, current capabilities, first TASK-004c with
+acceptance checks, separate modern/legacy environments, public URLs/hash recovery
+for ignored inputs, and a ready continuation prompt. Linked from README/knowledge
+entry points. Existing public code/reports total about 0.54 MB; raw data, models,
+private originals and third-party checkouts remain ignored.
+
+Fresh host verification before publication: all 26 tests passed; synthetic smoke
+executed. Reviewed 139 reachable historical blobs for ignored raw/private directories,
+private-key/token patterns and file email addresses: no matches. Handoff links pass.
+This bounded publication check does not change the research-readiness limitations.
