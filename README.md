@@ -13,7 +13,8 @@ Tim: Amar Hodžić, Belmin Durmo, Harun Goralija. Predmet MPVI.
 
 ## Nastavak za pet minuta
 
-1. Pročitaj [trenutno stanje](docs/STATUS.md) i [upute za narednu sesiju](docs/NEXT_SESSION.md).
+1. Za novi računar/kolegu počni od [HANDOFF](HANDOFF.md); zatim pročitaj
+   [trenutno stanje](docs/STATUS.md) i [upute za narednu sesiju](docs/NEXT_SESSION.md).
 2. Pogledaj [istraživački protokol](docs/research/PROTOCOL.md),
    [provjeru simulatora](docs/research/SIMULATOR_AUDIT.md) i [odluke](docs/specs/DECISION_RECORDS.md).
 3. Pokreni testove i pilot ispod. Glavni sljedeći zadatak je **TASK-004c: ispravan observation/metrics adapter**.

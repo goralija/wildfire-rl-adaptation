@@ -1,5 +1,9 @@
 # Nastavak rada bez chat historije
 
+Za drugi računar ili novog saradnika prvo pročitaj [HANDOFF](../HANDOFF.md):
+clone grana, minimalni setup i pribavljanje lokalno ignorisanih izvora/podataka.
+Lokalne putanje ispod su samo historija Harunovog računara, nisu prenosivi setup.
+
 1. Iz ovog repozitorija pročitaj STATUS, DECISION_RECORDS, SIMULATOR_AUDIT i PROTOCOL.
 2. `git status --short --branch`; provjeri da si u ispravnom task worktreeu.
 3. `PYTHONPATH=src python3 -m unittest discover -s tests -v`.
