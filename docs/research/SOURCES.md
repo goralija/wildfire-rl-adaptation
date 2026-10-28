@@ -33,3 +33,23 @@ konačne tvrdnje; nije provedena sistematska literature review.
 - [PyTorch 1.13.1 release files](https://pypi.org/project/torch/1.13.1/): potvrđen ARM64 Linux wheel za legacy runtime.
 - Checkpoint `system_info.txt`, lokalni C++/Python kod, dataset fajlovi i izvršeni
   stdout/JSON su primarni dokazi nastavka; receipti i hashovi su u reports/firehose-verification/.
+
+## Historijski požari: izvori pregledani 2026-10-28
+
+- S-014: [Kim, Pais & Gonzalez, 2025](https://pmc.ncbi.nlm.nih.gov/articles/PMC12254405/),
+  DOI 10.1038/s41598-025-05706-6; Dogrib kao Cell2Fire validacijski slučaj.
+  [Podaci i kod](https://github.com/humnetlab/Cell2Fire/tree/84e3c817ad866358d8db28e87c9445b42aaf7908),
+  pin 84e3c817…; zasebno pregledan originalni Dogrib_v624 README (Alberta, 2019-02-03).
+- S-015: [Barber et al., 2024, CFSDS](https://pmc.ncbi.nlm.nih.gov/articles/PMC11239873/),
+  DOI 10.1038/s41597-024-03436-4; [OSF podaci](https://osf.io/f48ry/),
+  DOI 10.17605/OSF.IO/F48RY. Rad opisuje v1; [version record](https://osf.io/download/8fe4u/)
+  dokumentuje v1_1 od 2025-06-12. Provjeren javni OSF API: projekt, fajlovi i
+  [deklarisana CC-BY 4.0 licenca](https://api.osf.io/v2/licenses/563c1cf88c5e4a3877f9e96a/).
+- S-016: [Gerard, Zhao & Sullivan, WildfireSpreadTS](https://zenodo.org/records/8006177),
+  DOI 10.5281/zenodo.8006177; [autorski code/loader](https://github.com/SebastianGer/WildfireSpreadTS).
+  Pregledani javni metapodaci; arhiva nije preuzeta niti očišćena u ovom projektu.
+- S-017: [MITRE BurnMD](https://github.com/mitrefireline/burnmd/tree/a9e423f15906bc9860be6d80b56e71e4a6ee307c),
+  samo LFS metapodaci, mogući SimFire fallback; sadržaj arhive nije pregledan.
+
+[REAL_FIRE_DATASETS](REAL_FIRE_DATASETS.md) čuva preporuku, obim uzorka i nedostatke;
+reports/real-fire-data/ čuva download SHA256 i provjere stvarno preuzetih fajlova.

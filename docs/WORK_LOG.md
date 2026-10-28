@@ -79,3 +79,26 @@ commits/source hashes and all dataset file hashes. Physical validity, policy qua
 redistribution rights, future adapter and new-platform Docker rebuild are explicitly
 outside that verdict. Final host suite 26/26; clean core 22 pass + 4 optional RL skips;
 core smoke still executes. All changes remain local on feature/project-bootstrap.
+
+2026-10-28 — User correctly distinguished environment configuration from observed-fire
+data and requested real dataset candidates. Reviewed primary sources for Dogrib/Cell2Fire,
+CFSDS and WildfireSpreadTS; bounded public data downloads only, no training or simulation.
+Plan: assess relevance to budget adaptation -> inspect small observed-outcome samples ->
+record provenance/quality/limitations and a feasible historical validation path.
+
+Downloaded 16 selected Dogrib files (3,390,138 bytes) plus two CFSDS 2020 ZIPs
+(293,731 bytes); SHA256 and offline sample checks passed for all 18 files. Dogrib
+observed scar is 223x357 with 10,210 positive cells; 663 overlap fuel code101.
+Sub20 fuel/elevation exactly match full Dogrib array[0:20,20:40]; slope/aspect differ,
+and retained Sub20 origin does not match that crop. Thus not independent map validation.
+CFSDS sample: 38 matched rasters/IDs at 90 m, 372 daily rows, 60 columns, no duplicate
+fire-days, two missing BUI rows, no wind-direction column. Daily summaries alone cannot
+supply the complete FBP grid/weather needed for a Cell2Fire replay.
+
+Decision ADR-007: historical data strengthen simulator credibility but are not mandatory
+for a conditional simulator policy comparison and do not identify counterfactual RL
+benefits. Dogrib first as a connected case after temporal/input alignment; CFSDS as
+conditional small independent event subset. Preserve TASK-004c as next technical task.
+Do not mix 2024 CFSDS paper v1 (180 m) with inspected v1_1 files (90 m, beta caveats).
+Raw samples/PDF remain ignored; only manifests/profiles/checks/source notes are versioned.
+No physical validation, training, full large-archive download or remote writes performed.

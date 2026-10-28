@@ -1,0 +1,40 @@
+{
+  "reviewed_on": "2026-10-28",
+  "cfsds_version_record": {
+    "url": "https://osf.io/download/8fe4u/",
+    "bytes": 2041,
+    "sha256": "f531a0a8447fad69cd336521d015061eb5624e8746c8cfb4501d708556d74789",
+    "reviewed_release": {
+      "label": "v1_1",
+      "release_date": "2025-06-12",
+      "years": "2002-2024",
+      "resolution_m": 90,
+      "minimum_fire_ha": 500,
+      "beta_warning_present": true,
+      "version_record_url": "https://osf.io/download/8fe4u/"
+    }
+  },
+  "cfsds_license": {
+    "url": "https://api.osf.io/v2/licenses/563c1cf88c5e4a3877f9e96a/",
+    "name": "CC-By Attribution 4.0 International"
+  },
+  "wildfirespreadts": {
+    "metadata_url": "https://zenodo.org/api/records/8006177",
+    "files": [
+      {
+        "name": "WildfireSpreadTS_Documentation.pdf",
+        "bytes": 7841847,
+        "checksum": "md5:1abb9a9975a0dae1dbd0324a782d00dc"
+      },
+      {
+        "name": "WildfireSpreadTS.zip",
+        "bytes": 48359369821,
+        "checksum": "md5:dc1a04e63ccc70037b277d585b8fe761"
+      }
+    ],
+    "license": {
+      "id": "cc-by-4.0"
+    },
+    "archive_downloaded": false
+  }
+}

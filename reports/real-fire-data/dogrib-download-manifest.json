@@ -1,0 +1,102 @@
+{
+  "repository_commit": "84e3c817ad866358d8db28e87c9445b42aaf7908",
+  "files": [
+    {
+      "path": "dogrib/Forest.asc",
+      "url": "https://raw.githubusercontent.com/humnetlab/Cell2Fire/84e3c817ad866358d8db28e87c9445b42aaf7908/data/real/dogrib/Forest.asc",
+      "bytes": 196099,
+      "sha256": "d23715361b4097681b8b941d80c864e46c3e588abe80b766eb60bda85df1b559"
+    },
+    {
+      "path": "dogrib/elevation.asc",
+      "url": "https://raw.githubusercontent.com/humnetlab/Cell2Fire/84e3c817ad866358d8db28e87c9445b42aaf7908/data/real/dogrib/elevation.asc",
+      "bytes": 398366,
+      "sha256": "10ee1b2bf3e804d395ab907db97bf1417b4f93f6fb58c35928d8a568c80bbece"
+    },
+    {
+      "path": "dogrib/slope.asc",
+      "url": "https://raw.githubusercontent.com/humnetlab/Cell2Fire/84e3c817ad866358d8db28e87c9445b42aaf7908/data/real/dogrib/slope.asc",
+      "bytes": 216999,
+      "sha256": "fdd411e8e7023d9b0d3b0f4dc3da7975e47d10da2cbeaffb3c3b79aeb1d21bb2"
+    },
+    {
+      "path": "dogrib/saz.asc",
+      "url": "https://raw.githubusercontent.com/humnetlab/Cell2Fire/84e3c817ad866358d8db28e87c9445b42aaf7908/data/real/dogrib/saz.asc",
+      "bytes": 288305,
+      "sha256": "d72d9c7f41b7a5dbc0148c26207bb789ff441d95501baed4b7d9840b5a5627e0"
+    },
+    {
+      "path": "dogrib/cur.asc",
+      "url": "https://raw.githubusercontent.com/humnetlab/Cell2Fire/84e3c817ad866358d8db28e87c9445b42aaf7908/data/real/dogrib/cur.asc",
+      "bytes": 433954,
+      "sha256": "25c87afc4ab9b84d13a0b8eb4c9cc791c215e9d359dcf3ac17e3aa3b5c996936"
+    },
+    {
+      "path": "dogrib/Weather.csv",
+      "url": "https://raw.githubusercontent.com/humnetlab/Cell2Fire/84e3c817ad866358d8db28e87c9445b42aaf7908/data/real/dogrib/Weather.csv",
+      "bytes": 579,
+      "sha256": "0603ca53338da2aae11319c46e000a1b679fc906ffd5556492bac52e5fa552c4"
+    },
+    {
+      "path": "dogrib/Ignitions.csv",
+      "url": "https://raw.githubusercontent.com/humnetlab/Cell2Fire/84e3c817ad866358d8db28e87c9445b42aaf7908/data/real/dogrib/Ignitions.csv",
+      "bytes": 18,
+      "sha256": "641da94eea841367f3e039fb127fa49f6ece223e1516ff8f831e4f7cacc75c81"
+    },
+    {
+      "path": "dogrib/fbp_lookup_table.csv",
+      "url": "https://raw.githubusercontent.com/humnetlab/Cell2Fire/84e3c817ad866358d8db28e87c9445b42aaf7908/data/real/dogrib/fbp_lookup_table.csv",
+      "bytes": 11067,
+      "sha256": "9ff5b23cbff4b5dff8595c9d37885da359634a80671ae56ce8e0d30396be7ea2"
+    },
+    {
+      "path": "dogrib/real_scar_dogrib.csv",
+      "url": "https://raw.githubusercontent.com/humnetlab/Cell2Fire/84e3c817ad866358d8db28e87c9445b42aaf7908/data/real/dogrib/real_scar_dogrib.csv",
+      "bytes": 159221,
+      "sha256": "bb7dfcd39c831023de72a2755049ef4f566b37008ccd06d908993c066bd334d3"
+    },
+    {
+      "path": "dogrib/prometheus_dogrib.csv",
+      "url": "https://raw.githubusercontent.com/humnetlab/Cell2Fire/84e3c817ad866358d8db28e87c9445b42aaf7908/data/real/dogrib/prometheus_dogrib.csv",
+      "bytes": 159222,
+      "sha256": "e103df4919014f09601f828b028bf383015ae5d19497731239d7bcf9ef6684d2"
+    },
+    {
+      "path": "dogrib/README.md",
+      "url": "https://raw.githubusercontent.com/humnetlab/Cell2Fire/84e3c817ad866358d8db28e87c9445b42aaf7908/data/real/dogrib/README.md",
+      "bytes": 13,
+      "sha256": "63a856b9c8cf086fb10772de51b535388bd5ca0f710ed66e571a4ed4ae801d5e"
+    },
+    {
+      "path": "Dogrib_v624/fbp_fuel_type.prj",
+      "url": "https://raw.githubusercontent.com/humnetlab/Cell2Fire/84e3c817ad866358d8db28e87c9445b42aaf7908/data/real/Dogrib_v624/fbp_fuel_type.prj",
+      "bytes": 357,
+      "sha256": "a6b976c393edca3e7eb7e115fc5f59fbd4f6d17c4d32e4829b395e6642d4f22d"
+    },
+    {
+      "path": "Dogrib_v624/Dogrib_v624_README.pdf",
+      "url": "https://raw.githubusercontent.com/humnetlab/Cell2Fire/84e3c817ad866358d8db28e87c9445b42aaf7908/data/real/Dogrib_v624/Dogrib_v624_README.pdf",
+      "bytes": 1400951,
+      "sha256": "2fce0e1e514bcc090875023aaa27be263e4834a2600376014aa9fd102103a773"
+    },
+    {
+      "path": "Dogrib_v624/ignition_point_20011016_1300.kml",
+      "url": "https://raw.githubusercontent.com/humnetlab/Cell2Fire/84e3c817ad866358d8db28e87c9445b42aaf7908/data/real/Dogrib_v624/ignition_point_20011016_1300.kml",
+      "bytes": 1751,
+      "sha256": "39e2d2fcb73b7a5e9dd9e8ba9d66ee2ff45cad763ffb5bb3347a27ac1ec21b51"
+    },
+    {
+      "path": "Dogrib_v624/perimeter_rwf085_20011016_1300.kml",
+      "url": "https://raw.githubusercontent.com/humnetlab/Cell2Fire/84e3c817ad866358d8db28e87c9445b42aaf7908/data/real/Dogrib_v624/perimeter_rwf085_20011016_1300.kml",
+      "bytes": 11633,
+      "sha256": "2f693194f1adf5a7ce97da908c3b28d198e4a01ff59a1314faa1f670bfdc610c"
+    },
+    {
+      "path": "Dogrib_v624/perimeter_rwf085_20011017_1152.kml",
+      "url": "https://raw.githubusercontent.com/humnetlab/Cell2Fire/84e3c817ad866358d8db28e87c9445b42aaf7908/data/real/Dogrib_v624/perimeter_rwf085_20011017_1152.kml",
+      "bytes": 111603,
+      "sha256": "a279e9c23f0847dbc1ae1ccbe4dce852099e457c00054db4a5cc9b41b50d660e"
+    }
+  ],
+  "total_bytes": 3390138
+}

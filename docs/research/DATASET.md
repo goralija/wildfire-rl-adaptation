@@ -1,8 +1,10 @@
 # Dataset: šta imamo i šta ćemo koristiti
 
-**Da, projekat ima dataset.** U RL-u se sastoji od ulaza za simulaciju i skupa
-scenarija; agent interakcijom stvara iskustvo. Nije nam nužan klasičan skup redova
-sa oznakom ispravne intervencije. Ovu podjelu čuvamo odvojeno od modela i rezultata.
+**Postavka okruženja i dataset opaženih požara su različite stvari.** Početni Firehose
+fajlovi su ulazi za simulaciju; agent interakcijom stvara RL iskustvo. Oni sami nisu
+skup stvarnih ishoda niti oznaka ispravnih intervencija. Sada su zasebno preuzeti i
+pregledani mali Dogrib/CFSDS historijski uzorci. Preporuka i ograničenja su u
+[REAL_FIRE_DATASETS](REAL_FIRE_DATASETS.md).
 
 ## Postojeći Firehose Sub20x20 — data card
 
@@ -30,7 +32,10 @@ ovim inventarom. Ne pretvarati ćelije u hektare prije provjere CRS-a.
 
 ## Kvalitet i ograničenja
 
-- Četiri rastera su prostorno poravnata, imaju po 20 redova × 20 kolona i ista zaglavlja.
+- Četiri rastera imaju po 20 redova × 20 kolona i ista zaglavlja unutar Sub20 paketa.
+  Naknadna Dogrib provjera otkrila je da origin ne odgovara stvarnom izrezu pune
+  mape: gorivo/elevation su identični njenom bloku [0:20,20:40]. Zajednička zaglavlja
+  zato ne dokazuju ispravnu geografsku lokaciju; vidjeti REAL_FIRE_DATASETS.
 - Nema nepoznatih fuel kodova. Svih 130 weather fajlova ima 8 redova; nema negativnog
   WS ili RH izvan [0,100] u tim poljima. Ovo nije fizička validacija svih vrijednosti.
 - Više `Data.csv` kolona je prazno po dizajnu jer se vrijeme/vjetar/indeksi popunjavaju
@@ -59,8 +64,10 @@ ovim inventarom. Ne pretvarati ćelije u hektare prije provjere CRS-a.
    krive šteta/budžet i intervali.
 
 Početak je ova mala postojeća mapa; zatim proširujemo scenarije nakon provjere
-adaptera. Stvarni regionalni GIS, satellite dataset ili ručno označavanje nisu sada
-neophodni. To bi bili zaseban dodatni obim sa svojom kalibracijom i licencama.
+adaptera. Preporučen dodatak je ograničena historijska provjera simulatora: Dogrib kao
+početni povezani slučaj, zatim mali nezavisni CFSDS podskup ako kompletni inputi budu
+izvedivi. To nije uslov da uopšte počnemo RL poređenje niti dokaz koristi intervencija
+u stvarnom svijetu. Regionalni BiH GIS i velika kampanja označavanja nisu u sadašnjem obimu.
 
 ## Ponovi inventar
 

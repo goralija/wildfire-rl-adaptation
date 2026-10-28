@@ -44,3 +44,21 @@ active/burnt stanja zahtijevaju TASK-004c. Ne koristiti upstream done za contain
 Dataset se za početak sastoji od pinovanih map/terrain/weather inputa i scenarija;
 RL iskustvo generiše simulator. Nema obaveze skupljanja označenih intervencija ili
 regionalnog GIS-a. Raw data/weights i Docker image ostaju lokalni dok licence nisu provjerene.
+
+## ADR-007 — historijski podaci imaju zasebnu validacijsku ulogu, accepted 2026-10-28
+Korisnik je ispravno razdvojio simulator inpute od dataseta opaženih požara i tražio
+dobar stvarni dataset. Osnovno istraživačko pitanje ostaje adaptacija politike unutar
+simulatora; ne uvodimo obavezu supervised labela intervencija ili novu forecasting temu.
+
+Preporučen početak je Dogrib 2001 sa opaženim scarom i pripremljenim Cell2Fire inputima;
+zatim mali CFSDS podskup za nezavisnije događaje, uslovno dostupnim kompletnim inputima.
+Izbor konkretnog holdout skupa je provisional. Mali uzorci su preuzeti i pregledani,
+ali fizička validacija nije izvršena. Dogrib dijeli fuel/elevation blok s Firehose
+Sub20, pa služi kao povezana referenca/kalibracijski slučaj, ne nezavisan test.
+
+Historijski ishodi ne identifikuju ishode novih RL intervencija. Mjerenje sličnosti
+požara odvajamo od paired policy benchmarka. Event split i vremenski alignment
+preduslovi su za vanjske tvrdnje, ne razlog da odgađamo popravku TASK-004c.
+Pinovati CFSDS fajlove: rad opisuje 180 m v1, pregledani v1_1 uzorak ima 90 m.
+Raw ostaje ignorisan, manifesti/hashovi/profili i odluke idu u Git. Detalji i
+ograničenja: research/REAL_FIRE_DATASETS.md; implementacija provjere je TASK-011.
