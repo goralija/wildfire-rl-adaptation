@@ -107,3 +107,15 @@ Migracija ne dodaje izmišljenu provenance, ljudsku potvrdu ili naučnu verifika
 TASK-012 ostaje prvi istraživački korak; dataset odluke su otvorene. Raw/težine,
 treći repo, environmenti i privatni originali ostaju van bundlea uz recovery manifeste.
 Lokalni START_HERE/backup i chat nisu izvor istine ili preduslov za novog saradnika.
+
+## ADR-011 — glavni klon direktno u mpvi, accepted 2026-10-28
+Korisnik traži da mpvi bude klon, worktree-i u mpvi/.worktrees i lokalni ignorisani
+prostor za fajlove koji ne pripadaju Git historiji. Postojeći glavni Git direktorij
+promovišemo iz repository/ u root, a postojeći PR checkout selimo Git move/repair
+postupkom. Grane, commitovi i PR ostaju isti; main se ne mergea tim zahvatom.
+
+`.worktrees/` i `.local/` su versionisano ignorisani u feature grani. Dok main još
+nema projektnu .gitignore, lokalni info/exclude čuva iste granice. Postojeći backup-i
+i lokalni ulazni fajl sele u .local, a originalni ignored podaci/modeli/venv ostaju
+uz isti worktree. Python apsolutne putanje treba uskladiti i provjeriti testovima.
+Kanonski runbook je knowledge/workspace-layout.md. TASK-012 ostaje prvi istraživački posao.

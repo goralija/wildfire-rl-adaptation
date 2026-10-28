@@ -33,6 +33,8 @@ minimalni setup i pribavljanje lokalno ignorisanih izvora/podataka.
 ## Repo-relative lokacije
 - Repo root na tvom računaru: `git rev-parse --show-toplevel`.
 - PR grana: `feature/project-bootstrap`; poslije mergea sadržaj je na mainu.
+- Glavni klon je `mpvi`; PR checkout je `.worktrees/project-bootstrap/` u tom klonu.
+  [Workspace runbook](../knowledge/workspace-layout.md) daje pravila i lokalni storage.
 - [index.md](../index.md) je kanonski ulaz; vanjski START_HERE ili lokalni backup nisu preduslov.
 - `.venv`: optional moderni RL environment; `external/firehose`: pinovani izvor/ZIP-ovi.
 - `data/raw`, `runs`, `private`: ignorisani artefakti; javni recovery URL/hashovi su u repou.

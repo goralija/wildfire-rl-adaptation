@@ -29,12 +29,20 @@ u repou. Lokalni veliki/raw artefakti i privatni originali imaju odvojenu granic
 Dok PR nije spojen, preuzmi implementacijsku granu:
 
 ```sh
-git clone --branch feature/project-bootstrap https://github.com/goralija/wildfire-rl-adaptation.git
-cd wildfire-rl-adaptation
+git clone --branch main https://github.com/goralija/wildfire-rl-adaptation.git mpvi
+cd mpvi
+printf '\n/.worktrees/\n/.local/\n' >> .git/info/exclude
+mkdir -p .worktrees
+git worktree add --track -b feature/project-bootstrap .worktrees/project-bootstrap origin/feature/project-bootstrap
+cd .worktrees/project-bootstrap
 python3 -m venv .venv
 PYTHONPATH=src .venv/bin/python -m unittest discover -s tests -v
 PYTHONPATH=src .venv/bin/python -m wildfire_rl.cli --config configs/smoke.json --out runs/handoff-smoke
 ```
+
+Komande za kreiranje worktreea iznad su za nov klon; u postojećem koristi
+`git worktree list` i nastavi na već registrovanoj putanji. [Workspace raspored](knowledge/workspace-layout.md)
+opisuje glavni klon, prazan main dok PR čeka merge i `.local/` za radne artefakte.
 
 Treba Python >=3.11; osnovni paket nema dodatnih zavisnosti. Bez RL biblioteka
 prolaze 22 testa, a 4 optional RL testa se preskaču. Smoke pravi CSV/JSON/SVG izlaze.

@@ -175,3 +175,10 @@ a path. Added failing code-span fixtures, fixed extraction, and verified 15 know
 tests/63-file strict check in the clean clone again. Application suite remains 26/26.
 Receipt with checker/test/requirements/workflow SHA256 is reports/knowledge-validation.json.
 TASK-013 knowledge migration is complete; TASK-012 dataset refinement remains open/first.
+
+2026-10-28 — User explicitly requested primary clone at mpvi root, linked worktrees
+under .worktrees/, and ignored local scratch storage. Preflight: primary main and PR
+worktree clean; one linked worktree, same published head; no managed app worktree attachment.
+Plan: record ignore/layout policy -> snapshot Git/assets -> Git move linked checkout ->
+promote existing .git and repair links -> preserve backups in .local and fix local venv
+paths -> verify identities, ignores, tests/smoke and OKF -> update same PR. No PR/main merge.

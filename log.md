@@ -1,5 +1,9 @@
 # Promjene baze znanja
 
+## 2026-10-28: Workspace raspored
+
+- [Runbook](knowledge/workspace-layout.md) definiše mpvi glavni klon, .worktrees i ignorisani .local prostor, uz očuvanje PR-a i dataset prioriteta.
+
 ## 2026-10-28: OKF 0.2 bundle u repozitoriju
 
 - Dodani typed koncepti, lowercase indeksi, [kontekst](knowledge/project-context.md), [mapa koda](knowledge/code-map.md) i [održavanje](knowledge/maintenance.md).
