@@ -169,3 +169,9 @@ Fresh read-only OKF review found two P2 checker false positives (valid fence sha
 and optional Markdown link titles). Both were reproduced with failing tests and
 fixed in one pass; 14 knowledge tests, 26 application tests and 63-file strict check
 pass. No additional onboarding/provenance/dependency/TASK-012 findings; details in REVIEW.
+
+Final clone rerun caught a newly added inline-code link example being interpreted as
+a path. Added failing code-span fixtures, fixed extraction, and verified 15 knowledge
+tests/63-file strict check in the clean clone again. Application suite remains 26/26.
+Receipt with checker/test/requirements/workflow SHA256 is reports/knowledge-validation.json.
+TASK-013 knowledge migration is complete; TASK-012 dataset refinement remains open/first.
