@@ -39,3 +39,20 @@ prava redistribucije, budući adapter ili novi Docker rebuild na drugoj platform
 Ruling: to ostaje van ostvarenog runtime zaključka; implementer je stvarno izgradio
 image i izvršio kontejnerske slučajeve na ovdje dokumentovanom ARM64 hostu.
 To nije garancija fizičkog realizma ili nove platforme, niti zamjena za glavni protokol.
+
+## Nezavisan pregled OKF migracije — 2026-10-28
+Pregled `76ce375..38ba94f`: metadata/navigacija, OKF profil, agent ulazi, validator,
+testovi i CI. Reviewer je read-only potvrdio 12 početnih knowledge testova, svih
+26 aplikacijskih testova, strict provjeru 63 Markdown fajla, smoke i public-only
+export sa 22 core pass / 4 optional skip. Exact-case audit potvrđuje lowercase index.
+
+Dva P2 nalaza su reproducirana i ispravljena uz RED→GREEN regresije: uvlačenje/
+duži ili nezatvoren code fence nije smio stvarati lažne link greške; opcionalni
+Markdown naslov nije dio putanje linka. Konačna suite ima 14 knowledge testova,
+uključujući osam varijanti novih regresija; 26 aplikacijskih testova ostaje zeleno.
+Nije bilo dodatnih nalaza u provenance, onboardingu, razdvajanju zavisnosti ili
+činjenici da TASK-012 ostaje prvi i otvoren.
+
+Granice: native Linux/Docker rebuild nisu dio ovog pregleda; Linux case putanje su
+provjerene prema Git imenima. Pregled/linter ne potvrđuju naučnu istinitost niti
+sve opcionalne OKF attestation porodice. Prethodni TASK-010 ostaje odvojeni minor.

@@ -25,7 +25,19 @@ def markdown_files(root):
 
 
 def without_fences(text):
-    return re.sub(r'(?ms)^(`{3,}|~{3,})[^\n]*\n.*?^\1[ \t]*(?:\n|$)', '', text)
+    visible, fence = [], None
+    for line in text.splitlines():
+        if fence:
+            character, length = fence
+            if re.fullmatch(r' {0,3}' + re.escape(character) + '{%d,}[ \t]*' % length, line):
+                fence = None
+            continue
+        opening = re.match(r' {0,3}(`{3,}|~{3,})(.*)$', line)
+        if opening and not (opening[1][0] == '`' and '`' in opening[2]):
+            fence = (opening[1][0], len(opening[1]))
+        else:
+            visible.append(line)
+    return '\n'.join(visible)
 
 
 def frontmatter(text):
@@ -109,7 +121,7 @@ def validate(root, strict=False):
                 if metadata is None or not isinstance(metadata.get('type'), str) or not metadata['type'].strip():
                     raise ValueError('concept needs YAML frontmatter with nonempty string type')
                 metadata_checks(metadata)
-            links = re.findall(r'\[[^\]\n]*\]\(([^)\n]+)\)', visible)
+            links = re.findall(r'\[[^\]\n]*\]\(\s*(<[^>\n]*>|[^\s)\n]+)', visible)
             if metadata:
                 links += [s['resource'] for s in metadata.get('sources', [])
                           if s['resource'].startswith(('/', './', '../'))]
