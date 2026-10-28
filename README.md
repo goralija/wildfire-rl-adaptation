@@ -4,8 +4,9 @@ Istražujemo može li prilagodba unaprijed treniranog RL agenta **različitim bu
 intervencija** smanjiti opožarenu površinu u odnosu na početni agent i heuristike,
 uz posebno ispitivanje zaštite prioritetnih područja.
 
-**Stanje:** istraživačka osnova i izvršiv sintetički pilot. Firehose checkpointi su
-pronađeni i pregledani; Cell2Fire integracija i fine-tuning još nisu ostvareni.
+**Stanje:** istraživačka osnova i sintetički pilot; Cell2Fire je kompajliran, a oba
+postojeća 20×20 Firehose modela izvršena su u izolovanom legacy kontejneru.
+Fine-tuning i glavna evaluacija još nisu izvedeni.
 Pilot ne predviđa stvarne požare i nije dokaz uspješnosti RL pristupa.
 
 Tim: Amar Hodžić, Belmin Durmo, Harun Goralija. Predmet MPVI.
@@ -15,7 +16,7 @@ Tim: Amar Hodžić, Belmin Durmo, Harun Goralija. Predmet MPVI.
 1. Pročitaj [trenutno stanje](docs/STATUS.md) i [upute za narednu sesiju](docs/NEXT_SESSION.md).
 2. Pogledaj [istraživački protokol](docs/research/PROTOCOL.md),
    [provjeru simulatora](docs/research/SIMULATOR_AUDIT.md) i [odluke](docs/specs/DECISION_RECORDS.md).
-3. Pokreni testove i pilot ispod. Glavni sljedeći zadatak je **TASK-004: Firehose feasibility gate**.
+3. Pokreni testove i pilot ispod. Glavni sljedeći zadatak je **TASK-004c: ispravan observation/metrics adapter**.
 
 ## Pokretanje bez dodatnih biblioteka
 
@@ -45,6 +46,16 @@ Primjer provjerenog izlaza je u [reports/pilot](reports/pilot/README.md).
 Ovo trenira novi mali MaskablePPO u sintetičkom okruženju na CPU-u.
 **Ne učitava Firehose težine, ne implementira glavno istraživanje i ne tvrdi poboljšanje.**
 Za zabilježene tačne verzije vidi `requirements/rl-macos-py313.freeze.txt`.
+
+## Postojeći model i dataset
+
+[Firehose runtime nalaz](docs/research/FIREHOSE_VERIFICATION.md): 12 uspješnih kratkih
+rollouta, ponovljiv seed, budžetski no-op i nepromijenjene težine. [Docker runbook](docker/firehose/README.md)
+čuva build i inference komande. Nije bilo treniranja.
+
+[Dataset data card](docs/research/DATASET.md): postojeća mapa 400 ćelija, terrain/fuel
+inputi i 130 weather fajlova; zadani test koristi samo bazni Weather.csv. RL iskustvo
+nastaje interakcijom, a train/validation/test scenariji tek trebaju biti zamrznuti.
 
 ## Šta se računa kao intervencija
 

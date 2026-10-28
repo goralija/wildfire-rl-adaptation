@@ -22,3 +22,12 @@ Pri B=16 max-L2 je u ovom pilotu imao 75.09% opožarenog, no-action 98.37%; to j
 samo ponašanje heuristika u sintetičkom svijetu, ne rezultat RL istraživanja.
 EXP-002 final: 1,024 koraka, save/reload i validni masked rollout završeni na CPU-u;
 manifest u reports/rl-smoke/training_manifest.json. Nema held-out tvrdnje.
+
+## EXP-003 — stvarni Firehose/Cell2Fire inference, bez treniranja
+12-case batch u Linux ARM64/Python 3.8/SB3 1.5.0. Oba pretrained modela izvršena,
+svih 12 C++ returncodeova 0, reproducibilni seedovi, B=8/no-op, isti input hash i
+nepromijenjeni policy tensor hashovi. Sažetak: reports/firehose-verification/.
+Svi runovi imaju 58 odluka pod osmosatnim weather capom; ne tumačiti done kao containment.
+Originalni reset nije učitao warmup; fixed PPO brojač 206 naspram 207 iz historije.
+Odvojeni sync-reset slučaj daje 207/207. Runtime PASS, istraživački adapter još pending.
+Ovo nije glavni benchmark: jedan ignition/weather/layout, premalo realizacija za ranking.

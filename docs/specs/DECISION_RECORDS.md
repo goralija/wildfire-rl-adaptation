@@ -31,3 +31,16 @@ OD-001: licenca našeg koda i redistribucija mapa/modela.
 OD-002: deadline, compute i glavni matriks nakon runtime mjerenja.
 OD-003: legacy runtime ili migracija težina; no-op learned ili prisilni wrapper.
 OD-004: prostorni/meteorološki test split i granica tvrdnji o generalizaciji.
+
+## ADR-006 — Firehose runtime potvrđen, accepted 2026-10-28
+Nastavak ADR-002/004: izvorni fork kompajliran je i oba postojeća 20×20 checkpointa
+izvršena su bez treniranja. Zadržavamo Firehose za narednu fazu; promjena simulatora
+sada nije opravdana. Legacy okruženje je odvojeni Docker image (Python 3.8 / SB3 1.5),
+moderni .venv ostaje za sintetički pilot. Probe čuva 400-action glavu i RGB opažanje;
+budžet nameće forced no-op, pa još ne uči vrijeme intervencije.
+
+Runtime PASS nije research-ready: dokazani reset/cumulative-damage problem i spajanje
+active/burnt stanja zahtijevaju TASK-004c. Ne koristiti upstream done za containment.
+Dataset se za početak sastoji od pinovanih map/terrain/weather inputa i scenarija;
+RL iskustvo generiše simulator. Nema obaveze skupljanja označenih intervencija ili
+regionalnog GIS-a. Raw data/weights i Docker image ostaju lokalni dok licence nisu provjerene.

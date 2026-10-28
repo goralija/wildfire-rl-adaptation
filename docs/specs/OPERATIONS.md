@@ -17,3 +17,7 @@ Provjeri source hash za tačan replay; runtime i created_utc se prirodno razliku
 Originalni privatni attachmenti i lokalni modeli nisu u bundleu; zasebna lokalna kopija
 je dostupna dok ovaj worktree ostaje sačuvan.
 Open Questions: udaljena pohrana velikih artefakata i timski compute.
+
+Legacy runtime je sada ostvaren preko `docker/firehose/Dockerfile`: pinned Python base,
+SB3/contrib 1.5.0, Gym 0.21, C++ build flag overrides. Tačne resolved verzije i image ID
+su u reports/firehose-verification/. Runtime bez mreže i sa output-only host mountom.

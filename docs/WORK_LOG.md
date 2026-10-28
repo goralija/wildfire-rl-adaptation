@@ -33,3 +33,38 @@ Local branch/worktree retained. No push, merge, paid compute or messaging perfor
 Final artifact check: Python CSV writer uses standard CRLF line endings; Git whitespace
 check flagged them. Added a CSV text/eol=lf Git attribute so committed reports normalize
 without changing data or source hashes. This affects only repository serialization.
+
+2026-10-28 — TASK-004 continuation authorized: build Firehose/Cell2Fire, attempt existing
+checkpoint inference without training, and document dataset. Existing task worktree reused;
+clean at start (e1de936). Docker daemon is available; choose isolated Linux container
+instead of altering the modern .venv or installing system compiler libraries. A cached
+managed Python 3.10 was made available by uv but is not needed for the selected Docker path.
+No remote Git writes or long training authorized/required.
+Plan: pinned dependency build -> binary no-action test -> legacy model load/predict ->
+bounded rollouts and seed/replay checks -> dataset inventory/data card -> knowledge/handoff.
+Verify: build exit 0, model action shape/mask, subprocess exits/timeout, paired seed replay,
+existing tests, manifests with exact source/image/package versions. Treat any runtime patch
+as an explicit compatibility decision, never a silent upstream change.
+
+Runtime decision: checkpoint system_info.txt reports Python 3.8.12, SB3 1.5.0,
+PyTorch 1.11.0+cu113 (GPU disabled), numpy 1.22.2, Gym 0.21.0. Use Python 3.8.20
+container to match the Python minor version; PyTorch 1.13.1 has a verified Linux ARM64
+wheel. This is compatible inference reproduction, not an exact original machine image.
+SB3 contrib fork is pinned to 43b7fe6fcdda71c2c10de7af0d20f39e48ae5df3 (version 1.5.0).
+Build only overrides compiler/include/link flags (remove x86-only -m64, enable OpenMP,
+Eigen path), preserving original source and model files. Runtime network will be disabled.
+
+TASK-004 runtime results: original C++ fork compiled without source edits in Linux ARM64;
+both pretrained ZIPs loaded in SB3/contrib 1.5.0 and executed (0 training steps). Final
+12-case batch passed with returncode 0, exact no-action/model seed replay, changed spread
+for changed C++ seeds, identical input hash, B=8 enforcement/no-op continuation, and
+unchanged model tensors. Four new probe helper tests were RED→GREEN.
+Ruling: keep Firehose for next phase; runtime feasibility passed, full research gate remains
+partial pending reset/cumulative-damage and termination reason adapter. Do not switch to
+SimFire merely because the legacy stack needs isolation.
+Confirmed wrapper issue: warmup CSV has 7 affected cells, reset state is blank; fixed PPO
+upstream counter 206 vs history union 207. Explicit sync-reset diagnostic gives 207/207.
+Confirmed state semantics: C++ outputGrid=1 merges burning and burnt; done may be weather
+horizon, so no containment claims. Datacard inventories 141 files, 400 cells (307 fuel),
+base weather plus 129 variants; current rows mode reads only base Weather.csv.
+No raw dataset/model/image published, no remote pushes, no training or paid compute.

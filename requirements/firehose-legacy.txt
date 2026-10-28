@@ -1,0 +1,9 @@
+# Isolated inference-only environment; never install into the modern .venv.
+numpy==1.23.5
+torch==1.13.1
+gym==0.21.0
+stable-baselines3==1.5.0
+cloudpickle==2.0.0
+pandas==1.5.3
+matplotlib==3.7.5
+opencv-python-headless==4.8.1.78

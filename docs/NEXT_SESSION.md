@@ -4,12 +4,15 @@
 2. `git status --short --branch`; provjeri da si u ispravnom task worktreeu.
 3. `PYTHONPATH=src python3 -m unittest discover -s tests -v`.
 4. `PYTHONPATH=src python3 -m wildfire_rl.cli --config configs/smoke.json --out runs/NEW_ID`.
-5. Počni TASK-004 prema `docs/research/SIMULATOR_AUDIT.md`: odvojeni Linux legacy
-   environment, pinned Firehose commit, C++ build, simulator seed, no-op i prvo opažanje,
-   pa checkpoint inference. Timebox 4 aktivna sata; sačuvaj komande i logove.
-6. Ako gate padne, dokumentuj prepreku i napravi SimFire spike; ne prepravljaj zaključak
-   o pretrained agentu ako si ustvari trenirao novi model.
-7. Nakon gatea freeze test manifest, runtime procjena, frozen baseline, pa tek fine-tuning.
+5. Pročitaj `docs/research/FIREHOSE_VERIFICATION.md` i `docs/research/DATASET.md`.
+   Runtime je već ostvaren: ne počinjati ponovo od instalacije ili traženja modela.
+6. Počni TASK-004c: formalni Firehose adapter za stvarni warmup observation,
+   kumulativnu štetu, maske/budžet i C++ termination reason / active-vs-burnt export.
+   Sačuvaj RGB 3×20×20 i Discrete(400) checkpoint kontrakt; forced no-op ostaje izvan glave.
+7. Dodaj integracijske regresijske testove za 206/207 brojač, identične kontrole,
+   timeout/cleanup i razliku weather-horizon/containment. Tek potom dataset split i fine-tuning.
+8. Za ponavljanje postojećeg testa koristi `docker/firehose/README.md`; lokalni image
+   je `wildfire-firehose-probe:20261028`, rezultati u `runs/firehose-verification-final/`.
 
 ## Lokalne lokacije ove sesije
 - Workspace: `/Users/harungoralija/Desktop/mpvi` (ulazni START_HERE.md).
@@ -22,7 +25,8 @@
 
 ## Spreman prompt za nastavak
 
-"Nastavi wildfire-rl-adaptation od TASK-004. Pročitaj AGENTS.md, STATUS.md,
-NEXT_SESSION.md, PROTOCOL.md i SIMULATOR_AUDIT.md. Provjeri postojeće testove.
-Izvedi ograničeni Firehose feasibility gate; nemoj pokretati veliku training matricu,
-objavljivati privatni materijal ili tretirati synthetic pilot kao glavni rezultat."
+"Nastavi wildfire-rl-adaptation od TASK-004c. Prvo pročitaj STATUS, NEXT_SESSION,
+FIREHOSE_VERIFICATION i DATASET. Cell2Fire build i oba postojeća modela već rade u
+izolovanom Docker imageu; ne ponavljaj setup bez razloga. Implementiraj i testiraj
+observation/damage/termination adapter uz očuvanje checkpoint kontrakta. Ne pokreći
+veliko treniranje ili remote objavu bez naloga."

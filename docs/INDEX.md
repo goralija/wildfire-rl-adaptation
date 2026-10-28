@@ -8,6 +8,9 @@
 - [BACKLOG](BACKLOG.md): prioriteti, prihvat i okvirni napor.
 
 ## Istraživački dokazi
+- [Izvršen Firehose/Cell2Fire i oba modela](research/FIREHOSE_VERIFICATION.md).
+- [Dataset data card i plan splitova](research/DATASET.md).
+- [Legacy Docker runbook](../docker/firehose/README.md).
 - [Profesorovi zahtjevi i bodovanje](research/REQUIREMENTS_AND_RUBRIC.md).
 - [Eksperimentalni protokol](research/PROTOCOL.md).
 - [Simulator audit i odluka](research/SIMULATOR_AUDIT.md).
