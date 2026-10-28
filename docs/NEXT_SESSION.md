@@ -1,8 +1,12 @@
+---
+type: Handoff
+title: Nastavak rada bez chat historije
+---
 # Nastavak rada bez chat historije
 
-Za drugi računar ili novog saradnika prvo pročitaj [HANDOFF](../HANDOFF.md):
-clone grana, minimalni setup i pribavljanje lokalno ignorisanih izvora/podataka.
-Lokalne putanje ispod su samo historija Harunovog računara, nisu prenosivi setup.
+Ulaz u OKF bundle je [index.md](../index.md), zatim [projektni kontekst](../knowledge/project-context.md).
+Za drugi računar ili novog saradnika pročitaj [HANDOFF](../HANDOFF.md): clone grana,
+minimalni setup i pribavljanje lokalno ignorisanih izvora/podataka.
 
 1. Iz ovog repozitorija pročitaj STATUS, DECISION_RECORDS, SIMULATOR_AUDIT i PROTOCOL.
 2. `git status --short --branch`; provjeri da si u ispravnom task worktreeu.
@@ -26,14 +30,12 @@ Lokalne putanje ispod su samo historija Harunovog računara, nisu prenosivi setu
    proglašavati Dogrib nezavisnim testom: dijeli teren s Firehose Sub20. Raw ulazi
    i opaženi ishodi su odvojeni; fizička validacija još nije izvršena.
 
-## Lokalne lokacije ove sesije
-- Workspace: `/Users/harungoralija/Desktop/mpvi` (ulazni START_HERE.md).
-- Primary clone: `/Users/harungoralija/Desktop/mpvi/repository` (lokalni main base).
-- Ovaj worktree: `/Users/harungoralija/Desktop/mpvi/worktrees/project-bootstrap`.
-- Branch: `feature/project-bootstrap`.
-- `.venv`: optional moderni RL environment. `external/firehose`: pinovani izvor i ZIP-ovi.
-- `private/`: originalni korisnički materijali, ignorisani u Gitu; ne objavljivati.
-- Bundle backup je u workspace `backups/`, kreira se po završetku.
+## Repo-relative lokacije
+- Repo root na tvom računaru: `git rev-parse --show-toplevel`.
+- PR grana: `feature/project-bootstrap`; poslije mergea sadržaj je na mainu.
+- [index.md](../index.md) je kanonski ulaz; vanjski START_HERE ili lokalni backup nisu preduslov.
+- `.venv`: optional moderni RL environment; `external/firehose`: pinovani izvor/ZIP-ovi.
+- `data/raw`, `runs`, `private`: ignorisani artefakti; javni recovery URL/hashovi su u repou.
 
 ## Spreman prompt za nastavak
 

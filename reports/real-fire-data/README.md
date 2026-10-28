@@ -1,3 +1,7 @@
+---
+type: Experiment Report
+title: 'Stvarni požari: pregled kandidata i mali uzorci'
+---
 # Stvarni požari: pregled kandidata i mali uzorci
 
 Prikladnost izvora za naš projekat, ne rezultat fizičke validacije simulatora.

@@ -1,3 +1,7 @@
+---
+type: Audit
+title: Simulator i pretrained feasibility audit
+---
 # Simulator i pretrained feasibility audit
 
 Datum provjere: 2026-10-28. **Firehose s njegovom izmijenjenom Cell2Fire jezgrom**

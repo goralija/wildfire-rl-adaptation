@@ -1,3 +1,11 @@
+---
+type: Verification Record
+title: Firehose/Cell2Fire izvršavanje — 2026-10-28
+sources:
+- resource: /reports/firehose-verification/verification.json
+- resource: /reports/firehose-verification/summary.json
+- resource: /reports/firehose-verification/environment.json
+---
 # Firehose/Cell2Fire izvršavanje — 2026-10-28
 
 ## Zaključak

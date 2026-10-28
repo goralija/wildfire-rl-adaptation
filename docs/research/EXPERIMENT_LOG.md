@@ -1,3 +1,7 @@
+---
+type: Experiment Log
+title: Experiment log
+---
 # Experiment log
 
 ## EXP-001 — synthetic pilot

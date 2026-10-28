@@ -1,3 +1,7 @@
+---
+type: Delivery Plan
+title: 'Predaja: poster, demonstracija i pojedinačni usmeni'
+---
 # Predaja: poster, demonstracija i pojedinačni usmeni
 
 Ovo je plan, bez izmišljenih rezultata. Format i rok nisu poznati.

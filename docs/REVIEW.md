@@ -1,3 +1,7 @@
+---
+type: Review Record
+title: Nezavisan pregled bootstrap koda — 2026-10-28
+---
 # Nezavisan pregled bootstrap koda — 2026-10-28
 
 Pregledani commit range: `9e24b48..948ab53`, 53 fajla / 2054 dodane linije.

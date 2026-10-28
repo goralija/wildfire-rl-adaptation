@@ -1,3 +1,7 @@
+---
+type: Project Overview
+title: Wildfire RL adaptation — MPVI
+---
 # Wildfire RL adaptation — MPVI
 
 Istražujemo može li prilagodba unaprijed treniranog RL agenta **različitim budžetima
@@ -12,6 +16,11 @@ Pilot ne predviđa stvarne požare i nije dokaz uspješnosti RL pristupa.
 Tim: Amar Hodžić, Belmin Durmo, Harun Goralija. Predmet MPVI.
 
 ## Nastavak za pet minuta
+
+Repo je samostalan **OKF 0.2 knowledge bundle**. [Glavni index.md](index.md) je ulaz
+za ljude i agente; [kratki kontekst](knowledge/project-context.md) razlikuje dokaze,
+prijedloge i otvorene odluke. [Pravila održavanja](knowledge/maintenance.md) i
+[format/provjera](knowledge/okf-format.md) čuvaju isti kontekst kroz naredne sesije.
 
 1. Za novi računar/kolegu počni od [HANDOFF](HANDOFF.md); zatim pročitaj
    [trenutno stanje](docs/STATUS.md) i [upute za narednu sesiju](docs/NEXT_SESSION.md).
@@ -84,7 +93,9 @@ Detalji i razlike u odnosu na Firehose: [pravila](docs/specs/BUSINESS_RULES.md).
 | `external/`, `runs/`, `artifacts/` | lokalni ignorisani kod trećih strana, izlazi i modeli |
 | `private/` | ignorisani originalni mail i slika rubrike; ne objavljivati |
 
-[Indeks znanja](docs/INDEX.md) povezuje sve dokumente.
+[Glavni indeks znanja](index.md) povezuje cijeli repo; [docs indeks](docs/index.md)
+grupiše istraživanje/specifikacije. Agent ulazi su AGENTS.md, CLAUDE.md, GEMINI.md
+i .github/copilot-instructions.md, s istim kanonskim pravilima u AGENTS.md.
 Ne stavljati `.venv`, cijeli Firehose, težine, privatnu prepisku, velike rastere ili
 neprovjerene rezultate u Git. Ne biramo licencu za tim bez njegove odluke;
 Firehose/Cell2Fire imaju vlastite licence, vidi [provenance](data/README.md).

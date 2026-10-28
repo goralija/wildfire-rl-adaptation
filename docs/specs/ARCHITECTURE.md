@@ -1,3 +1,8 @@
+---
+type: Specification
+title: Arhitektura
+status: draft
+---
 # Arhitektura
 
 Sada: `Scenario -> GridFire -> policies/evaluation -> CSV + manifest + SVG`.

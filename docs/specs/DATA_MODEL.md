@@ -1,3 +1,8 @@
+---
+type: Specification
+title: Podaci i artefakti
+status: draft
+---
 # Podaci i artefakti
 
 Scenario JSON: rows, cols, ignition[], nonfuel[], priority[], spread_probability,

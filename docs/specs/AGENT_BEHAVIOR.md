@@ -1,3 +1,8 @@
+---
+type: Specification
+title: Smjernice za buduće sesije
+status: draft
+---
 # Smjernice za buduće sesije
 
 Pravila rada su u root `AGENTS.md`. Izvor istine: potvrđeni zahtjevi -> ovaj spec ->

@@ -1,3 +1,7 @@
+---
+type: Dataset Reference
+title: Podaci, porijeklo i Git politika
+---
 # Podaci, porijeklo i Git politika
 
 `manifests/upstream.json` pinova Firehose izvor i dostupne modele. `configs/pilot.json`

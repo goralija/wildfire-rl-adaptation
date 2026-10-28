@@ -1,3 +1,7 @@
+---
+type: History
+title: Work log
+---
 # Work log
 
 2026-10-28 — empty upstream repository cloned; local empty base commit created to permit
@@ -135,3 +139,23 @@ technical follow-up before experiments. Updated handoff prompts and data selecti
 status; no dataset was newly adopted, no code/data/experiments changed.
 Verification after the correction: 26 tests pass, synthetic smoke succeeds, changed
 document links/candidate JSON validate and Git whitespace check passes.
+
+2026-10-28 — User requested all project knowledge as a self-contained OKF 0.2
+repository bundle in the same PR. Existing docs already lived in Git; migration
+adds types/titles and selected known source pointers, root index/log, lowercase
+directory indexes and concise context/code-map/maintenance/format guides. The only
+existing document rename is docs/INDEX.md → docs/index.md, performed via an
+intermediate filename for macOS compatibility; all live references were updated.
+
+ADR-010: root bundle keeps canonical documents in place instead of duplicating them
+under a second knowledge tree. Agent routing files share AGENTS rather than copying
+full rules. Workstation-specific prerequisites were removed from NEXT_SESSION;
+public source/hash recovery remains in repo manifests. Dataset TASK-012 stays open/first.
+No private originals, raw samples, checkpoints, third-party code or environment files
+were added. No invented human verification or source modified timestamps.
+
+Checker tests were written first: all initially failed because the CLI was absent;
+12 tests passed after implementation. PyYAML 6.0.3 lives in a separate temporary
+knowledge-tool venv and requirements/knowledge.txt; application dependencies unchanged.
+Strict navigation validation currently passes 63 public Markdown files. The checker
+is a scoped project tool, not a full implementation of optional OKF attestation fields.

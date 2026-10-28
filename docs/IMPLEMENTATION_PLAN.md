@@ -1,3 +1,8 @@
+---
+type: Implementation Plan
+title: Project bootstrap implementation plan
+status: draft
+---
 # Project bootstrap implementation plan
 
 **Date:** 2026-10-28. **Goal:** recoverable research foundation plus tested pilot.

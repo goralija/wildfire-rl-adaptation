@@ -1,3 +1,11 @@
+---
+type: Dataset Review
+title: 'Stvarni požari: izbor podataka i granica zaključaka'
+sources:
+- resource: /data/manifests/real-fire-candidates.json
+- resource: /reports/real-fire-data/dogrib-profile.json
+- resource: /reports/real-fire-data/cfsds-sample-profile.json
+---
 # Stvarni požari: izbor podataka i granica zaključaka
 
 Provjereno 2026-10-28. Ovo je izbor izvora i pregled malih uzoraka. Nismo još

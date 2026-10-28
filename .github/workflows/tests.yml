@@ -19,3 +19,13 @@ jobs:
       - run: python -m wildfire_rl.cli --config configs/smoke.json --out runs/ci-smoke
         env:
           PYTHONPATH: src
+  knowledge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r requirements/knowledge.txt
+      - run: python -m unittest discover -s tests/knowledge -v
+      - run: python scripts/validate_knowledge.py --strict

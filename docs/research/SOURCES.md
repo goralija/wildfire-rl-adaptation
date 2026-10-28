@@ -1,3 +1,7 @@
+---
+type: Reference
+title: Izvori i literatura
+---
 # Izvori i literatura
 
 Provjereno 2026-10-28. Primarni izvori; postojeći rad nije naš rezultat.
@@ -53,3 +57,7 @@ konačne tvrdnje; nije provedena sistematska literature review.
 
 [REAL_FIRE_DATASETS](REAL_FIRE_DATASETS.md) čuva preporuku, obim uzorka i nedostatke;
 reports/real-fire-data/ čuva download SHA256 i provjere stvarno preuzetih fajlova.
+
+## Format baze znanja
+S-018: [Open Knowledge Format v0.2, kanonski pin](https://github.com/GoogleCloudPlatform/open-knowledge-format/blob/ad30107c31c06aec8a7d5636e0d1058118604e6f/SPEC.md).
+Koristimo strukturu/semantiku za repo bundle; [projektni profil i granice checkera](../../knowledge/okf-format.md).

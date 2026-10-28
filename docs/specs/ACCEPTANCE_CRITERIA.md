@@ -1,3 +1,8 @@
+---
+type: Specification
+title: Kriteriji prihvata i trag zahtjeva
+status: draft
+---
 # Kriteriji prihvata i trag zahtjeva
 
 | ID | Provjerljivi kriterij | Veza | Zadatak |

@@ -1,3 +1,7 @@
+---
+type: Runbook
+title: Izolovana Firehose provjera bez treniranja
+---
 # Izolovana Firehose provjera bez treniranja
 
 Testirano na lokalnom Docker Desktopu, Linux ARM64. Legacy runtime nije projektni

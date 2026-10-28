@@ -1,3 +1,11 @@
+---
+type: Research Protocol
+title: Istraživački protokol — draft v1, 2026-10-28
+status: draft
+sources:
+- resource: /docs/research/REQUIREMENTS_AND_RUBRIC.md
+- resource: /docs/specs/DECISION_RECORDS.md
+---
 # Istraživački protokol — draft v1, 2026-10-28
 
 ## Pitanje i hipoteze

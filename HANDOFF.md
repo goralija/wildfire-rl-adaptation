@@ -1,3 +1,7 @@
+---
+type: Playbook
+title: Handoff za nastavak projekta
+---
 # Handoff za nastavak projekta
 
 Stanje 2026-10-28. Ovaj dokument je dovoljan ulaz bez prethodne chat historije.
@@ -7,6 +11,18 @@ intervencija poboljšati rezultate u odnosu na zamrznuti model i heuristike?
 **Aktuelni fokus: TASK-012 — dataset refinement.** Izvori i mali uzorci su pregledani;
 uloga stvarnih podataka, konačni izbor i obim evaluacije još nisu usaglašeni.
 Dogrib/CFSDS su kandidati i prijedlog, ne zamrznut istraživački dataset.
+
+## Baza znanja u repozitoriju
+
+Repo je jedan OKF 0.2 bundle. [Root index](index.md) vodi do
+[sažetog konteksta](knowledge/project-context.md), [mape koda/zadataka](knowledge/code-map.md),
+[kanonskih dokumenata](docs/index.md) i dokaza. [Održavanje](knowledge/maintenance.md)
+opisuje gdje zabilježiti nalaze, odluke i otvorene teme; [OKF profil](knowledge/okf-format.md)
+opisuje format/provjere. Za nastavak nisu potrebni chat ni vanjska baza znanja.
+
+Agent ulazi AGENTS.md/CLAUDE.md/GEMINI.md/.github/copilot-instructions.md daju isti
+redoslijed čitanja. Sadržaj se učitava progresivno; relevantni izvori ostaju dostupni
+u repou. Lokalni veliki/raw artefakti i privatni originali imaju odvojenu granicu ispod.
 
 ## Preuzimanje i prvo pokretanje
 
@@ -40,7 +56,7 @@ cross-platform lock. Optional suite uključuje kratko učenje radi provjere save
 
 | Dio | Dokaz i granica |
 | --- | --- |
-| Baza znanja | [Indeks](docs/INDEX.md), zahtjevi/rubrika, protokol, specifikacije, odluke i backlog |
+| Baza znanja | [Indeks](docs/index.md), zahtjevi/rubrika, protokol, specifikacije, odluke i backlog |
 | Sintetički pilot | engine, pet baseline politika, budžet/no-op, kumulativna šteta, paired evaluacija; [300 baseline epizoda](reports/pilot/README.md) |
 | Moderni RL smoke | novi mali PPO u sintetičkom engineu; [manifest](reports/rl-smoke/README.md), nije adaptacija Firehose modela |
 | Firehose/Cell2Fire runtime | originalni C++ kompajliran na Linux ARM64; oba postojeća 20×20 checkpointa izvršena bez treniranja; [12 kratkih rollouta](docs/research/FIREHOSE_VERIFICATION.md) |

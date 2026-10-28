@@ -1,3 +1,7 @@
+---
+type: Backlog
+title: Naredni zadaci
+---
 # Naredni zadaci
 
 Napor je okvirni agentov prijedlog u aktivnim radnim satima, bez roka i dodjele članovima.
@@ -8,6 +12,7 @@ Napor je okvirni agentov prijedlog u aktivnim radnim satima, bez roka i dodjele 
 | TASK-002 | P0 završeno | synthetic budžet/no-op/damage + testovi; AC-002..003 | bootstrap |
 | TASK-003 | P0 završeno | paired baselines, manifest/CSV/SVG, replay; AC-004..005 | bootstrap |
 | TASK-004 | runtime završeno; research gate djelimičan | build, oba modela, seed/replay i budžetski no-op provjereni; AC-006 | ostvareno |
+| TASK-013 | podrška handoffu: OKF migracija | repo bundle, ulazi/navigacija, održavanje i CI provjera; dataset odluke ostaju otvorene | provjera u toku |
 | TASK-012 | P0 prvo sljedeće, otvoreno | dataset refinement: uloga, izbor/obim, model/scenario veza, splitovi i metrike; prijedlog za usaglašavanje | 1–2 h za prijedlog |
 | TASK-004c | P0 tehnički nastavak nakon refinementa | warmup/damage adapter, C++ termination reason i active/burnt export u usaglašenom obimu | 3–6 h |
 | TASK-004b | P0 uslovno | SimFire fallback spike ako gate padne; novi ADR | 2–4 h |

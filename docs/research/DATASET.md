@@ -1,3 +1,10 @@
+---
+type: Dataset Review
+title: 'Dataset: šta imamo i šta ćemo koristiti'
+sources:
+- resource: /reports/firehose-verification/dataset-inventory.json
+- resource: /data/manifests/upstream.json
+---
 # Dataset: šta imamo i šta ćemo koristiti
 
 **Postavka okruženja i dataset opaženih požara su različite stvari.** Početni Firehose
