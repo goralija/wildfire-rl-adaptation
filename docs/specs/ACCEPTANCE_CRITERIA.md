@@ -16,3 +16,7 @@ jasno navedena neispunjena AC-006..008 i handoff. Optional modern RL smoke nije 
 Glavni projekt Done: simulator gate, potpuno reproducibilni glavni eksperimenti,
 interpretacija/ograničenja, poster i dokumentovani doprinosi tima.
 Open Questions: profesorov krajnji rok i eventualni dodatni formalni uslovi predaje.
+
+Dopuna 2026-10-28: AC-006 je runtime ostvaren za oba 20×20 checkpointa u izolovanom
+Docker environmentu. AC-007/008 nisu ostvareni. TASK-004c je novi preduvjet za AC-007:
+observation/damage/termination ugovor mora biti ispravan prije poređenja ili fine-tuninga.

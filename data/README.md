@@ -19,3 +19,9 @@ Licenca za naš projekat je otvorena timska odluka prije javnog objavljivanja iz
 Data card prije glavnih eksperimenata: porijeklo, područje, rezolucija, gorivo,
 weather, ignition, NODATA, priority definicija, prostorna usklađenost, licence,
 hash sirovih i obrađenih fajlova, preprocessing komanda i split bez curenja.
+
+## Stvarni početni dataset
+Sada je pregledan i izvršen Firehose Sub20x20 input. Detaljan [data card](../docs/research/DATASET.md)
+navodi 400 ćelija, 4 rastera, Data.csv, lookup i 130 weather fajlova, uz provjere i
+ograničenja. Hash svakog fajla je u reports/firehose-verification/dataset-inventory.json.
+U Git idu ti mali manifesti, a sirovi dataset ostaje u external/firehose/data/Sub20x20/.

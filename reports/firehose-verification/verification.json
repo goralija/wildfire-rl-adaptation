@@ -1,0 +1,25 @@
+{
+  "checks": {
+    "all_12_runs_succeeded": true,
+    "all_same_input_hash": true,
+    "same_seed_noop_replays": true,
+    "same_seed_model_replays": true,
+    "different_seeds_change_spread": true,
+    "all_model_weights_unchanged": true,
+    "budgets_enforced": true,
+    "noops_after_exhaustion": true,
+    "reset_mismatch_reproduced": true,
+    "reset_sync_corrects_cumulative_counter": true
+  },
+  "runtime_gate": "passed",
+  "research_ready": false,
+  "research_gaps": [
+    "initial observation/cumulative damage adapter needs formal integration",
+    "Grid code 1 merges active and burnt cells",
+    "done does not distinguish containment from weather horizon",
+    "scenario split and richer weather coverage pending"
+  ],
+  "cold_first_run_seconds": 2.2016172930016182,
+  "warm_probe_median_seconds": 0.4275601249828469,
+  "probe_script_sha256": "1ea9b2ae0817ec8f94354876f8132467456c2e45be35ec5fbcd3134e4c525815"
+}

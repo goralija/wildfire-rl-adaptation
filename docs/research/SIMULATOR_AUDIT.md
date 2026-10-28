@@ -1,7 +1,8 @@
 # Simulator i pretrained feasibility audit
 
-Datum provjere: 2026-10-28. Provisional izbor: **Firehose s njegovom izmijenjenom
-Cell2Fire jezgrom**, uz feasibility gate prije većeg ulaganja.
+Datum provjere: 2026-10-28. **Firehose s njegovom izmijenjenom Cell2Fire jezgrom**
+prošao je runtime provjeru oba modela. Nastavljamo taj backend; istraživački gate
+čeka observation/damage/termination adapter (TASK-004c).
 
 | Kandidat | Prednost | Cijena/rizik | Odluka sada |
 | --- | --- | --- | --- |
@@ -31,7 +32,8 @@ ZIP JSON je pročitan bez pickle/cloudpickle/torch deserializacije; težine nisu
 Root requirements ne pinova verzije i koristi vlastiti contrib Git fork.
 Mac Makefile ima lokalnu Eigen putanju; kod traži Eigen, Boost i OpenMP.
 Te zavisnosti nisu pronađene na očekivanim lokalnim Homebrew putanjama.
-Build, inferencija i fizikalna validacija nisu izvršeni.
+Ovo je bio početni statički nalaz. Build i inferencija su sada izvršeni; vidi
+[FIREHOSE_VERIFICATION](FIREHOSE_VERIFICATION.md). Fizikalna validacija nije izvršena.
 
 Firehose autori već demonstriraju reward za prioritetna područja
 [na projektnoj stranici](https://williamshen-nz.github.io/firehose/).
@@ -70,3 +72,8 @@ Vanjski kod ostaje ignorisan. Licencu i porijeklo mapa provjeriti prije redistri
 Za poređenje kandidata: [Cell2Fire](https://github.com/cell2fire/Cell2Fire),
 [C2F-W](https://github.com/fire2a/C2F-W), [SimFire](https://github.com/mitrefireline/simfire),
 [SimHarness](https://github.com/mitrefireline/simharness).
+
+## Dopuna nakon izvršavanja
+Docker build i 12 inference slučajeva su prošli. Nemoj ponavljati ovaj početni statički
+plan kao da runtime nije pokrenut. Detalji, ograničenja i konkretan naredni zadatak su u
+[FIREHOSE_VERIFICATION](FIREHOSE_VERIFICATION.md); dataset u [DATASET](DATASET.md).

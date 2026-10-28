@@ -1,0 +1,20 @@
+{
+  "image_tag": "wildfire-firehose-probe:20261028",
+  "image_id": "sha256:f3124c813773ae9ef53789ad00fbf95aa7477ecf6f21137ca158f7174c6cb54c",
+  "architecture": "arm64",
+  "os": "linux",
+  "created": "2026-10-28T08:23:59.671386833Z",
+  "base_image": "python:3.8.20-slim-bookworm@sha256:1d52838af602b4b5a831beb13a0e4d073280665ea7be7f69ce2382f29c5a613f",
+  "firehose_commit": "e49a52a9a987a1585d25ddca2f711222ca500ffb",
+  "contrib_commit": "43b7fe6fcdda71c2c10de7af0d20f39e48ae5df3",
+  "runtime_network": "none",
+  "cpu_limit": 2,
+  "memory_limit": "2g",
+  "training_steps": 0,
+  "source_hashes": {
+    "docker/firehose/Dockerfile": "b18a7376dac5f91994152fe6431f8dc5fa90e097d06399444364ea40ba37a2ed",
+    "docker/firehose/verify_batch.py": "3b8448ecb29aed72b28373ceef0c7166ce6a7d9354fff1103e5f9afbbd0ac126",
+    "src/wildfire_rl/firehose_probe.py": "1ea9b2ae0817ec8f94354876f8132467456c2e45be35ec5fbcd3134e4c525815",
+    "requirements/firehose-legacy.txt": "a0f36e5e8166eea217e849715a7ac5ec56963978848d19a671576a88cc2ae8f1"
+  }
+}

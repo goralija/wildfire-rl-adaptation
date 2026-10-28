@@ -93,3 +93,12 @@ Nulti rezultat ili nepouzdan simulator znače smanjiti obim i dokumentovati nala
 3. Krive učenja prema simulator koracima i vremenu, ne samo epizodama.
 4. Isti unaprijed izabrani scenarij kao mapa stanja kroz vrijeme za sve politike.
 5. Tabela efekata i limita. Bez prenošenja idealizovanih rezultata na realnu intervenciju.
+
+## Dopuna iz runtime provjere — 2026-10-28
+Firehose je izvršen. Originalni grid=1 kombinuje burning i burnt; postojeći min/max-L2
+stoga bira iz pogođenog footprinta, a ne nužno aktivne fronte. Prije glavnih rezultata
+jasno označiti legacy baseline ili dodati stvarni active-state export. Svim politikama
+primijeniti isti ispravljeni warmup observation/damage adapter. Originalni FireSizeReward
+penalizuje footprint kroz vrijeme; prelazak na incremental damage reward bio bi dodatna
+promjena uz budget adaptaciju i zahtijeva zasebnu kontrolu/ablation. Done na weather
+horizontu nije containment. Dataset split i priority maska još nisu gotovi.

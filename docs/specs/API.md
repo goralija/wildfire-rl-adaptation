@@ -19,3 +19,7 @@ Gym: `reset(seed=) -> (dict observation, info)`;
 `step(action) -> (observation, reward, terminated, truncated, info)`.
 Budžeti/seeds zadani konstruktorom; reset options nisu podržani.
 Open Questions: glavni adapter nakon simulator gatea.
+
+Legacy dijagnostika: `docker/firehose/README.md`; file `firehose_probe.py` se izvršava
+unutar Python 3.8 imagea, bez instalacije modernog projektnog paketa. `--sync-reset`
+je eksplicitna compatibility korekcija prvog opažanja; original mode ostaje dostupan.
