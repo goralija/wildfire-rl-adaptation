@@ -51,3 +51,11 @@ I bootstrap i novi runtime pregled su prošli bez kritičnih ili važnih nalaza.
 Novi pregled nezavisno potvrđuje testove, evidence/provenance i dataset hashove.
 Jedan stari minor ostaje TASK-010:
 JSON null config u synthetic CLI-u daje traceback umjesto uredne poruke.
+
+## Handoff za kolegu
+[HANDOFF](../HANDOFF.md) sadrži prenosiv clone/setup, put do legacy runtimea,
+pribavljanje ignorisanih podataka i prvi zadatak s kriterijima prihvata.
+Za objavu ponovo prolazi svih 26 testova u modernom environmentu. Čisti lokalni
+Git klon s novim venvom i bez dodatnih paketa prolazi 22 testa (4 optional preskočena)
+i synthetic smoke; originalni lokalni setup nije preduslov za taj početak.
+Korisnik je odobrio objavu cijele feature grane i PR prema početnom mainu; ADR-008.
