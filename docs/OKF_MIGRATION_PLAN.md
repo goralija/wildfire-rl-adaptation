@@ -1,7 +1,7 @@
 ---
 type: Implementation Plan
 title: OKF 0.2 knowledge migration
-status: draft
+status: stable
 ---
 # OKF 0.2 Knowledge Implementation Plan
 
@@ -40,9 +40,9 @@ Files: scripts/validate_knowledge.py, tests/knowledge/test_validate_knowledge.py
 requirements/knowledge.txt, .github/workflows/tests.yml.
 Interface: CLI --root PATH [--strict], exit 0 for success, 1 for validation issues.
 
-- [ ] Add CLI fixture tests for conformance, strict links/reachability, unsafe YAML and ignores.
-- [ ] Run tests RED, implement the small checker, run GREEN.
-- [ ] Add a separate CI knowledge job; leave core dependencies unchanged.
+- [x] Add CLI fixture tests for conformance, strict links/reachability, unsafe YAML and ignores.
+- [x] Run tests RED, implement the small checker, run GREEN.
+- [x] Add a separate CI knowledge job; leave core dependencies unchanged.
 
 ### Task 2: Bundle and navigation
 
@@ -50,9 +50,9 @@ Files: root index.md/log.md, existing tracked Markdown, lowercase directory inde
 knowledge/okf-profile.json and knowledge authoring guide.
 Interface: root index → group indexes → all public concepts/assets.
 
-- [ ] Add honest types/titles and curated source metadata; preserve bodies and decision history.
-- [ ] Add indexes/log, canonical source pin and writing/maintenance conventions.
-- [ ] Run base and strict checker; fix actual broken references.
+- [x] Add honest types/titles and curated source metadata; preserve bodies and decision history.
+- [x] Add indexes/log, canonical source pin and writing/maintenance conventions.
+- [x] Run base and strict checker; fix actual broken references.
 
 ### Task 3: People and agent onboarding
 
@@ -60,12 +60,12 @@ Files: AGENTS.md, README.md, HANDOFF.md, small agent compatibility entry files,
 knowledge/project-context.md, knowledge/code-map.md, knowledge/maintenance.md.
 Interface: shared AGENTS rules and root index; task-specific progressive reading routes.
 
-- [ ] Record current state, open decisions, code ownership/routing and reproducible commands.
-- [ ] Update handoff and next-session instructions; keep authoritative facts in existing docs.
-- [ ] Validate all routes and run application tests/smoke.
+- [x] Record current state, open decisions, code ownership/routing and reproducible commands.
+- [x] Update handoff and next-session instructions; keep authoritative facts in existing docs.
+- [x] Validate all routes and run application tests/smoke.
 
 ### Task 4: Verification and publication
 
-- [ ] Review the migration against the pinned spec, including privacy and known limitations.
-- [ ] Run clean-clone knowledge checks, unit tests and core smoke; record evidence.
-- [ ] Commit/push into existing PR #1 and update its description; no merge.
+- [x] Review the migration against the pinned spec, including privacy and known limitations.
+- [x] Run clean-clone knowledge checks, unit tests and core smoke; record evidence.
+- [x] Commit/push into existing PR #1 and update its description; no merge.

@@ -56,3 +56,7 @@ Nije bilo dodatnih nalaza u provenance, onboardingu, razdvajanju zavisnosti ili
 Granice: native Linux/Docker rebuild nisu dio ovog pregleda; Linux case putanje su
 provjerene prema Git imenima. Pregled/linter ne potvrđuju naučnu istinitost niti
 sve opcionalne OKF attestation porodice. Prethodni TASK-010 ostaje odvojeni minor.
+
+Završna ponovljena provjera čistog klona otkrila je novi primjer inline code linka
+u autorskim uputama. Dodana je RED→GREEN regresija za code spans; konačno 15 knowledge
+testova i strict 63-file provjera prolaze i u tom klonu. [Receipt i hashovi](../reports/knowledge-validation.json).

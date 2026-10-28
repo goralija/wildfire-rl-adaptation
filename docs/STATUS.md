@@ -14,6 +14,8 @@ i [pravilima održavanja](../knowledge/maintenance.md). Dokumenti imaju tipove,
 lowercase indekse i navigaciju; agent ulazi dijele isti AGENTS kontekst. Zaseban
 knowledge checker/CI čuva strukturu i lokalne linkove. Migracija ne zatvara dataset
 refinement niti uvodi naučnu/humanu verifikaciju sadržaja.
+Provjera: [63 Markdown fajla, 15 knowledge testova i clean-clone dokaz](../reports/knowledge-validation.json).
+Osnovni aplikacijski paket i dalje nema dodatne zavisnosti; PyYAML je samo knowledge alat.
 
 ## Najnoviji pomak
 **Cell2Fire je kompajliran i oba postojeća 20×20 Firehose PPO checkpointa rade.**
