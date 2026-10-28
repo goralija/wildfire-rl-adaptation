@@ -72,6 +72,16 @@ class KnowledgeTests(unittest.TestCase):
         self.assertEqual(result.returncode, 1)
         self.assertIn('unreachable', result.stderr)
 
+    def test_inline_code_examples_are_not_live_links(self):
+        for example in ('`[Ghost](missing.md)`', '``[Ghost](missing.md)``',
+                        '``a ` tick [Ghost](missing.md)``'):
+            with self.subTest(example=example):
+                files = {'index.md': '---\nokf_version: "0.2"\n---\n# Root\n- [A](a.md) - A\n',
+                         'a.md': '---\ntype: Reference\n---\nExample: ' + example + '\n[Real](b.md)\n',
+                         'b.md': '---\ntype: Reference\n---\n# Real\n'}
+                result = self.check(files, strict=True)
+                self.assertEqual(result.returncode, 0, result.stderr)
+
     def test_commonmark_indented_longer_and_unclosed_fences(self):
         for fenced in ('  ```md\n[Example](missing.md)\n  ```\n',
                        '```md\n[Example](missing.md)\n````\n',
