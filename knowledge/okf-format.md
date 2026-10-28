@@ -26,6 +26,8 @@ taj JSON je naš dodatak, nije obavezni OKF konfiguracijski fajl.
 - Veze u tijelu su obični Markdown linkovi, uglavnom relativni radi GitHub prikaza.
   Koncept ID je putanja bez `.md`. U metadata `sources` koristimo bundle-relative
   putanje s početnim `/` ili javne URL-ove.
+- Navigacijske veze ovog bundlea pišemo inline kao `[naslov](putanja.md)`; mali
+  projektni checker prati te veze, a nije opšti CommonMark renderer.
 - `sources` navodi stvarno korištene materijale. `generated` bilježi poznatog autora/
   proces trenutnog sadržaja; `verified` samo stvarne provjere. Datetime provenance
   koristi eksplicitan UTC offset. Nepoznate historijske datume/verifiere izostavljamo.

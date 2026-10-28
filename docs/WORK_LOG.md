@@ -159,3 +159,13 @@ Checker tests were written first: all initially failed because the CLI was absen
 knowledge-tool venv and requirements/knowledge.txt; application dependencies unchanged.
 Strict navigation validation currently passes 63 public Markdown files. The checker
 is a scoped project tool, not a full implementation of optional OKF attestation fields.
+
+Clean-clone verification: new Git clone and new Python 3.12.12 venv passed 22 core
+tests/four optional skips and synthetic smoke before any package install. Installing
+only the pinned PyYAML then passed knowledge tests/strict navigation. Public tracked
+file scan found no private/raw/env paths or key/token/email patterns (130 files).
+
+Fresh read-only OKF review found two P2 checker false positives (valid fence shapes
+and optional Markdown link titles). Both were reproduced with failing tests and
+fixed in one pass; 14 knowledge tests, 26 application tests and 63-file strict check
+pass. No additional onboarding/provenance/dependency/TASK-012 findings; details in REVIEW.

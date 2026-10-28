@@ -72,6 +72,27 @@ class KnowledgeTests(unittest.TestCase):
         self.assertEqual(result.returncode, 1)
         self.assertIn('unreachable', result.stderr)
 
+    def test_commonmark_indented_longer_and_unclosed_fences(self):
+        for fenced in ('  ```md\n[Example](missing.md)\n  ```\n',
+                       '```md\n[Example](missing.md)\n````\n',
+                       '~~~md\n[Example](missing.md)\n~~~~\n',
+                       '```md\n[Example](missing.md)\n'):
+            with self.subTest(fenced=fenced):
+                files = {'index.md': '---\nokf_version: "0.2"\n---\n# Root\n- [A](a.md) - A\n',
+                         'a.md': '---\ntype: Reference\n---\n' + fenced}
+                result = self.check(files, strict=True)
+                self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_link_titles_are_not_part_of_destinations(self):
+        for link in ('[A](a.md "A title")', "[A](a.md 'A title')", '[A](a.md (A title))',
+                     '[A](<a file.md> "A title")'):
+            with self.subTest(link=link):
+                name = 'a file.md' if '<' in link else 'a.md'
+                files = {'index.md': '---\nokf_version: "0.2"\n---\n# Root\n- ' + link + ' - A\n',
+                         name: '---\ntype: Reference\n---\n# A\n'}
+                result = self.check(files, strict=True)
+                self.assertEqual(result.returncode, 0, result.stderr)
+
     def test_bundle_relative_sources_and_bare_verifier(self):
         text = ('---\ntype: Reference\nsources: [{resource: /evidence.json}]\n'
                 'verified: {by: process:fixture-check, at: "2026-10-28T12:00:00Z"}\n---\n# A\n')
