@@ -27,3 +27,9 @@ nagrade. Naš predloženi doprinos je kontrolisano ispitivanje adaptacije preko 
 uz jasne troškove, kumulativnu štetu, uparene scenarije i analizu ukupne/prioritetne
 štete. Originalnost tog uskog doprinosa još zahtijeva širi pregled literature prije
 konačne tvrdnje; nije provedena sistematska literature review.
+
+## Runtime continuation sources
+- [Autorski SB3 contrib fork](https://github.com/williamshen-nz/stable-baselines3-contrib/tree/43b7fe6fcdda71c2c10de7af0d20f39e48ae5df3): stvarno korišten, verzija 1.5.0.
+- [PyTorch 1.13.1 release files](https://pypi.org/project/torch/1.13.1/): potvrđen ARM64 Linux wheel za legacy runtime.
+- Checkpoint `system_info.txt`, lokalni C++/Python kod, dataset fajlovi i izvršeni
+  stdout/JSON su primarni dokazi nastavka; receipti i hashovi su u reports/firehose-verification/.

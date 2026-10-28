@@ -72,3 +72,10 @@ No raw dataset/model/image published, no remote pushes, no training or paid comp
 Evidence packaging correction: the global runs/ ignore also matched the nested report
 folder named runs. Moved the twelve small JSON evidence files to reports/.../probes/
 so model actions/state hashes are actually versioned; raw grids/logs remain ignored.
+
+Final runtime review: fresh read-only reviewer found no Critical/Important or new minor
+issues in the diagnostic scope; independently passed 26 tests and checked evidence,
+commits/source hashes and all dataset file hashes. Physical validity, policy quality,
+redistribution rights, future adapter and new-platform Docker rebuild are explicitly
+outside that verdict. Final host suite 26/26; clean core 22 pass + 4 optional RL skips;
+core smoke still executes. All changes remain local on feature/project-bootstrap.

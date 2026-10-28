@@ -36,5 +36,7 @@ Nema provjere fizike simulatora na BiH podacima, potvrde RL prednosti ili genera
 Deadline/compute i licence za sirove podatke ostaju otvoreni.
 
 ## Pregled i odgođena sitnica
-Prvi bootstrap review je prošao bez važnih nalaza. Jedan minor ostaje TASK-010:
+I bootstrap i novi runtime pregled su prošli bez kritičnih ili važnih nalaza.
+Novi pregled nezavisno potvrđuje testove, evidence/provenance i dataset hashove.
+Jedan stari minor ostaje TASK-010:
 JSON null config u synthetic CLI-u daje traceback umjesto uredne poruke.

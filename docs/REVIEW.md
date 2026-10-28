@@ -23,3 +23,15 @@ implementer je provjerio sliku/prepisku, rubric sum, linkove, JSON i dvostruki r
 
 Pregled ne potvrđuje naučnu hipotezu. Source i config hashes u report manifestima
 povezuju prikazane podatke s konkretnim kodom.
+
+## Nezavisan runtime review — nastavak 2026-10-28
+Pregled `e1de936..f45233b`: bez Critical/Important nalaza i bez dodatnih minor
+izmjena potrebnih za ovaj dijagnostički obim. Reviewer je nezavisno pokrenuo svih
+26 host testova i provjerio 12 sažetaka prema detaljnim rezultatima, source hashove,
+čiste upstream commitove i svih 141 hashova dataset fajlova.
+
+Nije ocjenjivao: fizikalnu tačnost simulatora, nadmoć/generalizaciju politika,
+prava redistribucije, budući adapter ili novi Docker rebuild na drugoj platformi.
+Ruling: to ostaje van ostvarenog runtime zaključka; implementer je stvarno izgradio
+image i izvršio kontejnerske slučajeve na ovdje dokumentovanom ARM64 hostu.
+To nije garancija fizičkog realizma ili nove platforme, niti zamjena za glavni protokol.
