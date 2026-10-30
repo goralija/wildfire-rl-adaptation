@@ -1,32 +1,4 @@
 {
-  "claims_not_supported": [
-    "physical validation",
-    "real-world counterfactual damage reduction",
-    "generalization across all CFSDS fires"
-  ],
-  "dataset": {
-    "dataset_paper_doi": "10.1038/s41597-024-03436-4",
-    "license": "CC BY 4.0",
-    "minimum_fire_size_ha": 500,
-    "name": "Canadian Fire Spread Dataset",
-    "native_resolution_m": 90,
-    "project_url": "https://osf.io/f48ry/",
-    "release": "v1.1",
-    "years": "2002-2024"
-  },
-  "pilot_case": {
-    "case_manifest": "reports/real-fire-data/2018_747-case.json",
-    "event_id": "2018_747",
-    "map": "reports/real-fire-data/2018_747-day228.png",
-    "no_action_seed_sweep": "6 seeds (123\u2013128); all final grids identical; 66 ha predicted versus 15.39 ha target; crop-edge touched",
-    "purpose": "pipeline and mismatch diagnostic only; excluded from held-out evaluation",
-    "replay_report": "reports/real-fire-data/2018_747-day228-replay.json",
-    "seed_sweep_report": "reports/real-fire-data/2018_747-seed-sweep.json",
-    "split": "train",
-    "target_date": "2018-08-16",
-    "target_doy": 228,
-    "year": 2018
-  },
   "additional_train_cases": [
     {
       "case_manifest": "reports/real-fire-data/2018_241-case.json",
@@ -43,10 +15,38 @@
       "year": 2018
     }
   ],
+  "claims_not_supported": [
+    "physical validation",
+    "real-world counterfactual damage reduction",
+    "generalization across all CFSDS fires"
+  ],
+  "dataset": {
+    "dataset_paper_doi": "10.1038/s41597-024-03436-4",
+    "license": "CC BY 4.0",
+    "minimum_fire_size_ha": 500,
+    "name": "Canadian Fire Spread Dataset",
+    "native_resolution_m": 90,
+    "project_url": "https://osf.io/f48ry/",
+    "release": "v1.1",
+    "years": "2002-2024"
+  },
   "fuel_rejection": {
     "event_id": "2014_538",
-    "report": "reports/real-fire-data/2014_538-fuel-rejection.json",
-    "reason": "One or more historical scar/front/target cells map to water or non-fuel in the 2014b map."
+    "reason": "One or more historical scar/front/target cells map to water or non-fuel in the 2014b map.",
+    "report": "reports/real-fire-data/2014_538-fuel-rejection.json"
+  },
+  "pilot_case": {
+    "case_manifest": "reports/real-fire-data/2018_747-case.json",
+    "event_id": "2018_747",
+    "map": "reports/real-fire-data/2018_747-day228.png",
+    "no_action_seed_sweep": "6 seeds (123\u2013128); all final grids identical; 66 ha predicted versus 15.39 ha target; crop-edge touched",
+    "purpose": "pipeline and mismatch diagnostic only; excluded from held-out evaluation",
+    "replay_report": "reports/real-fire-data/2018_747-day228-replay.json",
+    "seed_sweep_report": "reports/real-fire-data/2018_747-seed-sweep.json",
+    "split": "train",
+    "target_date": "2018-08-16",
+    "target_doy": 228,
+    "year": 2018
   },
   "schema": "real-fire-cohort/v1",
   "selection": {
@@ -181,160 +181,180 @@
       "train": [
         {
           "event_id": "2014_221",
+          "fuel_qc_status": "PASS_FUEL_ONLY",
           "growth_capture_ratio": 1.0,
-          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "quality_status": "fuel-only pass; terrain/weather/suppression/replay gates remain open",
           "target_doy": 203,
           "target_fireday": 8,
           "year": 2014
         },
         {
           "event_id": "2014_2221",
+          "fuel_qc_status": "FAIL_FUEL_OVERLAP",
           "growth_capture_ratio": 1.0,
-          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "quality_status": "fuel overlap fail; see train fuel QC report",
           "target_doy": 236,
           "target_fireday": 8,
           "year": 2014
         },
         {
           "event_id": "2014_285",
+          "fuel_qc_status": "FAIL_FUEL_OVERLAP",
           "growth_capture_ratio": 1.0,
-          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "quality_status": "fuel overlap fail; see train fuel QC report",
           "target_doy": 229,
           "target_fireday": 51,
           "year": 2014
         },
         {
           "event_id": "2014_432",
+          "fuel_qc_status": "FAIL_FUEL_OVERLAP",
           "growth_capture_ratio": 1.0,
-          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "quality_status": "fuel overlap fail; see train fuel QC report",
           "target_doy": 227,
           "target_fireday": 13,
           "year": 2014
         },
         {
           "event_id": "2014_538",
+          "fuel_qc_status": "FAIL_FUEL_OVERLAP",
           "growth_capture_ratio": 1.0,
-          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "quality_status": "fuel overlap fail; see train fuel QC report",
           "target_doy": 215,
           "target_fireday": 2,
           "year": 2014
         },
         {
           "event_id": "2015_252",
+          "fuel_qc_status": "PASS_FUEL_ONLY",
           "growth_capture_ratio": 1.0,
-          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "quality_status": "fuel-only pass; terrain/weather/suppression/replay gates remain open",
           "target_doy": 225,
           "target_fireday": 50,
           "year": 2015
         },
         {
           "event_id": "2015_2924",
+          "fuel_qc_status": "PASS_FUEL_ONLY",
           "growth_capture_ratio": 1.0,
-          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "quality_status": "fuel-only pass; terrain/weather/suppression/replay gates remain open",
           "target_doy": 192,
           "target_fireday": 19,
           "year": 2015
         },
         {
           "event_id": "2015_2929",
+          "fuel_qc_status": "FAIL_FUEL_OVERLAP",
           "growth_capture_ratio": 1.0,
-          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "quality_status": "fuel overlap fail; see train fuel QC report",
           "target_doy": 184,
           "target_fireday": 8,
           "year": 2015
         },
         {
           "event_id": "2015_438",
+          "fuel_qc_status": "FAIL_FUEL_OVERLAP",
           "growth_capture_ratio": 1.0,
-          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "quality_status": "fuel overlap fail; see train fuel QC report",
           "target_doy": 185,
           "target_fireday": 3,
           "year": 2015
         },
         {
           "event_id": "2015_896",
+          "fuel_qc_status": "PASS_FUEL_ONLY",
           "growth_capture_ratio": 1.0,
-          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "quality_status": "fuel-only pass; terrain/weather/suppression/replay gates remain open",
           "target_doy": 180,
           "target_fireday": 2,
           "year": 2015
         },
         {
           "event_id": "2017_1146",
+          "fuel_qc_status": "FAIL_FUEL_OVERLAP",
           "growth_capture_ratio": 1.0,
-          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "quality_status": "fuel overlap fail; see train fuel QC report",
           "target_doy": 220,
           "target_fireday": 26,
           "year": 2017
         },
         {
           "event_id": "2017_1296",
+          "fuel_qc_status": "FAIL_FUEL_OVERLAP",
           "growth_capture_ratio": 1.0,
-          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "quality_status": "fuel overlap fail; see train fuel QC report",
           "target_doy": 233,
           "target_fireday": 16,
           "year": 2017
         },
         {
           "event_id": "2017_1431",
+          "fuel_qc_status": "PASS_FUEL_ONLY",
           "growth_capture_ratio": 1.0,
-          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "quality_status": "fuel-only pass; terrain/weather/suppression/replay gates remain open",
           "target_doy": 223,
           "target_fireday": 22,
           "year": 2017
         },
         {
           "event_id": "2017_1871",
+          "fuel_qc_status": "PASS_FUEL_ONLY",
           "growth_capture_ratio": 1.0,
-          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "quality_status": "fuel-only pass; terrain/weather/suppression/replay gates remain open",
           "target_doy": 257,
           "target_fireday": 39,
           "year": 2017
         },
         {
           "event_id": "2017_51",
+          "fuel_qc_status": "FAIL_FUEL_OVERLAP",
           "growth_capture_ratio": 1.0,
-          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "quality_status": "fuel overlap fail; see train fuel QC report",
           "target_doy": 232,
           "target_fireday": 63,
           "year": 2017
         },
         {
           "event_id": "2018_1770",
+          "fuel_qc_status": "PASS_FUEL_ONLY",
           "growth_capture_ratio": 1.0,
-          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "quality_status": "fuel-only pass; terrain/weather/suppression/replay gates remain open",
           "target_doy": 224,
           "target_fireday": 3,
           "year": 2018
         },
         {
           "event_id": "2018_1860",
+          "fuel_qc_status": "PASS_FUEL_ONLY",
           "growth_capture_ratio": 1.0,
-          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "quality_status": "fuel-only pass; terrain/weather/suppression/replay gates remain open",
           "target_doy": 244,
           "target_fireday": 19,
           "year": 2018
         },
         {
           "event_id": "2018_1932",
+          "fuel_qc_status": "FAIL_FUEL_OVERLAP",
           "growth_capture_ratio": 1.0,
-          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "quality_status": "fuel overlap fail; see train fuel QC report",
           "target_doy": 234,
           "target_fireday": 5,
           "year": 2018
         },
         {
           "event_id": "2018_241",
+          "fuel_qc_status": "PASS_FUEL_ONLY",
           "growth_capture_ratio": 1.0,
-          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "quality_status": "fuel-only pass; terrain/weather/suppression/replay gates remain open",
           "target_doy": 227,
           "target_fireday": 11,
           "year": 2018
         },
         {
           "event_id": "2018_747",
+          "fuel_qc_status": "PASS_FUEL_ONLY",
           "growth_capture_ratio": 1.0,
-          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "quality_status": "fuel-only pass; terrain/weather/suppression/replay gates remain open",
           "target_doy": 228,
           "target_fireday": 6,
           "year": 2018
@@ -427,6 +447,17 @@
     "source_screen_report": "reports/real-fire-data/cfsds-cohort-screen.json",
     "split_rule": "Assign each whole event by calendar year: 2014-2018 train, 2019-2021 validation, 2022-2024 test. Never split one fire across partitions.",
     "status": "selected primary compatible data route; preliminary compact-crop cohort, not final benchmark"
+  },
+  "train_fuel_qc": {
+    "audit_date": "2026-10-30",
+    "candidate_count": 20,
+    "report": "reports/real-fire-data/cfsds-train-fuel-qc.json",
+    "scope": "train only; fuel compatibility screen, not full case qualification",
+    "status_counts": {
+      "FAIL_FUEL_OVERLAP": 10,
+      "PASS_FUEL_ONLY": 10
+    },
+    "suppression_status": "unknown for all 20 candidates"
   },
   "training_rule": "Historical next-day growth is hidden from the agent and is not a reward/action label. RL experience is generated by simulator rollouts on real-derived inputs."
 }

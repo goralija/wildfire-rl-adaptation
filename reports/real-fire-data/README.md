@@ -4,6 +4,11 @@ title: 'Stvarni požari: pregled kandidata i mali uzorci'
 ---
 # Stvarni požari: kandidati, CFSDS pilot i mali uzorci
 
+Najnoviji train-only ulazni gate: [CFSDS fuel QC metoda](../../docs/research/CFSDS_TRAIN_QC.md)
+i [mašinski čitljiv rezultat](cfsds-train-fuel-qc.json). Pregledano je 20 train
+kandidata: 10 prolazi samo gorivnu provjeru, 10 pada, a nijedan nije ovim auditom
+potvrđen kao kompletan simulator slučaj. Nisu pokretani replays ni treniranje.
+
 Prikladnost izvora za naš projekat, ne rezultat fizičke validacije simulatora.
 Primarni nalazi i preporuka: docs/research/REAL_FIRE_DATASETS.md.
 Candidate manifest: data/manifests/real-fire-candidates.json.
