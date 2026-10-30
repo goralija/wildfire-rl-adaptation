@@ -1,0 +1,206 @@
+diff --git a/Cell2FireC/Cell2Fire.cpp b/Cell2FireC/Cell2Fire.cpp
+index 1a74eb4..8368fa3 100644
+--- a/Cell2FireC/Cell2Fire.cpp
++++ b/Cell2FireC/Cell2Fire.cpp
+@@ -464,0 +465,3 @@ void Cell2Fire::reset(int rnumber, double rnumber2, int simExt=1){
++	this->terminalStateReported = false;
++	this->terminationReason.clear();
++	this->terminalActiveCells.clear();
+@@ -1235 +1238 @@ void Cell2Fire::outputGrid(){
+-			statusCells2[bc-1] = 2;
++			statusCells2[bc-1] = this->importedInitialState ? 2 : 1;
+@@ -1260,0 +1264,49 @@ void Cell2Fire::outputGrid(){
++// Emit a machine-readable terminal receipt before the process exits. Cell IDs
++// are one-based row-major, matching Cell2Fire's CSV and action protocol.
++void Cell2Fire::reportTerminalState(){
++	if (!this->done || this->terminalStateReported) return;
++	if (this->terminationReason.empty()) {
++		if (this->year > this->args.TotalYears) this->terminationReason = "weather_horizon";
++		else if (this->availCells.empty()) this->terminationReason = "grid_exhausted";
++		else if (this->burningCells.empty()) this->terminationReason = "front_extinguished";
++		else this->terminationReason = "upstream_terminal_unclassified";
++	}
++
++	std::vector<int> active = this->terminalActiveCells;
++	if (active.empty()) active.assign(this->burningCells.begin(), this->burningCells.end());
++	std::vector<int> affected(this->burntCells.begin(), this->burntCells.end());
++	std::vector<int> treated(this->harvestCells.begin(), this->harvestCells.end());
++	auto sortIds = [](std::vector<int>& ids) { std::sort(ids.begin(), ids.end()); };
++	sortIds(active);
++	sortIds(affected);
++	sortIds(treated);
++	auto printIds = [](const std::vector<int>& ids) {
++		std::cout << "[";
++		for (std::size_t index = 0; index < ids.size(); ++index) {
++			if (index) std::cout << ",";
++			std::cout << ids[index];
++		}
++		std::cout << "]";
++	};
++	int finalFirePeriod = 0;
++	if (this->year >= 1 && this->year <= static_cast<int>(this->fire_period.size())) {
++		finalFirePeriod = this->fire_period[this->year - 1];
++	} else if (this->year > this->args.TotalYears) {
++		finalFirePeriod = this->args.MaxFirePeriods;
++	}
++
++	std::cout << "FIREHOSE_TERMINAL_STATE {\"schema\":\"firehose-terminal-state-v1\","
++	          << "\"reason\":\"" << this->terminationReason << "\","
++	          << "\"cell_id_base\":1,\"active_front_ncells\":";
++	printIds(active);
++	std::cout << ",\"ever_affected_ncells\":";
++	printIds(affected);
++	std::cout << ",\"treated_ncells\":";
++	printIds(treated);
++	std::cout << ",\"available_cell_count\":" << this->availCells.size()
++	          << ",\"total_cell_count\":" << this->nCells
++	          << ",\"fire_period\":" << finalFirePeriod
++	          << ",\"weather_period\":" << this->weatherPeriod << "}" << std::endl;
++	this->terminalStateReported = true;
++}
++
+@@ -1306,0 +1359 @@ void Cell2Fire::Step(std::default_random_engine generator, int rnumber, double r
++		this->terminationReason = this->nIgnitions == 0 ? "no_ignition" : "weather_horizon";
+@@ -1347,0 +1401 @@ void Cell2Fire::Step(std::default_random_engine generator, int rnumber, double r
++				this->terminationReason = this->nIgnitions == 0 ? "no_ignition" : "weather_horizon";
+@@ -1360,0 +1415 @@ void Cell2Fire::Step(std::default_random_engine generator, int rnumber, double r
++				this->terminationReason = this->nIgnitions == 0 ? "no_ignition" : "front_extinguished";
+@@ -1379,0 +1435,3 @@ void Cell2Fire::Step(std::default_random_engine generator, int rnumber, double r
++		// Preserve the active edge before the horizon transition marks it burnt.
++		this->terminalActiveCells.assign(this->burningCells.begin(), this->burningCells.end());
++
+@@ -1404,0 +1463 @@ void Cell2Fire::Step(std::default_random_engine generator, int rnumber, double r
++		this->terminationReason = "weather_horizon";
+@@ -1407,2 +1466,2 @@ void Cell2Fire::Step(std::default_random_engine generator, int rnumber, double r
+-	// Done flag (extra condition: no available cells or death of the team)
+-	if ((this->availCells.size() == 0) || (this->burningCells.size() == 0 && !this->noMessages) && !this->done && !auxC){
++	// Distinguish an exhausted crop from an extinguished front.
++	if (this->availCells.size() == 0 && !this->done){
+@@ -1410,0 +1470,11 @@ void Cell2Fire::Step(std::default_random_engine generator, int rnumber, double r
++		this->terminationReason = "grid_exhausted";
++
++		// Print-out results to folder
++		this->Results();
++
++		// Next Sim if max year
++		this->sim += 1;
++	}
++	else if (this->burningCells.size() == 0 && !this->noMessages && !this->done && !auxC){
++		this->done = true;
++		this->terminationReason = this->nIgnitions == 0 ? "no_ignition" : "front_extinguished";
+@@ -1418,0 +1489,2 @@ void Cell2Fire::Step(std::default_random_engine generator, int rnumber, double r
++	this->reportTerminalState();
++
+@@ -1630 +1702 @@ int main(int argc, char * argv[]){
+-}
+\ No newline at end of file
++}
+diff --git a/Cell2FireC/Cell2Fire.h b/Cell2FireC/Cell2Fire.h
+index 4a1cff3..ac80c89 100644
+--- a/Cell2FireC/Cell2Fire.h
++++ b/Cell2FireC/Cell2Fire.h
+@@ -60,0 +61,2 @@ class Cell2Fire {
++		 bool terminalStateReported = false;
++		 std::string terminationReason;
+@@ -73,0 +76 @@ class Cell2Fire {
++		 std::vector<int> terminalActiveCells;
+@@ -106,2 +109,3 @@ class Cell2Fire {
+-		void Results();
+-		void outputGrid();
++		 void Results();
++		 void outputGrid();
++		 void reportTerminalState();
+diff --git a/firehose/baselines.py b/firehose/baselines.py
+index 1471f13..fb30b63 100644
+--- a/firehose/baselines.py
++++ b/firehose/baselines.py
+@@ -109,2 +109,3 @@ class NaiveAlgorithm(FlatActionSpaceAlgorithm):
+-        cells_on_fire = self.env.state == 1
+-        fire_yx = list(zip(*np.where(cells_on_fire)))
++        # FireEnv normalizes the currently burning cells across the legacy
++        # one-code grid and imported historical two-code grid.
++        fire_yx = sorted(self.env.cells_on_fire)
+diff --git a/gym_env.py b/gym_env.py
+index b77e716..bdc2a4b 100644
+--- a/gym_env.py
++++ b/gym_env.py
+@@ -1,0 +2 @@ import os
++import json
+@@ -298 +299,2 @@ class FireEnv(Env):
+-        on_fire = set(zip(*np.where(self.state == 2)))
++        burning_code = 2 if self.has_initial_state else 1
++        on_fire = set(zip(*np.where(self.state == burning_code)))
+@@ -364 +366,2 @@ class FireEnv(Env):
+-            return obs, reward, True, {}
++            info = self._episode_info(terminated=True)
++            return obs, reward, True, info
+@@ -380,0 +384 @@ class FireEnv(Env):
++        info = self._episode_info(terminated=done)
+@@ -393 +397,66 @@ class FireEnv(Env):
+-        return obs, reward, done, {}
++        return obs, reward, done, info
++
++    def _episode_info(self, terminated):
++        """Return explicit simulator termination metadata without changing rewards."""
++        ever_affected = sorted(
++            int(row * self.width + col + 1) for row, col in self.cells_burned
++        )
++        active_front = sorted(
++            int(row * self.width + col + 1) for row, col in self.cells_on_fire
++        )
++        terminal_prefix = "FIREHOSE_TERMINAL_STATE "
++        terminal = None
++        for line in reversed(self.fire_process.lines):
++            if line.startswith(terminal_prefix):
++                terminal = json.loads(line[len(terminal_prefix):])
++                break
++        if terminal is not None:
++            # The categorical output grid gives treatment precedence (-1), so a
++            # fire-affected cell can disappear from Python's positive-grid
++            # counter when it is treated in the same simulator interval. The
++            # terminal C++ sets are authoritative for episode totals/front.
++            self.cells_burned.update(
++                ((cell_id - 1) // self.width, (cell_id - 1) % self.width)
++                for cell_id in terminal["ever_affected_ncells"]
++            )
++            self.cells_on_fire = {
++                ((cell_id - 1) // self.width, (cell_id - 1) % self.width)
++                for cell_id in terminal["active_front_ncells"]
++            }
++            self.cells_harvested.update(
++                ((cell_id - 1) // self.width, (cell_id - 1) % self.width)
++                for cell_id in terminal["treated_ncells"]
++            )
++            ever_affected = sorted(
++                int(row * self.width + col + 1) for row, col in self.cells_burned
++            )
++            active_front = sorted(
++                int(row * self.width + col + 1) for row, col in self.cells_on_fire
++            )
++            return {
++                "termination_reason": terminal["reason"],
++                "simulator_terminal": True,
++                "terminal_state": terminal,
++                "ever_affected_cells": len(ever_affected),
++                "active_front_cells": len(active_front),
++                "ever_affected_cell_ids_one_based": ever_affected,
++                "active_front_cell_ids_one_based": active_front,
++            }
++        if not terminated:
++            return {}
++        if self.fire_process.finished:
++            reason = "upstream_terminal_unclassified"
++        elif self.iter >= self.max_steps:
++            reason = "adapter_step_limit"
++        elif self.fire_process.process is not None and self.fire_process.process.poll() is not None:
++            reason = "subprocess_error"
++        else:
++            reason = "simulator_output_missing"
++        return {
++            "termination_reason": reason,
++            "simulator_terminal": False,
++            "ever_affected_cells": len(ever_affected),
++            "active_front_cells": len(active_front),
++            "ever_affected_cell_ids_one_based": ever_affected,
++            "active_front_cell_ids_one_based": active_front,
++        }

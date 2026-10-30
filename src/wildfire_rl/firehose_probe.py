@@ -23,6 +23,11 @@ CHECKPOINTS = {
     'ppo-random': ('20x20-random-20m-ppo-maskable.zip',
                    '08cb56f17fdb99f2f17ac542008963324a75a724fe2d5cf032537e7381304dec'),
 }
+TERMINAL_STATE_PREFIX = 'FIREHOSE_TERMINAL_STATE '
+TERMINATION_REASONS = {
+    'weather_horizon', 'front_extinguished', 'grid_exhausted', 'no_ignition',
+    'upstream_terminal_unclassified',
+}
 
 
 def budget_action(candidate, used, budget):
@@ -43,6 +48,74 @@ def history_damage(paths):
             cells = [int(value) for row in csv.reader(file) for value in row]
         affected.update(i for i, value in enumerate(cells) if value > 0)
     return affected
+
+
+def cells_with_state(grid, states):
+    """Return sorted one-based row-major IDs matching one or more grid codes."""
+    values = grid.tolist() if hasattr(grid, 'tolist') else grid
+    if not values or not values[0]:
+        raise ValueError('state grid must be a nonempty rectangle')
+    width = len(values[0])
+    if any(len(row) != width for row in values):
+        raise ValueError('state grid rows must have equal length')
+    wanted = set(states)
+    return sorted(
+        row_index * width + col_index + 1
+        for row_index, row in enumerate(values)
+        for col_index, value in enumerate(row)
+        if int(value) in wanted
+    )
+
+
+def parse_terminal_state(lines):
+    """Parse and validate the single structured terminal receipt from C++ stdout."""
+    records = [line[len(TERMINAL_STATE_PREFIX):] for line in lines
+               if line.startswith(TERMINAL_STATE_PREFIX)]
+    if not records:
+        return None
+    if len(records) != 1:
+        raise ValueError('expected at most one Firehose terminal-state record')
+    record = json.loads(records[0])
+    if record.get('schema') != 'firehose-terminal-state-v1':
+        raise ValueError('unsupported Firehose terminal-state schema')
+    if record.get('reason') not in TERMINATION_REASONS:
+        raise ValueError('unknown Firehose terminal reason')
+    if record.get('cell_id_base') != 1:
+        raise ValueError('terminal-state cell IDs must be one-based')
+    for field in ('active_front_ncells', 'ever_affected_ncells', 'treated_ncells'):
+        values = record.get(field)
+        if not isinstance(values, list) or any(type(value) is not int or value < 1 for value in values):
+            raise ValueError('terminal-state %s must contain positive integer cell IDs' % field)
+        if values != sorted(set(values)):
+            raise ValueError('terminal-state %s must be sorted and unique' % field)
+    if not set(record['active_front_ncells']).issubset(record['ever_affected_ncells']):
+        raise ValueError('active-front cells must be included in cumulative affected cells')
+    for field in ('available_cell_count', 'total_cell_count', 'fire_period', 'weather_period'):
+        if type(record.get(field)) is not int or record[field] < 0:
+            raise ValueError('terminal-state %s must be a nonnegative integer' % field)
+    if record['available_cell_count'] > record['total_cell_count']:
+        raise ValueError('available cell count exceeds total grid size')
+    for field in ('active_front_ncells', 'ever_affected_ncells', 'treated_ncells'):
+        if any(cell_id > record['total_cell_count'] for cell_id in record[field]):
+            raise ValueError('terminal-state %s contains an ID outside the grid' % field)
+    return record
+
+
+def terminal_damage_matches_grid_history(terminal_state, grid_damage):
+    """Check grid coverage and explain treated cells hidden by the final grid code.
+
+    Cell2Fire gives treatment precedence in its categorical grid output. A cell
+    that was affected and later treated therefore appears as ``-1`` in every
+    saved grid after treatment, even though the terminal C++ cumulative set
+    correctly retains it.
+    """
+    if terminal_state is None:
+        return False
+    terminal_damage = set(terminal_state['ever_affected_ncells'])
+    visible_damage = set(grid_damage)
+    treated = set(terminal_state['treated_ncells'])
+    hidden_by_treatment = terminal_damage - visible_damage
+    return visible_damage.issubset(terminal_damage) and hidden_by_treatment.issubset(treated)
 
 
 def input_tree_hash(root):
@@ -104,6 +177,7 @@ def main():
     model = None
     result = dict(policy=args.policy, simulator_seed=args.seed, budget=args.budget,
                   sync_reset=args.sync_reset, fire_map=args.fire_map, no_training=True, success=False,
+                  termination_reason=None,
                   firehose_commit='e49a52a9a987a1585d25ddca2f711222ca500ffb',
                   contrib_commit='43b7fe6fcdda71c2c10de7af0d20f39e48ae5df3',
                   script_sha256=sha256(Path(__file__).read_bytes()).hexdigest(),
@@ -159,9 +233,19 @@ def main():
         observation = env.reset()
         initial_paths = [line for line in env.fire_process.lines if 'ForestGrid' in line and '.csv' in line]
         initial_state = pd.read_csv(initial_paths[-1], header=None).values
+        active_state_code = 2 if env.has_initial_state else 1
         result['upstream_nonfuel_mask_cells'] = int(np.sum(env.helper.forest_non_fuel))
         result['warmup_affected_cells'] = int(np.sum(initial_state > 0))
-        result['warmup_active_cells'] = int(np.sum(initial_state == 2))
+        result['warmup_active_cells'] = (
+            int(np.sum(initial_state == active_state_code)) if env.has_initial_state else None
+        )
+        result['warmup_ever_affected_cell_ids_one_based'] = cells_with_state(initial_state, {1, 2})
+        result['warmup_active_front_cell_ids_one_based'] = (
+            cells_with_state(initial_state, {active_state_code}) if env.has_initial_state else None
+        )
+        result['warmup_historical_scar_cell_ids_one_based'] = (
+            cells_with_state(initial_state, {1}) if env.has_initial_state else []
+        )
         result['initial_state_import_log'] = next(
             (line for line in env.fire_process.lines if line.startswith('Imported historical state:')),
             None,
@@ -177,7 +261,8 @@ def main():
         nonfuel_requests = 0
         transitions = []
         done = False
-        for decision in range(200):
+        last_info = {}
+        for decision in range(args.max_steps):
             candidate = -1
             if used < args.budget:
                 if model is not None:
@@ -192,21 +277,70 @@ def main():
                 used += 1
                 nonfuel_requests += int(env.helper.forest_non_fuel.ravel()[action] != 0)
             observation, reward, done, info = env.step(action)
-            transitions.append(dict(decision=decision, action=action, used=used,
-                                    affected_snapshot=int(np.sum(env.state > 0)),
-                                    active_snapshot=int(np.sum(env.state == 2)),
-                                    upstream_cumulative=len(env.cells_burned),
-                                    state_sha256=sha256(env.state.tobytes()).hexdigest()))
+            last_info = info
+            transition = dict(
+                decision=decision,
+                action=action,
+                used=used,
+                affected_snapshot=int(np.sum(env.state > 0)),
+                active_snapshot=(
+                    int(np.sum(env.state == 2)) if env.has_initial_state else None
+                ),
+                ever_affected_cell_ids_one_based=info.get(
+                    'ever_affected_cell_ids_one_based',
+                    sorted(int(row * env.width + col + 1) for row, col in env.cells_burned),
+                ),
+                active_front_cell_ids_one_based=info.get(
+                    'active_front_cell_ids_one_based',
+                    cells_with_state(env.state, {2}) if env.has_initial_state else None,
+                ),
+                state_sha256=sha256(env.state.tobytes()).hexdigest(),
+            )
+            transitions.append(transition)
             if done:
                 break
         grids = list(Path(env.helper.output_folder).rglob('ForestGrid*.csv'))
+        exported_damage = sorted(index + 1 for index in history_damage(grids))
+        terminal_state = parse_terminal_state(env.fire_process.lines)
+        if terminal_state is not None:
+            terminal_damage = terminal_state['ever_affected_ncells']
+            state_export_matches_grids = terminal_damage_matches_grid_history(
+                terminal_state, exported_damage
+            )
+            termination_reason = terminal_state['reason']
+            active_front = terminal_state['active_front_ncells']
+        else:
+            terminal_damage = exported_damage
+            state_export_matches_grids = None
+            active_front = cells_with_state(env.state, {2}) if env.has_initial_state else None
+            if last_info.get('termination_reason'):
+                termination_reason = last_info['termination_reason']
+            elif done and not env.fire_process.finished:
+                termination_reason = 'probe_step_limit'
+            elif env.fire_process.finished:
+                termination_reason = 'upstream_terminal_unclassified'
+        if not done and termination_reason is None:
+            termination_reason = 'probe_step_limit'
+        python_damage = sorted(
+            int(row * env.width + col + 1) for row, col in env.cells_burned
+        )
+        python_damage_matches_simulator = (
+            terminal_state is not None and python_damage == terminal_damage
+        )
         result.update(decisions=len(transitions), actions=[r['action'] for r in transitions],
                       interventions_requested=used, transitions=transitions,
                       nonfuel_requests=nonfuel_requests,
-                      observed_ever_affected_cells=len(history_damage(grids)),
+                      observed_ever_affected_cells=len(terminal_damage),
+                      ever_affected_cell_ids_one_based=terminal_damage,
+                      active_front_cell_ids_one_based=active_front,
+                      terminal_state=terminal_state,
+                      terminal_state_matches_grid_history=state_export_matches_grids,
+                      simulator_cumulative_affected_cells=len(terminal_damage),
+                      python_cumulative_affected_cells=len(python_damage),
+                      python_cumulative_matches_simulator=python_damage_matches_simulator,
                       upstream_cumulative_cells=len(env.cells_burned),
                       simulator_reported_finished=env.fire_process.finished,
-                      termination_reason='upstream_done; containment vs weather horizon not exposed',
+                      termination_reason=termination_reason,
                       budget_exhausted_followed_by_noops=any(
                           r['action'] == -1 and r['used'] == args.budget for r in transitions))
         if model is not None:
@@ -214,9 +348,14 @@ def main():
             result['weights_unchanged'] = result['weights_before'] == result['weights_after']
             if not result['weights_unchanged']:
                 raise RuntimeError('inference changed policy tensors')
-        result['success'] = bool(done and env.fire_process.finished)
+        result['success'] = bool(
+            done and env.fire_process.finished and terminal_state is not None
+            and terminal_state['reason'] != 'upstream_terminal_unclassified'
+            and state_export_matches_grids and python_damage_matches_simulator
+        )
     except Exception as exc:
         result['error'] = type(exc).__name__ + ': ' + str(exc)
+        result['termination_reason'] = 'probe_timeout' if isinstance(exc, TimeoutError) else 'adapter_error'
         (args.out / 'error.txt').write_text(traceback.format_exc())
     finally:
         signal.alarm(0)
@@ -236,6 +375,7 @@ def main():
                     stream.close()
                 if process.returncode != 0:
                     result['success'] = False
+                    result['termination_reason'] = 'subprocess_error'
             env.close()
         result['runtime_seconds'] = time.perf_counter() - start
         (args.out / 'result.json').write_text(json.dumps(result, indent=2) + '\n')

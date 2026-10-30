@@ -10,7 +10,7 @@ for label,policy,seed,budget,sync in cases:
  sys.argv=['probe','--policy',policy,'--seed',str(seed),'--budget',str(budget),'--out',str(root/label)]+(['--sync-reset'] if sync else [])
  with (root/(label+'.log')).open('w') as log,contextlib.redirect_stdout(log),contextlib.redirect_stderr(log):
   code=probe.main()
- result=json.loads((root/label/'result.json').read_text());summary.append({'label':label,**{k:result.get(k) for k in ('success','policy','simulator_seed','budget','sync_reset','decisions','interventions_requested','nonfuel_requests','observed_ever_affected_cells','upstream_cumulative_cells','weights_unchanged','subprocess_returncode','runtime_seconds')}})
+ result=json.loads((root/label/'result.json').read_text());summary.append({'label':label,**{k:result.get(k) for k in ('success','policy','simulator_seed','budget','sync_reset','decisions','interventions_requested','nonfuel_requests','observed_ever_affected_cells','active_front_cell_ids_one_based','termination_reason','terminal_state_matches_grid_history','python_cumulative_affected_cells','python_cumulative_matches_simulator','weights_unchanged','subprocess_returncode','runtime_seconds')}})
  print(label,code,summary[-1],flush=True)
 (root/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
 raise SystemExit(0 if all(r['success'] for r in summary) else 1)

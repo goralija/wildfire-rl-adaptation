@@ -22,22 +22,43 @@ Za postojeći sparse checkout Firehose moraju biti uključeni `cell2fire/Cell2Fi
 `cell2fire/firehose`, `cell2fire/utils`, `data/Sub20x20` i dva 20×20 model ZIP-a.
 Raw izvori i težine ostaju u ignorisanom external/ direktoriju.
 
-Docker build primjenjuje lokalni patch
-[`cfsds_initial_state.patch`](cfsds_initial_state.patch) na pinovani upstream izvor.
+Docker build redom primjenjuje lokalne patch-eve
+[`cfsds_initial_state.patch`](cfsds_initial_state.patch) i
+[`task004c_state_export.patch`](task004c_state_export.patch) na pinovani upstream izvor.
 Opcioni `InitialState.csv` podržava dnevni historical case i ima format
 `state,ncell`, gdje je `state` `burnt` ili `burning`, a `ncell` je one-based
 row-major ID. Aktivna ivica i starija opožarena površina ostaju odvojene u C++
 stanju i gridovima. Kada fajl nedostaje, postojeći Firehose slučajevi zadržavaju
 dosadašnju logiku i izgled opažanja.
 
+TASK-004c čuva RGB 20×20/400-akcijski i reward/checkpoint ugovor. Za standardne
+Firehose mape grid koristi stari kod 1 za aktivno/opožareno kako postojeći modeli
+i heuristike ostanu kompatibilni. Samo kad se uveze `InitialState.csv`, grid kodovi
+su: 0 neizgorjelo, 1 stariji ožiljak, 2 aktivni front i -1 tretirana ćelija.
+`FireEnv.step()` vraća u `info` kumulativno pogođene ID-jeve, aktivne ID-jeve i
+`termination_reason`; svi navedeni `ncell` ID-jevi su one-based row-major, a akcije
+agenta i dalje ostaju zero-based.
+
+Kad C++ završi, ispisuje jedan `FIREHOSE_TERMINAL_STATE` JSON red sa zajedničkim
+stanjima i razlogom: `weather_horizon`, `front_extinguished`, `grid_exhausted` ili
+`no_ignition`. Na vremenskom limitu terminalni aktivni rub se sačuva prije nego ga
+Cell2Fire prebaci u završni burnt set. Terminalni C++ spisak je izvor kumulativne
+štete; Python `FireEnv` ga kopira u trajni episode counter. Categorical grid daje
+prednost tretiranju (`-1`), pa cell koja je u istoj simulacijskoj etapi pogođena i
+tretirana može nestati iz pozitivnih grid vrijednosti. Probe zato provjerava da su
+sve pozitivne grid ćelije u terminalnom skupu, a svaka razlika mora pripadati i
+terminalnom skupu tretiranih ćelija. Neobjašnjeno neslaganje ili neklasifikovan
+završetak ruši smoke. Probe timeout, adapter step limit i subprocess greška imaju
+odvojene razloge i ne predstavljaju fizičko gašenje požara.
+
 ## Build i provjera
 
 Iz korijena projekta:
 
 ```sh
-docker build --file docker/firehose/Dockerfile --tag wildfire-firehose-probe:20261030-initial-state .
+docker build --file docker/firehose/Dockerfile --tag wildfire-firehose-probe:task004c .
 mkdir -p runs/firehose-new-check
-docker run --rm --network none --cpus 2 --memory 2g --pids-limit 128 --read-only   --tmpfs /tmp:rw,nosuid,size=256m --tmpfs /opt/firehose/input:rw,nosuid,size=128m   --cap-drop ALL --security-opt no-new-privileges -e MPLCONFIGDIR=/tmp/mpl   -v "$PWD/runs/firehose-new-check:/outputs"   wildfire-firehose-probe:20261030-initial-state timeout 300 python /opt/firehose_verify_batch.py
+docker run --rm --network none --cpus 2 --memory 2g --pids-limit 128 --read-only   --tmpfs /tmp:rw,nosuid,size=256m --tmpfs /opt/firehose/input:rw,nosuid,size=128m   --cap-drop ALL --security-opt no-new-privileges -e MPLCONFIGDIR=/tmp/mpl   -v "$PWD/runs/firehose-new-check:/outputs"   wildfire-firehose-probe:task004c timeout 300 python /opt/firehose_verify_batch.py
 ```
 
 Folder `/outputs/final` mora biti nov. 12 kratkih rollouta ima pojedinačni limit 90 s;
@@ -49,7 +70,7 @@ fajlove i moderni .venv iz build contexta.
 Za jedan model:
 
 ```sh
-docker run --rm --network none --cpus 2 --memory 2g --read-only   --tmpfs /tmp:rw,nosuid,size=256m --tmpfs /opt/firehose/input:rw,nosuid,size=128m   -e MPLCONFIGDIR=/tmp/mpl -v "$PWD/runs/firehose-new-check:/outputs"   wildfire-firehose-probe:20261030-initial-state timeout 100 python /opt/firehose_probe.py   --policy ppo-fixed --seed 123 --budget 8 --sync-reset --out /outputs/one-model
+docker run --rm --network none --cpus 2 --memory 2g --read-only   --tmpfs /tmp:rw,nosuid,size=256m --tmpfs /opt/firehose/input:rw,nosuid,size=128m   -e MPLCONFIGDIR=/tmp/mpl -v "$PWD/runs/firehose-new-check:/outputs"   wildfire-firehose-probe:task004c timeout 100 python /opt/firehose_probe.py   --policy ppo-fixed --seed 123 --budget 8 --sync-reset --out /outputs/one-model
 ```
 
 ## Početni historijski front
@@ -63,7 +84,7 @@ docker run --rm --network none --cpus 2 --memory 2g --pids-limit 128 --read-only
   --tmpfs /tmp:rw,nosuid,size=256m --tmpfs /opt/firehose/input:rw,nosuid,size=128m \
   --cap-drop ALL --security-opt no-new-privileges -e MPLCONFIGDIR=/tmp/mpl \
   -v "$PWD/runs/initial-state-check:/outputs" \
-  wildfire-firehose-probe:20261030-initial-state python /opt/firehose_verify_initial_state.py
+  wildfire-firehose-probe:task004c python /opt/firehose_verify_initial_state.py
 ```
 
 Provjeravač učitava malu fixturesku mapu: 1 ranije izgorjela ćelija i 2 aktivne
@@ -80,10 +101,14 @@ manifest](../../reports/real-fire-data/2018_747-case.json), [replay report](../.
 Docker image ID i hashovi su u
 [`initial-state-import-smoke.json`](../../reports/real-fire-data/initial-state-import-smoke.json).
 
-Prvi istorijski `InitialState.csv` sada je izvezen i C++ importer ga učitava. Standardni
-Sub20 `FireEnv` reset/damage i termination reason još nisu potpuno popravljeni: opcija
-`--sync-reset` je zasebna dijagnostička korekcija, ne konačan TASK-004c adapter. Sljedeći
-korak je provjeriti poravnanje/mismatch kroz više train slučajeva i dovršiti terminalni
-state/cumulative-damage export.
+TASK-004c adapter je implementiran i provjeren fixtureom plus 12 kratkih Sub20 inference
+rollouta; mašinski sažetak i image ID su u
+[`task004c-adapter-smoke.json`](../../reports/firehose-verification/task004c-adapter-smoke.json).
+Test potvrđuje tehničko poravnanje terminalnog C++ kumulativnog skupa i Python brojača,
+uz posebno objašnjenje ćelija koje su skrivene oznakom tretiranja. Ne provjerava fiziku
+požara niti zatvara CFSDS no-action gate. `--sync-reset` ostaje opcionalna dijagnostika
+za poređenje reset varijanti; FireEnv sada resetuje warmup observation prema C++ gridu.
+Sljedeće je dovršiti train-only fuel-vintage/terrain/weather/suppression QC i tek zatim
+odlučiti o dodatnim kontrolisanim replayima.
 Za drugu arhitekturu/OS potrebno je zasebno provjeriti build i wheel dostupnost;
 postojeći freeze nije obećanje x86/GPU/Colab kompatibilnosti.
