@@ -1,5 +1,14 @@
 # Promjene baze znanja
 
+## 2026-10-30: TASK-018 no-action dijagnostika završena
+
+- Analizirani su samo postojeći train replayi `2018_747`, `2018_241` i `2018_1770` na fiksnim 30–1.440 simuliranim minutama; nema novog C++ runa ni RL treninga.
+- Sva tri predviđanja dotiču rub 20×20 mreže u 34–52 minute; jedan slučaj popuni svih 400 ćelija. Dnevni CFSDS cilj ne otkriva tačan minut izgaranja, a istorijsko gašenje nije poznato, zato uzrok nije izolovan i no-action gate ostaje FAIL.
+- Ispravljen je samo probe metapodatak: horizon sada broji stvarne `Weather.csv` redove. Ranijih 480 minuta bila je pogrešna vrijednost izvještaja; sa 24 reda i 60 min/red stvarni gornji horizon je 1.440 min. Stari replayi se nisu mijenjali.
+- Dijagnoza: [istraživački izvještaj](docs/research/CFSDS_NO_ACTION_DIAGNOSIS.md), [mašinski timeline/hash receipt](reports/real-fire-data/cfsds-no-action-timeline.json), [EXP-007](docs/research/EXPERIMENT_LOG.md), [ADR-017](docs/specs/DECISION_RECORDS.md).
+- Provjera: 34/34 aplikacijskih testova; strict OKF validator 69 Markdown fajlova; CLI smoke je uporedio spremljeni `2018_747` rezultat s reportom; `git diff --check` čist.
+- Sljedeće: TASK-004c treba imenovati terminalni razlog i sačuvati kumulativno izgorjele/aktivne ćelije prije daljih benchmarka.
+
 ## 2026-10-30: train-only CFSDS fuel QC gate
 
 - Nova grana `research/cfsds-train-qc` zasniva se na spojenom `main` (`ea5b8a7a`); rad je u izolovanom task worktreeu.
@@ -8,8 +17,8 @@
 - Train redovi u `data/manifests/cfsds-v1_1-pilot-cohort.json` nose odgovarajući fuel-only status i link na receipt; cijela kohorta i dalje nije finalni benchmark.
 - Validation/test fuel i source rasteri nisu otvoreni. Zajednički cohort manifest i crop-screen JSON sa svim split metapodacima učitani su da se izdvoje train redovi; nijedan validation/test overlay nije izračunat. Dokumentacija to precizno navodi. Nije bilo replaya, RL treninga ni kalibracije.
 - [Metoda i limiti](docs/research/CFSDS_TRAIN_QC.md), [mašinski report](reports/real-fire-data/cfsds-train-fuel-qc.json), [EXP-006](docs/research/EXPERIMENT_LOG.md), [ADR-016](docs/specs/DECISION_RECORDS.md).
-- Sljedeće je TASK-018: train-only dijagnostika prekomjernog no-action širenja; potom TASK-004c i preostali input/replay gate prije benchmarka ili fine-tuninga.
-- Fokusirani geo tests: 3/3 prolaze. Cijela test suite, strict knowledge validator, CLI smoke i atomic commits još su u toku.
+- Tadašnji sljedeći zadatak bio je TASK-018; završen je u odjeljku iznad. Dalji redoslijed je TASK-004c, zatim preostali train-only input/replay gate prije benchmarka ili fine-tuninga.
+- U trenutku ovog ranijeg QC unosa fokusirani geo tests: 3/3 prolazili su; verifikacija TASK-018 je zapisana iznad.
 
 ## 2026-10-30: CFSDS putanja izabrana i prvi stvarni C++ replay
 

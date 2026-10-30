@@ -39,6 +39,11 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
   gate, a 10 pada na ne-gorivo/ambiguous overlay. Sva tri postojeća replay slučaja su
   među prolazima; zato fuel overlap sam ne objašnjava njihov veliki no-action rast.
   Suppression je nepoznat, a puna input/replay validacija nije završena. [Metod i detalji](../docs/research/CFSDS_TRAIN_QC.md).
+- TASK-018 je završio dijagnostičko poređenje tri sačuvana no-action replaya na fiksnim
+  vremenskim presjecima: svi dodiruju rub 20×20 domene za 34–52 minute, a jedan popuni
+  svih 400 ćelija. Rezultati su osjetljivi na vrijeme, ali nema unutar-dnevnog ground trutha
+  ili suppression podataka da se tačan uzrok izdvoji. Probe horizon metapodatak ispravljen
+  je sa 480 na 1.440 minuta za 24 hourly reda. [Izvještaj](../docs/research/CFSDS_NO_ACTION_DIAGNOSIS.md).
 - FireSpread_MedEU/EFFIS ostaje odvojeni mogući BiH pravac; evropski NFFL fuel kodovi
   nisu direktno kompatibilni s trenutnim Canadian FBP.
 
@@ -49,11 +54,11 @@ na istim historijskim uslovima. To ne znači učiti „tačnu akciju“ iz perim
 generiše counterfactual ishode. Pročitaj [X/Y mapiranje i ograničenja](../docs/research/REAL_CASE_PIPELINE.md)
 i [izbor izvora](../docs/research/REAL_FIRE_DATASETS.md).
 
-Glavni izbor geografije i simulatora je zatvoren po korisnikovoj uputi. Sljedeće je
-TASK-018: dijagnostikovati no-action prekomjerno širenje na tri postojeća train replaya,
-prvo iz njihovih sačuvanih inputa, FWI/weather i FBP parametara, te domene/fronta.
-Zatim pripremiti odgovarajuće fuel vintages, terrain/weather QC i suppression dokaze.
-Preliminarni 44 ID-ja i pilot su u
+Glavni izbor geografije i simulatora je zatvoren po korisnikovoj uputi. Dijagnostička
+faza TASK-018 je završena, ali no-action gate i uzrok neslaganja ostaju otvoreni.
+Sljedeće je TASK-004c: cumulative-damage/front export i terminal reason. Nakon toga
+pripremiti odgovarajuće fuel vintages, terrain/weather QC i suppression dokaze samo na
+train/calibration događajima. Preliminarni 44 ID-ja i pilot su u
 [CFSDS kohort manifestu](../data/manifests/cfsds-v1_1-pilot-cohort.json). Adapter za
 `burnt` + višestruki `burning` početni state i jedan case converter su već ostvareni;
 TASK-004c još treba terminalni razlog i cumulative-damage export.

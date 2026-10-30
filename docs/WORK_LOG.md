@@ -348,3 +348,25 @@ strict OKF validator passed with 68 Markdown files, and the synthetic CLI smoke 
 its output successfully. Report/manifest/script SHA-256 consistency was checked; no
 absolute workstation paths were found in the new report. These checks cover the exact
 implementation, report and documentation recorded above.
+
+2026-10-30 — TASK-018 completed as a train-only diagnostics stage on
+`research/cfsds-train-qc`. Compared existing FireCase/replay manifests and hashes,
+Canadian FBP fuel classes, weather/FWI inputs, initial fronts, model extents and saved
+simulator grids. Added `scripts/analyze_cfsds_replay_timeline.py` and a compact report
+with fixed 30/60/120/240/480/720/1,440-minute measurements. All three saved forecasts
+first contact the 20×20 crop edge within 34–52 model minutes; `2018_241` eventually
+fills the 400-cell grid. Since CFSDS gives a daily satellite-interpolated target without
+within-day timing and suppression records are unknown, the diagnosis does not identify
+one physical cause or select per-event stop times.
+
+Source review found and corrected a probe metadata error: its `weather_horizon_minutes`
+used `60 × steps_per_action` (480) instead of the 24 hourly weather rows × 60 min =
+1,440-minute horizon. The field now counts rows in the actual copied `Weather.csv`; this
+does not alter completed replays. Added focused tests, TASK-018 diagnosis/receipt,
+ADR-017, backlog/status/handoff/index updates. No new C++ replay, PPO training, raw data,
+or validation/test outcome was used. TASK-004c is next; the no-action gate remains failed.
+
+Verification: full application suite 34/34 passed, strict OKF validation passed with
+69 Markdown files, and the timeline CLI smoke against the saved `2018_747` replay
+reproduced the committed checkpoints and terminal grid metrics. Its generated output
+is under ignored `runs/`; no simulator was rerun. `git diff --check` passed.

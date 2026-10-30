@@ -1,73 +1,75 @@
 ---
 type: Handoff
-title: Nastavak nakon prvog stvarnog CFSDS replaya
+title: Naredna sesija — nakon TASK-018 dijagnostike
 ---
 # Naredna sesija
 
 ## Trenutno stanje
 
-Najnoviji TASK-015 pomak: per-cell fuel QC za svih 20 train kandidata. Deset prolazi
-**samo gorivni gate**, deset pada; svih 20 imaju geometrijski ispravan susjedni front/cilj
-na 20×20 gridu. Od tri postojeća no-action replaya (`2018_747`, `2018_241`, `2018_1770`),
-sva tri prolaze fuel-only provjeru. Nijedan kandidat time nije proglašen potpunim ili
-fizički validiranim slučajem. Pogledati [metod i nalaz](research/CFSDS_TRAIN_QC.md) i
-[detaljni JSON](../reports/real-fire-data/cfsds-train-fuel-qc.json). Audit je koristio
-samo train događaje za overlay; zajednički screen JSON sa svim podjelama bio je učitan,
-ali validation/test fuel i CFSDS rasteri nisu otvarani. Nije bilo simulator replays,
-treniranja ni kalibracije.
+TASK-018 dijagnostička faza je završena na tri već postojeća **train-only** CFSDS no-action
+replaya (`2018_747`, `2018_241`, `2018_1770`). Nisu napravljeni novi C++ replayi,
+fine-tuning ni heldout kalibracija. Nema dokaza da agent smanjuje stvarnu štetu i
+simulator još ne prolazi no-action reality-check.
 
-Glavni pravac je izabran: **Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire**. Razlog je
-kompatibilnost s simulatorom i postojećim 20×20 agentom. Tri train slučaja (`2018_747`,
-`2018_241`, `2018_1770`) su pretvorena i pokrenuta bez intervencija i bez treniranja.
-Za `2018_747` imamo šest seedova; druga dva zasad imaju po jedan.
+Glavni nalazi:
 
-No-action rezultat za `2018_747` je 66 ha prema 15.39 ha opaženih (IoU .2187); šest
-seedova daje istu mapu, a predikcija dotiče rub. Za `2018_241` simulator je zahvatio
-svih 400 ćelija i dodao 237 ha prema 12.15 ha (IoU .0376); za `2018_1770` dodao je
-73 ha prema 12.15 ha (IoU .1361). Prva dva slučaja ponovljena su bez 20-minutnog
-početnog zagrijavanja s istim završnim mjerama. Kandidat `2014_538` nije prošao
-konverziju jer historijske ćelije padaju na vodu/ne-gorivo u FBP karti. Nepoznat status
-gašenja ostaje moguć uzrok razlike, ali ovo nisu fizička validacija ni rezultat agenta.
+- Fuel/FBP ulaz koristi isti kanadski FBP 2014b sloj (250 m prebačen na 100 m) i istu
+  lookup tabelu. Te tri modelirane mape imaju klase C2/C3/D1; ne nedostaju im posebni
+  mixedwood/grass parametri. Fuel-only PASS nije fizička validacija.
+- Sačuvani simulator grids na fiksnim 30–1.440 minuta pokazuju različite brzine rasta.
+  Sva tri slučaja dotaknu rub 20×20 prozora za 34–52 minute; `2018_241` napuni svih
+  400 ćelija. CFSDS je dnevni satelitski interpolisani cilj bez tačnog sata izgaranja.
+- `Weather.csv` ima 24 satna reda, a pinovani C++ kod ima do 60 minuta po redu, pa je
+  stvarni maksimalni horizont 1.440 simulator minuta. Polje u ranijoj probe datoteci
+  pogrešno je pokazivalo 480 jer je množilo interval odluka (`steps_per_action=8`) sa
+  60. Kod je popravljen da broji redove; raniji replayi nisu mijenjani.
+- Suppression/gašenje je nepoznato, a prethodni output adapter ne razlikuje pouzdano
+  iscrpljenost mreže, nestanak aktivnog fronta i vremenski horizon. Tačan fizički uzrok
+  prevelikog rasta nije izolovan.
 
-Važni artefakti:
+Detalji, opažanja naspram hipoteza i ograničenja su u
+[TASK-018 dijagnozi](research/CFSDS_NO_ACTION_DIAGNOSIS.md), a svi fiksni vremenski
+presjeci i hashovi u
+[timeline reportu](../reports/real-fire-data/cfsds-no-action-timeline.json).
 
-- [jednostavno X/Y objašnjenje i konverzija](../docs/research/REAL_CASE_PIPELINE.md)
-- [izbor skupa i granice zaključaka](../docs/research/REAL_FIRE_DATASETS.md)
-- [split manifest s preliminarnim fire ID-jevima](../data/manifests/cfsds-v1_1-pilot-cohort.json)
-- [case ulazi i provenance](../reports/real-fire-data/2018_747-case.json)
-- [replay mjere](../reports/real-fire-data/2018_747-day228-replay.json)
-- [vizualna karta](../reports/real-fire-data/2018_747-day228.png)
-- [dodatni train slučajevi, karte i fuel odbijanje](../reports/real-fire-data/README.md)
+## Sljedeći zadatak: TASK-004c adapter
 
-## Nastavak rada
+Prije nastavka dodatnog train replaya napraviti pouzdanu evidenciju epizode:
 
-1. Sljedeći je TASK-018: dijagnosticiraj veliko no-action širenje u tri postojeća
-train replaya. Na njima nije nađen preklop s isključenim fuel kategorijama; to ne
-isključuje neodgovarajući fuel vintage ili FBP postavke. Uporedi sačuvane case
-manifest/hashove, FBP special parameters, vremenske jedinice/profil i FWI, početni
-front te 20×20 domen. Prvo zabilježi šta ulazi kažu, zatim predloži male kontrolisane
-train-only provjere. Ne podešavaj prema validation/test ciljevima i ne mijenjaj agente.
-2. Odredi može li 20×20 prozor predstaviti događaj bez rubnog rezanja. Ako je potreban
-40×40 model, to mijenja agentov ulaz i broj akcija; prvo uradi poseban feasibility check,
-ne predstavljaj ga kao isti pretrained agent.
-3. Prije heldout slučajeva pribavi FBP fuel vintages koji odgovaraju periodu:
-2014 za train slučajeve 2014–2018, 2019 za validation 2019–2021, 2024 za test 2022–2024.
-4. Pokušaj povezati fire ID-jeve sa službenim incident/suppression zapisima i označi
-nepoznate slučajeve. Trenutni geometrijski screen daje do pet kandidata godišnje i nije
-iscrpan; pun benchmark tek treba usaglasiti.
-5. Proširi TASK-004c: pouzdan cumulative-damage export i terminalni razlog (containment
-naspram isteka vremenskih ulaza). TASK-017 initial-state import i tri TASK-016 konverzije
-su ostvareni.
-6. Dodaj/validiraj još train-only FireCaseove nakon zatvaranja njihovih ulaznih gateova.
-7. Pokreni glavni agent benchmark/fine-tuning tek kad no-action ponašanje prođe gate na
-više train požara i heldout ID-jevi budu zamrznuti.
+1. Sačuvati kumulativno pogođene/opožarene ćelije i početni historical scar i nakon
+   tretiranja ćelije; postojeći Sub20 primjer ima poznato 206 naspram 207 neslaganje.
+2. Exportovati aktivni front odvojeno od starijih opožarenih ćelija; C++ kod 1 trenutno
+   spaja oba stanja.
+3. Vratiti imenovani terminalni razlog: završetak zbog horizonta, nestanka fronta,
+   potrošenog prostora/ćelija, subprocess greške ili timeout-a.
+4. Zadržati checkpoint kontrakt RGB 3×20×20 / `Discrete(400)` i legacy no-op `-1`.
+   Ne mijenjati reward ili model head usput.
+5. Dodati regresijske testove i ponovljiv no-action/paired smoke nakon implementacije.
 
-## Lokalno okruženje
+Poslije TASK-004c: završiti train-only terrain/weather/suppression i fuel-vintage QC
+(TASK-015), zatim provesti ograničene train-only kontrolne replaye koji mijenjaju jedan
+weather/FBP ulaz odjednom. Definisati zajednički vremenski horizont prije ikakve politike;
+ne izabrati poseban prekid požara tako što se pogleda njegov target. No-action gate i
+heldout ID freeze ostaju preduslovi benchmarka i fine-tuninga.
 
-Moderni Python 3.12.4 `.venv` ima GIS i knowledge pakete. Legacy Firehose radi u zasebnom
-Linux ARM64 Docker imageu. Sirovi CFSDS, DEM i FBP fajlovi su u Git-ignorisanom
-`data/raw/`; generisani simulator paketi su pod `runs/`. U čistom checkoutu pribavi ih
-prema [manifestu preuzimanja](../reports/real-fire-data/cfsds-download-manifest.json)
-i ponovi build skriptom. Ne instaliraj legacy pakete u moderni venv.
+## Bitni artefakti
 
-Prije predaje pokreni testove, synthetic CLI smoke i `python3 scripts/validate_knowledge.py --strict`.
+- [TASK-018 dijagnoza](research/CFSDS_NO_ACTION_DIAGNOSIS.md)
+- [TASK-018 timeline/hash receipt](../reports/real-fire-data/cfsds-no-action-timeline.json)
+- [TASK-015 fuel audit](research/CFSDS_TRAIN_QC.md) i
+  [mašinski report](../reports/real-fire-data/cfsds-train-fuel-qc.json)
+- [X/Y data pipeline](research/REAL_CASE_PIPELINE.md)
+- [cijeli real-fire report index](../reports/real-fire-data/index.md)
+- [backlog](BACKLOG.md), [odluke](specs/DECISION_RECORDS.md) i [status](STATUS.md)
+
+## Lokalni environment
+
+Moderni Python 3.12.4 `.venv` ima GIS/knowledge pakete. Legacy Firehose je odvojeni
+Linux ARM64 Docker image. Sirovi CFSDS, DEM, fuel karte, generated FireCase fajlovi i
+simulator grids ostaju ignorisani; mali kod, manifests/hashovi, sažeci i rezultati idu u
+Git. U čistom checkoutu koristiti [download manifest](../reports/real-fire-data/cfsds-download-manifest.json)
+i pipeline runbook. Ne instalirati legacy SB3/Gym pakete u moderni venv.
+
+Prije handoffa pratiti `AGENTS.md`: fokusirani/puni testovi, strict knowledge validator,
+i synthetic CLI smoke. Nikad ne prepisivati postojeće `runs/` rezultate; odabrati nov
+output folder.

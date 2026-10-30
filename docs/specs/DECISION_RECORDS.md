@@ -287,3 +287,40 @@ Ako se kasnije nađu fuel-vintage ili suppression podaci, ponoviti QC pod novim 
 ne prepisivati historijski receipt.
 
 Evidence: `docs/research/CFSDS_TRAIN_QC.md`, `reports/real-fire-data/cfsds-train-fuel-qc.json`.
+
+## ADR-017 — compare no-action growth at a declared time and track grid/horizon end, 2026-10-30
+
+TASK-018 compared the three existing train-only FireCase manifests, hashes, fuel/FBP
+settings, hourly ERA5-Seamless rows, daily CFSDS FWI values, initial scar/front and
+20×20 domain. All three use the same Canadian FBP 2014b layer/lookup; no M1/M2/M3/M4/O1
+special parameter is missing in their C2/C3/D1 map crops. This means the simple fuel-code
+overlap gate passes, not that the map or ROS is physically calibrated. Suppression remains
+unknown.
+
+Saved grid histories at fixed 30–1,440 minute checkpoints show that growth timing differs
+by event. Each run reaches the crop boundary within 34–52 minutes; `2018_241` fills its
+400-cell crop, `2018_1770` reaches the 24-hour weather horizon and `2018_747` ends earlier
+with no active cells remaining. The existing replay receipts do not expose a typed C++
+terminal reason, so these conclusions are derived from the source and saved grids. A
+daily interpolated CFSDS target does not provide an observed minute-of-day for comparison.
+
+**Decision:** preserve the diagnostic checkpoint curves without using them to choose an
+event-specific burn duration or claim performance. Future no-action and policy comparisons
+must declare the same fixed time horizon, identify whether the simulator ended by horizon,
+extinction or exhausted grid, and report edge contact. Do not calibrate on validation/test
+targets. The no-action gate remains failed; policy benchmarking/training waits for TASK-004c
+and additional train-only input checks.
+
+The C++ source caps rows-mode weather to `WeatherRows × 60 / FirePeriodLen`; for the 24
+hourly rows and one-minute fire period, that is 1,440 minutes. `steps_per_action=8` means an
+agent action interval of eight simulated minutes. The probe had incorrectly reported
+`60 × steps_per_action=480` as total weather horizon. The probe now counts actual
+`Weather.csv` rows and multiplies by the 60-minute weather period. This metadata fix does
+not change any already-run simulation.
+
+Evidence: `docs/research/CFSDS_NO_ACTION_DIAGNOSIS.md`,
+`reports/real-fire-data/cfsds-no-action-timeline.json`,
+`scripts/analyze_cfsds_replay_timeline.py`, `src/wildfire_rl/firehose_probe.py` and its
+focused tests. Context only: the CFSDS v1.1 W.I.S.E. benchmark reports default-setting
+overprediction and grid-boundary contact at scale [S-019](../research/SOURCES.md#s-019);
+that engine's metrics are not results for this project.

@@ -9,6 +9,14 @@ i [mašinski čitljiv rezultat](cfsds-train-fuel-qc.json). Pregledano je 20 trai
 kandidata: 10 prolazi samo gorivnu provjeru, 10 pada, a nijedan nije ovim auditom
 potvrđen kao kompletan simulator slučaj. Nisu pokretani replays ni treniranje.
 
+TASK-018 train-only no-action dijagnostika uporedila je tri postojeće simulator serije
+na fiksnim checkpointima 30–1.440 minuta. Rast zavisi od trajanja i razlikuje se po
+požaru; sva tri replaya dotiču rub 20×20 prozora u prvih 52 minuta, a `2018_241` napuni
+cijelu mrežu. Uzrok nije izolovan jer suppression i tačno intradnevno CFSDS vrijeme nisu
+poznati. Nisu pokrenuti novi C++ runovi, treniranje ili heldout kalibracija.
+[Metod i ograničenja](../../docs/research/CFSDS_NO_ACTION_DIAGNOSIS.md),
+[vremenski presjeci i hashovi](cfsds-no-action-timeline.json).
+
 Prikladnost izvora za naš projekat, ne rezultat fizičke validacije simulatora.
 Primarni nalazi i preporuka: docs/research/REAL_FIRE_DATASETS.md.
 Candidate manifest: data/manifests/real-fire-candidates.json.

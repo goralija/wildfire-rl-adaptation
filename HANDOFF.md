@@ -25,11 +25,13 @@ dokaza da bi agent smanjio stvarnu štetu. Pročitaj [X/Y pipeline](docs/researc
 [dataset pregled](docs/research/REAL_FIRE_DATASETS.md) i
 [cohort manifest](data/manifests/cfsds-v1_1-pilot-cohort.json).
 
-Najnoviji korak je train-only [per-cell fuel QC](docs/research/CFSDS_TRAIN_QC.md):
-10/20 train kandidata prolazi samo fuel provjeru, a 10/20 pada na fuel overlap.
-Postojeća tri replaya prolaze taj gate, pa je sljedeće TASK-018 dijagnostika weather/FWI,
-FBP postavki i crop/domain efekta. Report čuva metod, rezultate i granice; validation/test
-rasteri nisu korišteni.
+Najnoviji korak je TASK-018 train-only dijagnostika no-action rasta. Sačuvani gridovi
+analizirani su na fiksnim minutnim presjecima, ulazi/hashovi su upoređeni, a pogrešan
+probe horizon metapodatak ispravljen. Požari rastu različitim brzinama, svi dodiruju rub
+20×20 mreže, suppression nije poznat, a tačan uzrok nije izolovan. Svi izvještaji su u
+[dijagnozi](docs/research/CFSDS_NO_ACTION_DIAGNOSIS.md) i
+[timeline receiptu](reports/real-fire-data/cfsds-no-action-timeline.json). Validation/test
+ishodi nisu korišteni.
 
 ## Baza znanja u repozitoriju
 
@@ -96,31 +98,28 @@ Optional suite uključuje kratko učenje radi provjere save/load.
 RL adaptacije, fizička validacija na historijskim požarima ili validacija za BiH.
 Sintetički pilot i runtime provjera nisu glavni istraživački rezultati.
 
-## Trenutni projektni zadatak: TASK-018 dijagnostika no-action neslaganja
+## Trenutni projektni zadatak: TASK-004c epizodni adapter
 
-Izbor geografije je zatvoren; ne vraćati se na izbor dataset-a bez novog dokaza.
-Pročitaj [train-only fuel QC](docs/research/CFSDS_TRAIN_QC.md), [X/Y scenario plan](docs/research/REAL_CASE_PIPELINE.md),
-[status](docs/STATUS.md) i najnovije [odluke](docs/specs/DECISION_RECORDS.md). Sva tri
-postojeća train replay događaja prolaze fuel-only gate, ali bez intervencija predviđaju
-66/237/73 ha prema 15.39/12.15/12.15 ha opaženih. Najprije uporedi njihove sačuvane
-case manifeste i hashove: fuel vrste i FBP parametre, FWI/weather vrijednosti/jedinice,
-historijski scar/front, 20×20 extent i rubne ćelije. Sačuvaj potvrđene činjenice odvojeno
-od hipoteza. Ako treba, predloži mali kontrolisani train-only replay koji mijenja jedan
-faktor i bilježi iste osnovne metrike. Ne podešavaj na validation/test ciljevima,
-ne treniraj agenta i ne prepisuj postojeće replays.
+Prvo pročitaj [TASK-018 dijagnozu](docs/research/CFSDS_NO_ACTION_DIAGNOSIS.md),
+[runtime nalaze](docs/research/FIREHOSE_VERIFICATION.md),
+[protokol](docs/research/PROTOCOL.md), [STATUS](docs/STATUS.md) i najnovije
+[odluke](docs/specs/DECISION_RECORDS.md). Implementirati pouzdan kumulativni damage i
+odvojeni front export, te imenovani terminalni razlog za horizon, nestanak fronta ili
+iscrpljenu mrežu. Sačuvati RGB 3×20×20 / `Discrete(400)` checkpoint kontrakt i legacy
+no-op `-1`; ne mijenjati model head ili reward usput. Probe već računa horizon iz stvarnih
+`Weather.csv` redova, ali C++/adapter i dalje moraju vratiti terminalni razlog.
 
-Train QC receipt je [ovdje](reports/real-fire-data/cfsds-train-fuel-qc.json); 10 od 20
-train kandidata prolazi **samo** fuel gate, 10 pada. Suppression ostaje nepoznat za sve.
-Zatim procijeni crop/domenu, dovrši preostali TASK-004c cumulative-damage/terminal
-adapter i tek nakon prihvatljivog no-action ponašanja i zamrznutih heldout IDs planiraj
-upareni benchmark ili fine-tuning. TASK-015 je i dalje djelimično otvoren; TASK-017
-initial-state importer je završen, a tri train FireCase konverzije/replayi već postoje.
+TASK-015 je i dalje djelimičan: fuel-vintage, terrain/weather i suppression QC ostaju
+otvoreni. Nakon TASK-004c planirati train-only kontrolisane ulazne provjere i dodatne
+caseove. Ne birati trajanje prema historijskom targetu svakog požara; prije benchmarka
+definisati isti vremenski horizont za sve politike i zamrznuti heldout IDs. No-action gate
+nije prošao, pa fine-tuning čeka.
 
 TASK-014 Python 3.12.4/macOS ARM64, Linux ARM64 legacy Docker i geospatial ETL venv
 navedeni su u [environment receiptu](reports/environment-setup/README.md). Venv,
 `external/` i Docker image su ignorisani i lokalni.
 
-## Kasniji tehnički preduslov za benchmark: TASK-004c
+## Detaljni zahtjevi za TASK-004c
 
 Prvo pročitaj [STATUS](docs/STATUS.md), [runtime nalaze](docs/research/FIREHOSE_VERIFICATION.md),
 [protokol](docs/research/PROTOCOL.md) i [odluke](docs/specs/DECISION_RECORDS.md).
@@ -193,10 +192,10 @@ Ne preuzimati cijelu 48.4 GB WildfireSpreadTS arhivu.
 
 ## Spreman prompt za kolegu ili coding agenta
 
-> Nastavi TASK-018 no-action mismatch dijagnostiku za train događaje `2018_747`,
-> `2018_241`, `2018_1770`. Pročitaj STATUS, NEXT_SESSION, BACKLOG, ADR-015/016,
-> `docs/research/CFSDS_TRAIN_QC.md`, REAL_CASE_PIPELINE, REAL_FIRE_DATASETS i cohort
-> manifest. Postojeći input hashove i case manifeste prvo uporedi, zatim izoluj moguća
-> objašnjenja u fuel/FBP parametrima, weather/FWI, historijskom frontu i 20×20 extentu.
-> Sva tri prolaze samo fuel gate; suppression je nepoznat. Validation/test outcome
-> ne koristiti za kalibraciju. Ne trenirati prije no-action gatea i TASK-004c adaptera.
+> Nastavi TASK-004c na grani `research/cfsds-train-qc`. Pročitaj STATUS, NEXT_SESSION,
+> BACKLOG, ADR-015–017, FIREHOSE_VERIFICATION i `CFSDS_NO_ACTION_DIAGNOSIS.md`.
+> Implementiraj kumulativnu štetu/odvojeni front i typed terminalni razlog za weather
+> horizon, nestanak fronta, iscrpljenu mrežu i subprocess grešku/timeout. Sačuvaj
+> RGB 3×20×20 / Discrete(400) i legacy no-op `-1`; dodaj regresijske testove. Nakon
+> toga tek planiraj train-only kontrolisane weather/FBP ulaze. Ne koristi validation/test
+> ishode za tuning niti treniraj dok no-action gate ne prođe.

@@ -89,12 +89,32 @@ nedostatka satnih vrijednosti u CFSDS. Za heldout 2019/2022–24 još treba odgo
 fuel-map vintages (2019/2024) i kvalitetni inputi. BiH/MedEU ostaje kasnija odvojena
 studija jer njegovi evropski NFFL fuel kodovi nisu isti kao Canadian FBP.
 
-Sljedeće: TASK-018 dijagnostika weather/FWI, FBP parametara, početnog fronta i extent-a
-na tri postojeća train no-action replaya, uz nepromijenjene inpute i bez heldout
-kalibracije. TASK-015 fuel gate je djelimično zatvoren, ali terrain/weather/suppression
-i odgovarajuće fuel vintages ostaju otvoreni. Zatim TASK-004c terminal/damage export,
-dodatni kvalitetni train replayi i heldout freeze. Glavno treniranje je na čekanju dok
-no-action gate ne prođe na više train požara; test skup se ne koristi za kalibraciju.
+## Train-only no-action mismatch dijagnostika — 2026-10-30
+
+TASK-018 dijagnostička faza je završena na sačuvanim train replayima. Poređeni su
+manifesti/hashovi, vrste goriva i FBP parametri, satno vrijeme i dnevni FWI, početni
+front, trajanje i rubovi 20×20 domena. Analiza fiksnih vremenskih presjeka pokazuje da
+area i IoU snažno zavise od vremena, a tri slučaja rastu različito. Za 30/120 minuta
+simulator prognozira 18/42 ha (`2018_747`), 8/46 ha (`2018_241`) i 0/13 ha
+(`2018_1770`), dok su ciljevi 15.39/12.15/12.15 ha. Završna predviđanja su 66/237/73 ha.
+
+Sva tri dodiruju rub mreže u prvih 34–52 minuta; `2018_241` popunjava svih 400 ćelija.
+Ispostavilo se i da je raw probe metapodatak horizon-a pogrešno računao 480 minuta iz
+intervala akcije. Stvarni C++ weather limit je 24 reda × 60 minuta = 1.440 minuta;
+probe sada računa horizon iz broja redova. To ne mijenja stare replays. Tačan razlog
+završetka i dalje nije u output adapteru, suppression je nepoznat, a CFSDS target nema
+tačno intradnevno vrijeme. Zato je dijagnostička faza završena, ali fizički uzrok
+neslaganja i no-action gate nisu zatvoreni.
+
+Potvrđene činjenice i hipoteze: [dijagnoza](research/CFSDS_NO_ACTION_DIAGNOSIS.md),
+[timeline receipt](../reports/real-fire-data/cfsds-no-action-timeline.json).
+
+Sljedeće je TASK-004c: cumulative-damage export i imenovani terminalni razlog (horizon,
+bez aktivnog fronta, iscrpljen grid), uz testove i kratki CLI smoke. TASK-015 ostaje
+djelimičan: odgovarajući fuel vintages, terrain/weather poravnanje i suppression evidence
+trebaju se procijeniti samo za train/calibration događaje prije heldout freezea. Zatim
+slijede dodatni train replayi i zasebna odluka o gate-u. Fine-tuning/policy benchmark
+ostaju na čekanju; heldout ciljevi se ne koriste za kalibraciju.
 
 ## Train-only fuel quality gate — 2026-10-30
 

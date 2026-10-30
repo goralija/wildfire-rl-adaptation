@@ -165,3 +165,28 @@ project-specific conservative gate inspired by (not reproducing) the W.I.S.E. me
 crop adequacy and no-action behavior remain separate. See [method](CFSDS_TRAIN_QC.md)
 and [receipt](../../reports/real-fire-data/cfsds-train-fuel-qc.json). Next is TASK-018
 train-only diagnosis of the three current replay mismatches. No heldout outcomes used.
+
+## EXP-007 — CFSDS no-action timeline diagnosis, 2026-10-30
+
+Compared the saved minute-grid histories for the three existing train-only no-action
+replays at fixed 30, 60, 120, 240, 480, 720 and 1,440 simulated-minute checkpoints.
+The original input manifests and simulator-input hashes were preserved. No C++ replay,
+training, parameter tuning or validation/test raster inspection was performed.
+
+Predicted areas at the fixed checkpoints show different spread timing by event: at 30
+minutes the three cases are 18/8/0 ha; at 120 minutes 42/46/13 ha; at the final state
+66/237/73 ha versus CFSDS targets 15.387/12.153/12.151 ha. All three first reach the
+20×20 grid edge after 34/37/52 minutes. `2018_241` fills all 400 cells; `2018_1770`
+reaches its 24-row weather limit; `2018_747` stops earlier with no active cells and
+remaining unburned grid cells. The saved Python probe horizon field had incorrectly
+multiplied `steps_per_action` by 60 (480 min); source inspection confirms the C++ cap is
+24 weather rows × 60 min = 1,440 min. The field now uses actual `Weather.csv` row count.
+
+Confirmed and hypothesized explanations are separated in
+[`CFSDS_NO_ACTION_DIAGNOSIS.md`](CFSDS_NO_ACTION_DIAGNOSIS.md); checkpoint measurements
+and all three input/container hashes are in
+[`cfsds-no-action-timeline.json`](../../reports/real-fire-data/cfsds-no-action-timeline.json).
+The diagnostic stage is complete, but the physical cause remains unresolved because the
+daily CFSDS target has no exact within-day timing, suppression is unknown, all runs touch
+the crop edge, and weather/FWI inputs are approximate. TASK-004c is next; the no-action
+gate remains failed and fine-tuning stays on hold.
