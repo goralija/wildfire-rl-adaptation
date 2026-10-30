@@ -5,6 +5,7 @@ description: Methods and results for mapping the 20 preliminary CFSDS train day-
 status: stable
 sources:
   - resource: /reports/real-fire-data/cfsds-train-fuel-qc.json
+  - resource: /reports/real-fire-data/cfsds-train-input-qc.json
   - resource: /data/manifests/cfsds-v1_1-pilot-cohort.json
   - resource: /docs/specs/DECISION_RECORDS.md
 ---
@@ -88,18 +89,22 @@ provide local paths without adding raw archives or the third-party checkout to G
 
 ## Limits and next work
 
-The 2014b fuel vintage is a useful training-period layer but does not prove annual
-fuel succession for every event. The 250 m layer resampled to 100 m does not provide
-new 100 m fuel detail. The project's strict rule can reject a case due to even one
-native fire pixel on an excluded class; inspect area/counts before interpreting a
-failure as a broad landscape mismatch. More complete quality control still needs
-fuel-vintage review, terrain/weather alignment, suppression evidence, crop/domain
-adequacy and the no-action simulator gate. The W.I.S.E. paper uses annual fuel-map
+The 2014b layer does not prove annual fuel succession or as-of-event provenance for
+every event. Official metadata does not state a per-pixel or burn-record cutoff.
+The 250 m layer resampled to 100 m does not provide new 100 m fuel detail. The
+project's strict rule can reject a case due to even one native fire pixel on an
+excluded class; inspect area/counts before interpreting a failure as a broad
+landscape mismatch. More complete quality control still needs leakage-safe
+fuel-vintage construction, source-tile/weather provenance, suppression evidence,
+crop/domain adequacy and the no-action simulator gate. See the
+[train-only input alignment audit](CFSDS_TRAIN_INPUT_QC.md) for measured inputs
+from three FireCases and the official fuel-vintage review. The W.I.S.E. paper uses annual fuel-map
 vintages and additional event filters; its reported skill scores are not Cell2Fire
 results and must not be attributed to this project.
 
-Next: finish train-only fuel-vintage, terrain/weather alignment and suppression evidence;
-then use the three existing fuel-pass replay cases for preregistered weather/FWI,
-FBP-parameter and crop-edge controls. Keep all validation/test event outcomes out of
-tuning. TASK-004c adapter is complete, but no-action benchmark/fine-tuning remains blocked
+Next: resolve leakage-safe train-only fuel-vintage construction, missing per-case
+provenance and suppression evidence; then use the three existing fuel-pass replay
+cases only for preregistered weather/FWI, FBP-parameter and crop-edge controls. Keep
+all validation/test event outcomes out of tuning. TASK-004c adapter is complete, but
+no-action benchmark/fine-tuning remains blocked
 by the independent replay quality gate and heldout event freeze in ADR-015/018.

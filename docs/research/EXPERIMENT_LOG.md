@@ -217,3 +217,39 @@ matrix case ended at `weather_horizon`; `front_extinguished`, `grid_exhausted`, 
 CFSDS no-action overgrowth and crop-edge contact remain, so no-action gate is still failed
 and policy benchmark/fine-tuning remain on hold. Machine receipt:
 [`task004c-adapter-smoke.json`](../../reports/firehose-verification/task004c-adapter-smoke.json).
+
+## EXP-009 — Train-only CFSDS input alignment and source-vintage review, 2026-10-31
+
+Inspected only the 20 TRAIN IDs and their matching local generated-case directories.
+Three train packages were available (2018_1770, 2018_241, 2018_747); validation
+and test case packages were not opened. Their four ASCII maps share the expected
+20×20/100 m header, the terrain layers contain 400 non-NoData cells, and each
+Weather.csv has 24 ordered rows on the target's local date. Their weather request
+locations are 2.436–5.195 km from the CFSDS summary centroid; the six daily FWI
+fields are repeated across all hourly weather rows. Seventeen train case packages
+were not present and remain unmeasured.
+
+Reviewed official 2014b, 2019 development and 2024 fuel-map metadata, the W.I.S.E.
+annualization recipe, MRDEM, ERA5/Open-Meteo, and CNFDB source documentation.
+Reviewed the published license/terms statements too: the official 2024 map and
+MRDEM portal list OGL Canada, Open-Meteo API data are CC BY 4.0 with separate
+service limits, and no license statement was located in the 2014b/v20191114
+directory metadata; confirm those terms with NRCan before raster redistribution.
+The 2014b metadata has no explicit temporal cutoff for NFDB/NBAC burn information;
+the 2019 CanFG raster is in a development directory and lists NBAC; the 2024 map
+postdates the 2014–2018 train events. The W.I.S.E. recipe is recorded as a candidate
+method only. No annual map was selected as a leakage-safe replacement. All train
+suppression remains unknown. The report preserves this uncertainty rather than
+marking cases fully qualified.
+
+No simulator replay, target-based parameter selection, benchmark, calibration,
+fine-tuning, or validation/test outcome inspection was performed. The no-action gate
+remains failed. See [input QC](CFSDS_TRAIN_INPUT_QC.md),
+[receipt](../../reports/real-fire-data/cfsds-train-input-qc.json),
+[source review](SOURCES.md), and [ADR-019](../specs/DECISION_RECORDS.md#adr-019).
+
+Verification for EXP-009: all 42 project unit tests passed, strict OKF validation
+passed for 70 Markdown files, the synthetic CLI smoke wrote successfully to a fresh
+ignored run folder, and git diff --check was clean. The train-input report was
+regenerated from the three supplied train case packages. No raw data or generated
+simulator input was added to Git.

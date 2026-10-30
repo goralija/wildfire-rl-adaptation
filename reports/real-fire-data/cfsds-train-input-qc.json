@@ -223,7 +223,7 @@
       }
     }
   ],
-  "generated_at_utc": "2026-10-30T23:01:20.369830+00:00",
+  "generated_at_utc": "2026-10-30T23:04:14.426885+00:00",
   "limitations": [
     "This audit intentionally selects only the TRAIN list from the cohort manifest; it opens no validation/test case package or raster.",
     "Input alignment checks do not validate Cell2Fire fire behavior and do not explain the prior no-action overgrowth.",
@@ -296,10 +296,12 @@
   },
   "source_review": {
     "fuel_vintage": {
+      "2014b_license_status": "No license statement was identified in the reviewed official archive listing or metadata PDF; confirm reuse/redistribution terms with NRCan before publishing the raster.",
       "2014b_vintage_limit": "The official metadata does not provide a per-pixel date or a clear NBAC/NFDB cutoff. The 2014b label alone therefore cannot certify that every train event, especially 2014 events, is free of post-event fuel information.",
       "2019_map": {
         "archive_downloaded": false,
         "assessment": "A genuine official candidate vintage and source for a burn-scar succession ruleset, but it is listed under development and includes NBAC-based burned-area reassignment. Its exact per-pixel burn-record cutoff is not provided, so it may contain records later than an event target.",
+        "license_status": "No license statement was identified in the reviewed official development listing or metadata PDF; confirm terms with NRCan before use or redistribution.",
         "listed_archive_size": "about 2 GB",
         "metadata_inputs": "kNN Forest Inventory (2017), Agriculture Canada land cover, NBAC burn-area reassignment, and national deforestation monitoring",
         "metadata_verified_from": "official CWFIS development catalog and metadata PDF; see S-032",
@@ -309,6 +311,7 @@
       },
       "2024_map": {
         "assessment": "Useful as a later map product but after all current 2014-2018 train targets; not used as their baseline because this risks future-information leakage.",
+        "license": "Open Government Licence - Canada (official Open Government record)",
         "metadata_inputs": "SCANFI, Canadian ecozones, and NBAC",
         "metadata_verified_from": "official Open Government record; see S-033",
         "product": "CFFDRS FBP Fuel Types 2024, 30 m",
@@ -422,6 +425,7 @@
           }
         }
       ],
+      "license": "Open Government Licence - Canada on the official portal; retain the product's Copernicus source attribution/limitations where applicable",
       "limitations": [
         "Only generated train cases present in the supplied runs directory were measured.",
         "The three measured ASCII DEM/slope/aspect grids have matching 20x20 / 100 m headers and no no-data cells.",
@@ -519,6 +523,8 @@
         2.436,
         5.195
       ],
+      "data_license": "CC BY 4.0 per Open-Meteo terms; attribution is required",
+      "free_api_service_terms": "Non-commercial use, rate limit and service terms are separate from the data license; verify current limits before bulk collection.",
       "limitations": [
         "A nearest reanalysis point is not a local weather station measurement or 100 m weather field.",
         "A daily CFSDS burn-day target does not identify the actual hour at which the observed front advanced.",

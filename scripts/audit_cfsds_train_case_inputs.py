@@ -281,6 +281,7 @@ def build_report(cohort_path: Path, fuel_qc_path: Path, runs_root: Path) -> dict
                 "train_fires_years": sorted({int(row["year"]) for row in train_rows}),
                 "used_map": "National FBP fuel-type grid v2014b, 250 m; metadata lists 2011 land cover, CanFI2000/ecological inputs, and NFDB/NBAC burn-scar use",
                 "2014b_vintage_limit": "The official metadata does not provide a per-pixel date or a clear NBAC/NFDB cutoff. The 2014b label alone therefore cannot certify that every train event, especially 2014 events, is free of post-event fuel information.",
+                "2014b_license_status": "No license statement was identified in the reviewed official archive listing or metadata PDF; confirm reuse/redistribution terms with NRCan before publishing the raster.",
                 "2019_map": {
                     "product": "Canadian Forest FBP Fuel Types (CanFG), v20191114",
                     "official_catalog_location": "CWFIS development directory",
@@ -288,6 +289,7 @@ def build_report(cohort_path: Path, fuel_qc_path: Path, runs_root: Path) -> dict
                     "listed_archive_size": "about 2 GB",
                     "metadata_inputs": "kNN Forest Inventory (2017), Agriculture Canada land cover, NBAC burn-area reassignment, and national deforestation monitoring",
                     "assessment": "A genuine official candidate vintage and source for a burn-scar succession ruleset, but it is listed under development and includes NBAC-based burned-area reassignment. Its exact per-pixel burn-record cutoff is not provided, so it may contain records later than an event target.",
+                    "license_status": "No license statement was identified in the reviewed official development listing or metadata PDF; confirm terms with NRCan before use or redistribution.",
                     "archive_downloaded": False,
                     "metadata_verified_from": "official CWFIS development catalog and metadata PDF; see S-032",
                 },
@@ -295,6 +297,7 @@ def build_report(cohort_path: Path, fuel_qc_path: Path, runs_root: Path) -> dict
                     "product": "CFFDRS FBP Fuel Types 2024, 30 m",
                     "temporal_coverage": "2020-08-01 to 2024-04-01",
                     "metadata_inputs": "SCANFI, Canadian ecozones, and NBAC",
+                    "license": "Open Government Licence - Canada (official Open Government record)",
                     "assessment": "Useful as a later map product but after all current 2014-2018 train targets; not used as their baseline because this risks future-information leakage.",
                     "metadata_verified_from": "official Open Government record; see S-033",
                 },
@@ -314,6 +317,7 @@ def build_report(cohort_path: Path, fuel_qc_path: Path, runs_root: Path) -> dict
             },
             "terrain": {
                 "source_product": "NRCan MRDEM-30 Digital Terrain Model (DTM)",
+                "license": "Open Government Licence - Canada on the official portal; retain the product's Copernicus source attribution/limitations where applicable",
                 "source_resolution_m": 30,
                 "simulator_resolution_m": 100,
                 "materialized_case_count": len(cases),
@@ -331,6 +335,8 @@ def build_report(cohort_path: Path, fuel_qc_path: Path, runs_root: Path) -> dict
             },
             "weather": {
                 "source": "Open-Meteo Historical Weather API, ERA5-Seamless",
+                "data_license": "CC BY 4.0 per Open-Meteo terms; attribution is required",
+                "free_api_service_terms": "Non-commercial use, rate limit and service terms are separate from the data license; verify current limits before bulk collection.",
                 "official_resolution_context": "ERA5 is hourly at 0.25 degrees (about 25 km); ERA5-Land is hourly at 0.1 degrees (about 9-11 km). Both are much coarser than the 2x2 km policy grid.",
                 "provider_variable_mapping_verified": "Open-Meteo documents temperature and humidity from ERA5-Land and wind and solar radiation from ERA5 for ERA5-Seamless. The precise source/version for every field in the saved Weather.csv, especially precipitation, was not recorded in the case manifests and must be captured before regenerating cases; see S-035.",
                 "materialized_case_count": len(distances),

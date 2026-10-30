@@ -4,7 +4,7 @@ title: Izvori i literatura
 ---
 # Izvori i literatura
 
-Provjereno 2026-10-30. Primarni izvori; postojeći rad nije naš rezultat.
+Primarni izvori; datumi pregleda su navedeni uz stavke. Postojeći rad nije naš rezultat.
 
 | ID | Izvor | Uloga / ograničenje |
 | --- | --- | --- |
@@ -112,6 +112,53 @@ konačne tvrdnje; nije provedena sistematska literature review.
   Cell2Fire fork. It may offer an integration starting point for European fuels, but its
   RL wrapper, exact fuel crosswalk and transfer of this project's Firehose weights have
   not been tested.
+- S-031: [CWFIS archived National FBP Fuel Types v2014b](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/archive/)
+  and [official metadata](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/archive/nat_fbpfuels_2014b_metadata.pdf),
+  reviewed 2026-10-31. The archive is 250 m; metadata lists 2011 land cover, CanFI2000,
+  ecological inputs, and NFDB/NBAC use. It does not give a per-pixel acquisition date or
+  a clear cutoff for burn records, so its version label alone cannot prove as-of-event
+  safety for every 2014–2018 target. No license statement was identified in the
+  reviewed archive listing or metadata; confirm reuse/redistribution terms with NRCan.
+- S-032: [CWFIS development directory for Canadian Forest FBP Fuel Types](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/)
+  and [v20191114 metadata](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/Canadian_Forest_FBP_Fuel_Types_Metadata_v20191114.pdf),
+  reviewed 2026-10-31. The 250 m archive is listed at about 2 GB in a development
+  directory; metadata lists kNN Forest Inventory (2017) and NBAC. The raw raster was not
+  downloaded or selected as the 2014–2018 event baseline. No license statement was
+  identified in the reviewed listing/metadata; confirm terms with NRCan before use.
+- S-033: [Open Government Portal, CFFDRS FBP Fuel Types 2024, 30 m](https://open.canada.ca/data/dataset/4e66dd2f-5cd0-42fd-b82c-a430044b31de),
+  reviewed 2026-10-31. Official metadata gives 2020-08-01 to 2024-04-01 coverage and lists
+  SCANFI, ecozones, and NBAC inputs. This postdates the current train targets. The
+  portal lists the Open Government Licence - Canada.
+- S-034: [NRCan National Elevation Data Strategy](https://natural-resources.canada.ca/maps-tools-publications/satellite-elevation-air-photos/national-elevation-data-strategy),
+  [MRDEM Open Government record](https://open.canada.ca/data/en/dataset/18752265-bda3-498c-a4ba-9dfe68cb98da),
+  and [NRCan MRDEM overview](https://natural-resources.canada.ca/science-data/science-research/geomatics/ending-canadian-digital-elevation-model-era-new-medium-resolution-digital-elevation-model).
+  Reviewed 2026-10-31. MRDEM provides 30 m terrain products; the overview says lidar
+  sources incorporated into DTM were collected between 2006 and 2023. The portal lists
+  the Open Government Licence - Canada; product metadata also carries Copernicus-source
+  attribution/limitations. The source cell and acquisition date for the three saved
+  pilot grids are not recorded.
+- S-035: [Copernicus ERA5 hourly single-level dataset](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels?tab=overview),
+  [ERA5-Land dataset](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land?tab=download),
+  [Open-Meteo Historical Weather API documentation](https://open-meteo.com/en/docs/historical-weather-api),
+  [Open-Meteo terms](https://open-meteo.com/en/terms), and
+  [service pricing/limits](https://open-meteo.com/en/pricing),
+  reviewed 2026-10-31. ERA5 is hourly on a 0.25 degree grid; ERA5-Land is hourly at
+  approximately 0.1 degree. Open-Meteo says ERA5-Seamless combines temperature/humidity
+  from ERA5-Land with wind/solar from ERA5. Open-Meteo states API data are CC BY 4.0
+  with attribution, while free API service terms are separate. The exact variable
+  lineage for each column in our saved API responses, especially precipitation, still
+  needs recording.
+- S-036: [CWFIS CNFDB documentation](https://cwfis.cfs.nrcan.gc.ca/downloads/nfdb/fire_poly/current_version/NFDB_documentation_EN.pdf)
+  and [CWFIS FAQ](https://cwfis.cfs.nrcan.gc.ca/en/faq?wbdisable=true), reviewed 2026-10-31.
+  CNFDB contains agency-provided fire locations/perimeters; documentation says the data
+  are incomplete and quality varies and that access requires an End-User Agreement.
+  No agreement was accepted and no event-level action/resource timeline was joined.
+- S-037: [Bennett et al., 2026, W.I.S.E. assessment using CFSDS 1.1](https://doi.org/10.1071/WF26072),
+  *International Journal of Wildland Fire* 35(8), WF26072, reviewed 2026-10-31.
+  Methods report filtering fires with suppression from CNFDB and making annual fuel maps
+  by masking previous perimeters and applying the v20191114 burn-scar succession rules.
+  This is a published method reference, not a reproduction or result from this project;
+  the exact event-action linkage and transfer to our simulator remain unverified.
 
 [REAL_FIRE_DATASETS](REAL_FIRE_DATASETS.md) čuva preporuku, obim uzorka i nedostatke;
 reports/real-fire-data/ čuva download SHA256 i provjere stvarno preuzetih fajlova.

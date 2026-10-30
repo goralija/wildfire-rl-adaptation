@@ -355,3 +355,45 @@ Evidence: `docker/firehose/task004c_state_export.patch`,
 `src/wildfire_rl/firehose_probe.py`, `tests/test_firehose_probe.py`,
 `docker/firehose/verify_batch.py`, and
 `reports/firehose-verification/task004c-adapter-smoke.json`.
+
+## ADR-019 — distinguish reproducible pilot inputs from as-of-event inputs, recorded 2026-10-31
+
+The train-only input audit measured three materialized FireCases out of 20 train
+candidates. Their 20×20/100 m terrain grids align and contain 400 valid cells each;
+their weather files have 24 ordered hours on the target local date. This is evidence
+of file/grid alignment only, not historical-input or physical validation.
+
+Official source review found that v2014b metadata uses NFDB/NBAC to identify burned
+areas but gives no explicit per-pixel temporal cutoff. Therefore the v2014b version
+label cannot certify that every 2014–2018 event input is as-of-event. A v20191114
+250 m CanFG raster exists in the CWFIS development directory, lists 2017 inventory
+and NBAC, and is about 2 GB; it is not adopted as a past-event base map. The official
+2024 raster also postdates every current train target. The W.I.S.E. annual fuel-map
+recipe is a published candidate method, not a project implementation or result.
+
+The reviewed 2014b and v20191114 directory/metadata sources do not state a license;
+confirm terms with NRCan before distributing those rasters. The 2024 fuel map and
+MRDEM portal records state the Open Government Licence - Canada. Open-Meteo states
+CC BY 4.0 for API data, while free-service terms are separate. Record attribution
+and source-specific conditions in any future shared data release.
+
+Decision: preserve v2014b for exact reproduction of existing saved pilot runs, but
+do not describe it as a leakage-safe annual vintage for new training cases. A future
+fuel map must document its base-map time provenance and hashes, apply only known
+pre-target burn history, exclude target-day/future fire information, and test the
+interaction between non-fuel scars and the imported initial scar/front. Do not
+download the large development raster unless a bounded technical need is established.
+
+Terrain-source tile hashes/acquisition dates are absent from the three saved case
+manifests. The ERA5-Seamless response is at a 2.4–5.2 km point-to-centroid distance;
+the saved manifests do not preserve field-by-field source mapping or an hourly
+FWI trajectory. Suppression remains unknown for all 20 train events. CNFDB agency
+perimeters are incomplete and its data require an End-User Agreement; no terms were
+accepted and no event-level action timeline was joined.
+
+This decision record does not certify a complete train cohort. TASK-015 remains
+partial; the no-action gate remains failed. No simulator replay, calibration,
+fine-tuning, benchmark, or heldout outcome inspection was performed for this audit.
+Evidence: [train input QC method](../research/CFSDS_TRAIN_INPUT_QC.md),
+[machine receipt](../../reports/real-fire-data/cfsds-train-input-qc.json),
+[sources S-031–S-037](../research/SOURCES.md#s-031).
