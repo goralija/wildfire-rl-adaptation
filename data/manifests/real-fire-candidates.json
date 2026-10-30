@@ -1,30 +1,25 @@
 {
-  "reviewed_on": "2026-10-28",
-  "purpose": "dataset suitability for simulator validation; no policy training or physical validation performed",
-  "selection_status": "candidate review only; final role, selection and scope not agreed",
-  "next_task": "TASK-012 dataset refinement",
-  "recommended_sequence": [
-    "dogrib-case-study",
-    "cfsds-small-independent-subset"
-  ],
+  "alternate_fuel_map_candidate": {
+    "map_url": "https://www.cirgeo.unipd.it/fire-res/app/",
+    "name": "FIRE-RES Pan-European Fuel Map Server",
+    "paper_url": "https://doi.org/10.1016/j.geomat.2024.100036",
+    "possible_simulator": "Cell2Fire-W documents Scott-Burgan mode; its RL wrapper/weights transfer to this project are untested",
+    "product_catalogue_url": "https://fireurisk.eu/products/",
+    "published_layers": "paper describes co-registered ~100m surface Scott-Burgan fuel and terrain/canopy layers; product catalogue lists a 1km European fuel map and 100m selected pilot products",
+    "status": "candidate only; exact BiH coverage, downloadable layer/resolution, vintage and license terms not verified"
+  },
   "candidates": [
     {
-      "id": "dogrib-case-study",
-      "name": "Dogrib Fire 2001 reference case",
-      "role": "first Cell2Fire-compatible historical case / sanity check, not independent generalization test",
-      "repository": "https://github.com/humnetlab/Cell2Fire",
+      "cell_size_m": 100,
       "commit": "84e3c817ad866358d8db28e87c9445b42aaf7908",
-      "paper_doi": "10.1038/s41598-025-05706-6",
+      "downloaded_bytes": 3390138,
+      "downloaded_files": 16,
       "grid": [
         223,
         357
       ],
-      "cell_size_m": 100,
-      "downloaded_files": 16,
-      "downloaded_bytes": 3390138,
       "has_observed_outcome": true,
-      "observed_outcome_file": "dogrib/real_scar_dogrib.csv",
-      "observed_burned_pixels": 10210,
+      "id": "dogrib-case-study",
       "license_status": "repository declares MIT; separate originating Prometheus/Alberta data terms not confirmed",
       "limitations": [
         "shared fuel/elevation patch with Firehose Sub20",
@@ -32,91 +27,195 @@
         "observation and simulation time windows must be reconciled",
         "663 observed-burn pixels coincide with nonfuel code101; no silent label filtering",
         "full map is incompatible with existing 400-action policy without explicit cropping/scaling design"
-      ]
+      ],
+      "name": "Dogrib Fire 2001 reference case",
+      "observed_burned_pixels": 10210,
+      "observed_outcome_file": "dogrib/real_scar_dogrib.csv",
+      "paper_doi": "10.1038/s41598-025-05706-6",
+      "repository": "https://github.com/humnetlab/Cell2Fire",
+      "role": "first Cell2Fire-compatible historical case / sanity check, not independent generalization test"
     },
     {
-      "id": "cfsds",
-      "name": "Canadian Fire Spread Dataset",
-      "role": "broader independent historical validation candidate after input preparation",
-      "url": "https://osf.io/f48ry/",
+      "article_license": "CC-BY-4.0 (article; does not automatically settle data-package terms)",
+      "doi": "10.5281/zenodo.18200075",
+      "download_size_display": "2.8 MB",
+      "fires": 103,
+      "id": "firespread-medeu-v2",
+      "limitations": [
+        "polygon progression plus land-cover fractions, not simulator-ready hourly weather or terrain bundle",
+        "satellite clouds/smoke can create missing days or boundary uncertainty",
+        "European LCCS land cover cannot be silently mapped into Canadian FBP fuel classes",
+        "current Cell2Fire input initializes one point ignition; multi-cell daily front needs new state import",
+        "the seven BiH candidates are a first-pass spatial subset, not a representative national sample",
+        "the existing verified 20x20 100m policy covers 2x2 km and cannot contain the complete mapped extents of the best-quality local candidate events"
+      ],
+      "local_spatial_screen": {
+        "candidate_effis_ids_overlapping_bosnia_and_herzegovina": [
+          12321,
+          13228,
+          22108,
+          25244,
+          25274,
+          43482,
+          205938
+        ],
+        "downloaded_zip_bytes": 2751019,
+        "downloaded_zip_sha256": "907e8d340bd44cde64c739b39474381d72ebe64aeef86c0daba17fa53967e27b",
+        "first_local_reference_candidate": 205938,
+        "raw_zip_ignored_by_git": true,
+        "report": "reports/real-fire-data/medeu-spatial-screen.json",
+        "screen_boundary": "Natural Earth Admin 0 countries 1:110m; overlap must be confirmed against authoritative/higher-resolution boundaries and EFFIS records"
+      },
+      "name": "FireSpread_MedEU spatiotemporal propagation dataset",
+      "paper_doi": "10.1038/s41597-026-06965-2",
+      "propagation_steps_with_burned_area": 320,
+      "role": "high-resolution historical progression reference for Europe/Mediterranean; not a drop-in input set for current Canadian FBP simulator",
+      "spatial_resolution_m": "approximately 3-4.1 m Planet imagery source; vector boundaries in EPSG:3035",
+      "temporal_resolution": "daily when satellite imagery permits; 63% of propagation steps are daily; missing dates are described",
+      "updated_on": "2026-01-09",
+      "url": "https://zenodo.org/records/18200075",
+      "version": "v2",
+      "years": "2017-2023",
+      "zenodo_record_license": "not shown in reviewed v2 metadata; verify data-file terms before redistribution/use"
+    },
+    {
+      "id": "globfire-v2-daily-perimeters",
+      "license": "CC-BY-4.0 (Google Earth Engine catalog metadata)",
+      "limitations": [
+        "several-day uncertainty in start/end dates and 500m satellite spatial resolution",
+        "no fire-model-ready fuel, terrain or hourly weather bundle",
+        "Earth Engine retrieval/setup needed for bulk use",
+        "not an hourly fire front; current Cell2Fire still needs multi-cell state import"
+      ],
+      "name": "JRC/GWIS GlobFire v2 DailyPerimeters",
+      "paper_doi": "10.1038/s41597-019-0312-2",
+      "resolution_m": 500,
+      "role": "global coarser-resolution fallback for fire progression sampling",
+      "temporal_resolution": "nominal daily fire boundaries derived from MODIS MCD64A1 burn-date product",
+      "url": "https://developers.google.com/earth-engine/datasets/catalog/JRC_GWIS_GlobFire_v2_DailyPerimeters",
+      "years": "2001-2021"
+    },
+    {
       "doi": "10.17605/OSF.IO/F48RY",
-      "paper_doi": "10.1038/s41597-024-03436-4",
-      "project_modified_at": "2025-11-05T17:57:53.166235",
+      "downloaded_sample": {
+        "bytes": 293731,
+        "columns": 60,
+        "daily_rows": 372,
+        "duplicate_fire_day_rows": 0,
+        "fires": 38,
+        "matched_rasters": 38,
+        "missing_bui_rows": 2,
+        "year": 2020
+      },
+      "id": "cfsds",
+      "inspected_osf_release": {
+        "beta_warning_present": true,
+        "label": "v1_1",
+        "minimum_fire_ha": 500,
+        "release_date": "2025-06-12",
+        "resolution_m": 90,
+        "version_record_url": "https://osf.io/download/8fe4u/",
+        "years": "2002-2024"
+      },
       "license": "CC-By Attribution 4.0 International",
       "license_id": "563c1cf88c5e4a3877f9e96a",
-      "published_v1": {
-        "years": "2002-2021",
-        "resolution_m": 180,
-        "minimum_fire_ha": 1000,
-        "fires": 3269
-      },
-      "inspected_osf_release": {
-        "label": "v1_1",
-        "release_date": "2025-06-12",
-        "years": "2002-2024",
-        "resolution_m": 90,
-        "minimum_fire_ha": 500,
-        "beta_warning_present": true,
-        "version_record_url": "https://osf.io/download/8fe4u/"
-      },
-      "downloaded_sample": {
-        "year": 2020,
-        "bytes": 293731,
-        "fires": 38,
-        "daily_rows": 372,
-        "columns": 60,
-        "duplicate_fire_day_rows": 0,
-        "matched_rasters": 38,
-        "missing_bui_rows": 2
-      },
       "limitations": [
         "daily interpolated day-of-burning, not minute-level observed front",
         "reviewed daily table lacks wind direction and is not a complete spatial fuel grid",
         "release history documents beta/topology/points-update caveats; per-event QC required",
         "observed outcomes do not identify counterfactual outcomes under new RL actions"
-      ]
+      ],
+      "name": "Canadian Fire Spread Dataset",
+      "paper_doi": "10.1038/s41597-024-03436-4",
+      "project_modified_at": "2025-11-05T17:57:53.166235",
+      "published_v1": {
+        "fires": 3269,
+        "minimum_fire_ha": 1000,
+        "resolution_m": 180,
+        "years": "2002-2021"
+      },
+      "role": "broader independent historical validation candidate after input preparation",
+      "url": "https://osf.io/f48ry/"
     },
     {
-      "id": "wildfirespreadts",
-      "name": "WildfireSpreadTS",
-      "role": "alternative for daily spread forecasting; lower priority for current Cell2Fire controller",
-      "url": "https://zenodo.org/records/8006177",
       "doi": "10.5281/zenodo.8006177",
-      "years": "2018-2021",
+      "downloaded": false,
+      "files": [
+        {
+          "bytes": 7841847,
+          "checksum": "md5:1abb9a9975a0dae1dbd0324a782d00dc",
+          "name": "WildfireSpreadTS_Documentation.pdf"
+        },
+        {
+          "bytes": 48359369821,
+          "checksum": "md5:dc1a04e63ccc70037b277d585b8fe761",
+          "name": "WildfireSpreadTS.zip"
+        }
+      ],
       "fires": 607,
-      "resolution_m": 375,
-      "temporal_resolution_hours": 24,
+      "id": "wildfirespreadts",
       "license": {
         "id": "cc-by-4.0"
       },
-      "files": [
-        {
-          "name": "WildfireSpreadTS_Documentation.pdf",
-          "bytes": 7841847,
-          "checksum": "md5:1abb9a9975a0dae1dbd0324a782d00dc"
-        },
-        {
-          "name": "WildfireSpreadTS.zip",
-          "bytes": 48359369821,
-          "checksum": "md5:dc1a04e63ccc70037b277d585b8fe761"
-        }
-      ],
-      "downloaded": false,
       "limitations": [
         "48.4 GB full archive",
         "US remote-sensing feature stack requires conversion to Canadian FBP simulator inputs"
-      ]
+      ],
+      "name": "WildfireSpreadTS",
+      "resolution_m": 375,
+      "role": "alternative for daily spread forecasting; lower priority for current Cell2Fire controller",
+      "temporal_resolution_hours": 24,
+      "url": "https://zenodo.org/records/8006177",
+      "years": "2018-2021"
     },
     {
-      "id": "burnmd",
-      "name": "MITRE BurnMD",
-      "role": "conditional alternative if SimFire is later selected",
-      "url": "https://github.com/mitrefireline/burnmd",
-      "commit": "a9e423f15906bc9860be6d80b56e71e4a6ee307c",
       "archive_bytes": 362131110,
       "archive_sha256_from_lfs": "4eefcbfdabce4966d68e0009e8a4b88dd34294a2cb5dee6aea84dd017eb334c7",
+      "commit": "a9e423f15906bc9860be6d80b56e71e4a6ee307c",
       "downloaded": false,
-      "inspection_level": "LFS metadata only; archive content not verified"
+      "id": "burnmd",
+      "inspection_level": "LFS metadata only; archive content not verified",
+      "name": "MITRE BurnMD",
+      "role": "conditional alternative if SimFire is later selected",
+      "url": "https://github.com/mitrefireline/burnmd"
     }
-  ]
+  ],
+  "local_fuel_map_candidate": {
+    "crs": "EPSG:3035",
+    "description_url": "https://forest-fire.emergency.copernicus.eu/about-effis/technical-background/fuels",
+    "downloaded_archive": {
+      "bytes": 18226545,
+      "ignored_by_git": true,
+      "path": "data/raw/FuelMap_LAEA.zip",
+      "sha256": "ed06080d81048de18dc34caf0f4fcc2f26d626f020bf132277d4e470a71a83d8"
+    },
+    "fuel_model_system": "NFFL / Anderson 1982; raster codes 1-10 observed locally",
+    "id": "effis-european-fuel-map-2017",
+    "interpretation": "250m continental classification, not field-verified local fuel inventory; not directly compatible with current Canadian FBP Firehose build; no DEM or weather included",
+    "license": "EFFIS says EU-owned web content is CC BY 4.0 unless otherwise indicated; verify item-specific notices and cite source and changes",
+    "local_overlay_report": "reports/real-fire-data/medeu-spatial-screen.json",
+    "name": "EFFIS European Fuel Map",
+    "reference_year": 2017,
+    "resolution_m": 250,
+    "role": "regional BiH fuel-class candidate to align with MedEU historical progression polygons",
+    "url": "https://data.effis.emergency.copernicus.eu/effis/applications/data-and-services/FuelMap_LAEA.zip"
+  },
+  "next_task": "TASK-015 completion: prepare year-correct fuel/map inputs and expand train-only replay diagnostics before freezing held-out cases.",
+  "purpose": "dataset suitability for real-fire-derived simulation scenarios and historical spread checks; no policy training or physical validation performed",
+  "recommended_sequence": [
+    "primary-route: Canada+CFSDS-v1_1+Canadian-FBP-Cell2Fire",
+    "expand-train-only-cohort-after-pilot-input-and-boundary-review",
+    "prepare-2019-and-2024-appropriate-FBP-fuel-map-vintages-for-held-out-years",
+    "join-event-suppression-and-source-quality-metadata-before-benchmark-freeze",
+    "keep-next-day-observed-growth-hidden-from-RL-policy-and-simulator-reward",
+    "retain-MedEU-as-later-separate-Europe-track-only-with-compatible-fuel-model-and-license-check"
+  ],
+  "reviewed_on": "2026-10-30",
+  "selected_primary_route": {
+    "manifest": "data/manifests/cfsds-v1_1-pilot-cohort.json",
+    "note": "The 44 reported candidates are the retained top-at-most-five-per-year screen, not an exhaustive set; the event holdout is provisional.",
+    "pilot_case": "2018_747",
+    "preliminary_geometry_screen": "reports/real-fire-data/cfsds-cohort-screen.json"
+  },
+  "selection_status": "Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire selected as the primary compatibility route; three train cases converted and replayed without interventions, and one geometric candidate rejected by the fuel check. No-action validation is still poor and the wider benchmark remains provisional."
 }

@@ -31,8 +31,31 @@ ograničenja. Hash svakog fajla je u reports/firehose-verification/dataset-inven
 U Git idu ti mali manifesti, a sirovi dataset ostaje u external/firehose/data/Sub20x20/.
 
 ## Dataset opaženih požara
-Za zasebnu historijsku provjeru preuzeti su mali Dogrib i CFSDS uzorci, ukupno
-3,683,869 bajtova u ignorisanom data/raw/. [Preporuka i ograničenja](../docs/research/REAL_FIRE_DATASETS.md)
-razlikuju opaženi ishod od simulator inputa. Kandidati su u
-manifests/real-fire-candidates.json, hashovi/profili u reports/real-fire-data/.
-Nije još izvršen replay/kalibracija na tim događajima. Raw podaci nisu dodani u Git.
+
+Glavna putanja je odabrana: **CFSDS v1.1 + Canadian FBP/Cell2Fire**. 23 godišnja ZIP
+para iz 2002–2024 (102,405,239 bajtova) i svi veći sirovi slojevi su lokalno u
+Git-ignorisanom `data/raw/`. Candidate manifest je
+[`cfsds-v1_1-pilot-cohort.json`](manifests/cfsds-v1_1-pilot-cohort.json); njegov trenutni
+geometrijski screen zadržava do pet kandidata po godini, ukupno 20 train, 9 validation,
+15 test. To nije iscrpan ni finalan benchmark.
+
+Tri train slučaja (`2018_747`, `2018_241`, `2018_1770`) pretvorena su u simulator ulaze
+i pokrenuta kao C++ no-action replayi bez treniranja. Prognoze su 66/237/73 ha prema
+opaženih 15.39/12.15/12.15 ha; sve tri dotiču rub 2×2 km prozora. Kandidat `2014_538`
+je odbijen na fuel kompatibilnosti jer dio historijskog scar/front/targeta mapira na
+water/nonfuel. Suppression status nije poznat. Izvještaji, hashovi i vizualizacije su u
+[`reports/real-fire-data/`](../reports/real-fire-data/README.md). [Pipeline objašnjava
+razliku između simulator ulaza i historijskog cilja](../docs/research/REAL_CASE_PIPELINE.md).
+
+Dogrib ostaje formatni primjer, ali dijeli gorivo/elevation s Firehose Sub20 i nije
+nezavisan prostorni test. FireSpread_MedEU v2 je pregledan za moguću BiH studiju: ZIP
+(2.75 MB) je u `data/raw/`, prvi grubi overlay našao je sedam EFFIS ID kandidata. EFFIS
+European Fuel Map 2017 (250 m, NFFL/Anderson) je uzorkovana preko dva primjera, ali taj
+fuel model ne odgovara trenutnom Canadian FBP buildu. MedEU licenca/lokacije, veći grid i
+kompatibilan evropski model ostaju otvoreni ako kasnije izaberemo taj track. Hashovi,
+izvori i ograničenja su u `reports/real-fire-data/medeu-spatial-screen.json`.
+
+Veliki raw fajlovi, Docker image, virtualno okruženje i simulator runovi nisu dodani u
+Git. Repo čuva URL, verziju, checksum, konverzijski kod, sažet case manifest i mali
+vizualni rezultat. Pogledaj `reports/real-fire-data/cfsds-download-manifest.json` za
+preuzimanje CFSDS arhive.
