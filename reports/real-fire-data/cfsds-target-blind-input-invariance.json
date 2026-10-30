@@ -1,0 +1,96 @@
+{
+  "environment": {
+    "numpy": "2.5.4",
+    "python": "3.12.4",
+    "rasterio": "1.4.4"
+  },
+  "generated_at_utc": "2026-10-30T23:47:39.125954+00:00",
+  "limitations": [
+    "This proves input-geometry invariance for one TRAIN event, not fire-behavior validity or agent benefit.",
+    "The active day-n-1 cells are a daily-front proxy; CFSDS does not identify which cells were flaming at an exact hour.",
+    "Target-day coverage is reported only after the target-blind crop is fixed; a low capture ratio makes the event unsuitable for the fixed-size reality-check grid.",
+    "This proof fixes one TRAIN event/day for an invariance check; it does not validate how a cohort chooses event-days.",
+    "Weather response location/content is not checked; the reported front centroid is only the intended query point."
+  ],
+  "purpose": "Train-only proof that crop selection and imported initial state are invariant to day-n target-mask changes.",
+  "rule": {
+    "active_front": "valid day n-1 pixels in the selected 23x23 crop's one-pixel interior ring",
+    "border": "day n-1 pixels on the native crop border are retained as burnt scar, not active front",
+    "crop": "select target-blind crop whose center is nearest the centroid of all day n-1 pixels, requiring at least the minimum safe-interior front; ties maximize interior front then pre-target history; border-ring day n-1 pixels remain burnt scar",
+    "intended_weather_lookup_point_wgs84": {
+      "lat": 49.83960880240741,
+      "lon": -115.93089791429585
+    },
+    "scar": "all other valid burned pixels strictly before day n",
+    "target_mask_used_to_choose_crop_or_initial_state": false,
+    "version": "cfsds-pretarget-window-front-v1",
+    "weather_location_basis": "intended lookup point from the safe-interior day n-1 front centroid; actual weather response is outside this proof"
+  },
+  "schema": "cfsds-target-blind-input-invariance/v1",
+  "scope": {
+    "event_id": "2018_747",
+    "simulator_replay_or_training": false,
+    "source_raster_shape_rc": [
+      48,
+      50
+    ],
+    "split": "train",
+    "target_doy": 228,
+    "validation_or_test_rasters_opened": false,
+    "weather_response_or_weather_csv_checked": false,
+    "year": 2018
+  },
+  "selection": {
+    "active_front_capture_fraction": 0.399209,
+    "all_day_n_minus_1_pixels_in_crop": 111,
+    "model_grid_cells": {
+      "active_front_edge_cells": 0,
+      "burning": 76,
+      "burnt": 221,
+      "initial_state_rows": 297,
+      "target_initial_overlap_cells_diagnostic": 0,
+      "target_truth": 11
+    },
+    "pre_target_scar_pixels": 283,
+    "target_blind_active_front_pixels": 101,
+    "target_blind_crop_day_n_minus_1_pixels": 111,
+    "target_blind_crop_pretarget_pixels": 384,
+    "target_blind_crop_row_col": [
+      11,
+      22
+    ],
+    "target_blind_crop_transform": [
+      90.0,
+      0.0,
+      -1474980.0,
+      0.0,
+      -90.0,
+      6923700.0
+    ],
+    "target_blind_day_n_minus_1_border_pixels_as_scar": 10,
+    "target_growth_capture_ratio": 0.894737,
+    "target_pixels_in_target_blind_crop": 17,
+    "target_pixels_whole_event": 19,
+    "whole_event_day_n_minus_1_pixels": 253
+  },
+  "source": {
+    "arrival_archive": "data/raw/cfsds-v1_1/2018/2018_fireDOYrasters.zip",
+    "arrival_archive_sha256": "0b31797c19fe705a890eb19ebc35827356f15bc3d83666ad614e0e1dc0518e3f",
+    "arrival_raster_member": "2018_747_krig.tif",
+    "arrival_raster_member_sha256": "a3e35564129f5ad68f118c4c487134077e98953f9a485d285bfb17e30bb0d1cd",
+    "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]"
+  },
+  "target_perturbation": {
+    "crop_offset_unchanged": true,
+    "initial_state_row_count": 297,
+    "model_grid_active_front_mask_unchanged": true,
+    "model_grid_burnt_mask_unchanged": true,
+    "model_grid_target_truth_changed": true,
+    "modified_target_pixels": 19,
+    "original_target_pixels": 19,
+    "pre_target_mask_unchanged": true,
+    "serialized_initial_state_rows_unchanged": true,
+    "status": "PASS_TARGET_MASK_INVARIANCE",
+    "target_geometry_changed": true
+  }
+}

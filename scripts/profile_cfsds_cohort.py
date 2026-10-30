@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Screen annual CFSDS maps for compact 20x20 daily-front windows.
+"""Screen TRAIN-only CFSDS maps for compact 20x20 daily-front windows.
 
 This is a data inventory and crop feasibility screen. It does not create
 Cell2Fire inputs or claim that the model reproduces historical fire behavior.
@@ -21,11 +21,10 @@ import rasterio
 from rasterio.windows import Window
 from scipy.ndimage import binary_dilation
 
-
-def box_sums(mask: np.ndarray, size: int) -> np.ndarray:
-    integral = np.pad(mask.astype(np.int32), ((1, 0), (1, 0)))
-    integral = integral.cumsum(axis=0).cumsum(axis=1)
-    return integral[size:, size:] - integral[:-size, size:] - integral[size:, :-size] + integral[:-size, :-size]
+try:  # works both as ``python scripts/profile_cfsds_cohort.py`` and package import
+    from .cfsds_initial_state import NODATA_ARRIVAL, select_target_blind_window
+except ImportError:  # pragma: no cover - exercised by direct CLI invocation
+    from cfsds_initial_state import NODATA_ARRIVAL, select_target_blind_window
 
 
 def split_for_year(year: int) -> str:
@@ -36,6 +35,17 @@ def split_for_year(year: int) -> str:
     if year <= 2021:
         return "validation"
     return "test"
+
+
+def validate_train_years(years: list[int]) -> None:
+    """Prevent this target-diagnostic screen from opening held-out rasters."""
+    if not years:
+        raise ValueError("At least one TRAIN year is required")
+    outside = sorted({year for year in years if split_for_year(year) != "train"})
+    if outside:
+        raise ValueError(
+            f"This screen is TRAIN-only and refuses non-train years: {outside}"
+        )
 
 
 def source_paths(root: Path, year: int) -> tuple[Path, Path]:
@@ -62,61 +72,50 @@ def parse_groups(path: Path) -> pd.DataFrame:
     return frame
 
 
-def find_window(arrival: np.ndarray, day: int, tile_size: int) -> dict[str, int] | None:
-    h, w = arrival.shape
-    if h < tile_size or w < tile_size:
+def find_window(arrival: np.ndarray, day: int, tile_size: int) -> dict[str, Any] | None:
+    selected = select_target_blind_window(arrival, day, tile_size=tile_size)
+    if selected is None:
         return None
-    nodata_mask = arrival >= 4_000_000_000
-    observed_target = (arrival == day) & ~nodata_mask
-    previous_day = (arrival == day - 1) & ~nodata_mask
-    if not observed_target.any() or not previous_day.any():
-        return None
-    adjacent = np.ones((3, 3), dtype=bool)
-    target = observed_target & binary_dilation(previous_day, structure=adjacent)
-    front = previous_day & binary_dilation(target, structure=adjacent)
-    if not target.any() or not front.any():
-        return None
-    # Reject day pairs containing disconnected/spot-fire target pixels.
-    if int(target.sum()) != int(observed_target.sum()):
-        return None
-
-    target_windows = box_sums(target, tile_size)
-    front_windows = box_sums(front, tile_size)
-    inner_windows = box_sums(target[1:-1, 1:-1], tile_size - 2)
-    inner_front_windows = box_sums(front[1:-1, 1:-1], tile_size - 2)
-    if not target_windows.size or not inner_windows.size:
-        return None
-    edge_windows = target_windows - inner_windows
-    front_edge_windows = front_windows - inner_front_windows
-    valid = (inner_windows >= 5) & (front_windows >= 3)
-    if not valid.any():
-        return None
-    capture_ppm = np.rint(target_windows / max(int(target.sum()), 1) * 1_000_000).astype(np.int64)
-    score = (
-        capture_ppm * 1_000_000_000
-        - edge_windows.astype(np.int64) * 1_000_000
-        - front_edge_windows.astype(np.int64) * 100_000
-        + np.minimum(front_windows, 999).astype(np.int64) * 100
-        + np.minimum(inner_windows, 999).astype(np.int64)
-    )
-    score[~valid] = -1
-    row, col = np.unravel_index(int(np.argmax(score)), score.shape)
-    capture = int(target_windows[row, col]) / max(int(target.sum()), 1)
-    if capture < 0.95 or edge_windows[row, col] != 0 or front_edge_windows[row, col] != 0:
-        return None
+    row, col = selected["row_off"], selected["col_off"]
     crop = arrival[row:row + tile_size, col:col + tile_size]
-    crop_valid = (crop > 0) & (crop <= day - 1) & (crop < 4_000_000_000)
+    observed_target = (arrival == day) & (arrival < NODATA_ARRIVAL)
+    target_crop = (crop == day) & (crop < NODATA_ARRIVAL)
+    target_edge_mask = np.zeros(target_crop.shape, dtype=bool)
+    target_edge_mask[[0, -1], :] = True
+    target_edge_mask[:, [0, -1]] = True
+    previous_day = (crop == day - 1) & (crop < NODATA_ARRIVAL)
+    active_front = previous_day[1:-1, 1:-1]
+    pre_target = (crop > 0) & (crop < day) & (crop < NODATA_ARRIVAL)
+    target_adjacent = observed_target & binary_dilation(
+        (arrival == day - 1) & (arrival < NODATA_ARRIVAL),
+        structure=np.ones((3, 3), dtype=bool),
+    )
+    target_count = int(observed_target.sum())
+    target_in_window = int(target_crop.sum())
     return {
         "row_off": int(row),
         "col_off": int(col),
-        "target_pixels_in_tile": int(target_windows[row, col]),
-        "target_pixels_interior": int(inner_windows[row, col]),
-        "target_pixels_on_tile_edge": int(edge_windows[row, col]),
-        "active_front_cells": int(front_windows[row, col]),
-        "active_front_cells_on_tile_edge": int(front_edge_windows[row, col]),
-        "scar_cells": int(np.count_nonzero(crop_valid) - front_windows[row, col]),
+        "target_pixels_in_tile": target_in_window,
+        "target_pixels_interior": int(target_crop[1:-1, 1:-1].sum()),
+        "target_pixels_on_tile_edge": int((target_crop & target_edge_mask).sum()),
+        "active_front_cells": int(active_front.sum()),
+        "active_front_cells_on_tile_edge": 0,
+        "scar_cells": int(pre_target.sum()) - int(active_front.sum()),
         "spot_target_pixels_rejected": 0,
-        "target_pixels_in_whole_fire_day": int(target.sum()),
+        "target_pixels_in_whole_fire_day": target_count,
+        "target_pixels_adjacent_to_previous_day": int(target_adjacent.sum()),
+        "target_pixels_outside_previous_day_neighborhood": target_count - int(target_adjacent.sum()),
+        "pre_target_pixels_in_window": int(pre_target.sum()),
+        "day_n_minus_1_pixels_in_window": int(previous_day.sum()),
+        "day_n_minus_1_border_pixels_as_burnt_scar": int(previous_day.sum()) - int(active_front.sum()),
+        "day_n_minus_1_front_pixels_total": int(((arrival == day - 1) & (arrival < NODATA_ARRIVAL)).sum()),
+        "day_n_minus_1_front_capture_ratio": selected["day_n_minus_1_front_capture_ratio"],
+        "day_n_minus_1_centroid_to_window_center_px": selected[
+            "day_n_minus_1_centroid_to_window_center_px"
+        ],
+        "window_selection_rule": selected["rule"],
+        "target_geometry_used_for_window_selection": False,
+        "target_geometry_used_for_candidate_ranking": False,
     }
 
 
@@ -190,15 +189,16 @@ def summarize_year(year: int, raw_root: Path, tile_size: int, top_per_year: int)
                         "crop_transform": list(rasterio.windows.transform(Window(window["col_off"], window["row_off"], tile_size, tile_size), src.transform))[:6],
                         "target_growth_capture_ratio": round(capture, 6),
                         "suppression_status": "unknown",
-                        "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+                        "quality_status": "target-blind pre-target window screen; target coverage is diagnostic only; external fuel/terrain/hourly weather not yet aligned",
+                        "window_selection_rule": window["window_selection_rule"],
                         **window,
                     }
                     previous = event_best.get(event_id)
                     rank = (
-                        window["target_pixels_in_tile"] / max(window["target_pixels_in_whole_fire_day"], 1),
-                        -window["target_pixels_on_tile_edge"],
-                        -window["active_front_cells_on_tile_edge"],
                         window["active_front_cells"],
+                        window["pre_target_pixels_in_window"],
+                        window["day_n_minus_1_front_capture_ratio"],
+                        -day,
                     )
                     if previous is None or rank > previous["_rank"]:
                         candidate["_rank"] = rank
@@ -207,10 +207,10 @@ def summarize_year(year: int, raw_root: Path, tile_size: int, top_per_year: int)
     candidates = sorted(
         event_best.values(),
         key=lambda item: (
-            item["target_growth_capture_ratio"],
-            -item["target_pixels_on_tile_edge"],
-            -item["active_front_cells_on_tile_edge"],
             item["active_front_cells"],
+            item["pre_target_pixels_in_window"],
+            item["day_n_minus_1_front_capture_ratio"],
+            item["event_id"],
         ),
         reverse=True,
     )[:top_per_year]
@@ -222,12 +222,16 @@ def summarize_year(year: int, raw_root: Path, tile_size: int, top_per_year: int)
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--raw-root", type=Path, default=Path("data/raw/cfsds-v1_1"))
-    parser.add_argument("--years", nargs="+", type=int, default=list(range(2014, 2025)))
+    parser.add_argument("--years", nargs="+", type=int, default=list(range(2014, 2019)))
     parser.add_argument("--tile-size", type=int, default=23)
     parser.add_argument("--top-per-year", type=int, default=5)
-    parser.add_argument("--out", type=Path, default=Path("reports/real-fire-data/cfsds-cohort-screen.json"))
+    parser.add_argument("--out", type=Path, default=Path("reports/real-fire-data/cfsds-train-target-blind-window-screen.json"))
     args = parser.parse_args()
     years = sorted(set(args.years))
+    try:
+        validate_train_years(years)
+    except ValueError as exc:
+        parser.error(str(exc))
     reports = [summarize_year(year, args.raw_root, args.tile_size, args.top_per_year) for year in years]
     annual = [item["annual"] for item in reports]
     candidates = [candidate for item in reports for candidate in item["candidates"]]
@@ -235,15 +239,19 @@ def main() -> int:
     manifest = {
         "dataset": "Canadian Fire Spread Dataset (CFSDS)",
         "release": "v1.1",
+        "scope": "train_only",
+        "heldout_splits_opened": False,
         "screened_on": pd.Timestamp.now(tz="UTC").isoformat(),
-        "purpose": "identify complete compact historical day-pair windows for a 20x20, 100m Cell2Fire policy grid",
-        "not_a_result": "This is crop feasibility only. It is not an aligned simulator case, a physically validated replay, or evidence of policy benefit.",
+        "purpose": "identify compact CFSDS crops from pre-target history for a 20x20, 100m Cell2Fire policy grid",
+        "not_a_result": "This is a pre-target crop screen. Target coverage is a later diagnostic; it is not an aligned simulator case, a physically validated replay, or evidence of policy benefit.",
         "split_rule_by_event_year": "2014-2018 train; 2019-2021 validation; 2022-2024 test. Pre-2014 events are excluded because the published benchmark reports no compatible nationwide FBP map vintage for those years. Each event_id remains in one split.",
         "native_window_cells": args.tile_size,
         "native_resolution_m": 90,
         "simulator_grid_cells": 20,
         "simulator_cell_size_m": 100,
-        "window_rule": "reject disconnected spot growth; require at least 5 target-day pixels and 3 active-front pixels; target growth and active front must be wholly within the native window away from its edge, with at least 95% of target-day pixels represented",
+        "window_rule": "select a 23x23 native crop using only values before target day n; center it as close as possible to the centroid of all day n-1 pixels while requiring a minimum safe-interior front, then prefer more interior front and pre-target history; day n-1 pixels in the border remain burnt scar. Target-day coverage/adjacency is reported after crop selection and never determines the crop or ranking.",
+        "target_geometry_used_for_crop_selection": False,
+        "target_geometry_used_for_candidate_ranking": False,
         "suppression_status": "unknown unless an event-specific agency record is later joined",
         "annual": annual,
         "screening_candidates": candidates,
