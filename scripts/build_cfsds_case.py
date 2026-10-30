@@ -241,6 +241,10 @@ def make_case(args: argparse.Namespace) -> dict[str, Any]:
     observed = (arrival == target_doy) & (arrival < NODATA_ARRIVAL)
     previous = (arrival == target_doy - 1) & (arrival < NODATA_ARRIVAL)
     target_native = observed & binary_dilation(previous, structure=np.ones((3, 3), dtype=bool))
+    # PROTOTYPE CAVEAT: this selects the n-1 front by looking at target day n.
+    # The target geometry therefore leaks into InitialState.csv. Preserve this
+    # only for reproducing existing cases; replace it with a preregistered,
+    # target-blind n-1 front before any unbiased agent benchmark.
     front_native = previous & binary_dilation(target_native, structure=np.ones((3, 3), dtype=bool))
     scar_native = (arrival > 0) & (arrival <= target_doy - 1) & (arrival < NODATA_ARRIVAL) & ~front_native
     if not target_native.any() or not front_native.any() or int(target_native.sum()) != int(observed.sum()):
