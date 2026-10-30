@@ -246,10 +246,13 @@ tačan affine transform.
 4. **Površine požara.** CFSDS 90 m `day-of-burning` reprojectovati na 100 m masku uz
    unaprijed definisano pravilo pokrivenosti/većine. Zapisati koliko pozitivne površine
    se gubi ili dobija pri resamplingu. Sačuvati i 90 m reference za metričke proračune.
-5. **Prozor.** Za 20×20 polje izabrati crop koji sadrži prethodnu frontu i sav target
-   rast do kraja horizonta uz buffer. Prijaviti target koji izađe iz prozora; ne zvati ga
-   uspješnim zadržavanjem požara. Takav slučaj izostaviti iz primarnog rezultata ili ga
-   posebno označiti kao edge-censored.
+5. **Prozor.** Za 20×20 polje crop i podobnost birati samo prema informacijama poznatim
+   do početka epizode; target ne smije postavljati crop offset niti odlučivati koji se
+   slučajevi testiraju. Prijaviti koliko početnog scar/front stanja ostaje izvan domene.
+   Target koji naknadno izađe iz prozora jeste edge-censored, ne uspješno zadržan požar.
+   Target capture/edge mjere računati tek nakon što su crop i shortlist fiksirani; ako
+   mnogo slučajeva ne može se smjestiti u 2×2 km bez outcome-based izbora, blokirati
+   reality-check ili zasebno opravdati drugačiju policy/model domenu.
 6. **Weather.** Izvući hourly temperaturu, vlagu, U/V ili brzinu/smjer vjetra i
    padavine, zapisati UTC/local-time konverziju i jedinice. Cell2Fire traži i sve FWI
    kodove; oni se ne dobijaju tako što se sirovi ERA5 redovi samo kopiraju. Treba
@@ -284,18 +287,23 @@ ali trenutna implementacija **nije leakage-free**:
    burn-scar succession. Zatim se samo perimetri istog požara prije dana n mogu
    ukloniti/reclassifikovati prema provjerenom pravilu. Trenutno su te dvije fuel faze
    još blokirane provenanceom i importer contractom.
-2. `scripts/build_cfsds_case.py` trenutno traži day n-1 ćelije susjedne targetu day n
-   da bi izabrao `InitialState.csv` aktivni front. Time target geometrija uđe u agentov
-   početni input iako se target raster fizički čuva u `truth/`. Ovo ponašanje slijedi
-   objavljeni W.I.S.E. benchmark, čiji autori eksplicitno kažu da je njihov front
-   target-aware i favorizujući [S-037](SOURCES.md#s-037); za unbiased RL benchmark taj
-   recept ne možemo prenijeti bez promjene.
-3. Prije benchmarka treba preregistrovati front koji se može izračunati samo iz day n-1
-   i ranijih podataka (npr. granica prethodno opožarene površine je kandidat, ali još
-   nije usvojeno pravilo), pa testirati da početni grid ne mijenja target maska.
-   `InitialState.csv` C++ uvoz postoji; fuel/non-fuel kompatibilnost starog scar-a još
-   nije riješena.
-4. Tek nakon target-blind front i leak-safe goriva postavi poravnati teren i satni
+2. Raniji `scripts/build_cfsds_case.py` birao je day n-1 ćelije susjedne targetu day n,
+   što je otkrivalo dio buduće target geometrije u `InitialState.csv`. To ponašanje
+   slijedilo je objavljeni W.I.S.E. benchmark, čiji autori eksplicitno kažu da je njihov
+   front target-aware i favorizujući [S-037](SOURCES.md#s-037); ne koristimo ga za naš
+   unbiased RL benchmark.
+3. Novi prototip bira 23×23 crop isključivo iz arrival vrijednosti prije dana n, sa
+   centrom što bliže centroidu svih day n−1 piksela. Unutrašnji day n−1 pikseli postaju
+   aktivni front; n−1 pikseli na rubu izreza i stariji pikseli postaju burnt scar.
+   `InitialState.csv` ne mijenja se kada se target maska promijeni u testu za `2018_747`.
+   To je target-blind dnevna proxy definicija, ne satno opažena fronta; fuel/non-fuel
+   kompatibilnost starog scar-a još nije riješena.
+4. Train-only shortlist screen je nakon izbora prozora izmjerio da samo 4/25 izreza ima
+   makar jedan pixel narednog dana, uz medijanu target capture 0. Ovaj target-only
+   dijagnostički rezultat ne smije birati prozor ni shortlistu; pokazuje da 2×2 km domena
+   često ne obuhvata naredni dnevni rast. Prije reality-check replaya definisati prostornu
+   podobnost isključivo iz pre-target ulaza ili nezavisno opravdati drugačiji model-domain.
+5. Tek nakon target-blind front i leak-safe goriva postavi poravnati teren i satni
    weather trace. Target dan n ostaje samo za unaprijed definisane evaluacijske metrike.
 5. Pusti **no-action** reality-check na train/calibration slučajevima uz isti unaprijed
    definisani horizont. Ako gate ne prođe, popravi input/model i testiraj ponovo; ne

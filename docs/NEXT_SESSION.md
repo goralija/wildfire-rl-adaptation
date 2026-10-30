@@ -1,6 +1,6 @@
 ---
 type: Handoff
-title: Naredna sesija — nakon TASK-015 fuel-vintage mask proofa
+title: Naredna sesija — nakon TASK-015 target-blind input prototipa
 ---
 # Naredna sesija
 
@@ -58,19 +58,22 @@ sačuvani, a suppression je unknown za svih 20. Detalji i redoslijed su u
 
 Sljedeći tehnički koraci:
 
-1. Završeni su samo dva pripremna dokaza: pre-target maska na jednom TRAIN eventu
-   (`2018_747`) i C++ fixture koji karakteriše `NF` scar odbijanje. Pogledati
-   [mask receipt](../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
+1. Završeni su TRAIN-only pre-target fuel mask proof (`2018_747`), C++ fixture za
+   `NF` scar odbijanje, target-blind prozor/front prototip i target-mask invariance proof
+   na istom TRAIN događaju. Pogledati [mask receipt](../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
    [import receipt](../reports/firehose-verification/nonfuel-initial-scar-compatibility.json),
-   ADR-020 i EXP-010. Nije izrađena godišnja fuel mapa i nije mijenjan case builder.
-2. **Prvi naredni zadatak:** prije benchmarka ukloniti buduću informaciju iz početnog fronta: trenutni case builder
-   bira day n-1 ćelije prema njihovoj susjednosti targetu day n. W.I.S.E. paper to koristi
-   i priznaje kao favorizujuću buduću informaciju. Definisati front samo iz n-1 i ranijih
-   podataka, preregistrovati ga, pa testirati da se početni input ne mijenja kad se target
-   maska promijeni.
+   [invariance receipt](../reports/real-fire-data/cfsds-target-blind-input-invariance.json),
+   [train screen](../reports/real-fire-data/cfsds-train-target-blind-window-screen.json),
+   ADR-020/021 i EXP-010/011. Ovo nije CFSDS replay, godišnja fuel mapa ni fizička validacija.
+2. **Prvi naredni zadatak:** preregistrovati train-only prostorni feasibility audit koji
+   koristi samo pre-target informacije: koliko prethodne scar/front površine izrez izostavlja,
+   da li front ostaje upotrebljiv nakon 90→100 m resamplinga i da li fiksni 2×2 km
+   model-domain uopšte može podržati reality-check. Ne koristiti target capture za izbor
+   kandidata/prozora; ako grid nije kompatibilan, zabilježiti blokadu i razmotriti zasebnu
+   odluku o model-domain/policy ugovoru.
 3. Pribaviti/dokumentovati bazni FBP as-of-event cutoff i prepisati/provjeriti v20191114
-   burn-scar succession tree, uključujući licencu i per-pixel porijeklo. Ne koristiti
-   v2019 development ili 2024 raster kao gotovu historijsku mapu.
+   burn-scar succession tree, uključujući licencu i per-pixel porijeklo. Ne koristiti v2019
+   development ili 2024 raster kao gotovu historijsku mapu.
 4. Odlučiti i fixtureom testirati importer contract za slučaj da validno succession
    pravilo staru ćeliju označi kao non-fuel: scar mora ostati u kumulativnoj historijskoj
    šteti, dok takva ćelija ne smije postati gorivo za širenje; testirati kako se aktivni
@@ -89,6 +92,24 @@ Sljedeći tehnički koraci:
    prema targetu i ne koristiti validation/test ishode.
 9. Heldout event IDs zamrznuti tek nakon prihvatljivog train no-action gatea. Benchmark
    i fine-tuning ostaju blokirani do tada.
+
+Trenutni target-blind crop je centriran na centroidu posljednjeg poznatog dana n−1;
+aktivni front čine day n−1 pikseli u sigurnom unutrašnjem dijelu prozora, a pikseli na
+ivici ostaju scar. Na train screen shortlisti 25 kandidata samo 4 imaju makar jedan day-n
+pixel u 23×23 izrezu (median target capture je 0; maksimum oko 1.04%). To je target-only
+naknadna dijagnostika i pokazuje da 2×2 km grid često ne obuhvata naredni dnevni rast.
+Ne prilagođavati prozor ni shortlistu prema toj metrici; prije reality-check replaya
+definisati target-blind pravilo prostorne podobnosti ili razmotriti unaprijed opravdanu
+promjenu domene/policy grid ugovora.
+
+Case builder sada podrazumijeva novi train-only screen i odbija manifest/candidate redove
+koji ne potvrđuju target-blind crop i ranking. Stari kombinovani cohort screen zadržava
+istorijske target-aware offsete; ne koristiti ga za novo građenje FireCase-a. Invariance
+receipt za `2018_747` fiksira event/day par i ne dokazuje da je izbor tog para nezavisan od
+target dostupnosti; za budući cohort unaprijed zapisati target-blind day-pair pravilo.
+Raniji 10/20 fuel-only rezultat pripada prethodnoj kohorti/izrezima i ne kvalifikuje ovih
+25 novih target-blind kandidata; nakon prostorne provjere ponoviti fuel audit za stvarno
+odabrane train slučajeve. Stari pilot FireCase-ovi ostaju historijski target-aware primjeri.
 
 Benchmark i fine-tuning ostaju blokirani dok se ne prođu i no-action quality gate i
 heldout freeze. Ne otvarati validation/test rastere ili ishode radi QC/tuninga.

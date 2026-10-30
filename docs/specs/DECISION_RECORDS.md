@@ -438,3 +438,50 @@ Evidence: [TRAIN mask proof](../../reports/real-fire-data/cfsds-train-fuel-vinta
 [TASK-015 input QC](../research/CFSDS_TRAIN_INPUT_QC.md),
 [sources S-031–S-038](../research/SOURCES.md#s-031),
 [W.I.S.E. paper](https://doi.org/10.1071/WF26072).
+
+## ADR-021 — make CFSDS crop and initial state target-blind, recorded 2026-10-31
+
+The former crop/front selection used day n target geometry to choose day n−1 pixels
+adjacent to that target. That gives the agent future spatial information through its
+initial state even when target rasters are stored separately. The CFSDS source provides
+daily interpolated arrival masks, not exact hourly flame locations, so the project needs a
+declared proxy based only on inputs available before day n.
+
+**Decision:** select the fixed 23×23 native crop using only valid arrivals strictly before
+day n. Its center is the eligible crop center nearest the centroid of all day n−1 pixels;
+the crop must contain at least three day n−1 pixels in its one-cell safe interior. Every
+day n−1 pixel in that interior is active front; day n−1 pixels in the crop border and all
+older pre-target arrivals are historical burnt scar. Distance ties prefer more interior
+front pixels, then more pre-target history, then row/column order. The day-n mask is
+computed only after crop/state selection as separate evaluation truth. Source weather
+lookup target is calculated from the safe-interior day n−1 centroid, not the day-n summary
+centroid. The proof does not fetch or validate a weather response; supplied weather files
+and their locations/lineage remain a separate input-provenance task.
+
+The rule was fixed before its TRAIN-only cohort screen. A perturbation proof on
+`2018_747` changes all 19 day-n pixels while preserving the pre-target values; crop offset,
+model scar/front masks and serialized `InitialState.csv` remain identical, while target
+truth changes. Receipt: [target-blind invariance](../../reports/real-fire-data/cfsds-target-blind-input-invariance.json).
+The separate 2014–2018 screen selects five candidates per year using only pre-target
+event-day/state metrics. Target coverage is measured after selection as a feasibility
+diagnostic only: 4/25 shortlisted windows contain any target pixel; median capture is 0,
+maximum 1.0402%. Do not use this result to adjust crop offsets, candidate ranking, or
+hyperparameters. The screen tool defaults to years 2014–2018 and refuses held-out years;
+the case builder defaults to this train-only report and rejects legacy reports/candidate
+rows without explicit target-blind flags. Receipt: [train-only window screen](../../reports/real-fire-data/cfsds-train-target-blind-window-screen.json).
+
+This establishes only input-mask invariance for one TRAIN event and a target-blind
+prototype; it does not validate the daily-front proxy or fire spread. The low target
+coverage warns that the fixed 2×2 km domain may not support a useful next-day
+reality-check for most shortlisted events. Resolve spatial feasibility from pre-target
+information or independently justify a model-domain change before replay. Keep ADR-020's
+annual fuel-map and non-fuel-scar blockers. No case replay, calibration, training,
+benchmark or validation/test inspection was performed. Existing saved pilot FireCases
+remain historical target-aware prototypes. The earlier 10/20 fuel-only pass/fail audit
+used their former cohort/windows and cannot be transferred to this new shortlist.
+
+Evidence: [helper and focused tests](../../scripts/cfsds_initial_state.py),
+[case builder](../../scripts/build_cfsds_case.py),
+[TRAIN-only screen code](../../scripts/profile_cfsds_cohort.py),
+[input QC](../research/CFSDS_TRAIN_INPUT_QC.md),
+[CFSDS source S-015](../research/SOURCES.md#s-015).

@@ -282,3 +282,38 @@ heldout inspection or target-based selection was performed. Decision and follow-
 [`CFSDS_TRAIN_INPUT_QC.md`](CFSDS_TRAIN_INPUT_QC.md); receipts:
 [`mask proof`](../../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
 [`importer check`](../../reports/firehose-verification/nonfuel-initial-scar-compatibility.json).
+
+## EXP-011 — TRAIN-only target-blind crop and initial-state proof, 2026-10-31
+
+Replaced day-n-adjacent front selection with a rule defined before the cohort screen:
+use only valid arrival values before target day n; center the 23×23 native crop nearest
+the centroid of all day n−1 pixels; require at least three day n−1 pixels in the safe
+interior; classify every such interior pixel as active and leave the crop border plus
+older pre-target pixels as historical scar. Ties prefer more safe-interior front pixels,
+then more pre-target history, then row/column. The day-n target mask is computed after
+this selection and written separately as evaluation truth. The chosen weather point is
+intended to be the safe-interior n−1 front centroid; no weather response or `Weather.csv`
+was checked by this proof.
+
+On TRAIN event `2018_747` (target DOY 228), all 19 target pixels were moved to different
+nodata locations. The target truth changed, but selected crop offset, prior mask, 20×20
+burnt/front masks, and row-major `InitialState.csv` were identical. The new crop contains
+17 of the 19 target pixels (89.47%); this is post-selection diagnostic evidence, not an
+eligibility rule. Receipt: [`cfsds-target-blind-input-invariance.json`](../../reports/real-fire-data/cfsds-target-blind-input-invariance.json).
+
+A train-only cohort screen read only 2014–2018 CFSDS rasters, one year at a time, and
+retained five events per year based on pre-target front/history metrics. It did not open
+validation/test rasters. Only 4/25 selected windows contain any target-day pixels;
+median capture is 0 and maximum is 1.0402%. Target coverage was calculated after crop and
+candidate selection; it did not influence them. This warns that the current fixed 2×2 km
+domain is often too small for next-day perimeter reality checks. Do not tune crop or
+shortlist with this target-based diagnostic; investigate target-blind spatial feasibility
+or an independently justified domain change before replay. Receipt:
+[`cfsds-train-target-blind-window-screen.json`](../../reports/real-fire-data/cfsds-train-target-blind-window-screen.json).
+
+Twelve focused CFSDS helper/screen tests pass. No new FireCase, annual fuel map, C++ replay, calibration,
+benchmark, or training was run. Fuel vintage, importer scar semantics, terrain/weather
+provenance, suppression, spatial feasibility, and the no-action gate remain open.
+The prior 10/20 fuel-only audit applies to the legacy cohort/windows, not this new
+target-blind shortlist; rerun it only after spatial feasibility defines a valid train set.
+The saved pilot FireCases are not retroactively relabeled as target-blind.

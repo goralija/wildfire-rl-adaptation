@@ -115,14 +115,11 @@ yet been transcribed and validated for this project's crosswalk. The official
 one-page CanFG-with-burn-scars PDF is a class legend, not that decision tree [S-038].
 
 The paper's initial boundary also selects day n-1 cells adjacent to target day n,
-and explicitly acknowledges this uses future perimeter information [S-037]. Our
-current `build_cfsds_case.py` implements that target-aware selection. It means the
-existing initial observation exposes part of target geometry even when the target
-raster is not copied into the observation. This is a separate leakage path from the
-fuel mask and must be replaced with a target-blind front definition before an
-unbiased agent benchmark. The day n-1 perimeter is satellite-derived and does not
-provide an hourly front, so the target-blind definition itself must be preregistered
-and checked on train data.
+and explicitly acknowledges this uses future perimeter information [S-037]. The
+first version of our `build_cfsds_case.py` implemented that target-aware selection,
+so its initial observation exposed part of target geometry. That historical behavior
+has since been replaced by the target-blind prototype recorded below. The day n-1
+perimeter remains satellite-derived and does not provide an hourly front.
 
 That published approach is a method candidate, not a result from this project and
 must not be copied without adaptation. Before implementing it, resolve the v2014b
@@ -157,7 +154,7 @@ event counts and the general boundary-rule check are recorded separately in
 This proves only the temporal perimeter predicate. It does **not** build/reclassify a
 fuel raster: the existing v2014b map still lacks a verified per-pixel cutoff, and the
 v20191114 succession tree has not yet been transcribed/validated. The diagnostic
-front count reproduces the current target-aware builder rule only to explain the
+front count reproduces the then-current target-aware builder rule only to explain the
 existing case; it is not an acceptable front input for an unbiased benchmark. A
 deliberately small C++
 fixture places one `burnt` initial-state cell on an upstream `NF` fuel cell. The pinned
@@ -167,27 +164,68 @@ grid; the probe then reports a secondary `IndexError` because that grid is absen
 The expected-rejection characterization and image/fixture hashes are in
 [`nonfuel-initial-scar-compatibility.json`](../../reports/firehose-verification/nonfuel-initial-scar-compatibility.json).
 
-**Decision:** do not silently map prior CFSDS scars to generic non-fuel or change the
-case builder yet. First establish the base-map vintage/succession rules, define a
-target-blind day n-1 front, and decide how C++/Python damage accounting represents a
-historically burnt cell that is non-fuel at simulation start. The active front must be
-valid under the simulator's fuel/import contract. No validation/test raster, replay,
-training, or target-based parameter selection was used.
+**Decision:** do not silently map prior CFSDS scars to generic non-fuel or alter fuel
+classes. The initial-state selector is now target-blind, but annual map generation still
+requires base-map vintage/succession rules and a decision about how C++/Python damage
+accounting represents a historically burnt cell that is non-fuel at simulation start.
+The active front must be valid under the simulator's fuel/import contract. No
+validation/test raster, replay, training, or target-based parameter selection was used.
+
+## Target-blind crop and initial-state proof — 2026-10-31
+
+The prototype rule in [`scripts/cfsds_initial_state.py`](../../scripts/cfsds_initial_state.py)
+uses only arrival values strictly before day n. It chooses the eligible 23×23 crop whose
+center is nearest the centroid of all day n−1 pixels; a crop must contain at least three
+safe-interior day n−1 pixels. Those interior pixels become the active front. Day n−1
+pixels on the one-pixel native crop border and older pre-target pixels become historical
+scar. Ties are deterministic: more interior front, more pre-target history, then
+row/column order. This is a declared daily-front proxy, not hourly flame truth.
+
+The train-only [`2018_747` invariance receipt](../../reports/real-fire-data/cfsds-target-blind-input-invariance.json)
+perturbs all 19 target-day pixels while preserving prior history. The crop offset, native
+prior mask, 20×20 burnt/front masks and serialized `InitialState.csv` remain identical;
+the separate target truth changes. The chosen target-blind crop happens to include 17/19
+target pixels, but this coverage was measured only after the crop rule was fixed.
+This proof fixes one TRAIN event/day explicitly; it proves conditional input invariance,
+not that the cohort's event-day selection is itself independent of target availability.
+
+A separate predeclared train-only screen processed years 2014–2018 and selected five
+candidates per year by pre-target state metrics. Only 4 of 25 shortlisted windows contain
+any target-day pixel; median target capture is zero and maximum capture is 1.0402%.
+Target geometry is diagnostic only and does not influence crop, candidate ranking, or
+eligibility. The result indicates that a fixed 2×2 km grid often misses the next day's
+observed growth for this shortlist. Do not tune the rule against target coverage; define
+any future spatial-feasibility rule from inputs available before day n, or reconsider the
+model-domain contract before a reality-check replay.
+
+The new window screen defaults to 2014–2018 and refuses validation/test years before
+opening their archives. `build_cfsds_case.py` now defaults to this train-only report and
+requires explicit false flags for target use both at report and candidate-row level; the
+legacy combined screen is rejected for new case generation. The builder calculates an
+intended weather lookup point from the pre-target front but still reads the supplied
+`--weather-json`; this invariance proof does not inspect that response or any `Weather.csv`.
+No weather file was regenerated, so weather location/field provenance remains open.
+
+No FireCase was rebuilt and no C++ replay or training was run. The proof demonstrates
+input invariance for one TRAIN event only, not physical validity or policy benefit.
 
 ## Status and next work
 
 - Generated terrain/weather package available: 3 of 20 train candidates.
-- Fuel-only screen: 10 pass and 10 fail; vintage suitability is unresolved.
+- Legacy fuel-only screen: 10 pass and 10 fail on the previous cohort/windows; the new
+  target-blind shortlist has not been fuel-audited and vintage suitability is unresolved.
 - Suppression status: unknown for 20 of 20.
 - No-action gate: not passed. No benchmark or fine-tuning.
 
 Before new train replay work:
 
-1. Obtain/verify a safe base-map temporal cutoff and transcribe/validate the v20191114
+1. Resolve target-blind spatial feasibility using only pre-target information: quantify
+   how much prior scar/front the fixed crop omits and verify that a usable day n−1 front
+   survives regridding. The current target screen is post-selection diagnosis only, never
+   an eligibility/tuning criterion. If the fixed 2×2 km domain is unsuitable, record the
+   blocker and justify a separate model-domain decision before replay.
+2. Obtain/verify a safe base-map temporal cutoff and transcribe/validate the v20191114
    succession tree and fuel crosswalk, including licensing and per-cell provenance.
-2. Replace the current target-aware `day n-1 adjacent to target day n` front selection
-   with a preregistered definition based only on day n-1-and-earlier information; add
-   a regression proving the initial input is invariant to the target-day mask.
 3. Decide/test importer semantics when historical cumulative damage occupies a cell
    whose as-of-event fuel class is non-fuel; the current importer explicitly rejects it.
 4. Only then build a fuel raster for one TRAIN case using the tested pre-target mask.

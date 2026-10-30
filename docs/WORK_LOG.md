@@ -455,3 +455,34 @@ network-isolated C++ expected-rejection verifier succeeded; and `git diff --chec
 clean. The first CLI smoke invocation intentionally avoided overwriting an existing
 `runs/` directory by rerunning under a fresh output name. Raw archives, Docker image,
 external checkout, and generated run outputs remain outside Git.
+
+## 2026-10-31 — TASK-015 target-blind crop/state and train spatial screen
+
+Replaced target-adjacent front selection with a registered pre-target rule. The 23×23
+crop center is nearest the centroid of all day n−1 pixels; safe-interior day n−1 pixels
+are active front, and the one-cell crop border plus older arrivals become historical
+scar. `build_cfsds_case.py` now recomputes this crop from pre-target data, defaults to the
+train-only screen, and rejects screens/candidate rows without explicit target-blind flags.
+The cohort-screen CLI defaults to 2014–2018 and refuses validation/test years.
+
+For TRAIN `2018_747` (DOY 228), moved all 19 day-n target pixels while preserving prior
+arrivals. Crop offset, 20×20 scar/front masks and serialized `InitialState.csv` stayed
+identical; the target truth changed. The crop contains 17/19 target pixels, measured only
+after selection. The separate target-blind train screen selected 25 candidates (five/year)
+by pre-target metrics; only 4/25 contain any target-day pixel, median capture 0, maximum
+1.0402%. This is a spatial-feasibility blocker, not a reason to tune windows with outcomes.
+
+Receipts: [invariance proof](../reports/real-fire-data/cfsds-target-blind-input-invariance.json),
+[train screen](../reports/real-fire-data/cfsds-train-target-blind-window-screen.json).
+The historical combined cohort report retains legacy target-aware offsets and is rejected
+by the updated builder. No FireCase rebuild, C++ replay, fuel-map generation, training,
+calibration, benchmark, or validation/test raster access occurred.
+
+Verification: all 58 project tests passed; strict OKF validation passed for 70 Markdown
+files; synthetic CLI smoke wrote to a fresh `/private/tmp` folder; the CFSDS screen
+processed 1,301 TRAIN event rasters/28,347 daily rows and emitted 25 TRAIN candidates;
+the target-mask proof passed; `build_cfsds_case.py --help`, Python compilation and
+`git diff --check` passed. The screen CLI's heldout-year rejection is unit-tested.
+No validation/test raster was opened. Generated smoke output and raw CFSDS archives stay
+outside Git. The screen emitted a non-fatal NumPy 2.5/Rasterio deprecation warning while
+reading rasters; the report completed successfully.

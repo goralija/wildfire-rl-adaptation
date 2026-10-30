@@ -38,6 +38,8 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
 - Per-cell train fuel audit sada je provjerio svih 20 kandidata: 10 prolazi samo fuel
   gate, a 10 pada na ne-gorivo/ambiguous overlay. Sva tri postojeća replay slučaja su
   među prolazima; zato fuel overlap sam ne objašnjava njihov veliki no-action rast.
+  Ovo je legacy kohorta i target-aware crop; ti PASS/FAIL brojevi ne kvalifikuju novi
+  target-blind shortlist, koji još nema svoj fuel audit.
   Novi input audit mjerio je samo tri materijalizovana slučaja: sve tri 20×20/100 m
   terrain mape su poravnate i kompletne; 17 slučajeva još nemaju paket. 2014b nema
   pixel-level cutoff dokaz, 2019 CanFG je razvojni i NBAC-zasnovan, a suppression je
@@ -50,8 +52,13 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
   [Mask receipt](../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
   [importer receipt](../reports/firehose-verification/nonfuel-initial-scar-compatibility.json),
   [ADR-020](../docs/specs/DECISION_RECORDS.md#adr-020).
-  Također, trenutni builder bira day n-1 front prema targetu day n, što otkriva dio
-  ciljne geometrije; target-blind početni front je preduslov za unbiased benchmark.
+  Raniji builder je birao day n-1 front prema targetu day n; to je zamijenjeno
+  target-blind centroid prozorom i unutrašnjim day n-1 frontom. Za `2018_747` promjena
+  target maske ne mijenja simulator input. Međutim, post-selection train screen shortlist
+  sadrži makar jedan target pixel u samo 4/25 cropa, pa prostorna podobnost 2×2 km domena
+  ostaje otvorena. Vidi [invariance receipt](../reports/real-fire-data/cfsds-target-blind-input-invariance.json),
+  [screen receipt](../reports/real-fire-data/cfsds-train-target-blind-window-screen.json)
+  i [ADR-021](../docs/specs/DECISION_RECORDS.md#adr-021).
 - TASK-018 je završio dijagnostičko poređenje tri sačuvana no-action replaya na fiksnim
   vremenskim presjecima: svi dodiruju rub 20×20 domene za 34–52 minute, a jedan popuni
   svih 400 ćelija. Rezultati su osjetljivi na vrijeme, ali nema unutar-dnevnog ground trutha
@@ -73,10 +80,13 @@ TASK-004c episode adapter je sada završen lokalno: C++/Python dijele terminalni
 damage, scar i aktivni front su odvojeni, a završetak dobija named reason. Fixture + 12/12
 inference rollouta potvrđuju adapter contract; svi matrix slučajevi završili su na weather
 horizonu. [Receipt i tehnički limiti](../reports/firehose-verification/task004c-adapter-smoke.json).
-Sljedeće treba ukloniti target-day curenje iz početnog fronta, potvrditi bazni fuel-map
-cutoff i v20191114 succession tree, definisati importer semantiku historijskog scar-a na
-non-fuel ćeliji i zatvoriti nedostajuću terrain/weather/suppression provenance samo na
-train/calibration događajima; izmjereni input audit trenutno pokriva 3/20 train paketa.
+Target-day curenje iz početnog fronta je uklonjeno za crop/initial-state pravilo i
+provjereno na jednom TRAIN paru. Sljedeće prvo riješiti da li je fiksni 2×2 km domen
+prostorno prikladan za target-blind train scenarije, bez korištenja targeta za izbor;
+zatim potvrditi bazni fuel-map cutoff i v20191114 succession tree, definisati importer
+semantiku historijskog scar-a na non-fuel ćeliji i zatvoriti nedostajuću
+terrain/weather/suppression provenance samo na train/calibration događajima. Izmjereni
+input audit trenutno pokriva 3/20 train paketa. Vidi [task handoff](../docs/NEXT_SESSION.md).
 Preliminarni 44 ID-ja i pilot su u
 [CFSDS kohort manifestu](../data/manifests/cfsds-v1_1-pilot-cohort.json).
 

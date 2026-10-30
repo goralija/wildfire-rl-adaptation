@@ -65,7 +65,8 @@ je uspješno. Svih šest dalo je istu mapu od 66 ha prema CFSDS cilju 15.39 ha (
 a novo širenje dodirnulo je 19 rubnih ćelija našeg 2×2 km isječka. Trajanje runova se
 razlikovalo. Dakle konverzija radi, ali
 ovaj replay pokazuje veliko neslaganje i rubni efekat; ne validira fiziku niti dokazuje
-korist agenta. [Replay mjere](../reports/real-fire-data/2018_747-day228-replay.json),
+korist agenta. Ovaj spremljeni pilot koristi historijski target-aware crop i ne smije se
+predstavljati kao target-blind niti retroaktivno mijenjati. [Replay mjere](../reports/real-fire-data/2018_747-day228-replay.json),
 [mapa](../reports/real-fire-data/2018_747-day228.png).
 
 **Dodatne train provjere, bez treniranja:** `2018_241` i `2018_1770` su pretvoreni i
@@ -149,10 +150,11 @@ u 48×50 source rasteru (272 u simulator cropu), dok je 19 ćelija dana 228 izos
 u ovom event rasteru nema poslije-target ćelija. Unit test dodatno provjerava da se
 synthetic dan n+1 isključuje. Ovo dokazuje vremensko pravilo maske, ne godišnju FBP kartu.
 
-Isti audit je otkrio dodatni evaluation blocker: trenutni `build_cfsds_case.py` bira
-day n-1 aktivne ćelije provjeravajući dodiruju li target day n. To otkriva target geometriju
-agentu kroz početni front. W.I.S.E. paper navodi i priznaje istu buduću informaciju;
-prije benchmarka treba preregistrovati i testirati target-blind front iz n-1 i ranijih dana.
+Isti audit je otkrio dodatni evaluation blocker: raniji `build_cfsds_case.py` birao je
+day n-1 aktivne ćelije provjeravajući dodiruju li target day n. Taj target-aware izbor
+zamijenjen je target-blind prototipom; detalji i nezavisni invariant dokaz su u odjeljku
+ispod. W.I.S.E. paper navodi i priznaje buduću informaciju u svom frontu, pa njegovu
+target-aware metodu ne koristimo za naš unbiased benchmark.
 
 Izolovani C++ fixture (`NF` cell 4 kao `burnt`, uz gorivnu cell 1 kao `burning`) potvrdio
 je poruku `InitialState.csv marks a non-fuel/harvested cell as burned`; importer odbija
@@ -162,9 +164,43 @@ ne simulator PASS. Nijedna fuel klasa nije promijenjena, nije pokrenut CFSDS rep
 trening i nisu otvoreni validation/test rasteri.
 
 Odluka [ADR-020](specs/DECISION_RECORDS.md#adr-020) blokira godišnje reclassifikovanje dok
-se ne potvrde per-pixel vintage/succession tree i importer/damage contract; target-aware
-front dodatno blokira unbiased benchmark. No-action gate ostaje pao; train terrain/weather
+se ne potvrde per-pixel vintage/succession tree i importer/damage contract. Target-aware
+front je zamijenjen target-blind prototipom, ali post-selection screen pokazuje slabu
+target pokrivenost na fiksnom gridu, a no-action gate ostaje pao. Train terrain/weather
 provenance i suppression takođe nisu zatvoreni.
+
+## TRAIN-only target-blind initial-state proof — 2026-10-31
+
+Uvedeno je pravilo [CFSDS initial-state helpera](../scripts/cfsds_initial_state.py):
+prozor 23×23 se bira samo iz arrival vrijednosti prije target DOY i njegov centar se
+postavlja što bliže centroidu svih day n−1 piksela. Za početni model front uzimaju se
+day n−1 pikseli unutar sigurnog unutrašnjeg prstena; n−1 pikseli na samoj ivici prozora i
+stariji pre-target pikseli ostaju burnt scar. Dnevna satelitski interpolisana oznaka je
+proxy, ne satna mjera plamena.
+
+Na samo TRAIN događaju `2018_747` promjena pozicije svih 19 day-n target piksela promijenila
+je zasebnu target truth mapu, ali nije promijenila crop offset, 20×20 scar/front maske ni
+serijalizovani `InitialState.csv`: `PASS_TARGET_MASK_INVARIANCE`. Target-blind crop sadrži
+17/19 target piksela (0.894737), ali ta pokrivenost je samo post-selection dijagnostika.
+Pogledati [invariance receipt](../reports/real-fire-data/cfsds-target-blind-input-invariance.json)
+i [implementaciju/testove](../scripts/cfsds_initial_state.py).
+
+Drugi screen otvarao je samo godišnje CFSDS rastere 2014–2018 (train). 25 kandidata,
+pet po godini, odabrani su po target-independent pre-target front/history mjerama; target
+coverage je izračunat nakon izbora. Samo 4/25 prozora sadrže makar jedan target pixel;
+medijana target capture je 0, a maksimum 0.010402. Ovaj rezultat upozorava da trenutni
+fiksni 2×2 km model prozor često ne zahvata sljedeći dnevni rast. Nije korišten da se
+promijeni crop, rangiranje ili parametar; reality-check podobnost i domena ostaju otvoreni.
+Pogledati [train-only screen receipt](../reports/real-fire-data/cfsds-train-target-blind-window-screen.json).
+
+Nije napravljena godišnja fuel mapa, obnovljen FireCase, C++ replay, tuning ni trening.
+Target-mask invariance je jedan matematički/implementacijski dokaz, ne dokaz ponašanja
+požara. No-action gate, model-domain prikladnost, annual fuel provenance/importer contract,
+weather/terrain izvori i suppression i dalje blokiraju benchmark i fine-tuning.
+Raniji rezultat 10/20 `PASS_FUEL_ONLY` važio je za prethodnu kohortu/target-aware cropove;
+ne kvalifikuje novi target-blind shortlist, koji još nema ponovljen fuel audit. Sačuvani
+pilot FireCase-ovi ostaju historijski prototipi i nisu retroaktivno preimenovani u
+target-blind slučajeve.
 
 ## Train-only fuel quality gate — 2026-10-30
 

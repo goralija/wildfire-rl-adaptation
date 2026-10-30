@@ -15,17 +15,23 @@ TASK-012 je završen. TASK-015 ima train-only fuel audit (10/20 fuel-only prolaz
 i input-alignment audit za tri od 20 lokalno dostupnih FireCase paketa. As-of-event
 fuel vintage nije potvrđen, DEM/weather provenance nije potpuna, a suppression je
 unknown. No-action mismatch ostaje otvoren.
-TASK-018 dijagnostička faza i TASK-004c episode adapter su završeni lokalno. Pre-target
-perimeter maska je dokazana za jedan TRAIN slučaj, ali godišnja fuel mapa još nije
-napravljena: 2014b nema potvrđen per-pixel cutoff, succession crosswalk nije potvrđen,
-a C++ fixture odbija historijski scar na NF ćeliji. Case builder trenutno bira početni
-front koristeći target day n, pa to buduće curenje treba ukloniti prije unbiased benchmarka.
-Slijedi rješavanje fuel/source/importer ugovora, target-blind front, terrain/weather
-provenance, suppression evidence i unaprijed definisani replay gate. Root cause no-action
-overgrowth nije izolovan, a no-action gate nije prošao. Ne koristi
-validation/test ishode za izbor parametara. No-action gate i heldout freeze moraju proći
-prije policy benchmarka ili fine-tuninga. Runtime PASS nije dokaz fizičke validacije ili
-RL prednosti. Čuvaj ovu razliku u sažecima.
+TASK-018 dijagnostička faza i TASK-004c episode adapter su završeni lokalno. Početni
+input sada ima prototipsko target-blind pravilo: prozor se centrira na centroid day n−1,
+a sigurne unutrašnje day n−1 ćelije čine početni front; granica prozora ostaje historijski
+scar. Za TRAIN događaj `2018_747` dokazano je da promjena day-n ciljne maske ne mijenja
+prozor, modelsku scar/front masku ni `InitialState.csv`. TRAIN-only screen istog pravila
+pokazuje slabo preklapanje ciljnog dana za većinu trenutno rangiranih kandidata; to je
+dijagnostika prostorne prikladnosti, ne dozvola da se prozor bira prema targetu.
+Godišnja fuel mapa još nije napravljena: 2014b nema potvrđen per-pixel cutoff,
+succession crosswalk nije potvrđen, a C++ fixture odbija historijski scar na NF ćeliji.
+Prvi naredni korak je target-blind prostorna podobnost 2×2 km domena iz pre-target
+podataka, jer train screen pokazuje malo sljedećednevnog target preklapanja. Zatim slijedi
+rješavanje fuel/source/importer ugovora, kompletne train terrain/weather provenance,
+suppression evidence i unaprijed definisani replay gate. Root cause no-action overgrowth
+nije izolovan, a no-action gate nije prošao. Ne koristi validation/test ishode za izbor
+parametara. No-action gate i heldout freeze moraju proći prije policy benchmarka ili
+fine-tuninga. Runtime PASS nije dokaz fizičke validacije ili RL prednosti. Čuvaj ovu
+razliku u sažecima.
 
 Održavanje znanja: [maintenance](knowledge/maintenance.md), format:
 [OKF profil](knowledge/okf-format.md). Novi `.md` koncept dobija YAML `type` i vezu iz

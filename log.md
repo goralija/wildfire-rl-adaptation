@@ -1,5 +1,13 @@
 # Promjene baze znanja
 
+## 2026-10-31: TASK-015 target-blind početno stanje i train screen
+
+- Početni crop/front sada koriste samo pre-target podatke: crop se centrira na day n−1 centroid, sigurni unutrašnji n−1 pikseli su aktivni front, a rub izreza ostaje scar. Builder odbija stare screenove/candidate redove bez eksplicitnih target-blind oznaka; screen CLI je train-only i odbija heldout godine.
+- TRAIN `2018_747` invariance proof: promjena svih 19 target piksela nije promijenila crop, 20×20 scar/front niti `InitialState.csv`; target truth se promijenio. To je uslovni proof za fiksni event/day par, ne validacija dnevnog fronta ili cohort-day odabira.
+- Screen shortlist od 25 TRAIN kandidata ima target pixel u samo 4 prozora (median capture 0; max 1.0402%). Ovo je naknadna dijagnostika, ne izborni kriterij; fiksni 2×2 km reality-check prostor ostaje upitan. Nema replaya, case rebuilda ni treninga.
+- [ADR-021](docs/specs/DECISION_RECORDS.md#adr-021), [EXP-011](docs/research/EXPERIMENT_LOG.md#exp-011--train-only-target-blind-crop-and-initial-state-proof-2026-10-31), [input QC](docs/research/CFSDS_TRAIN_INPUT_QC.md), [invariance receipt](reports/real-fire-data/cfsds-target-blind-input-invariance.json), [train screen](reports/real-fire-data/cfsds-train-target-blind-window-screen.json).
+- Fokus testovi: 12/12 prolaze; puni suite 58/58, strict OKF za 70 Markdown fajlova i synthetic CLI smoke prolaze. Sljedeće: prostorna podobnost bez targeta, fuel-vintage cutoff/succession i NF-scar importer; no-action replay gate ostaje blokiran.
+
 ## 2026-10-31: TASK-015 pre-target maska i NF-scar importer
 
 - Dodani su TRAIN-only mask audit i unit testovi. Za `2018_747`, target DOY 228, `arrival_day < 228` bira 881 pixel prije targeta; 19 target pixela je izostavljeno, a test pokriva i synthetic budući dan n+1.
