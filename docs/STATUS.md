@@ -18,11 +18,10 @@ Provjera: [63 Markdown fajla, 15 knowledge testova i clean-clone dokaz](../repor
 Osnovni aplikacijski paket i dalje nema dodatne zavisnosti; PyYAML je samo knowledge alat.
 
 ## Lokalni workspace
-Trenutni projektni checkout je repo root na grani `feature/project-bootstrap`, koja
-odgovara `origin/feature/project-bootstrap` na commitu `1499890`. `main` je i dalje na
-početnom commitu; feature grana nije spojena. U ovom workspaceu nema zasebnog nested
-`.worktrees/project-bootstrap/` checkouta: aktivna grana je na root putanji. Runbook za
-čiste klonove i lokalno ignorisane artefakte je u
+Projektni bootstrap PR #1 je spojen u `main`; baza za ovaj nastavak je commit `ea5b8a7a`.
+Train-only fuel QC je urađen u zasebnom task worktreeu na grani `research/cfsds-train-qc`.
+Glavni klon i drugi postojeći worktree sačuvani su. Sirovi podaci i treći Firehose
+checkout ostaju izvan commita. Runbook za worktree raspored je u
 [workspace layout dokumentu](../knowledge/workspace-layout.md).
 [Provjera preseljenja](../reports/workspace-relocation.json): 13,246 ne-venv fajlova
 i 11 backup fajlova sa istim hashovima, 19 sačuvanih verzija paketa, ispravljene
@@ -90,13 +89,31 @@ nedostatka satnih vrijednosti u CFSDS. Za heldout 2019/2022–24 još treba odgo
 fuel-map vintages (2019/2024) i kvalitetni inputi. BiH/MedEU ostaje kasnija odvojena
 studija jer njegovi evropski NFFL fuel kodovi nisu isti kao Canadian FBP.
 
-Sljedeći posao: sistemski provjeriti gorivo, vrijeme, FBP parametre i veličinu domene na
-train slučajevima, pa utvrditi postoji li konfiguracija Cell2Fire koja prođe no-action
-gate bez podešavanja na validation/test ciljevima. Preostaje TASK-004c terminal/damage
-export; multi-cell
-initial-state import (TASK-017) i tri train FireCase konverzije/no-action replaya (TASK-016)
-su ostvareni. Glavno treniranje je na čekanju dok no-action gate ne bude prihvatljiv
-na više train slučajeva; test skup se ne koristi za kalibraciju.
+Sljedeće: TASK-018 dijagnostika weather/FWI, FBP parametara, početnog fronta i extent-a
+na tri postojeća train no-action replaya, uz nepromijenjene inpute i bez heldout
+kalibracije. TASK-015 fuel gate je djelimično zatvoren, ali terrain/weather/suppression
+i odgovarajuće fuel vintages ostaju otvoreni. Zatim TASK-004c terminal/damage export,
+dodatni kvalitetni train replayi i heldout freeze. Glavno treniranje je na čekanju dok
+no-action gate ne prođe na više train požara; test skup se ne koristi za kalibraciju.
+
+## Train-only fuel quality gate — 2026-10-30
+
+Implementiran je [per-cell audit](research/CFSDS_TRAIN_QC.md) za svih 20 preliminarnih
+train day-pair kandidata. Deset prolazi `PASS_FUEL_ONLY`, a deset dobija
+`FAIL_FUEL_OVERLAP`; processing grešaka nema. Aktivni front i naredni target su u svih
+20 geometrijski validni i većinski na modelskom gridu ne dodiruju rub. To nije potvrda
+potpunog simulator slučaja: terrain/weather, suppression i reality-check su posebne
+provjere. Sve tri postojeće replay studije (`2018_747`, `2018_241`, `2018_1770`) prolaze
+gorivni gate, pa fuel preklop sam ne objašnjava njihovo preveliko širenje.
+
+i source rasteri nisu otvarani. Nije bilo simulator replaya, RL treninga ili kalibracije.
+Audit je koristio samo train slučajeve za overlay. Cohort manifest i zajednički crop-screen
+JSON, koji sadrže i druge podjele, bili su učitani radi selekcije train redova;
+validation/test fuel i source rasteri nisu otvarani. Rezultati su zapisani i u train
+redove [kohort manifesta](../data/manifests/cfsds-v1_1-pilot-cohort.json). Nije bilo
+simulator replaya, RL treninga ili kalibracije.
+i source rasteri nisu otvarani. Nije bilo simulator replaya, RL treninga ili kalibracije.
+Suppression je nepoznat za svih 20. [Detaljni report](../reports/real-fire-data/cfsds-train-fuel-qc.json).
 
 ## Environment reproducibility — 2026-10-30
 
@@ -155,4 +172,5 @@ pribavljanje lokalnih podataka i trenutno stanje replaya.
 Za objavu ponovo prolazi svih 26 testova u modernom environmentu. Čisti lokalni
 Git klon s novim venvom i bez dodatnih paketa prolazi 22 testa (4 optional preskočena)
 i synthetic smoke; originalni lokalni setup nije preduslov za taj početak.
-Korisnik je odobrio objavu cijele feature grane i PR prema početnom mainu; ADR-008.
+Bootstrap rad je spojen kroz [PR #1](https://github.com/goralija/wildfire-rl-adaptation/pull/1).
+Ova statusna grana sadrži zaseban naredni train-data QC korak.

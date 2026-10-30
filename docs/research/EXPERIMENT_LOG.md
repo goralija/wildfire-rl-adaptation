@@ -142,3 +142,26 @@ Receipts: `reports/real-fire-data/2018_241-case.json`, `2018_241-day227-replay.j
 `2018_1770-*` files; rejection receipt `2014_538-fuel-rejection.json`. These runs
 confirm that geometric crop screening is insufficient and that simulator no-action
 behavior needs input/model diagnosis before policy training. No RL training performed.
+
+## EXP-006 — Train-only per-cell CFSDS fuel QC, 2026-10-30
+
+Audited all 20 preliminary train day-pairs against the official Canadian FBP 2014b
+250 m fuel layer. The tool independently reports 90 m CFSDS native-pixel overlap and
+the actual centered 20×20/100 m Cell2Fire grid, matching the existing converter's
+nearest-neighbour fuel resampling and area-averaged state masks. It cross-checks event
+area against the annual group table and records source/code hashes.
+
+Results: 10 `PASS_FUEL_ONLY`, 10 `FAIL_FUEL_OVERLAP`, zero processing errors. All 20
+retain a valid adjacent front/target pair on the model grid, and majority front/target
+cells do not touch the grid edge. All three existing no-action replay cases pass the
+fuel-only gate, so fuel overlap by itself does not account for their spread mismatch.
+Suppression is unknown for all candidates. The all-split cohort manifest and crop-screen
+JSON were loaded for train selection, but no validation/test source or fuel raster was opened or
+overlaid. No C++ replay, policy benchmark, calibration or RL training was run.
+
+The exclusion rule checks earlier scar as well as active front and target, and is a
+project-specific conservative gate inspired by (not reproducing) the W.I.S.E. method.
+10 fuel-pass events are not full-case passes; terrain/weather/suppression, fuel vintage,
+crop adequacy and no-action behavior remain separate. See [method](CFSDS_TRAIN_QC.md)
+and [receipt](../../reports/real-fire-data/cfsds-train-fuel-qc.json). Next is TASK-018
+train-only diagnosis of the three current replay mismatches. No heldout outcomes used.

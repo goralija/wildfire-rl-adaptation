@@ -10,9 +10,13 @@ Repo je OKF 0.2 knowledge bundle. Na početku sesije pročitaj [index.md](index.
 Zatim koristi [mapu zadataka/koda](knowledge/code-map.md) za relevantne izvore i testove.
 Korisnikove direktne upute imaju prednost; kasniji ADR može zamijeniti raniji.
 
-**Prvi fokus je TASK-012 dataset refinement.** Izbor, uloga i obim podataka su otvoreni;
-Dogrib/CFSDS su pregledani kandidati. TASK-004c je tehnički nastavak nakon refinementa.
-Runtime PASS nije dokaz fizičke validacije ili RL prednosti. Čuvaj ovu razliku u sažecima.
+**Odabrana je putanja Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire (ADR-013).**
+TASK-012 je završen. TASK-015 ima preliminarni train-only fuel audit: 10/20 kandidata
+prolazi samo taj gate; vrijeme, teren, gašenje i no-action mismatch ostaju otvoreni.
+Sljedeći fokus je TASK-018, kontrolisana dijagnostika širenja na postojećim train
+caseovima. Ne koristi validation/test ishode za izbor parametara. TASK-004c i no-action
+gate moraju biti završeni prije policy benchmarka ili fine-tuninga. Runtime PASS nije
+dokaz fizičke validacije ili RL prednosti. Čuvaj ovu razliku u sažecima.
 
 Održavanje znanja: [maintenance](knowledge/maintenance.md), format:
 [OKF profil](knowledge/okf-format.md). Novi `.md` koncept dobija YAML `type` i vezu iz

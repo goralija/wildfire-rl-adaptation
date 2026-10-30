@@ -35,6 +35,10 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
   intervencija/treninga; no-action prognoze 66/237/73 ha prema 15.39/12.15/12.15 ha
   pokazuju veliko neslaganje i rubni efekat. `2014_538` pada na fuel/water provjeri.
   Treba riješiti input/extent/model gate prije treniranja agenta.
+- Per-cell train fuel audit sada je provjerio svih 20 kandidata: 10 prolazi samo fuel
+  gate, a 10 pada na ne-gorivo/ambiguous overlay. Sva tri postojeća replay slučaja su
+  među prolazima; zato fuel overlap sam ne objašnjava njihov veliki no-action rast.
+  Suppression je nepoznat, a puna input/replay validacija nije završena. [Metod i detalji](../docs/research/CFSDS_TRAIN_QC.md).
 - FireSpread_MedEU/EFFIS ostaje odvojeni mogući BiH pravac; evropski NFFL fuel kodovi
   nisu direktno kompatibilni s trenutnim Canadian FBP.
 
@@ -46,9 +50,9 @@ generiše counterfactual ishode. Pročitaj [X/Y mapiranje i ograničenja](../doc
 i [izbor izvora](../docs/research/REAL_FIRE_DATASETS.md).
 
 Glavni izbor geografije i simulatora je zatvoren po korisnikovoj uputi. Sljedeće je
-sistemski provjeriti fuel-vintage, FWI/weather i FBP parametre za train događaje,
-razumjeti no-action prekomjerno širenje, pripremiti 2019/2024 FBP map vintages i spojiti
-suppression/QC metadata.
+TASK-018: dijagnostikovati no-action prekomjerno širenje na tri postojeća train replaya,
+prvo iz njihovih sačuvanih inputa, FWI/weather i FBP parametara, te domene/fronta.
+Zatim pripremiti odgovarajuće fuel vintages, terrain/weather QC i suppression dokaze.
 Preliminarni 44 ID-ja i pilot su u
 [CFSDS kohort manifestu](../data/manifests/cfsds-v1_1-pilot-cohort.json). Adapter za
 `burnt` + višestruki `burning` početni state i jedan case converter su već ostvareni;
@@ -56,8 +60,8 @@ TASK-004c još treba terminalni razlog i cumulative-damage export.
 
 TASK-014 core/legacy environment je lokalno reproducovan na macOS ARM64 + Linux ARM64;
 moderni venv ima geospatial ETL stack. Receipt bilježi pakete, image hash i inference.
-TASK-004c treba dovršiti cumulative-damage i terminal-reason dio. Runtime PASS nije
-research-ready. Checkpoint kontrakt je RGB 3×20×20 i
+TASK-004c treba dovršiti cumulative-damage i terminal-reason dio prije benchmarka ili
+fine-tuninga. Runtime PASS nije research-ready. Checkpoint kontrakt je RGB 3×20×20 i
 Discrete(400), uz forced legacy no-op -1 nakon budžeta.
 
 Glavni fine-tuning, dokazana RL prednost, fizička validacija stvarnim požarima,

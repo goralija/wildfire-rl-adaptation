@@ -261,3 +261,29 @@ interpolisani dnevni target, zato rezultat nije sam po sebi dokaz greške Cell2F
 Evidence: `reports/real-fire-data/2018_241-day227-replay.json`,
 `2018_1770-day224-replay.json`, `2014_538-fuel-rejection.json` i
 `reports/real-fire-data/README.md`.
+
+## ADR-016 — train-only fuel gate and next diagnostic order, 2026-10-30
+
+TASK-015 per-cell QC je primijenjen samo na 20 kandidata iz train particije koristeći
+Canadian FBP 2014b, trenutno raspoloživi trening-period sloj. `PASS_FUEL_ONLY` znači
+isključivo da audit nije našao native 90 m fire-mask piksele niti majority 100 m
+model-grid fire-mask ćelije na Water, Non-fuel, Wetland, Urban, Vegetated Non-fuel,
+Unknown ili unmapped kategoriji. Sub-majority preklop se zasebno prijavljuje za review.
+Ovo je konzervativno projektno pravilo, inspirisano fuel filterima u W.I.S.E. radu,
+ali nije reprodukcija njegovog protokola; u ovom auditu i raniji scar ulazi u provjeru.
+
+Nalaz: 10/20 train događaja `PASS_FUEL_ONLY`, 10/20 `FAIL_FUEL_OVERLAP`, bez processing
+grešaka. Sva tri već replayana događaja prolaze samo fuel provjeru. To ne potvrđuje
+terrain/weather/suppression ni fizičku tačnost i ne znači da su pass događaji puni
+caseovi. Kohort manifest i combined crop-screen JSON sa svim split metadata su učitani za train selekciju,
+ali nijedan validation/test raster nije otvoren ili overlay-an. Raw ostaje ignorisan;
+commituju se kod, hashovi i sažet rezultat.
+
+**Operativni nastavak:** sljedeći TASK-018 prvo poredi postojeće train FireCase manifest-e,
+FWI/weather, FBP parametre, početni front i crop/domain te predlaže minimalne kontrolisane
+train-only provjere. Ne podešavati validation/test ciljeve. TASK-004c damage/terminal
+adapter i no-action gate ostaju preduslov za policy benchmark/fine-tuning prema ADR-015.
+Ako se kasnije nađu fuel-vintage ili suppression podaci, ponoviti QC pod novim reportom;
+ne prepisivati historijski receipt.
+
+Evidence: `docs/research/CFSDS_TRAIN_QC.md`, `reports/real-fire-data/cfsds-train-fuel-qc.json`.

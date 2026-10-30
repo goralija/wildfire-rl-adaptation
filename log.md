@@ -1,5 +1,16 @@
 # Promjene baze znanja
 
+## 2026-10-30: train-only CFSDS fuel QC gate
+
+- Nova grana `research/cfsds-train-qc` zasniva se na spojenom `main` (`ea5b8a7a`); rad je u izolovanom task worktreeu.
+- `scripts/audit_cfsds_train_fuel.py` i tri GIS unit testa pregledaju 20 train day-pair kandidata na dvije skale: native CFSDS 90 m i stvarni Cell2Fire 20×20/100 m grid. Report uključuje source/code SHA-256, fuel class mape, mask/area statistiku i ograničenja.
+- Rezultat: 10 `PASS_FUEL_ONLY`, 10 `FAIL_FUEL_OVERLAP`, 0 processing grešaka. Sva tri postojeća no-action replay događaja prolaze samo fuel gate; to ne potvrđuje weather/terrain/suppression ili potpunu podobnost.
+- Train redovi u `data/manifests/cfsds-v1_1-pilot-cohort.json` nose odgovarajući fuel-only status i link na receipt; cijela kohorta i dalje nije finalni benchmark.
+- Validation/test fuel i source rasteri nisu otvoreni. Zajednički cohort manifest i crop-screen JSON sa svim split metapodacima učitani su da se izdvoje train redovi; nijedan validation/test overlay nije izračunat. Dokumentacija to precizno navodi. Nije bilo replaya, RL treninga ni kalibracije.
+- [Metoda i limiti](docs/research/CFSDS_TRAIN_QC.md), [mašinski report](reports/real-fire-data/cfsds-train-fuel-qc.json), [EXP-006](docs/research/EXPERIMENT_LOG.md), [ADR-016](docs/specs/DECISION_RECORDS.md).
+- Sljedeće je TASK-018: train-only dijagnostika prekomjernog no-action širenja; potom TASK-004c i preostali input/replay gate prije benchmarka ili fine-tuninga.
+- Fokusirani geo tests: 3/3 prolaze. Cijela test suite, strict knowledge validator, CLI smoke i atomic commits još su u toku.
+
 ## 2026-10-30: CFSDS putanja izabrana i prvi stvarni C++ replay
 
 - Po korisnikovoj uputi odabrana je Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire, jer je to najbolji fit postojećem simulatoru. Stvarni historijski rast ostaje zaseban reality-check; RL iskustvo generiše simulator.

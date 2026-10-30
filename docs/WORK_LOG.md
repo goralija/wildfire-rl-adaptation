@@ -324,3 +324,27 @@ the existing 12-case Sub20 inference matrix: 12/12 succeeded, all C++ exit codes
 and all existing PPO checkpoint weights remained unchanged. The run was offline/CPU-only,
 without training. Compact receipt: `reports/firehose-verification/real-case-image-regression.json`;
 raw logs stay in ignored `runs/firehose-final-check/`.
+
+2026-10-30 — Started isolated branch `research/cfsds-train-qc` from merged main
+`ea5b8a7a`. Implemented `scripts/audit_cfsds_train_fuel.py` and focused optional GIS
+unit tests. The train-only audit reads the 20 train rows, compares CFSDS 90 m masks and
+the actual 20×20/100 m simulator grid to the Canadian FBP 2014b map, cross-checks annual
+group-table area, and stores SHA-256 provenance in
+`reports/real-fire-data/cfsds-train-fuel-qc.json`. Result: 10 `PASS_FUEL_ONLY`, 10
+`FAIL_FUEL_OVERLAP`, zero processing errors. The existing three replay cases pass the
+fuel gate, so their mismatch needs separate weather/FWI, FBP, suppression and domain
+diagnosis. All suppression remains unknown. A precision review corrected the report to
+state that the all-splits crop-screen file is loaded for selection, while no
+validation/test fuel/source rasters are opened or overlaid. The published W.I.S.E.
+filter is cited as inspiration only; this project gate is not its reproduction.
+
+Added the fuel-only statuses and report pointer to the train rows in the cohort manifest.
+Regenerated the report so its SHA-256 provenance matches the updated manifest.
+Documented method, finding, limits and next TASK-018 in the research note, ADR-016,
+experiment/work logs, status, backlog, handoff and navigation. No raw archive, third-party
+checkout, venv, simulator replay, parameter calibration or agent training was added.
+Verification: full application suite 29/29 passed, knowledge checker tests 15/15 passed,
+strict OKF validator passed with 68 Markdown files, and the synthetic CLI smoke wrote
+its output successfully. Report/manifest/script SHA-256 consistency was checked; no
+absolute workstation paths were found in the new report. These checks cover the exact
+implementation, report and documentation recorded above.

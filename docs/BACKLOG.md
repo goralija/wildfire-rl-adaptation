@@ -15,10 +15,11 @@ Napor je okvirni agentov prijedlog u aktivnim radnim satima, bez roka i dodjele 
 | TASK-013 | završeno: podrška handoffu | OKF repo bundle, ulazi/navigacija, održavanje, validator/testovi/CI | ostvareno |
 | TASK-012 | završeno 2026-10-30 | prema korisnikovoj uputi odabrana Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire; historijske granice služe zasebnom reality-checku, a agent uči iz simulatora | ostvareno |
 | TASK-014 | lokalno završeno 2026-10-30; drugi host nije provjeren | moderni `.venv` i odvojeni legacy Docker izgrađeni; package/source/image hashovi i smoke/inference receipt zapisani | ostvareno lokalno |
-| TASK-015 | P0, djelimično završeno | odabrana CFSDS putanja; 44 preliminarna compact-crop kandidata podijeljena 20/9/15; tri train slučaja su pokrenuta, jedan je odbijen zbog water/nonfuel ćelija; treba fuel-vintage, suppression i vremenski QC prije benchmarka | 2–4 h + data QC |
+| TASK-015 | P0, djelimično završeno | 44 preliminarna kandidata 20/9/15; novi per-cell fuel QC za svih 20 train: 10 `PASS_FUEL_ONLY`, 10 `FAIL_FUEL_OVERLAP`; preostaju fuel-vintage, terrain/weather i suppression QC | 2–4 h + data QC |
+| TASK-018 | P0, sljedeći | kontrolisana dijagnostika prevelikog no-action širenja na `2018_747`, `2018_241`, `2018_1770`; sačuvati iste inpute/hashove, provjeriti FBP/weather/front/domain uz train-only analizu; bez RL treninga i heldout kalibracije | 3–6 h + GIS/model |
 | TASK-004c | P0, djelimično | multi-cell C++ početni state radi; preostaje kumulativna šteta i terminalni razlog containment naspram isteka weather horizonta za RL evaluator | 3–6 h |
 | TASK-017 | završeno 2026-10-30 | `InitialState.csv` uvozi raniji scar i više aktivnih ćelija; fixture i stvarni `2018_747` C++ import/replay su uspješni | ostvareno |
-| TASK-016 | P0, tri pilot konverzije; no-action gate nije prošao | FireCase JSON→raster/weather→Cell2Fire radi; tri train-only replaya šire 66/237/73 ha prema 15.39/12.15/12.15 ha; jedan kandidat odbijen na fuel provjeri; prvo ulazni QC i dijagnostika širenja, bez fine-tuninga | 6–12 h + GIS/model |
+| TASK-016 | P0, tri pilot konverzije; no-action gate nije prošao | FireCase JSON→raster/weather→Cell2Fire radi; tri train-only replaya šire 66/237/73 ha prema 15.39/12.15/12.15 ha; 2014_538 fuel-rejected; fuel gate 10/20 train kandidata pass-only; TASK-018 dijagnostika slijedi prije dodatnih replaya, bez fine-tuninga | 6–12 h + GIS/model |
 | TASK-004b | P0 uslovno | SimFire fallback spike ako gate padne; novi ADR | 2–4 h |
 | TASK-005 | P1 nakon gatea | budžetski adapter + frozen benchmark + cijena 10 rollouta | 3–6 h |
 | TASK-006 | P1 | 3 training seeda, fine-tuning po B, matched controls, hierarchical CI; AC-007 | zavisi od mjerenja |
@@ -26,9 +27,12 @@ Napor je okvirni agentov prijedlog u aktivnim radnim satima, bez roka i dodjele 
 | TASK-008 | P2 | joint budget features/weight transfer i ablation bez njih | samo uz prostor |
 | TASK-009 | P1 predaja | glavni grafikoni, poster, interpretacija i usmeni | 4–8 h |
 
-Redoslijed nastavka: 012 cilj/source plan→014 local PASS→015 event/input freeze→
-004c adapter→017 multi-cell initial-state import→016 selected-geography case builder/replay→005 benchmark/time→006
-fine-tune→007→009; 001–004 su ostvarena osnova, 004b samo nakon dokumentovanog FAIL.
+Redoslijed nastavka: 012 (završeno) → 014 local PASS (završeno) → 015 train fuel/input
+QC (djelimično) → 018 no-action mismatch dijagnostika → 004c cumulative-damage/
+terminal-reason adapter → 015 preostali vintage/terrain/weather/suppression QC i heldout
+freeze → 016 dodatni train replay → 005 benchmark/time → 006 fine-tune → 007 → 009.
+TASK-017 initial-state import je završen. TASK-004b je samo fallback nakon dokumentovanog
+FAIL. TASK-005/006 ne počinju prije no-action gatea i ispravnog terminal/damage adaptera.
 Ne počinjati fine-tuning dok se ne izmjere rollout/training trošak i zamrzne test ID skup.
 Historijski TASK-011a/011b ostaje opcion i iza glavnog simulator gatea.
 Nema obaveze implementacije svakog proširenja: glavni minimum i kvalitet evaluacije imaju prednost.
@@ -61,10 +65,16 @@ knowledge checker, CLI, GIS reprojection smoke, moderni PPO smoke i 12 Firehose 
 slučajeva su u reports/environment-setup/. Drugi OS/arch nije provjeren.
 
 TASK-015 (P0 input/cohort quality): geometrijski screen za 2014–2024 zadržao najviše pet
-candidate slučajeva po godini: 20 train, 9 validation, 15 test. To nije iscrpan spisak
-niti finalni benchmark. Pripremiti FBP 2019/2024 vintages za kasnije godine, provjeriti
-fuel/terrain/weather poravnanje na više train cropova, spojiti suppression dokaze, pa
-tek onda zaključati heldout event IDs.
+kandidata po godini: 20 train, 9 validation, 15 test. Train-only audit (`docs/research/CFSDS_TRAIN_QC.md`)
+obrađuje 20 train parova: 10 prolazi samo gorivnu provjeru, 10 pada; postojeća tri replaya
+su među prolazima. Validation/test rasteri nisu otvarani. Kohorta nije iscrpna niti je
+heldout benchmark zamrznut. Još pribaviti/ocijeniti FBP 2019/2024 vintages, terrain/weather
+poravnanje i suppression dokaze prije heldout caseova.
+
+TASK-018 prihvat: objasniti koji potvrđeni ulazni faktori mogu uzrokovati preveliko
+no-action širenje u tri postojeća train replaya; porediti dokumentovane vrijednosti i
+hashove prije bilo kakve promjene, odvojiti opažanja od hipoteza, sačuvati reproduktivne
+kontrolisane train-only provjere i ne mijenjati validation/test niti PPO težine.
 
 TASK-017 je završen za početni historical state bridge. `InitialState.csv` prenosi ranije
 opožarene ćelije (`burnt`) i više aktivnih front ćelija (`burning`). Fixture i stvarni

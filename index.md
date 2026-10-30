@@ -10,7 +10,7 @@ okf_version: "0.2"
 - [Handoff za kolegu](HANDOFF.md) - Prenosiv nastavak bez chat historije.
 - [Trenutno stanje](docs/STATUS.md) - Šta radi, dokazi i ograničenja.
 - [Naredna sesija](docs/NEXT_SESSION.md) - Redoslijed nastavka.
-- [Prioriteti i prihvat](docs/BACKLOG.md) - Dataset refinement prvi; adapter je tehnički nastavak.
+- [Prioriteti i prihvat](docs/BACKLOG.md) - CFSDS fuel QC je djelimičan; sljedeće je TASK-018 replay dijagnostika.
 
 ## Pronađi detalje i dokaze
 
