@@ -54,6 +54,18 @@ def input_tree_hash(root):
     return h.hexdigest()
 
 
+def weather_horizon(path, minutes_per_weather_row=60):
+    """Return the number of weather rows and their modeled time coverage."""
+    if type(minutes_per_weather_row) is not int or minutes_per_weather_row < 1:
+        raise ValueError('minutes_per_weather_row must be a positive integer')
+    with Path(path).open(newline='') as stream:
+        rows = list(csv.reader(stream))
+    if not rows:
+        raise ValueError('Weather.csv is empty')
+    data_rows = [row for row in rows[1:] if any(value.strip() for value in row)]
+    return len(data_rows), len(data_rows) * minutes_per_weather_row
+
+
 def weight_hash(model):
     h = sha256()
     for name, value in sorted(model.policy.state_dict().items()):
@@ -141,7 +153,9 @@ def main():
         )
         result['ignition_cell_one_based'] = 372
         result['weather_file'] = 'Weather.csv (rows mode)'
-        result['weather_horizon_minutes'] = 60 * args.steps_per_action
+        result['weather_rows_available'], result['weather_horizon_minutes'] = weather_horizon(
+            Path(env.helper.tmp_input_folder) / 'Weather.csv'
+        )
         observation = env.reset()
         initial_paths = [line for line in env.fire_process.lines if 'ForestGrid' in line and '.csv' in line]
         initial_state = pd.read_csv(initial_paths[-1], header=None).values

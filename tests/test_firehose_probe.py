@@ -2,7 +2,13 @@ import tempfile
 from pathlib import Path
 import unittest
 
-from wildfire_rl.firehose_probe import budget_action, history_damage, override_seed, input_tree_hash
+from wildfire_rl.firehose_probe import (
+    budget_action,
+    history_damage,
+    input_tree_hash,
+    override_seed,
+    weather_horizon,
+)
 
 
 class FirehoseProbeTests(unittest.TestCase):
@@ -35,3 +41,19 @@ class FirehoseProbeTests(unittest.TestCase):
             self.assertEqual(input_tree_hash(a), input_tree_hash(b))
             (b / 'Ignitions.csv').write_text('Year,Ncell\n1,381\n')
             self.assertNotEqual(input_tree_hash(a), input_tree_hash(b))
+
+    def test_weather_horizon_uses_weather_rows_not_policy_action_interval(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / 'Weather.csv'
+            path.write_text('Scenario,datetime,WS\ncase,00:00,2\ncase,01:00,3\n')
+            self.assertEqual(weather_horizon(path), (2, 120))
+
+    def test_weather_horizon_rejects_empty_file_and_invalid_period(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / 'Weather.csv'
+            path.write_text('')
+            with self.assertRaises(ValueError):
+                weather_horizon(path)
+            path.write_text('Scenario,datetime,WS\n')
+            with self.assertRaises(ValueError):
+                weather_horizon(path, minutes_per_weather_row=0)
