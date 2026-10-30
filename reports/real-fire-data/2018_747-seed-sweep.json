@@ -1,0 +1,97 @@
+{
+  "all_same_input": true,
+  "case_id": "2018_747_dob228_20x20",
+  "scope": "six no-action seed repeats of one train day-pair; no learning or interventions",
+  "seeds": [
+    {
+      "area_weighted_iou": 0.2187,
+      "area_weighted_precision": 0.2213,
+      "area_weighted_recall": 0.9491,
+      "final_grid": "runs/real-case/2018_747-day228/probe/no-action/simulator/results/CFSDS_2018_747_2026-10-30_18-55-07_PWG84N/run_0/Grids/Grids1/ForestGrid245.csv",
+      "input_sha256": "4685b7466ed9daa6de2783553fed019f0f15b53a2b6b6a54df3335a9e1308bcf",
+      "model_minute_snapshots": 244,
+      "new_burned_area_ha": 66.0,
+      "observed_target_ha": 15.387,
+      "predicted_edge_cells": 19,
+      "seed": 123,
+      "success": true
+    },
+    {
+      "area_weighted_iou": 0.2187,
+      "area_weighted_precision": 0.2213,
+      "area_weighted_recall": 0.9491,
+      "final_grid": "runs/real-case/2018_747-day228/probe-seeds/seed-124/simulator/results/CFSDS_2018_747_2026-10-30_19-05-33_X951ST/run_0/Grids/Grids1/ForestGrid207.csv",
+      "input_sha256": "4685b7466ed9daa6de2783553fed019f0f15b53a2b6b6a54df3335a9e1308bcf",
+      "model_minute_snapshots": 206,
+      "new_burned_area_ha": 66.0,
+      "observed_target_ha": 15.387,
+      "predicted_edge_cells": 19,
+      "seed": 124,
+      "success": true
+    },
+    {
+      "area_weighted_iou": 0.2187,
+      "area_weighted_precision": 0.2213,
+      "area_weighted_recall": 0.9491,
+      "final_grid": "runs/real-case/2018_747-day228/probe-seeds/seed-125/simulator/results/CFSDS_2018_747_2026-10-30_19-05-36_M8VDRD/run_0/Grids/Grids1/ForestGrid364.csv",
+      "input_sha256": "4685b7466ed9daa6de2783553fed019f0f15b53a2b6b6a54df3335a9e1308bcf",
+      "model_minute_snapshots": 363,
+      "new_burned_area_ha": 66.0,
+      "observed_target_ha": 15.387,
+      "predicted_edge_cells": 19,
+      "seed": 125,
+      "success": true
+    },
+    {
+      "area_weighted_iou": 0.2187,
+      "area_weighted_precision": 0.2213,
+      "area_weighted_recall": 0.9491,
+      "final_grid": "runs/real-case/2018_747-day228/probe-seeds/seed-126/simulator/results/CFSDS_2018_747_2026-10-30_19-05-39_U0BBTW/run_0/Grids/Grids1/ForestGrid273.csv",
+      "input_sha256": "4685b7466ed9daa6de2783553fed019f0f15b53a2b6b6a54df3335a9e1308bcf",
+      "model_minute_snapshots": 272,
+      "new_burned_area_ha": 66.0,
+      "observed_target_ha": 15.387,
+      "predicted_edge_cells": 19,
+      "seed": 126,
+      "success": true
+    },
+    {
+      "area_weighted_iou": 0.2187,
+      "area_weighted_precision": 0.2213,
+      "area_weighted_recall": 0.9491,
+      "final_grid": "runs/real-case/2018_747-day228/probe-seeds/seed-127/simulator/results/CFSDS_2018_747_2026-10-30_19-05-42_39O479/run_0/Grids/Grids1/ForestGrid337.csv",
+      "input_sha256": "4685b7466ed9daa6de2783553fed019f0f15b53a2b6b6a54df3335a9e1308bcf",
+      "model_minute_snapshots": 336,
+      "new_burned_area_ha": 66.0,
+      "observed_target_ha": 15.387,
+      "predicted_edge_cells": 19,
+      "seed": 127,
+      "success": true
+    },
+    {
+      "area_weighted_iou": 0.2187,
+      "area_weighted_precision": 0.2213,
+      "area_weighted_recall": 0.9491,
+      "final_grid": "runs/real-case/2018_747-day228/probe-seeds/seed-128/simulator/results/CFSDS_2018_747_2026-10-30_19-05-45_7DMMPL/run_0/Grids/Grids1/ForestGrid322.csv",
+      "input_sha256": "4685b7466ed9daa6de2783553fed019f0f15b53a2b6b6a54df3335a9e1308bcf",
+      "model_minute_snapshots": 321,
+      "new_burned_area_ha": 66.0,
+      "observed_target_ha": 15.387,
+      "predicted_edge_cells": 19,
+      "seed": 128,
+      "success": true
+    }
+  ],
+  "summary": {
+    "all_reached_crop_edge": true,
+    "identical_final_grid_across_seeds": true,
+    "iou_max": 0.2187,
+    "iou_min": 0.2187,
+    "mean_predicted_area_ha": 66.0,
+    "observed_target_ha": 15.387,
+    "predicted_area_ha_max": 66.0,
+    "predicted_area_ha_min": 66.0,
+    "runs_successful": 6,
+    "unique_final_grid_hashes": 1
+  }
+}
