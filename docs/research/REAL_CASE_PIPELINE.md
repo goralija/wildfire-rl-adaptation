@@ -270,9 +270,10 @@ se ne tumače kao jedna istovremena ivica.
 
 Ovo rješava projektni adapter kroz `InitialState.csv`: ranije opožarene ćelije su
 `burnt`, opaženi aktivni rub je skup `burning` ćelija. C++ simulator je potvrdio uvoz
-fixturea i slučaja `2018_747`; početno C++ raster stanje odgovara ulaznom CSV-u. Za
-glavne RL eksperimente još treba provjeriti cumulative-damage računanje i terminalni
-razlog u cijeloj Python→C++ epizodi.
+fixturea i slučaja `2018_747`; TASK-004c je naknadno dodao terminalni cumulative-damage,
+front/treatment IDs i reason u cijeloj Python→C++ epizodi. [Runtime receipt](../../reports/firehose-verification/task004c-adapter-smoke.json).
+Za glavne RL eksperimente i dalje treba proći odvojeni CFSDS no-action quality gate;
+tehnički adapter prolaz ne potvrđuje fiziku niti smanjenje štete.
 
 ## Kako od daily CFSDS para napraviti jednu Cell2Fire epizodu
 

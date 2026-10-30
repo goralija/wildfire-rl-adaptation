@@ -166,8 +166,9 @@ Firehose/Cell2Fire engine, pa njegove metrike ne prenosimo na ovaj projekat.
 
 ## Sljedeći koraci
 
-1. Dovršiti TASK-004c: eksport kumulativne štete i poseban terminalni razlog za horizon,
-   nestanak fronta i iscrpljen domen. Ovaj popravak je potreban prije poređenja agenta.
+1. TASK-004c adapter je naknadno dovršen: C++ eksportuje kumulativnu štetu/front/treatment
+   i terminal reason; fixture i 12/12 inference slučajeva prolaze. Ovaj adapter popravlja
+   mjerenje, ali ne mijenja nijedan raniji no-action replay niti rješava fizički mismatch.
 2. Definisati unaprijed zajednički vremenski horizont za no-action baseline i sve agentne
    politike. Ne birati trajanje po požaru koristeći njegov target raster.
 3. Razdvojeno pripremiti train-only kontrolu satnog vremena/FWI (isti ostali ulazi,
@@ -177,3 +178,5 @@ Firehose/Cell2Fire engine, pa njegove metrike ne prenosimo na ovaj projekat.
    broj ćelija/akcija i ne može se predstaviti kao isti 20×20 agent.
 5. Prije policy benchmarka zatvoriti no-action gate, riješiti suppression evidence gdje
    postoji i zamrznuti heldout event ID-jeve. Ne trenirati niti kalibrisati na validation/test.
+
+Nastavak TASK-004c integracije i ograničenja: [adapter smoke receipt](../../reports/firehose-verification/task004c-adapter-smoke.json).

@@ -6,10 +6,11 @@ title: Naredna sesija — nakon TASK-018 dijagnostike
 
 ## Trenutno stanje
 
-TASK-018 dijagnostička faza je završena na tri već postojeća **train-only** CFSDS no-action
-replaya (`2018_747`, `2018_241`, `2018_1770`). Nisu napravljeni novi C++ replayi,
-fine-tuning ni heldout kalibracija. Nema dokaza da agent smanjuje stvarnu štetu i
-simulator još ne prolazi no-action reality-check.
+TASK-018 dijagnostička faza je završena na tri **train-only** CFSDS no-action replaya
+(`2018_747`, `2018_241`, `2018_1770`). Nisu napravljeni novi CFSDS replays,
+fine-tuning ni heldout kalibracija. Kasniji Sub20 C++ runovi služe samo adapter smokeu.
+Nema dokaza da agent smanjuje stvarnu štetu i simulator još ne prolazi no-action
+reality-check.
 
 Glavni nalazi:
 
@@ -23,34 +24,46 @@ Glavni nalazi:
   stvarni maksimalni horizont 1.440 simulator minuta. Polje u ranijoj probe datoteci
   pogrešno je pokazivalo 480 jer je množilo interval odluka (`steps_per_action=8`) sa
   60. Kod je popravljen da broji redove; raniji replayi nisu mijenjani.
-- Suppression/gašenje je nepoznato, a prethodni output adapter ne razlikuje pouzdano
-  iscrpljenost mreže, nestanak aktivnog fronta i vremenski horizon. Tačan fizički uzrok
-  prevelikog rasta nije izolovan.
+- Suppression/gašenje je nepoznato. TASK-004c adapter sada emitira named terminal reason
+  i zasebne affected/front/treatment skupove; batch potvrđuje integraciju, ali ne
+  razrješava tačan fizički uzrok prevelikog rasta.
 
 Detalji, opažanja naspram hipoteza i ograničenja su u
 [TASK-018 dijagnozi](research/CFSDS_NO_ACTION_DIAGNOSIS.md), a svi fiksni vremenski
 presjeci i hashovi u
 [timeline reportu](../reports/real-fire-data/cfsds-no-action-timeline.json).
 
-## Sljedeći zadatak: TASK-004c adapter
+## Završeni adapter i sljedeći zadatak: TASK-015 input QC
 
-Prije nastavka dodatnog train replaya napraviti pouzdanu evidenciju epizode:
+TASK-004c adapter je lokalno završen. C++ sada odvaja stariji scar od aktivnog fronta,
+čuva kumulativno pogođene ćelije i uz završetak ispisuje imenovani razlog. Python `info`
+dobija isti terminalni spisak i reason. Ćelija koju C++ u istom koraku označi i kao
+pogođenu i kao tretiranu ostaje u kumulativnom C++/Python izvještaju iako se na
+kategorijalnom gridu vidi kao `-1`. RGB 3×20×20, `Discrete(400)`, no-op `-1`, reward i
+checkpoint težine ostaju isti. Fixture i 12/12 inference rollouta prolaze; detalji i
+ograničenja su u [TASK-004c receiptu](../reports/firehose-verification/task004c-adapter-smoke.json).
 
-1. Sačuvati kumulativno pogođene/opožarene ćelije i početni historical scar i nakon
-   tretiranja ćelije; postojeći Sub20 primjer ima poznato 206 naspram 207 neslaganje.
-2. Exportovati aktivni front odvojeno od starijih opožarenih ćelija; C++ kod 1 trenutno
-   spaja oba stanja.
-3. Vratiti imenovani terminalni razlog: završetak zbog horizonta, nestanka fronta,
-   potrošenog prostora/ćelija, subprocess greške ili timeout-a.
-4. Zadržati checkpoint kontrakt RGB 3×20×20 / `Discrete(400)` i legacy no-op `-1`.
-   Ne mijenjati reward ili model head usput.
-5. Dodati regresijske testove i ponovljiv no-action/paired smoke nakon implementacije.
+**Ovo je adapter/runtime prolaz, ne fire-behavior prolaz.** Svih 12 batch slučajeva završilo
+je na `weather_horizon`; u toj matrici nismo direktno izvršili C++ grane `front_extinguished`,
+`grid_exhausted` ili `no_ignition`. CFSDS no-action razlika i rubni efekat ostaju otvoreni,
+pa nema fizičke validacije, dokaza da agent smanjuje štetu, policy benchmarka ni treniranja.
 
-Poslije TASK-004c: završiti train-only terrain/weather/suppression i fuel-vintage QC
-(TASK-015), zatim provesti ograničene train-only kontrolne replaye koji mijenjaju jedan
-weather/FBP ulaz odjednom. Definisati zajednički vremenski horizont prije ikakve politike;
-ne izabrati poseban prekid požara tako što se pogleda njegov target. No-action gate i
-heldout ID freeze ostaju preduslovi benchmarka i fine-tuninga.
+Sljedeće je dovršiti train-only fuel-vintage/terrain/weather/suppression QC iz TASK-015:
+
+1. Provjeriti postoji li za godine train slučajeva podržan i dokumentovan FBP vintage;
+   zabilježiti službeni izvor, licencu, checksum i razliku prema trenutno korištenom 2014b.
+2. Mjeriti DEM/fuel/weather prostorno-vremensko poravnanje samo za train događaje;
+   posebno bilježiti koliko je fronta/novog rasta blizu 20×20 ruba.
+3. Za gašenje/suppression povezati samo pouzdane historijske dokaze; ako ih nema,
+   označiti `unknown` umjesto pretpostaviti da intervencija nije bilo.
+4. Unaprijed zapisati ulazne varijante i zajednički vremenski horizont, pa pokretati
+   train-only no-action replaye koji mijenjaju po jedan ulaz. Ne birati trajanje ili
+   parametre na osnovu narednodnevnog targeta.
+5. Tek nakon prihvatljivih no-action replaya zamrznuti event-level heldout ID-jeve;
+   tek onda predložiti frozen-agent benchmark. Fine-tuning ostaje kasnije.
+
+Benchmark i fine-tuning ostaju blokirani dok se ne prođu i no-action quality gate i
+heldout freeze. Ne otvarati validation/test rastere ili ishode radi QC/tuninga.
 
 ## Bitni artefakti
 

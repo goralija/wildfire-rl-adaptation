@@ -3,6 +3,7 @@ type: Project Status
 title: Trenutno stanje — 2026-10-30
 sources:
 - resource: /reports/firehose-verification/verification.json
+- resource: /reports/firehose-verification/task004c-adapter-smoke.json
 - resource: /docs/WORK_LOG.md
 ---
 # Trenutno stanje — 2026-10-30
@@ -109,12 +110,19 @@ neslaganja i no-action gate nisu zatvoreni.
 Potvrđene činjenice i hipoteze: [dijagnoza](research/CFSDS_NO_ACTION_DIAGNOSIS.md),
 [timeline receipt](../reports/real-fire-data/cfsds-no-action-timeline.json).
 
-Sljedeće je TASK-004c: cumulative-damage export i imenovani terminalni razlog (horizon,
-bez aktivnog fronta, iscrpljen grid), uz testove i kratki CLI smoke. TASK-015 ostaje
-djelimičan: odgovarajući fuel vintages, terrain/weather poravnanje i suppression evidence
-trebaju se procijeniti samo za train/calibration događaje prije heldout freezea. Zatim
-slijede dodatni train replayi i zasebna odluka o gate-u. Fine-tuning/policy benchmark
-ostaju na čekanju; heldout ciljevi se ne koriste za kalibraciju.
+TASK-004c adapter je lokalno završen: C++ šalje kumulativni affected/treatment skup,
+odvojeni aktivni front i reason (`weather_horizon`, `front_extinguished`, `grid_exhausted`,
+`no_ignition`); Python ga prenosi u episode `info` i uskladi cumulative counter. Fixture
+i 12/12 inference rollouta prolaze. Ako se ćelija istovremeno pojavi kao affected i
+treated, C++ terminalni skup je mjerodavan jer grid prikazuje `-1`; provjeravač zahtijeva
+da je svaka takva razlika objašnjena treated skupom. RGB/action/reward/checkpoint ugovori
+nisu promijenjeni. [Receipt i ograničenja](../reports/firehose-verification/task004c-adapter-smoke.json).
+
+TASK-015 ostaje djelimičan: train-only fuel vintage, terrain/weather poravnanje i
+suppression evidence treba procijeniti prije dodatnih kontrolisanih replaya i heldout
+freezea. Batch je runtime provjera na Sub20, ne CFSDS fizička validacija; no-action gate
+ostaje pao, nema dokaza o agentovom smanjenju štete i benchmark/fine-tuning su na čekanju.
+Validation/test ciljevi se ne koriste za QC/tuning.
 
 ## Train-only fuel quality gate — 2026-10-30
 
@@ -126,13 +134,11 @@ potpunog simulator slučaja: terrain/weather, suppression i reality-check su pos
 provjere. Sve tri postojeće replay studije (`2018_747`, `2018_241`, `2018_1770`) prolaze
 gorivni gate, pa fuel preklop sam ne objašnjava njihovo preveliko širenje.
 
-i source rasteri nisu otvarani. Nije bilo simulator replaya, RL treninga ili kalibracije.
 Audit je koristio samo train slučajeve za overlay. Cohort manifest i zajednički crop-screen
 JSON, koji sadrže i druge podjele, bili su učitani radi selekcije train redova;
 validation/test fuel i source rasteri nisu otvarani. Rezultati su zapisani i u train
 redove [kohort manifesta](../data/manifests/cfsds-v1_1-pilot-cohort.json). Nije bilo
 simulator replaya, RL treninga ili kalibracije.
-i source rasteri nisu otvarani. Nije bilo simulator replaya, RL treninga ili kalibracije.
 Suppression je nepoznat za svih 20. [Detaljni report](../reports/real-fire-data/cfsds-train-fuel-qc.json).
 
 ## Environment reproducibility — 2026-10-30
@@ -146,18 +152,21 @@ GeoTIFF nearest-neighbour reprojection/import smoke je prošao. Kombinovani free
 smoke. Legacy Firehose image je svježe izgrađen na Linux ARM64 iz pinovanih upstream
 commitova; 12/12 inference slučajeva su prošli, sa ugašenom mrežom i bez treninga.
 Tačne verzije i image/source hashovi su u [environment receipt](../reports/environment-setup/README.md).
-Ovaj setup ostavlja known adapter mismatch aktivnim; environment PASS nije research-ready.
+TASK-004c adapter mismatch je riješen u izmijenjenom izolovanom imageu; environment/runtime
+PASS i dalje nije research-ready zbog neriješenog CFSDS no-action mismatcha, nepoznatog
+suppressiona, domena i intradnevne ground-truth granice.
 
 Dogrib gorivo/elevation dijele blok sa Sub20 mapom, pa nije nezavisan test prostorne
 generalizacije. MedEU je zaseban mogući evropski track, ali nije potreban za glavni
 Canadian FBP projekat i još nije pretvoren u simulator input.
 
 ## Ograničenja koja su stvarno potvrđena
-Legacy fixed-model reset i brojač za početni Sub20 warmup i dalje imaju poznatu razliku
-(206 naspram 207); eksplicitni sync reset je daje 207/207. Stvarni CFSDS pilot koristi
-poseban multi-cell importer i provjerava početni C++ grid. Preostali TASK-004c treba da
-izveze kumulativnu štetu i jasan terminalni razlog za online RL adapter. Simulatorov
-`done` ne razlikuje containment od vremenskog horizonta; zato **research_ready=false**.
+Stari rollout receipt bilježi reset/brojač razliku 206 naspram 207; TASK-004c sada
+sinhronizuje reset observation i na terminalnom C++ receiptu provjerava/sinhronizuje
+kumulativnu štetu. Novi 12-case matrix daje isti Python/C++ cumulative count u svim
+slučajevima. Svi slučajevi u toj matrici ipak završe na `weather_horizon`; druge C++
+terminal grane nisu direktno pokrivene batchom. Stvarni CFSDS pilot ima multi-cell
+importer, ali njegovo fizičko neslaganje ostaje. Zbog toga **research_ready=false**.
 
 ## Ostalo što radi
 Baza zahtjeva/rubrike/literature/odluka, synthetic-v1 engine i pet baseline politika,
@@ -166,17 +175,19 @@ Prethodni sintetički artefakti ostaju historijski dokaz; nisu Cell2Fire rezulta
 
 ## Dokazi
 - [Runtime nalazi](research/FIREHOSE_VERIFICATION.md), [dataset](research/DATASET.md).
-- `reports/firehose-verification/`: input inventar, 12 rezultata, summary, checks, environment.
-- 26 testova prolazi s modernim optional environmentom; 22 core + 4 optional RL testa.
+- `reports/firehose-verification/`: input inventar, legacy 12-case receipts i
+  [TASK-004c adapter receipt](../reports/firehose-verification/task004c-adapter-smoke.json).
+- 38 aplikacijskih testova prolazi s modernim environmentom; strict OKF provjera i
+  synthetic CLI smoke takođe prolaze nakon TASK-004c izmjena.
 - Originalni Firehose i contrib checkouti ostaju neizmijenjeni; samo build flagovi i
   eksplicitna dijagnostika reset/seed ponašanja su dodani u naš kod.
 - Docker/legacy i moderni .venv su odvojeni. Legacy inference je bez treniranja i
   plaćenog compute-a. Kod/dokumentacija su objavljeni kroz [PR #1](https://github.com/goralija/wildfire-rl-adaptation/pull/1).
 
-Sljedeće: pilot replay review i fuel/terrain/weather/domain dijagnostika → nekoliko
-train-only no-action replaya → FBP fuel vintages za heldout godine + suppression/QC
-spajanje → zamrzavanje event testa → preostali TASK-004c adapter → upareni benchmark /
-treniranje samo nakon prolaza replay gatea.
+Sljedeće: dovršiti TASK-015 train-only fuel-vintage/terrain/weather/suppression QC →
+unaprijed definisani train-only kontrolisani no-action replayi sa zajedničkim horizontom
+→ zasebna odluka o no-action gateu → tek zatim zamrznuti event-level heldout ID-jeve →
+frozen benchmark/trening samo nakon prihvatljivog replay gatea.
 Nema provjere fizike simulatora na BiH podacima, potvrde RL prednosti ili generalizacije.
 Deadline/compute i licence za sirove podatke ostaju otvoreni.
 

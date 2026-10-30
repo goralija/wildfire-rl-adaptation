@@ -17,7 +17,7 @@ Napor je okvirni agentov prijedlog u aktivnim radnim satima, bez roka i dodjele 
 | TASK-014 | lokalno završeno 2026-10-30; drugi host nije provjeren | moderni `.venv` i odvojeni legacy Docker izgrađeni; package/source/image hashovi i smoke/inference receipt zapisani | ostvareno lokalno |
 | TASK-015 | P0, djelimično završeno | 44 preliminarna kandidata 20/9/15; novi per-cell fuel QC za svih 20 train: 10 `PASS_FUEL_ONLY`, 10 `FAIL_FUEL_OVERLAP`; preostaju fuel-vintage, terrain/weather i suppression QC | 2–4 h + data QC |
 | TASK-018 | P0, dijagnostička faza završena 2026-10-30; uzrok nije izolovan | poređenje hashova/postavki i unaprijed fiksirani vremenski presjeci na tri train replaya; metadata horizon bug ispravljen; rub/domenska ograničenja potvrđena; bez heldout kalibracije ili treninga | ostvareno |
-| TASK-004c | P0, djelimično | multi-cell C++ početni state radi; preostaje kumulativna šteta i terminalni razlog containment naspram isteka weather horizonta za RL evaluator | 3–6 h |
+| TASK-004c | P0, adapter završen lokalno 2026-10-30 | C++/Python kumulativna šteta, zaseban scar/front i named terminal receipt; fixture + 12/12 inference rollouta, bez treninga; fizički no-action gate ostaje otvoren | ostvareno |
 | TASK-017 | završeno 2026-10-30 | `InitialState.csv` uvozi raniji scar i više aktivnih ćelija; fixture i stvarni `2018_747` C++ import/replay su uspješni | ostvareno |
 | TASK-016 | P0, tri pilot konverzije; no-action gate nije prošao | FireCase JSON→raster/weather→Cell2Fire radi; tri train-only replaya šire 66/237/73 ha prema 15.39/12.15/12.15 ha; 2014_538 fuel-rejected; fuel gate 10/20 train kandidata pass-only; TASK-018 je dokumentovao vremensku osjetljivost, ulazne razlike i edge/domain limite; nema fine-tuninga | 6–12 h + GIS/model |
 | TASK-004b | P0 uslovno | SimFire fallback spike ako gate padne; novi ADR | 2–4 h |
@@ -29,11 +29,13 @@ Napor je okvirni agentov prijedlog u aktivnim radnim satima, bez roka i dodjele 
 
 Redoslijed nastavka: 012 (završeno) → 014 local PASS (završeno) → 015 train fuel/input
 QC (djelimično) + 018 no-action dijagnostička faza (završena, uzrok još nije izolovan)
-→ 004c cumulative-damage/terminal-reason adapter → 015 preostali vintage/terrain/weather/
-suppression QC i heldout freeze → train-only kontrolisani replayi / 016 dodatni slučajevi
-→ 005 benchmark/time → 006 fine-tune → 007 → 009.
+→ 004c cumulative-damage/terminal-reason adapter (završen lokalno) → 015 preostali
+fuel-vintage/terrain/weather/suppression QC → unaprijed definisani train-only kontrolisani
+replayi / 016 dodatni slučajevi → no-action gate odluka + heldout freeze → 005 benchmark/time
+→ 006 fine-tune → 007 → 009.
 TASK-017 initial-state import je završen. TASK-004b je samo fallback nakon dokumentovanog
-FAIL. TASK-005/006 ne počinju prije no-action gatea i ispravnog terminal/damage adaptera.
+FAIL. TASK-005/006 ne počinju prije no-action gatea i heldout freezea; adapter PASS je
+tehnički preduslov, ne zamjena za no-action gate.
 Ne počinjati fine-tuning dok se ne izmjere rollout/training trošak i zamrzne test ID skup.
 Historijski TASK-011a/011b ostaje opcion i iza glavnog simulator gatea.
 Nema obaveze implementacije svakog proširenja: glavni minimum i kvalitet evaluacije imaju prednost.
@@ -80,14 +82,19 @@ nedostaju, a vrijeme širenja zavisi od slučaja. Ne mijenjati validation/test c
 PPO težine. Vidjeti `docs/research/CFSDS_NO_ACTION_DIAGNOSIS.md` i
 `reports/real-fire-data/cfsds-no-action-timeline.json`.
 
-TASK-004c obuhvata i ispravku probe metapodatka: horizon se računa iz broja vremenskih
-redova, ne iz `steps_per_action`. C++ završetak i dalje mora izložiti imenovan razlog
-(horizon, nema aktivnog fronta, iscrpljen grid) uz kumulativnu štetu.
+TASK-004c je implementiran: probe horizon računa iz redova vremena; C++ završetak šalje
+`weather_horizon`, `front_extinguished`, `grid_exhausted` ili `no_ignition`, aktivni front,
+kumulativni affected i treated ID-jeve. Python brojač se na terminalnom receiptu uskladi
+sa C++ izvorom istine. Grid-vs-terminal provjera dopušta samo razliku za ćelije koje su
+istovremeno u C++ affected i treated skupovima; runtime dokaz je u
+`reports/firehose-verification/task004c-adapter-smoke.json`. Batch pokriva 12 Sub20
+inference slučajeva, ali svi su završili na weather horizon; ostale C++ terminal grane
+još nisu potvrđene integracijskim slučajem.
 
 TASK-017 je završen za početni historical state bridge. `InitialState.csv` prenosi ranije
 opožarene ćelije (`burnt`) i više aktivnih front ćelija (`burning`). Fixture i stvarni
-`2018_747` import/reset prošli su u C++; ostatak cumulative-damage/terminal-state praćenja
-je TASK-004c.
+`2018_747` import/reset prošli su u C++; kumulativni damage/terminal receipt sada je
+TASK-004c adapter isporuka.
 
 TASK-016 sada ima tri FireCase konverzije i tri no-action train replaya (`2018_747`,
 `2018_241`, `2018_1770`); za prvi je dodatno urađeno šest seedova. Sva tri odstupaju od

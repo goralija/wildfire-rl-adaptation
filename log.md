@@ -1,5 +1,13 @@
 # Promjene baze znanja
 
+## 2026-10-30: TASK-004c adapter završen lokalno
+
+- C++ terminal receipt izvozi cumulative affected, active front, treated IDs i named reason; Python terminal counters se usklade s C++ stanjem, uz očuvan RGB 3×20×20 / Discrete(400) / no-op -1 ugovor.
+- 1-scar/2-front fixture i 12/12 Sub20 inference rollouta prošli; matrix je našao i popravio slučaj gdje tretirana pogođena ćelija ostane u C++ damage skupu, ali je grid prikaže samo kao `-1`.
+- Cumulative ID-jevi i hashovi su u [adapter receiptu](reports/firehose-verification/task004c-adapter-smoke.json); 38 aplikacijskih testova, strict OKF validator, synthetic CLI smoke i `git diff --check` prolaze.
+- Bez treninga ili fizičke validacije. Svi matrix runovi završili su na `weather_horizon`, pa se druge C++ terminal grane nisu integracijski izvršile. CFSDS no-action gate ostaje FAIL.
+- Sljedeće: preostali TASK-015 train-only fuel-vintage/terrain/weather/suppression QC, zatim unaprijed definisani no-action replay gate i heldout freeze prije benchmarka.
+
 ## 2026-10-30: TASK-018 no-action dijagnostika završena
 
 - Analizirani su samo postojeći train replayi `2018_747`, `2018_241` i `2018_1770` na fiksnim 30–1.440 simuliranim minutama; nema novog C++ runa ni RL treninga.
@@ -7,7 +15,7 @@
 - Ispravljen je samo probe metapodatak: horizon sada broji stvarne `Weather.csv` redove. Ranijih 480 minuta bila je pogrešna vrijednost izvještaja; sa 24 reda i 60 min/red stvarni gornji horizon je 1.440 min. Stari replayi se nisu mijenjali.
 - Dijagnoza: [istraživački izvještaj](docs/research/CFSDS_NO_ACTION_DIAGNOSIS.md), [mašinski timeline/hash receipt](reports/real-fire-data/cfsds-no-action-timeline.json), [EXP-007](docs/research/EXPERIMENT_LOG.md), [ADR-017](docs/specs/DECISION_RECORDS.md).
 - Provjera: 34/34 aplikacijskih testova; strict OKF validator 69 Markdown fajlova; CLI smoke je uporedio spremljeni `2018_747` rezultat s reportom; `git diff --check` čist.
-- Sljedeće: TASK-004c treba imenovati terminalni razlog i sačuvati kumulativno izgorjele/aktivne ćelije prije daljih benchmarka.
+- Tada sljedeće: TASK-004c adapter; dovršen je u odjeljku iznad.
 
 ## 2026-10-30: train-only CFSDS fuel QC gate
 
@@ -17,7 +25,7 @@
 - Train redovi u `data/manifests/cfsds-v1_1-pilot-cohort.json` nose odgovarajući fuel-only status i link na receipt; cijela kohorta i dalje nije finalni benchmark.
 - Validation/test fuel i source rasteri nisu otvoreni. Zajednički cohort manifest i crop-screen JSON sa svim split metapodacima učitani su da se izdvoje train redovi; nijedan validation/test overlay nije izračunat. Dokumentacija to precizno navodi. Nije bilo replaya, RL treninga ni kalibracije.
 - [Metoda i limiti](docs/research/CFSDS_TRAIN_QC.md), [mašinski report](reports/real-fire-data/cfsds-train-fuel-qc.json), [EXP-006](docs/research/EXPERIMENT_LOG.md), [ADR-016](docs/specs/DECISION_RECORDS.md).
-- Tadašnji sljedeći zadatak bio je TASK-018; završen je u odjeljku iznad. Dalji redoslijed je TASK-004c, zatim preostali train-only input/replay gate prije benchmarka ili fine-tuninga.
+- Tadašnji sljedeći zadatak bio je TASK-018, a zatim TASK-004c; oba su sada završena lokalno. Aktuelni korak je preostali train-only TASK-015 input/replay gate prije benchmarka ili fine-tuninga.
 - U trenutku ovog ranijeg QC unosa fokusirani geo tests: 3/3 prolazili su; verifikacija TASK-018 je zapisana iznad.
 
 ## 2026-10-30: CFSDS putanja izabrana i prvi stvarni C++ replay

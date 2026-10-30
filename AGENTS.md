@@ -13,11 +13,12 @@ Korisnikove direktne upute imaju prednost; kasniji ADR može zamijeniti raniji.
 **Odabrana je putanja Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire (ADR-013).**
 TASK-012 je završen. TASK-015 ima preliminarni train-only fuel audit: 10/20 kandidata
 prolazi samo taj gate; vrijeme, teren, gašenje i no-action mismatch ostaju otvoreni.
-TASK-018 dijagnostička faza je završena; sljedeći fokus je TASK-004c: cumulative-damage/
-front export i imenovani terminalni razlozi. Root cause no-action overgrowth nije
-izolovan, a no-action gate nije prošao. Ne koristi validation/test ishode za izbor
-parametara. TASK-004c i no-action gate moraju biti završeni prije policy benchmarka ili fine-tuninga. Runtime PASS nije
-dokaz fizičke validacije ili RL prednosti. Čuvaj ovu razliku u sažecima.
+TASK-018 dijagnostička faza i TASK-004c episode adapter su završeni lokalno. Sljedeći
+fokus je preostali TASK-015 train-only fuel-vintage/terrain/weather/suppression QC. Root
+cause no-action overgrowth nije izolovan, a no-action gate nije prošao. Ne koristi
+validation/test ishode za izbor parametara. No-action gate i heldout freeze moraju proći
+prije policy benchmarka ili fine-tuninga. Runtime PASS nije dokaz fizičke validacije ili
+RL prednosti. Čuvaj ovu razliku u sažecima.
 
 Održavanje znanja: [maintenance](knowledge/maintenance.md), format:
 [OKF profil](knowledge/okf-format.md). Novi `.md` koncept dobija YAML `type` i vezu iz

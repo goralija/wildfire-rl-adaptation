@@ -56,18 +56,19 @@ i [izbor izvora](../docs/research/REAL_FIRE_DATASETS.md).
 
 Glavni izbor geografije i simulatora je zatvoren po korisnikovoj uputi. Dijagnostička
 faza TASK-018 je završena, ali no-action gate i uzrok neslaganja ostaju otvoreni.
-Sljedeće je TASK-004c: cumulative-damage/front export i terminal reason. Nakon toga
-pripremiti odgovarajuće fuel vintages, terrain/weather QC i suppression dokaze samo na
-train/calibration događajima. Preliminarni 44 ID-ja i pilot su u
-[CFSDS kohort manifestu](../data/manifests/cfsds-v1_1-pilot-cohort.json). Adapter za
-`burnt` + višestruki `burning` početni state i jedan case converter su već ostvareni;
-TASK-004c još treba terminalni razlog i cumulative-damage export.
+TASK-004c episode adapter je sada završen lokalno: C++/Python dijele terminalni cumulative
+damage, scar i aktivni front su odvojeni, a završetak dobija named reason. Fixture + 12/12
+inference rollouta potvrđuju adapter contract; svi matrix slučajevi završili su na weather
+horizonu. [Receipt i tehnički limiti](../reports/firehose-verification/task004c-adapter-smoke.json).
+Sljedeće je dovršiti preostali TASK-015 fuel-vintage, terrain/weather i suppression QC samo
+na train/calibration događajima. Preliminarni 44 ID-ja i pilot su u
+[CFSDS kohort manifestu](../data/manifests/cfsds-v1_1-pilot-cohort.json).
 
 TASK-014 core/legacy environment je lokalno reproducovan na macOS ARM64 + Linux ARM64;
 moderni venv ima geospatial ETL stack. Receipt bilježi pakete, image hash i inference.
-TASK-004c treba dovršiti cumulative-damage i terminal-reason dio prije benchmarka ili
-fine-tuninga. Runtime PASS nije research-ready. Checkpoint kontrakt je RGB 3×20×20 i
-Discrete(400), uz forced legacy no-op -1 nakon budžeta.
+No-action gate i heldout freeze i dalje su preduslovi benchmarka ili fine-tuninga. Runtime
+PASS nije research-ready. Checkpoint kontrakt je RGB 3×20×20 i Discrete(400), uz forced
+legacy no-op -1 nakon budžeta.
 
 Glavni fine-tuning, dokazana RL prednost, fizička validacija stvarnim požarima,
 BiH primjenjivost, konačni test split, rok/compute i timska licenca ostaju otvoreni.

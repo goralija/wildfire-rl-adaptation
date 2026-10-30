@@ -370,3 +370,22 @@ Verification: full application suite 34/34 passed, strict OKF validation passed 
 69 Markdown files, and the timeline CLI smoke against the saved `2018_747` replay
 reproduced the committed checkpoints and terminal grid metrics. Its generated output
 is under ignored `runs/`; no simulator was rerun. `git diff --check` passed.
+
+## 2026-10-30 — TASK-004c episode adapter
+
+TASK-004c episode adapter completed locally on `research/cfsds-train-qc`. Added the second
+pin-compatible Firehose patch for cumulative affected/front/treatment IDs and terminal
+reasons; synced FireEnv's initial reset grid and terminal counters; kept checkpoint RGB,
+action count, no-op and reward contract. A first 12-case integration run exposed cells
+that C++ kept in cumulative damage while the categorical output grid showed treatment
+(`-1`). The C++ terminal receipt is now canonical, Python counters synchronize from it,
+and the probe verifies visible grid coverage plus treated-cell explanation for hidden IDs.
+The fixture and corrected inference matrix pass; no training or physical validation ran.
+The no-action gate remains failed and other C++ termination branches were not exercised
+by this matrix. See `reports/firehose-verification/task004c-adapter-smoke.json` and ADR-018.
+
+Verification after the implementation: all 38 project unit tests passed, strict OKF
+validation passed, the synthetic CLI smoke wrote successfully, and `git diff --check` was
+clean. The next task is remaining train-only TASK-015 fuel-vintage/terrain/weather/
+suppression QC followed by predeclared no-action replay checks; no heldout result or
+training was used.

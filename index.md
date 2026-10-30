@@ -10,7 +10,7 @@ okf_version: "0.2"
 - [Handoff za kolegu](HANDOFF.md) - Prenosiv nastavak bez chat historije.
 - [Trenutno stanje](docs/STATUS.md) - Šta radi, dokazi i ograničenja.
 - [Naredna sesija](docs/NEXT_SESSION.md) - Redoslijed nastavka.
-- [Prioriteti i prihvat](docs/BACKLOG.md) - No-action dijagnostika je dokumentovana; sljedeći preduslov je TASK-004c adapter.
+- [Prioriteti i prihvat](docs/BACKLOG.md) - TASK-004c adapter je završen; preostaje train-only input QC i no-action gate.
 
 ## Pronađi detalje i dokaze
 

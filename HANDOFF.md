@@ -98,52 +98,35 @@ Optional suite uključuje kratko učenje radi provjere save/load.
 RL adaptacije, fizička validacija na historijskim požarima ili validacija za BiH.
 Sintetički pilot i runtime provjera nisu glavni istraživački rezultati.
 
-## Trenutni projektni zadatak: TASK-004c epizodni adapter
+## Trenutni projektni zadatak: TASK-015 train-only input QC
 
-Prvo pročitaj [TASK-018 dijagnozu](docs/research/CFSDS_NO_ACTION_DIAGNOSIS.md),
-[runtime nalaze](docs/research/FIREHOSE_VERIFICATION.md),
-[protokol](docs/research/PROTOCOL.md), [STATUS](docs/STATUS.md) i najnovije
-[odluke](docs/specs/DECISION_RECORDS.md). Implementirati pouzdan kumulativni damage i
-odvojeni front export, te imenovani terminalni razlog za horizon, nestanak fronta ili
-iscrpljenu mrežu. Sačuvati RGB 3×20×20 / `Discrete(400)` checkpoint kontrakt i legacy
-no-op `-1`; ne mijenjati model head ili reward usput. Probe već računa horizon iz stvarnih
-`Weather.csv` redova, ali C++/adapter i dalje moraju vratiti terminalni razlog.
+TASK-004c episode adapter je završen lokalno. C++ terminal receipt i Python `FireEnv`
+sada čuvaju kumulativno pogođene ID-jeve nakon tretiranja, odvojeni scar/aktivni front,
+početni reset state i razlog završetka. Fixture + 12/12 inference slučajeva prolaze.
+Checkpoint ugovor RGB 3×20×20 / `Discrete(400)`, legacy no-op `-1`, action head i reward
+nisu mijenjani. Sažeti dokaz i eksplicitne granice su u
+[adapter receiptu](reports/firehose-verification/task004c-adapter-smoke.json).
 
-TASK-015 je i dalje djelimičan: fuel-vintage, terrain/weather i suppression QC ostaju
-otvoreni. Nakon TASK-004c planirati train-only kontrolisane ulazne provjere i dodatne
-caseove. Ne birati trajanje prema historijskom targetu svakog požara; prije benchmarka
-definisati isti vremenski horizont za sve politike i zamrznuti heldout IDs. No-action gate
-nije prošao, pa fine-tuning čeka.
+Sljedeće dovršiti train-only fuel-vintage, terrain/weather i suppression QC. Prvo utvrditi
+službene dostupne FBP vintages/licence/hashove; zatim izračunati prostorno-vremensko
+poravnanje i crop-edge margine samo na train slučajevima; za suppression zapisati dokaz
+ili `unknown`. Unaprijed definisati ulazne varijante i zajednički vremenski horizont, pa
+pokretati train-only no-action kontrolne replaye koji mijenjaju po jedan ulaz. No-action
+gate nije prošao: ne koristiti heldout ishode za kalibraciju, ne pokretati benchmark ili
+fine-tuning i ne tvrditi fizičku validaciju/agenta boljeg od baselinea.
 
 TASK-014 Python 3.12.4/macOS ARM64, Linux ARM64 legacy Docker i geospatial ETL venv
 navedeni su u [environment receiptu](reports/environment-setup/README.md). Venv,
 `external/` i Docker image su ignorisani i lokalni.
 
-## Detaljni zahtjevi za TASK-004c
+## Ograničenja završene TASK-004c adapter faze
 
-Prvo pročitaj [STATUS](docs/STATUS.md), [runtime nalaze](docs/research/FIREHOSE_VERIFICATION.md),
-[protokol](docs/research/PROTOCOL.md) i [odluke](docs/specs/DECISION_RECORDS.md).
-Ne treba ponovo istraživati da li checkpointovi uopšte rade — to je već ostvareno.
-Treba formalni adapter i C++ export koji ispravljaju potvrđene probleme:
-
-1. Upstream reset vraća prazno početno opažanje iako warmup ima 7 pogođenih ćelija.
-   Dijagnostički `--sync-reset` učitava stvarno stanje; još nije konačan adapter.
-2. Kumulativna šteta može izostaviti početnu ćeliju: provjeren primjer 206 naspram
-   207 iz historije rastera. Tretman prethodno zapaljene ćelije ne smije izbrisati štetu.
-3. C++ grid kod 1 spaja aktivno i ranije gorjelo. Potreban je eksplicitan active/burnt
-   export za mjerenje fronte i smisleno tumačenje heuristika.
-4. `done` ne razlikuje containment od isteka weather horizonta. Dodati reason i
-   odvojiti termination/truncation, uključujući timeout i cleanup subprocessa.
-
-Sačuvati **RGB 3×20×20 i Discrete(400)** checkpoint kontrakt. Legacy no-op je `-1`,
-prisiljen poslije B intervencija; nije naučena 401. akcija. Istu semantiku dati svim
-politikama. Prihvat: regresijski testovi za warmup/207 ćelija, budžet, deterministički
-replay, cleanup i containment/weather-horizon razliku. Ne mijenjati reward i glavu
-modela usput bez zasebne odluke i kontrola.
-
-Nakon usaglašenog obima i odgovarajućeg adaptera: zamrznuti scenarije/splitove,
-izmjeriti trošak kratkog benchmarka, pa
-tek planirati fine-tuning. [BACKLOG](docs/BACKLOG.md) čuva TASK-005/006 i dalje.
+U 12-case batchu svaka epizoda završila je na `weather_horizon`; C++ grane
+`front_extinguished`, `grid_exhausted` i `no_ignition` nisu direktno izvršene u toj matrici.
+Adapter consistency nije fire-behavior validation. Stari CFSDS no-action replays i dalje
+previše rastu/dotiču crop edge, uz unknown suppression i dnevni satelitski target.
+Prije benchmarka i dalje trebaju TASK-015 input QC, train-only no-action replay gate i
+event-level heldout freeze. [BACKLOG](docs/BACKLOG.md) čuva redoslijed TASK-005/006.
 TASK-010 je poznata manja CLI greška za root JSON `null`, ne blokira validne runove.
 
 ## Legacy runtime na drugom računaru
@@ -192,10 +175,9 @@ Ne preuzimati cijelu 48.4 GB WildfireSpreadTS arhivu.
 
 ## Spreman prompt za kolegu ili coding agenta
 
-> Nastavi TASK-004c na grani `research/cfsds-train-qc`. Pročitaj STATUS, NEXT_SESSION,
-> BACKLOG, ADR-015–017, FIREHOSE_VERIFICATION i `CFSDS_NO_ACTION_DIAGNOSIS.md`.
-> Implementiraj kumulativnu štetu/odvojeni front i typed terminalni razlog za weather
-> horizon, nestanak fronta, iscrpljenu mrežu i subprocess grešku/timeout. Sačuvaj
-> RGB 3×20×20 / Discrete(400) i legacy no-op `-1`; dodaj regresijske testove. Nakon
-> toga tek planiraj train-only kontrolisane weather/FBP ulaze. Ne koristi validation/test
-> ishode za tuning niti treniraj dok no-action gate ne prođe.
+> Nastavi nakon TASK-004c na postojećoj grani `research/cfsds-train-qc`. Pročitaj
+> STATUS, NEXT_SESSION, BACKLOG, ADR-018, TASK-015 QC, FIREHOSE_VERIFICATION i
+> CFSDS_NO_ACTION_DIAGNOSIS. Dovrši train-only fuel-vintage/terrain/weather/suppression
+> QC uz izvore, licence i hashove; unaprijed definiši kontrolisane no-action replay varijante
+> i zajednički vremenski horizont. Ne otvaraj heldout ishode za tuning i ne treniraj dok
+> no-action gate ne prođe.

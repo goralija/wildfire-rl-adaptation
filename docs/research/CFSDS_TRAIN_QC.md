@@ -98,7 +98,8 @@ adequacy and the no-action simulator gate. The W.I.S.E. paper uses annual fuel-m
 vintages and additional event filters; its reported skill scores are not Cell2Fire
 results and must not be attributed to this project.
 
-Next: use the three existing fuel-pass replay cases to diagnose weather/FWI,
-FBP parameter and crop-edge effects on train data only. Keep all validation/test
-event outcomes out of tuning. Finish TASK-004c before any policy benchmark or
-fine-tuning, as required by ADR-015 and ADR-016.
+Next: finish train-only fuel-vintage, terrain/weather alignment and suppression evidence;
+then use the three existing fuel-pass replay cases for preregistered weather/FWI,
+FBP-parameter and crop-edge controls. Keep all validation/test event outcomes out of
+tuning. TASK-004c adapter is complete, but no-action benchmark/fine-tuning remains blocked
+by the independent replay quality gate and heldout event freeze in ADR-015/018.

@@ -252,8 +252,9 @@ automatska historical input mapa. [CWFIS FBP fuel maps](https://cwfis.cfs.nrcan.
    nije iscrpan i nije finalni benchmark. Za širenje na 2019–2024 treba odgovarajuće
    nacionalne FBP fuel mape iz 2019. i 2024. i potpunu provjeru vremena/suppressiona.
 4. **TASK-017 — prvi adapter završen:** `InitialState.csv` uvozi raniji scar i više
-   aktivnih ćelija; provjeren je na fixtureu i na stvarnom CFSDS ulazu. Preostali dio
-   TASK-004c je pouzdan export kumulativne štete i objašnjenje terminalnog stanja za RL.
+   aktivnih ćelija; provjeren je na fixtureu i na stvarnom CFSDS ulazu. TASK-004c je
+   naknadno završio cumulative-damage/front export i terminalni razlog;
+   [adapter receipt](../../reports/firehose-verification/task004c-adapter-smoke.json).
 5. **TASK-016 — tri train konverzije izvršene:** FireCase JSON, GIS ulazi i C++ no-action
    replays rade; za `2018_747` šest seedova daje istu završnu mapu. Sva tri slučaja
    predviđaju previše širenja i dotiču rub. `2014_538` je odbijen na water/nonfuel checku.
@@ -365,12 +366,11 @@ nemaju zajednički teren s Dogrib/Firehose mapama; nezavisnost potvrditi prostor
 
 ## Ograničeni naredni koraci
 
-1. TASK-012/015: zapisati geografiju, izvor i event/crop split. Ako ostanemo na
-   Canadian FBP/Cell2Fire, koristi CFSDS kao multi-fire kandidat; za Evropu procijeni
-   FireSpread_MedEU i regionalni simulator prije nego nastavimo.
-2. TASK-004c/017: prvo popraviti adapter i omogućiti višepikselni active-front state.
-3. TASK-016: konvertovati mali pilot, provjeriti rastersko/meteorološko poravnanje i
-   no-action rast na kalibracijskim slučajevima. Test događaje ne koristiti za tuning.
+1. Canada/CFSDS/Canadian FBP/Cell2Fire put je izabran. Dovršiti train-only TASK-015:
+   fuel vintages, terrain/weather alignment, suppression dokaze i crop adequacy.
+2. TASK-004c/017 adapteri su završeni; tehnički runtime smoke nije fizička validacija.
+3. TASK-016: nakon unaprijed definisane QC varijante, provjeriti no-action rast na
+   kalibracijskim slučajevima. Test događaje ne koristiti za tuning.
 4. Tek nakon zadovoljavajućeg no-action ponašanja trenirati/porediti politike na
    event-level holdout scenarijima. Odvojeno izvještavati simulator fit i policy gain.
 
