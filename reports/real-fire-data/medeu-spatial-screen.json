@@ -1,0 +1,143 @@
+{
+  "screened_at": "2026-10-30",
+  "purpose": "local-only first-pass identification of FireSpread_MedEU v2 events spatially overlapping Bosnia and Herzegovina; not an event selection, perimeter validation, or simulator replay",
+  "dataset": {
+    "name": "FireSpread_MedEU",
+    "version": "v2",
+    "record_url": "https://zenodo.org/records/18200075",
+    "paper_doi": "10.1038/s41597-026-06965-2",
+    "download_url": "https://zenodo.org/records/18200075/files/FireSpread_MedEU.zip?download=1",
+    "local_ignored_path": "data/raw/FireSpread_MedEU.zip",
+    "bytes": 2751019,
+    "sha256": "907e8d340bd44cde64c739b39474381d72ebe64aeef86c0daba17fa53967e27b",
+    "license_status": "Zenodo v2 record marks the dataset Open but shows no license value; do not redistribute or assume article CC-BY-4.0 also licenses the data package."
+  },
+  "boundary": {
+    "name": "Natural Earth Admin 0 countries",
+    "scale": "1:110m",
+    "source_url": "https://www.naturalearthdata.com/downloads/110m-cultural-vectors/110m-admin-0-countries/",
+    "local_ignored_path": "data/raw/ne_110m_admin_0_countries.zip",
+    "bytes": 214976,
+    "sha256": "0f243aeac8ac6cf26f0417285b0bd33ac47f1b5bdb719fd3e0df37d03ea37110",
+    "limitation": "Coarse national boundary; use only for candidate discovery, then verify coordinates against authoritative/high-resolution boundaries and the EFFIS record."
+  },
+  "fuel_map": {
+    "name": "EFFIS European Fuel Map",
+    "reference_year": 2017,
+    "download_url": "https://data.effis.emergency.copernicus.eu/effis/applications/data-and-services/FuelMap_LAEA.zip",
+    "license": "EFFIS states EU-owned site content is CC BY 4.0 unless otherwise indicated; cite the European Fuel Map (2017) and indicate processing changes.",
+    "local_ignored_path": "data/raw/FuelMap_LAEA.zip",
+    "archive_bytes": 18226545,
+    "archive_sha256": "ed06080d81048de18dc34caf0f4fcc2f26d626f020bf132277d4e470a71a83d8",
+    "contained_tiff": "FuelMap2000_NFFL_LAEA.tif",
+    "contained_tiff_uncompressed_bytes": 621969457,
+    "crs": "EPSG:3035",
+    "shape_rc": [23200, 26801],
+    "cell_size_m": 250,
+    "dtype": "uint8",
+    "nodata": 0,
+    "fuel_model_system": "NFFL / Anderson 1982 categories; EFFIS says 42 vegetation complexes were assigned to 13 categories, with the final 3 categories unused. Local raster contains codes 1-10.",
+    "overlay_on_final_observed_polygon": {
+      "effis_id_205938": {
+        "valid_250m_pixels": 103,
+        "code_pixel_counts": {"0_nodata": 9, "4_chaparral": 40, "5_brush": 42, "9_hardwood_litter": 12}
+      },
+      "effis_id_43482": {
+        "valid_250m_pixels": 34,
+        "code_pixel_counts": {"3_tall_grass": 32, "5_brush": 2}
+      }
+    },
+    "limitation": "This is a 250m continental classification, not a local fuel inventory; it uses NFFL model categories and is not directly compatible with the current Canadian FBP Cell2Fire implementation. No terrain or weather is bundled."
+  },
+  "method": {
+    "source_geometry_crs": "EPSG:3035",
+    "overlay_crs": "EPSG:4326",
+    "event_key": "EFFIS_id",
+    "geometry_repair": "Two invalid non-empty geometries, belonging to EFFIS IDs 51305 and 51382 outside the Bosnia and Herzegovina subset, were repaired in memory with shapely.make_valid for the overlay. The source ZIP was not changed.",
+    "python": "3.12.4",
+    "geopandas": "1.2.0",
+    "shapely": "2.2.0"
+  },
+  "result": {
+    "source_rows": 649,
+    "unique_source_events": 103,
+    "events_overlapping_bosnia_and_herzegovina_boundary": 7,
+    "candidate_effis_ids": [12321, 13228, 22108, 25244, 25274, 43482, 205938],
+    "candidates": [
+      {
+        "effis_id": 12321,
+        "entry_count_in_dataset": 4,
+        "burned_steps": 3,
+        "burned_step_dates": "2017-07-14 to 2017-07-20",
+        "final_reported_burned_area_ha": 569.18,
+        "quality_values": ["high", "very high", "very high"]
+      },
+      {
+        "effis_id": 13228,
+        "entry_count_in_dataset": 5,
+        "burned_steps": 4,
+        "burned_step_dates": "2017-08-09 to 2017-08-16",
+        "final_reported_burned_area_ha": 2910.04,
+        "quality_values": ["low", "medium", "high", "very high"]
+      },
+      {
+        "effis_id": 22108,
+        "entry_count_in_dataset": 7,
+        "burned_steps": 6,
+        "burned_step_dates": "2020-04-07 to 2020-04-15",
+        "final_reported_burned_area_ha": 4613.29,
+        "quality_values": ["high", "low", "medium", "medium", "medium", "high"]
+      },
+      {
+        "effis_id": 25244,
+        "entry_count_in_dataset": 4,
+        "burned_steps": 3,
+        "burned_step_dates": "2020-04-09 to 2020-04-13",
+        "final_reported_burned_area_ha": 4243.57,
+        "quality_values": ["medium", "medium", "high"]
+      },
+      {
+        "effis_id": 25274,
+        "entry_count_in_dataset": 4,
+        "burned_steps": 3,
+        "burned_step_dates": "2020-04-12 to 2020-04-17",
+        "final_reported_burned_area_ha": 1309.46,
+        "quality_values": ["medium", "high", "very high"]
+      },
+      {
+        "effis_id": 43482,
+        "entry_count_in_dataset": 4,
+        "burned_steps": 3,
+        "burned_step_dates": "2020-09-07 to 2020-09-11",
+        "final_reported_burned_area_ha": 216.87,
+        "final_burned_extent_bbox_km": [2.56, 1.71],
+        "quality_values": ["very high", "medium", "very high"]
+      },
+      {
+        "effis_id": 205938,
+        "entry_count_in_dataset": 5,
+        "burned_steps": 4,
+        "burned_step_dates": "2022-07-15 to 2022-07-18",
+        "final_reported_burned_area_ha": 637.63,
+        "final_burned_extent_bbox_km": [4.14, 4.18],
+        "quality_values": ["very high", "very high", "very high", "very high"]
+      }
+    ],
+    "first_local_reference_candidate": {
+      "effis_id": 205938,
+      "reason": "Four consecutive daily burned-area steps, all rated very high in the dataset, 2022-07-15 through 2022-07-18.",
+      "important_scale_limit": "Its final mapped extent is about 4.14 by 4.18 km. The verified 20x20, 100 m Firehose policy covers only 2 by 2 km (400 ha); it cannot contain or score the complete event."
+    },
+    "smallest_spatial_candidate": {
+      "effis_id": 43482,
+      "reason": "Smallest final mapped area among the seven candidates (216.87 ha).",
+      "important_scale_limit": "Its final bounding extent is about 2.56 by 1.71 km, so it also does not fit inside the existing 2 by 2 km policy window without cropping or changing grid scale. One propagation step is medium quality."
+    }
+  },
+  "interpretation": [
+    "These are seven first-pass spatial overlaps, not independently checked national fire labels or a representative sample of all BiH fires.",
+    "EFFIS_id and satellite-derived perimeters provide event/progression evidence; they do not provide complete historical fuel, terrain, local hourly weather, or suppression inputs.",
+    "The available Cell2Fire policy uses Canadian FBP classes. FireSpread_MedEU LCCS land-cover fractions must not be relabeled into Canadian FBP codes without an independently justified fuel/spread model.",
+    "The historical boundary is for no-action/model replay; it is not an action label and cannot reveal a counterfactual RL-controlled outcome."
+  ]
+}
