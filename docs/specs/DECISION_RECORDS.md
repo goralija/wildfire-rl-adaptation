@@ -119,3 +119,145 @@ nema projektnu .gitignore, lokalni info/exclude čuva iste granice. Postojeći b
 i lokalni ulazni fajl sele u .local, a originalni ignored podaci/modeli/venv ostaju
 uz isti worktree. Python apsolutne putanje treba uskladiti i provjeriti testovima.
 Kanonski runbook je knowledge/workspace-layout.md. TASK-012 ostaje prvi istraživački posao.
+
+## TASK-012 istraživački prijedlog — 2026-10-30, usaglašavanje čeka
+
+Desk review je dopunjen CFSDS v1.1 evaluacijom iz 2026, zvaničnim izvorima za fuel
+mape i Alberta historijske perimetre. Preporuka je zadržati glavno pitanje na
+Firehose/Cell2Fire i kompatibilnoj Sub20 mapi; RL iskustvo generisati online u
+simulatoru. Dogrib bi bio samo povezan, opcioni sanity-check; CFSDS opcioni dnevni
+model-verification track nakon provjere kompletnosti inputa i vremena.
+
+Ovo je istraživački prijedlog, **nije ADR prihvatanja dataseta**. Tim još treba
+usaglasiti obim; nema izabranog historijskog uzorka, train/test manifest ili tvrdnje
+o prostornoj generalizaciji. Detalji, izvori, potrebni environmenti, otvorena pitanja
+i predloženi TASK-014/015 su u `docs/research/REAL_FIRE_DATASETS.md` i backlogu.
+ADR-009 ostaje važeći za redoslijed: refinement/upravljanje podacima prije TASK-004c.
+
+## TASK-012 addendum — real-derived training scenarios i multi-cell initial state, 2026-10-30
+
+Korisnik je dodatno precizirao da RL scenariji trebaju biti zasnovani na stvarnim
+požarima/raspodjelama, a ne samo postojećim synthetic mapama, te da se historijski
+događaji koriste i za provjeru. Ovo pojašnjava projektni cilj. Ne potvrđuje konačan
+izbor geografije, dataseta, licencu, fire IDs ili test split.
+
+Pregledani kandidati zavise od modela/geografije: CFSDS v1.1 (Kanada, 5,435 događaja,
+90 m) najbolje odgovara postojećem Canadian FBP/Cell2Fire; FireSpread_MedEU v2
+(Evropa/Mediteran, 103 događaja, 320 približno 3 m koraka) ima detaljnije progresijske
+granice ali nema Canadian FBP mapu. Dogrib je formatni primjer i dijeli teren sa Firehose
+Sub20; nije nezavisan spatial holdout. Zenodo zapis za FireSpread_MedEU ne prikazuje
+dataset-license polje, pa se licenca arhive mora potvrditi odvojeno od CC-BY članka.
+
+Izvorni kod je pregledan i pokazuje važan feasibility gate: trenutni C++ `Ignitions.csv`
+parser uzima jednu početnu ćeliju po simulacijskoj godini. Više redova iz Python helpera
+ne predstavljaju istovremeno višepikselni front. Historijski day n-1→day n replay zato
+zahtijeva TASK-004c adapter i TASK-017 multi-cell initial-state podršku prije TASK-016
+geospatial konvertera. Uz to postojeći provjereni PPO je 20×20/400 akcija (100 m po
+ćeliji ≈400 ha), pa ne pokriva cijeli veliki požar bez izričitog crop/state-boundary plana.
+
+Odvajamo: (1) real-derived uslove za online RL scenarije, (2) target history za no-action
+spatial check, i (3) simulated counterfactual policy comparison. Ne zaključivati da bi
+agenta u stvarnosti sigurno izgorjelo manje; taj rezultat važio bi samo za Cell2Fire
+parametre i njegovu apstraktnu ćelijsku intervenciju. Source/geography recommendation i
+koraci su u `docs/research/REAL_CASE_PIPELINE.md`, `REAL_FIRE_DATASETS.md`, TASK-015/017/016.
+
+## TASK-012 BiH spatial-screen addendum — 2026-10-30
+
+FireSpread_MedEU v2 je lokalno preuzet samo za prostorni pregled (ZIP je pod Git-ignorisanom
+`data/raw/`; checksum i screening metod su u `reports/real-fire-data/medeu-spatial-screen.json`).
+Presjek sa Natural Earth 1:110m granicom našao je 7 prvih EFFIS kandidata koji dodiruju
+BiH; preciznu lokaciju još treba potvrditi službenim EFFIS podacima/preciznijom granicom.
+`EFFIS_id=205938` je kvalitetan svakodnevni historical reference, ali puni obuhvat je oko
+4.14×4.18 km. `EFFIS_id=43482` je manji po površini, ali bounding extent 2.56×1.71 km.
+Oba prelaze postojeći 20×20/100m policy window u barem jednoj dimenziji.
+
+Dodatna lokalna provjera je preuzela EFFIS European Fuel Map 2017 i presjekla je s
+finalnim poligonima `205938` i `43482`. Raster je 250 m EPSG:3035, NFFL/Anderson kodovi;
+obuhvaćeni su kodovi 4/5/9 uz no-data za `205938`, te 3/5 za `43482`. EFFIS web licenca
+kaže CC BY 4.0 za EU-owned sadržaj osim posebnih napomena; zadržati slojsku provenance,
+citat i prerade. Ovo pronalazi gorivni izvor, ali ne zatvara simulator izbor: postojeći
+Firehose C++ build je Canadian FBP i ne može direktno uzeti EFFIS NFFL kodove. FIRE-RES
+100 m/Scott–Burgan karta je kandidat za provjeru, ali njena BiH pokrivenost, izvoz i
+uslovi nisu potvrđeni; ne tretirati je kao spreman input.
+
+Stoga nema jedinstvene dataset preporuke: CFSDS je putanja za reuse postojećeg Canadian
+FBP/Cell2Fire; MedEU je putanja ako je važnija BiH geografija, uz prethodni izbor i
+validaciju regionalnog fuel/spread modela, ZIP license provjeru, event location potvrdu
+i novu grid/agent scale odluku. Dnevne granice su no-action/model targets, ne akcijske
+etikete. Ovaj nalaz ne potvrđuje fizičku tačnost, trening ili RL prednost. Dataset izbor
+je i dalje prijedlog koji čeka timsku odluku.
+
+## ADR-013 — odabir glavne real-fire putanje, accepted 2026-10-30
+
+Korisnik je izričito rekao da geografija nije ograničenje i da treba uzeti izvor koji
+najbolje odgovara postojećem simulatoru i omogućava bolje scenarije/testne prikaze.
+Odabrana je **Canada + Canadian Fire Spread Dataset (CFSDS) v1.1 + Canadian FBP /
+Cell2Fire**. CFSDS daje mnogo stvarnih kanadskih požara s dnevnim satelitski procijenjenim
+danom gorenja; postojeći simulator već koristi Canadian FBP gorivne klase. FireSpread_MedEU
+i EFFIS ostaju mogući zaseban BiH track, ali njihovi NFFL kodovi nisu direktan input
+trenutnom simulatoru i tražili bi drugi ili prošireni model.
+
+Historijski target ostaje odvojen od agentovog ulaza i nagrade. Trening iskustvo generiše
+simulator na stvarno izvedenim uslovima; sljedeća opažena granica služi no-action
+reality-checku. Izbor ne znači da CFSDS target predstavlja satni ground truth niti daje
+odgovor šta bi se desilo pod novom RL akcijom. Raw arhive i teži GeoTIFF-ovi ostaju
+ignorirani od Git-a; commitujemo kod, provenance, hashove i sažete nalaze.
+
+Početni geometrijski cohort screen drži do pet kandidata godišnje iz 2014–2024 (20 train,
+9 validation, 15 test), podijeljene po godini cijelog požara. Ovo je preliminarna lista,
+neiscrpna i ne znači da su fuel/weather/suppression svi provjereni ili da je test skup
+zamrznut. Prvi train pilot je `2018_747`, target 16.08.2018. Službeni FBP 2014b fuel
+vintage kompatibilan je s ovim pilotom, ali 2019/2024 slojevi i event suppression metadata
+su potrebni prije šire validacije.
+
+Pilot je konvertovan i pokrenut šest puta u C++ no-action režimu (seedovi 123–128). Svih šest
+runova dalo je identičnu mapu od 66 ha novog gorenja prema CFSDS cilju 15.39 ha, IoU=0.2187,
+te je dotaklo 19 ćelija ruba 2×2 km prozora; vrijeme simulacije se razlikovalo. Status gašenja je nepoznat. Zato je to mismatch dijagnostika;
+ne smije se kalibrisati/validirati na ovom jednom događaju niti koristiti kao dokaz
+prednosti agenta. Glavni trening čeka više train-only replaya, input/domain provjere,
+preostali terminal/damage adapter i zamrznut event holdout.
+
+Evidence: `data/manifests/cfsds-v1_1-pilot-cohort.json`,
+`reports/real-fire-data/2018_747-case.json`,
+`reports/real-fire-data/2018_747-day228-replay.json` i `.png` karta.
+
+## ADR-014 — multi-cell initial-state importer i pilot replay, accepted 2026-10-30
+
+TASK-017 je implementiran lokalno kao patch prema pinovanom Firehose/Cell2Fire sourceu.
+`InitialState.csv` sadrži one-based row-major `ncell` i odvojeno `burnt` ili `burning`
+stanje; C++ učita scar i istovremeni front, Python wrapper čuva ekvivalentno stanje.
+Patch/image nisu upstream izmjena i ostaju dokumentovani s checksumom. Potvrđeni su mali
+fixture (1 scar + 2 front ćelije) i pravi `2018_747` ulaz (175 scar + 31 front ćelija).
+
+TASK-016 FireCase builder je izgradio poravnate 20×20/100m fuel/DEM/slope/aspect/weather/
+initial-state fajlove, a target raster je ostao u zasebnoj `truth/` fascikli. Šest C++ no-action
+replaya uspješno se izvršilo bez RL treninga i bez intervencija; svih šest imalo je isti završni raster. `--fire-map` opcija sada
+prihvata case mapu, a CSV converter koristi LF redove zbog strogog C++ zaglavlja.
+
+Preostali rizik: prognoza znatno veća od opaženog može biti posljedica nepoznatog gašenja,
+weather/FWI ulaza, kalibracije/ROS, male karte ili modela; jedan rezultat ih ne razdvaja.
+Dok se mismatch ne razjasni kroz više train događaja/seedova, simulator nema physical
+validation gate za policy benefit. Originalni 20×20 pretrained agent i budžetski adapter
+nisu trenirani/poređeni na ovom pilotu.
+
+## ADR-015 — no-action gate je obavezan prije treniranja, accepted 2026-10-30
+
+Nakon početnog CFSDS pilota izvršena su još dva train day-paira `2018_241` i
+`2018_1770`, oba bez intervencija i sa početnim stanjem učitanim u C++. Rezultati su
+237 ha prema 12.153 ha (IoU .0376) i 73 ha prema 12.151 ha (IoU .1361); oba dotaknu
+rub 20×20 mreže. `2018_747` ostaje 66 ha prema 15.387 ha (IoU .2187; šest seedova).
+No-warmup replayi su ponovili glavne rezultate, pa početnih 20 simulator-minuta nije
+uzrok prekomjernog širenja.
+
+Geometrijski prihvatljiv train kandidat `2014_538` konverter odbija prije simulacije:
+historijska scar/front/target ćelija pada na Water ili Non-fuel u FBP 2014b sloju.
+To potvrđuje da geometrijski crop screen nije dovoljan i da kohortu treba dodatno
+filtrirati gorivom, vremenom, FBP parametrima i stanjem domene.
+
+**Odluka:** ne pokretati fine-tuning ili heldout policy poređenja dok no-action razlika
+ne bude dijagnosticirana na train slučajevima i dok TASK-004c terminal/damage mjerenje
+ne bude dovršeno. Historijski suppression status ostaje nepoznat; CFSDS je satelitski
+interpolisani dnevni target, zato rezultat nije sam po sebi dokaz greške Cell2Firea.
+Evidence: `reports/real-fire-data/2018_241-day227-replay.json`,
+`2018_1770-day224-replay.json`, `2014_538-fuel-rejection.json` i
+`reports/real-fire-data/README.md`.

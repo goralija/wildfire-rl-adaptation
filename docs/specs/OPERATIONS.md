@@ -6,10 +6,15 @@ status: draft
 # Environment i runbook
 
 Core: Python >=3.11; bez pip biblioteka, `PYTHONPATH=src` za sve komande.
-Referentni lokalni environment: Python 3.13 `.venv` u task worktreeu.
-Optional RL: `python -m pip install -e '.[rl]'`; snapshot tačnih verzija je u requirements/.
-Snapshot sa macOS ARM64 nije obećanje kompatibilnosti na Colab Linux GPU-u.
-Za Colab ponovo razriješiti podržane verzije i sačuvati zaseban freeze i manifest.
+Optional modern RL: `python -m pip install -e '.[rl]'`; verified snapshots su u
+`requirements/rl-macos-py312.freeze.txt` (Python 3.12/macOS ARM64) i
+`requirements/rl-macos-py313.freeze.txt` (Python 3.13/macOS ARM64). Oba su lokalni
+snapshoti platforme, ne obećanje kompatibilnosti na Colab/Linux GPU-u. Za Colab ponovo
+razriješiti podržane verzije i sačuvati zaseban freeze i manifest.
+
+Za najnoviji čisti lokalni dokaz vidi [environment setup receipt](../../reports/environment-setup/README.md):
+Python 3.12.4, 26 app testova, 15 knowledge testova, strict bundle provjera i oba smokea
+su prošla. Taj worktree `.venv`, external izvori, weights i Docker tag ostaju lokalni.
 
 Run: `python -m wildfire_rl.cli --config configs/pilot.json --out runs/NEW_ID`.
 Output postoji -> izaberi novi ID, nemoj brisati ili koristiti overwrite flag.
@@ -25,5 +30,7 @@ i raw podatke koristiti pinovane javne izvore iz HANDOFF-a, ne tuđu lokalnu put
 Open Questions: udaljena pohrana velikih artefakata i timski compute.
 
 Legacy runtime je sada ostvaren preko `docker/firehose/Dockerfile`: pinned Python base,
-SB3/contrib 1.5.0, Gym 0.21, C++ build flag overrides. Tačne resolved verzije i image ID
-su u reports/firehose-verification/. Runtime bez mreže i sa output-only host mountom.
+SB3/contrib 1.5.0, Gym 0.21, C++ build flag overrides. Stvarni build i 12-case replay
+su ponovljeni na Linux ARM64; tačan ID je u [environment receipt](../../reports/environment-setup/manifest.json),
+raniji pinovani runtime manifest je u reports/firehose-verification/. Runtime bez mreže
+i sa output-only host mountom. Rebuild drugih platformi još nije potvrđen.

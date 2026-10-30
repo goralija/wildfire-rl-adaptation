@@ -9,10 +9,19 @@ sources:
 
 **Postavka okruženja i dataset opaženih požara su različite stvari.** Početni Firehose
 fajlovi su ulazi za simulaciju; agent interakcijom stvara RL iskustvo. Oni sami nisu
-skup stvarnih ishoda niti oznaka ispravnih intervencija. Sada su zasebno preuzeti i
-pregledani mali Dogrib/CFSDS historijski uzorci. Preporuka i ograničenja su u
-[REAL_FIRE_DATASETS](REAL_FIRE_DATASETS.md). Konačna uloga, izbor i obim još nisu
-usaglašeni; TASK-012 dataset refinement je neposredni sljedeći korak.
+skup stvarnih ishoda niti oznaka ispravnih intervencija. Korisnikov cilj je da ti ulazi
+dolaze iz stvarnih požara i njihovih distribucija, a historijski događaji ostanu
+odvojeni za replay/holdout. Odabrali smo Canada + CFSDS v1.1 jer odgovara postojećem
+Canadian FBP simulatoru i nudi mnogo različitih požara. Jedan slučaj je već pretvoren
+u simulator ulaze i no-action replayan, uz veliko neslaganje prema opaženom rastu. Ako
+želimo stvarne BiH slučajeve, FireSpread_MedEU v2 je
+našao 7 prvih prostorno lokaliziranih kandidata, a EFFIS-ova karta iz 2017. daje
+evropske NFFL kodove goriva od 250 m; potrebni su kompatibilan simulator, provjera licence
+i veći grid jer postojeći 20×20 prozor ne pokriva cijele dobre primjere. Dnevni perimetri traže
+simulator state-import; ovaj projekat sada ima višepikselni početni state adapter.
+Preporuka i format su u
+[REAL_FIRE_DATASETS](REAL_FIRE_DATASETS.md) i [REAL_CASE_PIPELINE](REAL_CASE_PIPELINE.md);
+punu listu fire ID-jeva i benchmark još treba zamrznuti.
 
 ## Postojeći Firehose Sub20x20 — data card
 
@@ -29,7 +38,7 @@ Inventar: [dataset-inventory.json](../../reports/firehose-verification/dataset-i
 | `fbp_lookup_table.csv` | svi opaženi kodovi imaju lookup | tip goriva i RGB prikaz |
 | `Weather.csv` | 8 vremenskih redova | stvarno korišten u sadašnjem rows testu |
 | `Weathers/Weather*.csv` | 129 dodatnih fajlova po 8 redova | alternativni scenariji, nisu automatski korišteni |
-| `Ignitions.csv` | izvorni input navodi 381; provjera modela koristi 372 | mjesto paljenja, indeks od jedan |
+| `Ignitions.csv` | input navodi 381; inference provjera koristi 372 | različita mjesta: 381 je red 20/kolona 1 (O-1a), 372 red 19/kolona 12 (C-2) |
 | Priority maska | `Reward.asc` nije prisutan za ovu mapu | napravit ćemo kontrolisani dodatni ulaz |
 
 Ukupno 141 fajl / 159,595 bajtova (~156 KiB). Ima 130 različitih weather sadržaja
@@ -58,24 +67,80 @@ ovim inventarom. Ne pretvarati ćelije u hektare prije provjere CRS-a.
   potvrđena; čuvati URL/commit/hash i izbjegavati redistribuciju sirovih podataka zasad.
 - Same mape nisu dovoljne za tvrdnju o generalizaciji na drugi teren ili vremenske uslove.
 
-## Planirani istraživački dataset
+## Preporučeni dataset/scenario plan
 
-1. **Scenario inputs:** mapa + weather trace + ignition + simulator seed + priority maska.
-   Svaka kombinacija dobija scenario ID, porijeklo, transformacije i hash.
-2. **Train/validation/test manifesti:** odvojene kombinacije ignition/weather i po
-   mogućnosti odvojene mape. Samo promjena seeda na istoj mapi/weather nije dokaz
-   prostorne ili meteorološke generalizacije. Test manifest se zamrzava prije tuninga.
-3. **RL iskustvo:** (opažanje, akcija, nagrada, sljedeće opažanje, done/reason), nastaje
-   u simulatoru. PPO koristi rollout buffer; ne mora čuvati sav trening kao offline dataset.
-4. **Evaluacijski dataset:** po scenariju i politici čuvamo damage, priority damage,
-   intervencije, horizon/reason, seedove, runtime i identitet checkpointa. Iz toga nastaju
-   krive šteta/budžet i intervali.
+Korisnik je jasno odredio cilj: RL treba učiti u Firehose/Cell2Fire na scenarijima koji
+predstavljaju stvarne pejzaže, gorivo, vrijeme i početna stanja požara. Zato ne koristimo
+random toy mape kao glavni training distribution. Agentov reward i nove akcija–ishod
+epizode ipak generiše simulator; historijski perimetri nisu etikete „dobre akcije“.
 
-Početak je ova mala postojeća mapa; zatim proširujemo scenarije nakon provjere
-adaptera. Preporučen dodatak je ograničena historijska provjera simulatora: Dogrib kao
-početni povezani slučaj, zatim mali nezavisni CFSDS podskup ako kompletni inputi budu
-izvedivi. To nije uslov da uopšte počnemo RL poređenje niti dokaz koristi intervencija
-u stvarnom svijetu. Regionalni BiH GIS i velika kampanja označavanja nisu u sadašnjem obimu.
+**Početna pilot konverzija:** CFSDS događaj `2018_747`, dani 15–16.08.2018. Odabrali smo ga
+jer stane u postojeći 20×20 model i njegov mali prozor koristi samo FBP goriva C-3/D-1,
+bez miješanog goriva kojem nedostaje simulator-parametar. Ulazi i rezultat su u
+[case manifestu](../../reports/real-fire-data/2018_747-case.json),
+[replay izvještaju](../../reports/real-fire-data/2018_747-day228-replay.json) i
+[karti](../../reports/real-fire-data/2018_747-day228.png) i [šest-seed izvještaju](../../reports/real-fire-data/2018_747-seed-sweep.json).
+Svih šest C++ no-action seedova dalo je istu završnu mapu od 66 ha novog opožarenog
+područja prema opaženih 15.39 ha i dotaklo rub 2×2 km karte. Seedovi su mijenjali
+trajanje, ne završnu mapu. Dvije dodatne 2018 train konverzije dale su 237 ha i 73 ha
+prema opaženih oko 12 ha po danu; i one su dotakle rub. `2014_538` nije prošao FBP
+fuel/water kompatibilnost. Ovo nije rezultat treniranja: sljedeće treba provjeriti
+gorivo, vrijeme, model i prostor prije rada na politici.
+
+Dogrib ostaje koristan formatni primjer, ali nije pilot ovog historijskog day-pair
+pipelinea: njegovi podaci dijele dio terena s postojećim Firehose Sub20.
+
+**Odabrani multi-event izvor za postojeći simulator:** CFSDS v1.1
+day-of-burning rasteri. Svaki scenario se pravi od događaja/dana, historijskog FBP fuel
+mapa, DEM-a, hourly ERA5-Land weathera i početne granice požara. Dnevni CFSDS raster
+služi kao `day n` target za provjeru bez intervencije; RL rollout-i na tom pejzažu su
+simulatorovi counterfactual-i. Raster je satelitski interpolisan i ne predstavlja tačan
+satni front. Višepikselni initial-state importer sada postoji i provjeren je kroz jedan
+stvarni pilot; glavna još nepoznata stvar je kvalitet no-action podudaranja. Kompletan
+JSON-to-Cell2Fire field mapping je u
+[REAL_CASE_PIPELINE](REAL_CASE_PIPELINE.md).
+
+**Ako je glavni cilj Evropa/BiH:** FireSpread_MedEU sadrži 103 događaja i 320 ~3 m
+koraka; prostorni pregled našao je sedam kandidata koji dodiruju BiH granicu. Najbolje
+ocijenjeni lokalni primjer `EFFIS_id=205938` ima četiri dnevna koraka visoke kvalitete,
+ali je oko 4.14×4.18 km. Manji primjer `43482` je 216.87 ha, ali mu je okvir 2.56×1.71 km.
+Postojeći PPO pokriva 2×2 km; zato niži broj hektara sam po sebi ne garantuje da cijela
+granica stane u prozor. Vidi [lokalni prostorni pregled](../../reports/real-fire-data/medeu-spatial-screen.json).
+Prvo izabrati i provjeriti lokalno prikladan model goriva; ne preslikavati LCCS/CLC
+landcover u C-1/C-2 bez fizičkog opravdanja. EFFIS-ov 250 m NFFL sloj je prostorno
+uzorkovan preko dva završna događaja, ali nije isti gorivni sistem kao trenutni Canadian
+FBP build. Sama v2 arhiva nema DEM ili satni weather;
+pre-fire point zapis nije izmjerena stvarna tačka paljenja.
+
+Za glavni eksperiment:
+
+1. **Source/event manifest:** Canada + CFSDS/Canadian FBP je odabrani glavni pravac;
+   44 kandidata iz trenutnog screening uzorka su podijeljena po cijelim događajima:
+   20 train, 9 validation i 15 test. To su geometrijski kandidati, ne još završen
+   fuel/weather kvalitetni benchmark. Izabrati godišnju FBP mapu, satelitski front,
+   DEM, weather window i suppression flag po `event_id`. Za BiH:
+   provjeriti EFFIS IDs iz prostornog pregleda, licencu za MedEU zip, high-resolution
+   event bounds, regionalni fuel model i grid koji može obuhvatiti požar.
+2. **Intermediate FireCase JSON:** event/date, CRS/transform, shape/cellsize, fuel/DEM/
+   observed perimeter asset paths+hashes, weather series+units/timezone, initial-front
+   construction, conversion log i event-level split group.
+3. **Cell2Fire folder:** poravnati categorical fuel, DEM/slope/aspect, `Data.csv`, hourly
+   `Weather.csv` i `InitialState.csv` za scar + multi-cell front; obični `Ignitions.csv`
+   ostaje za slučaj jedne tačke. Kreirati no-action replay i porediti njegovu
+   granicu sa skrivenim observed `day n`.
+4. **Splits:** rasporediti cijele fire IDs u train/validation/test; nijedan crop ili
+   drugi dan istog incidenta ne smije preći u drugu particiju. Kalibraciju raditi samo
+   na train/calibration fire IDs.
+5. **RL experience/evaluation:** simulator generiše transitions online; za svaku politiku
+   zabilježiti istu mapu/front/weather/C++ seed/budžet, simulated damage, horizon,
+   intervencije, checkpoint/hash i observed-boundary spread score.
+
+Sljedeće je proširiti train-only CFSDS replaye, pregledati poravnanje fuel/DEM/weather
+i prostor oko predviđenog rasta. Za BiH početi s MedEU `205938` (ili manjim `43482`)
+samo poslije fuel-modela, licence i scale odluke. Tek kad više no-action train replaya
+bude razumljivo, zamrznuti event-level heldout IDs i pokrenuti benchmark/fine-tuning.
+Jedna Dogrib/CFSDS mapa ne pokazuje generalizaciju. Ne predstavljati kanadske FBP gorive
+klase kao validaciju šumskih požara u BiH.
 
 ## Ponovi inventar
 
@@ -86,3 +151,5 @@ python3 scripts/inventory_firehose_dataset.py --root external/firehose/data/Sub2
 Skripta čuva hash svakog fajla, dimenzije, spatial alignment, weather brojnosti,
 fuel lookup pokrivenost i missingness. Rezultati su ograničeni na pinovani Sub20x20,
 ne predstavljaju inventar svih mapa autorskog repozitorija.
+Ponovljeni inventar 2026-10-30 nakon ponovnog checkouta tačnog Firehose commita u
+potpunosti odgovara sačuvanom `reports/firehose-verification/dataset-inventory.json`.
