@@ -1,0 +1,551 @@
+{
+  "cases": [
+    {
+      "case_input_available": true,
+      "case_manifest_sha256": "c6eae9397ddb87636f0ee4c3f0e70cbf385808fc1ad237fe85e903bee1db97a7",
+      "event_id": "2018_1770",
+      "fuel": {
+        "map_release": "National FBP fuel-type grid v2014b",
+        "simulator_grid_sha256": "e2b937d4c8f9908bc28498ec84d59700b953bd3b2138804b3b2c7fb4dbeef27c",
+        "source_resolution_m": [
+          250.0,
+          250.0
+        ]
+      },
+      "grid_alignment": {
+        "all_four_ascii_headers_match": true,
+        "data_csv_rows_including_header": 401,
+        "expected_20x20_100m_grid": true,
+        "missing_ascii_assets": []
+      },
+      "split_confirmed_train": true,
+      "suppression_status": "unknown; no event-level agency record joined",
+      "target_date_local": "2018-08-12",
+      "terrain": {
+        "elevation": {
+          "maximum": 2154.0,
+          "mean": 1834.5825,
+          "minimum": 1622.0,
+          "nodata_cells": 0,
+          "sha256": "fff6fee27d25ff4c59db1f2ce60ff3b4ce012828af0fa5efa88e871414a12272",
+          "valid_cells": 400
+        },
+        "saz": {
+          "maximum": 332.0,
+          "minimum": 80.0,
+          "nodata_cells": 0,
+          "sha256": "d7fdb11c1b825d8adb76f23b174660b2e90a10419d9a491007e5bf5e6aee00e1",
+          "valid_cells": 400
+        },
+        "slope": {
+          "maximum": 56.0,
+          "mean": 26.1875,
+          "minimum": 5.0,
+          "nodata_cells": 0,
+          "sha256": "7d7015430b001037296aa6838cc73dec21ab3b53ecc1735dc83de861c4835752",
+          "valid_cells": 400
+        }
+      },
+      "weather": {
+        "api_location": {
+          "lat": 49.5,
+          "lon": -114.9
+        },
+        "distance_from_cfsds_summary_centroid_km": 2.436,
+        "input_file": {
+          "all_rows_on_target_local_day": true,
+          "first_local_time": "2018-08-12 00:00",
+          "fwi_fields_constant_across_hourly_rows": {
+            "BUI": true,
+            "DC": true,
+            "DMC": true,
+            "FFMC": true,
+            "FWI": true,
+            "ISI": true
+          },
+          "last_local_time": "2018-08-12 23:00",
+          "ordered_hourly_24_rows": true,
+          "row_count": 24,
+          "sha256": "42c12a84298bb1d8ec691ec7fe640d39cbad1db6209586e157f10cc4ee4e391b"
+        },
+        "provider_model": "ERA5-Seamless",
+        "source_file_sha256": "9932bfaa16beb8ef16b3229b622d1d1655eddbf85a401e10abaeecf08cddd920",
+        "timezone": "America/Edmonton",
+        "utc_offset_seconds": -21600
+      }
+    },
+    {
+      "case_input_available": true,
+      "case_manifest_sha256": "b7ec7f2e9b4c71f821c640002e9091dc75a98c129cf22ed32244fd4ef005849a",
+      "event_id": "2018_241",
+      "fuel": {
+        "map_release": "National FBP fuel-type grid v2014b",
+        "simulator_grid_sha256": "6cb05da022829f4e5278822c1860eb0f140283fe61c8c49b0f46cc2b734a6149",
+        "source_resolution_m": [
+          250.0,
+          250.0
+        ]
+      },
+      "grid_alignment": {
+        "all_four_ascii_headers_match": true,
+        "data_csv_rows_including_header": 401,
+        "expected_20x20_100m_grid": true,
+        "missing_ascii_assets": []
+      },
+      "split_confirmed_train": true,
+      "suppression_status": "unknown; no event-level agency record joined",
+      "target_date_local": "2018-08-15",
+      "terrain": {
+        "elevation": {
+          "maximum": 983.0,
+          "mean": 936.46,
+          "minimum": 899.0,
+          "nodata_cells": 0,
+          "sha256": "76ab10027a4733f33478c64c4a097ce92af9928bdeb24a26e4176bb7aeb7d88d",
+          "valid_cells": 400
+        },
+        "saz": {
+          "maximum": 359.0,
+          "minimum": 1.0,
+          "nodata_cells": 0,
+          "sha256": "56e61ad9753ae987854928266b53e0f1355b313ab328c028ec2f2c194502ddf2",
+          "valid_cells": 400
+        },
+        "slope": {
+          "maximum": 15.0,
+          "mean": 5.45,
+          "minimum": 0.0,
+          "nodata_cells": 0,
+          "sha256": "bfd2d5014046c7bf957718785b8b41e61b174596728ed45387e14962f5405975",
+          "valid_cells": 400
+        }
+      },
+      "weather": {
+        "api_location": {
+          "lat": 53.100006,
+          "lon": -123.8
+        },
+        "distance_from_cfsds_summary_centroid_km": 5.156,
+        "input_file": {
+          "all_rows_on_target_local_day": true,
+          "first_local_time": "2018-08-15 00:00",
+          "fwi_fields_constant_across_hourly_rows": {
+            "BUI": true,
+            "DC": true,
+            "DMC": true,
+            "FFMC": true,
+            "FWI": true,
+            "ISI": true
+          },
+          "last_local_time": "2018-08-15 23:00",
+          "ordered_hourly_24_rows": true,
+          "row_count": 24,
+          "sha256": "13db2cf3a68c006daeee1159ce041d9c0e02976147d137583fe1fb920547e4a5"
+        },
+        "provider_model": "ERA5-Seamless",
+        "source_file_sha256": "26cd0d1f412e07f4cec023c6e9ea06f1aa3c573b8b550d2b9539e109b9cf1079",
+        "timezone": "America/Vancouver",
+        "utc_offset_seconds": -25200
+      }
+    },
+    {
+      "case_input_available": true,
+      "case_manifest_sha256": "43baf91cc526056b21381257eae201ee7f24bd85d316e64e01132a47f017b2f5",
+      "event_id": "2018_747",
+      "fuel": {
+        "map_release": "National FBP fuel-type grid v2014b",
+        "simulator_grid_sha256": "eddcf2b3d993c6ac8474aa3a077156918e33fd2c5b46d6262d7076c6c23f83dd",
+        "source_resolution_m": [
+          250.0,
+          250.0
+        ]
+      },
+      "grid_alignment": {
+        "all_four_ascii_headers_match": true,
+        "data_csv_rows_including_header": 401,
+        "expected_20x20_100m_grid": true,
+        "missing_ascii_assets": []
+      },
+      "split_confirmed_train": true,
+      "suppression_status": "unknown; no event-level agency record joined",
+      "target_date_local": "2018-08-16",
+      "terrain": {
+        "elevation": {
+          "maximum": 1533.0,
+          "mean": 1404.825,
+          "minimum": 1301.0,
+          "nodata_cells": 0,
+          "sha256": "44f5cfb31876aac17b876d8341c5a6c37f807c6b388a1cb2929fe11d3f445eca",
+          "valid_cells": 400
+        },
+        "saz": {
+          "maximum": 357.0,
+          "minimum": 6.0,
+          "nodata_cells": 0,
+          "sha256": "1644006afa72ad67126315621aa2b118a409612cc07f1260ee59259219a5c363",
+          "valid_cells": 400
+        },
+        "slope": {
+          "maximum": 44.0,
+          "mean": 15.43,
+          "minimum": 1.0,
+          "nodata_cells": 0,
+          "sha256": "532335072ab57e29df5133853115e3e4883936fbc31fe873eb117388a26237f0",
+          "valid_cells": 400
+        }
+      },
+      "weather": {
+        "api_location": {
+          "lat": 49.800003,
+          "lon": -115.9
+        },
+        "distance_from_cfsds_summary_centroid_km": 5.195,
+        "input_file": {
+          "all_rows_on_target_local_day": true,
+          "first_local_time": "2018-08-16 00:00",
+          "fwi_fields_constant_across_hourly_rows": {
+            "BUI": true,
+            "DC": true,
+            "DMC": true,
+            "FFMC": true,
+            "FWI": true,
+            "ISI": true
+          },
+          "last_local_time": "2018-08-16 23:00",
+          "ordered_hourly_24_rows": true,
+          "row_count": 24,
+          "sha256": "3fc33cdb3585a5624296f4ba79cb489905d6668bc89757992f788cd116df6e8e"
+        },
+        "provider_model": "ERA5-Seamless",
+        "source_file_sha256": "d1e295689ff420f7484d1860160d789d62718b4d8beec62fbd1c7719fff6f45e",
+        "timezone": "America/Edmonton",
+        "utc_offset_seconds": -21600
+      }
+    }
+  ],
+  "generated_at_utc": "2026-10-30T23:01:20.369830+00:00",
+  "limitations": [
+    "This audit intentionally selects only the TRAIN list from the cohort manifest; it opens no validation/test case package or raster.",
+    "Input alignment checks do not validate Cell2Fire fire behavior and do not explain the prior no-action overgrowth.",
+    "Fuel PASS is only a compatibility screen. Suppression and within-day fire timing remain unknown.",
+    "No simulator replay, fine-tuning, benchmark, or parameter calibration was run."
+  ],
+  "provenance": {
+    "cohort_manifest": "data/manifests/cfsds-v1_1-pilot-cohort.json",
+    "cohort_manifest_sha256": "12bef860961e84019e1a1293735bf80ed6b6ccbf913afe6030f6c25cf1781154",
+    "dem_source_asset_sha256_recorded_in_case_manifests": false,
+    "fuel_audit_report": "reports/real-fire-data/cfsds-train-fuel-qc.json",
+    "fuel_audit_report_sha256": "968e8879b2b53080adc3ab7b3286271fcfcf3a960c2f8c5ddf6976058652a221",
+    "fuel_map_zip_sha256": "8675bbd92d99366e46b6537d5b512017d0982e3a34f97e4bc81fb60b93c29a2b",
+    "local_generated_case_source": "operator-provided runs/real-case directory; generated inputs remain ignored by Git"
+  },
+  "purpose": "Train-only inventory and alignment check of the existing 20x20 CFSDS FireCase inputs; not physical validation.",
+  "schema": "cfsds-train-input-qc/1.1",
+  "scope": {
+    "case_input_packages_found": 3,
+    "case_input_packages_not_materialized": 17,
+    "materialized_train_event_ids": [
+      "2018_1770",
+      "2018_241",
+      "2018_747"
+    ],
+    "not_materialized_train_event_ids": [
+      "2014_221",
+      "2014_2221",
+      "2014_285",
+      "2014_432",
+      "2014_538",
+      "2015_252",
+      "2015_2924",
+      "2015_2929",
+      "2015_438",
+      "2015_896",
+      "2017_1146",
+      "2017_1296",
+      "2017_1431",
+      "2017_1871",
+      "2017_51",
+      "2018_1860",
+      "2018_1932"
+    ],
+    "split": "train only",
+    "train_candidate_count": 20,
+    "train_event_ids": [
+      "2014_221",
+      "2014_2221",
+      "2014_285",
+      "2014_432",
+      "2014_538",
+      "2015_252",
+      "2015_2924",
+      "2015_2929",
+      "2015_438",
+      "2015_896",
+      "2017_1146",
+      "2017_1296",
+      "2017_1431",
+      "2017_1871",
+      "2017_51",
+      "2018_1770",
+      "2018_1860",
+      "2018_1932",
+      "2018_241",
+      "2018_747"
+    ],
+    "validation_or_test_case_files_opened": 0
+  },
+  "source_review": {
+    "fuel_vintage": {
+      "2014b_vintage_limit": "The official metadata does not provide a per-pixel date or a clear NBAC/NFDB cutoff. The 2014b label alone therefore cannot certify that every train event, especially 2014 events, is free of post-event fuel information.",
+      "2019_map": {
+        "archive_downloaded": false,
+        "assessment": "A genuine official candidate vintage and source for a burn-scar succession ruleset, but it is listed under development and includes NBAC-based burned-area reassignment. Its exact per-pixel burn-record cutoff is not provided, so it may contain records later than an event target.",
+        "listed_archive_size": "about 2 GB",
+        "metadata_inputs": "kNN Forest Inventory (2017), Agriculture Canada land cover, NBAC burn-area reassignment, and national deforestation monitoring",
+        "metadata_verified_from": "official CWFIS development catalog and metadata PDF; see S-032",
+        "official_catalog_location": "CWFIS development directory",
+        "product": "Canadian Forest FBP Fuel Types (CanFG), v20191114",
+        "resolution_m": 250
+      },
+      "2024_map": {
+        "assessment": "Useful as a later map product but after all current 2014-2018 train targets; not used as their baseline because this risks future-information leakage.",
+        "metadata_inputs": "SCANFI, Canadian ecozones, and NBAC",
+        "metadata_verified_from": "official Open Government record; see S-033",
+        "product": "CFFDRS FBP Fuel Types 2024, 30 m",
+        "temporal_coverage": "2020-08-01 to 2024-04-01"
+      },
+      "annualization_method_candidate": {
+        "must_resolve_before_use": [
+          "Confirm the base map's temporal provenance and any pre-existing burn history so older scars are neither omitted nor double-counted.",
+          "Reproduce and test the exact fuel-class succession crosswalk; the current 2014b raster codes and v20191114 rules must not be assumed interchangeable.",
+          "Keep target day n and later perimeter information out of the fuel layer.",
+          "Test how a day n-1 scar reclassified to non-fuel interacts with this simulator's imported initial scar and active front."
+        ],
+        "project_status": "Literature method only; not implemented or validated in this project.",
+        "published_recipe": "Build a year/day-specific fuel layer from a versioned base map and reclassify only perimeters burned before target day n, following the v20191114 burn-scar succession ruleset.",
+        "source": "Bennett et al. (2026), W.I.S.E. methods; see S-037"
+      },
+      "decision": "Retain v2014b only as the pinned input for reproducing already-saved pilot cases. No annual vintage is approved as a leakage-safe replacement yet; do not label any of the 20 candidates fully fuel-vintage qualified.",
+      "full_2014b_metadata_verified_from": "official CWFIS metadata PDF; see S-031",
+      "train_fires_years": [
+        2014,
+        2015,
+        2017,
+        2018
+      ],
+      "used_map": "National FBP fuel-type grid v2014b, 250 m; metadata lists 2011 land cover, CanFI2000/ecological inputs, and NFDB/NBAC burn-scar use"
+    },
+    "suppression": {
+      "evidence_joined": false,
+      "interpretation": "No event-level action/resource timeline was joined. This does not mean no suppression occurred.",
+      "public_source_review": "CWFIS public fire-history descriptions document agency-reported fire locations and mapped perimeters, while public current-fire status is not a retrospective action/resource record for these CFSDS day-pairs; see S-036.",
+      "status_for_all_train_events": "unknown"
+    },
+    "terrain": {
+      "cases": [
+        {
+          "elevation": {
+            "maximum": 2154.0,
+            "mean": 1834.5825,
+            "minimum": 1622.0,
+            "nodata_cells": 0,
+            "sha256": "fff6fee27d25ff4c59db1f2ce60ff3b4ce012828af0fa5efa88e871414a12272",
+            "valid_cells": 400
+          },
+          "event_id": "2018_1770",
+          "saz": {
+            "maximum": 332.0,
+            "minimum": 80.0,
+            "nodata_cells": 0,
+            "sha256": "d7fdb11c1b825d8adb76f23b174660b2e90a10419d9a491007e5bf5e6aee00e1",
+            "valid_cells": 400
+          },
+          "slope": {
+            "maximum": 56.0,
+            "mean": 26.1875,
+            "minimum": 5.0,
+            "nodata_cells": 0,
+            "sha256": "7d7015430b001037296aa6838cc73dec21ab3b53ecc1735dc83de861c4835752",
+            "valid_cells": 400
+          }
+        },
+        {
+          "elevation": {
+            "maximum": 983.0,
+            "mean": 936.46,
+            "minimum": 899.0,
+            "nodata_cells": 0,
+            "sha256": "76ab10027a4733f33478c64c4a097ce92af9928bdeb24a26e4176bb7aeb7d88d",
+            "valid_cells": 400
+          },
+          "event_id": "2018_241",
+          "saz": {
+            "maximum": 359.0,
+            "minimum": 1.0,
+            "nodata_cells": 0,
+            "sha256": "56e61ad9753ae987854928266b53e0f1355b313ab328c028ec2f2c194502ddf2",
+            "valid_cells": 400
+          },
+          "slope": {
+            "maximum": 15.0,
+            "mean": 5.45,
+            "minimum": 0.0,
+            "nodata_cells": 0,
+            "sha256": "bfd2d5014046c7bf957718785b8b41e61b174596728ed45387e14962f5405975",
+            "valid_cells": 400
+          }
+        },
+        {
+          "elevation": {
+            "maximum": 1533.0,
+            "mean": 1404.825,
+            "minimum": 1301.0,
+            "nodata_cells": 0,
+            "sha256": "44f5cfb31876aac17b876d8341c5a6c37f807c6b388a1cb2929fe11d3f445eca",
+            "valid_cells": 400
+          },
+          "event_id": "2018_747",
+          "saz": {
+            "maximum": 357.0,
+            "minimum": 6.0,
+            "nodata_cells": 0,
+            "sha256": "1644006afa72ad67126315621aa2b118a409612cc07f1260ee59259219a5c363",
+            "valid_cells": 400
+          },
+          "slope": {
+            "maximum": 44.0,
+            "mean": 15.43,
+            "minimum": 1.0,
+            "nodata_cells": 0,
+            "sha256": "532335072ab57e29df5133853115e3e4883936fbc31fe873eb117388a26237f0",
+            "valid_cells": 400
+          }
+        }
+      ],
+      "limitations": [
+        "Only generated train cases present in the supplied runs directory were measured.",
+        "The three measured ASCII DEM/slope/aspect grids have matching 20x20 / 100 m headers and no no-data cells.",
+        "The case manifests do not record a checksum for the source MRDEM tile, so generated-grid hashes prove output identity but not the exact upstream source tile bytes.",
+        "MRDEM is a blended product; acquisition date of the local source tile was not recorded in these case manifests."
+      ],
+      "materialized_case_count": 3,
+      "not_materialized_train_case_count": 17,
+      "simulator_resolution_m": 100,
+      "source_product": "NRCan MRDEM-30 Digital Terrain Model (DTM)",
+      "source_resolution_m": 30
+    },
+    "weather": {
+      "cases": [
+        {
+          "api_location": {
+            "lat": 49.5,
+            "lon": -114.9
+          },
+          "distance_from_cfsds_summary_centroid_km": 2.436,
+          "event_id": "2018_1770",
+          "input_file": {
+            "all_rows_on_target_local_day": true,
+            "first_local_time": "2018-08-12 00:00",
+            "fwi_fields_constant_across_hourly_rows": {
+              "BUI": true,
+              "DC": true,
+              "DMC": true,
+              "FFMC": true,
+              "FWI": true,
+              "ISI": true
+            },
+            "last_local_time": "2018-08-12 23:00",
+            "ordered_hourly_24_rows": true,
+            "row_count": 24,
+            "sha256": "42c12a84298bb1d8ec691ec7fe640d39cbad1db6209586e157f10cc4ee4e391b"
+          },
+          "target_date_local": "2018-08-12",
+          "timezone": "America/Edmonton"
+        },
+        {
+          "api_location": {
+            "lat": 53.100006,
+            "lon": -123.8
+          },
+          "distance_from_cfsds_summary_centroid_km": 5.156,
+          "event_id": "2018_241",
+          "input_file": {
+            "all_rows_on_target_local_day": true,
+            "first_local_time": "2018-08-15 00:00",
+            "fwi_fields_constant_across_hourly_rows": {
+              "BUI": true,
+              "DC": true,
+              "DMC": true,
+              "FFMC": true,
+              "FWI": true,
+              "ISI": true
+            },
+            "last_local_time": "2018-08-15 23:00",
+            "ordered_hourly_24_rows": true,
+            "row_count": 24,
+            "sha256": "13db2cf3a68c006daeee1159ce041d9c0e02976147d137583fe1fb920547e4a5"
+          },
+          "target_date_local": "2018-08-15",
+          "timezone": "America/Vancouver"
+        },
+        {
+          "api_location": {
+            "lat": 49.800003,
+            "lon": -115.9
+          },
+          "distance_from_cfsds_summary_centroid_km": 5.195,
+          "event_id": "2018_747",
+          "input_file": {
+            "all_rows_on_target_local_day": true,
+            "first_local_time": "2018-08-16 00:00",
+            "fwi_fields_constant_across_hourly_rows": {
+              "BUI": true,
+              "DC": true,
+              "DMC": true,
+              "FFMC": true,
+              "FWI": true,
+              "ISI": true
+            },
+            "last_local_time": "2018-08-16 23:00",
+            "ordered_hourly_24_rows": true,
+            "row_count": 24,
+            "sha256": "3fc33cdb3585a5624296f4ba79cb489905d6668bc89757992f788cd116df6e8e"
+          },
+          "target_date_local": "2018-08-16",
+          "timezone": "America/Edmonton"
+        }
+      ],
+      "centroid_distance_km_min_max": [
+        2.436,
+        5.195
+      ],
+      "limitations": [
+        "A nearest reanalysis point is not a local weather station measurement or 100 m weather field.",
+        "A daily CFSDS burn-day target does not identify the actual hour at which the observed front advanced.",
+        "The saved input comes from a merged product; the provider does not identify the source version for each saved column in the case manifest.",
+        "Only three materialized train cases were checked; the remaining 17 need case construction and equivalent checks."
+      ],
+      "materialized_case_count": 3,
+      "official_resolution_context": "ERA5 is hourly at 0.25 degrees (about 25 km); ERA5-Land is hourly at 0.1 degrees (about 9-11 km). Both are much coarser than the 2x2 km policy grid.",
+      "provider_variable_mapping_verified": "Open-Meteo documents temperature and humidity from ERA5-Land and wind and solar radiation from ERA5 for ERA5-Seamless. The precise source/version for every field in the saved Weather.csv, especially precipitation, was not recorded in the case manifests and must be captured before regenerating cases; see S-035.",
+      "source": "Open-Meteo Historical Weather API, ERA5-Seamless",
+      "time_alignment": "The three checked Weather.csv files each contain 24 ordered hourly rows for the target's local calendar date. The daily CFSDS FWI fields are repeated unchanged in all 24 rows because no hourly FWI series is present in the current case inputs."
+    }
+  },
+  "summary": {
+    "all_train_suppression_status": "unknown; no event-level suppression/action record was joined for any of the 20 candidates",
+    "case_inputs_complete_for_full_train_cohort": false,
+    "no_action_gate_passed": false,
+    "train_fuel_qc_status_counts": {
+      "FAIL_FUEL_OVERLAP": 10,
+      "PASS_FUEL_ONLY": 10,
+      "other_or_missing": 0
+    },
+    "training_or_calibration_performed": false,
+    "weather_centroid_distance_km": {
+      "maximum": 5.195,
+      "measured_case_count": 3,
+      "minimum": 2.436
+    }
+  }
+}
