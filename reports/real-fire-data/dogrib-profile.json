@@ -1,0 +1,93 @@
+{
+  "headers": {
+    "Forest.asc": {
+      "ncols": 357.0,
+      "nrows": 223.0,
+      "xllcorner": 457900.0,
+      "yllcorner": 5716800.0,
+      "cellsize": 100.0,
+      "nodata_value": -9999.0
+    },
+    "elevation.asc": {
+      "ncols": 357.0,
+      "nrows": 223.0,
+      "xllcorner": 457900.0,
+      "yllcorner": 5716800.0,
+      "cellsize": 100.0,
+      "nodata_value": -9999.0
+    },
+    "slope.asc": {
+      "ncols": 357.0,
+      "nrows": 223.0,
+      "xllcorner": 457900.0,
+      "yllcorner": 5716800.0,
+      "cellsize": 100.0,
+      "nodata_value": -9999.0
+    },
+    "saz.asc": {
+      "ncols": 357.0,
+      "nrows": 223.0,
+      "xllcorner": 457900.0,
+      "yllcorner": 5716800.0,
+      "cellsize": 100.0,
+      "nodata_value": -9999.0
+    }
+  },
+  "grid_shape": [
+    223,
+    357
+  ],
+  "references": {
+    "real_scar_dogrib.csv": {
+      "shape": [
+        223,
+        357
+      ],
+      "delimiter": "whitespace",
+      "values": {
+        "0.0": 69401,
+        "1.0": 10210
+      }
+    },
+    "prometheus_dogrib.csv": {
+      "shape": [
+        223,
+        357
+      ],
+      "delimiter": ",",
+      "values": {
+        "0.0": 78414,
+        "1.0": 1197
+      }
+    }
+  },
+  "firehose_sub20_geospatial_crop_row": 203,
+  "firehose_sub20_geospatial_crop_col": 0,
+  "firehose_sub20_exact_geospatial_fuel_match": false,
+  "firehose_sub20_exact_matrix_matches": [
+    [
+      0,
+      20
+    ]
+  ],
+  "historical_burn_on_nonfuel_code101": 663,
+  "source_projection_wkt": "Projection    TRANSVERSE\nDatum         NAD83\nSpheroid      GRS80\nUnits         METERS\nZunits        NO\nXshift        0.0\nYshift        0.0\nParameters    \n0.9992 /* scale factor at central meridian\n-115  0  0.0 /* longitude of central meridian\n   0  0  0.0 /* latitude of origin\n500000.0 /* false easting (meters)\n0.0 /* false northing (meters)\n",
+  "sub20_cross_raster_comparison": {
+    "Forest.asc": {
+      "exact_match_at_row0_col20": true,
+      "max_absolute_difference": 0.0
+    },
+    "elevation.asc": {
+      "exact_match_at_row0_col20": true,
+      "max_absolute_difference": 0.0
+    },
+    "slope.asc": {
+      "exact_match_at_row0_col20": false,
+      "max_absolute_difference": 12.0
+    },
+    "saz.asc": {
+      "exact_match_at_row0_col20": false,
+      "max_absolute_difference": 57.0
+    }
+  }
+}

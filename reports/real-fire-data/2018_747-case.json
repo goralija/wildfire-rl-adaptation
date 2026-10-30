@@ -1,0 +1,224 @@
+{
+  "case_id": "2018_747_dob228_20x20",
+  "conversion": {
+    "fbp_mapping": {
+      "101": {
+        "simulator_fuel_type": "C-1",
+        "simulator_grid_value": 1,
+        "source_label": "C1"
+      },
+      "102": {
+        "simulator_fuel_type": "C-2",
+        "simulator_grid_value": 2,
+        "source_label": "C2"
+      },
+      "103": {
+        "simulator_fuel_type": "C-3",
+        "simulator_grid_value": 3,
+        "source_label": "C3"
+      },
+      "105": {
+        "simulator_fuel_type": "C-5",
+        "simulator_grid_value": 5,
+        "source_label": "C5"
+      },
+      "107": {
+        "simulator_fuel_type": "C-7",
+        "simulator_grid_value": 7,
+        "source_label": "C7"
+      },
+      "108": {
+        "simulator_fuel_type": "D-1",
+        "simulator_grid_value": 11,
+        "source_label": "D1"
+      },
+      "109": {
+        "simulator_fuel_type": "M-1",
+        "simulator_grid_value": 40,
+        "source_label": "M1"
+      },
+      "116": {
+        "simulator_fuel_type": "O-1a",
+        "simulator_grid_value": 31,
+        "source_label": "O1a"
+      },
+      "118": {
+        "simulator_fuel_type": "Non-fuel",
+        "simulator_grid_value": 102,
+        "source_label": "Water"
+      },
+      "119": {
+        "simulator_fuel_type": "Non-fuel",
+        "simulator_grid_value": 101,
+        "source_label": "Non-fuel"
+      },
+      "120": {
+        "simulator_fuel_type": "Non-fuel",
+        "simulator_grid_value": 101,
+        "source_label": "Wetland"
+      },
+      "121": {
+        "simulator_fuel_type": "Non-fuel",
+        "simulator_grid_value": 101,
+        "source_label": "Urban"
+      },
+      "122": {
+        "simulator_fuel_type": "Non-fuel",
+        "simulator_grid_value": 105,
+        "source_label": "Veg non-fuel"
+      }
+    },
+    "initial_state": "burned scar and day n-1 active front are separate; the observed day n target is stored only in truth/ and is not copied into Cell2Fire input.",
+    "non_fuel_rule": "Water remains Water; 2014b Non-fuel/Wetland/Urban map to generic Cell2Fire Non-fuel; Veg non-fuel maps to Cell2Fire Vegetated Non-fuel.",
+    "special_fuel_parameters": {
+      "dead_fir_percent": null,
+      "grass_curing_percent": null,
+      "mixedwood_percent_conifer": null
+    },
+    "terrain": "slope is percent rise/run, capped at the upstream FBP 70% limit; SAZ is the 0-359 degree uphill bearing derived from the 100m DEM.",
+    "weather": "24 local-time hourly ERA5-Seamless weather rows; APCP mm, TMP Celsius, RH percent, WS km/h, WD converted from meteorological-from to simulator downwind bearing. Daily FWI codes are the CFSDS fire-day means and held constant across these 24 rows because CFSDS does not supply hourly FWI codes."
+  },
+  "dataset": {
+    "name": "Canadian Fire Spread Dataset",
+    "release": "v1.1",
+    "url": "https://osf.io/f48ry/"
+  },
+  "event": {
+    "event_id": "2018_747",
+    "fire_day_number": 6,
+    "reported_day_growth_ha": 15.39,
+    "summary_centroid_wgs84": {
+      "lat": 49.8422232087954,
+      "lon": -115.931021052199
+    },
+    "summary_weather": {
+      "bui": 112.898994445801,
+      "dc": 520.743896484375,
+      "dmc": 77.4345932006836,
+      "ffmc": 93.2947158813477,
+      "fwi": 32.1091537475586,
+      "isi": 9.48892974853516,
+      "prec": 0.010157944634557,
+      "rh": 24.348653793335,
+      "tmax": 28.8974857330322,
+      "ws": 6.50208282470703
+    },
+    "suppression_status": "unknown; no event-level agency record joined",
+    "target_date_local": "2018-08-16",
+    "target_doy": 228,
+    "year": 2018
+  },
+  "grid": {
+    "alignment": "center 20x20 100m model grid within the screened 23x23 90m CFSDS crop",
+    "cell_size_m": 100,
+    "cols": 20,
+    "crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+    "extent_m": 2000,
+    "historical_mask_resampling": "area-weighted fraction; model start state uses >=50% cell coverage; target truth fraction remains separate",
+    "native_cfsds_grid": {
+      "cell_size_m": 90,
+      "cols": 23,
+      "front_pixels": 36,
+      "rows": 23,
+      "scar_pixels": 236,
+      "target_pixels": 19
+    },
+    "rows": 20,
+    "state_counts": {
+      "burning_area_equivalent_ha": 29.16,
+      "burning_cells_majority": 31,
+      "burnt_area_equivalent_ha": 180.5725,
+      "burnt_cells_majority": 175,
+      "front_edge_cells": 0,
+      "initial_nonfuel_cells": 0,
+      "target_area_equivalent_ha": 15.39,
+      "target_area_source_ha": 15.39,
+      "target_cells_majority": 18,
+      "target_edge_cells": 0,
+      "target_nonfuel_cells": 0
+    }
+  },
+  "limitations": [
+    "CFSDS day-of-burning is a satellite-hotspot interpolation, not a ground-truth hourly fire perimeter.",
+    "Fuel map is 250m and was regridded to a 100m policy grid; this does not create 100m fuel detail.",
+    "Weather is a roughly 9-25km reanalysis point estimate, several kilometres from the fire-growth centroid.",
+    "Daily CFSDS FWI codes are held constant over the 24 hourly simulator weather rows.",
+    "Suppression status is unknown, so this case is not proof of how a counterfactual response would have changed the actual fire."
+  ],
+  "quality_gates": {
+    "active_front_adjacent_to_target_after_resampling": true,
+    "all_initial_and_target_cells_on_burnable_fuel": true,
+    "historical_suppression_joined": false,
+    "physical_validity_claimed": false,
+    "target_and_front_interior_to_simulator_grid": true,
+    "target_has_no_disconnected_spot_pixels": true,
+    "weather_rows_complete": true
+  },
+  "sources": {
+    "cfsds_arrival_raster": {
+      "member": "2018_747_krig.tif",
+      "name": "2018_fireDOYrasters.zip",
+      "sha256": "0b31797c19fe705a890eb19ebc35827356f15bc3d83666ad614e0e1dc0518e3f",
+      "url": "https://osf.io/download/f4nmp/"
+    },
+    "cfsds_daily_summary": {
+      "member": "single CSV",
+      "name": "Firegrowth_groups_v1_1_2018.zip",
+      "sha256": "5cd96e243bb3bec6adf0db819f080ed7462baf1aea38a2aefe180793acd6ed16",
+      "url": "https://osf.io/download/j2esd/"
+    },
+    "elevation": {
+      "asset_url": "https://canelevation-dem.s3.ca-central-1.amazonaws.com/mrdem-30/mrdem-30-dtm.vrt",
+      "collection": "mrdem-30",
+      "crs": "EPSG:3979",
+      "name": "NRCan Canadian Medium Resolution Digital Elevation Model DTM",
+      "resampling": "30m DTM bilinear to the 100m simulator grid",
+      "resolution_m": [
+        30.0,
+        30.0
+      ],
+      "retrieved_on": "2026-10-30",
+      "stac_url": "https://datacube.services.geo.ca/stac/api/collections/mrdem-30"
+    },
+    "fuel_map": {
+      "crs": "PROJCS[\"Canada_Lambert_Conformal_Conic\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",49],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "release": "National FBP fuel-type grid v2014b",
+      "resolution_m": [
+        250.0,
+        250.0
+      ],
+      "sha256": "8675bbd92d99366e46b6537d5b512017d0982e3a34f97e4bc81fb60b93c29a2b",
+      "url": "https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/archive/National_FBP_Fueltypes_version2014b.zip"
+    },
+    "simulator_lookup": {
+      "path": "external/firehose/data/Sub20x20/fbp_lookup_table.csv",
+      "sha256": "9ff5b23cbff4b5dff8595c9d37885da359634a80671ae56ce8e0d30396be7ea2"
+    },
+    "weather": {
+      "api_grid_distance_from_cfsds_centroid_km": 5.201,
+      "api_url": "https://archive-api.open-meteo.com/v1/archive",
+      "grid_elevation_m": 1375.0,
+      "hourly_summary": {
+        "APCP_sum_mm": 0.0,
+        "RH": 41.4167,
+        "TMP": 21.2375,
+        "WS": 5.4042
+      },
+      "model": "ERA5-Seamless",
+      "raw_json": "data/raw/real-case/2018_747/era5_seamless_2018-08-16_local.json",
+      "raw_sha256": "d1e295689ff420f7484d1860160d789d62718b4d8beec62fbd1c7719fff6f45e",
+      "request_location": {
+        "lat": 49.800003,
+        "lon": -115.9
+      },
+      "rows_for_target_day": 24,
+      "source_license_note": "Open-Meteo free API use requires attribution and is intended for non-commercial use; ERA5 data are Copernicus reanalysis.",
+      "temperature_humidity_source_note": "ERA5-Land within ERA5-Seamless",
+      "timezone": "America/Edmonton",
+      "utc_offset_seconds": -21600,
+      "wind_direction_conversion": "met-from direction + 180 degrees -> downwind bearing, modulo 360",
+      "wind_precipitation_source_note": "ERA5 within ERA5-Seamless"
+    }
+  },
+  "split": "train"
+}

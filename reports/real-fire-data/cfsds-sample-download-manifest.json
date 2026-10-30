@@ -1,0 +1,28 @@
+[
+  {
+    "type": "rasters",
+    "name": "2020_fireDOYrasters.zip",
+    "url": "https://osf.io/download/dmcfr/",
+    "osf_file_id": "685417c3a4441a6ad8c89ae1",
+    "bytes": 165971,
+    "sha256": "69c07f1036658a08d5745bcf7602dbdaba71f7d7ea73175b734a2d6f304c97c7",
+    "metadata_sha256": {
+      "md5": "65f0e3e8c36c82f0199192f21a390e53",
+      "sha256": "69c07f1036658a08d5745bcf7602dbdaba71f7d7ea73175b734a2d6f304c97c7"
+    },
+    "date_modified": "2025-06-19T13:59:31.616117"
+  },
+  {
+    "type": "daily",
+    "name": "Firegrowth_groups_v1_1_2020.zip",
+    "url": "https://osf.io/download/ajd3q/",
+    "osf_file_id": "690b896be4e0e9629ee03c0b",
+    "bytes": 127760,
+    "sha256": "289654c15cbbf61e2e3932bc0a8b639399ef7c8352a6f0880731f1bae03cfd35",
+    "metadata_sha256": {
+      "md5": "d9347f26d89d654a7df68c3dfb590c14",
+      "sha256": "289654c15cbbf61e2e3932bc0a8b639399ef7c8352a6f0880731f1bae03cfd35"
+    },
+    "date_modified": "2025-11-05T17:29:15.733657"
+  }
+]

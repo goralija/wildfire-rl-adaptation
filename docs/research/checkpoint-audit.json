@@ -1,0 +1,22 @@
+[
+  {
+    "file": "20x20-fixed-ppo-maskable.zip",
+    "size_bytes": 2236955,
+    "sha256": "ec9475239abb141ab627e6e3d07f14e49da2b7a71020699fed55504db0bf9a5c",
+    "sb3_version": "1.5.0",
+    "num_timesteps": 5013504,
+    "n_steps": 2048,
+    "features_extractor_class": "<class 'firehose.models.PaddedNatureCNN'>",
+    "deserialized": false
+  },
+  {
+    "file": "20x20-random-20m-ppo-maskable.zip",
+    "size_bytes": 2186486,
+    "sha256": "08cb56f17fdb99f2f17ac542008963324a75a724fe2d5cf032537e7381304dec",
+    "sb3_version": "1.5.0",
+    "num_timesteps": 20021248,
+    "n_steps": 2048,
+    "features_extractor_class": "<class 'firehose.models.PaddedNatureCNN'>",
+    "deserialized": false
+  }
+]

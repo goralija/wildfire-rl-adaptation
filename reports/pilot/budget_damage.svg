@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="840" height="500" viewBox="0 0 840 500">
+<rect width="840" height="500" fill="white"/>
+<g font-family="sans-serif" font-size="14" fill="#172033">
+<text x="65" y="30" font-size="20">Synthetic pilot — technical validation only</text>
+<text x="65" y="52">Mean ever-burned fraction; 95% seed bootstrap intervals</text>
+<path d="M65 400 H625" stroke="#e2e8f0"/>
+<text x="22" y="405">0.0</text>
+<path d="M65 336 H625" stroke="#e2e8f0"/>
+<text x="22" y="341">0.2</text>
+<path d="M65 272 H625" stroke="#e2e8f0"/>
+<text x="22" y="277">0.4</text>
+<path d="M65 208 H625" stroke="#e2e8f0"/>
+<text x="22" y="213">0.6</text>
+<path d="M65 144 H625" stroke="#e2e8f0"/>
+<text x="22" y="149">0.8</text>
+<path d="M65 80 H625" stroke="#e2e8f0"/>
+<text x="22" y="85">1.0</text>
+<text x="65.0" y="425" text-anchor="middle">0</text>
+<text x="135.0" y="425" text-anchor="middle">2</text>
+<text x="205.0" y="425" text-anchor="middle">4</text>
+<text x="345.0" y="425" text-anchor="middle">8</text>
+<text x="625.0" y="425" text-anchor="middle">16</text>
+<path d="M65.0 86.99228791773777 V83.35904027420736" stroke="#475569" opacity=".5"/>
+<circle cx="65.0" cy="85.20994001713797" r="4" fill="#475569"/>
+<path d="M135.0 86.51242502142242 V83.22193658954586" stroke="#475569" opacity=".5"/>
+<circle cx="135.0" cy="84.93573264781492" r="4" fill="#475569"/>
+<path d="M205.0 87.19794344473007 V84.04455869751501" stroke="#475569" opacity=".5"/>
+<circle cx="205.0" cy="85.48414738646102" r="4" fill="#475569"/>
+<path d="M345.0 161.3024850042845 V83.77035132819191" stroke="#475569" opacity=".5"/>
+<circle cx="345.0" cy="110.57412167952015" r="4" fill="#475569"/>
+<path d="M625.0 233.28191945158525 V87.40359897172237" stroke="#475569" opacity=".5"/>
+<circle cx="625.0" cy="159.72579263067698" r="4" fill="#475569"/>
+<polyline points="65.0,85.20994001713797 135.0,84.93573264781492 205.0,85.48414738646102 345.0,110.57412167952015 625.0,159.72579263067698" fill="none" stroke="#475569" stroke-width="2"/>
+<text x="650" y="100" fill="#475569">max_l2</text>
+<path d="M65.0 86.99228791773777 V83.35904027420736" stroke="#dc2626" opacity=".5"/>
+<circle cx="65.0" cy="85.20994001713797" r="4" fill="#dc2626"/>
+<path d="M135.0 86.44387317909167 V83.01628106255356" stroke="#dc2626" opacity=".5"/>
+<circle cx="135.0" cy="84.73007712082267" r="4" fill="#dc2626"/>
+<path d="M205.0 86.51242502142242 V83.01628106255356" stroke="#dc2626" opacity=".5"/>
+<circle cx="205.0" cy="84.79862896315342" r="4" fill="#dc2626"/>
+<path d="M345.0 86.92373607540702 V83.22193658954586" stroke="#dc2626" opacity=".5"/>
+<circle cx="345.0" cy="85.07283633247641" r="4" fill="#dc2626"/>
+<path d="M625.0 91.17395029991434 V85.27849185946872" stroke="#dc2626" opacity=".5"/>
+<circle cx="625.0" cy="88.08911739502997" r="4" fill="#dc2626"/>
+<polyline points="65.0,85.20994001713797 135.0,84.73007712082267 205.0,84.79862896315342 345.0,85.07283633247641 625.0,88.08911739502997" fill="none" stroke="#dc2626" stroke-width="2"/>
+<text x="650" y="128" fill="#dc2626">min_l2</text>
+<path d="M65.0 86.99228791773777 V83.35904027420736" stroke="#2563eb" opacity=".5"/>
+<circle cx="65.0" cy="85.20994001713797" r="4" fill="#2563eb"/>
+<path d="M135.0 86.99228791773777 V83.35904027420736" stroke="#2563eb" opacity=".5"/>
+<circle cx="135.0" cy="85.20994001713797" r="4" fill="#2563eb"/>
+<path d="M205.0 86.99228791773777 V83.35904027420736" stroke="#2563eb" opacity=".5"/>
+<circle cx="205.0" cy="85.20994001713797" r="4" fill="#2563eb"/>
+<path d="M345.0 86.99228791773777 V83.35904027420736" stroke="#2563eb" opacity=".5"/>
+<circle cx="345.0" cy="85.20994001713797" r="4" fill="#2563eb"/>
+<path d="M625.0 86.99228791773777 V83.35904027420736" stroke="#2563eb" opacity=".5"/>
+<circle cx="625.0" cy="85.20994001713797" r="4" fill="#2563eb"/>
+<polyline points="65.0,85.20994001713797 135.0,85.20994001713797 205.0,85.20994001713797 345.0,85.20994001713797 625.0,85.20994001713797" fill="none" stroke="#2563eb" stroke-width="2"/>
+<text x="650" y="156" fill="#2563eb">none</text>
+<path d="M65.0 86.99228791773777 V83.35904027420736" stroke="#16a34a" opacity=".5"/>
+<circle cx="65.0" cy="85.20994001713797" r="4" fill="#16a34a"/>
+<path d="M135.0 87.60925449871468 V84.18166238217651" stroke="#16a34a" opacity=".5"/>
+<circle cx="135.0" cy="85.96401028277637" r="4" fill="#16a34a"/>
+<path d="M205.0 89.87146529562983 V86.16966580976862" stroke="#16a34a" opacity=".5"/>
+<circle cx="205.0" cy="87.95201371036842" r="4" fill="#16a34a"/>
+<path d="M345.0 161.91945158526136 V84.66152527849187" stroke="#16a34a" opacity=".5"/>
+<circle cx="345.0" cy="111.05398457583544" r="4" fill="#16a34a"/>
+<path d="M625.0 174.60154241645242 V87.81491002570692" stroke="#16a34a" opacity=".5"/>
+<circle cx="625.0" cy="119.21165381319622" r="4" fill="#16a34a"/>
+<polyline points="65.0,85.20994001713797 135.0,85.96401028277637 205.0,87.95201371036842 345.0,111.05398457583544 625.0,119.21165381319622" fill="none" stroke="#16a34a" stroke-width="2"/>
+<text x="650" y="184" fill="#16a34a">priority</text>
+<path d="M65.0 86.99228791773777 V83.35904027420736" stroke="#9333ea" opacity=".5"/>
+<circle cx="65.0" cy="85.20994001713797" r="4" fill="#9333ea"/>
+<path d="M135.0 91.51670951156814 V85.96401028277637" stroke="#9333ea" opacity=".5"/>
+<circle cx="135.0" cy="88.56898029134533" r="4" fill="#9333ea"/>
+<path d="M205.0 95.012853470437 V88.56898029134533" stroke="#9333ea" opacity=".5"/>
+<circle cx="205.0" cy="91.58526135389889" r="4" fill="#9333ea"/>
+<path d="M345.0 102.89631533847472 V91.44815766923739" stroke="#9333ea" opacity=".5"/>
+<circle cx="345.0" cy="96.3153384747215" r="4" fill="#9333ea"/>
+<path d="M625.0 120.37703513281923 V100.56555269922876" stroke="#9333ea" opacity=".5"/>
+<circle cx="625.0" cy="108.17480719794344" r="4" fill="#9333ea"/>
+<polyline points="65.0,85.20994001713797 135.0,88.56898029134533 205.0,91.58526135389889 345.0,96.3153384747215 625.0,108.17480719794344" fill="none" stroke="#9333ea" stroke-width="2"/>
+<text x="650" y="212" fill="#9333ea">random</text>
+<text x="345" y="458" text-anchor="middle">Intervention budget (cells)</text>
+<text x="65" y="485" font-size="12">Not Cell2Fire. No RL comparison. One synthetic layout; intervals do not cover model or map uncertainty.</text>
+</g></svg>

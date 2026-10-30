@@ -1,0 +1,12 @@
+All 18 downloaded files match recorded sizes and SHA256 checksums.
+Dogrib observed-burn cells: 10210
+Observed-burn cells on fuel code101: 663
+Forest.asc Sub20 equals full-map array[0:20,20:40]: True
+elevation.asc Sub20 equals full-map array[0:20,20:40]: True
+slope.asc Sub20 equals full-map array[0:20,20:40]: False
+saz.asc Sub20 equals full-map array[0:20,20:40]: False
+CFSDS 2020 daily rows / fire IDs / columns: 372 38 60
+Missing BUI rows: 2
+Wind direction column: False
+CFSDS matched fire rasters: 38 at 90 m
+Sample checks passed; no simulator validation or policy training performed.

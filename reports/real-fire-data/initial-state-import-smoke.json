@@ -1,0 +1,38 @@
+{
+  "adapter_patch_sha256": "f77a36c755636d9b56a410481be60c28fa7a6ff696945174e72ce3ee2966df42",
+  "fixture": {
+    "expected": "one previously-burned cell and two active-front cells",
+    "sha256": "c01cba05cbe4bc37965cdd5ecf6a58f0c91b1cb03022fa5880bcbb53de3dfa54",
+    "source": "docker/firehose/initial_state_fixture.csv"
+  },
+  "observed": {
+    "cumulative_cells_after_one_step": 3,
+    "initial_active_cells": 2,
+    "initial_affected_cells": 3,
+    "initial_state_import_log": "Imported historical state: scar=1 front=2",
+    "reset_state_matches_grid": true,
+    "return_code": 0,
+    "subprocess_returncode": 0,
+    "success": true
+  },
+  "pass": true,
+  "run_mode": "--network none; CPU-only; inference-only; zero agent interventions; no RL model loaded",
+  "runtime": {
+    "contrib_commit": "43b7fe6fcdda71c2c10de7af0d20f39e48ae5df3",
+    "docker_image": "wildfire-firehose-probe:20261030-initial-state",
+    "docker_image_id": "sha256:51495d225c89f362d8d152f999f19320d652c259cd5c0ac872a20032be59b113",
+    "firehose_commit": "e49a52a9a987a1585d25ddca2f711222ca500ffb",
+    "packages": {
+      "cloudpickle": "2.0.0",
+      "gym": "0.21.0",
+      "numpy": "1.23.5",
+      "sb3-contrib": "1.5.0",
+      "stable-baselines3": "1.5.0",
+      "torch": "1.13.1"
+    },
+    "python": "3.8.20"
+  },
+  "scope": "C++/Python adapter smoke using a three-cell fixture; not a real-fire replay or physical validation",
+  "training_performed": false,
+  "verified_on": "2026-10-30"
+}

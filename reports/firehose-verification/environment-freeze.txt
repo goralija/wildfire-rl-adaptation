@@ -1,0 +1,27 @@
+cloudpickle==2.0.0
+contourpy==1.1.1
+cycler==0.12.1
+fonttools==4.57.0
+gym==0.21.0
+importlib_resources==6.4.5
+kiwisolver==1.4.7
+matplotlib==3.7.5
+numpy==1.23.5
+opencv-python-headless==4.8.1.78
+packaging==26.2
+pandas==1.5.3
+pillow==10.4.0
+pyparsing==3.1.4
+python-dateutil==3.0.0
+pytz==2026.5
+sb3_contrib @ file:///opt/contrib
+six==1.17.0
+stable-baselines3==1.5.0
+torch==1.13.1
+typing_extensions==4.13.2
+tzdata==2026.5
+zipp==3.20.2
+g++	4:12.2.0-3
+libboost-dev:arm64	1.74.0.3
+libeigen3-dev	3.4.0-4
+make	4.3-4.1

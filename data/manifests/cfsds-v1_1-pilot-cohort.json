@@ -1,0 +1,432 @@
+{
+  "claims_not_supported": [
+    "physical validation",
+    "real-world counterfactual damage reduction",
+    "generalization across all CFSDS fires"
+  ],
+  "dataset": {
+    "dataset_paper_doi": "10.1038/s41597-024-03436-4",
+    "license": "CC BY 4.0",
+    "minimum_fire_size_ha": 500,
+    "name": "Canadian Fire Spread Dataset",
+    "native_resolution_m": 90,
+    "project_url": "https://osf.io/f48ry/",
+    "release": "v1.1",
+    "years": "2002-2024"
+  },
+  "pilot_case": {
+    "case_manifest": "reports/real-fire-data/2018_747-case.json",
+    "event_id": "2018_747",
+    "map": "reports/real-fire-data/2018_747-day228.png",
+    "no_action_seed_sweep": "6 seeds (123\u2013128); all final grids identical; 66 ha predicted versus 15.39 ha target; crop-edge touched",
+    "purpose": "pipeline and mismatch diagnostic only; excluded from held-out evaluation",
+    "replay_report": "reports/real-fire-data/2018_747-day228-replay.json",
+    "seed_sweep_report": "reports/real-fire-data/2018_747-seed-sweep.json",
+    "split": "train",
+    "target_date": "2018-08-16",
+    "target_doy": 228,
+    "year": 2018
+  },
+  "additional_train_cases": [
+    {
+      "case_manifest": "reports/real-fire-data/2018_241-case.json",
+      "event_id": "2018_241",
+      "replay_report": "reports/real-fire-data/2018_241-day227-replay.json",
+      "target_doy": 227,
+      "year": 2018
+    },
+    {
+      "case_manifest": "reports/real-fire-data/2018_1770-case.json",
+      "event_id": "2018_1770",
+      "replay_report": "reports/real-fire-data/2018_1770-day224-replay.json",
+      "target_doy": 224,
+      "year": 2018
+    }
+  ],
+  "fuel_rejection": {
+    "event_id": "2014_538",
+    "report": "reports/real-fire-data/2014_538-fuel-rejection.json",
+    "reason": "One or more historical scar/front/target cells map to water or non-fuel in the 2014b map."
+  },
+  "schema": "real-fire-cohort/v1",
+  "selection": {
+    "candidate_counts": {
+      "test": 15,
+      "train": 20,
+      "validation": 9
+    },
+    "candidate_day_pairs_by_split": {
+      "test": [
+        {
+          "event_id": "2022_279",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 184,
+          "target_fireday": 5,
+          "year": 2022
+        },
+        {
+          "event_id": "2022_329",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 263,
+          "target_fireday": 83,
+          "year": 2022
+        },
+        {
+          "event_id": "2022_440",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 239,
+          "target_fireday": 60,
+          "year": 2022
+        },
+        {
+          "event_id": "2022_578",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 265,
+          "target_fireday": 23,
+          "year": 2022
+        },
+        {
+          "event_id": "2022_730",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 293,
+          "target_fireday": 48,
+          "year": 2022
+        },
+        {
+          "event_id": "2023_337",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 261,
+          "target_fireday": 82,
+          "year": 2023
+        },
+        {
+          "event_id": "2023_628",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 206,
+          "target_fireday": 49,
+          "year": 2023
+        },
+        {
+          "event_id": "2023_774",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 198,
+          "target_fireday": 3,
+          "year": 2023
+        },
+        {
+          "event_id": "2023_866",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 237,
+          "target_fireday": 42,
+          "year": 2023
+        },
+        {
+          "event_id": "2023_940",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 221,
+          "target_fireday": 4,
+          "year": 2023
+        },
+        {
+          "event_id": "2024_309",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 235,
+          "target_fireday": 37,
+          "year": 2024
+        },
+        {
+          "event_id": "2024_405",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 225,
+          "target_fireday": 45,
+          "year": 2024
+        },
+        {
+          "event_id": "2024_453",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 183,
+          "target_fireday": 39,
+          "year": 2024
+        },
+        {
+          "event_id": "2024_46",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 186,
+          "target_fireday": 53,
+          "year": 2024
+        },
+        {
+          "event_id": "2024_60",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 226,
+          "target_fireday": 9,
+          "year": 2024
+        }
+      ],
+      "train": [
+        {
+          "event_id": "2014_221",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 203,
+          "target_fireday": 8,
+          "year": 2014
+        },
+        {
+          "event_id": "2014_2221",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 236,
+          "target_fireday": 8,
+          "year": 2014
+        },
+        {
+          "event_id": "2014_285",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 229,
+          "target_fireday": 51,
+          "year": 2014
+        },
+        {
+          "event_id": "2014_432",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 227,
+          "target_fireday": 13,
+          "year": 2014
+        },
+        {
+          "event_id": "2014_538",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 215,
+          "target_fireday": 2,
+          "year": 2014
+        },
+        {
+          "event_id": "2015_252",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 225,
+          "target_fireday": 50,
+          "year": 2015
+        },
+        {
+          "event_id": "2015_2924",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 192,
+          "target_fireday": 19,
+          "year": 2015
+        },
+        {
+          "event_id": "2015_2929",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 184,
+          "target_fireday": 8,
+          "year": 2015
+        },
+        {
+          "event_id": "2015_438",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 185,
+          "target_fireday": 3,
+          "year": 2015
+        },
+        {
+          "event_id": "2015_896",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 180,
+          "target_fireday": 2,
+          "year": 2015
+        },
+        {
+          "event_id": "2017_1146",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 220,
+          "target_fireday": 26,
+          "year": 2017
+        },
+        {
+          "event_id": "2017_1296",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 233,
+          "target_fireday": 16,
+          "year": 2017
+        },
+        {
+          "event_id": "2017_1431",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 223,
+          "target_fireday": 22,
+          "year": 2017
+        },
+        {
+          "event_id": "2017_1871",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 257,
+          "target_fireday": 39,
+          "year": 2017
+        },
+        {
+          "event_id": "2017_51",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 232,
+          "target_fireday": 63,
+          "year": 2017
+        },
+        {
+          "event_id": "2018_1770",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 224,
+          "target_fireday": 3,
+          "year": 2018
+        },
+        {
+          "event_id": "2018_1860",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 244,
+          "target_fireday": 19,
+          "year": 2018
+        },
+        {
+          "event_id": "2018_1932",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 234,
+          "target_fireday": 5,
+          "year": 2018
+        },
+        {
+          "event_id": "2018_241",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 227,
+          "target_fireday": 11,
+          "year": 2018
+        },
+        {
+          "event_id": "2018_747",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 228,
+          "target_fireday": 6,
+          "year": 2018
+        }
+      ],
+      "validation": [
+        {
+          "event_id": "2019_138",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 206,
+          "target_fireday": 29,
+          "year": 2019
+        },
+        {
+          "event_id": "2019_157",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 205,
+          "target_fireday": 6,
+          "year": 2019
+        },
+        {
+          "event_id": "2019_168",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 142,
+          "target_fireday": 11,
+          "year": 2019
+        },
+        {
+          "event_id": "2020_332",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 256,
+          "target_fireday": 27,
+          "year": 2020
+        },
+        {
+          "event_id": "2021_1163",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 202,
+          "target_fireday": 17,
+          "year": 2021
+        },
+        {
+          "event_id": "2021_1622",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 213,
+          "target_fireday": 31,
+          "year": 2021
+        },
+        {
+          "event_id": "2021_194",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 198,
+          "target_fireday": 4,
+          "year": 2021
+        },
+        {
+          "event_id": "2021_1966",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 246,
+          "target_fireday": 47,
+          "year": 2021
+        },
+        {
+          "event_id": "2021_287",
+          "growth_capture_ratio": 1.0,
+          "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+          "target_doy": 198,
+          "target_fireday": 7,
+          "year": 2021
+        }
+      ]
+    },
+    "not_final_because": [
+      "Geometric window screening is not full fuel, weather, suppression, or simulator quality control.",
+      "Three train no-action cases have large spread mismatches; all predictions touch the 2x2 km crop edge.",
+      "The geometric candidate 2014_538 was rejected because historical state/target cells map to water or non-fuel.",
+      "2019 and 2024-compatible national FBP fuel map vintages have not yet been prepared for held-out cases.",
+      "Suppression records have not been joined for these event IDs."
+    ],
+    "reason": "CFSDS Canadian fire cases pair with the current Canadian FBP/Cell2Fire model and its supported fuel classes.",
+    "screen_rule": "At most five crop-compatible event candidates per year were retained from the annual screening. The list is not exhaustive.",
+    "source_screen_report": "reports/real-fire-data/cfsds-cohort-screen.json",
+    "split_rule": "Assign each whole event by calendar year: 2014-2018 train, 2019-2021 validation, 2022-2024 test. Never split one fire across partitions.",
+    "status": "selected primary compatible data route; preliminary compact-crop cohort, not final benchmark"
+  },
+  "training_rule": "Historical next-day growth is hidden from the agent and is not a reward/action label. RL experience is generated by simulator rollouts on real-derived inputs."
+}

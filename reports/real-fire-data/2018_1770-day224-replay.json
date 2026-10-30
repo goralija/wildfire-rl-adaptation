@@ -1,0 +1,63 @@
+{
+  "case_id": "2018_1770_dob224_20x20",
+  "evaluation_scope": "one-day observed growth mask versus one no-action simulator rollout",
+  "event_id": "2018_1770",
+  "final_grid_path": "runs/real-case/2018_1770-day224/probe/no-action-zero-warmup/simulator/results/CFSDS_2018_1770_2026-10-30_19-16-52_FIZ5SY/run_0/Grids/Grids1/ForestGrid1440.csv",
+  "initial_state": {
+    "active_front_cells": 17,
+    "burnt_cells": 287,
+    "cpp_import_log": "Imported historical state: scar=287 front=17",
+    "reset_matches_cpp_grid": true,
+    "total_cells": 304
+  },
+  "interpretation": "The no-action simulator reached most observed target cells but spread over a much larger area in this single rollout and touched the edge of the 2x2 km model crop. Suppression status is unknown and the simulator is not calibrated on this case, so this is a mismatch diagnostic, not evidence of counterfactual policy performance.",
+  "limitations": [
+    "CFSDS is a satellite-derived/interpolated daily target, not an hourly ground-truth perimeter.",
+    "Suppression status for the event was not joined from an agency record.",
+    "One random seed and one event-day are insufficient for model validation.",
+    "Daily CFSDS FWI codes are held constant across the 24 hourly weather rows.",
+    "The predicted spread touches the model-grid edge; fire spread beyond the 2x2 km crop is not represented."
+  ],
+  "metrics": {
+    "area_weighted_iou": 0.1361,
+    "area_weighted_precision": 0.1398,
+    "area_weighted_recall": 0.8397,
+    "predicted_to_observed_area_ratio": 6.0077
+  },
+  "observed_target": {
+    "majority_cells": 12,
+    "resampled_fractional_area_ha": 12.151,
+    "source_area_ha": 12.15
+  },
+  "run": {
+    "container_image": "wildfire-firehose-probe:20261030-real-case",
+    "container_image_id": "sha256:bf250dd34cebdff5f38e17056c73ef2f914055bdde29b0d6fea9afc16cbd10a3",
+    "decisions": 180,
+    "final_grid_index": 1440,
+    "fire_period_minutes": 1,
+    "initial_state_csv_sha256": "74cdd0218065fe417fa064a6b2de2835f4ab6f8efa3f0f16bb2dfd254773ed57",
+    "input_sha256": "584f8e62d0085e24ccf216a3ed0206b1903d1553436c0e80b78a681b69460e7b",
+    "interventions_requested": 0,
+    "policy": "none",
+    "ros_cv": 0.5,
+    "saved_grid_intervals_until_final": 1439,
+    "simulator_elapsed_model_minutes_until_final": 1439,
+    "simulator_reported_finished": true,
+    "simulator_seed": 123,
+    "steps_before_sim": 0,
+    "steps_per_action": 8,
+    "success": true,
+    "training_performed": false,
+    "weather_rows_available": 24
+  },
+  "simulator_prediction": {
+    "final_total_affected_cells": 377,
+    "newly_burned_area_ha": 73.0,
+    "newly_burned_cells": 73,
+    "overlap_with_observed_target_ha": 10.203,
+    "predicted_cells_touching_grid_edge": true,
+    "predicted_edge_cells": 26,
+    "target_cells_hit_at_50pct_threshold": 12
+  },
+  "target_date_local": "2018-08-12"
+}

@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "id": "dogrib",
+      "title": "Dogrib: prvi historijski slučaj za Cell2Fire",
+      "assumptions": [
+        "Uzorak služi pripremi validacije simulatora. Historijski replay još nije izvršen."
+      ],
+      "queries": [
+        {
+          "id": "dogrib-sample",
+          "source": {
+            "label": "Dogrib 2001 — odabrani fajlovi",
+            "links": [
+              {
+                "label": "Pinovani Cell2Fire/Dogrib podaci",
+                "href": "https://github.com/humnetlab/Cell2Fire/tree/84e3c817ad866358d8db28e87c9445b42aaf7908/data/real/dogrib"
+              },
+              {
+                "label": "Kim et al. (2025)",
+                "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12254405/"
+              }
+            ],
+            "files": [
+              {
+                "label": "dogrib-download-manifest.json"
+              },
+              {
+                "label": "dogrib-profile.json"
+              }
+            ],
+            "filters": [
+              "16 preuzetih fajlova, ne cijeli upstream folder."
+            ],
+            "caveats": [
+              "Dogrib dijeli fuel/elevation blok s Firehose Sub20: nije nezavisan test prostorne generalizacije.",
+              "663 označene opožarene ćelije preklapaju se s nonfuel kodom 101; treba razjasniti prostorni i vremenski alignment.",
+              "Licenca izvornih Alberta/Prometheus podataka nije zasebno potvrđena."
+            ]
+          },
+          "reportingPeriod": "Dogrib 2001; uzorak pregledan 2026-10-28",
+          "columns": [
+            "rows",
+            "columns",
+            "observed_burn_cells",
+            "downloaded_bytes"
+          ],
+          "rows": [
+            {
+              "rows": 223,
+              "columns": 357,
+              "observed_burn_cells": 10210,
+              "downloaded_bytes": 3390138
+            }
+          ],
+          "methods": [
+            {
+              "language": "python",
+              "code": "observed = np.loadtxt(dogrib / 'real_scar_dogrib.csv')\nprint('Dogrib observed-burn cells:', int(observed.sum()))"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cfsds",
+      "title": "CFSDS: mali uzorak za izbor dodatnih događaja",
+      "assumptions": [
+        "Godina 2020 odabrana je za pristup/schema check, nije konačni test split."
+      ],
+      "queries": [
+        {
+          "id": "cfsds-sample",
+          "source": {
+            "label": "CFSDS — v1_1, preuzeti 2020 fajlovi",
+            "links": [
+              {
+                "label": "CFSDS OSF",
+                "href": "https://osf.io/f48ry/"
+              },
+              {
+                "label": "Version record",
+                "href": "https://osf.io/download/8fe4u/"
+              },
+              {
+                "label": "Barber et al. (2024)",
+                "href": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11239873/"
+              }
+            ],
+            "files": [
+              {
+                "label": "cfsds-sample-download-manifest.json"
+              },
+              {
+                "label": "cfsds-sample-profile.json"
+              }
+            ],
+            "filters": [
+              "Dva ZIP-a za 2020; nije pregled svih godina."
+            ],
+            "caveats": [
+              "Izvorni rad opisuje 180 m v1; preuzeti v1_1 rasteri imaju 90 m. Version record sadrži beta/topology caveats.",
+              "Nema smjera vjetra u pregledanoj dnevnoj tabeli; nije kompletna prostorna FBP mapa prije požara.",
+              "Datum gorenja je interpoliran na dnevnoj skali; ne potvrđuje osamminutnu dinamiku."
+            ]
+          },
+          "reportingPeriod": "2020 uzorak; pregledan 2026-10-28",
+          "columns": [
+            "fires",
+            "daily_rows",
+            "columns",
+            "matched_rasters",
+            "missing_bui_rows",
+            "resolution_m"
+          ],
+          "rows": [
+            {
+              "fires": 38,
+              "daily_rows": 372,
+              "columns": 60,
+              "matched_rasters": 38,
+              "missing_bui_rows": 2,
+              "resolution_m": 90
+            }
+          ],
+          "methods": [
+            {
+              "language": "python",
+              "code": "keys = Counter((row['ID'], row['DOB']) for row in rows)\nids = {row['ID'] for row in rows}\nassert sum(v - 1 for v in keys.values()) == 0\nprint('CFSDS 2020 daily rows / fire IDs / columns:', len(rows), len(ids), len(rows[0]))"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wildfirespreadts",
+      "title": "WildfireSpreadTS: alternativa za predikciju širenja",
+      "queries": [
+        {
+          "id": "zenodo-metadata",
+          "source": {
+            "label": "WildfireSpreadTS — samo javni metapodaci",
+            "links": [
+              {
+                "label": "Zenodo dataset record",
+                "href": "https://zenodo.org/records/8006177"
+              }
+            ],
+            "caveats": [
+              "Arhiva nije preuzeta ni sadržajno provjerena. Za sada slabiji izbor od Dogrib/CFSDS za postojeći Cell2Fire kontroler."
+            ]
+          },
+          "reportingPeriod": "2018–2021; metapodaci pregledani 2026-10-28",
+          "columns": [
+            "fires",
+            "forecast_hours",
+            "archive_bytes",
+            "license"
+          ],
+          "rows": [
+            {
+              "fires": 607,
+              "forecast_hours": 24,
+              "archive_bytes": 48359369821,
+              "license": "CC-BY 4.0"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
