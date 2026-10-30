@@ -6,7 +6,7 @@ okf_version: "0.2"
 ## Počni ovdje
 
 - [Projekt i pokretanje](README.md) - Cilj istraživanja i minimalni setup.
-- [Sažeti projektni kontekst](knowledge/project-context.md) - Potvrđeno, otvoreno i TASK-012 dataset refinement.
+- [Sažeti projektni kontekst](knowledge/project-context.md) - Odabrani CFSDS pravac, pilot rezultat i otvoreni replay gate.
 - [Handoff za kolegu](HANDOFF.md) - Prenosiv nastavak bez chat historije.
 - [Trenutno stanje](docs/STATUS.md) - Šta radi, dokazi i ograničenja.
 - [Naredna sesija](docs/NEXT_SESSION.md) - Redoslijed nastavka.
@@ -16,8 +16,9 @@ okf_version: "0.2"
 
 - [Kontekst i pravila održavanja](knowledge/index.md) - Mapa koda/zadataka, OKF profil i održavanje.
 - [Dokumenti projekta](docs/index.md) - Protokol, zahtjevi, specifikacije, odluke i historija.
-- [Podaci](data/index.md) - Porijeklo, javni izvori i manifesti; konačni izbor ostaje otvoren.
-- [Izvještaji](reports/index.md) - Sintetički pilot, runtime dokazi i pregled historijskih uzoraka.
+- [Podaci](data/index.md) - Porijeklo, javni izvori i CFSDS pilot cohort manifest.
+- [Real-case pipeline](docs/research/REAL_CASE_PIPELINE.md) - Jednostavan opis šta stvarni podaci daju (Y), šta simulator prima (X), te jaz početnog fronta.
+- [Izvještaji](reports/index.md) - Sintetički pilot, runtime dokazi i stvarni CFSDS C++ replay.
 - [Runtime okruženja](docker/index.md) - Pinovani legacy setup i inference bez treniranja.
 - [Promjene baze znanja](log.md) - Najnovije promjene prve i veze na detaljnu historiju.
 
