@@ -1,0 +1,15 @@
+{
+  "case_id": "2014_538_dob215_20x20",
+  "date": "2014-08-03",
+  "event_id": "2014_538",
+  "failure_stage": "fuel compatibility check during FireCase conversion",
+  "fuel_map": "Natural Resources Canada National FBP fuel-type grid v2014b (250 m)",
+  "outcome": "rejected; no simulator replay",
+  "reason": "At least one historical scar, active-front, or target cell maps to Water or Non-fuel after the 20x20 resampling.",
+  "screening_note": "The event passed the preliminary geometry-only crop screen with 100% target-growth capture. This rejection shows that geometry alone cannot establish simulator compatibility.",
+  "split": "train",
+  "source_event_growth_ha": 6.48,
+  "weather_record": "data/raw/real-case/2014_538/era5_seamless_2014-08-03_local.json",
+  "builder": "scripts/build_cfsds_case.py",
+  "source_manifest": "reports/real-fire-data/2018_747-case.json"
+}
