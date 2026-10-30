@@ -11,6 +11,7 @@ import importlib.metadata
 import json
 from pathlib import Path
 import platform
+import shutil
 import signal
 import subprocess
 import time
@@ -35,12 +36,12 @@ def override_seed(command, seed):
 
 
 def history_damage(paths):
-    """C++ outputGrid codes 1 for burning OR burnt, -1 for treated, 0 otherwise."""
+    """Read C++ outputGrid codes: 1 burnt, 2 burning, -1 treated, 0 otherwise."""
     affected = set()
     for path in paths:
         with Path(path).open() as file:
             cells = [int(value) for row in csv.reader(file) for value in row]
-        affected.update(i for i, value in enumerate(cells) if value == 1)
+        affected.update(i for i, value in enumerate(cells) if value > 0)
     return affected
 
 
@@ -67,10 +68,19 @@ def main():
     parser.add_argument('--seed', type=int, default=123)
     parser.add_argument('--budget', type=int, default=8)
     parser.add_argument('--sync-reset', action='store_true', help='load actual warmup CSV before first action')
+    parser.add_argument('--steps-before-sim', type=int, default=20)
+    parser.add_argument('--steps-per-action', type=int, default=8)
+    parser.add_argument('--max-steps', type=int, default=200)
+    parser.add_argument('--fire-map', default='Sub20x20',
+                        help='map directory under cell2fire/data; use a mounted real-case input map when needed')
+    parser.add_argument('--initial-state-csv', type=Path,
+                        help='optional historical state,ncell CSV copied into the scenario input')
     parser.add_argument('--out', type=Path, required=True)
     args = parser.parse_args()
     if args.seed < 0 or args.budget < 0:
         parser.error('seed and budget must be nonnegative')
+    if args.steps_before_sim < 0 or args.steps_per_action < 1 or args.max_steps < 1:
+        parser.error('steps-before must be nonnegative; steps-per-action and max-steps must be positive')
     args.out.mkdir(parents=True, exist_ok=False)
 
     def timeout_handler(*_):
@@ -81,7 +91,7 @@ def main():
     env = None
     model = None
     result = dict(policy=args.policy, simulator_seed=args.seed, budget=args.budget,
-                  sync_reset=args.sync_reset, no_training=True, success=False,
+                  sync_reset=args.sync_reset, fire_map=args.fire_map, no_training=True, success=False,
                   firehose_commit='e49a52a9a987a1585d25ddca2f711222ca500ffb',
                   contrib_commit='43b7fe6fcdda71c2c10de7af0d20f39e48ae5df3',
                   script_sha256=sha256(Path(__file__).read_bytes()).hexdigest(),
@@ -112,22 +122,36 @@ def main():
             result['model_observation_shape'] = list(model.observation_space.shape)
             result['model_actions'] = int(model.action_space.n)
 
-        env = FireEnv(fire_map='Sub20x20', action_type='flat', observation_type='forest_rgb',
+        env = FireEnv(fire_map=args.fire_map, action_type='flat', observation_type='forest_rgb',
                       ignition_points=IgnitionPoints([IgnitionPoint(372, 1, x=11, y=18)]),
-                      steps_before_sim=20, steps_per_action=8, max_steps=200,
+                      steps_before_sim=args.steps_before_sim,
+                      steps_per_action=args.steps_per_action, max_steps=args.max_steps,
                       output_dir=str(args.out / 'simulator'), verbose=False)
+        if args.initial_state_csv:
+            shutil.copyfile(args.initial_state_csv,
+                            Path(env.helper.tmp_input_folder) / 'InitialState.csv')
+            env.has_initial_state = True
         original = env.fire_process.get_command_str
         env.fire_process.get_command_str = lambda: override_seed(original(), args.seed)
         result['simulator_command'] = env.fire_process.get_command_str()
         result['input_sha256'] = input_tree_hash(env.helper.tmp_input_folder)
+        result['initial_state_csv_sha256'] = (
+            sha256(args.initial_state_csv.read_bytes()).hexdigest()
+            if args.initial_state_csv else None
+        )
         result['ignition_cell_one_based'] = 372
         result['weather_file'] = 'Weather.csv (rows mode)'
-        result['weather_horizon_minutes'] = 480
+        result['weather_horizon_minutes'] = 60 * args.steps_per_action
         observation = env.reset()
         initial_paths = [line for line in env.fire_process.lines if 'ForestGrid' in line and '.csv' in line]
         initial_state = pd.read_csv(initial_paths[-1], header=None).values
         result['upstream_nonfuel_mask_cells'] = int(np.sum(env.helper.forest_non_fuel))
-        result['warmup_affected_cells'] = int(np.sum(initial_state == 1))
+        result['warmup_affected_cells'] = int(np.sum(initial_state > 0))
+        result['warmup_active_cells'] = int(np.sum(initial_state == 2))
+        result['initial_state_import_log'] = next(
+            (line for line in env.fire_process.lines if line.startswith('Imported historical state:')),
+            None,
+        )
         result['upstream_reset_state_matches_csv'] = bool(np.array_equal(env.state, initial_state))
         if args.sync_reset:
             env.state = initial_state
@@ -155,7 +179,8 @@ def main():
                 nonfuel_requests += int(env.helper.forest_non_fuel.ravel()[action] != 0)
             observation, reward, done, info = env.step(action)
             transitions.append(dict(decision=decision, action=action, used=used,
-                                    affected_snapshot=int(np.sum(env.state == 1)),
+                                    affected_snapshot=int(np.sum(env.state > 0)),
+                                    active_snapshot=int(np.sum(env.state == 2)),
                                     upstream_cumulative=len(env.cells_burned),
                                     state_sha256=sha256(env.state.tobytes()).hexdigest()))
             if done:
