@@ -1,0 +1,155 @@
+{
+  "base_commit": "149989039e1d6809bbf18c637473ba4ce1839cbe",
+  "branch": "feature/project-bootstrap",
+  "cfsds_real_case": {
+    "all_archive_hashes_verified": true,
+    "candidate_split_counts": {
+      "test": 15,
+      "train": 20,
+      "validation": 9
+    },
+    "case_id": "2018_747_dob228_20x20",
+    "case_manifest": "reports/real-fire-data/2018_747-case.json",
+    "cohort_screen": "reports/real-fire-data/cfsds-cohort-screen.json",
+    "dataset": "CFSDS v1.1",
+    "downloaded_archives": 46,
+    "downloaded_bytes": 102405239,
+    "physical_validation_claimed": false,
+    "replay_report": "reports/real-fire-data/2018_747-day228-replay.json",
+    "seed_sweep": {
+      "iou": 0.2187,
+      "observed_target_ha": 15.387,
+      "predicted_area_ha": 66.0,
+      "predicted_edge_cells": 19,
+      "runs": 6,
+      "same_final_grid": true,
+      "successful": 6
+    },
+    "seed_sweep_report": "reports/real-fire-data/2018_747-seed-sweep.json",
+    "additional_train_cases": [
+      {
+        "case_manifest": "reports/real-fire-data/2018_241-case.json",
+        "replay_report": "reports/real-fire-data/2018_241-day227-replay.json",
+        "predicted_new_area_ha": 237.0,
+        "observed_target_ha": 12.153,
+        "iou": 0.0376,
+        "steps_before_sim": 0
+      },
+      {
+        "case_manifest": "reports/real-fire-data/2018_1770-case.json",
+        "replay_report": "reports/real-fire-data/2018_1770-day224-replay.json",
+        "predicted_new_area_ha": 73.0,
+        "observed_target_ha": 12.151,
+        "iou": 0.1361,
+        "steps_before_sim": 0
+      }
+    ],
+    "fuel_rejection_report": "reports/real-fire-data/2014_538-fuel-rejection.json",
+    "training_performed": false
+  },
+  "created_at": "2026-10-30T16:34:04Z",
+  "fuel_map_screen": {
+    "archive_bytes": 18226545,
+    "archive_sha256": "ed06080d81048de18dc34caf0f4fcc2f26d626f020bf132277d4e470a71a83d8",
+    "case_converted": false,
+    "fuel_codes": "NFFL/Anderson categories 1-10 in local raster",
+    "inspection": "read from ZIP without extracting the 621,969,457-byte GeoTIFF; overlaid on final MedEU polygons for EFFIS IDs 205938 and 43482",
+    "license_note": "EFFIS states EU-owned website content is CC BY 4.0 unless a specific item says otherwise; verify layer-specific notices and cite changes",
+    "local_only_ignored_archive": "data/raw/FuelMap_LAEA.zip",
+    "name": "EFFIS European Fuel Map",
+    "raster": "FuelMap2000_NFFL_LAEA.tif",
+    "raster_crs": "EPSG:3035",
+    "reference_year": 2017,
+    "resolution_m": 250
+  },
+  "ignored_local_outputs": {
+    "firehose_regression_runs": "runs/firehose-final-check/final/",
+    "legacy_batch": "runs/dataset-refinement-firehose-20261030/final/",
+    "legacy_summary_sha256": "77deef6352e4def935f604af9d919b851bced08f8f7ee1513ce78e3723504b67",
+    "modern_rl_smoke": "runs/dataset-refinement-feature-rl-smoke-20261030/",
+    "modern_rl_smoke_zip_sha256": "9d3dd23ffc3035abaaa71b33c4f0f36b95b86e6a813fad897c4dfd2175332ff7",
+    "real_case_input": "runs/real-case/2018_747-day228/input/",
+    "real_case_raw_archives": "data/raw/cfsds-v1_1/",
+    "real_case_seed_runs": "runs/real-case/2018_747-day228/probe-seeds/",
+    "synthetic_smoke": "runs/dataset-refinement-smoke-20261030/"
+  },
+  "legacy_firehose": {
+    "base_image": "python:3.8.20-slim-bookworm@sha256:1d52838af602b4b5a831beb13a0e4d073280665ea7be7f69ce2382f29c5a613f",
+    "contrib_commit": "43b7fe6fcdda71c2c10de7af0d20f39e48ae5df3",
+    "docker_server": "28.0.4",
+    "firehose_commit": "e49a52a9a987a1585d25ddca2f711222ca500ffb",
+    "image_id": "sha256:bf250dd34cebdff5f38e17056c73ef2f914055bdde29b0d6fea9afc16cbd10a3",
+    "image_tag": "wildfire-firehose-probe:20261030-real-case",
+    "known_adapter_issue_reproduced": "Sub20 fixed-PPO counter remains 206 vs 207 grid; sync-reset diagnostic is 207/207. Historical InitialState.csv import is separately verified.",
+    "platform": "linux/arm64",
+    "regression_cases_successful": 12,
+    "regression_report": "reports/firehose-verification/real-case-image-regression.json",
+    "runtime": "network disabled; 2 CPU; 2 GiB; patched C++ initial-state importer; no training",
+    "successful_cases": 12,
+    "weather_horizon": "58 decisions in each recorded case; do not interpret as containment"
+  },
+  "limitations": [
+    "Environment readiness does not establish simulator physical validity or policy performance.",
+    "Three CFSDS train day-pairs have been converted and replayed without interventions. All overpredict daily growth and touch the crop boundary; a fourth geometric candidate was rejected at the nonfuel/water check. Suppression status is unknown.",
+    "TASK-004c cumulative-damage and terminal-reason handling remains required before the main policy benchmark.",
+    "The 44 compact-crop candidate list is a preliminary up-to-five-per-year screen, not exhaustive or a frozen benchmark.",
+    "2019/2024 Canadian FBP fuel map vintages and event-level suppression/QC evidence are needed before heldout runs.",
+    "Modern package freeze is macOS ARM64/Python 3.12 only; it is not a Colab/Linux lock.",
+    "Open-Meteo free API output requires attribution and is intended for non-commercial use; source is reanalysis rather than fire-local station data.",
+    "EFFIS fuel raster is NFFL/Anderson and 250m; current Firehose Cell2Fire build is Canadian FBP, so it is not a direct fuel input without selecting a compatible spread model or validating a crosswalk.",
+    "The FireSpread_MedEU v2 Zenodo record displays no clear data-package license; do not redistribute or assume the article license applies to the archive.",
+    "Docker apt dependencies are not version-pinned; current image digest pins this built image, but future rebuilds can resolve newer Debian packages."
+  ],
+  "modern": {
+    "checks": {
+      "application_tests": "26 passed in current checkout",
+      "dataset_archive_hashes": "all 46 CFSDS annual files verified against OSF size/SHA256; total 102405239 bytes",
+      "geospatial_imports": "rasterio, geopandas, pyproj, xarray, rioxarray, netCDF4, scipy, shapely, CDS API and dependencies import",
+      "geospatial_reprojection_smoke": "in-memory EPSG:4326 to EPSG:32611 nearest-neighbour reprojection passed; Firehose Forest.asc reads 20x20 with no CRS",
+      "knowledge_tests": "15 passed",
+      "modern_rl_smoke": "1024 CPU steps; save/load and masked rollout passed",
+      "strict_knowledge_validator": "67 Markdown files passed in current checkout",
+      "synthetic_cli_smoke": "passed; output in ignored runs/real-case-final-smoke/"
+    },
+    "geo_stack": {
+      "cdsapi": "0.7.7",
+    "geopandas": "1.2.0",
+    "matplotlib": "3.11.2",
+      "netCDF4": "1.7.2",
+      "pandas": "3.1.0",
+      "pyogrio": "0.13.0",
+      "pyproj": "3.8.0",
+      "rasterio": "1.4.4",
+      "rioxarray": "0.23.0",
+      "scipy": "1.18.1",
+      "shapely": "2.2.0",
+      "xarray": "2026.9.0"
+    },
+    "knowledge_tool": "PyYAML 6.0.3",
+    "os": "macOS 14.2 ARM64",
+    "package_freeze": "requirements/research-macos-arm64-py312.freeze.txt",
+    "pip": "24.0",
+    "project_install": "editable; optional rl+geo extras",
+    "python": "3.12.4"
+  },
+  "reproduced_at": "2026-10-30T19:06:00Z",
+  "research_data_screen": {
+    "archive_bytes": 2751019,
+    "archive_sha256": "907e8d340bd44cde64c739b39474381d72ebe64aeef86c0daba17fa53967e27b",
+    "case_converted": false,
+    "local_only_ignored_archive": "data/raw/FireSpread_MedEU.zip",
+    "name": "FireSpread_MedEU v2",
+    "result": "7 first-pass EFFIS event candidates intersect Bosnia and Herzegovina boundary",
+    "screen_report": "reports/real-fire-data/medeu-spatial-screen.json"
+  },
+  "source_hashes": {
+    "docker/firehose/Dockerfile": "acc5d6ea9af17e5262704953b6a5e451df411449d726c7e7da3ea20b6e5076ae",
+    "docker/firehose/cfsds_initial_state.patch": "f77a36c755636d9b56a410481be60c28fa7a6ff696945174e72ce3ee2966df42",
+    "requirements/firehose-legacy.txt": "a0f36e5e8166eea217e849715a7ac5ec56963978848d19a671576a88cc2ae8f1",
+    "scripts/build_cfsds_case.py": "71d15b483ed529baefaf0ab0f0dd1eb212ae6dfe599c57b20288779f88496eba",
+    "scripts/evaluate_cfsds_replay.py": "0de4e4c404a883aca02fc08fd8952616177869a02ea07f414f2c3270dea46aa3",
+    "scripts/profile_cfsds_cohort.py": "7c3b38410fde017a5d11ced9a2267bc88718661178e92aa5e77602d96fdce73b",
+    "src/wildfire_rl/firehose_probe.py": "e8c100f297b27b8bac095bd2692bfd9890101df77a3945ff11a22fc83bc7d403"
+  },
+  "workspace": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation"
+}

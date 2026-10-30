@@ -201,3 +201,126 @@ Verification after relocation: 26 app tests, 15 knowledge tests, smoke and stric
 in a fresh temporary clone: core 22 pass/four optional skips, clean main/worktree,
 strict knowledge passes. Public summary: reports/workspace-relocation.json; complete
 local snapshots/repair details stay ignored in .local/migration. TASK-012 stays first.
+
+2026-10-30 — User clarified the data target: build agent-training scenarios from real-fire
+landscapes/weather/initial conditions, use observed progression as a separate no-action
+reality-check, and compare policy counterfactuals only inside the simulator. Reviewed
+Cell2Fire's exact CSV/raster parser contract and found a blocking shape mismatch:
+`Ignitions.csv` maps one start cell per simulation year; multiple Python rows do not
+initialize a simultaneous historical fire front. Added TASK-017 multi-cell initial-state
+support after TASK-004c and before TASK-016 case conversion/replay. A 20x20/100m policy
+covers 400 ha, so full-size events need an explicit crop/front boundary plan.
+
+Expanded source review: CFSDS v1.1 remains best fit to current Canadian FBP simulator;
+FireSpread_MedEU v2 offers 103 Europe/Mediterranean cases and 320 ~3m progression steps
+but no Canadian FBP fuel mapping and no clearly displayed data-package license; GlobFire
+is a global, coarser 500m fallback with several-day timing uncertainty. Added source
+comparison, exact JSON/Cell2Fire mapping, weather/FWI/raster issues and claim limits to
+REAL_CASE_PIPELINE / REAL_FIRE_DATASETS / DATASET; updated decision addendum, manifests,
+handoff, statuses and task sequence. Sources include the Cell2Fire paper, CFSDS/W.I.S.E.,
+FireSpread_MedEU descriptor, Copernicus ERA5-Land and JRC/GWIS data notes.
+
+Installed the optional `geo` extra into the isolated modern Python 3.12.4/macOS ARM64
+`.venv`: rasterio, geopandas, pyproj, xarray/rioxarray, netCDF4, scipy, shapely, pandas,
+pyogrio and CDS API. Pinned rasterio 1.4.x and netCDF4 1.7.2 to compatible macOS 14 ARM64
+wheels after latest releases attempted an unavailable local source build. All imports and
+in-memory nearest-neighbour reprojection passed; Sub20 ASC parses but has no CRS. Created
+combined GIS+RL freeze. CDS credentials and actual event download/conversion remain open;
+no event split or large raster set was selected.
+
+2026-10-30 follow-up — User asked for a broad, local-data-aware investigation before
+choosing a path. Downloaded the 2.75 MB FireSpread_MedEU v2 shapefile to Git-ignored
+`data/raw/` for a spatial-only scan. Reprojected its 649 EPSG:3035 rows to WGS84 and
+intersected them with Natural Earth Admin 0 1:110m Bosnia and Herzegovina. Seven
+candidate EFFIS IDs overlap: 12321, 13228, 22108, 25244, 25274, 43482, 205938. The
+coarse country border means these still need authoritative-location verification.
+
+EFFIS 205938 has four consecutive daily growth boundaries (2022-07-15..18), all rated
+very high, final mapped area 637.63 ha, and ~4.14×4.18 km extent. EFFIS 43482 is the
+smallest by area (216.87 ha) but has a 2.56×1.71 km extent and one medium-quality step.
+Both exceed the verified PPO's 2×2 km footprint in at least one direction. Full event
+fits need a verified larger grid/model or a clearly documented crop. Hashes, source
+links, event metadata and limitations are in `reports/real-fire-data/medeu-spatial-screen.json`.
+
+Added source-conditioned recommendations: CFSDS is the compatible route for keeping
+the current Canadian FBP simulator; MedEU is the local BiH progression route, but first
+requires regional fuel/spread model selection, dataset ZIP license confirmation, event
+location verification, weather/DEM assembly and grid-scale decision. MedEU file was not
+converted and is not in Git. No case build, simulator replay, training or policy claim
+was made. Updated dataset pipeline, project handoff/status/backlog, source list, manifest,
+environment receipt and decision/experiment logs accordingly.
+
+2026-10-30 handoff to requested branch — Confirmed the user's `feature/project-bootstrap`
+checkout was clean and at the same base commit, then applied the documented research
+changes there. Copied only Git-ignored local materials needed for continuity: three raw
+research ZIPs, upstream Firehose checkouts, prior small smoke/inference outputs. Created
+the `.venv` in that project checkout using the pinned macOS ARM64/Python 3.12 freeze.
+Repeated 26 application tests, 15 knowledge tests, 67-file strict validation, synthetic
+CLI smoke, 1,024-step modern PPO smoke, and GIS imports/raster metadata checks; all passed.
+The first unsandboxed package install was blocked by network isolation, then the user-
+authorized network-enabled install completed. No Git commit or remote update was made.
+
+2026-10-30 follow-up — Broadened the BiH path to actual fuel coverage. Downloaded the
+EFFIS European Fuel Map 2017 archive (18,226,545 bytes, SHA256
+`ed06080d81048de18dc34caf0f4fcc2f26d626f020bf132277d4e470a71a83d8`) to ignored
+`data/raw/`. Read the 250 m EPSG:3035 NFFL/Anderson raster through `/vsizip/` without
+extracting its 621,969,457-byte TIFF. Spatial overlay found codes 4/5/9 plus 9 no-data
+pixels on final event `205938`, and codes 3/5 on `43482`. Results and method are in
+`reports/real-fire-data/medeu-spatial-screen.json`.
+
+This closes one data-source gap but exposes the model boundary: the checked-in Firehose
+Cell2Fire C++ build is Canadian FBP; EFFIS categories must not be substituted into it.
+The BiH path therefore needs a compatible NFFL/European spread engine or a defensible,
+validated crosswalk. FIRE-RES publishes a potentially relevant 100 m Scott–Burgan server,
+but exact BiH coverage, export rights and terms remain unverified; the product catalogue
+also shows differing continental/pilot resolutions. EFFIS generic EU reuse terms default
+to CC BY 4.0 unless layer-specific conditions apply. No FireCase conversion, no-action
+replay or RL training was run. Updated route recommendations, source records, manifests,
+environment receipt and backlog to show these gates.
+
+
+2026-10-30 follow-up — User directed us to select the best simulator-compatible data
+route without a national constraint and continue the next phase. Accepted Canada +
+CFSDS v1.1 + Canadian FBP/Cell2Fire. Downloaded and checksum-verified all 23 annual
+CFSDS archive pairs (2002–2024; 102,405,239 bytes) into ignored `data/raw/cfsds-v1_1/`.
+Profiled 2014–2024: 3,141 fires / 82,015 daily rows / raster matches; selected at most
+five compact crop candidates per year (44 retained: 20 train, 9 validation, 15 test
+by event year). The split is preliminary and not exhaustive, and suppression/fuel-
+vintage QC is not complete. Detailed ID list is in `data/manifests/cfsds-v1_1-pilot-cohort.json`.
+
+Implemented `InitialState.csv` multi-cell importer for prior scar + active front, plus
+`--fire-map` option for the real case in the isolated legacy image. Built a real CFSDS
+case `2018_747`, 15–16 Aug 2018: CFSDS arrival mask resampled from 90m, official Canadian
+FBP 2014b fuel map from 250m, MRDEM 30m terrain, 24 hourly ERA5-Seamless records, and a
+100m 20×20 simulator grid. C++ import shows 175 scar / 31 active-front cells. Target
+mask is held in separate `truth/`. Actual compiled C++ no-action replay succeeded with
+seed 123; no RL training or interventions. Result: 66 ha predicted versus 15.39 ha
+observed, IoU .2187, with 19 predicted cells touching the crop boundary. Fire-suppression
+status is unknown, so this is not a physical validation or a policy result. A visual
+map, case provenance, and JSON replay receipt are committed-size artifacts under
+`reports/real-fire-data/`; the raw files and run outputs remain ignored.
+
+QA and boundary work identified the next gate: review fuel/DEM/weather alignment,
+perimeter handling and available crop extent; run several train-only event/seed replays;
+prepare 2019/2024 FBP vintages and suppression/QC evidence before final event split; finish
+the remaining TASK-004c cumulative-damage and terminal-reason export before training or
+held-out policy comparisons. Updated ADR-013/014, STATUS/NEXT_SESSION/BACKLOG, data and
+research manifests, knowledge context, and root log/index. No model fine-tuning or remote
+Git action was performed.
+
+
+2026-10-30 follow-up — Ran five additional offline CPU-only C++ no-action replays for
+train pilot `2018_747` with seeds 124–128 (original seed 123 retained). All five extra
+runs completed successfully, used the exact same input SHA-256, imported scar=175/front=31,
+and produced the same final grid as seed 123. Thus all six runs yield 66 ha, IoU .2187,
+19 predicted edge cells; simulator elapsed model periods range from 206 to 363. This shows
+seed-stable final extent on this one case but does not show independent-event accuracy;
+the unknown suppression, map boundary, weather/FWI assumptions and model calibration
+still prevent a physical-validation claim. Receipt: `reports/real-fire-data/2018_747-seed-sweep.json`.
+
+
+2026-10-30 verification — Rebuilt real-case Docker image was regression-checked against
+the existing 12-case Sub20 inference matrix: 12/12 succeeded, all C++ exit codes were 0,
+and all existing PPO checkpoint weights remained unchanged. The run was offline/CPU-only,
+without training. Compact receipt: `reports/firehose-verification/real-case-image-regression.json`;
+raw logs stay in ignored `runs/firehose-final-check/`.

@@ -30,13 +30,16 @@ prijedloge i otvorene odluke. [Pravila održavanja](knowledge/maintenance.md) i
    [trenutno stanje](docs/STATUS.md) i [upute za narednu sesiju](docs/NEXT_SESSION.md).
 2. Pogledaj [istraživački protokol](docs/research/PROTOCOL.md),
    [provjeru simulatora](docs/research/SIMULATOR_AUDIT.md) i [odluke](docs/specs/DECISION_RECORDS.md).
-3. Pokreni testove i pilot ispod. Glavni sljedeći korak je **TASK-012: dataset refinement**
-   — uloga, izbor i obim podataka još nisu usaglašeni. TASK-004c je naredni poznati
-   tehnički posao nakon tog razjašnjenja.
+3. Pokreni testove i pilot ispod. Glavni real-fire pravac je odabran: Canada + CFSDS v1.1
+   + Canadian FBP/Cell2Fire. Prvi stvarni slučaj je već pretvoren i izvršen, ali njegov
+   no-action rezultat se još ne slaže dovoljno s opažanjem. [Od stvarnog događaja do
+   simulator ulaza X](docs/research/REAL_CASE_PIPELINE.md) objašnjava mapiranje i sljedeće
+   provjere običnim jezikom.
 
 ## Pokretanje bez dodatnih biblioteka
 
-Python >=3.11. Referentni lokalni interpreter je Python 3.13.
+Python >=3.11. Najnoviji lokalni environment receipt koristi Python 3.12.4/macOS
+ARM64; u repozitoriju postoji i raniji Python 3.13 snapshot.
 Iz korijena repozitorija:
 
 ```sh
@@ -61,7 +64,19 @@ Primjer provjerenog izlaza je u [reports/pilot](reports/pilot/README.md).
 
 Ovo trenira novi mali MaskablePPO u sintetičkom okruženju na CPU-u.
 **Ne učitava Firehose težine, ne implementira glavno istraživanje i ne tvrdi poboljšanje.**
-Za zabilježene tačne verzije vidi `requirements/rl-macos-py313.freeze.txt`.
+Za tačne verzije i platformu vidi kombinovani GIS+RL lock
+`requirements/research-macos-arm64-py312.freeze.txt`, raniji RL-only lock
+`requirements/rl-macos-py312.freeze.txt`, `requirements/rl-macos-py313.freeze.txt` i
+[`environment setup receipt`](reports/environment-setup/README.md).
+
+Za GIS raster/weather obradu instaliraj dodatni `geo` extra zajedno s RL-om:
+
+```sh
+.venv/bin/python -m pip install -e '.[rl,geo]' -r requirements/knowledge.txt
+```
+
+To daje `rasterio`, `geopandas`, `pyproj`, `xarray`, `rioxarray`, `netCDF4` i CDS API
+klijent u istom modernom `.venv`; GIS paketi nisu potrebni legacy Firehose Dockeru.
 
 ## Postojeći model i dataset
 

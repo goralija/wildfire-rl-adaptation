@@ -1,49 +1,61 @@
 ---
 type: Handoff
-title: Nastavak rada bez chat historije
+title: Nastavak nakon prvog stvarnog CFSDS replaya
 ---
-# Nastavak rada bez chat historije
+# Naredna sesija
 
-Ulaz u OKF bundle je [index.md](../index.md), zatim [projektni kontekst](../knowledge/project-context.md).
-Za drugi računar ili novog saradnika pročitaj [HANDOFF](../HANDOFF.md): clone grana,
-minimalni setup i pribavljanje lokalno ignorisanih izvora/podataka.
+## Trenutno stanje
 
-1. Iz ovog repozitorija pročitaj STATUS, DECISION_RECORDS, SIMULATOR_AUDIT i PROTOCOL.
-2. `git status --short --branch`; provjeri da si u ispravnom task worktreeu.
-3. `PYTHONPATH=src python3 -m unittest discover -s tests -v`.
-4. `PYTHONPATH=src python3 -m wildfire_rl.cli --config configs/smoke.json --out runs/NEW_ID`.
-5. Pročitaj `docs/research/FIREHOSE_VERIFICATION.md` i `docs/research/DATASET.md`.
-   Runtime je već ostvaren: ne počinjati ponovo od instalacije ili traženja modela.
-6. Počni TASK-012 — dataset refinement: pročitaj REAL_FIRE_DATASETS i DATASET.
-   Razdvoji simulator inpute, RL iskustvo i historijske reference; pripremi prijedlog
-   izbora/obima, model/scenario veze, splitova, metrika i nedostajućih inputa.
-   Označi otvorene odluke: Dogrib/CFSDS nisu konačno usaglašen izbor ili test skup.
-7. Nakon usaglašavanja obima slijedi TASK-004c: formalni Firehose adapter za stvarni warmup observation,
-   kumulativnu štetu, maske/budžet i C++ termination reason / active-vs-burnt export.
-   Sačuvaj RGB 3×20×20 i Discrete(400) checkpoint kontrakt; forced no-op ostaje izvan glave.
-8. Dodaj integracijske regresijske testove za 206/207 brojač, identične kontrole,
-   timeout/cleanup i razliku weather-horizon/containment. Tek potom dataset split i fine-tuning.
-9. Za ponavljanje postojećeg testa koristi `docker/firehose/README.md`; lokalni image
-   je `wildfire-firehose-probe:20261028`, rezultati u `runs/firehose-verification-final/`.
-10. Za historijske reference pročitaj `docs/research/REAL_FIRE_DATASETS.md` i TASK-011.
-   Dogrib/CFSDS mali uzorci su već lokalno preuzeti. Ne preuzimati gigabajte niti
-   proglašavati Dogrib nezavisnim testom: dijeli teren s Firehose Sub20. Raw ulazi
-   i opaženi ishodi su odvojeni; fizička validacija još nije izvršena.
+Glavni pravac je izabran: **Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire**. Razlog je
+kompatibilnost s simulatorom i postojećim 20×20 agentom. Tri train slučaja (`2018_747`,
+`2018_241`, `2018_1770`) su pretvorena i pokrenuta bez intervencija i bez treniranja.
+Za `2018_747` imamo šest seedova; druga dva zasad imaju po jedan.
 
-## Repo-relative lokacije
-- Repo root na tvom računaru: `git rev-parse --show-toplevel`.
-- PR grana: `feature/project-bootstrap`; poslije mergea sadržaj je na mainu.
-- Glavni klon je `mpvi`; PR checkout je `.worktrees/project-bootstrap/` u tom klonu.
-  [Workspace runbook](../knowledge/workspace-layout.md) daje pravila i lokalni storage.
-- [index.md](../index.md) je kanonski ulaz; vanjski START_HERE ili lokalni backup nisu preduslov.
-- `.venv`: optional moderni RL environment; `external/firehose`: pinovani izvor/ZIP-ovi.
-- `data/raw`, `runs`, `private`: ignorisani artefakti; javni recovery URL/hashovi su u repou.
+No-action rezultat za `2018_747` je 66 ha prema 15.39 ha opaženih (IoU .2187); šest
+seedova daje istu mapu, a predikcija dotiče rub. Za `2018_241` simulator je zahvatio
+svih 400 ćelija i dodao 237 ha prema 12.15 ha (IoU .0376); za `2018_1770` dodao je
+73 ha prema 12.15 ha (IoU .1361). Prva dva slučaja ponovljena su bez 20-minutnog
+početnog zagrijavanja s istim završnim mjerama. Kandidat `2014_538` nije prošao
+konverziju jer historijske ćelije padaju na vodu/ne-gorivo u FBP karti. Nepoznat status
+gašenja ostaje moguć uzrok razlike, ali ovo nisu fizička validacija ni rezultat agenta.
 
-## Spreman prompt za nastavak
+Važni artefakti:
 
-"Nastavi wildfire-rl-adaptation od TASK-012 — dataset refinement. Pročitaj HANDOFF,
-STATUS, DATASET, REAL_FIRE_DATASETS i PROTOCOL. Imamo pregled kandidata i male uzorke,
-ali izbor, uloga i obim nisu usaglašeni. Pripremi prijedlog izvora/podskupa, veze s
-20×20 modelom, scenarija/splitova, metrika i granica zaključaka. Odvoji preporuke
-od odluka. Runtime već radi; TASK-004c slijedi nakon refinementa u usaglašenom obimu.
-Ne pokreći dugo treniranje, velika preuzimanja ili remote objavu bez naloga."
+- [jednostavno X/Y objašnjenje i konverzija](../docs/research/REAL_CASE_PIPELINE.md)
+- [izbor skupa i granice zaključaka](../docs/research/REAL_FIRE_DATASETS.md)
+- [split manifest s preliminarnim fire ID-jevima](../data/manifests/cfsds-v1_1-pilot-cohort.json)
+- [case ulazi i provenance](../reports/real-fire-data/2018_747-case.json)
+- [replay mjere](../reports/real-fire-data/2018_747-day228-replay.json)
+- [vizualna karta](../reports/real-fire-data/2018_747-day228.png)
+- [dodatni train slučajevi, karte i fuel odbijanje](../reports/real-fire-data/README.md)
+
+## Nastavak rada
+
+1. Sistemski provjeri gorivo za train shortlist i napravi per-cell QC. Odbaci slučajeve
+gdje scar/front/target pada na water/nonfuel; `2014_538` je već poznat primjer.
+2. Istraži zašto se no-action toliko širi u tri izvršena slučaja. Provjeri gorivnu mapu,
+FBP parametre (curing/mixedwood gdje postoje), vremenske jedinice/profil, početni front
+i veličinu izreza. Drži iste ulaze i ne podešavaj prema validation/test ciljevima.
+3. Odredi može li 20×20 prozor predstaviti događaj bez rubnog rezanja. Ako je potreban
+40×40 model, to mijenja agentov ulaz i broj akcija; prvo uradi poseban feasibility check,
+ne predstavljaj ga kao isti pretrained agent.
+4. Prije heldout slučajeva pribavi FBP fuel vintages koji odgovaraju periodu:
+2014 za train slučajeve 2014–2018, 2019 za validation 2019–2021, 2024 za test 2022–2024.
+5. Pokušaj povezati fire ID-jeve sa službenim incident/suppression zapisima i označi
+nepoznate slučajeve. Trenutni geometrijski screen daje do pet kandidata godišnje i nije
+iscrpan; pun benchmark tek treba usaglasiti.
+6. Proširi TASK-004c: pouzdan cumulative-damage export i terminalni razlog (containment
+naspram isteka vremenskih ulaza). TASK-017 initial-state import i tri TASK-016 konverzije
+su ostvareni.
+7. Pokreni glavni agent benchmark/fine-tuning tek kad no-action ponašanje prođe gate na
+više train požara i heldout ID-jevi budu zamrznuti.
+
+## Lokalno okruženje
+
+Moderni Python 3.12.4 `.venv` ima GIS i knowledge pakete. Legacy Firehose radi u zasebnom
+Linux ARM64 Docker imageu. Sirovi CFSDS, DEM i FBP fajlovi su u Git-ignorisanom
+`data/raw/`; generisani simulator paketi su pod `runs/`. U čistom checkoutu pribavi ih
+prema [manifestu preuzimanja](../reports/real-fire-data/cfsds-download-manifest.json)
+i ponovi build skriptom. Ne instaliraj legacy pakete u moderni venv.
+
+Prije predaje pokreni testove, synthetic CLI smoke i `python3 scripts/validate_knowledge.py --strict`.
