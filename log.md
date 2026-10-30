@@ -1,5 +1,12 @@
 # Promjene baze znanja
 
+## 2026-10-31: train-only input QC i fuel-vintage provenance
+
+- Input audit je izmjerio 3/20 dostupnih CFSDS train FireCase paketa: sva tri imaju usklađene 20×20/100 m ASCII gridove, po 400 validnih terrain ćelija i 24 uredna vremenska reda. Weather point je 2.436–5.195 km od CFSDS centroida; dnevni FWI se ponavlja kroz satne redove.
+- Pregledani su službeni fuel izvori 2014b, 2019 development i 2024, objavljena W.I.S.E. annualization metoda, MRDEM, ERA5/Open-Meteo, CNFDB i licence. Nijedan novi map vintage nije odobren kao leakage-safe zamjena; 2014b nema eksplicitan burn-record cutoff, a suppression ostaje unknown.
+- Metoda, mjerenja, izvori, ADR-019, EXP-009, TASK-015 status/backlog i handoff su ažurirani. Nema novog replaya, kalibracije, benchmarka, treninga niti heldout ishoda.
+- Provjera: 42/42 testova, strict OKF 70 Markdown fajlova, synthetic CLI smoke i git diff --check su prošli. [Input QC](docs/research/CFSDS_TRAIN_INPUT_QC.md), [receipt](reports/real-fire-data/cfsds-train-input-qc.json). No-action gate ostaje pao.
+
 ## 2026-10-30: TASK-004c adapter završen lokalno
 
 - C++ terminal receipt izvozi cumulative affected, active front, treated IDs i named reason; Python terminal counters se usklade s C++ stanjem, uz očuvan RGB 3×20×20 / Discrete(400) / no-op -1 ugovor.

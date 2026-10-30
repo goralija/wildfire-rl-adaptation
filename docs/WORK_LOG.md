@@ -389,3 +389,36 @@ validation passed, the synthetic CLI smoke wrote successfully, and `git diff --c
 clean. The next task is remaining train-only TASK-015 fuel-vintage/terrain/weather/
 suppression QC followed by predeclared no-action replay checks; no heldout result or
 training was used.
+
+## 2026-10-31 — TASK-015 train-only input alignment and fuel-vintage research
+
+Added a small standard-library audit that reads only train IDs from the cohort and
+checks matching local FireCase inputs. It found three materialized packages out of
+20. All three share 20×20/100 m fuel/terrain grid headers; elevation, slope and aspect
+have 400 valid cells each; each Weather.csv has 24 ordered hours on its target local
+date. The reanalysis request location is 2.436–5.195 km from the CFSDS summary
+centroid; the daily FWI codes repeat across the hourly rows. The other 17 packages
+remain unmeasured. Machine report: reports/real-fire-data/cfsds-train-input-qc.json.
+
+Reviewed official v2014b, v20191114 development, and 2024 fuel-map sources, the W.I.S.E.
+annual-map method, MRDEM, ERA5/Open-Meteo and CNFDB documentation. The v2014b metadata
+does not disclose an explicit per-pixel/burn-record time cutoff; v20191114 is in the
+development catalog, about 2 GB, and includes NBAC-based reassignment; 2024 postdates
+the current train targets. License review found OGL Canada for the 2024 map/MRDEM,
+CC BY 4.0 for Open-Meteo API data with separate service terms, and no license
+statement in the reviewed 2014b/v20191114 listings or metadata; confirm terms with
+NRCan before redistributing those rasters. The W.I.S.E. recipe remains a method
+candidate, not a project implementation. We preserve v2014b only for reproducing saved pilot cases.
+We do not claim its map is leakage-safe for new cases. Suppression remains unknown
+for all 20; no agency action timeline was joined. Terrain source tile dates/hashes and
+full weather field lineage are missing from the existing case manifests.
+
+Added focused train-only report/script/tests and updated source list, research note,
+ADR-019, backlog, status, next-session, work log, handoff, code map and root navigation.
+No new simulator replay, training, calibration, benchmark or heldout inspection ran.
+No raw/large map, external checkout, venv, or generated run output was added to Git.
+The no-action gate remains failed.
+
+Verification: 42/42 project tests pass; strict OKF validation passes for 70 Markdown
+files; synthetic CLI smoke succeeds in a fresh ignored run directory; git diff --check
+is clean.

@@ -1,6 +1,6 @@
 ---
 type: Project Status
-title: Trenutno stanje — 2026-10-30
+title: Trenutno stanje — 2026-10-31
 sources:
 - resource: /reports/firehose-verification/verification.json
 - resource: /reports/firehose-verification/task004c-adapter-smoke.json
@@ -118,11 +118,27 @@ treated, C++ terminalni skup je mjerodavan jer grid prikazuje `-1`; provjeravač
 da je svaka takva razlika objašnjena treated skupom. RGB/action/reward/checkpoint ugovori
 nisu promijenjeni. [Receipt i ograničenja](../reports/firehose-verification/task004c-adapter-smoke.json).
 
-TASK-015 ostaje djelimičan: train-only fuel vintage, terrain/weather poravnanje i
-suppression evidence treba procijeniti prije dodatnih kontrolisanih replaya i heldout
-freezea. Batch je runtime provjera na Sub20, ne CFSDS fizička validacija; no-action gate
-ostaje pao, nema dokaza o agentovom smanjenju štete i benchmark/fine-tuning su na čekanju.
+TASK-015 ostaje djelimičan. Input audit je izmjerio 3/20 raspoloživih train FireCase
+paketa; fuel/weather/terrain/suppression poravnanje još nije zatvoreno za cijelu kohortu.
+FBP 2014b nema dokumentovan pixel-level vremenski cutoff; 2019 CanFG je u razvojnom
+direktoriju i koristi NBAC. Terrain tile provenance nedostaje, weather API field lineage
+treba eksplicitno snimiti, a suppression ostaje unknown za svih 20. Batch je runtime
+provjera na Sub20, ne CFSDS fizička validacija; no-action gate ostaje pao, nema dokaza
+o agentovom smanjenju štete i benchmark/fine-tuning su na čekanju.
 Validation/test ciljevi se ne koriste za QC/tuning.
+
+## Train-only input alignment gate — 2026-10-31
+
+Dodani su [lokalni input audit](../scripts/audit_cfsds_train_case_inputs.py),
+fokusirani testovi i [mašinski report](../reports/real-fire-data/cfsds-train-input-qc.json).
+Tri raspoloživa train FireCase paketa imaju usklađene 20×20/100 m ASCII gridove,
+400 terrain ćelija bez NoData i 24 uređena vremenska reda na lokalni target datum;
+weather lokacije su 2.436–5.195 km od CFSDS summary centroida. Preostalih 17 input
+paketa nije materijalizovano u ovom checkoutu. W.I.S.E. annual-fuel metod i službene
+2019/2024 mape su pregledani, ali nijedna se ne proglašava sigurnom zamjenom zbog
+vremenskog porijekla/NBAC i potrebe za leak-free succession mapom. Suppression ostaje
+unknown, bez novog C++ replaya ili treninga. Vidi
+[detaljnu metodu i otvorena pitanja](research/CFSDS_TRAIN_INPUT_QC.md).
 
 ## Train-only fuel quality gate — 2026-10-30
 
@@ -184,8 +200,9 @@ Prethodni sintetički artefakti ostaju historijski dokaz; nisu Cell2Fire rezulta
 - Docker/legacy i moderni .venv su odvojeni. Legacy inference je bez treniranja i
   plaćenog compute-a. Kod/dokumentacija su objavljeni kroz [PR #1](https://github.com/goralija/wildfire-rl-adaptation/pull/1).
 
-Sljedeće: dovršiti TASK-015 train-only fuel-vintage/terrain/weather/suppression QC →
-unaprijed definisani train-only kontrolisani no-action replayi sa zajedničkim horizontom
+Sljedeće: dovršiti TASK-015 leak-safe fuel-vintage i preostalu terrain/weather/suppression
+provenance samo na train događajima → unaprijed definisani train-only kontrolisani
+no-action replayi sa zajedničkim horizontom
 → zasebna odluka o no-action gateu → tek zatim zamrznuti event-level heldout ID-jeve →
 frozen benchmark/trening samo nakon prihvatljivog replay gatea.
 Nema provjere fizike simulatora na BiH podacima, potvrde RL prednosti ili generalizacije.

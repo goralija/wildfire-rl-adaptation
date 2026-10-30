@@ -38,7 +38,11 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
 - Per-cell train fuel audit sada je provjerio svih 20 kandidata: 10 prolazi samo fuel
   gate, a 10 pada na ne-gorivo/ambiguous overlay. Sva tri postojeća replay slučaja su
   među prolazima; zato fuel overlap sam ne objašnjava njihov veliki no-action rast.
-  Suppression je nepoznat, a puna input/replay validacija nije završena. [Metod i detalji](../docs/research/CFSDS_TRAIN_QC.md).
+  Novi input audit mjerio je samo tri materijalizovana slučaja: sve tri 20×20/100 m
+  terrain mape su poravnate i kompletne; 17 slučajeva još nemaju paket. 2014b nema
+  pixel-level cutoff dokaz, 2019 CanFG je razvojni i NBAC-zasnovan, a suppression je
+  unknown za sve. [Fuel QC](../docs/research/CFSDS_TRAIN_QC.md) i
+  [input/provenance QC](../docs/research/CFSDS_TRAIN_INPUT_QC.md).
 - TASK-018 je završio dijagnostičko poređenje tri sačuvana no-action replaya na fiksnim
   vremenskim presjecima: svi dodiruju rub 20×20 domene za 34–52 minute, a jedan popuni
   svih 400 ćelija. Rezultati su osjetljivi na vrijeme, ali nema unutar-dnevnog ground trutha
@@ -60,8 +64,9 @@ TASK-004c episode adapter je sada završen lokalno: C++/Python dijele terminalni
 damage, scar i aktivni front su odvojeni, a završetak dobija named reason. Fixture + 12/12
 inference rollouta potvrđuju adapter contract; svi matrix slučajevi završili su na weather
 horizonu. [Receipt i tehnički limiti](../reports/firehose-verification/task004c-adapter-smoke.json).
-Sljedeće je dovršiti preostali TASK-015 fuel-vintage, terrain/weather i suppression QC samo
-na train/calibration događajima. Preliminarni 44 ID-ja i pilot su u
+Sljedeće je dokazati leak-safe train fuel-vintage konstrukciju i zatvoriti nedostajuću
+terrain/weather/suppression provenance samo na train/calibration događajima; izmjereni
+input audit trenutno pokriva 3/20 train paketa. Preliminarni 44 ID-ja i pilot su u
 [CFSDS kohort manifestu](../data/manifests/cfsds-v1_1-pilot-cohort.json).
 
 TASK-014 core/legacy environment je lokalno reproducovan na macOS ARM64 + Linux ARM64;

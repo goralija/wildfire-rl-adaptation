@@ -1,6 +1,6 @@
 ---
 type: Handoff
-title: Naredna sesija — nakon TASK-018 dijagnostike
+title: Naredna sesija — nakon train-only TASK-015 input QC
 ---
 # Naredna sesija
 
@@ -48,19 +48,33 @@ je na `weather_horizon`; u toj matrici nismo direktno izvršili C++ grane `front
 `grid_exhausted` ili `no_ignition`. CFSDS no-action razlika i rubni efekat ostaju otvoreni,
 pa nema fizičke validacije, dokaza da agent smanjuje štetu, policy benchmarka ni treniranja.
 
-Sljedeće je dovršiti train-only fuel-vintage/terrain/weather/suppression QC iz TASK-015:
+Train-only input QC je sada izmjeren za tri dostupna FireCase paketa i fuel-vintage
+izvori su pregledani. Još nije bezbjedno proglasiti train slučajeve potpuno spremnim:
+17 paketa nedostaje, 2014b nema dokumentovan per-pixel vremenski cutoff, 2019 CanFG
+je u razvojnom direktoriju i koristi NBAC, izvorni DEM tile/weather field lineage nisu
+sačuvani, a suppression je unknown za svih 20. Detalji i redoslijed su u
+[input QC izvještaju](research/CFSDS_TRAIN_INPUT_QC.md) i
+[mašinskom receipt-u](../reports/real-fire-data/cfsds-train-input-qc.json).
 
-1. Provjeriti postoji li za godine train slučajeva podržan i dokumentovan FBP vintage;
-   zabilježiti službeni izvor, licencu, checksum i razliku prema trenutno korištenom 2014b.
-2. Mjeriti DEM/fuel/weather prostorno-vremensko poravnanje samo za train događaje;
-   posebno bilježiti koliko je fronta/novog rasta blizu 20×20 ruba.
-3. Za gašenje/suppression povezati samo pouzdane historijske dokaze; ako ih nema,
-   označiti `unknown` umjesto pretpostaviti da intervencija nije bilo.
-4. Unaprijed zapisati ulazne varijante i zajednički vremenski horizont, pa pokretati
-   train-only no-action replaye koji mijenjaju po jedan ulaz. Ne birati trajanje ili
-   parametre na osnovu narednodnevnog targeta.
-5. Tek nakon prihvatljivih no-action replaya zamrznuti event-level heldout ID-jeve;
-   tek onda predložiti frozen-agent benchmark. Fine-tuning ostaje kasnije.
+Sljedeći tehnički koraci:
+
+1. Napraviti mali train-only dokaz godišnje fuel karte: dokumentovati baznu mapu i
+   cutoff, primijeniti samo perimetre prije target dana n, testirati ruleset/crosswalk
+   i provjeriti da nijedan target ili budući scar ne ulazi u gorivni input. Ne koristiti
+   2019 ili 2024 raster kao gotovu prošlu mapu.
+2. Napraviti fixture za interakciju između scar-a iz dana n-1, non-fuel reclassifikacije
+   i simulatorovog multi-cell initial state-a prije izmjene case buildera.
+3. Za train slučajeve odabrane za replay prikupiti izvornu terrain tile provenancu i
+   kompletan vremenski API request, resolved location, units i variable-source mapping;
+   zadržati unknown ako ih se ne može dokazati.
+4. Potražiti event-level suppression dokaz od nadležne agencije. CNFDB dokumentuje
+   agency-provided lokacije/perimetre i ograničenu potpunost, a ne već spojenu timeline
+   akcija ovog projekta; nema prihvaćanja EULA bez ovlaštenja.
+5. Unaprijed zapisati ulazne varijante, seedove, metrike i zajednički horizont, pa tek
+   onda uraditi train-only kontrolisane no-action replays. Ne birati per-event trajanje
+   prema targetu i ne koristiti validation/test ishode.
+6. Heldout event IDs zamrznuti tek nakon prihvatljivog train no-action gatea. Benchmark
+   i fine-tuning ostaju blokirani do tada.
 
 Benchmark i fine-tuning ostaju blokirani dok se ne prođu i no-action quality gate i
 heldout freeze. Ne otvarati validation/test rastere ili ishode radi QC/tuninga.
@@ -71,6 +85,8 @@ heldout freeze. Ne otvarati validation/test rastere ili ishode radi QC/tuninga.
 - [TASK-018 timeline/hash receipt](../reports/real-fire-data/cfsds-no-action-timeline.json)
 - [TASK-015 fuel audit](research/CFSDS_TRAIN_QC.md) i
   [mašinski report](../reports/real-fire-data/cfsds-train-fuel-qc.json)
+- [TASK-015 input audit](research/CFSDS_TRAIN_INPUT_QC.md) i
+  [mašinski report](../reports/real-fire-data/cfsds-train-input-qc.json)
 - [X/Y data pipeline](research/REAL_CASE_PIPELINE.md)
 - [cijeli real-fire report index](../reports/real-fire-data/index.md)
 - [backlog](BACKLOG.md), [odluke](specs/DECISION_RECORDS.md) i [status](STATUS.md)

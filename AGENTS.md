@@ -11,10 +11,13 @@ Zatim koristi [mapu zadataka/koda](knowledge/code-map.md) za relevantne izvore i
 Korisnikove direktne upute imaju prednost; kasniji ADR može zamijeniti raniji.
 
 **Odabrana je putanja Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire (ADR-013).**
-TASK-012 je završen. TASK-015 ima preliminarni train-only fuel audit: 10/20 kandidata
-prolazi samo taj gate; vrijeme, teren, gašenje i no-action mismatch ostaju otvoreni.
+TASK-012 je završen. TASK-015 ima train-only fuel audit (10/20 fuel-only prolaza)
+i input-alignment audit za tri od 20 lokalno dostupnih FireCase paketa. As-of-event
+fuel vintage nije potvrđen, DEM/weather provenance nije potpuna, a suppression je
+unknown. No-action mismatch ostaje otvoren.
 TASK-018 dijagnostička faza i TASK-004c episode adapter su završeni lokalno. Sljedeći
-fokus je preostali TASK-015 train-only fuel-vintage/terrain/weather/suppression QC. Root
+fokus je leak-safe train-only fuel-vintage proof-of-concept, izvorna terrain/weather
+provenance, suppression evidence i unaprijed definisani replay gate. Root
 cause no-action overgrowth nije izolovan, a no-action gate nije prošao. Ne koristi
 validation/test ishode za izbor parametara. No-action gate i heldout freeze moraju proći
 prije policy benchmarka ili fine-tuninga. Runtime PASS nije dokaz fizičke validacije ili

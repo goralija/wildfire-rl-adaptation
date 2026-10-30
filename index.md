@@ -18,6 +18,7 @@ okf_version: "0.2"
 - [Dokumenti projekta](docs/index.md) - Protokol, zahtjevi, specifikacije, odluke i historija.
 - [Podaci](data/index.md) - Porijeklo, javni izvori i CFSDS pilot cohort manifest.
 - [Real-case pipeline](docs/research/REAL_CASE_PIPELINE.md) - Jednostavan opis šta stvarni podaci daju (Y), šta simulator prima (X), te jaz početnog fronta.
+- [Train-only CFSDS input QC](docs/research/CFSDS_TRAIN_INPUT_QC.md) - Izmjereni ulazi za dostupne train slučajeve i otvoreni fuel/weather/suppression rizici.
 - [Izvještaji](reports/index.md) - Sintetički pilot, runtime dokazi i stvarni CFSDS C++ replay.
 - [Runtime okruženja](docker/index.md) - Pinovani legacy setup i inference bez treniranja.
 - [Promjene baze znanja](log.md) - Najnovije promjene prve i veze na detaljnu historiju.

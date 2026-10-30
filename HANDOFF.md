@@ -107,13 +107,19 @@ Checkpoint ugovor RGB 3×20×20 / `Discrete(400)`, legacy no-op `-1`, action hea
 nisu mijenjani. Sažeti dokaz i eksplicitne granice su u
 [adapter receiptu](reports/firehose-verification/task004c-adapter-smoke.json).
 
-Sljedeće dovršiti train-only fuel-vintage, terrain/weather i suppression QC. Prvo utvrditi
-službene dostupne FBP vintages/licence/hashove; zatim izračunati prostorno-vremensko
-poravnanje i crop-edge margine samo na train slučajevima; za suppression zapisati dokaz
-ili `unknown`. Unaprijed definisati ulazne varijante i zajednički vremenski horizont, pa
-pokretati train-only no-action kontrolne replaye koji mijenjaju po jedan ulaz. No-action
-gate nije prošao: ne koristiti heldout ishode za kalibraciju, ne pokretati benchmark ili
-fine-tuning i ne tvrditi fizičku validaciju/agenta boljeg od baselinea.
+Train-only input QC sada mjeri 3/20 dostupnih FireCase paketa. Sve tri 20×20/100 m
+terrain mape su poravnate; dnevni FWI se ponavlja kroz 24 sata; weather reanalysis tačke
+su 2.4–5.2 km od summary centroida. 2014b nema pixel-level cutoff dokaz, 2019 CanFG je
+razvojni/NBAC-zasnovan, izvorni DEM tile hash/date i potpuna weather field mapping nisu
+sačuvani, a suppression je unknown za svih 20. Čitaj
+[detaljni input QC](docs/research/CFSDS_TRAIN_INPUT_QC.md) i
+[mašinski receipt](reports/real-fire-data/cfsds-train-input-qc.json).
+
+Sljedeće je napraviti train-only leak-safe godišnji fuel map proof-of-concept i testirati
+scar/nofuel interakciju s importerom, zatim popuniti source provenance i suppression
+evidence prije preregistrovanog train replay gatea. Ne birati per-event trajanje iz targeta.
+No-action gate nije prošao: ne koristiti heldout ishode za kalibraciju, ne pokretati
+benchmark ili fine-tuning i ne tvrditi fizičku validaciju/agenta boljeg od baselinea.
 
 TASK-014 Python 3.12.4/macOS ARM64, Linux ARM64 legacy Docker i geospatial ETL venv
 navedeni su u [environment receiptu](reports/environment-setup/README.md). Venv,
@@ -175,9 +181,9 @@ Ne preuzimati cijelu 48.4 GB WildfireSpreadTS arhivu.
 
 ## Spreman prompt za kolegu ili coding agenta
 
-> Nastavi nakon TASK-004c na postojećoj grani `research/cfsds-train-qc`. Pročitaj
-> STATUS, NEXT_SESSION, BACKLOG, ADR-018, TASK-015 QC, FIREHOSE_VERIFICATION i
-> CFSDS_NO_ACTION_DIAGNOSIS. Dovrši train-only fuel-vintage/terrain/weather/suppression
-> QC uz izvore, licence i hashove; unaprijed definiši kontrolisane no-action replay varijante
-> i zajednički vremenski horizont. Ne otvaraj heldout ishode za tuning i ne treniraj dok
-> no-action gate ne prođe.
+> Nastavi na research/cfsds-train-qc. Pročitaj STATUS, NEXT_SESSION, BACKLOG,
+> ADR-019, CFSDS_TRAIN_INPUT_QC, CFSDS_TRAIN_QC i CFSDS_NO_ACTION_DIAGNOSIS. Napravi
+> mali leak-safe train fuel-vintage proof of concept, prvo dodaj fixture za interakciju
+> scar/nonfuel i importer, pa snimi per-case terrain/weather provenance i suppression
+> evidence. Zatim preregistruj zajednički no-action replay gate. Ne otvaraj heldout
+> ishode za tuning i ne treniraj dok gate ne prođe.
