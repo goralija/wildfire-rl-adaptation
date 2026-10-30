@@ -101,6 +101,35 @@ manifest](../../reports/real-fire-data/2018_747-case.json), [replay report](../.
 Docker image ID i hashovi su u
 [`initial-state-import-smoke.json`](../../reports/real-fire-data/initial-state-import-smoke.json).
 
+### Historijski scar na non-fuel ćeliji
+
+`InitialState.csv` može označiti samo modelsku ćeliju koja ima FBP gorivo. Fixture
+[`nonfuel_initial_scar_fixture.csv`](nonfuel_initial_scar_fixture.csv) označava
+`ncell=4` kao historijski `burnt`; ta ćelija je `NF` u standardnoj Sub20 mapi, dok
+je `ncell=1` gorivna aktivna ćelija. Provjeravač potvrđuje da pinovani C++ importer
+trenutno odbije takav scar. To je karakterizacija ograničenja, ne željeni rezultat
+za fizički model niti dokaz da scar treba proglasiti non-fuel.
+
+Nakon što su pinovani upstream checkouti dostupni, rebuildaj image i pokreni kratku
+izolovanu provjeru (za svaki ponovljeni run izaberi novi output folder):
+
+```sh
+docker build --file docker/firehose/Dockerfile --tag wildfire-firehose-probe:task015-nonfuel-scar .
+mkdir -p runs/nonfuel-initial-scar-check-new
+docker run --rm --network none --cpus 2 --memory 2g --pids-limit 128 --read-only \
+  --tmpfs /tmp:rw,nosuid,size=256m --tmpfs /opt/firehose/input:rw,nosuid,size=128m \
+  --cap-drop ALL --security-opt no-new-privileges -e MPLCONFIGDIR=/tmp/mpl \
+  -v "$PWD/runs/nonfuel-initial-scar-check-new:/outputs" \
+  wildfire-firehose-probe:task015-nonfuel-scar python /opt/firehose_verify_nonfuel_initial_scar.py
+```
+
+Očekivani test rezultat je `expected_current_rejection_confirmed: true`. Proces
+Cell2Fire namjerno završava na guardu; Python probe zato bilježi adapter grešku
+jer nije nastao početni grid. Mjerodavan dokaz je C++ stderr poruka
+`InitialState.csv marks a non-fuel/harvested cell as burned`. Ne koristi se trening,
+policy niti CFSDS validation/test slučaj. Automatski receipt iz stvarnog izvršavanja
+je u [`nonfuel-initial-scar-compatibility.json`](../../reports/firehose-verification/nonfuel-initial-scar-compatibility.json).
+
 TASK-004c adapter je implementiran i provjeren fixtureom plus 12 kratkih Sub20 inference
 rollouta; mašinski sažetak i image ID su u
 [`task004c-adapter-smoke.json`](../../reports/firehose-verification/task004c-adapter-smoke.json).

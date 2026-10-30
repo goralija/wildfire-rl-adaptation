@@ -27,5 +27,7 @@ COPY src/wildfire_rl/firehose_probe.py /opt/firehose_probe.py
 COPY docker/firehose/verify_batch.py /opt/firehose_verify_batch.py
 COPY docker/firehose/initial_state_fixture.csv /opt/initial_state_fixture.csv
 COPY docker/firehose/verify_initial_state.py /opt/firehose_verify_initial_state.py
+COPY docker/firehose/nonfuel_initial_scar_fixture.csv /opt/nonfuel_initial_scar_fixture.csv
+COPY docker/firehose/verify_nonfuel_initial_scar.py /opt/firehose_verify_nonfuel_initial_scar.py
 WORKDIR /opt/firehose
 CMD ["python", "/opt/firehose_verify_batch.py"]
