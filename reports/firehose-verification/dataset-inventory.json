@@ -1,0 +1,3550 @@
+{
+  "dataset": "Firehose Sub20x20",
+  "source_commit": "e49a52a9a987a1585d25ddca2f711222ca500ffb",
+  "files": 141,
+  "bytes": 159595,
+  "rasters": {
+    "Forest.asc": {
+      "header": {
+        "ncols": 20.0,
+        "nrows": 20.0,
+        "xllcorner": 457900.0,
+        "yllcorner": 5716800.0,
+        "cellsize": 100.0,
+        "nodata_value": -9999.0
+      },
+      "row_count": 20,
+      "widths": [
+        20
+      ],
+      "shape_matches_header": true,
+      "value_counts": {
+        "2.0": 203,
+        "101.0": 93,
+        "1.0": 19,
+        "31.0": 67,
+        "3.0": 18
+      }
+    },
+    "elevation.asc": {
+      "header": {
+        "ncols": 20.0,
+        "nrows": 20.0,
+        "xllcorner": 457900.0,
+        "yllcorner": 5716800.0,
+        "cellsize": 100.0,
+        "nodata_value": -9999.0
+      },
+      "row_count": 20,
+      "widths": [
+        20
+      ],
+      "shape_matches_header": true
+    },
+    "saz.asc": {
+      "header": {
+        "ncols": 20.0,
+        "nrows": 20.0,
+        "xllcorner": 457900.0,
+        "yllcorner": 5716800.0,
+        "cellsize": 100.0,
+        "nodata_value": -9999.0
+      },
+      "row_count": 20,
+      "widths": [
+        20
+      ],
+      "shape_matches_header": true
+    },
+    "slope.asc": {
+      "header": {
+        "ncols": 20.0,
+        "nrows": 20.0,
+        "xllcorner": 457900.0,
+        "yllcorner": 5716800.0,
+        "cellsize": 100.0,
+        "nodata_value": -9999.0
+      },
+      "row_count": 20,
+      "widths": [
+        20
+      ],
+      "shape_matches_header": true
+    }
+  },
+  "rasters_aligned": true,
+  "missing_fuel_lookup_codes": [],
+  "weather_files": 130,
+  "weather_row_counts": {
+    "8": 130
+  },
+  "weather_unique_content_hashes": 130,
+  "data_csv_rows": 400,
+  "data_csv_column_count": 20,
+  "data_csv_row_widths": {
+    "20": 399,
+    "19": 1
+  },
+  "data_csv_missing_by_column": {
+    "fueltype": 0,
+    "mon": 400,
+    "jd": 400,
+    "M": 400,
+    "jd_min": 400,
+    "lat": 0,
+    "lon": 0,
+    "elev": 0,
+    "ffmc": 400,
+    "ws": 400,
+    "waz": 400,
+    "bui": 400,
+    "ps": 0,
+    "saz": 0,
+    "pc": 400,
+    "pdf": 400,
+    "gfl": 93,
+    "cur": 333,
+    "time": 0,
+    "pattern": 400
+  },
+  "reward_mask_present": false,
+  "weather": [
+    {
+      "file": "Weathers/Weather1.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "38c93358b790a4184dfc80a00c23cf20fc8f115e0a25e5c41276b8662b61c25b",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather10.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "d92e6a8199f8cc7996bbca0e33aabf5fe82e5793e16f2d2d53245e35dfbabcc3",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather100.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "6bf924aae2da4167713d462f37cf81b5115f562bfc537e42a9576d8dfa93fc30",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather101.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "72cbe946c91dff153eff81088602e1ffe69f6d54bf8e41e063112a3dcd853ac6",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather102.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "ed028bc574ff613e3d2e75251a0347d18d0586bf94802e0cdd5535096eb1f844",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather103.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "3b1ddbbe5ff20c99c8359ef6f053820b15fce61e598c109e59cec3107b9408af",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather104.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "3b4036977da478cb09ae811218badf7c167adc2794e7ea137777921349d31ece",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather105.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "7f746c33799ff1d61f2eb8823654529fd8d5debdbf60a47e52d508a0b5b42ee5",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather106.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "f0c7150674ad75be4cd416481942e484d2b82cb9082af2a0f70d17c4a42807b5",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather107.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "c2b2b5da531237e6c431f2ac0e1e4422d34501bc5deb7e8e950108b59b8f17c0",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather108.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "53f309f520edb6a60bbd5cbb70055a850b426396415b1d857dc2005c271c834c",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather109.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "cf22e596da12aaa0c49e574632b94bd78a3491b37139b740c12060c6ab0107f2",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather11.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "9a5ec37824a42060e30f9694bdcecaee67e15bf5bc4fc994d133ebf2ec9b9a98",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather110.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "619114faef6ae812f110fbb209cf7f17f11989e81d78cd7caa822bd65c2b365f",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather111.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "cd17e7e92e16eec9ad90cf66333efd873fc7f3dfc50fc3d046f73f76b12106a4",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather112.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "a0bccebf4920b756b376e51eb1f9c3f2595a02e296e1847ae4cf8d86fca586c0",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather113.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "79172ab2b5e65b4e3bc516fe45134d19004e28e51cf722e8a3feaeaefcecaaaa",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather114.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "8c035880b5b36a091a0f9b2035f8d16a37c3795ddb45d7924b1cca3053028cbf",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather115.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "146ae92a77853197660afc7686da474cfd2b718d85f64ecfe311f12b4662a444",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather116.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "65eb0c812c10ab005a6dd4446499f50ef49ba70521ae079418ec04d1ae74592a",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather117.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "16faabead1d44b00d0ba0c1589d379494bb62f9a3320f45006492d83cf55a9f6",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather118.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "344ee3f8749026d798fec98b203b5e2cbf713bd30bbfeb10cc2961d3e0a961b1",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather119.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "7d6d4e9a4cf2c556ffd86c6aa45d571f7dff818cb4bfa504c2bacfc40b5d0a23",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather12.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "296984b74e049ccc4327fe63a024f8daa48014dbef7da99e4603afa590e1777d",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather120.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "67330ec29dcef1cac0c3b5632152dd9fc2ae9ed59134a953aa7502e92fda3f73",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather121.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "cd61c1011b9cc9b710ff5906bc9f8258e1d642aacbd3b0099b4a9625883c7a94",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather122.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "94d11ac7bea25d35fee225fe78f11433b0008a3136dd1915cba426722b438771",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather123.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "287fae511d3a83afa3f30284042e1063e2a9c75857ab4fdb9b0eef81a3dd703f",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather124.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "7a91b34e759d7cc384c1bb195c7c646874c1ec91d3c71a8b82cf566a4e32acdb",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather125.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "0900452da1323668d77c8813e334a430bce851c300b8186420bb07644e396b5f",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather126.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "b8855d5e69ee57067d1734c4185357d11809df931ee2b11a54ae2c492b6ed654",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather127.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "89ba956b2726a7d3c25d24786df05c0c86cf1d18adb45209db60cf888ca77be7",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather128.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "a6e68e790f62c05689f1b8679c67daa2c59f13e841cb135b5fe3ffa66e028413",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather129.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "df977a96da3e161b2f2addbc31f3dc0ca315b578622e70abae8a34adc874deb7",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather13.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "70a863c850720b709cb7ab8dc308dabab3b2702fc20864736eb5763597b03fd9",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather14.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "f2a2f27ebc0d8a13aecb798a6cfa26e4edfb8d6c7ddcdc9ca6984987a8b34246",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather15.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "fed82c7105b5b003b11551297a831411fecd5687a8dd4eeb28408b507b0f5d11",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather16.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "186392c36f2cb12b8673d1414940e3ab12a4a6d0fc544473815efcc007c47980",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather17.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "318f5c8793a20dae0866627954ab7afe3d4aeddeae4851505d692aa1a2386b3c",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather18.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "f9a4310087ecd8d16ebecf2a94952f881b80c3ad020777e09319ad584794ba20",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather19.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "3cc252b03553ce901509a89048cc4f18c685e1b7d8093b190415cf7c29846625",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather2.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "15a5f52fd38be4922b1c2c56339526e85f2580babbe61a66566f82708fd8bbd2",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather20.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "65fa71bae6e2d17020b1853fe08630b5da3a0e0c229780e616bc9d1d942cf708",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather21.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "8cd08235e399e7dbee62f71509f07a3ac14ffb3ff373a6a3d41568813eab3f82",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather22.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "f9b9568714acb12ee0af3f1d62466113f35c6a3d0406914a91fffb79cdd37102",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather23.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "31de5ae6bbb1ff2fe66e1ab688b43cf10a48237f8d9032c685f67492a0d38313",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather24.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "0e58bcd4628bfb94a8a124c13fa25a9a01ef069b2664a4a664213e30d3ba7878",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather25.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "5f5658cf28e82b4f8c68b320d2b3e2f3492e7bc3853f347d0b726380e130d7ba",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather26.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "de6a9e218ad1e8a2c803b9c31da4a7454848c9d92c9f54cdf06cf2f0a580929e",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather27.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "e31cfdcaeb1c0dbe84d35e532c6d7528ccac84718fe4ab9f248fb5eff08fce28",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather28.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "55e2dffb11301acb01c91310f4793d7b499061cad88efa3df33b6e2b7d948357",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather29.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "af633331027eb7d65cb501260ded392d857bef24e963ae262c8f0edac6cb2d62",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather3.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "c8bfec4bed4ef12c12e01470772a8dc26678fb699dfb614feced3ecb8a9f9bc2",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather30.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "bbdd7cf997d1ad88537afb5a32182141b2c487a3f1900a66d48040527800ef35",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather31.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "8115db5d65d35a14104fcff53e7898ea6c041b31e0abe3d55f110a0e017d53b3",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather32.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "71dc3b88355fc6816477b34a417fe50957cdf3d7b6c4d26147d71a07235299d4",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather33.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "a83aacb85200460c93249664da7bef7aee1c98ead4f38ad75e4feb076d9c98ba",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather34.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "66ec16040cacc8d1e58ad638b5af99b89a91fb018da2fa7bf3fb673c80859dba",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather35.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "75a290cba46cdcc1efb1819b4166446691374e60c7d2824ffdd9e957b51a87ab",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather36.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "489e2f5ea84914712516bd5e41afd4123c8c970c7b1bb30b3597c9b6047d8e51",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather37.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "461b496801784c2f80e96d6858362f217c68025cc87230240e2a7ba0c7313716",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather38.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "db18afbed51875c4bc2d557003a93fc2ed16bedf5a2fd1359ccee6c0a598d22e",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather39.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "e4062f413572d04ce4cd13cc2e2b6e8a5e2aaed5244e5ad2e30ad4fda227df39",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather4.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "14be0840a873d7e4245ac455babd48b6b06c4cb572a3757bb7a263feec3cf598",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather40.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "5c5e5636ecac8cbf02f351c593ff494783f19b080563aeec3660ec78dc5c3a4d",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather41.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "fab9777e6ed240c132e6d2a42670ce17589554b1035e3b0317a3150ac29ddf6c",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather42.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "f4242de7a1ea30a9a4a3e867a078afb045cc780def3537d2b49f25584f8e0e0d",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather43.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "c715cfff09fa013182acc62168392433c62b6f540ce5783c5a297146f41d057a",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather44.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "435ac7141ac6fbc820fb7ea1a7f618776006a6146b1ef2e3817ccfed9353f121",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather45.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "e62ca3a1f700947125e0c30fea1c1b1780afadd1d02edf0d699ac154d99bb7b5",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather46.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "f6b177a8015849cedacb14d06151c82cf3c9f6819ef6a312f9a7cb2eb5b3881f",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather47.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "da2fb70ebe68c8efed1a0b468a8218f9f33ae5c729a941fd2d4c6227db569efa",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather48.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "d0cae9f953b8b4dacc8fb918b44cb53faa4e428cd1011018ac95f122f8cd560c",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather49.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "d6d4fb2b385cc7976337ac192213a1f193e4a19779557f2972d144ed3b922050",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather5.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "3609f788946d6a947adf41258f971dde24a7ca4c73f0c309fd3e367e731c82f7",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather50.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "454df56844536dc88596e891b84eb2b741699aa360b0225cb9997af4ce71a35f",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather51.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "35b1cae54c9cd720e9b6098d529ab6a3c212af6afb1580062026149a45f11098",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather52.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "ba4e80250225bb21a2e1311a94407c1ebd5c5dafdc33ee001cc19fadbce17db0",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather53.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "86d6342023037c79c21d140cda21bbdd099ae7cf1dd2c465b5e11702db9c1a0c",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather54.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "db51ad57fd969c73f7f09596ec6a4e3e2f21ff1c6cd3db34257c6b0e4dcaa20d",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather55.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "7da92f0878532262eab8a4ea56825d45461703cba12282d7d4de1340c6404ce0",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather56.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "8984dc5df24293468ec7ec966fac66663c179c5cb42fab13ae7371ba1a977a88",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather57.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "1e78cddcc6b84a24acde01642ef79fa72aeb9f1c34164cbeb2079a8767c38b92",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather58.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "83a0b626b68f086aaae15c1c95e003496add081907d3829ba140614dc9925dfa",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather59.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "863d4f1c64116b099e3c3ce1113dfa0a8339ed4c5e52a1c4d7977e990c76f4c8",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather6.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "6f0949ceebbee54b1d97b00986fe138e1c62f8234505b6aa2b118608300b5d56",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather60.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "686a2a8a03a95e9e457247283093520ae96d07184dccc17d24085233ab892205",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather61.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "1aad2c9ada441d03b6fc0c5965b6d6238054adc169b03cbff3bf7b5a1430f6fb",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather62.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "ff66245fb217a0557e385f0ade6b7f1dee0893c61aa5f9c4b87c85a2d3e4b34a",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather63.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "875555b4756132504a6b234d4582244963e979acb8bb0694f21ad53465bbe691",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather64.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "eb7302558e630e6998b60214141b81c1f57c2dce3d409c3cf844fc819be63373",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather65.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "370afbcf09bed8173448926492868de650b252d38b9d74641f61b7b5e38a629a",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather66.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "9d5a611cd5baa4359fa517127e5acd34ce3fb5cdeffb911aff0b61a6bed10436",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather67.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "58c0352196784e596767a191a23ded300ef0c6fa6f2766c5239c815c73c8a34a",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather68.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "ac3bbbb147668c5d0aa8a465a07be674ffe5d9689fe7ff08d9ae47001920a988",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather69.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "84a0723dd3f68c71152a009b768d1a4a1e0af7409739e85437c49027cd913779",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather7.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "c553d65dd1824bb840fb67c96d93208d25c18c39b4256b89e449882cb8da5cfb",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather70.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "ef0cde33e3a499b8641b66bcc8054e7e69564d733bbba6ab885a022a1dd676ac",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather71.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "1616df4a39c4954dd1a1ecff9efb7192db66c694525573bea4321f3ae2a59c3a",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather72.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "ee9ccc6d8fa571f5da7963b861b25d91fc11bba31437e28bc538ec0fce9ff252",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather73.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "379b20ddd50be39f3a1337ef4773a1540e20e58ea001fb5e09e4bcd04031b509",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather74.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "304812da98f4ad38cd690a290ee46c4e89ef469d5335cf2b70ca546700209ff4",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather75.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "312ce079e6b807cb3743e3b185d7bf9103f685e4d992593f19ce740d897bbd02",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather76.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "9b4449b7e667995ddaaa76ca2258ac643b005dd86b4012791c425072c9f51e6c",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather77.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "236c83b7e3b74e3ae1896650877675efa0687dc28ec3b3808e003dfb89568cfb",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather78.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "131b5e9a2d8d839cae1600d9dd437975629244eeada536d1287516ad0a5ffeaf",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather79.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "c48b11fca5183a5a3c86b10665954dab0d830dc9f11924f2643210946eba5af2",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather8.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "f82d9e48342a149b6379b0b7b98dd4147e4065ecedec5f68f161df1f53a9a056",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather80.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "265a0db0679453d9a1d90a339372b4c7d2a3a60e57f246185125841bd5f10d4d",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather81.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "2adf897b3dea30106d77ef61ab60fb4b29b976cb6434c5404fff2cfbfe5a3b9e",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather82.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "74d798250a4666808576c3ae4e48d8ba30c91580d89ec8570e7f464ed74e51d9",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather83.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "1f6887a9c976943ea0b403b0fc62c024eafdf7801e4abfb57e55686b83399681",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather84.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "0a521b45e5c400f98d5371fbfb6b4d0e1848d2e7845bb2bcd869dbb1c4f20a11",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather85.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "ef99bc6e95f6910e1b13ceb494a4368f4780c318645a99617b8d931c0d750e88",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather86.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "977aba6b3d7a9ae43aed4944a8952c0a0bc45a1bd36ebab6d6fd7b7376d0f312",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather87.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "81fab5e0ef8df0e28ec025e4c19cc2813cc079611f1a2299a0ab5c87b8b8e7ac",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather88.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "6cdc091abc935ec11b15252c65c4c2e398b5246ffa8eeedb8abb6d83d171689e",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather89.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "299871588536957a0788a2b3621033f5326d42d524f3e95533523cae2ca05c49",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather9.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "dd907883633d409f4defa2d0f488fa1cab20ad30799fe167fa752aee3302d5cc",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather90.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "644df216958f3e9f4720b98d79503ff0d9a9dc7029a0527b1519304c4ed3e908",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather91.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "437ba90bcc1aa65557850e597adb7586487b87d8bd4dda3d75319141a8f13801",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather92.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "646de74403fef8f609980b8fd1319307fcb213933e00e9c53a0495e54a461628",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather93.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "704f38ec5a8e0d34b0cc87fd0417805209ad205fc2fe4e9a1234ebb177b1ef88",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather94.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "702d6c402fe118f0c8737f173751013aeefba1baa6c7b68fa9597b8a36e67240",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather95.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "3bae58465969ee80ab1f64cfb172eb520f8bc4ac175e5afe20fb3ea51d9716b9",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather96.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "a1fa30e69857bde8dd7be8a7c0dcd916c7e873519575ed7f4dfa7aafa1f8c2af",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather97.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "640dd79c38730d2dfaa4169e32e393ff26db9578a586098c1971fc761e7f0804",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather98.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "5e40e8d7fd40da9d7649e808f9802851acbfa57720cc38f41400eabfa67866b7",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weathers/Weather99.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "89c62101742ce762e28fac4e634f3c8a6fe0caf3387fed19d7ee134cc88d96c9",
+      "invalid_ws_rh_rows": 0
+    },
+    {
+      "file": "Weather.csv",
+      "rows": 8,
+      "columns": [
+        "Scenario",
+        "datetime",
+        "APCP",
+        "TMP",
+        "RH",
+        "WS",
+        "WD",
+        "FFMC",
+        "DMC",
+        "DC",
+        "ISI",
+        "BUI",
+        "FWI"
+      ],
+      "sha256": "d46d78c14d46e81b1cc3eb87eb1cf007dced395136405b108ea1f0502eaac901",
+      "invalid_ws_rh_rows": 0
+    }
+  ],
+  "file_manifest": [
+    {
+      "path": "Data.csv",
+      "bytes": 24937,
+      "sha256": "48d5dcb6ecdd7faa214c54aa8ce44e1e34f9aadcd0b88b815ec973d2d1a8a85a"
+    },
+    {
+      "path": "Data.dat",
+      "bytes": 24450,
+      "sha256": "c50805220786853a7526156f7ea809c3dd50ca1b96a9bc1afc10f3f8caef6bc3"
+    },
+    {
+      "path": "Forest.asc",
+      "bytes": 1265,
+      "sha256": "416efcdd285b9364a5cae2af81a73791c6ca01458ccae81fb593a069bee6fe7a"
+    },
+    {
+      "path": "IgnitionPoints.csv",
+      "bytes": 17,
+      "sha256": "8ca663664594d8c55897dab31aeb3265b5baa6da3525f0b0e52b6f3b6288e81b"
+    },
+    {
+      "path": "Ignitions.csv",
+      "bytes": 17,
+      "sha256": "8ca663664594d8c55897dab31aeb3265b5baa6da3525f0b0e52b6f3b6288e81b"
+    },
+    {
+      "path": "README.md",
+      "bytes": 13,
+      "sha256": "63a856b9c8cf086fb10772de51b535388bd5ca0f710ed66e571a4ed4ae801d5e"
+    },
+    {
+      "path": "Weather.csv",
+      "bytes": 557,
+      "sha256": "d46d78c14d46e81b1cc3eb87eb1cf007dced395136405b108ea1f0502eaac901"
+    },
+    {
+      "path": "Weathers/.DS_Store",
+      "bytes": 6148,
+      "sha256": "d65165279105ca6773180500688df4bdc69a2c7b771752f0a46ef120b7fd8ec3"
+    },
+    {
+      "path": "Weathers/Weather1.csv",
+      "bytes": 659,
+      "sha256": "38c93358b790a4184dfc80a00c23cf20fc8f115e0a25e5c41276b8662b61c25b"
+    },
+    {
+      "path": "Weathers/Weather10.csv",
+      "bytes": 662,
+      "sha256": "d92e6a8199f8cc7996bbca0e33aabf5fe82e5793e16f2d2d53245e35dfbabcc3"
+    },
+    {
+      "path": "Weathers/Weather100.csv",
+      "bytes": 655,
+      "sha256": "6bf924aae2da4167713d462f37cf81b5115f562bfc537e42a9576d8dfa93fc30"
+    },
+    {
+      "path": "Weathers/Weather101.csv",
+      "bytes": 671,
+      "sha256": "72cbe946c91dff153eff81088602e1ffe69f6d54bf8e41e063112a3dcd853ac6"
+    },
+    {
+      "path": "Weathers/Weather102.csv",
+      "bytes": 672,
+      "sha256": "ed028bc574ff613e3d2e75251a0347d18d0586bf94802e0cdd5535096eb1f844"
+    },
+    {
+      "path": "Weathers/Weather103.csv",
+      "bytes": 665,
+      "sha256": "3b1ddbbe5ff20c99c8359ef6f053820b15fce61e598c109e59cec3107b9408af"
+    },
+    {
+      "path": "Weathers/Weather104.csv",
+      "bytes": 678,
+      "sha256": "3b4036977da478cb09ae811218badf7c167adc2794e7ea137777921349d31ece"
+    },
+    {
+      "path": "Weathers/Weather105.csv",
+      "bytes": 686,
+      "sha256": "7f746c33799ff1d61f2eb8823654529fd8d5debdbf60a47e52d508a0b5b42ee5"
+    },
+    {
+      "path": "Weathers/Weather106.csv",
+      "bytes": 686,
+      "sha256": "f0c7150674ad75be4cd416481942e484d2b82cb9082af2a0f70d17c4a42807b5"
+    },
+    {
+      "path": "Weathers/Weather107.csv",
+      "bytes": 699,
+      "sha256": "c2b2b5da531237e6c431f2ac0e1e4422d34501bc5deb7e8e950108b59b8f17c0"
+    },
+    {
+      "path": "Weathers/Weather108.csv",
+      "bytes": 703,
+      "sha256": "53f309f520edb6a60bbd5cbb70055a850b426396415b1d857dc2005c271c834c"
+    },
+    {
+      "path": "Weathers/Weather109.csv",
+      "bytes": 666,
+      "sha256": "cf22e596da12aaa0c49e574632b94bd78a3491b37139b740c12060c6ab0107f2"
+    },
+    {
+      "path": "Weathers/Weather11.csv",
+      "bytes": 682,
+      "sha256": "9a5ec37824a42060e30f9694bdcecaee67e15bf5bc4fc994d133ebf2ec9b9a98"
+    },
+    {
+      "path": "Weathers/Weather110.csv",
+      "bytes": 672,
+      "sha256": "619114faef6ae812f110fbb209cf7f17f11989e81d78cd7caa822bd65c2b365f"
+    },
+    {
+      "path": "Weathers/Weather111.csv",
+      "bytes": 676,
+      "sha256": "cd17e7e92e16eec9ad90cf66333efd873fc7f3dfc50fc3d046f73f76b12106a4"
+    },
+    {
+      "path": "Weathers/Weather112.csv",
+      "bytes": 658,
+      "sha256": "a0bccebf4920b756b376e51eb1f9c3f2595a02e296e1847ae4cf8d86fca586c0"
+    },
+    {
+      "path": "Weathers/Weather113.csv",
+      "bytes": 674,
+      "sha256": "79172ab2b5e65b4e3bc516fe45134d19004e28e51cf722e8a3feaeaefcecaaaa"
+    },
+    {
+      "path": "Weathers/Weather114.csv",
+      "bytes": 673,
+      "sha256": "8c035880b5b36a091a0f9b2035f8d16a37c3795ddb45d7924b1cca3053028cbf"
+    },
+    {
+      "path": "Weathers/Weather115.csv",
+      "bytes": 647,
+      "sha256": "146ae92a77853197660afc7686da474cfd2b718d85f64ecfe311f12b4662a444"
+    },
+    {
+      "path": "Weathers/Weather116.csv",
+      "bytes": 662,
+      "sha256": "65eb0c812c10ab005a6dd4446499f50ef49ba70521ae079418ec04d1ae74592a"
+    },
+    {
+      "path": "Weathers/Weather117.csv",
+      "bytes": 670,
+      "sha256": "16faabead1d44b00d0ba0c1589d379494bb62f9a3320f45006492d83cf55a9f6"
+    },
+    {
+      "path": "Weathers/Weather118.csv",
+      "bytes": 656,
+      "sha256": "344ee3f8749026d798fec98b203b5e2cbf713bd30bbfeb10cc2961d3e0a961b1"
+    },
+    {
+      "path": "Weathers/Weather119.csv",
+      "bytes": 655,
+      "sha256": "7d6d4e9a4cf2c556ffd86c6aa45d571f7dff818cb4bfa504c2bacfc40b5d0a23"
+    },
+    {
+      "path": "Weathers/Weather12.csv",
+      "bytes": 690,
+      "sha256": "296984b74e049ccc4327fe63a024f8daa48014dbef7da99e4603afa590e1777d"
+    },
+    {
+      "path": "Weathers/Weather120.csv",
+      "bytes": 654,
+      "sha256": "67330ec29dcef1cac0c3b5632152dd9fc2ae9ed59134a953aa7502e92fda3f73"
+    },
+    {
+      "path": "Weathers/Weather121.csv",
+      "bytes": 672,
+      "sha256": "cd61c1011b9cc9b710ff5906bc9f8258e1d642aacbd3b0099b4a9625883c7a94"
+    },
+    {
+      "path": "Weathers/Weather122.csv",
+      "bytes": 677,
+      "sha256": "94d11ac7bea25d35fee225fe78f11433b0008a3136dd1915cba426722b438771"
+    },
+    {
+      "path": "Weathers/Weather123.csv",
+      "bytes": 666,
+      "sha256": "287fae511d3a83afa3f30284042e1063e2a9c75857ab4fdb9b0eef81a3dd703f"
+    },
+    {
+      "path": "Weathers/Weather124.csv",
+      "bytes": 657,
+      "sha256": "7a91b34e759d7cc384c1bb195c7c646874c1ec91d3c71a8b82cf566a4e32acdb"
+    },
+    {
+      "path": "Weathers/Weather125.csv",
+      "bytes": 671,
+      "sha256": "0900452da1323668d77c8813e334a430bce851c300b8186420bb07644e396b5f"
+    },
+    {
+      "path": "Weathers/Weather126.csv",
+      "bytes": 675,
+      "sha256": "b8855d5e69ee57067d1734c4185357d11809df931ee2b11a54ae2c492b6ed654"
+    },
+    {
+      "path": "Weathers/Weather127.csv",
+      "bytes": 676,
+      "sha256": "89ba956b2726a7d3c25d24786df05c0c86cf1d18adb45209db60cf888ca77be7"
+    },
+    {
+      "path": "Weathers/Weather128.csv",
+      "bytes": 680,
+      "sha256": "a6e68e790f62c05689f1b8679c67daa2c59f13e841cb135b5fe3ffa66e028413"
+    },
+    {
+      "path": "Weathers/Weather129.csv",
+      "bytes": 686,
+      "sha256": "df977a96da3e161b2f2addbc31f3dc0ca315b578622e70abae8a34adc874deb7"
+    },
+    {
+      "path": "Weathers/Weather13.csv",
+      "bytes": 666,
+      "sha256": "70a863c850720b709cb7ab8dc308dabab3b2702fc20864736eb5763597b03fd9"
+    },
+    {
+      "path": "Weathers/Weather14.csv",
+      "bytes": 680,
+      "sha256": "f2a2f27ebc0d8a13aecb798a6cfa26e4edfb8d6c7ddcdc9ca6984987a8b34246"
+    },
+    {
+      "path": "Weathers/Weather15.csv",
+      "bytes": 675,
+      "sha256": "fed82c7105b5b003b11551297a831411fecd5687a8dd4eeb28408b507b0f5d11"
+    },
+    {
+      "path": "Weathers/Weather16.csv",
+      "bytes": 672,
+      "sha256": "186392c36f2cb12b8673d1414940e3ab12a4a6d0fc544473815efcc007c47980"
+    },
+    {
+      "path": "Weathers/Weather17.csv",
+      "bytes": 675,
+      "sha256": "318f5c8793a20dae0866627954ab7afe3d4aeddeae4851505d692aa1a2386b3c"
+    },
+    {
+      "path": "Weathers/Weather18.csv",
+      "bytes": 677,
+      "sha256": "f9a4310087ecd8d16ebecf2a94952f881b80c3ad020777e09319ad584794ba20"
+    },
+    {
+      "path": "Weathers/Weather19.csv",
+      "bytes": 675,
+      "sha256": "3cc252b03553ce901509a89048cc4f18c685e1b7d8093b190415cf7c29846625"
+    },
+    {
+      "path": "Weathers/Weather2.csv",
+      "bytes": 677,
+      "sha256": "15a5f52fd38be4922b1c2c56339526e85f2580babbe61a66566f82708fd8bbd2"
+    },
+    {
+      "path": "Weathers/Weather20.csv",
+      "bytes": 689,
+      "sha256": "65fa71bae6e2d17020b1853fe08630b5da3a0e0c229780e616bc9d1d942cf708"
+    },
+    {
+      "path": "Weathers/Weather21.csv",
+      "bytes": 686,
+      "sha256": "8cd08235e399e7dbee62f71509f07a3ac14ffb3ff373a6a3d41568813eab3f82"
+    },
+    {
+      "path": "Weathers/Weather22.csv",
+      "bytes": 663,
+      "sha256": "f9b9568714acb12ee0af3f1d62466113f35c6a3d0406914a91fffb79cdd37102"
+    },
+    {
+      "path": "Weathers/Weather23.csv",
+      "bytes": 677,
+      "sha256": "31de5ae6bbb1ff2fe66e1ab688b43cf10a48237f8d9032c685f67492a0d38313"
+    },
+    {
+      "path": "Weathers/Weather24.csv",
+      "bytes": 672,
+      "sha256": "0e58bcd4628bfb94a8a124c13fa25a9a01ef069b2664a4a664213e30d3ba7878"
+    },
+    {
+      "path": "Weathers/Weather25.csv",
+      "bytes": 660,
+      "sha256": "5f5658cf28e82b4f8c68b320d2b3e2f3492e7bc3853f347d0b726380e130d7ba"
+    },
+    {
+      "path": "Weathers/Weather26.csv",
+      "bytes": 683,
+      "sha256": "de6a9e218ad1e8a2c803b9c31da4a7454848c9d92c9f54cdf06cf2f0a580929e"
+    },
+    {
+      "path": "Weathers/Weather27.csv",
+      "bytes": 683,
+      "sha256": "e31cfdcaeb1c0dbe84d35e532c6d7528ccac84718fe4ab9f248fb5eff08fce28"
+    },
+    {
+      "path": "Weathers/Weather28.csv",
+      "bytes": 665,
+      "sha256": "55e2dffb11301acb01c91310f4793d7b499061cad88efa3df33b6e2b7d948357"
+    },
+    {
+      "path": "Weathers/Weather29.csv",
+      "bytes": 667,
+      "sha256": "af633331027eb7d65cb501260ded392d857bef24e963ae262c8f0edac6cb2d62"
+    },
+    {
+      "path": "Weathers/Weather3.csv",
+      "bytes": 684,
+      "sha256": "c8bfec4bed4ef12c12e01470772a8dc26678fb699dfb614feced3ecb8a9f9bc2"
+    },
+    {
+      "path": "Weathers/Weather30.csv",
+      "bytes": 683,
+      "sha256": "bbdd7cf997d1ad88537afb5a32182141b2c487a3f1900a66d48040527800ef35"
+    },
+    {
+      "path": "Weathers/Weather31.csv",
+      "bytes": 648,
+      "sha256": "8115db5d65d35a14104fcff53e7898ea6c041b31e0abe3d55f110a0e017d53b3"
+    },
+    {
+      "path": "Weathers/Weather32.csv",
+      "bytes": 675,
+      "sha256": "71dc3b88355fc6816477b34a417fe50957cdf3d7b6c4d26147d71a07235299d4"
+    },
+    {
+      "path": "Weathers/Weather33.csv",
+      "bytes": 689,
+      "sha256": "a83aacb85200460c93249664da7bef7aee1c98ead4f38ad75e4feb076d9c98ba"
+    },
+    {
+      "path": "Weathers/Weather34.csv",
+      "bytes": 660,
+      "sha256": "66ec16040cacc8d1e58ad638b5af99b89a91fb018da2fa7bf3fb673c80859dba"
+    },
+    {
+      "path": "Weathers/Weather35.csv",
+      "bytes": 676,
+      "sha256": "75a290cba46cdcc1efb1819b4166446691374e60c7d2824ffdd9e957b51a87ab"
+    },
+    {
+      "path": "Weathers/Weather36.csv",
+      "bytes": 680,
+      "sha256": "489e2f5ea84914712516bd5e41afd4123c8c970c7b1bb30b3597c9b6047d8e51"
+    },
+    {
+      "path": "Weathers/Weather37.csv",
+      "bytes": 670,
+      "sha256": "461b496801784c2f80e96d6858362f217c68025cc87230240e2a7ba0c7313716"
+    },
+    {
+      "path": "Weathers/Weather38.csv",
+      "bytes": 679,
+      "sha256": "db18afbed51875c4bc2d557003a93fc2ed16bedf5a2fd1359ccee6c0a598d22e"
+    },
+    {
+      "path": "Weathers/Weather39.csv",
+      "bytes": 677,
+      "sha256": "e4062f413572d04ce4cd13cc2e2b6e8a5e2aaed5244e5ad2e30ad4fda227df39"
+    },
+    {
+      "path": "Weathers/Weather4.csv",
+      "bytes": 680,
+      "sha256": "14be0840a873d7e4245ac455babd48b6b06c4cb572a3757bb7a263feec3cf598"
+    },
+    {
+      "path": "Weathers/Weather40.csv",
+      "bytes": 650,
+      "sha256": "5c5e5636ecac8cbf02f351c593ff494783f19b080563aeec3660ec78dc5c3a4d"
+    },
+    {
+      "path": "Weathers/Weather41.csv",
+      "bytes": 662,
+      "sha256": "fab9777e6ed240c132e6d2a42670ce17589554b1035e3b0317a3150ac29ddf6c"
+    },
+    {
+      "path": "Weathers/Weather42.csv",
+      "bytes": 670,
+      "sha256": "f4242de7a1ea30a9a4a3e867a078afb045cc780def3537d2b49f25584f8e0e0d"
+    },
+    {
+      "path": "Weathers/Weather43.csv",
+      "bytes": 612,
+      "sha256": "c715cfff09fa013182acc62168392433c62b6f540ce5783c5a297146f41d057a"
+    },
+    {
+      "path": "Weathers/Weather44.csv",
+      "bytes": 629,
+      "sha256": "435ac7141ac6fbc820fb7ea1a7f618776006a6146b1ef2e3817ccfed9353f121"
+    },
+    {
+      "path": "Weathers/Weather45.csv",
+      "bytes": 637,
+      "sha256": "e62ca3a1f700947125e0c30fea1c1b1780afadd1d02edf0d699ac154d99bb7b5"
+    },
+    {
+      "path": "Weathers/Weather46.csv",
+      "bytes": 621,
+      "sha256": "f6b177a8015849cedacb14d06151c82cf3c9f6819ef6a312f9a7cb2eb5b3881f"
+    },
+    {
+      "path": "Weathers/Weather47.csv",
+      "bytes": 638,
+      "sha256": "da2fb70ebe68c8efed1a0b468a8218f9f33ae5c729a941fd2d4c6227db569efa"
+    },
+    {
+      "path": "Weathers/Weather48.csv",
+      "bytes": 641,
+      "sha256": "d0cae9f953b8b4dacc8fb918b44cb53faa4e428cd1011018ac95f122f8cd560c"
+    },
+    {
+      "path": "Weathers/Weather49.csv",
+      "bytes": 651,
+      "sha256": "d6d4fb2b385cc7976337ac192213a1f193e4a19779557f2972d144ed3b922050"
+    },
+    {
+      "path": "Weathers/Weather5.csv",
+      "bytes": 676,
+      "sha256": "3609f788946d6a947adf41258f971dde24a7ca4c73f0c309fd3e367e731c82f7"
+    },
+    {
+      "path": "Weathers/Weather50.csv",
+      "bytes": 658,
+      "sha256": "454df56844536dc88596e891b84eb2b741699aa360b0225cb9997af4ce71a35f"
+    },
+    {
+      "path": "Weathers/Weather51.csv",
+      "bytes": 667,
+      "sha256": "35b1cae54c9cd720e9b6098d529ab6a3c212af6afb1580062026149a45f11098"
+    },
+    {
+      "path": "Weathers/Weather52.csv",
+      "bytes": 631,
+      "sha256": "ba4e80250225bb21a2e1311a94407c1ebd5c5dafdc33ee001cc19fadbce17db0"
+    },
+    {
+      "path": "Weathers/Weather53.csv",
+      "bytes": 641,
+      "sha256": "86d6342023037c79c21d140cda21bbdd099ae7cf1dd2c465b5e11702db9c1a0c"
+    },
+    {
+      "path": "Weathers/Weather54.csv",
+      "bytes": 646,
+      "sha256": "db51ad57fd969c73f7f09596ec6a4e3e2f21ff1c6cd3db34257c6b0e4dcaa20d"
+    },
+    {
+      "path": "Weathers/Weather55.csv",
+      "bytes": 640,
+      "sha256": "7da92f0878532262eab8a4ea56825d45461703cba12282d7d4de1340c6404ce0"
+    },
+    {
+      "path": "Weathers/Weather56.csv",
+      "bytes": 647,
+      "sha256": "8984dc5df24293468ec7ec966fac66663c179c5cb42fab13ae7371ba1a977a88"
+    },
+    {
+      "path": "Weathers/Weather57.csv",
+      "bytes": 649,
+      "sha256": "1e78cddcc6b84a24acde01642ef79fa72aeb9f1c34164cbeb2079a8767c38b92"
+    },
+    {
+      "path": "Weathers/Weather58.csv",
+      "bytes": 674,
+      "sha256": "83a0b626b68f086aaae15c1c95e003496add081907d3829ba140614dc9925dfa"
+    },
+    {
+      "path": "Weathers/Weather59.csv",
+      "bytes": 677,
+      "sha256": "863d4f1c64116b099e3c3ce1113dfa0a8339ed4c5e52a1c4d7977e990c76f4c8"
+    },
+    {
+      "path": "Weathers/Weather6.csv",
+      "bytes": 682,
+      "sha256": "6f0949ceebbee54b1d97b00986fe138e1c62f8234505b6aa2b118608300b5d56"
+    },
+    {
+      "path": "Weathers/Weather60.csv",
+      "bytes": 667,
+      "sha256": "686a2a8a03a95e9e457247283093520ae96d07184dccc17d24085233ab892205"
+    },
+    {
+      "path": "Weathers/Weather61.csv",
+      "bytes": 636,
+      "sha256": "1aad2c9ada441d03b6fc0c5965b6d6238054adc169b03cbff3bf7b5a1430f6fb"
+    },
+    {
+      "path": "Weathers/Weather62.csv",
+      "bytes": 655,
+      "sha256": "ff66245fb217a0557e385f0ade6b7f1dee0893c61aa5f9c4b87c85a2d3e4b34a"
+    },
+    {
+      "path": "Weathers/Weather63.csv",
+      "bytes": 662,
+      "sha256": "875555b4756132504a6b234d4582244963e979acb8bb0694f21ad53465bbe691"
+    },
+    {
+      "path": "Weathers/Weather64.csv",
+      "bytes": 640,
+      "sha256": "eb7302558e630e6998b60214141b81c1f57c2dce3d409c3cf844fc819be63373"
+    },
+    {
+      "path": "Weathers/Weather65.csv",
+      "bytes": 668,
+      "sha256": "370afbcf09bed8173448926492868de650b252d38b9d74641f61b7b5e38a629a"
+    },
+    {
+      "path": "Weathers/Weather66.csv",
+      "bytes": 667,
+      "sha256": "9d5a611cd5baa4359fa517127e5acd34ce3fb5cdeffb911aff0b61a6bed10436"
+    },
+    {
+      "path": "Weathers/Weather67.csv",
+      "bytes": 647,
+      "sha256": "58c0352196784e596767a191a23ded300ef0c6fa6f2766c5239c815c73c8a34a"
+    },
+    {
+      "path": "Weathers/Weather68.csv",
+      "bytes": 648,
+      "sha256": "ac3bbbb147668c5d0aa8a465a07be674ffe5d9689fe7ff08d9ae47001920a988"
+    },
+    {
+      "path": "Weathers/Weather69.csv",
+      "bytes": 651,
+      "sha256": "84a0723dd3f68c71152a009b768d1a4a1e0af7409739e85437c49027cd913779"
+    },
+    {
+      "path": "Weathers/Weather7.csv",
+      "bytes": 641,
+      "sha256": "c553d65dd1824bb840fb67c96d93208d25c18c39b4256b89e449882cb8da5cfb"
+    },
+    {
+      "path": "Weathers/Weather70.csv",
+      "bytes": 644,
+      "sha256": "ef0cde33e3a499b8641b66bcc8054e7e69564d733bbba6ab885a022a1dd676ac"
+    },
+    {
+      "path": "Weathers/Weather71.csv",
+      "bytes": 662,
+      "sha256": "1616df4a39c4954dd1a1ecff9efb7192db66c694525573bea4321f3ae2a59c3a"
+    },
+    {
+      "path": "Weathers/Weather72.csv",
+      "bytes": 665,
+      "sha256": "ee9ccc6d8fa571f5da7963b861b25d91fc11bba31437e28bc538ec0fce9ff252"
+    },
+    {
+      "path": "Weathers/Weather73.csv",
+      "bytes": 661,
+      "sha256": "379b20ddd50be39f3a1337ef4773a1540e20e58ea001fb5e09e4bcd04031b509"
+    },
+    {
+      "path": "Weathers/Weather74.csv",
+      "bytes": 670,
+      "sha256": "304812da98f4ad38cd690a290ee46c4e89ef469d5335cf2b70ca546700209ff4"
+    },
+    {
+      "path": "Weathers/Weather75.csv",
+      "bytes": 667,
+      "sha256": "312ce079e6b807cb3743e3b185d7bf9103f685e4d992593f19ce740d897bbd02"
+    },
+    {
+      "path": "Weathers/Weather76.csv",
+      "bytes": 674,
+      "sha256": "9b4449b7e667995ddaaa76ca2258ac643b005dd86b4012791c425072c9f51e6c"
+    },
+    {
+      "path": "Weathers/Weather77.csv",
+      "bytes": 684,
+      "sha256": "236c83b7e3b74e3ae1896650877675efa0687dc28ec3b3808e003dfb89568cfb"
+    },
+    {
+      "path": "Weathers/Weather78.csv",
+      "bytes": 679,
+      "sha256": "131b5e9a2d8d839cae1600d9dd437975629244eeada536d1287516ad0a5ffeaf"
+    },
+    {
+      "path": "Weathers/Weather79.csv",
+      "bytes": 663,
+      "sha256": "c48b11fca5183a5a3c86b10665954dab0d830dc9f11924f2643210946eba5af2"
+    },
+    {
+      "path": "Weathers/Weather8.csv",
+      "bytes": 664,
+      "sha256": "f82d9e48342a149b6379b0b7b98dd4147e4065ecedec5f68f161df1f53a9a056"
+    },
+    {
+      "path": "Weathers/Weather80.csv",
+      "bytes": 678,
+      "sha256": "265a0db0679453d9a1d90a339372b4c7d2a3a60e57f246185125841bd5f10d4d"
+    },
+    {
+      "path": "Weathers/Weather81.csv",
+      "bytes": 676,
+      "sha256": "2adf897b3dea30106d77ef61ab60fb4b29b976cb6434c5404fff2cfbfe5a3b9e"
+    },
+    {
+      "path": "Weathers/Weather82.csv",
+      "bytes": 662,
+      "sha256": "74d798250a4666808576c3ae4e48d8ba30c91580d89ec8570e7f464ed74e51d9"
+    },
+    {
+      "path": "Weathers/Weather83.csv",
+      "bytes": 672,
+      "sha256": "1f6887a9c976943ea0b403b0fc62c024eafdf7801e4abfb57e55686b83399681"
+    },
+    {
+      "path": "Weathers/Weather84.csv",
+      "bytes": 672,
+      "sha256": "0a521b45e5c400f98d5371fbfb6b4d0e1848d2e7845bb2bcd869dbb1c4f20a11"
+    },
+    {
+      "path": "Weathers/Weather85.csv",
+      "bytes": 671,
+      "sha256": "ef99bc6e95f6910e1b13ceb494a4368f4780c318645a99617b8d931c0d750e88"
+    },
+    {
+      "path": "Weathers/Weather86.csv",
+      "bytes": 676,
+      "sha256": "977aba6b3d7a9ae43aed4944a8952c0a0bc45a1bd36ebab6d6fd7b7376d0f312"
+    },
+    {
+      "path": "Weathers/Weather87.csv",
+      "bytes": 680,
+      "sha256": "81fab5e0ef8df0e28ec025e4c19cc2813cc079611f1a2299a0ab5c87b8b8e7ac"
+    },
+    {
+      "path": "Weathers/Weather88.csv",
+      "bytes": 658,
+      "sha256": "6cdc091abc935ec11b15252c65c4c2e398b5246ffa8eeedb8abb6d83d171689e"
+    },
+    {
+      "path": "Weathers/Weather89.csv",
+      "bytes": 662,
+      "sha256": "299871588536957a0788a2b3621033f5326d42d524f3e95533523cae2ca05c49"
+    },
+    {
+      "path": "Weathers/Weather9.csv",
+      "bytes": 673,
+      "sha256": "dd907883633d409f4defa2d0f488fa1cab20ad30799fe167fa752aee3302d5cc"
+    },
+    {
+      "path": "Weathers/Weather90.csv",
+      "bytes": 657,
+      "sha256": "644df216958f3e9f4720b98d79503ff0d9a9dc7029a0527b1519304c4ed3e908"
+    },
+    {
+      "path": "Weathers/Weather91.csv",
+      "bytes": 666,
+      "sha256": "437ba90bcc1aa65557850e597adb7586487b87d8bd4dda3d75319141a8f13801"
+    },
+    {
+      "path": "Weathers/Weather92.csv",
+      "bytes": 674,
+      "sha256": "646de74403fef8f609980b8fd1319307fcb213933e00e9c53a0495e54a461628"
+    },
+    {
+      "path": "Weathers/Weather93.csv",
+      "bytes": 671,
+      "sha256": "704f38ec5a8e0d34b0cc87fd0417805209ad205fc2fe4e9a1234ebb177b1ef88"
+    },
+    {
+      "path": "Weathers/Weather94.csv",
+      "bytes": 680,
+      "sha256": "702d6c402fe118f0c8737f173751013aeefba1baa6c7b68fa9597b8a36e67240"
+    },
+    {
+      "path": "Weathers/Weather95.csv",
+      "bytes": 695,
+      "sha256": "3bae58465969ee80ab1f64cfb172eb520f8bc4ac175e5afe20fb3ea51d9716b9"
+    },
+    {
+      "path": "Weathers/Weather96.csv",
+      "bytes": 691,
+      "sha256": "a1fa30e69857bde8dd7be8a7c0dcd916c7e873519575ed7f4dfa7aafa1f8c2af"
+    },
+    {
+      "path": "Weathers/Weather97.csv",
+      "bytes": 657,
+      "sha256": "640dd79c38730d2dfaa4169e32e393ff26db9578a586098c1971fc761e7f0804"
+    },
+    {
+      "path": "Weathers/Weather98.csv",
+      "bytes": 666,
+      "sha256": "5e40e8d7fd40da9d7649e808f9802851acbfa57720cc38f41400eabfa67866b7"
+    },
+    {
+      "path": "Weathers/Weather99.csv",
+      "bytes": 678,
+      "sha256": "89c62101742ce762e28fac4e634f3c8a6fe0caf3387fed19d7ee134cc88d96c9"
+    },
+    {
+      "path": "elevation.asc",
+      "bytes": 2193,
+      "sha256": "114f7010c228c4601e30d7ecbdbf5d258c61af48023eedc721f800a875fb6b07"
+    },
+    {
+      "path": "fbp_lookup_table.csv",
+      "bytes": 11067,
+      "sha256": "9ff5b23cbff4b5dff8595c9d37885da359634a80671ae56ce8e0d30396be7ea2"
+    },
+    {
+      "path": "saz.asc",
+      "bytes": 1645,
+      "sha256": "0fc9026b1e1b0b6c6b0c468412982ef7edcfe000ed2dcb30c95c907e9020aaba"
+    },
+    {
+      "path": "slope.asc",
+      "bytes": 1283,
+      "sha256": "0f1dc066654e8fb5d086437c67f69760d44d8ad3892632d79bc525a96a64a30a"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+label,success,policy,simulator_seed,budget,sync_reset,decisions,interventions_requested,nonfuel_requests,observed_ever_affected_cells,upstream_cumulative_cells,weights_unchanged,subprocess_returncode,runtime_seconds
+none-123-a,True,none,123,0,False,58,0,0,217,217,,0,2.2016172930016182
+none-123-b,True,none,123,0,False,58,0,0,217,217,,0,0.3897245840053074
+none-124,True,none,124,0,False,58,0,0,240,240,,0,0.40556620797724463
+none-125,True,none,125,0,False,58,0,0,193,193,,0,0.41637733299285173
+min-123,True,min_l2,123,8,False,58,8,0,193,193,,0,0.3988442920090165
+max-123,True,max_l2,123,8,False,58,8,0,217,217,,0,0.45932575000915676
+fixed-123-a,True,ppo-fixed,123,8,False,58,8,0,207,206,True,0,0.6159912509901915
+fixed-123-b,True,ppo-fixed,123,8,False,58,8,0,207,206,True,0,0.5238293760048691
+fixed-124,True,ppo-fixed,124,8,False,58,8,0,215,214,True,0,0.42611616701469757
+random-123,True,ppo-random,123,8,False,58,8,0,211,211,True,0,0.4275601249828469
+fixed-123-sync,True,ppo-fixed,123,8,True,58,8,0,207,207,True,0,0.4670088749844581
+none-123-sync,True,none,123,0,True,58,0,0,217,217,,0,0.4328780409996398

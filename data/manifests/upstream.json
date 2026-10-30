@@ -1,0 +1,42 @@
+{
+  "accessed_on": "2026-10-30",
+  "firehose": {
+    "url": "https://github.com/aidan-curtis/firehose.git",
+    "commit": "e49a52a9a987a1585d25ddca2f711222ca500ffb",
+    "license_declared": "GPL-3.0",
+    "checkpoints": [
+      {
+        "file": "20x20-fixed-ppo-maskable.zip",
+        "size_bytes": 2236955,
+        "sha256": "ec9475239abb141ab627e6e3d07f14e49da2b7a71020699fed55504db0bf9a5c",
+        "sb3_version": "1.5.0",
+        "num_timesteps": 5013504,
+        "n_steps": 2048,
+        "features_extractor_class": "<class 'firehose.models.PaddedNatureCNN'>",
+        "deserialized": false
+      },
+      {
+        "file": "20x20-random-20m-ppo-maskable.zip",
+        "size_bytes": 2186486,
+        "sha256": "08cb56f17fdb99f2f17ac542008963324a75a724fe2d5cf032537e7381304dec",
+        "sb3_version": "1.5.0",
+        "num_timesteps": 20021248,
+        "n_steps": 2048,
+        "features_extractor_class": "<class 'firehose.models.PaddedNatureCNN'>",
+        "deserialized": false
+      }
+    ]
+  },
+  "private_inputs": [
+    {
+      "name": "grading-rubric.png",
+      "sha256": "50125fef7fe0058f744e4a8cb8006b4878e97dbc8fec71050b967634e74d3703",
+      "location": "private/ (ignored; do not publish originals)"
+    },
+    {
+      "name": "professor-correspondence.txt",
+      "sha256": "20786d02b92c58f5ca97782c96748ce81feef65c9b0b7b2ec809a246ec39d49f",
+      "location": "private/ (ignored; do not publish originals)"
+    }
+  ]
+}

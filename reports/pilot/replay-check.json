@@ -1,0 +1,11 @@
+{
+  "episodes": 300,
+  "matching_replays": true,
+  "ignored_nondeterministic_fields": [
+    "runtime_seconds",
+    "manifest.created_utc"
+  ],
+  "truncated_episodes": 0,
+  "replay_config_sha256": "b3e9d0ab864b4e28fd1ddfd86cbbd3e8b749e8780dc7af3dc4bce041675cf1c8",
+  "canonical_episode_sha256": "0906b38fc4c33808a04e452a9363c94bb856836c39c630f8d9db387d523b353a"
+}

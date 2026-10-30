@@ -1,0 +1,89 @@
+{
+  "label": "SYNTHETIC RL SMOKE ONLY; trained from scratch, no adaptation claim",
+  "source_sha256": "d84977b06867fb923d65ab564e697bd67d7fcf4f4b9291eed9f35041edf7006f",
+  "git_commit": "9e24b48455c81b7a24cc0a7bc5fe32efac0290e2",
+  "git_dirty": true,
+  "python": "3.13.11",
+  "platform": "macOS-26.3.1-arm64-arm-64bit-Mach-O",
+  "scenario": {
+    "rows": 6,
+    "cols": 6,
+    "ignition": [
+      21
+    ],
+    "nonfuel": [],
+    "priority": [
+      4,
+      5,
+      10,
+      11
+    ],
+    "spread_probability": 0.35,
+    "burn_duration": 3,
+    "warmup_steps": 3,
+    "horizon": 24
+  },
+  "training_seed": 7,
+  "training_scenario_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+  ],
+  "training_budgets": [
+    0,
+    2,
+    4
+  ],
+  "reset_seed_for_smoke": 200,
+  "smoke_rollout": {
+    "burned_cells": 35,
+    "burned_fraction": 0.9722222222222222,
+    "priority_burned_cells": 4,
+    "priority_burned_fraction": 1.0,
+    "interventions": 0,
+    "steps": 12,
+    "terminated": true,
+    "truncated": false,
+    "invalid_action": false
+  },
+  "smoke_is_held_out": false,
+  "requested_steps": 1024,
+  "actual_steps": 1024,
+  "checkpoint_sha256": "e9e856ad961cca48c02379ca9381fd64578baf3c7dfd9982509bf6c16ce8c23c",
+  "packages": {
+    "torch": "2.14.1",
+    "numpy": "2.5.4",
+    "gymnasium": "1.4.0",
+    "stable-baselines3": "2.9.2",
+    "sb3-contrib": "2.9.2"
+  }
+}

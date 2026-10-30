@@ -1,0 +1,2289 @@
+{
+  "annual": [
+    {
+      "candidate_event_days": 2757,
+      "events_with_candidate_window": 14,
+      "fires_in_group_table": 234,
+      "group_rows": 6513,
+      "group_rows_missing_bui": 93,
+      "raster_matches": 234,
+      "raster_members": 234,
+      "year": 2014
+    },
+    {
+      "candidate_event_days": 2366,
+      "events_with_candidate_window": 10,
+      "fires_in_group_table": 351,
+      "group_rows": 6509,
+      "group_rows_missing_bui": 113,
+      "raster_matches": 351,
+      "raster_members": 351,
+      "year": 2015
+    },
+    {
+      "candidate_event_days": 638,
+      "events_with_candidate_window": 0,
+      "fires_in_group_table": 116,
+      "group_rows": 1947,
+      "group_rows_missing_bui": 2,
+      "raster_matches": 116,
+      "raster_members": 116,
+      "year": 2016
+    },
+    {
+      "candidate_event_days": 3061,
+      "events_with_candidate_window": 20,
+      "fires_in_group_table": 322,
+      "group_rows": 8065,
+      "group_rows_missing_bui": 81,
+      "raster_matches": 322,
+      "raster_members": 322,
+      "year": 2017
+    },
+    {
+      "candidate_event_days": 2314,
+      "events_with_candidate_window": 14,
+      "fires_in_group_table": 278,
+      "group_rows": 5313,
+      "group_rows_missing_bui": 86,
+      "raster_matches": 278,
+      "raster_members": 278,
+      "year": 2018
+    },
+    {
+      "candidate_event_days": 875,
+      "events_with_candidate_window": 3,
+      "fires_in_group_table": 125,
+      "group_rows": 2502,
+      "group_rows_missing_bui": 18,
+      "raster_matches": 125,
+      "raster_members": 125,
+      "year": 2019
+    },
+    {
+      "candidate_event_days": 146,
+      "events_with_candidate_window": 1,
+      "fires_in_group_table": 38,
+      "group_rows": 372,
+      "group_rows_missing_bui": 2,
+      "raster_matches": 38,
+      "raster_members": 38,
+      "year": 2020
+    },
+    {
+      "candidate_event_days": 3581,
+      "events_with_candidate_window": 24,
+      "fires_in_group_table": 406,
+      "group_rows": 10051,
+      "group_rows_missing_bui": 363,
+      "raster_matches": 406,
+      "raster_members": 406,
+      "year": 2021
+    },
+    {
+      "candidate_event_days": 1988,
+      "events_with_candidate_window": 13,
+      "fires_in_group_table": 278,
+      "group_rows": 6501,
+      "group_rows_missing_bui": 14,
+      "raster_matches": 278,
+      "raster_members": 278,
+      "year": 2022
+    },
+    {
+      "candidate_event_days": 8222,
+      "events_with_candidate_window": 30,
+      "fires_in_group_table": 621,
+      "group_rows": 21717,
+      "group_rows_missing_bui": 83,
+      "raster_matches": 621,
+      "raster_members": 621,
+      "year": 2023
+    },
+    {
+      "candidate_event_days": 5109,
+      "events_with_candidate_window": 31,
+      "fires_in_group_table": 372,
+      "group_rows": 12525,
+      "group_rows_missing_bui": 114,
+      "raster_matches": 372,
+      "raster_members": 372,
+      "year": 2024
+    }
+  ],
+  "candidate_count_by_split": {
+    "test": 15,
+    "train": 20,
+    "validation": 9
+  },
+  "dataset": "Canadian Fire Spread Dataset (CFSDS)",
+  "native_resolution_m": 90,
+  "native_window_cells": 23,
+  "not_a_result": "This is crop feasibility only. It is not an aligned simulator case, a physically validated replay, or evidence of policy benefit.",
+  "purpose": "identify complete compact historical day-pair windows for a 20x20, 100m Cell2Fire policy grid",
+  "release": "v1.1",
+  "screened_on": "2026-10-30T18:38:19.997418+00:00",
+  "screening_candidates": [
+    {
+      "active_front_cells": 31,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 12.15,
+      "col_off": 85,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -996630.0,
+        0.0,
+        -90.0,
+        8009820.0
+      ],
+      "event_id": "2014_285",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 25,
+      "scar_cells": 387,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2014_285_krig.tif",
+      "split": "train",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 104.079322814941,
+      "target_doy": 229,
+      "target_ffmc": 87.7293395996094,
+      "target_fireday": 51,
+      "target_fwi": 23.0194816589356,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 15,
+      "target_pixels_in_whole_fire_day": 15,
+      "target_pixels_interior": 15,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 36.0477142333984,
+      "target_ws_kmh": 13.6805000305176,
+      "year": 2014
+    },
+    {
+      "active_front_cells": 30,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 11.34,
+      "col_off": 28,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1681260.0,
+        0.0,
+        -90.0,
+        7738740.0
+      ],
+      "event_id": "2014_432",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 19,
+      "scar_cells": 347,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2014_432_krig.tif",
+      "split": "train",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 96.6200839451381,
+      "target_doy": 227,
+      "target_ffmc": 90.1768624441964,
+      "target_fireday": 13,
+      "target_fwi": 20.4483423233032,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 14,
+      "target_pixels_in_whole_fire_day": 14,
+      "target_pixels_interior": 14,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 36.9425999777658,
+      "target_ws_kmh": 4.44763503755842,
+      "year": 2014
+    },
+    {
+      "active_front_cells": 24,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 6.48,
+      "col_off": 17,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -556710.0,
+        0.0,
+        -90.0,
+        7556490.0
+      ],
+      "event_id": "2014_538",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 120,
+      "scar_cells": 145,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2014_538_krig.tif",
+      "split": "train",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 59.9813690185547,
+      "target_doy": 215,
+      "target_ffmc": 82.7450408935547,
+      "target_fireday": 2,
+      "target_fwi": 8.19002151489258,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 8,
+      "target_pixels_in_whole_fire_day": 8,
+      "target_pixels_interior": 8,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 63.9831428527832,
+      "target_ws_kmh": 8.93281173706055,
+      "year": 2014
+    },
+    {
+      "active_front_cells": 19,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 2.025,
+      "col_off": 16,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1142160.0,
+        0.0,
+        -90.0,
+        8105220.0
+      ],
+      "event_id": "2014_221",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 16,
+      "scar_cells": 344,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2014_221_krig.tif",
+      "split": "train",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 88.6379013061523,
+      "target_doy": 203,
+      "target_ffmc": 90.1739120483398,
+      "target_fireday": 8,
+      "target_fwi": 21.4019584655762,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 5,
+      "target_pixels_in_whole_fire_day": 5,
+      "target_pixels_interior": 5,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 40.8749542236328,
+      "target_ws_kmh": 6.95832586288452,
+      "year": 2014
+    },
+    {
+      "active_front_cells": 15,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 12.96,
+      "col_off": 3,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1885020.0,
+        0.0,
+        -90.0,
+        7438410.0
+      ],
+      "event_id": "2014_2221",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 10,
+      "scar_cells": 306,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2014_2221_krig.tif",
+      "split": "train",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 87.1434440612793,
+      "target_doy": 236,
+      "target_ffmc": 89.1440925598145,
+      "target_fireday": 8,
+      "target_fwi": 17.280378818512,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 16,
+      "target_pixels_in_whole_fire_day": 16,
+      "target_pixels_interior": 16,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 32.3513836860657,
+      "target_ws_kmh": 4.32876837253571,
+      "year": 2014
+    },
+    {
+      "active_front_cells": 55,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 23.49,
+      "col_off": 628,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -715560.0,
+        0.0,
+        -90.0,
+        7441020.0
+      ],
+      "event_id": "2015_2924",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 274,
+      "scar_cells": 386,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2015_2924_krig.tif",
+      "split": "train",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 69.7610626220703,
+      "target_doy": 192,
+      "target_ffmc": 84.1988906860352,
+      "target_fireday": 19,
+      "target_fwi": 10.6188879013062,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 29,
+      "target_pixels_in_whole_fire_day": 29,
+      "target_pixels_interior": 29,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 53.906436920166,
+      "target_ws_kmh": 9.04010772705078,
+      "year": 2015
+    },
+    {
+      "active_front_cells": 40,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 12.96,
+      "col_off": 0,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -698190.0,
+        0.0,
+        -90.0,
+        7182180.0
+      ],
+      "event_id": "2015_896",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 20,
+      "scar_cells": 111,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2015_896_krig.tif",
+      "split": "train",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 54.3045883178711,
+      "target_doy": 180,
+      "target_ffmc": 91.78125,
+      "target_fireday": 2,
+      "target_fwi": 21.7116317749023,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 16,
+      "target_pixels_in_whole_fire_day": 16,
+      "target_pixels_interior": 16,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 31.0118751525879,
+      "target_ws_kmh": 9.92533302307129,
+      "year": 2015
+    },
+    {
+      "active_front_cells": 20,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 2.43,
+      "col_off": 39,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -709530.0,
+        0.0,
+        -90.0,
+        7346160.0
+      ],
+      "event_id": "2015_2929",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 36,
+      "scar_cells": 195,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2015_2929_krig.tif",
+      "split": "train",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 79.658561706543,
+      "target_doy": 184,
+      "target_ffmc": 89.4700927734375,
+      "target_fireday": 8,
+      "target_fwi": 25.516902923584,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 6,
+      "target_pixels_in_whole_fire_day": 6,
+      "target_pixels_interior": 6,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 38.1474151611328,
+      "target_ws_kmh": 15.4750051498413,
+      "year": 2015
+    },
+    {
+      "active_front_cells": 17,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 2.025,
+      "col_off": 10,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1096170.0,
+        0.0,
+        -90.0,
+        7707690.0
+      ],
+      "event_id": "2015_438",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 23,
+      "scar_cells": 415,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2015_438_krig.tif",
+      "split": "train",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 86.4038619995117,
+      "target_doy": 185,
+      "target_ffmc": 68.4343490600586,
+      "target_fireday": 3,
+      "target_fwi": 4.53685665130615,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 5,
+      "target_pixels_in_whole_fire_day": 5,
+      "target_pixels_interior": 5,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 71.8092498779297,
+      "target_ws_kmh": 10.513524055481,
+      "year": 2015
+    },
+    {
+      "active_front_cells": 16,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 2.025,
+      "col_off": 17,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1001760.0,
+        0.0,
+        -90.0,
+        7958970.0
+      ],
+      "event_id": "2015_252",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 67,
+      "scar_cells": 319,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2015_252_krig.tif",
+      "split": "train",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 49.1050720214844,
+      "target_doy": 225,
+      "target_ffmc": 70.0153045654297,
+      "target_fireday": 50,
+      "target_fwi": 2.58818054199219,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 5,
+      "target_pixels_in_whole_fire_day": 5,
+      "target_pixels_interior": 5,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 58.615161895752,
+      "target_ws_kmh": 8.23805141448975,
+      "year": 2015
+    },
+    {
+      "active_front_cells": 26,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 12.96,
+      "col_off": 0,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1664790.0,
+        0.0,
+        -90.0,
+        6956280.0
+      ],
+      "event_id": "2017_1871",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 45,
+      "scar_cells": 186,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2017_1871_krig.tif",
+      "split": "train",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 106.698196411133,
+      "target_doy": 257,
+      "target_ffmc": 86.6707153320313,
+      "target_fireday": 39,
+      "target_fwi": 16.0034599304199,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 16,
+      "target_pixels_in_whole_fire_day": 16,
+      "target_pixels_interior": 16,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 35.1905517578125,
+      "target_ws_kmh": 6.4620418548584,
+      "year": 2017
+    },
+    {
+      "active_front_cells": 26,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 3.24,
+      "col_off": 116,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1491450.0,
+        0.0,
+        -90.0,
+        8905770.0
+      ],
+      "event_id": "2017_51",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 70,
+      "scar_cells": 398,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2017_51_krig.tif",
+      "split": "train",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 51.3604469299316,
+      "target_doy": 232,
+      "target_ffmc": 87.2474822998047,
+      "target_fireday": 63,
+      "target_fwi": 10.3663444519043,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 8,
+      "target_pixels_in_whole_fire_day": 8,
+      "target_pixels_interior": 8,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 55.8097534179688,
+      "target_ws_kmh": 4.43786716461182,
+      "year": 2017
+    },
+    {
+      "active_front_cells": 24,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 10.53,
+      "col_off": 10,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -38760.0,
+        0.0,
+        -90.0,
+        7153740.0
+      ],
+      "event_id": "2017_1296",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 12,
+      "scar_cells": 92,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2017_1296_krig.tif",
+      "split": "train",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 36.0650749206543,
+      "target_doy": 233,
+      "target_ffmc": 85.3633804321289,
+      "target_fireday": 16,
+      "target_fwi": 9.51667785644531,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 13,
+      "target_pixels_in_whole_fire_day": 13,
+      "target_pixels_interior": 13,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 44.2477226257324,
+      "target_ws_kmh": 12.6061820983887,
+      "year": 2017
+    },
+    {
+      "active_front_cells": 23,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 10.53,
+      "col_off": 75,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -134070.0,
+        0.0,
+        -90.0,
+        7095510.0
+      ],
+      "event_id": "2017_1431",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 25,
+      "scar_cells": 323,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2017_1431_krig.tif",
+      "split": "train",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 52.944766998291,
+      "target_doy": 223,
+      "target_ffmc": 90.5327529907227,
+      "target_fireday": 22,
+      "target_fwi": 16.4205074310303,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 13,
+      "target_pixels_in_whole_fire_day": 13,
+      "target_pixels_interior": 13,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 36.9258728027344,
+      "target_ws_kmh": 6.24372577667236,
+      "year": 2017
+    },
+    {
+      "active_front_cells": 22,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 10.53,
+      "col_off": 28,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1539060.0,
+        0.0,
+        -90.0,
+        7237350.0
+      ],
+      "event_id": "2017_1146",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 41,
+      "scar_cells": 372,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2017_1146_krig.tif",
+      "split": "train",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 62.3911666870117,
+      "target_doy": 220,
+      "target_ffmc": 91.5116882324219,
+      "target_fireday": 26,
+      "target_fwi": 16.7755832672119,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 13,
+      "target_pixels_in_whole_fire_day": 13,
+      "target_pixels_interior": 13,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 30.1409568786621,
+      "target_ws_kmh": 1.68978071212769,
+      "year": 2017
+    },
+    {
+      "active_front_cells": 36,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 15.39,
+      "col_off": 18,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1475340.0,
+        0.0,
+        -90.0,
+        6924690.0
+      ],
+      "event_id": "2018_747",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 0,
+      "scar_cells": 236,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2018_747_krig.tif",
+      "split": "train",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 112.898994445801,
+      "target_doy": 228,
+      "target_ffmc": 93.2947158813477,
+      "target_fireday": 6,
+      "target_fwi": 32.1091537475586,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 19,
+      "target_pixels_in_whole_fire_day": 19,
+      "target_pixels_interior": 19,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 24.348653793335,
+      "target_ws_kmh": 6.50208282470703,
+      "year": 2018
+    },
+    {
+      "active_front_cells": 31,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 12.15,
+      "col_off": 104,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1835520.0,
+        0.0,
+        -90.0,
+        7466040.0
+      ],
+      "event_id": "2018_241",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 80,
+      "scar_cells": 180,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2018_241_krig.tif",
+      "split": "train",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 114.630020141602,
+      "target_doy": 227,
+      "target_ffmc": 91.6729354858398,
+      "target_fireday": 11,
+      "target_fwi": 23.9613285064697,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 15,
+      "target_pixels_in_whole_fire_day": 15,
+      "target_pixels_interior": 15,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 41.4747772216797,
+      "target_ws_kmh": 2.35966873168945,
+      "year": 2018
+    },
+    {
+      "active_front_cells": 27,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 8.1,
+      "col_off": 0,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1768830.0,
+        0.0,
+        -90.0,
+        6962850.0
+      ],
+      "event_id": "2018_1860",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 19,
+      "scar_cells": 135,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2018_1860_krig.tif",
+      "split": "train",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 141.672805786133,
+      "target_doy": 244,
+      "target_ffmc": 88.1826171875,
+      "target_fireday": 19,
+      "target_fwi": 20.1830959320068,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 10,
+      "target_pixels_in_whole_fire_day": 10,
+      "target_pixels_interior": 10,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 36.0146598815918,
+      "target_ws_kmh": 5.17760515213013,
+      "year": 2018
+    },
+    {
+      "active_front_cells": 26,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 6.48,
+      "col_off": 1,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1490640.0,
+        0.0,
+        -90.0,
+        7908660.0
+      ],
+      "event_id": "2018_1932",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 3,
+      "scar_cells": 267,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2018_1932_krig.tif",
+      "split": "train",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 137.321792602539,
+      "target_doy": 234,
+      "target_ffmc": 91.2352066040039,
+      "target_fireday": 5,
+      "target_fwi": 28.4749889373779,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 8,
+      "target_pixels_in_whole_fire_day": 8,
+      "target_pixels_interior": 8,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 43.5160598754883,
+      "target_ws_kmh": 6.53158521652222,
+      "year": 2018
+    },
+    {
+      "active_front_cells": 23,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 12.15,
+      "col_off": 0,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1413960.0,
+        0.0,
+        -90.0,
+        6864210.0
+      ],
+      "event_id": "2018_1770",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 0,
+      "scar_cells": 377,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2018_1770_krig.tif",
+      "split": "train",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 71.3886032104492,
+      "target_doy": 224,
+      "target_ffmc": 79.5148315429688,
+      "target_fireday": 3,
+      "target_fwi": 8.24415683746338,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 15,
+      "target_pixels_in_whole_fire_day": 15,
+      "target_pixels_interior": 15,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 40.0520782470703,
+      "target_ws_kmh": 13.85422706604,
+      "year": 2018
+    },
+    {
+      "active_front_cells": 21,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 12.15,
+      "col_off": 1,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1424400.0,
+        0.0,
+        -90.0,
+        7884270.0
+      ],
+      "event_id": "2019_168",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 0,
+      "scar_cells": 156,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2019_168_krig.tif",
+      "split": "validation",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 68.5473175048828,
+      "target_doy": 142,
+      "target_ffmc": 92.1985321044922,
+      "target_fireday": 11,
+      "target_fwi": 21.750358581543,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 15,
+      "target_pixels_in_whole_fire_day": 15,
+      "target_pixels_interior": 15,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 35.4160957336426,
+      "target_ws_kmh": 5.45002889633179,
+      "year": 2019
+    },
+    {
+      "active_front_cells": 20,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 10.53,
+      "col_off": 18,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1011840.0,
+        0.0,
+        -90.0,
+        7910640.0
+      ],
+      "event_id": "2019_157",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 0,
+      "scar_cells": 309,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2019_157_krig.tif",
+      "split": "validation",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 75.1678314208984,
+      "target_doy": 205,
+      "target_ffmc": 91.2191390991211,
+      "target_fireday": 6,
+      "target_fwi": 24.5686073303223,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 13,
+      "target_pixels_in_whole_fire_day": 13,
+      "target_pixels_interior": 13,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 38.4242324829102,
+      "target_ws_kmh": 10.2840585708618,
+      "year": 2019
+    },
+    {
+      "active_front_cells": 16,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 7.29,
+      "col_off": 0,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -879180.0,
+        0.0,
+        -90.0,
+        7961850.0
+      ],
+      "event_id": "2019_138",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 0,
+      "scar_cells": 213,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2019_138_krig.tif",
+      "split": "validation",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 80.2086944580078,
+      "target_doy": 206,
+      "target_ffmc": 90.9294357299805,
+      "target_fireday": 29,
+      "target_fwi": 24.1955795288086,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 9,
+      "target_pixels_in_whole_fire_day": 9,
+      "target_pixels_interior": 9,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 34.8529853820801,
+      "target_ws_kmh": 9.73242092132568,
+      "year": 2019
+    },
+    {
+      "active_front_cells": 31,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 13.77,
+      "col_off": 0,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1551840.0,
+        0.0,
+        -90.0,
+        6948000.0
+      ],
+      "event_id": "2020_332",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 29,
+      "scar_cells": 41,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2020_332_krig.tif",
+      "split": "validation",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 88.7894668579102,
+      "target_doy": 256,
+      "target_ffmc": 92.7989654541016,
+      "target_fireday": 27,
+      "target_fwi": 25.7083644866943,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 17,
+      "target_pixels_in_whole_fire_day": 17,
+      "target_pixels_interior": 17,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 26.9349765777588,
+      "target_ws_kmh": 4.70559358596802,
+      "year": 2020
+    },
+    {
+      "active_front_cells": 47,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 18.63,
+      "col_off": 26,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1750560.0,
+        0.0,
+        -90.0,
+        7750080.0
+      ],
+      "event_id": "2021_1622",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 43,
+      "scar_cells": 93,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2021_1622_krig.tif",
+      "split": "validation",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 40.7146982939347,
+      "target_doy": 213,
+      "target_ffmc": 90.2112848033076,
+      "target_fireday": 31,
+      "target_fwi": 12.812333687492,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 23,
+      "target_pixels_in_whole_fire_day": 23,
+      "target_pixels_interior": 23,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 42.4226210221,
+      "target_ws_kmh": 4.44927101549895,
+      "year": 2021
+    },
+    {
+      "active_front_cells": 27,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 9.72,
+      "col_off": 134,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1733100.0,
+        0.0,
+        -90.0,
+        6947730.0
+      ],
+      "event_id": "2021_1966",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 5,
+      "scar_cells": 357,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2021_1966_krig.tif",
+      "split": "validation",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 110.27360534668,
+      "target_doy": 246,
+      "target_ffmc": 89.9834136962891,
+      "target_fireday": 47,
+      "target_fwi": 21.752857208252,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 12,
+      "target_pixels_in_whole_fire_day": 12,
+      "target_pixels_interior": 12,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 31.3134689331055,
+      "target_ws_kmh": 4.91983318328857,
+      "year": 2021
+    },
+    {
+      "active_front_cells": 25,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 8.91,
+      "col_off": 0,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -323610.0,
+        0.0,
+        -90.0,
+        7199100.0
+      ],
+      "event_id": "2021_194",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 22,
+      "scar_cells": 266,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2021_194_krig.tif",
+      "split": "validation",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 77.8855819702149,
+      "target_doy": 198,
+      "target_ffmc": 89.6672592163086,
+      "target_fireday": 4,
+      "target_fwi": 21.503381729126,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 11,
+      "target_pixels_in_whole_fire_day": 11,
+      "target_pixels_interior": 11,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 47.7726631164551,
+      "target_ws_kmh": 10.4239921569824,
+      "year": 2021
+    },
+    {
+      "active_front_cells": 24,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 3.24,
+      "col_off": 240,
+      "crop_transform": [
+        90.0,
+        0.0,
+        117120.0,
+        0.0,
+        -90.0,
+        6877980.0
+      ],
+      "event_id": "2021_1163",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 182,
+      "scar_cells": 380,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2021_1163_krig.tif",
+      "split": "validation",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 139.23518371582,
+      "target_doy": 202,
+      "target_ffmc": 90.2959823608398,
+      "target_fireday": 17,
+      "target_fwi": 27.6097793579102,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 8,
+      "target_pixels_in_whole_fire_day": 8,
+      "target_pixels_interior": 8,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 38.7743034362793,
+      "target_ws_kmh": 8.16172504425049,
+      "year": 2021
+    },
+    {
+      "active_front_cells": 23,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 8.1,
+      "col_off": 24,
+      "crop_transform": [
+        90.0,
+        0.0,
+        20820.0,
+        0.0,
+        -90.0,
+        7051590.0
+      ],
+      "event_id": "2021_287",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 21,
+      "scar_cells": 395,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2021_287_krig.tif",
+      "split": "validation",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 33.7187576293945,
+      "target_doy": 198,
+      "target_ffmc": 52.4898986816406,
+      "target_fireday": 7,
+      "target_fwi": 0.4526427090168,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 10,
+      "target_pixels_in_whole_fire_day": 10,
+      "target_pixels_interior": 10,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 74.6732025146484,
+      "target_ws_kmh": 9.63876438140869,
+      "year": 2021
+    },
+    {
+      "active_front_cells": 49,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 12.96,
+      "col_off": 85,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1590720.0,
+        0.0,
+        -90.0,
+        7550370.0
+      ],
+      "event_id": "2022_730",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 16,
+      "scar_cells": 343,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2022_730_krig.tif",
+      "split": "test",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 42.0551300048828,
+      "target_doy": 293,
+      "target_ffmc": 80.8526306152344,
+      "target_fireday": 48,
+      "target_fwi": 7.15164375305176,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 16,
+      "target_pixels_in_whole_fire_day": 16,
+      "target_pixels_interior": 16,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 56.0499992370606,
+      "target_ws_kmh": 15.4564094543457,
+      "year": 2022
+    },
+    {
+      "active_front_cells": 42,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 19.44,
+      "col_off": 0,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1752900.0,
+        0.0,
+        -90.0,
+        8806590.0
+      ],
+      "event_id": "2022_279",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 0,
+      "scar_cells": 266,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2022_279_krig.tif",
+      "split": "test",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 41.0090980529785,
+      "target_doy": 184,
+      "target_ffmc": 85.3363037109375,
+      "target_fireday": 5,
+      "target_fwi": 7.81451559066773,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 24,
+      "target_pixels_in_whole_fire_day": 24,
+      "target_pixels_interior": 24,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 39.9015007019043,
+      "target_ws_kmh": 6.42492437362671,
+      "year": 2022
+    },
+    {
+      "active_front_cells": 18,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 13.77,
+      "col_off": 9,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1852530.0,
+        0.0,
+        -90.0,
+        7161930.0
+      ],
+      "event_id": "2022_578",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 39,
+      "scar_cells": 426,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2022_578_krig.tif",
+      "split": "test",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 43.2084922790527,
+      "target_doy": 265,
+      "target_ffmc": 88.2058258056641,
+      "target_fireday": 23,
+      "target_fwi": 10.9801816940308,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 17,
+      "target_pixels_in_whole_fire_day": 17,
+      "target_pixels_interior": 17,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 37.1851997375488,
+      "target_ws_kmh": 5.55063962936401,
+      "year": 2022
+    },
+    {
+      "active_front_cells": 17,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 10.53,
+      "col_off": 149,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1594410.0,
+        0.0,
+        -90.0,
+        8253990.0
+      ],
+      "event_id": "2022_329",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 0,
+      "scar_cells": 340,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2022_329_krig.tif",
+      "split": "test",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 60.7349548339844,
+      "target_doy": 263,
+      "target_ffmc": 87.0030670166016,
+      "target_fireday": 83,
+      "target_fwi": 14.0091047286987,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 13,
+      "target_pixels_in_whole_fire_day": 13,
+      "target_pixels_interior": 13,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 51.2588005065918,
+      "target_ws_kmh": 10.2058095932007,
+      "year": 2022
+    },
+    {
+      "active_front_cells": 17,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 2.835,
+      "col_off": 115,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -894660.0,
+        0.0,
+        -90.0,
+        7522560.0
+      ],
+      "event_id": "2022_440",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 2,
+      "scar_cells": 71,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2022_440_krig.tif",
+      "split": "test",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 69.8823928833008,
+      "target_doy": 239,
+      "target_ffmc": 88.6471437726702,
+      "target_fireday": 60,
+      "target_fwi": 15.4709170205253,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 7,
+      "target_pixels_in_whole_fire_day": 7,
+      "target_pixels_interior": 7,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 58.0240293230329,
+      "target_ws_kmh": 6.06480387278966,
+      "year": 2022
+    },
+    {
+      "active_front_cells": 48,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 17.82,
+      "col_off": 0,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1730400.0,
+        0.0,
+        -90.0,
+        8803350.0
+      ],
+      "event_id": "2023_940",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 0,
+      "scar_cells": 298,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2023_940_krig.tif",
+      "split": "test",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 96.8761520385742,
+      "target_doy": 221,
+      "target_ffmc": 89.5429840087891,
+      "target_fireday": 4,
+      "target_fwi": 20.0527381896973,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 22,
+      "target_pixels_in_whole_fire_day": 22,
+      "target_pixels_interior": 22,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 48.6068000793457,
+      "target_ws_kmh": 5.69573068618774,
+      "year": 2023
+    },
+    {
+      "active_front_cells": 37,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 17.82,
+      "col_off": 5,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1992570.0,
+        0.0,
+        -90.0,
+        7466130.0
+      ],
+      "event_id": "2023_774",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 50,
+      "scar_cells": 309,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2023_774_krig.tif",
+      "split": "test",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 28.6093845367432,
+      "target_doy": 198,
+      "target_ffmc": 45.8464851379395,
+      "target_fireday": 3,
+      "target_fwi": 0.161775082349777,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 22,
+      "target_pixels_in_whole_fire_day": 22,
+      "target_pixels_interior": 22,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 58.9332008361816,
+      "target_ws_kmh": 8.26201820373535,
+      "year": 2023
+    },
+    {
+      "active_front_cells": 30,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 12.15,
+      "col_off": 169,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1880970.0,
+        0.0,
+        -90.0,
+        7215840.0
+      ],
+      "event_id": "2023_866",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 96,
+      "scar_cells": 184,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2023_866_krig.tif",
+      "split": "test",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 67.5305633544922,
+      "target_doy": 237,
+      "target_ffmc": 83.4990463256836,
+      "target_fireday": 42,
+      "target_fwi": 7.30325031280518,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 15,
+      "target_pixels_in_whole_fire_day": 15,
+      "target_pixels_interior": 15,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 44.2420997619629,
+      "target_ws_kmh": 2.76767444610596,
+      "year": 2023
+    },
+    {
+      "active_front_cells": 29,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 4.455,
+      "col_off": 122,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1389750.0,
+        0.0,
+        -90.0,
+        8568810.0
+      ],
+      "event_id": "2023_337",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 208,
+      "scar_cells": 386,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2023_337_krig.tif",
+      "split": "test",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 33.7845726013184,
+      "target_doy": 261,
+      "target_ffmc": 86.1739730834961,
+      "target_fireday": 82,
+      "target_fwi": 7.39725589752197,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 11,
+      "target_pixels_in_whole_fire_day": 11,
+      "target_pixels_interior": 11,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 62.3269996643067,
+      "target_ws_kmh": 5.54208564758301,
+      "year": 2023
+    },
+    {
+      "active_front_cells": 26,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 11.34,
+      "col_off": 0,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -586500.0,
+        0.0,
+        -90.0,
+        7291800.0
+      ],
+      "event_id": "2023_628",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 115,
+      "scar_cells": 243,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2023_628_krig.tif",
+      "split": "test",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 65.8039169311524,
+      "target_doy": 206,
+      "target_ffmc": 89.8478088378906,
+      "target_fireday": 49,
+      "target_fwi": 27.1869850158691,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 14,
+      "target_pixels_in_whole_fire_day": 14,
+      "target_pixels_interior": 14,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 41.2969017028809,
+      "target_ws_kmh": 19.0257434844971,
+      "year": 2023
+    },
+    {
+      "active_front_cells": 35,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 9.72,
+      "col_off": 20,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -978630.0,
+        0.0,
+        -90.0,
+        7765560.0
+      ],
+      "event_id": "2024_453",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 14,
+      "scar_cells": 390,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2024_453_krig.tif",
+      "split": "test",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 71.2986602783203,
+      "target_doy": 183,
+      "target_ffmc": 89.4151077270508,
+      "target_fireday": 39,
+      "target_fwi": 14.7509641647339,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 12,
+      "target_pixels_in_whole_fire_day": 12,
+      "target_pixels_interior": 12,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 54.8175010681152,
+      "target_ws_kmh": 2.34921550750732,
+      "year": 2024
+    },
+    {
+      "active_front_cells": 31,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 4.05,
+      "col_off": 32,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -238830.0,
+        0.0,
+        -90.0,
+        7476300.0
+      ],
+      "event_id": "2024_309",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 11,
+      "scar_cells": 133,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2024_309_krig.tif",
+      "split": "test",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 21.8671531677246,
+      "target_doy": 235,
+      "target_ffmc": 74.5368957519531,
+      "target_fireday": 37,
+      "target_fwi": 1.46113801002502,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 10,
+      "target_pixels_in_whole_fire_day": 10,
+      "target_pixels_interior": 10,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 64.864501953125,
+      "target_ws_kmh": 8.79065608978272,
+      "year": 2024
+    },
+    {
+      "active_front_cells": 25,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 3.24,
+      "col_off": 267,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1282740.0,
+        0.0,
+        -90.0,
+        8608230.0
+      ],
+      "event_id": "2024_60",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 482,
+      "scar_cells": 34,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2024_60_krig.tif",
+      "split": "test",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 17.8043441772461,
+      "target_doy": 226,
+      "target_ffmc": 48.8980255126953,
+      "target_fireday": 9,
+      "target_fwi": 0.158056929707527,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 8,
+      "target_pixels_in_whole_fire_day": 8,
+      "target_pixels_interior": 8,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 57.8059005737305,
+      "target_ws_kmh": 5.43461084365845,
+      "year": 2024
+    },
+    {
+      "active_front_cells": 23,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 9.72,
+      "col_off": 46,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1693770.0,
+        0.0,
+        -90.0,
+        8449200.0
+      ],
+      "event_id": "2024_405",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 6,
+      "scar_cells": 309,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2024_405_krig.tif",
+      "split": "test",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 24.2003803253174,
+      "target_doy": 225,
+      "target_ffmc": 59.3717269897461,
+      "target_fireday": 45,
+      "target_fwi": 0.587320387363434,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 12,
+      "target_pixels_in_whole_fire_day": 12,
+      "target_pixels_interior": 12,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 67.8403015136719,
+      "target_ws_kmh": 7.51202964782715,
+      "year": 2024
+    },
+    {
+      "active_front_cells": 22,
+      "active_front_cells_on_tile_edge": 0,
+      "cfsds_firearea_ha": 3.645,
+      "col_off": 12,
+      "crop_transform": [
+        90.0,
+        0.0,
+        -1246380.0,
+        0.0,
+        -90.0,
+        8166690.0
+      ],
+      "event_id": "2024_46",
+      "native_crop_shape_rc": [
+        23,
+        23
+      ],
+      "quality_status": "crop-screen-only; external fuel/terrain/hourly weather not yet aligned",
+      "raster_cellsize_m": [
+        90.0,
+        90.0
+      ],
+      "raster_crs_wkt": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "row_off": 41,
+      "scar_cells": 346,
+      "simulator_cell_size_m": 100,
+      "simulator_grid_shape_rc": [
+        20,
+        20
+      ],
+      "source_raster": "2024_46_krig.tif",
+      "split": "test",
+      "spot_target_pixels_rejected": 0,
+      "suppression_status": "unknown",
+      "target_bui": 126.627967834473,
+      "target_doy": 186,
+      "target_ffmc": 88.8919372558594,
+      "target_fireday": 53,
+      "target_fwi": 19.5725479125977,
+      "target_growth_capture_ratio": 1.0,
+      "target_pixels_in_tile": 9,
+      "target_pixels_in_whole_fire_day": 9,
+      "target_pixels_interior": 9,
+      "target_pixels_on_tile_edge": 0,
+      "target_rh_percent": 42.7350006103516,
+      "target_ws_kmh": 3.47506237030029,
+      "year": 2024
+    }
+  ],
+  "simulator_cell_size_m": 100,
+  "simulator_grid_cells": 20,
+  "split_rule_by_event_year": "2014-2018 train; 2019-2021 validation; 2022-2024 test. Pre-2014 events are excluded because the published benchmark reports no compatible nationwide FBP map vintage for those years. Each event_id remains in one split.",
+  "suppression_status": "unknown unless an event-specific agency record is later joined",
+  "window_rule": "reject disconnected spot growth; require at least 5 target-day pixels and 3 active-front pixels; target growth and active front must be wholly within the native window away from its edge, with at least 95% of target-day pixels represented"
+}
