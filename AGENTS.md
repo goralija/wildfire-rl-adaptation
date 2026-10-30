@@ -15,10 +15,14 @@ TASK-012 je završen. TASK-015 ima train-only fuel audit (10/20 fuel-only prolaz
 i input-alignment audit za tri od 20 lokalno dostupnih FireCase paketa. As-of-event
 fuel vintage nije potvrđen, DEM/weather provenance nije potpuna, a suppression je
 unknown. No-action mismatch ostaje otvoren.
-TASK-018 dijagnostička faza i TASK-004c episode adapter su završeni lokalno. Sljedeći
-fokus je leak-safe train-only fuel-vintage proof-of-concept, izvorna terrain/weather
-provenance, suppression evidence i unaprijed definisani replay gate. Root
-cause no-action overgrowth nije izolovan, a no-action gate nije prošao. Ne koristi
+TASK-018 dijagnostička faza i TASK-004c episode adapter su završeni lokalno. Pre-target
+perimeter maska je dokazana za jedan TRAIN slučaj, ali godišnja fuel mapa još nije
+napravljena: 2014b nema potvrđen per-pixel cutoff, succession crosswalk nije potvrđen,
+a C++ fixture odbija historijski scar na NF ćeliji. Case builder trenutno bira početni
+front koristeći target day n, pa to buduće curenje treba ukloniti prije unbiased benchmarka.
+Slijedi rješavanje fuel/source/importer ugovora, target-blind front, terrain/weather
+provenance, suppression evidence i unaprijed definisani replay gate. Root cause no-action
+overgrowth nije izolovan, a no-action gate nije prošao. Ne koristi
 validation/test ishode za izbor parametara. No-action gate i heldout freeze moraju proći
 prije policy benchmarka ili fine-tuninga. Runtime PASS nije dokaz fizičke validacije ili
 RL prednosti. Čuvaj ovu razliku u sažecima.

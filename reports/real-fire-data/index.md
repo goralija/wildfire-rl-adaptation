@@ -4,6 +4,7 @@
 
 - [CFSDS train fuel QC metoda](../../docs/research/CFSDS_TRAIN_QC.md) i [mašinski čitljiv rezultat](cfsds-train-fuel-qc.json) — 20 train kandidata; 10 prolazi samo gorivnu provjeru, 10 pada; nijedan nije potvrđen kao kompletan simulator slučaj.
 - [CFSDS train input QC](../../docs/research/CFSDS_TRAIN_INPUT_QC.md) i [mašinski čitljiv rezultat](cfsds-train-input-qc.json) — poravnanje izmjereno za 3/20 dostupnih train FireCase paketa; fuel vintage nije potvrđen kao vremenski siguran, suppression ostaje unknown.
+- [CFSDS TRAIN fuel-vintage mask proof](cfsds-train-fuel-vintage-mask-proof.json) — `2018_747` pre-target maska isključuje target dan i kasnije; godišnja fuel mapa nije izrađena dok se ne potvrde bazni cutoff i succession crosswalk.
 - [CFSDS no-action dijagnostika](../../docs/research/CFSDS_NO_ACTION_DIAGNOSIS.md) i [mašinski čitljiva vremenska analiza](cfsds-no-action-timeline.json) — tri sačuvana train replaya, bez novog C++ runa, kalibracije ili treninga.
 
 ## Dokumenti

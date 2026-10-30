@@ -1,5 +1,14 @@
 # Promjene baze znanja
 
+## 2026-10-31: TASK-015 pre-target maska i NF-scar importer
+
+- Dodani su TRAIN-only mask audit i unit testovi. Za `2018_747`, target DOY 228, `arrival_day < 228` bira 881 pixel prije targeta; 19 target pixela je izostavljeno, a test pokriva i synthetic budući dan n+1.
+- Izolovani C++ fixture reprodukuje da trenutni importer odbija historijski `burnt` scar na `NF` ćeliji; nema promjene C++/case builder ponašanja.
+- Godišnja fuel mapa nije generisana: v2014b per-pixel cutoff nije potvrđen, v20191114 succession tree nije transkribovan/validiran, a current case builder bira aktivni n-1 front prema targetu n. Taj target-aware input mora se zamijeniti prije nepristrasnog benchmarka. Bez replaya, treninga, heldout podataka ili tuning-a.
+- [Input QC i odluka](docs/research/CFSDS_TRAIN_INPUT_QC.md), [mask receipt](reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json), [C++ receipt](reports/firehose-verification/nonfuel-initial-scar-compatibility.json), [ADR-020](docs/specs/DECISION_RECORDS.md#adr-020).
+- Provjera nakon izmjena: 46/46 testova, strict OKF za 70 Markdown fajlova, novi synthetic CLI smoke, train-only proof i izolovani C++ expected-rejection verifier prošli; `git diff --check` čist. Nema godišnje fuel mape, CFSDS replaya niti treninga.
+- Prvi sljedeći korak u [handoffu](docs/NEXT_SESSION.md): definisati target-blind n−1 front, preregistrovati ga i dokazati da promjena target maske ne mijenja početni input.
+
 ## 2026-10-31: train-only input QC i fuel-vintage provenance
 
 - Input audit je izmjerio 3/20 dostupnih CFSDS train FireCase paketa: sva tri imaju usklađene 20×20/100 m ASCII gridove, po 400 validnih terrain ćelija i 24 uredna vremenska reda. Weather point je 2.436–5.195 km od CFSDS centroida; dnevni FWI se ponavlja kroz satne redove.

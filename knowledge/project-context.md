@@ -43,6 +43,15 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
   pixel-level cutoff dokaz, 2019 CanFG je razvojni i NBAC-zasnovan, a suppression je
   unknown za sve. [Fuel QC](../docs/research/CFSDS_TRAIN_QC.md) i
   [input/provenance QC](../docs/research/CFSDS_TRAIN_INPUT_QC.md).
+- TRAIN-only fuel-vintage mask proof obrađuje samo `2018_747`: `arrival_day < target_doy`
+  bira 881 prethodno spaljenu ćeliju u rasteru i isključuje 19 target ćelija; unit test
+  provjerava i budući dan n+1. Godišnja mapa nije generisana jer 2014b cutoff i succession
+  crosswalk nisu potvrđeni, a C++ fixture reprodukuje odbijanje `burnt` na `NF` ćeliji.
+  [Mask receipt](../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
+  [importer receipt](../reports/firehose-verification/nonfuel-initial-scar-compatibility.json),
+  [ADR-020](../docs/specs/DECISION_RECORDS.md#adr-020).
+  Također, trenutni builder bira day n-1 front prema targetu day n, što otkriva dio
+  ciljne geometrije; target-blind početni front je preduslov za unbiased benchmark.
 - TASK-018 je završio dijagnostičko poređenje tri sačuvana no-action replaya na fiksnim
   vremenskim presjecima: svi dodiruju rub 20×20 domene za 34–52 minute, a jedan popuni
   svih 400 ćelija. Rezultati su osjetljivi na vrijeme, ali nema unutar-dnevnog ground trutha
@@ -64,9 +73,11 @@ TASK-004c episode adapter je sada završen lokalno: C++/Python dijele terminalni
 damage, scar i aktivni front su odvojeni, a završetak dobija named reason. Fixture + 12/12
 inference rollouta potvrđuju adapter contract; svi matrix slučajevi završili su na weather
 horizonu. [Receipt i tehnički limiti](../reports/firehose-verification/task004c-adapter-smoke.json).
-Sljedeće je dokazati leak-safe train fuel-vintage konstrukciju i zatvoriti nedostajuću
-terrain/weather/suppression provenance samo na train/calibration događajima; izmjereni
-input audit trenutno pokriva 3/20 train paketa. Preliminarni 44 ID-ja i pilot su u
+Sljedeće treba ukloniti target-day curenje iz početnog fronta, potvrditi bazni fuel-map
+cutoff i v20191114 succession tree, definisati importer semantiku historijskog scar-a na
+non-fuel ćeliji i zatvoriti nedostajuću terrain/weather/suppression provenance samo na
+train/calibration događajima; izmjereni input audit trenutno pokriva 3/20 train paketa.
+Preliminarni 44 ID-ja i pilot su u
 [CFSDS kohort manifestu](../data/manifests/cfsds-v1_1-pilot-cohort.json).
 
 TASK-014 core/legacy environment je lokalno reproducovan na macOS ARM64 + Linux ARM64;

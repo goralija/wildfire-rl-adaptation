@@ -6,7 +6,7 @@ sources:
 - resource: /reports/firehose-verification/task004c-adapter-smoke.json
 - resource: /docs/WORK_LOG.md
 ---
-# Trenutno stanje — 2026-10-30
+# Trenutno stanje — 2026-10-31
 
 ## Baza znanja u repozitoriju
 Repo je OKF 0.2 bundle s [root indeksom](../index.md),
@@ -139,6 +139,32 @@ paketa nije materijalizovano u ovom checkoutu. W.I.S.E. annual-fuel metod i slu�
 vremenskog porijekla/NBAC i potrebe za leak-free succession mapom. Suppression ostaje
 unknown, bez novog C++ replaya ili treninga. Vidi
 [detaljnu metodu i otvorena pitanja](research/CFSDS_TRAIN_INPUT_QC.md).
+
+## Train-only fuel-vintage mask proof — 2026-10-31
+
+Dodani su [pre-target mask audit](../scripts/prove_cfsds_train_fuel_vintage.py), testovi i
+[mašinski receipt](../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json).
+Samo TRAIN događaj `2018_747` je obrađen: maska `arrival_day < 228` obuhvata 881 ćeliju
+u 48×50 source rasteru (272 u simulator cropu), dok je 19 ćelija dana 228 izostavljeno;
+u ovom event rasteru nema poslije-target ćelija. Unit test dodatno provjerava da se
+synthetic dan n+1 isključuje. Ovo dokazuje vremensko pravilo maske, ne godišnju FBP kartu.
+
+Isti audit je otkrio dodatni evaluation blocker: trenutni `build_cfsds_case.py` bira
+day n-1 aktivne ćelije provjeravajući dodiruju li target day n. To otkriva target geometriju
+agentu kroz početni front. W.I.S.E. paper navodi i priznaje istu buduću informaciju;
+prije benchmarka treba preregistrovati i testirati target-blind front iz n-1 i ranijih dana.
+
+Izolovani C++ fixture (`NF` cell 4 kao `burnt`, uz gorivnu cell 1 kao `burning`) potvrdio
+je poruku `InitialState.csv marks a non-fuel/harvested cell as burned`; importer odbija
+scar prije prvog grid exporta. To je očekivana odbijenica u
+[kompatibilnosnom receipt-u](../reports/firehose-verification/nonfuel-initial-scar-compatibility.json),
+ne simulator PASS. Nijedna fuel klasa nije promijenjena, nije pokrenut CFSDS replay ni RL
+trening i nisu otvoreni validation/test rasteri.
+
+Odluka [ADR-020](specs/DECISION_RECORDS.md#adr-020) blokira godišnje reclassifikovanje dok
+se ne potvrde per-pixel vintage/succession tree i importer/damage contract; target-aware
+front dodatno blokira unbiased benchmark. No-action gate ostaje pao; train terrain/weather
+provenance i suppression takođe nisu zatvoreni.
 
 ## Train-only fuel quality gate — 2026-10-30
 

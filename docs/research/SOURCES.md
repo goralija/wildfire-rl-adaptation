@@ -155,10 +155,20 @@ konačne tvrdnje; nije provedena sistematska literature review.
   No agreement was accepted and no event-level action/resource timeline was joined.
 - S-037: [Bennett et al., 2026, W.I.S.E. assessment using CFSDS 1.1](https://doi.org/10.1071/WF26072),
   *International Journal of Wildland Fire* 35(8), WF26072, reviewed 2026-10-31.
-  Methods report filtering fires with suppression from CNFDB and making annual fuel maps
-  by masking previous perimeters and applying the v20191114 burn-scar succession rules.
-  This is a published method reference, not a reproduction or result from this project;
-  the exact event-action linkage and transfer to our simulator remain unverified.
+  Methods describe building yearly fuel maps from the 2014/2019/2024 releases with the
+  v20191114 burn-scar succession rules, then reclassifying same-fire pixels burned before
+  day n as non-fuel for each daily simulation. The paper's initial boundary selects day
+  n-1 pixels adjacent to target day n and explicitly acknowledges that this uses future
+  perimeter information. This is a published method reference, not a result from this
+  project; its succession tree must be transcribed/validated, and its target-aware front
+  must not be copied into an unbiased agent benchmark. Suppression filtering is reported,
+  but the exact event-action linkage and transfer to our simulator remain unverified.
+- S-038: [CWFIS CanFG fuel-layer-with-burn-scars legend](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/FBP_FuelLayer_wBurnScars.pdf),
+  and [official v20191114 metadata](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/Canadian_Forest_FBP_Fuel_Types_Metadata_v20191114.pdf),
+  reviewed 2026-10-31. The one-page PDF lists fuel classes (including non-fuel, water,
+  and urban) but does not expose the burn-scar succession decision tree. The metadata
+  confirms NBAC was used to reassign fuel types in burned areas and lists supporting
+  fuel-layer decision documentation; it does not give per-pixel temporal cutoffs.
 
 [REAL_FIRE_DATASETS](REAL_FIRE_DATASETS.md) čuva preporuku, obim uzorka i nedostatke;
 reports/real-fire-data/ čuva download SHA256 i provjere stvarno preuzetih fajlova.

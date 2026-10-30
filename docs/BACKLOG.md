@@ -15,7 +15,7 @@ Napor je okvirni agentov prijedlog u aktivnim radnim satima, bez roka i dodjele 
 | TASK-013 | završeno: podrška handoffu | OKF repo bundle, ulazi/navigacija, održavanje, validator/testovi/CI | ostvareno |
 | TASK-012 | završeno 2026-10-30 | prema korisnikovoj uputi odabrana Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire; historijske granice služe zasebnom reality-checku, a agent uči iz simulatora | ostvareno |
 | TASK-014 | lokalno završeno 2026-10-30; drugi host nije provjeren | moderni `.venv` i odvojeni legacy Docker izgrađeni; package/source/image hashovi i smoke/inference receipt zapisani | ostvareno lokalno |
-| TASK-015 | P0, djelimično završeno | 44 preliminarna kandidata 20/9/15; train fuel-only 10 pass/10 fail; input QC izmjeren za 3/20 postojećih FireCase paketa; v2014b cutoff nije pixel-proven, 2019 layer je razvojni/NBAC zasnovan, suppression unknown | input provenance + train replay gate |
+| TASK-015 | P0, djelimično završeno | 44 preliminarna kandidata 20/9/15; train fuel-only 10 pass/10 fail; input QC za 3/20; 2018_747 pre-target mask PASS; annual mapa blokirana base cutoff/succession/importer pitanjima; target-aware front leak identifikovan; suppression unknown | fuel vintage + target-blind front + importer odluka + input provenance + replay gate |
 | TASK-018 | P0, dijagnostička faza završena 2026-10-30; uzrok nije izolovan | poređenje hashova/postavki i unaprijed fiksirani vremenski presjeci na tri train replaya; metadata horizon bug ispravljen; rub/domenska ograničenja potvrđena; bez heldout kalibracije ili treninga | ostvareno |
 | TASK-004c | P0, adapter završen lokalno 2026-10-30 | C++/Python kumulativna šteta, zaseban scar/front i named terminal receipt; fixture + 12/12 inference rollouta, bez treninga; fizički no-action gate ostaje otvoren | ostvareno |
 | TASK-017 | završeno 2026-10-30 | `InitialState.csv` uvozi raniji scar i više aktivnih ćelija; fixture i stvarni `2018_747` C++ import/replay su uspješni | ostvareno |
@@ -71,8 +71,16 @@ TASK-015 (P0 input/cohort quality): geometrijski screen za 2014–2024 zadržao 
 kandidata po godini: 20 train, 9 validation, 15 test. Train-only audit (`docs/research/CFSDS_TRAIN_QC.md`)
 obrađuje 20 train parova: 10 prolazi samo gorivnu provjeru, 10 pada; postojeća tri replaya
 su među prolazima. Validation/test rasteri nisu otvarani. Kohorta nije iscrpna niti je
-heldout benchmark zamrznut. Još pribaviti/ocijeniti FBP 2019/2024 vintages, terrain/weather
-poravnanje i suppression dokaze prije heldout caseova.
+heldout benchmark zamrznut. Pre-target maska za `2018_747` koristi samo
+`arrival_day < target_doy` i matematički isključuje dan n i kasnije; receipt je
+`reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json`. To nije annual fuel
+mapa: nema potvrđenog baznog vremenskog cutoffa ni autoritativnog succession crosswalka.
+C++ fixture je reproducirao odbijanje `burnt` stanja na `NF` ćeliji; prije promjene buildera
+treba odlučiti kako simulator čuva stari scar i cumulative damage kada godišnje pravilo
+ćeliju učini non-fuel. Još jedan blocker je trenutni `build_cfsds_case.py` front odabran
+prema susjednosti targeta day n; target-blind pravilo mora biti definisano i testirano.
+Pogledati ADR-020 i EXP-010. Još treba FBP vintage/source provjera,
+terrain/weather poravnanje i suppression dokazi prije heldout caseova.
 
 TASK-018 isporuka: poređeni su isti case-manifest/input hashovi, fuel/FBP, weather/FWI,
 početni front i 20×20 domen. Sačuvani postojeći grids analizirani su na fiksnih 30–1.440
@@ -102,3 +110,8 @@ dnevnog CFSDS cilja, a predikcije dotiču rub modelskog prozora. `2014_538` je o
 neke historijske ćelije mapiraju na water/nonfuel. Suppression status ostaje nepoznat.
 Prije RL benchmarka provjeriti gorivo, vrijeme, FBP parametre i extent; kalibraciju raditi
 samo na train/calibration eventima.
+C++ fixture je reproducirao odbijanje `burnt` stanja na `NF` ćeliji; prije promjene buildera
+treba odlučiti kako simulator čuva stari scar i cumulative damage kada godišnje pravilo
+ćeliju učini non-fuel. Još jedan blocker je trenutni `build_cfsds_case.py` front odabran
+prema susjednosti targeta day n; target-blind pravilo mora biti definisano i testirano.
+Pogledati ADR-020 i EXP-010. Još treba FBP vintage/source provjera,

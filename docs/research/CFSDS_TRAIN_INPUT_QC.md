@@ -107,19 +107,72 @@ The official 2024 map is 30 m, covers 2020-08-01 to 2024-04-01, and uses SCANFI,
 ecozones, and NBAC. It postdates all current train targets, so it is not a safe
 replacement baseline for them [S-033].
 
-The W.I.S.E. paper describes a useful candidate recipe: start from one of the
-versioned FBP maps, overlay only perimeters burned before target day n, and apply
-the v20191114 burn-scar succession rules to form an event-specific annual map. It
-uses day n-1 for initialization and day n as the assessment target [S-037].
-That published approach is not a result from this project and must not be copied
-without adaptation. Before implementing it, resolve the v2014b base map's historic
-burn coverage, verify the exact class crosswalk/ruleset, keep day n and later
-information out of the fuel input, and test how a day n-1 scar classified as
-non-fuel interacts with this project's imported scar and active-front state.
+The W.I.S.E. paper describes two distinct candidate fuel steps: make yearly maps
+from one of the 2014/2019/2024 FBP releases using the v20191114 burn-scar succession
+rules, then, for a day-n job, reclassify the same fire's perimeters before day n as
+non-fuel [S-037]. The rule set's existence is verified, but its exact tree has not
+yet been transcribed and validated for this project's crosswalk. The official
+one-page CanFG-with-burn-scars PDF is a class legend, not that decision tree [S-038].
+
+The paper's initial boundary also selects day n-1 cells adjacent to target day n,
+and explicitly acknowledges this uses future perimeter information [S-037]. Our
+current `build_cfsds_case.py` implements that target-aware selection. It means the
+existing initial observation exposes part of target geometry even when the target
+raster is not copied into the observation. This is a separate leakage path from the
+fuel mask and must be replaced with a target-blind front definition before an
+unbiased agent benchmark. The day n-1 perimeter is satellite-derived and does not
+provide an hourly front, so the target-blind definition itself must be preregistered
+and checked on train data.
+
+That published approach is a method candidate, not a result from this project and
+must not be copied without adaptation. Before implementing it, resolve the v2014b
+base map's historic burn coverage, transcribe/verify the succession tree and fuel
+crosswalk, keep day n and later information out of all fuel inputs, and test how
+non-fuel historical scar cells interact with this project's imported scar, active
+front, and cumulative-damage state.
 
 **Current decision:** keep v2014b only to reproduce the already-saved pilot cases.
 No annual map has been selected as a leakage-safe replacement for new training
 cases. No CFSDS target day was used to tune a map or simulator setting.
+
+## Train-only perimeter-mask and importer proof — 2026-10-31
+
+Added `scripts/cfsds_fuel_vintage.py` and
+[`scripts/prove_cfsds_train_fuel_vintage.py`](../../scripts/prove_cfsds_train_fuel_vintage.py).
+The latter refuses any screen row outside `split=train` and reads only the `2018_747`
+arrival raster (target DOY 228) for this proof. Its rule is:
+
+```text
+pre_target = valid AND arrival_day > 0 AND arrival_day < target_doy
+```
+
+The source raster is 48×50. This rule selects 881 pre-target event pixels overall and
+272 in the existing 23×23 model crop; it includes day n-1 (136 pixels in the crop,
+36 classified as the active front after target adjacency), and excludes all 19 day-n
+target pixels. There are no later-than-target arrivals in this particular event raster.
+Unit tests use an explicit n+1 value and confirm it is excluded; therefore the actual
+event counts and the general boundary-rule check are recorded separately in
+[`cfsds-train-fuel-vintage-mask-proof.json`](../../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json).
+
+This proves only the temporal perimeter predicate. It does **not** build/reclassify a
+fuel raster: the existing v2014b map still lacks a verified per-pixel cutoff, and the
+v20191114 succession tree has not yet been transcribed/validated. The diagnostic
+front count reproduces the current target-aware builder rule only to explain the
+existing case; it is not an acceptable front input for an unbiased benchmark. A
+deliberately small C++
+fixture places one `burnt` initial-state cell on an upstream `NF` fuel cell. The pinned
+importer terminates with
+`InitialState.csv marks a non-fuel/harvested cell as burned`, before writing an initial
+grid; the probe then reports a secondary `IndexError` because that grid is absent.
+The expected-rejection characterization and image/fixture hashes are in
+[`nonfuel-initial-scar-compatibility.json`](../../reports/firehose-verification/nonfuel-initial-scar-compatibility.json).
+
+**Decision:** do not silently map prior CFSDS scars to generic non-fuel or change the
+case builder yet. First establish the base-map vintage/succession rules, define a
+target-blind day n-1 front, and decide how C++/Python damage accounting represents a
+historically burnt cell that is non-fuel at simulation start. The active front must be
+valid under the simulator's fuel/import contract. No validation/test raster, replay,
+training, or target-based parameter selection was used.
 
 ## Status and next work
 
@@ -130,18 +183,23 @@ cases. No CFSDS target day was used to tune a map or simulator setting.
 
 Before new train replay work:
 
-1. Build a small, train-only fuel-vintage proof of concept from documented sources.
-   Record exact base-map hashes, time cutoffs, succession rules and per-cell
-   provenance; assert that the fuel layer excludes target day n and future scars.
-2. Check the proposed scar/non-fuel treatment against the current initial-state
-   importer and simulator behavior with a fixture before using it in any FireCase.
-3. Materialize inputs for the remaining train-only candidates selected for replay.
+1. Obtain/verify a safe base-map temporal cutoff and transcribe/validate the v20191114
+   succession tree and fuel crosswalk, including licensing and per-cell provenance.
+2. Replace the current target-aware `day n-1 adjacent to target day n` front selection
+   with a preregistered definition based only on day n-1-and-earlier information; add
+   a regression proving the initial input is invariant to the target-day mask.
+3. Decide/test importer semantics when historical cumulative damage occupies a cell
+   whose as-of-event fuel class is non-fuel; the current importer explicitly rejects it.
+4. Only then build a fuel raster for one TRAIN case using the tested pre-target mask.
+   Preserve assertions excluding target day n and later arrivals; keep the day n-1
+   front compatible with spread.
+5. Materialize inputs for the remaining train-only candidates selected for replay.
    Save source tile hashes/acquisition metadata for terrain and full weather API
    request, timezone, resolved location, units and variable-to-source mapping.
-4. Seek event-level suppression evidence from the appropriate agency if available;
+6. Seek event-level suppression evidence from the appropriate agency if available;
    otherwise retain unknown and define how that uncertainty affects cohort
    eligibility before running the replay gate.
-5. Preregister the input variants, seeds, metrics and a common simulation horizon.
+7. Preregister the input variants, seeds, metrics and a common simulation horizon.
    Use target perimeters only for the declared aggregate train gate; do not select
    per-event stopping times or tune from any validation/test outcome.
 

@@ -4,7 +4,7 @@ title: Handoff za nastavak projekta
 ---
 # Handoff za nastavak projekta
 
-Stanje 2026-10-30. Ovaj dokument je dovoljan ulaz bez prethodne chat historije.
+Stanje 2026-10-31. Ovaj dokument je dovoljan ulaz bez prethodne chat historije.
 Istraživačko pitanje: može li prilagodba postojećeg RL agenta različitim budžetima
 intervencija poboljšati rezultate u odnosu na zamrznuti model i heuristike?
 
@@ -115,9 +115,15 @@ sačuvani, a suppression je unknown za svih 20. Čitaj
 [detaljni input QC](docs/research/CFSDS_TRAIN_INPUT_QC.md) i
 [mašinski receipt](reports/real-fire-data/cfsds-train-input-qc.json).
 
-Sljedeće je napraviti train-only leak-safe godišnji fuel map proof-of-concept i testirati
-scar/nofuel interakciju s importerom, zatim popuniti source provenance i suppression
-evidence prije preregistrovanog train replay gatea. Ne birati per-event trajanje iz targeta.
+Train-only pre-target mask proof za `2018_747` i C++ NF-scar characterization fixture su
+završeni; pogledati mask receipt, importer receipt i ADR-020. To nije godišnja fuel mapa:
+2014b nema potvrđen pixel cutoff, v20191114 succession tree nije transkribovan/validiran,
+a C++ importer odbija `burnt` inicijalno stanje na NF ćeliji. Također, trenutni builder
+bira n-1 active front prema targetu n, pa agent dobija buduću target geometriju. Prije
+benchmarka definisati target-blind front, pribaviti vjerodostojna fuel pravila, odlučiti
+importer/damage contract, pa tek onda napraviti godišnju kartu. Zatim popuniti train
+terrain/weather provenance i suppression evidence prije preregistrovanog replay gatea.
+Ne birati per-event trajanje iz targeta.
 No-action gate nije prošao: ne koristiti heldout ishode za kalibraciju, ne pokretati
 benchmark ili fine-tuning i ne tvrditi fizičku validaciju/agenta boljeg od baselinea.
 

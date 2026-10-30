@@ -1,6 +1,6 @@
 ---
 type: Handoff
-title: Naredna sesija — nakon train-only TASK-015 input QC
+title: Naredna sesija — nakon TASK-015 fuel-vintage mask proofa
 ---
 # Naredna sesija
 
@@ -33,7 +33,7 @@ Detalji, opažanja naspram hipoteza i ograničenja su u
 presjeci i hashovi u
 [timeline reportu](../reports/real-fire-data/cfsds-no-action-timeline.json).
 
-## Završeni adapter i sljedeći zadatak: TASK-015 input QC
+## Završeni adapter i trenutno stanje TASK-015 input QC-a
 
 TASK-004c adapter je lokalno završen. C++ sada odvaja stariji scar od aktivnog fronta,
 čuva kumulativno pogođene ćelije i uz završetak ispisuje imenovani razlog. Python `info`
@@ -58,22 +58,36 @@ sačuvani, a suppression je unknown za svih 20. Detalji i redoslijed su u
 
 Sljedeći tehnički koraci:
 
-1. Napraviti mali train-only dokaz godišnje fuel karte: dokumentovati baznu mapu i
-   cutoff, primijeniti samo perimetre prije target dana n, testirati ruleset/crosswalk
-   i provjeriti da nijedan target ili budući scar ne ulazi u gorivni input. Ne koristiti
-   2019 ili 2024 raster kao gotovu prošlu mapu.
-2. Napraviti fixture za interakciju između scar-a iz dana n-1, non-fuel reclassifikacije
-   i simulatorovog multi-cell initial state-a prije izmjene case buildera.
-3. Za train slučajeve odabrane za replay prikupiti izvornu terrain tile provenancu i
+1. Završeni su samo dva pripremna dokaza: pre-target maska na jednom TRAIN eventu
+   (`2018_747`) i C++ fixture koji karakteriše `NF` scar odbijanje. Pogledati
+   [mask receipt](../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
+   [import receipt](../reports/firehose-verification/nonfuel-initial-scar-compatibility.json),
+   ADR-020 i EXP-010. Nije izrađena godišnja fuel mapa i nije mijenjan case builder.
+2. **Prvi naredni zadatak:** prije benchmarka ukloniti buduću informaciju iz početnog fronta: trenutni case builder
+   bira day n-1 ćelije prema njihovoj susjednosti targetu day n. W.I.S.E. paper to koristi
+   i priznaje kao favorizujuću buduću informaciju. Definisati front samo iz n-1 i ranijih
+   podataka, preregistrovati ga, pa testirati da se početni input ne mijenja kad se target
+   maska promijeni.
+3. Pribaviti/dokumentovati bazni FBP as-of-event cutoff i prepisati/provjeriti v20191114
+   burn-scar succession tree, uključujući licencu i per-pixel porijeklo. Ne koristiti
+   v2019 development ili 2024 raster kao gotovu historijsku mapu.
+4. Odlučiti i fixtureom testirati importer contract za slučaj da validno succession
+   pravilo staru ćeliju označi kao non-fuel: scar mora ostati u kumulativnoj historijskoj
+   šteti, dok takva ćelija ne smije postati gorivo za širenje; testirati kako se aktivni
+   front pravilno predstavlja.
+5. Tek nakon tih dokaza napraviti mali annual-map rezultat za jedan TRAIN event; assertioni
+   moraju isključiti target dan n i sve kasnije datume, a target-blind day n-1 front mora
+   biti kompatibilan.
+6. Za train slučajeve odabrane za replay prikupiti izvornu terrain tile provenancu i
    kompletan vremenski API request, resolved location, units i variable-source mapping;
    zadržati unknown ako ih se ne može dokazati.
-4. Potražiti event-level suppression dokaz od nadležne agencije. CNFDB dokumentuje
+7. Potražiti event-level suppression dokaz od nadležne agencije. CNFDB dokumentuje
    agency-provided lokacije/perimetre i ograničenu potpunost, a ne već spojenu timeline
    akcija ovog projekta; nema prihvaćanja EULA bez ovlaštenja.
-5. Unaprijed zapisati ulazne varijante, seedove, metrike i zajednički horizont, pa tek
+8. Unaprijed zapisati ulazne varijante, seedove, metrike i zajednički horizont, pa tek
    onda uraditi train-only kontrolisane no-action replays. Ne birati per-event trajanje
    prema targetu i ne koristiti validation/test ishode.
-6. Heldout event IDs zamrznuti tek nakon prihvatljivog train no-action gatea. Benchmark
+9. Heldout event IDs zamrznuti tek nakon prihvatljivog train no-action gatea. Benchmark
    i fine-tuning ostaju blokirani do tada.
 
 Benchmark i fine-tuning ostaju blokirani dok se ne prođu i no-action quality gate i

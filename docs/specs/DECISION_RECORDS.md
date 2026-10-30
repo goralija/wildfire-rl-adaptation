@@ -397,3 +397,44 @@ fine-tuning, benchmark, or heldout outcome inspection was performed for this aud
 Evidence: [train input QC method](../research/CFSDS_TRAIN_INPUT_QC.md),
 [machine receipt](../../reports/real-fire-data/cfsds-train-input-qc.json),
 [sources S-031–S-037](../research/SOURCES.md#s-031).
+
+## ADR-020 — block annual fuel reclassification until provenance and scar semantics are proven, recorded 2026-10-31
+
+A train-only temporal mask was exercised on `2018_747` (target DOY 228). It selected
+valid arrival pixels strictly before day 228, included day 227, and excluded day 228
+and later values. The complete raster contains 881 pre-target pixels and 19 target
+pixels; the selected 23×23 simulator crop contains 272 pre-target pixels, including
+the day n-1 front. This proves only the event-time predicate. It does not supply a
+safe base fuel vintage or a cross-event annual scar history.
+
+Review of the W.I.S.E. paper distinguishes two fuel operations: annual map succession
+using the v20191114 ruleset and the daily same-fire pre-target perimeter mask. The
+paper also states that its initial active edge selects day n-1 pixels adjacent to
+target day n, explicitly acknowledging future-perimeter information. The current
+`build_cfsds_case.py` uses the same target-aware rule; omitting target raster from the
+agent observation does not remove this side channel. Replace it with a predeclared
+target-blind day n-1 front before an unbiased agent benchmark. The exact succession
+tree is referenced in the paper but has not yet been transcribed/validated here.
+
+A network-isolated C++ fixture marked Sub20 cell 4 (`NF`) as historical `burnt` and
+cell 1 as active `burning`. The pinned importer rejected the scar with
+`InitialState.csv marks a non-fuel/harvested cell as burned` before creating a grid.
+The probe's follow-on `IndexError` is a secondary missing-grid symptom, not the
+simulator's rejection reason. Receipt:
+[`nonfuel-initial-scar-compatibility.json`](../../reports/firehose-verification/nonfuel-initial-scar-compatibility.json).
+
+Decision: implement and retain the strictly pre-target perimeter mask, but do not
+reclassify any fuel pixels or alter case-builder/importer behavior yet. The official
+v2014b source still lacks a verified per-pixel burn-history cutoff; the v20191114
+succession tree has not been transcribed/validated for this project, and raster reuse
+terms need confirmation. Before a map is emitted, also define how a non-fuel historical
+scar remains in cumulative damage, choose a target-blind day n-1 front, and prove its
+import/spread contract. No CFSDS replay, calibration, training, benchmark or
+validation/test outcome was used.
+
+Evidence: [TRAIN mask proof](../../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
+[importer fixture](../../docker/firehose/nonfuel_initial_scar_fixture.csv),
+[verification method](../../docker/firehose/verify_nonfuel_initial_scar.py),
+[TASK-015 input QC](../research/CFSDS_TRAIN_INPUT_QC.md),
+[sources S-031–S-038](../research/SOURCES.md#s-031),
+[W.I.S.E. paper](https://doi.org/10.1071/WF26072).

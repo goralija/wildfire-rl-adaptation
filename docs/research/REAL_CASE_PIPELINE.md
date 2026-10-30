@@ -277,22 +277,32 @@ tehnički adapter prolaz ne potvrđuje fiziku niti smanjenje štete.
 
 ## Kako od daily CFSDS para napraviti jednu Cell2Fire epizodu
 
-Za izabrani događaj uzmi `burn_day = n` i prethodni `burn_day = n-1`:
+Za izabrani događaj `burn_day = n` i `burn_day = n-1` daju historijski dnevni par,
+ali trenutna implementacija **nije leakage-free**:
 
-1. Maska dana `n-1` postaje početna opožarena površina; sve ćelije koje su već gorjele
-   prekategorizuj u non-fuel da ih simulacija ne zapali ponovo.
-2. Početne ćelije simulacije postaju dio granice dana `n-1` koji dodiruje novi rast dana
-   `n`. To imitira opaženi aktivni front, umjesto da se cijeli požar ponovo pali iz jedne
-   izmišljene tačke. `InitialState.csv` uvoz je već implementiran.
-3. U simulator postavi odgovarajuće gorivo/teren i satni weather trace za izabrani dan.
-4. `target_day_n` ostaje skriven od agenta i reward-a. Prvo pusti **no-action** replay i
-   izmjeri koliko je Cell2Fireov predviđeni rast sličan opaženom targetu.
-5. Ako no-action simulacija nije dovoljno vjerna na train/calibration događajima,
-   popravi inpute/parametre prije RL treninga. Ne podešavati na test događajima.
-6. Na valjanom slučaju pokreni frozen checkpoint, fine-tuneani checkpoint i heuristike
-   sa istim weather-om, početnim stanjem, C++ seedovima i budžetom. RL reward je
-   simulatorova šteta uz eventualni trošak intervencije; opažena `target_day_n` služi
-   samo za odvojene spread-metrike.
+1. Fuel karta za dan n treba siguran as-of-event bazni vintage i dokumentovan annual
+   burn-scar succession. Zatim se samo perimetri istog požara prije dana n mogu
+   ukloniti/reclassifikovati prema provjerenom pravilu. Trenutno su te dvije fuel faze
+   još blokirane provenanceom i importer contractom.
+2. `scripts/build_cfsds_case.py` trenutno traži day n-1 ćelije susjedne targetu day n
+   da bi izabrao `InitialState.csv` aktivni front. Time target geometrija uđe u agentov
+   početni input iako se target raster fizički čuva u `truth/`. Ovo ponašanje slijedi
+   objavljeni W.I.S.E. benchmark, čiji autori eksplicitno kažu da je njihov front
+   target-aware i favorizujući [S-037](SOURCES.md#s-037); za unbiased RL benchmark taj
+   recept ne možemo prenijeti bez promjene.
+3. Prije benchmarka treba preregistrovati front koji se može izračunati samo iz day n-1
+   i ranijih podataka (npr. granica prethodno opožarene površine je kandidat, ali još
+   nije usvojeno pravilo), pa testirati da početni grid ne mijenja target maska.
+   `InitialState.csv` C++ uvoz postoji; fuel/non-fuel kompatibilnost starog scar-a još
+   nije riješena.
+4. Tek nakon target-blind front i leak-safe goriva postavi poravnati teren i satni
+   weather trace. Target dan n ostaje samo za unaprijed definisane evaluacijske metrike.
+5. Pusti **no-action** reality-check na train/calibration slučajevima uz isti unaprijed
+   definisani horizont. Ako gate ne prođe, popravi input/model i testiraj ponovo; ne
+   podešavati na heldout događajima.
+6. Tek na prihvatljivom slučaju pokreni frozen checkpoint, fine-tuneani checkpoint i
+   heuristike sa istim vremenom, početnim stanjem, C++ seedovima i budžetom. RL reward
+   ostaje simulatorova šteta uz eventualni trošak intervencije.
 
 CFSDS raster je dnevno interpolisan iz satelitskih hotspota. Ovakav par je dobar za
 dnevnu provjeru rasta, ali ne pruža label svake Firehose akcije niti preciznu satnu

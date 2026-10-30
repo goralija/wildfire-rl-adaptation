@@ -422,3 +422,36 @@ The no-action gate remains failed.
 Verification: 42/42 project tests pass; strict OKF validation passes for 70 Markdown
 files; synthetic CLI smoke succeeds in a fresh ignored run directory; git diff --check
 is clean.
+
+## 2026-10-31 — TASK-015 pre-target mask proof and non-fuel importer characterization
+
+Added a reusable pre-target arrival-day mask and a train-only proof for `2018_747`
+(target DOY 228). It selected 881 valid pre-target pixels across the source raster and
+272 in the 23×23 simulator crop; all 19 target-day pixels were excluded. The event has
+no later-than-target pixels, so a unit fixture separately verifies that day n+1 is
+excluded. This is a temporal-mask proof only: no annual fuel map or fuel-class
+reclassification was emitted because the base-map cutoff and succession crosswalk
+remain unverified.
+
+An isolated fixture reproduced the pinned C++ importer's rejection of historical
+`burnt` state on an `NF` cell. The simulator emitted
+`InitialState.csv marks a non-fuel/harvested cell as burned` before exporting an initial
+grid; the probe's subsequent missing-grid `IndexError` is a secondary wrapper symptom.
+This is an expected-rejection characterization, not a compatibility pass. No importer
+or case-builder behavior changed.
+
+The audit also confirmed that the current case builder selects the day n−1 active
+front using adjacency to the day n target. That exposes target geometry through the
+initial input, even if the target raster itself is kept hidden. The next task is to
+define and preregister a target-blind initial-front rule using only day n−1 and earlier
+information, then test that changing the target mask cannot change the initial state.
+The annual fuel-map provenance/succession and historical-scar contract remain separate
+blockers. No CFSDS replay, training, calibration, benchmark, or validation/test outcome
+was used.
+
+Verification: 46/46 project tests passed; strict OKF validation passed for 70 Markdown
+files; a fresh synthetic CLI smoke succeeded; the train-only proof CLI succeeded; the
+network-isolated C++ expected-rejection verifier succeeded; and `git diff --check` was
+clean. The first CLI smoke invocation intentionally avoided overwriting an existing
+`runs/` directory by rerunning under a fresh output name. Raw archives, Docker image,
+external checkout, and generated run outputs remain outside Git.

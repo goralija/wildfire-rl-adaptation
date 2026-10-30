@@ -253,3 +253,32 @@ passed for 70 Markdown files, the synthetic CLI smoke wrote successfully to a fr
 ignored run folder, and git diff --check was clean. The train-input report was
 regenerated from the three supplied train case packages. No raw data or generated
 simulator input was added to Git.
+
+## EXP-010 — TRAIN-only pre-target fuel mask and NF-scar importer characterization, 2026-10-31
+
+Added a pure pre-target mask helper and a TRAIN-guarded audit CLI. On only
+`2018_747` (target DOY 228), the full 48×50 arrival raster yielded 881 valid event
+pixels before the target and 19 target pixels; the 23×23 simulator crop contained
+272 pre-target pixels, 136 pixels on day n-1 (36 selected as the active front after
+adjacency separation), and 236 earlier scar pixels. This raster had no arrivals
+after the target. A unit fixture includes day n+1 and verifies it is excluded, so
+the temporal rule is checked even though no future-coded pixel occurs in this event
+raster. Source/archive/member hashes are in the mask receipt.
+
+Ran one short, network-disabled C++ constructor/import check against the already-built
+pin-compatible local image. A synthetic upstream Sub20 fixture marks cell 4 (`NF`)
+as burnt and cell 1 as burning. The C++ importer reproducibly rejects the scar with
+`InitialState.csv marks a non-fuel/harvested cell as burned` before grid export; the
+probe's subsequent `IndexError` is only because no initial grid exists. The verifier
+records this expected rejection as a passing characterization test, not successful
+NF-scar compatibility. No Firehose code or case-builder semantics were altered.
+
+No fuel map was emitted: the 2014b per-pixel historical cutoff and authoritative
+succession tree has not yet been transcribed/validated, and the current importer cannot
+represent an NF initial scar. Review of the W.I.S.E. paper also confirmed that the current
+case builder selects its n-1 front using target day n adjacency; this target-aware input
+must be replaced before an unbiased benchmark. No CFSDS replay, training, calibration,
+heldout inspection or target-based selection was performed. Decision and follow-up are in ADR-020 and
+[`CFSDS_TRAIN_INPUT_QC.md`](CFSDS_TRAIN_INPUT_QC.md); receipts:
+[`mask proof`](../../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
+[`importer check`](../../reports/firehose-verification/nonfuel-initial-scar-compatibility.json).
