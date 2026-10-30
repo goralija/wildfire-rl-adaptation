@@ -324,3 +324,34 @@ Evidence: `docs/research/CFSDS_NO_ACTION_DIAGNOSIS.md`,
 focused tests. Context only: the CFSDS v1.1 W.I.S.E. benchmark reports default-setting
 overprediction and grid-boundary contact at scale [S-019](../research/SOURCES.md#s-019);
 that engine's metrics are not results for this project.
+
+## ADR-018 — make the C++ terminal receipt canonical for episode damage, 2026-10-30
+
+TASK-004c is implemented in the isolated Firehose image. When the categorical output grid
+uses `-1` for treatment, a cell affected during the same simulator interval can be hidden
+from its positive-grid history. The C++ terminal receipt's `ever_affected_ncells` is therefore
+the episode-level source of truth; the patched Python adapter copies it into `cells_burned`
+and copies the terminal front/treatment sets into their corresponding counters before
+returning final `info`. IDs in the receipt are one-based row-major. Agent actions remain
+zero-based and `-1` remains the no-op.
+
+The probe's terminal/grid consistency check requires every positive cell in every saved
+grid to exist in the C++ cumulative set. Any extra C++ affected ID must also be in the
+C++ treated set, which accounts for the grid's treatment precedence. This is a traceability
+check, not an independent fire-damage model. Named simulator reasons are `weather_horizon`,
+`front_extinguished`, `grid_exhausted`, and `no_ignition`; timeout, adapter step limit,
+missing output and subprocess failure remain separate adapter/process outcomes. The
+terminal active front is captured before the horizon transition marks it burnt.
+
+The checkpoint contract remains RGB 3×20×20, `Discrete(400)`, and reward/action semantics
+unchanged. Fixture plus 12/12 existing Sub20 inference runs passed, Python and C++ cumulative
+counts matched in every case, and all five checkpoint inference cases retained identical
+weights. The matrix did not exercise the C++ `front_extinguished`, `grid_exhausted`, or
+`no_ignition` paths; all cases ended on `weather_horizon`. No training or physical validation
+was performed. The CFSDS no-action gate still fails, so policy benchmarking and fine-tuning
+remain blocked pending train-only input QC and a separate replay gate decision.
+
+Evidence: `docker/firehose/task004c_state_export.patch`,
+`src/wildfire_rl/firehose_probe.py`, `tests/test_firehose_probe.py`,
+`docker/firehose/verify_batch.py`, and
+`reports/firehose-verification/task004c-adapter-smoke.json`.

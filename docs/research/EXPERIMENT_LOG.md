@@ -190,3 +190,30 @@ The diagnostic stage is complete, but the physical cause remains unresolved beca
 daily CFSDS target has no exact within-day timing, suppression is unknown, all runs touch
 the crop edge, and weather/FWI inputs are approximate. TASK-004c is next; the no-action
 gate remains failed and fine-tuning stays on hold.
+
+## EXP-008 — Firehose cumulative damage and terminal-state adapter, 2026-10-30
+
+Implemented TASK-004c against pinned Firehose `e49a52a9` and contrib `43b7fe6f` in the
+isolated Linux ARM64 image. The C++ terminal receipt now exposes sorted one-based IDs for
+the active front, cumulative affected cells and treated cells, plus a named simulator
+termination reason. The Python adapter reconciles its final counters with that receipt.
+For historical initial-state imports, the exported grid distinguishes scar/front; standard
+maps retain the legacy one-code fire grid. The checkpoint observation/action/reward contract
+was not changed.
+
+A first 12-case run exposed a real discrepancy for PPO-selected cells that became treated
+and affected in one simulator interval: the grid displayed only `-1` while the C++ cumulative
+set retained the cell. The adapter now treats the C++ terminal list as canonical and checks
+that every grid-visible fire cell appears in it, while each hidden affected ID is explained
+by the treated set. The corrected matrix passed 12/12 cases; all Python/C++ final cumulative
+counts matched, all subprocesses returned 0, all five pretrained inference runs kept identical
+weights, and repeated fixed-seed no-action/PPO pairs reproduced actions and state hashes.
+The initial-state fixture also passed with 1 scar + 2 active cells and matching terminal
+counts. Strict validation, synthetic CLI smoke and the 38-test project suite passed.
+
+This was adapter/inference verification only: no training or physical validation. Every
+matrix case ended at `weather_horizon`; `front_extinguished`, `grid_exhausted`, and
+`no_ignition` C++ terminal branches were not directly exercised in the matrix. Existing
+CFSDS no-action overgrowth and crop-edge contact remain, so no-action gate is still failed
+and policy benchmark/fine-tuning remain on hold. Machine receipt:
+[`task004c-adapter-smoke.json`](../../reports/firehose-verification/task004c-adapter-smoke.json).

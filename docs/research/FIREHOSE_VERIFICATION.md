@@ -5,6 +5,7 @@ sources:
 - resource: /reports/firehose-verification/verification.json
 - resource: /reports/firehose-verification/summary.json
 - resource: /reports/firehose-verification/environment.json
+- resource: /reports/firehose-verification/task004c-adapter-smoke.json
 ---
 # Firehose/Cell2Fire izvršavanje — 2026-10-28
 
@@ -87,3 +88,30 @@ active/burnt state iz C++ prije resetovanja terminalnog stanja. Dodati integraci
 testove, uz očuvanje RGB 3×20×20 i 400-action kontrakta pretrained modela.
 Tek zatim freeze scenario split i krenuti u frozen benchmark/fine-tuning.
 Nema izvedene preporuke za stvarne požare ili provjere tačnosti simulatora na BiH podacima.
+
+## TASK-004c adapter isporuka — 2026-10-30
+
+Na pinovanom upstreamu dodat je `task004c_state_export.patch`, primijenjen poslije
+`cfsds_initial_state.patch`. C++ terminal receipt sada sadrži sortirane one-based
+row-major ID-jeve za `active_front_ncells`, `ever_affected_ncells` i `treated_ncells`,
+brojače i reason: `weather_horizon`, `front_extinguished`, `grid_exhausted` ili
+`no_ignition`. Na weather horizontu aktivni front se zabilježi prije nego ga C++ prebaci
+u burnt stanje. FireEnv syncuje warmup observation sa stvarnim CSV gridom i završni Python
+damage/front/treatment counters s C++ receiptom.
+
+Testirao sam historical-state fixture (1 scar + 2 front ćelije), zatim 12 inference-only
+Sub20 slučajeva: no-action ponavljanja/seeds, min/max-L2, dva postojeća PPO checkpointa,
+te reset varijante. 12/12 su uspješni; sve Python/C++ terminalne cumulative liste se
+podudaraju, testovi čuvaju poznati treatment edge-case, a svih pet checkpoint runova imaju
+iste težine prije i poslije inferencije. Prvi batch je otkrio da tretirana ćelija može
+nestati iz pozitivnih CSV gridova dok je C++ cumulative set čuva. Finalna provjera zato
+traži da terminalni C++ skup pokriva svaku pozitivnu grid ćeliju i da su sve skrivene
+affected ćelije i u terminalnom treated skupu. Pojedinosti, hashovi i raw output lokacija
+su u [TASK-004c smoke receiptu](../../reports/firehose-verification/task004c-adapter-smoke.json).
+
+Ova matrica izvršava samo `weather_horizon` završetak; front-extinguished/grid-exhausted/
+no-ignition C++ putanje nisu direktno testirane u 12 slučajeva. Probe error/timeout/step-limit
+ostaju zasebne Python adapter kategorije. Checkpoint ostaje RGB 3×20×20, `Discrete(400)`,
+legacy no-op `-1`; reward/model head nisu mijenjani. Nema `learn()`/treninga i ovo nije
+fire-behavior validacija. CFSDS no-action mismatch i no-action gate ostaju; TASK-015
+train-only fuel-vintage/terrain/weather/suppression QC je naredni korak prije benchmarka.
