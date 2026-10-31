@@ -793,3 +793,41 @@ Evidence: [terrain/weather receipt](../../reports/real-fire-data/cfsds-train-ter
 [input QC](../research/CFSDS_TRAIN_INPUT_QC.md),
 [weather response snapshots](../../reports/real-fire-data/weather-snapshots/),
 [source register S-049](../research/SOURCES.md), and [EXP-020](../research/EXPERIMENT_LOG.md#exp-020--train-terrain-source-class-and-weather-snapshot-provenance-2026-10-31).
+
+## ADR-031 — adapt W.I.S.E./Cell2Fire/Firehose workflow with target-blind inputs and visualization receipts, accepted 2026-10-31
+
+The user asked to adapt this project to prior published workflows and to preserve a path
+to strong visual results. **Decision:** keep the selected CFSDS v1.1 + Canadian FBP +
+Cell2Fire + Firehose path. Reuse W.I.S.E.'s CFSDS day-pair screening, aligned fuel/terrain/
+weather assembly, nonfuel/spot/suppression quality filters and perimeter metrics where
+these fit. Construct our initial state only from data available through day n−1. Keep
+day-n target masks physically separate from simulator inputs and never select the initial
+front, run horizon, wind or spread parameters by inspecting heldout targets for a primary
+claim.
+
+The W.I.S.E. article uses day-n adjacency to seed its initial perimeter and selects target-
+scored simulation durations in diagnostic scenarios; the Dogrib/Cell2Fire paper optimizes
+spread factors against its case's observed scar. These are informative feasibility and
+sensitivity analyses, but would make our primary evaluation optimistic if copied without
+separation. Firehose remains the policy-training loop, not a replacement for validating
+the environment.
+
+Use the pinned Dogrib package as a geospatial/schema/visualization fixture only until its
+KML and CSV ignition locations, 663 scar cells on fuel code 101, seven-hour available
+weather span, 22 h 52 min perimeter interval and 20×20 crop lineage are resolved. Do not
+count its existing Prometheus raster as our simulator output. The first QA map/JSON receipt
+now establishes a repeatable style and records CRS, bounds, scale, time and known source
+conflicts. Future episode records must preserve per-step time/state/action/budget/cumulative
+damage and input/model hashes so static maps and animations can be regenerated.
+
+This choice does not promote the research gate. Fuel vintage/succession, complete input
+provenance, suppression evidence where applicable, suitable spatial extent and the
+pre-registered no-action replay gate remain open. No new CFSDS replay or RL training was
+performed here; `research_ready=false` remains.
+
+Evidence: [adapted workflow](../research/ADAPTED_PRIOR_ART_WORKFLOW.md),
+[Dogrib QA image](../../reports/real-fire-data/dogrib-reference-alignment.png),
+[machine receipt](../../reports/real-fire-data/dogrib-reference-alignment.json),
+[W.I.S.E. article](https://doi.org/10.1071/WF26072),
+[Dogrib/Cell2Fire article](https://doi.org/10.1038/s41598-025-05706-6),
+[Firehose paper](https://williamshen-nz.github.io/firehose/firehose-paper.pdf).

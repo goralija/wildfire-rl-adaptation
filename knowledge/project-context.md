@@ -3,7 +3,7 @@ type: Project Context
 title: Projektni kontekst i stanje istraživanja
 description: Kratki ulaz u cilj, ostvareno, otvorene odluke i prvi naredni posao.
 status: stable
-generated: {by: "process:codex", at: "2026-10-31T11:40:20Z"}
+generated: {by: "process:codex", at: "2026-10-31T12:42:16Z"}
 sources:
   - resource: /docs/STATUS.md
   - resource: /docs/specs/DECISION_RECORDS.md
@@ -83,6 +83,14 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
   ne mogu složiti: tri postojeća TRAIN slučaja već su konvertovana i replayana, ali
   fizički no-action gate i input provenance ostaju otvoreni. Vidi
   [laički/prior-art pregled](../docs/research/CFSDS_PRIOR_WORK_AND_PLAIN_EXPLANATION.md).
+- Usvojen je prilagođeni recept: preuzeti W.I.S.E. način slaganja i provjere CFSDS/FBP/
+  DEM/vremenskih podataka, ali početno stanje praviti bez gledanja sutrašnje karte; zadržati
+  Firehose/Cell2Fire za agenta i simulaciju; koristiti Dogrib samo za provjeru formata i
+  vizualizacije dok se njegovo paljenje/vrijeme/scar ne razriješe. Nova georeferencirana
+  [Dogrib QA karta](../reports/real-fire-data/dogrib-reference-alignment.png) pokazuje
+  razliku od jedne ćelije u KML/CSV paljenju, 663 scar ćelije na kodu 101 i kraći vremenski
+  niz od raspona između referentnih perimetara. Nije pokrenut Dogrib replay niti trening;
+  detalji i plan vizualizacija su u [prilagođenom workflowu](../docs/research/ADAPTED_PRIOR_ART_WORKFLOW.md).
 - TRAIN-only fuel-vintage mask proof obrađuje samo `2018_747`: `arrival_day < target_doy`
   bira 881 prethodno spaljenu ćeliju u rasteru i isključuje 19 target ćelija; unit test
   provjerava i budući dan n+1. Godišnja mapa nije generisana jer 2014b cutoff i succession

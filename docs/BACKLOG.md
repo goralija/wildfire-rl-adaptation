@@ -25,7 +25,8 @@ Napor je okvirni agentov prijedlog u aktivnim radnim satima, bez roka i dodjele 
 | TASK-006 | P1 | 3 training seeda, fine-tuning po B, matched controls, hierarchical CI; AC-007 | zavisi od mjerenja |
 | TASK-007 | P1 nakon minimuma | priority weight ablation, ukupna vs priority šteta; AC-008 | 4–8 h + compute |
 | TASK-008 | P2 | joint budget features/weight transfer i ablation bez njih | samo uz prostor |
-| TASK-009 | P1 predaja | glavni grafikoni, poster, interpretacija i usmeni | 4–8 h |
+| TASK-009 | P1 predaja | glavni grafikoni, poster, interpretacija i usmeni; stabilna karta/skala, više seedova i neizvjesnost | 4–8 h |
+| TASK-019 | P1, vizualni ugovor i Dogrib QA fixture završeni; replay prikazi čekaju validne slučajeve | iz epizodnog zapisa praviti georeferenciranu ulaznu kartu, vremensku animaciju i poređenje agenta s baselineom kroz slučajeve i seedove | 4–8 h nakon no-action gatea |
 
 Redoslijed nastavka: 012 (završeno) → 014 local PASS (završeno) → 015 train fuel/input
 QC (djelimično; DEM source class je ustanovljen za tri saved inputs, weather snapshoti
@@ -39,6 +40,8 @@ TASK-017 initial-state import je završen. TASK-004b je samo fallback nakon doku
 FAIL. TASK-005/006 ne počinju prije no-action gatea i heldout freezea; adapter PASS je
 tehnički preduslov, ne zamjena za no-action gate.
 Ne počinjati fine-tuning dok se ne izmjere rollout/training trošak i zamrzne test ID skup.
+TASK-019 pripremati na ranijim validnim replayima: sačuvati CRS, skalu, vremenske korake,
+akcije i kumulativnu štetu da bi se karte i animacije mogle ponoviti bez ponovnog pokretanja.
 Historijski TASK-011a/011b ostaje opcion i iza glavnog simulator gatea.
 Nema obaveze implementacije svakog proširenja: glavni minimum i kvalitet evaluacije imaju prednost.
 
@@ -49,10 +52,12 @@ TASK-011 (P1 ograničena historijska provjera; poslije TASK-004c, nije novi pred
 za svako RL poređenje): izvori i mali uzorci već su pregledani; vidjeti
 research/REAL_FIRE_DATASETS.md i reports/real-fire-data/.
 
-- 011a: Dogrib vremenski/prostorni/provenance alignment, nonfuel neslaganja i kratki
-  simulator-only replay. Prihvat: isti početni perimetar, domen i završni trenutak,
-  documented weather/timezone, IoU/F1/area error uz seedove; bez tvrdnje o nezavisnoj
-  generalizaciji i bez tihe kalibracije na testu. Prvo timebox 2–4 h za izvedivost.
+- 011a: početni Dogrib input/visual QA sada je završen: KML i CSV paljenje odstupaju za
+  jednu ćeliju u oba smjera, 663 opažene scar ćelije padaju na kod 101, paketno vrijeme
+  traje 7h između uzoraka naspram 22h52min između KML perimetara, a full landscape je
+  223×357 naspram 20×20 modela. Zato nije pokrenut fizički replay. Za zatvaranje treba
+  ili dokumentovati i razriješiti te neusklađenosti te definisati manju usporedivu domenu,
+  ili eksplicitno zadržati Dogrib kao formatni/vizualni fixture bez replay tvrdnje.
 - 011b: 3–5 drugih CFSDS događaja samo ako se mogu pripremiti kompletni FBP/terrain
   i weather inputi; event holdout prije tuninga, provjera rasterskih oznaka i licence.
   Prvo timebox 2–4 h za izvedivost; ako inputi nisu dostupni, dokumentovati budući rad.

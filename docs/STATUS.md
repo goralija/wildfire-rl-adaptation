@@ -10,6 +10,7 @@ sources:
 - resource: /reports/real-fire-data/cfsds-train-bc-operational-evidence.json
 - resource: /reports/real-fire-data/cfsds-train-fuel-source-gate.json
 - resource: /reports/real-fire-data/cfsds-train-terrain-weather-provenance.json
+- resource: /reports/real-fire-data/dogrib-reference-alignment.json
 - resource: /docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md
 - resource: /docs/WORK_LOG.md
 ---
@@ -28,6 +29,20 @@ potvrđuju izvedivost komponenti, ali ne zatvaraju naš CFSDS + Firehose checkpo
 fine-tuning + heldout lanac. Naša konverzija je moguća i već je djelimično izvršena;
 no-action, provenance, prostor i nepristrasnost su preostali blokatori. Detalji i laičke
 analogije: [pregled ranijih radova](research/CFSDS_PRIOR_WORK_AND_PLAIN_EXPLANATION.md).
+
+## Izabrani recept i vizualizacijska osnova — 2026-10-31
+
+Sada je usvojen konkretan hibrid: **W.I.S.E. postupak za pakovanje CFSDS slučajeva**,
+**Cell2Fire/Firehose za širenje i RL**, te **Dogrib samo kao kontrolni primjer GIS ulaza i
+vizualizacije**. Preuzimamo W.I.S.E. filtere/prostorne slojeve/metrike, ali početno stanje
+biramo samo iz dana n−1; nećemo koristiti buduću ciljnu granicu za biranje fronta ili
+parametara. Novi Dogrib QA alat je nacrtao georeferenciranu kartu i zabilježio razliku od
+jedne ćelije između KML i CSV lokacije paljenja, 663 scar ćelije na kodu 101 koji označava
+non-fuel, te razliku 7h vremenskih uzoraka prema 22h52min između perimetara. Zato to još
+nije valjan replay cijelog požara.
+Karta i receipt su u [research indexu](research/index.md), a detaljni preuzeti recept i
+pravila za animacije su u [prilagođenom workflowu](research/ADAPTED_PRIOR_ART_WORKFLOW.md).
+Još nema novog CFSDS replaya ili RL treninga; `research_ready=false` ostaje.
 
 ## Baza znanja u repozitoriju
 Repo je OKF 0.2 bundle s [root indeksom](../index.md),

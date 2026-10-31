@@ -4,6 +4,40 @@ title: Experiment log
 ---
 # Experiment log
 
+## EXP-021 — Adapt prior art and create georeferenced Dogrib QA plate, 2026-10-31
+
+**Question.** Can we reuse a published CFSDS/FBP/weather preparation method and an
+existing Cell2Fire/RL workflow, while avoiding target leakage and preserving data needed
+for later maps/animations?
+
+**Method.** Re-read the W.I.S.E. methods and limitations, the 2025 Dogrib/Cell2Fire paper,
+the Firehose paper, the pinned public Dogrib inputs and our existing FireCase workflow.
+Adaptation decision: W.I.S.E.-style case assembly/QC + CFSDS v1.1 + target-blind initial
+state + existing Cell2Fire/Firehose runtime. Dogrib is now a geospatial schema/visual QA
+fixture only. Added `scripts/plot_dogrib_reference.py` and ran it against the local,
+hash-pinned, ignored Dogrib raw files. It draws fuels, terrain, KML boundaries, both
+published ignition representations, observed scar and the package-supplied Prometheus
+comparison layer. The JSON receipt preserves CRS, grid dimensions, source commit and
+observed mismatches.
+
+**Findings.** The full raster is 223×357 at 100 m, whereas the current policy grid is
+20×20. The KML point maps to one-based row/column 189/92, while `Ignitions.csv` gives
+188/91. Of 10,210 observed-scar cells, 663 overlap fuel code 101. The weather file has
+eight hourly samples spanning seven hours; the initial and final KML perimeter timestamps
+are 22 h 52 min apart. The supplied Prometheus comparison map has no independently
+verified timestep match. The existing Sub20 crop shares fuel/elevation values with a
+full-map block but slope/aspect and geographic origin are not verified.
+
+**Decision and limits.** Do not run or advertise this as a full-event physical replay.
+Keep it as a geospatial/input/visualization fixture unless the ignition, fuel/scar, time
+and domain issues are resolved. Adopt W.I.S.E.'s case assembly/QC pattern, but do not copy
+its future-informed initial-front construction or target-optimized sensitivity scenarios
+into primary training or held-out evaluation. The Dogrib paper's same-scar optimization is
+not an independent generalization test. No new simulator replay, no-action gate, RL
+training, or benchmark was run. `research_ready=false` remains. The output files are
+`reports/real-fire-data/dogrib-reference-alignment.png` and `.json`; see
+`docs/research/ADAPTED_PRIOR_ART_WORKFLOW.md` and ADR-031.
+
 ## EXP-001 — synthetic pilot
 Config `configs/pilot.json`; 5 politika × 5 B × 12 seedova = 300 epizoda.
 Namjena: provjera pipelinea i budžetskog računovodstva. Nema RL modela i nema tvrdnje

@@ -4,6 +4,17 @@ title: Work log
 ---
 # Work log
 
+2026-10-31 — Adopted a concrete prior-art workflow rather than treating the published
+limitations as a reason to stall: reuse W.I.S.E.'s CFSDS case assembly/QC ideas with a
+strict target-blind start; keep Cell2Fire/Firehose as the simulator/RL path; use Dogrib
+only as a schema and visualization fixture. Added ADR-031, an implementation workflow,
+and a georeferenced Dogrib QA plotting script/plate/JSON receipt. The new artifact records
+the KML vs CSV ignition one-cell offset, 663 observed scar cells on fuel code 101, and
+the seven-hour sampled weather span versus a 22 h 52 min interval between KML perimeters.
+No Dogrib or new CFSDS replay, no policy training, no physical validation and no gate
+promotion occurred. Raw files remain ignored. See EXP-021 and
+[ADAPTED_PRIOR_ART_WORKFLOW](research/ADAPTED_PRIOR_ART_WORKFLOW.md).
+
 2026-10-31 — Prior-art follow-up for CFSDS → simulator → RL question. Reviewed the
 original CFSDS data descriptor and technical-validation section, the direct W.I.S.E.
 assessment built on CFSDS 1.1, the 2025 Dogrib/Cell2Fire real-case study and inputs,

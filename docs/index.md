@@ -15,3 +15,4 @@
 - [Nezavisan pregled bootstrap koda — 2026-10-28](REVIEW.md) - Review Record
 - [Trenutno stanje — 2026-10-31](STATUS.md) - Project Status
 - [Work log](WORK_LOG.md) - History
+- [Provjereni tok požarnih podataka i vizualizacija](research/ADAPTED_PRIOR_ART_WORKFLOW.md) - prilagođen W.I.S.E./Cell2Fire/Firehose recept i budući vizualni ugovor

@@ -23,6 +23,14 @@ front i target za optimalno trajanje/vjetar u dijagnostičkim scenarijima; Dogri
 Cell2Fire real-case pretvorbu, a Firehose potvrđuje RL petlju u simulatoru. Nijedan od tih
 izvora sam ne dokazuje našu ciljanu fine-tune prednost.
 
+Odabir i provedba prilagođenog recepta su zapisani u
+[ADAPTED_PRIOR_ART_WORKFLOW](research/ADAPTED_PRIOR_ART_WORKFLOW.md): W.I.S.E. za CFSDS
+pripremu uz target-blind početak, Firehose/Cell2Fire za simulaciju i RL, Dogrib kao GIS/
+vizualni fixture. Prva Dogrib QA karta i receipt su napravljeni; pronašli su razliku od
+jedne ćelije u KML/CSV paljenju, 663 nonfuel scar ćelije i vremenski prozor od 7h prema
+skoro 23h između perimetara. Zbog toga Dogrib nije dobio replay. Za buduće prikaze TASK-019
+traži očuvane CRS/skalu/vrijeme/akcije kroz cijelu epizodu.
+
 ## Završeno u ovoj fazi
 
 - TASK-018 analiza tri sačuvana TRAIN no-action replaya potvrdila je rani kontakt s
@@ -98,6 +106,10 @@ Metode i dokazi:
 - [BC operational evidence receipt](../reports/real-fire-data/cfsds-train-bc-operational-evidence.json) for dated activity/status reports on the three BC candidate incidents; partial public evidence, not a full daily resource log
 - [TASK-004c adapter/runtime receipt](../reports/firehose-verification/task004c-adapter-smoke.json)
 - [No-action dijagnostika](research/CFSDS_NO_ACTION_DIAGNOSIS.md)
+- Novi Dogrib QA alat [`plot_dogrib_reference.py`](../scripts/plot_dogrib_reference.py)
+  crta pune georeferencirane slojeve i pravi
+  [alignment receipt](../reports/real-fire-data/dogrib-reference-alignment.json). Ovo
+  je GIS/format provjera; nije no-action replay. Pogledati prilagođeni workflow i ADR-031.
 
 ## Sljedeći taskovi po redu
 
