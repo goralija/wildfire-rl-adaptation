@@ -13,6 +13,7 @@
 - [TRAIN BC operational evidence](../../reports/real-fire-data/cfsds-train-bc-operational-evidence.json) - Dnevni javni izvještaji za dva od tri kandidata, s razlikom između cilj-dana i okolnih dana; nije dnevnik dispečiranja
 - [TRAIN-only CFSDS fuel-vintage review](CFSDS_FUEL_VINTAGE_REVIEW.md) - Službeni izvori za istorijski cutoff, javno transkribovanu W.I.S.E. Figure 2, neriješenu age/class semantiku i reuse uslove
 - [TRAIN-only fuel source-gate receipt](../../reports/real-fire-data/cfsds-train-fuel-source-gate.json) - Šta zvanični metadata i javno navedeni v20191114 dokumenti dokazuju, a šta ne
+- [TRAIN terrain/weather provenance receipt](../../reports/real-fire-data/cfsds-train-terrain-weather-provenance.json) - MRDEM source-class check i pinovani target-blind ERA5-Seamless odgovori za tri stare dijagnostičke slučajeve; source vintage i legacy weather mismatch ostaju otvoreni
 - [TRAIN-only CFSDS prostorna podobnost](CFSDS_SPATIAL_FEASIBILITY.md) - Poređenje unaprijed zadanih target-blind domena na istim TRAIN parovima
 - [Puni TRAIN target-independent day-pair screen](CFSDS_FULL_DAY_PAIR_SCREEN.md) - 1.301 CFSDS rastera i pet fiksnih domena; target metrics samo post-selection dijagnostika
 - [EXP-010: fuel-vintage mask proof](EXPERIMENT_LOG.md#exp-010--train-only-pre-target-fuel-mask-and-nf-scar-importer-characterization-2026-10-31) - TRAIN-only vremenska maska i raniji expected-rejection nalaz

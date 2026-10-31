@@ -15,7 +15,7 @@ Napor je okvirni agentov prijedlog u aktivnim radnim satima, bez roka i dodjele 
 | TASK-013 | završeno: podrška handoffu | OKF repo bundle, ulazi/navigacija, održavanje, validator/testovi/CI | ostvareno |
 | TASK-012 | završeno 2026-10-30 | prema korisnikovoj uputi odabrana Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire; historijske granice služe zasebnom reality-checku, a agent uči iz simulatora | ostvareno |
 | TASK-014 | lokalno završeno 2026-10-30; drugi host nije provjeren | moderni `.venv` i odvojeni legacy Docker izgrađeni; package/source/image hashovi i smoke/inference receipt zapisani | ostvareno lokalno |
-| TASK-015 | P0, djelimično završeno | full target-independent screen: svih 1.301 TRAIN rastera obrađeno; 1.010 imaju target mapu, 291 nemaju mapirane target piksele; 20×20/100 m prozor nađen za 1.295; nijedna domena još nije usvojena; `scar_nf` contract je provjeren; W.I.S.E. Figure 2 je javno transkribovana, ali underlying v20191114 succession implementacija i starosna semantika nisu provjerene; v2014b nema javno dokumentovan NFDB/NBAC cutoff; navedeni Decision Rules PDF pokriva baznu klasifikaciju, ne starost burn scars; DEM/weather lineage nedostaje; 3 saved cases imaju BC perimeter kandidatske ID-jeve, dva imaju javno zabilježenu operativnu aktivnost na/uz target datum, C11937 ima samo next-day status; Alberta CSV endpoint 403 | autoritativni fuel vintage/rule contract + event-keyed suppression/source join + DEM/weather provenance + preregistrovani replay gate |
+| TASK-015 | P0, djelimično završeno | full target-independent screen: 1.301 TRAIN rastera; 1.010 imaju target mapu, 291 nemaju target piksela; 20×20/100 m prozor nađen za 1.295; domena nije usvojena; `scar_nf` contract provjeren; W.I.S.E. Figure 2 je javno transkribovana, ali v20191114 succession implementation/starosna semantika nisu; v2014b nema NFDB/NBAC cutoff; BC incidenti su kandidatski, dva imaju djelimičnu javnu aktivnost na/uz target datum, C11937 samo next-day status; Alberta CSV endpoint 403; EXP-020 je za tri stara slučaja našao MRDEM source class GLO-30 i snapshotovao rekonstruisane weather queryje, ali stare temperature/humidity se razlikuju i legacy query/vintage ostaje nepoznat | fuel vintage/rules + suppression event join + full-cohort inputs/domain + preregistrovani no-action gate |
 | TASK-018 | P0, dijagnostička faza završena 2026-10-30; uzrok nije izolovan | poređenje hashova/postavki i unaprijed fiksirani vremenski presjeci na tri train replaya; metadata horizon bug ispravljen; rub/domenska ograničenja potvrđena; bez heldout kalibracije ili treninga | ostvareno |
 | TASK-004c | P0, adapter završen lokalno 2026-10-30 | C++/Python kumulativna šteta, zaseban scar/front i named terminal receipt; fixture + 12/12 inference rollouta, bez treninga; fizički no-action gate ostaje otvoren | ostvareno |
 | TASK-017 | završeno 2026-10-30 | `InitialState.csv` uvozi raniji scar i više aktivnih ćelija; fixture i stvarni `2018_747` C++ import/replay su uspješni | ostvareno |
@@ -28,7 +28,9 @@ Napor je okvirni agentov prijedlog u aktivnim radnim satima, bez roka i dodjele 
 | TASK-009 | P1 predaja | glavni grafikoni, poster, interpretacija i usmeni | 4–8 h |
 
 Redoslijed nastavka: 012 (završeno) → 014 local PASS (završeno) → 015 train fuel/input
-QC (djelimično) + 018 no-action dijagnostička faza (završena, uzrok još nije izolovan)
+QC (djelimično; DEM source class je ustanovljen za tri saved inputs, weather snapshoti
+su pinovani, ali legacy temperature/humidity se razlikuju i stari inputs ostaju
+target-aware) + 018 no-action dijagnostička faza (završena, uzrok još nije izolovan)
 → 004c cumulative-damage/terminal-reason adapter (završen lokalno) → 015 preostali
 fuel-vintage/terrain/weather/suppression QC → unaprijed definisani train-only kontrolisani
 replayi / 016 dodatni slučajevi → no-action gate odluka + heldout freeze → 005 benchmark/time

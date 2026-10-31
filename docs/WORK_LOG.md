@@ -661,3 +661,27 @@ and [ADR-029](specs/DECISION_RECORDS.md#adr-029). No raster download/generation,
 simulator replay, training, or heldout inspection occurred. Fuel gate remains blocked;
 next seek an authoritative cutoff and succession implementation or define a separately
 auditable alternative.
+
+## 2026-10-31 — TASK-015 TRAIN terrain source-class and weather snapshot provenance
+
+Read only the NRCan MRDEM-30-SOURCE COG windows covering the three existing 2018 TRAIN
+diagnostic grids. All 4,489 sampled 30 m pixels in each footprint were source code 1,
+adjusted Copernicus GLO-30; that class covers all 400 100 m model cells in each patch.
+The product specification dates GLO-30 inputs to 2011–2015, but the old case manifests
+do not pin the DTM/VRT revision, source checksum or per-pixel acquisition dates. No
+national DEM was downloaded.
+
+Reconstructed the target-blind pre-target-front weather query coordinates and queried
+only the three existing target dates from Open-Meteo ERA5-Seamless. The API resolved to
+the same coarse cells/timezones as the saved manifests, but all 24 temperatures changed
+for every case and 1–6 relative-humidity hours changed; wind and precipitation matched.
+Cause is unknown. Saved exact request URLs and exact 24-hour response snapshots, totalling
+4,282 bytes. No historical case files/manifests were modified and no new FireCase, replay,
+benchmark or training run was made.
+
+Added [terrain/weather provenance receipt](../reports/real-fire-data/cfsds-train-terrain-weather-provenance.json),
+[EXP-020](research/EXPERIMENT_LOG.md#exp-020--train-terrain-source-class-and-weather-snapshot-provenance-2026-10-31),
+[ADR-030](specs/DECISION_RECORDS.md#adr-030), and [S-049](research/SOURCES.md); updated
+input QC, status, backlog, handoff, context and indexes. The finding narrows two input
+lineage questions for these old train diagnostics; it does not clear fuel vintage,
+spatial fitness, event-keyed suppression or the no-action gate. `research_ready=false`.

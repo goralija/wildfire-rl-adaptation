@@ -55,6 +55,13 @@ fine-tuning prije prihvatljivih train ulaza, replay gatea i zamrznutog heldout s
   Alberta 2006–2025 fire-level suppression dataset je pronađen; direktni CSV download
   endpoint vratio je HTTP 403 pa nijedan događaj nije spojen. DEM/weather lineage je
   nepotpuna, a suppression status za slučajeve ostaje unknown.
+- EXP-020 je provjerio samo tri postojeća TRAIN FireCase-a: trenutni MRDEM source-class
+  prozor je 100% adjusted GLO-30 (source collection 2011–2015), ali tačan stari DTM
+  revision/acquisition date nije utvrđen. Novi target-blind ERA5-Seamless upiti su
+  sačuvani kao mali JSON snapshoti; model grid point se poklapa sa starim, ali temperature
+  se razlikuju u sva 24 sata, a humidity u 1–6 sati. Razlog nije potvrđen. Stari
+  target-aware FireCase-i nisu promijenjeni. Vidi EXP-020/ADR-030 i
+  `reports/real-fire-data/cfsds-train-terrain-weather-provenance.json`.
 - Naknadna provjera službenih BC historical perimeter poligona našla je po jedan
   2018 kandidat za svaki od tri spremljena cilja: `2018_1770` → N12395,
   `2018_241` → C11937, `2018_747` → N12413. To su geometrijski crosswalk kandidati,
@@ -79,6 +86,7 @@ Metode i dokazi:
 - [Fuel mask proof](../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
   [NF-scar importer contract receipt](../reports/firehose-verification/nonfuel-initial-scar-contract.json)
 - [Fuel source-gate receipt](../reports/real-fire-data/cfsds-train-fuel-source-gate.json) for the v2014b cutoff and v20191114 rules-artifact inventory
+- [Terrain/weather provenance receipt](../reports/real-fire-data/cfsds-train-terrain-weather-provenance.json) and [pinned weather response files](../reports/real-fire-data/weather-snapshots/)
 - [BC perimeter crosswalk receipt](../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json) for the three saved 2018 TRAIN cases; no suppression fields
 - [BC operational evidence receipt](../reports/real-fire-data/cfsds-train-bc-operational-evidence.json) for dated activity/status reports on the three BC candidate incidents; partial public evidence, not a full daily resource log
 - [TASK-004c adapter/runtime receipt](../reports/firehose-verification/task004c-adapter-smoke.json)
@@ -98,10 +106,11 @@ Metode i dokazi:
    slučajeve odredi provinciju pa traži nadležni izvor; Alberta CSV/dictionary još treba
    dohvatiti službenim putem nakon HTTP 403. Fire-level resursi nisu dnevni plan, a bez
    dokaza ostavi status `unknown`.
-3. Za prihvatljive TRAIN slučajeve kompletiraj DEM tile/version/hash i zabilježi tačan
-   weather query, traženu i vraćenu lokaciju, model/polja/jedinice/timezone/raw hash.
-   Tri sačuvana FireCase paketa su target-aware i njihove weather request lokacije nisu
-   rekonstruisane; ne predstavljaj ih kao čiste benchmark ulaze.
+3. Prihvati tri sačuvana case-a samo kao dijagnostiku. Za nove prihvatljive TRAIN ulaze
+   zamrzni tačan DEM DTM asset/version/hash (trenutni izvorni sloj daje samo source
+   category) i zabilježi query URL, traženu/vraćenu lokaciju, model/polja/jedinice,
+   timezone i response hash. Reconstructed target-blind weather snapshoti su dokaz
+   metode i pinovani inputi za budući rebuild, ne zamjena za stare `Weather.csv` fajlove.
 4. Preregistruj iste no-action ulaze, seedove i horizont; uradi mali train-only replay
    gate na slučajevima koji prođu prethodne gateove i unaprijed definiši prihvatljive
    metrike. Ne birati trajanje epizode po targetu.

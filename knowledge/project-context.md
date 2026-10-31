@@ -3,7 +3,7 @@ type: Project Context
 title: Projektni kontekst i stanje istraživanja
 description: Kratki ulaz u cilj, ostvareno, otvorene odluke i prvi naredni posao.
 status: stable
-generated: {by: "process:codex", at: "2026-10-31T10:12:28Z"}
+generated: {by: "process:codex", at: "2026-10-31T11:40:20Z"}
 sources:
   - resource: /docs/STATUS.md
   - resource: /docs/specs/DECISION_RECORDS.md
@@ -55,6 +55,14 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
   reprodukciju spremljenih slučajeva. Alberta 2006–2025 suppression dataset je pronađen,
   ali CSV endpoint vratio je HTTP 403 i nema event join-a. [Audit](../docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md),
   [ADR-024](../docs/specs/DECISION_RECORDS.md#adr-024), [ADR-026](../docs/specs/DECISION_RECORDS.md#adr-026).
+- Terrain/weather provenance je dodatno provjeren za tri postojeća TRAIN pilota: svi
+  uzorkovani MRDEM source-class pikseli su adjusted GLO-30 (2011–2015 input collection),
+  a rekonstruisani target-blind ERA5-Seamless odgovori su sačuvani sa query URL-ovima.
+  Ipak, stare temperature se razlikuju svih 24 sata u sva tri slučaja, humidity u 1–6
+  sati, stari DEM revision ostaje nepoznat, a FireCase-i su target-aware. Ovo nije PASS
+  za environment/no-action gate. [Receipt](../reports/real-fire-data/cfsds-train-terrain-weather-provenance.json),
+  [snapshots](../reports/real-fire-data/weather-snapshots/), [EXP-020](../docs/research/EXPERIMENT_LOG.md#exp-020--train-terrain-source-class-and-weather-snapshot-provenance-2026-10-31),
+  [ADR-030](../docs/specs/DECISION_RECORDS.md#adr-030).
 - Službeni BC historical perimeter servis geometrijski povezuje target-centroid tri
   spremljena 2018 TRAIN slučaja s kandidatima N12395, C11937 i N12413. Follow-up javni
   izvještaji dokumentuju containment-line rad na cilj-dan Coal Creeka i paljenje/resurse

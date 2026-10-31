@@ -1,5 +1,11 @@
 # Promjene baze znanja
 
+## 2026-10-31: TRAIN DEM source class i vremenski snapshoti
+
+- Tri postojeća 2018 TRAIN DEM prozora u MRDEM source-class sloju su 100% adjusted GLO-30; tačan stari DTM revision i pixel acquisition date i dalje nisu poznati.
+- Rekonstruisani target-blind weather queryji daju iste grube API ćelije kao stari inputi, ali nove temperature/humidity se razlikuju. Tačni URL-ovi i 24-satni JSON odgovori su sačuvani; stare FireCase datoteke nisu promijenjene.
+- Dodani su [provenance receipt](reports/real-fire-data/cfsds-train-terrain-weather-provenance.json), [weather snapshots](reports/real-fire-data/weather-snapshots/), [S-049](docs/research/SOURCES.md), [EXP-020](docs/research/EXPERIMENT_LOG.md#exp-020--train-terrain-source-class-and-weather-snapshot-provenance-2026-10-31) i [ADR-030](docs/specs/DECISION_RECORDS.md#adr-030). `research_ready=false`.
+
 ## 2026-10-31: TRAIN fuel source-gate inventory
 
 - Zvanični v2014b metadata navodi NFDB/NBAC za burn scars, ali ne datum snapshot-a ni cutoff; ne možemo ga proglasiti leakage-safe za TRAIN događaje.

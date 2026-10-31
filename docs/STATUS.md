@@ -9,6 +9,7 @@ sources:
 - resource: /reports/firehose-verification/nonfuel-initial-scar-contract.json
 - resource: /reports/real-fire-data/cfsds-train-bc-operational-evidence.json
 - resource: /reports/real-fire-data/cfsds-train-fuel-source-gate.json
+- resource: /reports/real-fire-data/cfsds-train-terrain-weather-provenance.json
 - resource: /docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md
 - resource: /docs/WORK_LOG.md
 ---
@@ -21,7 +22,9 @@ i [pravilima održavanja](../knowledge/maintenance.md). Dokumenti imaju tipove,
 lowercase indekse i navigaciju; agent ulazi dijele isti AGENTS kontekst. Zaseban
 knowledge checker/CI čuva strukturu i lokalne linkove. Migracija ne zatvara dataset
 refinement niti uvodi naučnu/humanu verifikaciju sadržaja.
-Provjera: [63 Markdown fajla, 15 knowledge testova i clean-clone dokaz](../reports/knowledge-validation.json).
+Trenutni strict OKF checker prolazi za 73 Markdown fajla. Odvojeni knowledge testovi i
+clean-clone rezultat iz ranije validacije su sažeti u
+[historijskom validation receiptu](../reports/knowledge-validation.json).
 Osnovni aplikacijski paket i dalje nema dodatne zavisnosti; PyYAML je samo knowledge alat.
 
 ## Lokalni workspace
@@ -455,3 +458,26 @@ not verified. The roughly 2 GB release ZIP was not inspected. No annual map was 
 the fuel gate remains blocked. See the [source-gate receipt](../reports/real-fire-data/cfsds-train-fuel-source-gate.json),
 [EXP-019](research/EXPERIMENT_LOG.md#exp-019--train-fuel-vintage-artifact-inventory-2026-10-31),
 and [ADR-029](specs/DECISION_RECORDS.md#adr-029).
+
+## TRAIN terrain and weather provenance follow-up — 2026-10-31
+
+For only the three existing 2018 TRAIN diagnostic cases, bounded reads of NRCan's
+MRDEM-30-SOURCE COG found adjusted Copernicus GLO-30 source class in all 4,489 30 m
+pixels covering each 2 km case grid. The product specification dates the underlying
+GLO-30 collection to 2011–2015, before these targets. This narrows the source category,
+but the exact DTM VRT revision, source checksum and per-pixel acquisition date used in
+the saved cases are still unknown.
+
+Fresh Open-Meteo ERA5-Seamless queries at reconstructed target-blind day-n−1 front
+centroids returned the same coarse grid point and timezone as the legacy manifests.
+Their temperature series differs for all 24 hours in each case; humidity differs for
+1–6 hours; wind and precipitation match. The cause of the historical mismatch is not
+established. Exact request URLs and three small response snapshots are now pinned. The
+old FireCase inputs were not changed and remain outputs of the target-aware builder.
+
+This closes neither historical-input validation nor the environment gate. No case was
+rebuilt, no replay or training ran, and no heldout data were opened. Annual fuel vintage,
+event-keyed suppression, model-domain fitness and pre-registered no-action acceptance
+remain blockers. See the [receipt](../reports/real-fire-data/cfsds-train-terrain-weather-provenance.json),
+[EXP-020](research/EXPERIMENT_LOG.md#exp-020--train-terrain-source-class-and-weather-snapshot-provenance-2026-10-31),
+[ADR-030](specs/DECISION_RECORDS.md#adr-030), and [S-049](research/SOURCES.md).

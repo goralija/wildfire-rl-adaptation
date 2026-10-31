@@ -43,13 +43,16 @@ with no no-data cells.
 
 The three case manifests identify the NRCan MRDEM-30 DTM VRT and the 30 m bilinear
 conversion to 100 m cells. Hashes exist for the generated elevation/slope/aspect grids,
-but the exact upstream source-cell identifiers, source raster/tile checksum, and
-per-cell acquisition dates are absent. MRDEM is a blended product; incorporated lidar
-sources range from 2006 to 2023 [S-034]. This leaves output identity reproducible from
-the saved grid hashes, while upstream terrain lineage and event-era representativeness
-remain unverified. The W.I.S.E. study also uses MRDEM and assumes terrain changes since
-2014 are negligible; that is a published static-terrain assumption, not case-specific
-evidence [S-037].
+but the exact VRT snapshot/source-cell identifiers, source DTM checksum, and per-cell
+acquisition dates used for those saved inputs are absent. A bounded read of NRCan's
+separate current MRDEM-30-SOURCE asset found code 1 (adjusted Copernicus GLO-30) across
+all 4,489 source pixels covering each saved 2 km grid; therefore all 400 output cells
+per case overlap that source class. NRCan dates the underlying GLO-30 collection to
+2011–2015, before these 2018 targets [S-049]. This narrows the source category for the
+current footprints but does not identify exact acquisition dates or prove the old DTM
+values came from an identical product revision. The W.I.S.E. study also uses MRDEM and
+assumes terrain changes since 2014 are negligible; that remains a published static-
+terrain assumption, not case-specific proof [S-037].
 
 Each saved Weather.csv contains 24 ordered hourly rows from 00:00 through 23:00 on
 the target local date. The three raw API responses preserve the model name, resolved
@@ -63,12 +66,23 @@ FWI codes are repeated in every hourly row, so there is no hourly FWI trajectory
 The original API query URL/parameters and exact requested coordinate were not saved.
 The manifest key `request_location` describes the response's resolved grid point, not
 the original coordinate sent to the API. Those resolved points are 2.436–5.195 km from
-the target-day summary centroid. Because the original request point is missing, these
-historic files cannot prove that weather location selection was target-blind. The
-current builder can calculate an intended point from the pre-target day n−1 front, but
-an external weather fetch must use that point and save its exact query before a new case
-can pass this provenance check. Day-n reanalysis is retrospective forcing, not a
-forecast known on day n−1; this should remain explicit in the benchmark claim.
+the target-day summary centroid. A fresh query using a reconstructed target-blind
+day-n−1-front centroid for each case resolved to the same coarse API grid coordinates
+and timezone. But its temperatures changed in all 24 hours in every case, and humidity
+changed in 1–6 hours; wind and precipitation matched. The reason for this historical
+response mismatch is not established. Exact fresh requests and response snapshots are
+saved in the [terrain/weather provenance receipt](../../reports/real-fire-data/cfsds-train-terrain-weather-provenance.json)
+and `reports/real-fire-data/weather-snapshots/`. This provides pinned data for a future
+rebuild, not proof of what original query generated the legacy FireCases. Those cases
+remain outputs of the older target-aware builder; their manifests and `Weather.csv`
+were not changed. Day-n reanalysis is retrospective forcing, not a forecast known on
+day n−1; this should remain explicit in the benchmark claim.
+
+The receipt also identifies the MRDEM source-class asset and its current HTTP snapshot,
+while preserving the distinction between source category and exact source vintage.
+Neither terrain nor weather findings close TASK-015: these are three historical pilot
+inputs, not the full TRAIN cohort, and annual fuel provenance, suppression, domain
+suitability, and the no-action replay gate remain unresolved.
 
 The case fuel grids use National FBP fuel-type map v2014b at 250 m. The existing
 train-only fuel audit found 10 PASS_FUEL_ONLY and 10 FAIL_FUEL_OVERLAP; this

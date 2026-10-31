@@ -761,3 +761,35 @@ Evidence: [fuel source-gate receipt](../../reports/real-fire-data/cfsds-train-fu
 [official v20191114 directory](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/),
 [official baseline decision rules](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/FBP_Fuel_Layer_Decision_Rules.pdf),
 [W.I.S.E. article](https://doi.org/10.1071/WF26072).
+
+## ADR-030 — pin fresh TRAIN weather replies and record MRDEM source class, recorded 2026-10-31
+
+A read of NRCan's separate current MRDEM-30-SOURCE COG found only adjusted Copernicus
+GLO-30 source code 1 in the 30 m pixels covering each of the three saved 2018 TRAIN
+pilot grids. Each bounded window contained 4,489 pixels, all code 1; all 400 simulator
+cells in each 2 km patch therefore overlap that source category. NRCan describes the
+source collection as 2011–2015, before the target dates. This does not identify the exact
+DTM revision, input VRT bytes, or per-cell collection dates used in the old cases, and
+the current source-class COG is not the historic DTM asset itself.
+
+Fresh Open-Meteo ERA5-Seamless requests made at reconstructed target-blind day-n−1
+front centroids resolved to the same coarse grid coordinates/timezones recorded in the
+legacy manifests. Compared with the target-day rows in the old raw responses, new
+temperature differs at all 24 hours for each case, humidity differs at 1–6 hours, and
+wind and precipitation match. The cause is not established. Save exact query URLs and
+the three small exact response snapshots so a future FireCase rebuild can use pinned
+weather input. The legacy manifests do not preserve their original sent coordinates or
+URLs; their `request_location` values are resolved output points. Do not overwrite the
+old case weather files or describe those old cases as target-blind.
+
+**Decision:** record the source-class result and pin these new weather snapshots for
+possible future rebuilds. This narrows, but does not close, terrain/weather provenance.
+Do not regenerate cases until fuel vintage and model domain are resolved; do not pass
+the no-action gate based on these historical inputs. Fuel vintage, event-keyed
+suppression, spatial fitness, complete-cohort input provenance and replay acceptance
+remain blockers. No FireCase rebuild, replay, training or heldout inspection occurred.
+
+Evidence: [terrain/weather receipt](../../reports/real-fire-data/cfsds-train-terrain-weather-provenance.json),
+[input QC](../research/CFSDS_TRAIN_INPUT_QC.md),
+[weather response snapshots](../../reports/real-fire-data/weather-snapshots/),
+[source register S-049](../research/SOURCES.md), and [EXP-020](../research/EXPERIMENT_LOG.md#exp-020--train-terrain-source-class-and-weather-snapshot-provenance-2026-10-31).

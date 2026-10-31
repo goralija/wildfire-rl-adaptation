@@ -577,3 +577,34 @@ or generated, no FireCase/replay/training occurred, and no validation/test data 
 inspected. Evidence: [source-gate receipt](../../reports/real-fire-data/cfsds-train-fuel-source-gate.json),
 [fuel-vintage review](CFSDS_FUEL_VINTAGE_REVIEW.md), [ADR-029](../specs/DECISION_RECORDS.md#adr-029),
 and [S-048](SOURCES.md).
+
+## EXP-020 — TRAIN terrain source-class and weather snapshot provenance, 2026-10-31
+
+For the three already-materialized TRAIN pilot cases only, read NRCan's separate
+MRDEM-30-SOURCE COG over each 2 km simulator extent. Each 67×67 source window contained
+4,489/4,489 pixels with source code 1 (adjusted Copernicus GLO-30), so all 400 model
+cells overlap that source class. NRCan's product specification dates the GLO-30 source
+collection to 2011–2015. The current source-class COG is a 2026 snapshot; the saved
+manifest does not identify an exact DTM revision, upstream tile checksum, or per-pixel
+acquisition date. This is source-category evidence, not proof that the legacy elevation
+values were built from byte-identical 2011–2015-only data.
+
+Recomputed the target-blind day-n−1 safe-front centroid coordinates and requested each
+case's existing target date from Open-Meteo ERA5-Seamless. All responses resolved to the
+same coarse grid point/timezone as the legacy manifests. The target-day temperature
+values changed in 24/24 hours in all cases; relative humidity changed in 6/24, 3/24,
+and 1/24 hours. Wind speed, wind direction and precipitation matched all 24 values.
+`2018_747`'s old 72-hour response was compared only over August 16, its target-date
+slice. The reason for historical response changes is unverified. Exact query URLs and
+new 24-hour responses are committed as small snapshots with hashes. Legacy manifests,
+weather files and FireCases were not modified.
+
+**Decision:** preserve the new replies as immutable input snapshots for a future
+rebuild, but do not treat the old cases as target-blind or use this result to pass the
+environment/no-action gate. Fuel-vintage validity, exact legacy DTM vintage, full-cohort
+weather/provenance, domain fit, event-keyed suppression and no-action replay acceptance
+remain open. No case rebuild, simulator replay, calibration, benchmark, training or
+heldout inspection occurred. Evidence: [terrain/weather receipt](../../reports/real-fire-data/cfsds-train-terrain-weather-provenance.json),
+[pinned response snapshots](../../reports/real-fire-data/weather-snapshots/),
+[input QC](CFSDS_TRAIN_INPUT_QC.md), [ADR-030](../specs/DECISION_RECORDS.md#adr-030),
+and [S-049](SOURCES.md).

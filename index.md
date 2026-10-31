@@ -19,6 +19,7 @@ okf_version: "0.2"
 - [Podaci](data/index.md) - Porijeklo, javni izvori i CFSDS pilot cohort manifest.
 - [Real-case pipeline](docs/research/REAL_CASE_PIPELINE.md) - Jednostavan opis šta stvarni podaci daju (Y), šta simulator prima (X), te jaz početnog fronta.
 - [Train-only CFSDS input QC](docs/research/CFSDS_TRAIN_INPUT_QC.md) - Izmjereni ulazi, target-blind početno stanje i otvoreni fuel/weather/spatial/suppression rizici.
+- [TRAIN terrain/weather provenance receipt](reports/real-fire-data/cfsds-train-terrain-weather-provenance.json) - MRDEM source class i novi pinovani weather snapshots; ne kvalifikuje stare target-aware slučajeve.
 - [TRAIN-only CFSDS fuel-vintage review](docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md) - FBP izvori, javno transkribovano W.I.S.E. succession stablo, neriješeni historijski cut-off i reuse uslovi.
 - [TRAIN-only CFSDS prostorni audit](docs/research/CFSDS_SPATIAL_FEASIBILITY.md) - Učinak 2–6 km target-blind domena na 25 TRAIN parova i ograničenja postojećeg 20×20 checkpointa.
 - [Puni TRAIN target-independent day-pair screen](docs/research/CFSDS_FULL_DAY_PAIR_SCREEN.md) - Svih 1.301 CFSDS TRAIN rastera, parovi dana bez target uslova i pet unaprijed definisanih domena.
