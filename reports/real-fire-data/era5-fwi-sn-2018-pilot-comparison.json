@@ -1,0 +1,210 @@
+{
+  "audit_script_sha256": "501b936059b4fb48de8268b2b244087df341708ab6ed1438bd645d6e94bf0e8e",
+  "cases": [
+    {
+      "case_receipt_sha256": "c6eae9397ddb87636f0ee4c3f0e70cbf385808fc1ad237fe85e903bee1db97a7",
+      "cfsds_fire_day_summary_values": {
+        "BUI": 71.3886032104492,
+        "DC": 363.458648681641,
+        "DMC": 47.309700012207,
+        "FFMC": 79.5148315429688,
+        "FWI": 8.24415683746338,
+        "ISI": 2.17563152313232
+      },
+      "comparison_note": "Different products and spatial supports: ERA5-FWI-SN is a nearest ~31 km ERA5 grid cell at the reconstructed target-blind point; CFSDS summary values are fire-day summaries. Differences are diagnostic, not error estimates.",
+      "era5_fwi_sn_daily_values": {
+        "BUI": 58.71604253541427,
+        "DC": 315.04559514167073,
+        "DMC": 38.27475497043534,
+        "FFMC": 78.22665842583217,
+        "FWI": 8.612565050289252,
+        "ISI": 2.6377276372454648
+      },
+      "era5_fwi_sn_minus_cfsds_summary": {
+        "BUI": -12.672561,
+        "DC": -48.413054,
+        "DMC": -9.034945,
+        "FFMC": -1.288173,
+        "FWI": 0.368408,
+        "ISI": 0.462096
+      },
+      "event_id": "2018_1770",
+      "nearest_era5_grid_point_wgs84": {
+        "lat": 49.5,
+        "lon": -114.75
+      },
+      "point_to_grid_distance_km": 7.986,
+      "query_point_method": "reconstructed target-blind day-n-1 safe-interior-front centroid from the existing provenance receipt",
+      "query_point_wgs84": {
+        "lat": 49.50311574,
+        "lon": -114.86048225
+      },
+      "target_date_local": "2018-08-12"
+    },
+    {
+      "case_receipt_sha256": "b7ec7f2e9b4c71f821c640002e9091dc75a98c129cf22ed32244fd4ef005849a",
+      "cfsds_fire_day_summary_values": {
+        "BUI": 114.630020141602,
+        "DC": 459.240875244141,
+        "DMC": 83.3078536987305,
+        "FFMC": 91.6729354858398,
+        "FWI": 23.9613285064697,
+        "ISI": 6.12948846817017
+      },
+      "comparison_note": "Different products and spatial supports: ERA5-FWI-SN is a nearest ~31 km ERA5 grid cell at the reconstructed target-blind point; CFSDS summary values are fire-day summaries. Differences are diagnostic, not error estimates.",
+      "era5_fwi_sn_daily_values": {
+        "BUI": 133.87811484940454,
+        "DC": 521.4402813284066,
+        "DMC": 98.57511061384315,
+        "FFMC": 91.84945476258571,
+        "FWI": 26.1454276147457,
+        "ISI": 6.357412756312737
+      },
+      "era5_fwi_sn_minus_cfsds_summary": {
+        "BUI": 19.248095,
+        "DC": 62.199406,
+        "DMC": 15.267257,
+        "FFMC": 0.176519,
+        "FWI": 2.184099,
+        "ISI": 0.227924
+      },
+      "event_id": "2018_241",
+      "nearest_era5_grid_point_wgs84": {
+        "lat": 53.25,
+        "lon": -123.75
+      },
+      "point_to_grid_distance_km": 13.501,
+      "query_point_method": "reconstructed target-blind day-n-1 safe-interior-front centroid from the existing provenance receipt",
+      "query_point_wgs84": {
+        "lat": 53.13376191,
+        "lon": -123.80856635
+      },
+      "target_date_local": "2018-08-15"
+    },
+    {
+      "case_receipt_sha256": "43baf91cc526056b21381257eae201ee7f24bd85d316e64e01132a47f017b2f5",
+      "cfsds_fire_day_summary_values": {
+        "BUI": 112.898994445801,
+        "DC": 520.743896484375,
+        "DMC": 77.4345932006836,
+        "FFMC": 93.2947158813477,
+        "FWI": 32.1091537475586,
+        "ISI": 9.48892974853516
+      },
+      "comparison_note": "Different products and spatial supports: ERA5-FWI-SN is a nearest ~31 km ERA5 grid cell at the reconstructed target-blind point; CFSDS summary values are fire-day summaries. Differences are diagnostic, not error estimates.",
+      "era5_fwi_sn_daily_values": {
+        "BUI": 89.2597223293234,
+        "DC": 400.39880474269427,
+        "DMC": 61.870667507807994,
+        "FFMC": 94.24057692632942,
+        "FWI": 33.76868455810565,
+        "ISI": 12.043051987690912
+      },
+      "era5_fwi_sn_minus_cfsds_summary": {
+        "BUI": -23.639272,
+        "DC": -120.345092,
+        "DMC": -15.563926,
+        "FFMC": 0.945861,
+        "FWI": 1.659531,
+        "ISI": 2.554122
+      },
+      "event_id": "2018_747",
+      "nearest_era5_grid_point_wgs84": {
+        "lat": 49.75,
+        "lon": -116.0
+      },
+      "point_to_grid_distance_km": 11.13,
+      "query_point_method": "reconstructed target-blind day-n-1 safe-interior-front centroid from the existing provenance receipt",
+      "query_point_wgs84": {
+        "lat": 49.8396088,
+        "lon": -115.93089791
+      },
+      "target_date_local": "2018-08-16"
+    }
+  ],
+  "interpretation": [
+    "This is a Canada-specific, documented alternative for the six daily FWI columns; it is materially better sourced than using CFSDS fire-day means as the simulator weather codes.",
+    "Cell2Fire's Weather.csv is hourly, while these six Canadian FWI indices are daily. The compatible first-pass mapping is one dated daily value repeated across that date's hourly rows, explicitly labeled daily; it does not invent an hourly FWI trajectory.",
+    "The source is a roughly 31 km grid, not local fire-station truth. It improves provenance and validation, not local spatial precision.",
+    "The hourly temperature, humidity, wind and precipitation series remain a separate input source and still need pinned coordinates, versions and matched-time checks before new cases are rebuilt.",
+    "These reads do not establish historical suppression, as-of-event fuel maps, no-action physical validity, or an agent's real-world avoided area. No old case is automatically promoted to benchmark status."
+  ],
+  "purpose": "Read-only comparison of a validated Canadian daily FWI reanalysis against the FWI summary values used in three existing TRAIN pilot cases.",
+  "reviewed_on": "2026-10-31",
+  "schema": "era5-fwi-sn-pilot-comparison/v1",
+  "scope": {
+    "calibration_or_training_run": false,
+    "case_manifests_or_weather_csv_modified": false,
+    "event_ids": [
+      "2018_1770",
+      "2018_241",
+      "2018_747"
+    ],
+    "new_firecase_or_cell2fire_replay_created": false,
+    "validation_test_data_opened": false
+  },
+  "source": {
+    "dataset_doi": "https://doi.org/10.5683/SP3/4B18XZ",
+    "dataset_license": "CC BY 4.0",
+    "name": "ERA5-FWI-SN dataset (V1), Borealis release version 2",
+    "netcdf_product_version": "FWI_v2",
+    "paper_doi": "https://doi.org/10.5194/essd-18-5995-2026",
+    "published_domain_and_years_in_paper": "Canada, 1950\u20132024; the current Borealis v2 archive also contains selected 2025 products",
+    "selected_files": [
+      {
+        "borealis_file_id": 976865,
+        "bytes": 19691676,
+        "component": "FFMC",
+        "filename": "Risque-ESCER_ERA5_FFMC_daily_2018_Can_0p25grid.nc",
+        "md5": "dd71a6c640c3f80eb916cea413a548f8",
+        "sha256": "bdc28540c484728a5dde53d03a555ad9b623550f04ef8adba37feb982dbb8672"
+      },
+      {
+        "borealis_file_id": 977355,
+        "bytes": 20719079,
+        "component": "DMC",
+        "filename": "Risque-ESCER_ERA5_DMC_daily_2018_Can_0p25grid.nc",
+        "md5": "3b7c7d01bbed7b33d165e5fb42e85573",
+        "sha256": "ea21b3507598e498199f1889d9074d3d6f8c63300398a70c1a6f41513ad2edeb"
+      },
+      {
+        "borealis_file_id": 977028,
+        "bytes": 20399821,
+        "component": "DC",
+        "filename": "Risque-ESCER_ERA5_DC_daily_2018_Can_0p25grid.nc",
+        "md5": "bda2a902114d24d6506b3b92de05493b",
+        "sha256": "8b7645b5df53ec50c4c5d0ee7fcb1987994bf0cc27684693e858afdb7a589bd8"
+      },
+      {
+        "borealis_file_id": 977599,
+        "bytes": 21167694,
+        "component": "ISI",
+        "filename": "Risque-ESCER_ERA5_ISI_daily_2018_Can_0p25grid.nc",
+        "md5": "b3a5d85825f479fda5f9bbbcb561ac0b",
+        "sha256": "2d81900c248fd9b1fa0ade0d06ced8d9fbbdfb4069e5d084811ae2e36c9159e5"
+      },
+      {
+        "borealis_file_id": 977649,
+        "bytes": 20731112,
+        "component": "BUI",
+        "filename": "Risque-ESCER_ERA5_BUI_daily_2018_Can_0p25grid.nc",
+        "md5": "9192c88611853090c7ff9fe808b9872a",
+        "sha256": "c227dda052cb0acdbd13d96cdcb58cccf2f49897db094ec66a9f591bf7b6bd06"
+      },
+      {
+        "borealis_file_id": 976732,
+        "bytes": 21376913,
+        "component": "FWI",
+        "filename": "Risque-ESCER_ERA5_FWI_daily_2018_Can_0p25grid.nc",
+        "md5": "538b91cfeb483425ec0c3c0ef575520c",
+        "sha256": "6e24e88b78a2d5ae3d19394aab433258cfa8c55f7883ab5f4587a5edee43d3ad"
+      }
+    ],
+    "source_reanalysis": "ERA5 hourly single-level reanalysis",
+    "spatial_resolution_degrees": 0.25,
+    "temporal_resolution": "daily; components calculated using local solar-noon meteorology",
+    "validation_summary_from_paper": "Against CWFIS station FWI for 2015\u20132024, median temporal/spatial correlation is 0.81; paper reports modestly high variability and underestimation of some extremes."
+  },
+  "source_data_directory": "data/raw/era5-fwi-sn/v2",
+  "target_blind_point_receipt_sha256": "864f3c2309d3a6f9ad339960ca04a6c93163b88a88f6cd53401885407f3f1f0c"
+}

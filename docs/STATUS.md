@@ -18,6 +18,27 @@ sources:
 ---
 # Trenutno stanje — 2026-10-31
 
+## Najnoviji nalaz — dnevni FWI izvor provjeren, glavni zastoji ostaju, 2026-10-31
+
+Za tri postojeća 2018 TRAIN dijagnostička slučaja preuzeti su i checksum-provjereni
+šest ERA5-FWI-SN dnevnih indeksa. Upareni replayi mijenjali su samo te indekse i
+uspješno su završeni: predviđene nove površine bile su 73→70 ha, 237→237 ha i
+66→66 ha. Sve tri simulacije i dalje su došle do ruba malog 2×2 km izreza. Dakle,
+novi vremenski izvor je sada ponovljiv i propisno dokumentovan, ali nije uzrok niti
+rješenje velikog neslaganja. Pogledati [EXP-025](research/EXPERIMENT_LOG.md#exp-025--era5-fwi-sn-daily-weather-paired-train-replays-2026-10-31),
+[kontrolno poređenje](../reports/real-fire-data/era5-fwi-sn-2018-weather-replay-comparison.json)
+i [objašnjenje](research/ERA5_FWI_SN_DIAGNOSTIC.md).
+
+Ponovo je provjeren i Alberta put za podatke o gašenju. Katalog najavljuje tačno
+potrebne zapise o prvom fizičkom suzbijanju, ali CSV u ovom okruženju vraća 403;
+službena dostupna GIS karta sadrži status i površinu, ne vrijeme prvog fizičkog
+gašenja. To ne rješava tri postojeća BC požara i ne može dokazati da su bili bez
+intervencije. Svi ostaju `suppression_status=unknown`. Glavne otvorene prepreke su
+gašenje po konkretnom incidentu/danu, vremenska pouzdanost stare karte goriva i
+simulatorska površina koja trenutno siječe rub. `research_ready=false`; bez treninga.
+Vidi [EXP-026](research/EXPERIMENT_LOG.md#exp-026--alberta-suppression-source-schema-and-access-audit-2026-10-31),
+[ADR-036](specs/DECISION_RECORDS.md#adr-036) i [S-052](research/SOURCES.md).
+
 ## Najnoviji TRAIN fuel nalaz — 2026-10-31
 
 Nova target-blind provjera je preko fiksne mreže 20×20/100 m preklopila postojeću

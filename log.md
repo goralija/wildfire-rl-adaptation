@@ -1,5 +1,11 @@
 # Promjene baze znanja
 
+## 2026-10-31: ERA5-FWI-SN paired replay i Alberta action-source provjera
+
+- Za tri postojeća TRAIN simulator slučaja checksum-provjereni su ERA5-FWI-SN dnevni indeksi i napravljeni su upareni replayi koji mijenjaju samo FFMC/DMC/DC/ISI/BUI/FWI. Rezultat se promijenio za 0–3 model ćelije; sve tri simulacije i dalje dodiruju rub, pa vrijeme nije riješilo glavni no-action mismatch.
+- Službeni Alberta katalog najavljuje prvo fizičko suzbijanje, ali CSV je HTTP 403; dostupni službeni GIS sloj ima lokaciju/status/površinu, ne vrijeme prve akcije. Nema join-a, a sva tri spremljena događaja su BC; status ostaje `unknown`.
+- Dodani su [EXP-025/026](docs/research/EXPERIMENT_LOG.md), [ADR-035/036](docs/specs/DECISION_RECORDS.md), [S-052](docs/research/SOURCES.md), ERA5 dijagnostika i receipts. Ažurirani su TASK-015, status, handoff, source/data indeksi i agent upute. `research_ready=false`; nema treninga, policy benchmarka niti heldout pristupa.
+
 ## 2026-10-31: suppression uslov iz W.I.S.E. i istorijski NBAC datumi
 
 - W.I.S.E. rad uklanja svaki požar sa evidentiranim gašenjem u CNFDB jer model ne simulira intervencije. Naša tri 2018 BC poklapanja su samo kandidati; dva imaju parcijalne javne izvještaje o aktivnosti, a nijedan nema potpun dnevni action log ili dokaz da nije bilo gašenja. `unknown` ne može proći kao `none`.

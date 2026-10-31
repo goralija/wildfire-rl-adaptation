@@ -923,3 +923,44 @@ Evidence: [EXP-024](../research/EXPERIMENT_LOG.md#exp-024--wise-suppression-excl
 [current NBAC metadata](https://cwfis.cfs.nrcan.gc.ca/downloads/nbac/NBAC_1972to2024_20250506_shp_metadata.pdf),
 [suppression evidence](../../reports/real-fire-data/cfsds-train-bc-operational-evidence.json),
 [perimeter crosswalk](../../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json), and [S-031/S-036/S-037/S-050](../research/SOURCES.md).
+
+## ADR-035 — use ERA5-FWI-SN as an auditable daily FWI source for new Canadian cases, accepted 2026-10-31
+
+The six daily ERA5-FWI-SN v2 components were checksum-verified for 2018 and inserted
+into diagnostic copies of three TRAIN `Weather.csv` files by repeating each daily code
+over its 24 hourly rows. All other source inputs and simulator settings were held fixed.
+Paired replays changed the final 100 m cell count by −3, 0 and 0; all three predictions
+still touched the 20×20 crop edge. The weather source is therefore reproducible and
+better documented, but this small sensitivity experiment neither validates the fire
+model nor explains the large spread mismatch.
+
+**Decision:** use the nearest daily ERA5-FWI-SN grid cell for future Canadian replay
+inputs when its date/location and daily-to-hourly mapping are recorded. Retain hourly
+temperature, humidity, wind and precipitation as separately sourced fields; never label
+the daily codes as hourly observations. Do not modify old manifests or treat this as a
+pass for the no-action, historical-fuel, spatial-domain or physical-validity gate.
+
+Evidence: [EXP-025](../research/EXPERIMENT_LOG.md#exp-025--era5-fwi-sn-daily-weather-paired-train-replays-2026-10-31),
+[diagnostic note](../research/ERA5_FWI_SN_DIAGNOSTIC.md), [paired receipt](../../reports/real-fire-data/era5-fwi-sn-2018-weather-replay-comparison.json), and [S-051](../research/SOURCES.md).
+
+## ADR-036 — Alberta perimeter/status layers cannot certify a no-suppression day, accepted 2026-10-31
+
+The official Alberta historical-wildfire catalogue advertises an incident table with
+staffing/resources and initial physical-action fields, but the direct CSV is blocked by
+HTTP 403 / a Cloudflare interstitial in this environment. The accessible provincial
+historical GIS service exposes fire identity, status/status date and area fields, not the
+first-action time or response-resource fields. It can assist incident identification
+and context; it cannot prove that no suppression occurred before or during a target day.
+The existing saved CFSDS crosswalks are British Columbia incidents, so Alberta records
+would not resolve those three cases even if downloaded.
+
+**Decision:** keep every existing `suppression_status=unknown` value unchanged. For a
+future Alberta TRAIN candidate, join the official fire-level source using fire number,
+year and location, and only classify days strictly before a verified physical-firefighting
+start date as pre-action; same-day dates are ambiguous at CFSDS's daily temporal
+resolution. If official access remains unavailable, exclude the event or revise the
+study claim before training; do not infer “no action” from out-of-control status, blank
+fields, or a perimeter.
+
+Evidence: [EXP-026](../research/EXPERIMENT_LOG.md#exp-026--alberta-suppression-source-schema-and-access-audit-2026-10-31),
+[Alberta historical wildfire catalogue](https://open.canada.ca/data/en/dataset/a221e7a0-4f46-4be7-9c5a-e29de9a3447e), [official GIS schema S-052](../research/SOURCES.md), and [EXP-024](../research/EXPERIMENT_LOG.md#exp-024--wise-suppression-exclusion-and-national-burn-history-dating-2026-10-31).

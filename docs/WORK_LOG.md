@@ -772,3 +772,26 @@ Updated the operational evidence receipt, [S-046](research/SOURCES.md), [EXP-021
 and navigation. All saved incident matches remain candidate crosswalks and every case
 manifest retains `suppression_status=unknown`; no status was turned into a cell action.
 No FireCase, simulator replay, training, or heldout inspection occurred.
+
+## 2026-10-31 — ERA5-FWI-SN paired replays and Alberta suppression-source check
+
+Verified all six 2018 ERA5-FWI-SN NetCDFs against source metadata and replayed three
+copies of existing TRAIN cases after changing only the six daily FWI columns. Each
+daily value was repeated over that date's 24 hourly simulator records; the other hourly
+weather, terrain, fuel, masks, reset, seed, budget, policy and pinned offline simulator
+were held fixed. The paired new-burned-cell results changed by −3, 0 and 0, and all three
+still touched the 20×20 crop edge. This closes an auditable daily-FWI data path for new
+Canadian cases, not weather validation, model calibration or the no-action mismatch.
+
+Checked the official Alberta catalogue and historical GIS service. The catalogue
+advertises first-physical-action timing/resource fields, but the official CSV download
+returns 403 / Cloudflare verification. The public GIS schema gives status/area, not action
+timing. The existing three BC cases cannot be resolved from Alberta records regardless;
+no third-party mirror or blank field was treated as authoritative evidence. All current
+suppression labels remain unknown.
+
+Added [EXP-025/026](research/EXPERIMENT_LOG.md), [ADR-035/036](specs/DECISION_RECORDS.md),
+[S-052](research/SOURCES.md), the paired receipts, and a [plain-language blocker guide](research/CFSDS_OPEN_GATES_PLAIN_LANGUAGE.md).
+Updated STATUS/NEXT_SESSION/BACKLOG, AGENTS/HANDOFF, context, indexes and root knowledge
+log. No new FireCase, policy benchmark, training or heldout inspection was performed;
+`research_ready=false` remains.

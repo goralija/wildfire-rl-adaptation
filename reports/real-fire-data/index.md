@@ -15,6 +15,8 @@
 - [CFSDS full TRAIN fuel-class overlay](../../docs/research/CFSDS_FULL_TRAIN_FUEL_OVERLAY.md), [zbirni JSON](cfsds-full-train-fuel-overlay.json) i [1301-redni CSV](cfsds-full-train-fuel-overlay.csv) — 1.295/1.301 prozora overlayano na 2014b; 701 pass-only, 64 review, 530 fail; nijedan nije full-case approved.
 - [CanFG v20191114 archive member review](canfg-fuel-archive-member-review.json) — službeni 2.68 GB ZIP indeksiran bez preuzimanja karte; pronađena pravila za scar-succession, ali v2014b cutoff ostaje otvoren.
 - [CFSDS no-action dijagnostika](../../docs/research/CFSDS_NO_ACTION_DIAGNOSIS.md) i [mašinski čitljiva vremenska analiza](cfsds-no-action-timeline.json) — tri sačuvana train replaya, bez novog C++ runa, kalibracije ili treninga.
+- [ERA5-FWI-SN 2018 source audit](era5-fwi-sn-2018-pilot-comparison.json) i [paired weather replay receipt](era5-fwi-sn-2018-weather-replay-comparison.json) — checksum-provjereni dnevni indeksi i tri uparene kopije; sirovi NetCDF fajlovi ostaju u ignorisanom `data/raw/era5-fwi-sn/v2/`.
+- [Alberta 2006–2025 historical wildfire catalogue](https://open.canada.ca/data/en/dataset/a221e7a0-4f46-4be7-9c5a-e29de9a3447e) — katalog navodi action-time/resources kolone, ali 403 sprečava preuzimanje; vidi [EXP-026](../../docs/research/EXPERIMENT_LOG.md#exp-026--alberta-suppression-source-schema-and-access-audit-2026-10-31). Nema Alberta događaja spojenih.
 
 ## Dokumenti
 

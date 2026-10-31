@@ -16,6 +16,24 @@ Glavni put je Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire. Validation i test go
 ne otvarati radi izbora modela ili kalibracije; ne pokretati policy benchmark ni
 fine-tuning prije prihvatljivih train ulaza, replay gatea i zamrznutog heldout splita.
 
+Najnovija provjera je zatvorila samo dnevni FWI izvor za dijagnostiku: tri uparena
+replaya s ERA5-FWI-SN kodovima promijenila su rezultat 73→70 ha, 237→237 ha i
+66→66 ha; sve tri simulacije i dalje dodiruju rub. To znači da novi dnevni FWI ulazi
+se mogu ponoviti, ali stari FWI ulaz nije glavni uzrok velikog neslaganja. Novi
+[EXP-025](research/EXPERIMENT_LOG.md#exp-025--era5-fwi-sn-daily-weather-paired-train-replays-2026-10-31)
+i [EXP-026](research/EXPERIMENT_LOG.md#exp-026--alberta-suppression-source-schema-and-access-audit-2026-10-31)
+preciziraju blokadu: Alberta službeni CSV za početak fizičkog gašenja vraća 403, a
+službeni javni GIS servis daje lokaciju/status, ne vrijeme intervencije. Tri spremljena
+slučaja su BC, pa Alberta ne bi riješila njih; nijedan slučaj se ne smije nazvati
+„bez gašenja” na osnovu samog statusa.
+
+Prvi naredni korak ostaje TRAIN-only: dobiti odobreni pristup punom zvaničnom dnevniku
+gašenja ili iz CFSDS-a unaprijed izabrati drugu TRAIN epizodu s dokazivim datumom prve
+intervencije; datum cilja mora biti strogo raniji od prve akcije. U istom redu zatvoriti
+istorijsku fuel mapu (v2014b cutoff/succession) i veći target-blind prostor ili odbaciti
+historijski no-action tvrdnju za ovaj model. Ne trenirati i ne otvarati 2019+ ishode dok
+ti uslovi nisu zadovoljeni.
+
 Pregled ranijih radova sada je sažet u
 [CFSDS prior-work i laičkom objašnjenju](research/CFSDS_PRIOR_WORK_AND_PLAIN_EXPLANATION.md).
 Najvažnije: W.I.S.E. je direktan CFSDS precedent, ali koristi sutrašnju kartu za početni

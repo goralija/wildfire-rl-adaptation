@@ -765,3 +765,62 @@ Evidence: [W.I.S.E. method, fuel maps, and cohort filters](https://doi.org/10.10
 [CWFIS FAQ](https://cwfis.cfs.nrcan.gc.ca/en/faq?wbdisable=true),
 [NBAC v20250506 metadata](https://cwfis.cfs.nrcan.gc.ca/downloads/nbac/NBAC_1972to2024_20250506_shp_metadata.pdf),
 [sources S-031/S-036/S-037/S-050](SOURCES.md), and [ADR-034](../specs/DECISION_RECORDS.md#adr-034).
+
+## EXP-025 — ERA5-FWI-SN daily-weather paired TRAIN replays, 2026-10-31
+
+Replaced only FFMC, DMC, DC, ISI, BUI and FWI in copies of the three existing 2018
+TRAIN simulator inputs with daily ERA5-FWI-SN v2 values at the nearest 0.25-degree
+grid cell to the target-blind day-n-1 front location. Each daily code was repeated in
+the 24 hourly `Weather.csv` rows for that date; hourly temperature, relative humidity,
+wind and precipitation were preserved. Original cases, source weather files, terrain,
+fuel, state masks, policy, seed, budget, reset setting and pinned offline simulator
+image stayed fixed. The comparison script verified the input hashes and same-start-state
+condition before interpreting the paired results.
+
+All six 2018 source files match the Borealis metadata MD5 values. All three paired
+replays completed. `2018_1770` changed from 73 to 70 newly burned 100 m cells (IoU
+0.1361 to 0.1418); `2018_241` remained 237 cells (IoU 0.0376); `2018_747` remained
+66 cells (IoU 0.2187). Every updated run still reached the edge of the 20×20 crop.
+These are deterministic input-sensitivity results, not evidence that daily FWI is the
+only correct weather source or that the simulator is physically calibrated.
+
+**Decision:** ERA5-FWI-SN v2 is an auditable daily source for future Canadian cases if
+the event date, target-blind point, nearest grid cell and daily-to-hourly repetition are
+recorded. Keep hourly weather variables separately sourced. Do not overwrite the three
+old cases or use this small sensitivity result to close the no-action, fuel-vintage,
+spatial-domain or physical-validity gates. The weather correction did not explain the
+large spread mismatch: two final masks were identical, one differed by three cells,
+and all three still touched the crop edge. `research_ready=false` remains.
+
+Evidence: [ERA5-FWI diagnostic note](ERA5_FWI_SN_DIAGNOSTIC.md), [audit receipt](../../reports/real-fire-data/era5-fwi-sn-2018-pilot-comparison.json),
+[paired replay receipt](../../reports/real-fire-data/era5-fwi-sn-2018-weather-replay-comparison.json),
+[Benoit et al. 2026](https://doi.org/10.5194/essd-18-5995-2026), and [Borealis dataset](https://doi.org/10.5683/SP3/4B18XZ).
+
+## EXP-026 — Alberta suppression-source schema and access audit, 2026-10-31
+
+Rechecked the official Alberta historical-wildfire catalogue, its 2006–2025 CSV/dictionary
+links, and the public provincial Historical Wildfires ArcGIS REST service. The catalogue
+describes fire-level staffing/resources and the dictionary identifies fields for initial
+action and physical firefighting start; the direct CSV remains blocked by HTTP 403 / a
+Cloudflare verification interstitial in this environment. The official spatial service
+does load, but the inspected historical point schema has reported status/status-date and
+area/cause fields, not the initial-action time or crew/resource columns needed to mark a
+target day as pre-suppression. It is not a substitute for the CSV.
+
+The three saved pilot events are BC crosswalk candidates, not Alberta events, so even a
+successful Alberta download would not resolve their suppression evidence. The potential
+Alberta route is still worth pursuing for future TRAIN fires: after obtaining the official
+table, match by fire number/year and location, then conservatively require a target date
+strictly before the recorded physical-firefighting start date. Same-day or missing dates
+remain unknown because CFSDS does not provide within-day arrival times. No third-party
+mirror was treated as official evidence; no record was joined, downloaded or promoted to
+an eligibility label.
+
+**Decision:** retain `suppression_status=unknown` for all existing cases; no status or
+perimeter snapshot proves no physical action. For this environment, the suppression gate
+remains blocked pending an authoritative event-keyed action table (or a different
+pre-registered study design whose claim does not rely on untreated historical growth).
+The service schema and source-access outcome are recorded in [S-043/S-052](SOURCES.md).
+
+Evidence: Alberta [official catalogue](https://open.canada.ca/data/en/dataset/a221e7a0-4f46-4be7-9c5a-e29de9a3447e), [official wildfire data page](https://www.alberta.ca/wildfire-maps-and-data),
+[historical wildfire REST service](https://geospatial.alberta.ca/mimas/rest/services/wildfire/historical_wildfires_data/FeatureServer), [S-043/S-052](SOURCES.md), and [ADR-036](../specs/DECISION_RECORDS.md#adr-036).

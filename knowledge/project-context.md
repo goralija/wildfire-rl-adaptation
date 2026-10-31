@@ -35,6 +35,13 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
   intervencija/treninga; no-action prognoze 66/237/73 ha prema 15.39/12.15/12.15 ha
   pokazuju veliko neslaganje i rubni efekat. `2014_538` pada na fuel/water provjeri.
   Treba riješiti input/extent/model gate prije treniranja agenta.
+- Daily FWI izvor je sad direktno checksum-provjeren za 2018: tri kontrolisana uparena
+  replaya promijenila su rezultat za −3, 0 i 0 novih modelskih ćelija; sva tri i dalje
+  dodiruju rub 2 km prostora. To pokazuje da FWI lineage nije glavno objašnjenje
+  prevelikog rasta. Alberta službeni action-time CSV vraća 403, a dostupna GIS karta
+  daje status/površinu, ne vrijeme prvog gašenja; postojeći tri incidenta su BC. Nema
+  dokaza `no suppression`, nema potvrđenog v2014b burn-history cutoffa, zato
+  `research_ready=false` ostaje. Detalji u [EXP-025/026](../docs/research/EXPERIMENT_LOG.md).
 - Per-cell train fuel audit sada je provjerio svih 20 kandidata: 10 prolazi samo fuel
   gate, a 10 pada na ne-gorivo/ambiguous overlay. Sva tri postojeća replay slučaja su
   među prolazima; zato fuel overlap sam ne objašnjava njihov veliki no-action rast.

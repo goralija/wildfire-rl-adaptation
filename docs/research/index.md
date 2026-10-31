@@ -21,6 +21,10 @@
 - [EXP-022: full TRAIN fuel-class overlay](EXPERIMENT_LOG.md#exp-022--full-train-fuel-class-overlay-on-target-blind-pairs-2026-10-31) - 701 pass-only, 64 review, 530 fail, 6 bez prozora
 - [EXP-023: embedded v20191114 burn-scar rules](EXPERIMENT_LOG.md#exp-023--v20191114-archive-burn-scar-rules-and-v2014b-member-review-2026-10-31) - mali rule fajl pregledan iz 2.68 GB ZIP-a bez preuzimanja karte
 - [EXP-024: W.I.S.E. suppression exclusion and burn-history dates](EXPERIMENT_LOG.md#exp-024--wise-suppression-exclusion-and-national-burn-history-dating-2026-10-31) - dokumentovan uslov da `unknown` gašenje nije isto što i `none`; provjereni su i službeni NBAC vremenski metapodaci
+- [ERA5-FWI-SN dnevni FWI replay dijagnostika](ERA5_FWI_SN_DIAGNOSTIC.md) - checksum-provjeren 2018 izvor, pravilno mapiranje dnevnih kodova u satni simulator input i upareni rezultati tri slučaja; no-action mismatch ostaje.
+- [Zašto je CFSDS okruženje još blokirano — laički pregled](CFSDS_OPEN_GATES_PLAIN_LANGUAGE.md) - svaki preostali uslov, zašto je bitan i koji dokaz ga zatvara.
+- [EXP-025: ERA5-FWI-SN paired replays](EXPERIMENT_LOG.md#exp-025--era5-fwi-sn-daily-weather-paired-train-replays-2026-10-31) - zamijenjeni samo šest dnevnih indeksa; 0–3 ćelije razlike, sva tri runa i dalje dodiruju rub.
+- [EXP-026: Alberta suppression-source audit](EXPERIMENT_LOG.md#exp-026--alberta-suppression-source-schema-and-access-audit-2026-10-31) - official CSV je 403, dok otvoreni GIS sloj nema vrijeme prve fizičke intervencije.
 - [CanFG archive member review](../../reports/real-fire-data/canfg-fuel-archive-member-review.json) - ZIP unosi, byte ranges i hashovi; v2014b cutoff ostaje nepoznat
 - [Kako su raniji radovi pripremali i provjeravali stvarne požare](CFSDS_PRIOR_WORK_AND_PLAIN_EXPLANATION.md) - CFSDS, W.I.S.E., Dogrib/Cell2Fire i Firehose, te laičko objašnjenje šta još blokira validan eksperiment
 - [Provjereni tok prilagođen našem projektu](ADAPTED_PRIOR_ART_WORKFLOW.md) - šta preuzimamo iz W.I.S.E., Dogrib/Cell2Fire i Firehose, kako izbjegavamo poznate zamke i kako čuvamo podatke za buduće mape/animacije

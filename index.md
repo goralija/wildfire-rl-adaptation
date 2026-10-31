@@ -10,7 +10,7 @@ okf_version: "0.2"
 - [Handoff za kolegu](HANDOFF.md) - Prenosiv nastavak bez chat historije.
 - [Trenutno stanje](docs/STATUS.md) - Šta radi, dokazi i ograničenja.
 - [Naredna sesija](docs/NEXT_SESSION.md) - Redoslijed nastavka.
-- [Prioriteti i prihvat](docs/BACKLOG.md) - NF-scar importer contract je završen; preostaju train-only fuel/provenance QC i no-action gate.
+- [Prioriteti i prihvat](docs/BACKLOG.md) - NF-scar importer contract je završen; dnevni FWI izvor je provjeren na tri dijagnostičke kopije, a fuel/suppression/prostor i dalje blokiraju no-action gate.
 
 ## Pronađi detalje i dokaze
 
@@ -20,6 +20,9 @@ okf_version: "0.2"
 - [Real-case pipeline](docs/research/REAL_CASE_PIPELINE.md) - Jednostavan opis šta stvarni podaci daju (Y), šta simulator prima (X), te jaz početnog fronta.
 - [Train-only CFSDS input QC](docs/research/CFSDS_TRAIN_INPUT_QC.md) - Izmjereni ulazi, target-blind početno stanje i otvoreni fuel/weather/spatial/suppression rizici.
 - [TRAIN terrain/weather provenance receipt](reports/real-fire-data/cfsds-train-terrain-weather-provenance.json) - MRDEM source class i novi pinovani weather snapshots; ne kvalifikuje stare target-aware slučajeve.
+- [ERA5-FWI-SN paired replay nalaz](docs/research/ERA5_FWI_SN_DIAGNOSTIC.md) - Dnevni indeksni izvor i tri kontrolisana TRAIN poređenja; rezultat nije riješio simulacijsko neslaganje.
+- [Zašto su istraživački uslovi još otvoreni](docs/research/CFSDS_OPEN_GATES_PLAIN_LANGUAGE.md) - laički pregled goriva, gašenja, veličine mape, dnevnog cilja i šta bi svaki uslov zatvorilo.
+- [Alberta suppression-source nalaz](docs/research/EXPERIMENT_LOG.md#exp-026--alberta-suppression-source-schema-and-access-audit-2026-10-31) - CSV sa action-time poljima vraća 403; javni GIS statusni sloj ne može dokazati nepostojanje gašenja.
 - [TRAIN-only CFSDS fuel-vintage review](docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md) - FBP izvori, javno transkribovano W.I.S.E. succession stablo, neriješeni historijski cut-off i reuse uslovi.
 - [TRAIN-only CFSDS prostorni audit](docs/research/CFSDS_SPATIAL_FEASIBILITY.md) - Učinak 2–6 km target-blind domena na 25 TRAIN parova i ograničenja postojećeg 20×20 checkpointa.
 - [Kako su raniji radovi pripremali i provjeravali stvarne požare](docs/research/CFSDS_PRIOR_WORK_AND_PLAIN_EXPLANATION.md) - Direktna poređenja s CFSDS/W.I.S.E., Dogrib/Cell2Fire i Firehose, plus laičko objašnjenje otvorenih validacijskih prepreka.

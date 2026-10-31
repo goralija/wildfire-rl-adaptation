@@ -15,7 +15,7 @@ Napor je okvirni agentov prijedlog u aktivnim radnim satima, bez roka i dodjele 
 | TASK-013 | završeno: podrška handoffu | OKF repo bundle, ulazi/navigacija, održavanje, validator/testovi/CI | ostvareno |
 | TASK-012 | završeno 2026-10-30 | prema korisnikovoj uputi odabrana Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire; historijske granice služe zasebnom reality-checku, a agent uči iz simulatora | ostvareno |
 | TASK-014 | lokalno završeno 2026-10-30; drugi host nije provjeren | moderni `.venv` i odvojeni legacy Docker izgrađeni; package/source/image hashovi i smoke/inference receipt zapisani | ostvareno lokalno |
-| TASK-015 | P0, djelimično završeno | Full target-independent screen: 1.301 TRAIN parova; 1.295 fiksnih 20×20/100 m prozora overlayano na v2014b: 701 class-only pass, 64 sub-cell review, 530 fail, 6 bez prozora; full-case eligibility=0. Pronađeni v20191114 burn-scar age rules, ali regionalna/date aritmetika i v2014b cutoff ostaju otvoreni. W.I.S.E. izbacuje požare s evidentiranim suppression; `unknown` ne znači `none`, a 3 BC kandidata nemaju puni shared-ID action log. Alberta CSV endpoint 403. Tri stara terrain/weather paketa imaju nepotpun/različit provenance. No-action gate pao (EXP-024/ADR-034). | v2014b as-of-date ili dokaziva zamjena + isključenje poznato gašenih/unknown slučajeva ili dokaz `none` + puni input QC + preregistrovani no-action gate |
+| TASK-015 | P0, djelimično završeno | Full target-independent screen: 1.301 TRAIN parova; 1.295 prozora overlayano na v2014b: 701 class-only pass, 64 review, 530 fail, 6 bez prozora; full-case eligibility=0. EXP-025 zatvara samo ponovljiv daily-FWI izvor u 3 dijagnostičke kopije (73→70 ha, 237→237 ha, 66→66 ha); sve i dalje dotiču rub. Alberta katalog najavljuje first-action polja, ali CSV je 403; službeni GIS sloj ima status, ne action log. Tri BC slučaja nemaju dokaz `none`, a v2014b cutoff/pravila ostaju nepotvrđeni. No-action gate nije prošao (EXP-024–026/ADR-034–036). | službeni događajni action log za budući TRAIN kandidat ili izmjena istraživačke tvrdnje + vremenski ispravna fuel baza/succession + dovoljno velika target-blind domena + potpuni input QC i preregistrovani replay gate |
 | TASK-018 | P0, dijagnostička faza završena 2026-10-30; uzrok nije izolovan | poređenje hashova/postavki i unaprijed fiksirani vremenski presjeci na tri train replaya; metadata horizon bug ispravljen; rub/domenska ograničenja potvrđena; bez heldout kalibracije ili treninga | ostvareno |
 | TASK-004c | P0, adapter završen lokalno 2026-10-30 | C++/Python kumulativna šteta, zaseban scar/front i named terminal receipt; fixture + 12/12 inference rollouta, bez treninga; fizički no-action gate ostaje otvoren | ostvareno |
 | TASK-017 | završeno 2026-10-30 | `InitialState.csv` uvozi raniji scar i više aktivnih ćelija; fixture i stvarni `2018_747` C++ import/replay su uspješni | ostvareno |
@@ -29,11 +29,13 @@ Napor je okvirni agentov prijedlog u aktivnim radnim satima, bez roka i dodjele 
 | TASK-019 | P1, vizualni ugovor i Dogrib QA fixture završeni; replay prikazi čekaju validne slučajeve | iz epizodnog zapisa praviti georeferenciranu ulaznu kartu, vremensku animaciju i poređenje agenta s baselineom kroz slučajeve i seedove | 4–8 h nakon no-action gatea |
 
 Redoslijed nastavka: 012 (završeno) → 014 local PASS (završeno) → 015 train fuel/input
-QC (djelimično; DEM source class je ustanovljen za tri saved inputs, weather snapshoti
-su pinovani, ali legacy temperature/humidity se razlikuju i stari inputs ostaju
-target-aware) + 018 no-action dijagnostička faza (završena, uzrok još nije izolovan)
+QC (djelimično; DEM source class je ustanovljen za tri saved inputs, novi daily-FWI
+izvor je uparen na iste tri kopije i nije riješio edge/mismatch; legacy temperature/
+humidity se razlikuju i stari inputs ostaju target-aware) + 018 no-action dijagnostička
+faza (završena, uzrok još nije izolovan)
 → 004c cumulative-damage/terminal-reason adapter (završen lokalno) → 015 preostali
-fuel-vintage/terrain/weather/suppression QC → unaprijed definisani train-only kontrolisani
+fuel-vintage/terrain/weather/suppression QC (sljedeći dokaz: event-keyed action log; Alberta
+CSV 403, javni GIS sloj nema action-vrijeme; ne zaključivati `none`) → unaprijed definisani train-only kontrolisani
 replayi / 016 dodatni slučajevi → no-action gate odluka + heldout freeze → 005 benchmark/time
 → 006 fine-tune → 007 → 009.
 TASK-017 initial-state import je završen. TASK-004b je samo fallback nakon dokumentovanog

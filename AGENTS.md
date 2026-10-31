@@ -54,6 +54,17 @@ Ne koristi validation/test ishode za izbor parametara. No-action gate i heldout 
 moraju proći prije policy benchmarka ili fine-tuninga. Runtime PASS nije dokaz fizičke
 validacije ili RL prednosti. Čuvaj ovu razliku u sažecima.
 
+EXP-025 (2026-10-31) checksum-verifikovao je šest ERA5-FWI-SN dnevnih kodova za 2018.
+U tri uparena TRAIN dijagnostička replaya zamjena samo FWI kodova promijenila je broj
+novih 100 m ćelija za −3, 0 i 0; sve tri predikcije i dalje dodiruju rub cropa. Za buduće
+kanadske slučajeve koristi se samo kao dokumentovan dnevni izvor, ponovljen u 24 satna
+reda i jasno označen dnevnim; satna meteorologija ostaje odvojen izvor. Ovo nije fizička
+validacija niti zatvara TASK-015. EXP-026 je potvrdio da Alberta CSV s action-time poljima
+postoji u katalogu, ali mu ovaj environment dobija 403; dostupni GIS sloj nema vrijeme
+prve fizičke akcije. Ne tretirati `out of control`, prazno polje ili nedostupan URL kao
+dokaz da gašenja nije bilo. Postojeći tri kandidata su BC, pa se suppression label ne
+mijenja. Pogledati ADR-035/036 i EXP-025/026.
+
 Održavanje znanja: [maintenance](knowledge/maintenance.md), format:
 [OKF profil](knowledge/okf-format.md). Novi `.md` koncept dobija YAML `type` i vezu iz
 najbližeg `index.md`; ne izmišljati sources, generated/verified ili ljudsku potvrdu.

@@ -33,6 +33,23 @@ probe horizon metapodatak ispravljen. Požari rastu različitim brzinama, svi do
 [timeline receiptu](reports/real-fire-data/cfsds-no-action-timeline.json). Validation/test
 ishodi nisu korišteni.
 
+## Najnovije provjere — 2026-10-31
+
+ERA5-FWI-SN dnevni indeksi za 2018 su checksum-provjereni i upareni replayani na
+kopijama tri postojeća TRAIN slučaja. Mijenjano je samo šest FWI kodova. Predikcije su
+73→70 ha, 237→237 ha i 66→66 ha; sva tri rezultata i dalje dodiruju rub 20×20 mape.
+Daily FWI izvor sada je ponovljiv za buduće slučajeve, ali nije uzrok niti rješenje
+velikog neslaganja. Pogledati [EXP-025](docs/research/EXPERIMENT_LOG.md#exp-025--era5-fwi-sn-daily-weather-paired-train-replays-2026-10-31)
+i [replay receipt](reports/real-fire-data/era5-fwi-sn-2018-weather-replay-comparison.json).
+
+Alberta katalog navodi tabelu sa prvim fizičkim suzbijanjem, ali preuzimanje CSV-a vraća
+403. Dostupni službeni GIS sloj ima status/površinu i nema vrijeme prve fizičke akcije.
+Postojeći CFSDS kandidati su BC, dakle Alberta tabela ih svakako ne rješava. Sve tri
+oznake ostaju `suppression_status=unknown`. Vidi [EXP-026](docs/research/EXPERIMENT_LOG.md#exp-026--alberta-suppression-source-schema-and-access-audit-2026-10-31)
+i [ADR-036](docs/specs/DECISION_RECORDS.md#adr-036). Preostali blokeri su dokaz gašenja,
+vremenski sigurna fuel mapa i prekratak 2 km domen; bez njih nema `research_ready`,
+no-action gatea ili naučnog benchmarka.
+
 ## Baza znanja u repozitoriju
 
 Repo je jedan OKF 0.2 bundle. [Root index](index.md) vodi do

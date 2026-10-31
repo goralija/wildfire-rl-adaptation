@@ -1,0 +1,270 @@
+{
+  "cases": [
+    {
+      "baseline_result": {
+        "decisions": 180,
+        "final_grid_index": 1440,
+        "final_total_affected_cells": 377,
+        "iou": 0.1361,
+        "new_burned_area_ha": 73.0,
+        "precision": 0.1398,
+        "predicted_edge_cells": 26,
+        "recall": 0.8397
+      },
+      "change_era5_fwi_sn_minus_baseline": {
+        "edge_cells": -1,
+        "final_total_affected_cells": -3,
+        "iou": 0.0057,
+        "new_burned_area_ha": -3.0
+      },
+      "daily_fwi_codes": {
+        "BUI": 58.71604253541427,
+        "DC": 315.04559514167073,
+        "DMC": 38.27475497043534,
+        "FFMC": 78.22665842583217,
+        "FWI": 8.612565050289252,
+        "ISI": 2.6377276372454648
+      },
+      "era5_fwi_sn_result": {
+        "decisions": 180,
+        "final_grid_index": 1440,
+        "final_total_affected_cells": 374,
+        "iou": 0.1418,
+        "new_burned_area_ha": 70.0,
+        "precision": 0.1458,
+        "predicted_edge_cells": 25,
+        "recall": 0.8397
+      },
+      "event_id": "2018_1770",
+      "input_control": {
+        "all_other_source_inputs_and_hourly_weather_fields_unchanged": true,
+        "baseline_input_tree_sha256": "584f8e62d0085e24ccf216a3ed0206b1903d1553436c0e80b78a681b69460e7b",
+        "baseline_matches_archived_replay_input": true,
+        "daily_fwi_codes_repeated_for_all_24_hour_rows": true,
+        "hourly_rows": 24,
+        "initial_state_csv_sha256": "74cdd0218065fe417fa064a6b2de2835f4ab6f8efa3f0f16bb2dfd254773ed57",
+        "original_weather_csv_sha256": "42c12a84298bb1d8ec691ec7fe640d39cbad1db6209586e157f10cc4ee4e391b",
+        "same_policy_seed_budget_reset_setting_and_container_probe": true,
+        "updated_columns": [
+          "FFMC",
+          "DMC",
+          "DC",
+          "ISI",
+          "BUI",
+          "FWI"
+        ],
+        "updated_input_tree_sha256": "f4c60220227abd0a350a0e53d84d19644bac538f446f81994cbc9cf872137c28",
+        "updated_weather_csv_sha256": "1eeb0826a4069bd9f189c551b310e1a5f22df39f3b55a6dd02e1174da3d7ecff"
+      },
+      "nearest_era5_fwi_sn_grid_point_wgs84": {
+        "lat": 49.5,
+        "lon": -114.75
+      },
+      "original_cfsds_fire_day_summary_codes": {
+        "BUI": 71.3886032104492,
+        "DC": 363.458648681641,
+        "DMC": 47.309700012207,
+        "FFMC": 79.5148315429688,
+        "FWI": 8.24415683746338,
+        "ISI": 2.17563152313232
+      },
+      "point_to_grid_distance_km": 7.986,
+      "replay_result_sha256": {
+        "baseline": "b8d1d12f5ec7656462975f3f6fc0357a95680842e8641d2396ff4e5dcbe0924a",
+        "era5_fwi_sn": "b776c5bb8e097f0f7b51ab3c163bc3ef3c91783848a3e6b5203b7c72c2278058"
+      },
+      "target_date_local": "2018-08-12",
+      "weather_source_point_wgs84": {
+        "lat": 49.50311574,
+        "lon": -114.86048225
+      }
+    },
+    {
+      "baseline_result": {
+        "decisions": 87,
+        "final_grid_index": 695,
+        "final_total_affected_cells": 400,
+        "iou": 0.0376,
+        "new_burned_area_ha": 237.0,
+        "precision": 0.0381,
+        "predicted_edge_cells": 62,
+        "recall": 0.743
+      },
+      "change_era5_fwi_sn_minus_baseline": {
+        "edge_cells": 0,
+        "final_total_affected_cells": 0,
+        "iou": 0.0,
+        "new_burned_area_ha": 0.0
+      },
+      "daily_fwi_codes": {
+        "BUI": 133.87811484940454,
+        "DC": 521.4402813284066,
+        "DMC": 98.57511061384315,
+        "FFMC": 91.84945476258571,
+        "FWI": 26.1454276147457,
+        "ISI": 6.357412756312737
+      },
+      "era5_fwi_sn_result": {
+        "decisions": 84,
+        "final_grid_index": 666,
+        "final_total_affected_cells": 400,
+        "iou": 0.0376,
+        "new_burned_area_ha": 237.0,
+        "precision": 0.0381,
+        "predicted_edge_cells": 62,
+        "recall": 0.743
+      },
+      "event_id": "2018_241",
+      "input_control": {
+        "all_other_source_inputs_and_hourly_weather_fields_unchanged": true,
+        "baseline_input_tree_sha256": "28726be3e885e01044dd3d73cb60e1b644a2e9dcf2f7ff60b592305dced2bd8c",
+        "baseline_matches_archived_replay_input": true,
+        "daily_fwi_codes_repeated_for_all_24_hour_rows": true,
+        "hourly_rows": 24,
+        "initial_state_csv_sha256": "6e8db277bde0f4f76902659cc4d592d5d22a21635e39be882a31c2e136268cdb",
+        "original_weather_csv_sha256": "13db2cf3a68c006daeee1159ce041d9c0e02976147d137583fe1fb920547e4a5",
+        "same_policy_seed_budget_reset_setting_and_container_probe": true,
+        "updated_columns": [
+          "FFMC",
+          "DMC",
+          "DC",
+          "ISI",
+          "BUI",
+          "FWI"
+        ],
+        "updated_input_tree_sha256": "0e6e5b2eee6fb8d9b6af915528c333f5d12a8c9f440068cacd0cbe01ddc24eb0",
+        "updated_weather_csv_sha256": "c0591fda7f7f7f38231e287024ab6617bf188801cf16ec20ddd5208ffda7e9ba"
+      },
+      "nearest_era5_fwi_sn_grid_point_wgs84": {
+        "lat": 53.25,
+        "lon": -123.75
+      },
+      "original_cfsds_fire_day_summary_codes": {
+        "BUI": 114.630020141602,
+        "DC": 459.240875244141,
+        "DMC": 83.3078536987305,
+        "FFMC": 91.6729354858398,
+        "FWI": 23.9613285064697,
+        "ISI": 6.12948846817017
+      },
+      "point_to_grid_distance_km": 13.501,
+      "replay_result_sha256": {
+        "baseline": "7f800364901b87ea81a6214e7cf9ed9b2717427355e12417b118c86391babce2",
+        "era5_fwi_sn": "11c1ee30f8f8e69c9b667c63834f5b19fb8fcc13b86d26842d63f689b1daba48"
+      },
+      "target_date_local": "2018-08-15",
+      "weather_source_point_wgs84": {
+        "lat": 53.13376191,
+        "lon": -123.80856635
+      }
+    },
+    {
+      "baseline_result": {
+        "decisions": 31,
+        "final_grid_index": 245,
+        "final_total_affected_cells": 272,
+        "iou": 0.2187,
+        "new_burned_area_ha": 66.0,
+        "precision": 0.2213,
+        "predicted_edge_cells": 19,
+        "recall": 0.9491
+      },
+      "change_era5_fwi_sn_minus_baseline": {
+        "edge_cells": 0,
+        "final_total_affected_cells": 0,
+        "iou": 0.0,
+        "new_burned_area_ha": 0.0
+      },
+      "daily_fwi_codes": {
+        "BUI": 89.2597223293234,
+        "DC": 400.39880474269427,
+        "DMC": 61.870667507807994,
+        "FFMC": 94.24057692632942,
+        "FWI": 33.76868455810565,
+        "ISI": 12.043051987690912
+      },
+      "era5_fwi_sn_result": {
+        "decisions": 26,
+        "final_grid_index": 207,
+        "final_total_affected_cells": 272,
+        "iou": 0.2187,
+        "new_burned_area_ha": 66.0,
+        "precision": 0.2213,
+        "predicted_edge_cells": 19,
+        "recall": 0.9491
+      },
+      "event_id": "2018_747",
+      "input_control": {
+        "all_other_source_inputs_and_hourly_weather_fields_unchanged": true,
+        "baseline_input_tree_sha256": "4685b7466ed9daa6de2783553fed019f0f15b53a2b6b6a54df3335a9e1308bcf",
+        "baseline_matches_archived_replay_input": true,
+        "daily_fwi_codes_repeated_for_all_24_hour_rows": true,
+        "hourly_rows": 24,
+        "initial_state_csv_sha256": "7077ffd8a146e1fa72bcb2dcf1b3174c825d188297a3a641c4543a9233910153",
+        "original_weather_csv_sha256": "3fc33cdb3585a5624296f4ba79cb489905d6668bc89757992f788cd116df6e8e",
+        "same_policy_seed_budget_reset_setting_and_container_probe": true,
+        "updated_columns": [
+          "FFMC",
+          "DMC",
+          "DC",
+          "ISI",
+          "BUI",
+          "FWI"
+        ],
+        "updated_input_tree_sha256": "bddee70eec5b3c1f9b648189279a33e0fc0d5c523b61b75dc5060a0af696409f",
+        "updated_weather_csv_sha256": "e6adcd3503b1e66ee8059030c5c903bf3000269c09b57e8f9a29a9b64f0b350a"
+      },
+      "nearest_era5_fwi_sn_grid_point_wgs84": {
+        "lat": 49.75,
+        "lon": -116.0
+      },
+      "original_cfsds_fire_day_summary_codes": {
+        "BUI": 112.898994445801,
+        "DC": 520.743896484375,
+        "DMC": 77.4345932006836,
+        "FFMC": 93.2947158813477,
+        "FWI": 32.1091537475586,
+        "ISI": 9.48892974853516
+      },
+      "point_to_grid_distance_km": 11.13,
+      "replay_result_sha256": {
+        "baseline": "5fb836391a9ec5c99973340eeb95b0c3bbf758c8be59d26e0eb3dec29c85fde1",
+        "era5_fwi_sn": "ac12bdc093801682112a1d32cc3391bac7b2cbfd4b121ddc15073e8073523425"
+      },
+      "target_date_local": "2018-08-16",
+      "weather_source_point_wgs84": {
+        "lat": 49.8396088,
+        "lon": -115.93089791
+      }
+    }
+  ],
+  "comparison_script_sha256": "c1a8d2f75032b60a02940e213fd143ed0ee2cf7863453e8f1e0c6fec34593c87",
+  "created_utc_date": "2026-10-31",
+  "input_preparation_script_sha256": "f055c18781942369d729654841e0da2d803d393f4e95141aa18e91da0bc85d86",
+  "limitations": [
+    "ERA5-FWI-SN daily codes are held unchanged across 24 hourly simulator weather rows; they are not presented as hourly observations.",
+    "The ERA5-FWI-SN grid is approximately 31 km, much coarser than the 2 km Cell2Fire crop and the separate hourly weather point.",
+    "CFSDS target masks are satellite-derived daily estimates; exact within-day burn timing is unavailable.",
+    "The three pilot incidents have unknown or documented partial suppression evidence, so observed growth is not a clean untreated trajectory.",
+    "Only one seed per paired replay was run because this tests input sensitivity, not stochastic policy performance.",
+    "Fuel vintage, crop boundary, fuel spread calibration, and suppression evidence remain unresolved."
+  ],
+  "question": "Does replacing the old CFSDS fire-day summary codes with nearest-grid daily ERA5-FWI-SN codes resolve the observed no-action mismatch?",
+  "runtime": {
+    "container_network": "disabled",
+    "firehose_commit": "e49a52a9a987a1585d25ddca2f711222ca500ffb",
+    "image": "wildfire-firehose-probe:20261030-real-case",
+    "image_id": "sha256:bf250dd34cebdff5f38e17056c73ef2f914055bdde29b0d6fea9afc16cbd10a3",
+    "training_performed": false
+  },
+  "schema": "era5-fwi-sn-weather-replay-comparison/v1",
+  "scope": "Three existing 2018 TRAIN diagnostic cases only; no validation/test targets, calibration, policy test, or training.",
+  "summary": {
+    "cases_still_touching_crop_edge_after_updated_weather": 3,
+    "cases_with_changed_final_affected_cell_count": 1,
+    "cases_with_same_final_affected_cell_count": 2,
+    "interpretation": "The updated daily weather source is usable and reproducible, but it does not resolve the large no-action mismatch in these cases. Two final masks are unchanged; one has three fewer newly burned cells. All three still touch the crop edge. This is a small deterministic sensitivity experiment, not physical validation or a model calibration.",
+    "successful_paired_replays": 3
+  },
+  "weather_audit_sha256": "fe6512a8175133e108fa90e2b8dbb8658361bde21ccf12bd834e789bea35eecf"
+}
