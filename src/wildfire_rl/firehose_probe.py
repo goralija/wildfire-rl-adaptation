@@ -232,6 +232,10 @@ def main():
         )
         observation = env.reset()
         initial_paths = [line for line in env.fire_process.lines if 'ForestGrid' in line and '.csv' in line]
+        if not initial_paths:
+            raise RuntimeError(
+                'Cell2Fire emitted no initial ForestGrid; inspect simulator-stderr.txt for the importer error'
+            )
         initial_state = pd.read_csv(initial_paths[-1], header=None).values
         active_state_code = 2 if env.has_initial_state else 1
         result['upstream_nonfuel_mask_cells'] = int(np.sum(env.helper.forest_non_fuel))
@@ -245,6 +249,18 @@ def main():
         )
         result['warmup_historical_scar_cell_ids_one_based'] = (
             cells_with_state(initial_state, {1}) if env.has_initial_state else []
+        )
+        nonfuel_ids = sorted(
+            int(cell_id + 1)
+            for cell_id, is_nonfuel in enumerate(env.helper.forest_non_fuel.ravel())
+            if is_nonfuel
+        )
+        result['upstream_nonfuel_cell_ids_one_based'] = nonfuel_ids
+        result['warmup_nonfuel_scar_cell_ids_one_based'] = sorted(
+            set(result['warmup_historical_scar_cell_ids_one_based']) & set(nonfuel_ids)
+        )
+        result['warmup_nonfuel_active_cell_ids_one_based'] = sorted(
+            set(result['warmup_active_front_cell_ids_one_based'] or []) & set(nonfuel_ids)
         )
         result['initial_state_import_log'] = next(
             (line for line in env.fire_process.lines if line.startswith('Imported historical state:')),
@@ -294,6 +310,12 @@ def main():
                     'active_front_cell_ids_one_based',
                     cells_with_state(env.state, {2}) if env.has_initial_state else None,
                 ),
+                nonfuel_active_front_cell_ids_one_based=sorted(
+                    set(info.get(
+                        'active_front_cell_ids_one_based',
+                        cells_with_state(env.state, {2}) if env.has_initial_state else [],
+                    ) or []) & set(nonfuel_ids)
+                ),
                 state_sha256=sha256(env.state.tobytes()).hexdigest(),
             )
             transitions.append(transition)
@@ -302,6 +324,7 @@ def main():
         grids = list(Path(env.helper.output_folder).rglob('ForestGrid*.csv'))
         exported_damage = sorted(index + 1 for index in history_damage(grids))
         terminal_state = parse_terminal_state(env.fire_process.lines)
+        termination_reason = None
         if terminal_state is not None:
             terminal_damage = terminal_state['ever_affected_ncells']
             state_export_matches_grids = terminal_damage_matches_grid_history(

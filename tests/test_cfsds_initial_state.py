@@ -109,6 +109,24 @@ class CFSDSInitialStateTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "must not overlap"):
             initial_state_cells(np.array([[True]]), np.array([[True]]))
 
+    def test_explicit_nonfuel_scar_serializes_separately_from_active_front(self) -> None:
+        scar = np.array([[True, True], [False, False]])
+        front = np.array([[False, False], [False, True]])
+        nonfuel_scar = np.array([[True, False], [False, False]])
+
+        self.assertEqual(
+            initial_state_cells(scar, front, nonfuel_scar=nonfuel_scar),
+            [("scar_nf", 1), ("burnt", 2), ("burning", 4)],
+        )
+
+    def test_nonfuel_scar_serialization_requires_explicit_prior_burnt_cell(self) -> None:
+        with self.assertRaisesRegex(ValueError, "subset of burnt"):
+            initial_state_cells(
+                np.array([[False, False]]),
+                np.array([[False, False]]),
+                nonfuel_scar=np.array([[True, False]]),
+            )
+
     def test_invalid_rasters_and_days_are_rejected(self) -> None:
         with self.assertRaisesRegex(ValueError, "two-dimensional"):
             select_target_blind_window(np.array([1, 2]), 2)

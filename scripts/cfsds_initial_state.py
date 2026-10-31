@@ -138,20 +138,38 @@ def derive_pre_target_state_masks(
     return {"scar": scar, "front": front}
 
 
-def initial_state_cells(burnt: np.ndarray, burning: np.ndarray) -> list[tuple[str, int]]:
-    """Serialize majority-cell masks as sorted one-based row-major importer rows."""
+def initial_state_cells(
+    burnt: np.ndarray,
+    burning: np.ndarray,
+    nonfuel_scar: np.ndarray | None = None,
+) -> list[tuple[str, int]]:
+    """Serialize historical scar/front masks as one-based row-major rows.
+
+    ``nonfuel_scar`` is an explicit caller attestation that these cells are both
+    historical burn scars and mapped to the simulator's NF fuel class. It must
+    be a subset of ``burnt``; this helper does not infer scar provenance from a
+    fuel code or authorize a fuel-map reclassification.
+    """
     scar = np.asarray(burnt, dtype=bool)
     front = np.asarray(burning, dtype=bool)
     if scar.ndim != 2 or front.ndim != 2 or scar.shape != front.shape:
         raise ValueError("burnt and burning masks must be same-shaped 2D arrays")
     if np.any(scar & front):
         raise ValueError("burnt and burning masks must not overlap")
+    if nonfuel_scar is None:
+        nonfuel = np.zeros_like(scar)
+    else:
+        nonfuel = np.asarray(nonfuel_scar, dtype=bool)
+        if nonfuel.ndim != 2 or nonfuel.shape != scar.shape:
+            raise ValueError("nonfuel_scar mask must match the burnt mask shape")
+        if np.any(nonfuel & ~scar):
+            raise ValueError("nonfuel_scar mask must be a subset of burnt cells")
     rows: list[tuple[str, int]] = []
     for row in range(scar.shape[0]):
         for col in range(scar.shape[1]):
             cell = row * scar.shape[1] + col + 1
             if scar[row, col]:
-                rows.append(("burnt", cell))
+                rows.append(("scar_nf" if nonfuel[row, col] else "burnt", cell))
             elif front[row, col]:
                 rows.append(("burning", cell))
     return rows
