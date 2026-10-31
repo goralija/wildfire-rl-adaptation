@@ -638,3 +638,26 @@ Updated [S-045–S-047](research/SOURCES.md), [EXP-018](research/EXPERIMENT_LOG.
 context, and indexes. No FireCase, replay, calibration, benchmark, training, or heldout
 inspection occurred. Next continue the event-keyed record search; separately resolve the
 fuel vintage and complete DEM/weather provenance before a preregistered no-action gate.
+
+## 2026-10-31 — TASK-015 official fuel-source artifact inventory
+
+Rechecked the official CWFIS metadata and public directory to resolve the next fuel gate.
+The v2014b metadata names Land Cover Map 2011 and CanFI2000, and says NFDB/NBAC were
+used to identify burn scars, but gives neither the burn-history snapshot date nor a
+per-pixel cutoff. The v20191114 metadata names 2017 kNN inventory and NBAC reassignment,
+also without a dated NBAC cutoff.
+
+The listed v20191114 *Decision Rules* PDF (dated November 14, 2018) describes how base
+FBP classes are assigned from vegetation, species, land cover and ecological inputs; it
+does not define the post-fire age thresholds shown in W.I.S.E. Figure 2. The official
+directory lists a burn-scar legend but no separate succession document. The roughly
+2 GB ZIP was not inspected, so no claim is made about its internal contents. The paper's
+Figure 2 remains the public rule description, while its precise date arithmetic and
+special-class behavior remain unresolved.
+
+Updated the source-gate receipt, fuel-vintage review, input QC, source register, status,
+backlog, handoff, navigation, project context, [EXP-019](research/EXPERIMENT_LOG.md#exp-019--train-fuel-vintage-artifact-inventory-2026-10-31)
+and [ADR-029](specs/DECISION_RECORDS.md#adr-029). No raster download/generation, FireCase,
+simulator replay, training, or heldout inspection occurred. Fuel gate remains blocked;
+next seek an authoritative cutoff and succession implementation or define a separately
+auditable alternative.

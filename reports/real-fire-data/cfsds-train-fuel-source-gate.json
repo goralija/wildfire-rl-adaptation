@@ -1,0 +1,52 @@
+{
+  "schema": "cfsds-train-fuel-source-gate/v1",
+  "reviewed_date": "2026-10-31",
+  "scope": "Official public metadata and documentation for Canadian FBP v2014b and CanFG v20191114, plus the published W.I.S.E. methods and Figure 2. No validation/test cases were accessed.",
+  "questions": {
+    "v2014b_as_of_event_cutoff": {
+      "status": "unresolved",
+      "source_url": "https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/archive/nat_fbpfuels_2014b_metadata.pdf",
+      "documented_inputs": [
+        "Land Cover Map of Canada 2011",
+        "Canadian Forest Inventory (CanFI2000)",
+        "NFDB and NBAC, used with ecozones/ecoregions to identify burn scars"
+      ],
+      "missing_evidence": "No date is given for the NFDB/NBAC snapshot, no per-pixel burn-history vintage, and no cutoff suitable for a 2014-2018 target. The 2014b label and dates of the other component layers do not establish the burn-scar cutoff."
+    },
+    "v20191114_succession_artifact": {
+      "status": "underlying_implementation_not_verified",
+      "metadata_url": "https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/Canadian_Forest_FBP_Fuel_Types_Metadata_v20191114.pdf",
+      "directory_url": "https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/",
+      "metadata_facts": [
+        "The product uses a 2017 kNN forest inventory and NBAC to reassign fuel types in burned areas.",
+        "The metadata does not give an NBAC snapshot date or per-pixel temporal cutoff."
+      ],
+      "listed_release_files": [
+        "Canadian_Forest_FBP_Fuel_Types_Metadata_v20191114.pdf (748 KB)",
+        "Canadian_Forest_FBP_Fuel_Types_v20191114.zip (about 2 GB; not downloaded or inspected)",
+        "FBP_FuelLayer_wBurnScars.pdf (about 3 MB)",
+        "FBP_Fuel_Layer_Base_Layers.pdf (389 KB)",
+        "FBP_Fuel_Layer_Decision_Rules.pdf (381 KB)",
+        "FBPfueltypes_sample_colour_classification.xlsx (18 KB)"
+      ],
+      "decision_rules_pdf_finding": "The listed Decision Rules PDF is dated November 14, 2018 and describes baseline FBP classification from vegetation, forest, species, land-cover and ecological attributes. It does not specify elapsed-years-since-fire succession thresholds. The burn-scar PDF is a class legend, not the succession algorithm.",
+      "interpretation_limit": "The official directory listing exposes no separate burn-scar succession algorithm. Since the 2 GB release ZIP was not inspected, this is not proof that no additional material is embedded inside it."
+    },
+    "published_wise_rule": {
+      "status": "figure_publicly_described; exact_release_implementation_unverified",
+      "article_url": "https://doi.org/10.1071/WF26072",
+      "finding": "The article says annual maps use the succession ruleset associated with v20191114 and identifies Figure 2 as its decision-tree visualization. The project transcription in CFSDS_FUEL_VINTAGE_REVIEW.md is based on that published figure. The official directory's listed Decision Rules PDF is a different, baseline fuel-classification document and cannot validate Figure 2's age arithmetic or special-class handling."
+    }
+  },
+  "decision": "Keep the annual fuel-map gate blocked. Do not describe v2014b as leakage-safe for 2014-2018, or use v20191114 directly as an event-era baseline. Preserve the Figure 2 transcription as a published rule description, not verified executable source code.",
+  "next_evidence_needed": [
+    "An authoritative dated NFDB/NBAC snapshot or explicit cutoff for v2014b, including whether later records were incorporated.",
+    "The exact burn-scar succession artifact or code associated with v20191114, including age-counting semantics and special-class handling.",
+    "If these cannot be obtained, a separately justified, date-stamped historical base and burn-history construction auditable for each TRAIN target."
+  ],
+  "actions_not_performed": [
+    "No 2014b or v20191114 raster was downloaded, generated, or reclassified.",
+    "The approximately 2 GB v20191114 ZIP was not downloaded or inspected.",
+    "No FireCase, simulator replay, calibration, benchmark, training, or heldout inspection was performed."
+  ]
+}

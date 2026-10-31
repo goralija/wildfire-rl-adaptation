@@ -1,5 +1,12 @@
 # Promjene baze znanja
 
+## 2026-10-31: TRAIN fuel source-gate inventory
+
+- Zvanični v2014b metadata navodi NFDB/NBAC za burn scars, ali ne datum snapshot-a ni cutoff; ne možemo ga proglasiti leakage-safe za TRAIN događaje.
+- Zvanični CanFG v20191114 direktorij navodi Decision Rules PDF za bazno mapiranje klasa. On ne sadrži godine-od-požara succession pragove iz W.I.S.E. Figure 2; ZIP od oko 2 GB nije pregledan.
+- Figure 2 ostaje javno transkribovano pravilo, ali bez potvrđene age arithmetic, special-class semantike ili executable implementation. Godišnja mapa ostaje blokirana.
+- Dodani su [source-gate receipt](reports/real-fire-data/cfsds-train-fuel-source-gate.json), [S-048](docs/research/SOURCES.md), [EXP-019](docs/research/EXPERIMENT_LOG.md#exp-019--train-fuel-vintage-artifact-inventory-2026-10-31) i [ADR-029](docs/specs/DECISION_RECORDS.md#adr-029). Nema download-a/generisanja rastera ni FireCase/replay/treninga; `research_ready=false`.
+
 ## 2026-10-31: TRAIN-only BC operational evidence follow-up
 
 - Za kandidatski BC incident N12395, Coal Creek, pronađen je javni izvještaj koji za 12. august navodi rad na containment linijama, pet komada teške mehanizacije i helikopter; taj datum se poklapa sa target datumom CFSDS `2018_1770`.

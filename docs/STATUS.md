@@ -8,6 +8,7 @@ sources:
 - resource: /reports/real-fire-data/cfsds-train-full-day-pair-screen.json
 - resource: /reports/firehose-verification/nonfuel-initial-scar-contract.json
 - resource: /reports/real-fire-data/cfsds-train-bc-operational-evidence.json
+- resource: /reports/real-fire-data/cfsds-train-fuel-source-gate.json
 - resource: /docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md
 - resource: /docs/WORK_LOG.md
 ---
@@ -375,9 +376,12 @@ treniranje ni CFSDS replay. Vidi [ADR-025](specs/DECISION_RECORDS.md#adr-025),
 i [runtime receipt](../reports/firehose-verification/nonfuel-initial-scar-contract.json).
 
 I dalje nema leakage-safe godišnje fuel mape: v2014b cut-off nije potvrđen, a javno
-transkribovanoj Figure 2 nedostaje potvrđena age/special-class semantika i artifact check.
-Naredni rad je preostali TRAIN input provenance (DEM, weather, suppression) za slučajeve
-koji prođu source gate, pa unaprijed definisani no-action replay gate.
+transkribovanoj Figure 2 nedostaje potvrđena age/special-class semantika i underlying
+succession artifact. Zvanična *Decision Rules* dokumentacija koja je navedena u v20191114
+direktoriju obrađuje baznu fuel klasifikaciju, ne starost burn scars; 2 GB ZIP nije
+pregledan. Naredni rad je dobiti cutoff/pravilo od nadležnog izvora ili osmisliti zaseban
+datumima potkrijepljen izvorni put, zatim završiti DEM/weather/suppression provenance i
+preregistrovani no-action gate.
 **research_ready=false.**
 
 
@@ -439,3 +443,15 @@ Receipt: [dated operational evidence](../reports/real-fire-data/cfsds-train-bc-o
 No replay, FireCase rebuild, training or heldout inspection was done. The environment
 is still **not research-ready**; fuel vintage, candidate-level DEM/weather provenance,
 domain fitness and the no-action gate remain open.
+
+## TRAIN fuel-source artifact inventory — 2026-10-31
+
+The official v2014b metadata names Land Cover Map 2011 and CanFI2000 and says NFDB/NBAC
+were used to identify burn scars, but does not state the burn-history snapshot date or a
+per-pixel cutoff. The public v20191114 directory's *Decision Rules* PDF describes base
+fuel classification, not the W.I.S.E. post-fire age tree. Figure 2 remains publicly
+transcribed; its exact age arithmetic/special classes and underlying implementation are
+not verified. The roughly 2 GB release ZIP was not inspected. No annual map was generated;
+the fuel gate remains blocked. See the [source-gate receipt](../reports/real-fire-data/cfsds-train-fuel-source-gate.json),
+[EXP-019](research/EXPERIMENT_LOG.md#exp-019--train-fuel-vintage-artifact-inventory-2026-10-31),
+and [ADR-029](specs/DECISION_RECORDS.md#adr-029).

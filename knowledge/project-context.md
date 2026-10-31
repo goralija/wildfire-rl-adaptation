@@ -48,9 +48,10 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
   [input/provenance QC](../docs/research/CFSDS_TRAIN_INPUT_QC.md).
 - Novi FBP fuel source review našao je CWFIS site-wide Open Government Licence - Canada
   uz atribuciju, ali v2014b i dalje nema cutoff za NFDB/NBAC burn scars. Službeni 2018
-  fuel-class decision rules opisuju bazno klasifikovanje. W.I.S.E. Figure 2 succession
-  tree je javno transkribovana, ali starosna semantika/specijalne klase i tačan v20191114
-  artifact nisu potvrđeni. Nema novog godišnjeg map vintagea; 2014b ostaje samo za
+  fuel-class decision rules opisuju bazno klasifikovanje, ne post-fire age succession.
+  W.I.S.E. Figure 2 succession tree je javno transkribovana, ali starosna semantika/
+  specijalne klase i underlying v20191114 implementation nisu potvrđeni; javni ZIP od
+  2 GB nije pregledan. Nema novog godišnjeg map vintagea; 2014b ostaje samo za
   reprodukciju spremljenih slučajeva. Alberta 2006–2025 suppression dataset je pronađen,
   ali CSV endpoint vratio je HTTP 403 i nema event join-a. [Audit](../docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md),
   [ADR-024](../docs/specs/DECISION_RECORDS.md#adr-024), [ADR-026](../docs/specs/DECISION_RECORDS.md#adr-026).

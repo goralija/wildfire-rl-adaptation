@@ -14,7 +14,7 @@
     "no_fuel_class_was_reclassified": true,
     "reason": [
       "The 2014b base-map metadata has no verified per-pixel temporal cutoff.",
-      "W.I.S.E. identifies a v20191114 succession ruleset, but its exact class tree has not yet been transcribed and validated for this project.",
+      "The W.I.S.E. Figure 2 succession tree is transcribed in CFSDS_FUEL_VINTAGE_REVIEW.md; the official v20191114 directory's listed decision-rules PDF covers baseline fuel classification, not the post-fire age tree. The underlying release implementation, age arithmetic, and special-class behavior remain unverified.",
       "Applying a generic non-fuel code would conflict with the simulator's current imported historical scar/front contract."
     ],
     "status": "BLOCKED_BASE_VINTAGE_AND_SUCCESSION_RULES_UNVERIFIED"

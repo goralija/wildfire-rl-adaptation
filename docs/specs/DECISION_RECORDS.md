@@ -728,3 +728,36 @@ Evidence: [operational evidence receipt](../../reports/real-fire-data/cfsds-trai
 [source register S-045–S-047](../research/SOURCES.md),
 [BC Wildfire season summary](https://www2.gov.bc.ca/gov/content/safety/wildfire-status/about-bcws/wildfire-history/wildfire-season-summary),
 [PECC Situation Report package](https://docs.openinfo.gov.bc.ca/Response_Package_PSS-2018-86747.pdf).
+
+## ADR-029 — keep annual fuel generation blocked after official source-artifact review, recorded 2026-10-31
+
+The official v2014b metadata documents the 2011 land-cover map, CanFI2000, and NFDB/NBAC
+use to identify burn scars, but does not date the NFDB/NBAC snapshot or state a per-pixel
+cutoff. The v20191114 metadata lists a 2017 kNN forest inventory and NBAC burn-area
+reassignment without a dated NBAC cutoff. Its public directory lists the roughly 2 GB
+archive, a burn-scar legend, base-layer documentation, and a *Decision Rules* PDF dated
+November 14, 2018. That PDF assigns baseline fuel classes from vegetation, species,
+land-cover and ecological attributes; it is not the W.I.S.E. post-fire age-succession
+tree. The archive itself was not downloaded or inspected, so this inventory cannot rule
+out embedded source material.
+
+The W.I.S.E. paper says the succession ruleset is associated with v20191114 and shows it
+in Figure 2. That figure is publicly described and transcribed in the fuel review, but
+the listed official decision-rules document does not verify its executable logic,
+calendar arithmetic, or special-class treatment. **Decision:** keep v2014b's event-time
+cutoff unresolved and do not emit an annual fuel map. Keep the Figure 2 tree labeled as
+a published transcription, not verified release code. Next evidence must be an explicit
+v2014b burn-history cutoff and the underlying v20191114 succession artifact (or an
+authoritative confirmation that Figure 2 is complete); if unavailable, define an
+alternative dated history source or exclude cases that cannot be audited.
+
+No raster was downloaded or generated, and no FireCase, replay, calibration, benchmark,
+training, or heldout inspection occurred.
+
+Evidence: [fuel source-gate receipt](../../reports/real-fire-data/cfsds-train-fuel-source-gate.json),
+[fuel-vintage review](../research/CFSDS_FUEL_VINTAGE_REVIEW.md),
+[source register S-031–S-048](../research/SOURCES.md),
+[official v2014b metadata](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/archive/nat_fbpfuels_2014b_metadata.pdf),
+[official v20191114 directory](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/),
+[official baseline decision rules](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/FBP_Fuel_Layer_Decision_Rules.pdf),
+[W.I.S.E. article](https://doi.org/10.1071/WF26072).

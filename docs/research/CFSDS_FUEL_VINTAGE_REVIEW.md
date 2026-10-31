@@ -65,8 +65,13 @@ The paper's Figure 2 publicly shows the decision tree for the first transformati
 Its article text does not spell out the branches and it does not provide a public
 code/data archive; the data statement offers study data from the corresponding author
 upon reasonable request. The figure can be transcribed, but its date arithmetic and
-the exact source release files have not yet been independently checked. The public
-CWFIS FBP classification-rules PDF is still not a substitute for that burn-scar tree.
+the exact source release files have not yet been independently checked. The official
+v20191114 directory lists a *Decision Rules* PDF, but that November 2018 document
+classifies baseline FBP fuel types from vegetation, forest, species, land-cover and
+ecological attributes; it is not the post-fire age-succession tree. The directory's
+burn-scar PDF is a class legend, not a succession algorithm. The roughly 2 GB release
+ZIP was not downloaded or inspected, so the directory listing cannot rule out additional
+embedded material [S-048].
 The second transformation has a local TRAIN-only temporal-mask proof for `2018_747`,
 but the proof does not create an annual fuel layer. The paper also selects its active
 boundary using day-n adjacency and acknowledges that this uses future information;
@@ -86,10 +91,12 @@ The published decision tree reads as follows:
 This is a transcription of the publisher's figure, not a claim that the project has
 reproduced the full NRCan v20191114 release or independently validated its age-counting
 convention. The figure does not state how fractional years, calendar-year boundaries,
-fire dates, pre-existing scar classes, or nodata/water/urban classes are handled. A
-separate CWFIS description of its 2015 operational fuel grid says last-year burns were
-mapped as non-fuel and burns from the prior two years as grass; that is a different,
-simpler historical product rule and cannot be substituted for the v20191114 tree [S-042].
+fire dates, pre-existing scar classes, or nodata/water/urban classes are handled. The
+paper's Figure 2 is the only public description located for these age thresholds; the
+underlying executable implementation remains unverified. A separate CWFIS description
+of its 2015 operational fuel grid says last-year burns were mapped as non-fuel and burns
+from the prior two years as grass; that is a different, simpler historical product rule
+and cannot be substituted for the v20191114 tree [S-042].
 
 ## Reuse terms
 
@@ -119,10 +126,11 @@ Before an annual map can be used, the project needs:
 1. An authoritative date/cutoff for the base map's burn-history inputs, suitable for
    the target year. If none can be obtained, mark the vintage unresolved and do not
    claim leakage-safe fuel inputs.
-2. Verify the Figure 2 transcription against the actual v20191114 rules artifact and
-   define how elapsed age is counted from fire dates. Resolve treatment of existing
-   scars, no-data, water, non-fuel, urban, and ambiguous classes; do not infer these
-   cases from the figure's legend or baseline-classification rules.
+2. Obtain the underlying v20191114 burn-scar succession artifact (or an authoritative
+   confirmation that Figure 2 is the complete rule) and define how elapsed age is counted
+   from fire dates. Resolve treatment of existing scars, no-data, water, non-fuel, urban,
+   and ambiguous classes; do not infer these cases from the figure's legend or baseline
+   classification rules.
 3. A frozen, target-independent history mask: only fires/burn days dated before target
    day n may alter the input; day n and later arrivals must be excluded. Retain the
    tested invariant `arrival_day < target_doy` for the current event.
@@ -144,8 +152,9 @@ The `scar_nf` token must not be used merely because an event-arrival layer overl
 generic `NF` class; that overlap could reflect water, urban, no-data, or another mapping
 error rather than a post-fire succession class.
 
-Evidence and source detail: [source register S-031–S-043](SOURCES.md), [input QC](CFSDS_TRAIN_INPUT_QC.md),
+Evidence and source detail: [source register S-031–S-048](SOURCES.md), [input QC](CFSDS_TRAIN_INPUT_QC.md),
 [pre-target mask proof](../../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
+[fuel source gate receipt](../../reports/real-fire-data/cfsds-train-fuel-source-gate.json),
 [historical importer characterization](../../reports/firehose-verification/nonfuel-initial-scar-compatibility.json),
 [contract receipt](../../reports/firehose-verification/nonfuel-initial-scar-contract.json),
 [ADR-024](../specs/DECISION_RECORDS.md#adr-024), and

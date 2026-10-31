@@ -550,3 +550,30 @@ No replay, FireCase build, fuel-map generation, training, or validation/test ins
 was done. See the [operational evidence receipt](../../reports/real-fire-data/cfsds-train-bc-operational-evidence.json),
 [input QC](CFSDS_TRAIN_INPUT_QC.md), [ADR-028](../specs/DECISION_RECORDS.md#adr-028),
 and [sources S-045–S-047](SOURCES.md).
+
+## EXP-019 — TRAIN fuel-vintage artifact inventory, 2026-10-31
+
+Rechecked the official v2014b and v20191114 metadata and inventoried the official
+v20191114 public directory. The v2014b metadata lists the 2011 land-cover map and
+CanFI2000, and says NFDB/NBAC were used with ecozones to identify burn scars, but gives
+no date for those burn records or a per-pixel cutoff. The v20191114 metadata lists a
+2017 kNN forest inventory and NBAC reassignment of burned-area fuel types, again with no
+NBAC snapshot date or per-pixel cutoff.
+
+The official v20191114 directory lists a metadata PDF, an approximately 2 GB ZIP, a
+burn-scar legend, base-layer notes, a *Decision Rules* PDF, and a sample colour workbook.
+The November 14, 2018 *Decision Rules* PDF maps vegetation/forest/species/land-cover and
+ecological attributes to baseline fuel classes; it does not specify years-since-fire
+succession thresholds. The burn-scar PDF is a legend, not the post-fire age algorithm.
+The ZIP was not downloaded or inspected, so the directory listing cannot establish
+whether additional artifacts are embedded inside it.
+
+The W.I.S.E. article states that annual maps use a v20191114 succession ruleset and
+that Figure 2 visualizes it. The project transcription remains a transcription of the
+published figure; its exact date arithmetic, special-class semantics, and underlying
+release implementation are not verified by the listed official decision-rules PDF.
+**Decision:** keep annual fuel generation blocked. No historical raster was downloaded
+or generated, no FireCase/replay/training occurred, and no validation/test data were
+inspected. Evidence: [source-gate receipt](../../reports/real-fire-data/cfsds-train-fuel-source-gate.json),
+[fuel-vintage review](CFSDS_FUEL_VINTAGE_REVIEW.md), [ADR-029](../specs/DECISION_RECORDS.md#adr-029),
+and [S-048](SOURCES.md).

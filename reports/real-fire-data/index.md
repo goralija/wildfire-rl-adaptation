@@ -5,6 +5,7 @@
 - [CFSDS train fuel QC metoda](../../docs/research/CFSDS_TRAIN_QC.md) i [mašinski čitljiv rezultat](cfsds-train-fuel-qc.json) — 20 train kandidata; 10 prolazi samo gorivnu provjeru, 10 pada; nijedan nije potvrđen kao kompletan simulator slučaj.
 - [CFSDS train input QC](../../docs/research/CFSDS_TRAIN_INPUT_QC.md) i [mašinski čitljiv rezultat](cfsds-train-input-qc.json) — poravnanje izmjereno za 3/20 dostupnih train FireCase paketa; fuel vintage nije potvrđen kao vremenski siguran, suppression ostaje unknown.
 - [CFSDS TRAIN fuel-vintage mask proof](cfsds-train-fuel-vintage-mask-proof.json) — `2018_747` pre-target maska isključuje target dan i kasnije; godišnja fuel mapa nije izrađena dok se ne potvrde bazni cutoff i succession crosswalk.
+- [CFSDS TRAIN fuel source gate](cfsds-train-fuel-source-gate.json) — v2014b ne navodi NFDB/NBAC cutoff; javno navedeni v20191114 decision-rules PDF pokriva bazne fuel klase, a ne post-fire age succession.
 - [CFSDS target-blind input invariance proof](cfsds-target-blind-input-invariance.json) — TRAIN `2018_747`; promjena day-n maske ne mijenja crop, 20×20 početni scar/front ni `InitialState.csv`.
 - [CFSDS TRAIN target-blind window screen](cfsds-train-target-blind-window-screen.json) — samo 2014–2018 TRAIN; target coverage je post-selection dijagnostika, 4/25 prozora imaju ikakav target pixel.
 - [CFSDS TRAIN prostorni feasibility audit](cfsds-train-spatial-feasibility.json) — poređenje 2–6 km domena na istih 25 TRAIN parova; target dijagnostika je post-selection, bez FireCase-a ili replaya.

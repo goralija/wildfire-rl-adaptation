@@ -175,10 +175,13 @@ strictly before target day n as non-fuel [S-037]. Figure 2 is publicly accessibl
 has now been transcribed in the [fuel-vintage review](CFSDS_FUEL_VINTAGE_REVIEW.md).
 The tree says O-1 remains grass; otherwise scars older than 21 years become C-2, older
 than 5 become M-2 (C25%), older than 2 become D-2, and younger scars become Non-Fuel.
-The figure does not document exact date arithmetic or special-class handling, and the
-original v20191114 rule artifact has not been independently verified. This resolves
-the prior claim that the tree was not publicly transcribable, but it does not resolve
-the v2014b burn-history cutoff or authorize a map [S-031, S-037].
+The figure does not document exact date arithmetic or special-class handling. The
+official v20191114 directory's listed *Decision Rules* PDF covers baseline fuel
+classification, not this post-fire age tree; its burn-scar PDF is a legend. The roughly
+2 GB release ZIP was not inspected, so the exact succession implementation remains
+unverified. This resolves the prior claim that the tree was not publicly transcribable,
+but it does not resolve the v2014b burn-history cutoff or authorize a map [S-031,
+S-037, S-048].
 
 A separate official CWFIS note describes the simpler 2015 operational grid rule
 (last-year scars Non-Fuel; the prior two years Grass). That rule belongs to a different
@@ -230,8 +233,10 @@ event counts and the general boundary-rule check are recorded separately in
 
 This proves only the temporal perimeter predicate. It does **not** build/reclassify a
 fuel raster: the existing v2014b map still lacks a verified per-pixel cutoff, and the
-publicly shown W.I.S.E. Figure 2 tree has only been transcribed, not checked against the
-actual v20191114 rules artifact or its age-counting convention. The diagnostic front
+publicly shown W.I.S.E. Figure 2 tree has only been transcribed. The official directory's
+listed decision-rules PDF covers baseline fuel classification; the underlying succession
+artifact was not found in the listed documents, and the large archive was not inspected.
+Its age-counting convention remains unknown. The diagnostic front
 count reproduces the then-current target-aware builder rule only to explain the existing
 case; it is not an acceptable front input for an unbiased benchmark. A
 deliberately small C++ fixture originally placed one ordinary `burnt` initial-state cell
@@ -310,10 +315,11 @@ Before new train replay work:
    survives regridding. The current target screen is post-selection diagnosis only, never
    an eligibility/tuning criterion. If the fixed 2×2 km domain is unsuitable, record the
    blocker and justify a separate model-domain decision before replay.
-2. Finish the fuel source gate: obtain/verify the dated v2014b burn-history cutoff;
-   validate the Figure 2 transcription against the v20191114 rule artifact; specify age
-   arithmetic and special classes; preserve per-cell lineage. The crosswalk is now
-   publicly transcribed, but no map is authorized while its data contract is incomplete.
+2. Finish the fuel source gate: obtain an authoritative dated v2014b burn-history
+   cutoff; obtain the underlying v20191114 succession artifact or confirmation that the
+   published Figure 2 is complete; specify age arithmetic and special classes; preserve
+   per-cell lineage. The official listed decision-rules PDF is for baseline classes, not
+   succession. No map is authorized while its data contract is incomplete.
 3. Use the tested `scar_nf` importer token only when cell-level evidence confirms that
    an NF class is a post-fire succession outcome, not Water, Urban, no-data or an
    overlay error. The generic case builder still rejects every initial non-fuel/water

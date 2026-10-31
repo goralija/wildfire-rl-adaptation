@@ -48,8 +48,10 @@ fine-tuning prije prihvatljivih train ulaza, replay gatea i zamrznutog heldout s
   [JSON receipt](../reports/real-fire-data/cfsds-train-full-day-pair-screen.json) i
   [1301-row case/domain CSV](../reports/real-fire-data/cfsds-train-full-day-pair-screen.csv).
 - Godišnja fuel mapa nije izrađena: v2014b nema potvrđen vremenski cutoff za NFDB/NBAC
-  burn-scar layer. W.I.S.E. Figure 2 je sada pronađena i transkribovana, ali starosna
-  računica, specijalne klase i stvarni v20191114 rules artifact nisu provjereni.
+  burn-scar layer. W.I.S.E. Figure 2 je javno transkribovana. Pregledani v20191114
+  Decision Rules PDF opisuje bazno dodjeljivanje fuel klasa, ne succession prema starosti;
+  2 GB raster ZIP nije pregledan. Tačan succession artifact, age arithmetic, specijalne
+  klase i v2014b cutoff ostaju otvoreni; vidi fuel source-gate receipt.
   Alberta 2006–2025 fire-level suppression dataset je pronađen; direktni CSV download
   endpoint vratio je HTTP 403 pa nijedan događaj nije spojen. DEM/weather lineage je
   nepotpuna, a suppression status za slučajeve ostaje unknown.
@@ -76,6 +78,7 @@ Metode i dokazi:
 - [EXP-016 input-lineage audit](research/EXPERIMENT_LOG.md#exp-016--train-fuel-tree-correction-and-external-input-lineage-audit-2026-10-31)
 - [Fuel mask proof](../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
   [NF-scar importer contract receipt](../reports/firehose-verification/nonfuel-initial-scar-contract.json)
+- [Fuel source-gate receipt](../reports/real-fire-data/cfsds-train-fuel-source-gate.json) for the v2014b cutoff and v20191114 rules-artifact inventory
 - [BC perimeter crosswalk receipt](../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json) for the three saved 2018 TRAIN cases; no suppression fields
 - [BC operational evidence receipt](../reports/real-fire-data/cfsds-train-bc-operational-evidence.json) for dated activity/status reports on the three BC candidate incidents; partial public evidence, not a full daily resource log
 - [TASK-004c adapter/runtime receipt](../reports/firehose-verification/task004c-adapter-smoke.json)
@@ -83,10 +86,12 @@ Metode i dokazi:
 
 ## Sljedeći taskovi po redu
 
-1. Nastavi fuel source gate: pribavi autoritativni v2014b NFDB/NBAC cutoff ili zadrži
-   vintage unresolved; provjeri javno prepisanu W.I.S.E. Figure 2 prema izvornom
-   v20191114 artifactu i utvrdi računanje starosti/specijalne klase. Ne generiši godišnju
-   mapu dok ovo nije riješeno.
+1. Fuel source-gate pretraga javno dostupnih metadata/PDF-ova je završena bez cutoffa:
+   v2014b NFDB/NBAC snapshot nije datiran, a javno navedeni v20191114 Decision Rules PDF
+   pokriva baznu klasifikaciju, ne post-fire age-tree. Sljedeći dokaz mora doći od
+   NRCan/CWFIS ili autora rada: eksplicitan v2014b cutoff i succession artifact/code ili
+   potvrda da je Figure 2 kompletan algoritam. ZIP od 2 GB nije pregledan. Do tada drži
+   gate zatvoren i ne generiši godišnju mapu.
 2. Nastavi TRAIN-only BC suppression search: pribavi event-keyed dnevne zapise za N12395,
    C11937 i N12413 ako su javno dostupni; sadašnji izvještaji za Coal Creek/Lost Dog su
    snapshots i kandidatski join, a C11937 nema pronađene dnevne akcije. Za ostale TRAIN
