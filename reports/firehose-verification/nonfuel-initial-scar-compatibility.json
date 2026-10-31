@@ -1,0 +1,43 @@
+{
+  "decision": "Do not reclassify CFSDS prior scars to generic non-fuel in the case builder until an authoritative succession rule and a compatible initial-state/damage-accounting contract are established.",
+  "fixture": {
+    "cell_id_one_based": 4,
+    "fuel_data_path": "external/firehose/data/Sub20x20/Data.csv",
+    "fuel_data_sha256": "48d5dcb6ecdd7faa214c54aa8ce44e1e34f9aadcd0b88b815ec973d2d1a8a85a",
+    "fuel_type": "NF",
+    "initial_state_patch_sha256": "f77a36c755636d9b56a410481be60c28fa7a6ff696945174e72ce3ee2966df42",
+    "path": "docker/firehose/nonfuel_initial_scar_fixture.csv",
+    "second_cell": {
+      "cell_id_one_based": 1,
+      "fuel_type": "C2",
+      "state": "burning"
+    },
+    "sha256": "48edd8419940a11b589d7ac0eb837b754de1ed854753dbc9961d75fd45092c6f",
+    "state": "burnt"
+  },
+  "performed_at_utc": "2026-10-30T23:13:06.148632+00:00",
+  "purpose": "Characterize whether the current pinned C++ importer accepts a historical burnt cell whose simulator fuel is NF.",
+  "result": {
+    "actual_stderr_contains_expected_rejection": true,
+    "expected_rejection": "InitialState.csv marks a non-fuel/harvested cell as burned",
+    "interpretation": "The C++ guard rejects the NF scar before producing a grid. The probe then reports an IndexError while looking for the absent initial grid; that wrapper error is secondary. This is an expected-rejection characterization, not a simulator-compatibility pass.",
+    "probe_exit_code": 1,
+    "secondary_probe_error": "IndexError: list index out of range",
+    "simulator_returncode": -6,
+    "status": "PASS_EXPECTED_REJECTION_REPRODUCED"
+  },
+  "runtime": {
+    "firehose_commit": "e49a52a9a987a1585d25ddca2f711222ca500ffb",
+    "image_id": "sha256:51495d225c89f362d8d152f999f19320d652c259cd5c0ac872a20032be59b113",
+    "image_tag": "wildfire-firehose-probe:20261030-initial-state",
+    "network": "disabled",
+    "platform": "Linux ARM64, Python 3.8.20"
+  },
+  "schema": "firehose-nonfuel-initial-scar-compatibility-report/v1",
+  "scope": {
+    "data_split": "upstream synthetic Sub20 fixture only; no CFSDS raster or validation/test outcome was opened",
+    "fire_simulation_started": false,
+    "policy_rollout": false,
+    "training": false
+  }
+}

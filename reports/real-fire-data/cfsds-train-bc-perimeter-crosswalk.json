@@ -1,0 +1,138 @@
+{
+  "schema": "cfsds-train-bc-perimeter-crosswalk/v1",
+  "retrieved_date_utc": "2026-10-31",
+  "scope": "TRAIN-only; the three already-saved 2018 FireCases; target centroid used only to identify a historical incident, never as simulator input or to select a new case",
+  "source": {
+    "publisher": "Government of British Columbia, BC Wildfire Service",
+    "layer_name": "BC Wildfire Fire Perimeters - Historical",
+    "layer_url": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_land_and_natural_resource/MapServer/6",
+    "catalogue_url": "https://open.canada.ca/data/en/dataset/22c7cb44-1463-48f7-8e47-88857f207702",
+    "licence": "Open Government Licence - British Columbia",
+    "queried_endpoint": "https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_land_and_natural_resource/MapServer/6/query",
+    "response_fields": [
+      "FIRE_NUMBER",
+      "VERSION_NUMBER",
+      "FIRE_YEAR",
+      "FIRE_CAUSE",
+      "FIRE_LABEL",
+      "FIRE_SIZE_HECTARES",
+      "SOURCE",
+      "GPS_TRACK_DATE",
+      "FIRE_DATE",
+      "CREATION_METHOD"
+    ],
+    "query": {
+      "where": "FIRE_YEAR=2018",
+      "geometry": "summary_centroid_wgs84 from each existing case manifest",
+      "geometryType": "esriGeometryPoint",
+      "inSR": 4326,
+      "spatialRel": "esriSpatialRelIntersects",
+      "returnGeometry": false,
+      "f": "json"
+    }
+  },
+  "result_summary": {
+    "cases_queried": 3,
+    "cases_with_exactly_one_2018_polygon_intersection": 3,
+    "cases_with_zero_or_multiple_intersections": [],
+    "suppression_status": "unknown for all three; this perimeter layer contains no staffing, resource-use, or daily-action fields"
+  },
+  "events": [
+    {
+      "cfsds_event_id": "2018_1770",
+      "case_manifest": "reports/real-fire-data/2018_1770-case.json",
+      "case_manifest_sha256": "c6eae9397ddb87636f0ee4c3f0e70cbf385808fc1ad237fe85e903bee1db97a7",
+      "target_date_local": "2018-08-12",
+      "target_doy": 224,
+      "target_summary_centroid_wgs84": {
+        "lat": 49.5064544588417,
+        "lon": -114.867760189334
+      },
+      "candidate_match_count": 1,
+      "candidate_matches": [
+        {
+          "fire_number": "N12395",
+          "fire_label": "2018-N12395",
+          "fire_year": 2018,
+          "fire_date_utc": "2018-08-10",
+          "cause": "Person",
+          "reported_polygon_size_ha": 955.7,
+          "source": "2018 ROLLOVER",
+          "gps_track_date_utc": "2018-09-07",
+          "version_number": 2018090701,
+          "creation_method": "Non-corrected airborne GPS"
+        }
+      ],
+      "query_response_sha256": "68060037e6ae088ddae730726eb75cc55814c3cba9d13ef94e944bf0973d40ad",
+      "query_response_bytes": 1510,
+      "query_response_raw_json": "{\"displayFieldName\":\"FIRE_NUMBER\",\"fieldAliases\":{\"FIRE_NUMBER\":\"Fire Number\",\"VERSION_NUMBER\":\"Version Number\",\"FIRE_YEAR\":\"Fire Year\",\"FIRE_CAUSE\":\"Fire Cause\",\"FIRE_LABEL\":\"Fire Label\",\"FIRE_SIZE_HECTARES\":\"Fire Size (ha)\",\"SOURCE\":\"Source\",\"GPS_TRACK_DATE\":\"GPS Track Date\",\"FIRE_DATE\":\"Fire Date\",\"CREATION_METHOD\":\"Creation Method\"},\"fields\":[{\"name\":\"FIRE_NUMBER\",\"type\":\"esriFieldTypeString\",\"alias\":\"Fire Number\",\"length\":10},{\"name\":\"VERSION_NUMBER\",\"type\":\"esriFieldTypeInteger\",\"alias\":\"Version Number\"},{\"name\":\"FIRE_YEAR\",\"type\":\"esriFieldTypeSmallInteger\",\"alias\":\"Fire Year\"},{\"name\":\"FIRE_CAUSE\",\"type\":\"esriFieldTypeString\",\"alias\":\"Fire Cause\",\"length\":20},{\"name\":\"FIRE_LABEL\",\"type\":\"esriFieldTypeString\",\"alias\":\"Fire Label\",\"length\":16},{\"name\":\"FIRE_SIZE_HECTARES\",\"type\":\"esriFieldTypeDouble\",\"alias\":\"Fire Size (ha)\"},{\"name\":\"SOURCE\",\"type\":\"esriFieldTypeString\",\"alias\":\"Source\",\"length\":50},{\"name\":\"GPS_TRACK_DATE\",\"type\":\"esriFieldTypeDate\",\"alias\":\"GPS Track Date\",\"length\":8},{\"name\":\"FIRE_DATE\",\"type\":\"esriFieldTypeDate\",\"alias\":\"Fire Date\",\"length\":8},{\"name\":\"CREATION_METHOD\",\"type\":\"esriFieldTypeString\",\"alias\":\"Creation Method\",\"length\":50}],\"features\":[{\"attributes\":{\"FIRE_NUMBER\":\"N12395\",\"VERSION_NUMBER\":2018090701,\"FIRE_YEAR\":2018,\"FIRE_CAUSE\":\"Person\",\"FIRE_LABEL\":\"2018-N12395\",\"FIRE_SIZE_HECTARES\":955.7,\"SOURCE\":\"2018 ROLLOVER\",\"GPS_TRACK_DATE\":1536278400000,\"FIRE_DATE\":1533859200000,\"CREATION_METHOD\":\"Non-corrected airborne GPS                        \"}}]}",
+      "interpretation": "candidate spatial crosswalk: the CFSDS target-day summary centroid intersects this single 2018 BC historical perimeter; no shared CFSDS/BC incident key was available in this query"
+    },
+    {
+      "cfsds_event_id": "2018_241",
+      "case_manifest": "reports/real-fire-data/2018_241-case.json",
+      "case_manifest_sha256": "b7ec7f2e9b4c71f821c640002e9091dc75a98c129cf22ed32244fd4ef005849a",
+      "target_date_local": "2018-08-15",
+      "target_doy": 227,
+      "target_summary_centroid_wgs84": {
+        "lat": 53.1417986856387,
+        "lon": -123.766526571052
+      },
+      "candidate_match_count": 1,
+      "candidate_matches": [
+        {
+          "fire_number": "C11937",
+          "fire_label": "2018-C11937",
+          "fire_year": 2018,
+          "fire_date_utc": "2018-08-01",
+          "cause": "Lightning",
+          "reported_polygon_size_ha": 13433.1,
+          "source": "2018 ROLLOVER",
+          "gps_track_date_utc": "2018-09-03",
+          "version_number": 2018090301,
+          "creation_method": "Non-corrected airborne GPS"
+        }
+      ],
+      "query_response_sha256": "5d335b47a23936cf03c0bc39aa722f7ac7c394593bb97634378556cadb8833ca",
+      "query_response_bytes": 1515,
+      "query_response_raw_json": "{\"displayFieldName\":\"FIRE_NUMBER\",\"fieldAliases\":{\"FIRE_NUMBER\":\"Fire Number\",\"VERSION_NUMBER\":\"Version Number\",\"FIRE_YEAR\":\"Fire Year\",\"FIRE_CAUSE\":\"Fire Cause\",\"FIRE_LABEL\":\"Fire Label\",\"FIRE_SIZE_HECTARES\":\"Fire Size (ha)\",\"SOURCE\":\"Source\",\"GPS_TRACK_DATE\":\"GPS Track Date\",\"FIRE_DATE\":\"Fire Date\",\"CREATION_METHOD\":\"Creation Method\"},\"fields\":[{\"name\":\"FIRE_NUMBER\",\"type\":\"esriFieldTypeString\",\"alias\":\"Fire Number\",\"length\":10},{\"name\":\"VERSION_NUMBER\",\"type\":\"esriFieldTypeInteger\",\"alias\":\"Version Number\"},{\"name\":\"FIRE_YEAR\",\"type\":\"esriFieldTypeSmallInteger\",\"alias\":\"Fire Year\"},{\"name\":\"FIRE_CAUSE\",\"type\":\"esriFieldTypeString\",\"alias\":\"Fire Cause\",\"length\":20},{\"name\":\"FIRE_LABEL\",\"type\":\"esriFieldTypeString\",\"alias\":\"Fire Label\",\"length\":16},{\"name\":\"FIRE_SIZE_HECTARES\",\"type\":\"esriFieldTypeDouble\",\"alias\":\"Fire Size (ha)\"},{\"name\":\"SOURCE\",\"type\":\"esriFieldTypeString\",\"alias\":\"Source\",\"length\":50},{\"name\":\"GPS_TRACK_DATE\",\"type\":\"esriFieldTypeDate\",\"alias\":\"GPS Track Date\",\"length\":8},{\"name\":\"FIRE_DATE\",\"type\":\"esriFieldTypeDate\",\"alias\":\"Fire Date\",\"length\":8},{\"name\":\"CREATION_METHOD\",\"type\":\"esriFieldTypeString\",\"alias\":\"Creation Method\",\"length\":50}],\"features\":[{\"attributes\":{\"FIRE_NUMBER\":\"C11937\",\"VERSION_NUMBER\":2018090301,\"FIRE_YEAR\":2018,\"FIRE_CAUSE\":\"Lightning\",\"FIRE_LABEL\":\"2018-C11937\",\"FIRE_SIZE_HECTARES\":13433.1,\"SOURCE\":\"2018 ROLLOVER\",\"GPS_TRACK_DATE\":1535932800000,\"FIRE_DATE\":1533081600000,\"CREATION_METHOD\":\"Non-corrected airborne GPS                        \"}}]}",
+      "interpretation": "candidate spatial crosswalk: the CFSDS target-day summary centroid intersects this single 2018 BC historical perimeter; no shared CFSDS/BC incident key was available in this query"
+    },
+    {
+      "cfsds_event_id": "2018_747",
+      "case_manifest": "reports/real-fire-data/2018_747-case.json",
+      "case_manifest_sha256": "43baf91cc526056b21381257eae201ee7f24bd85d316e64e01132a47f017b2f5",
+      "target_date_local": "2018-08-16",
+      "target_doy": 228,
+      "target_summary_centroid_wgs84": {
+        "lat": 49.8422232087954,
+        "lon": -115.931021052199
+      },
+      "candidate_match_count": 1,
+      "candidate_matches": [
+        {
+          "fire_number": "N12413",
+          "fire_label": "2018-N12413",
+          "fire_year": 2018,
+          "fire_date_utc": "2018-08-10",
+          "cause": "Lightning",
+          "reported_polygon_size_ha": 713.7,
+          "source": "2018 ROLLOVER",
+          "gps_track_date_utc": "2018-08-23",
+          "version_number": 2018082301,
+          "creation_method": "Processed IR image"
+        }
+      ],
+      "query_response_sha256": "bee66baebb62a02df0a6c9304c097035aff9aab285fd7d83da73d006206ff896",
+      "query_response_bytes": 1513,
+      "query_response_raw_json": "{\"displayFieldName\":\"FIRE_NUMBER\",\"fieldAliases\":{\"FIRE_NUMBER\":\"Fire Number\",\"VERSION_NUMBER\":\"Version Number\",\"FIRE_YEAR\":\"Fire Year\",\"FIRE_CAUSE\":\"Fire Cause\",\"FIRE_LABEL\":\"Fire Label\",\"FIRE_SIZE_HECTARES\":\"Fire Size (ha)\",\"SOURCE\":\"Source\",\"GPS_TRACK_DATE\":\"GPS Track Date\",\"FIRE_DATE\":\"Fire Date\",\"CREATION_METHOD\":\"Creation Method\"},\"fields\":[{\"name\":\"FIRE_NUMBER\",\"type\":\"esriFieldTypeString\",\"alias\":\"Fire Number\",\"length\":10},{\"name\":\"VERSION_NUMBER\",\"type\":\"esriFieldTypeInteger\",\"alias\":\"Version Number\"},{\"name\":\"FIRE_YEAR\",\"type\":\"esriFieldTypeSmallInteger\",\"alias\":\"Fire Year\"},{\"name\":\"FIRE_CAUSE\",\"type\":\"esriFieldTypeString\",\"alias\":\"Fire Cause\",\"length\":20},{\"name\":\"FIRE_LABEL\",\"type\":\"esriFieldTypeString\",\"alias\":\"Fire Label\",\"length\":16},{\"name\":\"FIRE_SIZE_HECTARES\",\"type\":\"esriFieldTypeDouble\",\"alias\":\"Fire Size (ha)\"},{\"name\":\"SOURCE\",\"type\":\"esriFieldTypeString\",\"alias\":\"Source\",\"length\":50},{\"name\":\"GPS_TRACK_DATE\",\"type\":\"esriFieldTypeDate\",\"alias\":\"GPS Track Date\",\"length\":8},{\"name\":\"FIRE_DATE\",\"type\":\"esriFieldTypeDate\",\"alias\":\"Fire Date\",\"length\":8},{\"name\":\"CREATION_METHOD\",\"type\":\"esriFieldTypeString\",\"alias\":\"Creation Method\",\"length\":50}],\"features\":[{\"attributes\":{\"FIRE_NUMBER\":\"N12413\",\"VERSION_NUMBER\":2018082301,\"FIRE_YEAR\":2018,\"FIRE_CAUSE\":\"Lightning\",\"FIRE_LABEL\":\"2018-N12413\",\"FIRE_SIZE_HECTARES\":713.7,\"SOURCE\":\"2018 ROLLOVER\",\"GPS_TRACK_DATE\":1534982400000,\"FIRE_DATE\":1533859200000,\"CREATION_METHOD\":\"Processed IR image                                \"}}]}",
+      "interpretation": "candidate spatial crosswalk: the CFSDS target-day summary centroid intersects this single 2018 BC historical perimeter; no shared CFSDS/BC incident key was available in this query"
+    }
+  ],
+  "limitations": [
+    "The match is spatial and year-based; CFSDS and BC source incident identifiers are not directly linked in the query, so treat it as a strong candidate crosswalk pending a shared-key or chronology check.",
+    "These are historical perimeter records captured after each target day. They are used only for incident identification and are not valid pre-target simulator inputs.",
+    "Fire size, cause and fire date do not reveal the suppression actions, staffing or daily resource schedule.",
+    "No other train, validation or test events were examined."
+  ]
+}

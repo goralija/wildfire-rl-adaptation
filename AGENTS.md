@@ -10,9 +10,41 @@ Repo je OKF 0.2 knowledge bundle. Na početku sesije pročitaj [index.md](index.
 Zatim koristi [mapu zadataka/koda](knowledge/code-map.md) za relevantne izvore i testove.
 Korisnikove direktne upute imaju prednost; kasniji ADR može zamijeniti raniji.
 
-**Prvi fokus je TASK-012 dataset refinement.** Izbor, uloga i obim podataka su otvoreni;
-Dogrib/CFSDS su pregledani kandidati. TASK-004c je tehnički nastavak nakon refinementa.
-Runtime PASS nije dokaz fizičke validacije ili RL prednosti. Čuvaj ovu razliku u sažecima.
+**Odabrana je putanja Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire (ADR-013).**
+TASK-012 je završen. TASK-015 ima train-only fuel audit (10/20 fuel-only prolaza)
+i input-alignment audit za tri od 20 lokalno dostupnih FireCase paketa. As-of-event
+fuel vintage nije potvrđen, DEM/weather provenance nije potpuna, a suppression je
+unknown. No-action mismatch ostaje otvoren.
+TASK-018 dijagnostička faza i TASK-004c episode adapter su završeni lokalno. Početni
+input sada ima prototipsko target-blind pravilo: prozor se centrira na centroid day n−1,
+a sigurne unutrašnje day n−1 ćelije čine početni front; granica prozora ostaje historijski
+scar. Za TRAIN događaj `2018_747` dokazano je da promjena day-n ciljne maske ne mijenja
+prozor, modelsku scar/front masku ni `InitialState.csv`. TRAIN-only screen istog pravila
+pokazuje slabo preklapanje ciljnog dana za većinu trenutno rangiranih kandidata; to je
+dijagnostika prostorne prikladnosti, ne dozvola da se prozor bira prema targetu.
+Naknadni prostorni audit na istih 25 parova pokazuje da 2 km nije dovoljno; oko 4 km
+medijalno pokriva samo 1.95% targeta, a oko 6 km oko 15.3% i ne stane u dva izvorna
+rastera. Nijedna domena nije usvojena; day-pair membership shortlist-a nije dokazano
+potpuno outcome-independent jer je tražen target-day red i pozitivna `firearea`.
+Sljedeći korak za cohort/prostor je završen: unaprijed definisano pravilo obradilo je svih
+1.301 TRAIN rastera i provjerilo pet fizičkih skala. Na 1.010 parova naredni dan ima
+mapirane piksele; 291 ostaje sa statusom bez mapiranog targeta. Ovo je geometrijski
+pre-screen, ne konačna podobna kohorta. Godišnja fuel mapa još nije napravljena: 2014b
+nema potvrđen per-pixel cutoff, a javno transkribovani succession tree još nema potvrđen
+age/special-class ugovor. Izolovani C++ importer contract sada prihvata eksplicitni
+`scar_nf` samo na tačnoj NF ćeliji i čuva ga kao
+cumulative damage, ali stvarni CFSDS builder i dalje blokira takav ulaz dok se ne riješi
+fuel/source provenance. W.I.S.E. Figure 2 je sada javno transkribovana; v2014b cutoff,
+starosna pravila/specijalne klase i stvarni v20191114 artifact ostaju otvoreni. Alberta
+2006–2025 suppression dataset je pronađen, ali CSV download je vratio HTTP 403 i nema
+spojenih suppression događaja. Tri spremljena 2018 slučaja imaju BC perimeter crosswalk
+kandidate N12395/C11937/N12413, ali bez evidence o akcijama gašenja. Zatim slijedi fuel
+evidence gdje je dostupna, train terrain/weather
+provenance, suppression joins i unaprijed definisani replay gate.
+Root cause no-action overgrowth nije izolovan, a no-action gate nije prošao.
+Ne koristi validation/test ishode za izbor parametara. No-action gate i heldout freeze
+moraju proći prije policy benchmarka ili fine-tuninga. Runtime PASS nije dokaz fizičke
+validacije ili RL prednosti. Čuvaj ovu razliku u sažecima.
 
 Održavanje znanja: [maintenance](knowledge/maintenance.md), format:
 [OKF profil](knowledge/okf-format.md). Novi `.md` koncept dobija YAML `type` i vezu iz

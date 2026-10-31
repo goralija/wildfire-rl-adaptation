@@ -11,7 +11,9 @@ COPY external/sb3-contrib-legacy /opt/contrib
 RUN python -m pip install --no-cache-dir --no-deps /opt/contrib && python -m pip check
 COPY external/firehose/cell2fire /opt/firehose/cell2fire
 COPY docker/firehose/cfsds_initial_state.patch /opt/cfsds_initial_state.patch
-RUN patch --batch -p1 -d /opt/firehose/cell2fire < /opt/cfsds_initial_state.patch
+COPY docker/firehose/task004c_state_export.patch /opt/task004c_state_export.patch
+RUN patch --batch -p1 -d /opt/firehose/cell2fire < /opt/cfsds_initial_state.patch \
+    && patch --batch -p1 -d /opt/firehose/cell2fire < /opt/task004c_state_export.patch
 COPY external/firehose/data/Sub20x20 /opt/firehose/data/Sub20x20
 COPY external/firehose/pretrained_models/20x20-fixed-ppo-maskable.zip /opt/firehose/pretrained_models/20x20-fixed-ppo-maskable.zip
 COPY external/firehose/pretrained_models/20x20-random-20m-ppo-maskable.zip /opt/firehose/pretrained_models/20x20-random-20m-ppo-maskable.zip
@@ -25,5 +27,10 @@ COPY src/wildfire_rl/firehose_probe.py /opt/firehose_probe.py
 COPY docker/firehose/verify_batch.py /opt/firehose_verify_batch.py
 COPY docker/firehose/initial_state_fixture.csv /opt/initial_state_fixture.csv
 COPY docker/firehose/verify_initial_state.py /opt/firehose_verify_initial_state.py
+COPY docker/firehose/nonfuel_initial_scar_fixture.csv /opt/nonfuel_initial_scar_fixture.csv
+COPY docker/firehose/nonfuel_initial_scar_reject_burnt_fixture.csv /opt/nonfuel_initial_scar_reject_burnt_fixture.csv
+COPY docker/firehose/nonfuel_initial_scar_reject_active_fixture.csv /opt/nonfuel_initial_scar_reject_active_fixture.csv
+COPY docker/firehose/nonfuel_initial_scar_reject_mismatch_fixture.csv /opt/nonfuel_initial_scar_reject_mismatch_fixture.csv
+COPY docker/firehose/verify_nonfuel_initial_scar.py /opt/firehose_verify_nonfuel_initial_scar.py
 WORKDIR /opt/firehose
 CMD ["python", "/opt/firehose_verify_batch.py"]

@@ -1,0 +1,185 @@
+{
+  "schema": "cfsds-train-terrain-weather-provenance/v1",
+  "reviewed_on": "2026-10-31",
+  "purpose": "Bounded source-lineage check for terrain and weather used by the three already-materialized CFSDS TRAIN pilot cases.",
+  "scope": {
+    "split": "train",
+    "event_ids": ["2018_1770", "2018_241", "2018_747"],
+    "case_manifests_rebuilt": false,
+    "firecases_rebuilt": false,
+    "simulator_replays_run": false,
+    "training_or_calibration_run": false,
+    "validation_or_test_data_opened": false,
+    "interpretation": "This receipt narrows two provenance questions for three old diagnostic inputs. It does not qualify them as unbiased benchmark cases or close TASK-015."
+  },
+  "terrain": {
+    "case_input": "The saved manifests identify NRCan MRDEM-30 DTM, 30 m bilinear resampling to the 100 m model grid, and generated elevation hashes.",
+    "case_grid_extent_format": "[xmin, ymin, xmax, ymax] metres in the Canada Lambert Conformal Conic NAD83 CRS recorded in each case manifest.",
+    "source_class_asset": {
+      "url": "https://canelevation-dem.s3.ca-central-1.amazonaws.com/mrdem-30/mrdem-30-source.tif",
+      "http_status": 200,
+      "content_length_bytes": 163409244,
+      "last_modified": "2026-06-24T15:13:26Z",
+      "etag": "2fe298cc193316a0ee961d02ad47d0fe-20",
+      "crs": "EPSG:3979",
+      "raster_size_pixels": [185220, 166668],
+      "resolution_m": [30, 30],
+      "dtype": "uint8",
+      "nodata": 0,
+      "transform": [30, 0, -2500020, 0, -30, 4000020],
+      "read_method": "Remote COG window reads only; no national raster download.",
+      "product_specification": "https://download-telecharger.services.geo.ca/pub/elevation/dem_mne/MRDEM_MNEMR/CanElevation-MRDEM-Product-Specifications.pdf",
+      "product_specification_edition": "1.2, 2025-06-20",
+      "source_code_meanings": {
+        "1": "Adjusted Copernicus GLO-30",
+        "5": "Blended area",
+        "10": "HRDEM Mosaic"
+      }
+    },
+    "case_windows": [
+      {
+        "event_id": "2018_1770",
+        "target_date": "2018-08-12",
+        "case_manifest_sha256": "c6eae9397ddb87636f0ee4c3f0e70cbf385808fc1ad237fe85e903bee1db97a7",
+        "simulator_grid_extent_m": [-1413925, 6862175, -1411925, 6864175],
+        "generated_elevation_sha256": "fff6fee27d25ff4c59db1f2ce60ff3b4ce012828af0fa5efa88e871414a12272",
+        "source_window_col_row_offset": [36203, 124030],
+        "source_window_width_height": [67, 67],
+        "source_window_pixels": 4489,
+        "source_window_counts": {"1": 4489},
+        "output_model_cells": 400,
+        "output_cells_supported_by_code_1": 400
+      },
+      {
+        "event_id": "2018_241",
+        "target_date": "2018-08-15",
+        "case_manifest_sha256": "b7ec7f2e9b4c71f821c640002e9091dc75a98c129cf22ed32244fd4ef005849a",
+        "simulator_grid_extent_m": [-1835485, 7464005, -1833485, 7466005],
+        "generated_elevation_sha256": "76ab10027a4733f33478c64c4a097ce92af9928bdeb24a26e4176bb7aeb7d88d",
+        "source_window_col_row_offset": [22151, 103969],
+        "source_window_width_height": [67, 67],
+        "source_window_pixels": 4489,
+        "source_window_counts": {"1": 4489},
+        "output_model_cells": 400,
+        "output_cells_supported_by_code_1": 400
+      },
+      {
+        "event_id": "2018_747",
+        "target_date": "2018-08-16",
+        "case_manifest_sha256": "43baf91cc526056b21381257eae201ee7f24bd85d316e64e01132a47f017b2f5",
+        "simulator_grid_extent_m": [-1475305, 6922655, -1473305, 6924655],
+        "generated_elevation_sha256": "44f5cfb31876aac17b876d8341c5a6c37f807c6b388a1cb2929fe11d3f445eca",
+        "source_window_col_row_offset": [34157, 122014],
+        "source_window_width_height": [67, 67],
+        "source_window_pixels": 4489,
+        "source_window_counts": {"1": 4489},
+        "output_model_cells": 400,
+        "output_cells_supported_by_code_1": 400
+      }
+    ],
+    "interpretation": "All 4489 source pixels in each bounded 2 km extent are code 1, so all 400 output cells overlap only the adjusted Copernicus GLO-30 source class in the currently published source-class asset. NRCan describes the GLO-30 source collection as 2011–2015, which predates these 2018 targets.",
+    "limitations": [
+      "The current source-class COG identifies source category, not an exact per-pixel acquisition date.",
+      "The DTM source COG is a current live product snapshot, not a captured copy of the exact VRT/source bytes used to build the old cases; the product was revised after the target dates.",
+      "The 2011–2015 source collection date does not pin the later MRDEM adjustment/processing version or prove the exact historical case raster was byte-identical.",
+      "This supports the published static-terrain modeling assumption, not case-specific proof of unchanged terrain or input vintage."
+    ]
+  },
+  "weather": {
+    "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+    "provider_model": "ERA5-Seamless",
+    "variable_source_notes": {
+      "temperature_2m": "ERA5-Land within ERA5-Seamless",
+      "relative_humidity_2m": "ERA5-Land within ERA5-Seamless",
+      "wind_speed_10m": "ERA5 within ERA5-Seamless",
+      "wind_direction_10m": "ERA5 within ERA5-Seamless",
+      "precipitation": "ERA5, as listed for ERA5-Seamless in the provider's model-variable table"
+    },
+    "target_blind_request_point_method": "Recomputed the centroid of safe-interior day n-1 front cells from the target-blind crop/state helper (scripts/cfsds_initial_state.py); requested only the existing TRAIN target date. These are reconstructed diagnostic requests, not proof of the original historical request coordinates.",
+    "queries": [
+      {
+        "event_id": "2018_1770",
+        "target_date": "2018-08-12",
+        "request_lat_lon": [49.50311574, -114.86048225],
+        "resolved_lat_lon": [49.5, -114.9],
+        "legacy_resolved_elevation_m": 1706,
+        "fresh_response_elevation_m": 1873,
+        "timezone": "America/Edmonton",
+        "utc_offset_seconds": -21600,
+        "rows": 24,
+        "snapshot": "weather-snapshots/2018_1770_2018-08-12.json",
+        "snapshot_sha256": "0273374fae654b2cc724ba8c572115742d021afa7637fec152190b50ce64323e",
+        "snapshot_bytes": 1433,
+        "legacy_response_sha256": "9932bfaa16beb8ef16b3229b622d1d1655eddbf85a401e10abaeecf08cddd920",
+        "legacy_target_day_comparison": {
+          "temperature_2m_changed_rows": 24,
+          "relative_humidity_2m_changed_rows": 6,
+          "wind_speed_10m_changed_rows": 0,
+          "wind_direction_10m_changed_rows": 0,
+          "precipitation_changed_rows": 0
+        },
+        "request_url": "https://archive-api.open-meteo.com/v1/archive?latitude=49.50311574&longitude=-114.86048225&start_date=2018-08-12&end_date=2018-08-12&hourly=temperature_2m%2Crelative_humidity_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cprecipitation&timezone=America%2FEdmonton&models=era5_seamless"
+      },
+      {
+        "event_id": "2018_241",
+        "target_date": "2018-08-15",
+        "request_lat_lon": [53.13376191, -123.80856635],
+        "resolved_lat_lon": [53.100006, -123.8],
+        "legacy_resolved_elevation_m": 943,
+        "fresh_response_elevation_m": 1005,
+        "timezone": "America/Vancouver",
+        "utc_offset_seconds": -25200,
+        "rows": 24,
+        "snapshot": "weather-snapshots/2018_241_2018-08-15.json",
+        "snapshot_sha256": "a06817a41f6b63257f4e12b40fdefafb38bd1c5173bcee2cf1b6f3186102a37f",
+        "snapshot_bytes": 1421,
+        "legacy_response_sha256": "26cd0d1f412e07f4cec023c6e9ea06f1aa3c573b8b550d2b9539e109b9cf1079",
+        "legacy_target_day_comparison": {
+          "temperature_2m_changed_rows": 24,
+          "relative_humidity_2m_changed_rows": 3,
+          "wind_speed_10m_changed_rows": 0,
+          "wind_direction_10m_changed_rows": 0,
+          "precipitation_changed_rows": 0
+        },
+        "request_url": "https://archive-api.open-meteo.com/v1/archive?latitude=53.13376191&longitude=-123.80856635&start_date=2018-08-15&end_date=2018-08-15&hourly=temperature_2m%2Crelative_humidity_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cprecipitation&timezone=America%2FVancouver&models=era5_seamless"
+      },
+      {
+        "event_id": "2018_747",
+        "target_date": "2018-08-16",
+        "request_lat_lon": [49.8396088, -115.93089791],
+        "resolved_lat_lon": [49.800003, -115.9],
+        "legacy_resolved_elevation_m": 1375,
+        "fresh_response_elevation_m": 1416,
+        "timezone": "America/Edmonton",
+        "utc_offset_seconds": -21600,
+        "rows": 24,
+        "snapshot": "weather-snapshots/2018_747_2018-08-16.json",
+        "snapshot_sha256": "1a47c30537c091b170010913c29d3f3b5f00dd30b6beea39aeb004be3875b54e",
+        "snapshot_bytes": 1428,
+        "legacy_response_sha256": "d1e295689ff420f7484d1860160d789d62718b4d8beec62fbd1c7719fff6f45e",
+        "legacy_target_day_comparison": {
+          "comparison_slice": "2018-08-16T00:00 through 2018-08-16T23:00 local time (24 rows from the legacy 72-row response)",
+          "temperature_2m_changed_rows": 24,
+          "relative_humidity_2m_changed_rows": 1,
+          "wind_speed_10m_changed_rows": 0,
+          "wind_direction_10m_changed_rows": 0,
+          "precipitation_changed_rows": 0
+        },
+        "request_url": "https://archive-api.open-meteo.com/v1/archive?latitude=49.8396088&longitude=-115.93089791&start_date=2018-08-16&end_date=2018-08-16&hourly=temperature_2m%2Crelative_humidity_2m%2Cwind_speed_10m%2Cwind_direction_10m%2Cprecipitation&timezone=America%2FEdmonton&models=era5_seamless"
+      }
+    ],
+    "interpretation": "Each reconstructed target-blind request resolves to the same coarse API grid coordinates and timezone recorded by its legacy manifest. However, a fresh API response is not byte-identical: temperature differs in all 24 target-day hours for all three cases, humidity differs in 1–6 hours, and wind and precipitation values match. Returned grid-elevation metadata also differs from the legacy response. The reason for these historical response changes is not established. Exact response snapshots and request URLs are now versioned so future runs can use pinned inputs.",
+    "limitations": [
+      "The legacy manifests record the API-resolved grid point under request_location; the original sent coordinates and query URLs are unavailable.",
+      "The legacy FireCases were created by the older target-aware builder. Reconstructing a target-blind weather query does not make those FireCases target-blind or replace their Weather.csv files.",
+      "ERA5/ERA5-Land reanalysis is retrospective forcing, not a forecast available to a responder on the previous day; its grid is much coarser than the 2 km simulator patch.",
+      "The legacy 2018_747 source response spans three dates; comparison uses only its 24 target-local-date rows."
+    ]
+  },
+  "decision": "Record terrain source class and pin reconstructed target-blind weather replies for provenance, but do not rebuild or qualify cases yet. The annual fuel vintage/crosswalk, model-domain suitability, event-keyed suppression evidence, and no-action replay gate remain unresolved.",
+  "references": [
+    "https://download-telecharger.services.geo.ca/pub/elevation/dem_mne/MRDEM_MNEMR/CanElevation-MRDEM-Product-Specifications.pdf",
+    "https://natural-resources.canada.ca/maps-tools-publications/satellite-elevation-air-photos/national-elevation-data-strategy",
+    "https://open-meteo.com/en/docs/historical-weather-api"
+  ]
+}

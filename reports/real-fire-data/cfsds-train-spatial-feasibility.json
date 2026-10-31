@@ -1,0 +1,3113 @@
+{
+  "candidate_pairs": 25,
+  "candidate_pairs_by_year": {
+    "2014": 5,
+    "2015": 5,
+    "2016": 5,
+    "2017": 5,
+    "2018": 5
+  },
+  "candidate_pairs_detail": [
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 93,
+          "day_n_minus_1_front_capture_ratio": 0.21100917,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 529,
+          "day_n_minus_1_front_pixels_total": 2507,
+          "pre_target_pixels_in_window": 529,
+          "row_off": 95,
+          "source_raster_shape_rc": [
+            227,
+            319
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 7935,
+          "target_pixels_total": 7935,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 87,
+          "day_n_minus_1_front_capture_ratio": 0.41802952,
+          "day_n_minus_1_front_pixels_in_safe_interior": 859,
+          "day_n_minus_1_front_pixels_in_window": 1048,
+          "day_n_minus_1_front_pixels_total": 2507,
+          "pre_target_pixels_in_window": 1048,
+          "row_off": 90,
+          "source_raster_shape_rc": [
+            227,
+            319
+          ],
+          "target_capture_ratio": 0.00718336,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 16,
+          "target_pixels_in_window": 57,
+          "target_pixels_outside_window": 7878,
+          "target_pixels_total": 7935,
+          "target_safe_interior_capture_ratio": 0.00201638,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 82,
+          "day_n_minus_1_front_capture_ratio": 0.6406063,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1409,
+          "day_n_minus_1_front_pixels_in_window": 1606,
+          "day_n_minus_1_front_pixels_total": 2507,
+          "pre_target_pixels_in_window": 1606,
+          "row_off": 84,
+          "source_raster_shape_rc": [
+            227,
+            319
+          ],
+          "target_capture_ratio": 0.02961563,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 150,
+          "target_pixels_in_window": 235,
+          "target_pixels_outside_window": 7700,
+          "target_pixels_total": 7935,
+          "target_safe_interior_capture_ratio": 0.01890359,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 71,
+          "day_n_minus_1_front_capture_ratio": 0.90027922,
+          "day_n_minus_1_front_pixels_in_safe_interior": 2148,
+          "day_n_minus_1_front_pixels_in_window": 2257,
+          "day_n_minus_1_front_pixels_total": 2507,
+          "pre_target_pixels_in_window": 2257,
+          "row_off": 73,
+          "source_raster_shape_rc": [
+            227,
+            319
+          ],
+          "target_capture_ratio": 0.12993069,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 747,
+          "target_pixels_in_window": 1031,
+          "target_pixels_outside_window": 6904,
+          "target_pixels_total": 7935,
+          "target_safe_interior_capture_ratio": 0.09413989,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 82,
+          "day_n_minus_1_front_capture_ratio": 0.6406063,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1508,
+          "day_n_minus_1_front_pixels_in_window": 1606,
+          "day_n_minus_1_front_pixels_total": 2507,
+          "pre_target_pixels_in_window": 1606,
+          "row_off": 84,
+          "source_raster_shape_rc": [
+            227,
+            319
+          ],
+          "target_capture_ratio": 0.02961563,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 193,
+          "target_pixels_in_window": 235,
+          "target_pixels_outside_window": 7700,
+          "target_pixels_total": 7935,
+          "target_safe_interior_capture_ratio": 0.02432262,
+          "window_found": true
+        }
+      },
+      "event_id": "2014_454",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2014_454_krig.tif",
+      "source_raster_sha256": "e66d217883c434ea728582342ec3816dd5e6b18e02e071cc10b5621f5af0b9f4",
+      "target_doy": 195,
+      "year": 2014
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 159,
+          "day_n_minus_1_front_capture_ratio": 0.20160061,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 529,
+          "day_n_minus_1_front_pixels_total": 2624,
+          "pre_target_pixels_in_window": 529,
+          "row_off": 74,
+          "source_raster_shape_rc": [
+            255,
+            296
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 2397,
+          "target_pixels_total": 2397,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 153,
+          "day_n_minus_1_front_capture_ratio": 0.41539634,
+          "day_n_minus_1_front_pixels_in_safe_interior": 881,
+          "day_n_minus_1_front_pixels_in_window": 1090,
+          "day_n_minus_1_front_pixels_total": 2624,
+          "pre_target_pixels_in_window": 1106,
+          "row_off": 68,
+          "source_raster_shape_rc": [
+            255,
+            296
+          ],
+          "target_capture_ratio": 0.02085941,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 18,
+          "target_pixels_in_window": 50,
+          "target_pixels_outside_window": 2347,
+          "target_pixels_total": 2397,
+          "target_safe_interior_capture_ratio": 0.00750939,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 148,
+          "day_n_minus_1_front_capture_ratio": 0.59032012,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1393,
+          "day_n_minus_1_front_pixels_in_window": 1549,
+          "day_n_minus_1_front_pixels_total": 2624,
+          "pre_target_pixels_in_window": 1672,
+          "row_off": 63,
+          "source_raster_shape_rc": [
+            255,
+            296
+          ],
+          "target_capture_ratio": 0.14309554,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 209,
+          "target_pixels_in_window": 343,
+          "target_pixels_outside_window": 2054,
+          "target_pixels_total": 2397,
+          "target_safe_interior_capture_ratio": 0.08719232,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 137,
+          "day_n_minus_1_front_capture_ratio": 0.86242378,
+          "day_n_minus_1_front_pixels_in_safe_interior": 2090,
+          "day_n_minus_1_front_pixels_in_window": 2263,
+          "day_n_minus_1_front_pixels_total": 2624,
+          "pre_target_pixels_in_window": 2759,
+          "row_off": 52,
+          "source_raster_shape_rc": [
+            255,
+            296
+          ],
+          "target_capture_ratio": 0.3838131,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 790,
+          "target_pixels_in_window": 920,
+          "target_pixels_outside_window": 1477,
+          "target_pixels_total": 2397,
+          "target_safe_interior_capture_ratio": 0.32957864,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 148,
+          "day_n_minus_1_front_capture_ratio": 0.59032012,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1471,
+          "day_n_minus_1_front_pixels_in_window": 1549,
+          "day_n_minus_1_front_pixels_total": 2624,
+          "pre_target_pixels_in_window": 1672,
+          "row_off": 63,
+          "source_raster_shape_rc": [
+            255,
+            296
+          ],
+          "target_capture_ratio": 0.14309554,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 275,
+          "target_pixels_in_window": 343,
+          "target_pixels_outside_window": 2054,
+          "target_pixels_total": 2397,
+          "target_safe_interior_capture_ratio": 0.11472674,
+          "window_found": true
+        }
+      },
+      "event_id": "2014_487",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2014_487_krig.tif",
+      "source_raster_sha256": "ae0a0c25c692c060c85a626b0063bd4f62ec01ba6ea0f0d2d70e861da811caa4",
+      "target_doy": 215,
+      "year": 2014
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 65,
+          "day_n_minus_1_front_capture_ratio": 0.15786332,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 529,
+          "day_n_minus_1_front_pixels_total": 3351,
+          "pre_target_pixels_in_window": 529,
+          "row_off": 18,
+          "source_raster_shape_rc": [
+            56,
+            139
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 389,
+          "target_pixels_total": 389,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 59,
+          "day_n_minus_1_front_capture_ratio": 0.31721874,
+          "day_n_minus_1_front_pixels_in_safe_interior": 877,
+          "day_n_minus_1_front_pixels_in_window": 1063,
+          "day_n_minus_1_front_pixels_total": 3351,
+          "pre_target_pixels_in_window": 1063,
+          "row_off": 12,
+          "source_raster_shape_rc": [
+            56,
+            139
+          ],
+          "target_capture_ratio": 0.01285347,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 5,
+          "target_pixels_outside_window": 384,
+          "target_pixels_total": 389,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 54,
+          "day_n_minus_1_front_capture_ratio": 0.43479558,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1345,
+          "day_n_minus_1_front_pixels_in_window": 1457,
+          "day_n_minus_1_front_pixels_total": 3351,
+          "pre_target_pixels_in_window": 1457,
+          "row_off": 7,
+          "source_raster_shape_rc": [
+            56,
+            139
+          ],
+          "target_capture_ratio": 0.26992288,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 53,
+          "target_pixels_in_window": 105,
+          "target_pixels_outside_window": 284,
+          "target_pixels_total": 389,
+          "target_safe_interior_capture_ratio": 0.13624679,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "source_raster_shape_rc": [
+            56,
+            139
+          ],
+          "target_geometry_used_for_window_selection": false,
+          "window_found": false,
+          "window_unavailable_reason": "source_raster_smaller_than_requested_window"
+        },
+        "grid40_cell100m": {
+          "col_off": 54,
+          "day_n_minus_1_front_capture_ratio": 0.43479558,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1408,
+          "day_n_minus_1_front_pixels_in_window": 1457,
+          "day_n_minus_1_front_pixels_total": 3351,
+          "pre_target_pixels_in_window": 1457,
+          "row_off": 7,
+          "source_raster_shape_rc": [
+            56,
+            139
+          ],
+          "target_capture_ratio": 0.26992288,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 76,
+          "target_pixels_in_window": 105,
+          "target_pixels_outside_window": 284,
+          "target_pixels_total": 389,
+          "target_safe_interior_capture_ratio": 0.19537275,
+          "window_found": true
+        }
+      },
+      "event_id": "2014_932",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2014_932_krig.tif",
+      "source_raster_sha256": "94b4d209a00081c8f3030e405730d8db5db8f2ec54ceac65d4248ae72dc7b0ea",
+      "target_doy": 145,
+      "year": 2014
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 51,
+          "day_n_minus_1_front_capture_ratio": 0.08719301,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 529,
+          "day_n_minus_1_front_pixels_total": 6067,
+          "pre_target_pixels_in_window": 529,
+          "row_off": 78,
+          "source_raster_shape_rc": [
+            187,
+            164
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 9678,
+          "target_pixels_total": 9678,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 46,
+          "day_n_minus_1_front_capture_ratio": 0.18905555,
+          "day_n_minus_1_front_pixels_in_safe_interior": 897,
+          "day_n_minus_1_front_pixels_in_window": 1147,
+          "day_n_minus_1_front_pixels_total": 6067,
+          "pre_target_pixels_in_window": 1147,
+          "row_off": 72,
+          "source_raster_shape_rc": [
+            187,
+            164
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 9678,
+          "target_pixels_total": 9678,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 40,
+          "day_n_minus_1_front_capture_ratio": 0.319433,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1633,
+          "day_n_minus_1_front_pixels_in_window": 1938,
+          "day_n_minus_1_front_pixels_total": 6067,
+          "pre_target_pixels_in_window": 1938,
+          "row_off": 67,
+          "source_raster_shape_rc": [
+            187,
+            164
+          ],
+          "target_capture_ratio": 0.00681959,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 29,
+          "target_pixels_in_window": 66,
+          "target_pixels_outside_window": 9612,
+          "target_pixels_total": 9678,
+          "target_safe_interior_capture_ratio": 0.00299649,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 29,
+          "day_n_minus_1_front_capture_ratio": 0.61760343,
+          "day_n_minus_1_front_pixels_in_safe_interior": 3234,
+          "day_n_minus_1_front_pixels_in_window": 3747,
+          "day_n_minus_1_front_pixels_total": 6067,
+          "pre_target_pixels_in_window": 3747,
+          "row_off": 56,
+          "source_raster_shape_rc": [
+            187,
+            164
+          ],
+          "target_capture_ratio": 0.07398223,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 466,
+          "target_pixels_in_window": 716,
+          "target_pixels_outside_window": 8962,
+          "target_pixels_total": 9678,
+          "target_safe_interior_capture_ratio": 0.04815044,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 40,
+          "day_n_minus_1_front_capture_ratio": 0.319433,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1781,
+          "day_n_minus_1_front_pixels_in_window": 1938,
+          "day_n_minus_1_front_pixels_total": 6067,
+          "pre_target_pixels_in_window": 1938,
+          "row_off": 67,
+          "source_raster_shape_rc": [
+            187,
+            164
+          ],
+          "target_capture_ratio": 0.00681959,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 47,
+          "target_pixels_in_window": 66,
+          "target_pixels_outside_window": 9612,
+          "target_pixels_total": 9678,
+          "target_safe_interior_capture_ratio": 0.00485638,
+          "window_found": true
+        }
+      },
+      "event_id": "2014_237",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2014_237_krig.tif",
+      "source_raster_sha256": "221c8f947dd458b51bebd138cab4b3be31d37c10b60c6b4854900b3b21ef94d8",
+      "target_doy": 217,
+      "year": 2014
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 240,
+          "day_n_minus_1_front_capture_ratio": 0.05177138,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 529,
+          "day_n_minus_1_front_pixels_total": 10218,
+          "pre_target_pixels_in_window": 529,
+          "row_off": 318,
+          "source_raster_shape_rc": [
+            450,
+            450
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 7394,
+          "target_pixels_total": 7394,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 234,
+          "day_n_minus_1_front_capture_ratio": 0.11293795,
+          "day_n_minus_1_front_pixels_in_safe_interior": 900,
+          "day_n_minus_1_front_pixels_in_window": 1154,
+          "day_n_minus_1_front_pixels_total": 10218,
+          "pre_target_pixels_in_window": 1154,
+          "row_off": 313,
+          "source_raster_shape_rc": [
+            450,
+            450
+          ],
+          "target_capture_ratio": 0.00027049,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 2,
+          "target_pixels_outside_window": 7392,
+          "target_pixels_total": 7394,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 229,
+          "day_n_minus_1_front_capture_ratio": 0.18712077,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1621,
+          "day_n_minus_1_front_pixels_in_window": 1912,
+          "day_n_minus_1_front_pixels_total": 10218,
+          "pre_target_pixels_in_window": 1924,
+          "row_off": 307,
+          "source_raster_shape_rc": [
+            450,
+            450
+          ],
+          "target_capture_ratio": 0.00838518,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 34,
+          "target_pixels_in_window": 62,
+          "target_pixels_outside_window": 7332,
+          "target_pixels_total": 7394,
+          "target_safe_interior_capture_ratio": 0.00459832,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 218,
+          "day_n_minus_1_front_capture_ratio": 0.38794285,
+          "day_n_minus_1_front_pixels_in_safe_interior": 3373,
+          "day_n_minus_1_front_pixels_in_window": 3964,
+          "day_n_minus_1_front_pixels_total": 10218,
+          "pre_target_pixels_in_window": 4013,
+          "row_off": 296,
+          "source_raster_shape_rc": [
+            450,
+            450
+          ],
+          "target_capture_ratio": 0.03205302,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 184,
+          "target_pixels_in_window": 237,
+          "target_pixels_outside_window": 7157,
+          "target_pixels_total": 7394,
+          "target_safe_interior_capture_ratio": 0.02488504,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 229,
+          "day_n_minus_1_front_capture_ratio": 0.18712077,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1765,
+          "day_n_minus_1_front_pixels_in_window": 1912,
+          "day_n_minus_1_front_pixels_total": 10218,
+          "pre_target_pixels_in_window": 1924,
+          "row_off": 307,
+          "source_raster_shape_rc": [
+            450,
+            450
+          ],
+          "target_capture_ratio": 0.00838518,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 47,
+          "target_pixels_in_window": 62,
+          "target_pixels_outside_window": 7332,
+          "target_pixels_total": 7394,
+          "target_safe_interior_capture_ratio": 0.00635651,
+          "window_found": true
+        }
+      },
+      "event_id": "2014_350",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2014_350_krig.tif",
+      "source_raster_sha256": "27d0a62d5a64646f3d992c49dbde9ac15bb39833d1b178e6d9480d310ab5a7f3",
+      "target_doy": 168,
+      "year": 2014
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 91,
+          "day_n_minus_1_front_capture_ratio": 0.3165769,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 529,
+          "day_n_minus_1_front_pixels_total": 1671,
+          "pre_target_pixels_in_window": 529,
+          "row_off": 13,
+          "source_raster_shape_rc": [
+            57,
+            136
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 120,
+          "target_pixels_total": 120,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 85,
+          "day_n_minus_1_front_capture_ratio": 0.61998803,
+          "day_n_minus_1_front_pixels_in_safe_interior": 866,
+          "day_n_minus_1_front_pixels_in_window": 1036,
+          "day_n_minus_1_front_pixels_total": 1671,
+          "pre_target_pixels_in_window": 1036,
+          "row_off": 8,
+          "source_raster_shape_rc": [
+            57,
+            136
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 120,
+          "target_pixels_total": 120,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 80,
+          "day_n_minus_1_front_capture_ratio": 0.86894075,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1322,
+          "day_n_minus_1_front_pixels_in_window": 1452,
+          "day_n_minus_1_front_pixels_total": 1671,
+          "pre_target_pixels_in_window": 1452,
+          "row_off": 2,
+          "source_raster_shape_rc": [
+            57,
+            136
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 120,
+          "target_pixels_total": 120,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "source_raster_shape_rc": [
+            57,
+            136
+          ],
+          "target_geometry_used_for_window_selection": false,
+          "window_found": false,
+          "window_unavailable_reason": "source_raster_smaller_than_requested_window"
+        },
+        "grid40_cell100m": {
+          "col_off": 80,
+          "day_n_minus_1_front_capture_ratio": 0.86894075,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1392,
+          "day_n_minus_1_front_pixels_in_window": 1452,
+          "day_n_minus_1_front_pixels_total": 1671,
+          "pre_target_pixels_in_window": 1452,
+          "row_off": 2,
+          "source_raster_shape_rc": [
+            57,
+            136
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 120,
+          "target_pixels_total": 120,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        }
+      },
+      "event_id": "2015_895",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2015_895_krig.tif",
+      "source_raster_sha256": "c829977db67ae7fcb2998c84ecf0d06359b36316b24d0aedad2de6661aa6ddd1",
+      "target_doy": 160,
+      "year": 2015
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 48,
+          "day_n_minus_1_front_capture_ratio": 0.14197531,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 529,
+          "day_n_minus_1_front_pixels_total": 3726,
+          "pre_target_pixels_in_window": 529,
+          "row_off": 40,
+          "source_raster_shape_rc": [
+            141,
+            105
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 5314,
+          "target_pixels_total": 5314,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 42,
+          "day_n_minus_1_front_capture_ratio": 0.30891036,
+          "day_n_minus_1_front_pixels_in_safe_interior": 900,
+          "day_n_minus_1_front_pixels_in_window": 1151,
+          "day_n_minus_1_front_pixels_total": 3726,
+          "pre_target_pixels_in_window": 1151,
+          "row_off": 34,
+          "source_raster_shape_rc": [
+            141,
+            105
+          ],
+          "target_capture_ratio": 0.00094091,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 5,
+          "target_pixels_outside_window": 5309,
+          "target_pixels_total": 5314,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 37,
+          "day_n_minus_1_front_capture_ratio": 0.51422437,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1637,
+          "day_n_minus_1_front_pixels_in_window": 1916,
+          "day_n_minus_1_front_pixels_total": 3726,
+          "pre_target_pixels_in_window": 1916,
+          "row_off": 29,
+          "source_raster_shape_rc": [
+            141,
+            105
+          ],
+          "target_capture_ratio": 0.01411366,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 40,
+          "target_pixels_in_window": 75,
+          "target_pixels_outside_window": 5239,
+          "target_pixels_total": 5314,
+          "target_safe_interior_capture_ratio": 0.00752729,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 26,
+          "day_n_minus_1_front_capture_ratio": 0.8682233,
+          "day_n_minus_1_front_pixels_in_safe_interior": 2968,
+          "day_n_minus_1_front_pixels_in_window": 3235,
+          "day_n_minus_1_front_pixels_total": 3726,
+          "pre_target_pixels_in_window": 3235,
+          "row_off": 18,
+          "source_raster_shape_rc": [
+            141,
+            105
+          ],
+          "target_capture_ratio": 0.12363568,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 409,
+          "target_pixels_in_window": 657,
+          "target_pixels_outside_window": 4657,
+          "target_pixels_total": 5314,
+          "target_safe_interior_capture_ratio": 0.0769665,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 37,
+          "day_n_minus_1_front_capture_ratio": 0.51422437,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1776,
+          "day_n_minus_1_front_pixels_in_window": 1916,
+          "day_n_minus_1_front_pixels_total": 3726,
+          "pre_target_pixels_in_window": 1916,
+          "row_off": 29,
+          "source_raster_shape_rc": [
+            141,
+            105
+          ],
+          "target_capture_ratio": 0.01411366,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 56,
+          "target_pixels_in_window": 75,
+          "target_pixels_outside_window": 5239,
+          "target_pixels_total": 5314,
+          "target_safe_interior_capture_ratio": 0.0105382,
+          "window_found": true
+        }
+      },
+      "event_id": "2015_257",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2015_257_krig.tif",
+      "source_raster_sha256": "0c6ba09a50c4c9585b201bf1ace02165e4cc6d1cba129595c80ccdd1961de8e1",
+      "target_doy": 190,
+      "year": 2015
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 86,
+          "day_n_minus_1_front_capture_ratio": 0.05663812,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 529,
+          "day_n_minus_1_front_pixels_total": 9340,
+          "pre_target_pixels_in_window": 529,
+          "row_off": 95,
+          "source_raster_shape_rc": [
+            204,
+            174
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 358,
+          "target_pixels_total": 358,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 81,
+          "day_n_minus_1_front_capture_ratio": 0.12376874,
+          "day_n_minus_1_front_pixels_in_safe_interior": 900,
+          "day_n_minus_1_front_pixels_in_window": 1156,
+          "day_n_minus_1_front_pixels_total": 9340,
+          "pre_target_pixels_in_window": 1156,
+          "row_off": 89,
+          "source_raster_shape_rc": [
+            204,
+            174
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 358,
+          "target_pixels_total": 358,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 75,
+          "day_n_minus_1_front_capture_ratio": 0.21670236,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1681,
+          "day_n_minus_1_front_pixels_in_window": 2024,
+          "day_n_minus_1_front_pixels_total": 9340,
+          "pre_target_pixels_in_window": 2024,
+          "row_off": 84,
+          "source_raster_shape_rc": [
+            204,
+            174
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 358,
+          "target_pixels_total": 358,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 64,
+          "day_n_minus_1_front_capture_ratio": 0.43586724,
+          "day_n_minus_1_front_pixels_in_safe_interior": 3534,
+          "day_n_minus_1_front_pixels_in_window": 4071,
+          "day_n_minus_1_front_pixels_total": 9340,
+          "pre_target_pixels_in_window": 4148,
+          "row_off": 73,
+          "source_raster_shape_rc": [
+            204,
+            174
+          ],
+          "target_capture_ratio": 0.06703911,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 1,
+          "target_pixels_in_window": 24,
+          "target_pixels_outside_window": 334,
+          "target_pixels_total": 358,
+          "target_safe_interior_capture_ratio": 0.0027933,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 75,
+          "day_n_minus_1_front_capture_ratio": 0.21670236,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1849,
+          "day_n_minus_1_front_pixels_in_window": 2024,
+          "day_n_minus_1_front_pixels_total": 9340,
+          "pre_target_pixels_in_window": 2024,
+          "row_off": 84,
+          "source_raster_shape_rc": [
+            204,
+            174
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 358,
+          "target_pixels_total": 358,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        }
+      },
+      "event_id": "2015_198",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2015_198_krig.tif",
+      "source_raster_sha256": "25bd6458811bb861fc90ae005f2f4a1ce3bf984c40d45381d613af1b1b7cca28",
+      "target_doy": 158,
+      "year": 2015
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 165,
+          "day_n_minus_1_front_capture_ratio": 0.04394783,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 529,
+          "day_n_minus_1_front_pixels_total": 12037,
+          "pre_target_pixels_in_window": 529,
+          "row_off": 149,
+          "source_raster_shape_rc": [
+            302,
+            318
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 4088,
+          "target_pixels_total": 4088,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 160,
+          "day_n_minus_1_front_capture_ratio": 0.09005566,
+          "day_n_minus_1_front_pixels_in_safe_interior": 868,
+          "day_n_minus_1_front_pixels_in_window": 1084,
+          "day_n_minus_1_front_pixels_total": 12037,
+          "pre_target_pixels_in_window": 1084,
+          "row_off": 144,
+          "source_raster_shape_rc": [
+            302,
+            318
+          ],
+          "target_capture_ratio": 0.00489237,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 11,
+          "target_pixels_in_window": 20,
+          "target_pixels_outside_window": 4068,
+          "target_pixels_total": 4088,
+          "target_safe_interior_capture_ratio": 0.0026908,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 154,
+          "day_n_minus_1_front_capture_ratio": 0.14239428,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1490,
+          "day_n_minus_1_front_pixels_in_window": 1714,
+          "day_n_minus_1_front_pixels_total": 12037,
+          "pre_target_pixels_in_window": 1714,
+          "row_off": 138,
+          "source_raster_shape_rc": [
+            302,
+            318
+          ],
+          "target_capture_ratio": 0.02666341,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 58,
+          "target_pixels_in_window": 109,
+          "target_pixels_outside_window": 3979,
+          "target_pixels_total": 4088,
+          "target_safe_interior_capture_ratio": 0.01418787,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 143,
+          "day_n_minus_1_front_capture_ratio": 0.24756999,
+          "day_n_minus_1_front_pixels_in_safe_interior": 2640,
+          "day_n_minus_1_front_pixels_in_window": 2980,
+          "day_n_minus_1_front_pixels_total": 12037,
+          "pre_target_pixels_in_window": 2980,
+          "row_off": 127,
+          "source_raster_shape_rc": [
+            302,
+            318
+          ],
+          "target_capture_ratio": 0.15313112,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 445,
+          "target_pixels_in_window": 626,
+          "target_pixels_outside_window": 3462,
+          "target_pixels_total": 4088,
+          "target_safe_interior_capture_ratio": 0.10885519,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 154,
+          "day_n_minus_1_front_capture_ratio": 0.14239428,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1602,
+          "day_n_minus_1_front_pixels_in_window": 1714,
+          "day_n_minus_1_front_pixels_total": 12037,
+          "pre_target_pixels_in_window": 1714,
+          "row_off": 138,
+          "source_raster_shape_rc": [
+            302,
+            318
+          ],
+          "target_capture_ratio": 0.02666341,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 81,
+          "target_pixels_in_window": 109,
+          "target_pixels_outside_window": 3979,
+          "target_pixels_total": 4088,
+          "target_safe_interior_capture_ratio": 0.01981409,
+          "window_found": true
+        }
+      },
+      "event_id": "2015_301",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2015_301_krig.tif",
+      "source_raster_sha256": "78d5a044e5f41fea4015503a5d8430971495ded7b6fdba1e6264d6ee3b3f72cf",
+      "target_doy": 158,
+      "year": 2015
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 359,
+          "day_n_minus_1_front_capture_ratio": 0.01790065,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 529,
+          "day_n_minus_1_front_pixels_total": 29552,
+          "pre_target_pixels_in_window": 529,
+          "row_off": 185,
+          "source_raster_shape_rc": [
+            567,
+            754
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 54997,
+          "target_pixels_total": 54997,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 353,
+          "day_n_minus_1_front_capture_ratio": 0.03871142,
+          "day_n_minus_1_front_pixels_in_safe_interior": 899,
+          "day_n_minus_1_front_pixels_in_window": 1144,
+          "day_n_minus_1_front_pixels_total": 29552,
+          "pre_target_pixels_in_window": 1156,
+          "row_off": 179,
+          "source_raster_shape_rc": [
+            567,
+            754
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 54997,
+          "target_pixels_total": 54997,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 348,
+          "day_n_minus_1_front_capture_ratio": 0.06534245,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1630,
+          "day_n_minus_1_front_pixels_in_window": 1931,
+          "day_n_minus_1_front_pixels_total": 29552,
+          "pre_target_pixels_in_window": 2014,
+          "row_off": 174,
+          "source_raster_shape_rc": [
+            567,
+            754
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 54997,
+          "target_pixels_total": 54997,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 337,
+          "day_n_minus_1_front_capture_ratio": 0.13870466,
+          "day_n_minus_1_front_pixels_in_safe_interior": 3442,
+          "day_n_minus_1_front_pixels_in_window": 4099,
+          "day_n_minus_1_front_pixels_total": 29552,
+          "pre_target_pixels_in_window": 4410,
+          "row_off": 163,
+          "source_raster_shape_rc": [
+            567,
+            754
+          ],
+          "target_capture_ratio": 3.637e-05,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 2,
+          "target_pixels_outside_window": 54995,
+          "target_pixels_total": 54997,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 348,
+          "day_n_minus_1_front_capture_ratio": 0.06534245,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1778,
+          "day_n_minus_1_front_pixels_in_window": 1931,
+          "day_n_minus_1_front_pixels_total": 29552,
+          "pre_target_pixels_in_window": 2014,
+          "row_off": 174,
+          "source_raster_shape_rc": [
+            567,
+            754
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 54997,
+          "target_pixels_total": 54997,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        }
+      },
+      "event_id": "2015_344",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2015_344_krig.tif",
+      "source_raster_sha256": "dfdafc3a15abd184a98325f02255d18e870b450b8fdb9f9983d4483d091a0348",
+      "target_doy": 157,
+      "year": 2015
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 90,
+          "day_n_minus_1_front_capture_ratio": 0.10682553,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 529,
+          "day_n_minus_1_front_pixels_total": 4952,
+          "pre_target_pixels_in_window": 529,
+          "row_off": 160,
+          "source_raster_shape_rc": [
+            235,
+            144
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 49,
+          "target_pixels_total": 49,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 84,
+          "day_n_minus_1_front_capture_ratio": 0.23303716,
+          "day_n_minus_1_front_pixels_in_safe_interior": 900,
+          "day_n_minus_1_front_pixels_in_window": 1154,
+          "day_n_minus_1_front_pixels_total": 4952,
+          "pre_target_pixels_in_window": 1154,
+          "row_off": 154,
+          "source_raster_shape_rc": [
+            235,
+            144
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 49,
+          "target_pixels_total": 49,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 79,
+          "day_n_minus_1_front_capture_ratio": 0.38449111,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1640,
+          "day_n_minus_1_front_pixels_in_window": 1904,
+          "day_n_minus_1_front_pixels_total": 4952,
+          "pre_target_pixels_in_window": 1928,
+          "row_off": 149,
+          "source_raster_shape_rc": [
+            235,
+            144
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 49,
+          "target_pixels_total": 49,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 68,
+          "day_n_minus_1_front_capture_ratio": 0.66983037,
+          "day_n_minus_1_front_pixels_in_safe_interior": 2944,
+          "day_n_minus_1_front_pixels_in_window": 3317,
+          "day_n_minus_1_front_pixels_total": 4952,
+          "pre_target_pixels_in_window": 3438,
+          "row_off": 138,
+          "source_raster_shape_rc": [
+            235,
+            144
+          ],
+          "target_capture_ratio": 0.48979592,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 24,
+          "target_pixels_outside_window": 25,
+          "target_pixels_total": 49,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 79,
+          "day_n_minus_1_front_capture_ratio": 0.38449111,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1774,
+          "day_n_minus_1_front_pixels_in_window": 1904,
+          "day_n_minus_1_front_pixels_total": 4952,
+          "pre_target_pixels_in_window": 1928,
+          "row_off": 149,
+          "source_raster_shape_rc": [
+            235,
+            144
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 49,
+          "target_pixels_total": 49,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        }
+      },
+      "event_id": "2016_13",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2016_13_krig.tif",
+      "source_raster_sha256": "b54b23ea1eb00cb943b3746a1a637cf6e944c1eee84cec4a43e33c08278f3091",
+      "target_doy": 198,
+      "year": 2016
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 107,
+          "day_n_minus_1_front_capture_ratio": 0.22387426,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 527,
+          "day_n_minus_1_front_pixels_total": 2354,
+          "pre_target_pixels_in_window": 527,
+          "row_off": 95,
+          "source_raster_shape_rc": [
+            240,
+            282
+          ],
+          "target_capture_ratio": 0.00025621,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 2,
+          "target_pixels_outside_window": 7804,
+          "target_pixels_total": 7806,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 101,
+          "day_n_minus_1_front_capture_ratio": 0.44435004,
+          "day_n_minus_1_front_pixels_in_safe_interior": 862,
+          "day_n_minus_1_front_pixels_in_window": 1046,
+          "day_n_minus_1_front_pixels_total": 2354,
+          "pre_target_pixels_in_window": 1046,
+          "row_off": 89,
+          "source_raster_shape_rc": [
+            240,
+            282
+          ],
+          "target_capture_ratio": 0.0078145,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 22,
+          "target_pixels_in_window": 61,
+          "target_pixels_outside_window": 7745,
+          "target_pixels_total": 7806,
+          "target_safe_interior_capture_ratio": 0.00281834,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 96,
+          "day_n_minus_1_front_capture_ratio": 0.59345794,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1287,
+          "day_n_minus_1_front_pixels_in_window": 1397,
+          "day_n_minus_1_front_pixels_total": 2354,
+          "pre_target_pixels_in_window": 1397,
+          "row_off": 84,
+          "source_raster_shape_rc": [
+            240,
+            282
+          ],
+          "target_capture_ratio": 0.06008199,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 267,
+          "target_pixels_in_window": 469,
+          "target_pixels_outside_window": 7337,
+          "target_pixels_total": 7806,
+          "target_safe_interior_capture_ratio": 0.03420446,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 85,
+          "day_n_minus_1_front_capture_ratio": 0.74723874,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1688,
+          "day_n_minus_1_front_pixels_in_window": 1759,
+          "day_n_minus_1_front_pixels_total": 2354,
+          "pre_target_pixels_in_window": 1759,
+          "row_off": 73,
+          "source_raster_shape_rc": [
+            240,
+            282
+          ],
+          "target_capture_ratio": 0.30912119,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 1823,
+          "target_pixels_in_window": 2413,
+          "target_pixels_outside_window": 5393,
+          "target_pixels_total": 7806,
+          "target_safe_interior_capture_ratio": 0.2335383,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 96,
+          "day_n_minus_1_front_capture_ratio": 0.59345794,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1341,
+          "day_n_minus_1_front_pixels_in_window": 1397,
+          "day_n_minus_1_front_pixels_total": 2354,
+          "pre_target_pixels_in_window": 1397,
+          "row_off": 84,
+          "source_raster_shape_rc": [
+            240,
+            282
+          ],
+          "target_capture_ratio": 0.06008199,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 360,
+          "target_pixels_in_window": 469,
+          "target_pixels_outside_window": 7337,
+          "target_pixels_total": 7806,
+          "target_safe_interior_capture_ratio": 0.04611837,
+          "window_found": true
+        }
+      },
+      "event_id": "2016_236",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2016_236_krig.tif",
+      "source_raster_sha256": "8b82b9eaa0b19d5b3130cb2cb8d97b6239c40932b47987ddc48d32ba14989637",
+      "target_doy": 181,
+      "year": 2016
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 36,
+          "day_n_minus_1_front_capture_ratio": 0.22398968,
+          "day_n_minus_1_front_pixels_in_safe_interior": 437,
+          "day_n_minus_1_front_pixels_in_window": 521,
+          "day_n_minus_1_front_pixels_total": 2326,
+          "pre_target_pixels_in_window": 521,
+          "row_off": 113,
+          "source_raster_shape_rc": [
+            248,
+            250
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 665,
+          "target_pixels_total": 665,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 30,
+          "day_n_minus_1_front_capture_ratio": 0.45313844,
+          "day_n_minus_1_front_pixels_in_safe_interior": 849,
+          "day_n_minus_1_front_pixels_in_window": 1054,
+          "day_n_minus_1_front_pixels_total": 2326,
+          "pre_target_pixels_in_window": 1056,
+          "row_off": 108,
+          "source_raster_shape_rc": [
+            248,
+            250
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 665,
+          "target_pixels_total": 665,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 25,
+          "day_n_minus_1_front_capture_ratio": 0.65950129,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1388,
+          "day_n_minus_1_front_pixels_in_window": 1534,
+          "day_n_minus_1_front_pixels_total": 2326,
+          "pre_target_pixels_in_window": 1537,
+          "row_off": 102,
+          "source_raster_shape_rc": [
+            248,
+            250
+          ],
+          "target_capture_ratio": 0.03458647,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 23,
+          "target_pixels_outside_window": 642,
+          "target_pixels_total": 665,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 14,
+          "day_n_minus_1_front_capture_ratio": 0.9144454,
+          "day_n_minus_1_front_pixels_in_safe_interior": 2029,
+          "day_n_minus_1_front_pixels_in_window": 2127,
+          "day_n_minus_1_front_pixels_total": 2326,
+          "pre_target_pixels_in_window": 2185,
+          "row_off": 91,
+          "source_raster_shape_rc": [
+            248,
+            250
+          ],
+          "target_capture_ratio": 0.55488722,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 297,
+          "target_pixels_in_window": 369,
+          "target_pixels_outside_window": 296,
+          "target_pixels_total": 665,
+          "target_safe_interior_capture_ratio": 0.44661654,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 25,
+          "day_n_minus_1_front_capture_ratio": 0.65950129,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1463,
+          "day_n_minus_1_front_pixels_in_window": 1534,
+          "day_n_minus_1_front_pixels_total": 2326,
+          "pre_target_pixels_in_window": 1537,
+          "row_off": 102,
+          "source_raster_shape_rc": [
+            248,
+            250
+          ],
+          "target_capture_ratio": 0.03458647,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 6,
+          "target_pixels_in_window": 23,
+          "target_pixels_outside_window": 642,
+          "target_pixels_total": 665,
+          "target_safe_interior_capture_ratio": 0.00902256,
+          "window_found": true
+        }
+      },
+      "event_id": "2016_233",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2016_233_krig.tif",
+      "source_raster_sha256": "3ef637da010d855a18ae5218b3f5dffb9c9cafec44762bcf4891992a06101503",
+      "target_doy": 175,
+      "year": 2016
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 646,
+          "day_n_minus_1_front_capture_ratio": 0.00757419,
+          "day_n_minus_1_front_pixels_in_safe_interior": 430,
+          "day_n_minus_1_front_pixels_in_window": 513,
+          "day_n_minus_1_front_pixels_total": 67730,
+          "pre_target_pixels_in_window": 513,
+          "row_off": 541,
+          "source_raster_shape_rc": [
+            1085,
+            1448
+          ],
+          "target_capture_ratio": 0.00010384,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 2,
+          "target_pixels_in_window": 5,
+          "target_pixels_outside_window": 48148,
+          "target_pixels_total": 48153,
+          "target_safe_interior_capture_ratio": 4.153e-05,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 641,
+          "day_n_minus_1_front_capture_ratio": 0.01432157,
+          "day_n_minus_1_front_pixels_in_safe_interior": 812,
+          "day_n_minus_1_front_pixels_in_window": 970,
+          "day_n_minus_1_front_pixels_total": 67730,
+          "pre_target_pixels_in_window": 987,
+          "row_off": 535,
+          "source_raster_shape_rc": [
+            1085,
+            1448
+          ],
+          "target_capture_ratio": 0.00116296,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 25,
+          "target_pixels_in_window": 56,
+          "target_pixels_outside_window": 48097,
+          "target_pixels_total": 48153,
+          "target_safe_interior_capture_ratio": 0.00051918,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 635,
+          "day_n_minus_1_front_capture_ratio": 0.0200502,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1212,
+          "day_n_minus_1_front_pixels_in_window": 1358,
+          "day_n_minus_1_front_pixels_total": 67730,
+          "pre_target_pixels_in_window": 1454,
+          "row_off": 530,
+          "source_raster_shape_rc": [
+            1085,
+            1448
+          ],
+          "target_capture_ratio": 0.00328121,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 120,
+          "target_pixels_in_window": 158,
+          "target_pixels_outside_window": 47995,
+          "target_pixels_total": 48153,
+          "target_safe_interior_capture_ratio": 0.00249206,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 624,
+          "day_n_minus_1_front_capture_ratio": 0.03621733,
+          "day_n_minus_1_front_pixels_in_safe_interior": 2093,
+          "day_n_minus_1_front_pixels_in_window": 2453,
+          "day_n_minus_1_front_pixels_total": 67730,
+          "pre_target_pixels_in_window": 2932,
+          "row_off": 519,
+          "source_raster_shape_rc": [
+            1085,
+            1448
+          ],
+          "target_capture_ratio": 0.00631321,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 273,
+          "target_pixels_in_window": 304,
+          "target_pixels_outside_window": 47849,
+          "target_pixels_total": 48153,
+          "target_safe_interior_capture_ratio": 0.00566943,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 635,
+          "day_n_minus_1_front_capture_ratio": 0.0200502,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1282,
+          "day_n_minus_1_front_pixels_in_window": 1358,
+          "day_n_minus_1_front_pixels_total": 67730,
+          "pre_target_pixels_in_window": 1454,
+          "row_off": 530,
+          "source_raster_shape_rc": [
+            1085,
+            1448
+          ],
+          "target_capture_ratio": 0.00328121,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 141,
+          "target_pixels_in_window": 158,
+          "target_pixels_outside_window": 47995,
+          "target_pixels_total": 48153,
+          "target_safe_interior_capture_ratio": 0.00292817,
+          "window_found": true
+        }
+      },
+      "event_id": "2016_255",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2016_255_krig.tif",
+      "source_raster_sha256": "5e8e07749b3b711b8b01e2aeca81eb22c7dc43a7d72efe1f170bdecf23001296",
+      "target_doy": 127,
+      "year": 2016
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 77,
+          "day_n_minus_1_front_capture_ratio": 0.30166271,
+          "day_n_minus_1_front_pixels_in_safe_interior": 430,
+          "day_n_minus_1_front_pixels_in_window": 508,
+          "day_n_minus_1_front_pixels_total": 1684,
+          "pre_target_pixels_in_window": 508,
+          "row_off": 145,
+          "source_raster_shape_rc": [
+            210,
+            150
+          ],
+          "target_capture_ratio": 0.01040222,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 6,
+          "target_pixels_in_window": 15,
+          "target_pixels_outside_window": 1427,
+          "target_pixels_total": 1442,
+          "target_safe_interior_capture_ratio": 0.00416089,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 72,
+          "day_n_minus_1_front_capture_ratio": 0.55522565,
+          "day_n_minus_1_front_pixels_in_safe_interior": 775,
+          "day_n_minus_1_front_pixels_in_window": 935,
+          "day_n_minus_1_front_pixels_total": 1684,
+          "pre_target_pixels_in_window": 938,
+          "row_off": 139,
+          "source_raster_shape_rc": [
+            210,
+            150
+          ],
+          "target_capture_ratio": 0.10957004,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 94,
+          "target_pixels_in_window": 158,
+          "target_pixels_outside_window": 1284,
+          "target_pixels_total": 1442,
+          "target_safe_interior_capture_ratio": 0.06518724,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 66,
+          "day_n_minus_1_front_capture_ratio": 0.7131829,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1119,
+          "day_n_minus_1_front_pixels_in_window": 1201,
+          "day_n_minus_1_front_pixels_total": 1684,
+          "pre_target_pixels_in_window": 1249,
+          "row_off": 134,
+          "source_raster_shape_rc": [
+            210,
+            150
+          ],
+          "target_capture_ratio": 0.30027739,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 326,
+          "target_pixels_in_window": 433,
+          "target_pixels_outside_window": 1009,
+          "target_pixels_total": 1442,
+          "target_safe_interior_capture_ratio": 0.2260749,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 55,
+          "day_n_minus_1_front_capture_ratio": 0.93942993,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1514,
+          "day_n_minus_1_front_pixels_in_window": 1582,
+          "day_n_minus_1_front_pixels_total": 1684,
+          "pre_target_pixels_in_window": 1749,
+          "row_off": 123,
+          "source_raster_shape_rc": [
+            210,
+            150
+          ],
+          "target_capture_ratio": 0.69972261,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 878,
+          "target_pixels_in_window": 1009,
+          "target_pixels_outside_window": 433,
+          "target_pixels_total": 1442,
+          "target_safe_interior_capture_ratio": 0.60887656,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 66,
+          "day_n_minus_1_front_capture_ratio": 0.7131829,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1160,
+          "day_n_minus_1_front_pixels_in_window": 1201,
+          "day_n_minus_1_front_pixels_total": 1684,
+          "pre_target_pixels_in_window": 1249,
+          "row_off": 134,
+          "source_raster_shape_rc": [
+            210,
+            150
+          ],
+          "target_capture_ratio": 0.30027739,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 381,
+          "target_pixels_in_window": 433,
+          "target_pixels_outside_window": 1009,
+          "target_pixels_total": 1442,
+          "target_safe_interior_capture_ratio": 0.26421637,
+          "window_found": true
+        }
+      },
+      "event_id": "2016_146",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2016_146_krig.tif",
+      "source_raster_sha256": "774446aa0851a590374581eedb69786bbe9e583457510513c756c3b8a84c695d",
+      "target_doy": 184,
+      "year": 2016
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 23,
+          "day_n_minus_1_front_capture_ratio": 0.30315186,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 529,
+          "day_n_minus_1_front_pixels_total": 1745,
+          "pre_target_pixels_in_window": 529,
+          "row_off": 25,
+          "source_raster_shape_rc": [
+            83,
+            85
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 317,
+          "target_pixels_total": 317,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 17,
+          "day_n_minus_1_front_capture_ratio": 0.61489971,
+          "day_n_minus_1_front_pixels_in_safe_interior": 877,
+          "day_n_minus_1_front_pixels_in_window": 1073,
+          "day_n_minus_1_front_pixels_total": 1745,
+          "pre_target_pixels_in_window": 1073,
+          "row_off": 20,
+          "source_raster_shape_rc": [
+            83,
+            85
+          ],
+          "target_capture_ratio": 0.15772871,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 17,
+          "target_pixels_in_window": 50,
+          "target_pixels_outside_window": 267,
+          "target_pixels_total": 317,
+          "target_safe_interior_capture_ratio": 0.05362776,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 12,
+          "day_n_minus_1_front_capture_ratio": 0.87048711,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1369,
+          "day_n_minus_1_front_pixels_in_window": 1519,
+          "day_n_minus_1_front_pixels_total": 1745,
+          "pre_target_pixels_in_window": 1519,
+          "row_off": 14,
+          "source_raster_shape_rc": [
+            83,
+            85
+          ],
+          "target_capture_ratio": 0.38170347,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 86,
+          "target_pixels_in_window": 121,
+          "target_pixels_outside_window": 196,
+          "target_pixels_total": 317,
+          "target_safe_interior_capture_ratio": 0.27129338,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 1,
+          "day_n_minus_1_front_capture_ratio": 1.0,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1742,
+          "day_n_minus_1_front_pixels_in_window": 1745,
+          "day_n_minus_1_front_pixels_total": 1745,
+          "pre_target_pixels_in_window": 1745,
+          "row_off": 3,
+          "source_raster_shape_rc": [
+            83,
+            85
+          ],
+          "target_capture_ratio": 0.95268139,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 281,
+          "target_pixels_in_window": 302,
+          "target_pixels_outside_window": 15,
+          "target_pixels_total": 317,
+          "target_safe_interior_capture_ratio": 0.88643533,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 12,
+          "day_n_minus_1_front_capture_ratio": 0.87048711,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1446,
+          "day_n_minus_1_front_pixels_in_window": 1519,
+          "day_n_minus_1_front_pixels_total": 1745,
+          "pre_target_pixels_in_window": 1519,
+          "row_off": 14,
+          "source_raster_shape_rc": [
+            83,
+            85
+          ],
+          "target_capture_ratio": 0.38170347,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 102,
+          "target_pixels_in_window": 121,
+          "target_pixels_outside_window": 196,
+          "target_pixels_total": 317,
+          "target_safe_interior_capture_ratio": 0.32176656,
+          "window_found": true
+        }
+      },
+      "event_id": "2017_1671",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2017_1671_krig.tif",
+      "source_raster_sha256": "a72eea0be3c8d73c14fdb01ce690f85c35ac8b78416720f356bd4dd7c227a047",
+      "target_doy": 189,
+      "year": 2017
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 61,
+          "day_n_minus_1_front_capture_ratio": 0.28349411,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 529,
+          "day_n_minus_1_front_pixels_total": 1866,
+          "pre_target_pixels_in_window": 529,
+          "row_off": 100,
+          "source_raster_shape_rc": [
+            181,
+            234
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 100,
+          "target_pixels_total": 100,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 55,
+          "day_n_minus_1_front_capture_ratio": 0.5943194,
+          "day_n_minus_1_front_pixels_in_safe_interior": 883,
+          "day_n_minus_1_front_pixels_in_window": 1109,
+          "day_n_minus_1_front_pixels_total": 1866,
+          "pre_target_pixels_in_window": 1109,
+          "row_off": 94,
+          "source_raster_shape_rc": [
+            181,
+            234
+          ],
+          "target_capture_ratio": 0.07,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 6,
+          "target_pixels_in_window": 7,
+          "target_pixels_outside_window": 93,
+          "target_pixels_total": 100,
+          "target_safe_interior_capture_ratio": 0.06,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 50,
+          "day_n_minus_1_front_capture_ratio": 0.89228296,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1489,
+          "day_n_minus_1_front_pixels_in_window": 1665,
+          "day_n_minus_1_front_pixels_total": 1866,
+          "pre_target_pixels_in_window": 1665,
+          "row_off": 89,
+          "source_raster_shape_rc": [
+            181,
+            234
+          ],
+          "target_capture_ratio": 0.26,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 11,
+          "target_pixels_in_window": 26,
+          "target_pixels_outside_window": 74,
+          "target_pixels_total": 100,
+          "target_safe_interior_capture_ratio": 0.11,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 39,
+          "day_n_minus_1_front_capture_ratio": 1.0,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1864,
+          "day_n_minus_1_front_pixels_in_window": 1866,
+          "day_n_minus_1_front_pixels_total": 1866,
+          "pre_target_pixels_in_window": 1891,
+          "row_off": 78,
+          "source_raster_shape_rc": [
+            181,
+            234
+          ],
+          "target_capture_ratio": 1.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 100,
+          "target_pixels_in_window": 100,
+          "target_pixels_outside_window": 0,
+          "target_pixels_total": 100,
+          "target_safe_interior_capture_ratio": 1.0,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 50,
+          "day_n_minus_1_front_capture_ratio": 0.89228296,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1579,
+          "day_n_minus_1_front_pixels_in_window": 1665,
+          "day_n_minus_1_front_pixels_total": 1866,
+          "pre_target_pixels_in_window": 1665,
+          "row_off": 89,
+          "source_raster_shape_rc": [
+            181,
+            234
+          ],
+          "target_capture_ratio": 0.26,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 17,
+          "target_pixels_in_window": 26,
+          "target_pixels_outside_window": 74,
+          "target_pixels_total": 100,
+          "target_safe_interior_capture_ratio": 0.17,
+          "window_found": true
+        }
+      },
+      "event_id": "2017_7",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2017_7_krig.tif",
+      "source_raster_sha256": "bb4631dcc8c1126462bcc711d745e71df491459f238351ae327a7195a2c1548c",
+      "target_doy": 176,
+      "year": 2017
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 285,
+          "day_n_minus_1_front_capture_ratio": 0.02138411,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 529,
+          "day_n_minus_1_front_pixels_total": 24738,
+          "pre_target_pixels_in_window": 529,
+          "row_off": 138,
+          "source_raster_shape_rc": [
+            269,
+            459
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 4474,
+          "target_pixels_total": 4474,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 279,
+          "day_n_minus_1_front_capture_ratio": 0.04620422,
+          "day_n_minus_1_front_pixels_in_safe_interior": 892,
+          "day_n_minus_1_front_pixels_in_window": 1143,
+          "day_n_minus_1_front_pixels_total": 24738,
+          "pre_target_pixels_in_window": 1143,
+          "row_off": 133,
+          "source_raster_shape_rc": [
+            269,
+            459
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 4474,
+          "target_pixels_total": 4474,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 274,
+          "day_n_minus_1_front_capture_ratio": 0.0771283,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1622,
+          "day_n_minus_1_front_pixels_in_window": 1908,
+          "day_n_minus_1_front_pixels_total": 24738,
+          "pre_target_pixels_in_window": 1908,
+          "row_off": 127,
+          "source_raster_shape_rc": [
+            269,
+            459
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 4474,
+          "target_pixels_total": 4474,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 263,
+          "day_n_minus_1_front_capture_ratio": 0.15385237,
+          "day_n_minus_1_front_pixels_in_safe_interior": 3199,
+          "day_n_minus_1_front_pixels_in_window": 3806,
+          "day_n_minus_1_front_pixels_total": 24738,
+          "pre_target_pixels_in_window": 3806,
+          "row_off": 116,
+          "source_raster_shape_rc": [
+            269,
+            459
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 4474,
+          "target_pixels_total": 4474,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 274,
+          "day_n_minus_1_front_capture_ratio": 0.0771283,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1765,
+          "day_n_minus_1_front_pixels_in_window": 1908,
+          "day_n_minus_1_front_pixels_total": 24738,
+          "pre_target_pixels_in_window": 1908,
+          "row_off": 127,
+          "source_raster_shape_rc": [
+            269,
+            459
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 4474,
+          "target_pixels_total": 4474,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        }
+      },
+      "event_id": "2017_2418",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2017_2418_krig.tif",
+      "source_raster_sha256": "0cc61577c0d2d1da5586e6ad61e458702830c34d6027e8e5f9c689d84d413ed5",
+      "target_doy": 255,
+      "year": 2017
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 58,
+          "day_n_minus_1_front_capture_ratio": 0.26980072,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 528,
+          "day_n_minus_1_front_pixels_total": 1957,
+          "pre_target_pixels_in_window": 528,
+          "row_off": 65,
+          "source_raster_shape_rc": [
+            105,
+            173
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 470,
+          "target_pixels_total": 470,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 53,
+          "day_n_minus_1_front_capture_ratio": 0.57230455,
+          "day_n_minus_1_front_pixels_in_safe_interior": 896,
+          "day_n_minus_1_front_pixels_in_window": 1120,
+          "day_n_minus_1_front_pixels_total": 1957,
+          "pre_target_pixels_in_window": 1127,
+          "row_off": 60,
+          "source_raster_shape_rc": [
+            105,
+            173
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 470,
+          "target_pixels_total": 470,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 47,
+          "day_n_minus_1_front_capture_ratio": 0.83903935,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1498,
+          "day_n_minus_1_front_pixels_in_window": 1642,
+          "day_n_minus_1_front_pixels_total": 1957,
+          "pre_target_pixels_in_window": 1721,
+          "row_off": 54,
+          "source_raster_shape_rc": [
+            105,
+            173
+          ],
+          "target_capture_ratio": 0.15106383,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 33,
+          "target_pixels_in_window": 71,
+          "target_pixels_outside_window": 399,
+          "target_pixels_total": 470,
+          "target_safe_interior_capture_ratio": 0.07021277,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 36,
+          "day_n_minus_1_front_capture_ratio": 0.99284619,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1919,
+          "day_n_minus_1_front_pixels_in_window": 1943,
+          "day_n_minus_1_front_pixels_total": 1957,
+          "pre_target_pixels_in_window": 2479,
+          "row_off": 38,
+          "source_raster_shape_rc": [
+            105,
+            173
+          ],
+          "target_capture_ratio": 0.55744681,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 221,
+          "target_pixels_in_window": 262,
+          "target_pixels_outside_window": 208,
+          "target_pixels_total": 470,
+          "target_safe_interior_capture_ratio": 0.47021277,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 47,
+          "day_n_minus_1_front_capture_ratio": 0.83903935,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1576,
+          "day_n_minus_1_front_pixels_in_window": 1642,
+          "day_n_minus_1_front_pixels_total": 1957,
+          "pre_target_pixels_in_window": 1721,
+          "row_off": 54,
+          "source_raster_shape_rc": [
+            105,
+            173
+          ],
+          "target_capture_ratio": 0.15106383,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 51,
+          "target_pixels_in_window": 71,
+          "target_pixels_outside_window": 399,
+          "target_pixels_total": 470,
+          "target_safe_interior_capture_ratio": 0.10851064,
+          "window_found": true
+        }
+      },
+      "event_id": "2017_776",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2017_776_krig.tif",
+      "source_raster_sha256": "7188acb33347b230384bf2eaa3cfec9eef0d90b04d86e174c85c9696b9077454",
+      "target_doy": 213,
+      "year": 2017
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 34,
+          "day_n_minus_1_front_capture_ratio": 0.15743789,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 526,
+          "day_n_minus_1_front_pixels_total": 3341,
+          "pre_target_pixels_in_window": 526,
+          "row_off": 59,
+          "source_raster_shape_rc": [
+            171,
+            92
+          ],
+          "target_capture_ratio": 0.00222965,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 2,
+          "target_pixels_outside_window": 895,
+          "target_pixels_total": 897,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 29,
+          "day_n_minus_1_front_capture_ratio": 0.32954205,
+          "day_n_minus_1_front_pixels_in_safe_interior": 872,
+          "day_n_minus_1_front_pixels_in_window": 1101,
+          "day_n_minus_1_front_pixels_total": 3341,
+          "pre_target_pixels_in_window": 1101,
+          "row_off": 54,
+          "source_raster_shape_rc": [
+            171,
+            92
+          ],
+          "target_capture_ratio": 0.02006689,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 10,
+          "target_pixels_in_window": 18,
+          "target_pixels_outside_window": 879,
+          "target_pixels_total": 897,
+          "target_safe_interior_capture_ratio": 0.01114827,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 23,
+          "day_n_minus_1_front_capture_ratio": 0.51272074,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1487,
+          "day_n_minus_1_front_pixels_in_window": 1713,
+          "day_n_minus_1_front_pixels_total": 3341,
+          "pre_target_pixels_in_window": 1713,
+          "row_off": 48,
+          "source_raster_shape_rc": [
+            171,
+            92
+          ],
+          "target_capture_ratio": 0.13266444,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 75,
+          "target_pixels_in_window": 119,
+          "target_pixels_outside_window": 778,
+          "target_pixels_total": 897,
+          "target_safe_interior_capture_ratio": 0.08361204,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 12,
+          "day_n_minus_1_front_capture_ratio": 0.79706675,
+          "day_n_minus_1_front_pixels_in_safe_interior": 2479,
+          "day_n_minus_1_front_pixels_in_window": 2663,
+          "day_n_minus_1_front_pixels_total": 3341,
+          "pre_target_pixels_in_window": 2719,
+          "row_off": 37,
+          "source_raster_shape_rc": [
+            171,
+            92
+          ],
+          "target_capture_ratio": 0.51170569,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 400,
+          "target_pixels_in_window": 459,
+          "target_pixels_outside_window": 438,
+          "target_pixels_total": 897,
+          "target_safe_interior_capture_ratio": 0.44593088,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 23,
+          "day_n_minus_1_front_capture_ratio": 0.51272074,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1599,
+          "day_n_minus_1_front_pixels_in_window": 1713,
+          "day_n_minus_1_front_pixels_total": 3341,
+          "pre_target_pixels_in_window": 1713,
+          "row_off": 48,
+          "source_raster_shape_rc": [
+            171,
+            92
+          ],
+          "target_capture_ratio": 0.13266444,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 97,
+          "target_pixels_in_window": 119,
+          "target_pixels_outside_window": 778,
+          "target_pixels_total": 897,
+          "target_safe_interior_capture_ratio": 0.10813824,
+          "window_found": true
+        }
+      },
+      "event_id": "2017_989",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2017_989_krig.tif",
+      "source_raster_sha256": "3fcdbde065b529afd400bf85b6ced6e1dbc8ebcb96438287a17339fa6f1f1bf3",
+      "target_doy": 224,
+      "year": 2017
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 43,
+          "day_n_minus_1_front_capture_ratio": 0.20369657,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 529,
+          "day_n_minus_1_front_pixels_total": 2597,
+          "pre_target_pixels_in_window": 529,
+          "row_off": 70,
+          "source_raster_shape_rc": [
+            170,
+            118
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 2607,
+          "target_pixels_total": 2607,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 37,
+          "day_n_minus_1_front_capture_ratio": 0.42780131,
+          "day_n_minus_1_front_pixels_in_safe_interior": 894,
+          "day_n_minus_1_front_pixels_in_window": 1111,
+          "day_n_minus_1_front_pixels_total": 2597,
+          "pre_target_pixels_in_window": 1118,
+          "row_off": 65,
+          "source_raster_shape_rc": [
+            170,
+            118
+          ],
+          "target_capture_ratio": 0.00613732,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 2,
+          "target_pixels_in_window": 16,
+          "target_pixels_outside_window": 2591,
+          "target_pixels_total": 2607,
+          "target_safe_interior_capture_ratio": 0.00076717,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 32,
+          "day_n_minus_1_front_capture_ratio": 0.63265306,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1458,
+          "day_n_minus_1_front_pixels_in_window": 1643,
+          "day_n_minus_1_front_pixels_total": 2597,
+          "pre_target_pixels_in_window": 1720,
+          "row_off": 59,
+          "source_raster_shape_rc": [
+            170,
+            118
+          ],
+          "target_capture_ratio": 0.07134638,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 108,
+          "target_pixels_in_window": 186,
+          "target_pixels_outside_window": 2421,
+          "target_pixels_total": 2607,
+          "target_safe_interior_capture_ratio": 0.04142693,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 21,
+          "day_n_minus_1_front_capture_ratio": 0.89718906,
+          "day_n_minus_1_front_pixels_in_safe_interior": 2216,
+          "day_n_minus_1_front_pixels_in_window": 2330,
+          "day_n_minus_1_front_pixels_total": 2597,
+          "pre_target_pixels_in_window": 2727,
+          "row_off": 48,
+          "source_raster_shape_rc": [
+            170,
+            118
+          ],
+          "target_capture_ratio": 0.32911392,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 648,
+          "target_pixels_in_window": 858,
+          "target_pixels_outside_window": 1749,
+          "target_pixels_total": 2607,
+          "target_safe_interior_capture_ratio": 0.24856157,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 32,
+          "day_n_minus_1_front_capture_ratio": 0.63265306,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1552,
+          "day_n_minus_1_front_pixels_in_window": 1643,
+          "day_n_minus_1_front_pixels_total": 2597,
+          "pre_target_pixels_in_window": 1720,
+          "row_off": 59,
+          "source_raster_shape_rc": [
+            170,
+            118
+          ],
+          "target_capture_ratio": 0.07134638,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 144,
+          "target_pixels_in_window": 186,
+          "target_pixels_outside_window": 2421,
+          "target_pixels_total": 2607,
+          "target_safe_interior_capture_ratio": 0.0552359,
+          "window_found": true
+        }
+      },
+      "event_id": "2018_926",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2018_926_krig.tif",
+      "source_raster_sha256": "2ec977a3615000cd5fcd3e63ccc6f3a8d3963f98777e073b4340ef052c92e43c",
+      "target_doy": 172,
+      "year": 2018
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 59,
+          "day_n_minus_1_front_capture_ratio": 0.17633333,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 529,
+          "day_n_minus_1_front_pixels_total": 3000,
+          "pre_target_pixels_in_window": 529,
+          "row_off": 32,
+          "source_raster_shape_rc": [
+            93,
+            129
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 2377,
+          "target_pixels_total": 2377,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 54,
+          "day_n_minus_1_front_capture_ratio": 0.36566667,
+          "day_n_minus_1_front_pixels_in_safe_interior": 880,
+          "day_n_minus_1_front_pixels_in_window": 1097,
+          "day_n_minus_1_front_pixels_total": 3000,
+          "pre_target_pixels_in_window": 1097,
+          "row_off": 27,
+          "source_raster_shape_rc": [
+            93,
+            129
+          ],
+          "target_capture_ratio": 0.00420698,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 7,
+          "target_pixels_in_window": 10,
+          "target_pixels_outside_window": 2367,
+          "target_pixels_total": 2377,
+          "target_safe_interior_capture_ratio": 0.00294489,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 48,
+          "day_n_minus_1_front_capture_ratio": 0.578,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1510,
+          "day_n_minus_1_front_pixels_in_window": 1734,
+          "day_n_minus_1_front_pixels_total": 3000,
+          "pre_target_pixels_in_window": 1773,
+          "row_off": 21,
+          "source_raster_shape_rc": [
+            93,
+            129
+          ],
+          "target_capture_ratio": 0.00799327,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 10,
+          "target_pixels_in_window": 19,
+          "target_pixels_outside_window": 2358,
+          "target_pixels_total": 2377,
+          "target_safe_interior_capture_ratio": 0.00420698,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 37,
+          "day_n_minus_1_front_capture_ratio": 0.85633333,
+          "day_n_minus_1_front_pixels_in_safe_interior": 2401,
+          "day_n_minus_1_front_pixels_in_window": 2569,
+          "day_n_minus_1_front_pixels_total": 3000,
+          "pre_target_pixels_in_window": 2820,
+          "row_off": 10,
+          "source_raster_shape_rc": [
+            93,
+            129
+          ],
+          "target_capture_ratio": 0.13251998,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 165,
+          "target_pixels_in_window": 315,
+          "target_pixels_outside_window": 2062,
+          "target_pixels_total": 2377,
+          "target_safe_interior_capture_ratio": 0.06941523,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 48,
+          "day_n_minus_1_front_capture_ratio": 0.578,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1625,
+          "day_n_minus_1_front_pixels_in_window": 1734,
+          "day_n_minus_1_front_pixels_total": 3000,
+          "pre_target_pixels_in_window": 1773,
+          "row_off": 21,
+          "source_raster_shape_rc": [
+            93,
+            129
+          ],
+          "target_capture_ratio": 0.00799327,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 12,
+          "target_pixels_in_window": 19,
+          "target_pixels_outside_window": 2358,
+          "target_pixels_total": 2377,
+          "target_safe_interior_capture_ratio": 0.00504838,
+          "window_found": true
+        }
+      },
+      "event_id": "2018_1853",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2018_1853_krig.tif",
+      "source_raster_sha256": "bb3727244a5d43646663ca7f1241849a87d84961610ea37a595b7fd48fcb9017",
+      "target_doy": 176,
+      "year": 2018
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 291,
+          "day_n_minus_1_front_capture_ratio": 0.16367574,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 529,
+          "day_n_minus_1_front_pixels_total": 3232,
+          "pre_target_pixels_in_window": 529,
+          "row_off": 202,
+          "source_raster_shape_rc": [
+            536,
+            601
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 160,
+          "target_pixels_total": 160,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 286,
+          "day_n_minus_1_front_capture_ratio": 0.34127475,
+          "day_n_minus_1_front_pixels_in_safe_interior": 880,
+          "day_n_minus_1_front_pixels_in_window": 1103,
+          "day_n_minus_1_front_pixels_total": 3232,
+          "pre_target_pixels_in_window": 1103,
+          "row_off": 196,
+          "source_raster_shape_rc": [
+            536,
+            601
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 160,
+          "target_pixels_total": 160,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 280,
+          "day_n_minus_1_front_capture_ratio": 0.55167079,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1514,
+          "day_n_minus_1_front_pixels_in_window": 1783,
+          "day_n_minus_1_front_pixels_total": 3232,
+          "pre_target_pixels_in_window": 1789,
+          "row_off": 191,
+          "source_raster_shape_rc": [
+            536,
+            601
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 160,
+          "target_pixels_total": 160,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 269,
+          "day_n_minus_1_front_capture_ratio": 0.85519802,
+          "day_n_minus_1_front_pixels_in_safe_interior": 2615,
+          "day_n_minus_1_front_pixels_in_window": 2764,
+          "day_n_minus_1_front_pixels_total": 3232,
+          "pre_target_pixels_in_window": 2981,
+          "row_off": 180,
+          "source_raster_shape_rc": [
+            536,
+            601
+          ],
+          "target_capture_ratio": 0.18125,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 11,
+          "target_pixels_in_window": 29,
+          "target_pixels_outside_window": 131,
+          "target_pixels_total": 160,
+          "target_safe_interior_capture_ratio": 0.06875,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 280,
+          "day_n_minus_1_front_capture_ratio": 0.55167079,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1648,
+          "day_n_minus_1_front_pixels_in_window": 1783,
+          "day_n_minus_1_front_pixels_total": 3232,
+          "pre_target_pixels_in_window": 1789,
+          "row_off": 191,
+          "source_raster_shape_rc": [
+            536,
+            601
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 160,
+          "target_pixels_total": 160,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        }
+      },
+      "event_id": "2018_267",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2018_267_krig.tif",
+      "source_raster_sha256": "dd5b260215b4ca585a69c6d29575b4a5616a1a551a6111b4237290866d7de344",
+      "target_doy": 215,
+      "year": 2018
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 133,
+          "day_n_minus_1_front_capture_ratio": 0.12580262,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 529,
+          "day_n_minus_1_front_pixels_total": 4205,
+          "pre_target_pixels_in_window": 529,
+          "row_off": 181,
+          "source_raster_shape_rc": [
+            256,
+            204
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 5470,
+          "target_pixels_total": 5470,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 127,
+          "day_n_minus_1_front_capture_ratio": 0.27039239,
+          "day_n_minus_1_front_pixels_in_safe_interior": 890,
+          "day_n_minus_1_front_pixels_in_window": 1137,
+          "day_n_minus_1_front_pixels_total": 4205,
+          "pre_target_pixels_in_window": 1141,
+          "row_off": 176,
+          "source_raster_shape_rc": [
+            256,
+            204
+          ],
+          "target_capture_ratio": 0.00274223,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 8,
+          "target_pixels_in_window": 15,
+          "target_pixels_outside_window": 5455,
+          "target_pixels_total": 5470,
+          "target_safe_interior_capture_ratio": 0.00146252,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 122,
+          "day_n_minus_1_front_capture_ratio": 0.46539834,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1656,
+          "day_n_minus_1_front_pixels_in_window": 1957,
+          "day_n_minus_1_front_pixels_total": 4205,
+          "pre_target_pixels_in_window": 1962,
+          "row_off": 170,
+          "source_raster_shape_rc": [
+            256,
+            204
+          ],
+          "target_capture_ratio": 0.00274223,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 15,
+          "target_pixels_in_window": 15,
+          "target_pixels_outside_window": 5455,
+          "target_pixels_total": 5470,
+          "target_safe_interior_capture_ratio": 0.00274223,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 111,
+          "day_n_minus_1_front_capture_ratio": 0.81046373,
+          "day_n_minus_1_front_pixels_in_safe_interior": 3077,
+          "day_n_minus_1_front_pixels_in_window": 3408,
+          "day_n_minus_1_front_pixels_total": 4205,
+          "pre_target_pixels_in_window": 3600,
+          "row_off": 159,
+          "source_raster_shape_rc": [
+            256,
+            204
+          ],
+          "target_capture_ratio": 0.01297989,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 31,
+          "target_pixels_in_window": 71,
+          "target_pixels_outside_window": 5399,
+          "target_pixels_total": 5470,
+          "target_safe_interior_capture_ratio": 0.00566728,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 122,
+          "day_n_minus_1_front_capture_ratio": 0.46539834,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1807,
+          "day_n_minus_1_front_pixels_in_window": 1957,
+          "day_n_minus_1_front_pixels_total": 4205,
+          "pre_target_pixels_in_window": 1962,
+          "row_off": 170,
+          "source_raster_shape_rc": [
+            256,
+            204
+          ],
+          "target_capture_ratio": 0.00274223,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 15,
+          "target_pixels_in_window": 15,
+          "target_pixels_outside_window": 5455,
+          "target_pixels_total": 5470,
+          "target_safe_interior_capture_ratio": 0.00274223,
+          "window_found": true
+        }
+      },
+      "event_id": "2018_1941",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2018_1941_krig.tif",
+      "source_raster_sha256": "9c4b4d113f004b1fd34d5a02f46185951653ed77d3f0fb7914bf141e3ab3a39a",
+      "target_doy": 141,
+      "year": 2018
+    },
+    {
+      "domains": {
+        "grid20_cell100m": {
+          "col_off": 100,
+          "day_n_minus_1_front_capture_ratio": 0.10712839,
+          "day_n_minus_1_front_pixels_in_safe_interior": 441,
+          "day_n_minus_1_front_pixels_in_window": 529,
+          "day_n_minus_1_front_pixels_total": 4938,
+          "pre_target_pixels_in_window": 529,
+          "row_off": 47,
+          "source_raster_shape_rc": [
+            136,
+            264
+          ],
+          "target_capture_ratio": 0.0,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 0,
+          "target_pixels_outside_window": 5496,
+          "target_pixels_total": 5496,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell150m": {
+          "col_off": 94,
+          "day_n_minus_1_front_capture_ratio": 0.2326853,
+          "day_n_minus_1_front_pixels_in_safe_interior": 900,
+          "day_n_minus_1_front_pixels_in_window": 1149,
+          "day_n_minus_1_front_pixels_total": 4938,
+          "pre_target_pixels_in_window": 1149,
+          "row_off": 41,
+          "source_raster_shape_rc": [
+            136,
+            264
+          ],
+          "target_capture_ratio": 0.00127365,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 0,
+          "target_pixels_in_window": 7,
+          "target_pixels_outside_window": 5489,
+          "target_pixels_total": 5496,
+          "target_safe_interior_capture_ratio": 0.0,
+          "window_found": true
+        },
+        "grid20_cell200m": {
+          "col_off": 89,
+          "day_n_minus_1_front_capture_ratio": 0.37829081,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1591,
+          "day_n_minus_1_front_pixels_in_window": 1868,
+          "day_n_minus_1_front_pixels_total": 4938,
+          "pre_target_pixels_in_window": 1887,
+          "row_off": 36,
+          "source_raster_shape_rc": [
+            136,
+            264
+          ],
+          "target_capture_ratio": 0.0194687,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 69,
+          "target_pixels_in_window": 107,
+          "target_pixels_outside_window": 5389,
+          "target_pixels_total": 5496,
+          "target_safe_interior_capture_ratio": 0.01255459,
+          "window_found": true
+        },
+        "grid20_cell300m": {
+          "col_off": 78,
+          "day_n_minus_1_front_capture_ratio": 0.65370595,
+          "day_n_minus_1_front_pixels_in_safe_interior": 2922,
+          "day_n_minus_1_front_pixels_in_window": 3228,
+          "day_n_minus_1_front_pixels_total": 4938,
+          "pre_target_pixels_in_window": 3569,
+          "row_off": 25,
+          "source_raster_shape_rc": [
+            136,
+            264
+          ],
+          "target_capture_ratio": 0.1257278,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 448,
+          "target_pixels_in_window": 691,
+          "target_pixels_outside_window": 4805,
+          "target_pixels_total": 5496,
+          "target_safe_interior_capture_ratio": 0.08151383,
+          "window_found": true
+        },
+        "grid40_cell100m": {
+          "col_off": 89,
+          "day_n_minus_1_front_capture_ratio": 0.37829081,
+          "day_n_minus_1_front_pixels_in_safe_interior": 1727,
+          "day_n_minus_1_front_pixels_in_window": 1868,
+          "day_n_minus_1_front_pixels_total": 4938,
+          "pre_target_pixels_in_window": 1887,
+          "row_off": 36,
+          "source_raster_shape_rc": [
+            136,
+            264
+          ],
+          "target_capture_ratio": 0.0194687,
+          "target_geometry_used_for_window_selection": false,
+          "target_pixels_in_safe_interior": 86,
+          "target_pixels_in_window": 107,
+          "target_pixels_outside_window": 5389,
+          "target_pixels_total": 5496,
+          "target_safe_interior_capture_ratio": 0.01564774,
+          "window_found": true
+        }
+      },
+      "event_id": "2018_2037",
+      "shortlist_rule": "existing 2014\u20132018 pre-target shortlist; event/day membership is held fixed across domain options",
+      "source_raster_member": "2018_2037_krig.tif",
+      "source_raster_sha256": "f4dec1898dbacd0b4f8ab703571c7a0bc1f1151109ef81e6287b06dfbb375939",
+      "target_doy": 225,
+      "year": 2018
+    }
+  ],
+  "code_sha256": {
+    "audit_cfsds_train_spatial_feasibility.py": "6b7c739c1efa12e0af8a2183761dbe510ca89ff6bf8c8cb397bc08ae9769124c",
+    "cfsds_initial_state.py": "fbd5f9bae62976620952eb6d1a211a58e24ef32485e06b102b1a0ed5e0366123",
+    "cfsds_spatial_feasibility.py": "84974b59c459c348d12cb8d5ba4910bd0d4e0633fe219e04f85b56409fc4f880"
+  },
+  "dataset": "Canadian Fire Spread Dataset (CFSDS)",
+  "domain_options": {
+    "grid20_cell100m": {
+      "edge_margin_native_pixels": 1,
+      "existing_20x20_checkpoint_compatible_by_tensor_shape": true,
+      "grid": {
+        "cell_size_m": 100,
+        "cols": 20,
+        "id": "grid20_cell100m",
+        "rows": 20
+      },
+      "native_window_shape_rc": [
+        23,
+        23
+      ],
+      "physical_cell_semantics_match_existing_100m_case": true,
+      "realized_extent_m": [
+        2070,
+        2070
+      ],
+      "requested_extent_m": [
+        2000,
+        2000
+      ],
+      "summary": {
+        "candidate_pairs": 25,
+        "maximum_target_capture_ratio": 0.010402,
+        "median_day_n_minus_1_front_capture_ratio": 0.157863,
+        "median_safe_interior_target_capture_ratio": 0.0,
+        "median_target_capture_ratio": 0.0,
+        "p75_target_capture_ratio": 0.0,
+        "pre_target_window_found": 25,
+        "target_metrics_are_post_selection_diagnostics": true,
+        "target_pairs_with_any_pixel_in_window": 4,
+        "target_pairs_with_any_safe_interior_pixel": 2,
+        "window_found_rate": 1.0
+      }
+    },
+    "grid20_cell150m": {
+      "edge_margin_native_pixels": 2,
+      "existing_20x20_checkpoint_compatible_by_tensor_shape": true,
+      "grid": {
+        "cell_size_m": 150,
+        "cols": 20,
+        "id": "grid20_cell150m",
+        "rows": 20
+      },
+      "native_window_shape_rc": [
+        34,
+        34
+      ],
+      "physical_cell_semantics_match_existing_100m_case": false,
+      "realized_extent_m": [
+        3060,
+        3060
+      ],
+      "requested_extent_m": [
+        3000,
+        3000
+      ],
+      "summary": {
+        "candidate_pairs": 25,
+        "maximum_target_capture_ratio": 0.157729,
+        "median_day_n_minus_1_front_capture_ratio": 0.329542,
+        "median_safe_interior_target_capture_ratio": 0.0,
+        "median_target_capture_ratio": 0.001274,
+        "p75_target_capture_ratio": 0.007815,
+        "pre_target_window_found": 25,
+        "target_metrics_are_post_selection_diagnostics": true,
+        "target_pairs_with_any_pixel_in_window": 16,
+        "target_pairs_with_any_safe_interior_pixel": 12,
+        "window_found_rate": 1.0
+      }
+    },
+    "grid20_cell200m": {
+      "edge_margin_native_pixels": 2,
+      "existing_20x20_checkpoint_compatible_by_tensor_shape": true,
+      "grid": {
+        "cell_size_m": 200,
+        "cols": 20,
+        "id": "grid20_cell200m",
+        "rows": 20
+      },
+      "native_window_shape_rc": [
+        45,
+        45
+      ],
+      "physical_cell_semantics_match_existing_100m_case": false,
+      "realized_extent_m": [
+        4050,
+        4050
+      ],
+      "requested_extent_m": [
+        4000,
+        4000
+      ],
+      "summary": {
+        "candidate_pairs": 25,
+        "maximum_target_capture_ratio": 0.381703,
+        "median_day_n_minus_1_front_capture_ratio": 0.514224,
+        "median_safe_interior_target_capture_ratio": 0.007527,
+        "median_target_capture_ratio": 0.019469,
+        "p75_target_capture_ratio": 0.132664,
+        "pre_target_window_found": 25,
+        "target_metrics_are_post_selection_diagnostics": true,
+        "target_pairs_with_any_pixel_in_window": 19,
+        "target_pairs_with_any_safe_interior_pixel": 18,
+        "window_found_rate": 1.0
+      }
+    },
+    "grid20_cell300m": {
+      "edge_margin_native_pixels": 3,
+      "existing_20x20_checkpoint_compatible_by_tensor_shape": true,
+      "grid": {
+        "cell_size_m": 300,
+        "cols": 20,
+        "id": "grid20_cell300m",
+        "rows": 20
+      },
+      "native_window_shape_rc": [
+        67,
+        67
+      ],
+      "physical_cell_semantics_match_existing_100m_case": false,
+      "realized_extent_m": [
+        6030,
+        6030
+      ],
+      "requested_extent_m": [
+        6000,
+        6000
+      ],
+      "summary": {
+        "candidate_pairs": 25,
+        "maximum_target_capture_ratio": 1.0,
+        "median_day_n_minus_1_front_capture_ratio": 0.810464,
+        "median_safe_interior_target_capture_ratio": 0.081514,
+        "median_target_capture_ratio": 0.153131,
+        "p75_target_capture_ratio": 0.500751,
+        "pre_target_window_found": 23,
+        "target_metrics_are_post_selection_diagnostics": true,
+        "target_pairs_with_any_pixel_in_window": 22,
+        "target_pairs_with_any_safe_interior_pixel": 20,
+        "window_found_rate": 0.92
+      }
+    },
+    "grid40_cell100m": {
+      "edge_margin_native_pixels": 1,
+      "existing_20x20_checkpoint_compatible_by_tensor_shape": false,
+      "grid": {
+        "cell_size_m": 100,
+        "cols": 40,
+        "id": "grid40_cell100m",
+        "rows": 40
+      },
+      "native_window_shape_rc": [
+        45,
+        45
+      ],
+      "physical_cell_semantics_match_existing_100m_case": true,
+      "realized_extent_m": [
+        4050,
+        4050
+      ],
+      "requested_extent_m": [
+        4000,
+        4000
+      ],
+      "summary": {
+        "candidate_pairs": 25,
+        "maximum_target_capture_ratio": 0.381703,
+        "median_day_n_minus_1_front_capture_ratio": 0.514224,
+        "median_safe_interior_target_capture_ratio": 0.010538,
+        "median_target_capture_ratio": 0.019469,
+        "p75_target_capture_ratio": 0.132664,
+        "pre_target_window_found": 25,
+        "target_metrics_are_post_selection_diagnostics": true,
+        "target_pairs_with_any_pixel_in_window": 19,
+        "target_pairs_with_any_safe_interior_pixel": 19,
+        "window_found_rate": 1.0
+      }
+    }
+  },
+  "event_years": [
+    2014,
+    2015,
+    2016,
+    2017,
+    2018
+  ],
+  "heldout_splits_opened": false,
+  "interpretation_limits": [
+    "This is a TRAIN-only geometry audit over the already shortlisted 25 event/day pairs, not a full CFSDS cohort audit.",
+    "Day-n coverage is computed after target-blind window selection and is a feasibility diagnostic only; it did not choose a domain, crop, or event.",
+    "Counts are native 90m raster pixels. The report does not resample maps into simulator cells or create FireCase inputs.",
+    "20x20 grids at 150m or larger preserve tensor/action shape but change the physical meaning of each action and require a separate simulator/input contract review.",
+    "40x40 at 100m changes tensor and action dimensions; the existing 20x20 Firehose checkpoint cannot be used unchanged.",
+    "No fuel, DEM, weather, suppression, importer, no-action replay, simulator physics, calibration, RL training, or policy benefit is validated here.",
+    "The audit cannot resolve the separate as-of-event fuel vintage and non-fuel historical-scar importer blockers."
+  ],
+  "native_resolution_m": 90,
+  "release": "v1.1",
+  "scope": "train_only",
+  "source_archives": [
+    {
+      "filename": "2014_fireDOYrasters.zip",
+      "sha256": "5767d45c58cffe8a53815e41facef1389f27c5bc66e74dab9eea61395fc3f4a8",
+      "year": 2014
+    },
+    {
+      "filename": "2015_fireDOYrasters.zip",
+      "sha256": "7afe47aa29f17a551d8825d676a09d900f88c6450e4e42c49b5ae809d79241c6",
+      "year": 2015
+    },
+    {
+      "filename": "2016_fireDOYrasters.zip",
+      "sha256": "92b650765675cac90e38db3ade3c194fc2e29e7bb00d1c4fff48ee572339e0a3",
+      "year": 2016
+    },
+    {
+      "filename": "2017_fireDOYrasters.zip",
+      "sha256": "2c8d35c8018f34900abcfe241f0035cd7c7efa939171058e06e43efe972de959",
+      "year": 2017
+    },
+    {
+      "filename": "2018_fireDOYrasters.zip",
+      "sha256": "0b31797c19fe705a890eb19ebc35827356f15bc3d83666ad614e0e1dc0518e3f",
+      "year": 2018
+    }
+  ],
+  "source_shortlist": {
+    "candidate_membership_reselected_per_domain": false,
+    "day_pair_eligibility_requires_target_day_record_and_positive_firearea": true,
+    "day_pair_membership_fully_target_independent": false,
+    "path": "cfsds-train-target-blind-window-screen.json",
+    "sha256": "c0d9d626ea28427d42979d99ed83fc84d800382eb42f02cc13229829cf7c7bda",
+    "window_and_candidate_geometry_selection_target_blind": true
+  },
+  "window_selection": {
+    "minimum_safe_interior_front_pixels": 3,
+    "safe_border": "approximately one model cell, converted to rounded native 90m pixels",
+    "source_information": "valid CFSDS arrival values strictly before target_doy; day n-1 centroid",
+    "target_day_used_for_crop_or_candidate_selection": false,
+    "tie_breaking": "nearest day n-1 centroid; then more interior n-1 pixels; then more pre-target history; then row/column order"
+  }
+}

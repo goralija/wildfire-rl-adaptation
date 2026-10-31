@@ -62,7 +62,7 @@ serija za **jedan scenario**:
 | `slope.asc`, `saz.asc` | nagib i smjer padine | Izračunati iz istog poravnatog DEM-a; aspect/saz mora koristiti ugaonu konvenciju koju očekuje C++ kod |
 | `Data.csv` | jedan red po ćeliji; 20 kolona: `fueltype,mon,jd,M,jd_min,lat,lon,elev,ffmc,ws,waz,bui,ps,saz,pc,pdf,gfl,cur,time,pattern` | generiše se redom ćelija iz normalizovanih rastera i provjerenog Cell2Fire `DataGeneratorC`; nedostajuće vrijednosti ne popunjavati nulama napamet |
 | `Weather.csv` | Cell2Fire parser očekuje tačne kolone `Scenario,datetime,APCP,TMP,RH,WS,WD,FFMC,DMC,DC,ISI,BUI,FWI` | lokalna stanica ako postoji; inače historijski ERA5-Land uz provjerene jedinice, smjer vjetra i FWI kodove. Sami vremenski podaci nisu dovoljni ako nedostaju početne FWI vrijednosti |
-| `Ignitions.csv` + `InitialState.csv` | `Ignitions.csv` ostaje za jednu tačku; lokalni adapter dodatno prima one-based row-major listu `burnt` i `burning` ćelija | `InitialState.csv` učitava prethodni scar i više aktivnih ćelija kao zajedničko početno stanje; C++ import je provjeren na fixtureu i stvarnom CFSDS slučaju |
+| `Ignitions.csv` + `InitialState.csv` | `Ignitions.csv` ostaje za jednu tačku; adapter prima one-based row-major listu `burnt`, `scar_nf` i `burning` ćelija | `scar_nf` je izričit caller-attestation da je ćelija već bila spaljena, ali sada ima `NF` klasu; C++ je zadrži u cumulative damage bez dodavanja u aktivni front. Ne označavati automatski svaku NF ćeliju kao scar. Synthetic Sub20 import ugovor je testiran; CFSDS builder i dalje blokira takve ćelije dok se fuel vintage/succession ne riješi. |
 | `fbp_lookup_table.csv` | veza gorivnog koda i FBP parametara/boje | fiksna, verzionisana tabela kompatibilna s Cell2Fire buildom |
 | `Reward.asc` (opciono) | prioritetni region koji se štiti | tek ako je prioritet definisan prije evaluacije; ne crtati ga iz buduće granice požara |
 
@@ -246,10 +246,13 @@ tačan affine transform.
 4. **Površine požara.** CFSDS 90 m `day-of-burning` reprojectovati na 100 m masku uz
    unaprijed definisano pravilo pokrivenosti/većine. Zapisati koliko pozitivne površine
    se gubi ili dobija pri resamplingu. Sačuvati i 90 m reference za metričke proračune.
-5. **Prozor.** Za 20×20 polje izabrati crop koji sadrži prethodnu frontu i sav target
-   rast do kraja horizonta uz buffer. Prijaviti target koji izađe iz prozora; ne zvati ga
-   uspješnim zadržavanjem požara. Takav slučaj izostaviti iz primarnog rezultata ili ga
-   posebno označiti kao edge-censored.
+5. **Prozor.** Za 20×20 polje crop i podobnost birati samo prema informacijama poznatim
+   do početka epizode; target ne smije postavljati crop offset niti odlučivati koji se
+   slučajevi testiraju. Prijaviti koliko početnog scar/front stanja ostaje izvan domene.
+   Target koji naknadno izađe iz prozora jeste edge-censored, ne uspješno zadržan požar.
+   Target capture/edge mjere računati tek nakon što su crop i shortlist fiksirani; ako
+   mnogo slučajeva ne može se smjestiti u 2×2 km bez outcome-based izbora, blokirati
+   reality-check ili zasebno opravdati drugačiju policy/model domenu.
 6. **Weather.** Izvući hourly temperaturu, vlagu, U/V ili brzinu/smjer vjetra i
    padavine, zapisati UTC/local-time konverziju i jedinice. Cell2Fire traži i sve FWI
    kodove; oni se ne dobijaju tako što se sirovi ERA5 redovi samo kopiraju. Treba
@@ -270,28 +273,45 @@ se ne tumače kao jedna istovremena ivica.
 
 Ovo rješava projektni adapter kroz `InitialState.csv`: ranije opožarene ćelije su
 `burnt`, opaženi aktivni rub je skup `burning` ćelija. C++ simulator je potvrdio uvoz
-fixturea i slučaja `2018_747`; početno C++ raster stanje odgovara ulaznom CSV-u. Za
-glavne RL eksperimente još treba provjeriti cumulative-damage računanje i terminalni
-razlog u cijeloj Python→C++ epizodi.
+fixturea i slučaja `2018_747`; TASK-004c je naknadno dodao terminalni cumulative-damage,
+front/treatment IDs i reason u cijeloj Python→C++ epizodi. [Runtime receipt](../../reports/firehose-verification/task004c-adapter-smoke.json).
+Za glavne RL eksperimente i dalje treba proći odvojeni CFSDS no-action quality gate;
+tehnički adapter prolaz ne potvrđuje fiziku niti smanjenje štete.
 
 ## Kako od daily CFSDS para napraviti jednu Cell2Fire epizodu
 
-Za izabrani događaj uzmi `burn_day = n` i prethodni `burn_day = n-1`:
+Za izabrani događaj `burn_day = n` i `burn_day = n-1` daju historijski dnevni par,
+ali trenutna implementacija **nije leakage-free**:
 
-1. Maska dana `n-1` postaje početna opožarena površina; sve ćelije koje su već gorjele
-   prekategorizuj u non-fuel da ih simulacija ne zapali ponovo.
-2. Početne ćelije simulacije postaju dio granice dana `n-1` koji dodiruje novi rast dana
-   `n`. To imitira opaženi aktivni front, umjesto da se cijeli požar ponovo pali iz jedne
-   izmišljene tačke. `InitialState.csv` uvoz je već implementiran.
-3. U simulator postavi odgovarajuće gorivo/teren i satni weather trace za izabrani dan.
-4. `target_day_n` ostaje skriven od agenta i reward-a. Prvo pusti **no-action** replay i
-   izmjeri koliko je Cell2Fireov predviđeni rast sličan opaženom targetu.
-5. Ako no-action simulacija nije dovoljno vjerna na train/calibration događajima,
-   popravi inpute/parametre prije RL treninga. Ne podešavati na test događajima.
-6. Na valjanom slučaju pokreni frozen checkpoint, fine-tuneani checkpoint i heuristike
-   sa istim weather-om, početnim stanjem, C++ seedovima i budžetom. RL reward je
-   simulatorova šteta uz eventualni trošak intervencije; opažena `target_day_n` služi
-   samo za odvojene spread-metrike.
+1. Fuel karta za dan n treba siguran as-of-event bazni vintage i dokumentovan annual
+   burn-scar succession. Zatim se samo perimetri istog požara prije dana n mogu
+   ukloniti/reclassifikovati prema provjerenom pravilu. Provenance pravila je i dalje
+   blokirana; odvojeni adapter contract za eksplicitno označen scar na `NF` ćeliji je
+   testiran, ali builder još ne emituje takve CFSDS slučajeve.
+2. Raniji `scripts/build_cfsds_case.py` birao je day n-1 ćelije susjedne targetu day n,
+   što je otkrivalo dio buduće target geometrije u `InitialState.csv`. To ponašanje
+   slijedilo je objavljeni W.I.S.E. benchmark, čiji autori eksplicitno kažu da je njihov
+   front target-aware i favorizujući [S-037](SOURCES.md#s-037); ne koristimo ga za naš
+   unbiased RL benchmark.
+3. Novi prototip bira 23×23 crop isključivo iz arrival vrijednosti prije dana n, sa
+   centrom što bliže centroidu svih day n−1 piksela. Unutrašnji day n−1 pikseli postaju
+   aktivni front; n−1 pikseli na rubu izreza i stariji pikseli postaju burnt scar.
+   `InitialState.csv` ne mijenja se kada se target maska promijeni u testu za `2018_747`.
+   To je target-blind dnevna proxy definicija, ne satno opažena fronta; fuel/non-fuel
+   kompatibilnost starog scar-a još nije riješena.
+4. Train-only shortlist screen je nakon izbora prozora izmjerio da samo 4/25 izreza ima
+   makar jedan pixel narednog dana, uz medijanu target capture 0. Ovaj target-only
+   dijagnostički rezultat ne smije birati prozor ni shortlistu; pokazuje da 2×2 km domena
+   često ne obuhvata naredni dnevni rast. Prije reality-check replaya definisati prostornu
+   podobnost isključivo iz pre-target ulaza ili nezavisno opravdati drugačiji model-domain.
+5. Tek nakon target-blind front i leak-safe goriva postavi poravnati teren i satni
+   weather trace. Target dan n ostaje samo za unaprijed definisane evaluacijske metrike.
+5. Pusti **no-action** reality-check na train/calibration slučajevima uz isti unaprijed
+   definisani horizont. Ako gate ne prođe, popravi input/model i testiraj ponovo; ne
+   podešavati na heldout događajima.
+6. Tek na prihvatljivom slučaju pokreni frozen checkpoint, fine-tuneani checkpoint i
+   heuristike sa istim vremenom, početnim stanjem, C++ seedovima i budžetom. RL reward
+   ostaje simulatorova šteta uz eventualni trošak intervencije.
 
 CFSDS raster je dnevno interpolisan iz satelitskih hotspota. Ovakav par je dobar za
 dnevnu provjeru rasta, ali ne pruža label svake Firehose akcije niti preciznu satnu

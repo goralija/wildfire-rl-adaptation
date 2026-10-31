@@ -1,0 +1,3802 @@
+{
+  "cases": [
+    {
+      "event_id": "2014_221",
+      "fuel_by_mask": [
+        {
+          "mask": "scar",
+          "model_100m": {
+            "area_equivalent_ha": 260.61499,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 306,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 260.61499,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 258,
+            "majority_cells_by_fuel_category": {
+              "burnable": 258
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 344,
+            "pixels_by_fuel_category": {
+              "burnable": 344
+            },
+            "pixels_by_source_fuel_code": {
+              "101": 20,
+              "102": 324
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "front",
+          "model_100m": {
+            "area_equivalent_ha": 15.389999,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 33,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 15.389999,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 14,
+            "majority_cells_by_fuel_category": {
+              "burnable": 14
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 19,
+            "pixels_by_fuel_category": {
+              "burnable": 19
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 19
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "target",
+          "model_100m": {
+            "area_equivalent_ha": 4.05,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 12,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 4.05,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 3,
+            "majority_cells_by_fuel_category": {
+              "burnable": 3
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 5,
+            "pixels_by_fuel_category": {
+              "burnable": 5
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 5
+            }
+          },
+          "strict_fuel_compatibility": true
+        }
+      ],
+      "fuel_map_vintage": "National FBP fuel-type grid v2014b",
+      "fuel_status": "PASS_FUEL_ONLY",
+      "full_case_status": "not_assessed; terrain, weather/FWI, suppression, and replay are outside this fuel-only audit",
+      "model_grid": {
+        "cell_size_m": 100.0,
+        "cols": 20,
+        "extent_m": 2000.0,
+        "front_majority_edge_cells": 0,
+        "majority_target_front_adjacent": true,
+        "rows": 20,
+        "target_majority_edge_cells": 0,
+        "transform": [
+          100.0,
+          0.0,
+          -1142125.0,
+          0.0,
+          -100.0,
+          8105185.0
+        ]
+      },
+      "model_grid_fractional_fuel_overlap_requires_review": false,
+      "screen_crosscheck": {
+        "annual_group_table_growth_ha": 2.025,
+        "day_pair_counts": {
+          "active_front_pixels": 19,
+          "disconnected_target_pixels": 0,
+          "earlier_scar_pixels": 344,
+          "observed_target_pixels": 5,
+          "previous_day_pixels": 43,
+          "target_pixels_adjacent_to_previous_day": 5
+        },
+        "day_pair_valid": true,
+        "geometry_growth_capture_ratio": 1.0,
+        "growth_matches": true,
+        "model_grid_pair_valid": true,
+        "screen_growth_ha": 2.025
+      },
+      "screening_errors": [],
+      "source_grid": {
+        "cell_size_m": [
+          90.0,
+          90.0
+        ],
+        "cols": 23,
+        "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+        "rows": 23,
+        "transform": [
+          90.0,
+          0.0,
+          -1142160.0,
+          0.0,
+          -90.0,
+          8105220.0
+        ]
+      },
+      "source_raster_member": "2014_221_krig.tif",
+      "source_raster_sha256": "a97a32d8d1a71865e7b0f4bd3b3c7f264bdc14d8403046fa704ea0fb34e4752e",
+      "split": "train",
+      "suppression_status": "unknown; no agency record joined",
+      "target_doy": 203,
+      "target_fireday": 8,
+      "year": 2014
+    },
+    {
+      "event_id": "2014_2221",
+      "fuel_by_mask": [
+        {
+          "mask": "scar",
+          "model_100m": {
+            "area_equivalent_ha": 235.190002,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 3,
+              "burnable": 283,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 3.0,
+            "excluded_or_unmapped_majority_cells": 3,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 3.0,
+              "burnable": 232.190002,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 236,
+            "majority_cells_by_fuel_category": {
+              "ambiguous": 3,
+              "burnable": 233
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 6,
+            "pixels": 306,
+            "pixels_by_fuel_category": {
+              "ambiguous": 6,
+              "burnable": 300
+            },
+            "pixels_by_source_fuel_code": {
+              "103": 216,
+              "108": 58,
+              "116": 26,
+              "122": 6
+            }
+          },
+          "strict_fuel_compatibility": false
+        },
+        {
+          "mask": "front",
+          "model_100m": {
+            "area_equivalent_ha": 12.150001,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 32,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 12.15,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 11,
+            "majority_cells_by_fuel_category": {
+              "burnable": 11
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 15,
+            "pixels_by_fuel_category": {
+              "burnable": 15
+            },
+            "pixels_by_source_fuel_code": {
+              "103": 14,
+              "108": 1
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "target",
+          "model_100m": {
+            "area_equivalent_ha": 12.959999,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 22,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 12.96,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 14,
+            "majority_cells_by_fuel_category": {
+              "burnable": 14
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 16,
+            "pixels_by_fuel_category": {
+              "burnable": 16
+            },
+            "pixels_by_source_fuel_code": {
+              "103": 14,
+              "108": 2
+            }
+          },
+          "strict_fuel_compatibility": true
+        }
+      ],
+      "fuel_map_vintage": "National FBP fuel-type grid v2014b",
+      "fuel_status": "FAIL_FUEL_OVERLAP",
+      "full_case_status": "not_assessed; terrain, weather/FWI, suppression, and replay are outside this fuel-only audit",
+      "model_grid": {
+        "cell_size_m": 100.0,
+        "cols": 20,
+        "extent_m": 2000.0,
+        "front_majority_edge_cells": 0,
+        "majority_target_front_adjacent": true,
+        "rows": 20,
+        "target_majority_edge_cells": 0,
+        "transform": [
+          100.0,
+          0.0,
+          -1884985.0,
+          0.0,
+          -100.0,
+          7438375.0
+        ]
+      },
+      "model_grid_fractional_fuel_overlap_requires_review": true,
+      "screen_crosscheck": {
+        "annual_group_table_growth_ha": 12.96,
+        "day_pair_counts": {
+          "active_front_pixels": 15,
+          "disconnected_target_pixels": 0,
+          "earlier_scar_pixels": 306,
+          "observed_target_pixels": 16,
+          "previous_day_pixels": 29,
+          "target_pixels_adjacent_to_previous_day": 16
+        },
+        "day_pair_valid": true,
+        "geometry_growth_capture_ratio": 1.0,
+        "growth_matches": true,
+        "model_grid_pair_valid": true,
+        "screen_growth_ha": 12.96
+      },
+      "screening_errors": [],
+      "source_grid": {
+        "cell_size_m": [
+          90.0,
+          90.0
+        ],
+        "cols": 23,
+        "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+        "rows": 23,
+        "transform": [
+          90.0,
+          0.0,
+          -1885020.0,
+          0.0,
+          -90.0,
+          7438410.0
+        ]
+      },
+      "source_raster_member": "2014_2221_krig.tif",
+      "source_raster_sha256": "89d4424839e6b7ada5c34b0d5d152bea3a7335af642f38b4e57156699b88e36b",
+      "split": "train",
+      "suppression_status": "unknown; no agency record joined",
+      "target_doy": 236,
+      "target_fireday": 8,
+      "year": 2014
+    },
+    {
+      "event_id": "2014_285",
+      "fuel_by_mask": [
+        {
+          "mask": "scar",
+          "model_100m": {
+            "area_equivalent_ha": 293.23999,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 347,
+              "nonfuel": 4,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 1.9325,
+            "excluded_or_unmapped_majority_cells": 2,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 291.307495,
+              "nonfuel": 1.9325,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 295,
+            "majority_cells_by_fuel_category": {
+              "burnable": 293,
+              "nonfuel": 2
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 2,
+            "pixels": 387,
+            "pixels_by_fuel_category": {
+              "burnable": 385,
+              "nonfuel": 2
+            },
+            "pixels_by_source_fuel_code": {
+              "101": 385,
+              "119": 2
+            }
+          },
+          "strict_fuel_compatibility": false
+        },
+        {
+          "mask": "front",
+          "model_100m": {
+            "area_equivalent_ha": 25.110001,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 50,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 25.110001,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 24,
+            "majority_cells_by_fuel_category": {
+              "burnable": 24
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 31,
+            "pixels_by_fuel_category": {
+              "burnable": 31
+            },
+            "pixels_by_source_fuel_code": {
+              "101": 31
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "target",
+          "model_100m": {
+            "area_equivalent_ha": 12.150001,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 25,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 12.15,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 13,
+            "majority_cells_by_fuel_category": {
+              "burnable": 13
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 15,
+            "pixels_by_fuel_category": {
+              "burnable": 15
+            },
+            "pixels_by_source_fuel_code": {
+              "101": 15
+            }
+          },
+          "strict_fuel_compatibility": true
+        }
+      ],
+      "fuel_map_vintage": "National FBP fuel-type grid v2014b",
+      "fuel_status": "FAIL_FUEL_OVERLAP",
+      "full_case_status": "not_assessed; terrain, weather/FWI, suppression, and replay are outside this fuel-only audit",
+      "model_grid": {
+        "cell_size_m": 100.0,
+        "cols": 20,
+        "extent_m": 2000.0,
+        "front_majority_edge_cells": 0,
+        "majority_target_front_adjacent": true,
+        "rows": 20,
+        "target_majority_edge_cells": 0,
+        "transform": [
+          100.0,
+          0.0,
+          -996595.0,
+          0.0,
+          -100.0,
+          8009785.0
+        ]
+      },
+      "model_grid_fractional_fuel_overlap_requires_review": true,
+      "screen_crosscheck": {
+        "annual_group_table_growth_ha": 12.15,
+        "day_pair_counts": {
+          "active_front_pixels": 31,
+          "disconnected_target_pixels": 0,
+          "earlier_scar_pixels": 387,
+          "observed_target_pixels": 15,
+          "previous_day_pixels": 67,
+          "target_pixels_adjacent_to_previous_day": 15
+        },
+        "day_pair_valid": true,
+        "geometry_growth_capture_ratio": 1.0,
+        "growth_matches": true,
+        "model_grid_pair_valid": true,
+        "screen_growth_ha": 12.15
+      },
+      "screening_errors": [],
+      "source_grid": {
+        "cell_size_m": [
+          90.0,
+          90.0
+        ],
+        "cols": 23,
+        "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+        "rows": 23,
+        "transform": [
+          90.0,
+          0.0,
+          -996630.0,
+          0.0,
+          -90.0,
+          8009820.0
+        ]
+      },
+      "source_raster_member": "2014_285_krig.tif",
+      "source_raster_sha256": "5f6272998240fcff785bed373e4743b8fafd45761664102016138bf4a748c08f",
+      "split": "train",
+      "suppression_status": "unknown; no agency record joined",
+      "target_doy": 229,
+      "target_fireday": 51,
+      "year": 2014
+    },
+    {
+      "event_id": "2014_432",
+      "fuel_by_mask": [
+        {
+          "mask": "scar",
+          "model_100m": {
+            "area_equivalent_ha": 267.647491,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 162,
+              "nonfuel": 6,
+              "unmapped": 0,
+              "water": 153
+            },
+            "excluded_or_unmapped_fractional_area_ha": 146.192505,
+            "excluded_or_unmapped_majority_cells": 145,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 121.455002,
+              "nonfuel": 6.0,
+              "unmapped": 0.0,
+              "water": 140.192505
+            },
+            "majority_cells": 264,
+            "majority_cells_by_fuel_category": {
+              "burnable": 119,
+              "nonfuel": 6,
+              "water": 139
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 171,
+            "pixels": 347,
+            "pixels_by_fuel_category": {
+              "burnable": 176,
+              "nonfuel": 6,
+              "water": 165
+            },
+            "pixels_by_source_fuel_code": {
+              "101": 10,
+              "102": 157,
+              "116": 9,
+              "118": 165,
+              "120": 6
+            }
+          },
+          "strict_fuel_compatibility": false
+        },
+        {
+          "mask": "front",
+          "model_100m": {
+            "area_equivalent_ha": 24.300001,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 48,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 24.300001,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 25,
+            "majority_cells_by_fuel_category": {
+              "burnable": 25
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 30,
+            "pixels_by_fuel_category": {
+              "burnable": 30
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 30
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "target",
+          "model_100m": {
+            "area_equivalent_ha": 11.34,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 29,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 11.34,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 9,
+            "majority_cells_by_fuel_category": {
+              "burnable": 9
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 14,
+            "pixels_by_fuel_category": {
+              "burnable": 14
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 14
+            }
+          },
+          "strict_fuel_compatibility": true
+        }
+      ],
+      "fuel_map_vintage": "National FBP fuel-type grid v2014b",
+      "fuel_status": "FAIL_FUEL_OVERLAP",
+      "full_case_status": "not_assessed; terrain, weather/FWI, suppression, and replay are outside this fuel-only audit",
+      "model_grid": {
+        "cell_size_m": 100.0,
+        "cols": 20,
+        "extent_m": 2000.0,
+        "front_majority_edge_cells": 0,
+        "majority_target_front_adjacent": true,
+        "rows": 20,
+        "target_majority_edge_cells": 0,
+        "transform": [
+          100.0,
+          0.0,
+          -1681225.0,
+          0.0,
+          -100.0,
+          7738705.0
+        ]
+      },
+      "model_grid_fractional_fuel_overlap_requires_review": true,
+      "screen_crosscheck": {
+        "annual_group_table_growth_ha": 11.34,
+        "day_pair_counts": {
+          "active_front_pixels": 30,
+          "disconnected_target_pixels": 0,
+          "earlier_scar_pixels": 347,
+          "observed_target_pixels": 14,
+          "previous_day_pixels": 87,
+          "target_pixels_adjacent_to_previous_day": 14
+        },
+        "day_pair_valid": true,
+        "geometry_growth_capture_ratio": 1.0,
+        "growth_matches": true,
+        "model_grid_pair_valid": true,
+        "screen_growth_ha": 11.34
+      },
+      "screening_errors": [],
+      "source_grid": {
+        "cell_size_m": [
+          90.0,
+          90.0
+        ],
+        "cols": 23,
+        "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+        "rows": 23,
+        "transform": [
+          90.0,
+          0.0,
+          -1681260.0,
+          0.0,
+          -90.0,
+          7738740.0
+        ]
+      },
+      "source_raster_member": "2014_432_krig.tif",
+      "source_raster_sha256": "b44007c79f6738650643aad0e9f9d902ab012c56346a7f7e443ad2626f080fed",
+      "split": "train",
+      "suppression_status": "unknown; no agency record joined",
+      "target_doy": 227,
+      "target_fireday": 13,
+      "year": 2014
+    },
+    {
+      "event_id": "2014_538",
+      "fuel_by_mask": [
+        {
+          "mask": "scar",
+          "model_100m": {
+            "area_equivalent_ha": 110.012497,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 125,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 12
+            },
+            "excluded_or_unmapped_fractional_area_ha": 5.265,
+            "excluded_or_unmapped_majority_cells": 4,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 104.747498,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 5.265
+            },
+            "majority_cells": 112,
+            "majority_cells_by_fuel_category": {
+              "burnable": 108,
+              "water": 4
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 3,
+            "pixels": 145,
+            "pixels_by_fuel_category": {
+              "burnable": 142,
+              "water": 3
+            },
+            "pixels_by_source_fuel_code": {
+              "101": 12,
+              "102": 130,
+              "118": 3
+            }
+          },
+          "strict_fuel_compatibility": false
+        },
+        {
+          "mask": "front",
+          "model_100m": {
+            "area_equivalent_ha": 19.440001,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 37,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 19.440001,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 18,
+            "majority_cells_by_fuel_category": {
+              "burnable": 18
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 24,
+            "pixels_by_fuel_category": {
+              "burnable": 24
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 24
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "target",
+          "model_100m": {
+            "area_equivalent_ha": 6.48,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 12,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 6.48,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 6,
+            "majority_cells_by_fuel_category": {
+              "burnable": 6
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 8,
+            "pixels_by_fuel_category": {
+              "burnable": 8
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 8
+            }
+          },
+          "strict_fuel_compatibility": true
+        }
+      ],
+      "fuel_map_vintage": "National FBP fuel-type grid v2014b",
+      "fuel_status": "FAIL_FUEL_OVERLAP",
+      "full_case_status": "not_assessed; terrain, weather/FWI, suppression, and replay are outside this fuel-only audit",
+      "model_grid": {
+        "cell_size_m": 100.0,
+        "cols": 20,
+        "extent_m": 2000.0,
+        "front_majority_edge_cells": 0,
+        "majority_target_front_adjacent": true,
+        "rows": 20,
+        "target_majority_edge_cells": 0,
+        "transform": [
+          100.0,
+          0.0,
+          -556675.0,
+          0.0,
+          -100.0,
+          7556455.0
+        ]
+      },
+      "model_grid_fractional_fuel_overlap_requires_review": true,
+      "screen_crosscheck": {
+        "annual_group_table_growth_ha": 6.48,
+        "day_pair_counts": {
+          "active_front_pixels": 24,
+          "disconnected_target_pixels": 0,
+          "earlier_scar_pixels": 145,
+          "observed_target_pixels": 8,
+          "previous_day_pixels": 169,
+          "target_pixels_adjacent_to_previous_day": 8
+        },
+        "day_pair_valid": true,
+        "geometry_growth_capture_ratio": 1.0,
+        "growth_matches": true,
+        "model_grid_pair_valid": true,
+        "screen_growth_ha": 6.48
+      },
+      "screening_errors": [],
+      "source_grid": {
+        "cell_size_m": [
+          90.0,
+          90.0
+        ],
+        "cols": 23,
+        "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+        "rows": 23,
+        "transform": [
+          90.0,
+          0.0,
+          -556710.0,
+          0.0,
+          -90.0,
+          7556490.0
+        ]
+      },
+      "source_raster_member": "2014_538_krig.tif",
+      "source_raster_sha256": "a9cc2caa4acadb3840c9031e21e85870492e2f583321a7539616356d04331d84",
+      "split": "train",
+      "suppression_status": "unknown; no agency record joined",
+      "target_doy": 215,
+      "target_fireday": 2,
+      "year": 2014
+    },
+    {
+      "event_id": "2015_252",
+      "fuel_by_mask": [
+        {
+          "mask": "scar",
+          "model_100m": {
+            "area_equivalent_ha": 243.199997,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 313,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 243.199997,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 252,
+            "majority_cells_by_fuel_category": {
+              "burnable": 252
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 319,
+            "pixels_by_fuel_category": {
+              "burnable": 319
+            },
+            "pixels_by_source_fuel_code": {
+              "101": 166,
+              "108": 153
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "front",
+          "model_100m": {
+            "area_equivalent_ha": 12.96,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 34,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 12.96,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 11,
+            "majority_cells_by_fuel_category": {
+              "burnable": 11
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 16,
+            "pixels_by_fuel_category": {
+              "burnable": 16
+            },
+            "pixels_by_source_fuel_code": {
+              "101": 16
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "target",
+          "model_100m": {
+            "area_equivalent_ha": 4.05,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 12,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 4.05,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 3,
+            "majority_cells_by_fuel_category": {
+              "burnable": 3
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 5,
+            "pixels_by_fuel_category": {
+              "burnable": 5
+            },
+            "pixels_by_source_fuel_code": {
+              "101": 5
+            }
+          },
+          "strict_fuel_compatibility": true
+        }
+      ],
+      "fuel_map_vintage": "National FBP fuel-type grid v2014b",
+      "fuel_status": "PASS_FUEL_ONLY",
+      "full_case_status": "not_assessed; terrain, weather/FWI, suppression, and replay are outside this fuel-only audit",
+      "model_grid": {
+        "cell_size_m": 100.0,
+        "cols": 20,
+        "extent_m": 2000.0,
+        "front_majority_edge_cells": 0,
+        "majority_target_front_adjacent": true,
+        "rows": 20,
+        "target_majority_edge_cells": 0,
+        "transform": [
+          100.0,
+          0.0,
+          -1001725.0,
+          0.0,
+          -100.0,
+          7958935.0
+        ]
+      },
+      "model_grid_fractional_fuel_overlap_requires_review": false,
+      "screen_crosscheck": {
+        "annual_group_table_growth_ha": 2.025,
+        "day_pair_counts": {
+          "active_front_pixels": 16,
+          "disconnected_target_pixels": 0,
+          "earlier_scar_pixels": 319,
+          "observed_target_pixels": 5,
+          "previous_day_pixels": 111,
+          "target_pixels_adjacent_to_previous_day": 5
+        },
+        "day_pair_valid": true,
+        "geometry_growth_capture_ratio": 1.0,
+        "growth_matches": true,
+        "model_grid_pair_valid": true,
+        "screen_growth_ha": 2.025
+      },
+      "screening_errors": [],
+      "source_grid": {
+        "cell_size_m": [
+          90.0,
+          90.0
+        ],
+        "cols": 23,
+        "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+        "rows": 23,
+        "transform": [
+          90.0,
+          0.0,
+          -1001760.0,
+          0.0,
+          -90.0,
+          7958970.0
+        ]
+      },
+      "source_raster_member": "2015_252_krig.tif",
+      "source_raster_sha256": "dbbd51b4e562034aa4c483320fcb1e8f9d777b6ac422ce2c81aaa55966a81378",
+      "split": "train",
+      "suppression_status": "unknown; no agency record joined",
+      "target_doy": 225,
+      "target_fireday": 50,
+      "year": 2015
+    },
+    {
+      "event_id": "2015_2924",
+      "fuel_by_mask": [
+        {
+          "mask": "scar",
+          "model_100m": {
+            "area_equivalent_ha": 292.429993,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 329,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 292.429993,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 297,
+            "majority_cells_by_fuel_category": {
+              "burnable": 297
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 386,
+            "pixels_by_fuel_category": {
+              "burnable": 386
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 386
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "front",
+          "model_100m": {
+            "area_equivalent_ha": 44.549999,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 98,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 44.549999,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 41,
+            "majority_cells_by_fuel_category": {
+              "burnable": 41
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 55,
+            "pixels_by_fuel_category": {
+              "burnable": 55
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 55
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "target",
+          "model_100m": {
+            "area_equivalent_ha": 23.490002,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 43,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 23.490002,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 25,
+            "majority_cells_by_fuel_category": {
+              "burnable": 25
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 29,
+            "pixels_by_fuel_category": {
+              "burnable": 29
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 29
+            }
+          },
+          "strict_fuel_compatibility": true
+        }
+      ],
+      "fuel_map_vintage": "National FBP fuel-type grid v2014b",
+      "fuel_status": "PASS_FUEL_ONLY",
+      "full_case_status": "not_assessed; terrain, weather/FWI, suppression, and replay are outside this fuel-only audit",
+      "model_grid": {
+        "cell_size_m": 100.0,
+        "cols": 20,
+        "extent_m": 2000.0,
+        "front_majority_edge_cells": 0,
+        "majority_target_front_adjacent": true,
+        "rows": 20,
+        "target_majority_edge_cells": 0,
+        "transform": [
+          100.0,
+          0.0,
+          -715525.0,
+          0.0,
+          -100.0,
+          7440985.0
+        ]
+      },
+      "model_grid_fractional_fuel_overlap_requires_review": false,
+      "screen_crosscheck": {
+        "annual_group_table_growth_ha": 23.49,
+        "day_pair_counts": {
+          "active_front_pixels": 55,
+          "disconnected_target_pixels": 0,
+          "earlier_scar_pixels": 386,
+          "observed_target_pixels": 29,
+          "previous_day_pixels": 298,
+          "target_pixels_adjacent_to_previous_day": 29
+        },
+        "day_pair_valid": true,
+        "geometry_growth_capture_ratio": 1.0,
+        "growth_matches": true,
+        "model_grid_pair_valid": true,
+        "screen_growth_ha": 23.49
+      },
+      "screening_errors": [],
+      "source_grid": {
+        "cell_size_m": [
+          90.0,
+          90.0
+        ],
+        "cols": 23,
+        "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+        "rows": 23,
+        "transform": [
+          90.0,
+          0.0,
+          -715560.0,
+          0.0,
+          -90.0,
+          7441020.0
+        ]
+      },
+      "source_raster_member": "2015_2924_krig.tif",
+      "source_raster_sha256": "b6a959fcfd6a1200ccbedba25fe4b3ab8f2b453c19201d7f20f36dc2ca902ed8",
+      "split": "train",
+      "suppression_status": "unknown; no agency record joined",
+      "target_doy": 192,
+      "target_fireday": 19,
+      "year": 2015
+    },
+    {
+      "event_id": "2015_2929",
+      "fuel_by_mask": [
+        {
+          "mask": "scar",
+          "model_100m": {
+            "area_equivalent_ha": 147.677505,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 169,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 147.677505,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 150,
+            "majority_cells_by_fuel_category": {
+              "burnable": 150
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 195,
+            "pixels_by_fuel_category": {
+              "burnable": 195
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 121,
+              "109": 73,
+              "116": 1
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "front",
+          "model_100m": {
+            "area_equivalent_ha": 16.200001,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 39,
+              "nonfuel": 1,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.2925,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 15.9075,
+              "nonfuel": 0.2925,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 14,
+            "majority_cells_by_fuel_category": {
+              "burnable": 14
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 1,
+            "pixels": 20,
+            "pixels_by_fuel_category": {
+              "burnable": 19,
+              "nonfuel": 1
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 17,
+              "109": 2,
+              "120": 1
+            }
+          },
+          "strict_fuel_compatibility": false
+        },
+        {
+          "mask": "target",
+          "model_100m": {
+            "area_equivalent_ha": 4.86,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 16,
+              "nonfuel": 2,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.6075,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 4.2525,
+              "nonfuel": 0.6075,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 1,
+            "majority_cells_by_fuel_category": {
+              "burnable": 1
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 2,
+            "pixels": 6,
+            "pixels_by_fuel_category": {
+              "burnable": 4,
+              "nonfuel": 2
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 4,
+              "120": 2
+            }
+          },
+          "strict_fuel_compatibility": false
+        }
+      ],
+      "fuel_map_vintage": "National FBP fuel-type grid v2014b",
+      "fuel_status": "FAIL_FUEL_OVERLAP",
+      "full_case_status": "not_assessed; terrain, weather/FWI, suppression, and replay are outside this fuel-only audit",
+      "model_grid": {
+        "cell_size_m": 100.0,
+        "cols": 20,
+        "extent_m": 2000.0,
+        "front_majority_edge_cells": 0,
+        "majority_target_front_adjacent": true,
+        "rows": 20,
+        "target_majority_edge_cells": 0,
+        "transform": [
+          100.0,
+          0.0,
+          -709495.0,
+          0.0,
+          -100.0,
+          7346125.0
+        ]
+      },
+      "model_grid_fractional_fuel_overlap_requires_review": true,
+      "screen_crosscheck": {
+        "annual_group_table_growth_ha": 2.43,
+        "day_pair_counts": {
+          "active_front_pixels": 20,
+          "disconnected_target_pixels": 0,
+          "earlier_scar_pixels": 195,
+          "observed_target_pixels": 6,
+          "previous_day_pixels": 91,
+          "target_pixels_adjacent_to_previous_day": 6
+        },
+        "day_pair_valid": true,
+        "geometry_growth_capture_ratio": 1.0,
+        "growth_matches": true,
+        "model_grid_pair_valid": true,
+        "screen_growth_ha": 2.43
+      },
+      "screening_errors": [],
+      "source_grid": {
+        "cell_size_m": [
+          90.0,
+          90.0
+        ],
+        "cols": 23,
+        "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+        "rows": 23,
+        "transform": [
+          90.0,
+          0.0,
+          -709530.0,
+          0.0,
+          -90.0,
+          7346160.0
+        ]
+      },
+      "source_raster_member": "2015_2929_krig.tif",
+      "source_raster_sha256": "c5bc17b39fa3e947c2eb2edb4fc91a54ce5c4e03d63eb37edc0d9f9dc8332795",
+      "split": "train",
+      "suppression_status": "unknown; no agency record joined",
+      "target_doy": 184,
+      "target_fireday": 8,
+      "year": 2015
+    },
+    {
+      "event_id": "2015_438",
+      "fuel_by_mask": [
+        {
+          "mask": "scar",
+          "model_100m": {
+            "area_equivalent_ha": 313.014984,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 334,
+              "nonfuel": 11,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 8.665,
+            "excluded_or_unmapped_majority_cells": 9,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 304.349976,
+              "nonfuel": 8.665,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 315,
+            "majority_cells_by_fuel_category": {
+              "burnable": 306,
+              "nonfuel": 9
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 9,
+            "pixels": 415,
+            "pixels_by_fuel_category": {
+              "burnable": 406,
+              "nonfuel": 9
+            },
+            "pixels_by_source_fuel_code": {
+              "101": 3,
+              "102": 177,
+              "108": 7,
+              "109": 183,
+              "116": 36,
+              "120": 9
+            }
+          },
+          "strict_fuel_compatibility": false
+        },
+        {
+          "mask": "front",
+          "model_100m": {
+            "area_equivalent_ha": 13.77,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 27,
+              "nonfuel": 1,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0675,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 13.7025,
+              "nonfuel": 0.0675,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 13,
+            "majority_cells_by_fuel_category": {
+              "burnable": 13
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 17,
+            "pixels_by_fuel_category": {
+              "burnable": 17
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 5,
+              "109": 12
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "target",
+          "model_100m": {
+            "area_equivalent_ha": 4.05,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 10,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 4.05,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 3,
+            "majority_cells_by_fuel_category": {
+              "burnable": 3
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 5,
+            "pixels_by_fuel_category": {
+              "burnable": 5
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 4,
+              "109": 1
+            }
+          },
+          "strict_fuel_compatibility": true
+        }
+      ],
+      "fuel_map_vintage": "National FBP fuel-type grid v2014b",
+      "fuel_status": "FAIL_FUEL_OVERLAP",
+      "full_case_status": "not_assessed; terrain, weather/FWI, suppression, and replay are outside this fuel-only audit",
+      "model_grid": {
+        "cell_size_m": 100.0,
+        "cols": 20,
+        "extent_m": 2000.0,
+        "front_majority_edge_cells": 0,
+        "majority_target_front_adjacent": true,
+        "rows": 20,
+        "target_majority_edge_cells": 0,
+        "transform": [
+          100.0,
+          0.0,
+          -1096135.0,
+          0.0,
+          -100.0,
+          7707655.0
+        ]
+      },
+      "model_grid_fractional_fuel_overlap_requires_review": true,
+      "screen_crosscheck": {
+        "annual_group_table_growth_ha": 2.025,
+        "day_pair_counts": {
+          "active_front_pixels": 17,
+          "disconnected_target_pixels": 0,
+          "earlier_scar_pixels": 415,
+          "observed_target_pixels": 5,
+          "previous_day_pixels": 416,
+          "target_pixels_adjacent_to_previous_day": 5
+        },
+        "day_pair_valid": true,
+        "geometry_growth_capture_ratio": 1.0,
+        "growth_matches": true,
+        "model_grid_pair_valid": true,
+        "screen_growth_ha": 2.025
+      },
+      "screening_errors": [],
+      "source_grid": {
+        "cell_size_m": [
+          90.0,
+          90.0
+        ],
+        "cols": 23,
+        "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+        "rows": 23,
+        "transform": [
+          90.0,
+          0.0,
+          -1096170.0,
+          0.0,
+          -90.0,
+          7707690.0
+        ]
+      },
+      "source_raster_member": "2015_438_krig.tif",
+      "source_raster_sha256": "4b8302566939a2e1bc1508d34b786c80cdb1a14e5cf50916dac4cb53ef93c243",
+      "split": "train",
+      "suppression_status": "unknown; no agency record joined",
+      "target_doy": 185,
+      "target_fireday": 3,
+      "year": 2015
+    },
+    {
+      "event_id": "2015_896",
+      "fuel_by_mask": [
+        {
+          "mask": "scar",
+          "model_100m": {
+            "area_equivalent_ha": 86.445,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 125,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 86.445,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 86,
+            "majority_cells_by_fuel_category": {
+              "burnable": 86
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 111,
+            "pixels_by_fuel_category": {
+              "burnable": 111
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 110,
+              "109": 1
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "front",
+          "model_100m": {
+            "area_equivalent_ha": 32.400002,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 62,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 32.400002,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 29,
+            "majority_cells_by_fuel_category": {
+              "burnable": 29
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 40,
+            "pixels_by_fuel_category": {
+              "burnable": 40
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 40
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "target",
+          "model_100m": {
+            "area_equivalent_ha": 12.96,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 28,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 12.96,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 15,
+            "majority_cells_by_fuel_category": {
+              "burnable": 15
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 16,
+            "pixels_by_fuel_category": {
+              "burnable": 16
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 16
+            }
+          },
+          "strict_fuel_compatibility": true
+        }
+      ],
+      "fuel_map_vintage": "National FBP fuel-type grid v2014b",
+      "fuel_status": "PASS_FUEL_ONLY",
+      "full_case_status": "not_assessed; terrain, weather/FWI, suppression, and replay are outside this fuel-only audit",
+      "model_grid": {
+        "cell_size_m": 100.0,
+        "cols": 20,
+        "extent_m": 2000.0,
+        "front_majority_edge_cells": 0,
+        "majority_target_front_adjacent": true,
+        "rows": 20,
+        "target_majority_edge_cells": 0,
+        "transform": [
+          100.0,
+          0.0,
+          -698155.0,
+          0.0,
+          -100.0,
+          7182145.0
+        ]
+      },
+      "model_grid_fractional_fuel_overlap_requires_review": false,
+      "screen_crosscheck": {
+        "annual_group_table_growth_ha": 12.96,
+        "day_pair_counts": {
+          "active_front_pixels": 40,
+          "disconnected_target_pixels": 0,
+          "earlier_scar_pixels": 111,
+          "observed_target_pixels": 16,
+          "previous_day_pixels": 151,
+          "target_pixels_adjacent_to_previous_day": 16
+        },
+        "day_pair_valid": true,
+        "geometry_growth_capture_ratio": 1.0,
+        "growth_matches": true,
+        "model_grid_pair_valid": true,
+        "screen_growth_ha": 12.96
+      },
+      "screening_errors": [],
+      "source_grid": {
+        "cell_size_m": [
+          90.0,
+          90.0
+        ],
+        "cols": 23,
+        "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+        "rows": 23,
+        "transform": [
+          90.0,
+          0.0,
+          -698190.0,
+          0.0,
+          -90.0,
+          7182180.0
+        ]
+      },
+      "source_raster_member": "2015_896_krig.tif",
+      "source_raster_sha256": "84bb5ad01959f863f93ee40734a91584c39ee43488f27464f3764b22a180c713",
+      "split": "train",
+      "suppression_status": "unknown; no agency record joined",
+      "target_doy": 180,
+      "target_fireday": 2,
+      "year": 2015
+    },
+    {
+      "event_id": "2017_1146",
+      "fuel_by_mask": [
+        {
+          "mask": "scar",
+          "model_100m": {
+            "area_equivalent_ha": 282.035004,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 299,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 3
+            },
+            "excluded_or_unmapped_fractional_area_ha": 3.0,
+            "excluded_or_unmapped_majority_cells": 3,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 279.035004,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 3.0
+            },
+            "majority_cells": 284,
+            "majority_cells_by_fuel_category": {
+              "burnable": 281,
+              "water": 3
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 2,
+            "pixels": 372,
+            "pixels_by_fuel_category": {
+              "burnable": 370,
+              "water": 2
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 311,
+              "105": 54,
+              "116": 5,
+              "118": 2
+            }
+          },
+          "strict_fuel_compatibility": false
+        },
+        {
+          "mask": "front",
+          "model_100m": {
+            "area_equivalent_ha": 17.82,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 32,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 17.82,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 18,
+            "majority_cells_by_fuel_category": {
+              "burnable": 18
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 22,
+            "pixels_by_fuel_category": {
+              "burnable": 22
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 22
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "target",
+          "model_100m": {
+            "area_equivalent_ha": 10.530001,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 21,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 10.530001,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 10,
+            "majority_cells_by_fuel_category": {
+              "burnable": 10
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 13,
+            "pixels_by_fuel_category": {
+              "burnable": 13
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 13
+            }
+          },
+          "strict_fuel_compatibility": true
+        }
+      ],
+      "fuel_map_vintage": "National FBP fuel-type grid v2014b",
+      "fuel_status": "FAIL_FUEL_OVERLAP",
+      "full_case_status": "not_assessed; terrain, weather/FWI, suppression, and replay are outside this fuel-only audit",
+      "model_grid": {
+        "cell_size_m": 100.0,
+        "cols": 20,
+        "extent_m": 2000.0,
+        "front_majority_edge_cells": 0,
+        "majority_target_front_adjacent": true,
+        "rows": 20,
+        "target_majority_edge_cells": 0,
+        "transform": [
+          100.0,
+          0.0,
+          -1539025.0,
+          0.0,
+          -100.0,
+          7237315.0
+        ]
+      },
+      "model_grid_fractional_fuel_overlap_requires_review": true,
+      "screen_crosscheck": {
+        "annual_group_table_growth_ha": 10.53,
+        "day_pair_counts": {
+          "active_front_pixels": 22,
+          "disconnected_target_pixels": 0,
+          "earlier_scar_pixels": 372,
+          "observed_target_pixels": 13,
+          "previous_day_pixels": 55,
+          "target_pixels_adjacent_to_previous_day": 13
+        },
+        "day_pair_valid": true,
+        "geometry_growth_capture_ratio": 1.0,
+        "growth_matches": true,
+        "model_grid_pair_valid": true,
+        "screen_growth_ha": 10.53
+      },
+      "screening_errors": [],
+      "source_grid": {
+        "cell_size_m": [
+          90.0,
+          90.0
+        ],
+        "cols": 23,
+        "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+        "rows": 23,
+        "transform": [
+          90.0,
+          0.0,
+          -1539060.0,
+          0.0,
+          -90.0,
+          7237350.0
+        ]
+      },
+      "source_raster_member": "2017_1146_krig.tif",
+      "source_raster_sha256": "90647ea1c7930234fcf259701b13c6084469b318b05c56c59cd42223731a1b1d",
+      "split": "train",
+      "suppression_status": "unknown; no agency record joined",
+      "target_doy": 220,
+      "target_fireday": 26,
+      "year": 2017
+    },
+    {
+      "event_id": "2017_1296",
+      "fuel_by_mask": [
+        {
+          "mask": "scar",
+          "model_100m": {
+            "area_equivalent_ha": 65.0,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 88,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 65.0,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 66,
+            "majority_cells_by_fuel_category": {
+              "burnable": 66
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 1,
+            "pixels": 92,
+            "pixels_by_fuel_category": {
+              "burnable": 91,
+              "nonfuel": 1
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 91,
+              "120": 1
+            }
+          },
+          "strict_fuel_compatibility": false
+        },
+        {
+          "mask": "front",
+          "model_100m": {
+            "area_equivalent_ha": 19.440001,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 41,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 19.440001,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 17,
+            "majority_cells_by_fuel_category": {
+              "burnable": 17
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 24,
+            "pixels_by_fuel_category": {
+              "burnable": 24
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 24
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "target",
+          "model_100m": {
+            "area_equivalent_ha": 10.530001,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 23,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 10.530001,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 11,
+            "majority_cells_by_fuel_category": {
+              "burnable": 11
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 13,
+            "pixels_by_fuel_category": {
+              "burnable": 13
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 13
+            }
+          },
+          "strict_fuel_compatibility": true
+        }
+      ],
+      "fuel_map_vintage": "National FBP fuel-type grid v2014b",
+      "fuel_status": "FAIL_FUEL_OVERLAP",
+      "full_case_status": "not_assessed; terrain, weather/FWI, suppression, and replay are outside this fuel-only audit",
+      "model_grid": {
+        "cell_size_m": 100.0,
+        "cols": 20,
+        "extent_m": 2000.0,
+        "front_majority_edge_cells": 0,
+        "majority_target_front_adjacent": true,
+        "rows": 20,
+        "target_majority_edge_cells": 0,
+        "transform": [
+          100.0,
+          0.0,
+          -38725.0,
+          0.0,
+          -100.0,
+          7153705.0
+        ]
+      },
+      "model_grid_fractional_fuel_overlap_requires_review": false,
+      "screen_crosscheck": {
+        "annual_group_table_growth_ha": 10.53,
+        "day_pair_counts": {
+          "active_front_pixels": 24,
+          "disconnected_target_pixels": 0,
+          "earlier_scar_pixels": 92,
+          "observed_target_pixels": 13,
+          "previous_day_pixels": 87,
+          "target_pixels_adjacent_to_previous_day": 13
+        },
+        "day_pair_valid": true,
+        "geometry_growth_capture_ratio": 1.0,
+        "growth_matches": true,
+        "model_grid_pair_valid": true,
+        "screen_growth_ha": 10.53
+      },
+      "screening_errors": [],
+      "source_grid": {
+        "cell_size_m": [
+          90.0,
+          90.0
+        ],
+        "cols": 23,
+        "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+        "rows": 23,
+        "transform": [
+          90.0,
+          0.0,
+          -38760.0,
+          0.0,
+          -90.0,
+          7153740.0
+        ]
+      },
+      "source_raster_member": "2017_1296_krig.tif",
+      "source_raster_sha256": "0bbc51f498667c3c75017dd0530659507c112847578d0f7de985aaa9e8c2d60b",
+      "split": "train",
+      "suppression_status": "unknown; no agency record joined",
+      "target_doy": 233,
+      "target_fireday": 16,
+      "year": 2017
+    },
+    {
+      "event_id": "2017_1431",
+      "fuel_by_mask": [
+        {
+          "mask": "scar",
+          "model_100m": {
+            "area_equivalent_ha": 244.235001,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 286,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 244.235016,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 245,
+            "majority_cells_by_fuel_category": {
+              "burnable": 245
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 323,
+            "pixels_by_fuel_category": {
+              "burnable": 323
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 323
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "front",
+          "model_100m": {
+            "area_equivalent_ha": 18.630001,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 42,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 18.629999,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 12,
+            "majority_cells_by_fuel_category": {
+              "burnable": 12
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 23,
+            "pixels_by_fuel_category": {
+              "burnable": 23
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 23
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "target",
+          "model_100m": {
+            "area_equivalent_ha": 10.530001,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 25,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 10.53,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 13,
+            "majority_cells_by_fuel_category": {
+              "burnable": 13
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 13,
+            "pixels_by_fuel_category": {
+              "burnable": 13
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 13
+            }
+          },
+          "strict_fuel_compatibility": true
+        }
+      ],
+      "fuel_map_vintage": "National FBP fuel-type grid v2014b",
+      "fuel_status": "PASS_FUEL_ONLY",
+      "full_case_status": "not_assessed; terrain, weather/FWI, suppression, and replay are outside this fuel-only audit",
+      "model_grid": {
+        "cell_size_m": 100.0,
+        "cols": 20,
+        "extent_m": 2000.0,
+        "front_majority_edge_cells": 0,
+        "majority_target_front_adjacent": true,
+        "rows": 20,
+        "target_majority_edge_cells": 0,
+        "transform": [
+          100.0,
+          0.0,
+          -134035.0,
+          0.0,
+          -100.0,
+          7095475.0
+        ]
+      },
+      "model_grid_fractional_fuel_overlap_requires_review": false,
+      "screen_crosscheck": {
+        "annual_group_table_growth_ha": 10.53,
+        "day_pair_counts": {
+          "active_front_pixels": 23,
+          "disconnected_target_pixels": 0,
+          "earlier_scar_pixels": 323,
+          "observed_target_pixels": 13,
+          "previous_day_pixels": 29,
+          "target_pixels_adjacent_to_previous_day": 13
+        },
+        "day_pair_valid": true,
+        "geometry_growth_capture_ratio": 1.0,
+        "growth_matches": true,
+        "model_grid_pair_valid": true,
+        "screen_growth_ha": 10.53
+      },
+      "screening_errors": [],
+      "source_grid": {
+        "cell_size_m": [
+          90.0,
+          90.0
+        ],
+        "cols": 23,
+        "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+        "rows": 23,
+        "transform": [
+          90.0,
+          0.0,
+          -134070.0,
+          0.0,
+          -90.0,
+          7095510.0
+        ]
+      },
+      "source_raster_member": "2017_1431_krig.tif",
+      "source_raster_sha256": "594002f8c453bc19703ac1b32d8f033c8afc5efa195459507523c890043d41fe",
+      "split": "train",
+      "suppression_status": "unknown; no agency record joined",
+      "target_doy": 223,
+      "target_fireday": 22,
+      "year": 2017
+    },
+    {
+      "event_id": "2017_1871",
+      "fuel_by_mask": [
+        {
+          "mask": "scar",
+          "model_100m": {
+            "area_equivalent_ha": 136.100006,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 183,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 136.100006,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 135,
+            "majority_cells_by_fuel_category": {
+              "burnable": 135
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 186,
+            "pixels_by_fuel_category": {
+              "burnable": 186
+            },
+            "pixels_by_source_fuel_code": {
+              "105": 184,
+              "108": 2
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "front",
+          "model_100m": {
+            "area_equivalent_ha": 21.060001,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 49,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 21.060001,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 21,
+            "majority_cells_by_fuel_category": {
+              "burnable": 21
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 26,
+            "pixels_by_fuel_category": {
+              "burnable": 26
+            },
+            "pixels_by_source_fuel_code": {
+              "105": 24,
+              "108": 2
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "target",
+          "model_100m": {
+            "area_equivalent_ha": 12.960001,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 32,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 12.960001,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 12,
+            "majority_cells_by_fuel_category": {
+              "burnable": 12
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 16,
+            "pixels_by_fuel_category": {
+              "burnable": 16
+            },
+            "pixels_by_source_fuel_code": {
+              "105": 16
+            }
+          },
+          "strict_fuel_compatibility": true
+        }
+      ],
+      "fuel_map_vintage": "National FBP fuel-type grid v2014b",
+      "fuel_status": "PASS_FUEL_ONLY",
+      "full_case_status": "not_assessed; terrain, weather/FWI, suppression, and replay are outside this fuel-only audit",
+      "model_grid": {
+        "cell_size_m": 100.0,
+        "cols": 20,
+        "extent_m": 2000.0,
+        "front_majority_edge_cells": 0,
+        "majority_target_front_adjacent": true,
+        "rows": 20,
+        "target_majority_edge_cells": 0,
+        "transform": [
+          100.0,
+          0.0,
+          -1664755.0,
+          0.0,
+          -100.0,
+          6956245.0
+        ]
+      },
+      "model_grid_fractional_fuel_overlap_requires_review": false,
+      "screen_crosscheck": {
+        "annual_group_table_growth_ha": 12.96,
+        "day_pair_counts": {
+          "active_front_pixels": 26,
+          "disconnected_target_pixels": 0,
+          "earlier_scar_pixels": 186,
+          "observed_target_pixels": 16,
+          "previous_day_pixels": 52,
+          "target_pixels_adjacent_to_previous_day": 16
+        },
+        "day_pair_valid": true,
+        "geometry_growth_capture_ratio": 1.0,
+        "growth_matches": true,
+        "model_grid_pair_valid": true,
+        "screen_growth_ha": 12.96
+      },
+      "screening_errors": [],
+      "source_grid": {
+        "cell_size_m": [
+          90.0,
+          90.0
+        ],
+        "cols": 23,
+        "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+        "rows": 23,
+        "transform": [
+          90.0,
+          0.0,
+          -1664790.0,
+          0.0,
+          -90.0,
+          6956280.0
+        ]
+      },
+      "source_raster_member": "2017_1871_krig.tif",
+      "source_raster_sha256": "145709bf879d0ceb745502756cc2c8d9aac2946d740f4c241016dfe5ace5624a",
+      "split": "train",
+      "suppression_status": "unknown; no agency record joined",
+      "target_doy": 257,
+      "target_fireday": 39,
+      "year": 2017
+    },
+    {
+      "event_id": "2017_51",
+      "fuel_by_mask": [
+        {
+          "mask": "scar",
+          "model_100m": {
+            "area_equivalent_ha": 299.4375,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 242,
+              "burnable": 113,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 206.654999,
+            "excluded_or_unmapped_majority_cells": 211,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 206.654999,
+              "burnable": 92.782501,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 302,
+            "majority_cells_by_fuel_category": {
+              "ambiguous": 211,
+              "burnable": 91
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 263,
+            "pixels": 398,
+            "pixels_by_fuel_category": {
+              "ambiguous": 263,
+              "burnable": 135
+            },
+            "pixels_by_source_fuel_code": {
+              "101": 14,
+              "102": 117,
+              "109": 4,
+              "122": 263
+            }
+          },
+          "strict_fuel_compatibility": false
+        },
+        {
+          "mask": "front",
+          "model_100m": {
+            "area_equivalent_ha": 21.060001,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 29,
+              "burnable": 14,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 15.475,
+            "excluded_or_unmapped_majority_cells": 17,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 15.475,
+              "burnable": 5.585001,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 22,
+            "majority_cells_by_fuel_category": {
+              "ambiguous": 17,
+              "burnable": 5
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 18,
+            "pixels": 26,
+            "pixels_by_fuel_category": {
+              "ambiguous": 18,
+              "burnable": 8
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 8,
+              "122": 18
+            }
+          },
+          "strict_fuel_compatibility": false
+        },
+        {
+          "mask": "target",
+          "model_100m": {
+            "area_equivalent_ha": 6.48,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 12,
+              "burnable": 5,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 4.05,
+            "excluded_or_unmapped_majority_cells": 3,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 4.05,
+              "burnable": 2.43,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 6,
+            "majority_cells_by_fuel_category": {
+              "ambiguous": 3,
+              "burnable": 3
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 5,
+            "pixels": 8,
+            "pixels_by_fuel_category": {
+              "ambiguous": 5,
+              "burnable": 3
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 3,
+              "122": 5
+            }
+          },
+          "strict_fuel_compatibility": false
+        }
+      ],
+      "fuel_map_vintage": "National FBP fuel-type grid v2014b",
+      "fuel_status": "FAIL_FUEL_OVERLAP",
+      "full_case_status": "not_assessed; terrain, weather/FWI, suppression, and replay are outside this fuel-only audit",
+      "model_grid": {
+        "cell_size_m": 100.0,
+        "cols": 20,
+        "extent_m": 2000.0,
+        "front_majority_edge_cells": 0,
+        "majority_target_front_adjacent": true,
+        "rows": 20,
+        "target_majority_edge_cells": 0,
+        "transform": [
+          100.0,
+          0.0,
+          -1491415.0,
+          0.0,
+          -100.0,
+          8905735.0
+        ]
+      },
+      "model_grid_fractional_fuel_overlap_requires_review": true,
+      "screen_crosscheck": {
+        "annual_group_table_growth_ha": 3.24,
+        "day_pair_counts": {
+          "active_front_pixels": 26,
+          "disconnected_target_pixels": 0,
+          "earlier_scar_pixels": 398,
+          "observed_target_pixels": 8,
+          "previous_day_pixels": 52,
+          "target_pixels_adjacent_to_previous_day": 8
+        },
+        "day_pair_valid": true,
+        "geometry_growth_capture_ratio": 1.0,
+        "growth_matches": true,
+        "model_grid_pair_valid": true,
+        "screen_growth_ha": 3.24
+      },
+      "screening_errors": [],
+      "source_grid": {
+        "cell_size_m": [
+          90.0,
+          90.0
+        ],
+        "cols": 23,
+        "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+        "rows": 23,
+        "transform": [
+          90.0,
+          0.0,
+          -1491450.0,
+          0.0,
+          -90.0,
+          8905770.0
+        ]
+      },
+      "source_raster_member": "2017_51_krig.tif",
+      "source_raster_sha256": "93b13266baa36b73b0995d7c4fc2b411d2c7dd5f3d421a900e9a328707809768",
+      "split": "train",
+      "suppression_status": "unknown; no agency record joined",
+      "target_doy": 232,
+      "target_fireday": 63,
+      "year": 2017
+    },
+    {
+      "event_id": "2018_1770",
+      "fuel_by_mask": [
+        {
+          "mask": "scar",
+          "model_100m": {
+            "area_equivalent_ha": 292.070007,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 326,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 292.070007,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 287,
+            "majority_cells_by_fuel_category": {
+              "burnable": 287
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 377,
+            "pixels_by_fuel_category": {
+              "burnable": 377
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 377
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "front",
+          "model_100m": {
+            "area_equivalent_ha": 18.630001,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 38,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 18.630001,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 17,
+            "majority_cells_by_fuel_category": {
+              "burnable": 17
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 23,
+            "pixels_by_fuel_category": {
+              "burnable": 23
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 23
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "target",
+          "model_100m": {
+            "area_equivalent_ha": 12.15,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 26,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 12.15,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 12,
+            "majority_cells_by_fuel_category": {
+              "burnable": 12
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 15,
+            "pixels_by_fuel_category": {
+              "burnable": 15
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 15
+            }
+          },
+          "strict_fuel_compatibility": true
+        }
+      ],
+      "fuel_map_vintage": "National FBP fuel-type grid v2014b",
+      "fuel_status": "PASS_FUEL_ONLY",
+      "full_case_status": "not_assessed; terrain, weather/FWI, suppression, and replay are outside this fuel-only audit",
+      "model_grid": {
+        "cell_size_m": 100.0,
+        "cols": 20,
+        "extent_m": 2000.0,
+        "front_majority_edge_cells": 0,
+        "majority_target_front_adjacent": true,
+        "rows": 20,
+        "target_majority_edge_cells": 0,
+        "transform": [
+          100.0,
+          0.0,
+          -1413925.0,
+          0.0,
+          -100.0,
+          6864175.0
+        ]
+      },
+      "model_grid_fractional_fuel_overlap_requires_review": false,
+      "screen_crosscheck": {
+        "annual_group_table_growth_ha": 12.15,
+        "day_pair_counts": {
+          "active_front_pixels": 23,
+          "disconnected_target_pixels": 0,
+          "earlier_scar_pixels": 377,
+          "observed_target_pixels": 15,
+          "previous_day_pixels": 223,
+          "target_pixels_adjacent_to_previous_day": 15
+        },
+        "day_pair_valid": true,
+        "geometry_growth_capture_ratio": 1.0,
+        "growth_matches": true,
+        "model_grid_pair_valid": true,
+        "screen_growth_ha": 12.15
+      },
+      "screening_errors": [],
+      "source_grid": {
+        "cell_size_m": [
+          90.0,
+          90.0
+        ],
+        "cols": 23,
+        "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+        "rows": 23,
+        "transform": [
+          90.0,
+          0.0,
+          -1413960.0,
+          0.0,
+          -90.0,
+          6864210.0
+        ]
+      },
+      "source_raster_member": "2018_1770_krig.tif",
+      "source_raster_sha256": "57faa8f34b53d18e98c472c8f7ac3db197f4093bf0c1a9390bdb1eb456ca736f",
+      "split": "train",
+      "suppression_status": "unknown; no agency record joined",
+      "target_doy": 224,
+      "target_fireday": 3,
+      "year": 2018
+    },
+    {
+      "event_id": "2018_1860",
+      "fuel_by_mask": [
+        {
+          "mask": "scar",
+          "model_100m": {
+            "area_equivalent_ha": 99.514999,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 120,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 99.514999,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 102,
+            "majority_cells_by_fuel_category": {
+              "burnable": 102
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 135,
+            "pixels_by_fuel_category": {
+              "burnable": 135
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 84,
+              "108": 51
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "front",
+          "model_100m": {
+            "area_equivalent_ha": 21.869999,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 46,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 21.869999,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 20,
+            "majority_cells_by_fuel_category": {
+              "burnable": 20
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 27,
+            "pixels_by_fuel_category": {
+              "burnable": 27
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 2,
+              "108": 25
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "target",
+          "model_100m": {
+            "area_equivalent_ha": 8.1,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 22,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 8.099999,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 5,
+            "majority_cells_by_fuel_category": {
+              "burnable": 5
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 10,
+            "pixels_by_fuel_category": {
+              "burnable": 10
+            },
+            "pixels_by_source_fuel_code": {
+              "108": 10
+            }
+          },
+          "strict_fuel_compatibility": true
+        }
+      ],
+      "fuel_map_vintage": "National FBP fuel-type grid v2014b",
+      "fuel_status": "PASS_FUEL_ONLY",
+      "full_case_status": "not_assessed; terrain, weather/FWI, suppression, and replay are outside this fuel-only audit",
+      "model_grid": {
+        "cell_size_m": 100.0,
+        "cols": 20,
+        "extent_m": 2000.0,
+        "front_majority_edge_cells": 0,
+        "majority_target_front_adjacent": true,
+        "rows": 20,
+        "target_majority_edge_cells": 0,
+        "transform": [
+          100.0,
+          0.0,
+          -1768795.0,
+          0.0,
+          -100.0,
+          6962815.0
+        ]
+      },
+      "model_grid_fractional_fuel_overlap_requires_review": false,
+      "screen_crosscheck": {
+        "annual_group_table_growth_ha": 8.1,
+        "day_pair_counts": {
+          "active_front_pixels": 27,
+          "disconnected_target_pixels": 0,
+          "earlier_scar_pixels": 135,
+          "observed_target_pixels": 10,
+          "previous_day_pixels": 85,
+          "target_pixels_adjacent_to_previous_day": 10
+        },
+        "day_pair_valid": true,
+        "geometry_growth_capture_ratio": 1.0,
+        "growth_matches": true,
+        "model_grid_pair_valid": true,
+        "screen_growth_ha": 8.1
+      },
+      "screening_errors": [],
+      "source_grid": {
+        "cell_size_m": [
+          90.0,
+          90.0
+        ],
+        "cols": 23,
+        "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+        "rows": 23,
+        "transform": [
+          90.0,
+          0.0,
+          -1768830.0,
+          0.0,
+          -90.0,
+          6962850.0
+        ]
+      },
+      "source_raster_member": "2018_1860_krig.tif",
+      "source_raster_sha256": "9c0e3336fe8831aa3860c278159fb55c4bd62a8e35c745b8ec4074d5ea3e113e",
+      "split": "train",
+      "suppression_status": "unknown; no agency record joined",
+      "target_doy": 244,
+      "target_fireday": 19,
+      "year": 2018
+    },
+    {
+      "event_id": "2018_1932",
+      "fuel_by_mask": [
+        {
+          "mask": "scar",
+          "model_100m": {
+            "area_equivalent_ha": 205.48999,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 246,
+              "nonfuel": 2,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 2.0,
+            "excluded_or_unmapped_majority_cells": 2,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 203.490005,
+              "nonfuel": 2.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 209,
+            "majority_cells_by_fuel_category": {
+              "burnable": 207,
+              "nonfuel": 2
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 6,
+            "pixels": 267,
+            "pixels_by_fuel_category": {
+              "burnable": 261,
+              "nonfuel": 6
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 201,
+              "109": 60,
+              "120": 6
+            }
+          },
+          "strict_fuel_compatibility": false
+        },
+        {
+          "mask": "front",
+          "model_100m": {
+            "area_equivalent_ha": 21.059999,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 43,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 21.060001,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 18,
+            "majority_cells_by_fuel_category": {
+              "burnable": 18
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 26,
+            "pixels_by_fuel_category": {
+              "burnable": 26
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 26
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "target",
+          "model_100m": {
+            "area_equivalent_ha": 6.48,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 19,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 6.48,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 6,
+            "majority_cells_by_fuel_category": {
+              "burnable": 6
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 8,
+            "pixels_by_fuel_category": {
+              "burnable": 8
+            },
+            "pixels_by_source_fuel_code": {
+              "102": 8
+            }
+          },
+          "strict_fuel_compatibility": true
+        }
+      ],
+      "fuel_map_vintage": "National FBP fuel-type grid v2014b",
+      "fuel_status": "FAIL_FUEL_OVERLAP",
+      "full_case_status": "not_assessed; terrain, weather/FWI, suppression, and replay are outside this fuel-only audit",
+      "model_grid": {
+        "cell_size_m": 100.0,
+        "cols": 20,
+        "extent_m": 2000.0,
+        "front_majority_edge_cells": 0,
+        "majority_target_front_adjacent": true,
+        "rows": 20,
+        "target_majority_edge_cells": 0,
+        "transform": [
+          100.0,
+          0.0,
+          -1490605.0,
+          0.0,
+          -100.0,
+          7908625.0
+        ]
+      },
+      "model_grid_fractional_fuel_overlap_requires_review": true,
+      "screen_crosscheck": {
+        "annual_group_table_growth_ha": 6.48,
+        "day_pair_counts": {
+          "active_front_pixels": 26,
+          "disconnected_target_pixels": 0,
+          "earlier_scar_pixels": 267,
+          "observed_target_pixels": 8,
+          "previous_day_pixels": 293,
+          "target_pixels_adjacent_to_previous_day": 8
+        },
+        "day_pair_valid": true,
+        "geometry_growth_capture_ratio": 1.0,
+        "growth_matches": true,
+        "model_grid_pair_valid": true,
+        "screen_growth_ha": 6.48
+      },
+      "screening_errors": [],
+      "source_grid": {
+        "cell_size_m": [
+          90.0,
+          90.0
+        ],
+        "cols": 23,
+        "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+        "rows": 23,
+        "transform": [
+          90.0,
+          0.0,
+          -1490640.0,
+          0.0,
+          -90.0,
+          7908660.0
+        ]
+      },
+      "source_raster_member": "2018_1932_krig.tif",
+      "source_raster_sha256": "967302596f5c9d232ac62b5be5d631555e9b65f721f6f3687afb334007bb7213",
+      "split": "train",
+      "suppression_status": "unknown; no agency record joined",
+      "target_doy": 234,
+      "target_fireday": 5,
+      "year": 2018
+    },
+    {
+      "event_id": "2018_241",
+      "fuel_by_mask": [
+        {
+          "mask": "scar",
+          "model_100m": {
+            "area_equivalent_ha": 140.76001,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 181,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 140.76001,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 140,
+            "majority_cells_by_fuel_category": {
+              "burnable": 140
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 180,
+            "pixels_by_fuel_category": {
+              "burnable": 180
+            },
+            "pixels_by_source_fuel_code": {
+              "103": 178,
+              "108": 2
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "front",
+          "model_100m": {
+            "area_equivalent_ha": 25.110001,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 56,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 25.110001,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 23,
+            "majority_cells_by_fuel_category": {
+              "burnable": 23
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 31,
+            "pixels_by_fuel_category": {
+              "burnable": 31
+            },
+            "pixels_by_source_fuel_code": {
+              "103": 31
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "target",
+          "model_100m": {
+            "area_equivalent_ha": 12.150001,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 27,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 12.150001,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 8,
+            "majority_cells_by_fuel_category": {
+              "burnable": 8
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 15,
+            "pixels_by_fuel_category": {
+              "burnable": 15
+            },
+            "pixels_by_source_fuel_code": {
+              "103": 15
+            }
+          },
+          "strict_fuel_compatibility": true
+        }
+      ],
+      "fuel_map_vintage": "National FBP fuel-type grid v2014b",
+      "fuel_status": "PASS_FUEL_ONLY",
+      "full_case_status": "not_assessed; terrain, weather/FWI, suppression, and replay are outside this fuel-only audit",
+      "model_grid": {
+        "cell_size_m": 100.0,
+        "cols": 20,
+        "extent_m": 2000.0,
+        "front_majority_edge_cells": 0,
+        "majority_target_front_adjacent": true,
+        "rows": 20,
+        "target_majority_edge_cells": 0,
+        "transform": [
+          100.0,
+          0.0,
+          -1835485.0,
+          0.0,
+          -100.0,
+          7466005.0
+        ]
+      },
+      "model_grid_fractional_fuel_overlap_requires_review": false,
+      "screen_crosscheck": {
+        "annual_group_table_growth_ha": 12.15,
+        "day_pair_counts": {
+          "active_front_pixels": 31,
+          "disconnected_target_pixels": 0,
+          "earlier_scar_pixels": 180,
+          "observed_target_pixels": 15,
+          "previous_day_pixels": 185,
+          "target_pixels_adjacent_to_previous_day": 15
+        },
+        "day_pair_valid": true,
+        "geometry_growth_capture_ratio": 1.0,
+        "growth_matches": true,
+        "model_grid_pair_valid": true,
+        "screen_growth_ha": 12.15
+      },
+      "screening_errors": [],
+      "source_grid": {
+        "cell_size_m": [
+          90.0,
+          90.0
+        ],
+        "cols": 23,
+        "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+        "rows": 23,
+        "transform": [
+          90.0,
+          0.0,
+          -1835520.0,
+          0.0,
+          -90.0,
+          7466040.0
+        ]
+      },
+      "source_raster_member": "2018_241_krig.tif",
+      "source_raster_sha256": "0f4f2adbea39e7bf12b14a11a776d51d80add68f3c997af5c45ff520d3518b4c",
+      "split": "train",
+      "suppression_status": "unknown; no agency record joined",
+      "target_doy": 227,
+      "target_fireday": 11,
+      "year": 2018
+    },
+    {
+      "event_id": "2018_747",
+      "fuel_by_mask": [
+        {
+          "mask": "scar",
+          "model_100m": {
+            "area_equivalent_ha": 180.57251,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 229,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 180.57251,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 175,
+            "majority_cells_by_fuel_category": {
+              "burnable": 175
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 236,
+            "pixels_by_fuel_category": {
+              "burnable": 236
+            },
+            "pixels_by_source_fuel_code": {
+              "103": 127,
+              "108": 109
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "front",
+          "model_100m": {
+            "area_equivalent_ha": 29.16,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 60,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 29.16,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 31,
+            "majority_cells_by_fuel_category": {
+              "burnable": 31
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 36,
+            "pixels_by_fuel_category": {
+              "burnable": 36
+            },
+            "pixels_by_source_fuel_code": {
+              "103": 23,
+              "108": 13
+            }
+          },
+          "strict_fuel_compatibility": true
+        },
+        {
+          "mask": "target",
+          "model_100m": {
+            "area_equivalent_ha": 15.39,
+            "cells_with_any_fraction_by_fuel_category": {
+              "ambiguous": 0,
+              "burnable": 29,
+              "nonfuel": 0,
+              "unmapped": 0,
+              "water": 0
+            },
+            "excluded_or_unmapped_fractional_area_ha": 0.0,
+            "excluded_or_unmapped_majority_cells": 0,
+            "fractional_area_equivalent_ha_by_fuel_category": {
+              "ambiguous": 0.0,
+              "burnable": 15.39,
+              "nonfuel": 0.0,
+              "unmapped": 0.0,
+              "water": 0.0
+            },
+            "majority_cells": 18,
+            "majority_cells_by_fuel_category": {
+              "burnable": 18
+            }
+          },
+          "native_90m": {
+            "excluded_or_unmapped_pixels": 0,
+            "pixels": 19,
+            "pixels_by_fuel_category": {
+              "burnable": 19
+            },
+            "pixels_by_source_fuel_code": {
+              "103": 17,
+              "108": 2
+            }
+          },
+          "strict_fuel_compatibility": true
+        }
+      ],
+      "fuel_map_vintage": "National FBP fuel-type grid v2014b",
+      "fuel_status": "PASS_FUEL_ONLY",
+      "full_case_status": "not_assessed; terrain, weather/FWI, suppression, and replay are outside this fuel-only audit",
+      "model_grid": {
+        "cell_size_m": 100.0,
+        "cols": 20,
+        "extent_m": 2000.0,
+        "front_majority_edge_cells": 0,
+        "majority_target_front_adjacent": true,
+        "rows": 20,
+        "target_majority_edge_cells": 0,
+        "transform": [
+          100.0,
+          0.0,
+          -1475305.0,
+          0.0,
+          -100.0,
+          6924655.0
+        ]
+      },
+      "model_grid_fractional_fuel_overlap_requires_review": false,
+      "screen_crosscheck": {
+        "annual_group_table_growth_ha": 15.39,
+        "day_pair_counts": {
+          "active_front_pixels": 36,
+          "disconnected_target_pixels": 0,
+          "earlier_scar_pixels": 236,
+          "observed_target_pixels": 19,
+          "previous_day_pixels": 136,
+          "target_pixels_adjacent_to_previous_day": 19
+        },
+        "day_pair_valid": true,
+        "geometry_growth_capture_ratio": 1.0,
+        "growth_matches": true,
+        "model_grid_pair_valid": true,
+        "screen_growth_ha": 15.39
+      },
+      "screening_errors": [],
+      "source_grid": {
+        "cell_size_m": [
+          90.0,
+          90.0
+        ],
+        "cols": 23,
+        "crs": "PROJCS[\"unknown\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",0],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+        "rows": 23,
+        "transform": [
+          90.0,
+          0.0,
+          -1475340.0,
+          0.0,
+          -90.0,
+          6924690.0
+        ]
+      },
+      "source_raster_member": "2018_747_krig.tif",
+      "source_raster_sha256": "a3e35564129f5ad68f118c4c487134077e98953f9a485d285bfb17e30bb0d1cd",
+      "split": "train",
+      "suppression_status": "unknown; no agency record joined",
+      "target_doy": 228,
+      "target_fireday": 6,
+      "year": 2018
+    }
+  ],
+  "environment": {
+    "gdal": "3.10.3",
+    "numpy": "2.5.4",
+    "pandas": "3.1.0",
+    "python": "3.12.4",
+    "rasterio": "1.4.4"
+  },
+  "generated_at_utc": "2026-10-30T21:52:27.319506+00:00",
+  "input_provenance": {
+    "audit_script_sha256": "0b02dfd370d04e5d6ae23f148a1744e8ab8944d247d4654c4dbd15120df1b9f8",
+    "cell2fire_lookup": "external/firehose/data/Sub20x20/fbp_lookup_table.csv",
+    "cell2fire_lookup_sha256": "9ff5b23cbff4b5dff8595c9d37885da359634a80671ae56ce8e0d30396be7ea2",
+    "cfsds_annual_source_zip_sha256": {
+      "groups_zip": {
+        "2014": "91883309f14f51a3dfbf732e16cecf5357301d1ca4129916ca6360e1cc875ca0",
+        "2015": "55d0bb773866faf0f596a013925896055754ba40ed29dc91362ceeeea4c88326",
+        "2017": "46348459f37b22e68b0473146d858a096512652f3e47401ef6db425cd6f8dd63",
+        "2018": "5cd96e243bb3bec6adf0db819f080ed7462baf1aea38a2aefe180793acd6ed16"
+      },
+      "raster_zip": {
+        "2014": "5767d45c58cffe8a53815e41facef1389f27c5bc66e74dab9eea61395fc3f4a8",
+        "2015": "7afe47aa29f17a551d8825d676a09d900f88c6450e4e42c49b5ae809d79241c6",
+        "2017": "2c8d35c8018f34900abcfe241f0035cd7c7efa939171058e06e43efe972de959",
+        "2018": "0b31797c19fe705a890eb19ebc35827356f15bc3d83666ad614e0e1dc0518e3f"
+      }
+    },
+    "cohort_manifest": "data/manifests/cfsds-v1_1-pilot-cohort.json",
+    "cohort_manifest_sha256": "12bef860961e84019e1a1293735bf80ed6b6ccbf913afe6030f6c25cf1781154",
+    "crop_screen": "reports/real-fire-data/cfsds-cohort-screen.json",
+    "crop_screen_sha256": "d3145b21121bb00a88258154789bc986c1ebb314a507aecd836c34def82e8ad6",
+    "fuel_map": {
+      "crs": "PROJCS[\"Canada_Lambert_Conformal_Conic\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",49],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "dtype": "uint8",
+      "mapping_by_source_code": {
+        "101": {
+          "simulator_fuel_type": "C-1",
+          "simulator_grid_value": 1,
+          "source_label": "C1"
+        },
+        "102": {
+          "simulator_fuel_type": "C-2",
+          "simulator_grid_value": 2,
+          "source_label": "C2"
+        },
+        "103": {
+          "simulator_fuel_type": "C-3",
+          "simulator_grid_value": 3,
+          "source_label": "C3"
+        },
+        "105": {
+          "simulator_fuel_type": "C-5",
+          "simulator_grid_value": 5,
+          "source_label": "C5"
+        },
+        "107": {
+          "simulator_fuel_type": "C-7",
+          "simulator_grid_value": 7,
+          "source_label": "C7"
+        },
+        "108": {
+          "simulator_fuel_type": "D-1",
+          "simulator_grid_value": 11,
+          "source_label": "D1"
+        },
+        "109": {
+          "simulator_fuel_type": "M-1",
+          "simulator_grid_value": 40,
+          "source_label": "M1"
+        },
+        "116": {
+          "simulator_fuel_type": "O-1a",
+          "simulator_grid_value": 31,
+          "source_label": "O1a"
+        },
+        "118": {
+          "simulator_fuel_type": "Non-fuel",
+          "simulator_grid_value": 102,
+          "source_label": "Water"
+        },
+        "119": {
+          "simulator_fuel_type": "Non-fuel",
+          "simulator_grid_value": 101,
+          "source_label": "Non-fuel"
+        },
+        "120": {
+          "simulator_fuel_type": "Non-fuel",
+          "simulator_grid_value": 101,
+          "source_label": "Wetland"
+        },
+        "121": {
+          "simulator_fuel_type": "Non-fuel",
+          "simulator_grid_value": 101,
+          "source_label": "Urban"
+        },
+        "122": {
+          "simulator_fuel_type": "Non-fuel",
+          "simulator_grid_value": 105,
+          "source_label": "Veg non-fuel"
+        }
+      },
+      "member": "nat_fbpfuels_2014b.tif",
+      "nodata": 0.0,
+      "raster_attribute_table_member": "nat_fbpfuels_2014b.tif.vat.dbf",
+      "resolution_m": [
+        250.0,
+        250.0
+      ],
+      "shape": [
+        18233,
+        21404
+      ]
+    },
+    "fuel_map_zip": "National_FBP_Fueltypes_version2014b.zip",
+    "fuel_map_zip_sha256": "8675bbd92d99366e46b6537d5b512017d0982e3a34f97e4bc81fb60b93c29a2b"
+  },
+  "limitations": [
+    "The 2014b map is the available training-period vintage; this does not establish that it represents historical annual fuel succession for every event.",
+    "Native CFSDS pixels and the 100 m Cell2Fire policy cells have different spatial supports; both are reported rather than treated as interchangeable.",
+    "CFSDS day-of-burning is a satellite-hotspot interpolation and not hourly ground truth.",
+    "Suppression status remains unknown for every candidate; a fuel-pass does not imply an unsuppressed event or a complete simulator case.",
+    "The combined crop-screen JSON contains all splits and was loaded to select train rows; no validation/test fuel or source rasters were opened, and no validation/test candidate received a fuel overlay.",
+    "No simulator replay was run, and no model parameters were calibrated."
+  ],
+  "method": {
+    "categories": {
+      "ambiguous": "Vegetated Non-fuel/Unknown or simulator grid code 105",
+      "burnable": "mapped FBP class supported by the pinned Cell2Fire lookup table",
+      "nonfuel": "source label Non-fuel/Wetland/Urban or simulator grid code 101",
+      "unmapped": "no-data, unrecognised source class, or missing map coverage",
+      "water": "source label Water or simulator grid code 102"
+    },
+    "cfsds_reference": "Barber et al. 2024, CFSDS v1.1; https://doi.org/10.1038/s41597-024-03436-4",
+    "fractional_rule": "Sub-50% observed coverage on excluded fuel is reported in hectares and marked review; it is not silently rounded into a pass.",
+    "fuel_qc_reference": "Bennett et al. 2026, W.I.S.E. assessment; https://doi.org/10.1071/WF26072",
+    "fuel_status_meaning": {
+      "ERROR": "source data or processing check failed; candidate is retained with error detail",
+      "FAIL_FUEL_OVERLAP": "at least one native fire pixel or model-majority state/target cell overlaps excluded/unmapped fuel",
+      "PASS_FUEL_ONLY": "no native-pixel or model-majority overlap with excluded/unmapped fuel; not a full-case pass",
+      "REVIEW_SUBCELL_FUEL_OVERLAP": "no majority-cell failure, but fractional model-grid fire coverage overlaps excluded/unmapped fuel"
+    },
+    "model_rule": "The same masks are area-averaged to the centered 20x20, 100 m model grid; the 2014b categorical map is nearest-neighbour resampled, matching build_cfsds_case.py. Initial-state and target majority cells on non-burnable/ambiguous/unmapped classes fail the fuel gate.",
+    "native_rule": "CFSDS day n-1 scar/front and day n target are reconstructed from day-of-burning values, then compared against 2014b fuel classes resampled nearest-neighbour to the native 90 m crop.",
+    "published_filter_inspiration": "Bennett et al. report filtering burned-pixel overlap with water/non-fuel and ambiguous FBP classes; this project implements a separate, stricter project-specific train gate and does not claim to reproduce W.I.S.E."
+  },
+  "purpose": "strict train-only fuel compatibility screen before additional simulator cases or any calibration",
+  "schema": "cfsds-train-fuel-qc/v1",
+  "scope": {
+    "agent_training_performed": false,
+    "all_split_cohort_metadata_loaded": true,
+    "all_split_crop_screen_metadata_loaded": true,
+    "candidate_count_audited": 20,
+    "candidate_count_expected": 20,
+    "simulator_runs_performed": 0,
+    "split": "train only",
+    "validation_or_test_candidates_fuel_audited": false,
+    "validation_or_test_rasters_opened": false
+  },
+  "summary": {
+    "candidate_processing_errors": 0,
+    "cases_with_unknown_suppression": 20,
+    "eligible_for_full_replay_or_policy_evaluation": 0,
+    "fuel_status_counts": {
+      "FAIL_FUEL_OVERLAP": 10,
+      "PASS_FUEL_ONLY": 10
+    },
+    "reason_full_replay_gate_remains_open": "This audit checks fuel only; suppression, terrain, weather/FWI, crop extent, and no-action behavior remain separate gates."
+  }
+}

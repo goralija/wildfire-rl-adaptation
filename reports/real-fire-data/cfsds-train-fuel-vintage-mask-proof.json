@@ -1,0 +1,74 @@
+{
+  "checks": {
+    "day_n_minus_1_included_as_prior_perimeter": true,
+    "every_selected_pixel_is_valid_and_before_target": true,
+    "target_day_n_and_future_excluded": true
+  },
+  "environment": {
+    "numpy": "2.5.4",
+    "python": "3.12.4",
+    "rasterio": "1.4.4"
+  },
+  "fuel_map": {
+    "generated": false,
+    "no_fuel_class_was_reclassified": true,
+    "reason": [
+      "The 2014b base-map metadata has no verified per-pixel temporal cutoff.",
+      "The W.I.S.E. Figure 2 succession tree is transcribed in CFSDS_FUEL_VINTAGE_REVIEW.md; the official v20191114 directory's listed decision-rules PDF covers baseline fuel classification, not the post-fire age tree. The underlying release implementation, age arithmetic, and special-class behavior remain unverified.",
+      "Applying a generic non-fuel code would conflict with the simulator's current imported historical scar/front contract."
+    ],
+    "status": "BLOCKED_BASE_VINTAGE_AND_SUCCESSION_RULES_UNVERIFIED"
+  },
+  "generated_at_utc": "2026-10-30T23:18:49.423212+00:00",
+  "limitations": [
+    "This is a same-event temporal-mask proof, not a complete annual fuel map or a claim about cross-event historical fire coverage.",
+    "CFSDS day-of-burning is a satellite-hotspot interpolation, not an hourly ground-truth perimeter.",
+    "The existing target-aware initial-front rule is not leakage-free even though this fuel mask excludes target/future pixels.",
+    "No validation/test input, target, or outcome was used."
+  ],
+  "mask_rule": "valid arrival_day > 0 and arrival_day < target_doy; day n-1 is included; day n and later are excluded",
+  "measurements": {
+    "day_n_minus_1_active_front_pixels": 36,
+    "day_n_minus_1_pixels": 136,
+    "earlier_scar_pixels_after_front_separation": 236,
+    "future_after_day_n_pixels_full_raster": 0,
+    "future_after_day_n_pixels_model_crop": 0,
+    "pre_target_event_pixels_full_raster": 881,
+    "pre_target_event_pixels_model_crop": 272,
+    "target_day_n_pixels_full_raster": 19,
+    "target_day_n_pixels_model_crop": 19
+  },
+  "methodology_boundary": {
+    "existing_project_front_rule": "The current builder selects day n-1 cells adjacent to target day n; this reveals target geometry through the initial state and must be replaced before an unbiased benchmark.",
+    "published_annual_map_step": "W.I.S.E. describes applying the v20191114 burn-scar succession rules to annual maps built from 2014/2019/2024 releases.",
+    "published_daily_mask_step": "W.I.S.E. describes reclassifying the same-fire perimeter before day n as non-fuel for a day-n simulation.",
+    "target_aware_front_count_is_diagnostic_only": true
+  },
+  "purpose": "Prove a TRAIN-only CFSDS pre-target perimeter mask excludes target-day and later event pixels.",
+  "schema": "cfsds-train-fuel-vintage-mask-proof/v1",
+  "scope": {
+    "arrival_raster_shape_rc": [
+      48,
+      50
+    ],
+    "event_id": "2018_747",
+    "native_crop_shape_rc": [
+      23,
+      23
+    ],
+    "simulator_replay_or_training": false,
+    "split": "train",
+    "target_doy": 228,
+    "validation_or_test_rasters_opened": false,
+    "year": 2018
+  },
+  "source": {
+    "arrival_archive": "data/raw/cfsds-v1_1/2018/2018_fireDOYrasters.zip",
+    "arrival_archive_sha256": "0b31797c19fe705a890eb19ebc35827356f15bc3d83666ad614e0e1dc0518e3f",
+    "arrival_raster_member": "2018_747_krig.tif",
+    "arrival_raster_member_sha256": "a3e35564129f5ad68f118c4c487134077e98953f9a485d285bfb17e30bb0d1cd",
+    "arrival_raster_nodata": 4294967295,
+    "screen_report": "reports/real-fire-data/cfsds-cohort-screen.json",
+    "screen_report_sha256": "d3145b21121bb00a88258154789bc986c1ebb314a507aecd836c34def82e8ad6"
+  }
+}

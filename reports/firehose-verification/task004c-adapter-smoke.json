@@ -1,0 +1,200 @@
+{
+  "batch": {
+    "all_actions_respect_budget_and_continue_with_noop": true,
+    "all_pretrained_weights_unchanged": true,
+    "all_processes_exit_zero": true,
+    "all_python_cumulative_counts_match_simulator": true,
+    "all_terminal_states_match_grid_history": true,
+    "case_count": 12,
+    "cases": [
+      {
+        "budget": 0,
+        "label": "none-123-a",
+        "observed_ever_affected_cells": 217,
+        "policy": "none",
+        "python_cumulative_matches_simulator": true,
+        "simulator_seed": 123,
+        "success": true,
+        "sync_reset": false,
+        "termination_reason": "weather_horizon",
+        "weights_unchanged": null
+      },
+      {
+        "budget": 0,
+        "label": "none-123-b",
+        "observed_ever_affected_cells": 217,
+        "policy": "none",
+        "python_cumulative_matches_simulator": true,
+        "simulator_seed": 123,
+        "success": true,
+        "sync_reset": false,
+        "termination_reason": "weather_horizon",
+        "weights_unchanged": null
+      },
+      {
+        "budget": 0,
+        "label": "none-124",
+        "observed_ever_affected_cells": 240,
+        "policy": "none",
+        "python_cumulative_matches_simulator": true,
+        "simulator_seed": 124,
+        "success": true,
+        "sync_reset": false,
+        "termination_reason": "weather_horizon",
+        "weights_unchanged": null
+      },
+      {
+        "budget": 0,
+        "label": "none-125",
+        "observed_ever_affected_cells": 193,
+        "policy": "none",
+        "python_cumulative_matches_simulator": true,
+        "simulator_seed": 125,
+        "success": true,
+        "sync_reset": false,
+        "termination_reason": "weather_horizon",
+        "weights_unchanged": null
+      },
+      {
+        "budget": 8,
+        "label": "min-123",
+        "observed_ever_affected_cells": 193,
+        "policy": "min_l2",
+        "python_cumulative_matches_simulator": true,
+        "simulator_seed": 123,
+        "success": true,
+        "sync_reset": false,
+        "termination_reason": "weather_horizon",
+        "weights_unchanged": null
+      },
+      {
+        "budget": 8,
+        "label": "max-123",
+        "observed_ever_affected_cells": 217,
+        "policy": "max_l2",
+        "python_cumulative_matches_simulator": true,
+        "simulator_seed": 123,
+        "success": true,
+        "sync_reset": false,
+        "termination_reason": "weather_horizon",
+        "weights_unchanged": null
+      },
+      {
+        "budget": 8,
+        "label": "fixed-123-a",
+        "observed_ever_affected_cells": 208,
+        "policy": "ppo-fixed",
+        "python_cumulative_matches_simulator": true,
+        "simulator_seed": 123,
+        "success": true,
+        "sync_reset": false,
+        "termination_reason": "weather_horizon",
+        "weights_unchanged": true
+      },
+      {
+        "budget": 8,
+        "label": "fixed-123-b",
+        "observed_ever_affected_cells": 208,
+        "policy": "ppo-fixed",
+        "python_cumulative_matches_simulator": true,
+        "simulator_seed": 123,
+        "success": true,
+        "sync_reset": false,
+        "termination_reason": "weather_horizon",
+        "weights_unchanged": true
+      },
+      {
+        "budget": 8,
+        "label": "fixed-124",
+        "observed_ever_affected_cells": 236,
+        "policy": "ppo-fixed",
+        "python_cumulative_matches_simulator": true,
+        "simulator_seed": 124,
+        "success": true,
+        "sync_reset": false,
+        "termination_reason": "weather_horizon",
+        "weights_unchanged": true
+      },
+      {
+        "budget": 8,
+        "label": "random-123",
+        "observed_ever_affected_cells": 212,
+        "policy": "ppo-random",
+        "python_cumulative_matches_simulator": true,
+        "simulator_seed": 123,
+        "success": true,
+        "sync_reset": false,
+        "termination_reason": "weather_horizon",
+        "weights_unchanged": true
+      },
+      {
+        "budget": 8,
+        "label": "fixed-123-sync",
+        "observed_ever_affected_cells": 208,
+        "policy": "ppo-fixed",
+        "python_cumulative_matches_simulator": true,
+        "simulator_seed": 123,
+        "success": true,
+        "sync_reset": true,
+        "termination_reason": "weather_horizon",
+        "weights_unchanged": true
+      },
+      {
+        "budget": 0,
+        "label": "none-123-sync",
+        "observed_ever_affected_cells": 217,
+        "policy": "none",
+        "python_cumulative_matches_simulator": true,
+        "simulator_seed": 123,
+        "success": true,
+        "sync_reset": true,
+        "termination_reason": "weather_horizon",
+        "weights_unchanged": null
+      }
+    ],
+    "deterministic_repeat_pairs": [
+      "none-123-a/none-123-b",
+      "fixed-123-a/fixed-123-b"
+    ],
+    "passed": 12,
+    "terminal_reasons_observed": [
+      "weather_horizon"
+    ]
+  },
+  "date": "2026-10-30",
+  "fixture": {
+    "cumulative_cells_after_replay": 3,
+    "initial_front_cell_ids_one_based": [
+      2,
+      3
+    ],
+    "initial_scar_cell_ids_one_based": [
+      1
+    ],
+    "python_cumulative_affected_cells": 3,
+    "python_cumulative_matches_simulator": true,
+    "subprocess_returncode": 0,
+    "success": true,
+    "terminal_reason": "weather_horizon",
+    "terminal_state_matches_grid_history": true
+  },
+  "image": {
+    "image_id": "sha256:1623209bd9f946d3d24bb6cf1c4f5b398811a487e315930fe99069adeb7238be",
+    "local_tag": "wildfire-firehose-probe:task004c-20261030-r5",
+    "runtime": "Linux ARM64; network disabled; read-only container root; no learning call"
+  },
+  "limitations": [
+    "All 12 Sub20 cases terminated at weather_horizon; front-extinguished, grid-exhausted, and no-ignition C++ branches were not exercised by this batch.",
+    "No RL training or policy update occurred.",
+    "Runtime consistency does not validate fire physics, historical alignment, or agent benefit; the CFSDS no-action gate remains failed."
+  ],
+  "purpose": "Adapter/inference integration only; not training or physical validation.",
+  "raw_outputs": "Ignored local runs/task004c-20261030-{rerun5,batch-r5}/; not included in Git.",
+  "schema": "task004c-adapter-smoke-v1",
+  "source": {
+    "contrib_commit": "43b7fe6fcdda71c2c10de7af0d20f39e48ae5df3",
+    "firehose_commit": "e49a52a9a987a1585d25ddca2f711222ca500ffb",
+    "probe_sha256": "5515c164e5d176b0263de8d268968ff77c3463bbb38d9fe092b24283e3d8bb4b",
+    "state_export_patch_sha256": "03754e6cd2c44c0b93c6cbd902b0d35bf32d1541d5226fc5241b599d1800e62e"
+  }
+}

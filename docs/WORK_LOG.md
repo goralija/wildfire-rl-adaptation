@@ -324,3 +324,364 @@ the existing 12-case Sub20 inference matrix: 12/12 succeeded, all C++ exit codes
 and all existing PPO checkpoint weights remained unchanged. The run was offline/CPU-only,
 without training. Compact receipt: `reports/firehose-verification/real-case-image-regression.json`;
 raw logs stay in ignored `runs/firehose-final-check/`.
+
+2026-10-30 — Started isolated branch `research/cfsds-train-qc` from merged main
+`ea5b8a7a`. Implemented `scripts/audit_cfsds_train_fuel.py` and focused optional GIS
+unit tests. The train-only audit reads the 20 train rows, compares CFSDS 90 m masks and
+the actual 20×20/100 m simulator grid to the Canadian FBP 2014b map, cross-checks annual
+group-table area, and stores SHA-256 provenance in
+`reports/real-fire-data/cfsds-train-fuel-qc.json`. Result: 10 `PASS_FUEL_ONLY`, 10
+`FAIL_FUEL_OVERLAP`, zero processing errors. The existing three replay cases pass the
+fuel gate, so their mismatch needs separate weather/FWI, FBP, suppression and domain
+diagnosis. All suppression remains unknown. A precision review corrected the report to
+state that the all-splits crop-screen file is loaded for selection, while no
+validation/test fuel/source rasters are opened or overlaid. The published W.I.S.E.
+filter is cited as inspiration only; this project gate is not its reproduction.
+
+Added the fuel-only statuses and report pointer to the train rows in the cohort manifest.
+Regenerated the report so its SHA-256 provenance matches the updated manifest.
+Documented method, finding, limits and next TASK-018 in the research note, ADR-016,
+experiment/work logs, status, backlog, handoff and navigation. No raw archive, third-party
+checkout, venv, simulator replay, parameter calibration or agent training was added.
+Verification: full application suite 29/29 passed, knowledge checker tests 15/15 passed,
+strict OKF validator passed with 68 Markdown files, and the synthetic CLI smoke wrote
+its output successfully. Report/manifest/script SHA-256 consistency was checked; no
+absolute workstation paths were found in the new report. These checks cover the exact
+implementation, report and documentation recorded above.
+
+2026-10-30 — TASK-018 completed as a train-only diagnostics stage on
+`research/cfsds-train-qc`. Compared existing FireCase/replay manifests and hashes,
+Canadian FBP fuel classes, weather/FWI inputs, initial fronts, model extents and saved
+simulator grids. Added `scripts/analyze_cfsds_replay_timeline.py` and a compact report
+with fixed 30/60/120/240/480/720/1,440-minute measurements. All three saved forecasts
+first contact the 20×20 crop edge within 34–52 model minutes; `2018_241` eventually
+fills the 400-cell grid. Since CFSDS gives a daily satellite-interpolated target without
+within-day timing and suppression records are unknown, the diagnosis does not identify
+one physical cause or select per-event stop times.
+
+Source review found and corrected a probe metadata error: its `weather_horizon_minutes`
+used `60 × steps_per_action` (480) instead of the 24 hourly weather rows × 60 min =
+1,440-minute horizon. The field now counts rows in the actual copied `Weather.csv`; this
+does not alter completed replays. Added focused tests, TASK-018 diagnosis/receipt,
+ADR-017, backlog/status/handoff/index updates. No new C++ replay, PPO training, raw data,
+or validation/test outcome was used. TASK-004c is next; the no-action gate remains failed.
+
+Verification: full application suite 34/34 passed, strict OKF validation passed with
+69 Markdown files, and the timeline CLI smoke against the saved `2018_747` replay
+reproduced the committed checkpoints and terminal grid metrics. Its generated output
+is under ignored `runs/`; no simulator was rerun. `git diff --check` passed.
+
+## 2026-10-30 — TASK-004c episode adapter
+
+TASK-004c episode adapter completed locally on `research/cfsds-train-qc`. Added the second
+pin-compatible Firehose patch for cumulative affected/front/treatment IDs and terminal
+reasons; synced FireEnv's initial reset grid and terminal counters; kept checkpoint RGB,
+action count, no-op and reward contract. A first 12-case integration run exposed cells
+that C++ kept in cumulative damage while the categorical output grid showed treatment
+(`-1`). The C++ terminal receipt is now canonical, Python counters synchronize from it,
+and the probe verifies visible grid coverage plus treated-cell explanation for hidden IDs.
+The fixture and corrected inference matrix pass; no training or physical validation ran.
+The no-action gate remains failed and other C++ termination branches were not exercised
+by this matrix. See `reports/firehose-verification/task004c-adapter-smoke.json` and ADR-018.
+
+Verification after the implementation: all 38 project unit tests passed, strict OKF
+validation passed, the synthetic CLI smoke wrote successfully, and `git diff --check` was
+clean. The next task is remaining train-only TASK-015 fuel-vintage/terrain/weather/
+suppression QC followed by predeclared no-action replay checks; no heldout result or
+training was used.
+
+## 2026-10-31 — TASK-015 train-only input alignment and fuel-vintage research
+
+Added a small standard-library audit that reads only train IDs from the cohort and
+checks matching local FireCase inputs. It found three materialized packages out of
+20. All three share 20×20/100 m fuel/terrain grid headers; elevation, slope and aspect
+have 400 valid cells each; each Weather.csv has 24 ordered hours on its target local
+date. The reanalysis request location is 2.436–5.195 km from the CFSDS summary
+centroid; the daily FWI codes repeat across the hourly rows. The other 17 packages
+remain unmeasured. Machine report: reports/real-fire-data/cfsds-train-input-qc.json.
+
+Reviewed official v2014b, v20191114 development, and 2024 fuel-map sources, the W.I.S.E.
+annual-map method, MRDEM, ERA5/Open-Meteo and CNFDB documentation. The v2014b metadata
+does not disclose an explicit per-pixel/burn-record time cutoff; v20191114 is in the
+development catalog, about 2 GB, and includes NBAC-based reassignment; 2024 postdates
+the current train targets. License review found OGL Canada for the 2024 map/MRDEM,
+CC BY 4.0 for Open-Meteo API data with separate service terms, and no license
+statement in the reviewed 2014b/v20191114 listings or metadata; confirm terms with
+NRCan before redistributing those rasters. The W.I.S.E. recipe remains a method
+candidate, not a project implementation. We preserve v2014b only for reproducing saved pilot cases.
+We do not claim its map is leakage-safe for new cases. Suppression remains unknown
+for all 20; no agency action timeline was joined. Terrain source tile dates/hashes and
+full weather field lineage are missing from the existing case manifests.
+
+Added focused train-only report/script/tests and updated source list, research note,
+ADR-019, backlog, status, next-session, work log, handoff, code map and root navigation.
+No new simulator replay, training, calibration, benchmark or heldout inspection ran.
+No raw/large map, external checkout, venv, or generated run output was added to Git.
+The no-action gate remains failed.
+
+Verification: 42/42 project tests pass; strict OKF validation passes for 70 Markdown
+files; synthetic CLI smoke succeeds in a fresh ignored run directory; git diff --check
+is clean.
+
+## 2026-10-31 — TASK-015 pre-target mask proof and non-fuel importer characterization
+
+Added a reusable pre-target arrival-day mask and a train-only proof for `2018_747`
+(target DOY 228). It selected 881 valid pre-target pixels across the source raster and
+272 in the 23×23 simulator crop; all 19 target-day pixels were excluded. The event has
+no later-than-target pixels, so a unit fixture separately verifies that day n+1 is
+excluded. This is a temporal-mask proof only: no annual fuel map or fuel-class
+reclassification was emitted because the base-map cutoff and succession crosswalk
+remain unverified.
+
+An isolated fixture reproduced the pinned C++ importer's rejection of historical
+`burnt` state on an `NF` cell. The simulator emitted
+`InitialState.csv marks a non-fuel/harvested cell as burned` before exporting an initial
+grid; the probe's subsequent missing-grid `IndexError` is a secondary wrapper symptom.
+This is an expected-rejection characterization, not a compatibility pass. No importer
+or case-builder behavior changed.
+
+The audit also confirmed that the current case builder selects the day n−1 active
+front using adjacency to the day n target. That exposes target geometry through the
+initial input, even if the target raster itself is kept hidden. The next task is to
+define and preregister a target-blind initial-front rule using only day n−1 and earlier
+information, then test that changing the target mask cannot change the initial state.
+The annual fuel-map provenance/succession and historical-scar contract remain separate
+blockers. No CFSDS replay, training, calibration, benchmark, or validation/test outcome
+was used.
+
+Verification: 46/46 project tests passed; strict OKF validation passed for 70 Markdown
+files; a fresh synthetic CLI smoke succeeded; the train-only proof CLI succeeded; the
+network-isolated C++ expected-rejection verifier succeeded; and `git diff --check` was
+clean. The first CLI smoke invocation intentionally avoided overwriting an existing
+`runs/` directory by rerunning under a fresh output name. Raw archives, Docker image,
+external checkout, and generated run outputs remain outside Git.
+
+## 2026-10-31 — TASK-015 target-blind crop/state and train spatial screen
+
+Replaced target-adjacent front selection with a registered pre-target rule. The 23×23
+crop center is nearest the centroid of all day n−1 pixels; safe-interior day n−1 pixels
+are active front, and the one-cell crop border plus older arrivals become historical
+scar. `build_cfsds_case.py` now recomputes this crop from pre-target data, defaults to the
+train-only screen, and rejects screens/candidate rows without explicit target-blind flags.
+The cohort-screen CLI defaults to 2014–2018 and refuses validation/test years.
+
+For TRAIN `2018_747` (DOY 228), moved all 19 day-n target pixels while preserving prior
+arrivals. Crop offset, 20×20 scar/front masks and serialized `InitialState.csv` stayed
+identical; the target truth changed. The crop contains 17/19 target pixels, measured only
+after selection. The separate target-blind train screen selected 25 candidates (five/year)
+by pre-target metrics; only 4/25 contain any target-day pixel, median capture 0, maximum
+1.0402%. This is a spatial-feasibility blocker, not a reason to tune windows with outcomes.
+
+Receipts: [invariance proof](../reports/real-fire-data/cfsds-target-blind-input-invariance.json),
+[train screen](../reports/real-fire-data/cfsds-train-target-blind-window-screen.json).
+The historical combined cohort report retains legacy target-aware offsets and is rejected
+by the updated builder. No FireCase rebuild, C++ replay, fuel-map generation, training,
+calibration, benchmark, or validation/test raster access occurred.
+
+Verification: all 58 project tests passed; strict OKF validation passed for 70 Markdown
+files; synthetic CLI smoke wrote to a fresh `/private/tmp` folder; the CFSDS screen
+processed 1,301 TRAIN event rasters/28,347 daily rows and emitted 25 TRAIN candidates;
+the target-mask proof passed; `build_cfsds_case.py --help`, Python compilation and
+`git diff --check` passed. The screen CLI's heldout-year rejection is unit-tested.
+No validation/test raster was opened. Generated smoke output and raw CFSDS archives stay
+outside Git. The screen emitted a non-fatal NumPy 2.5/Rasterio deprecation warning while
+reading rasters; the report completed successfully.
+
+## 2026-10-31 — TASK-015 bounded TRAIN spatial-domain feasibility
+
+Added a pure helper, a TRAIN-only audit CLI and focused tests to compare 20×20 domains at
+100/150/200/300 m with a 40×40/100 m option. All five options use the same 25 already
+shortlisted 2014–2018 event/day pairs. Each window is selected using only arrival values
+strictly before target day n and the day n−1 centroid; target coverage is measured only
+after selection. The JSON receipt records source archive/member and code hashes.
+
+The current 2×2 km domain contains any target-day pixel in 4/25 crops (median target
+capture 0%, max 1.04%). Approximately 4 km contains target pixels in 19/25, but median
+capture remains 1.95%. Approximately 6 km has a 15.31% median over its 23 valid windows;
+two source rasters are smaller than 67×67 pixels. None of these results is a resampled
+simulator case or justification to adopt a wider grid. A 20×20 coarse grid changes action
+semantics; 40×40 is incompatible with the existing checkpoint shape.
+
+Protocol note: the 25-pair screen required a target-day summary and positive `firearea`.
+Target geometry did not choose the crops, but full outcome-independent pair membership is
+not established. The next task is to define that membership rule and screen the complete
+TRAIN opportunity set at fixed domains. Fuel vintage, NF-scar importer, terrain/weather,
+suppression, no-action gate, benchmark and training remain blocked/unfinished.
+
+No FireCase, raster resampling, simulator replay, calibration, training or validation/test
+inspection occurred. Added [method](research/CFSDS_SPATIAL_FEASIBILITY.md),
+[receipt](../reports/real-fire-data/cfsds-train-spatial-feasibility.json), ADR-022 and
+EXP-012; refreshed status/handoff/backlog and navigation.
+
+Verification: 61/61 project tests passed; strict OKF validation passed for 71 Markdown
+files; synthetic CLI smoke wrote to a fresh `/private/tmp` directory; and `git diff --check`
+passed. The audit read only 2014–2018 raster archives, confirmed 25 fixed event/day pairs
+across all five options, and recorded archive/member/code SHA-256 values.
+
+## 2026-10-31: Full TRAIN target-independent CFSDS day-pair screen
+
+- Added `scripts/audit_cfsds_train_full_day_pairs.py`. It opens only the 2014–2018 CFSDS arrival-raster archives and ignores group CSV/target-summary conditions for pair membership.
+- Applied the rule to all 1,301 rasters: earliest day with at least three valid 90 m arrivals is input; following calendar day is target. All pairs are retained; 1,010 have mapped target pixels and 291 do not. Removing target/future arrival pixels preserved the selected input day for every event.
+- Evaluated five fixed domains after pair/window selection. At 20×20/100 m, 1,295 windows are available and median target capture is 36.71% (N=1,008 observed targets with a valid crop). Larger windows show higher conditional capture but fail to fit many source rasters; no domain was selected.
+- Added method/results report, aggregate JSON receipt, and compact 1,301-row domain CSV. Raw data remain ignored. No fuel/terrain/weather audit, FireCase, simulator replay, training, heldout inspection, or benchmark was run.
+- The actual screen CLI completed against local TRAIN ZIPs. No application tests were added or run; `git diff --check` and strict knowledge validation remain handoff checks.
+- See [EXP-013](research/EXPERIMENT_LOG.md#exp-013--full-train-target-independent-cfsds-day-pair-and-domain-screen-2026-10-31), [ADR-023](specs/DECISION_RECORDS.md#adr-023), and [NEXT_SESSION](NEXT_SESSION.md).
+
+## 2026-10-31: TRAIN-only FBP fuel-vintage source review
+
+- Reviewed CWFIS v2014b/v20191114 metadata, official 2024 and current-year 2026 product descriptions, the CWFIS site-wide download licence, official 2018 baseline fuel-class/base-layer rules, and the publisher text of the W.I.S.E. paper.
+- Confirmed v2014b's metadata lists 2011 land cover and NFDB/NBAC use to identify burn scars, but gives no date/cutoff for that burn-history layer. The current 2026 annual pre-season update convention does not establish historical v2014b timing. v20191114 uses 2017 kNN and NBAC and is not adopted directly for 2014–2018 TRAIN.
+- Distinguished baseline FBP classification rules from the separate post-fire succession tree cited by W.I.S.E. The public 2018 PDFs document the former, not the latter. W.I.S.E. article text does not enumerate the tree branches; article data are available on reasonable request.
+- Corrected the earlier file-level license finding: the CWFIS download-site notice states Open Government Licence - Canada and requires CFS/CWFIS attribution. Separately sourced component layer terms remain to be checked if used.
+- Decision: keep v2014b solely for reproducing saved pilots; no new annual map is safe to claim, and none was generated. Added [fuel-vintage review](research/CFSDS_FUEL_VINTAGE_REVIEW.md), source entries S-039–S-041, EXP-014, ADR-024, and updated status/handoff/index.
+- No raster download, FireCase conversion, replay, training, or validation/test inspection occurred. Next implementation task: define and test the importer/cumulative-damage behavior for a historical scar on a non-fuel cell; continue sourcing cutoff and succession evidence before map generation.
+
+## 2026-10-31 — TASK-015 explicit NF historical-scar importer contract
+
+Implemented the importer behavior for a previously burned cell that a fuel map labels
+`NF`. The new `scar_nf` token requires an explicit caller assertion and is accepted only
+for an exact upstream `NF` cell. It contributes to the C++ `burntCells`/cumulative-damage
+set and Python terminal `ever_affected`, but remains unavailable for spread and never
+enters the active front. Ordinary `burnt` on NF, `burning` on NF, and `scar_nf` on fuel
+are rejected. The serializer helper validates the explicit scar mask's shape and subset
+relationship; it does not guess which nonfuel cells were previously burned.
+
+Added one positive synthetic Sub20 fixture and three negative fixtures. The positive
+no-policy/no-intervention run completed to `weather_horizon`; initial scar cell 4 remained
+in cumulative damage, C++ and Python sets matched, terminal export agreed with the grids,
+and no NF cell entered the front across all three transitions. All three negative imports
+failed with the intended C++ error. Docker ran offline against pinned Firehose/contrib
+commits; exact runtime and hashes are in
+[`nonfuel-initial-scar-contract.json`](../reports/firehose-verification/nonfuel-initial-scar-contract.json).
+
+Added [ADR-025](specs/DECISION_RECORDS.md#adr-025), [EXP-015](research/EXPERIMENT_LOG.md#exp-015--explicit-nonfuel-historical-scar-importer-contract-2026-10-31),
+and refreshed input QC, pipeline schema, status, backlog, handoff, code map, and indexes.
+The CFSDS case builder continues to reject nonfuel scars pending dated fuel-vintage and
+post-fire succession evidence. This test validates only import/state semantics on the
+bundled synthetic landscape. No real CFSDS replay, physical validation, RL training,
+benchmark, or heldout inspection occurred.
+
+
+## 2026-10-31 — TASK-015 fuel-tree and external-input provenance follow-up
+
+Corrected the earlier statement that the W.I.S.E. post-fire succession tree was not
+publicly transcribable: Figure 2 is public and its branches are now recorded in the
+fuel-vintage review. This does not authorize annual maps because the v2014b NFDB/NBAC
+cutoff is still undocumented, and exact age arithmetic, special classes and the actual
+v20191114 artifact are unverified.
+
+Audited saved inputs: all three pilot FireCases are outputs of the older target-aware
+builder. MRDEM-30 DTM VRT, 30 m bilinear-to-100 m conversion and output hashes are known,
+but upstream tile/cell provenance and per-cell acquisition dates are missing. Raw
+Open-Meteo responses include the resolved grid location, timezone, fields/units and
+response hash, but not original query coordinate/URL; target-blind location choice for
+these historic requests cannot be demonstrated.
+
+Found the official Alberta 2006–2025 fire-level wildfire dataset and dictionary. Official
+metadata describes fire location/date/duration, weather, staffing and physical suppression
+resources. Its direct CSV endpoint returned HTTP 403 in this workspace; no table was
+downloaded or joined. Two case centroids are in BC and one is near the Alberta/BC border,
+so source/jurisdiction matching is still required; fire-level totals do not provide a
+daily response timeline.
+
+Updated the source register, input QC, ADR-026, EXP-016, backlog, status, handoff, agent
+context and indexes. No FireCase, raster, replay, training or heldout review occurred.
+Next: retrieve the Alberta source through an official accessible route, try exact
+TRAIN-only joins, verify fuel cutoff/tree semantics, and preserve complete DEM/weather
+request lineage before preregistering another replay gate.
+
+## 2026-10-31 — TASK-015 BC historical-perimeter crosswalk
+
+Queried the Government of British Columbia's official historical fire-perimeter layer for
+only the three saved 2018 TRAIN cases. The target-day centroid from each case manifest
+intersected exactly one official 2018 polygon: `2018_1770` → N12395, `2018_241` →
+C11937, and `2018_747` → N12413. The returned records include fire date, cause, reported
+area and GPS perimeter-track date. Because the CFSDS IDs do not share an incident key
+with the BC records, these are strong spatial/date candidates to be checked against the
+case chronology, not a completed keyed join.
+
+The perimeters were captured after each target day; the centroid overlay was used only to
+identify likely provincial incident records and was not put into simulator input or used
+to select a case. The layer has no resource/staffing or daily-action fields, so suppression
+remains `unknown`. Full response bodies plus hashes and case-manifest hashes are preserved
+in [`cfsds-train-bc-perimeter-crosswalk.json`](../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json).
+
+Updated [ADR-027](specs/DECISION_RECORDS.md#adr-027), [EXP-017](research/EXPERIMENT_LOG.md#exp-017--train-only-bc-historical-perimeter-crosswalk-2026-10-31),
+source register, input QC, status, backlog, handoff, navigation and project context. No
+FireCase, simulator replay, training or heldout inspection occurred. Next, verify these
+incident candidates against BC records and search for any operational suppression history;
+resolve the fuel cutoff and DEM/weather provenance before replay.
+
+## 2026-10-31 — TASK-015 BC operational-record follow-up
+
+Followed only the three saved TRAIN candidate incidents from the perimeter crosswalk.
+An August 12 local public update relaying BC Wildfire Service information reports
+containment-line construction at Coal Creek (N12395), with five heavy-equipment units and
+one helicopter; the date matches `2018_1770`'s CFSDS target day. An August 16 public
+recap describes a planned ignition and complex-level resources at Lost Dog Complex
+(candidate N12413) on August 15, one day before `2018_747`'s target. An August 18 update
+adds a next-day complex-level resource snapshot. None of these reports provides full
+dispatch/action logs or per-cell treatment footprints.
+
+For North Baezaeko (candidate C11937), the official EMBC PECC situation report dated
+August 16 reports an estimated 2,500 ha and 0% contained but no crew/tactic details for
+the August 15 target. This status does not imply that no suppression occurred. The BC
+Wildfire season summary independently records C11937 as discovered August 1, lightning-caused,
+and 13,433.2 ha at season end.
+
+Because the incident match is spatial/date-based rather than a shared event key, and the
+public operational reports are partial snapshots, all saved case-manifest suppression
+labels stay `unknown`. Dated report facts and target offsets are normalized in
+[`cfsds-train-bc-operational-evidence.json`](../reports/real-fire-data/cfsds-train-bc-operational-evidence.json).
+Updated [S-045–S-047](research/SOURCES.md), [EXP-018](research/EXPERIMENT_LOG.md#exp-018--train-only-bc-operational-record-search-2026-10-31),
+[ADR-028](specs/DECISION_RECORDS.md#adr-028), input QC, handoff, status, backlog, project
+context, and indexes. No FireCase, replay, calibration, benchmark, training, or heldout
+inspection occurred. Next continue the event-keyed record search; separately resolve the
+fuel vintage and complete DEM/weather provenance before a preregistered no-action gate.
+
+## 2026-10-31 — TASK-015 official fuel-source artifact inventory
+
+Rechecked the official CWFIS metadata and public directory to resolve the next fuel gate.
+The v2014b metadata names Land Cover Map 2011 and CanFI2000, and says NFDB/NBAC were
+used to identify burn scars, but gives neither the burn-history snapshot date nor a
+per-pixel cutoff. The v20191114 metadata names 2017 kNN inventory and NBAC reassignment,
+also without a dated NBAC cutoff.
+
+The listed v20191114 *Decision Rules* PDF (dated November 14, 2018) describes how base
+FBP classes are assigned from vegetation, species, land cover and ecological inputs; it
+does not define the post-fire age thresholds shown in W.I.S.E. Figure 2. The official
+directory lists a burn-scar legend but no separate succession document. The roughly
+2 GB ZIP was not inspected, so no claim is made about its internal contents. The paper's
+Figure 2 remains the public rule description, while its precise date arithmetic and
+special-class behavior remain unresolved.
+
+Updated the source-gate receipt, fuel-vintage review, input QC, source register, status,
+backlog, handoff, navigation, project context, [EXP-019](research/EXPERIMENT_LOG.md#exp-019--train-fuel-vintage-artifact-inventory-2026-10-31)
+and [ADR-029](specs/DECISION_RECORDS.md#adr-029). No raster download/generation, FireCase,
+simulator replay, training, or heldout inspection occurred. Fuel gate remains blocked;
+next seek an authoritative cutoff and succession implementation or define a separately
+auditable alternative.
+
+## 2026-10-31 — TASK-015 TRAIN terrain source-class and weather snapshot provenance
+
+Read only the NRCan MRDEM-30-SOURCE COG windows covering the three existing 2018 TRAIN
+diagnostic grids. All 4,489 sampled 30 m pixels in each footprint were source code 1,
+adjusted Copernicus GLO-30; that class covers all 400 100 m model cells in each patch.
+The product specification dates GLO-30 inputs to 2011–2015, but the old case manifests
+do not pin the DTM/VRT revision, source checksum or per-pixel acquisition dates. No
+national DEM was downloaded.
+
+Reconstructed the target-blind pre-target-front weather query coordinates and queried
+only the three existing target dates from Open-Meteo ERA5-Seamless. The API resolved to
+the same coarse cells/timezones as the saved manifests, but all 24 temperatures changed
+for every case and 1–6 relative-humidity hours changed; wind and precipitation matched.
+Cause is unknown. Saved exact request URLs and exact 24-hour response snapshots, totalling
+4,282 bytes. No historical case files/manifests were modified and no new FireCase, replay,
+benchmark or training run was made.
+
+Added [terrain/weather provenance receipt](../reports/real-fire-data/cfsds-train-terrain-weather-provenance.json),
+[EXP-020](research/EXPERIMENT_LOG.md#exp-020--train-terrain-source-class-and-weather-snapshot-provenance-2026-10-31),
+[ADR-030](specs/DECISION_RECORDS.md#adr-030), and [S-049](research/SOURCES.md); updated
+input QC, status, backlog, handoff, context and indexes. The finding narrows two input
+lineage questions for these old train diagnostics; it does not clear fuel vintage,
+spatial fitness, event-keyed suppression or the no-action gate. `research_ready=false`.

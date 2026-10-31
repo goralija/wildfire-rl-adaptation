@@ -4,7 +4,7 @@ title: Handoff za nastavak projekta
 ---
 # Handoff za nastavak projekta
 
-Stanje 2026-10-30. Ovaj dokument je dovoljan ulaz bez prethodne chat historije.
+Stanje 2026-10-31. Ovaj dokument je dovoljan ulaz bez prethodne chat historije.
 Istraživačko pitanje: može li prilagodba postojećeg RL agenta različitim budžetima
 intervencija poboljšati rezultate u odnosu na zamrznuti model i heuristike?
 
@@ -25,6 +25,14 @@ dokaza da bi agent smanjio stvarnu štetu. Pročitaj [X/Y pipeline](docs/researc
 [dataset pregled](docs/research/REAL_FIRE_DATASETS.md) i
 [cohort manifest](data/manifests/cfsds-v1_1-pilot-cohort.json).
 
+Najnoviji korak je TASK-018 train-only dijagnostika no-action rasta. Sačuvani gridovi
+analizirani su na fiksnim minutnim presjecima, ulazi/hashovi su upoređeni, a pogrešan
+probe horizon metapodatak ispravljen. Požari rastu različitim brzinama, svi dodiruju rub
+20×20 mreže, suppression nije poznat, a tačan uzrok nije izolovan. Svi izvještaji su u
+[dijagnozi](docs/research/CFSDS_NO_ACTION_DIAGNOSIS.md) i
+[timeline receiptu](reports/real-fire-data/cfsds-no-action-timeline.json). Validation/test
+ishodi nisu korišteni.
+
 ## Baza znanja u repozitoriju
 
 Repo je jedan OKF 0.2 bundle. [Root index](index.md) vodi do
@@ -39,28 +47,27 @@ u repou. Lokalni veliki/raw artefakti i privatni originali imaju odvojenu granic
 
 ## Preuzimanje i prvo pokretanje
 
-Dok PR nije spojen, preuzmi implementacijsku granu:
+Bootstrap je već spojen u `main`. Za trenutno objavljenu narednu task granu:
 
 ```sh
 git clone --branch main https://github.com/goralija/wildfire-rl-adaptation.git mpvi
 cd mpvi
-printf '\n/.worktrees/\n/.local/\n' >> .git/info/exclude
 mkdir -p .worktrees
-git worktree add --track -b feature/project-bootstrap .worktrees/project-bootstrap origin/feature/project-bootstrap
-cd .worktrees/project-bootstrap
+git worktree add --track -b research/cfsds-train-qc .worktrees/cfsds-train-qc origin/research/cfsds-train-qc
+cd .worktrees/cfsds-train-qc
 python3 -m venv .venv
 PYTHONPATH=src .venv/bin/python -m unittest discover -s tests -v
 PYTHONPATH=src .venv/bin/python -m wildfire_rl.cli --config configs/smoke.json --out runs/handoff-smoke
 ```
 
 Komande za kreiranje worktreea iznad su za nov klon; u postojećem koristi
-`git worktree list` i nastavi na već registrovanoj putanji. [Workspace raspored](knowledge/workspace-layout.md)
-opisuje glavni klon, prazan main dok PR čeka merge i `.local/` za radne artefakte.
+`git worktree list` i nastavi na odgovarajućoj putanji. [Workspace raspored](knowledge/workspace-layout.md)
+opisuje glavni klon i lokalne ignorirane radne artefakte. `main` već sadrži bootstrap.
 
 Treba Python >=3.11; osnovni paket nema dodatnih zavisnosti. Bez RL biblioteka
 prolaze 22 testa, a 4 optional RL testa se preskaču. Smoke pravi CSV/JSON/SVG izlaze.
 Izlazni direktorij mora biti nov pri ponavljanju. Nakon mergea isti sadržaj je na
-`main`; prije nastavka svog zadatka napravi vlastitu granu/worktree od PR grane ili maina.
+`main`; za novi rad napravi zasebnu granu i worktree od najnovijeg `origin/main`.
 
 Za moderni optional Gymnasium/SB3 i GIS converter environment, bez dugog treniranja:
 
@@ -91,49 +98,74 @@ Optional suite uključuje kratko učenje radi provjere save/load.
 RL adaptacije, fizička validacija na historijskim požarima ili validacija za BiH.
 Sintetički pilot i runtime provjera nisu glavni istraživački rezultati.
 
-## Trenutni projektni zadatak: popravi pilot reality-check pa proširi train kohortu
+## Trenutni projektni zadatak: TASK-015 train-only input QC
 
-Pročitaj [izbor izvora](docs/research/REAL_FIRE_DATASETS.md) i
-[X/Y scenario/data plan](docs/research/REAL_CASE_PIPELINE.md). Najprije zabilježiti
-Ne vraćati se na izbor geografije. Pregledati rezultate pilota, provjeriti poravnanje
-goriva/DEM-a i vremenske ulaze, odrediti extent koji ne siječe rast, pa ponoviti no-action
-replay na nekoliko TRAIN događaja i seedova. Pripremiti FBP mape odgovarajućih godina
-(2019/2024) prije VALIDATION/TEST slučajeva; pridružiti suppression/QC metapodatke.
-Tek kad replay ponašanje bude prihvatljivo i test spisak zamrznut, pokrenuti upareni
-benchmark/fine-tuning. Sljedeći blok je TASK-015 kohorta → TASK-004c preostali export/
-terminalni adapter → TASK-016 više slučajeva/replay → TASK-005/006 benchmark.
+TASK-004c episode adapter je završen lokalno. C++ terminal receipt i Python `FireEnv`
+sada čuvaju kumulativno pogođene ID-jeve nakon tretiranja, odvojeni scar/aktivni front,
+početni reset state i razlog završetka. Fixture + 12/12 inference slučajeva prolaze.
+Checkpoint ugovor RGB 3×20×20 / `Discrete(400)`, legacy no-op `-1`, action head i reward
+nisu mijenjani. Sažeti dokaz i eksplicitne granice su u
+[adapter receiptu](reports/firehose-verification/task004c-adapter-smoke.json).
+
+Train-only input QC sada mjeri 3/20 dostupnih FireCase paketa. Sve tri 20×20/100 m
+terrain mape su poravnate; dnevni FWI se ponavlja kroz 24 sata; weather reanalysis tačke
+su 2.4–5.2 km od summary centroida. 2014b nema pixel-level cutoff dokaz, 2019 CanFG je
+razvojni/NBAC-zasnovan, izvorni DEM tile hash/date i potpuna weather field mapping nisu
+sačuvani, a suppression je unknown za svih 20. Čitaj
+[detaljni input QC](docs/research/CFSDS_TRAIN_INPUT_QC.md) i
+[mašinski receipt](reports/real-fire-data/cfsds-train-input-qc.json).
+
+Train-only pre-target mask proof za `2018_747`, C++ NF-scar characterization fixture i
+target-blind initial-state prototype/proof su završeni; pogledati mask/importer/invariance
+receipt-e, train-only window screen i ADR-020/021. Prototip centrira 23×23 crop na
+centroidu day n−1, a početni front koristi samo njegov siguran unutrašnji prsten. Promjena
+svih 19 ciljnih piksela u `2018_747` ne mijenja izabrani crop ni početni simulator input.
+Međutim, train screen shortlist pokazuje da samo 4/25 2 km prozora sadrže makar jedan
+pixel narednog dana. Bounded spatial audit istih 25 parova pokazuje 19/25 target-pozitivnih
+prozora na oko 4 km, ali medijan capture je samo 1.95%; na oko 6 km medijan je 15.31%, a
+dvije izvorne slike su premale. Rezultati i limiti su u
+[TRAIN spatial report](docs/research/CFSDS_SPATIAL_FEASIBILITY.md) i
+[JSON receipt](reports/real-fire-data/cfsds-train-spatial-feasibility.json). Nijedna domena
+nije usvojena. Puni follow-up sada čita svih 1.301 TRAIN arrival rastera i bira za svaki
+najraniji dan sa najmanje tri 90 m arrival piksela, a naredni dan kao target. Pravilo ne
+koristi target mapu ili group-table uslove; svih 1.301 par je sačuvano i svaki input day
+ostaje isti kad se target/future oznake uklone. 1.010 narednih dana ima mapirane piksele,
+291 nema; 20×20/100 m prozor se može napraviti za 1.295 parova, uz median target capture
+36.71% na 1.008 targeta s validnim prozorom. Capture je samo naknadna raster dijagnostika.
+[Novi detaljni izvještaj](docs/research/CFSDS_FULL_DAY_PAIR_SCREEN.md),
+[JSON receipt](reports/real-fire-data/cfsds-train-full-day-pair-screen.json) i
+[case/domain CSV](reports/real-fire-data/cfsds-train-full-day-pair-screen.csv).
+
+Ovo nije godišnja fuel mapa: v2014b NFDB/NBAC scar layer nema potvrđen vremenski cutoff,
+a v20191114 post-fire succession tree nije transkribovan/validiran. Izolovani importer
+contract sada prihvata samo eksplicitni `scar_nf` na tačnoj NF ćeliji i zadržava je kao
+historijsku cumulative damage bez aktivnog fronta; obični `burnt` na NF i drugi
+neusklađeni zapisi se odbijaju. To je sintetički C++ ugovorni dokaz, ne CFSDS konverzija
+ili validacija fizike. CFSDS builder i dalje blokira takav unos dok vintage/succession
+ne budu odbranjeni. CWFIS download notice navodi Open Government Licence - Canada uz
+atribuciju; službeni baseline fuel-class rules PDF nije post-fire succession tree.
+Sljedeće: pribaviti datiran source-cutoff/succession dokaz gdje je dostupan, zatim za
+slučajeve koji prođu source gate popuniti DEM/weather provenance i suppression evidence
+prije preregistrovanog replay gatea. Vidi [ADR-025](docs/specs/DECISION_RECORDS.md#adr-025)
+i [runtime receipt](reports/firehose-verification/nonfuel-initial-scar-contract.json).
+Detalji su u [fuel-vintage audit](docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md) i
+[ADR-024](docs/specs/DECISION_RECORDS.md#adr-024).
+Ne birati per-event trajanje iz targeta.
+No-action gate nije prošao: ne koristiti heldout ishode za kalibraciju, ne pokretati
+benchmark ili fine-tuning i ne tvrditi fizičku validaciju/agenta boljeg od baselinea.
 
 TASK-014 Python 3.12.4/macOS ARM64, Linux ARM64 legacy Docker i geospatial ETL venv
 navedeni su u [environment receiptu](reports/environment-setup/README.md). Venv,
-`external/` i Docker image su ignorisani i lokalni. Sljedeći redoslijed je
-TASK-015 source/event freeze → TASK-004c adapter → TASK-017 initial-state import →
-TASK-016 converter i no-action historical replay → TASK-005/006 upareni benchmark/trening.
+`external/` i Docker image su ignorisani i lokalni.
 
-## Tehnički nastavak nakon refinementa: TASK-004c
+## Ograničenja završene TASK-004c adapter faze
 
-Prvo pročitaj [STATUS](docs/STATUS.md), [runtime nalaze](docs/research/FIREHOSE_VERIFICATION.md),
-[protokol](docs/research/PROTOCOL.md) i [odluke](docs/specs/DECISION_RECORDS.md).
-Ne treba ponovo istraživati da li checkpointovi uopšte rade — to je već ostvareno.
-Treba formalni adapter i C++ export koji ispravljaju potvrđene probleme:
-
-1. Upstream reset vraća prazno početno opažanje iako warmup ima 7 pogođenih ćelija.
-   Dijagnostički `--sync-reset` učitava stvarno stanje; još nije konačan adapter.
-2. Kumulativna šteta može izostaviti početnu ćeliju: provjeren primjer 206 naspram
-   207 iz historije rastera. Tretman prethodno zapaljene ćelije ne smije izbrisati štetu.
-3. C++ grid kod 1 spaja aktivno i ranije gorjelo. Potreban je eksplicitan active/burnt
-   export za mjerenje fronte i smisleno tumačenje heuristika.
-4. `done` ne razlikuje containment od isteka weather horizonta. Dodati reason i
-   odvojiti termination/truncation, uključujući timeout i cleanup subprocessa.
-
-Sačuvati **RGB 3×20×20 i Discrete(400)** checkpoint kontrakt. Legacy no-op je `-1`,
-prisiljen poslije B intervencija; nije naučena 401. akcija. Istu semantiku dati svim
-politikama. Prihvat: regresijski testovi za warmup/207 ćelija, budžet, deterministički
-replay, cleanup i containment/weather-horizon razliku. Ne mijenjati reward i glavu
-modela usput bez zasebne odluke i kontrola.
-
-Nakon usaglašenog obima i odgovarajućeg adaptera: zamrznuti scenarije/splitove,
-izmjeriti trošak kratkog benchmarka, pa
-tek planirati fine-tuning. [BACKLOG](docs/BACKLOG.md) čuva TASK-005/006 i dalje.
+U 12-case batchu svaka epizoda završila je na `weather_horizon`; C++ grane
+`front_extinguished`, `grid_exhausted` i `no_ignition` nisu direktno izvršene u toj matrici.
+Adapter consistency nije fire-behavior validation. Stari CFSDS no-action replays i dalje
+previše rastu/dotiču crop edge, uz unknown suppression i dnevni satelitski target.
+Prije benchmarka i dalje trebaju TASK-015 input QC, train-only no-action replay gate i
+event-level heldout freeze. [BACKLOG](docs/BACKLOG.md) čuva redoslijed TASK-005/006.
 TASK-010 je poznata manja CLI greška za root JSON `null`, ne blokira validne runove.
 
 ## Legacy runtime na drugom računaru
@@ -182,12 +214,9 @@ Ne preuzimati cijelu 48.4 GB WildfireSpreadTS arhivu.
 
 ## Spreman prompt za kolegu ili coding agenta
 
-> Nastavi od tri train CFSDS replays (`2018_747`, `2018_241`, `2018_1770`). Pročitaj STATUS, NEXT_SESSION,
-> DECISION_RECORDS, REAL_CASE_PIPELINE, REAL_FIRE_DATASETS i manifest
-> `cfsds-v1_1-pilot-cohort.json`. Odabrana je Canada + CFSDS + Canadian FBP/Cell2Fire.
-> Multi-cell initial-state adapter radi; svi no-action rezultati su dosta veći od opaženog
-> dnevnog rasta, a geometrijski kandidat `2014_538` je odbijen na water/nonfuel provjeri.
-> Istraži fuel/weather/FBP parametre, per-cell kompatibilnost i granice domena. Zatim
-> pripremi 2019/2024 FBP vintages i suppression/QC, pa zamrzni heldout ID-jeve. Ne pokreći
-> glavni
-> fine-tuning dok no-action gate ne prođe; ne radi remote push/merge bez odobrenja.
+> Nastavi na research/cfsds-train-qc. Pročitaj STATUS, NEXT_SESSION, BACKLOG,
+> ADR-019, CFSDS_TRAIN_INPUT_QC, CFSDS_TRAIN_QC i CFSDS_NO_ACTION_DIAGNOSIS. Napravi
+> mali leak-safe train fuel-vintage proof of concept, prvo dodaj fixture za interakciju
+> scar/nonfuel i importer, pa snimi per-case terrain/weather provenance i suppression
+> evidence. Zatim preregistruj zajednički no-action replay gate. Ne otvaraj heldout
+> ishode za tuning i ne treniraj dok gate ne prođe.

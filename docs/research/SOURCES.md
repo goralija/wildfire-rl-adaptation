@@ -4,7 +4,7 @@ title: Izvori i literatura
 ---
 # Izvori i literatura
 
-Provjereno 2026-10-30. Primarni izvori; postojeći rad nije naš rezultat.
+Primarni izvori; datumi pregleda su navedeni uz stavke. Postojeći rad nije naš rezultat.
 
 | ID | Izvor | Uloga / ograničenje |
 | --- | --- | --- |
@@ -112,6 +112,127 @@ konačne tvrdnje; nije provedena sistematska literature review.
   Cell2Fire fork. It may offer an integration starting point for European fuels, but its
   RL wrapper, exact fuel crosswalk and transfer of this project's Firehose weights have
   not been tested.
+- S-031: [CWFIS archived National FBP Fuel Types v2014b](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/archive/)
+  and [official metadata](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/archive/nat_fbpfuels_2014b_metadata.pdf),
+  reviewed 2026-10-31. The archive is 250 m; metadata lists 2011 land cover, CanFI2000,
+  ecological inputs, and NFDB/NBAC use to identify burn scars. It does not give a
+  per-pixel acquisition date or a clear cutoff for burn records, so its version label
+  alone cannot prove as-of-event safety for every 2014–2018 target. The general CWFIS
+  download licence says Open Government Licence - Canada and specifies attribution
+  [S-039]; no product-specific exception was found in the reviewed listing/metadata.
+- S-032: [CWFIS development directory for Canadian Forest FBP Fuel Types](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/)
+  and [v20191114 metadata](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/Canadian_Forest_FBP_Fuel_Types_Metadata_v20191114.pdf),
+  reviewed 2026-10-31. The 250 m archive is listed at about 2 GB in a development
+  directory; metadata lists kNN Forest Inventory (2017) and NBAC. The raw raster was not
+  downloaded or selected as the 2014–2018 event baseline; metadata does not state the
+  per-pixel NBAC cutoff. The general CWFIS download licence says Open Government Licence
+  - Canada and specifies attribution [S-039]; no product-specific exception was found in
+  the reviewed listing/metadata.
+- S-033: [Open Government Portal, CFFDRS FBP Fuel Types 2024, 30 m](https://open.canada.ca/data/dataset/4e66dd2f-5cd0-42fd-b82c-a430044b31de),
+  reviewed 2026-10-31. Official metadata gives 2020-08-01 to 2024-04-01 coverage and lists
+  SCANFI, ecozones, and NBAC inputs. This postdates the current train targets. The
+  portal lists the Open Government Licence - Canada.
+- S-034: [NRCan National Elevation Data Strategy](https://natural-resources.canada.ca/maps-tools-publications/satellite-elevation-air-photos/national-elevation-data-strategy),
+  [MRDEM Open Government record](https://open.canada.ca/data/en/dataset/18752265-bda3-498c-a4ba-9dfe68cb98da),
+  and [NRCan MRDEM overview](https://natural-resources.canada.ca/science-data/science-research/geomatics/ending-canadian-digital-elevation-model-era-new-medium-resolution-digital-elevation-model).
+  Reviewed 2026-10-31. MRDEM provides 30 m terrain products; the overview says lidar
+  sources incorporated into DTM were collected between 2006 and 2023. The three saved
+  pilot manifests identify the MRDEM-30 DTM VRT and bilinear 30 m to 100 m conversion,
+  and generated-grid hashes are recorded. Exact upstream tile/source-cell IDs, source
+  raster checksum, and per-cell acquisition dates are absent. The portal lists the Open
+  Government Licence - Canada; product metadata also carries Copernicus-source
+  attribution/limitations. The published collection dates are not per-cell dates for
+  our three pilot grids.
+- S-035: [Copernicus ERA5 hourly single-level dataset](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels?tab=overview),
+  [ERA5-Land dataset](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land?tab=download),
+  [Open-Meteo Historical Weather API documentation](https://open-meteo.com/en/docs/historical-weather-api),
+  [Open-Meteo terms](https://open-meteo.com/en/terms), and
+  [service pricing/limits](https://open-meteo.com/en/pricing),
+  reviewed 2026-10-31. ERA5 is hourly on a 0.25 degree grid; ERA5-Land is hourly at
+  approximately 0.1 degree. Open-Meteo says ERA5-Seamless combines temperature/humidity
+  from ERA5-Land with wind/solar from ERA5; its model table lists precipitation for
+  ERA5 only. The three saved raw responses preserve resolved grid point, timezone/offset,
+  variables/units and response hash, but not the original query coordinates/URL or exact
+  model revision. The manifest's request_location is the resolved response point, not
+  the original query point, so target-blind selection of these historical requests is
+  unproven. Open-Meteo states API data are CC BY 4.0 with attribution, while free API
+  service terms are separate.
+- S-036: [CWFIS CNFDB documentation](https://cwfis.cfs.nrcan.gc.ca/downloads/nfdb/fire_poly/current_version/NFDB_documentation_EN.pdf)
+  and [CWFIS FAQ](https://cwfis.cfs.nrcan.gc.ca/en/faq?wbdisable=true), reviewed 2026-10-31.
+  CNFDB contains agency-provided fire locations/perimeters; documentation says the data
+  are incomplete and quality varies and that access requires an End-User Agreement.
+  No agreement was accepted and no event-level action/resource timeline was joined.
+- S-037: [Bennett et al., 2026, W.I.S.E. assessment using CFSDS 1.1](https://doi.org/10.1071/WF26072),
+  *International Journal of Wildland Fire* 35(8), WF26072, reviewed 2026-10-31.
+  Methods describe building yearly fuel maps from the 2014/2019/2024 releases with the
+  v20191114 burn-scar succession rules, then reclassifying same-fire pixels burned before
+  day n as non-fuel for each daily simulation. Figure 2 publicly depicts the succession
+  tree; this project transcribed it in `CFSDS_FUEL_VINTAGE_REVIEW.md`. The exact age
+  counting convention and NRCan release artifact have not been independently checked.
+  The paper's initial boundary selects day n-1 pixels adjacent to target day n and
+  explicitly acknowledges future-perimeter information; do not copy that input rule into
+  an unbiased agent benchmark. Suppression filtering is reported, but event-level linkage
+  and transfer to our simulator remain unverified. Study data are available from the
+  corresponding author upon reasonable request; there is no public code/data archive.
+- S-038: [CWFIS CanFG fuel-layer-with-burn-scars legend](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/FBP_FuelLayer_wBurnScars.pdf),
+  and [official v20191114 metadata](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/Canadian_Forest_FBP_Fuel_Types_Metadata_v20191114.pdf),
+  reviewed 2026-10-31. The one-page PDF lists fuel classes (including non-fuel, water,
+  and urban) but does not expose the burn-scar succession decision tree. The metadata
+  confirms NBAC was used to reassign fuel types in burned areas and lists supporting
+  fuel-layer decision documentation; it does not give per-pixel temporal cutoffs.
+- S-039: [CWFIS download-site licence](https://cwfis.cfs.nrcan.gc.ca/downloads/licence.txt),
+  reviewed 2026-10-31. The site-wide notice states the Open Government Licence - Canada
+  applies to downloaded data and gives the required Canadian Forest Service/CWFIS
+  attribution. This resolves the prior finding that no licence statement was visible in
+  individual v2014b/v20191114 files; it does not replace checking for product-specific
+  exceptions or licences on separately sourced input layers.
+- S-040: [Canadian National FBP Fuel Type Layer - Current Year, Open Government Portal](https://open.canada.ca/data/en/dataset/851e6a27-a250-41e6-9cd0-d7ff96455dd6),
+  reviewed 2026-10-31. The official 2026 product description says national fuel maps are
+  updated before fire season with burned-area and other data from the previous year and
+  are scheduled for publication by 30 April. This is evidence for the current product's
+  update convention, not proof of the historical v2014b map's exact cutoff.
+- S-041: [FBP Fuel Layer Decision Rules](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/FBP_Fuel_Layer_Decision_Rules.pdf)
+  and [FBP Fuel Layer Base Layers](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/FBP_Fuel_Layer_Base_Layers.pdf),
+  reviewed 2026-10-31. These official 2018 documents describe deriving base FBP classes
+  from inventory, species, land-cover and ecological layers. They are not the post-fire
+  burn-scar succession crosswalk cited as a separate figure in S-037. The base-layer
+  document notes that kNN NFI v1 layers are available on request and some Agriculture
+  Canada land-cover inputs were under a data-sharing agreement.
+
+- S-042: [CWFIS Satellite/NDVI data for CWFIS/fire danger rating in Canada](https://cwfis.cfs.nrcan.gc.ca/downloads/greenup/Satellite_NDVI_data_for_CWFIS_fire_danger_rating_in_Canada.pdf),
+  reviewed 2026-10-31. The official note says the operational 2015 CWFIS fuel grid used
+  2012 MODIS land cover and CanFI, and annual updates mapped areas burned in the last year
+  as non-fuel and areas burned in the previous two years as grass. It describes a simpler
+  2015 operational grid; it is not proof of the versioned v2014b burn-record cutoff and
+  is not the v20191114 Figure 2 succession tree.
+- S-043: [Government of Alberta Historical wildfire data: 2006–2025 catalogue](https://open.canada.ca/data/en/dataset/a221e7a0-4f46-4be7-9c5a-e29de9a3447e),
+  [official CSV](https://open.alberta.ca/dataset/a221e7a0-4f46-4be7-9c5a-e29de9a3447e/resource/80480824-0c50-456c-9723-f9d4fc136141/download/fp-historical-wildfire-data-2006-2025.csv),
+  [official data dictionary](https://open.alberta.ca/dataset/a221e7a0-4f46-4be7-9c5a-e29de9a3447e/resource/1b635b8b-a937-4be4-857e-8aeef77365d2/download/fp-historical-wildfire-data-dictionary-2006-2025.pdf),
+  and [Alberta wildfire maps/data landing page](https://www.alberta.ca/wildfire-maps-and-data),
+  reviewed 2026-10-31. Official metadata says the fire-level dataset includes location,
+  time/duration, weather, staffing and physical resources used to suppress each fire, and
+  area burned; the catalogue lists Open Government Licence - Alberta. A direct CSV
+  download attempt from this workspace returned HTTP 403, so the CSV/dictionary have not
+  been inspected or joined to any CFSDS event. A candidate geographic match would
+  establish fire-level evidence only; it would not by itself provide a day-by-day action
+  timeline. Fire number, event date and perimeter/location must be matched before updating
+  suppression status.
+- S-044: [BC Wildfire Fire Perimeters - Historical, official ArcGIS layer](https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_land_and_natural_resource/MapServer/6)
+  and [Open Government catalogue entry](https://open.canada.ca/data/en/dataset/22c7cb44-1463-48f7-8e47-88857f207702),
+  reviewed 2026-10-31. The BC Wildfire Service layer exposes fire number/year, cause,
+  reported perimeter size, fire date, GPS track date and source; the catalogue lists the
+  Open Government Licence - British Columbia. A TRAIN-only point-in-polygon query matched
+  each of the three saved 2018 CFSDS target centroids to exactly one 2018 BC perimeter:
+  N12395, C11937 and N12413. These are strong candidate incident crosswalks, not shared
+  identifiers proven against a CFSDS event key. The layer has no crew/resource/daily
+  action fields, so these matches do not change suppression status from `unknown`. Query
+  inputs, case/response hashes and result attributes are in
+  [`cfsds-train-bc-perimeter-crosswalk.json`](../../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json).
+- S-045: [BC Wildfire Service 2018 Wildfire Season Summary](https://www2.gov.bc.ca/gov/content/safety/wildfire-status/about-bcws/wildfire-history/wildfire-season-summary), reviewed 2026-10-31. The official retrospective identifies North Baezaeko (C11937) as discovered August 1, lightning-caused, and 13,433.2 ha at season end. It supports incident context and name/date cross-checking, not a daily response timeline.
+- S-046: [Emergency Management BC, PECC Situation Report #10, August 16, 2018](https://docs.openinfo.gov.bc.ca/Response_Package_PSS-2018-86747.pdf), in the official open-information response package, reviewed 2026-10-31. Its August 16 15:00 snapshot lists North Baezaeko (C11937) at an estimated 2,500 ha and 0% contained. The report does not give this fire's crews, tactics, or daily action schedule; containment status is not proof of no suppression.
+- S-047: Contemporaneous [East Kootenay wildfire updates (August 12)](https://www.e-know.ca/regions/east-kootenay/east-kootenay-wildfire-update/), [nine fires update (August 14)](https://www.e-know.ca/regions/east-kootenay/nine-wildfires-of-note-burning-in-region/), [Kimberley public update (August 16)](https://www.e-know.ca/regions/kimberley/grateful-for-information-meeting-on-fires/), and [regional update (August 18)](https://www.e-know.ca/regions/east-kootenay/meachen-creek-fire-remains-in-drainage/), reviewed 2026-10-31. These local public reports relay BC Wildfire Service updates and a City of Kimberley mayor's recap. They report target-day containment-line work at Coal Creek (candidate N12395) and complex-level Lost Dog ignition/resources on August 15 (candidate N12413), adjacent to the saved target dates. Treat them as dated public reporting, not structured dispatch records: exact per-fire allocation, hours, cell-level locations and complete daily actions are unavailable. The train-only extraction, date offsets and limits are in [`cfsds-train-bc-operational-evidence.json`](../../reports/real-fire-data/cfsds-train-bc-operational-evidence.json).
+- S-048: Official [CanFG v20191114 directory listing](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/), [FBP Fuel Layer Decision Rules PDF](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/FBP_Fuel_Layer_Decision_Rules.pdf), and [FBP Fuel Layer with Burn Scars legend](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/FBP_FuelLayer_wBurnScars.pdf), reviewed 2026-10-31. The directory lists the 2 GB v20191114 raster archive, metadata, a burn-scar class legend, base-layer notes, baseline fuel-classification decision rules and a sample colour workbook; it does not list a separate burn-scar succession algorithm. The November 14, 2018 Decision Rules PDF maps vegetation/forest/species/land-cover/ecological attributes to baseline FBP classes and does not specify years-since-fire thresholds. The archive itself was not downloaded or inspected, so this directory inventory does not prove no additional artifact is embedded in the ZIP. The W.I.S.E. article states the v20191114 succession tree is visualized in Figure 2 [S-037]; the public figure is the available rule description, while exact release implementation and age/special-class semantics remain unverified. See the [fuel source gate receipt](../../reports/real-fire-data/cfsds-train-fuel-source-gate.json).
+- S-049: NRCan [CanElevation–MRDEM Product Specifications, edition 1.2](https://download-telecharger.services.geo.ca/pub/elevation/dem_mne/MRDEM_MNEMR/CanElevation-MRDEM-Product-Specifications.pdf), the public [MRDEM-30 source-class COG](https://canelevation-dem.s3.ca-central-1.amazonaws.com/mrdem-30/mrdem-30-source.tif), NRCan [National Elevation Data Strategy](https://natural-resources.canada.ca/maps-tools-publications/satellite-elevation-air-photos/national-elevation-data-strategy), and Open-Meteo [Historical Weather API documentation](https://open-meteo.com/en/docs/historical-weather-api), reviewed 2026-10-31. MRDEM source codes identify adjusted Copernicus GLO-30 (1), blended area (5), or HRDEM Mosaic (10). Bounded 30 m source-class reads over each of the three saved 2018 TRAIN grids returned 4,489/4,489 pixels as code 1. NRCan documents the GLO-30 source collection as 2011–2015, but the current source-class asset is not the saved DTM source bytes and does not expose an exact acquisition date per pixel. Fresh Open-Meteo ERA5-Seamless queries at reconstructed target-blind pre-target-front centroids resolve to the same coarse grid points as legacy manifests, but temperature changes in all 24 target-day hours and humidity in 1–6 hours; wind and precipitation match. The cause of those weather changes is unknown. Exact query URLs and small response snapshots are pinned in [`cfsds-train-terrain-weather-provenance.json`](../../reports/real-fire-data/cfsds-train-terrain-weather-provenance.json) and `reports/real-fire-data/weather-snapshots/`. The legacy original query coordinates remain unknown; the old FireCases are not updated or reclassified as target-blind.
 
 [REAL_FIRE_DATASETS](REAL_FIRE_DATASETS.md) čuva preporuku, obim uzorka i nedostatke;
 reports/real-fire-data/ čuva download SHA256 i provjere stvarno preuzetih fajlova.

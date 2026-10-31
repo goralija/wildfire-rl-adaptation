@@ -100,6 +100,12 @@ stvarni pilot; glavna još nepoznata stvar je kvalitet no-action podudaranja. Ko
 JSON-to-Cell2Fire field mapping je u
 [REAL_CASE_PIPELINE](REAL_CASE_PIPELINE.md).
 
+Ipak, fiksni 20×20/100 m prozor (~2×2 km) trenutno nije prostorno dovoljan za većinu
+shortlist TRAIN day-pair parova. Veći prozori popravljaju overlap, ali za isti shortlist
+medijan target capture je oko 1.95% na ~4 km i 15.31% na ~6 km. To su post-selection
+geometrijske dijagnostike, ne simulator rezultati niti dokaz da treba mijenjati agentovu
+skalu. [Spatial feasibility report](CFSDS_SPATIAL_FEASIBILITY.md).
+
 **Ako je glavni cilj Evropa/BiH:** FireSpread_MedEU sadrži 103 događaja i 320 ~3 m
 koraka; prostorni pregled našao je sedam kandidata koji dodiruju BiH granicu. Najbolje
 ocijenjeni lokalni primjer `EFFIS_id=205938` ima četiri dnevna koraka visoke kvalitete,
@@ -135,10 +141,12 @@ Za glavni eksperiment:
    zabilježiti istu mapu/front/weather/C++ seed/budžet, simulated damage, horizon,
    intervencije, checkpoint/hash i observed-boundary spread score.
 
-Sljedeće je proširiti train-only CFSDS replaye, pregledati poravnanje fuel/DEM/weather
-i prostor oko predviđenog rasta. Za BiH početi s MedEU `205938` (ili manjim `43482`)
-samo poslije fuel-modela, licence i scale odluke. Tek kad više no-action train replaya
-bude razumljivo, zamrznuti event-level heldout IDs i pokrenuti benchmark/fine-tuning.
+Sljedeće prvo definisati potpuno target-independent day-pair membership pravilo i
+screenirati sve train prilike na unaprijed zadanom modelskom prostoru. Tek nakon spatial
+gate-a pregledati fuel/DEM/weather za slučajeve i pokušati train no-action replaye. Za BiH
+početi s MedEU `205938` (ili manjim `43482`) samo poslije fuel-modela, licence i scale
+odluke. Tek kad više no-action train replaya bude razumljivo, zamrznuti event-level heldout
+IDs i pokrenuti benchmark/fine-tuning.
 Jedna Dogrib/CFSDS mapa ne pokazuje generalizaciju. Ne predstavljati kanadske FBP gorive
 klase kao validaciju šumskih požara u BiH.
 

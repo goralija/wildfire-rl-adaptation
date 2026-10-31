@@ -13,5 +13,5 @@
 - [Nastavak rada bez chat historije](NEXT_SESSION.md) - Handoff
 - [OKF 0.2 knowledge migration](OKF_MIGRATION_PLAN.md) - Implementation Plan
 - [Nezavisan pregled bootstrap koda — 2026-10-28](REVIEW.md) - Review Record
-- [Trenutno stanje — 2026-10-28](STATUS.md) - Project Status
+- [Trenutno stanje — 2026-10-31](STATUS.md) - Project Status
 - [Work log](WORK_LOG.md) - History

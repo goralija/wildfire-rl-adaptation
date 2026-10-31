@@ -28,6 +28,19 @@ from rasterio.warp import Resampling, reproject
 from rasterio.windows import Window
 from scipy.ndimage import binary_dilation
 
+try:  # works both as ``python scripts/build_cfsds_case.py`` and package import
+    from .cfsds_initial_state import (
+        derive_pre_target_state_masks,
+        initial_state_cells,
+        select_target_blind_window,
+    )
+except ImportError:  # pragma: no cover - exercised by direct CLI invocation
+    from cfsds_initial_state import (
+        derive_pre_target_state_masks,
+        initial_state_cells,
+        select_target_blind_window,
+    )
+
 
 CFSDS_OSF = "https://osf.io/f48ry/"
 FBP_2014_URL = (
@@ -42,6 +55,7 @@ WEATHER_API = "https://archive-api.open-meteo.com/v1/archive"
 MODEL_SIZE = 20
 MODEL_CELL_M = 100
 NODATA_ARRIVAL = 4_000_000_000
+MAX_WEATHER_GRID_DISTANCE_KM = 25.0
 
 
 def sha256(path: Path) -> str:
@@ -206,16 +220,40 @@ def get_weather_rows(path: Path, target_date: date) -> tuple[list[dict[str, Any]
     return rows, info
 
 
+def require_target_blind_screen(screen: Any) -> None:
+    """Reject legacy cohort screens without explicit target-blind selection flags."""
+    if not isinstance(screen, dict):
+        raise ValueError("Screen manifest must be a JSON object")
+    if screen.get("target_geometry_used_for_crop_selection") is not False:
+        raise ValueError("Refusing a screen that does not prove target-blind crop selection")
+    if screen.get("target_geometry_used_for_candidate_ranking") is not False:
+        raise ValueError("Refusing a screen that does not prove target-blind candidate ranking")
+
+
+def require_target_blind_candidate(candidate: Any) -> None:
+    """Reject a candidate row that was selected or ranked using target geometry."""
+    if not isinstance(candidate, dict):
+        raise ValueError("Screen candidate must be a JSON object")
+    if candidate.get("target_geometry_used_for_window_selection") is not False:
+        raise ValueError("Refusing a candidate whose crop selection used target geometry")
+    if candidate.get("target_geometry_used_for_candidate_ranking") is not False:
+        raise ValueError("Refusing a candidate whose ranking used target geometry")
+
+
 def make_case(args: argparse.Namespace) -> dict[str, Any]:
     raw_root = args.raw_root
     screen_path = args.screen
     screen = json.loads(screen_path.read_text())
+    require_target_blind_screen(screen)
     candidates = [item for item in screen["screening_candidates"] if item["event_id"] == args.event_id]
     if args.target_doy is not None:
         candidates = [item for item in candidates if item["target_doy"] == args.target_doy]
     if len(candidates) != 1:
         raise ValueError(f"Expected exactly one screened candidate for {args.event_id}, found {len(candidates)}")
     candidate = candidates[0]
+    if candidate.get("split") != "train":
+        raise ValueError(f"Refusing to build non-train event {args.event_id!r}")
+    require_target_blind_candidate(candidate)
     year = int(candidate["year"])
     target_doy = int(candidate["target_doy"])
     target_date = date(year, 1, 1) + timedelta(days=target_doy - 1)
@@ -232,19 +270,31 @@ def make_case(args: argparse.Namespace) -> dict[str, Any]:
         raster_bytes = archive.read(member)
     with rasterio.open(io.BytesIO(raster_bytes)) as src:
         source_crs = src.crs
-        source_transform = Affine(*candidate["crop_transform"])
-        source_window = Window(candidate["col_off"], candidate["row_off"], 23, 23)
-        arrival = src.read(1, window=source_window)
+        full_arrival = src.read(1)
+        selected_window = select_target_blind_window(full_arrival, target_doy, tile_size=23)
+        if selected_window is None:
+            raise ValueError(
+                f"{args.event_id} DOB={target_doy} has no target-blind 23x23 crop with at least three interior day n-1 cells"
+            )
+        row_off, col_off = int(selected_window["row_off"]), int(selected_window["col_off"])
+        source_window = Window(col_off, row_off, 23, 23)
+        arrival = full_arrival[row_off:row_off + 23, col_off:col_off + 23]
+        source_transform = rasterio.windows.transform(source_window, src.transform)
         if arrival.shape != (23, 23):
             raise ValueError(f"CFSDS native window shape is {arrival.shape}, expected 23x23")
 
-    observed = (arrival == target_doy) & (arrival < NODATA_ARRIVAL)
-    previous = (arrival == target_doy - 1) & (arrival < NODATA_ARRIVAL)
-    target_native = observed & binary_dilation(previous, structure=np.ones((3, 3), dtype=bool))
-    front_native = previous & binary_dilation(target_native, structure=np.ones((3, 3), dtype=bool))
-    scar_native = (arrival > 0) & (arrival <= target_doy - 1) & (arrival < NODATA_ARRIVAL) & ~front_native
-    if not target_native.any() or not front_native.any() or int(target_native.sum()) != int(observed.sum()):
-        raise ValueError("Selected day pair failed adjacency / no-long-range-spotting checks")
+    observed_full = (full_arrival == target_doy) & (full_arrival < NODATA_ARRIVAL)
+    target_native = observed_full[row_off:row_off + 23, col_off:col_off + 23]
+    pre_target_masks = derive_pre_target_state_masks(arrival, target_doy)
+    scar_native = pre_target_masks["scar"]
+    front_native = pre_target_masks["front"]
+    previous_full = (full_arrival == target_doy - 1) & (full_arrival < NODATA_ARRIVAL)
+    connected_target_full = observed_full & binary_dilation(
+        previous_full, structure=np.ones((3, 3), dtype=bool)
+    )
+    target_disconnected_pixels = int(observed_full.sum() - connected_target_full.sum())
+    if not front_native.any():
+        raise ValueError("Target-blind crop has no safe-interior day n-1 active-front cells")
 
     # Center a 20x20 100 m grid inside the candidate's 23x23 native 90 m crop.
     # This preserves the model's fixed 2 km policy footprint without silently
@@ -270,17 +320,21 @@ def make_case(args: argparse.Namespace) -> dict[str, Any]:
     burnt = fractions["scar"] >= 0.5
     burning = fractions["front"] >= 0.5
     target_binary = fractions["target"] >= 0.5
-    if np.any(burnt & burning) or np.any((burnt | burning) & target_binary):
-        raise ValueError("Resampling caused mutually exclusive historical states to overlap")
-    if not target_binary.any() or not burning.any():
-        raise ValueError("No target or active-front cells remain after resampling")
+    if np.any(burnt & burning):
+        raise ValueError("Resampling caused the historical scar and active front to overlap")
+    if not burning.any():
+        raise ValueError("No target-blind active-front cells remain after resampling")
     structure = np.ones((3, 3), dtype=bool)
-    if np.any(target_binary[[0, -1], :]) or np.any(target_binary[:, [0, -1]]):
-        raise ValueError("Target day touches the 20x20 simulator grid edge")
+    target_initial_overlap_cells = int(np.count_nonzero(target_binary & (burnt | burning)))
+    target_edge_cells = int(
+        target_binary[[0, -1], :].sum() + target_binary[:, [0, -1]].sum()
+        - target_binary[[0, -1], :][:, [0, -1]].sum()
+    )
+    target_front_adjacent = bool(
+        target_binary.any() and np.any(burning & binary_dilation(target_binary, structure=structure))
+    )
     if np.any(burning[[0, -1], :]) or np.any(burning[:, [0, -1]]):
-        raise ValueError("Active front touches the 20x20 simulator grid edge")
-    if not np.any(burning & binary_dilation(target_binary, structure=structure)):
-        raise ValueError("Resampled active front is no longer adjacent to the resampled target")
+        raise ValueError("Target-blind active front touches the 20x20 simulator grid edge")
 
     lookup_path = args.lookup
     with zipfile.ZipFile(args.fuel_zip) as archive:
@@ -302,8 +356,11 @@ def make_case(args: argparse.Namespace) -> dict[str, Any]:
     if missing_codes:
         raise ValueError(f"2014b fuel map contains unhandled code(s) in selected window: {missing_codes}")
     forest = np.vectorize(fuel_mapping.__getitem__, otypes=[np.uint16])(source_fuel)
-    if np.any((burnt | burning | target_binary) & np.isin(forest, [101, 102, 105])):
-        raise ValueError("A historical burned/front/target cell maps to non-fuel or water")
+    nonburnable = np.isin(forest, [101, 102, 105])
+    initial_nonfuel_cells = int(np.count_nonzero((burnt | burning) & nonburnable))
+    target_nonfuel_cells = int(np.count_nonzero(target_binary & nonburnable))
+    if initial_nonfuel_cells:
+        raise ValueError("A target-blind initial scar/front cell maps to non-fuel or water")
 
     weather_rows, weather_info = get_weather_rows(args.weather_json, target_date)
     data_summary = summary
@@ -312,7 +369,18 @@ def make_case(args: argparse.Namespace) -> dict[str, Any]:
 
     weather_path = args.weather_json
     weather_payload = json.loads(weather_path.read_text())
-    requested_lat, requested_lon = float(data_summary["lat"]), float(data_summary["lon"])
+    active_rows, active_cols = np.nonzero(front_native)
+    active_x = []
+    active_y = []
+    for local_row, local_col in zip(active_rows, active_cols):
+        x, y = source_transform * (float(local_col) + 0.5, float(local_row) + 0.5)
+        active_x.append(x)
+        active_y.append(y)
+    pre_target_x, pre_target_y = float(np.mean(active_x)), float(np.mean(active_y))
+    transformer = Transformer.from_crs(source_crs, "EPSG:4326", always_xy=True)
+    requested_lon, requested_lat = transformer.transform(pre_target_x, pre_target_y)
+    target_summary_lat = None if data_summary["lat"] is None else float(data_summary["lat"])
+    target_summary_lon = None if data_summary["lon"] is None else float(data_summary["lon"])
     api_lat, api_lon = float(weather_payload["latitude"]), float(weather_payload["longitude"])
     mean_lat = math.radians((requested_lat + api_lat) / 2)
     distance_km = math.sqrt(
@@ -320,7 +388,6 @@ def make_case(args: argparse.Namespace) -> dict[str, Any]:
         + ((requested_lon - api_lon) * 111.32 * math.cos(mean_lat)) ** 2
     )
 
-    transformer = Transformer.from_crs(source_crs, "EPSG:4326", always_xy=True)
     lat_grid = np.zeros((MODEL_SIZE, MODEL_SIZE), dtype=np.float64)
     lon_grid = np.zeros((MODEL_SIZE, MODEL_SIZE), dtype=np.float64)
     for row in range(MODEL_SIZE):
@@ -459,13 +526,7 @@ def make_case(args: argparse.Namespace) -> dict[str, Any]:
     with (input_root / "InitialState.csv").open("w", newline="") as stream:
         writer = csv.writer(stream, lineterminator="\n")
         writer.writerow(["state", "ncell"])
-        for row in range(MODEL_SIZE):
-            for col in range(MODEL_SIZE):
-                cell = row * MODEL_SIZE + col + 1
-                if burnt[row, col]:
-                    writer.writerow(["burnt", cell])
-                elif burning[row, col]:
-                    writer.writerow(["burning", cell])
+        writer.writerows(initial_state_cells(burnt, burning))
 
     write_ascii(truth_root / "target_next_day_fraction.asc", fractions["target"], model_transform, nodata=0)
     write_ascii(truth_root / "target_next_day_majority.asc", target_binary.astype(np.uint8), model_transform, nodata=0)
@@ -482,9 +543,9 @@ def make_case(args: argparse.Namespace) -> dict[str, Any]:
         "target_cells_majority": int(target_binary.sum()),
         "target_area_equivalent_ha": round(float(fractions["target"].sum()), 4),
         "target_area_source_ha": round(float(target_native.sum()) * 0.81, 4),
-        "initial_nonfuel_cells": 0,
-        "target_nonfuel_cells": 0,
-        "target_edge_cells": 0,
+        "initial_nonfuel_cells": initial_nonfuel_cells,
+        "target_nonfuel_cells": target_nonfuel_cells,
+        "target_edge_cells": target_edge_cells,
         "front_edge_cells": 0,
     }
     cfsds_manifest_path = Path("reports/real-fire-data/cfsds-download-manifest.json")
@@ -506,6 +567,9 @@ def make_case(args: argparse.Namespace) -> dict[str, Any]:
         for key in ("TMP", "RH", "WS")
     }
     weather_summary["APCP_sum_mm"] = round(float(model_weather["APCP"].sum()), 4)
+    weather_info["input_location_basis"] = "centroid of safe-interior day n-1 pixels in the target-blind selected crop"
+    weather_info["pre_target_front_centroid_wgs84"] = {"lat": float(requested_lat), "lon": float(requested_lon)}
+    weather_info["api_grid_distance_from_pre_target_front_centroid_km"] = round(distance_km, 3)
     case = {
         "case_id": f"{args.event_id}_dob{target_doy}_20x20",
         "split": candidate["split"],
@@ -519,7 +583,7 @@ def make_case(args: argparse.Namespace) -> dict[str, Any]:
             "reported_day_growth_ha": float(summary["firearea"]),
             "suppression_status": "unknown; no event-level agency record joined",
             "summary_weather": {key: summary[key] for key in ("ffmc", "dmc", "dc", "isi", "bui", "fwi", "prec", "tmax", "ws", "rh")},
-            "summary_centroid_wgs84": {"lat": requested_lat, "lon": requested_lon},
+            "target_day_growth_centroid_wgs84": {"lat": target_summary_lat, "lon": target_summary_lon},
         },
         "grid": {
             "rows": MODEL_SIZE,
@@ -527,8 +591,8 @@ def make_case(args: argparse.Namespace) -> dict[str, Any]:
             "cell_size_m": MODEL_CELL_M,
             "extent_m": MODEL_SIZE * MODEL_CELL_M,
             "crs_wkt": source_crs.to_wkt(),
-            "native_cfsds_grid": {"rows": 23, "cols": 23, "cell_size_m": 90, "target_pixels": int(target_native.sum()), "front_pixels": int(front_native.sum()), "scar_pixels": int(scar_native.sum())},
-            "alignment": "center 20x20 100m model grid within the screened 23x23 90m CFSDS crop",
+            "native_cfsds_grid": {"rows": 23, "cols": 23, "cell_size_m": 90, "row_off": row_off, "col_off": col_off, "target_pixels": int(target_native.sum()), "front_pixels": int(front_native.sum()), "day_n_minus_1_border_pixels_as_burnt_scar": int(selected_window["day_n_minus_1_border_pixels_as_burnt_scar"]), "scar_pixels": int(scar_native.sum())},
+            "alignment": "center 20x20 100m model grid within the target-blind 23x23 90m CFSDS crop",
             "historical_mask_resampling": "area-weighted fraction; model start state uses >=50% cell coverage; target truth fraction remains separate",
             "state_counts": state_counts,
         },
@@ -537,7 +601,7 @@ def make_case(args: argparse.Namespace) -> dict[str, Any]:
             "cfsds_daily_summary": {"name": group_zip.name, "url": group_entry["url"], "sha256": group_entry["sha256"], "member": "single CSV"},
             "fuel_map": fuel_entry,
             "elevation": {"name": "NRCan Canadian Medium Resolution Digital Elevation Model DTM", "collection": "mrdem-30", "stac_url": "https://datacube.services.geo.ca/stac/api/collections/mrdem-30", "asset_url": str(dem_path), "crs": dem_crs, "resolution_m": dem_resolution, "resampling": "30m DTM bilinear to the 100m simulator grid", "retrieved_on": date.today().isoformat()},
-            "weather": {**weather_info, "raw_json": str(weather_path), "raw_sha256": sha256(weather_path), "api_grid_distance_from_cfsds_centroid_km": round(distance_km, 3), "hourly_summary": weather_summary, "source_license_note": "Open-Meteo free API use requires attribution and is intended for non-commercial use; ERA5 data are Copernicus reanalysis."},
+            "weather": {**weather_info, "raw_json": str(weather_path), "raw_sha256": sha256(weather_path), "hourly_summary": weather_summary, "source_license_note": "Open-Meteo free API use requires attribution and is intended for non-commercial use; ERA5 data are Copernicus reanalysis."},
             "simulator_lookup": {"path": str(lookup_path), "sha256": sha256(lookup_path)},
         },
         "conversion": {
@@ -550,19 +614,32 @@ def make_case(args: argparse.Namespace) -> dict[str, Any]:
                 "grass_curing_percent": args.grass_curing_percent,
             },
             "weather": "24 local-time hourly ERA5-Seamless weather rows; APCP mm, TMP Celsius, RH percent, WS km/h, WD converted from meteorological-from to simulator downwind bearing. Daily FWI codes are the CFSDS fire-day means and held constant across these 24 rows because CFSDS does not supply hourly FWI codes.",
-            "initial_state": "burned scar and day n-1 active front are separate; the observed day n target is stored only in truth/ and is not copied into Cell2Fire input.",
+            "initial_state": "Target-blind crop is selected from arrival data strictly before day n. All day n-1 pixels inside the crop's one-native-cell border are active; border-ring day n-1 pixels and all older scars are burnt. Day-n geometry is stored only in truth/.",
+            "initial_state_rule_version": "cfsds-pretarget-window-front-v1",
         },
         "quality_gates": {
-            "target_has_no_disconnected_spot_pixels": True,
-            "active_front_adjacent_to_target_after_resampling": True,
-            "all_initial_and_target_cells_on_burnable_fuel": True,
-            "target_and_front_interior_to_simulator_grid": True,
+            "target_has_no_disconnected_spot_pixels": target_disconnected_pixels == 0,
+            "target_blind_initial_input": True,
+            "active_front_adjacent_to_target_after_resampling": target_front_adjacent,
+            "all_initial_cells_on_burnable_fuel": initial_nonfuel_cells == 0,
+            "target_cells_on_burnable_fuel": target_nonfuel_cells == 0,
+            "target_and_front_interior_to_simulator_grid": target_edge_cells == 0 and not bool(np.any(burning[[0, -1], :]) or np.any(burning[:, [0, -1]])),
+            "target_edge_cells": target_edge_cells,
+            "target_initial_overlap_cells_for_fractional_truth": target_initial_overlap_cells,
+            "target_disconnected_pixels": target_disconnected_pixels,
+            "target_pixels_in_crop": int(target_native.sum()),
+            "target_pixels_in_full_raster": int(observed_full.sum()),
+            "target_growth_capture_ratio": round(int(target_native.sum()) / max(int(observed_full.sum()), 1), 6),
+            "target_geometry_used_to_select_input_crop_or_front": False,
             "weather_rows_complete": len(weather_rows) == 24,
+            "weather_grid_within_25km_of_target_blind_front": distance_km <= MAX_WEATHER_GRID_DISTANCE_KM,
             "historical_suppression_joined": False,
             "physical_validity_claimed": False,
         },
         "limitations": [
             "CFSDS day-of-burning is a satellite-hotspot interpolation, not a ground-truth hourly fire perimeter.",
+            "The active day n-1 cells are a predeclared daily-front proxy, not observed instantaneous flaming cells; border-ring cells are treated as historical scar.",
+            "Day-n weather is retrospective reanalysis forcing, not a weather forecast known at the start of day n-1.",
             "Fuel map is 250m and was regridded to a 100m policy grid; this does not create 100m fuel detail.",
             "Weather is a roughly 9-25km reanalysis point estimate, several kilometres from the fire-growth centroid.",
             "Daily CFSDS FWI codes are held constant over the 24 hourly simulator weather rows.",
@@ -576,10 +653,10 @@ def make_case(args: argparse.Namespace) -> dict[str, Any]:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--event-id", default="2018_747")
+    parser.add_argument("--event-id", required=True)
     parser.add_argument("--target-doy", type=int, default=228)
     parser.add_argument("--raw-root", type=Path, default=Path("data/raw/cfsds-v1_1"))
-    parser.add_argument("--screen", type=Path, default=Path("reports/real-fire-data/cfsds-cohort-screen.json"))
+    parser.add_argument("--screen", type=Path, default=Path("reports/real-fire-data/cfsds-train-target-blind-window-screen.json"))
     parser.add_argument("--fuel-zip", type=Path, default=Path("data/raw/cwfis-fuels/National_FBP_Fueltypes_version2014b.zip"))
     parser.add_argument("--lookup", type=Path, default=Path("external/firehose/data/Sub20x20/fbp_lookup_table.csv"))
     parser.add_argument("--weather-json", type=Path, default=Path("data/raw/real-case/2018_747/era5_seamless_2018-08-16_local.json"))

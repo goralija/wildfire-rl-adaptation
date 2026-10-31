@@ -1,0 +1,102 @@
+{
+  "schema": "cfsds-train-bc-operational-evidence/v1",
+  "retrieved_date": "2026-10-31",
+  "scope": "Only the three already-saved 2018 TRAIN FireCases and their candidate BC incident crosswalks were reviewed.",
+  "join_rule": "Candidate BC incident numbers come from the separate target-centroid / 2018 historical-perimeter receipt. Public reporting was checked for incident name, fire number where shown, place, and date. No shared CFSDS-to-BC key was found.",
+  "cases": [
+    {
+      "cfsds_event_id": "2018_1770",
+      "target_date_local": "2018-08-12",
+      "candidate_bc_fire_number": "N12395",
+      "candidate_bc_name": "Coal Creek FSR",
+      "crosswalk_receipt": "cfsds-train-bc-perimeter-crosswalk.json",
+      "operational_evidence": "documented_activity_on_target_date",
+      "observations": [
+        {
+          "reported_activity_date": "2018-08-12",
+          "reported_by": "BC Wildfire Service, relayed in a contemporaneous local update",
+          "source_url": "https://www.e-know.ca/regions/east-kootenay/east-kootenay-wildfire-update/",
+          "source_published": "2018-08-12",
+          "facts": "The update identifies Coal Creek FSR about 12 km east of Fernie, reports the fire at 713 ha and 0% contained, and says five pieces of heavy equipment were building containment lines with one helicopter supporting the fire that day.",
+          "target_day_relation": "same calendar date as the CFSDS target day",
+          "limits": "No exact crew count, hours, cell-level treatment footprint, or complete daily action log is provided. The report is contemporaneous public reporting, not a structured BCWS dispatch record."
+        },
+        {
+          "reported_activity_date": "2018-08-14",
+          "reported_by": "BC Wildfire Service, relayed in a contemporaneous local update",
+          "source_url": "https://www.e-know.ca/regions/east-kootenay/nine-wildfires-of-note-burning-in-region/",
+          "source_published": "2018-08-14",
+          "facts": "The update reports 11 firefighters, one helicopter and five pieces of heavy equipment at Coal Creek, with heavy equipment building containment lines and helicopter bucketing support.",
+          "target_day_relation": "two calendar days after the CFSDS target day",
+          "limits": "Adjacent chronology only; resource totals are not an exact target-day assignment."
+        }
+      ],
+      "interpretation": "A suppression response is publicly documented on the target date for the candidate incident. This makes an observed perimeter an intervention-affected outcome; it is not a no-action ground-truth trajectory."
+    },
+    {
+      "cfsds_event_id": "2018_241",
+      "target_date_local": "2018-08-15",
+      "candidate_bc_fire_number": "C11937",
+      "candidate_bc_name": "North Baezaeko",
+      "crosswalk_receipt": "cfsds-train-bc-perimeter-crosswalk.json",
+      "operational_evidence": "response_status_only; daily_actions_not_found",
+      "observations": [
+        {
+          "reported_activity_date": "2018-08-16",
+          "reported_by": "Emergency Management BC, Provincial Emergency Coordination Centre Situation Report #10",
+          "source_url": "https://docs.openinfo.gov.bc.ca/Response_Package_PSS-2018-86747.pdf",
+          "source_published": "2018-08-16",
+          "facts": "The report lists North Baezaeko (C11937) at an estimated 2,500 ha and 0% contained in its August 16 15:00 interface-fire snapshot.",
+          "target_day_relation": "one calendar day after the CFSDS target day",
+          "limits": "Containment status and estimated size do not identify whether crews or aircraft were assigned, what tactics were used, or when. This is not evidence of no suppression."
+        },
+        {
+          "reported_activity_date": "2018 fire season summary",
+          "reported_by": "BC Wildfire Service",
+          "source_url": "https://www2.gov.bc.ca/gov/content/safety/wildfire-status/about-bcws/wildfire-history/wildfire-season-summary",
+          "source_published": "2018 season summary; current page reviewed 2026-10-31",
+          "facts": "The official summary identifies North Baezaeko as discovered August 1, lightning-caused, and 13,433.2 ha at season end.",
+          "target_day_relation": "incident identity and final-season context only",
+          "limits": "A season summary is not a daily resource or action record."
+        }
+      ],
+      "interpretation": "The candidate identity is supported by incident name, year, location and chronology, but no target-day or adjacent-day crew/action record was located in this search. Keep suppression and daily actions unknown."
+    },
+    {
+      "cfsds_event_id": "2018_747",
+      "target_date_local": "2018-08-16",
+      "candidate_bc_fire_number": "N12413",
+      "candidate_bc_name": "Lost Dog Complex",
+      "crosswalk_receipt": "cfsds-train-bc-perimeter-crosswalk.json",
+      "operational_evidence": "documented_complex_activity_on_adjacent_days",
+      "observations": [
+        {
+          "reported_activity_date": "2018-08-15",
+          "reported_by": "BC Wildfire Service information relayed through a City of Kimberley public update",
+          "source_url": "https://www.e-know.ca/regions/kimberley/grateful-for-information-meeting-on-fires/",
+          "source_published": "2018-08-16",
+          "facts": "The article's regional recap is explicitly for August 15. It reports a completed planned ignition and 54 firefighters, two helicopters and six pieces of heavy equipment associated with the Lost Dog Complex.",
+          "target_day_relation": "one calendar day before the CFSDS target day",
+          "limits": "The source discusses the multi-fire complex; it does not allocate all reported personnel/equipment exclusively to N12413 or provide a full shift/action timeline."
+        },
+        {
+          "reported_activity_date": "2018-08-17",
+          "reported_by": "BC Wildfire Service, relayed in a contemporaneous local update",
+          "source_url": "https://www.e-know.ca/regions/east-kootenay/meachen-creek-fire-remains-in-drainage/",
+          "source_published": "2018-08-18",
+          "facts": "The update says the Lost Dog Complex had 45 firefighters, three helicopters and four pieces of heavy equipment the previous day; crews were working containment and had conducted ignition operations on August 15.",
+          "target_day_relation": "one calendar day after the CFSDS target day",
+          "limits": "The resource count is complex-level and reported after the target date, not a target-day deployment record."
+        }
+      ],
+      "interpretation": "Suppression activity is documented for the candidate complex immediately before and after the target date. Exact resources and actions on August 16, and their allocation to N12413 versus the complex, remain unknown."
+    }
+  ],
+  "project_wide_status": "No complete event-keyed, daily suppression/action dataset has been joined. Do not change the saved case manifests' suppression_status field from unknown based on this partial public-source review.",
+  "use_limits": [
+    "These reports support incident-history and confounding analysis; they are not simulator action inputs or per-cell treatment labels.",
+    "Reported staffing/equipment totals are snapshots, not dispatch timelines or proof of where and when each resource acted.",
+    "Historical target perimeters include the consequences of fire response and other conditions. A no-action replay is a diagnostic, not a direct counterfactual reconstruction of the observed event.",
+    "No new FireCase, replay, calibration, benchmark, training or validation/test inspection was performed."
+  ]
+}

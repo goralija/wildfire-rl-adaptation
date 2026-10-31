@@ -200,7 +200,7 @@
     "role": "regional BiH fuel-class candidate to align with MedEU historical progression polygons",
     "url": "https://data.effis.emergency.copernicus.eu/effis/applications/data-and-services/FuelMap_LAEA.zip"
   },
-  "next_task": "TASK-015 completion: prepare year-correct fuel/map inputs and expand train-only replay diagnostics before freezing held-out cases.",
+  "next_task": "TASK-004c: complete cumulative-damage/front export and typed terminal reasons; then finish train-only weather, fuel-vintage, terrain and suppression QC before any held-out freeze.",
   "purpose": "dataset suitability for real-fire-derived simulation scenarios and historical spread checks; no policy training or physical validation performed",
   "recommended_sequence": [
     "primary-route: Canada+CFSDS-v1_1+Canadian-FBP-Cell2Fire",

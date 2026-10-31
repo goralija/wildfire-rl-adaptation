@@ -25,3 +25,9 @@ Open Questions: profesorov krajnji rok i eventualni dodatni formalni uslovi pred
 Dopuna 2026-10-28: AC-006 je runtime ostvaren za oba 20×20 checkpointa u izolovanom
 Docker environmentu. AC-007/008 nisu ostvareni. TASK-004c je novi preduvjet za AC-007:
 observation/damage/termination ugovor mora biti ispravan prije poređenja ili fine-tuninga.
+
+Dopuna 2026-10-30: TASK-004c adapter je lokalno implementiran i fixture/12-case smoke
+je prošao; time je tehnički observation/damage/termination preduvjet dostupan. AC-007/008
+i dalje nisu ostvareni jer CFSDS no-action quality gate nije prošao, train-only input QC
+je djelimičan, a event-level heldout split nije zamrznut. Adapter runtime rezultat nije
+dovoljan za AC-007 niti dokaz RL prednosti.

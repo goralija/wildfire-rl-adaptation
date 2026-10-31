@@ -16,6 +16,14 @@ Sub20 inference slučajeva na novom Docker imageu; svih 12 je prošlo, C++ retur
 [`real-case-image-regression.json`](real-case-image-regression.json); sirovi run logovi
 ostaju lokalno pod `runs/firehose-final-check/`.
 
-Ovo dokazuje izvršavanje, bez treniranja. Ne predstavlja glavnu evaluaciju RL kvaliteta.
-Runtime gate je prošao; research_ready je false zbog dokumentovanih wrapper/termination
-ograničenja. Nalazi i interpretacija su u docs/research/FIREHOSE_VERIFICATION.md.
+TASK-004c smoke je zatim provjerio cumulative affected/front/treatment i terminal reasons.
+Mala historical-state fixture provjera i 12/12 Sub20 inference rollouta prošli su; u svim
+batch slučajevima Python i C++ cumulative damage su isti, a sve razlike terminalnog skupa
+od pozitivnih gridova objašnjene su tretiranim ćelijama. Receipt čuva image/patch hash i
+sažetke po slučaju: [`task004c-adapter-smoke.json`](task004c-adapter-smoke.json). Lokalni
+raw outputi ostaju u ignorisanom `runs/`.
+
+Ovo dokazuje adapter izvršavanje, bez treniranja. Ne predstavlja glavnu evaluaciju RL
+kvaliteta niti fizičku validaciju. Runtime/adapter gate je prošao; research_ready je false
+zbog neriješenog CFSDS no-action mismatcha, extent/weather ograničenja i nepoznatog
+suppressiona. Nalazi i interpretacija su u docs/research/FIREHOSE_VERIFICATION.md.

@@ -43,12 +43,14 @@ lokalni; kolega treba ponoviti build na svom Docker hostu prema
 [`docker/firehose/README.md`](../../docker/firehose/README.md).
 
 Ovo **ne** potvrđuje fizičku tačnost Firehosea, kvalitet politike, generalizaciju ili
-RL prednost. Batch je ponovio poznati problem: fiksni PPO rollout ima 207 opaženih
-zahvaćenih ćelija, ali upstream brojač 206; eksplicitni `sync-reset` dijagnostički
-slučaj daje 207/207. Dakle okruženje je spremno za TASK-004c rad, ne za glavni rezultat.
-Svi Firehose slučajevi su imali 58 odluka do weather horizonta; to nije dokaz da je
-vatra ugašena. Tri no-action train replays daju 66/237/73 ha naspram 15.39/12.15/12.15
-ha opaženih i dotiču rub 2×2 km domena; suppression status je nepoznat.
+RL prednost. Prvobitni unpatched setup receipt bilježi poznatu reset/counter razliku
+(206/207); kasnije je TASK-004c adapter dodan u izdvojeni image, a fixture + 12/12 novih
+inference slučajeva potvrđuju C++/Python cumulative agreement. Novi dokaz i image ID su u
+[`task004c-adapter-smoke.json`](../firehose-verification/task004c-adapter-smoke.json).
+Svi ti Firehose slučajevi ipak završavaju na `weather_horizon`, što nije dokaz gašenja.
+Tri CFSDS no-action train replays daju 66/237/73 ha naspram 15.39/12.15/12.15 ha
+opaženih i dotiču rub 2×2 km domena; suppression status je nepoznat, a no-action gate je
+i dalje FAIL. Zato environment/adapter prolaz nije glavni istraživački rezultat.
 
 ## Komande za ponavljanje
 

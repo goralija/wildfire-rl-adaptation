@@ -1,0 +1,121 @@
+{
+  "contract": {
+    "active_front": false,
+    "allowed_exact_fuel_class": "NF",
+    "automatically_inferred_from_fuel_or_arrival_class": false,
+    "available_for_spread": false,
+    "counts_as_preexisting_ever_affected": true,
+    "included_in_terminal_and_python_cumulative_damage": true,
+    "initial_state_token": "scar_nf",
+    "new_damage_measurement": "Compare cumulative damage against the identical initial state; the pre-existing scar itself is not new simulated damage.",
+    "requires_explicit_provenance_assertion": true
+  },
+  "hashes_sha256": {
+    "docker/firehose/Dockerfile": "58e92c34341311ff09877e4965fa6b14281b2d26878a3d4799950236ae3b3f57",
+    "docker/firehose/cfsds_initial_state.patch": "4c5d34e0123523bba980dd9397a93e15f29ebbb72085fbeb1fc26e9288ad2a94",
+    "docker/firehose/nonfuel_initial_scar_fixture.csv": "42e9b43f98f5608fa390c8e02bb29f795af4f9e632ca3313b55a7b1ae7bca693",
+    "docker/firehose/nonfuel_initial_scar_reject_active_fixture.csv": "128b22a27cfd179bb9590885f0440cbd0cebdd168ef933271693b5d2e047eaaf",
+    "docker/firehose/nonfuel_initial_scar_reject_burnt_fixture.csv": "48edd8419940a11b589d7ac0eb837b754de1ed854753dbc9961d75fd45092c6f",
+    "docker/firehose/nonfuel_initial_scar_reject_mismatch_fixture.csv": "c3e252a4bad62d2215ec6dc5e393ceda7fcba570ba4750e0f3386828af378e53",
+    "docker/firehose/task004c_state_export.patch": "03754e6cd2c44c0b93c6cbd902b0d35bf32d1541d5226fc5241b599d1800e62e",
+    "docker/firehose/verify_nonfuel_initial_scar.py": "7614e7012483e81b4d035e5c9070a4bfe8ee25c6b6020468391224489a5b0b97",
+    "external/firehose/data/Sub20x20/Data.csv": "48d5dcb6ecdd7faa214c54aa8ce44e1e34f9aadcd0b88b815ec973d2d1a8a85a",
+    "scripts/cfsds_initial_state.py": "c58fe2106882ba01d4d899a5e92cbc51ef4014a3398b36b354c88a6c87280774",
+    "src/wildfire_rl/firehose_probe.py": "e5957bca9641019f5b63c45ba89eb7c42b928a23ab9a8c9823db97121cc70770"
+  },
+  "interpretation": "The nested generic probe is capped at 200 decisions; the accepted fixture normally returns 0 after its synthetic-map no-action episode reaches a named terminal state. This is an importer/state contract check, not physical validation.",
+  "negative_fixtures": [
+    {
+      "expected_cpp_error": "requires explicit scar_nf state for an NF scar",
+      "name": "nonfuel_initial_scar_reject_burnt_fixture.csv",
+      "observed": true,
+      "result": "PASS_REJECTED"
+    },
+    {
+      "expected_cpp_error": "cannot mark a non-fuel cell as burning",
+      "name": "nonfuel_initial_scar_reject_active_fixture.csv",
+      "observed": true,
+      "result": "PASS_REJECTED"
+    },
+    {
+      "expected_cpp_error": "scar_nf state requires an NF fuel cell",
+      "name": "nonfuel_initial_scar_reject_mismatch_fixture.csv",
+      "observed": true,
+      "result": "PASS_REJECTED"
+    }
+  ],
+  "performed_at_utc": "2026-10-31T10:44:20Z",
+  "positive_fixture": {
+    "burnable_front_cell_one_based": 1,
+    "fuel_map": "Sub20x20",
+    "initial_active_front_ids_one_based": [
+      1
+    ],
+    "initial_ever_affected_ids_one_based": [
+      1,
+      4
+    ],
+    "initial_nonfuel_scar_ids_one_based": [
+      4
+    ],
+    "name": "nonfuel_initial_scar_fixture.csv",
+    "nf_scar_cell_one_based": 4,
+    "nonfuel_active_front_ids_over_transitions": [
+      [],
+      [],
+      []
+    ],
+    "python_cumulative_matches_cpp": true,
+    "result": "PASS",
+    "runtime_seconds": 1.128,
+    "simulator_returncode": 0,
+    "terminal_active_front_ids_one_based": [],
+    "terminal_ever_affected_ids_one_based": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "terminal_reason": "weather_horizon",
+    "terminal_sets_match_exported_grids": true
+  },
+  "purpose": "Verify that an explicitly sourced historic scar on the exact NF fuel class remains cumulative damage and never enters the active front.",
+  "runtime": {
+    "budget": 0,
+    "contrib_commit": "43b7fe6fcdda71c2c10de7af0d20f39e48ae5df3",
+    "cpu_limit": 2,
+    "firehose_commit": "e49a52a9a987a1585d25ddca2f711222ca500ffb",
+    "image_id": "sha256:104b17a999aa2dc9665551888effdcd5753500cccd96c23e930442335b15e749",
+    "image_tag": "wildfire-firehose-probe:task015-nonfuel-scar-contract",
+    "max_steps": 200,
+    "memory_limit": "2g",
+    "network": "disabled",
+    "packages": {
+      "cloudpickle": "2.0.0",
+      "gym": "0.21.0",
+      "numpy": "1.23.5",
+      "sb3-contrib": "1.5.0",
+      "stable-baselines3": "1.5.0",
+      "torch": "1.13.1"
+    },
+    "platform": "linux/arm64",
+    "platform_detail": "Linux-6.10.14-linuxkit-aarch64-with-glibc2.34",
+    "policy": "none",
+    "python": "3.8.20",
+    "seed": 123,
+    "steps_before_sim": 0,
+    "steps_per_action": 8,
+    "termination_reason": "weather_horizon",
+    "training": false
+  },
+  "schema": "firehose-nonfuel-initial-scar-contract/v1",
+  "scope": {
+    "cfsds_case_used": false,
+    "dataset": "bundled synthetic upstream Sub20x20 fixture only",
+    "local_raw_run_directory": "runs/nonfuel-initial-scar-contract-20261031T1044Z-full/ (git-ignored)",
+    "physical_fire_behavior_validation": false,
+    "rl_training": false,
+    "validation_or_test_data_opened": false
+  },
+  "status": "PASS_EXPLICIT_NF_SCAR_IMPORT_CONTRACT"
+}

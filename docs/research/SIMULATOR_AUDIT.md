@@ -5,8 +5,9 @@ title: Simulator i pretrained feasibility audit
 # Simulator i pretrained feasibility audit
 
 Datum provjere: 2026-10-28. **Firehose s njegovom izmijenjenom Cell2Fire jezgrom**
-prošao je runtime provjeru oba modela. Nastavljamo taj backend; istraživački gate
-čeka observation/damage/termination adapter (TASK-004c).
+prošao je runtime provjeru oba modela. TASK-004c adapter je naknadno implementiran i
+prošao fixture/12-case runtime provjeru; istraživački gate sada čeka CFSDS no-action
+input/reality check (suppression, vrijeme, fuel-vintage i extent ostaju otvoreni).
 
 | Kandidat | Prednost | Cijena/rizik | Odluka sada |
 | --- | --- | --- | --- |
