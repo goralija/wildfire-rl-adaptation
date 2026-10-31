@@ -106,15 +106,22 @@ Before an annual map can be used, the project needs:
    event/date used, succession rule applied, and resampling/aggregation method into the
    simulator grid.
 5. An importer contract for historically burned cells whose starting fuel class is
-   non-fuel. The current C++ importer rejects a `burnt` initial state on `NF`, so
-   annual classification must not silently rewrite either the fuel or damage state.
+   non-fuel. This is now specified with an explicit `scar_nf` initial-state value: only
+   the exact `NF` fuel code may use it, the cell remains in cumulative historical damage,
+   and it is excluded from active fire spread. Generic `burnt` on `NF`, active `burning`
+   on non-fuel, and `scar_nf` on fuel remain invalid. See
+   [ADR-025](../specs/DECISION_RECORDS.md#adr-025) and the versioned contract receipt.
 
-The immediate next implementation task can progress independently: define and test the
-historical-scar/importer contract using a small TRAIN-only fixture while keeping annual
-fuel generation blocked on items 1–4. Then return to the missing dated-source and
-succession evidence before materializing any new simulator case.
+This resolves importer mechanics only. The CFSDS case builder still rejects all initial
+nonfuel/water overlaps, and no annual map or new FireCase is generated until the dated
+base-map source, succession rules, and per-cell provenance in items 1–4 are verified.
+The `scar_nf` token must not be used merely because an event-arrival layer overlaps a
+generic `NF` class; that overlap could reflect water, urban, no-data, or another mapping
+error rather than a post-fire succession class.
 
 Evidence and source detail: [source register S-031–S-041](SOURCES.md), [input QC](CFSDS_TRAIN_INPUT_QC.md),
 [pre-target mask proof](../../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
-[NF-scar importer receipt](../../reports/firehose-verification/nonfuel-initial-scar-compatibility.json),
-and [ADR-024](../specs/DECISION_RECORDS.md#adr-024).
+[historical importer characterization](../../reports/firehose-verification/nonfuel-initial-scar-compatibility.json),
+[contract receipt](../../reports/firehose-verification/nonfuel-initial-scar-contract.json),
+[ADR-024](../specs/DECISION_RECORDS.md#adr-024), and
+[ADR-025](../specs/DECISION_RECORDS.md#adr-025).

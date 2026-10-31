@@ -175,20 +175,28 @@ fuel raster: the existing v2014b map still lacks a verified per-pixel cutoff, an
 v20191114 succession tree has not yet been transcribed/validated. The diagnostic
 front count reproduces the then-current target-aware builder rule only to explain the
 existing case; it is not an acceptable front input for an unbiased benchmark. A
-deliberately small C++
-fixture places one `burnt` initial-state cell on an upstream `NF` fuel cell. The pinned
-importer terminates with
-`InitialState.csv marks a non-fuel/harvested cell as burned`, before writing an initial
-grid; the probe then reports a secondary `IndexError` because that grid is absent.
-The expected-rejection characterization and image/fixture hashes are in
+deliberately small C++ fixture originally placed one ordinary `burnt` initial-state cell
+on an upstream `NF` fuel cell; the pinned importer rejected it before writing a grid.
+That expected-rejection characterization and its image/fixture hashes remain in
 [`nonfuel-initial-scar-compatibility.json`](../../reports/firehose-verification/nonfuel-initial-scar-compatibility.json).
 
-**Decision:** do not silently map prior CFSDS scars to generic non-fuel or alter fuel
-classes. The initial-state selector is now target-blind, but annual map generation still
-requires base-map vintage/succession rules and a decision about how C++/Python damage
-accounting represents a historically burnt cell that is non-fuel at simulation start.
-The active front must be valid under the simulator's fuel/import contract. No
-validation/test raster, replay, training, or target-based parameter selection was used.
+The importer contract now adds a separate `scar_nf` state. It accepts this token only
+when the simulator map's exact class is `NF`, keeps the cell in C++ `burntCells` and the
+terminal/Python cumulative `ever_affected` set, exports it as a historical scar, and never
+adds it to the active front or available fuel. Ordinary `burnt` on `NF`, `burning` on
+non-fuel, and `scar_nf` on a fuel cell remain invalid. The serializer helper can emit this
+token only from an explicitly provided nonfuel-scar mask that is a subset of historical
+burnt cells. It does not infer that mask from a CFSDS event layer or FBP fuel class.
+The runnable C++ contract receipt is tracked separately in
+[`nonfuel-initial-scar-contract.json`](../../reports/firehose-verification/nonfuel-initial-scar-contract.json).
+
+**Decision:** preserve the source fuel class and require explicit provenance before
+using `scar_nf`. This resolves how a qualified historical scar is represented, but does
+not prove that any real `NF` overlay is a post-fire succession class. The case builder
+continues to reject all non-fuel/water scar or front cells; annual map generation still
+requires dated base-map vintage, a verified succession tree, and per-cell lineage. No
+validation/test raster, CFSDS replay, training, or target-based parameter selection was
+used.
 
 ## Target-blind crop and initial-state proof — 2026-10-31
 
@@ -247,8 +255,10 @@ Before new train replay work:
    source/validate the v20191114 post-fire succession tree and fuel crosswalk, including
    per-cell provenance. CWFIS general reuse terms are now documented as Open Government
    Licence - Canada with attribution; separately sourced layer terms still need review.
-3. Decide/test importer semantics when historical cumulative damage occupies a cell
-   whose as-of-event fuel class is non-fuel; the current importer explicitly rejects it.
+3. Use the tested `scar_nf` importer token only when cell-level evidence confirms that
+   an NF class is a post-fire succession outcome, not Water, Urban, no-data or an
+   overlay error. The generic case builder still rejects every initial non-fuel/water
+   overlap until that provenance and fuel map are supplied.
 4. Only then build a fuel raster for one TRAIN case using the tested pre-target mask.
    Preserve assertions excluding target day n and later arrivals; keep the day n-1
    front compatible with spread.

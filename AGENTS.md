@@ -30,10 +30,12 @@ Sljedeći korak za cohort/prostor je završen: unaprijed definisano pravilo obra
 1.301 TRAIN rastera i provjerilo pet fizičkih skala. Na 1.010 parova naredni dan ima
 mapirane piksele; 291 ostaje sa statusom bez mapiranog targeta. Ovo je geometrijski
 pre-screen, ne konačna podobna kohorta. Godišnja fuel mapa još nije napravljena: 2014b
-nema potvrđen per-pixel cutoff, succession crosswalk nije potvrđen, a C++ fixture odbija
-historijski scar na NF ćeliji. Zatim slijedi rješavanje fuel/source/importer ugovora,
-kompletne train terrain/weather provenance, suppression evidence i unaprijed definisani
-replay gate. Root cause no-action overgrowth nije izolovan, a no-action gate nije prošao.
+nema potvrđen per-pixel cutoff, succession crosswalk nije potvrđen. Izolovani C++ importer
+contract sada prihvata eksplicitni `scar_nf` samo na tačnoj NF ćeliji i čuva ga kao
+cumulative damage, ali stvarni CFSDS builder i dalje blokira takav ulaz dok se ne riješi
+fuel/source provenance. Zatim slijedi dated fuel evidence gdje je dostupna, kompletne
+train terrain/weather provenance, suppression evidence i unaprijed definisani replay gate.
+Root cause no-action overgrowth nije izolovan, a no-action gate nije prošao.
 Ne koristi validation/test ishode za izbor parametara. No-action gate i heldout freeze
 moraju proći prije policy benchmarka ili fine-tuninga. Runtime PASS nije dokaz fizičke
 validacije ili RL prednosti. Čuvaj ovu razliku u sažecima.

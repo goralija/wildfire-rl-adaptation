@@ -535,3 +535,28 @@ across all five options, and recorded archive/member/code SHA-256 values.
 - Corrected the earlier file-level license finding: the CWFIS download-site notice states Open Government Licence - Canada and requires CFS/CWFIS attribution. Separately sourced component layer terms remain to be checked if used.
 - Decision: keep v2014b solely for reproducing saved pilots; no new annual map is safe to claim, and none was generated. Added [fuel-vintage review](research/CFSDS_FUEL_VINTAGE_REVIEW.md), source entries S-039–S-041, EXP-014, ADR-024, and updated status/handoff/index.
 - No raster download, FireCase conversion, replay, training, or validation/test inspection occurred. Next implementation task: define and test the importer/cumulative-damage behavior for a historical scar on a non-fuel cell; continue sourcing cutoff and succession evidence before map generation.
+
+## 2026-10-31 — TASK-015 explicit NF historical-scar importer contract
+
+Implemented the importer behavior for a previously burned cell that a fuel map labels
+`NF`. The new `scar_nf` token requires an explicit caller assertion and is accepted only
+for an exact upstream `NF` cell. It contributes to the C++ `burntCells`/cumulative-damage
+set and Python terminal `ever_affected`, but remains unavailable for spread and never
+enters the active front. Ordinary `burnt` on NF, `burning` on NF, and `scar_nf` on fuel
+are rejected. The serializer helper validates the explicit scar mask's shape and subset
+relationship; it does not guess which nonfuel cells were previously burned.
+
+Added one positive synthetic Sub20 fixture and three negative fixtures. The positive
+no-policy/no-intervention run completed to `weather_horizon`; initial scar cell 4 remained
+in cumulative damage, C++ and Python sets matched, terminal export agreed with the grids,
+and no NF cell entered the front across all three transitions. All three negative imports
+failed with the intended C++ error. Docker ran offline against pinned Firehose/contrib
+commits; exact runtime and hashes are in
+[`nonfuel-initial-scar-contract.json`](../reports/firehose-verification/nonfuel-initial-scar-contract.json).
+
+Added [ADR-025](specs/DECISION_RECORDS.md#adr-025), [EXP-015](research/EXPERIMENT_LOG.md#exp-015--explicit-nonfuel-historical-scar-importer-contract-2026-10-31),
+and refreshed input QC, pipeline schema, status, backlog, handoff, code map, and indexes.
+The CFSDS case builder continues to reject nonfuel scars pending dated fuel-vintage and
+post-fire succession evidence. This test validates only import/state semantics on the
+bundled synthetic landscape. No real CFSDS replay, physical validation, RL training,
+benchmark, or heldout inspection occurred.

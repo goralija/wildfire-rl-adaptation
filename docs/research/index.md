@@ -12,8 +12,9 @@
 - [TRAIN-only CFSDS fuel-vintage review](CFSDS_FUEL_VINTAGE_REVIEW.md) - Službeni izvori za istorijski cutoff, FBP pravila, burn-scar succession i reuse uslove
 - [TRAIN-only CFSDS prostorna podobnost](CFSDS_SPATIAL_FEASIBILITY.md) - Poređenje unaprijed zadanih target-blind domena na istim TRAIN parovima
 - [Puni TRAIN target-independent day-pair screen](CFSDS_FULL_DAY_PAIR_SCREEN.md) - 1.301 CFSDS rastera i pet fiksnih domena; target metrics samo post-selection dijagnostika
-- [EXP-010: fuel-vintage mask proof](EXPERIMENT_LOG.md#exp-010--train-only-pre-target-fuel-mask-and-nf-scar-importer-characterization-2026-10-31) - TRAIN-only vremenska maska i granica trenutnog NF-scar importera
+- [EXP-010: fuel-vintage mask proof](EXPERIMENT_LOG.md#exp-010--train-only-pre-target-fuel-mask-and-nf-scar-importer-characterization-2026-10-31) - TRAIN-only vremenska maska i raniji expected-rejection nalaz
 - [EXP-011: target-blind CFSDS početno stanje](EXPERIMENT_LOG.md#exp-011--train-only-target-blind-crop-and-initial-state-proof-2026-10-31) - target-mask invariance na TRAIN `2018_747` i 2014–2018 crop coverage dijagnostika
+- [EXP-015: NF historical-scar importer contract](EXPERIMENT_LOG.md#exp-015--explicit-nonfuel-historical-scar-importer-contract-2026-10-31) - C++ import i cumulative-damage provjera za eksplicitno označene scar ćelije
 - [CFSDS no-action dijagnostika](CFSDS_NO_ACTION_DIAGNOSIS.md) - Vremenski presjeci, FWI/weather, rub mreže i završni uslovi na tri train slučaja
 - [Od stvarnog požara do Cell2Fire scenarija](REAL_CASE_PIPELINE.md) - Data Pipeline Design, X/Y format i ograničenja
 - [Zahtjevi i kriteriji profesora](REQUIREMENTS_AND_RUBRIC.md) - Requirements

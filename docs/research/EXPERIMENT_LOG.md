@@ -428,3 +428,33 @@ no simulator case/replay or training was run, and no heldout data was inspected.
 Method and sources: [fuel-vintage review](CFSDS_FUEL_VINTAGE_REVIEW.md),
 [source register S-031–S-041](SOURCES.md),
 [ADR-024](../specs/DECISION_RECORDS.md#adr-024).
+
+## EXP-015 — Explicit nonfuel historical-scar importer contract, 2026-10-31
+
+Updated the pinned Firehose initial-state import patch to accept `scar_nf` as a
+separate, explicit provenance assertion. It is accepted only when the upstream
+`Data.csv` cell has the exact class `NF`; ordinary `burnt` on NF, `burning` on NF,
+and `scar_nf` on a burnable fuel cell are rejected. An accepted scar remains in C++
+`burntCells`, the terminal cumulative-damage receipt, and Python `ever_affected`, but
+never becomes available fuel or part of the active front. No fuel code or map value is
+rewritten.
+
+The synthetic Sub20 fixture ran in the pinned Linux ARM64 image with networking disabled,
+no policy, zero intervention budget, and no training. Its explicit scar was present in
+the initial cumulative set `[1,4]`, remained in the terminal set `[1,2,3,4]`, and was
+absent from the active front at all three transitions. The terminal grid, C++ cumulative
+set, and Python cumulative set agreed; termination was `weather_horizon`. Three negative
+fixtures were rejected with the expected C++ errors. The runtime details and source hashes
+are in the [machine-readable receipt](../../reports/firehose-verification/nonfuel-initial-scar-contract.json).
+
+The schema helper now accepts an explicit `nonfuel_scar` mask, verifies it has the same
+shape as historical damage and is a subset of that mask, and emits `scar_nf`; it does
+not infer provenance from a fuel class or arrival raster. The real CFSDS builder still
+rejects nonfuel scars until the annual fuel vintage and succession mapping are supported
+by evidence. Cumulative damage comparisons must use the same initial scar on both agents;
+the already-burned scar is not new simulated damage.
+
+This is a parser/state-contract test on a bundled synthetic landscape, not physical fire
+validation, CFSDS replay, training, benchmark, or evidence that an agent improves real
+outcomes. Validation/test data were not inspected. See [ADR-025](../specs/DECISION_RECORDS.md#adr-025),
+[input QC](CFSDS_TRAIN_INPUT_QC.md), and the [verification index](../../reports/firehose-verification/index.md).

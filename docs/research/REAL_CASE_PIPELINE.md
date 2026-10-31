@@ -62,7 +62,7 @@ serija za **jedan scenario**:
 | `slope.asc`, `saz.asc` | nagib i smjer padine | Izračunati iz istog poravnatog DEM-a; aspect/saz mora koristiti ugaonu konvenciju koju očekuje C++ kod |
 | `Data.csv` | jedan red po ćeliji; 20 kolona: `fueltype,mon,jd,M,jd_min,lat,lon,elev,ffmc,ws,waz,bui,ps,saz,pc,pdf,gfl,cur,time,pattern` | generiše se redom ćelija iz normalizovanih rastera i provjerenog Cell2Fire `DataGeneratorC`; nedostajuće vrijednosti ne popunjavati nulama napamet |
 | `Weather.csv` | Cell2Fire parser očekuje tačne kolone `Scenario,datetime,APCP,TMP,RH,WS,WD,FFMC,DMC,DC,ISI,BUI,FWI` | lokalna stanica ako postoji; inače historijski ERA5-Land uz provjerene jedinice, smjer vjetra i FWI kodove. Sami vremenski podaci nisu dovoljni ako nedostaju početne FWI vrijednosti |
-| `Ignitions.csv` + `InitialState.csv` | `Ignitions.csv` ostaje za jednu tačku; lokalni adapter dodatno prima one-based row-major listu `burnt` i `burning` ćelija | `InitialState.csv` učitava prethodni scar i više aktivnih ćelija kao zajedničko početno stanje; C++ import je provjeren na fixtureu i stvarnom CFSDS slučaju |
+| `Ignitions.csv` + `InitialState.csv` | `Ignitions.csv` ostaje za jednu tačku; adapter prima one-based row-major listu `burnt`, `scar_nf` i `burning` ćelija | `scar_nf` je izričit caller-attestation da je ćelija već bila spaljena, ali sada ima `NF` klasu; C++ je zadrži u cumulative damage bez dodavanja u aktivni front. Ne označavati automatski svaku NF ćeliju kao scar. Synthetic Sub20 import ugovor je testiran; CFSDS builder i dalje blokira takve ćelije dok se fuel vintage/succession ne riješi. |
 | `fbp_lookup_table.csv` | veza gorivnog koda i FBP parametara/boje | fiksna, verzionisana tabela kompatibilna s Cell2Fire buildom |
 | `Reward.asc` (opciono) | prioritetni region koji se štiti | tek ako je prioritet definisan prije evaluacije; ne crtati ga iz buduće granice požara |
 
@@ -285,8 +285,9 @@ ali trenutna implementacija **nije leakage-free**:
 
 1. Fuel karta za dan n treba siguran as-of-event bazni vintage i dokumentovan annual
    burn-scar succession. Zatim se samo perimetri istog požara prije dana n mogu
-   ukloniti/reclassifikovati prema provjerenom pravilu. Trenutno su te dvije fuel faze
-   još blokirane provenanceom i importer contractom.
+   ukloniti/reclassifikovati prema provjerenom pravilu. Provenance pravila je i dalje
+   blokirana; odvojeni adapter contract za eksplicitno označen scar na `NF` ćeliji je
+   testiran, ali builder još ne emituje takve CFSDS slučajeve.
 2. Raniji `scripts/build_cfsds_case.py` birao je day n-1 ćelije susjedne targetu day n,
    što je otkrivalo dio buduće target geometrije u `InitialState.csv`. To ponašanje
    slijedilo je objavljeni W.I.S.E. benchmark, čiji autori eksplicitno kažu da je njihov

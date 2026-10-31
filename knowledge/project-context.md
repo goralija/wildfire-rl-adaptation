@@ -54,10 +54,12 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
 - TRAIN-only fuel-vintage mask proof obrađuje samo `2018_747`: `arrival_day < target_doy`
   bira 881 prethodno spaljenu ćeliju u rasteru i isključuje 19 target ćelija; unit test
   provjerava i budući dan n+1. Godišnja mapa nije generisana jer 2014b cutoff i succession
-  crosswalk nisu potvrđeni, a C++ fixture reprodukuje odbijanje `burnt` na `NF` ćeliji.
-  [Mask receipt](../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
-  [importer receipt](../reports/firehose-verification/nonfuel-initial-scar-compatibility.json),
-  [ADR-020](../docs/specs/DECISION_RECORDS.md#adr-020).
+  crosswalk nisu potvrđeni. Importer contract sada prihvata `scar_nf` samo uz eksplicitnu
+  oznaku caller-a i tačnu C++ `NF` klasu; sačuva scar u cumulative damage, bez aktivnog
+  fronta. Ovo je sintetički ugovorni test, ne CFSDS konverzija. [Mask receipt](../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
+  [contract receipt](../reports/firehose-verification/nonfuel-initial-scar-contract.json),
+  [ADR-020](../docs/specs/DECISION_RECORDS.md#adr-020) i
+  [ADR-025](../docs/specs/DECISION_RECORDS.md#adr-025).
   Raniji builder je birao day n-1 front prema targetu day n; to je zamijenjeno
   target-blind centroid prozorom i unutrašnjim day n-1 frontom. Za `2018_747` promjena
   target maske ne mijenja simulator input. Međutim, post-selection train screen shortlist

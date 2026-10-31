@@ -6,6 +6,7 @@ sources:
 - resource: /reports/firehose-verification/task004c-adapter-smoke.json
 - resource: /reports/real-fire-data/cfsds-train-spatial-feasibility.json
 - resource: /reports/real-fire-data/cfsds-train-full-day-pair-screen.json
+- resource: /reports/firehose-verification/nonfuel-initial-scar-contract.json
 - resource: /docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md
 - resource: /docs/WORK_LOG.md
 ---
@@ -352,3 +353,27 @@ preuzet raster, simulator input ili replay. Fuel vintage i succession ostaju blo
 sljedeći nezavisni mali task je ugovor/test za historical `burnt` stanje na `NF` gorivu.
 Detalji: [fuel-vintage audit](research/CFSDS_FUEL_VINTAGE_REVIEW.md), [source register S-031–S-041](research/SOURCES.md),
 [ADR-024](specs/DECISION_RECORDS.md#adr-024).
+
+## NF historical-scar importer contract — 2026-10-31
+
+TASK-015 importer podzadatak je završen. `InitialState.csv` sada prihvata poseban
+`scar_nf` zapis samo kada caller izričito potvrdi da je ćelija historijski scar, a
+pinovani C++ `Data.csv` klasu vidi kao tačno `NF`. Scar ulazi u cumulative affected
+istoriju, ali ne postaje raspoloživo gorivo niti aktivni front. Obični `burnt` na NF,
+`burning` na NF i `scar_nf` na gorivu se odbijaju. Python serializer podržava masku
+koju caller dostavi, ali CFSDS case builder i dalje odbija nonfuel scar dok vremenski
+fuel vintage i succession crosswalk nisu dokazani.
+
+Sintetički Sub20 C++ rollout je završio na `weather_horizon`: početni scar `NF` ostaje
+u završnom cumulative setu, C++ i Python cumulative damage se slažu, terminalni grid se
+slaže s adapterom, a NF nikad nije u aktivnom frontu kroz tri prijelaza. Tri negativna
+fixturea su odbijena s očekivanim porukama. Ovo provjerava format/stanje adaptera, ne
+širenje požara u prirodi, CFSDS integraciju ili kvalitet treninga; nije pokrenuto
+treniranje ni CFSDS replay. Vidi [ADR-025](specs/DECISION_RECORDS.md#adr-025),
+[EXP-015](research/EXPERIMENT_LOG.md#exp-015--explicit-nonfuel-historical-scar-importer-contract-2026-10-31)
+i [runtime receipt](../reports/firehose-verification/nonfuel-initial-scar-contract.json).
+
+I dalje nema leakage-safe godišnje fuel mape: v2014b cut-off i succession rules nisu
+potvrđeni. Naredni rad je preostali TRAIN input provenance (DEM, weather, suppression)
+za slučajeve koji prođu source gate, pa unaprijed definisani no-action replay gate.
+**research_ready=false.**

@@ -1,11 +1,17 @@
 # Promjene baze znanja
 
+## 2026-10-31: TASK-015 explicit NF historical-scar importer contract
+
+- C++ import sada podržava poseban `scar_nf` zapis samo uz eksplicitnu provenance tvrdnju i tačnu upstream `NF` klasu; scar ostaje u cumulative šteti, ali nikad nije aktivni front ili gorivo za širenje. Neispravni `burnt`/`burning`/mismatch slučajevi su odbijeni.
+- Puni no-policy sintetički Sub20 rollout i tri negativna fixturea prošli su u offline, pinovanom ARM64 Docker runtimeu; vidi [receipt](reports/firehose-verification/nonfuel-initial-scar-contract.json), [ADR-025](docs/specs/DECISION_RECORDS.md#adr-025) i [EXP-015](docs/research/EXPERIMENT_LOG.md#exp-015--explicit-nonfuel-historical-scar-importer-contract-2026-10-31).
+- CFSDS builder ostaje zatvoren za nonfuel scar dok annual fuel vintage i succession nisu dokazani. Nema CFSDS replaya, fizikalne validacije ili treniranja. Sljedeće: preostali fuel/source i DEM/weather/suppression provenance, zatim preregistrovani no-action gate.
+
 ## 2026-10-31: TRAIN-only FBP fuel-vintage source review
 
 - Službeni v2014b metadata ne navodi cutoff za NFDB/NBAC burn scars; 2014b ostaje samo za reprodukciju već spremljenih slučajeva. v20191114/2024/2026 nisu odabrani kao TRAIN vintage.
 - CWFIS download-site licenca je dokumentovana kao Open Government Licence - Canada uz CFS atribuciju. Službeni 2018 baseline FBP klasifikacioni PDF je razdvojen od post-fire succession stabla koje navodi W.I.S.E. rad.
 - Nije preuzet niti napravljen novi raster. Dodani su [source review](docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md), EXP-014 i ADR-024; ažurirani su input QC, status, backlog, handoff i navigacija.
-- Sljedeće: napraviti i provjeriti importer/cumulative-damage ugovor za historical scar na NF ćeliji; mapiranje ostaje blokirano dok se ne pribave pouzdani cutoff i succession rules.
+- Tadašnji naredni korak bio je importer/cumulative-damage ugovor za historical scar na NF ćeliji; završen je u EXP-015/ADR-025. Mapiranje ostaje blokirano dok se ne pribave pouzdani cutoff i succession rules.
 
 ## 2026-10-31: Full TRAIN target-independent CFSDS day-pair screen
 

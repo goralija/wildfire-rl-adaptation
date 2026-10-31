@@ -15,7 +15,7 @@ Napor je okvirni agentov prijedlog u aktivnim radnim satima, bez roka i dodjele 
 | TASK-013 | završeno: podrška handoffu | OKF repo bundle, ulazi/navigacija, održavanje, validator/testovi/CI | ostvareno |
 | TASK-012 | završeno 2026-10-30 | prema korisnikovoj uputi odabrana Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire; historijske granice služe zasebnom reality-checku, a agent uči iz simulatora | ostvareno |
 | TASK-014 | lokalno završeno 2026-10-30; drugi host nije provjeren | moderni `.venv` i odvojeni legacy Docker izgrađeni; package/source/image hashovi i smoke/inference receipt zapisani | ostvareno lokalno |
-| TASK-015 | P0, djelimično završeno | full target-independent screen: svih 1.301 TRAIN rastera obrađeno; 1.010 imaju target mapu, 291 nemaju mapirane target piksele; 20×20/100 m prozor nađen za 1.295; nijedna domena još nije usvojena; source audit bilježi CWFIS OGL, ali cutoff, succession/importer i suppression ostaju blokirani | dated fuel vintage/succession evidence + NF-scar importer contract + input provenance + preregistrovani replay gate |
+| TASK-015 | P0, djelimično završeno | full target-independent screen: svih 1.301 TRAIN rastera obrađeno; 1.010 imaju target mapu, 291 nemaju mapirane target piksele; 20×20/100 m prozor nađen za 1.295; nijedna domena još nije usvojena; `scar_nf` importer contract je provjeren; dated fuel vintage/succession, terrain/weather/suppression i replay gate ostaju otvoreni | dated fuel vintage/succession evidence + DEM/weather/suppression provenance + preregistrovani replay gate |
 | TASK-018 | P0, dijagnostička faza završena 2026-10-30; uzrok nije izolovan | poređenje hashova/postavki i unaprijed fiksirani vremenski presjeci na tri train replaya; metadata horizon bug ispravljen; rub/domenska ograničenja potvrđena; bez heldout kalibracije ili treninga | ostvareno |
 | TASK-004c | P0, adapter završen lokalno 2026-10-30 | C++/Python kumulativna šteta, zaseban scar/front i named terminal receipt; fixture + 12/12 inference rollouta, bez treninga; fizički no-action gate ostaje otvoren | ostvareno |
 | TASK-017 | završeno 2026-10-30 | `InitialState.csv` uvozi raniji scar i više aktivnih ćelija; fixture i stvarni `2018_747` C++ import/replay su uspješni | ostvareno |
@@ -83,16 +83,16 @@ Nijedna domena nije usvojena; metoda i ograničenja su u
 `docs/research/CFSDS_SPATIAL_FEASIBILITY.md` i `reports/real-fire-data/cfsds-train-spatial-feasibility.json`.
 Puni day-pair membership i prostorni screen sada su završeni target-independent pravilom
 (EXP-013/ADR-023). Ovo nije godišnja fuel mapa: nema potvrđenog baznog vremenskog cutoffa
-ni autoritativnog succession crosswalka. C++ fixture reprodukuje odbijanje `burnt` stanja
-na `NF` ćeliji; treba odlučiti kako simulator čuva historijsku štetu kad godišnje pravilo
-ćeliju učini non-fuel. Pogledati ADR-020/023 i EXP-010/013. Još trebaju FBP vintage/source
-provjera, importer ugovor, train terrain/weather poravnanje, suppression dokazi i unaprijed
+ni autoritativnog succession crosswalka. Kasniji EXP-015/ADR-025 implementirali su i
+provjerili `scar_nf` importer contract za izolovani adapter; to ne odobrava annual map niti
+CFSDS builder ulaz. Pogledati ADR-020/023/025 i EXP-010/013/015. Još trebaju FBP
+vintage/source provjera, train terrain/weather poravnanje, suppression dokazi i unaprijed
 definisani replay gate. Raniji 10/20 fuel-only rezultat koristio je prethodnu kohortu/
 izreze i ne važi za novi puni screen. EXP-014 našao je CWFIS site-wide Open Government
 Licence - Canada i službena pravila za baseline FBP klasu, ali ne cutoff za NFDB/NBAC
 scars u v2014b niti zasebno post-fire succession stablo. Zato nema vremenski sigurnog
-novog map vintagea i mapa se ne generiše. Sljedeće: definirati importer contract za
-historijski scar na non-fuel ćeliji, dok se izvorni cutoff/succession dodatno razrješava.
+novog map vintagea i mapa se ne generiše. Importer contract za historijski scar je sada
+testiran na sintetičkom fixtureu; izvorni cutoff/succession se i dalje mora razriješiti.
 Target capture se ne koristi za izbor.
 
 TASK-018 isporuka: poređeni su isti case-manifest/input hashovi, fuel/FBP, weather/FWI,
@@ -123,12 +123,13 @@ dnevnog CFSDS cilja, a predikcije dotiču rub modelskog prozora. `2014_538` je o
 neke historijske ćelije mapiraju na water/nonfuel. Suppression status ostaje nepoznat.
 Prije RL benchmarka provjeriti gorivo, vrijeme, FBP parametre i extent; kalibraciju raditi
 samo na train/calibration eventima.
-C++ fixture je reproducirao odbijanje `burnt` stanja na `NF` ćeliji; treba odlučiti kako
-simulator čuva historijsku štetu kada godišnje pravilo ćeliju učini non-fuel. Target-aware
+C++ fixture je prvobitno reproducirao odbijanje `burnt` stanja na `NF` ćeliji; kasniji
+EXP-015/ADR-025 dodali su i testirali eksplicitni `scar_nf` ugovor za izolovani adapter.
+To ne odobrava godišnju fuel mapu niti CFSDS builder ulaz. Target-aware
 front izbor je zamijenjen prototipom i testiran za target-mask invariance na `2018_747`;
 shortlist screen pokazuje slabu prostornu podobnost za većinu trenutnih kandidata. Bounded
 2–6 km domain audit je zabilježen u ADR-022/EXP-012; veća domena poboljšava target capture,
 ali ne opravdava replay niti je izabrana. Puni target-independent day-pair i TRAIN screen
 su zabilježeni u ADR-023/EXP-013; raniji 10/20 `PASS_FUEL_ONLY` odnosio se na stare izreze
-i ne kvalifikuje nove parove. Slijede train-only FBP vintage/source provjera, importer
-ugovor, terrain/weather poravnanje i suppression dokazi prije preregistrovanog replaya.
+i ne kvalifikuje nove parove. Slijede train-only FBP vintage/source provjera,
+terrain/weather poravnanje i suppression dokazi prije preregistrovanog replaya.

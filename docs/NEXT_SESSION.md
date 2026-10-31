@@ -50,8 +50,12 @@ fine-tuning prije prihvatljivih train ulaza, replay gatea i zamrznutog heldout s
 - Godišnja fuel mapa nije izrađena: v2014b nema potvrđen vremenski cutoff za NFDB/NBAC
   burn-scar layer, a succession crosswalk nije transkribovan/validiran. Public-source
   pregled je pronašao CWFIS Open Government Licence - Canada i službene baseline FBP
-  class rules; ta pravila nisu post-fire succession stablo. C++ importer odbija
-  historijski scar na `NF` ćeliji. DEM/weather lineage je nepotpuna, suppression unknown.
+  class rules; ta pravila nisu post-fire succession stablo. Importer sada prihvata
+  samo eksplicitni `scar_nf` marker na tačnoj `NF` ćeliji, a DEM/weather lineage je
+  nepotpuna i suppression unknown.
+- TASK-015 NF-scar importer/cumulative-damage contract je implementiran i provjeren na
+  izolovanom sintetičkom Sub20 C++ rolloutu; tri neispravna slučaja se odbijaju.
+  Ovo ne otključava annual mapu ili CFSDS builder. Vidi ADR-025 i versioned receipt.
 
 Metode i dokazi:
 
@@ -62,7 +66,7 @@ Metode i dokazi:
 - [Input/provenance QC](research/CFSDS_TRAIN_INPUT_QC.md), [fuel QC](research/CFSDS_TRAIN_QC.md)
 - [Fuel-vintage review](research/CFSDS_FUEL_VINTAGE_REVIEW.md), [ADR-024](../docs/specs/DECISION_RECORDS.md#adr-024)
 - [Fuel mask proof](../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
-  [NF-scar importer receipt](../reports/firehose-verification/nonfuel-initial-scar-compatibility.json)
+  [NF-scar importer contract receipt](../reports/firehose-verification/nonfuel-initial-scar-contract.json)
 - [TASK-004c adapter/runtime receipt](../reports/firehose-verification/task004c-adapter-smoke.json)
 - [No-action dijagnostika](research/CFSDS_NO_ACTION_DIAGNOSIS.md)
 
@@ -72,16 +76,13 @@ Metode i dokazi:
    NFDB/NBAC scar layer ni javno transkribovanog v20191114 post-fire succession stabla.
    Pribavi autoritativne datume/ruleset ili zadrži fuel vintage kao unresolved; ne koristi
    target-capture metrike i ne generiši godišnju mapu dok ovaj gate ne prođe.
-2. Sljedeći implementacijski task: definiši/testiraj importer i cumulative-damage ugovor
-   za historical scar na ćeliji koja je non-fuel. Ovaj ugovor se može provjeriti malim
-   TRAIN-only fixtureom bez godišnje fuel mape; ne pravi FireCase-e za svih 1.301 para.
-3. Za parove koji prođu fuel/input gateove pribavi DEM tile/version/hash, kompletnu
-   weather request/location/field/unit lineage i suppression evidence; bez event-level
-   dokaza suppression ostaje `unknown`.
-4. Preregistruj iste no-action ulaze, seedove i horizont; uradi mali train-only replay
-   gate na slučajevima koji prođu prethodne gateove i unaprijed definiši prihvatljive
-   metrike. Ne birati trajanje epizode po targetu.
-5. Tek nakon prolaza no-action gatea i heldout freeze-a razmatrati benchmark i fine-tuning.
+2. Za TRAIN parove koji prođu izvorni fuel/input gate pribavi DEM tile/version/hash, kompletnu
+  weather request/location/field/unit lineage i suppression evidence; bez event-level
+  dokaza suppression ostaje `unknown`.
+3. Preregistruj iste no-action ulaze, seedove i horizont; uradi mali train-only replay
+  gate na slučajevima koji prođu prethodne gateove i unaprijed definiši prihvatljive
+  metrike. Ne birati trajanje epizode po targetu.
+4. Tek nakon prolaza no-action gatea i heldout freeze-a razmatrati benchmark i fine-tuning.
    Target-independent day-pair i puni TRAIN prostorni pre-screen su završeni.
 
 Opcije 20×20 na 200/300 m čuvaju oblik tenzora/akcija, ali mijenjaju prostorno značenje

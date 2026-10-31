@@ -589,3 +589,38 @@ Evidence: [fuel-vintage review](../research/CFSDS_FUEL_VINTAGE_REVIEW.md),
 [input QC](../research/CFSDS_TRAIN_INPUT_QC.md),
 [source register S-031–S-041](../research/SOURCES.md),
 [pre-target mask receipt](../../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json).
+
+## ADR-025 — represent provenance-confirmed non-fuel scars explicitly, recorded 2026-10-31
+
+The pinned Cell2Fire importer previously rejected every historical `burnt` row whose
+fuel code was non-burnable. Silently changing the fuel class would corrupt simulator
+inputs, while silently accepting any `burnt`/`NF` overlap could turn water, urban, or
+no-data mapping mistakes into valid history.
+
+**Decision:** extend `InitialState.csv` with an explicit `scar_nf` state for a
+historically burned cell whose exact simulator fuel class is `NF`. This token is a
+caller-provided provenance assertion; the importer does not infer it from a generic fuel
+class or CFSDS arrival layer. A `scar_nf` cell remains in C++ `burntCells`, output scar
+grid code `1`, and the terminal/Python cumulative `ever_affected` set. It is excluded
+from `burningCells` and from available fuel cells, so it cannot join or spread the active
+front. Ordinary `burnt` on `NF`, `burning` on non-fuel/harvested, and `scar_nf` on any
+class other than `NF` remain invalid. `ND`, Water, Urban, and harvested cells are not
+eligible.
+
+The Python serializer accepts an optional explicit nonfuel-scar mask only when it is a
+subset of the historical burnt mask. It does not look up fuel classes or mark cells
+automatically. The CFSDS case builder's current nonfuel/water initial-state rejection is
+unchanged. Use `scar_nf` in a real case only after the event history and post-fire fuel
+succession provenance identify that exact cell as an NF burn scar.
+
+The bundled Sub20 fixture passed the full no-action episode to `weather_horizon`:
+initial scar cell 4 was present in terminal affected IDs `[1,2,3,4]`, absent from the
+active front at every recorded step, and terminal C++ damage matched both Python counters
+and exported grids. Three companion fixtures confirmed the invalid inputs remain
+rejected. This is an importer/state contract test, not fire-behavior validation, a CFSDS
+case, or RL training. Machine receipt and hashes:
+[`nonfuel-initial-scar-contract.json`](../../reports/firehose-verification/nonfuel-initial-scar-contract.json).
+
+The annual fuel-map gate remains blocked on the dated base-map cutoff, verified
+succession rules, and per-cell lineage. Existing saved pilot cases and their historic
+receipts are unchanged.

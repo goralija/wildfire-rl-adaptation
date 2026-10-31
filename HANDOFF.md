@@ -137,12 +137,17 @@ ostaje isti kad se target/future oznake uklone. 1.010 narednih dana ima mapirane
 [case/domain CSV](reports/real-fire-data/cfsds-train-full-day-pair-screen.csv).
 
 Ovo nije godišnja fuel mapa: v2014b NFDB/NBAC scar layer nema potvrđen vremenski cutoff,
-v20191114 post-fire succession tree nije transkribovan/validiran, a C++ importer odbija
-`burnt` inicijalno stanje na NF ćeliji. CWFIS download notice navodi Open Government
-Licence - Canada uz atribuciju; službeni baseline fuel-class rules PDF nije post-fire
-succession tree. Sljedeće: definisati importer/cumulative-damage contract za NF scar,
-zatim nastaviti pribavljanje datiranog source-cutoff/succession dokaza i popuniti train
-terrain/weather provenance i suppression evidence prije preregistrovanog replay gatea.
+a v20191114 post-fire succession tree nije transkribovan/validiran. Izolovani importer
+contract sada prihvata samo eksplicitni `scar_nf` na tačnoj NF ćeliji i zadržava je kao
+historijsku cumulative damage bez aktivnog fronta; obični `burnt` na NF i drugi
+neusklađeni zapisi se odbijaju. To je sintetički C++ ugovorni dokaz, ne CFSDS konverzija
+ili validacija fizike. CFSDS builder i dalje blokira takav unos dok vintage/succession
+ne budu odbranjeni. CWFIS download notice navodi Open Government Licence - Canada uz
+atribuciju; službeni baseline fuel-class rules PDF nije post-fire succession tree.
+Sljedeće: pribaviti datiran source-cutoff/succession dokaz gdje je dostupan, zatim za
+slučajeve koji prođu source gate popuniti DEM/weather provenance i suppression evidence
+prije preregistrovanog replay gatea. Vidi [ADR-025](docs/specs/DECISION_RECORDS.md#adr-025)
+i [runtime receipt](reports/firehose-verification/nonfuel-initial-scar-contract.json).
 Detalji su u [fuel-vintage audit](docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md) i
 [ADR-024](docs/specs/DECISION_RECORDS.md#adr-024).
 Ne birati per-event trajanje iz targeta.
