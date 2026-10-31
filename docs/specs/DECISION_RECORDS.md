@@ -485,3 +485,35 @@ Evidence: [helper and focused tests](../../scripts/cfsds_initial_state.py),
 [TRAIN-only screen code](../../scripts/profile_cfsds_cohort.py),
 [input QC](../research/CFSDS_TRAIN_INPUT_QC.md),
 [CFSDS source S-015](../research/SOURCES.md#s-015).
+
+## ADR-022 — bound the current TRAIN domain audit; do not adopt a wider grid yet, recorded 2026-10-31
+
+The fixed target-blind window from ADR-021 was spatially screened on the same 25
+2014–2018 TRAIN event/day pairs at five predeclared physical configurations: 20×20 at
+100/150/200/300 m and 40×40 at 100 m. The 25 pairs were held fixed; target-day pixels
+were measured only after each pre-target crop was selected. Validation/test rasters were
+not opened. The existing pair screen does, however, require a day-n CFSDS record and
+positive `firearea`, so full target-independent event/day membership has not been proven.
+
+The 20×20/100 m option finds any target pixel in only 4/25 crops (median capture 0%,
+maximum 1.04%). At an approximately 4 km footprint, both 20×20/200 m and 40×40/100 m
+capture a target pixel in 19/25, but median capture is only 1.95%. The 6 km 20×20/300 m
+option finds a window for 23/25 pairs; 22/23 valid windows contain target pixels, with
+15.31% median and 50.08% P75 target capture. Its 67×67 native window does not fit source
+rasters `2014_932` or `2015_895`. Capture counts are native 90 m raster pixels and do not
+represent a resampled simulator grid.
+
+**Decision:** the current 2×2 km domain is inadequate for reality-checking these 25
+shortlisted pairs. Do not choose or adopt a wider grid from this post-selection target
+diagnostic; no new FireCase, simulator replay, or RL run is authorized by this spatial
+receipt. Wider windows improve coverage but neither resolve the modest 4 km capture nor
+prove that coarse 20×20 cells preserve FBP physics. The 40×40 option changes the
+checkpoint's observation/action dimensions. Next establish day-pair membership and
+domain-screen rules before examining outcomes across the full TRAIN opportunity set;
+then assess simulator/cell-scale compatibility on train only. Keep the fuel-vintage,
+non-fuel-scar, terrain/weather, suppression, and no-action blockers.
+
+Evidence: [method and interpretation](../research/CFSDS_SPATIAL_FEASIBILITY.md),
+[audit code](../../scripts/audit_cfsds_train_spatial_feasibility.py),
+[geometry helper/tests](../../scripts/cfsds_spatial_feasibility.py),
+[machine receipt](../../reports/real-fire-data/cfsds-train-spatial-feasibility.json).

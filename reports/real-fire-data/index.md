@@ -7,6 +7,7 @@
 - [CFSDS TRAIN fuel-vintage mask proof](cfsds-train-fuel-vintage-mask-proof.json) — `2018_747` pre-target maska isključuje target dan i kasnije; godišnja fuel mapa nije izrađena dok se ne potvrde bazni cutoff i succession crosswalk.
 - [CFSDS target-blind input invariance proof](cfsds-target-blind-input-invariance.json) — TRAIN `2018_747`; promjena day-n maske ne mijenja crop, 20×20 početni scar/front ni `InitialState.csv`.
 - [CFSDS TRAIN target-blind window screen](cfsds-train-target-blind-window-screen.json) — samo 2014–2018 TRAIN; target coverage je post-selection dijagnostika, 4/25 prozora imaju ikakav target pixel.
+- [CFSDS TRAIN prostorni feasibility audit](cfsds-train-spatial-feasibility.json) — poređenje 2–6 km domena na istih 25 TRAIN parova; target dijagnostika je post-selection, bez FireCase-a ili replaya.
 - [CFSDS no-action dijagnostika](../../docs/research/CFSDS_NO_ACTION_DIAGNOSIS.md) i [mašinski čitljiva vremenska analiza](cfsds-no-action-timeline.json) — tri sačuvana train replaya, bez novog C++ runa, kalibracije ili treninga.
 
 ## Dokumenti

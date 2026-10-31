@@ -317,3 +317,39 @@ provenance, suppression, spatial feasibility, and the no-action gate remain open
 The prior 10/20 fuel-only audit applies to the legacy cohort/windows, not this new
 target-blind shortlist; rerun it only after spatial feasibility defines a valid train set.
 The saved pilot FireCases are not retroactively relabeled as target-blind.
+
+## EXP-012 — TRAIN-only target-blind spatial-domain feasibility, 2026-10-31
+
+Compared five preregistered footprints on the same 25 existing 2014–2018 TRAIN event/day
+pairs: 20×20 at 100/150/200/300 m and 40×40 at 100 m. For each option the crop was
+selected first using only valid arrival pixels before target day n and the day n−1
+centroid, with a safe border approximately one model cell wide. Day-n raster pixels were
+then measured as a post-selection coverage diagnostic. The existing 25 event/day pairs
+were not reranked by target coverage. Important scope limit: original pair eligibility
+required a day-n summary record and positive `firearea`, so fully outcome-independent
+pair membership remains an open protocol issue.
+
+Results: at 2 km, 4/25 windows contain any target pixel (median capture 0%, maximum
+1.04%); at 3 km, 16/25 contain any pixel (median 0.13%); at about 4 km, 19/25 contain a
+pixel but median capture is only 1.95%; at about 6 km, only 23/25 source rasters fit the
+requested 67×67 window, with 22/23 valid windows containing any target pixel, median
+capture 15.31%, and P75 50.08%. The two too-small source rasters are `2014_932` (56×139)
+and `2015_895` (57×136). Counts are native 90 m raster pixels; no resampling to simulator
+cells occurred.
+
+Interpretation: the fixed 2×2 km domain is inadequate for reality-checking this shortlist.
+Wider domains improve geometric coverage but do not qualify a simulator case or prove the
+coarse-grid FBP model. 20×20 at 200/300 m preserves tensor/action shape while changing
+physical action semantics; 40×40 at 100 m requires a new policy input/action shape. No
+domain was selected from target metrics. Follow ADR-022: preregister a target-independent
+day-pair rule and screen all TRAIN opportunities at fixed domains before building cases.
+
+No fuel/DEM/weather inputs were resampled, no FireCase was built, and no C++ replay,
+calibration, benchmark, training, or validation/test raster inspection occurred. The
+no-action gate remains failed. Receipt: [method/report](CFSDS_SPATIAL_FEASIBILITY.md),
+[machine output](../../reports/real-fire-data/cfsds-train-spatial-feasibility.json).
+
+Verification: all 61 project tests passed; strict OKF validation passed for 71 Markdown
+files; the synthetic CLI smoke wrote to a fresh ignored `/private/tmp` directory; and
+`git diff --check` passed. The train-only audit read only 2014–2018 raster archives and
+recorded archive/member/code SHA-256 values.

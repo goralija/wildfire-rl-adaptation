@@ -4,6 +4,7 @@ title: Trenutno stanje — 2026-10-31
 sources:
 - resource: /reports/firehose-verification/verification.json
 - resource: /reports/firehose-verification/task004c-adapter-smoke.json
+- resource: /reports/real-fire-data/cfsds-train-spatial-feasibility.json
 - resource: /docs/WORK_LOG.md
 ---
 # Trenutno stanje — 2026-10-31
@@ -201,6 +202,26 @@ Raniji rezultat 10/20 `PASS_FUEL_ONLY` važio je za prethodnu kohortu/target-awa
 ne kvalifikuje novi target-blind shortlist, koji još nema ponovljen fuel audit. Sačuvani
 pilot FireCase-ovi ostaju historijski prototipi i nisu retroaktivno preimenovani u
 target-blind slučajeve.
+
+## TRAIN-only prostorni audit domena — 2026-10-31
+
+Isti 25 TRAIN event/day kandidata upoređeni su na 20×20/100, 150, 200 i 300 m te
+40×40/100 m. Prozor svakog slučaja prvo je izabran oko day n−1 centroida iz pre-target
+rastera; target geometrija je mjerena tek nakon izbora. Za 20×20/100 m target ulazi u
+4/25 prozora (median capture 0%, max 1.04%). Na oko 4 km, target se vidi u 19/25, ali
+medijalno je pokriveno samo 1.95%. Oko 6 km medijana je 15.31%, no dvije source slike su
+premale za 67×67 raster prozor. [Metoda i tumačenje](research/CFSDS_SPATIAL_FEASIBILITY.md),
+[mašinski report i hashovi](../reports/real-fire-data/cfsds-train-spatial-feasibility.json),
+[ADR-022](specs/DECISION_RECORDS.md#adr-022).
+
+**Odluka:** postojeći 2×2 km domen nije dovoljan za reality-check ovih shortlisted parova;
+ne usvaja se širi domen samo zato što target coverage raste. Audit ne resampluje gorivo,
+teren ni vrijeme i ne pravi simulator ulaze. 20×20 na 200/300 m zadržava checkpoint oblik
+ali mijenja fizičko značenje akcija; 40×40 na 100 m ne odgovara postojećem checkpointu.
+Stari day-pair shortlist uslovljen je target-day summary zapisom i pozitivnom firearea,
+zato potpuno target-independent cohort membership još nije utvrđen. Sljedeće definisati
+to day-pair pravilo i napraviti pre-target screen svih TRAIN prilika na fiksnim domenama.
+Nije otvoren validation/test raster; nema novog casea, replaya, kalibracije ili treninga.
 
 ## Train-only fuel quality gate — 2026-10-30
 

@@ -120,15 +120,21 @@ target-blind initial-state prototype/proof su završeni; pogledati mask/importer
 receipt-e, train-only window screen i ADR-020/021. Prototip centrira 23×23 crop na
 centroidu day n−1, a početni front koristi samo njegov siguran unutrašnji prsten. Promjena
 svih 19 ciljnih piksela u `2018_747` ne mijenja izabrani crop ni početni simulator input.
-Međutim, train screen shortlist pokazuje da samo 4/25 prozora sadrže makar jedan pixel
-narednog dana; ne koristiti target coverage da se kandidati biraju ili crop podešava.
+Međutim, train screen shortlist pokazuje da samo 4/25 2 km prozora sadrže makar jedan
+pixel narednog dana. Bounded spatial audit istih 25 parova pokazuje 19/25 target-pozitivnih
+prozora na oko 4 km, ali medijan capture je samo 1.95%; na oko 6 km medijan je 15.31%, a
+dvije izvorne slike su premale. Rezultati i limiti su u
+[TRAIN spatial report](docs/research/CFSDS_SPATIAL_FEASIBILITY.md) i
+[JSON receipt](reports/real-fire-data/cfsds-train-spatial-feasibility.json). Nijedna domena
+nije usvojena. Target-day summary i pozitivna `firearea` bili su uslov shortlist day-paira;
+potpuno target-independent event/day pravilo još treba definisati.
 
 Ovo nije godišnja fuel mapa: 2014b nema potvrđen pixel cutoff, v20191114 succession tree
 nije transkribovan/validiran, a C++ importer odbija `burnt` inicijalno stanje na NF ćeliji.
-Sljedeće prvo riješiti target-blind prostornu podobnost fiksnog 2×2 km domena iz
-pre-target podataka. Zatim pribaviti vjerodostojna fuel pravila, odlučiti importer/damage
-contract i popuniti train terrain/weather provenance i suppression evidence prije
-preregistrovanog replay gatea.
+Sljedeće prvo definisati target-independent day-pair cohort pravilo i uraditi pre-target
+screen svih TRAIN prilika na unaprijed deklarisanim domenama. Zatim pribaviti vjerodostojna
+fuel pravila, odlučiti importer/damage contract i popuniti train terrain/weather provenance
+i suppression evidence prije preregistrovanog replay gatea.
 Ne birati per-event trajanje iz targeta.
 No-action gate nije prošao: ne koristiti heldout ishode za kalibraciju, ne pokretati
 benchmark ili fine-tuning i ne tvrditi fizičku validaciju/agenta boljeg od baselinea.

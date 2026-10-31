@@ -15,7 +15,7 @@ Napor je okvirni agentov prijedlog u aktivnim radnim satima, bez roka i dodjele 
 | TASK-013 | završeno: podrška handoffu | OKF repo bundle, ulazi/navigacija, održavanje, validator/testovi/CI | ostvareno |
 | TASK-012 | završeno 2026-10-30 | prema korisnikovoj uputi odabrana Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire; historijske granice služe zasebnom reality-checku, a agent uči iz simulatora | ostvareno |
 | TASK-014 | lokalno završeno 2026-10-30; drugi host nije provjeren | moderni `.venv` i odvojeni legacy Docker izgrađeni; package/source/image hashovi i smoke/inference receipt zapisani | ostvareno lokalno |
-| TASK-015 | P0, djelimično završeno | legacy kohorta 20/9/15; legacy train fuel-only 10 pass/10 fail (ne vrijedi za nove cropove); input QC za 3/20; `2018_747` pre-target mask i target-mask invariance PASS; train screen pokazuje slabu 2×2 km target pokrivenost; annual mapa blokirana base cutoff/succession/importer pitanjima; suppression unknown | target-blind prostorna podobnost + novi train fuel audit + fuel vintage + importer odluka + input provenance + replay gate |
+| TASK-015 | P0, djelimično završeno | legacy kohorta 20/9/15; input QC 3/20; target-blind mask/invariance PASS za jedan par; bounded prostor audit za 25 parova: 2 km neadekvatno, 4 km median capture 1.95%, 6 km 15.31% (2 rastera premala); day-pair članstvo nije potpuno outcome-independent; fuel vintage/importer/suppression blokirani | target-independent day-pair pravilo + puni train-only domain screen + novi train fuel audit + fuel vintage/importer/input provenance + replay gate |
 | TASK-018 | P0, dijagnostička faza završena 2026-10-30; uzrok nije izolovan | poređenje hashova/postavki i unaprijed fiksirani vremenski presjeci na tri train replaya; metadata horizon bug ispravljen; rub/domenska ograničenja potvrđena; bez heldout kalibracije ili treninga | ostvareno |
 | TASK-004c | P0, adapter završen lokalno 2026-10-30 | C++/Python kumulativna šteta, zaseban scar/front i named terminal receipt; fixture + 12/12 inference rollouta, bez treninga; fizički no-action gate ostaje otvoren | ostvareno |
 | TASK-017 | završeno 2026-10-30 | `InitialState.csv` uvozi raniji scar i više aktivnih ćelija; fixture i stvarni `2018_747` C++ import/replay su uspješni | ostvareno |
@@ -76,15 +76,21 @@ heldout benchmark zamrznut. Pre-target maska za `2018_747` koristi samo
 Target-blind initial-state prototip bira crop blizu day n−1 centroida; invariance proof
 pokazuje da target-mask promjena ne utiče na simulator input
 (`reports/real-fire-data/cfsds-target-blind-input-invariance.json`). Train-only shortlist
-screen sadrži makar jedan target pixel u samo 4/25 prozora, pa prostorna podobnost fiksnog
-2×2 km grid-a ostaje otvorena. To nije annual fuel mapa: nema potvrđenog baznog vremenskog
+screen sadrži makar jedan target pixel u samo 4/25 postojećih 2 km prozora. Bounded domain
+audit poredi iste parove: 4 km prozori hvataju makar target pixel u 19/25, ali medijalno
+samo 1.95% targeta; 6 km medijan je 15.31%, ali dva rastera ne mogu smjestiti prozor.
+Nijedna domena nije usvojena; metoda i ograničenja su u
+`docs/research/CFSDS_SPATIAL_FEASIBILITY.md` i `reports/real-fire-data/cfsds-train-spatial-feasibility.json`.
+Puni day-pair membership kriterij treba target-independent definisati prije sveobuhvatnog
+train screena. To nije annual fuel mapa: nema potvrđenog baznog vremenskog
 cutoffa ni autoritativnog succession crosswalka. C++ fixture reprodukuje odbijanje
 `burnt` stanja na `NF` ćeliji; treba odlučiti kako simulator čuva historijsku štetu kad
 godišnje pravilo ćeliju učini non-fuel. Pogledati ADR-020/021 i EXP-010/011. Još trebaju
 FBP vintage/source provjera, importer ugovor, train terrain/weather poravnanje,
 suppression dokazi i unaprijed definisani replay gate. Raniji 10/20 fuel-only rezultat
-koristio je prethodnu kohortu/izreze i ne važi za novi target-blind shortlist; audit treba
-ponoviti tek za slučajeve koji prođu target-blind prostornu provjeru.
+koristio je prethodnu kohortu/izreze i ne važi za novi target-blind shortlist. Sljedeće
+je preregistrovati day-pair selekciju i screenirati cijeli TRAIN prostor; tek potom
+ponoviti fuel audit za kvalifikovane train slučajeve.
 
 TASK-018 isporuka: poređeni su isti case-manifest/input hashovi, fuel/FBP, weather/FWI,
 početni front i 20×20 domen. Sačuvani postojeći grids analizirani su na fiksnih 30–1.440
@@ -117,8 +123,10 @@ samo na train/calibration eventima.
 C++ fixture je reproducirao odbijanje `burnt` stanja na `NF` ćeliji; treba odlučiti kako
 simulator čuva historijsku štetu kada godišnje pravilo ćeliju učini non-fuel. Target-aware
 front izbor je zamijenjen prototipom i testiran za target-mask invariance na `2018_747`;
-shortlist screen pokazuje slabu prostornu podobnost za većinu trenutnih kandidata. Raniji
-10/20 `PASS_FUEL_ONLY` odnosio se na stare izreze i ne kvalifikuje novi shortlist.
-Pogledati ADR-020/021 i EXP-010/011. Prvi sljedeći korak je pre-target spatial-feasibility
-audit, pa novi train fuel audit, FBP vintage/source provjera, importer ugovor, train
-terrain/weather poravnanje i suppression dokazi prije heldout caseova.
+shortlist screen pokazuje slabu prostornu podobnost za većinu trenutnih kandidata. Bounded
+2–6 km domain audit je zabilježen u ADR-022/EXP-012; veća domena poboljšava target capture,
+ali ne opravdava replay niti je izabrana. Raniji 10/20 `PASS_FUEL_ONLY` odnosio se na stare
+izreze i ne kvalifikuje novi shortlist. Pogledati ADR-020/022 i EXP-010/012. Prvi sljedeći
+korak je target-independent day-pair pravilo i puni train-only prostorni screen, zatim novi
+fuel audit, FBP vintage/source provjera, importer ugovor, train terrain/weather poravnanje
+i suppression dokazi prije heldout caseova.

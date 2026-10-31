@@ -19,6 +19,7 @@ okf_version: "0.2"
 - [Podaci](data/index.md) - Porijeklo, javni izvori i CFSDS pilot cohort manifest.
 - [Real-case pipeline](docs/research/REAL_CASE_PIPELINE.md) - Jednostavan opis šta stvarni podaci daju (Y), šta simulator prima (X), te jaz početnog fronta.
 - [Train-only CFSDS input QC](docs/research/CFSDS_TRAIN_INPUT_QC.md) - Izmjereni ulazi, target-blind početno stanje i otvoreni fuel/weather/spatial/suppression rizici.
+- [TRAIN-only CFSDS prostorni audit](docs/research/CFSDS_SPATIAL_FEASIBILITY.md) - Učinak 2–6 km target-blind domena na 25 TRAIN parova i ograničenja postojećeg 20×20 checkpointa.
 - [TRAIN fuel-vintage mask proof](reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json) - Provjera da su u jednom TRAIN slučaju target dan i kasniji dani van maske; godišnja mapa još nije kreirana.
 - [TRAIN target-blind input proof](reports/real-fire-data/cfsds-target-blind-input-invariance.json) - Target maska mijenja truth, ali ne početni input za `2018_747`.
 - [TRAIN target-blind window screen](reports/real-fire-data/cfsds-train-target-blind-window-screen.json) - Pre-target screen; pokazuje ograničenje 2×2 km izreza bez korištenja targeta za izbor.

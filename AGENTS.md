@@ -22,16 +22,19 @@ scar. Za TRAIN događaj `2018_747` dokazano je da promjena day-n ciljne maske ne
 prozor, modelsku scar/front masku ni `InitialState.csv`. TRAIN-only screen istog pravila
 pokazuje slabo preklapanje ciljnog dana za većinu trenutno rangiranih kandidata; to je
 dijagnostika prostorne prikladnosti, ne dozvola da se prozor bira prema targetu.
-Godišnja fuel mapa još nije napravljena: 2014b nema potvrđen per-pixel cutoff,
-succession crosswalk nije potvrđen, a C++ fixture odbija historijski scar na NF ćeliji.
-Prvi naredni korak je target-blind prostorna podobnost 2×2 km domena iz pre-target
-podataka, jer train screen pokazuje malo sljedećednevnog target preklapanja. Zatim slijedi
-rješavanje fuel/source/importer ugovora, kompletne train terrain/weather provenance,
-suppression evidence i unaprijed definisani replay gate. Root cause no-action overgrowth
-nije izolovan, a no-action gate nije prošao. Ne koristi validation/test ishode za izbor
-parametara. No-action gate i heldout freeze moraju proći prije policy benchmarka ili
-fine-tuninga. Runtime PASS nije dokaz fizičke validacije ili RL prednosti. Čuvaj ovu
-razliku u sažecima.
+Naknadni prostorni audit na istih 25 parova pokazuje da 2 km nije dovoljno; oko 4 km
+medijalno pokriva samo 1.95% targeta, a oko 6 km oko 15.3% i ne stane u dva izvorna
+rastera. Nijedna domena nije usvojena; day-pair membership shortlist-a nije dokazano
+potpuno outcome-independent jer je tražen target-day red i pozitivna `firearea`.
+Sljedeći korak je unaprijed definisati takvo pravilo i pregledati sve TRAIN mogućnosti na
+deklarisanim prostornim skalama. Godišnja fuel mapa još nije napravljena: 2014b nema
+potvrđen per-pixel cutoff, succession crosswalk nije potvrđen, a C++ fixture odbija
+historijski scar na NF ćeliji. Zatim slijedi rješavanje fuel/source/importer ugovora,
+kompletne train terrain/weather provenance, suppression evidence i unaprijed definisani
+replay gate. Root cause no-action overgrowth nije izolovan, a no-action gate nije prošao.
+Ne koristi validation/test ishode za izbor parametara. No-action gate i heldout freeze
+moraju proći prije policy benchmarka ili fine-tuninga. Runtime PASS nije dokaz fizičke
+validacije ili RL prednosti. Čuvaj ovu razliku u sažecima.
 
 Održavanje znanja: [maintenance](knowledge/maintenance.md), format:
 [OKF profil](knowledge/okf-format.md). Novi `.md` koncept dobija YAML `type` i vezu iz

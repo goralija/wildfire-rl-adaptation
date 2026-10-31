@@ -248,9 +248,12 @@ automatska historical input mapa. [CWFIS FBP fuel maps](https://cwfis.cfs.nrcan.
    PPO smoke i legacy Docker/inference su lokalno pripremljeni. Environment receipt
    navodi tačne GIS pakete nakon instalacije; drugi OS/arch nije provjeren.
 3. **TASK-015 — djelimično završen:** ekranirati 44 kandidata iz po najviše pet slučajeva
-   godišnje; podijeljeni su po događajima u 20 train, 9 validation i 15 test. Ovaj spisak
-   nije iscrpan i nije finalni benchmark. Za širenje na 2019–2024 treba odgovarajuće
-   nacionalne FBP fuel mape iz 2019. i 2024. i potpunu provjeru vremena/suppressiona.
+   godišnje; podijeljeni su po događajima u 20 train, 9 validation i 15 test. Target-blind
+   prostorni audit na 25 train parova pokazuje da 2×2 km nije dovoljan, a 4–6 km nije još
+   odobren kao simulator domena. Day-pair membership pravilo i puni TRAIN spatial screen
+   su sljedeći. Ovaj spisak nije iscrpan i nije finalni benchmark. Za širenje na 2019–2024
+   treba odgovarajuće nacionalne FBP fuel mape iz 2019. i 2024. i potpunu provjeru
+   vremena/suppressiona. Vidi [spatial report](CFSDS_SPATIAL_FEASIBILITY.md).
 4. **TASK-017 — prvi adapter završen:** `InitialState.csv` uvozi raniji scar i više
    aktivnih ćelija; provjeren je na fixtureu i na stvarnom CFSDS ulazu. TASK-004c je
    naknadno završio cumulative-damage/front export i terminalni razlog;

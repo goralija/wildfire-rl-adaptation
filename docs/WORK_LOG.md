@@ -486,3 +486,34 @@ the target-mask proof passed; `build_cfsds_case.py --help`, Python compilation a
 No validation/test raster was opened. Generated smoke output and raw CFSDS archives stay
 outside Git. The screen emitted a non-fatal NumPy 2.5/Rasterio deprecation warning while
 reading rasters; the report completed successfully.
+
+## 2026-10-31 — TASK-015 bounded TRAIN spatial-domain feasibility
+
+Added a pure helper, a TRAIN-only audit CLI and focused tests to compare 20×20 domains at
+100/150/200/300 m with a 40×40/100 m option. All five options use the same 25 already
+shortlisted 2014–2018 event/day pairs. Each window is selected using only arrival values
+strictly before target day n and the day n−1 centroid; target coverage is measured only
+after selection. The JSON receipt records source archive/member and code hashes.
+
+The current 2×2 km domain contains any target-day pixel in 4/25 crops (median target
+capture 0%, max 1.04%). Approximately 4 km contains target pixels in 19/25, but median
+capture remains 1.95%. Approximately 6 km has a 15.31% median over its 23 valid windows;
+two source rasters are smaller than 67×67 pixels. None of these results is a resampled
+simulator case or justification to adopt a wider grid. A 20×20 coarse grid changes action
+semantics; 40×40 is incompatible with the existing checkpoint shape.
+
+Protocol note: the 25-pair screen required a target-day summary and positive `firearea`.
+Target geometry did not choose the crops, but full outcome-independent pair membership is
+not established. The next task is to define that membership rule and screen the complete
+TRAIN opportunity set at fixed domains. Fuel vintage, NF-scar importer, terrain/weather,
+suppression, no-action gate, benchmark and training remain blocked/unfinished.
+
+No FireCase, raster resampling, simulator replay, calibration, training or validation/test
+inspection occurred. Added [method](research/CFSDS_SPATIAL_FEASIBILITY.md),
+[receipt](../reports/real-fire-data/cfsds-train-spatial-feasibility.json), ADR-022 and
+EXP-012; refreshed status/handoff/backlog and navigation.
+
+Verification: 61/61 project tests passed; strict OKF validation passed for 71 Markdown
+files; synthetic CLI smoke wrote to a fresh `/private/tmp` directory; and `git diff --check`
+passed. The audit read only 2014–2018 raster archives, confirmed 25 fixed event/day pairs
+across all five options, and recorded archive/member/code SHA-256 values.

@@ -1,139 +1,91 @@
 ---
 type: Handoff
-title: Naredna sesija — nakon TASK-015 target-blind input prototipa
+title: Nastavak nakon TRAIN-only CFSDS prostornog audita
 ---
 # Naredna sesija
 
-## Trenutno stanje
+## Kratko stanje
 
-TASK-018 dijagnostička faza je završena na tri **train-only** CFSDS no-action replaya
-(`2018_747`, `2018_241`, `2018_1770`). Nisu napravljeni novi CFSDS replays,
-fine-tuning ni heldout kalibracija. Kasniji Sub20 C++ runovi služe samo adapter smokeu.
-Nema dokaza da agent smanjuje stvarnu štetu i simulator još ne prolazi no-action
-reality-check.
+Nastaviti na grani `research/cfsds-train-qc` u njenom postojećem task worktreeu.
+Moderni Python/GIS environment i odvojeni legacy Cell2Fire runtime tehnički rade,
+ali istraživački environment za stvarne požare još nije spreman za glavno treniranje.
+No-action poređenje sa historijskim požarima nije prošlo; nema dokaza da RL agent
+smanjuje stvarnu štetu.
 
-Glavni nalazi:
+Glavni put je Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire. Validation i test godine
+ne otvarati radi izbora modela ili kalibracije; ne pokretati policy benchmark ni
+fine-tuning prije prihvatljivih train ulaza, replay gatea i zamrznutog heldout splita.
 
-- Fuel/FBP ulaz koristi isti kanadski FBP 2014b sloj (250 m prebačen na 100 m) i istu
-  lookup tabelu. Te tri modelirane mape imaju klase C2/C3/D1; ne nedostaju im posebni
-  mixedwood/grass parametri. Fuel-only PASS nije fizička validacija.
-- Sačuvani simulator grids na fiksnim 30–1.440 minuta pokazuju različite brzine rasta.
-  Sva tri slučaja dotaknu rub 20×20 prozora za 34–52 minute; `2018_241` napuni svih
-  400 ćelija. CFSDS je dnevni satelitski interpolisani cilj bez tačnog sata izgaranja.
-- `Weather.csv` ima 24 satna reda, a pinovani C++ kod ima do 60 minuta po redu, pa je
-  stvarni maksimalni horizont 1.440 simulator minuta. Polje u ranijoj probe datoteci
-  pogrešno je pokazivalo 480 jer je množilo interval odluka (`steps_per_action=8`) sa
-  60. Kod je popravljen da broji redove; raniji replayi nisu mijenjani.
-- Suppression/gašenje je nepoznato. TASK-004c adapter sada emitira named terminal reason
-  i zasebne affected/front/treatment skupove; batch potvrđuje integraciju, ali ne
-  razrješava tačan fizički uzrok prevelikog rasta.
+## Završeno u ovoj fazi
 
-Detalji, opažanja naspram hipoteza i ograničenja su u
-[TASK-018 dijagnozi](research/CFSDS_NO_ACTION_DIAGNOSIS.md), a svi fiksni vremenski
-presjeci i hashovi u
-[timeline reportu](../reports/real-fire-data/cfsds-no-action-timeline.json).
+- TASK-018 analiza tri sačuvana TRAIN no-action replaya potvrdila je rani kontakt s
+  rubom 20×20 mreže (34–52 minute); uzrok prevelikog rasta nije izolovan jer nema
+  intradnevnog ground trutha ni event-level suppression timeline-a.
+- TASK-004c C++/Python epizodni adapter izvozi cumulative damage, front i terminalni
+  razlog; fixture i 12 kratkih inference rollouta prolaze. To je adapter/runtime dokaz,
+  ne fire-behavior validacija.
+- TASK-015 pre-target maska i target-blind crop/state pravilo su implementirani.
+  Perturbation proof za `2018_747` pokazuje da promjena target maske ne utiče na crop
+  ni na početni input. Ovo važi za jedan fiksni TRAIN event/day par.
+- TRAIN screen sadrži 25 parova, pet po godini, ali day-pair eligibilnost je zahtijevala
+  target-day zapis i pozitivnu `firearea`; puna nezavisnost članstva od outcome-a nije
+  dokazana. Ne koristiti taj screen kao konačni benchmark cohort.
+- Prostorni audit uporedio je iste parove na oko 2, 3, 4 i 6 km. U 2 km target uđe u
+  4/25 prozora (median capture 0%); u oko 4 km uđe u 19/25, ali median je samo 1.95%;
+  u oko 6 km median raste na 15.31%, a dvije slike su premale za takav prozor. Nije
+  usvojen veći model grid i nisu napravljeni FireCase-ovi/replayi.
+- Godišnja fuel mapa nije izrađena: v2014b nema potvrđen pixel-level vremenski cutoff,
+  succession crosswalk nije transkribovan/validiran, a C++ importer odbija historijski
+  scar na `NF` ćeliji. DEM/weather lineage je nepotpuna, suppression unknown.
 
-## Završeni adapter i trenutno stanje TASK-015 input QC-a
+Metode i dokazi:
 
-TASK-004c adapter je lokalno završen. C++ sada odvaja stariji scar od aktivnog fronta,
-čuva kumulativno pogođene ćelije i uz završetak ispisuje imenovani razlog. Python `info`
-dobija isti terminalni spisak i reason. Ćelija koju C++ u istom koraku označi i kao
-pogođenu i kao tretiranu ostaje u kumulativnom C++/Python izvještaju iako se na
-kategorijalnom gridu vidi kao `-1`. RGB 3×20×20, `Discrete(400)`, no-op `-1`, reward i
-checkpoint težine ostaju isti. Fixture i 12/12 inference rollouta prolaze; detalji i
-ograničenja su u [TASK-004c receiptu](../reports/firehose-verification/task004c-adapter-smoke.json).
+- [Spatial feasibility izvještaj](research/CFSDS_SPATIAL_FEASIBILITY.md) i
+  [mašinski receipt](../reports/real-fire-data/cfsds-train-spatial-feasibility.json)
+- [Target-blind pravilo i invariance proof](../reports/real-fire-data/cfsds-target-blind-input-invariance.json)
+- [TRAIN shortlist](../reports/real-fire-data/cfsds-train-target-blind-window-screen.json)
+- [Input/provenance QC](research/CFSDS_TRAIN_INPUT_QC.md), [fuel QC](research/CFSDS_TRAIN_QC.md)
+- [Fuel mask proof](../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
+  [NF-scar importer receipt](../reports/firehose-verification/nonfuel-initial-scar-compatibility.json)
+- [TASK-004c adapter/runtime receipt](../reports/firehose-verification/task004c-adapter-smoke.json)
+- [No-action dijagnostika](research/CFSDS_NO_ACTION_DIAGNOSIS.md)
 
-**Ovo je adapter/runtime prolaz, ne fire-behavior prolaz.** Svih 12 batch slučajeva završilo
-je na `weather_horizon`; u toj matrici nismo direktno izvršili C++ grane `front_extinguished`,
-`grid_exhausted` ili `no_ignition`. CFSDS no-action razlika i rubni efekat ostaju otvoreni,
-pa nema fizičke validacije, dokaza da agent smanjuje štetu, policy benchmarka ni treniranja.
+## Sljedeći taskovi po redu
 
-Train-only input QC je sada izmjeren za tri dostupna FireCase paketa i fuel-vintage
-izvori su pregledani. Još nije bezbjedno proglasiti train slučajeve potpuno spremnim:
-17 paketa nedostaje, 2014b nema dokumentovan per-pixel vremenski cutoff, 2019 CanFG
-je u razvojnom direktoriju i koristi NBAC, izvorni DEM tile/weather field lineage nisu
-sačuvani, a suppression je unknown za svih 20. Detalji i redoslijed su u
-[input QC izvještaju](research/CFSDS_TRAIN_INPUT_QC.md) i
-[mašinskom receipt-u](../reports/real-fire-data/cfsds-train-input-qc.json).
+1. Definiši i zapiši unaprijed target-independent pravilo za izbor TRAIN day-pair
+   epizoda. Razdvoji tri stvari: dostupnost opaženog targeta za naknadni score, pravilo
+   koje izabere dan n, i geometriju prozora koja mora koristiti samo podatke prije n.
+   Raniji screen je koristio target-day red i pozitivnu `firearea`, zato taj dio prvo
+   treba pregledati.
+2. Provedi train-only prostorni pre-screen svih prihvatljivih 2014–2018 epizoda prema
+   unaprijed navedenim fizičkim domenama. Sačuvaj target metrike samo kao naknadni
+   feasibility check. Audit preko 25 starih kandidata nije iscrpan.
+3. Prije pravljenja novih slučajeva potvrdi as-of-event fuel-map izvor, cutoff,
+   succession crosswalk i uslove korištenja. Ne proglašavati v2014b vremenski sigurnim
+   bez dokaza; ne koristiti razvojni v2019 ili post-event 2024 sloj kao gotov odgovor.
+4. Fixtureom definiši kako se historijska kumulativna šteta čuva kad je ćelija non-fuel,
+   a da takva ćelija ne širi vatru; aktivni front mora imati zaseban jasan ugovor.
+5. Za TRAIN slučajeve koji prođu ove gateove pribavi DEM tile/version/hash i potpunu
+   weather request/location/field/unit lineage. Suppression status tražiti iz službenih
+   izvora; ako ga ne možemo povezati, ostaje `unknown`.
+6. Tek tad preregistruj iste no-action ulaze, seedove i horizont; uradi mali train-only
+   replay gate i unaprijed definiši prihvatljive metrike. Ne birati trajanje epizode po
+   targetu. No-action gate i heldout freeze su preduslovi za benchmark/trening.
 
-Sljedeći tehnički koraci:
-
-1. Završeni su TRAIN-only pre-target fuel mask proof (`2018_747`), C++ fixture za
-   `NF` scar odbijanje, target-blind prozor/front prototip i target-mask invariance proof
-   na istom TRAIN događaju. Pogledati [mask receipt](../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
-   [import receipt](../reports/firehose-verification/nonfuel-initial-scar-compatibility.json),
-   [invariance receipt](../reports/real-fire-data/cfsds-target-blind-input-invariance.json),
-   [train screen](../reports/real-fire-data/cfsds-train-target-blind-window-screen.json),
-   ADR-020/021 i EXP-010/011. Ovo nije CFSDS replay, godišnja fuel mapa ni fizička validacija.
-2. **Prvi naredni zadatak:** preregistrovati train-only prostorni feasibility audit koji
-   koristi samo pre-target informacije: koliko prethodne scar/front površine izrez izostavlja,
-   da li front ostaje upotrebljiv nakon 90→100 m resamplinga i da li fiksni 2×2 km
-   model-domain uopšte može podržati reality-check. Ne koristiti target capture za izbor
-   kandidata/prozora; ako grid nije kompatibilan, zabilježiti blokadu i razmotriti zasebnu
-   odluku o model-domain/policy ugovoru.
-3. Pribaviti/dokumentovati bazni FBP as-of-event cutoff i prepisati/provjeriti v20191114
-   burn-scar succession tree, uključujući licencu i per-pixel porijeklo. Ne koristiti v2019
-   development ili 2024 raster kao gotovu historijsku mapu.
-4. Odlučiti i fixtureom testirati importer contract za slučaj da validno succession
-   pravilo staru ćeliju označi kao non-fuel: scar mora ostati u kumulativnoj historijskoj
-   šteti, dok takva ćelija ne smije postati gorivo za širenje; testirati kako se aktivni
-   front pravilno predstavlja.
-5. Tek nakon tih dokaza napraviti mali annual-map rezultat za jedan TRAIN event; assertioni
-   moraju isključiti target dan n i sve kasnije datume, a target-blind day n-1 front mora
-   biti kompatibilan.
-6. Za train slučajeve odabrane za replay prikupiti izvornu terrain tile provenancu i
-   kompletan vremenski API request, resolved location, units i variable-source mapping;
-   zadržati unknown ako ih se ne može dokazati.
-7. Potražiti event-level suppression dokaz od nadležne agencije. CNFDB dokumentuje
-   agency-provided lokacije/perimetre i ograničenu potpunost, a ne već spojenu timeline
-   akcija ovog projekta; nema prihvaćanja EULA bez ovlaštenja.
-8. Unaprijed zapisati ulazne varijante, seedove, metrike i zajednički horizont, pa tek
-   onda uraditi train-only kontrolisane no-action replays. Ne birati per-event trajanje
-   prema targetu i ne koristiti validation/test ishode.
-9. Heldout event IDs zamrznuti tek nakon prihvatljivog train no-action gatea. Benchmark
-   i fine-tuning ostaju blokirani do tada.
-
-Trenutni target-blind crop je centriran na centroidu posljednjeg poznatog dana n−1;
-aktivni front čine day n−1 pikseli u sigurnom unutrašnjem dijelu prozora, a pikseli na
-ivici ostaju scar. Na train screen shortlisti 25 kandidata samo 4 imaju makar jedan day-n
-pixel u 23×23 izrezu (median target capture je 0; maksimum oko 1.04%). To je target-only
-naknadna dijagnostika i pokazuje da 2×2 km grid često ne obuhvata naredni dnevni rast.
-Ne prilagođavati prozor ni shortlistu prema toj metrici; prije reality-check replaya
-definisati target-blind pravilo prostorne podobnosti ili razmotriti unaprijed opravdanu
-promjenu domene/policy grid ugovora.
-
-Case builder sada podrazumijeva novi train-only screen i odbija manifest/candidate redove
-koji ne potvrđuju target-blind crop i ranking. Stari kombinovani cohort screen zadržava
-istorijske target-aware offsete; ne koristiti ga za novo građenje FireCase-a. Invariance
-receipt za `2018_747` fiksira event/day par i ne dokazuje da je izbor tog para nezavisan od
-target dostupnosti; za budući cohort unaprijed zapisati target-blind day-pair pravilo.
-Raniji 10/20 fuel-only rezultat pripada prethodnoj kohorti/izrezima i ne kvalifikuje ovih
-25 novih target-blind kandidata; nakon prostorne provjere ponoviti fuel audit za stvarno
-odabrane train slučajeve. Stari pilot FireCase-ovi ostaju historijski target-aware primjeri.
-
-Benchmark i fine-tuning ostaju blokirani dok se ne prođu i no-action quality gate i
-heldout freeze. Ne otvarati validation/test rastere ili ishode radi QC/tuninga.
-
-## Bitni artefakti
-
-- [TASK-018 dijagnoza](research/CFSDS_NO_ACTION_DIAGNOSIS.md)
-- [TASK-018 timeline/hash receipt](../reports/real-fire-data/cfsds-no-action-timeline.json)
-- [TASK-015 fuel audit](research/CFSDS_TRAIN_QC.md) i
-  [mašinski report](../reports/real-fire-data/cfsds-train-fuel-qc.json)
-- [TASK-015 input audit](research/CFSDS_TRAIN_INPUT_QC.md) i
-  [mašinski report](../reports/real-fire-data/cfsds-train-input-qc.json)
-- [X/Y data pipeline](research/REAL_CASE_PIPELINE.md)
-- [cijeli real-fire report index](../reports/real-fire-data/index.md)
-- [backlog](BACKLOG.md), [odluke](specs/DECISION_RECORDS.md) i [status](STATUS.md)
+Opcije 20×20 na 200/300 m čuvaju oblik tenzora/akcija, ali mijenjaju prostorno značenje
+svake akcije i modelskog širenja. 40×40 na 100 m čuva rezoluciju ali ne može koristiti
+postojeći 20×20 checkpoint. Prostorni audit sam ne bira između njih; potreban je zaseban
+FBP/policy ugovor prije izrade simulator paketa.
 
 ## Lokalni environment
 
-Moderni Python 3.12.4 `.venv` ima GIS/knowledge pakete. Legacy Firehose je odvojeni
-Linux ARM64 Docker image. Sirovi CFSDS, DEM, fuel karte, generated FireCase fajlovi i
-simulator grids ostaju ignorisani; mali kod, manifests/hashovi, sažeci i rezultati idu u
-Git. U čistom checkoutu koristiti [download manifest](../reports/real-fire-data/cfsds-download-manifest.json)
-i pipeline runbook. Ne instalirati legacy SB3/Gym pakete u moderni venv.
+Moderni Python 3.12.4 `.venv` s GIS alatima je u glavnom klonu, dok legacy Firehose
+koristi izolovan Linux ARM64 Docker image. Raw CFSDS i ostali rasteri su ignorisani u
+Git-u; u ovom audit worktreeu se čitaju preko putanje glavnog klona i ne kopiraju u Git.
+Pravila i download izvori su u [manifestima](../reports/real-fire-data/cfsds-download-manifest.json)
+i [runbooku](../HANDOFF.md). Ne miješati legacy SB3/Gym environment s modernim GIS venvom.
 
-Prije handoffa pratiti `AGENTS.md`: fokusirani/puni testovi, strict knowledge validator,
-i synthetic CLI smoke. Nikad ne prepisivati postojeće `runs/` rezultate; odabrati nov
-output folder.
+Pred predaju: `PYTHONPATH=src python3 -m unittest discover -s tests -v`, knowledge
+validator `python3 scripts/validate_knowledge.py --strict`, synthetic CLI smoke i
+`git diff --check`. Ne prepisivati postojeće `runs/`; svaki smoke treba svježe ignorisano
+odredište.

@@ -1,5 +1,13 @@
 # Promjene baze znanja
 
+## 2026-10-31: TASK-015 TRAIN spatial feasibility audit
+
+- Isti 25 TRAIN parova je target-blind centriran prema day n−1 na 2, 3, 4 i 6 km; dodatno poređeno 40×40/100 m. Day-n coverage je mjeren tek nakon crop izbora.
+- Na 2 km samo 4/25 prozora sadrže target pixel (median 0%); na približno 4 km 19/25 ali median capture 1.95%; na 6 km median 15.31% uz dvije premale source slike. Nijedan novi grid nije usvojen.
+- Uočena protokolska ograda: raniji parovi zahtijevaju day-n summary i pozitivnu firearea, pa day-pair membership nije dokazano potpuno outcome-independent.
+- [ADR-022](docs/specs/DECISION_RECORDS.md#adr-022), [EXP-012](docs/research/EXPERIMENT_LOG.md#exp-012--train-only-target-blind-spatial-domain-feasibility-2026-10-31), [metod](docs/research/CFSDS_SPATIAL_FEASIBILITY.md), [audit receipt](reports/real-fire-data/cfsds-train-spatial-feasibility.json).
+- Provjera: puni testovi 61/61, strict OKF 71 Markdown fajl, synthetic CLI smoke i git diff check prolaze. Nema resamplinga inputa, FireCase builda, replaya, treninga ili heldout rastera. Sljedeće: preregistrovati day-pair pravilo pa screenirati cijeli TRAIN prostor.
+
 ## 2026-10-31: TASK-015 target-blind početno stanje i train screen
 
 - Početni crop/front sada koriste samo pre-target podatke: crop se centrira na day n−1 centroid, sigurni unutrašnji n−1 pikseli su aktivni front, a rub izreza ostaje scar. Builder odbija stare screenove/candidate redove bez eksplicitnih target-blind oznaka; screen CLI je train-only i odbija heldout godine.
