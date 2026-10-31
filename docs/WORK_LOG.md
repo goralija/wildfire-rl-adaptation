@@ -4,6 +4,21 @@ title: Work log
 ---
 # Work log
 
+2026-10-31 — Prior-art follow-up for CFSDS → simulator → RL question. Reviewed the
+original CFSDS data descriptor and technical-validation section, the direct W.I.S.E.
+assessment built on CFSDS 1.1, the 2025 Dogrib/Cell2Fire real-case study and inputs,
+and the original Firehose RL paper. The literature confirms the individual steps are
+feasible, while exposing different evaluation goals: W.I.S.E. derives the initial front
+from day n-1 pixels adjacent to day n and its sensitivity scenarios select burn duration
+and wind using the target; Dogrib optimizes spread factors against the same burn scar;
+Firehose trains policies through simulator interaction on example/custom environments.
+None of these reviewed sources validates our full CFSDS-to-Firehose fine-tuning claim.
+Added a plain-language comparison and Y-to-X mapping in
+[CFSDS_PRIOR_WORK_AND_PLAIN_EXPLANATION](research/CFSDS_PRIOR_WORK_AND_PLAIN_EXPLANATION.md),
+linked it from the research/root indexes and project context, and summarized the boundary
+in status/handoff. This is literature review only: no data were downloaded, no FireCase
+rebuilt, no replay/training run, and no task gate changed. `research_ready=false` remains.
+
 2026-10-28 — empty upstream repository cloned; local empty base commit created to permit
 worktree isolation. Work occurs on `feature/project-bootstrap`. No original project files
 existed. User opted out of questions; all unconfirmed project choices remain assumptions.

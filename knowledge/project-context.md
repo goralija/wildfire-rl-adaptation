@@ -73,6 +73,16 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
   [operational evidence](../reports/real-fire-data/cfsds-train-bc-operational-evidence.json),
   [ADR-027](../docs/specs/DECISION_RECORDS.md#adr-027) and
   [ADR-028](../docs/specs/DECISION_RECORDS.md#adr-028).
+- Pregled ranijih radova potvrđuje da su CFSDS dnevne karte korištene u W.I.S.E., a
+  stvarni Dogrib požar u Cell2Fire; Firehose RL je zasebno treniran preko simulatora.
+  W.I.S.E. otvoreno koristi sutrašnju kartu za odabir početnog fronta, a podešeni
+  scenariji biraju trajanje/vjetar prema poznatom targetu; to su korisne dijagnostike,
+  ne dokaz poštene RL prednosti. Dogrib optimizacija je podešena prema istom ožiljku.
+  Nijedan pregledani rad ne zatvara cijeli naš lanac base-checkpoint → fine-tuning na
+  CFSDS historijskim slučajevima → nepristrasan heldout test. Ovo ne znači da se ulazi
+  ne mogu složiti: tri postojeća TRAIN slučaja već su konvertovana i replayana, ali
+  fizički no-action gate i input provenance ostaju otvoreni. Vidi
+  [laički/prior-art pregled](../docs/research/CFSDS_PRIOR_WORK_AND_PLAIN_EXPLANATION.md).
 - TRAIN-only fuel-vintage mask proof obrađuje samo `2018_747`: `arrival_day < target_doy`
   bira 881 prethodno spaljenu ćeliju u rasteru i isključuje 19 target ćelija; unit test
   provjerava i budući dan n+1. Godišnja mapa nije generisana jer 2014b cutoff i succession

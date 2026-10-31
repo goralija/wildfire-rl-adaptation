@@ -15,6 +15,20 @@ sources:
 ---
 # Trenutno stanje — 2026-10-31
 
+## Provjera ranijih rješenja — 2026-10-31
+
+Javni radovi potvrđuju da je ova vrsta pripreme izvodiva. CFSDS pretvara MODIS/VIIRS
+detekcije u procijenjeni dnevni dolazak vatre; W.I.S.E. je isti CFSDS format povezao s
+FBP gorivima, DEM-om i reanalysis vremenom; Dogrib je pripremljen za Cell2Fire uz fuel,
+teren i vremensku stanicu; Firehose je trenirao RL preko Cell2Fire scenarija. Razlika je
+u cilju i poštenju evaluacije: W.I.S.E. priznaje da početni front izvodi gledajući day-n
+target, a dijagnostički scenariji biraju najbolje trajanje i vjetar prema targetu.
+Dogrib optimizacija takođe je poređena na istom poznatom burn scar-u. Ovi radovi
+potvrđuju izvedivost komponenti, ali ne zatvaraju naš CFSDS + Firehose checkpoint +
+fine-tuning + heldout lanac. Naša konverzija je moguća i već je djelimično izvršena;
+no-action, provenance, prostor i nepristrasnost su preostali blokatori. Detalji i laičke
+analogije: [pregled ranijih radova](research/CFSDS_PRIOR_WORK_AND_PLAIN_EXPLANATION.md).
+
 ## Baza znanja u repozitoriju
 Repo je OKF 0.2 bundle s [root indeksom](../index.md),
 [sažetim kontekstom](../knowledge/project-context.md), [mapom koda](../knowledge/code-map.md)

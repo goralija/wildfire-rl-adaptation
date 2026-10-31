@@ -22,6 +22,7 @@ okf_version: "0.2"
 - [TRAIN terrain/weather provenance receipt](reports/real-fire-data/cfsds-train-terrain-weather-provenance.json) - MRDEM source class i novi pinovani weather snapshots; ne kvalifikuje stare target-aware slučajeve.
 - [TRAIN-only CFSDS fuel-vintage review](docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md) - FBP izvori, javno transkribovano W.I.S.E. succession stablo, neriješeni historijski cut-off i reuse uslovi.
 - [TRAIN-only CFSDS prostorni audit](docs/research/CFSDS_SPATIAL_FEASIBILITY.md) - Učinak 2–6 km target-blind domena na 25 TRAIN parova i ograničenja postojećeg 20×20 checkpointa.
+- [Kako su raniji radovi pripremali i provjeravali stvarne požare](docs/research/CFSDS_PRIOR_WORK_AND_PLAIN_EXPLANATION.md) - Direktna poređenja s CFSDS/W.I.S.E., Dogrib/Cell2Fire i Firehose, plus laičko objašnjenje otvorenih validacijskih prepreka.
 - [Puni TRAIN target-independent day-pair screen](docs/research/CFSDS_FULL_DAY_PAIR_SCREEN.md) - Svih 1.301 CFSDS TRAIN rastera, parovi dana bez target uslova i pet unaprijed definisanih domena.
 - [Full TRAIN day-pair JSON receipt](reports/real-fire-data/cfsds-train-full-day-pair-screen.json) i [case/domain CSV](reports/real-fire-data/cfsds-train-full-day-pair-screen.csv) - Aggregate hashovi i per-case mjere.
 - [TRAIN fuel-vintage mask proof](reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json) - Provjera da su u jednom TRAIN slučaju target dan i kasniji dani van maske; godišnja mapa još nije kreirana.

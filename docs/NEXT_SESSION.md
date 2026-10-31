@@ -16,6 +16,13 @@ Glavni put je Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire. Validation i test go
 ne otvarati radi izbora modela ili kalibracije; ne pokretati policy benchmark ni
 fine-tuning prije prihvatljivih train ulaza, replay gatea i zamrznutog heldout splita.
 
+Pregled ranijih radova sada je sažet u
+[CFSDS prior-work i laičkom objašnjenju](research/CFSDS_PRIOR_WORK_AND_PLAIN_EXPLANATION.md).
+Najvažnije: W.I.S.E. je direktan CFSDS precedent, ali koristi sutrašnju kartu za početni
+front i target za optimalno trajanje/vjetar u dijagnostičkim scenarijima; Dogrib potvrđuje
+Cell2Fire real-case pretvorbu, a Firehose potvrđuje RL petlju u simulatoru. Nijedan od tih
+izvora sam ne dokazuje našu ciljanu fine-tune prednost.
+
 ## Završeno u ovoj fazi
 
 - TASK-018 analiza tri sačuvana TRAIN no-action replaya potvrdila je rani kontakt s

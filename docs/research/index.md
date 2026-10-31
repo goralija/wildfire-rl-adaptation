@@ -16,6 +16,7 @@
 - [TRAIN terrain/weather provenance receipt](../../reports/real-fire-data/cfsds-train-terrain-weather-provenance.json) - MRDEM source-class check i pinovani target-blind ERA5-Seamless odgovori za tri stare dijagnostičke slučajeve; source vintage i legacy weather mismatch ostaju otvoreni
 - [TRAIN-only CFSDS prostorna podobnost](CFSDS_SPATIAL_FEASIBILITY.md) - Poređenje unaprijed zadanih target-blind domena na istim TRAIN parovima
 - [Puni TRAIN target-independent day-pair screen](CFSDS_FULL_DAY_PAIR_SCREEN.md) - 1.301 CFSDS rastera i pet fiksnih domena; target metrics samo post-selection dijagnostika
+- [Kako su raniji radovi pripremali i provjeravali stvarne požare](CFSDS_PRIOR_WORK_AND_PLAIN_EXPLANATION.md) - CFSDS, W.I.S.E., Dogrib/Cell2Fire i Firehose, te laičko objašnjenje šta još blokira validan eksperiment
 - [EXP-010: fuel-vintage mask proof](EXPERIMENT_LOG.md#exp-010--train-only-pre-target-fuel-mask-and-nf-scar-importer-characterization-2026-10-31) - TRAIN-only vremenska maska i raniji expected-rejection nalaz
 - [EXP-011: target-blind CFSDS početno stanje](EXPERIMENT_LOG.md#exp-011--train-only-target-blind-crop-and-initial-state-proof-2026-10-31) - target-mask invariance na TRAIN `2018_747` i 2014–2018 crop coverage dijagnostika
 - [EXP-015: NF historical-scar importer contract](EXPERIMENT_LOG.md#exp-015--explicit-nonfuel-historical-scar-importer-contract-2026-10-31) - C++ import i cumulative-damage provjera za eksplicitno označene scar ćelije
