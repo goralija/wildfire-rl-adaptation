@@ -517,3 +517,43 @@ Evidence: [method and interpretation](../research/CFSDS_SPATIAL_FEASIBILITY.md),
 [audit code](../../scripts/audit_cfsds_train_spatial_feasibility.py),
 [geometry helper/tests](../../scripts/cfsds_spatial_feasibility.py),
 [machine receipt](../../reports/real-fire-data/cfsds-train-spatial-feasibility.json).
+
+## ADR-023 — preregister a target-independent TRAIN day-pair screen, recorded 2026-10-31
+
+The prior CFSDS shortlist used target-day metadata and positive `firearea` for pair
+eligibility. Its target-blind crop rule did not make its day-pair membership
+outcome-independent. To complete the all-TRAIN spatial screen without requiring an
+observed target, the screen rule was specified in code before reading target coverage:
+for each 2014–2018 fire arrival raster, select the earliest DOY with at least three valid
+native 90 m arrival pixels as input day, and use the next calendar day as target. Do not
+require a target-day group-table row, positive area, weather field, or target pixel.
+Retain a pair with no mapped next-day pixels and record that outcome as
+`no_mapped_pixels_on_next_day`; do not call it confirmed zero physical growth.
+
+For each fixed domain (20×20 at 100/150/200/300 m; 40×40 at 100 m), choose a window only
+from input-day and older arrival pixels, requiring at least three input-day pixels in the
+safe interior. Compute target coverage after pair and window selection. The screen
+removes target and later labels and re-selects the day for every raster; the selected input
+day remained unchanged in all 1,301 cases.
+
+**Decision:** adopt this as the operational TRAIN day-pair rule for the full-cohort
+geometry pre-screen, not as final benchmark eligibility or proof of a useful training
+scenario. It yields 1,301 pairs, 1,010 with mapped target pixels and 291 without. At
+20×20/100 m, 1,295 windows are available and median target capture is 36.71% among 1,008
+observed-target pairs with an available window. Larger windows capture a greater fraction
+among cases where they fit, while 254 source rasters cannot fit the roughly 4 km windows
+and 566 cannot fit the roughly 6 km option. These target metrics do not choose a domain;
+no grid is adopted. The existing 20×20/100 m policy shape remains the only compatible
+option in the measured set, but geometry alone is not a physical/model recommendation.
+
+All five TRAIN year archives were opened; validation/test years and group CSV tables were
+not. The scan performed no fuel overlay, resampling, FireCase build, simulator run,
+calibration, benchmark, RL training, or heldout inspection. Daily interpolated CFSDS
+arrivals are not exact intraday flame truth. The as-of-event fuel vintage, succession
+crosswalk, non-fuel scar importer, complete terrain/weather provenance, suppression, and
+no-action gate remain unresolved.
+
+Evidence: [full method/results](../research/CFSDS_FULL_DAY_PAIR_SCREEN.md),
+[scanner](../../scripts/audit_cfsds_train_full_day_pairs.py),
+[aggregate receipt](../../reports/real-fire-data/cfsds-train-full-day-pair-screen.json),
+[per-pair/domain table](../../reports/real-fire-data/cfsds-train-full-day-pair-screen.csv).

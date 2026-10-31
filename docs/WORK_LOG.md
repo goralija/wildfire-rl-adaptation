@@ -517,3 +517,12 @@ Verification: 61/61 project tests passed; strict OKF validation passed for 71 Ma
 files; synthetic CLI smoke wrote to a fresh `/private/tmp` directory; and `git diff --check`
 passed. The audit read only 2014–2018 raster archives, confirmed 25 fixed event/day pairs
 across all five options, and recorded archive/member/code SHA-256 values.
+
+## 2026-10-31: Full TRAIN target-independent CFSDS day-pair screen
+
+- Added `scripts/audit_cfsds_train_full_day_pairs.py`. It opens only the 2014–2018 CFSDS arrival-raster archives and ignores group CSV/target-summary conditions for pair membership.
+- Applied the rule to all 1,301 rasters: earliest day with at least three valid 90 m arrivals is input; following calendar day is target. All pairs are retained; 1,010 have mapped target pixels and 291 do not. Removing target/future arrival pixels preserved the selected input day for every event.
+- Evaluated five fixed domains after pair/window selection. At 20×20/100 m, 1,295 windows are available and median target capture is 36.71% (N=1,008 observed targets with a valid crop). Larger windows show higher conditional capture but fail to fit many source rasters; no domain was selected.
+- Added method/results report, aggregate JSON receipt, and compact 1,301-row domain CSV. Raw data remain ignored. No fuel/terrain/weather audit, FireCase, simulator replay, training, heldout inspection, or benchmark was run.
+- The actual screen CLI completed against local TRAIN ZIPs. No application tests were added or run; `git diff --check` and strict knowledge validation remain handoff checks.
+- See [EXP-013](research/EXPERIMENT_LOG.md#exp-013--full-train-target-independent-cfsds-day-pair-and-domain-screen-2026-10-31), [ADR-023](specs/DECISION_RECORDS.md#adr-023), and [NEXT_SESSION](NEXT_SESSION.md).

@@ -9,6 +9,13 @@ sources:
 ---
 # TRAIN-only prostorna podobnost CFSDS domena
 
+> **Opseg ovog starijeg audita:** ovaj dokument opisuje samo historijski shortlist od
+> 25 parova. Njegov day-pair membership tražio je target-day group zapis i pozitivnu
+> `firearea`. Naknadni potpuni i target-independent pregled 1.301 rastera je u
+> [novom full day-pair screenu](CFSDS_FULL_DAY_PAIR_SCREEN.md) sa zasebnim
+> [JSON receipt](../../reports/real-fire-data/cfsds-train-full-day-pair-screen.json) i
+> [per-case CSV](../../reports/real-fire-data/cfsds-train-full-day-pair-screen.csv).
+
 ## Pitanje i ograničenje
 
 Može li ciljno slijep prozor oko prethodnog CFSDS dana obuhvatiti naredni dnevni
@@ -79,13 +86,12 @@ FBP vremensko porijeklo, scar na non-fuel ćeliji, teren/vrijeme i suppression. 
 usvajamo 200 m, 300 m ni 40×40 kao model domenu i ne koristimo ovaj target-only rezultat
 za izbor događaja, prozora ili tuning.
 
-Sljedeći prostorni korak je target-blind pre-screen svih TRAIN događaj/dan mogućnosti
-koristeći unaprijed deklarisane fizičke domene, a ne samo 25 parova izabranih uz 2 km
-agent. Day-pair pravilo mora biti napisano prije screeniranja; target geometrija se može
-izračunati tek naknadno kao feasibility dijagnostika. Ako se iz train podataka bira fizička
-skala, ona ostaje razvojna odluka i test skup mora ostati netaknut. Prije izrade slučajeva
-potrebna je zasebna procjena coarse-grid FBP i policy kompatibilnosti naspram novog 40×40
-modela.
+Sljedeći full-cohort prostorni korak je završen u EXP-013, koji je uveo target-independent
+pravilo za svih 1.301 TRAIN rastera; rezultate ne treba miješati s ovih 25 istorijskih
+parova. Ako se iz TRAIN podataka ikada bira fizička skala, to ostaje razvojna odluka i
+heldout test skup mora ostati netaknut. Prije izrade novih slučajeva i dalje je potrebna
+zasebna procjena coarse-grid FBP/policy kompatibilnosti naspram 40×40 modela i vremenski
+siguran fuel/input ugovor.
 
 ## Granice
 

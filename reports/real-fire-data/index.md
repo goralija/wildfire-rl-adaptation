@@ -8,6 +8,7 @@
 - [CFSDS target-blind input invariance proof](cfsds-target-blind-input-invariance.json) — TRAIN `2018_747`; promjena day-n maske ne mijenja crop, 20×20 početni scar/front ni `InitialState.csv`.
 - [CFSDS TRAIN target-blind window screen](cfsds-train-target-blind-window-screen.json) — samo 2014–2018 TRAIN; target coverage je post-selection dijagnostika, 4/25 prozora imaju ikakav target pixel.
 - [CFSDS TRAIN prostorni feasibility audit](cfsds-train-spatial-feasibility.json) — poređenje 2–6 km domena na istih 25 TRAIN parova; target dijagnostika je post-selection, bez FireCase-a ili replaya.
+- [CFSDS puni TRAIN target-independent day-pair screen](../../docs/research/CFSDS_FULL_DAY_PAIR_SCREEN.md), [JSON receipt](cfsds-train-full-day-pair-screen.json) i [1301-case/domain CSV](cfsds-train-full-day-pair-screen.csv) — svih 1.301 TRAIN rastera, pet unaprijed definisanih domena, 1.010 target-opaženih i 291 bez mapiranih target piksela; bez simulator replaya.
 - [CFSDS no-action dijagnostika](../../docs/research/CFSDS_NO_ACTION_DIAGNOSIS.md) i [mašinski čitljiva vremenska analiza](cfsds-no-action-timeline.json) — tri sačuvana train replaya, bez novog C++ runa, kalibracije ili treninga.
 
 ## Dokumenti

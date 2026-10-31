@@ -1,5 +1,13 @@
 # Promjene baze znanja
 
+## 2026-10-31: Full TRAIN target-independent CFSDS day-pair screen
+
+- Pregledano je svih 1.301 TRAIN fire arrival rastera pravilom koje ne koristi target-day uslove: najraniji dan sa najmanje tri validna 90 m piksela je input, sljedeći kalendarski dan target.
+- Sačuvano je 1.010 parova s mapiranim target pikselima i 291 bez njih; sva članstva ostaju u screen-u. Uklanjanje target i kasnijih oznaka nije promijenilo izabrani input DOY.
+- Na 20×20/100 m prozor je dostupan za 1.295 slučajeva; target ima makar jedan piksel u 945/1.010 prozora; medijalni capture je 36.71% za N=1.008 validnih target/crop parova. Širi prozori su bolji među onima koji stanu, ali mnogi rasteri su premali.
+- Nijedan grid nije usvojen. Dodani su [metod i izvještaj](docs/research/CFSDS_FULL_DAY_PAIR_SCREEN.md), [JSON receipt](reports/real-fire-data/cfsds-train-full-day-pair-screen.json), [case/domain CSV](reports/real-fire-data/cfsds-train-full-day-pair-screen.csv), ADR-023 i EXP-013.
+- Nema FireCase-a, C++ replaya, fuel/terrain/weather završetka, benchmarka ili treninga. Sljedeće: FBP vintage/source i non-fuel scar importer gateovi, zatim nedostajuća provenance/suppression i mali preregistrovani train replay.
+
 ## 2026-10-31: TASK-015 TRAIN spatial feasibility audit
 
 - Isti 25 TRAIN parova je target-blind centriran prema day n−1 na 2, 3, 4 i 6 km; dodatno poređeno 40×40/100 m. Day-n coverage je mjeren tek nakon crop izbora.

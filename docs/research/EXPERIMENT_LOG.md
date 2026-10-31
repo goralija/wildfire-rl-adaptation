@@ -353,3 +353,45 @@ Verification: all 61 project tests passed; strict OKF validation passed for 71 M
 files; the synthetic CLI smoke wrote to a fresh ignored `/private/tmp` directory; and
 `git diff --check` passed. The train-only audit read only 2014–2018 raster archives and
 recorded archive/member/code SHA-256 values.
+
+## EXP-013 — full TRAIN target-independent CFSDS day-pair and domain screen, 2026-10-31
+
+Implemented a TRAIN-guarded scanner that reads only the 2014–2018 CFSDS annual arrival
+raster ZIPs. The preregistered rule uses, for each fire raster, the earliest DOY with at
+least three valid native 90 m fire pixels as input day and the following calendar day as
+target. The rule does not read group CSV rows, positive `firearea`, weather, or target
+geometry. All 1.301 raster IDs became pairs (234/351/116/322/278 by year); 1.010 have
+mapped pixels on the target day and 291 are retained as
+`no_mapped_pixels_on_next_day`. This status describes the raster product, not verified
+absence of physical growth.
+
+The scanner then evaluated the same pairs on five fixed domains. Each window uses input-day
+and older arrivals only and requires at least three input-day pixels in its safe interior.
+For every raster, removing target and all later arrival labels leaves the selected input
+day unchanged. Target coverage is calculated after selection and is not a criterion.
+
+| Domain | Window found | Mapped-target pairs with any target pixel inside / 1,010 | Median target capture among observed targets with a window (N) |
+| --- | ---: | ---: | ---: |
+| 20×20 at 100 m | 1,295/1,301 | 945 | 36.71% (1,008) |
+| 20×20 at 150 m | 1,226/1,301 | 921 | 66.45% (957) |
+| 20×20 at 200 m | 1,042/1,301 | 804 | 85.78% (823) |
+| 20×20 at 300 m | 729/1,301 | 580 | 98.98% (593) |
+| 40×40 at 100 m | 1,044/1,301 | 805 | 85.86% (824) |
+
+Capture denominators vary because large requested windows do not fit many source rasters;
+254 cannot fit the roughly 4 km footprints and 566 cannot fit the roughly 6 km footprint.
+Do not use these medians as an unconditional scale ranking. No domain was adopted and
+target pixels were not resampled to simulator cells.
+
+The script generated an aggregate JSON receipt and a 1,301-row per-case/domain CSV. Both
+record SHA-256 provenance; the JSON records annual archive and code hashes. The actual
+screen CLI completed successfully on the supplied raw TRAIN ZIPs. No application tests
+were added or run in this task. No validation/test archive, group CSV, fuel/DEM/weather
+layer, C++ simulator, or checkpoint was opened or executed. No FireCase, replay,
+calibration, benchmark, or training was run. This is a pair/geometry gate, not a
+simulator-validity gate.
+
+Method: [full screen report](CFSDS_FULL_DAY_PAIR_SCREEN.md); decision:
+[ADR-023](../specs/DECISION_RECORDS.md#adr-023); machine output:
+[JSON](../../reports/real-fire-data/cfsds-train-full-day-pair-screen.json) and
+[CSV](../../reports/real-fire-data/cfsds-train-full-day-pair-screen.csv).

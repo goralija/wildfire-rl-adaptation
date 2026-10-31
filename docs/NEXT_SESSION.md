@@ -27,13 +27,26 @@ fine-tuning prije prihvatljivih train ulaza, replay gatea i zamrznutog heldout s
 - TASK-015 pre-target maska i target-blind crop/state pravilo su implementirani.
   Perturbation proof za `2018_747` pokazuje da promjena target maske ne utiče na crop
   ni na početni input. Ovo važi za jedan fiksni TRAIN event/day par.
-- TRAIN screen sadrži 25 parova, pet po godini, ali day-pair eligibilnost je zahtijevala
-  target-day zapis i pozitivnu `firearea`; puna nezavisnost članstva od outcome-a nije
-  dokazana. Ne koristiti taj screen kao konačni benchmark cohort.
+- Raniji TRAIN shortlist sadrži 25 parova, pet po godini, ali day-pair eligibilnost je
+  zahtijevala target-day zapis i pozitivnu `firearea`; zato nije outcome-independent i
+  ostaje samo historijski bounded audit. Novi full screen je target-independent pre-screen,
+  ne konačni benchmark cohort.
 - Prostorni audit uporedio je iste parove na oko 2, 3, 4 i 6 km. U 2 km target uđe u
   4/25 prozora (median capture 0%); u oko 4 km uđe u 19/25, ali median je samo 1.95%;
   u oko 6 km median raste na 15.31%, a dvije slike su premale za takav prozor. Nije
   usvojen veći model grid i nisu napravljeni FireCase-ovi/replayi.
+- EXP-013 je potom obradio puni TRAIN raster cohort target-independent pravilom: za svaki
+  raster prvi DOY sa najmanje tri validna 90 m arrival piksela je input dan, a naredni
+  kalendarski dan target. Pregledano je svih 1.301 rastera (234/351/116/322/278 za
+  2014–2018); 1.010 ima mapirane target piksele, a 291 ostaje označen kao „nema mapiranih
+  piksela“. Pravilo je ostalo invariantno nakon uklanjanja target i kasnijih arrival
+  oznaka. Na fiksnoj 20×20/100 m skali prozor postoji za 1.295 slučajeva; capture medijana
+  je 36.71% na 1.008 opaženih targeta s validnim cropom. Širi prozori imaju veći capture
+  među slučajevima gdje stanu, ali 254–566 rastera su premala za 4–6 km varijante. Ovo
+  nije FireCase kohorta, nema usvojene domene i nije pokrenut replay/trening. Vidi
+  [full screen report](research/CFSDS_FULL_DAY_PAIR_SCREEN.md),
+  [JSON receipt](../reports/real-fire-data/cfsds-train-full-day-pair-screen.json) i
+  [1301-row case/domain CSV](../reports/real-fire-data/cfsds-train-full-day-pair-screen.csv).
 - Godišnja fuel mapa nije izrađena: v2014b nema potvrđen pixel-level vremenski cutoff,
   succession crosswalk nije transkribovan/validiran, a C++ importer odbija historijski
   scar na `NF` ćeliji. DEM/weather lineage je nepotpuna, suppression unknown.
@@ -52,25 +65,20 @@ Metode i dokazi:
 
 ## Sljedeći taskovi po redu
 
-1. Definiši i zapiši unaprijed target-independent pravilo za izbor TRAIN day-pair
-   epizoda. Razdvoji tri stvari: dostupnost opaženog targeta za naknadni score, pravilo
-   koje izabere dan n, i geometriju prozora koja mora koristiti samo podatke prije n.
-   Raniji screen je koristio target-day red i pozitivnu `firearea`, zato taj dio prvo
-   treba pregledati.
-2. Provedi train-only prostorni pre-screen svih prihvatljivih 2014–2018 epizoda prema
-   unaprijed navedenim fizičkim domenama. Sačuvaj target metrike samo kao naknadni
-   feasibility check. Audit preko 25 starih kandidata nije iscrpan.
-3. Prije pravljenja novih slučajeva potvrdi as-of-event fuel-map izvor, cutoff,
-   succession crosswalk i uslove korištenja. Ne proglašavati v2014b vremenski sigurnim
-   bez dokaza; ne koristiti razvojni v2019 ili post-event 2024 sloj kao gotov odgovor.
-4. Fixtureom definiši kako se historijska kumulativna šteta čuva kad je ćelija non-fuel,
-   a da takva ćelija ne širi vatru; aktivni front mora imati zaseban jasan ugovor.
-5. Za TRAIN slučajeve koji prođu ove gateove pribavi DEM tile/version/hash i potpunu
-   weather request/location/field/unit lineage. Suppression status tražiti iz službenih
-   izvora; ako ga ne možemo povezati, ostaje `unknown`.
-6. Tek tad preregistruj iste no-action ulaze, seedove i horizont; uradi mali train-only
-   replay gate i unaprijed definiši prihvatljive metrike. Ne birati trajanje epizode po
-   targetu. No-action gate i heldout freeze su preduslovi za benchmark/trening.
+1. Na target-independent geometriji utvrdi vremenski siguran izvor/vintage FBP goriva.
+   2014b zadržati samo za istorijsku reprodukciju dok se ne potvrdi per-pixel cutoff;
+   ne birati događaje preko target capture metrika.
+2. Potvrdi i implementiraj pre-target fuel succession crosswalk i importer contract za
+   historijski scar na non-fuel ćeliji. Ne pravi FireCase-e za svih 1.301 par prije ovih
+   gateova.
+3. Za parove koji prođu fuel/input gateove pribavi DEM tile/version/hash, kompletnu
+   weather request/location/field/unit lineage i suppression evidence; bez event-level
+   dokaza suppression ostaje `unknown`.
+4. Preregistruj iste no-action ulaze, seedove i horizont; uradi mali train-only replay
+   gate na slučajevima koji prođu prethodne gateove i unaprijed definiši prihvatljive
+   metrike. Ne birati trajanje epizode po targetu.
+5. Tek nakon prolaza no-action gatea i heldout freeze-a razmatrati benchmark i fine-tuning.
+   Target-independent day-pair i puni TRAIN prostorni pre-screen su završeni.
 
 Opcije 20×20 na 200/300 m čuvaju oblik tenzora/akcija, ali mijenjaju prostorno značenje
 svake akcije i modelskog širenja. 40×40 na 100 m čuva rezoluciju ali ne može koristiti

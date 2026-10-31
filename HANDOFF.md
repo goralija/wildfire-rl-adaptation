@@ -126,15 +126,20 @@ prozora na oko 4 km, ali medijan capture je samo 1.95%; na oko 6 km medijan je 1
 dvije izvorne slike su premale. Rezultati i limiti su u
 [TRAIN spatial report](docs/research/CFSDS_SPATIAL_FEASIBILITY.md) i
 [JSON receipt](reports/real-fire-data/cfsds-train-spatial-feasibility.json). Nijedna domena
-nije usvojena. Target-day summary i pozitivna `firearea` bili su uslov shortlist day-paira;
-potpuno target-independent event/day pravilo još treba definisati.
+nije usvojena. Puni follow-up sada čita svih 1.301 TRAIN arrival rastera i bira za svaki
+najraniji dan sa najmanje tri 90 m arrival piksela, a naredni dan kao target. Pravilo ne
+koristi target mapu ili group-table uslove; svih 1.301 par je sačuvano i svaki input day
+ostaje isti kad se target/future oznake uklone. 1.010 narednih dana ima mapirane piksele,
+291 nema; 20×20/100 m prozor se može napraviti za 1.295 parova, uz median target capture
+36.71% na 1.008 targeta s validnim prozorom. Capture je samo naknadna raster dijagnostika.
+[Novi detaljni izvještaj](docs/research/CFSDS_FULL_DAY_PAIR_SCREEN.md),
+[JSON receipt](reports/real-fire-data/cfsds-train-full-day-pair-screen.json) i
+[case/domain CSV](reports/real-fire-data/cfsds-train-full-day-pair-screen.csv).
 
 Ovo nije godišnja fuel mapa: 2014b nema potvrđen pixel cutoff, v20191114 succession tree
 nije transkribovan/validiran, a C++ importer odbija `burnt` inicijalno stanje na NF ćeliji.
-Sljedeće prvo definisati target-independent day-pair cohort pravilo i uraditi pre-target
-screen svih TRAIN prilika na unaprijed deklarisanim domenama. Zatim pribaviti vjerodostojna
-fuel pravila, odlučiti importer/damage contract i popuniti train terrain/weather provenance
-i suppression evidence prije preregistrovanog replay gatea.
+Sljedeće pribaviti vjerodostojna fuel pravila, odlučiti importer/damage contract i popuniti
+train terrain/weather provenance i suppression evidence prije preregistrovanog replay gatea.
 Ne birati per-event trajanje iz targeta.
 No-action gate nije prošao: ne koristiti heldout ishode za kalibraciju, ne pokretati
 benchmark ili fine-tuning i ne tvrditi fizičku validaciju/agenta boljeg od baselinea.

@@ -5,6 +5,7 @@ sources:
 - resource: /reports/firehose-verification/verification.json
 - resource: /reports/firehose-verification/task004c-adapter-smoke.json
 - resource: /reports/real-fire-data/cfsds-train-spatial-feasibility.json
+- resource: /reports/real-fire-data/cfsds-train-full-day-pair-screen.json
 - resource: /docs/WORK_LOG.md
 ---
 # Trenutno stanje — 2026-10-31
@@ -219,9 +220,10 @@ ne usvaja se širi domen samo zato što target coverage raste. Audit ne resamplu
 teren ni vrijeme i ne pravi simulator ulaze. 20×20 na 200/300 m zadržava checkpoint oblik
 ali mijenja fizičko značenje akcija; 40×40 na 100 m ne odgovara postojećem checkpointu.
 Stari day-pair shortlist uslovljen je target-day summary zapisom i pozitivnom firearea,
-zato potpuno target-independent cohort membership još nije utvrđen. Sljedeće definisati
-to day-pair pravilo i napraviti pre-target screen svih TRAIN prilika na fiksnim domenama.
-Nije otvoren validation/test raster; nema novog casea, replaya, kalibracije ili treninga.
+pa je ovaj bounded audit ostao historical-only. Puni target-independent screen je naknadno
+završen; pogledati [EXP-013 izvještaj](research/CFSDS_FULL_DAY_PAIR_SCREEN.md) i
+[receipt](../reports/real-fire-data/cfsds-train-full-day-pair-screen.json). Nije otvoren
+validation/test raster; nema novog casea, replaya, kalibracije ili treninga.
 
 ## Train-only fuel quality gate — 2026-10-30
 
@@ -283,9 +285,9 @@ Prethodni sintetički artefakti ostaju historijski dokaz; nisu Cell2Fire rezulta
 - Docker/legacy i moderni .venv su odvojeni. Legacy inference je bez treniranja i
   plaćenog compute-a. Kod/dokumentacija su objavljeni kroz [PR #1](https://github.com/goralija/wildfire-rl-adaptation/pull/1).
 
-Sljedeće: dovršiti TASK-015 leak-safe fuel-vintage i preostalu terrain/weather/suppression
-provenance samo na train događajima → unaprijed definisani train-only kontrolisani
-no-action replayi sa zajedničkim horizontom
+Sljedeće: potvrditi vremenski siguran FBP fuel vintage/succession, riješiti importer
+semantiku non-fuel historijskog scar-a i zatvoriti terrain/weather/suppression provenance
+samo na train događajima → unaprijed definisani train-only kontrolisani no-action replayi sa zajedničkim horizontom
 → zasebna odluka o no-action gateu → tek zatim zamrznuti event-level heldout ID-jeve →
 frozen benchmark/trening samo nakon prihvatljivog replay gatea.
 Nema provjere fizike simulatora na BiH podacima, potvrde RL prednosti ili generalizacije.
@@ -305,3 +307,29 @@ Git klon s novim venvom i bez dodatnih paketa prolazi 22 testa (4 optional presk
 i synthetic smoke; originalni lokalni setup nije preduslov za taj početak.
 Bootstrap rad je spojen kroz [PR #1](https://github.com/goralija/wildfire-rl-adaptation/pull/1).
 Ova statusna grana sadrži zaseban naredni train-data QC korak.
+
+## Puni TRAIN target-independent day-pair i prostorni screen — 2026-10-31
+
+Skripta [audit_cfsds_train_full_day_pairs.py](../scripts/audit_cfsds_train_full_day_pairs.py)
+pregledala je samo godišnje CFSDS arrival rastere 2014–2018: 1.301 TIFF, svi sa validnim
+parom po pravilu „najraniji DOY sa najmanje tri 90 m arrival piksela, pa naredni
+kalendarski dan“. Group CSV tabele, `firearea`, weather i target geometrija nisu korišteni
+za članstvo. Za svih 1.301 par ostaje u auditu; 1.010 imaju target piksele, 291 ima status
+`no_mapped_pixels_on_next_day`. Uklanjanje target i kasnijih raster oznaka ne promijeni
+izabrani input dan ni u jednom slučaju.
+
+Na unaprijed zadatom 20×20/100 m prozoru (oko 2 km), 1.295/1.301 cropova imaju najmanje
+tri input-front piksela u sigurnom unutrašnjem dijelu. Od 1.010 parova s mapiranim targetom,
+945 imaju makar jedan target piksel unutar prozora; medijalni capture je 36.71% za 1.008
+parova s opaženim targetom i prozorom. Veći fizički prozori povećavaju capture među
+slučajevima gdje prozor stane, ali 254 slučaja ne mogu smjestiti 4 km opcije, a 566 ne mogu
+smjestiti 6 km opciju. Capture je native-pixel naknadna dijagnostika, nije resamplana
+Cell2Fire maska i nije korištena za izbor para ili domena. Nije usvojen novi grid.
+
+Dokumentacija: [metoda i tumačenje](research/CFSDS_FULL_DAY_PAIR_SCREEN.md),
+[JSON receipt](../reports/real-fire-data/cfsds-train-full-day-pair-screen.json) i
+[case/domain CSV](../reports/real-fire-data/cfsds-train-full-day-pair-screen.csv).
+Nema godišnje leakage-safe fuel mape, importer non-fuel scar ugovora, potpunog terrain/
+weather/suppression paketa, no-action gate prolaza, nove FireCase konverzije, replaya,
+benchmarka ili treninga. Sljedeće potvrditi vremenski siguran fuel/source ugovor i novi
+target-blind slučajevi; target capture ostaje van izbora. **research_ready=false.**

@@ -26,9 +26,11 @@ Naknadni prostorni audit na istih 25 parova pokazuje da 2 km nije dovoljno; oko 
 medijalno pokriva samo 1.95% targeta, a oko 6 km oko 15.3% i ne stane u dva izvorna
 rastera. Nijedna domena nije usvojena; day-pair membership shortlist-a nije dokazano
 potpuno outcome-independent jer je tražen target-day red i pozitivna `firearea`.
-Sljedeći korak je unaprijed definisati takvo pravilo i pregledati sve TRAIN mogućnosti na
-deklarisanim prostornim skalama. Godišnja fuel mapa još nije napravljena: 2014b nema
-potvrđen per-pixel cutoff, succession crosswalk nije potvrđen, a C++ fixture odbija
+Sljedeći korak za cohort/prostor je završen: unaprijed definisano pravilo obradilo je svih
+1.301 TRAIN rastera i provjerilo pet fizičkih skala. Na 1.010 parova naredni dan ima
+mapirane piksele; 291 ostaje sa statusom bez mapiranog targeta. Ovo je geometrijski
+pre-screen, ne konačna podobna kohorta. Godišnja fuel mapa još nije napravljena: 2014b
+nema potvrđen per-pixel cutoff, succession crosswalk nije potvrđen, a C++ fixture odbija
 historijski scar na NF ćeliji. Zatim slijedi rješavanje fuel/source/importer ugovora,
 kompletne train terrain/weather provenance, suppression evidence i unaprijed definisani
 replay gate. Root cause no-action overgrowth nije izolovan, a no-action gate nije prošao.

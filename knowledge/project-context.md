@@ -3,7 +3,7 @@ type: Project Context
 title: Projektni kontekst i stanje istraživanja
 description: Kratki ulaz u cilj, ostvareno, otvorene odluke i prvi naredni posao.
 status: stable
-generated: {by: "process:codex", at: "2026-10-31T09:28:36Z"}
+generated: {by: "process:codex", at: "2026-10-31T09:43:37Z"}
 sources:
   - resource: /docs/STATUS.md
   - resource: /docs/specs/DECISION_RECORDS.md
@@ -59,13 +59,18 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
   ostaje otvorena. Vidi [invariance receipt](../reports/real-fire-data/cfsds-target-blind-input-invariance.json),
   [screen receipt](../reports/real-fire-data/cfsds-train-target-blind-window-screen.json)
   i [ADR-021](../docs/specs/DECISION_RECORDS.md#adr-021).
-- Prostorni audit poredi istih 25 TRAIN parova na oko 2, 3, 4 i 6 km, uključujući 40×40
-  na 100 m. Na 2 km target pixel uđe u 4/25 prozora; na oko 4 km u 19/25 ali median
-  capture je 1.95%; na oko 6 km median je 15.31%, ali dva rastera su premala. Ne usvaja
-  se šira domena: 20×20 coarse cells mijenjaju značenje akcija, a 40×40 ne podržava
-  postojeći checkpoint. Postojeći 25-pair membership zahtijeva target-day summary i
-  pozitivnu firearea, pa nije potpuno outcome-independent. [Izvještaj](../docs/research/CFSDS_SPATIAL_FEASIBILITY.md),
-  [receipt](../reports/real-fire-data/cfsds-train-spatial-feasibility.json), [ADR-022](../docs/specs/DECISION_RECORDS.md#adr-022).
+- Bounded audit poredi starih 25 parova na oko 2–6 km; ti parovi i dalje imaju target-day
+  summary/pozitivnu firearea uslov i nisu potpuno outcome-independent. Naknadni puni
+  screen je obradio svih 1.301 TRAIN rastera po pravilu: najraniji DOY sa ≥3 arrival
+  piksela kao input, dan poslije kao target. 1.010 targeta ima mapirane piksele, 291 nema;
+  uklanjanje target/budućih arrival oznaka nije promijenilo nijedan izabrani input dan.
+  Za 20×20/100 m prozor je nađen u 1.295 slučajeva; target capture medijana je 36.71%
+  (N=1.008 targeti s cropom). Širi prozori uhvate više piksela, ali mnoga izvorna rasterska
+  područja su premala. Nijedna domena nije usvojena, a geometry screen ne potvrđuje
+  simulator fitness. [Full report](../docs/research/CFSDS_FULL_DAY_PAIR_SCREEN.md),
+  [JSON](../reports/real-fire-data/cfsds-train-full-day-pair-screen.json),
+  [per-case CSV](../reports/real-fire-data/cfsds-train-full-day-pair-screen.csv),
+  [ADR-023](../docs/specs/DECISION_RECORDS.md#adr-023).
 - TASK-018 je završio dijagnostičko poređenje tri sačuvana no-action replaya na fiksnim
   vremenskim presjecima: svi dodiruju rub 20×20 domene za 34–52 minute, a jedan popuni
   svih 400 ćelija. Rezultati su osjetljivi na vrijeme, ali nema unutar-dnevnog ground trutha
@@ -88,12 +93,11 @@ damage, scar i aktivni front su odvojeni, a završetak dobija named reason. Fixt
 inference rollouta potvrđuju adapter contract; svi matrix slučajevi završili su na weather
 horizonu. [Receipt i tehnički limiti](../reports/firehose-verification/task004c-adapter-smoke.json).
 Target-day curenje iz početnog fronta je uklonjeno za crop/initial-state pravilo i
-provjereno na jednom TRAIN paru. Bounded screen je pokazao da trenutni 2×2 km domen nije
-dovoljno velik za target coverage na postojećih 25 parova; širi grid još nije usvojen.
-Sljedeće definisati target-independent day-pair membership i pokrenuti pre-target screen
-za sve TRAIN prilike na deklarisanim domenama. Zatim potvrditi bazni fuel-map cutoff i
-v20191114 succession tree, definisati importer semantiku historijskog scar-a na non-fuel
-ćeliji i zatvoriti nedostajuću
+provjereno na jednom TRAIN paru. Stari 25-pair bounded screen imao je slab target coverage;
+puni target-independent screen sada obuhvata 1.301 paru i nijedan grid nije usvojen.
+Target-independent day-pair i full TRAIN domain screen su završeni. Sljedeće potvrditi
+bazni fuel-map cutoff i v20191114 succession tree, definisati importer semantiku
+historijskog scar-a na non-fuel ćeliji i zatvoriti nedostajuću
 terrain/weather/suppression provenance samo na train/calibration događajima. Izmjereni
 input audit trenutno pokriva 3/20 train paketa. Vidi [task handoff](../docs/NEXT_SESSION.md).
 Preliminarni 44 ID-ja i pilot su u

@@ -20,6 +20,8 @@ okf_version: "0.2"
 - [Real-case pipeline](docs/research/REAL_CASE_PIPELINE.md) - Jednostavan opis šta stvarni podaci daju (Y), šta simulator prima (X), te jaz početnog fronta.
 - [Train-only CFSDS input QC](docs/research/CFSDS_TRAIN_INPUT_QC.md) - Izmjereni ulazi, target-blind početno stanje i otvoreni fuel/weather/spatial/suppression rizici.
 - [TRAIN-only CFSDS prostorni audit](docs/research/CFSDS_SPATIAL_FEASIBILITY.md) - Učinak 2–6 km target-blind domena na 25 TRAIN parova i ograničenja postojećeg 20×20 checkpointa.
+- [Puni TRAIN target-independent day-pair screen](docs/research/CFSDS_FULL_DAY_PAIR_SCREEN.md) - Svih 1.301 CFSDS TRAIN rastera, parovi dana bez target uslova i pet unaprijed definisanih domena.
+- [Full TRAIN day-pair JSON receipt](reports/real-fire-data/cfsds-train-full-day-pair-screen.json) i [case/domain CSV](reports/real-fire-data/cfsds-train-full-day-pair-screen.csv) - Aggregate hashovi i per-case mjere.
 - [TRAIN fuel-vintage mask proof](reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json) - Provjera da su u jednom TRAIN slučaju target dan i kasniji dani van maske; godišnja mapa još nije kreirana.
 - [TRAIN target-blind input proof](reports/real-fire-data/cfsds-target-blind-input-invariance.json) - Target maska mijenja truth, ali ne početni input za `2018_747`.
 - [TRAIN target-blind window screen](reports/real-fire-data/cfsds-train-target-blind-window-screen.json) - Pre-target screen; pokazuje ograničenje 2×2 km izreza bez korištenja targeta za izbor.
