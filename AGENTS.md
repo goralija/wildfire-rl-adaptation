@@ -11,9 +11,14 @@ Zatim koristi [mapu zadataka/koda](knowledge/code-map.md) za relevantne izvore i
 Korisnikove direktne upute imaju prednost; kasniji ADR može zamijeniti raniji.
 
 **Odabrana je putanja Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire (ADR-013).**
-TASK-012 je završen. TASK-015 ima train-only fuel audit (10/20 fuel-only prolaza)
-i input-alignment audit za tri od 20 lokalno dostupnih FireCase paketa. As-of-event
-fuel vintage nije potvrđen, DEM/weather provenance nije potpuna, a suppression je
+TASK-012 je završen. TASK-015 je proširen na target-blind pre-screen svih 1.301 TRAIN
+parova: postojeća v2014b karta klasno prolazi u 701 od 1.295 dostupnih fiksnih prozora,
+64 traže sub-cell pregled, 530 pada, a 6 nema prozor. To nije dozvola za replay; broj
+slučajeva odobrenih za puni replay i dalje je nula. U službenom CanFG v20191114 ZIP-u
+pronađen je interni tekst post-fire pravila, ali on ne dokazuje vremenski cutoff starije
+v2014b karte niti tačno određuje regionalno brojanje starosti. v2014b as-of-event
+validnost i dalje nije potvrđena. Input-alignment audit je zasebno pokrio samo tri
+postojeća FireCase paketa; DEM/weather provenance nije potpuna, a suppression ostaje
 unknown. No-action mismatch ostaje otvoren.
 TASK-018 dijagnostička faza i TASK-004c episode adapter su završeni lokalno. Početni
 input sada ima prototipsko target-blind pravilo: prozor se centrira na centroid day n−1,
@@ -30,17 +35,20 @@ Sljedeći korak za cohort/prostor je završen: unaprijed definisano pravilo obra
 1.301 TRAIN rastera i provjerilo pet fizičkih skala. Na 1.010 parova naredni dan ima
 mapirane piksele; 291 ostaje sa statusom bez mapiranog targeta. Ovo je geometrijski
 pre-screen, ne konačna podobna kohorta. Godišnja fuel mapa još nije napravljena: 2014b
-nema potvrđen per-pixel cutoff, a javno transkribovani succession tree još nema potvrđen
-age/special-class ugovor. Izolovani C++ importer contract sada prihvata eksplicitni
+nema potvrđen per-pixel cutoff, a pronađeni v20191114 succession tekst još nema potvrđen
+age/regionalni ugovor. Izolovani C++ importer contract sada prihvata eksplicitni
 `scar_nf` samo na tačnoj NF ćeliji i čuva ga kao
 cumulative damage, ali stvarni CFSDS builder i dalje blokira takav ulaz dok se ne riješi
-fuel/source provenance. W.I.S.E. Figure 2 je sada javno transkribovana; v2014b cutoff,
-starosna pravila/specijalne klase i stvarni v20191114 artifact ostaju otvoreni. Alberta
+fuel/source provenance. W.I.S.E. Figure 2 i interni v20191114 rules tekst sada su
+pregledani; v2014b cutoff, tačno regionalno/starosno računanje i as-of-event baza ostaju
+otvoreni. Alberta
 2006–2025 suppression dataset je pronađen, ali CSV download je vratio HTTP 403 i nema
 spojenih suppression događaja. Tri spremljena 2018 slučaja imaju BC perimeter crosswalk
-kandidate N12395/C11937/N12413, ali bez evidence o akcijama gašenja. Zatim slijedi fuel
-evidence gdje je dostupna, train terrain/weather
-provenance, suppression joins i unaprijed definisani replay gate.
+kandidate N12395/C11937/N12413; dva imaju djelimične javne izvještaje o aktivnosti, a
+nijedan nema potpun action log ili dokaz `none`. W.I.S.E. isključuje požare sa bilo kakvim
+CNFDB zabilježenim gašenjem; `unknown` zato nije prihvatljiv dokaz za čisti no-action
+slučaj (EXP-024/ADR-034). Zatim slijedi fuel evidence, train terrain/weather provenance,
+event-keyed suppression joins i unaprijed definisani replay gate.
 Root cause no-action overgrowth nije izolovan, a no-action gate nije prošao.
 Ne koristi validation/test ishode za izbor parametara. No-action gate i heldout freeze
 moraju proći prije policy benchmarka ili fine-tuninga. Runtime PASS nije dokaz fizičke

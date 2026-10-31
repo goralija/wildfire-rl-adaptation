@@ -1,5 +1,20 @@
 # Promjene baze znanja
 
+## 2026-10-31: suppression uslov iz W.I.S.E. i istorijski NBAC datumi
+
+- W.I.S.E. rad uklanja svaki požar sa evidentiranim gašenjem u CNFDB jer model ne simulira intervencije. Naša tri 2018 BC poklapanja su samo kandidati; dva imaju parcijalne javne izvještaje o aktivnosti, a nijedan nema potpun dnevni action log ili dokaz da nije bilo gašenja. `unknown` ne može proći kao `none`.
+- v2014b metadata citira 2016 NFDB publikaciju, ali ne potvrđuje cutoff. To nije dokaz da su 2016 požari u mapi; potvrđuje da sam naziv verzije ne garantuje pre-target ožiljke za TRAIN 2014–2018.
+- Trenutni NBAC ima godišnje poligone/datume, ali novije izdanje retrospektivno ispravlja ranije godine. Može pomoći da rekonstruišemo historiju, ne i da je bez dodatnog rada proglasimo as-of-target. 2019+ heldout požari nisu otvarani.
+- Dodani su [EXP-024](docs/research/EXPERIMENT_LOG.md#exp-024--wise-suppression-exclusion-and-national-burn-history-dating-2026-10-31), [ADR-034](docs/specs/DECISION_RECORDS.md#adr-034) i [S-050](docs/research/SOURCES.md); ažurirani su laički pregled, input QC, status, handoff, sljedeći koraci i projektni kontekst. Nema mape, FireCase-a, replaya ili treninga; `research_ready=false`.
+
+## 2026-10-31: puni TRAIN overlay goriva i provjera CanFG pravila
+
+- Target-blind fuel-class overlay obrađen je nad svih 1.301 TRAIN day-pair redova; 1.295 fiksnih 20×20/100 m prozora stane: 701 prolazi samo kategorijalni overlay, 64 traže sub-cell pregled, 530 pada, a 6 nema prozor. Nijedan slučaj nema odobrenje za replay.
+- Izbor para/prozora i pre-target maska ne koriste target; ciljna maska je čitana naknadno samo kao dijagnostika. W.I.S.E. rad podržava odvojene pre-target masku i godišnju pozadinsku fuel mapu, ali javno priznaje target-derived početni rub u svom benchmarku; taj dio ne kopiramo.
+- Bez skidanja 2.68 GB rastera pročitani su zvanični v20191114 ZIP indeks i mali `Burn Scar Rules.txt`. Pronađene su široke post-fire starosne klase i NFDB update 2018-07-26 za požare >50 ha; regionalni prag i računanje starosti ostaju nejasni, a to ne dokazuje cutoff v2014b karte.
+- Usklađeni su [input QC](docs/research/CFSDS_TRAIN_INPUT_QC.md), [HANDOFF](HANDOFF.md), [upute agentima](AGENTS.md), status, backlog, izvori, eksperimenti i arhiva dokaza. Mašinski izvještaji su [fuel overlay](reports/real-fire-data/cfsds-full-train-fuel-overlay.json) i [ZIP pregled](reports/real-fire-data/canfg-fuel-archive-member-review.json); detalji su u [EXP-022/023](docs/research/EXPERIMENT_LOG.md).
+- Nema godišnje mape, novog FireCase-a, replaya, benchmarka ili treninga; v2014b, suppression, puni provenance i no-action gate i dalje blokiraju `research_ready`.
+
 ## 2026-10-31: dodatna BC javna statusna izvješća
 
 - Službeni EMBC PECC SitRep #10/#11 dodaje veličinu i containment status za kandidatske incidente C11937 i N12413. Dva izvještaja navode različite procjene za isto štampano vrijeme; ne predstavljamo ih kao jednu pouzdanu dnevnu krivulju.
@@ -15,7 +30,7 @@
 ## 2026-10-31: TRAIN fuel source-gate inventory
 
 - Zvanični v2014b metadata navodi NFDB/NBAC za burn scars, ali ne datum snapshot-a ni cutoff; ne možemo ga proglasiti leakage-safe za TRAIN događaje.
-- Zvanični CanFG v20191114 direktorij navodi Decision Rules PDF za bazno mapiranje klasa. On ne sadrži godine-od-požara succession pragove iz W.I.S.E. Figure 2; ZIP od oko 2 GB nije pregledan.
+- U toj ranijoj source-gate provjeri ZIP v20191114 još nije bio pregledan; kasnija byte-range provjera je zapisana u EXP-023. Njegov javni Decision Rules PDF pokriva bazno mapiranje, ne godine-od-požara succession pragove iz W.I.S.E. Figure 2.
 - Figure 2 ostaje javno transkribovano pravilo, ali bez potvrđene age arithmetic, special-class semantike ili executable implementation. Godišnja mapa ostaje blokirana.
 - Dodani su [source-gate receipt](reports/real-fire-data/cfsds-train-fuel-source-gate.json), [S-048](docs/research/SOURCES.md), [EXP-019](docs/research/EXPERIMENT_LOG.md#exp-019--train-fuel-vintage-artifact-inventory-2026-10-31) i [ADR-029](docs/specs/DECISION_RECORDS.md#adr-029). Nema download-a/generisanja rastera ni FireCase/replay/treninga; `research_ready=false`.
 

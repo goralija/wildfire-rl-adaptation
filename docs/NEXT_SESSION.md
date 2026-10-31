@@ -62,11 +62,20 @@ traži očuvane CRS/skalu/vrijeme/akcije kroz cijelu epizodu.
   [full screen report](research/CFSDS_FULL_DAY_PAIR_SCREEN.md),
   [JSON receipt](../reports/real-fire-data/cfsds-train-full-day-pair-screen.json) i
   [1301-row case/domain CSV](../reports/real-fire-data/cfsds-train-full-day-pair-screen.csv).
-- Godišnja fuel mapa nije izrađena: v2014b nema potvrđen vremenski cutoff za NFDB/NBAC
-  burn-scar layer. W.I.S.E. Figure 2 je javno transkribovana. Pregledani v20191114
-  Decision Rules PDF opisuje bazno dodjeljivanje fuel klasa, ne succession prema starosti;
-  2 GB raster ZIP nije pregledan. Tačan succession artifact, age arithmetic, specijalne
-  klase i v2014b cutoff ostaju otvoreni; vidi fuel source-gate receipt.
+- Novi full-screen fuel-class overlay je izvršen na svih 1.301 TRAIN parova: v2014b
+  mapa je preklopljena na 1.295 fiksnih 20×20/100 m prozora. Početni pre-target scar/front
+  prolazi samo klasnu provjeru u 701, traži pregled sub-cell preklopa u 64, a pada u 530;
+  šest prozora se ne može napraviti. 477 parova ima susjednu front/target većinsku mrežu
+  bez dodira ruba. Ovo su tehničke dijagnostike; full-case eligibility je i dalje nula.
+  Vidi [metodu](research/CFSDS_FULL_TRAIN_FUEL_OVERLAY.md), [JSON](../reports/real-fire-data/cfsds-full-train-fuel-overlay.json)
+  i [CSV](../reports/real-fire-data/cfsds-full-train-fuel-overlay.csv).
+- Službeni v20191114 ZIP od 2.68 GB nije preuzet kao raster. Njegov centralni indeks i
+  mali ugrađeni `Burn Scar Rules.txt` jesu pročitani: 1–2 godine Non-Fuel, 3–5 D-2,
+  6–21? M-2 C25 i >21 C-2; O-1 ostaje O-1, voda/ne-gorivo se čuva; navedeni NFDB update
+  je 2018-07-26 za požare >50 ha. Regionalni 6–21 prag i tačno brojanje starosti nisu
+  definisani. Zasebni v2014b ZIP nema takav rules fajl i i dalje nema dokumentovan NFDB/
+  NBAC cutoff. Vidi [archive receipt](../reports/real-fire-data/canfg-fuel-archive-member-review.json)
+  i [fuel-vintage review](research/CFSDS_FUEL_VINTAGE_REVIEW.md).
   Alberta 2006–2025 fire-level suppression dataset je pronađen; direktni CSV download
   endpoint vratio je HTTP 403 pa nijedan događaj nije spojen. DEM/weather lineage je
   nepotpuna, a suppression status za slučajeve ostaje unknown.
@@ -107,7 +116,9 @@ Metode i dokazi:
 - [EXP-016 input-lineage audit](research/EXPERIMENT_LOG.md#exp-016--train-fuel-tree-correction-and-external-input-lineage-audit-2026-10-31)
 - [Fuel mask proof](../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
   [NF-scar importer contract receipt](../reports/firehose-verification/nonfuel-initial-scar-contract.json)
-- [Fuel source-gate receipt](../reports/real-fire-data/cfsds-train-fuel-source-gate.json) for the v2014b cutoff and v20191114 rules-artifact inventory
+- [Fuel source-gate receipt](../reports/real-fire-data/cfsds-train-fuel-source-gate.json) for the v2014b cutoff questions
+- [CanFG archive member review](../reports/real-fire-data/canfg-fuel-archive-member-review.json) for the small internal succession-rules text and ZIP entry hashes
+- [Full TRAIN fuel overlay](research/CFSDS_FULL_TRAIN_FUEL_OVERLAY.md), [JSON](../reports/real-fire-data/cfsds-full-train-fuel-overlay.json), and [1,301-row CSV](../reports/real-fire-data/cfsds-full-train-fuel-overlay.csv)
 - [Terrain/weather provenance receipt](../reports/real-fire-data/cfsds-train-terrain-weather-provenance.json) and [pinned weather response files](../reports/real-fire-data/weather-snapshots/)
 - [BC perimeter crosswalk receipt](../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json) for the three saved 2018 TRAIN cases; no suppression fields
 - [BC operational evidence receipt](../reports/real-fire-data/cfsds-train-bc-operational-evidence.json) for dated activity/status reports on the three BC candidate incidents; partial public evidence, not a full daily resource log
@@ -120,19 +131,24 @@ Metode i dokazi:
 
 ## Sljedeći taskovi po redu
 
-1. Fuel source-gate pretraga javno dostupnih metadata/PDF-ova je završena bez cutoffa:
-   v2014b NFDB/NBAC snapshot nije datiran, a javno navedeni v20191114 Decision Rules PDF
-   pokriva baznu klasifikaciju, ne post-fire age-tree. Sljedeći dokaz mora doći od
-   NRCan/CWFIS ili autora rada: eksplicitan v2014b cutoff i succession artifact/code ili
-   potvrda da je Figure 2 kompletan algoritam. ZIP od 2 GB nije pregledan. Do tada drži
-   gate zatvoren i ne generiši godišnju mapu.
+1. Izvor succession pravila je pronađen unutar službenog v20191114 ZIP-a, ali je taj
+   zapis vezan za NFDB update 2018-07-26 i ne dokazuje v2014b vintage. Sljedeći korak je
+   dobiti dokumentovan NFDB/NBAC cutoff za v2014b (ili odabrati vremenski datiranu bazu
+   koja se može rekonstruisati bez budućih požara), te razjasniti regionalni 6–21 prag i
+   računanje godina za succession. Najnoviji NBAC može pomoći oko ranijih požara, ali je
+   retrospektivno revidiran i ne dokazuje sam po sebi šta je bilo poznato na datum
+   simulacije. Dok cutoff/base ne bude opravdan, ne generiši godišnju fuel mapu.
 2. Širi javni search pass za tri spremljena BC slučaja je završen (EXP-018/021): EMBC
    SitRep #10/#11 daje incident-level statusne snimke za C11937/N12413, a lokalni izvori
    daju djelimičnu aktivnost za N12395/N12413. Te vrijednosti nisu akcioni dnevnik;
    CFSDS crosswalk ostaje kandidatski. Nastavi na preostalim TRAIN kandidatima tako što
    ćeš prvo potvrditi provinciju i tražiti nadležni izvor. Alberta CSV/dictionary još
    treba dohvatiti službenim putem nakon HTTP 403. Ne zaključuj "bez gašenja" iz 0%
-   containmenta ili odsustva zapisa; bez pouzdanog dokaza ostavi `unknown`.
+   containmenta ili odsustva zapisa; bez pouzdanog dokaza ostavi `unknown`. W.I.S.E.
+   izbacuje slučajeve gdje CNFDB bilježi bilo kakvo gašenje, zato `unknown` nije dovoljan
+   za strogi no-action cohort; traži izvor koji podržava `none` ili isključi slučaj.
+   Vidi [EXP-024](research/EXPERIMENT_LOG.md#exp-024--wise-suppression-exclusion-and-national-burn-history-dating-2026-10-31)
+   i [ADR-034](specs/DECISION_RECORDS.md#adr-034).
 3. Prihvati tri sačuvana case-a samo kao dijagnostiku. Za nove prihvatljive TRAIN ulaze
    zamrzni tačan DEM DTM asset/version/hash (trenutni izvorni sloj daje samo source
    category) i zabilježi query URL, traženu/vraćenu lokaciju, model/polja/jedinice,

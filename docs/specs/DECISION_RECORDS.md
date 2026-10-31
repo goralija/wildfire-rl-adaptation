@@ -632,7 +632,9 @@ transcribed from the figure: preserve pre-fire O-1 Grass; otherwise assign C-2 S
 after more than 21 years, M-2 Mixedwood C25% after more than 5 years, D-2 Aspen after
 more than 2 years, and Non-Fuel otherwise. This corrects ADR-024's implication that no
 public transcription was available. The exact date arithmetic, special-class behavior,
-and correspondence to the actual v20191114 rules artifact remain unverified. Official
+and exact regional/year arithmetic remain unverified. The embedded v20191114 `Burn Scar
+Rules.txt` has since been inspected in EXP-023 and broadly corroborates the figure; the
+full raster was not downloaded and the rule was not independently executed. Official
 v2014b metadata still gives no dated NFDB/NBAC burn-history cutoff.
 
 The three saved pilot FireCases are outputs from the prior target-aware builder and are
@@ -854,3 +856,70 @@ in future visual products. Public-search failure is not proof that a record does
 Evidence: [EXP-021](../research/EXPERIMENT_LOG.md#exp-021--train-only-bc-incident-status-snapshot-follow-up-2026-10-31),
 [receipt](../../reports/real-fire-data/cfsds-train-bc-operational-evidence.json),
 [S-046](../research/SOURCES.md), and the [official PECC response package](https://docs.openinfo.gov.bc.ca/Response_Package_PSS-2018-86747.pdf).
+
+## ADR-033 — keep full TRAIN fuel overlays as class-only QC; record embedded succession rules, accepted 2026-10-31
+
+The full target-independent CFSDS screen contains 1,301 TRAIN day pairs. Applying the
+existing 2014b fuel-class grid to the same pre-selected 20×20/100 m windows yielded 701
+pre-target scar/front class-only passes, 64 fractional-cell reviews, 530 class failures,
+and six cases without a window. The model-majority front/target geometry was adjacent
+and away from the grid edge in 477 pairs. A fuel-class pass says nothing about whether
+the 2014b map reflects fuel conditions on the event date or whether Cell2Fire predicts
+the observed fire. No case passes the full replay/training gate.
+
+A byte-range inspection of the official 2.68 GB v20191114 ZIP found the embedded
+`docs/Burn Scar Rules.txt`. It reports broad post-fire age classes, O-1/Water/Non-Fuel
+special handling, fires over 50 ha, an NFDB update dated 2018-07-26, and a regional
+variation caveat for the 6–21-year M-2 class. This is evidence about that later release;
+it does not establish the older v2014b NFDB/NBAC cutoff. Exact date arithmetic, regional
+boundaries and a separately executable succession implementation remain unresolved.
+
+**Decision:** retain the full TRAIN overlay as a reproducible *class-compatibility
+screen only*. Do not select a training cohort from its pass counts, generate annual
+fuel maps, mark suppression known, or start replay/training from these results. Use the
+internal v20191114 text as the current source for the broad published succession rules,
+while keeping the historical map gate closed until v2014b temporal provenance (or a
+valid as-of-event replacement), the region/year convention, and per-cell provenance
+are established. The full raster ZIP was not downloaded; only its ZIP index and two
+small text members were inspected.
+
+Evidence: [EXP-022](../research/EXPERIMENT_LOG.md#exp-022--full-train-fuel-class-overlay-on-target-blind-pairs-2026-10-31),
+[EXP-023](../research/EXPERIMENT_LOG.md#exp-023--v20191114-archive-burn-scar-rules-and-v2014b-member-review-2026-10-31),
+[overlay method/results](../research/CFSDS_FULL_TRAIN_FUEL_OVERLAY.md),
+[overlay receipt](../../reports/real-fire-data/cfsds-full-train-fuel-overlay.json),
+[case CSV](../../reports/real-fire-data/cfsds-full-train-fuel-overlay.csv),
+[archive member receipt](../../reports/real-fire-data/canfg-fuel-archive-member-review.json),
+[fuel vintage review](../research/CFSDS_FUEL_VINTAGE_REVIEW.md), and [S-031/S-032/S-048](../research/SOURCES.md).
+
+## ADR-034 — unknown suppression is not an untreated case; preserve historic split, accepted 2026-10-31
+
+The W.I.S.E. CFSDS assessment reports excluding fires with any recorded suppression in
+CNFDB because its spread model does not represent intervention. Our saved `2018_1770`,
+`2018_241`, and `2018_747` matches are BC incident candidates based on spatial/date
+crosswalks, not shared CFSDS agency keys. Two candidates have partial public reporting
+of activity/resources at the incident or complex level; the third has status reports but
+no complete action record. None has evidence sufficient to label the target event
+“unsuppressed.” `suppression_status=unknown` must not be silently treated as `none`.
+
+The v2014b metadata itself names NFDB/NBAC as burn-scar inputs and cites the 2016 NFDB
+Agency FireData publication, but it supplies no per-pixel cutoff. The reference is not
+proof that 2016 records were incorporated; it confirms the map's `2014b` label cannot be
+used as an as-of-event guarantee. Current NBAC is a retrospective yearly composite whose
+latest metadata records edits to earlier years. It can inform a separately documented
+historical-scar reconstruction, but a current release is not automatically the snapshot
+available at the target date. Validation/test years remain frozen and were not inspected
+for this research.
+
+**Decision:** require source-backed evidence of no suppression (or exclude the fire from
+a strict no-action replay cohort); unknown and positive/partial action evidence do not
+qualify. Keep the existing three cases diagnostic only. Do not use 2019+ heldout cases to
+rescue the 2014–2018 TRAIN cohort or select a model/source. Keep `research_ready=false`
+until the fuel history, full input provenance, no-action gate, and split controls are
+resolved. The identified v20191114 and NBAC products are research leads, not approval to
+rebuild TRAIN maps or run a replay.
+
+Evidence: [EXP-024](../research/EXPERIMENT_LOG.md#exp-024--wise-suppression-exclusion-and-national-burn-history-dating-2026-10-31),
+[W.I.S.E. assessment](https://doi.org/10.1071/WF26072), [v2014b metadata](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/archive/nat_fbpfuels_2014b_metadata.pdf),
+[current NBAC metadata](https://cwfis.cfs.nrcan.gc.ca/downloads/nbac/NBAC_1972to2024_20250506_shp_metadata.pdf),
+[suppression evidence](../../reports/real-fire-data/cfsds-train-bc-operational-evidence.json),
+[perimeter crosswalk](../../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json), and [S-031/S-036/S-037/S-050](../research/SOURCES.md).

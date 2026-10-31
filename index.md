@@ -26,6 +26,8 @@ okf_version: "0.2"
 - [Prilagođeni tok iz ranijih radova](docs/research/ADAPTED_PRIOR_ART_WORKFLOW.md) - W.I.S.E. priprema CFSDS-a + target-blind početak + Firehose/Cell2Fire, s pravilima za buduće mape/animacije.
 - [Dogrib geografska QA karta](reports/real-fire-data/dogrib-reference-alignment.png) i [receipt](reports/real-fire-data/dogrib-reference-alignment.json) - ulazna/geometrijska provjera, nije novi simulator rezultat.
 - [Puni TRAIN target-independent day-pair screen](docs/research/CFSDS_FULL_DAY_PAIR_SCREEN.md) - Svih 1.301 CFSDS TRAIN rastera, parovi dana bez target uslova i pet unaprijed definisanih domena.
+- [Puni TRAIN fuel overlay](docs/research/CFSDS_FULL_TRAIN_FUEL_OVERLAY.md) - 1.301 parova; 701 class-only pass, 64 review, 530 fail, bez full-case potvrde.
+- [CanFG ZIP inventory](reports/real-fire-data/canfg-fuel-archive-member-review.json) - unutrašnja starosna pravila v20191114 nađena bez skidanja 2.68 GB karte; v2014b cutoff i dalje otvoren.
 - [Full TRAIN day-pair JSON receipt](reports/real-fire-data/cfsds-train-full-day-pair-screen.json) i [case/domain CSV](reports/real-fire-data/cfsds-train-full-day-pair-screen.csv) - Aggregate hashovi i per-case mjere.
 - [TRAIN fuel-vintage mask proof](reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json) - Provjera da su u jednom TRAIN slučaju target dan i kasniji dani van maske; godišnja mapa još nije kreirana.
 - [TRAIN target-blind input proof](reports/real-fire-data/cfsds-target-blind-input-invariance.json) - Target maska mijenja truth, ali ne početni input za `2018_747`.

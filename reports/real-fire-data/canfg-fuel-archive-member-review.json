@@ -1,0 +1,986 @@
+{
+  "no_map_or_case_built": true,
+  "no_validation_or_test_data_opened": true,
+  "reviewed_at_utc": "2026-10-31",
+  "schema": "canfg-fuel-archive-member-review/v1",
+  "sources": {
+    "v2014b_archive_directory": "https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/archive/",
+    "v20191114_archive": "https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/Canadian_Forest_FBP_Fuel_Types_v20191114.zip",
+    "v20191114_official_directory": "https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/",
+    "wise_article": "https://doi.org/10.1071/WF26072"
+  },
+  "v2014b_local_archive_inventory": {
+    "archive_bytes": 42906989,
+    "archive_filename": "National_FBP_Fueltypes_version2014b.zip",
+    "archive_sha256": "8675bbd92d99366e46b6537d5b512017d0982e3a34f97e4bc81fb60b93c29a2b",
+    "burn_scar_rules_member_found": false,
+    "full_fuel_raster_archive_already_present_in_gitignored_raw_data": true,
+    "interpretation": "The complete 13-member archive contains the raster, metadata, legend and GIS sidecars but no separate burn-scar rules text. The metadata/source review still finds no NFDB/NBAC snapshot cutoff for v2014b.",
+    "members": [
+      {
+        "compressed_bytes": 329320,
+        "name": "nat_fbpfuels_2014b_metadata2.pdf",
+        "uncompressed_bytes": 356233
+      },
+      {
+        "compressed_bytes": 362,
+        "name": "info/arc.dir",
+        "uncompressed_bytes": 1900
+      },
+      {
+        "compressed_bytes": 180969,
+        "name": "CIFFC_standard_colours_for_FBPfueltypes.pdf",
+        "uncompressed_bytes": 192200
+      },
+      {
+        "compressed_bytes": 2100,
+        "name": "ciffc_standard_fuels_legend.lyr",
+        "uncompressed_bytes": 8704
+      },
+      {
+        "compressed_bytes": 106067,
+        "name": "Generic_EN End-User Agreement for Digital Data.pdf",
+        "uncompressed_bytes": 111247
+      },
+      {
+        "compressed_bytes": 203685,
+        "name": "Generic_FR_End-User Agreement for Digital Data.pdf",
+        "uncompressed_bytes": 211510
+      },
+      {
+        "compressed_bytes": 47,
+        "name": "nat_fbpfuels_2014b.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 29898621,
+        "name": "nat_fbpfuels_2014b.tif",
+        "uncompressed_bytes": 393801993
+      },
+      {
+        "compressed_bytes": 844,
+        "name": "nat_fbpfuels_2014b.tif.aux.xml",
+        "uncompressed_bytes": 4198
+      },
+      {
+        "compressed_bytes": 11657416,
+        "name": "nat_fbpfuels_2014b.tif.ovr",
+        "uncompressed_bytes": 12579672
+      },
+      {
+        "compressed_bytes": 262,
+        "name": "nat_fbpfuels_2014b.tif.vat.dbf",
+        "uncompressed_bytes": 3679
+      },
+      {
+        "compressed_bytes": 379,
+        "name": "nat_fbpfuels_2014b.tif.xml",
+        "uncompressed_bytes": 721
+      },
+      {
+        "compressed_bytes": 525097,
+        "name": "nat_fbpfuels_2014b_metadata.pdf",
+        "uncompressed_bytes": 546027
+      }
+    ],
+    "zip_entry_count": 13
+  },
+  "v20191114_archive_index": {
+    "archive_size_bytes_from_zip_end_record": 2680409561,
+    "burn_scar_rules_summary": {
+      "age_threshold_caveat": "The source says the 6-21-year interval may vary by region; the text gives examples but no boundary dataset or regional lookup.",
+      "burn_database_snapshot": "Rules say they were applied to the most recent NFDB update dated 2018-07-26 for fires over 50 ha.",
+      "classes_by_stated_age_since_fire": "1-2 years Non-Fuel; 3-5 years D-2; 6-21? years M-2 with 25% conifer; over 21 years C-2",
+      "listed_historical_classes": "2016-2017 Non-Fuel; 2013-2015 D-2; 2010-2012 M-2 C25. Text says 2010-2011 are separated in raster stacking because 2011 imagery initially classifies those scars as Non-Fuel.",
+      "special_cases": "O-1 remains O-1 after burning; Water and Non-Fuel are retained on the landscape.",
+      "stack_order_as_written": [
+        "O-1 / Water / Urban",
+        "2010-2011 fires",
+        "Non-Fuel",
+        "2012-2017 fires",
+        "Base Fuel Layer"
+      ],
+      "stated_minimum_fire_size_ha": 50
+    },
+    "central_directory_bytes": 13417,
+    "central_directory_entry_names_and_sizes": [
+      {
+        "compressed_bytes": 49,
+        "name": "base_layers/broadleaf.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 181077462,
+        "name": "base_layers/broadleaf.tif",
+        "uncompressed_bytes": 197973941
+      },
+      {
+        "compressed_bytes": 1345,
+        "name": "base_layers/broadleaf.tif.aux.xml",
+        "uncompressed_bytes": 2722
+      },
+      {
+        "compressed_bytes": 58062850,
+        "name": "base_layers/broadleaf.tif.ovr",
+        "uncompressed_bytes": 58924221
+      },
+      {
+        "compressed_bytes": 2060,
+        "name": "base_layers/broadleaf.tif.xml",
+        "uncompressed_bytes": 5856
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "base_layers/coniferous.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 20089688,
+        "name": "base_layers/coniferous.tif",
+        "uncompressed_bytes": 39629379
+      },
+      {
+        "compressed_bytes": 363,
+        "name": "base_layers/coniferous.tif.aux.xml",
+        "uncompressed_bytes": 1440
+      },
+      {
+        "compressed_bytes": 5817448,
+        "name": "base_layers/coniferous.tif.ovr",
+        "uncompressed_bytes": 6637563
+      },
+      {
+        "compressed_bytes": 2058,
+        "name": "base_layers/coniferous.tif.xml",
+        "uncompressed_bytes": 5857
+      },
+      {
+        "compressed_bytes": 50,
+        "name": "base_layers/cropland_grassland.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 5124473,
+        "name": "base_layers/cropland_grassland.tif",
+        "uncompressed_bytes": 10383549
+      },
+      {
+        "compressed_bytes": 420,
+        "name": "base_layers/cropland_grassland.tif.aux.xml",
+        "uncompressed_bytes": 1494
+      },
+      {
+        "compressed_bytes": 2160294,
+        "name": "base_layers/cropland_grassland.tif.ovr",
+        "uncompressed_bytes": 2565818
+      },
+      {
+        "compressed_bytes": 5,
+        "name": "base_layers/cropland_grassland.tif.vat.cpg",
+        "uncompressed_bytes": 5
+      },
+      {
+        "compressed_bytes": 79,
+        "name": "base_layers/cropland_grassland.tif.vat.dbf",
+        "uncompressed_bytes": 158
+      },
+      {
+        "compressed_bytes": 2341,
+        "name": "base_layers/cropland_grassland.tif.xml",
+        "uncompressed_bytes": 6979
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "base_layers/crown_closure.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 218998015,
+        "name": "base_layers/crown_closure.tif",
+        "uncompressed_bytes": 236328329
+      },
+      {
+        "compressed_bytes": 1345,
+        "name": "base_layers/crown_closure.tif.aux.xml",
+        "uncompressed_bytes": 2710
+      },
+      {
+        "compressed_bytes": 69620030,
+        "name": "base_layers/crown_closure.tif.ovr",
+        "uncompressed_bytes": 70454653
+      },
+      {
+        "compressed_bytes": 2206,
+        "name": "base_layers/crown_closure.tif.xml",
+        "uncompressed_bytes": 6221
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "base_layers/deciduous.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 6603043,
+        "name": "base_layers/deciduous.tif",
+        "uncompressed_bytes": 29080301
+      },
+      {
+        "compressed_bytes": 360,
+        "name": "base_layers/deciduous.tif.aux.xml",
+        "uncompressed_bytes": 1439
+      },
+      {
+        "compressed_bytes": 1501963,
+        "name": "base_layers/deciduous.tif.ovr",
+        "uncompressed_bytes": 2377513
+      },
+      {
+        "compressed_bytes": 2056,
+        "name": "base_layers/deciduous.tif.xml",
+        "uncompressed_bytes": 5854
+      },
+      {
+        "compressed_bytes": 380,
+        "name": "base_layers/dominant_species_id.txt.xml",
+        "uncompressed_bytes": 799
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "base_layers/ecozones.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 1650768,
+        "name": "base_layers/ecozones.tif",
+        "uncompressed_bytes": 10302763
+      },
+      {
+        "compressed_bytes": 400,
+        "name": "base_layers/ecozones.tif.aux.xml",
+        "uncompressed_bytes": 1309
+      },
+      {
+        "compressed_bytes": 211,
+        "name": "base_layers/ecozones.tif.vat.dbf",
+        "uncompressed_bytes": 608
+      },
+      {
+        "compressed_bytes": 5,
+        "name": "base_layers/ecozones2.tif.vat.cpg",
+        "uncompressed_bytes": 5
+      },
+      {
+        "compressed_bytes": 50,
+        "name": "base_layers/elevation.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 172717129,
+        "name": "base_layers/elevation.tif",
+        "uncompressed_bytes": 183447647
+      },
+      {
+        "compressed_bytes": 1132,
+        "name": "base_layers/elevation.tif.aux.xml",
+        "uncompressed_bytes": 2299
+      },
+      {
+        "compressed_bytes": 58938970,
+        "name": "base_layers/elevation.tif.ovr",
+        "uncompressed_bytes": 59372222
+      },
+      {
+        "compressed_bytes": 5,
+        "name": "base_layers/elevation.tif.vat.cpg",
+        "uncompressed_bytes": 5
+      },
+      {
+        "compressed_bytes": 26465,
+        "name": "base_layers/elevation.tif.vat.dbf",
+        "uncompressed_bytes": 166958
+      },
+      {
+        "compressed_bytes": 2342,
+        "name": "base_layers/elevation.tif.xml",
+        "uncompressed_bytes": 6944
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "base_layers/forest.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 17231851,
+        "name": "base_layers/forest.tif",
+        "uncompressed_bytes": 36559503
+      },
+      {
+        "compressed_bytes": 359,
+        "name": "base_layers/forest.tif.aux.xml",
+        "uncompressed_bytes": 1440
+      },
+      {
+        "compressed_bytes": 5086048,
+        "name": "base_layers/forest.tif.ovr",
+        "uncompressed_bytes": 5890725
+      },
+      {
+        "compressed_bytes": 2052,
+        "name": "base_layers/forest.tif.xml",
+        "uncompressed_bytes": 5845
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "base_layers/fuel.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 22052592,
+        "name": "base_layers/fuel.tif",
+        "uncompressed_bytes": 39037289
+      },
+      {
+        "compressed_bytes": 397,
+        "name": "base_layers/fuel.tif.aux.xml",
+        "uncompressed_bytes": 1481
+      },
+      {
+        "compressed_bytes": 6458250,
+        "name": "base_layers/fuel.tif.ovr",
+        "uncompressed_bytes": 7176965
+      },
+      {
+        "compressed_bytes": 2051,
+        "name": "base_layers/fuel.tif.xml",
+        "uncompressed_bytes": 5839
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "base_layers/mask.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 1049907,
+        "name": "base_layers/mask.tif",
+        "uncompressed_bytes": 7084254
+      },
+      {
+        "compressed_bytes": 349,
+        "name": "base_layers/mask.tif.aux.xml",
+        "uncompressed_bytes": 929
+      },
+      {
+        "compressed_bytes": 515995,
+        "name": "base_layers/mask.tif.ovr",
+        "uncompressed_bytes": 980953
+      },
+      {
+        "compressed_bytes": 5,
+        "name": "base_layers/mask.tif.vat.cpg",
+        "uncompressed_bytes": 5
+      },
+      {
+        "compressed_bytes": 64,
+        "name": "base_layers/mask.tif.vat.dbf",
+        "uncompressed_bytes": 128
+      },
+      {
+        "compressed_bytes": 2433,
+        "name": "base_layers/mask.tif.xml",
+        "uncompressed_bytes": 7165
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "base_layers/mixedwood.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 16730758,
+        "name": "base_layers/mixedwood.tif",
+        "uncompressed_bytes": 36718437
+      },
+      {
+        "compressed_bytes": 361,
+        "name": "base_layers/mixedwood.tif.aux.xml",
+        "uncompressed_bytes": 1440
+      },
+      {
+        "compressed_bytes": 4472444,
+        "name": "base_layers/mixedwood.tif.ovr",
+        "uncompressed_bytes": 5286541
+      },
+      {
+        "compressed_bytes": 2058,
+        "name": "base_layers/mixedwood.tif.xml",
+        "uncompressed_bytes": 5854
+      },
+      {
+        "compressed_bytes": 50,
+        "name": "base_layers/nalcms.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 37642510,
+        "name": "base_layers/nalcms.tif",
+        "uncompressed_bytes": 41797299
+      },
+      {
+        "compressed_bytes": 487,
+        "name": "base_layers/nalcms.tif.aux.xml",
+        "uncompressed_bytes": 1576
+      },
+      {
+        "compressed_bytes": 15269313,
+        "name": "base_layers/nalcms.tif.ovr",
+        "uncompressed_bytes": 15608548
+      },
+      {
+        "compressed_bytes": 5,
+        "name": "base_layers/nalcms.tif.vat.cpg",
+        "uncompressed_bytes": 5
+      },
+      {
+        "compressed_bytes": 193,
+        "name": "base_layers/nalcms.tif.vat.dbf",
+        "uncompressed_bytes": 548
+      },
+      {
+        "compressed_bytes": 2471,
+        "name": "base_layers/nalcms.tif.xml",
+        "uncompressed_bytes": 7269
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "base_layers/needleleaf.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 177453889,
+        "name": "base_layers/needleleaf.tif",
+        "uncompressed_bytes": 194250579
+      },
+      {
+        "compressed_bytes": 1349,
+        "name": "base_layers/needleleaf.tif.aux.xml",
+        "uncompressed_bytes": 2724
+      },
+      {
+        "compressed_bytes": 56964970,
+        "name": "base_layers/needleleaf.tif.ovr",
+        "uncompressed_bytes": 57817663
+      },
+      {
+        "compressed_bytes": 2061,
+        "name": "base_layers/needleleaf.tif.xml",
+        "uncompressed_bytes": 5859
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "base_layers/nonfuel.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 21823910,
+        "name": "base_layers/nonfuel.tif",
+        "uncompressed_bytes": 38873357
+      },
+      {
+        "compressed_bytes": 359,
+        "name": "base_layers/nonfuel.tif.aux.xml",
+        "uncompressed_bytes": 1440
+      },
+      {
+        "compressed_bytes": 6187156,
+        "name": "base_layers/nonfuel.tif.ovr",
+        "uncompressed_bytes": 6898376
+      },
+      {
+        "compressed_bytes": 2142,
+        "name": "base_layers/nonfuel.tif.xml",
+        "uncompressed_bytes": 6110
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "base_layers/nonfuel0_fuel1.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 20629384,
+        "name": "base_layers/nonfuel0_fuel1.tif",
+        "uncompressed_bytes": 37576299
+      },
+      {
+        "compressed_bytes": 406,
+        "name": "base_layers/nonfuel0_fuel1.tif.aux.xml",
+        "uncompressed_bytes": 1489
+      },
+      {
+        "compressed_bytes": 6736356,
+        "name": "base_layers/nonfuel0_fuel1.tif.ovr",
+        "uncompressed_bytes": 7479357
+      },
+      {
+        "compressed_bytes": 2151,
+        "name": "base_layers/nonfuel0_fuel1.tif.xml",
+        "uncompressed_bytes": 6145
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "base_layers/open.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 22598001,
+        "name": "base_layers/open.tif",
+        "uncompressed_bytes": 39749021
+      },
+      {
+        "compressed_bytes": 360,
+        "name": "base_layers/open.tif.aux.xml",
+        "uncompressed_bytes": 1440
+      },
+      {
+        "compressed_bytes": 6274170,
+        "name": "base_layers/open.tif.ovr",
+        "uncompressed_bytes": 6990658
+      },
+      {
+        "compressed_bytes": 2051,
+        "name": "base_layers/open.tif.xml",
+        "uncompressed_bytes": 5839
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "base_layers/primary_species_name.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 43746375,
+        "name": "base_layers/primary_species_name.tif",
+        "uncompressed_bytes": 60254835
+      },
+      {
+        "compressed_bytes": 639,
+        "name": "base_layers/primary_species_name.tif.aux.xml",
+        "uncompressed_bytes": 1707
+      },
+      {
+        "compressed_bytes": 14514043,
+        "name": "base_layers/primary_species_name.tif.ovr",
+        "uncompressed_bytes": 15346844
+      },
+      {
+        "compressed_bytes": 2069,
+        "name": "base_layers/primary_species_name.tif.xml",
+        "uncompressed_bytes": 5888
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "base_layers/primary_species_percent.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 222213341,
+        "name": "base_layers/primary_species_percent.tif",
+        "uncompressed_bytes": 239369607
+      },
+      {
+        "compressed_bytes": 1364,
+        "name": "base_layers/primary_species_percent.tif.aux.xml",
+        "uncompressed_bytes": 2752
+      },
+      {
+        "compressed_bytes": 70354085,
+        "name": "base_layers/primary_species_percent.tif.ovr",
+        "uncompressed_bytes": 71209740
+      },
+      {
+        "compressed_bytes": 2070,
+        "name": "base_layers/primary_species_percent.tif.xml",
+        "uncompressed_bytes": 5898
+      },
+      {
+        "compressed_bytes": 381,
+        "name": "base_layers/secondary_species_id.txt.xml",
+        "uncompressed_bytes": 802
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "base_layers/secondary_species_name.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 62648362,
+        "name": "base_layers/secondary_species_name.tif",
+        "uncompressed_bytes": 79085671
+      },
+      {
+        "compressed_bytes": 658,
+        "name": "base_layers/secondary_species_name.tif.aux.xml",
+        "uncompressed_bytes": 1740
+      },
+      {
+        "compressed_bytes": 21072847,
+        "name": "base_layers/secondary_species_name.tif.ovr",
+        "uncompressed_bytes": 22029188
+      },
+      {
+        "compressed_bytes": 2069,
+        "name": "base_layers/secondary_species_name.tif.xml",
+        "uncompressed_bytes": 5894
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "base_layers/secondary_species_percent.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 203967917,
+        "name": "base_layers/secondary_species_percent.tif",
+        "uncompressed_bytes": 221075255
+      },
+      {
+        "compressed_bytes": 1326,
+        "name": "base_layers/secondary_species_percent.tif.aux.xml",
+        "uncompressed_bytes": 2682
+      },
+      {
+        "compressed_bytes": 63244335,
+        "name": "base_layers/secondary_species_percent.tif.ovr",
+        "uncompressed_bytes": 64106106
+      },
+      {
+        "compressed_bytes": 2070,
+        "name": "base_layers/secondary_species_percent.tif.xml",
+        "uncompressed_bytes": 5903
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "base_layers/stand_height.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 217626834,
+        "name": "base_layers/stand_height.tif",
+        "uncompressed_bytes": 234641935
+      },
+      {
+        "compressed_bytes": 1205,
+        "name": "base_layers/stand_height.tif.aux.xml",
+        "uncompressed_bytes": 2463
+      },
+      {
+        "compressed_bytes": 68441179,
+        "name": "base_layers/stand_height.tif.ovr",
+        "uncompressed_bytes": 69310713
+      },
+      {
+        "compressed_bytes": 2206,
+        "name": "base_layers/stand_height.tif.xml",
+        "uncompressed_bytes": 6205
+      },
+      {
+        "compressed_bytes": 379,
+        "name": "base_layers/tertiary_species_id.txt.xml",
+        "uncompressed_bytes": 799
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "base_layers/tertiary_species_name.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 69995880,
+        "name": "base_layers/tertiary_species_name.tif",
+        "uncompressed_bytes": 86420955
+      },
+      {
+        "compressed_bytes": 670,
+        "name": "base_layers/tertiary_species_name.tif.aux.xml",
+        "uncompressed_bytes": 1749
+      },
+      {
+        "compressed_bytes": 23506652,
+        "name": "base_layers/tertiary_species_name.tif.ovr",
+        "uncompressed_bytes": 24501213
+      },
+      {
+        "compressed_bytes": 2067,
+        "name": "base_layers/tertiary_species_name.tif.xml",
+        "uncompressed_bytes": 5891
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "base_layers/tertiary_species_percent.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 163518012,
+        "name": "base_layers/tertiary_species_percent.tif",
+        "uncompressed_bytes": 180078657
+      },
+      {
+        "compressed_bytes": 1305,
+        "name": "base_layers/tertiary_species_percent.tif.aux.xml",
+        "uncompressed_bytes": 2633
+      },
+      {
+        "compressed_bytes": 52147104,
+        "name": "base_layers/tertiary_species_percent.tif.ovr",
+        "uncompressed_bytes": 53043458
+      },
+      {
+        "compressed_bytes": 2072,
+        "name": "base_layers/tertiary_species_percent.tif.xml",
+        "uncompressed_bytes": 5900
+      },
+      {
+        "compressed_bytes": 50,
+        "name": "base_layers/urban.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 389729,
+        "name": "base_layers/urban.tif",
+        "uncompressed_bytes": 6628931
+      },
+      {
+        "compressed_bytes": 370,
+        "name": "base_layers/urban.tif.aux.xml",
+        "uncompressed_bytes": 1446
+      },
+      {
+        "compressed_bytes": 173323,
+        "name": "base_layers/urban.tif.ovr",
+        "uncompressed_bytes": 653148
+      },
+      {
+        "compressed_bytes": 5,
+        "name": "base_layers/urban.tif.vat.cpg",
+        "uncompressed_bytes": 5
+      },
+      {
+        "compressed_bytes": 64,
+        "name": "base_layers/urban.tif.vat.dbf",
+        "uncompressed_bytes": 128
+      },
+      {
+        "compressed_bytes": 2328,
+        "name": "base_layers/urban.tif.xml",
+        "uncompressed_bytes": 6915
+      },
+      {
+        "compressed_bytes": 50,
+        "name": "base_layers/water.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 9721179,
+        "name": "base_layers/water.tif",
+        "uncompressed_bytes": 14185947
+      },
+      {
+        "compressed_bytes": 370,
+        "name": "base_layers/water.tif.aux.xml",
+        "uncompressed_bytes": 1448
+      },
+      {
+        "compressed_bytes": 4184921,
+        "name": "base_layers/water.tif.ovr",
+        "uncompressed_bytes": 4534718
+      },
+      {
+        "compressed_bytes": 5,
+        "name": "base_layers/water.tif.vat.cpg",
+        "uncompressed_bytes": 5
+      },
+      {
+        "compressed_bytes": 66,
+        "name": "base_layers/water.tif.vat.dbf",
+        "uncompressed_bytes": 128
+      },
+      {
+        "compressed_bytes": 2328,
+        "name": "base_layers/water.tif.xml",
+        "uncompressed_bytes": 6915
+      },
+      {
+        "compressed_bytes": 93,
+        "name": "docs/~$P Fuel Layer Decision Rules.docx",
+        "uncompressed_bytes": 162
+      },
+      {
+        "compressed_bytes": 21012,
+        "name": "docs/~WRL1125.tmp",
+        "uncompressed_bytes": 23733
+      },
+      {
+        "compressed_bytes": 826,
+        "name": "docs/Burn Scar Rules.txt",
+        "uncompressed_bytes": 1737
+      },
+      {
+        "compressed_bytes": 742461,
+        "name": "docs/Canadian_Forest_FBP_Fuel_Types_Metadata_v20191114.pdf",
+        "uncompressed_bytes": 765485
+      },
+      {
+        "compressed_bytes": 171,
+        "name": "docs/FBP Fuel Codes.txt",
+        "uncompressed_bytes": 335
+      },
+      {
+        "compressed_bytes": 384166,
+        "name": "docs/FBP_Fuel_Layer_Base_Layers.pdf",
+        "uncompressed_bytes": 398786
+      },
+      {
+        "compressed_bytes": 378552,
+        "name": "docs/FBP_Fuel_Layer_Decision_Rules.pdf",
+        "uncompressed_bytes": 390476
+      },
+      {
+        "compressed_bytes": 15627,
+        "name": "docs/FBPfueltypes_sample_colour_classification.xlsx",
+        "uncompressed_bytes": 18170
+      },
+      {
+        "compressed_bytes": 12669,
+        "name": "docs/NALCMS Class Definitions.doc",
+        "uncompressed_bytes": 42496
+      },
+      {
+        "compressed_bytes": 1035,
+        "name": "docs/species_id.csv",
+        "uncompressed_bytes": 2125
+      },
+      {
+        "compressed_bytes": 2358,
+        "name": "fuel_layer/FBP_FuelLayer.lyr",
+        "uncompressed_bytes": 9728
+      },
+      {
+        "compressed_bytes": 3152474,
+        "name": "fuel_layer/FBP_FuelLayer.pdf",
+        "uncompressed_bytes": 3905355
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "fuel_layer/FBP_FuelLayer.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 47723763,
+        "name": "fuel_layer/FBP_FuelLayer.tif",
+        "uncompressed_bytes": 53425096
+      },
+      {
+        "compressed_bytes": 526,
+        "name": "fuel_layer/FBP_FuelLayer.tif.aux.xml",
+        "uncompressed_bytes": 2441
+      },
+      {
+        "compressed_bytes": 220,
+        "name": "fuel_layer/FBP_FuelLayer.tif.vat.dbf",
+        "uncompressed_bytes": 608
+      },
+      {
+        "compressed_bytes": 5,
+        "name": "fuel_layer/FBP_FuelLayer_2.tif.vat.cpg",
+        "uncompressed_bytes": 5
+      },
+      {
+        "compressed_bytes": 2848226,
+        "name": "fuel_layer/FBP_FuelLayer_wBurnScars.pdf",
+        "uncompressed_bytes": 3520853
+      },
+      {
+        "compressed_bytes": 49,
+        "name": "fuel_layer/FBP_FuelLayer_wBurnScars.tfw",
+        "uncompressed_bytes": 96
+      },
+      {
+        "compressed_bytes": 47345612,
+        "name": "fuel_layer/FBP_FuelLayer_wBurnScars.tif",
+        "uncompressed_bytes": 53046614
+      },
+      {
+        "compressed_bytes": 555,
+        "name": "fuel_layer/FBP_FuelLayer_wBurnScars.tif.aux.xml",
+        "uncompressed_bytes": 2488
+      },
+      {
+        "compressed_bytes": 18641111,
+        "name": "fuel_layer/FBP_FuelLayer_wBurnScars.tif.ovr",
+        "uncompressed_bytes": 19083033
+      },
+      {
+        "compressed_bytes": 223,
+        "name": "fuel_layer/FBP_FuelLayer_wBurnScars.tif.vat.dbf",
+        "uncompressed_bytes": 638
+      },
+      {
+        "compressed_bytes": 5,
+        "name": "fuel_layer/FBP_FuelLayer_wBurnScars_2.tif.vat.cpg",
+        "uncompressed_bytes": 5
+      },
+      {
+        "compressed_bytes": 2250,
+        "name": "fuel_layer/QGIS_Burn_p3_style.qml",
+        "uncompressed_bytes": 17771
+      },
+      {
+        "compressed_bytes": 1224,
+        "name": "rscripts/FuelLayer_build_base_layers_for_fbp_fuel_identification.R",
+        "uncompressed_bytes": 5264
+      },
+      {
+        "compressed_bytes": 621,
+        "name": "rscripts/FuelLayer_build_primary_species_layers_from_knn.R",
+        "uncompressed_bytes": 1786
+      },
+      {
+        "compressed_bytes": 748,
+        "name": "rscripts/FuelLayer_build_secondary_species_layers_from_knn.R",
+        "uncompressed_bytes": 2214
+      },
+      {
+        "compressed_bytes": 683,
+        "name": "rscripts/FuelLayer_build_tertiary_species_layers_from_knn.R",
+        "uncompressed_bytes": 2167
+      },
+      {
+        "compressed_bytes": 3298,
+        "name": "rscripts/FuelLayer_categorize_fbp_fuel_types_from_decision_tree.R",
+        "uncompressed_bytes": 16925
+      }
+    ],
+    "central_directory_offset": 2680396122,
+    "central_directory_sha256": "ed62284167c2c6f15245b28a66f7d67b84edbdb07babd5d8e778ab07cc933d75",
+    "full_raster_archive_downloaded": false,
+    "inspected_members": [
+      {
+        "compressed_bytes": 826,
+        "crc32": "9ef14d85",
+        "extracted_member_sha256": "697cda84fc8faa7e625f712f2f911cd370ca1b56b4b802891bd8eae2338213a5",
+        "inspection": "Range-extracted and read; rules summarized below.",
+        "name": "docs/Burn Scar Rules.txt",
+        "uncompressed_bytes": 1737
+      },
+      {
+        "compressed_bytes": 3298,
+        "extracted_member_sha256": "d433feb32e52a459aed746c7069cfcafbb05e54009cc8fb617ceb99bfa14dd2a",
+        "inspection": "Range-extracted and read; builds the base fuel class raster from kNN/species/ecozone/land-cover inputs and does not apply year-since-fire succession.",
+        "name": "rscripts/FuelLayer_categorize_fbp_fuel_types_from_decision_tree.R",
+        "uncompressed_bytes": 16925
+      }
+    ],
+    "interpretation_limits": [
+      "The 2018 NFDB date belongs to the v20191114 archive rule note; it does not establish the burn-record cutoff inside v2014b.",
+      "The rule text does not define exact date arithmetic, inclusive day/year boundaries, or the geographic boundary used for the variable M-2 succession interval.",
+      "The archive includes the textual rule and base-layer classification code; no separately named age-succession implementation appears in the complete member-name inventory. This does not rule out a manual/GIS procedure outside the archive.",
+      "This is enough to describe the released rule, not enough by itself to certify a leakage-safe annual fuel grid for 2014-2018 TRAIN events."
+    ],
+    "zip_entry_count": 170
+  }
+}

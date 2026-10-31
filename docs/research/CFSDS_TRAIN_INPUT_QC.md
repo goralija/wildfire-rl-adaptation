@@ -28,6 +28,14 @@ or calibrate an agent, or choose values by comparing new predictions with target
 perimeters. Machine-readable measurements and hashes are in
 [cfsds-train-input-qc.json](../../reports/real-fire-data/cfsds-train-input-qc.json).
 
+**Scope update (2026-10-31):** the fuel-class overlay has since been expanded from the
+earlier 20-candidate audit to all 1,301 rows in the target-independent TRAIN screen.
+It uses the same fixed 20×20/100 m crop and existing v2014b map; it is a separate
+spatial class check, not a new FireCase or a completion of this terrain/weather/
+suppression provenance audit. Of 1,295 windows that fit, 701 pass fuel-class overlap
+only, 64 need sub-cell review, and 530 fail; six cannot fit. None is approved for a
+full replay. See the [full overlay method and results](CFSDS_FULL_TRAIN_FUEL_OVERLAY.md).
+
 ## What was measured locally
 
 All three available FireCases identify their event and split=train. Each has
@@ -84,11 +92,12 @@ Neither terrain nor weather findings close TASK-015: these are three historical 
 inputs, not the full TRAIN cohort, and annual fuel provenance, suppression, domain
 suitability, and the no-action replay gate remain unresolved.
 
-The case fuel grids use National FBP fuel-type map v2014b at 250 m. The existing
-train-only fuel audit found 10 PASS_FUEL_ONLY and 10 FAIL_FUEL_OVERLAP; this
-status means only that the observed scar/front/target avoids disallowed fuel classes
-under that audit's rule. It is not a physical-validation or vintage-safety result
-[S-031; see also the method in CFSDS_TRAIN_QC.md].
+The case fuel grids use National FBP fuel-type map v2014b at 250 m. The earlier
+20-candidate audit found 10 PASS_FUEL_ONLY and 10 FAIL_FUEL_OVERLAP. The subsequent
+full TRAIN pre-screen is reported above and in the linked overlay report. Neither
+screen's pass means more than categorical spatial compatibility under its stated rule;
+neither establishes physical validity or that the 2014b map is safe for the event year
+[S-031].
 
 ## License and reuse notes
 
@@ -121,6 +130,15 @@ the [BC operational evidence receipt](../../reports/real-fire-data/cfsds-train-b
 [S-045–S-047]. CNFDB provides agency-contributed fire locations/perimeters, but its
 public documentation warns that records are incomplete and variable in quality; access
 requires an End-User Agreement [S-036].
+
+The W.I.S.E. CFSDS study removes fires with any recorded suppression because its model
+does not include intervention [S-037]. Therefore `unknown` cannot qualify as “no
+suppression” in our strict no-action cohort. Our three BC matches remain candidate
+crosswalks, and none has a complete event-keyed action record or source-backed proof of
+no intervention; two have partial reports of activity at the candidate incident or
+complex level. Retain them as diagnostics, not untreated benchmark cases. See
+[EXP-024](EXPERIMENT_LOG.md#exp-024--wise-suppression-exclusion-and-national-burn-history-dating-2026-10-31)
+and [ADR-034](../specs/DECISION_RECORDS.md#adr-034).
 
 A useful new lead is Alberta's official 2006–2025 fire-level dataset. Its catalogue says
 it includes staffing and physical resources used to suppress each fire, as well as
@@ -178,8 +196,9 @@ v20191114. Its metadata lists 2017 kNN forest inventory and NBAC, and the archiv
 is about 2 GB. The product is in the development directory; it is evidence that
 a later vintage exists, not evidence that its raw raster is appropriate for 2014–18
 training. Since it was released after these targets and uses NBAC, direct use may
-reveal post-target fire history; its precise per-pixel cutoff is unverified. The
-archive was not downloaded
+reveal post-target fire history; its precise per-pixel cutoff is unverified. The full
+raster was not downloaded; only its central directory and two small embedded files
+were read by byte range.
 [S-032].
 
 The official 2024 map is 30 m, covers 2020-08-01 to 2024-04-01, and uses SCANFI,
@@ -194,11 +213,12 @@ The tree says O-1 remains grass; otherwise scars older than 21 years become C-2,
 than 5 become M-2 (C25%), older than 2 become D-2, and younger scars become Non-Fuel.
 The figure does not document exact date arithmetic or special-class handling. The
 official v20191114 directory's listed *Decision Rules* PDF covers baseline fuel
-classification, not this post-fire age tree; its burn-scar PDF is a legend. The roughly
-2 GB release ZIP was not inspected, so the exact succession implementation remains
-unverified. This resolves the prior claim that the tree was not publicly transcribable,
-but it does not resolve the v2014b burn-history cutoff or authorize a map [S-031,
-S-037, S-048].
+classification, not this post-fire age tree; its burn-scar PDF is a legend. A later
+byte-range inspection of the release ZIP found an embedded `Burn Scar Rules.txt` with
+broad age classes and an NFDB update date of 2018-07-26 for fires over 50 ha. It leaves
+the regional M-2 boundary and exact date arithmetic unresolved. This later evidence
+does not resolve the v2014b burn-history cutoff or authorize a map [S-031, S-037,
+S-048; see also EXP-023].
 
 A separate official CWFIS note describes the simpler 2015 operational grid rule
 (last-year scars Non-Fuel; the prior two years Grass). That rule belongs to a different
@@ -220,8 +240,8 @@ front, and cumulative-damage state.
 
 **Current decision:** keep v2014b only to reproduce the already-saved pilot cases.
 Its 2011 land-cover vintage and version label do not prove the cutoff of the separate
-NFDB/NBAC burn-scar input. The W.I.S.E. succession tree is located/transcribed but its
-exact age convention and release artifacts still need verification. The older 2015
+NFDB/NBAC burn-scar input. The v20191114 succession note has been found and recorded,
+but its exact age convention and regional threshold still need resolution. The older 2015
 CWFIS annual rule is a different product and is not substituted. General CWFIS reuse
 terms are Open Government Licence - Canada with attribution. No annual map is safe to
 claim until the dated base-map source, tree age convention, special-class handling, and
@@ -249,11 +269,10 @@ event counts and the general boundary-rule check are recorded separately in
 [`cfsds-train-fuel-vintage-mask-proof.json`](../../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json).
 
 This proves only the temporal perimeter predicate. It does **not** build/reclassify a
-fuel raster: the existing v2014b map still lacks a verified per-pixel cutoff, and the
-publicly shown W.I.S.E. Figure 2 tree has only been transcribed. The official directory's
-listed decision-rules PDF covers baseline fuel classification; the underlying succession
-artifact was not found in the listed documents, and the large archive was not inspected.
-Its age-counting convention remains unknown. The diagnostic front
+fuel raster: the existing v2014b map still lacks a verified per-pixel cutoff. The
+v20191114 archive's internal succession note has now been inspected, but its age-counting
+convention and regional boundary remain incomplete, and that later release does not
+resolve the v2014b cutoff. The diagnostic front
 count reproduces the then-current target-aware builder rule only to explain the existing
 case; it is not an acceptable front input for an unbiased benchmark. A
 deliberately small C++ fixture originally placed one ordinary `burnt` initial-state cell

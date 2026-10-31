@@ -12,6 +12,8 @@
 - [CFSDS TRAIN target-blind window screen](cfsds-train-target-blind-window-screen.json) — samo 2014–2018 TRAIN; target coverage je post-selection dijagnostika, 4/25 prozora imaju ikakav target pixel.
 - [CFSDS TRAIN prostorni feasibility audit](cfsds-train-spatial-feasibility.json) — poređenje 2–6 km domena na istih 25 TRAIN parova; target dijagnostika je post-selection, bez FireCase-a ili replaya.
 - [CFSDS puni TRAIN target-independent day-pair screen](../../docs/research/CFSDS_FULL_DAY_PAIR_SCREEN.md), [JSON receipt](cfsds-train-full-day-pair-screen.json) i [1301-case/domain CSV](cfsds-train-full-day-pair-screen.csv) — svih 1.301 TRAIN rastera, pet unaprijed definisanih domena, 1.010 target-opaženih i 291 bez mapiranih target piksela; bez simulator replaya.
+- [CFSDS full TRAIN fuel-class overlay](../../docs/research/CFSDS_FULL_TRAIN_FUEL_OVERLAY.md), [zbirni JSON](cfsds-full-train-fuel-overlay.json) i [1301-redni CSV](cfsds-full-train-fuel-overlay.csv) — 1.295/1.301 prozora overlayano na 2014b; 701 pass-only, 64 review, 530 fail; nijedan nije full-case approved.
+- [CanFG v20191114 archive member review](canfg-fuel-archive-member-review.json) — službeni 2.68 GB ZIP indeksiran bez preuzimanja karte; pronađena pravila za scar-succession, ali v2014b cutoff ostaje otvoren.
 - [CFSDS no-action dijagnostika](../../docs/research/CFSDS_NO_ACTION_DIAGNOSIS.md) i [mašinski čitljiva vremenska analiza](cfsds-no-action-timeline.json) — tri sačuvana train replaya, bez novog C++ runa, kalibracije ili treninga.
 
 ## Dokumenti

@@ -4,6 +4,46 @@ title: Work log
 ---
 # Work log
 
+2026-10-31 — Rechecked the W.I.S.E. inclusion criteria and official national fire-history
+products. W.I.S.E. removes fires with any recorded CNFDB suppression because its model
+does not account for intervention. The three saved BC crosswalks do not have complete
+shared-ID action logs or evidence of no intervention; two have partial public reporting
+of incident/complex activity. Kept `suppression_status=unknown` and made “unknown is not
+none” an explicit replay-eligibility rule.
+
+The v2014b metadata cites the 2016 NFDB Agency FireData publication while giving no
+burn-record cutoff. That is not proof of which years were rasterized, but `2014b` cannot
+be used by itself as a pre-target guarantee. Official current NBAC metadata lists annual
+event/date/source fields and says its 2025 release revised older years; this can support
+a later retrospective scar reconstruction, not an assumed frozen as-of-target map.
+Validation/test years after 2018 were not opened. Added EXP-024, ADR-034 and S-050, and
+updated the plain-language prior-work page and current project handoff/status. No raster,
+case, replay, training run or model parameters were changed; `research_ready=false`.
+
+2026-10-31 — Expanded fuel compatibility review to the complete target-independent
+TRAIN screen. All 1,301 pairs were retained; the fixed 20×20/100 m domain fit 1,295.
+The pre-target scar/front overlap was class-compatible in 701 windows, required
+sub-cell review in 64, failed in 530, and had no window in six. These are fuel-class
+checks only: full-case/replay approvals remain zero. The target mask was read only after
+pair and window selection as a diagnostic. The initial-mask implementation was changed
+in the audit to use only pre-target day information, correcting the earlier helper's
+target-dependent front derivation for this screen.
+
+Inspected the official 2.68 GB CanFG v20191114 ZIP by HTTP byte ranges: its central
+directory and two small files were read, without downloading the fuel raster. The
+embedded `Burn Scar Rules.txt` gives broad post-fire age classes, special handling for
+O-1/Water/Non-Fuel, and references the 2018-07-26 NFDB update for fires over 50 ha. It
+leaves the regional M-2 threshold and exact age arithmetic open; it does not establish
+the older v2014b map's NFDB/NBAC cutoff. Updated the fuel-vintage review, input-QC page,
+source/experiment/decision registers, status, backlog, handoff, agent instructions,
+indexes and this log. Compact per-pair CSV and aggregate JSON plus an archive inventory
+receipt are committed as research evidence; source raster and raw archive are not.
+No annual map, new FireCase, simulator replay, benchmark or training run occurred;
+`research_ready=false` remains. See [EXP-022/023](research/EXPERIMENT_LOG.md),
+[full-screen method/results](research/CFSDS_FULL_TRAIN_FUEL_OVERLAY.md),
+[overlay JSON](../reports/real-fire-data/cfsds-full-train-fuel-overlay.json), and
+[archive receipt](../reports/real-fire-data/canfg-fuel-archive-member-review.json).
+
 2026-10-31 — Adopted a concrete prior-art workflow rather than treating the published
 limitations as a reason to stall: reuse W.I.S.E.'s CFSDS case assembly/QC ideas with a
 strict target-blind start; keep Cell2Fire/Firehose as the simulator/RL path; use Dogrib
@@ -592,9 +632,10 @@ benchmark, or heldout inspection occurred.
 
 Corrected the earlier statement that the W.I.S.E. post-fire succession tree was not
 publicly transcribable: Figure 2 is public and its branches are now recorded in the
-fuel-vintage review. This does not authorize annual maps because the v2014b NFDB/NBAC
-cutoff is still undocumented, and exact age arithmetic, special classes and the actual
-v20191114 artifact are unverified.
+fuel-vintage review. At this stage (before EXP-023), the actual v20191114 rules file had
+not been inspected. The later inspection records broad rules, but does not authorize
+annual maps: the v2014b NFDB/NBAC cutoff and exact age/regional arithmetic remain
+undocumented, and the full raster and implementation have not been independently checked.
 
 Audited saved inputs: all three pilot FireCases are outputs of the older target-aware
 builder. MRDEM-30 DTM VRT, 30 m bilinear-to-100 m conversion and output hashes are known,
@@ -676,10 +717,12 @@ also without a dated NBAC cutoff.
 The listed v20191114 *Decision Rules* PDF (dated November 14, 2018) describes how base
 FBP classes are assigned from vegetation, species, land cover and ecological inputs; it
 does not define the post-fire age thresholds shown in W.I.S.E. Figure 2. The official
-directory lists a burn-scar legend but no separate succession document. The roughly
-2 GB ZIP was not inspected, so no claim is made about its internal contents. The paper's
-Figure 2 remains the public rule description, while its precise date arithmetic and
-special-class behavior remain unresolved.
+directory lists a burn-scar legend but no separate succession document. At this
+initial-review stage, the roughly 2 GB ZIP had not been inspected, so no claim was made
+about its internal contents; EXP-023 later read its central directory and the small
+embedded rules text by byte range. The paper's Figure 2 remains the public rule
+description, while its precise date arithmetic and special-class behavior remain
+unresolved.
 
 Updated the source-gate receipt, fuel-vintage review, input QC, source register, status,
 backlog, handoff, navigation, project context, [EXP-019](research/EXPERIMENT_LOG.md#exp-019--train-fuel-vintage-artifact-inventory-2026-10-31)

@@ -17,6 +17,11 @@
 - [TRAIN terrain/weather provenance receipt](../../reports/real-fire-data/cfsds-train-terrain-weather-provenance.json) - MRDEM source-class check i pinovani target-blind ERA5-Seamless odgovori za tri stare dijagnostičke slučajeve; source vintage i legacy weather mismatch ostaju otvoreni
 - [TRAIN-only CFSDS prostorna podobnost](CFSDS_SPATIAL_FEASIBILITY.md) - Poređenje unaprijed zadanih target-blind domena na istim TRAIN parovima
 - [Puni TRAIN target-independent day-pair screen](CFSDS_FULL_DAY_PAIR_SCREEN.md) - 1.301 CFSDS rastera i pet fiksnih domena; target metrics samo post-selection dijagnostika
+- [Puni TRAIN fuel-class overlay](CFSDS_FULL_TRAIN_FUEL_OVERLAY.md) - 1.301 target-independent parova overlayanih na v2014b; class-only nalazi, bez annual fuel mape ili replaya
+- [EXP-022: full TRAIN fuel-class overlay](EXPERIMENT_LOG.md#exp-022--full-train-fuel-class-overlay-on-target-blind-pairs-2026-10-31) - 701 pass-only, 64 review, 530 fail, 6 bez prozora
+- [EXP-023: embedded v20191114 burn-scar rules](EXPERIMENT_LOG.md#exp-023--v20191114-archive-burn-scar-rules-and-v2014b-member-review-2026-10-31) - mali rule fajl pregledan iz 2.68 GB ZIP-a bez preuzimanja karte
+- [EXP-024: W.I.S.E. suppression exclusion and burn-history dates](EXPERIMENT_LOG.md#exp-024--wise-suppression-exclusion-and-national-burn-history-dating-2026-10-31) - dokumentovan uslov da `unknown` gašenje nije isto što i `none`; provjereni su i službeni NBAC vremenski metapodaci
+- [CanFG archive member review](../../reports/real-fire-data/canfg-fuel-archive-member-review.json) - ZIP unosi, byte ranges i hashovi; v2014b cutoff ostaje nepoznat
 - [Kako su raniji radovi pripremali i provjeravali stvarne požare](CFSDS_PRIOR_WORK_AND_PLAIN_EXPLANATION.md) - CFSDS, W.I.S.E., Dogrib/Cell2Fire i Firehose, te laičko objašnjenje šta još blokira validan eksperiment
 - [Provjereni tok prilagođen našem projektu](ADAPTED_PRIOR_ART_WORKFLOW.md) - šta preuzimamo iz W.I.S.E., Dogrib/Cell2Fire i Firehose, kako izbjegavamo poznate zamke i kako čuvamo podatke za buduće mape/animacije
 - [Dogrib geografska QA karta](../../reports/real-fire-data/dogrib-reference-alignment.png) - georeferencirana kontrola goriva, terena, perimetara, paljenja i opaženog scara; nije simulator replay

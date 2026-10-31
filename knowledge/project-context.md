@@ -47,14 +47,25 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
   [Fuel QC](../docs/research/CFSDS_TRAIN_QC.md) i
   [input/provenance QC](../docs/research/CFSDS_TRAIN_INPUT_QC.md).
 - Novi FBP fuel source review našao je CWFIS site-wide Open Government Licence - Canada
-  uz atribuciju, ali v2014b i dalje nema cutoff za NFDB/NBAC burn scars. Službeni 2018
-  fuel-class decision rules opisuju bazno klasifikovanje, ne post-fire age succession.
-  W.I.S.E. Figure 2 succession tree je javno transkribovana, ali starosna semantika/
-  specijalne klase i underlying v20191114 implementation nisu potvrđeni; javni ZIP od
-  2 GB nije pregledan. Nema novog godišnjeg map vintagea; 2014b ostaje samo za
-  reprodukciju spremljenih slučajeva. Alberta 2006–2025 suppression dataset je pronađen,
-  ali CSV endpoint vratio je HTTP 403 i nema event join-a. [Audit](../docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md),
-  [ADR-024](../docs/specs/DECISION_RECORDS.md#adr-024), [ADR-026](../docs/specs/DECISION_RECORDS.md#adr-026).
+  uz atribuciju, ali v2014b i dalje nema cutoff za NFDB/NBAC burn scars. ZIP v20191114
+  sad je indeksiran bez skidanja 2.68 GB karte: interni `Burn Scar Rules.txt` daje
+  1–2 godina nonfuel, 3–5 D-2, 6–21? M-2 C25 i >21 C-2, uz O-1/voda/nonfuel pravila,
+  NFDB datum 2018-07-26 za požare >50 ha i regionalno promjenjiv age prag. Ta pravila
+  ne dokazuju cutoff starije 2014b karte. Full TRAIN overlay na 1.295 izreza ima 701
+  prolaz samo klase, 64 review i 530 fail; 477 modelskih front/target parova je
+  geometrijski susjedno. Nijedan nije full-case approved. Nema nove godišnje karte,
+  CFSDS replaya/treninga; no-action gate i dalje nije prošao. Alberta 2006–2025 fire-level
+  suppression dataset je pronađen, ali CSV endpoint vratio je HTTP 403 i nema event join-a.
+  W.I.S.E. izbacuje slučajeve s bilo kakvim CNFDB evidentiranim gašenjem. Tri naša BC
+  2018 event matcha su samo prostorni kandidati i ostaju `unknown`; dva imaju parcijalnu
+  evidenciju aktivnosti, nijedan nema potpun shared-ID action log niti dokaz da se nije
+  intervenisalo. Najnoviji NBAC je koristan za retrospektivnu prethodnu-fire geometriju,
+  ali je naknadno revidiran, ne zamrznut as-of-target. Ni `unknown` ni trenutni NBAC ne
+  prolaze no-action gate. [EXP-024](../docs/research/EXPERIMENT_LOG.md#exp-024--wise-suppression-exclusion-and-national-burn-history-dating-2026-10-31),
+  [ADR-034](../docs/specs/DECISION_RECORDS.md#adr-034).
+  [Fuel audit](../docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md), [full overlay](../docs/research/CFSDS_FULL_TRAIN_FUEL_OVERLAY.md),
+  [archive receipt](../reports/real-fire-data/canfg-fuel-archive-member-review.json),
+  [ADR-033](../docs/specs/DECISION_RECORDS.md#adr-033).
 - Terrain/weather provenance je dodatno provjeren za tri postojeća TRAIN pilota: svi
   uzorkovani MRDEM source-class pikseli su adjusted GLO-30 (2011–2015 input collection),
   a rekonstruisani target-blind ERA5-Seamless odgovori su sačuvani sa query URL-ovima.

@@ -17,19 +17,21 @@ This review follows the all-TRAIN target-independent day-pair/domain screen in
 It asks whether an existing national Canadian FBP fuel raster can be treated as an
 as-of-event input for CFSDS targets in 2014–2018 and whether the public rules are enough
 to recreate the post-fire fuel succession used in the published W.I.S.E. assessment.
-The audit is limited to public metadata and documentation; it does not inspect
-validation/test data.
+The review includes public metadata, a complete member-name inventory of the local
+v2014b ZIP, and byte-range inspection of selected small files inside the official
+v20191114 archive. The v20191114 fuel raster itself was not downloaded or inspected;
+validation/test data were not opened.
 
-No fuel raster was downloaded, generated, or reclassified in this review. No FireCase,
-Cell2Fire replay, calibration, benchmark, or training was run. The 2014b raster remains
-only as the recorded source for reproducing the existing pilot files.
+The existing v2014b raster was used only for a train-only spatial fuel-class overlay;
+no fuel map was generated or reclassified. No new FireCase, Cell2Fire replay,
+calibration, benchmark, or training was run. Saved pilot files remain unchanged.
 
 ## Evidence by source vintage
 
 | Source | Documented evidence | TRAIN use decision |
 | --- | --- | --- |
-| National FBP v2014b, 250 m | Land Cover Map of Canada 2011, CanFI2000, ecological layers, and NFDB/NBAC are listed; NFDB/NBAC helped identify burn scars. No dated per-pixel lineage or explicit burn-record cutoff is stated. | Keep for exact reproduction of saved pilot cases. Do not label it as an as-of-event map for new cases until its cutoff is verified. |
-| Canadian Forest FBP v20191114, 250 m | Metadata lists 2017 kNN forest inventory and says NBAC was used to reassign fuel types in burned areas. It is listed in a development directory at about 2 GB. No per-pixel NBAC cutoff is stated. | Do not use directly as the baseline for 2014–2018 targets: the underlying inventory/map vintage is later than those events and the burn-record cutoff is unspecified. The archive was not downloaded. |
+| National FBP v2014b, 250 m | The complete 13-member local ZIP contains the raster, metadata, legend and GIS sidecars, but no separate burn-scar rule file. The PDFs name 2011 land cover, CanFI2000, ecological layers and NFDB/NBAC, without dated per-pixel lineage or an explicit burn-record cutoff. | Keep for exact reproduction of saved pilot files and class-only screening. Do not label it as an as-of-event map for new cases until its cutoff is verified. |
+| Canadian Forest FBP v20191114, 250 m | The metadata lists a 2017 kNN forest inventory and NBAC; the 170-member ZIP index contains `docs/Burn Scar Rules.txt`. That file gives fire-age classes and says the rules used an NFDB update dated 2018-07-26 for fires over 50 ha. It also flags a region-dependent 6–21-year interval. | Do not use this later base map directly for 2014–2018 targets. Its rule text helps describe succession, but does not supply the missing v2014b cutoff or fully define age/calendar and regional-boundary arithmetic. |
 | FBP Fuel Types 2024, 30 m | Official portal metadata gives 2020-08-01 through 2024-04-01 coverage and lists SCANFI, ecozones, and NBAC. | Postdates all current TRAIN targets; not a historical baseline for this cohort. |
 | FBP Fuel Types 2026, 250 m current-year product | The current product description says annual maps are updated before fire season with burned-area and other information from the previous year, with publication scheduled by 30 April. | Useful evidence for the current publication convention. It does not prove when the v2014b raster or its NBAC/NFDB layer was frozen. |
 
@@ -42,15 +44,32 @@ be projected backward to v2014b without historical release documentation.
 
 ## What the published rules do and do not establish
 
-The CWFIS directory includes official 2018 documents called *FBP Fuel Layer Decision
-Rules* and *FBP Fuel Layer Base Layers*. These describe how inventory, species,
-vegetation, land-cover and ecological data are classified into baseline FBP fuel
-classes. They are useful provenance for how a fuel code is assigned. They are not the
-post-fire burn-scar succession crosswalk cited by the W.I.S.E. paper. The base-layer
-document also says the kNN NFI v1 layers are available on request and that some
-Agriculture Canada land-cover input was under a data-sharing agreement; consequently,
-rebuilding the national base map from its component layers is not established by the
-public PDFs alone.
+The official v20191114 ZIP can be indexed without downloading its 2.68 GB raster: a
+65,536-byte end-of-file range and the 13,417-byte central directory identify all 170
+members. The index lists a small `docs/Burn Scar Rules.txt` file as well as baseline
+classification documents and five R scripts. We range-extracted that text file (1,737
+bytes after decompression) and one baseline classifier script. The classifier script
+builds fuel classes from kNN/species/ecozone/land-cover inputs; it does not use fire
+dates to apply succession. No separately named age-succession program appears in the
+complete ZIP member list. This does not rule out an external manual GIS procedure.
+
+The rules text states that scars from fires over 50 ha are treated as follows: 1–2 years
+as Non-Fuel, 3–5 years as D-2, 6–21? years as M-2 C25, and older than 21 years as C-2.
+It keeps O-1 as O-1 and preserves Water and Non-Fuel. It explicitly notes that the
+6–21-year M-2 window may vary by region. For an NFDB update dated 2018-07-26, it lists
+2016–2017 as Non-Fuel, 2013–2015 as D-2, and 2010–2012 as M-2 C25; 2010–2011 are
+separated in the raster stack because the 2011 imagery initially classifies them as
+Non-Fuel. The ZIP also gives layer precedence. These details substantially corroborate
+the [W.I.S.E. Figure 2 transcription](#figure-2-transcription), but the question mark
+and regional caveat mean the exact age cut and geographic lookup are still unresolved.
+
+The official 2018 *FBP Fuel Layer Decision Rules* and *FBP Fuel Layer Base Layers*
+documents describe how inventory, species, vegetation, land-cover and ecological data
+are classified into baseline FBP fuel classes. They are useful provenance for how a fuel
+code is assigned, but they are not the age-succession implementation. The base-layer
+document also says kNN NFI v1 layers are available on request and some Agriculture Canada
+land-cover input was under a data-sharing agreement; rebuilding the national base map
+from public PDFs alone is not established.
 
 The W.I.S.E. paper describes generating yearly fuel maps from the 2014, 2019, and 2024
 FBP map releases by applying prior fire perimeters and a succession ruleset associated
@@ -61,17 +80,15 @@ with arrival day before n are set to non-fuel. These are two different transform
 2. Current-event simulation mask: prevent the current fire's pre-target scar from
    burning again.
 
-The paper's Figure 2 publicly shows the decision tree for the first transformation.
-Its article text does not spell out the branches and it does not provide a public
-code/data archive; the data statement offers study data from the corresponding author
-upon reasonable request. The figure can be transcribed, but its date arithmetic and
-the exact source release files have not yet been independently checked. The official
-v20191114 directory lists a *Decision Rules* PDF, but that November 2018 document
-classifies baseline FBP fuel types from vegetation, forest, species, land-cover and
-ecological attributes; it is not the post-fire age-succession tree. The directory's
-burn-scar PDF is a class legend, not a succession algorithm. The roughly 2 GB release
-ZIP was not downloaded or inspected, so the directory listing cannot rule out additional
-embedded material [S-048].
+The paper's Figure 2 publicly shows the decision tree for the first transformation, and
+the archive text now independently confirms its broad age classes and special cases.
+The article data statement offers study data from the corresponding author upon
+reasonable request. The internal text still does not define the exact calendar/date
+arithmetic or the regional boundary for the 6–21-year M-2 interval. The burn-scar PDF
+is a class legend, not an executable succession algorithm. The 2.68 GB archive raster
+was not downloaded; only its central directory and selected small text members were
+inspected. See the [member-review receipt](../../reports/real-fire-data/canfg-fuel-archive-member-review.json)
+and source [S-032](SOURCES.md).
 The second transformation has a local TRAIN-only temporal-mask proof for `2018_747`,
 but the proof does not create an annual fuel layer. The paper also selects its active
 boundary using day-n adjacency and acknowledges that this uses future information;
@@ -113,24 +130,28 @@ terms if it later reconstructs or redistributes derived layers.
 
 **Decision:** preserve the existing v2014b-based pilot inputs for exact reproduction,
 but do not describe v2014b as a verified as-of-event base for new cases. Do not directly
-use v20191114, 2024, or 2026 layers as TRAIN-era baseline maps. The W.I.S.E. Figure 2
-succession tree is now publicly located and transcribed, but its age-counting convention
-and exact release artifacts have not been independently verified. The decisive v2014b
-NFDB/NBAC burn-history cutoff remains undocumented. General CWFIS download reuse terms
-are documented as Open Government Licence - Canada with attribution, but that does not
-resolve temporal leakage or every source-layer condition. No annual fuel map is selected
-or emitted.
+use v20191114, 2024, or 2026 layers as TRAIN-era baseline maps. The internal v20191114
+burn-scar text now corroborates the broad W.I.S.E. Figure 2 succession classes and gives
+an NFDB snapshot date for that later release, but it does not resolve the v2014b
+NFDB/NBAC cutoff, the regional 6–21-year threshold, exact date arithmetic, or the
+independently executable succession procedure. A full TRAIN overlay also shows that
+class compatibility on v2014b alone is insufficient: 530/1,295 starting windows fail
+the class-overlap check, 64 need sub-cell review, and 701 pass only this narrow check.
+General CWFIS download reuse terms are documented as Open Government Licence - Canada
+with attribution, but that does not resolve temporal leakage or every source-layer
+condition. No annual fuel map is selected or emitted.
 
 Before an annual map can be used, the project needs:
 
 1. An authoritative date/cutoff for the base map's burn-history inputs, suitable for
    the target year. If none can be obtained, mark the vintage unresolved and do not
    claim leakage-safe fuel inputs.
-2. Obtain the underlying v20191114 burn-scar succession artifact (or an authoritative
-   confirmation that Figure 2 is the complete rule) and define how elapsed age is counted
-   from fire dates. Resolve treatment of existing scars, no-data, water, non-fuel, urban,
-   and ambiguous classes; do not infer these cases from the figure's legend or baseline
-   classification rules.
+2. Resolve the v20191114 rule text's exact age/calendar arithmetic and region-specific
+   6–21-year M-2 threshold, and confirm how its stated layer order applies at overlaps.
+   Preserve its explicit O-1, Water, Non-Fuel and >50 ha rules. The internal R classifier
+   is for baseline fuel classes, not this age succession; no standalone succession
+   program was found in the complete ZIP index. Do not invent a regional threshold or
+   infer classes from the legend.
 3. A frozen, target-independent history mask: only fires/burn days dated before target
    day n may alter the input; day n and later arrivals must be excluded. Retain the
    tested invariant `arrival_day < target_doy` for the current event.
@@ -144,15 +165,18 @@ Before an annual map can be used, the project needs:
    on non-fuel, and `scar_nf` on fuel remain invalid. See
    [ADR-025](../specs/DECISION_RECORDS.md#adr-025) and the versioned contract receipt.
 
-The figure transcription narrows the unresolved ruleset question, but does not resolve
-the map gate. The CFSDS case builder still rejects all initial nonfuel/water overlaps,
-and no annual map or new FireCase is generated until the dated base-map source, age
-convention, special-class handling, and per-cell provenance in items 1–4 are verified.
+The rules file narrows the succession question, but does not resolve the map gate. The
+CFSDS case builder still rejects initial nonfuel/water overlaps, and no annual map or
+new FireCase is generated until the dated base-map source, age convention, regional
+threshold, special-class handling, and per-cell provenance in items 1–4 are verified.
 The `scar_nf` token must not be used merely because an event-arrival layer overlaps a
 generic `NF` class; that overlap could reflect water, urban, no-data, or another mapping
 error rather than a post-fire succession class.
 
-Evidence and source detail: [source register S-031–S-048](SOURCES.md), [input QC](CFSDS_TRAIN_INPUT_QC.md),
+Evidence and source detail: [source register S-031–S-049](SOURCES.md), [input QC](CFSDS_TRAIN_INPUT_QC.md),
+[CFSDS full TRAIN fuel overlay](CFSDS_FULL_TRAIN_FUEL_OVERLAY.md),
+[archive member receipt](../../reports/real-fire-data/canfg-fuel-archive-member-review.json),
+[full TRAIN fuel overlay receipt](../../reports/real-fire-data/cfsds-full-train-fuel-overlay.json),
 [pre-target mask proof](../../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
 [fuel source gate receipt](../../reports/real-fire-data/cfsds-train-fuel-source-gate.json),
 [historical importer characterization](../../reports/firehose-verification/nonfuel-initial-scar-compatibility.json),

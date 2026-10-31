@@ -9,12 +9,50 @@ sources:
 - resource: /reports/firehose-verification/nonfuel-initial-scar-contract.json
 - resource: /reports/real-fire-data/cfsds-train-bc-operational-evidence.json
 - resource: /reports/real-fire-data/cfsds-train-fuel-source-gate.json
+- resource: /reports/real-fire-data/cfsds-full-train-fuel-overlay.json
+- resource: /reports/real-fire-data/canfg-fuel-archive-member-review.json
 - resource: /reports/real-fire-data/cfsds-train-terrain-weather-provenance.json
 - resource: /reports/real-fire-data/dogrib-reference-alignment.json
 - resource: /docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md
 - resource: /docs/WORK_LOG.md
 ---
 # Trenutno stanje — 2026-10-31
+
+## Najnoviji TRAIN fuel nalaz — 2026-10-31
+
+Nova target-blind provjera je preko fiksne mreže 20×20/100 m preklopila postojeću
+v2014b kartu na svih 1.301 TRAIN parova. Prozor stane u 1.295 slučajeva; početni scar/front
+prolazi samo klasni preklop u 701, traži pregled manjeg preklopa u 64, a pada u 530.
+Šest prozora se ne može napraviti. 477 parova ima susjednu day-n−1 front/day-n ciljnu
+masku bez dodira ruba mreže; to je geometrijska provjera, ne simulator prolaz. Ni jedan
+slučaj nije spreman za replay ili trening.
+
+U službenom CanFG v20191114 ZIP-u od 2.68 GB indeksiran je sadržaj bez skidanja karte.
+Nađen je interni `Burn Scar Rules.txt`: široka starosna pravila, 2018-07-26 NFDB izvor
+za požare veće od 50 ha, posebni slučajevi za O-1/vodu/ne-gorivo i nejasan regionalni
+prag 6–21 godine. To razjašnjava više od samog W.I.S.E. crteža, ali ne dokazuje kada je
+NFDB/NBAC zamrznut u starijoj 2014b karti. `research_ready=false` ostaje.
+
+Metoda i [CSV/JSON rezultate](research/CFSDS_FULL_TRAIN_FUEL_OVERLAY.md),
+[inventar arhive](../reports/real-fire-data/canfg-fuel-archive-member-review.json) i
+[odluku ADR-033](specs/DECISION_RECORDS.md#adr-033) čuvaju reproducibilan dokaz.
+
+## Dodatna metodološka provjera — TRAIN suppression i vintage, 2026-10-31
+
+W.I.S.E. izričito uklanja požare za koje CNFDB bilježi bilo kakvo gašenje jer model ne
+računa intervencije. Naša tri sačuvana 2018 slučaja su geografski kandidati bez zajedničkog
+ID-ja s CFSDS-om; dva imaju parcijalne izvještaje o aktivnosti, a treći samo statusne
+izvještaje. Nijedan nema potpun dnevni action log ni dokaz da se nije gasio. `unknown` ne
+može proći kao “nije bilo gašenja”, pa su slučajevi i dalje dijagnostički.
+
+Službeni v2014b metadata citira 2016 NFDB referencu, ali ne kaže koji su fire years
+uključeni. To nije dokaz da je mapa koristila 2016 zapise; jeste dokaz da naziv `2014b`
+ne može sam potvrditi vrijeme sloja ožiljaka. Aktuelni NBAC nudi godišnje poligone i
+datume/izvore, ali najnoviji proizvod retrospektivno mijenja ranije godine. Koristan je
+za zasebnu rekonstrukciju ranijih ožiljaka, ne kao gotova vremenski zamrznuta mapa. Nismo
+otvarali 2019+ heldout požare. Fuel cutoff, potpuno poznati inputi i no-action gate ostaju
+blokirani; `research_ready=false`. Vidi [EXP-024](research/EXPERIMENT_LOG.md#exp-024--wise-suppression-exclusion-and-national-burn-history-dating-2026-10-31),
+[ADR-034](specs/DECISION_RECORDS.md#adr-034) i [S-050](research/SOURCES.md).
 
 ## Provjera ranijih rješenja — 2026-10-31
 
@@ -381,12 +419,15 @@ as-of-event input za nove slučajeve. v20191114 ima 2017 kNN/NBAC i nije direkta
 za događaje 2014–2018; 2024/2026 mape takođe nisu TRAIN baseline. Sada je dokumentovano
 da CWFIS download-site licenca navodi Open Government Licence - Canada uz CFS attribution.
 
-Pronađena službena *FBP Fuel Layer Decision Rules* dokumentacija opisuje dodjelu osnovnih
-FBP klasa; nije burn-scar succession stablo iz W.I.S.E. rada. Nije izrađena godišnja mapa,
-preuzet raster, simulator input ili replay. Fuel vintage i succession ostaju blokirani;
-sljedeći nezavisni mali task je ugovor/test za historical `burnt` stanje na `NF` gorivu.
-Detalji: [fuel-vintage audit](research/CFSDS_FUEL_VINTAGE_REVIEW.md), [source register S-031–S-041](research/SOURCES.md),
-[ADR-024](specs/DECISION_RECORDS.md#adr-024).
+Arhiva v20191114 sada sadrži pronađeni `Burn Scar Rules.txt`, koji opisuje post-fire
+succession. Dostupni 2014b ZIP zasebno je pregledan po imenima datoteka: ima raster,
+metadata i legendu, ali nema dodatni succession rule file. Za v2014b i dalje nema
+datuma NFDB/NBAC podataka. Nova full TRAIN klasa-provjera na v2014b dala je 701 prolaz
+od 1.295 prozora, 64 review i 530 fail; nijedan rezultat ne potvrđuje istorijsku
+tačnost karte. Nije izrađena godišnja mapa, FireCase ili replay. Vidi [fuel-vintage audit](research/CFSDS_FUEL_VINTAGE_REVIEW.md),
+[full TRAIN overlay](research/CFSDS_FULL_TRAIN_FUEL_OVERLAY.md), [archive receipt](../reports/real-fire-data/canfg-fuel-archive-member-review.json),
+[source register S-031–S-049](research/SOURCES.md), [EXP-022/023](research/EXPERIMENT_LOG.md#exp-022--full-train-fuel-class-overlay-on-target-blind-pairs-2026-10-31)
+i [ADR-033](specs/DECISION_RECORDS.md#adr-033).
 
 ## NF historical-scar importer contract — 2026-10-31
 
@@ -407,12 +448,10 @@ treniranje ni CFSDS replay. Vidi [ADR-025](specs/DECISION_RECORDS.md#adr-025),
 [EXP-015](research/EXPERIMENT_LOG.md#exp-015--explicit-nonfuel-historical-scar-importer-contract-2026-10-31)
 i [runtime receipt](../reports/firehose-verification/nonfuel-initial-scar-contract.json).
 
-I dalje nema leakage-safe godišnje fuel mape: v2014b cut-off nije potvrđen, a javno
-transkribovanoj Figure 2 nedostaje potvrđena age/special-class semantika i underlying
-succession artifact. Zvanična *Decision Rules* dokumentacija koja je navedena u v20191114
-direktoriju obrađuje baznu fuel klasifikaciju, ne starost burn scars; 2 GB ZIP nije
-pregledan. Naredni rad je dobiti cutoff/pravilo od nadležnog izvora ili osmisliti zaseban
-datumima potkrijepljen izvorni put, zatim završiti DEM/weather/suppression provenance i
+I dalje nema leakage-safe godišnje fuel mape: v2014b cutoff i regionalna/kalendarska
+semantika sukcesije nisu potvrđeni. Interni v20191114 `Burn Scar Rules.txt` sada je
+pregledan; full raster nije preuzet. Naredni rad je dobiti vremenski cutoff za v2014b i
+precizan ugovor za region/starost, zatim završiti DEM/weather/suppression provenance i
 preregistrovani no-action gate.
 **research_ready=false.**
 
@@ -422,10 +461,10 @@ preregistrovani no-action gate.
 The source review corrected an earlier open question: W.I.S.E. paper Figure 2 is public
 and its succession tree is transcribed in the [fuel-vintage review](research/CFSDS_FUEL_VINTAGE_REVIEW.md).
 It keeps pre-fire O-1 as grass; other burns become C-2 after >21 years, M-2 C25% after
->5, D-2 after >2, and Non-Fuel otherwise. The figure does not define exact date
-arithmetic or treatment of special classes, and the v20191114 artifact has not been
-checked. Official v2014b metadata still gives no NFDB/NBAC historical burn cutoff, so no
-annual fuel map is safe to claim or emit.
+>5, D-2 after >2, and Non-Fuel otherwise. The small v20191114 `Burn Scar Rules.txt` was
+later inspected; the entire fuel raster was not downloaded or independently reproduced.
+Exact date arithmetic/region rules remain open. Official v2014b metadata still gives no
+NFDB/NBAC historical burn cutoff, so no annual fuel map is safe to claim or emit.
 
 The three saved FireCases are old target-aware builder outputs, not clean inputs for the
 new benchmark. Their generated terrain grids are hashed and the MRDEM-30 VRT / bilinear
@@ -499,15 +538,13 @@ created or run. See [EXP-021](research/EXPERIMENT_LOG.md#exp-021--train-only-bc-
 
 ## TRAIN fuel-source artifact inventory — 2026-10-31
 
-The official v2014b metadata names Land Cover Map 2011 and CanFI2000 and says NFDB/NBAC
-were used to identify burn scars, but does not state the burn-history snapshot date or a
-per-pixel cutoff. The public v20191114 directory's *Decision Rules* PDF describes base
-fuel classification, not the W.I.S.E. post-fire age tree. Figure 2 remains publicly
-transcribed; its exact age arithmetic/special classes and underlying implementation are
-not verified. The roughly 2 GB release ZIP was not inspected. No annual map was generated;
-the fuel gate remains blocked. See the [source-gate receipt](../reports/real-fire-data/cfsds-train-fuel-source-gate.json),
-[EXP-019](research/EXPERIMENT_LOG.md#exp-019--train-fuel-vintage-artifact-inventory-2026-10-31),
-and [ADR-029](specs/DECISION_RECORDS.md#adr-029).
+The original source-gate inventory found the v2014b cutoff missing and the v20191114
+public Decision Rules PDF limited to base classification. A later ZIP-index pass found
+an internal succession-rules text file but no named standalone succession program. The
+v2014b cutoff remains missing and no annual map was generated. See the [source-gate
+receipt](../reports/real-fire-data/cfsds-train-fuel-source-gate.json), [archive receipt](../reports/real-fire-data/canfg-fuel-archive-member-review.json),
+[EXP-019/023](research/EXPERIMENT_LOG.md#exp-023--v20191114-archive-burn-scar-rules-and-v2014b-member-review-2026-10-31),
+and [ADR-033](specs/DECISION_RECORDS.md#adr-033).
 
 ## TRAIN terrain and weather provenance follow-up — 2026-10-31
 

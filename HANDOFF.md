@@ -136,20 +136,44 @@ ostaje isti kad se target/future oznake uklone. 1.010 narednih dana ima mapirane
 [JSON receipt](reports/real-fire-data/cfsds-train-full-day-pair-screen.json) i
 [case/domain CSV](reports/real-fire-data/cfsds-train-full-day-pair-screen.csv).
 
-Ovo nije godišnja fuel mapa: v2014b NFDB/NBAC scar layer nema potvrđen vremenski cutoff,
-a v20191114 post-fire succession tree nije transkribovan/validiran. Izolovani importer
-contract sada prihvata samo eksplicitni `scar_nf` na tačnoj NF ćeliji i zadržava je kao
-historijsku cumulative damage bez aktivnog fronta; obični `burnt` na NF i drugi
-neusklađeni zapisi se odbijaju. To je sintetički C++ ugovorni dokaz, ne CFSDS konverzija
-ili validacija fizike. CFSDS builder i dalje blokira takav unos dok vintage/succession
-ne budu odbranjeni. CWFIS download notice navodi Open Government Licence - Canada uz
-atribuciju; službeni baseline fuel-class rules PDF nije post-fire succession tree.
-Sljedeće: pribaviti datiran source-cutoff/succession dokaz gdje je dostupan, zatim za
-slučajeve koji prođu source gate popuniti DEM/weather provenance i suppression evidence
-prije preregistrovanog replay gatea. Vidi [ADR-025](docs/specs/DECISION_RECORDS.md#adr-025)
+Puni target-blind TRAIN fuel overlay je sada izvršen na svih 1.301 parova uz v2014b:
+1.295 mreža stane; 701 prođe samo klasno preklapanje, 64 traže sub-cell review, 530
+padne, 6 nema prozor. 477 parova ima susjednu day-n−1 front/day-n target geometriju
+bez rubnog dodira. To nijedan slučaj ne proglašava spremnim za replay.
+
+Za succession je unutar službenog CanFG v20191114 ZIP-a pronađen mali tekstualni fajl,
+bez skidanja 2.68 GB karte. On daje široke post-fire klase (1–2 godine Non-Fuel, 3–5
+D-2, 6–21? M-2 C25, >21 C-2), special-case pravila, te referencu na NFDB 2018-07-26
+za požare >50 ha. Prag M-2 zavisi od regije. To je koristan konkretan ruleset, ali nije
+dokaz datuma NFDB/NBAC u starijoj v2014b karti, niti određuje regionalni prag i tačno
+brojanje starosti. [Fuel vintage review](docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md),
+[overlay report](docs/research/CFSDS_FULL_TRAIN_FUEL_OVERLAY.md) i
+[archive receipt](reports/real-fire-data/canfg-fuel-archive-member-review.json) čuvaju detalje.
+
+Izolovani importer contract podržava eksplicitni `scar_nf` na tačnoj NF ćeliji i
+zadržava je kao kumulativnu štetu bez aktivnog fronta. To je sintetički C++ formatni
+dokaz, ne CFSDS replay. CFSDS builder i dalje blokira takav unos dok se ne riješe
+vintage, age-rule konvencija i per-cell provenance. CWFIS download notice navodi Open
+Government Licence - Canada uz atribuciju. Sljedeće: pribaviti v2014b cutoff ili
+vremenski datiranu zamjenu, razjasniti region/year pravilo, zatim nastaviti DEM/weather/
+suppression QC i preregistrovani no-action replay gate. Vidi
+[ADR-025](docs/specs/DECISION_RECORDS.md#adr-025), [ADR-033](docs/specs/DECISION_RECORDS.md#adr-033)
 i [runtime receipt](reports/firehose-verification/nonfuel-initial-scar-contract.json).
 Detalji su u [fuel-vintage audit](docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md) i
 [ADR-024](docs/specs/DECISION_RECORDS.md#adr-024).
+
+Nova provjera metode W.I.S.E. potvrđuje dodatni uslov: njihov CFSDS skup izbacuje požare
+sa bilo kakvim CNFDB evidentiranim gašenjem, jer model ne računa intervencije. Naša tri
+2018 incident matcha su kandidati bez zajedničkog događajnog ID-ja; dva imaju samo
+djelimične javne izvještaje o aktivnosti, a treći status bez action loga. Ostavi
+`suppression_status=unknown`; nijedan se ne može proglasiti neugašenim za strogi replay.
+Službeni v2014b metadata uz to citira NFDB rad iz 2016, iako ne potvrđuje koje je datume
+scar podataka karta uključila. To znači da oznaka “2014b” nije dokaz da su ožiljci
+prethodni TRAIN požarima. Najnoviji NBAC je naknadno revidirana godišnja kompozicija,
+korisna za traženje ranijih ožiljaka, ali ne sama po sebi vremenski zamrznut input.
+Detalji i odluke su u [EXP-024](docs/research/EXPERIMENT_LOG.md#exp-024--wise-suppression-exclusion-and-national-burn-history-dating-2026-10-31),
+[ADR-034](docs/specs/DECISION_RECORDS.md#adr-034) i [S-050](docs/research/SOURCES.md).
+
 Ne birati per-event trajanje iz targeta.
 No-action gate nije prošao: ne koristiti heldout ishode za kalibraciju, ne pokretati
 benchmark ili fine-tuning i ne tvrditi fizičku validaciju/agenta boljeg od baselinea.

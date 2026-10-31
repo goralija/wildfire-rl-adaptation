@@ -82,7 +82,10 @@ teren, vrijeme, prethodno izgorjelo područje i obod za provjeru. Ranije spaljen
 maskiraju kao negorivo; visinu, nagib i ekspoziciju računaju iz MRDEM terena; koriste
 ERA5-Land kao približni vremenski izvor i porede simulirane i opažene površine. Dnevne
 rastere su prebacili u zajednički sistem i rezoluciju 90 m. To potvrđuje da se CFSDS
-može povezati s fizičkim modelom širenja. [W.I.S.E. metoda](https://doi.org/10.1071/WF26072)
+može povezati s fizičkim modelom širenja. Važno za našu kohortu: autori su izbacili
+požare za koje je CNFDB bilježio **bilo kakvo gašenje**, jer njihov model ne računa
+intervenciju. Zato ni mi ne možemo istorijski požar sa `suppression_status=unknown`
+predstavljati kao požar bez gašenja. [W.I.S.E. metoda](https://doi.org/10.1071/WF26072)
 
 Ali CFSDS ne govori koji je tačno piksel gorio prvi unutar dana. W.I.S.E. zato početni
 front bira tako što uzima piksele od jučerašnjeg oboda koji dodiruju **sutrašnju**
@@ -103,6 +106,12 @@ Ovo direktno odgovara na tvoju nedoumicu: **drugi su sastavili i pokrenuli slič
 podatke; mi ne izmišljamo konverziju.** Oni su istovremeno pokazali i da dobijanje
 uvjerljivog i poštenog rezultata traži odvojene provjere, a "bolji F1 nakon gledanja
 targeta" nije isto što i unaprijed bolji agent.
+
+W.I.S.E. je dodatno izbacio slučajeve gdje CNFDB bilježi gašenje. Naša tri sačuvana
+2018 kandidata nemaju potpunu evidenciju koja dokazuje da se na požaru nije djelovalo;
+za dva incident-crosswalk kandidata postoje parcijalni javni izvještaji o radu/resursima,
+a treći ima samo statusne izvještaje. Zato se ti paketi mogu koristiti za dijagnostiku
+ulaza, ali ne prolaze strogi “neugašeni požar” uslov za čist no-action replay.
 
 ### 3. Dogrib: stvarni slučaj direktno u Cell2Fire
 
