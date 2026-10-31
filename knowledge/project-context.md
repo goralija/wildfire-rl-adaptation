@@ -42,8 +42,9 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
   target-blind shortlist, koji još nema svoj fuel audit.
   Novi input audit mjerio je samo tri materijalizovana slučaja: sve tri 20×20/100 m
   terrain mape su poravnate i kompletne; 17 slučajeva još nemaju paket. 2014b nema
-  pixel-level cutoff dokaz, 2019 CanFG je razvojni i NBAC-zasnovan, a suppression je
-  unknown za sve. [Fuel QC](../docs/research/CFSDS_TRAIN_QC.md) i
+  pixel-level cutoff dokaz, 2019 CanFG je razvojni i NBAC-zasnovan. Saved case manifests
+  retain suppression `unknown` because the incident/action join is incomplete.
+  [Fuel QC](../docs/research/CFSDS_TRAIN_QC.md) i
   [input/provenance QC](../docs/research/CFSDS_TRAIN_INPUT_QC.md).
 - Novi FBP fuel source review našao je CWFIS site-wide Open Government Licence - Canada
   uz atribuciju, ali v2014b i dalje nema cutoff za NFDB/NBAC burn scars. Službeni 2018
@@ -54,10 +55,15 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
   ali CSV endpoint vratio je HTTP 403 i nema event join-a. [Audit](../docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md),
   [ADR-024](../docs/specs/DECISION_RECORDS.md#adr-024), [ADR-026](../docs/specs/DECISION_RECORDS.md#adr-026).
 - Službeni BC historical perimeter servis geometrijski povezuje target-centroid tri
-  spremljena 2018 TRAIN slučaja s kandidatima N12395, C11937 i N12413. To daje incident
-  ID-jeve za traženje BC operativnih zapisa, ali nema crew/action historiju; suppression
-  ostaje unknown. [Crosswalk receipt](../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json),
-  [ADR-027](../docs/specs/DECISION_RECORDS.md#adr-027).
+  spremljena 2018 TRAIN slučaja s kandidatima N12395, C11937 i N12413. Follow-up javni
+  izvještaji dokumentuju containment-line rad na cilj-dan Coal Creeka i paljenje/resurse
+  Lost Dog Complexa dan prije drugog cilja; za C11937 je pronađen next-day status, ne
+  dnevnik akcija. Zbog kandidatskog incident-spoja i nepotpunih snapshot izvještaja case
+  manifests zadržavaju `suppression_status=unknown`; nema ćelijskog action-inputa.
+  [Crosswalk](../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json),
+  [operational evidence](../reports/real-fire-data/cfsds-train-bc-operational-evidence.json),
+  [ADR-027](../docs/specs/DECISION_RECORDS.md#adr-027) and
+  [ADR-028](../docs/specs/DECISION_RECORDS.md#adr-028).
 - TRAIN-only fuel-vintage mask proof obrađuje samo `2018_747`: `arrival_day < target_doy`
   bira 881 prethodno spaljenu ćeliju u rasteru i isključuje 19 target ćelija; unit test
   provjerava i budući dan n+1. Godišnja mapa nije generisana jer 2014b cutoff i succession

@@ -611,3 +611,30 @@ source register, input QC, status, backlog, handoff, navigation and project cont
 FireCase, simulator replay, training or heldout inspection occurred. Next, verify these
 incident candidates against BC records and search for any operational suppression history;
 resolve the fuel cutoff and DEM/weather provenance before replay.
+
+## 2026-10-31 — TASK-015 BC operational-record follow-up
+
+Followed only the three saved TRAIN candidate incidents from the perimeter crosswalk.
+An August 12 local public update relaying BC Wildfire Service information reports
+containment-line construction at Coal Creek (N12395), with five heavy-equipment units and
+one helicopter; the date matches `2018_1770`'s CFSDS target day. An August 16 public
+recap describes a planned ignition and complex-level resources at Lost Dog Complex
+(candidate N12413) on August 15, one day before `2018_747`'s target. An August 18 update
+adds a next-day complex-level resource snapshot. None of these reports provides full
+dispatch/action logs or per-cell treatment footprints.
+
+For North Baezaeko (candidate C11937), the official EMBC PECC situation report dated
+August 16 reports an estimated 2,500 ha and 0% contained but no crew/tactic details for
+the August 15 target. This status does not imply that no suppression occurred. The BC
+Wildfire season summary independently records C11937 as discovered August 1, lightning-caused,
+and 13,433.2 ha at season end.
+
+Because the incident match is spatial/date-based rather than a shared event key, and the
+public operational reports are partial snapshots, all saved case-manifest suppression
+labels stay `unknown`. Dated report facts and target offsets are normalized in
+[`cfsds-train-bc-operational-evidence.json`](../reports/real-fire-data/cfsds-train-bc-operational-evidence.json).
+Updated [S-045–S-047](research/SOURCES.md), [EXP-018](research/EXPERIMENT_LOG.md#exp-018--train-only-bc-operational-record-search-2026-10-31),
+[ADR-028](specs/DECISION_RECORDS.md#adr-028), input QC, handoff, status, backlog, project
+context, and indexes. No FireCase, replay, calibration, benchmark, training, or heldout
+inspection occurred. Next continue the event-keyed record search; separately resolve the
+fuel vintage and complete DEM/weather provenance before a preregistered no-action gate.

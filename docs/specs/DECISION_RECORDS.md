@@ -698,3 +698,33 @@ Evidence: [crosswalk receipt](../../reports/real-fire-data/cfsds-train-bc-perime
 [input QC](../research/CFSDS_TRAIN_INPUT_QC.md),
 [source register S-044](../research/SOURCES.md),
 [BC historical perimeter layer](https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_land_and_natural_resource/MapServer/6).
+
+## ADR-028 — record partial BC operational evidence without promoting suppression labels, recorded 2026-10-31
+
+A TRAIN-only search of public BC operational reporting followed the three candidate
+incident numbers from ADR-027. A contemporaneous August 12 report relaying BC Wildfire
+Service information documents containment-line work, five heavy-equipment units and
+one helicopter at candidate Coal Creek fire N12395 on the `2018_1770` target date.
+Reports for the Lost Dog Complex candidate N12413 describe a planned ignition and
+complex-level resources on August 15, one day before the `2018_747` target; later
+complex-level staffing/equipment is reported for August 17. For candidate North
+Baezaeko C11937, the official August 16 PECC snapshot gives 2,500 ha and 0% contained,
+but no crews or actions. That status does not prove suppression was absent.
+
+The BC IDs are still spatial/date candidates without a shared CFSDS key. Local public
+updates are snapshots, not a machine-readable dispatch log; complex-level resources
+cannot be assigned to a single fire without evidence. **Decision:** preserve all saved
+case-manifest suppression labels as `unknown`; record the dated observations separately.
+Do not convert reported totals into simulator actions, cell-level treatment masks, or
+proof of an action-free target. Observed growth where suppression is documented cannot
+be treated as a direct no-action counterfactual. Continue searching for event-keyed
+operational records and retain the limitations if none are available.
+
+No FireCase, replay, calibration, benchmark, training, or heldout inspection occurred.
+The input and fuel-vintage gates remain open.
+
+Evidence: [operational evidence receipt](../../reports/real-fire-data/cfsds-train-bc-operational-evidence.json),
+[input QC](../research/CFSDS_TRAIN_INPUT_QC.md),
+[source register S-045–S-047](../research/SOURCES.md),
+[BC Wildfire season summary](https://www2.gov.bc.ca/gov/content/safety/wildfire-status/about-bcws/wildfire-history/wildfire-season-summary),
+[PECC Situation Report package](https://docs.openinfo.gov.bc.ca/Response_Package_PSS-2018-86747.pdf).

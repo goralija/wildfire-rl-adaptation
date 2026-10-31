@@ -519,3 +519,34 @@ replay, benchmark or training was produced.
 Evidence: [ADR-027](../specs/DECISION_RECORDS.md#adr-027),
 [source register S-044](SOURCES.md),
 [BC Wildfire historical perimeter layer](https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_land_and_natural_resource/MapServer/6).
+
+## EXP-018 — TRAIN-only BC operational-record search, 2026-10-31
+
+Followed only the three saved 2018 TRAIN perimeter candidates (N12395, C11937 and
+N12413). Contemporaneous public reporting relaying BC Wildfire Service information
+documents containment-line work with five heavy-equipment units and one helicopter at
+Coal Creek (N12395) on the `2018_1770` target date, August 12. An August 14 update adds
+11 firefighters, one helicopter and five equipment units as a later snapshot.
+
+For Lost Dog Complex (candidate N12413), an August 16 local recap explicitly covers
+August 15 and reports a successful planned ignition, 54 firefighters, two helicopters
+and six heavy-equipment units associated with the complex. An August 18 update reports
+45 firefighters, three helicopters and four equipment units on August 17. The reports
+bracket the `2018_747` target date (August 16), but do not give a complete target-day
+timeline or allocate all complex-level resources exclusively to N12413.
+
+The official EMBC PECC Situation Report #10 (August 16 snapshot) lists North Baezaeko
+(C11937) at 2,500 ha and 0% contained. It supplies no crew/action details for the
+`2018_241` target date (August 15). Its 0% containment status cannot be read as no
+suppression. The BC Wildfire season summary independently identifies C11937 as a
+lightning-caused fire discovered August 1, with final season size 13,433.2 ha.
+
+These are candidate-incident records without a shared CFSDS key. Two cases now have
+dated public evidence of suppression activity on or adjacent to the target; one still
+has only next-day status evidence. The saved case-manifest suppression labels remain
+`unknown`, because none of these sources supplies a complete event-keyed daily action
+table. No action was translated to simulator cells or used to train/calibrate a policy.
+No replay, FireCase build, fuel-map generation, training, or validation/test inspection
+was done. See the [operational evidence receipt](../../reports/real-fire-data/cfsds-train-bc-operational-evidence.json),
+[input QC](CFSDS_TRAIN_INPUT_QC.md), [ADR-028](../specs/DECISION_RECORDS.md#adr-028),
+and [sources S-045–S-047](SOURCES.md).

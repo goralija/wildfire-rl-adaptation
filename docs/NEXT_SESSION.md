@@ -56,8 +56,11 @@ fine-tuning prije prihvatljivih train ulaza, replay gatea i zamrznutog heldout s
 - Naknadna provjera službenih BC historical perimeter poligona našla je po jedan
   2018 kandidat za svaki od tri spremljena cilja: `2018_1770` → N12395,
   `2018_241` → C11937, `2018_747` → N12413. To su geometrijski crosswalk kandidati,
-  bez dnevnih resursa ili akcija gašenja; suppression ostaje unknown. Receipt je
-  `reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json`.
+  ne zajednički ID join. Operativni follow-up našao je javni izvještaj o containment-line
+  radu na Coal Creek na target datum `2018_1770` i o planiranom paljenju/resursima Lost
+  Dog Complexa dan prije targeta `2018_747`. Za C11937 postoji službeni next-day status,
+  ali ne i pronađen dnevnik akcija. Sačuvani case manifesti i dalje imaju suppression
+  `unknown`; detalji su u `reports/real-fire-data/cfsds-train-bc-operational-evidence.json`.
 - TASK-015 NF-scar importer/cumulative-damage contract je implementiran i provjeren na
   izolovanom sintetičkom Sub20 C++ rolloutu; tri neispravna slučaja se odbijaju.
   Ovo ne otključava annual mapu ili CFSDS builder. Vidi ADR-025 i versioned receipt.
@@ -74,6 +77,7 @@ Metode i dokazi:
 - [Fuel mask proof](../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
   [NF-scar importer contract receipt](../reports/firehose-verification/nonfuel-initial-scar-contract.json)
 - [BC perimeter crosswalk receipt](../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json) for the three saved 2018 TRAIN cases; no suppression fields
+- [BC operational evidence receipt](../reports/real-fire-data/cfsds-train-bc-operational-evidence.json) for dated activity/status reports on the three BC candidate incidents; partial public evidence, not a full daily resource log
 - [TASK-004c adapter/runtime receipt](../reports/firehose-verification/task004c-adapter-smoke.json)
 - [No-action dijagnostika](research/CFSDS_NO_ACTION_DIAGNOSIS.md)
 
@@ -83,12 +87,12 @@ Metode i dokazi:
    vintage unresolved; provjeri javno prepisanu W.I.S.E. Figure 2 prema izvornom
    v20191114 artifactu i utvrdi računanje starosti/specijalne klase. Ne generiši godišnju
    mapu dok ovo nije riješeno.
-2. Za tri spremljena TRAIN slučaja pokušaj pronaći BC operativne/suppression zapise preko
-   kandidatskih ID-jeva N12395, C11937 i N12413; provjeri identitet preko fire year, date,
-   target chronology i perimeter prije ikakvog statusa. BC perimeter je samo identifikator,
-   ne evidencija gašenja. Za ostale TRAIN kandidate odredi provinciju pa traži nadležni
-   izvor; Alberta CSV/dictionary još treba dohvatiti službenim putem nakon HTTP 403.
-   Fire-level resursi nisu dnevni plan, a bez dokaza ostavi status `unknown`.
+2. Nastavi TRAIN-only BC suppression search: pribavi event-keyed dnevne zapise za N12395,
+   C11937 i N12413 ako su javno dostupni; sadašnji izvještaji za Coal Creek/Lost Dog su
+   snapshots i kandidatski join, a C11937 nema pronađene dnevne akcije. Za ostale TRAIN
+   slučajeve odredi provinciju pa traži nadležni izvor; Alberta CSV/dictionary još treba
+   dohvatiti službenim putem nakon HTTP 403. Fire-level resursi nisu dnevni plan, a bez
+   dokaza ostavi status `unknown`.
 3. Za prihvatljive TRAIN slučajeve kompletiraj DEM tile/version/hash i zabilježi tačan
    weather query, traženu i vraćenu lokaciju, model/polja/jedinice/timezone/raw hash.
    Tri sačuvana FireCase paketa su target-aware i njihove weather request lokacije nisu

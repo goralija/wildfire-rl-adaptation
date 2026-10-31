@@ -7,6 +7,7 @@ sources:
 - resource: /reports/real-fire-data/cfsds-train-spatial-feasibility.json
 - resource: /reports/real-fire-data/cfsds-train-full-day-pair-screen.json
 - resource: /reports/firehose-verification/nonfuel-initial-scar-contract.json
+- resource: /reports/real-fire-data/cfsds-train-bc-operational-evidence.json
 - resource: /docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md
 - resource: /docs/WORK_LOG.md
 ---
@@ -423,3 +424,18 @@ suppression remains `unknown`. Exact response bodies and hashes are in the
 [crosswalk receipt](../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json);
 the decision and query method are recorded in [ADR-027](specs/DECISION_RECORDS.md#adr-027)
 and [EXP-017](research/EXPERIMENT_LOG.md#exp-017--train-only-bc-historical-perimeter-crosswalk-2026-10-31).
+
+## TRAIN BC operational-record follow-up — 2026-10-31
+
+For the three saved TRAIN cases, the official historical-perimeter layer gave candidate
+incident numbers N12395, C11937 and N12413. Follow-up public reporting documents
+containment-line work and helicopter/heavy-equipment support at Coal Creek (N12395) on
+the `2018_1770` target date; Lost Dog Complex (N12413) had a reported planned ignition
+and complex-level resources one day before `2018_747`'s target. For North Baezaeko
+(C11937), the official August 16 report gives 2,500 ha and 0% contained, but no daily
+crew/action schedule. These sources are partial and the CFSDS-to-BC incident match has
+no shared event key, so saved case manifests remain `suppression_status=unknown`.
+Receipt: [dated operational evidence](../reports/real-fire-data/cfsds-train-bc-operational-evidence.json).
+No replay, FireCase rebuild, training or heldout inspection was done. The environment
+is still **not research-ready**; fuel vintage, candidate-level DEM/weather provenance,
+domain fitness and the no-action gate remain open.

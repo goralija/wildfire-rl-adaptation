@@ -90,11 +90,20 @@ base-layer notes identify an Agriculture Canada data-sharing agreement and kNN l
 available on request [S-041]. CNFDB separately requires its End-User Agreement; no
 agreement was accepted [S-031 through S-036].
 
-Suppression/action evidence remains unknown for all 20 candidates: no provincial
-suppression/action record has been joined. Three saved cases have candidate BC perimeter
-IDs from a separate spatial crosswalk [S-044], but no resource/action history. CNFDB provides agency-contributed fire
-locations/perimeters, but its public documentation warns that records are incomplete
-and variable in quality; access requires an End-User Agreement [S-036].
+The suppression/action join is still incomplete across the 20 TRAIN candidates. A
+follow-up review of public BC records found dated operational reporting for two of the
+three saved-case incident candidates: Coal Creek (N12395) had containment-line work,
+heavy equipment and a helicopter reported on the `2018_1770` target date; Lost Dog
+Complex (N12413) had a planned ignition and complex-level resources reported one day
+before the `2018_747` target. For North Baezaeko (C11937), the official report one day
+after the `2018_241` target gives size and 0% containment, but no crew/action schedule.
+The spatial crosswalk is still a candidate join without a shared CFSDS/BC event key, and
+the public reports do not give complete per-fire timelines. Keep the saved manifests'
+`suppression_status` as `unknown` pending an event-keyed record. Details and date offsets
+are in the [BC operational evidence receipt](../../reports/real-fire-data/cfsds-train-bc-operational-evidence.json)
+[S-045–S-047]. CNFDB provides agency-contributed fire locations/perimeters, but its
+public documentation warns that records are incomplete and variable in quality; access
+requires an End-User Agreement [S-036].
 
 A useful new lead is Alberta's official 2006–2025 fire-level dataset. Its catalogue says
 it includes staffing and physical resources used to suppress each fire, as well as
@@ -120,12 +129,15 @@ identify incidents, never used as simulator input or to choose a case. A compact
 preserves the exact query fields, local manifest hashes and response hashes:
 [BC perimeter crosswalk](../../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json).
 
-The three saved cases therefore need BC operational/suppression records; Alberta's
-dataset may apply to other TRAIN candidates after their jurisdiction is matched. Keep
-suppression status `unknown` for all 20 candidates until event-level evidence is joined.
-Absence of a joined record is not proof of no suppression. The W.I.S.E. paper reports a
-CNFDB-based suppressed-fire filter, but this project's matching and suppression evidence
-are not equivalent [S-037].
+Do not treat the saved cases' observed growth as action-free where suppression may have
+occurred. The two public reports with dated activity help explain why a no-action replay
+is not a reconstruction of the observed event; they do not provide cell-level treatments
+or complete resource timelines. A complete, event-keyed log could support response-aware
+stratification, but would not provide the untreated counterfactual. Alberta's dataset
+may apply to other TRAIN candidates after their jurisdiction is matched. Do not infer
+`no suppression` from missing records; the W.I.S.E. paper's CNFDB-based suppressed-fire
+filter is not equivalent to this project's current matching and suppression evidence
+[S-037].
 
 ## Fuel-vintage research and leakage control
 

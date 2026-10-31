@@ -1,5 +1,12 @@
 # Promjene baze znanja
 
+## 2026-10-31: TRAIN-only BC operational evidence follow-up
+
+- Za kandidatski BC incident N12395, Coal Creek, pronađen je javni izvještaj koji za 12. august navodi rad na containment linijama, pet komada teške mehanizacije i helikopter; taj datum se poklapa sa target datumom CFSDS `2018_1770`.
+- Za N12413 / Lost Dog Complex izvještaji opisuju planirano paljenje i resurse na kompleksu dan prije `2018_747` targeta, te još jedan resursni snapshot narednog dana. Ne raspoređujemo te zbirne resurse na pojedinačni incident ili ćelije.
+- Za C11937 / North Baezaeko nađen je službeni 16. august status od 2.500 ha i 0% contained, ali ne i akcioni/crew log za 15. august. Sve tri spremljene case manifest oznake ostaju `unknown` dok se ne dobije event-keyed dnevni zapis.
+- Dodani su [mašinski receipt](reports/real-fire-data/cfsds-train-bc-operational-evidence.json), [S-045–S-047](docs/research/SOURCES.md), [EXP-018](docs/research/EXPERIMENT_LOG.md#exp-018--train-only-bc-operational-record-search-2026-10-31) i [ADR-028](docs/specs/DECISION_RECORDS.md#adr-028). Nema novog FireCase/replaya/treninga/heldout pregleda; `research_ready=false`.
+
 ## 2026-10-31: TRAIN-only BC historical perimeter crosswalk
 
 - Službeni BCWS poligoni vraćaju po jedan 2018 incident za svaki od tri sačuvana target centroids: N12395, C11937 i N12413. To su prostorno/godinski kandidati, ne shared-key join.
