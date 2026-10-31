@@ -1,0 +1,207 @@
+{
+  "case_table": {
+    "columns": [
+      "event_id",
+      "year",
+      "input_doy",
+      "target_doy",
+      "domain",
+      "target_observation_status",
+      "target_pixels_full_raster",
+      "target_adjacent_pixels_in_crop",
+      "input_fireday_fuel_status",
+      "input_excluded_native_pixels",
+      "input_excluded_model_majority_cells",
+      "input_excluded_fractional_area_ha",
+      "target_fireday_fuel_status",
+      "model_grid_pair_valid",
+      "target_excluded_native_pixels",
+      "target_excluded_model_majority_cells",
+      "target_excluded_fractional_area_ha",
+      "model_grid_front_edge_cells",
+      "model_grid_target_edge_cells",
+      "error"
+    ],
+    "file": "cfsds-full-train-fuel-overlay.csv",
+    "rows": 1301,
+    "sha256": "0325cdcadd2eebdcb9a4cbcc4868d544e369588ff1c6e8ff0868d827b052107c"
+  },
+  "environment": {
+    "gdal": "3.10.3",
+    "numpy": "2.5.4",
+    "pandas": "3.1.0",
+    "python": "3.12.4",
+    "rasterio": "1.4.4"
+  },
+  "generated_at_utc": "2026-10-31T13:05:54.442986+00:00",
+  "limitations": [
+    "This screen uses the existing 2014b map to test spatial class overlap only. It does not construct annual fuel maps or establish that 2014b represents the event year.",
+    "The full-screen CSV's day and window selection is target independent, but target masks are inspected after selection as diagnostics.",
+    "CFSDS day-of-burning labels are interpolated daily observations, not hourly truth or suppression records.",
+    "A passing class overlay is not a simulator case pass and cannot be used as evidence that an RL agent would reduce real-world damage.",
+    "No validation/test source, Firegrowth group table, simulator, benchmark, or training run was opened/performed."
+  ],
+  "method": {
+    "domain": {
+      "cell_size_m": 100,
+      "cols": 20,
+      "id": "grid20_cell100m",
+      "rows": 20
+    },
+    "fire_mask_rule": "input scar and safe-interior day n-1 front use derive_pre_target_state_masks and read only days before n; adjacent day n target is built separately for post-selection outcome diagnostics; disconnected target pixels are counted separately",
+    "fuel_resampling": "nearest-neighbour categorical lookup on native 90 m crop and 20x20/100 m model grid",
+    "native_window_shape_rc": [
+      23,
+      23
+    ],
+    "pair_and_window_source": "All rows from the pinned target-independent full-screen CSV; no event/day selection was changed.",
+    "spatial_class_gate": "Any excluded/unmapped fuel under a native observed pixel or model majority cell fails; sub-cell fractional overlap is separately marked review.",
+    "status_meaning": {
+      "FAIL_FUEL_CLASS_OVERLAP": "One or more observed fire pixels or model majority cells overlap water, nonfuel, ambiguous, or unmapped source fuel.",
+      "NOT_AUDITED_NO_WINDOW": "The fixed target-blind screen could not place the existing 20x20/100 m domain.",
+      "NO_ADJACENT_TARGET_MASK_IN_CROP": "No day-n pixel adjacent to the day-(n-1) footprint was observed inside this crop; this does not mean the full event had no target-day pixels.",
+      "PASS_FUEL_CLASS_OVERLAY_ONLY": "No excluded/unmapped class overlap under the audited masks; does not prove map age, historical correctness, fire-behaviour validity, or case eligibility.",
+      "REVIEW_SUBCELL_FUEL_OVERLAP": "No native/majority failure, but area-weighted fire mask overlaps excluded fuel in model sub-cells."
+    }
+  },
+  "provenance": {
+    "audit_script_sha256": "ac6af3d62a6071a6380472224d91eb186218b32b4a00beb9d5863fcded238395",
+    "cell2fire_lookup": "external/firehose/data/Sub20x20/fbp_lookup_table.csv",
+    "cell2fire_lookup_sha256": "9ff5b23cbff4b5dff8595c9d37885da359634a80671ae56ce8e0d30396be7ea2",
+    "cfsds_annual_raster_zip_sha256": {
+      "2014": "5767d45c58cffe8a53815e41facef1389f27c5bc66e74dab9eea61395fc3f4a8",
+      "2015": "7afe47aa29f17a551d8825d676a09d900f88c6450e4e42c49b5ae809d79241c6",
+      "2016": "92b650765675cac90e38db3ade3c194fc2e29e7bb00d1c4fff48ee572339e0a3",
+      "2017": "2c8d35c8018f34900abcfe241f0035cd7c7efa939171058e06e43efe972de959",
+      "2018": "0b31797c19fe705a890eb19ebc35827356f15bc3d83666ad614e0e1dc0518e3f"
+    },
+    "fuel_map": {
+      "crs": "PROJCS[\"Canada_Lambert_Conformal_Conic\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101004,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Lambert_Conformal_Conic_2SP\"],PARAMETER[\"latitude_of_origin\",49],PARAMETER[\"central_meridian\",-95],PARAMETER[\"standard_parallel_1\",49],PARAMETER[\"standard_parallel_2\",77],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+      "dtype": "uint8",
+      "mapping_by_source_code": {
+        "101": {
+          "simulator_fuel_type": "C-1",
+          "simulator_grid_value": 1,
+          "source_label": "C1"
+        },
+        "102": {
+          "simulator_fuel_type": "C-2",
+          "simulator_grid_value": 2,
+          "source_label": "C2"
+        },
+        "103": {
+          "simulator_fuel_type": "C-3",
+          "simulator_grid_value": 3,
+          "source_label": "C3"
+        },
+        "105": {
+          "simulator_fuel_type": "C-5",
+          "simulator_grid_value": 5,
+          "source_label": "C5"
+        },
+        "107": {
+          "simulator_fuel_type": "C-7",
+          "simulator_grid_value": 7,
+          "source_label": "C7"
+        },
+        "108": {
+          "simulator_fuel_type": "D-1",
+          "simulator_grid_value": 11,
+          "source_label": "D1"
+        },
+        "109": {
+          "simulator_fuel_type": "M-1",
+          "simulator_grid_value": 40,
+          "source_label": "M1"
+        },
+        "116": {
+          "simulator_fuel_type": "O-1a",
+          "simulator_grid_value": 31,
+          "source_label": "O1a"
+        },
+        "118": {
+          "simulator_fuel_type": "Non-fuel",
+          "simulator_grid_value": 102,
+          "source_label": "Water"
+        },
+        "119": {
+          "simulator_fuel_type": "Non-fuel",
+          "simulator_grid_value": 101,
+          "source_label": "Non-fuel"
+        },
+        "120": {
+          "simulator_fuel_type": "Non-fuel",
+          "simulator_grid_value": 101,
+          "source_label": "Wetland"
+        },
+        "121": {
+          "simulator_fuel_type": "Non-fuel",
+          "simulator_grid_value": 101,
+          "source_label": "Urban"
+        },
+        "122": {
+          "simulator_fuel_type": "Non-fuel",
+          "simulator_grid_value": 105,
+          "source_label": "Veg non-fuel"
+        }
+      },
+      "member": "nat_fbpfuels_2014b.tif",
+      "nodata": 0.0,
+      "raster_attribute_table_member": "nat_fbpfuels_2014b.tif.vat.dbf",
+      "resolution_m": [
+        250.0,
+        250.0
+      ],
+      "shape": [
+        18233,
+        21404
+      ]
+    },
+    "fuel_zip": "National_FBP_Fueltypes_version2014b.zip",
+    "fuel_zip_sha256": "8675bbd92d99366e46b6537d5b512017d0982e3a34f97e4bc81fb60b93c29a2b",
+    "full_screen_csv": "reports/real-fire-data/cfsds-train-full-day-pair-screen.csv",
+    "full_screen_csv_sha256": "a609fdc74d12ef078d4c29490e0c7f99a2219408f7928bf716818e466e8d633b",
+    "full_screen_json": "reports/real-fire-data/cfsds-train-full-day-pair-screen.json",
+    "full_screen_json_sha256": "effdf789ace3eb772ff4cb2079006ceb598fc905b2151ec00732fae95a5e32dc"
+  },
+  "purpose": "Fuel-class spatial compatibility diagnostic for every feasible target-blind full-screen TRAIN day pair.",
+  "schema": "cfsds-full-train-fuel-overlay/v1",
+  "scope": {
+    "agent_training_performed": false,
+    "firegrowth_group_tables_opened": false,
+    "fuel_overlay_attempted": 1295,
+    "full_case_or_benchmark_eligible": 0,
+    "full_screen_pair_count": 1301,
+    "pre_target_windows_available": 1295,
+    "simulator_runs_performed": 0,
+    "split": "train only; 2014-2018",
+    "target_day_mapped_somewhere_in_source_raster": 1010,
+    "target_masks_observed_after_pair_selection": 930,
+    "validation_or_test_rasters_opened": false,
+    "window_unavailable_count": 6
+  },
+  "summary": {
+    "cases_eligible_for_full_replay_or_policy_evaluation": 0,
+    "input_fireday_fuel_status_counts": {
+      "FAIL_FUEL_CLASS_OVERLAP": 530,
+      "NOT_AUDITED_NO_WINDOW": 6,
+      "PASS_FUEL_CLASS_OVERLAY_ONLY": 701,
+      "REVIEW_SUBCELL_FUEL_OVERLAP": 64
+    },
+    "model_grid_pairs_valid": 477,
+    "processing_errors": 0,
+    "remaining_blockers": [
+      "v2014b source snapshot/cutoff and per-pixel as-of validity are unresolved",
+      "terrain/weather lineage and event-level suppression evidence are incomplete",
+      "the pre-existing no-action replay gate failed and must be resolved before policy evaluation"
+    ],
+    "target_fireday_fuel_status_counts": {
+      "FAIL_FUEL_CLASS_OVERLAP": 279,
+      "NOT_AUDITED_NO_WINDOW": 6,
+      "NO_ADJACENT_TARGET_MASK_IN_CROP": 365,
+      "PASS_FUEL_CLASS_OVERLAY_ONLY": 583,
+      "REVIEW_SUBCELL_FUEL_OVERLAP": 68
+    },
+    "target_observed_mask_count": 930
+  }
+}
