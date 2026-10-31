@@ -526,3 +526,12 @@ across all five options, and recorded archive/member/code SHA-256 values.
 - Added method/results report, aggregate JSON receipt, and compact 1,301-row domain CSV. Raw data remain ignored. No fuel/terrain/weather audit, FireCase, simulator replay, training, heldout inspection, or benchmark was run.
 - The actual screen CLI completed against local TRAIN ZIPs. No application tests were added or run; `git diff --check` and strict knowledge validation remain handoff checks.
 - See [EXP-013](research/EXPERIMENT_LOG.md#exp-013--full-train-target-independent-cfsds-day-pair-and-domain-screen-2026-10-31), [ADR-023](specs/DECISION_RECORDS.md#adr-023), and [NEXT_SESSION](NEXT_SESSION.md).
+
+## 2026-10-31: TRAIN-only FBP fuel-vintage source review
+
+- Reviewed CWFIS v2014b/v20191114 metadata, official 2024 and current-year 2026 product descriptions, the CWFIS site-wide download licence, official 2018 baseline fuel-class/base-layer rules, and the publisher text of the W.I.S.E. paper.
+- Confirmed v2014b's metadata lists 2011 land cover and NFDB/NBAC use to identify burn scars, but gives no date/cutoff for that burn-history layer. The current 2026 annual pre-season update convention does not establish historical v2014b timing. v20191114 uses 2017 kNN and NBAC and is not adopted directly for 2014–2018 TRAIN.
+- Distinguished baseline FBP classification rules from the separate post-fire succession tree cited by W.I.S.E. The public 2018 PDFs document the former, not the latter. W.I.S.E. article text does not enumerate the tree branches; article data are available on reasonable request.
+- Corrected the earlier file-level license finding: the CWFIS download-site notice states Open Government Licence - Canada and requires CFS/CWFIS attribution. Separately sourced component layer terms remain to be checked if used.
+- Decision: keep v2014b solely for reproducing saved pilots; no new annual map is safe to claim, and none was generated. Added [fuel-vintage review](research/CFSDS_FUEL_VINTAGE_REVIEW.md), source entries S-039–S-041, EXP-014, ADR-024, and updated status/handoff/index.
+- No raster download, FireCase conversion, replay, training, or validation/test inspection occurred. Next implementation task: define and test the importer/cumulative-damage behavior for a historical scar on a non-fuel cell; continue sourcing cutoff and succession evidence before map generation.

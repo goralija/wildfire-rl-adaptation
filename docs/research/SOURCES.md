@@ -115,16 +115,19 @@ konačne tvrdnje; nije provedena sistematska literature review.
 - S-031: [CWFIS archived National FBP Fuel Types v2014b](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/archive/)
   and [official metadata](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/archive/nat_fbpfuels_2014b_metadata.pdf),
   reviewed 2026-10-31. The archive is 250 m; metadata lists 2011 land cover, CanFI2000,
-  ecological inputs, and NFDB/NBAC use. It does not give a per-pixel acquisition date or
-  a clear cutoff for burn records, so its version label alone cannot prove as-of-event
-  safety for every 2014–2018 target. No license statement was identified in the
-  reviewed archive listing or metadata; confirm reuse/redistribution terms with NRCan.
+  ecological inputs, and NFDB/NBAC use to identify burn scars. It does not give a
+  per-pixel acquisition date or a clear cutoff for burn records, so its version label
+  alone cannot prove as-of-event safety for every 2014–2018 target. The general CWFIS
+  download licence says Open Government Licence - Canada and specifies attribution
+  [S-039]; no product-specific exception was found in the reviewed listing/metadata.
 - S-032: [CWFIS development directory for Canadian Forest FBP Fuel Types](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/)
   and [v20191114 metadata](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/Canadian_Forest_FBP_Fuel_Types_Metadata_v20191114.pdf),
   reviewed 2026-10-31. The 250 m archive is listed at about 2 GB in a development
   directory; metadata lists kNN Forest Inventory (2017) and NBAC. The raw raster was not
-  downloaded or selected as the 2014–2018 event baseline. No license statement was
-  identified in the reviewed listing/metadata; confirm terms with NRCan before use.
+  downloaded or selected as the 2014–2018 event baseline; metadata does not state the
+  per-pixel NBAC cutoff. The general CWFIS download licence says Open Government Licence
+  - Canada and specifies attribution [S-039]; no product-specific exception was found in
+  the reviewed listing/metadata.
 - S-033: [Open Government Portal, CFFDRS FBP Fuel Types 2024, 30 m](https://open.canada.ca/data/dataset/4e66dd2f-5cd0-42fd-b82c-a430044b31de),
   reviewed 2026-10-31. Official metadata gives 2020-08-01 to 2024-04-01 coverage and lists
   SCANFI, ecozones, and NBAC inputs. This postdates the current train targets. The
@@ -163,12 +166,34 @@ konačne tvrdnje; nije provedena sistematska literature review.
   project; its succession tree must be transcribed/validated, and its target-aware front
   must not be copied into an unbiased agent benchmark. Suppression filtering is reported,
   but the exact event-action linkage and transfer to our simulator remain unverified.
+  The publisher's data-availability statement says study data are available from the
+  corresponding author upon reasonable request; the article does not provide a public
+  code/data archive. The paper identifies a succession decision-tree figure, but the
+  text does not enumerate its branches.
 - S-038: [CWFIS CanFG fuel-layer-with-burn-scars legend](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/FBP_FuelLayer_wBurnScars.pdf),
   and [official v20191114 metadata](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/Canadian_Forest_FBP_Fuel_Types_Metadata_v20191114.pdf),
   reviewed 2026-10-31. The one-page PDF lists fuel classes (including non-fuel, water,
   and urban) but does not expose the burn-scar succession decision tree. The metadata
   confirms NBAC was used to reassign fuel types in burned areas and lists supporting
   fuel-layer decision documentation; it does not give per-pixel temporal cutoffs.
+- S-039: [CWFIS download-site licence](https://cwfis.cfs.nrcan.gc.ca/downloads/licence.txt),
+  reviewed 2026-10-31. The site-wide notice states the Open Government Licence - Canada
+  applies to downloaded data and gives the required Canadian Forest Service/CWFIS
+  attribution. This resolves the prior finding that no licence statement was visible in
+  individual v2014b/v20191114 files; it does not replace checking for product-specific
+  exceptions or licences on separately sourced input layers.
+- S-040: [Canadian National FBP Fuel Type Layer - Current Year, Open Government Portal](https://open.canada.ca/data/en/dataset/851e6a27-a250-41e6-9cd0-d7ff96455dd6),
+  reviewed 2026-10-31. The official 2026 product description says national fuel maps are
+  updated before fire season with burned-area and other data from the previous year and
+  are scheduled for publication by 30 April. This is evidence for the current product's
+  update convention, not proof of the historical v2014b map's exact cutoff.
+- S-041: [FBP Fuel Layer Decision Rules](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/FBP_Fuel_Layer_Decision_Rules.pdf)
+  and [FBP Fuel Layer Base Layers](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/FBP_Fuel_Layer_Base_Layers.pdf),
+  reviewed 2026-10-31. These official 2018 documents describe deriving base FBP classes
+  from inventory, species, land-cover and ecological layers. They are not the post-fire
+  burn-scar succession crosswalk cited as a separate figure in S-037. The base-layer
+  document notes that kNN NFI v1 layers are available on request and some Agriculture
+  Canada land-cover inputs were under a data-sharing agreement.
 
 [REAL_FIRE_DATASETS](REAL_FIRE_DATASETS.md) čuva preporuku, obim uzorka i nedostatke;
 reports/real-fire-data/ čuva download SHA256 i provjere stvarno preuzetih fajlova.

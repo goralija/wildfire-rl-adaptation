@@ -396,7 +396,7 @@ partial; the no-action gate remains failed. No simulator replay, calibration,
 fine-tuning, benchmark, or heldout outcome inspection was performed for this audit.
 Evidence: [train input QC method](../research/CFSDS_TRAIN_INPUT_QC.md),
 [machine receipt](../../reports/real-fire-data/cfsds-train-input-qc.json),
-[sources S-031–S-037](../research/SOURCES.md#s-031).
+[sources S-031–S-037](../research/SOURCES.md).
 
 ## ADR-020 — block annual fuel reclassification until provenance and scar semantics are proven, recorded 2026-10-31
 
@@ -436,7 +436,7 @@ Evidence: [TRAIN mask proof](../../reports/real-fire-data/cfsds-train-fuel-vinta
 [importer fixture](../../docker/firehose/nonfuel_initial_scar_fixture.csv),
 [verification method](../../docker/firehose/verify_nonfuel_initial_scar.py),
 [TASK-015 input QC](../research/CFSDS_TRAIN_INPUT_QC.md),
-[sources S-031–S-038](../research/SOURCES.md#s-031),
+[sources S-031–S-038](../research/SOURCES.md),
 [W.I.S.E. paper](https://doi.org/10.1071/WF26072).
 
 ## ADR-021 — make CFSDS crop and initial state target-blind, recorded 2026-10-31
@@ -557,3 +557,35 @@ Evidence: [full method/results](../research/CFSDS_FULL_DAY_PAIR_SCREEN.md),
 [scanner](../../scripts/audit_cfsds_train_full_day_pairs.py),
 [aggregate receipt](../../reports/real-fire-data/cfsds-train-full-day-pair-screen.json),
 [per-pair/domain table](../../reports/real-fire-data/cfsds-train-full-day-pair-screen.csv).
+
+## ADR-024 — keep fuel vintage blocked; record CWFIS reuse terms and distinguish base rules from succession, recorded 2026-10-31
+
+The source review followed the all-TRAIN target-independent screen. Official v2014b
+metadata lists 2011 land cover, CanFI2000, ecological inputs, and NFDB/NBAC use to
+identify burn scars, but gives no explicit date/cutoff for those burn records. The
+v20191114 metadata lists 2017 kNN inventory and NBAC reassignment; the 2024 map
+postdates the current TRAIN targets. The official current-year 2026 product describes
+annual pre-season updates incorporating prior-year burned-area data, but this does not
+establish the historical v2014b cutoff. The W.I.S.E. paper describes a separate
+post-fire succession ruleset and same-fire pre-target non-fuel mask.
+
+The official 2018 *FBP Fuel Layer Decision Rules* and *FBP Fuel Layer Base Layers*
+documents describe baseline class assignment from inventory/land-cover inputs; they are
+not the post-fire succession tree cited by the paper. The CWFIS download-site notice
+states Open Government Licence - Canada and requests Canadian Forest Service/CWFIS
+attribution, correcting the earlier file-level-only review that found no licence text.
+Some component inputs have separate availability/terms notes.
+
+**Decision:** retain the saved v2014b-based FireCases for exact reproduction, but do not
+certify v2014b as an as-of-event baseline or use v20191114/2024/2026 directly for new
+2014–2018 cases. Do not generate annual fuel maps until the base-map burn-history cutoff,
+post-fire succession crosswalk, target-time mask, per-cell provenance, and historical
+non-fuel-scar importer contract are resolved. General CWFIS reuse terms are recorded as
+Open Government Licence - Canada with attribution; this does not resolve temporal
+validity or independent component-source terms. No raster was downloaded/generated and
+no FireCase, replay, calibration, benchmark, training, or heldout inspection occurred.
+
+Evidence: [fuel-vintage review](../research/CFSDS_FUEL_VINTAGE_REVIEW.md),
+[input QC](../research/CFSDS_TRAIN_INPUT_QC.md),
+[source register S-031–S-041](../research/SOURCES.md),
+[pre-target mask receipt](../../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json).

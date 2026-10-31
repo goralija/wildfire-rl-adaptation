@@ -6,6 +6,7 @@ sources:
 - resource: /reports/firehose-verification/task004c-adapter-smoke.json
 - resource: /reports/real-fire-data/cfsds-train-spatial-feasibility.json
 - resource: /reports/real-fire-data/cfsds-train-full-day-pair-screen.json
+- resource: /docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md
 - resource: /docs/WORK_LOG.md
 ---
 # Trenutno stanje — 2026-10-31
@@ -333,3 +334,21 @@ Nema godišnje leakage-safe fuel mape, importer non-fuel scar ugovora, potpunog 
 weather/suppression paketa, no-action gate prolaza, nove FireCase konverzije, replaya,
 benchmarka ili treninga. Sljedeće potvrditi vremenski siguran fuel/source ugovor i novi
 target-blind slučajevi; target capture ostaje van izbora. **research_ready=false.**
+
+## TRAIN-only FBP fuel-vintage source review — 2026-10-31
+
+Pregledani su službeni CWFIS v2014b i v20191114 metadata, 2024/2026 fuel-map opisi,
+CWFIS download licence, službeni 2018 FBP baseline-class rules/base-layer PDFs i
+publisher tekst W.I.S.E. rada. v2014b metadata navodi Land Cover 2011 i NFDB/NBAC
+identifikaciju scars, ali ne navodi datum snapshot-a niti vremenski cutoff spaljenih
+poligona. Zato se v2014b zadržava za reprodukciju spremljenih pilota i nije potvrđen kao
+as-of-event input za nove slučajeve. v20191114 ima 2017 kNN/NBAC i nije direktan vintage
+za događaje 2014–2018; 2024/2026 mape takođe nisu TRAIN baseline. Sada je dokumentovano
+da CWFIS download-site licenca navodi Open Government Licence - Canada uz CFS attribution.
+
+Pronađena službena *FBP Fuel Layer Decision Rules* dokumentacija opisuje dodjelu osnovnih
+FBP klasa; nije burn-scar succession stablo iz W.I.S.E. rada. Nije izrađena godišnja mapa,
+preuzet raster, simulator input ili replay. Fuel vintage i succession ostaju blokirani;
+sljedeći nezavisni mali task je ugovor/test za historical `burnt` stanje na `NF` gorivu.
+Detalji: [fuel-vintage audit](research/CFSDS_FUEL_VINTAGE_REVIEW.md), [source register S-031–S-041](research/SOURCES.md),
+[ADR-024](specs/DECISION_RECORDS.md#adr-024).

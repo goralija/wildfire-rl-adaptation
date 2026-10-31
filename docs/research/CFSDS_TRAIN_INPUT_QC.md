@@ -7,6 +7,7 @@ sources:
   - resource: /reports/real-fire-data/cfsds-train-input-qc.json
   - resource: /data/manifests/cfsds-v1_1-pilot-cohort.json
   - resource: /docs/research/SOURCES.md
+  - resource: /docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md
 ---
 # Train-only CFSDS simulator input QC
 
@@ -70,11 +71,13 @@ The official 2024 FBP map and MRDEM portal records list the Open Government Lice
 – Canada. MRDEM also carries a Copernicus-derived component and product-specific
 attribution/limitation notes. Open-Meteo states that API data are CC BY 4.0, while
 free-service conditions (including non-commercial use and rate limits) are a
-separate question. The reviewed CWFIS v2014b and v20191114 directory/metadata files
-did not state a license; do not infer one from the fact that a URL is public. Ask
-NRCan to confirm reuse/redistribution terms before publishing those raster files.
-CNFDB separately requires its End-User Agreement; no agreement was accepted [S-031
-through S-036].
+separate question. The CWFIS download-site notice states that downloaded data are
+under the Open Government Licence - Canada and specifies CFS attribution [S-039].
+No product-specific exception was found in the reviewed v2014b or v20191114 listing
+and metadata. Separately sourced component layers may have their own terms; the 2018
+base-layer notes identify an Agriculture Canada data-sharing agreement and kNN layers
+available on request [S-041]. CNFDB separately requires its End-User Agreement; no
+agreement was accepted [S-031 through S-036].
 
 Suppression/action evidence remains unknown for all 20 candidates. No event-level
 agency action/resource timeline was joined. CNFDB provides agency-contributed
@@ -85,6 +88,13 @@ does not establish that this project has equivalent action data or can reproduce
 that filter [S-037]. Unknown does not mean “unsuppressed.”
 
 ## Fuel-vintage research and leakage control
+
+The focused public-source follow-up is recorded in the
+[TRAIN fuel-vintage review](CFSDS_FUEL_VINTAGE_REVIEW.md). It adds the official CWFIS
+site-wide reuse notice and the public 2018 baseline fuel-class rules/base-layer notes.
+Those rules describe classification into baseline FBP classes; they are not the
+post-fire burn-scar succession crosswalk. The v2014b metadata lists NFDB/NBAC use to
+identify burn scars but does not date that layer's input cutoff.
 
 The previous fuel QC described v2014b as predating every train event. That is too
 strong: the official metadata says its source includes 2011 land cover, CanFI2000,
@@ -113,6 +123,10 @@ rules, then, for a day-n job, reclassify the same fire's perimeters before day n
 non-fuel [S-037]. The rule set's existence is verified, but its exact tree has not
 yet been transcribed and validated for this project's crosswalk. The official
 one-page CanFG-with-burn-scars PDF is a class legend, not that decision tree [S-038].
+The official 2018 FBP classification-rules and base-layers PDFs describe baseline fuel
+assignment, not post-fire succession [S-041]. The publisher states that W.I.S.E. study
+data are available on reasonable request, and the article text does not enumerate the
+succession tree's branches [S-037].
 
 The paper's initial boundary also selects day n-1 cells adjacent to target day n,
 and explicitly acknowledges this uses future perimeter information [S-037]. The
@@ -129,8 +143,13 @@ non-fuel historical scar cells interact with this project's imported scar, activ
 front, and cumulative-damage state.
 
 **Current decision:** keep v2014b only to reproduce the already-saved pilot cases.
-No annual map has been selected as a leakage-safe replacement for new training
-cases. No CFSDS target day was used to tune a map or simulator setting.
+Its 2011 land-cover vintage and version label do not prove the cutoff of the separate
+NFDB/NBAC burn-scar input; the current 2026 pre-season map-update convention cannot be
+assumed for v2014b. The general CWFIS reuse terms are documented as Open Government
+Licence - Canada with attribution, but the post-fire succession tree and per-cell
+lineage remain unresolved. No annual map has been selected as a leakage-safe
+replacement for new training cases. No CFSDS target day was used to tune a map or
+simulator setting. See the [full review](CFSDS_FUEL_VINTAGE_REVIEW.md).
 
 ## Train-only perimeter-mask and importer proof — 2026-10-31
 
@@ -224,8 +243,10 @@ Before new train replay work:
    survives regridding. The current target screen is post-selection diagnosis only, never
    an eligibility/tuning criterion. If the fixed 2×2 km domain is unsuitable, record the
    blocker and justify a separate model-domain decision before replay.
-2. Obtain/verify a safe base-map temporal cutoff and transcribe/validate the v20191114
-   succession tree and fuel crosswalk, including licensing and per-cell provenance.
+2. Continue the source gate: obtain/verify the dated base-map burn-history cutoff and
+   source/validate the v20191114 post-fire succession tree and fuel crosswalk, including
+   per-cell provenance. CWFIS general reuse terms are now documented as Open Government
+   Licence - Canada with attribution; separately sourced layer terms still need review.
 3. Decide/test importer semantics when historical cumulative damage occupies a cell
    whose as-of-event fuel class is non-fuel; the current importer explicitly rejects it.
 4. Only then build a fuel raster for one TRAIN case using the tested pre-target mask.

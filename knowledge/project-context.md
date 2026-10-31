@@ -3,7 +3,7 @@ type: Project Context
 title: Projektni kontekst i stanje istraživanja
 description: Kratki ulaz u cilj, ostvareno, otvorene odluke i prvi naredni posao.
 status: stable
-generated: {by: "process:codex", at: "2026-10-31T09:43:37Z"}
+generated: {by: "process:codex", at: "2026-10-31T10:12:28Z"}
 sources:
   - resource: /docs/STATUS.md
   - resource: /docs/specs/DECISION_RECORDS.md
@@ -45,6 +45,12 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
   pixel-level cutoff dokaz, 2019 CanFG je razvojni i NBAC-zasnovan, a suppression je
   unknown za sve. [Fuel QC](../docs/research/CFSDS_TRAIN_QC.md) i
   [input/provenance QC](../docs/research/CFSDS_TRAIN_INPUT_QC.md).
+- Novi FBP fuel source review našao je CWFIS site-wide Open Government Licence - Canada
+  uz atribuciju, ali v2014b i dalje nema cutoff za NFDB/NBAC burn scars. Službeni 2018
+  fuel-class decision rules opisuju bazno klasifikovanje, ne burn-scar succession stablo
+  iz W.I.S.E. rada. Nema novog godišnjeg map vintagea; 2014b ostaje samo za reprodukciju
+  spremljenih slučajeva. [Audit](../docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md),
+  [ADR-024](../docs/specs/DECISION_RECORDS.md#adr-024).
 - TRAIN-only fuel-vintage mask proof obrađuje samo `2018_747`: `arrival_day < target_doy`
   bira 881 prethodno spaljenu ćeliju u rasteru i isključuje 19 target ćelija; unit test
   provjerava i budući dan n+1. Godišnja mapa nije generisana jer 2014b cutoff i succession
@@ -95,9 +101,11 @@ horizonu. [Receipt i tehnički limiti](../reports/firehose-verification/task004c
 Target-day curenje iz početnog fronta je uklonjeno za crop/initial-state pravilo i
 provjereno na jednom TRAIN paru. Stari 25-pair bounded screen imao je slab target coverage;
 puni target-independent screen sada obuhvata 1.301 paru i nijedan grid nije usvojen.
-Target-independent day-pair i full TRAIN domain screen su završeni. Sljedeće potvrditi
-bazni fuel-map cutoff i v20191114 succession tree, definisati importer semantiku
-historijskog scar-a na non-fuel ćeliji i zatvoriti nedostajuću
+Target-independent day-pair i full TRAIN domain screen su završeni. Source review je
+otkrio nedostatak javnog datiranog cutoffa i razlikovao baseline class rules od post-fire
+succession pravila. Sljedeće definisati/testirati importer semantiku historijskog scar-a
+na non-fuel ćeliji, a paralelno pribaviti autoritativni base-map cutoff i v20191114
+succession tree prije annual mape. Zatvoriti nedostajuću
 terrain/weather/suppression provenance samo na train/calibration događajima. Izmjereni
 input audit trenutno pokriva 3/20 train paketa. Vidi [task handoff](../docs/NEXT_SESSION.md).
 Preliminarni 44 ID-ja i pilot su u

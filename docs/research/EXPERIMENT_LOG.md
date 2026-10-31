@@ -395,3 +395,36 @@ Method: [full screen report](CFSDS_FULL_DAY_PAIR_SCREEN.md); decision:
 [ADR-023](../specs/DECISION_RECORDS.md#adr-023); machine output:
 [JSON](../../reports/real-fire-data/cfsds-train-full-day-pair-screen.json) and
 [CSV](../../reports/real-fire-data/cfsds-train-full-day-pair-screen.csv).
+
+## EXP-014 — TRAIN fuel-vintage public-source review, 2026-10-31
+
+Reviewed official CWFIS archive/development metadata, the current-year 2026 FBP product
+description, the CWFIS download-site licence notice, official 2018 fuel-class/base-layer
+rules PDFs, and the publisher version of the W.I.S.E. paper. Scope was limited to public
+documentation and the 2014–2018 TRAIN fuel-vintage question; validation/test materials
+were not opened.
+
+v2014b metadata documents 2011 land cover, CanFI2000, ecological inputs, and NFDB/NBAC
+use to identify burn scars, but gives no burn-record snapshot date/cutoff. v20191114 uses
+2017 kNN inventory and NBAC reassignment, with no per-pixel cutoff; it is not adopted as
+a direct baseline for 2014–2018. The 2024 map postdates this TRAIN interval. The 2026
+current product's described annual pre-season update convention is useful context but
+does not retroactively establish the v2014b cutoff.
+
+The 2018 official decision-rules/base-layer PDFs describe assignment of baseline FBP
+classes from vegetation/inventory inputs, not the separate post-fire succession tree
+cited by the W.I.S.E. paper. The publisher text points to a succession decision-tree
+figure but does not enumerate its branches; article data are available on reasonable
+request. The site-wide CWFIS licence notice states Open Government Licence - Canada and
+requires Canadian Forest Service/CWFIS attribution; this corrects the prior file-level
+review without resolving separate source-layer terms.
+
+Decision: keep v2014b only for reproducing existing saved pilots. No annual fuel map is
+selected or emitted; the as-of-event burn-history cutoff and exact succession crosswalk
+remain unresolved. Next, the importer contract for a historical scar on a non-fuel cell
+can be specified independently, while the map remains blocked. No raster was downloaded,
+no simulator case/replay or training was run, and no heldout data was inspected.
+
+Method and sources: [fuel-vintage review](CFSDS_FUEL_VINTAGE_REVIEW.md),
+[source register S-031–S-041](SOURCES.md),
+[ADR-024](../specs/DECISION_RECORDS.md#adr-024).
