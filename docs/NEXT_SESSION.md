@@ -53,6 +53,11 @@ fine-tuning prije prihvatljivih train ulaza, replay gatea i zamrznutog heldout s
   Alberta 2006–2025 fire-level suppression dataset je pronađen; direktni CSV download
   endpoint vratio je HTTP 403 pa nijedan događaj nije spojen. DEM/weather lineage je
   nepotpuna, a suppression status za slučajeve ostaje unknown.
+- Naknadna provjera službenih BC historical perimeter poligona našla je po jedan
+  2018 kandidat za svaki od tri spremljena cilja: `2018_1770` → N12395,
+  `2018_241` → C11937, `2018_747` → N12413. To su geometrijski crosswalk kandidati,
+  bez dnevnih resursa ili akcija gašenja; suppression ostaje unknown. Receipt je
+  `reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json`.
 - TASK-015 NF-scar importer/cumulative-damage contract je implementiran i provjeren na
   izolovanom sintetičkom Sub20 C++ rolloutu; tri neispravna slučaja se odbijaju.
   Ovo ne otključava annual mapu ili CFSDS builder. Vidi ADR-025 i versioned receipt.
@@ -68,6 +73,7 @@ Metode i dokazi:
 - [EXP-016 input-lineage audit](research/EXPERIMENT_LOG.md#exp-016--train-fuel-tree-correction-and-external-input-lineage-audit-2026-10-31)
 - [Fuel mask proof](../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
   [NF-scar importer contract receipt](../reports/firehose-verification/nonfuel-initial-scar-contract.json)
+- [BC perimeter crosswalk receipt](../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json) for the three saved 2018 TRAIN cases; no suppression fields
 - [TASK-004c adapter/runtime receipt](../reports/firehose-verification/task004c-adapter-smoke.json)
 - [No-action dijagnostika](research/CFSDS_NO_ACTION_DIAGNOSIS.md)
 
@@ -77,10 +83,12 @@ Metode i dokazi:
    vintage unresolved; provjeri javno prepisanu W.I.S.E. Figure 2 prema izvornom
    v20191114 artifactu i utvrdi računanje starosti/specijalne klase. Ne generiši godišnju
    mapu dok ovo nije riješeno.
-2. Pribavi Alberta CSV/dictionary kroz službeni pristup koji radi nakon HTTP 403, pa
-   pokušaj match samo na TRAIN događajima uz fire number + godinu, datum i geometriju.
-   Alberta evidencija je zbir po požaru, ne dnevni plan gašenja; za BC i granične
-   slučajeve traži odgovarajući provincijski izvor. Bez potvrđenog matcha ostavi `unknown`.
+2. Za tri spremljena TRAIN slučaja pokušaj pronaći BC operativne/suppression zapise preko
+   kandidatskih ID-jeva N12395, C11937 i N12413; provjeri identitet preko fire year, date,
+   target chronology i perimeter prije ikakvog statusa. BC perimeter je samo identifikator,
+   ne evidencija gašenja. Za ostale TRAIN kandidate odredi provinciju pa traži nadležni
+   izvor; Alberta CSV/dictionary još treba dohvatiti službenim putem nakon HTTP 403.
+   Fire-level resursi nisu dnevni plan, a bez dokaza ostavi status `unknown`.
 3. Za prihvatljive TRAIN slučajeve kompletiraj DEM tile/version/hash i zabilježi tačan
    weather query, traženu i vraćenu lokaciju, model/polja/jedinice/timezone/raw hash.
    Tri sačuvana FireCase paketa su target-aware i njihove weather request lokacije nisu

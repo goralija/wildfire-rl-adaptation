@@ -53,6 +53,11 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
   reprodukciju spremljenih slučajeva. Alberta 2006–2025 suppression dataset je pronađen,
   ali CSV endpoint vratio je HTTP 403 i nema event join-a. [Audit](../docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md),
   [ADR-024](../docs/specs/DECISION_RECORDS.md#adr-024), [ADR-026](../docs/specs/DECISION_RECORDS.md#adr-026).
+- Službeni BC historical perimeter servis geometrijski povezuje target-centroid tri
+  spremljena 2018 TRAIN slučaja s kandidatima N12395, C11937 i N12413. To daje incident
+  ID-jeve za traženje BC operativnih zapisa, ali nema crew/action historiju; suppression
+  ostaje unknown. [Crosswalk receipt](../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json),
+  [ADR-027](../docs/specs/DECISION_RECORDS.md#adr-027).
 - TRAIN-only fuel-vintage mask proof obrađuje samo `2018_747`: `arrival_day < target_doy`
   bira 881 prethodno spaljenu ćeliju u rasteru i isključuje 19 target ćelija; unit test
   provjerava i budući dan n+1. Godišnja mapa nije generisana jer 2014b cutoff i succession

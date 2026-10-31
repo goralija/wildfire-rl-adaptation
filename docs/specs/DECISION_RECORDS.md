@@ -665,3 +665,36 @@ Evidence: [fuel-vintage review](../research/CFSDS_FUEL_VINTAGE_REVIEW.md),
 [TRAIN input QC](../research/CFSDS_TRAIN_INPUT_QC.md),
 [source register S-034–S-043](../research/SOURCES.md),
 [Alberta open-data record](https://open.canada.ca/data/en/dataset/a221e7a0-4f46-4be7-9c5a-e29de9a3447e).
+
+## ADR-027 — use BC historical perimeters to identify saved TRAIN incidents, recorded 2026-10-31
+
+The Alberta suppression file was not downloaded after its public CSV endpoint returned
+HTTP 403. To identify the jurisdiction/source needed for the three existing TRAIN pilot
+cases, each case manifest's target-day summary centroid was queried against the official
+BC Wildfire historical-perimeter layer, filtered to `FIRE_YEAR=2018`. Each point
+intersected exactly one 2018 polygon:
+
+| CFSDS case | Candidate BC incident | Fire date | Cause | Reported polygon area |
+| --- | --- | --- | --- | ---: |
+| `2018_1770` | N12395 | 2018-08-10 | Person | 955.7 ha |
+| `2018_241` | C11937 | 2018-08-01 | Lightning | 13,433.1 ha |
+| `2018_747` | N12413 | 2018-08-10 | Lightning | 713.7 ha |
+
+These are **strong candidate spatial crosswalks**, not a shared ID join: CFSDS does not
+carry the BC fire number, and the match uses the target-day centroid within a final
+historical perimeter. Use them to locate BC event records and verify chronology before
+updating the case manifest. The historical perimeters were captured after the simulated
+target day and are identity evidence only; do not put them in the pre-target simulator
+state or use them to choose a case.
+
+**Decision:** search BC operational records using N12395, C11937 and N12413, then confirm
+the incident identity from year/date/perimeter chronology. The perimeter layer records
+fire date, cause, size and capture provenance, not crews, resources or daily actions; all
+three suppression labels remain `unknown`. Alberta's file may still apply to other
+TRAIN candidates after their jurisdiction is identified. No new FireCase, replay,
+training or heldout inspection occurred.
+
+Evidence: [crosswalk receipt](../../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json),
+[input QC](../research/CFSDS_TRAIN_INPUT_QC.md),
+[source register S-044](../research/SOURCES.md),
+[BC historical perimeter layer](https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_land_and_natural_resource/MapServer/6).

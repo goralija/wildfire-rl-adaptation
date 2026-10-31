@@ -22,6 +22,7 @@
 - [CFSDS replay 2018_241 with warmup](2018_241-day227-replay-warmup20.json) - comparison showing the 20-minute pre-simulation did not change final metrics.
 - [CFSDS map 2018_241](2018_241-day227.png) - input state, observed target and no-action result.
 - [CFSDS train case 2018_1770](2018_1770-case.json) - converted case provenance and input details.
+- [TRAIN-only BC historical perimeter crosswalk](cfsds-train-bc-perimeter-crosswalk.json) - candidate official BC incident IDs for the three saved 2018 TRAIN cases; no suppression/action observations.
 - [CFSDS replay 2018_1770](2018_1770-day224-replay.json) - zero-warmup no-action replay; 73 ha forecast versus 12.151 ha observed.
 - [CFSDS map 2018_1770](2018_1770-day224.png) - input state, observed target and no-action result.
 - [Fuel compatibility rejection 2014_538](2014_538-fuel-rejection.json) - geometry-screened candidate rejected at FBP nonfuel/water check.

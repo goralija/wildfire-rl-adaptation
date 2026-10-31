@@ -493,3 +493,29 @@ Evidence: [ADR-026](../specs/DECISION_RECORDS.md#adr-026),
 [input QC](CFSDS_TRAIN_INPUT_QC.md),
 [fuel-vintage review](CFSDS_FUEL_VINTAGE_REVIEW.md),
 [sources S-034–S-043](SOURCES.md).
+
+## EXP-017 — TRAIN-only BC historical-perimeter crosswalk, 2026-10-31
+
+Queried the official BC Wildfire historical-perimeter ArcGIS layer for only the three
+already-saved 2018 TRAIN cases. For each case, took `summary_centroid_wgs84` from its
+saved case manifest and queried a point intersection with `FIRE_YEAR=2018`. Exactly one
+historical polygon intersected each target centroid:
+
+- `2018_1770` → N12395 (fire date 2018-08-10, cause Person, reported polygon area 955.7 ha)
+- `2018_241` → C11937 (fire date 2018-08-01, cause Lightning, reported polygon area 13,433.1 ha)
+- `2018_747` → N12413 (fire date 2018-08-10, cause Lightning, reported polygon area 713.7 ha)
+
+The same response identifies each perimeter as a 2018 rollover and gives a post-target
+GPS track date. This is useful to find provincial event records, but it is not a common
+incident-ID join and is not valid pre-target fuel, state or simulator input. The layer
+contains no staffing, equipment, suppression action, or daily resource schedule, so
+suppression remains `unknown` for all three.
+
+Saved each query's complete small JSON response, its SHA-256 and the case-manifest SHA-256
+in the [crosswalk receipt](../../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json).
+This audit opened no other TRAIN, validation or test event. No CFSDS input, FireCase,
+replay, benchmark or training was produced.
+
+Evidence: [ADR-027](../specs/DECISION_RECORDS.md#adr-027),
+[source register S-044](SOURCES.md),
+[BC Wildfire historical perimeter layer](https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_land_and_natural_resource/MapServer/6).

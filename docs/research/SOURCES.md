@@ -217,6 +217,17 @@ konačne tvrdnje; nije provedena sistematska literature review.
   establish fire-level evidence only; it would not by itself provide a day-by-day action
   timeline. Fire number, event date and perimeter/location must be matched before updating
   suppression status.
+- S-044: [BC Wildfire Fire Perimeters - Historical, official ArcGIS layer](https://delivery.maps.gov.bc.ca/arcgis/rest/services/whse/bcgw_pub_whse_land_and_natural_resource/MapServer/6)
+  and [Open Government catalogue entry](https://open.canada.ca/data/en/dataset/22c7cb44-1463-48f7-8e47-88857f207702),
+  reviewed 2026-10-31. The BC Wildfire Service layer exposes fire number/year, cause,
+  reported perimeter size, fire date, GPS track date and source; the catalogue lists the
+  Open Government Licence - British Columbia. A TRAIN-only point-in-polygon query matched
+  each of the three saved 2018 CFSDS target centroids to exactly one 2018 BC perimeter:
+  N12395, C11937 and N12413. These are strong candidate incident crosswalks, not shared
+  identifiers proven against a CFSDS event key. The layer has no crew/resource/daily
+  action fields, so these matches do not change suppression status from `unknown`. Query
+  inputs, case/response hashes and result attributes are in
+  [`cfsds-train-bc-perimeter-crosswalk.json`](../../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json).
 
 [REAL_FIRE_DATASETS](REAL_FIRE_DATASETS.md) čuva preporuku, obim uzorka i nedostatke;
 reports/real-fire-data/ čuva download SHA256 i provjere stvarno preuzetih fajlova.

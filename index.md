@@ -26,6 +26,7 @@ okf_version: "0.2"
 - [TRAIN fuel-vintage mask proof](reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json) - Provjera da su u jednom TRAIN slučaju target dan i kasniji dani van maske; godišnja mapa još nije kreirana.
 - [TRAIN target-blind input proof](reports/real-fire-data/cfsds-target-blind-input-invariance.json) - Target maska mijenja truth, ali ne početni input za `2018_747`.
 - [TRAIN target-blind window screen](reports/real-fire-data/cfsds-train-target-blind-window-screen.json) - Pre-target screen; pokazuje ograničenje 2×2 km izreza bez korištenja targeta za izbor.
+- [BC perimeter crosswalk za tri TRAIN slučaja](reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json) - Službeni incident kandidati za pretragu BC izvora gašenja; nema dnevnih akcija.
 - [Izvještaji](reports/index.md) - Sintetički pilot, runtime dokazi i stvarni CFSDS C++ replay.
 - [Runtime okruženja](docker/index.md) - Pinovani legacy setup i inference bez treniranja.
 - [Promjene baze znanja](log.md) - Najnovije promjene prve i veze na detaljnu historiju.

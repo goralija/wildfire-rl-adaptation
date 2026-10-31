@@ -1,5 +1,11 @@
 # Promjene baze znanja
 
+## 2026-10-31: TRAIN-only BC historical perimeter crosswalk
+
+- Službeni BCWS poligoni vraćaju po jedan 2018 incident za svaki od tri sačuvana target centroids: N12395, C11937 i N12413. To su prostorno/godinski kandidati, ne shared-key join.
+- Perimetri su finalni, nakon target dana; korišteni samo za identifikaciju incidenta. Sloj nema resurse/akcije gašenja, pa suppression ostaje unknown. JSON receipt čuva originalne odgovore i SHA-256.
+- Bez novog FireCase/replaya/treninga. Vidi [ADR-027](docs/specs/DECISION_RECORDS.md#adr-027), [EXP-017](docs/research/EXPERIMENT_LOG.md#exp-017--train-only-bc-historical-perimeter-crosswalk-2026-10-31) i [receipt](reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json).
+
 ## 2026-10-31: TRAIN fuel-tree and input-lineage follow-up
 
 - Ispravljen raniji nalaz: W.I.S.E. Figure 2 je javna i succession tree je transkribovano, ali datumsku semantiku i specijalne klase treba potvrditi; v2014b cutoff ostaje nepoznat.

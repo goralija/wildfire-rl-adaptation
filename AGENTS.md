@@ -37,7 +37,9 @@ cumulative damage, ali stvarni CFSDS builder i dalje blokira takav ulaz dok se n
 fuel/source provenance. W.I.S.E. Figure 2 je sada javno transkribovana; v2014b cutoff,
 starosna pravila/specijalne klase i stvarni v20191114 artifact ostaju otvoreni. Alberta
 2006–2025 suppression dataset je pronađen, ali CSV download je vratio HTTP 403 i nema
-spojenih događaja. Zatim slijedi fuel evidence gdje je dostupna, train terrain/weather
+spojenih suppression događaja. Tri spremljena 2018 slučaja imaju BC perimeter crosswalk
+kandidate N12395/C11937/N12413, ali bez evidence o akcijama gašenja. Zatim slijedi fuel
+evidence gdje je dostupna, train terrain/weather
 provenance, suppression joins i unaprijed definisani replay gate.
 Root cause no-action overgrowth nije izolovan, a no-action gate nije prošao.
 Ne koristi validation/test ishode za izbor parametara. No-action gate i heldout freeze

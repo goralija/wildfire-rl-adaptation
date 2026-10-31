@@ -399,10 +399,9 @@ cannot be shown target-blind.
 
 A useful official suppression source is Alberta's 2006–2025 fire-level dataset. Its
 catalogue describes location, dates/duration, weather, staffing and physical suppression
-resources. The direct CSV endpoint returned HTTP 403 from this workspace; no file or
-event join was produced. Fire-level resources would still not amount to a daily action
-timeline. Two pilot centroids are in BC and one is near the Alberta/BC border, so
-jurisdiction must be confirmed per event. See [source register S-034–S-043](research/SOURCES.md),
+resources. The direct CSV endpoint returned HTTP 403 from this workspace; no Alberta
+file/event join was produced. Fire-level resources would still not amount to a daily action
+timeline. See [source register S-034–S-044](research/SOURCES.md),
 [ADR-026](specs/DECISION_RECORDS.md#adr-026) and [EXP-016](research/EXPERIMENT_LOG.md#exp-016--train-fuel-tree-correction-and-external-input-lineage-audit-2026-10-31).
 
 No raster was downloaded/generated, no FireCase was rebuilt, and no replay or training
@@ -412,3 +411,15 @@ Next: verify the fuel tree's artifact and age rules and seek a dated v2014b cuto
 the Alberta table through an official accessible route and attempt only TRAIN event
 matches; then repair DEM/weather query lineage before preregistering a common-horizon
 no-action gate.
+
+## BC historical-perimeter crosswalk — 2026-10-31
+
+A train-only query against the official BC Wildfire historical-perimeter layer found one
+2018 polygon at each of the three saved case target centroids: `2018_1770` → N12395,
+`2018_241` → C11937 and `2018_747` → N12413. Fire year, date and area are consistent
+candidate evidence to identify the matching BC operational records. This does not prove
+same-event identity via a shared key and the layer contains no crew/action history, so
+suppression remains `unknown`. Exact response bodies and hashes are in the
+[crosswalk receipt](../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json);
+the decision and query method are recorded in [ADR-027](specs/DECISION_RECORDS.md#adr-027)
+and [EXP-017](research/EXPERIMENT_LOG.md#exp-017--train-only-bc-historical-perimeter-crosswalk-2026-10-31).

@@ -91,20 +91,41 @@ available on request [S-041]. CNFDB separately requires its End-User Agreement; 
 agreement was accepted [S-031 through S-036].
 
 Suppression/action evidence remains unknown for all 20 candidates: no provincial
-record has yet been matched to a CFSDS event. CNFDB provides agency-contributed fire
+suppression/action record has been joined. Three saved cases have candidate BC perimeter
+IDs from a separate spatial crosswalk [S-044], but no resource/action history. CNFDB provides agency-contributed fire
 locations/perimeters, but its public documentation warns that records are incomplete
 and variable in quality; access requires an End-User Agreement [S-036].
 
-A useful new lead is Alberta's official 2006–2025 fire-level dataset. Its catalog
-specifically says it includes staffing and physical resources used to suppress each
-fire, as well as location, dates/duration, weather and area burned [S-043]. It may help
-if a TRAIN fire can be matched to an Alberta record; the CSV and dictionary have not yet
-been downloaded/joined, and the source description does not promise a day-by-day action
-timeline. Two existing case centroids are in British Columbia and would need that
-province's records instead. Until a fire ID, event date and perimeter are matched,
-retain `unknown`; absence of a joined record is not proof of no suppression. The W.I.S.E.
-paper reports a CNFDB-based suppressed-fire filter, but this project's matching and
-suppression evidence are not equivalent [S-037].
+A useful new lead is Alberta's official 2006–2025 fire-level dataset. Its catalogue says
+it includes staffing and physical resources used to suppress each fire, as well as
+location, dates/duration, weather and area burned [S-043]. The CSV and dictionary have
+not been retrieved, and the source description does not promise a day-by-day action
+timeline.
+
+For the three saved TRAIN cases, a separate query to the official BC historical
+perimeter layer used each existing case manifest's target-day summary centroid, filtered
+to `FIRE_YEAR=2018`. Each point intersects exactly one 2018 BC perimeter [S-044]:
+
+| CFSDS case | Target date | Candidate BC fire number | Recorded fire date | Polygon area |
+| --- | --- | --- | --- | ---: |
+| 2018_1770 | 2018-08-12 | N12395 | 2018-08-10 | 955.7 ha |
+| 2018_241 | 2018-08-15 | C11937 | 2018-08-01 | 13,433.1 ha |
+| 2018_747 | 2018-08-16 | N12413 | 2018-08-10 | 713.7 ha |
+
+These are strong spatial/date candidate crosswalks, not an explicit shared event key
+between CFSDS and BC records. They identify the likely province and incident number for
+finding further records; they do not contain suppression crews, resources, or daily
+actions. The perimeters were captured after the target days and were queried only to
+identify incidents, never used as simulator input or to choose a case. A compact receipt
+preserves the exact query fields, local manifest hashes and response hashes:
+[BC perimeter crosswalk](../../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json).
+
+The three saved cases therefore need BC operational/suppression records; Alberta's
+dataset may apply to other TRAIN candidates after their jurisdiction is matched. Keep
+suppression status `unknown` for all 20 candidates until event-level evidence is joined.
+Absence of a joined record is not proof of no suppression. The W.I.S.E. paper reports a
+CNFDB-based suppressed-fire filter, but this project's matching and suppression evidence
+are not equivalent [S-037].
 
 ## Fuel-vintage research and leakage control
 

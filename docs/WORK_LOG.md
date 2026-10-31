@@ -589,3 +589,25 @@ context and indexes. No FireCase, raster, replay, training or heldout review occ
 Next: retrieve the Alberta source through an official accessible route, try exact
 TRAIN-only joins, verify fuel cutoff/tree semantics, and preserve complete DEM/weather
 request lineage before preregistering another replay gate.
+
+## 2026-10-31 — TASK-015 BC historical-perimeter crosswalk
+
+Queried the Government of British Columbia's official historical fire-perimeter layer for
+only the three saved 2018 TRAIN cases. The target-day centroid from each case manifest
+intersected exactly one official 2018 polygon: `2018_1770` → N12395, `2018_241` →
+C11937, and `2018_747` → N12413. The returned records include fire date, cause, reported
+area and GPS perimeter-track date. Because the CFSDS IDs do not share an incident key
+with the BC records, these are strong spatial/date candidates to be checked against the
+case chronology, not a completed keyed join.
+
+The perimeters were captured after each target day; the centroid overlay was used only to
+identify likely provincial incident records and was not put into simulator input or used
+to select a case. The layer has no resource/staffing or daily-action fields, so suppression
+remains `unknown`. Full response bodies plus hashes and case-manifest hashes are preserved
+in [`cfsds-train-bc-perimeter-crosswalk.json`](../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json).
+
+Updated [ADR-027](specs/DECISION_RECORDS.md#adr-027), [EXP-017](research/EXPERIMENT_LOG.md#exp-017--train-only-bc-historical-perimeter-crosswalk-2026-10-31),
+source register, input QC, status, backlog, handoff, navigation and project context. No
+FireCase, simulator replay, training or heldout inspection occurred. Next, verify these
+incident candidates against BC records and search for any operational suppression history;
+resolve the fuel cutoff and DEM/weather provenance before replay.
