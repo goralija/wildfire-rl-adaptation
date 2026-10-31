@@ -1,0 +1,363 @@
+{
+  "candidate_pair_details": {
+    "domain_metrics_per_pair": 5,
+    "file": "cfsds-train-full-day-pair-screen.csv",
+    "format": "CSV; one row per selected TRAIN fire/day pair, domain metrics in fixed prefixed columns",
+    "rows": 1301,
+    "sha256": "a609fdc74d12ef078d4c29490e0c7f99a2219408f7928bf716818e466e8d633b"
+  },
+  "code_sha256": {
+    "audit_cfsds_train_full_day_pairs.py": "733791fff326e4520776cd6665b75e2f5335fd2032740467cbed80dcb702b1ec",
+    "cfsds_initial_state.py": "fbd5f9bae62976620952eb6d1a211a58e24ef32485e06b102b1a0ed5e0366123",
+    "cfsds_spatial_feasibility.py": "84974b59c459c348d12cb8d5ba4910bd0d4e0633fe219e04f85b56409fc4f880"
+  },
+  "dataset": "Canadian Fire Spread Dataset (CFSDS)",
+  "domain_options": {
+    "grid20_cell100m": {
+      "existing_20x20_checkpoint_compatible_by_tensor_shape": true,
+      "grid": {
+        "cell_size_m": 100,
+        "cols": 20,
+        "id": "grid20_cell100m",
+        "rows": 20
+      },
+      "native_window_shape_rc": [
+        23,
+        23
+      ],
+      "physical_cell_semantics_match_existing_100m_case": true,
+      "realized_extent_m": [
+        2070,
+        2070
+      ],
+      "requested_extent_m": [
+        2000,
+        2000
+      ],
+      "safe_edge_margin_native_pixels": 1,
+      "summary": {
+        "candidate_pairs": 1301,
+        "capture_ratios_exclude_pairs_without_mapped_target_pixels": true,
+        "maximum_target_capture_ratio_among_observed_targets": 1.0,
+        "median_day_n_minus_1_front_capture_ratio": 0.993631,
+        "median_safe_interior_target_capture_ratio_among_observed_targets": 0.310022,
+        "median_target_capture_ratio_among_observed_targets": 0.367126,
+        "observed_target_pairs_with_any_pixel_in_window": 945,
+        "observed_target_pairs_with_any_safe_interior_pixel": 933,
+        "p75_target_capture_ratio_among_observed_targets": 0.774633,
+        "pre_target_window_found": 1295,
+        "target_capture_ratio_denominator": 1008,
+        "target_metrics_are_post_selection_diagnostics": true,
+        "target_observed_but_window_unavailable": 2,
+        "target_observed_pairs": 1010,
+        "target_unobserved_pairs": 291,
+        "window_found_rate": 0.995388,
+        "window_unavailable_reasons": {
+          "no_window_meets_minimum_safe_interior_front": 4,
+          "source_raster_smaller_than_requested_window": 2
+        }
+      }
+    },
+    "grid20_cell150m": {
+      "existing_20x20_checkpoint_compatible_by_tensor_shape": true,
+      "grid": {
+        "cell_size_m": 150,
+        "cols": 20,
+        "id": "grid20_cell150m",
+        "rows": 20
+      },
+      "native_window_shape_rc": [
+        34,
+        34
+      ],
+      "physical_cell_semantics_match_existing_100m_case": false,
+      "realized_extent_m": [
+        3060,
+        3060
+      ],
+      "requested_extent_m": [
+        3000,
+        3000
+      ],
+      "safe_edge_margin_native_pixels": 2,
+      "summary": {
+        "candidate_pairs": 1301,
+        "capture_ratios_exclude_pairs_without_mapped_target_pixels": true,
+        "maximum_target_capture_ratio_among_observed_targets": 1.0,
+        "median_day_n_minus_1_front_capture_ratio": 1.0,
+        "median_safe_interior_target_capture_ratio_among_observed_targets": 0.565868,
+        "median_target_capture_ratio_among_observed_targets": 0.664452,
+        "observed_target_pairs_with_any_pixel_in_window": 921,
+        "observed_target_pairs_with_any_safe_interior_pixel": 913,
+        "p75_target_capture_ratio_among_observed_targets": 1.0,
+        "pre_target_window_found": 1226,
+        "target_capture_ratio_denominator": 957,
+        "target_metrics_are_post_selection_diagnostics": true,
+        "target_observed_but_window_unavailable": 53,
+        "target_observed_pairs": 1010,
+        "target_unobserved_pairs": 291,
+        "window_found_rate": 0.942352,
+        "window_unavailable_reasons": {
+          "no_window_meets_minimum_safe_interior_front": 7,
+          "source_raster_smaller_than_requested_window": 68
+        }
+      }
+    },
+    "grid20_cell200m": {
+      "existing_20x20_checkpoint_compatible_by_tensor_shape": true,
+      "grid": {
+        "cell_size_m": 200,
+        "cols": 20,
+        "id": "grid20_cell200m",
+        "rows": 20
+      },
+      "native_window_shape_rc": [
+        45,
+        45
+      ],
+      "physical_cell_semantics_match_existing_100m_case": false,
+      "realized_extent_m": [
+        4050,
+        4050
+      ],
+      "requested_extent_m": [
+        4000,
+        4000
+      ],
+      "safe_edge_margin_native_pixels": 2,
+      "summary": {
+        "candidate_pairs": 1301,
+        "capture_ratios_exclude_pairs_without_mapped_target_pixels": true,
+        "maximum_target_capture_ratio_among_observed_targets": 1.0,
+        "median_day_n_minus_1_front_capture_ratio": 1.0,
+        "median_safe_interior_target_capture_ratio_among_observed_targets": 0.785595,
+        "median_target_capture_ratio_among_observed_targets": 0.857802,
+        "observed_target_pairs_with_any_pixel_in_window": 804,
+        "observed_target_pairs_with_any_safe_interior_pixel": 799,
+        "p75_target_capture_ratio_among_observed_targets": 1.0,
+        "pre_target_window_found": 1042,
+        "target_capture_ratio_denominator": 823,
+        "target_metrics_are_post_selection_diagnostics": true,
+        "target_observed_but_window_unavailable": 187,
+        "target_observed_pairs": 1010,
+        "target_unobserved_pairs": 291,
+        "window_found_rate": 0.800922,
+        "window_unavailable_reasons": {
+          "no_window_meets_minimum_safe_interior_front": 5,
+          "source_raster_smaller_than_requested_window": 254
+        }
+      }
+    },
+    "grid20_cell300m": {
+      "existing_20x20_checkpoint_compatible_by_tensor_shape": true,
+      "grid": {
+        "cell_size_m": 300,
+        "cols": 20,
+        "id": "grid20_cell300m",
+        "rows": 20
+      },
+      "native_window_shape_rc": [
+        67,
+        67
+      ],
+      "physical_cell_semantics_match_existing_100m_case": false,
+      "realized_extent_m": [
+        6030,
+        6030
+      ],
+      "requested_extent_m": [
+        6000,
+        6000
+      ],
+      "safe_edge_margin_native_pixels": 3,
+      "summary": {
+        "candidate_pairs": 1301,
+        "capture_ratios_exclude_pairs_without_mapped_target_pixels": true,
+        "maximum_target_capture_ratio_among_observed_targets": 1.0,
+        "median_day_n_minus_1_front_capture_ratio": 1.0,
+        "median_safe_interior_target_capture_ratio_among_observed_targets": 0.922652,
+        "median_target_capture_ratio_among_observed_targets": 0.989848,
+        "observed_target_pairs_with_any_pixel_in_window": 580,
+        "observed_target_pairs_with_any_safe_interior_pixel": 579,
+        "p75_target_capture_ratio_among_observed_targets": 1.0,
+        "pre_target_window_found": 729,
+        "target_capture_ratio_denominator": 593,
+        "target_metrics_are_post_selection_diagnostics": true,
+        "target_observed_but_window_unavailable": 417,
+        "target_observed_pairs": 1010,
+        "target_unobserved_pairs": 291,
+        "window_found_rate": 0.560338,
+        "window_unavailable_reasons": {
+          "no_window_meets_minimum_safe_interior_front": 6,
+          "source_raster_smaller_than_requested_window": 566
+        }
+      }
+    },
+    "grid40_cell100m": {
+      "existing_20x20_checkpoint_compatible_by_tensor_shape": false,
+      "grid": {
+        "cell_size_m": 100,
+        "cols": 40,
+        "id": "grid40_cell100m",
+        "rows": 40
+      },
+      "native_window_shape_rc": [
+        45,
+        45
+      ],
+      "physical_cell_semantics_match_existing_100m_case": true,
+      "realized_extent_m": [
+        4050,
+        4050
+      ],
+      "requested_extent_m": [
+        4000,
+        4000
+      ],
+      "safe_edge_margin_native_pixels": 1,
+      "summary": {
+        "candidate_pairs": 1301,
+        "capture_ratios_exclude_pairs_without_mapped_target_pixels": true,
+        "maximum_target_capture_ratio_among_observed_targets": 1.0,
+        "median_day_n_minus_1_front_capture_ratio": 1.0,
+        "median_safe_interior_target_capture_ratio_among_observed_targets": 0.828031,
+        "median_target_capture_ratio_among_observed_targets": 0.858589,
+        "observed_target_pairs_with_any_pixel_in_window": 805,
+        "observed_target_pairs_with_any_safe_interior_pixel": 804,
+        "p75_target_capture_ratio_among_observed_targets": 1.0,
+        "pre_target_window_found": 1044,
+        "target_capture_ratio_denominator": 824,
+        "target_metrics_are_post_selection_diagnostics": true,
+        "target_observed_but_window_unavailable": 186,
+        "target_observed_pairs": 1010,
+        "target_unobserved_pairs": 291,
+        "window_found_rate": 0.80246,
+        "window_unavailable_reasons": {
+          "no_window_meets_minimum_safe_interior_front": 3,
+          "source_raster_smaller_than_requested_window": 254
+        }
+      }
+    }
+  },
+  "event_years": [
+    2014,
+    2015,
+    2016,
+    2017,
+    2018
+  ],
+  "heldout_splits_opened": false,
+  "interpretation_limits": [
+    "The pair rule is applied to every arrival TIFF in the 2014\u20132018 TRAIN archives; group tables and other split years are not opened.",
+    "A selected pair is a geometrically defined observation opportunity, not a qualified simulator case. Rasters with no pair are still listed with an explicit reason.",
+    "A next-day map with zero assigned pixels is retained and labelled no_mapped_pixels_on_next_day; it is not silently excluded and its capture ratio is undefined.",
+    "Target capture is calculated only after pair and target-blind crop selection; it is not used to select events, days, domain, or window.",
+    "The three-pixel rule is a minimum raster-observation gate only. A domain can still fail to fit three input-day pixels in its safe interior.",
+    "Counts are native 90m arrival pixels. No resampling to simulator cells, fuel/DEM/weather alignment, FireCase generation, C++ replay, calibration, benchmark, RL training, or physical validation is performed.",
+    "20x20 grids at 150m or larger change the physical meaning of actions; 40x40 at 100m changes checkpoint tensor/action dimensions. This screen adopts no domain.",
+    "CFSDS daily interpolated arrival labels are not exact sub-daily flame-front ground truth; suppression and burn-out attribution remain unknown.",
+    "A target date crossing the annual archive boundary is retained as unobservable; no neighboring-year archive is read.",
+    "This screen does not resolve as-of-event fuel provenance, non-fuel scar import, complete terrain/weather provenance, suppression evidence, or the failed no-action gate."
+  ],
+  "raster_scan_summary": {
+    "per_year": {
+      "2014": {
+        "rasters_scanned": 234,
+        "rasters_with_pair": 234
+      },
+      "2015": {
+        "rasters_scanned": 351,
+        "rasters_with_pair": 351
+      },
+      "2016": {
+        "rasters_scanned": 116,
+        "rasters_with_pair": 116
+      },
+      "2017": {
+        "rasters_scanned": 322,
+        "rasters_with_pair": 322
+      },
+      "2018": {
+        "rasters_scanned": 278,
+        "rasters_with_pair": 278
+      }
+    },
+    "rasters_scanned": 1301,
+    "rasters_with_selected_day_pair": 1301,
+    "rasters_without_pair": 0,
+    "selected_pairs_by_year": {
+      "2014": 234,
+      "2015": 351,
+      "2016": 116,
+      "2017": 322,
+      "2018": 278
+    },
+    "target_observation_status_counts": {
+      "mapped_pixels_observed": 1010,
+      "no_mapped_pixels_on_next_day": 291
+    },
+    "target_observation_status_counts_by_year": {
+      "2014": {
+        "mapped_pixels_observed": 183,
+        "no_mapped_pixels_on_next_day": 51
+      },
+      "2015": {
+        "mapped_pixels_observed": 293,
+        "no_mapped_pixels_on_next_day": 58
+      },
+      "2016": {
+        "mapped_pixels_observed": 82,
+        "no_mapped_pixels_on_next_day": 34
+      },
+      "2017": {
+        "mapped_pixels_observed": 239,
+        "no_mapped_pixels_on_next_day": 83
+      },
+      "2018": {
+        "mapped_pixels_observed": 213,
+        "no_mapped_pixels_on_next_day": 65
+      }
+    }
+  },
+  "rasters_without_pair_detail": [],
+  "release": "v1.1",
+  "scope": "train_only",
+  "selection_rule": {
+    "input_day": "earliest DOY whose raster has at least three valid native 90m fire-arrival pixels",
+    "minimum_input_day_pixels": 3,
+    "requires_group_table_row_or_positive_firearea": false,
+    "requires_target_day_raster_pixels": false,
+    "selection_invariance_check": "remove all arrival pixels after the selected input day and reselect; selected input day must remain identical",
+    "target_day": "the next calendar day after the selected input day",
+    "target_geometry_used_for_pair_membership": false,
+    "valid_arrival_predicate": "0 < arrival_doy < 4000000000",
+    "window_rule": "for each fixed domain, select a crop from input-day and older pixels only; require at least three input-day pixels in the safe interior; then score target pixels"
+  },
+  "source_archives": [
+    {
+      "filename": "2014_fireDOYrasters.zip",
+      "sha256": "5767d45c58cffe8a53815e41facef1389f27c5bc66e74dab9eea61395fc3f4a8",
+      "year": 2014
+    },
+    {
+      "filename": "2015_fireDOYrasters.zip",
+      "sha256": "7afe47aa29f17a551d8825d676a09d900f88c6450e4e42c49b5ae809d79241c6",
+      "year": 2015
+    },
+    {
+      "filename": "2016_fireDOYrasters.zip",
+      "sha256": "92b650765675cac90e38db3ade3c194fc2e29e7bb00d1c4fff48ee572339e0a3",
+      "year": 2016
+    },
+    {
+      "filename": "2017_fireDOYrasters.zip",
+      "sha256": "2c8d35c8018f34900abcfe241f0035cd7c7efa939171058e06e43efe972de959",
+      "year": 2017
+    },
+    {
+      "filename": "2018_fireDOYrasters.zip",
+      "sha256": "0b31797c19fe705a890eb19ebc35827356f15bc3d83666ad614e0e1dc0518e3f",
+      "year": 2018
+    }
+  ]
+}
