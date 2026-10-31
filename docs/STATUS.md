@@ -373,7 +373,42 @@ treniranje ni CFSDS replay. Vidi [ADR-025](specs/DECISION_RECORDS.md#adr-025),
 [EXP-015](research/EXPERIMENT_LOG.md#exp-015--explicit-nonfuel-historical-scar-importer-contract-2026-10-31)
 i [runtime receipt](../reports/firehose-verification/nonfuel-initial-scar-contract.json).
 
-I dalje nema leakage-safe godišnje fuel mape: v2014b cut-off i succession rules nisu
-potvrđeni. Naredni rad je preostali TRAIN input provenance (DEM, weather, suppression)
-za slučajeve koji prođu source gate, pa unaprijed definisani no-action replay gate.
+I dalje nema leakage-safe godišnje fuel mape: v2014b cut-off nije potvrđen, a javno
+transkribovanoj Figure 2 nedostaje potvrđena age/special-class semantika i artifact check.
+Naredni rad je preostali TRAIN input provenance (DEM, weather, suppression) za slučajeve
+koji prođu source gate, pa unaprijed definisani no-action replay gate.
 **research_ready=false.**
+
+
+## TRAIN input provenance follow-up — 2026-10-31
+
+The source review corrected an earlier open question: W.I.S.E. paper Figure 2 is public
+and its succession tree is transcribed in the [fuel-vintage review](research/CFSDS_FUEL_VINTAGE_REVIEW.md).
+It keeps pre-fire O-1 as grass; other burns become C-2 after >21 years, M-2 C25% after
+>5, D-2 after >2, and Non-Fuel otherwise. The figure does not define exact date
+arithmetic or treatment of special classes, and the v20191114 artifact has not been
+checked. Official v2014b metadata still gives no NFDB/NBAC historical burn cutoff, so no
+annual fuel map is safe to claim or emit.
+
+The three saved FireCases are old target-aware builder outputs, not clean inputs for the
+new benchmark. Their generated terrain grids are hashed and the MRDEM-30 VRT / bilinear
+30 m to 100 m path is recorded, but upstream tile/cell IDs and acquisition dates are
+missing. Their raw weather responses preserve resolved point/timezone/fields/units/hash,
+but not the original request coordinate/URL, so selection of those historical points
+cannot be shown target-blind.
+
+A useful official suppression source is Alberta's 2006–2025 fire-level dataset. Its
+catalogue describes location, dates/duration, weather, staffing and physical suppression
+resources. The direct CSV endpoint returned HTTP 403 from this workspace; no file or
+event join was produced. Fire-level resources would still not amount to a daily action
+timeline. Two pilot centroids are in BC and one is near the Alberta/BC border, so
+jurisdiction must be confirmed per event. See [source register S-034–S-043](research/SOURCES.md),
+[ADR-026](specs/DECISION_RECORDS.md#adr-026) and [EXP-016](research/EXPERIMENT_LOG.md#exp-016--train-fuel-tree-correction-and-external-input-lineage-audit-2026-10-31).
+
+No raster was downloaded/generated, no FireCase was rebuilt, and no replay or training
+was run. No validation/test material was opened. **research_ready=false.**
+
+Next: verify the fuel tree's artifact and age rules and seek a dated v2014b cutoff; obtain
+the Alberta table through an official accessible route and attempt only TRAIN event
+matches; then repair DEM/weather query lineage before preregistering a common-horizon
+no-action gate.

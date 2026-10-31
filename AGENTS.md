@@ -30,11 +30,15 @@ Sljedeći korak za cohort/prostor je završen: unaprijed definisano pravilo obra
 1.301 TRAIN rastera i provjerilo pet fizičkih skala. Na 1.010 parova naredni dan ima
 mapirane piksele; 291 ostaje sa statusom bez mapiranog targeta. Ovo je geometrijski
 pre-screen, ne konačna podobna kohorta. Godišnja fuel mapa još nije napravljena: 2014b
-nema potvrđen per-pixel cutoff, succession crosswalk nije potvrđen. Izolovani C++ importer
-contract sada prihvata eksplicitni `scar_nf` samo na tačnoj NF ćeliji i čuva ga kao
+nema potvrđen per-pixel cutoff, a javno transkribovani succession tree još nema potvrđen
+age/special-class ugovor. Izolovani C++ importer contract sada prihvata eksplicitni
+`scar_nf` samo na tačnoj NF ćeliji i čuva ga kao
 cumulative damage, ali stvarni CFSDS builder i dalje blokira takav ulaz dok se ne riješi
-fuel/source provenance. Zatim slijedi dated fuel evidence gdje je dostupna, kompletne
-train terrain/weather provenance, suppression evidence i unaprijed definisani replay gate.
+fuel/source provenance. W.I.S.E. Figure 2 je sada javno transkribovana; v2014b cutoff,
+starosna pravila/specijalne klase i stvarni v20191114 artifact ostaju otvoreni. Alberta
+2006–2025 suppression dataset je pronađen, ali CSV download je vratio HTTP 403 i nema
+spojenih događaja. Zatim slijedi fuel evidence gdje je dostupna, train terrain/weather
+provenance, suppression joins i unaprijed definisani replay gate.
 Root cause no-action overgrowth nije izolovan, a no-action gate nije prošao.
 Ne koristi validation/test ishode za izbor parametara. No-action gate i heldout freeze
 moraju proći prije policy benchmarka ili fine-tuninga. Runtime PASS nije dokaz fizičke

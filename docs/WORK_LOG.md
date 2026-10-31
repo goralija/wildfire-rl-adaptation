@@ -560,3 +560,32 @@ The CFSDS case builder continues to reject nonfuel scars pending dated fuel-vint
 post-fire succession evidence. This test validates only import/state semantics on the
 bundled synthetic landscape. No real CFSDS replay, physical validation, RL training,
 benchmark, or heldout inspection occurred.
+
+
+## 2026-10-31 — TASK-015 fuel-tree and external-input provenance follow-up
+
+Corrected the earlier statement that the W.I.S.E. post-fire succession tree was not
+publicly transcribable: Figure 2 is public and its branches are now recorded in the
+fuel-vintage review. This does not authorize annual maps because the v2014b NFDB/NBAC
+cutoff is still undocumented, and exact age arithmetic, special classes and the actual
+v20191114 artifact are unverified.
+
+Audited saved inputs: all three pilot FireCases are outputs of the older target-aware
+builder. MRDEM-30 DTM VRT, 30 m bilinear-to-100 m conversion and output hashes are known,
+but upstream tile/cell provenance and per-cell acquisition dates are missing. Raw
+Open-Meteo responses include the resolved grid location, timezone, fields/units and
+response hash, but not original query coordinate/URL; target-blind location choice for
+these historic requests cannot be demonstrated.
+
+Found the official Alberta 2006–2025 fire-level wildfire dataset and dictionary. Official
+metadata describes fire location/date/duration, weather, staffing and physical suppression
+resources. Its direct CSV endpoint returned HTTP 403 in this workspace; no table was
+downloaded or joined. Two case centroids are in BC and one is near the Alberta/BC border,
+so source/jurisdiction matching is still required; fire-level totals do not provide a
+daily response timeline.
+
+Updated the source register, input QC, ADR-026, EXP-016, backlog, status, handoff, agent
+context and indexes. No FireCase, raster, replay, training or heldout review occurred.
+Next: retrieve the Alberta source through an official accessible route, try exact
+TRAIN-only joins, verify fuel cutoff/tree semantics, and preserve complete DEM/weather
+request lineage before preregistering another replay gate.

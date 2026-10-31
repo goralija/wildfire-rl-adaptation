@@ -48,11 +48,11 @@ fine-tuning prije prihvatljivih train ulaza, replay gatea i zamrznutog heldout s
   [JSON receipt](../reports/real-fire-data/cfsds-train-full-day-pair-screen.json) i
   [1301-row case/domain CSV](../reports/real-fire-data/cfsds-train-full-day-pair-screen.csv).
 - Godišnja fuel mapa nije izrađena: v2014b nema potvrđen vremenski cutoff za NFDB/NBAC
-  burn-scar layer, a succession crosswalk nije transkribovan/validiran. Public-source
-  pregled je pronašao CWFIS Open Government Licence - Canada i službene baseline FBP
-  class rules; ta pravila nisu post-fire succession stablo. Importer sada prihvata
-  samo eksplicitni `scar_nf` marker na tačnoj `NF` ćeliji, a DEM/weather lineage je
-  nepotpuna i suppression unknown.
+  burn-scar layer. W.I.S.E. Figure 2 je sada pronađena i transkribovana, ali starosna
+  računica, specijalne klase i stvarni v20191114 rules artifact nisu provjereni.
+  Alberta 2006–2025 fire-level suppression dataset je pronađen; direktni CSV download
+  endpoint vratio je HTTP 403 pa nijedan događaj nije spojen. DEM/weather lineage je
+  nepotpuna, a suppression status za slučajeve ostaje unknown.
 - TASK-015 NF-scar importer/cumulative-damage contract je implementiran i provjeren na
   izolovanom sintetičkom Sub20 C++ rolloutu; tri neispravna slučaja se odbijaju.
   Ovo ne otključava annual mapu ili CFSDS builder. Vidi ADR-025 i versioned receipt.
@@ -64,7 +64,8 @@ Metode i dokazi:
 - [Target-blind pravilo i invariance proof](../reports/real-fire-data/cfsds-target-blind-input-invariance.json)
 - [TRAIN shortlist](../reports/real-fire-data/cfsds-train-target-blind-window-screen.json)
 - [Input/provenance QC](research/CFSDS_TRAIN_INPUT_QC.md), [fuel QC](research/CFSDS_TRAIN_QC.md)
-- [Fuel-vintage review](research/CFSDS_FUEL_VINTAGE_REVIEW.md), [ADR-024](../docs/specs/DECISION_RECORDS.md#adr-024)
+- [Fuel-vintage review](research/CFSDS_FUEL_VINTAGE_REVIEW.md), [ADR-024](../docs/specs/DECISION_RECORDS.md#adr-024), [ADR-026](../docs/specs/DECISION_RECORDS.md#adr-026)
+- [EXP-016 input-lineage audit](research/EXPERIMENT_LOG.md#exp-016--train-fuel-tree-correction-and-external-input-lineage-audit-2026-10-31)
 - [Fuel mask proof](../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json),
   [NF-scar importer contract receipt](../reports/firehose-verification/nonfuel-initial-scar-contract.json)
 - [TASK-004c adapter/runtime receipt](../reports/firehose-verification/task004c-adapter-smoke.json)
@@ -72,17 +73,22 @@ Metode i dokazi:
 
 ## Sljedeći taskovi po redu
 
-1. Iz javnih izvora je potvrđeno da nema dovoljno dokumentovanog cutoffa za v2014b
-   NFDB/NBAC scar layer ni javno transkribovanog v20191114 post-fire succession stabla.
-   Pribavi autoritativne datume/ruleset ili zadrži fuel vintage kao unresolved; ne koristi
-   target-capture metrike i ne generiši godišnju mapu dok ovaj gate ne prođe.
-2. Za TRAIN parove koji prođu izvorni fuel/input gate pribavi DEM tile/version/hash, kompletnu
-  weather request/location/field/unit lineage i suppression evidence; bez event-level
-  dokaza suppression ostaje `unknown`.
-3. Preregistruj iste no-action ulaze, seedove i horizont; uradi mali train-only replay
-  gate na slučajevima koji prođu prethodne gateove i unaprijed definiši prihvatljive
-  metrike. Ne birati trajanje epizode po targetu.
-4. Tek nakon prolaza no-action gatea i heldout freeze-a razmatrati benchmark i fine-tuning.
+1. Nastavi fuel source gate: pribavi autoritativni v2014b NFDB/NBAC cutoff ili zadrži
+   vintage unresolved; provjeri javno prepisanu W.I.S.E. Figure 2 prema izvornom
+   v20191114 artifactu i utvrdi računanje starosti/specijalne klase. Ne generiši godišnju
+   mapu dok ovo nije riješeno.
+2. Pribavi Alberta CSV/dictionary kroz službeni pristup koji radi nakon HTTP 403, pa
+   pokušaj match samo na TRAIN događajima uz fire number + godinu, datum i geometriju.
+   Alberta evidencija je zbir po požaru, ne dnevni plan gašenja; za BC i granične
+   slučajeve traži odgovarajući provincijski izvor. Bez potvrđenog matcha ostavi `unknown`.
+3. Za prihvatljive TRAIN slučajeve kompletiraj DEM tile/version/hash i zabilježi tačan
+   weather query, traženu i vraćenu lokaciju, model/polja/jedinice/timezone/raw hash.
+   Tri sačuvana FireCase paketa su target-aware i njihove weather request lokacije nisu
+   rekonstruisane; ne predstavljaj ih kao čiste benchmark ulaze.
+4. Preregistruj iste no-action ulaze, seedove i horizont; uradi mali train-only replay
+   gate na slučajevima koji prođu prethodne gateove i unaprijed definiši prihvatljive
+   metrike. Ne birati trajanje epizode po targetu.
+5. Tek nakon prolaza no-action gatea i heldout freeze-a razmatrati benchmark i fine-tuning.
    Target-independent day-pair i puni TRAIN prostorni pre-screen su završeni.
 
 Opcije 20×20 na 200/300 m čuvaju oblik tenzora/akcija, ali mijenjaju prostorno značenje

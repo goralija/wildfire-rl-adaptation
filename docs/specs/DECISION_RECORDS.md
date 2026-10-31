@@ -624,3 +624,44 @@ case, or RL training. Machine receipt and hashes:
 The annual fuel-map gate remains blocked on the dated base-map cutoff, verified
 succession rules, and per-cell lineage. Existing saved pilot cases and their historic
 receipts are unchanged.
+
+## ADR-026 — correct fuel-tree status and record unresolved train-input provenance, recorded 2026-10-31
+
+Follow-up to ADR-024 located the public W.I.S.E. article Figure 2. The tree can be
+transcribed from the figure: preserve pre-fire O-1 Grass; otherwise assign C-2 Spruce
+after more than 21 years, M-2 Mixedwood C25% after more than 5 years, D-2 Aspen after
+more than 2 years, and Non-Fuel otherwise. This corrects ADR-024's implication that no
+public transcription was available. The exact date arithmetic, special-class behavior,
+and correspondence to the actual v20191114 rules artifact remain unverified. Official
+v2014b metadata still gives no dated NFDB/NBAC burn-history cutoff.
+
+The three saved pilot FireCases are outputs from the prior target-aware builder and are
+not regenerated, clean benchmark inputs. Their MRDEM-30 VRT and bilinear 30 m to 100 m
+terrain conversion and output hashes are known, but upstream tile/cell lineage and
+per-cell acquisition dates are not. Saved Open-Meteo responses contain resolved point,
+timezone, fields/units and response hashes; the original request coordinates/query are
+missing, so target-blind weather-location selection cannot be demonstrated for those
+historic files.
+
+Official Alberta metadata identifies a 2006–2025 fire-level dataset with fire location,
+dates/duration, weather, staffing and physical suppression resources. Its official CSV
+and dictionary were not retrieved: the direct CSV request returned HTTP 403 from this
+workspace. No CFSDS event has been joined. A matched record could support fire-level
+suppression evidence, but the catalogue does not promise a day-by-day action timeline;
+BC events require an appropriate BC source.
+
+**Decision:** correct the record that the W.I.S.E. Figure 2 tree is publicly
+transcribable, while retaining the annual fuel-map block until the v2014b cutoff, age
+rules, special classes and per-cell history are verified. Do not promote the three
+historic FireCases to a clean benchmark, infer weather-location independence from the
+resolved point, or convert absent suppression records into `none`. The next independent
+source task is to obtain the Alberta file through an official accessible route and test
+fire ID/date/coordinate/perimeter joins on TRAIN only, in parallel with the fuel cutoff
+and tree-verification gate; retain DEM/weather lineage gaps. No raster or CSV was
+downloaded, no FireCase/replay/training was run, and
+no validation/test data were inspected.
+
+Evidence: [fuel-vintage review](../research/CFSDS_FUEL_VINTAGE_REVIEW.md),
+[TRAIN input QC](../research/CFSDS_TRAIN_INPUT_QC.md),
+[source register S-034–S-043](../research/SOURCES.md),
+[Alberta open-data record](https://open.canada.ca/data/en/dataset/a221e7a0-4f46-4be7-9c5a-e29de9a3447e).

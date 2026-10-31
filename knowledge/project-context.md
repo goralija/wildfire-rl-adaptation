@@ -47,10 +47,12 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
   [input/provenance QC](../docs/research/CFSDS_TRAIN_INPUT_QC.md).
 - Novi FBP fuel source review našao je CWFIS site-wide Open Government Licence - Canada
   uz atribuciju, ali v2014b i dalje nema cutoff za NFDB/NBAC burn scars. Službeni 2018
-  fuel-class decision rules opisuju bazno klasifikovanje, ne burn-scar succession stablo
-  iz W.I.S.E. rada. Nema novog godišnjeg map vintagea; 2014b ostaje samo za reprodukciju
-  spremljenih slučajeva. [Audit](../docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md),
-  [ADR-024](../docs/specs/DECISION_RECORDS.md#adr-024).
+  fuel-class decision rules opisuju bazno klasifikovanje. W.I.S.E. Figure 2 succession
+  tree je javno transkribovana, ali starosna semantika/specijalne klase i tačan v20191114
+  artifact nisu potvrđeni. Nema novog godišnjeg map vintagea; 2014b ostaje samo za
+  reprodukciju spremljenih slučajeva. Alberta 2006–2025 suppression dataset je pronađen,
+  ali CSV endpoint vratio je HTTP 403 i nema event join-a. [Audit](../docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md),
+  [ADR-024](../docs/specs/DECISION_RECORDS.md#adr-024), [ADR-026](../docs/specs/DECISION_RECORDS.md#adr-026).
 - TRAIN-only fuel-vintage mask proof obrađuje samo `2018_747`: `arrival_day < target_doy`
   bira 881 prethodno spaljenu ćeliju u rasteru i isključuje 19 target ćelija; unit test
   provjerava i budući dan n+1. Godišnja mapa nije generisana jer 2014b cutoff i succession
@@ -104,11 +106,11 @@ Target-day curenje iz početnog fronta je uklonjeno za crop/initial-state pravil
 provjereno na jednom TRAIN paru. Stari 25-pair bounded screen imao je slab target coverage;
 puni target-independent screen sada obuhvata 1.301 paru i nijedan grid nije usvojen.
 Target-independent day-pair i full TRAIN domain screen su završeni. Source review je
-otkrio nedostatak javnog datiranog cutoffa i razlikovao baseline class rules od post-fire
-succession pravila. Sljedeće definisati/testirati importer semantiku historijskog scar-a
-na non-fuel ćeliji, a paralelno pribaviti autoritativni base-map cutoff i v20191114
-succession tree prije annual mape. Zatvoriti nedostajuću
-terrain/weather/suppression provenance samo na train/calibration događajima. Izmjereni
+otkrio nedostatak javnog datiranog cutoffa; W.I.S.E. succession tree je transkribovan,
+ali datumsku semantiku i izvorni artifact tek treba provjeriti. `scar_nf` importer contract
+je završen. Sljedeće pribaviti autoritativni base-map cutoff, spojiti Alberta source ako se
+može preuzeti, i zatvoriti DEM/weather/suppression provenance samo na train/calibration
+događajima. Izmjereni
 input audit trenutno pokriva 3/20 train paketa. Vidi [task handoff](../docs/NEXT_SESSION.md).
 Preliminarni 44 ID-ja i pilot su u
 [CFSDS kohort manifestu](../data/manifests/cfsds-v1_1-pilot-cohort.json).

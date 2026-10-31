@@ -136,10 +136,13 @@ konačne tvrdnje; nije provedena sistematska literature review.
   [MRDEM Open Government record](https://open.canada.ca/data/en/dataset/18752265-bda3-498c-a4ba-9dfe68cb98da),
   and [NRCan MRDEM overview](https://natural-resources.canada.ca/science-data/science-research/geomatics/ending-canadian-digital-elevation-model-era-new-medium-resolution-digital-elevation-model).
   Reviewed 2026-10-31. MRDEM provides 30 m terrain products; the overview says lidar
-  sources incorporated into DTM were collected between 2006 and 2023. The portal lists
-  the Open Government Licence - Canada; product metadata also carries Copernicus-source
-  attribution/limitations. The source cell and acquisition date for the three saved
-  pilot grids are not recorded.
+  sources incorporated into DTM were collected between 2006 and 2023. The three saved
+  pilot manifests identify the MRDEM-30 DTM VRT and bilinear 30 m to 100 m conversion,
+  and generated-grid hashes are recorded. Exact upstream tile/source-cell IDs, source
+  raster checksum, and per-cell acquisition dates are absent. The portal lists the Open
+  Government Licence - Canada; product metadata also carries Copernicus-source
+  attribution/limitations. The published collection dates are not per-cell dates for
+  our three pilot grids.
 - S-035: [Copernicus ERA5 hourly single-level dataset](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels?tab=overview),
   [ERA5-Land dataset](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-land?tab=download),
   [Open-Meteo Historical Weather API documentation](https://open-meteo.com/en/docs/historical-weather-api),
@@ -147,10 +150,13 @@ konačne tvrdnje; nije provedena sistematska literature review.
   [service pricing/limits](https://open-meteo.com/en/pricing),
   reviewed 2026-10-31. ERA5 is hourly on a 0.25 degree grid; ERA5-Land is hourly at
   approximately 0.1 degree. Open-Meteo says ERA5-Seamless combines temperature/humidity
-  from ERA5-Land with wind/solar from ERA5. Open-Meteo states API data are CC BY 4.0
-  with attribution, while free API service terms are separate. The exact variable
-  lineage for each column in our saved API responses, especially precipitation, still
-  needs recording.
+  from ERA5-Land with wind/solar from ERA5; its model table lists precipitation for
+  ERA5 only. The three saved raw responses preserve resolved grid point, timezone/offset,
+  variables/units and response hash, but not the original query coordinates/URL or exact
+  model revision. The manifest's request_location is the resolved response point, not
+  the original query point, so target-blind selection of these historical requests is
+  unproven. Open-Meteo states API data are CC BY 4.0 with attribution, while free API
+  service terms are separate.
 - S-036: [CWFIS CNFDB documentation](https://cwfis.cfs.nrcan.gc.ca/downloads/nfdb/fire_poly/current_version/NFDB_documentation_EN.pdf)
   and [CWFIS FAQ](https://cwfis.cfs.nrcan.gc.ca/en/faq?wbdisable=true), reviewed 2026-10-31.
   CNFDB contains agency-provided fire locations/perimeters; documentation says the data
@@ -160,16 +166,14 @@ konačne tvrdnje; nije provedena sistematska literature review.
   *International Journal of Wildland Fire* 35(8), WF26072, reviewed 2026-10-31.
   Methods describe building yearly fuel maps from the 2014/2019/2024 releases with the
   v20191114 burn-scar succession rules, then reclassifying same-fire pixels burned before
-  day n as non-fuel for each daily simulation. The paper's initial boundary selects day
-  n-1 pixels adjacent to target day n and explicitly acknowledges that this uses future
-  perimeter information. This is a published method reference, not a result from this
-  project; its succession tree must be transcribed/validated, and its target-aware front
-  must not be copied into an unbiased agent benchmark. Suppression filtering is reported,
-  but the exact event-action linkage and transfer to our simulator remain unverified.
-  The publisher's data-availability statement says study data are available from the
-  corresponding author upon reasonable request; the article does not provide a public
-  code/data archive. The paper identifies a succession decision-tree figure, but the
-  text does not enumerate its branches.
+  day n as non-fuel for each daily simulation. Figure 2 publicly depicts the succession
+  tree; this project transcribed it in `CFSDS_FUEL_VINTAGE_REVIEW.md`. The exact age
+  counting convention and NRCan release artifact have not been independently checked.
+  The paper's initial boundary selects day n-1 pixels adjacent to target day n and
+  explicitly acknowledges future-perimeter information; do not copy that input rule into
+  an unbiased agent benchmark. Suppression filtering is reported, but event-level linkage
+  and transfer to our simulator remain unverified. Study data are available from the
+  corresponding author upon reasonable request; there is no public code/data archive.
 - S-038: [CWFIS CanFG fuel-layer-with-burn-scars legend](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/FBP_FuelLayer_wBurnScars.pdf),
   and [official v20191114 metadata](https://cwfis.cfs.nrcan.gc.ca/downloads/fuels/development/Canadian_Forest_FBP_Fuel_Types/Canadian_Forest_FBP_Fuel_Types_Metadata_v20191114.pdf),
   reviewed 2026-10-31. The one-page PDF lists fuel classes (including non-fuel, water,
@@ -194,6 +198,25 @@ konačne tvrdnje; nije provedena sistematska literature review.
   burn-scar succession crosswalk cited as a separate figure in S-037. The base-layer
   document notes that kNN NFI v1 layers are available on request and some Agriculture
   Canada land-cover inputs were under a data-sharing agreement.
+
+- S-042: [CWFIS Satellite/NDVI data for CWFIS/fire danger rating in Canada](https://cwfis.cfs.nrcan.gc.ca/downloads/greenup/Satellite_NDVI_data_for_CWFIS_fire_danger_rating_in_Canada.pdf),
+  reviewed 2026-10-31. The official note says the operational 2015 CWFIS fuel grid used
+  2012 MODIS land cover and CanFI, and annual updates mapped areas burned in the last year
+  as non-fuel and areas burned in the previous two years as grass. It describes a simpler
+  2015 operational grid; it is not proof of the versioned v2014b burn-record cutoff and
+  is not the v20191114 Figure 2 succession tree.
+- S-043: [Government of Alberta Historical wildfire data: 2006–2025 catalogue](https://open.canada.ca/data/en/dataset/a221e7a0-4f46-4be7-9c5a-e29de9a3447e),
+  [official CSV](https://open.alberta.ca/dataset/a221e7a0-4f46-4be7-9c5a-e29de9a3447e/resource/80480824-0c50-456c-9723-f9d4fc136141/download/fp-historical-wildfire-data-2006-2025.csv),
+  [official data dictionary](https://open.alberta.ca/dataset/a221e7a0-4f46-4be7-9c5a-e29de9a3447e/resource/1b635b8b-a937-4be4-857e-8aeef77365d2/download/fp-historical-wildfire-data-dictionary-2006-2025.pdf),
+  and [Alberta wildfire maps/data landing page](https://www.alberta.ca/wildfire-maps-and-data),
+  reviewed 2026-10-31. Official metadata says the fire-level dataset includes location,
+  time/duration, weather, staffing and physical resources used to suppress each fire, and
+  area burned; the catalogue lists Open Government Licence - Alberta. A direct CSV
+  download attempt from this workspace returned HTTP 403, so the CSV/dictionary have not
+  been inspected or joined to any CFSDS event. A candidate geographic match would
+  establish fire-level evidence only; it would not by itself provide a day-by-day action
+  timeline. Fire number, event date and perimeter/location must be matched before updating
+  suppression status.
 
 [REAL_FIRE_DATASETS](REAL_FIRE_DATASETS.md) čuva preporuku, obim uzorka i nedostatke;
 reports/real-fire-data/ čuva download SHA256 i provjere stvarno preuzetih fajlova.

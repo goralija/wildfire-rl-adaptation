@@ -15,7 +15,7 @@ Napor je okvirni agentov prijedlog u aktivnim radnim satima, bez roka i dodjele 
 | TASK-013 | završeno: podrška handoffu | OKF repo bundle, ulazi/navigacija, održavanje, validator/testovi/CI | ostvareno |
 | TASK-012 | završeno 2026-10-30 | prema korisnikovoj uputi odabrana Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire; historijske granice služe zasebnom reality-checku, a agent uči iz simulatora | ostvareno |
 | TASK-014 | lokalno završeno 2026-10-30; drugi host nije provjeren | moderni `.venv` i odvojeni legacy Docker izgrađeni; package/source/image hashovi i smoke/inference receipt zapisani | ostvareno lokalno |
-| TASK-015 | P0, djelimično završeno | full target-independent screen: svih 1.301 TRAIN rastera obrađeno; 1.010 imaju target mapu, 291 nemaju mapirane target piksele; 20×20/100 m prozor nađen za 1.295; nijedna domena još nije usvojena; `scar_nf` importer contract je provjeren; dated fuel vintage/succession, terrain/weather/suppression i replay gate ostaju otvoreni | dated fuel vintage/succession evidence + DEM/weather/suppression provenance + preregistrovani replay gate |
+| TASK-015 | P0, djelimično završeno | full target-independent screen: svih 1.301 TRAIN rastera obrađeno; 1.010 imaju target mapu, 291 nemaju mapirane target piksele; 20×20/100 m prozor nađen za 1.295; nijedna domena još nije usvojena; `scar_nf` importer contract je provjeren; W.I.S.E. Figure 2 je javno transkribovana, ali v2014b cutoff, starosna semantika/specijalne klase, DEM/weather lineage i suppression join ostaju otvoreni; Alberta CSV endpoint je vratio HTTP 403 | dokaz fuel vintagea + pribavljanje/join suppression podataka + kompletna DEM/weather provenance + preregistrovani replay gate |
 | TASK-018 | P0, dijagnostička faza završena 2026-10-30; uzrok nije izolovan | poređenje hashova/postavki i unaprijed fiksirani vremenski presjeci na tri train replaya; metadata horizon bug ispravljen; rub/domenska ograničenja potvrđena; bez heldout kalibracije ili treninga | ostvareno |
 | TASK-004c | P0, adapter završen lokalno 2026-10-30 | C++/Python kumulativna šteta, zaseban scar/front i named terminal receipt; fixture + 12/12 inference rollouta, bez treninga; fizički no-action gate ostaje otvoren | ostvareno |
 | TASK-017 | završeno 2026-10-30 | `InitialState.csv` uvozi raniji scar i više aktivnih ćelija; fixture i stvarni `2018_747` C++ import/replay su uspješni | ostvareno |
@@ -89,10 +89,13 @@ CFSDS builder ulaz. Pogledati ADR-020/023/025 i EXP-010/013/015. Još trebaju FB
 vintage/source provjera, train terrain/weather poravnanje, suppression dokazi i unaprijed
 definisani replay gate. Raniji 10/20 fuel-only rezultat koristio je prethodnu kohortu/
 izreze i ne važi za novi puni screen. EXP-014 našao je CWFIS site-wide Open Government
-Licence - Canada i službena pravila za baseline FBP klasu, ali ne cutoff za NFDB/NBAC
-scars u v2014b niti zasebno post-fire succession stablo. Zato nema vremenski sigurnog
-novog map vintagea i mapa se ne generiše. Importer contract za historijski scar je sada
-testiran na sintetičkom fixtureu; izvorni cutoff/succession se i dalje mora razriješiti.
+Licence - Canada i službena pravila za baseline FBP klasu. EXP-016 je ispravio raniji
+nalaz: W.I.S.E. Figure 2 je javno transkribovana, ali starosna semantika/specijalne klase
+i stvarni v20191114 artifact nisu provjereni; v2014b NFDB/NBAC cutoff i dalje nije
+dokumentovan. Službeni Alberta 2006–2025 fire-level suppression dataset je pronađen, ali
+CSV endpoint vraća HTTP 403 i nema join-a. Zato nema sigurnog godišnjeg fuel vintagea;
+DEM/weather i druge provincijske suppression izvore još treba povezati. Importer ugovor
+za historical scar je testiran na sintetičkom fixtureu i sam ne otključava CFSDS builder.
 Target capture se ne koristi za izbor.
 
 TASK-018 isporuka: poređeni su isti case-manifest/input hashovi, fuel/FBP, weather/FWI,

@@ -1,5 +1,11 @@
 # Promjene baze znanja
 
+## 2026-10-31: TRAIN fuel-tree and input-lineage follow-up
+
+- Ispravljen raniji nalaz: W.I.S.E. Figure 2 je javna i succession tree je transkribovano, ali datumsku semantiku i specijalne klase treba potvrditi; v2014b cutoff ostaje nepoznat.
+- Pronađen je službeni Alberta 2006–2025 fire-level suppression dataset; direktni CSV download vraća HTTP 403, pa nema event join-a. Osvježeni su DEM/weather lineage nalazi: nedostaju izvorni tile/cell detalji i originalna vremenska query lokacija.
+- Nema novog rasterskog ulaza, FireCase-a, replaya ni treninga. **research_ready=false**. Vidi [ADR-026](docs/specs/DECISION_RECORDS.md#adr-026), [EXP-016](docs/research/EXPERIMENT_LOG.md#exp-016--train-fuel-tree-correction-and-external-input-lineage-audit-2026-10-31) i [handoff](docs/NEXT_SESSION.md).
+
 ## 2026-10-31: TASK-015 explicit NF historical-scar importer contract
 
 - C++ import sada podržava poseban `scar_nf` zapis samo uz eksplicitnu provenance tvrdnju i tačnu upstream `NF` klasu; scar ostaje u cumulative šteti, ali nikad nije aktivni front ili gorivo za širenje. Neispravni `burnt`/`burning`/mismatch slučajevi su odbijeni.

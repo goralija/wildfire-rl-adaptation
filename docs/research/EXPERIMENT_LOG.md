@@ -458,3 +458,38 @@ This is a parser/state-contract test on a bundled synthetic landscape, not physi
 validation, CFSDS replay, training, benchmark, or evidence that an agent improves real
 outcomes. Validation/test data were not inspected. See [ADR-025](../specs/DECISION_RECORDS.md#adr-025),
 [input QC](CFSDS_TRAIN_INPUT_QC.md), and the [verification index](../../reports/firehose-verification/index.md).
+
+## EXP-016 — TRAIN fuel-tree correction and external input lineage audit, 2026-10-31
+
+Revisited the publisher version of the W.I.S.E. assessment after locating its Figure 2.
+The public figure depicts a succession decision tree and has been transcribed in the
+[fuel-vintage review](CFSDS_FUEL_VINTAGE_REVIEW.md): O-1 remains grass; otherwise age
+thresholds are >21 years C-2, >5 years M-2 C25%, >2 years D-2, and younger burns
+Non-Fuel. This corrects the earlier claim that the tree was not publicly transcribable.
+The figure does not specify exact elapsed-year arithmetic or special-class behavior,
+and the actual v20191114 rules artifact has not been checked. The official v2014b
+metadata still does not state the NFDB/NBAC burn-history cutoff; no annual map is
+authorized.
+
+Reviewed local lineage for the three saved TRAIN FireCases. Their DEM inputs name the
+MRDEM-30 DTM VRT and bilinear 30 m to 100 m conversion, and output hashes exist, but
+tile/source-cell IDs and per-cell acquisition dates are absent. Their raw Open-Meteo
+responses preserve resolved location, time zone, variables/units and response hashes,
+but not the original query coordinate/URL; the historical choice of query point is
+therefore not demonstrably target-blind. The cases were made by the former target-aware
+builder and remain diagnostic outputs, not clean replay inputs.
+
+Found the official Alberta 2006–2025 wildfire dataset and dictionary, whose metadata
+describes fire-level location, duration, weather, staffing and physical suppression
+resources. A direct CSV request returned HTTP 403; no data were retrieved or joined.
+Even a successful event-level match would not provide a daily action timeline by itself.
+Two saved case centroids are in BC, while a third is near the Alberta/BC boundary, so
+province-specific matching is required rather than assigning jurisdiction by case ID.
+
+No CFSDS case, raster, simulator replay, or training was generated or run. No heldout
+data were opened. This was a public-source and saved-manifest audit only.
+
+Evidence: [ADR-026](../specs/DECISION_RECORDS.md#adr-026),
+[input QC](CFSDS_TRAIN_INPUT_QC.md),
+[fuel-vintage review](CFSDS_FUEL_VINTAGE_REVIEW.md),
+[sources S-034–S-043](SOURCES.md).
