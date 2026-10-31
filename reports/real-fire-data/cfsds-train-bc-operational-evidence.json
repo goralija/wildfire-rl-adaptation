@@ -46,9 +46,22 @@
           "reported_by": "Emergency Management BC, Provincial Emergency Coordination Centre Situation Report #10",
           "source_url": "https://docs.openinfo.gov.bc.ca/Response_Package_PSS-2018-86747.pdf",
           "source_published": "2018-08-16",
+          "source_report_number": 10,
+          "snapshot_as_of_local_datetime": "2018-08-16 15:00",
           "facts": "The report lists North Baezaeko (C11937) at an estimated 2,500 ha and 0% contained in its August 16 15:00 interface-fire snapshot.",
           "target_day_relation": "one calendar day after the CFSDS target day",
           "limits": "Containment status and estimated size do not identify whether crews or aircraft were assigned, what tactics were used, or when. This is not evidence of no suppression."
+        },
+        {
+          "reported_activity_date": "2018-08-16",
+          "reported_by": "Emergency Management BC, Provincial Emergency Coordination Centre Situation Report #11",
+          "source_url": "https://docs.openinfo.gov.bc.ca/Response_Package_PSS-2018-86747.pdf",
+          "source_published": "2018-08-17",
+          "source_report_number": 11,
+          "snapshot_as_of_local_datetime": "2018-08-16 15:00 (as printed in report)",
+          "facts": "The later report prints an August 16 15:00 interface-fire snapshot with North Baezaeko (C11937) estimated at 4,000 ha and 10% contained, differing from the 2,500 ha and 0% entry in Situation Report #10.",
+          "target_day_relation": "one calendar day after the CFSDS target day; report #11 was published two days after it",
+          "limits": "The reports give different estimates for the same printed snapshot time. Treat them as report-version/status estimates, not a resolved daily perimeter series. Neither report supplies crew assignments, tactics, or an action schedule."
         },
         {
           "reported_activity_date": "2018 fire season summary",
@@ -68,8 +81,30 @@
       "candidate_bc_fire_number": "N12413",
       "candidate_bc_name": "Lost Dog Complex",
       "crosswalk_receipt": "cfsds-train-bc-perimeter-crosswalk.json",
-      "operational_evidence": "documented_complex_activity_on_adjacent_days",
+      "operational_evidence": "documented_complex_activity_on_adjacent_days; target_day_status_snapshot_only",
       "observations": [
+        {
+          "reported_activity_date": "2018-08-16",
+          "reported_by": "Emergency Management BC, Provincial Emergency Coordination Centre Situation Report #10",
+          "source_url": "https://docs.openinfo.gov.bc.ca/Response_Package_PSS-2018-86747.pdf",
+          "source_published": "2018-08-16",
+          "source_report_number": 10,
+          "snapshot_as_of_local_datetime": "2018-08-16 15:00",
+          "facts": "The interface-fire snapshot lists Lost Dog Complex (N12413) at an estimated 452.5 ha and out of control on the CFSDS target date.",
+          "target_day_relation": "same calendar date as the CFSDS target day",
+          "limits": "This is an incident-status/size snapshot, not a record of crews, aircraft, tactics, or spatially located actions."
+        },
+        {
+          "reported_activity_date": "2018-08-16",
+          "reported_by": "Emergency Management BC, Provincial Emergency Coordination Centre Situation Report #11",
+          "source_url": "https://docs.openinfo.gov.bc.ca/Response_Package_PSS-2018-86747.pdf",
+          "source_published": "2018-08-17",
+          "source_report_number": 11,
+          "snapshot_as_of_local_datetime": "2018-08-16 15:00 (as printed in report)",
+          "facts": "The later report prints an August 16 15:00 interface-fire snapshot with Lost Dog Complex (N12413) estimated at 706 ha and out of control, differing from the 452.5 ha entry in Situation Report #10.",
+          "target_day_relation": "same printed snapshot date as the CFSDS target; report #11 was published the following day",
+          "limits": "The reports give different estimates for the same printed snapshot time. Treat them as report-version/status estimates, not a resolved daily perimeter series. The complex-level status does not identify actions or allocate resources to N12413."
+        },
         {
           "reported_activity_date": "2018-08-15",
           "reported_by": "BC Wildfire Service information relayed through a City of Kimberley public update",
@@ -89,10 +124,15 @@
           "limits": "The resource count is complex-level and reported after the target date, not a target-day deployment record."
         }
       ],
-      "interpretation": "Suppression activity is documented for the candidate complex immediately before and after the target date. Exact resources and actions on August 16, and their allocation to N12413 versus the complex, remain unknown."
+      "interpretation": "Suppression activity is documented for the candidate complex immediately before and after the target date. An official August 16 status snapshot exists, but SitRep #10/#11 report different estimated areas for the same printed time and neither describes target-day actions. Exact resources and actions on August 16, and their allocation to N12413 versus the complex, remain unknown."
     }
   ],
-  "project_wide_status": "No complete event-keyed, daily suppression/action dataset has been joined. Do not change the saved case manifests' suppression_status field from unknown based on this partial public-source review.",
+  "search_audit": {
+    "reviewed_public_source": "Emergency Management BC PECC Situation Reports #10 and #11 embedded in Response_Package_PSS-2018-86747.pdf; official BC historical incident/perimeter records; indexed public operational-report search for the three candidate identifiers.",
+    "result": "The PECC reports provide incident-level size/containment snapshots for C11937 and N12413, including differing estimates in reports #10 and #11 for the same printed 2018-08-16 15:00 snapshot. A text search of this package returned no N12395 entry. The indexed search did not surface a case-specific daily action-plan/dispatch package for N12395, C11937, or N12413.",
+    "negative_search_limit": "Failure to find an indexed public record does not establish that no record exists; it establishes only that the reviewed public sources did not provide it."
+  },
+  "project_wide_status": "No complete event-keyed, daily suppression/action dataset has been joined. Public PECC status snapshots improve incident chronology but do not identify daily actions or cell-level treatment. Do not change the saved case manifests' suppression_status field from unknown based on this public-source review.",
   "use_limits": [
     "These reports support incident-history and confounding analysis; they are not simulator action inputs or per-cell treatment labels.",
     "Reported staffing/equipment totals are snapshots, not dispatch timelines or proof of where and when each resource acted.",

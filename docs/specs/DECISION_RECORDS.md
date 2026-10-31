@@ -831,3 +831,26 @@ Evidence: [adapted workflow](../research/ADAPTED_PRIOR_ART_WORKFLOW.md),
 [W.I.S.E. article](https://doi.org/10.1071/WF26072),
 [Dogrib/Cell2Fire article](https://doi.org/10.1038/s41598-025-05706-6),
 [Firehose paper](https://williamshen-nz.github.io/firehose/firehose-paper.pdf).
+
+## ADR-032 — incident status reports are context, not suppression/action truth, accepted 2026-10-31
+
+The user asked to continue the next TRAIN-only source/QC task. A broader public search
+found EMBC PECC Situation Reports #10 and #11 in the official 2018 open-information
+package. They report estimated fire size and containment status for candidate incidents
+C11937 and N12413; the two publications print the same August 16 15:00 snapshot time
+with different estimates. Local public updates separately document some operations for
+N12395 and Lost Dog Complex, but none of the reviewed sources is a complete, event-keyed
+dispatch/action log or a per-cell treatment map. CFSDS-to-BC matching remains based on
+spatial/date evidence rather than a shared event identifier.
+
+**Decision:** retain `suppression_status=unknown` in every saved case manifest. A report
+of 0% contained does not mean no crews acted. Incident-level reported area, containment,
+staffing, and complex-level operations may be shown as attributed historical context, but
+must not be converted to cell-level simulator actions, treated as exact perimeter truth,
+or used as evidence of an unbiased no-action trajectory. Preserve source/report number,
+publication time, claimed snapshot time, and any conflicting reported versions separately
+in future visual products. Public-search failure is not proof that a record does not exist.
+
+Evidence: [EXP-021](../research/EXPERIMENT_LOG.md#exp-021--train-only-bc-incident-status-snapshot-follow-up-2026-10-31),
+[receipt](../../reports/real-fire-data/cfsds-train-bc-operational-evidence.json),
+[S-046](../research/SOURCES.md), and the [official PECC response package](https://docs.openinfo.gov.bc.ca/Response_Package_PSS-2018-86747.pdf).

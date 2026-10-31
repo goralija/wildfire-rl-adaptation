@@ -711,3 +711,21 @@ Added [terrain/weather provenance receipt](../reports/real-fire-data/cfsds-train
 input QC, status, backlog, handoff, context and indexes. The finding narrows two input
 lineage questions for these old train diagnostics; it does not clear fuel vintage,
 spatial fitness, event-keyed suppression or the no-action gate. `research_ready=false`.
+
+## 2026-10-31 — TASK-015 BC public status-snapshot follow-up
+
+Expanded the public search for the three saved TRAIN incident candidates. The official
+EMBC response package includes PECC Situation Reports #10 and #11. Report #10 gives an
+August 16 15:00 snapshot of C11937 at 2,500 ha/0% contained and N12413 at 452.5 ha/out
+of control. Report #11, sent August 17, prints the same snapshot time but gives 4,000
+ha/10% and 706 ha/out of control respectively. These are different report-version
+estimates, not a resolved daily perimeter series. A text search of the package returned
+no N12395 entry. Indexed public searches did not surface case-specific daily action-plan
+or dispatch records for any of the three IDs; this does not prove such records do not
+exist outside the sources/indexes reviewed.
+
+Updated the operational evidence receipt, [S-046](research/SOURCES.md), [EXP-021](research/EXPERIMENT_LOG.md#exp-021--train-only-bc-incident-status-snapshot-follow-up-2026-10-31),
+[ADR-032](specs/DECISION_RECORDS.md#adr-032), input QC, status, backlog, handoff, context
+and navigation. All saved incident matches remain candidate crosswalks and every case
+manifest retains `suppression_status=unknown`; no status was turned into a cell action.
+No FireCase, simulator replay, training, or heldout inspection occurred.

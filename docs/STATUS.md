@@ -476,6 +476,27 @@ No replay, FireCase rebuild, training or heldout inspection was done. The enviro
 is still **not research-ready**; fuel vintage, candidate-level DEM/weather provenance,
 domain fitness and the no-action gate remain open.
 
+## TRAIN BC public status-record follow-up — 2026-10-31
+
+Expanded the search to the official EMBC 2018 response package. PECC Situation Report
+#10 gives an August 16 15:00 status snapshot of North Baezaeko (C11937) at 2,500 ha/
+0% contained and Lost Dog Complex (N12413) at 452.5 ha/out of control. Report #11,
+sent August 17, prints the same snapshot time but lists 4,000 ha/10% and 706 ha/out of
+control respectively. Keep report versions separate; these estimates do not form a
+resolved daily perimeter timeline. A text search of that package returned no N12395,
+and the indexed public search did not surface case-specific daily action plans for the
+three candidate IDs. This does not prove that no unpublished or request-only records
+exist. Coal Creek's contemporaneous local report remains the public source for action
+on its CFSDS target date.
+
+None of the newly found official status entries gives crew assignments or tactics. The
+CFSDS-to-BC incident matches still lack a shared event key; status estimates cannot be
+used as cell-level actions or no-action ground truth. All case manifests retain
+`suppression_status=unknown`. No simulator input, replay, benchmark, or training was
+created or run. See [EXP-021](research/EXPERIMENT_LOG.md#exp-021--train-only-bc-incident-status-snapshot-follow-up-2026-10-31),
+[ADR-032](specs/DECISION_RECORDS.md#adr-032), and the
+[updated evidence receipt](../reports/real-fire-data/cfsds-train-bc-operational-evidence.json).
+
 ## TRAIN fuel-source artifact inventory — 2026-10-31
 
 The official v2014b metadata names Land Cover Map 2011 and CanFI2000 and says NFDB/NBAC

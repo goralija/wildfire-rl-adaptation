@@ -67,12 +67,16 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
   spremljena 2018 TRAIN slučaja s kandidatima N12395, C11937 i N12413. Follow-up javni
   izvještaji dokumentuju containment-line rad na cilj-dan Coal Creeka i paljenje/resurse
   Lost Dog Complexa dan prije drugog cilja; za C11937 je pronađen next-day status, ne
-  dnevnik akcija. Zbog kandidatskog incident-spoja i nepotpunih snapshot izvještaja case
-  manifests zadržavaju `suppression_status=unknown`; nema ćelijskog action-inputa.
+  dnevnik akcija. EMBC SitRep #10/#11 dodaje statusne snimke za C11937 i N12413, ali
+  različite procjene za isto štampano vrijeme; to nije dnevnik akcija ni pouzdana dnevna
+  perimeter serija. Zbog kandidatskog incident-spoja i nepotpunih/različitih snapshot
+  izvještaja case manifests zadržavaju `suppression_status=unknown`; nema ćelijskog
+  action-inputa.
   [Crosswalk](../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json),
   [operational evidence](../reports/real-fire-data/cfsds-train-bc-operational-evidence.json),
-  [ADR-027](../docs/specs/DECISION_RECORDS.md#adr-027) and
-  [ADR-028](../docs/specs/DECISION_RECORDS.md#adr-028).
+  [ADR-027](../docs/specs/DECISION_RECORDS.md#adr-027),
+  [ADR-028](../docs/specs/DECISION_RECORDS.md#adr-028), and
+  [ADR-032](../docs/specs/DECISION_RECORDS.md#adr-032).
 - Pregled ranijih radova potvrđuje da su CFSDS dnevne karte korištene u W.I.S.E., a
   stvarni Dogrib požar u Cell2Fire; Firehose RL je zasebno treniran preko simulatora.
   W.I.S.E. otvoreno koristi sutrašnju kartu za odabir početnog fronta, a podešeni

@@ -11,6 +11,7 @@
 - [Train-only CFSDS input QC](CFSDS_TRAIN_INPUT_QC.md) - Poravnanje dostupnih train FireCase mapa, weather inputa, fuel vintagea i suppression evidencije
 - [TRAIN BC perimeter crosswalk](../../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json) - Tri target-centroid matcha na službene BC požare; ID-ji za provjeru, bez akcija gašenja
 - [TRAIN BC operational evidence](../../reports/real-fire-data/cfsds-train-bc-operational-evidence.json) - Dnevni javni izvještaji za dva od tri kandidata, s razlikom između cilj-dana i okolnih dana; nije dnevnik dispečiranja
+- [EXP-021: BC status snapshot follow-up](EXPERIMENT_LOG.md#exp-021--train-only-bc-incident-status-snapshot-follow-up-2026-10-31) - Službeni PECC statusi za dva kandidata; dvije verzije navode različite procjene za isto vrijeme i ne daju akcije gašenja
 - [TRAIN-only CFSDS fuel-vintage review](CFSDS_FUEL_VINTAGE_REVIEW.md) - Službeni izvori za istorijski cutoff, javno transkribovanu W.I.S.E. Figure 2, neriješenu age/class semantiku i reuse uslove
 - [TRAIN-only fuel source-gate receipt](../../reports/real-fire-data/cfsds-train-fuel-source-gate.json) - Šta zvanični metadata i javno navedeni v20191114 dokumenti dokazuju, a šta ne
 - [TRAIN terrain/weather provenance receipt](../../reports/real-fire-data/cfsds-train-terrain-weather-provenance.json) - MRDEM source-class check i pinovani target-blind ERA5-Seamless odgovori za tri stare dijagnostičke slučajeve; source vintage i legacy weather mismatch ostaju otvoreni

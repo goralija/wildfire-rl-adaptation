@@ -1,5 +1,11 @@
 # Promjene baze znanja
 
+## 2026-10-31: dodatna BC javna statusna izvješća
+
+- Službeni EMBC PECC SitRep #10/#11 dodaje veličinu i containment status za kandidatske incidente C11937 i N12413. Dva izvještaja navode različite procjene za isto štampano vrijeme; ne predstavljamo ih kao jednu pouzdanu dnevnu krivulju.
+- Pretraga javnog paketa ne nalazi N12395, a indeksirane pretrage ne otkrivaju incident-level dnevne planove/dispatch za tri kandidata. To nije dokaz da zapisi ne postoje izvan pregledanih izvora.
+- Manifesti ostaju `suppression_status=unknown`; nema cell-level action inputa. Ažurirani su [evidence receipt](reports/real-fire-data/cfsds-train-bc-operational-evidence.json), [S-046](docs/research/SOURCES.md), [EXP-021](docs/research/EXPERIMENT_LOG.md#exp-021--train-only-bc-incident-status-snapshot-follow-up-2026-10-31) i [ADR-032](docs/specs/DECISION_RECORDS.md#adr-032), uz status/task stranice. `research_ready=false`.
+
 ## 2026-10-31: TRAIN DEM source class i vremenski snapshoti
 
 - Tri postojeća 2018 TRAIN DEM prozora u MRDEM source-class sloju su 100% adjusted GLO-30; tačan stari DTM revision i pixel acquisition date i dalje nisu poznati.

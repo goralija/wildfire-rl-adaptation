@@ -104,17 +104,20 @@ base-layer notes identify an Agriculture Canada data-sharing agreement and kNN l
 available on request [S-041]. CNFDB separately requires its End-User Agreement; no
 agreement was accepted [S-031 through S-036].
 
-The suppression/action join is still incomplete across the 20 TRAIN candidates. A
-follow-up review of public BC records found dated operational reporting for two of the
-three saved-case incident candidates: Coal Creek (N12395) had containment-line work,
-heavy equipment and a helicopter reported on the `2018_1770` target date; Lost Dog
-Complex (N12413) had a planned ignition and complex-level resources reported one day
-before the `2018_747` target. For North Baezaeko (C11937), the official report one day
-after the `2018_241` target gives size and 0% containment, but no crew/action schedule.
-The spatial crosswalk is still a candidate join without a shared CFSDS/BC event key, and
-the public reports do not give complete per-fire timelines. Keep the saved manifests'
-`suppression_status` as `unknown` pending an event-keyed record. Details and date offsets
-are in the [BC operational evidence receipt](../../reports/real-fire-data/cfsds-train-bc-operational-evidence.json)
+The suppression/action join is still incomplete across the 20 TRAIN candidates. Public
+BC records document containment-line work, equipment and helicopter support at Coal
+Creek (candidate N12395) on the `2018_1770` target date, and a planned ignition/resources
+for the Lost Dog Complex (candidate N12413) one day before the `2018_747` target. An
+official EMBC package adds incident-level status snapshots: its August 16 SitRep #10
+lists North Baezaeko (C11937) at 2,500 ha/0% contained and Lost Dog Complex (N12413) at
+452.5 ha/out of control. SitRep #11, sent August 17, prints the same August 16 15:00
+snapshot time but reports different entries: 4,000 ha/10% and 706 ha/out of control. These
+are differently reported status estimates, not a reliable daily perimeter series or an
+action log. A text search of the package did not return N12395. The CFSDS/BC matches
+remain candidate joins without a shared event key, and no reviewed source gives a
+complete per-fire action timeline or cell-level treatment footprint. Keep all saved
+manifests' `suppression_status` as `unknown`. Exact observations and search limits are in
+the [BC operational evidence receipt](../../reports/real-fire-data/cfsds-train-bc-operational-evidence.json)
 [S-045–S-047]. CNFDB provides agency-contributed fire locations/perimeters, but its
 public documentation warns that records are incomplete and variable in quality; access
 requires an End-User Agreement [S-036].

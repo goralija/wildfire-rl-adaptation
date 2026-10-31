@@ -82,9 +82,16 @@ traži očuvane CRS/skalu/vrijeme/akcije kroz cijelu epizodu.
   `2018_241` → C11937, `2018_747` → N12413. To su geometrijski crosswalk kandidati,
   ne zajednički ID join. Operativni follow-up našao je javni izvještaj o containment-line
   radu na Coal Creek na target datum `2018_1770` i o planiranom paljenju/resursima Lost
-  Dog Complexa dan prije targeta `2018_747`. Za C11937 postoji službeni next-day status,
-  ali ne i pronađen dnevnik akcija. Sačuvani case manifesti i dalje imaju suppression
-  `unknown`; detalji su u `reports/real-fire-data/cfsds-train-bc-operational-evidence.json`.
+  Dog Complexa dan prije targeta `2018_747`. Službeni EMBC izvještaji daju samo statusne
+  snimke za N12413 na target dan i C11937 dan poslije; #10/#11 se razlikuju u procjeni
+  veličine/containmenta za isto štampano vrijeme. Dnevnik akcija nije pronađen. Sačuvani
+  case manifesti i dalje imaju suppression `unknown`; detalji su u
+  `reports/real-fire-data/cfsds-train-bc-operational-evidence.json`.
+- EXP-021 je proširio javnu BC pretragu na službeni EMBC PECC paket. Izvještaji #10/#11
+  daju statusne snimke za N12413 i C11937, ali uz različite procjene za isto štampano
+  vrijeme. Nema dnevnog plana akcija/dispečiranja za tri kandidata u pregledanim javnim
+  rezultatima; pretraga nije dokaz da takvi neobjavljeni ili neindeksirani zapisi ne
+  postoje. Statusi ne mijenjaju `suppression_status=unknown`.
 - TASK-015 NF-scar importer/cumulative-damage contract je implementiran i provjeren na
   izolovanom sintetičkom Sub20 C++ rolloutu; tri neispravna slučaja se odbijaju.
   Ovo ne otključava annual mapu ili CFSDS builder. Vidi ADR-025 i versioned receipt.
@@ -119,12 +126,13 @@ Metode i dokazi:
    NRCan/CWFIS ili autora rada: eksplicitan v2014b cutoff i succession artifact/code ili
    potvrda da je Figure 2 kompletan algoritam. ZIP od 2 GB nije pregledan. Do tada drži
    gate zatvoren i ne generiši godišnju mapu.
-2. Nastavi TRAIN-only BC suppression search: pribavi event-keyed dnevne zapise za N12395,
-   C11937 i N12413 ako su javno dostupni; sadašnji izvještaji za Coal Creek/Lost Dog su
-   snapshots i kandidatski join, a C11937 nema pronađene dnevne akcije. Za ostale TRAIN
-   slučajeve odredi provinciju pa traži nadležni izvor; Alberta CSV/dictionary još treba
-   dohvatiti službenim putem nakon HTTP 403. Fire-level resursi nisu dnevni plan, a bez
-   dokaza ostavi status `unknown`.
+2. Širi javni search pass za tri spremljena BC slučaja je završen (EXP-018/021): EMBC
+   SitRep #10/#11 daje incident-level statusne snimke za C11937/N12413, a lokalni izvori
+   daju djelimičnu aktivnost za N12395/N12413. Te vrijednosti nisu akcioni dnevnik;
+   CFSDS crosswalk ostaje kandidatski. Nastavi na preostalim TRAIN kandidatima tako što
+   ćeš prvo potvrditi provinciju i tražiti nadležni izvor. Alberta CSV/dictionary još
+   treba dohvatiti službenim putem nakon HTTP 403. Ne zaključuj "bez gašenja" iz 0%
+   containmenta ili odsustva zapisa; bez pouzdanog dokaza ostavi `unknown`.
 3. Prihvati tri sačuvana case-a samo kao dijagnostiku. Za nove prihvatljive TRAIN ulaze
    zamrzni tačan DEM DTM asset/version/hash (trenutni izvorni sloj daje samo source
    category) i zabilježi query URL, traženu/vraćenu lokaciju, model/polja/jedinice,

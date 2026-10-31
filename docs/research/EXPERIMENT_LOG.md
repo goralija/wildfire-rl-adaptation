@@ -642,3 +642,34 @@ heldout inspection occurred. Evidence: [terrain/weather receipt](../../reports/r
 [pinned response snapshots](../../reports/real-fire-data/weather-snapshots/),
 [input QC](CFSDS_TRAIN_INPUT_QC.md), [ADR-030](../specs/DECISION_RECORDS.md#adr-030),
 and [S-049](SOURCES.md).
+
+## EXP-021 — TRAIN-only BC incident-status snapshot follow-up, 2026-10-31
+
+Expanded the public-source search for only the three saved 2018 TRAIN perimeter
+candidates. The official 405-page Emergency Management BC response package contains
+PECC Situation Reports #10 and #11. SitRep #10, sent August 16, lists an August 16
+15:00 snapshot with North Baezaeko (C11937) at 2,500 ha/0% contained and Lost Dog
+Complex (N12413) at 452.5 ha/out of control. SitRep #11, sent August 17, prints that
+same snapshot time but reports C11937 at 4,000 ha/10% and N12413 at 706 ha/out of
+control. The two publications therefore provide versioned incident-status estimates,
+not a consistent daily perimeter series. The Lost Dog snapshot falls on the CFSDS
+`2018_747` target date; the North Baezaeko snapshot is one day after `2018_241`'s target.
+
+A text search of this package returned no N12395 entry. Indexed searches for the three
+incident identifiers did not surface a case-specific public BCWS daily action-plan or
+dispatch package. This is a bounded public-search result, not proof that unpublished,
+unindexed, or request-only records do not exist. Existing local reports remain the only
+reviewed public source describing target-day action at candidate N12395. No action
+schedule, crew assignment, treatment location, or common CFSDS-to-BC incident key was
+found for any saved case.
+
+**Decision:** do not infer `no suppression` from a 0% containment report or an absent
+public record; leave all three manifest labels `suppression_status=unknown`. Do not
+turn these incident-level area/status estimates into per-cell simulator actions or
+ground-truth arrival masks. Preserve report number, publication date, printed snapshot
+date/time, and estimate separately for any future visualization. No case, replay,
+calibration, benchmark, training, or heldout inspection was performed.
+
+Evidence: [updated operational evidence receipt](../../reports/real-fire-data/cfsds-train-bc-operational-evidence.json),
+[source S-046](SOURCES.md), [input QC](CFSDS_TRAIN_INPUT_QC.md), [ADR-032](../specs/DECISION_RECORDS.md#adr-032),
+and the [official PECC response package](https://docs.openinfo.gov.bc.ca/Response_Package_PSS-2018-86747.pdf).
