@@ -1,0 +1,66 @@
+{
+  "fixture": "Dogrib 2001 Cell2Fire public sample",
+  "purpose": "geospatial input and visualization QA only; not a simulator replay or independent holdout",
+  "source_commit": "84e3c817ad866358d8db28e87c9445b42aaf7908",
+  "crs_wkt": "PROJCRS[\"unknown\",BASEGEOGCRS[\"unknown\",DATUM[\"North American Datum 1983\",ELLIPSOID[\"GRS 1980\",6378137,298.257222101,LENGTHUNIT[\"metre\",1]],ID[\"EPSG\",6269]],PRIMEM[\"Greenwich\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8901]]],CONVERSION[\"unknown\",METHOD[\"Transverse Mercator\",ID[\"EPSG\",9807]],PARAMETER[\"Latitude of natural origin\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8801]],PARAMETER[\"Longitude of natural origin\",-115,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8802]],PARAMETER[\"Scale factor at natural origin\",0.9992,SCALEUNIT[\"unity\",1],ID[\"EPSG\",8805]],PARAMETER[\"False easting\",500000,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"(E)\",east,ORDER[1],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]],AXIS[\"(N)\",north,ORDER[2],LENGTHUNIT[\"metre\",1,ID[\"EPSG\",9001]]]]",
+  "crs_source_definition": "Projection    TRANSVERSE\nDatum         NAD83\nSpheroid      GRS80\nUnits         METERS\nZunits        NO\nXshift        0.0\nYshift        0.0\nParameters    \n0.9992 /* scale factor at central meridian\n-115  0  0.0 /* longitude of central meridian\n   0  0  0.0 /* latitude of origin\n500000.0 /* false easting (meters)\n0.0 /* false northing (meters)\n",
+  "grid": {
+    "shape_rc": [
+      223,
+      357
+    ],
+    "cell_size_m": 100.0,
+    "extent_xy_m": [
+      457900.0,
+      5716800.0,
+      493600.0,
+      5739100.0
+    ],
+    "row_order": "north_to_south"
+  },
+  "observed_scar_cells": 10210,
+  "observed_scar_cells_on_nonfuel_101": 663,
+  "supplied_prometheus_cells": 1197,
+  "supplied_prometheus_time_alignment": "not established; shown only as a source-package visual layer",
+  "ignition": {
+    "kml_cell_rc_zero_based": [
+      188,
+      91
+    ],
+    "kml_cell_rc_one_based": [
+      189,
+      92
+    ],
+    "csv_ncell_one_based_row_major": 66850,
+    "csv_cell_rc_zero_based": [
+      187,
+      90
+    ],
+    "csv_cell_rc_one_based": [
+      188,
+      91
+    ],
+    "cell_delta_csv_minus_kml": [
+      -1,
+      -1
+    ],
+    "kml_point_to_containing_cell_center_m": 4.419
+  },
+  "weather": {
+    "rows": 8,
+    "start": "2001-10-16 13:00",
+    "end": "2001-10-16 20:00",
+    "sample_span_hours": 7.0,
+    "perimeter_interval": "2001-10-16 13:00 to 2001-10-17 11:52",
+    "perimeter_interval_hours": 22.866666666666667,
+    "warning": "the package weather samples span only the first 7 hours between timestamps; final perimeter is 22 h 52 min after start"
+  },
+  "firehose_sub20_overlay": {
+    "illustrative_full_raster_array_origin_zero_based": [
+      0,
+      20
+    ],
+    "warning": "fuel/elevation match this array block, but slope/aspect differ and legacy geospatial origin is not validated"
+  },
+  "plot": "reports/real-fire-data/dogrib-reference-alignment.png"
+}

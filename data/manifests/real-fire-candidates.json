@@ -25,6 +25,8 @@
         "shared fuel/elevation patch with Firehose Sub20",
         "historical suppression present in case chronology",
         "observation and simulation time windows must be reconciled",
+        "KML ignition point maps to row 189/column 92 but Ignitions.csv maps to row 188/column 91 on the full raster",
+        "Weather.csv has eight hourly rows spanning seven hours, while reference KML perimeters are 22 h 52 min apart",
         "663 observed-burn pixels coincide with nonfuel code101; no silent label filtering",
         "full map is incompatible with existing 400-action policy without explicit cropping/scaling design"
       ],
@@ -33,7 +35,8 @@
       "observed_outcome_file": "dogrib/real_scar_dogrib.csv",
       "paper_doi": "10.1038/s41598-025-05706-6",
       "repository": "https://github.com/humnetlab/Cell2Fire",
-      "role": "first Cell2Fire-compatible historical case / sanity check, not independent generalization test"
+      "role": "Cell2Fire input-format and visualization fixture only until ignition/time/fuel/domain alignment is resolved; not a replay or independent generalization test",
+      "alignment_qc_report": "reports/real-fire-data/dogrib-reference-alignment.json"
     },
     {
       "article_license": "CC-BY-4.0 (article; does not automatically settle data-package terms)",
