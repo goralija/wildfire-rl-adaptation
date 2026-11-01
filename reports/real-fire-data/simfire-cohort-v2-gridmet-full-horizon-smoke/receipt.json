@@ -1,0 +1,439 @@
+{
+  "adapter": "src/wildfire_rl/simfire_gym_env.py",
+  "agent_training": false,
+  "atmosphere": {
+    "mode": "gridmet_daily_proxy",
+    "warning": "Daily proxy mode uses explicit assumptions; it is not an hourly event replay or measured midflame weather.",
+    "wind_adjustment_factor_override": 0.3
+  },
+  "created_at_utc": "2026-11-01T14:53:37.134002+00:00",
+  "decision_minutes": 30,
+  "historical_weather_context_used": true,
+  "horizon_decisions": 24,
+  "kind": "simfire_gymnasium_real_cohort_integration_smoke",
+  "limitations": [
+    "This confirms the data-to-SimFire-to-Gymnasium interface only; it is not an RL training run.",
+    "Daily gridMET is used only when gridmet_daily_proxy is selected; the default smoke remains demonstration_only.",
+    "A fireline action places one 30 m grid point instantly anywhere on the map; crew travel and construction time are omitted.",
+    "Reported FPA-FOD incident coordinates are uncertain references, not GPS-confirmed ignition cells."
+  ],
+  "line_budget_per_episode": 1,
+  "maximum_episode_hours": 12.0,
+  "physical_validation": false,
+  "scientific_result": false,
+  "simfire_commit": "04905b19fe8c10dc08d64faddd00303e0561bb66",
+  "splits": [
+    {
+      "action_count": 16385,
+      "gym_observation_space_contains_final": true,
+      "observation_shapes": {
+        "map": [
+          24,
+          128,
+          128
+        ],
+        "state": [
+          7
+        ]
+      },
+      "policy_probe": {
+        "algorithm": "MaskablePPO",
+        "learn_called": false,
+        "policy": "MultiInputPolicy",
+        "predicted_action": 3269,
+        "predicted_action_was_legal": true
+      },
+      "reset_info": {
+        "burnable_cells": 15331,
+        "cohort_id": "fpa-fod-western-us-2018-2024-v2",
+        "cumulative_burned_area_ha": 0.09,
+        "cumulative_burned_cells": 1,
+        "decision": 0,
+        "decision_minutes": 30,
+        "delta_burned_cells": 0,
+        "fireline_budget_initial": 1,
+        "fireline_budget_remaining": 1,
+        "fireline_points_used": 0,
+        "fuel_codes_present": [
+          1,
+          2,
+          3,
+          5,
+          8,
+          9,
+          91,
+          93,
+          98
+        ],
+        "fuel_sha256": "d99edd69c85a7ebe0bd33834e8b29ea37ad0964ad8dd73f775ba0b4332928d7c",
+        "fuel_source_release": "LF2016",
+        "grid_resolution_m": 30,
+        "historical_weather_context_used": true,
+        "horizon_decisions": 24,
+        "placed_fireline": false,
+        "scenario_id": "fpa-fod-400310930-owyhee",
+        "simfire_commit": "04905b19fe8c10dc08d64faddd00303e0561bb66",
+        "simfire_pixel_scale_ft": 98.42519685,
+        "simulated_minutes": 0,
+        "split": "train",
+        "terrain_sha256": "a73dd15c6e64a25f5326a7ec2de78402831764c3c789136246b73a0b4739327d",
+        "weather_mapping_sha256": "36123259730d4deb3b774be303d41da30ea5dc7f31708b7c5ca856a1be08b73e",
+        "weather_mapping_version": "gridmet-daily-simfire-proxy/1.0",
+        "weather_mode": "gridmet_daily_proxy",
+        "weather_proxy_parameters": {
+          "fuel_moisture_fraction_proxy": 0.029861099999999988,
+          "wind_adjustment_factor": 0.3,
+          "wind_direction_degrees_clockwise_north_to": 51.0,
+          "wind_speed_midflame_mph_proxy": 2.68432355052
+        },
+        "weather_source_sha256": "4f8feeb3278979561834b96d58af092739e3dace649a0c27f8a435f3def0fb3d"
+      },
+      "scenario_id": "fpa-fod-400310930-owyhee",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400310930-owyhee.json",
+      "split": "train",
+      "transitions": [
+        {
+          "action": "place_one_30m_fireline_point",
+          "column": 66,
+          "info": {
+            "burnable_cells": 15331,
+            "cohort_id": "fpa-fod-western-us-2018-2024-v2",
+            "cumulative_burned_area_ha": 0.09,
+            "cumulative_burned_cells": 1,
+            "decision": 1,
+            "decision_minutes": 30,
+            "delta_burned_cells": 0,
+            "fireline_budget_initial": 1,
+            "fireline_budget_remaining": 0,
+            "fireline_points_used": 1,
+            "fuel_codes_present": [
+              1,
+              2,
+              3,
+              5,
+              8,
+              9,
+              91,
+              93,
+              98
+            ],
+            "fuel_sha256": "d99edd69c85a7ebe0bd33834e8b29ea37ad0964ad8dd73f775ba0b4332928d7c",
+            "fuel_source_release": "LF2016",
+            "grid_resolution_m": 30,
+            "historical_weather_context_used": true,
+            "horizon_decisions": 24,
+            "placed_fireline": true,
+            "scenario_id": "fpa-fod-400310930-owyhee",
+            "simfire_commit": "04905b19fe8c10dc08d64faddd00303e0561bb66",
+            "simfire_pixel_scale_ft": 98.42519685,
+            "simulated_minutes": 4,
+            "split": "train",
+            "terrain_sha256": "a73dd15c6e64a25f5326a7ec2de78402831764c3c789136246b73a0b4739327d",
+            "weather_mapping_sha256": "36123259730d4deb3b774be303d41da30ea5dc7f31708b7c5ca856a1be08b73e",
+            "weather_mapping_version": "gridmet-daily-simfire-proxy/1.0",
+            "weather_mode": "gridmet_daily_proxy",
+            "weather_proxy_parameters": {
+              "fuel_moisture_fraction_proxy": 0.029861099999999988,
+              "wind_adjustment_factor": 0.3,
+              "wind_direction_degrees_clockwise_north_to": 51.0,
+              "wind_speed_midflame_mph_proxy": 2.68432355052
+            },
+            "weather_source_sha256": "4f8feeb3278979561834b96d58af092739e3dace649a0c27f8a435f3def0fb3d"
+          },
+          "reward": -0.0,
+          "row": 64,
+          "terminated": true,
+          "truncated": false
+        }
+      ],
+      "visual": "reports/real-fire-data/simfire-cohort-v2-gridmet-full-horizon-smoke/train-fpa-fod-400310930-owyhee.png"
+    },
+    {
+      "action_count": 16385,
+      "gym_observation_space_contains_final": true,
+      "observation_shapes": {
+        "map": [
+          24,
+          128,
+          128
+        ],
+        "state": [
+          7
+        ]
+      },
+      "policy_probe": null,
+      "reset_info": {
+        "burnable_cells": 15974,
+        "cohort_id": "fpa-fod-western-us-2018-2024-v2",
+        "cumulative_burned_area_ha": 0.09,
+        "cumulative_burned_cells": 1,
+        "decision": 0,
+        "decision_minutes": 30,
+        "delta_burned_cells": 0,
+        "fireline_budget_initial": 1,
+        "fireline_budget_remaining": 1,
+        "fireline_points_used": 0,
+        "fuel_codes_present": [
+          2,
+          5,
+          6,
+          8,
+          9,
+          10,
+          98,
+          99
+        ],
+        "fuel_sha256": "1119eca86b9a9356e60aa6fabf406aed490e9b961aa27908b51db5b64df266f9",
+        "fuel_source_release": "LF2022",
+        "grid_resolution_m": 30,
+        "historical_weather_context_used": true,
+        "horizon_decisions": 24,
+        "placed_fireline": false,
+        "scenario_id": "fpa-fod-401316132-hayden",
+        "simfire_commit": "04905b19fe8c10dc08d64faddd00303e0561bb66",
+        "simfire_pixel_scale_ft": 98.42519685,
+        "simulated_minutes": 0,
+        "split": "validation",
+        "terrain_sha256": "4bd9613e6ed2171a368f3ebc6120d9b916b962cf3e5f4a5dc207926f48fde870",
+        "weather_mapping_sha256": "beb07aec9e941d3f0d3ff17bff3c6efd27d5e8b63ec344a9fd4f7845b252861e",
+        "weather_mapping_version": "gridmet-daily-simfire-proxy/1.0",
+        "weather_mode": "gridmet_daily_proxy",
+        "weather_proxy_parameters": {
+          "fuel_moisture_fraction_proxy": 0.03172309999999998,
+          "wind_adjustment_factor": 0.3,
+          "wind_direction_degrees_clockwise_north_to": 124.0,
+          "wind_speed_midflame_mph_proxy": 1.34216177526
+        },
+        "weather_source_sha256": "a15dac7d8895f71f1a4fed702b96fa5a11224a763f07a51c7101da47560f2ced"
+      },
+      "scenario_id": "fpa-fod-401316132-hayden",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401316132-hayden.json",
+      "split": "validation",
+      "transitions": [
+        {
+          "action": "place_one_30m_fireline_point",
+          "column": 64,
+          "info": {
+            "burnable_cells": 15974,
+            "cohort_id": "fpa-fod-western-us-2018-2024-v2",
+            "cumulative_burned_area_ha": 0.9,
+            "cumulative_burned_cells": 10,
+            "decision": 1,
+            "decision_minutes": 30,
+            "delta_burned_cells": 9,
+            "fireline_budget_initial": 1,
+            "fireline_budget_remaining": 0,
+            "fireline_points_used": 1,
+            "fuel_codes_present": [
+              2,
+              5,
+              6,
+              8,
+              9,
+              10,
+              98,
+              99
+            ],
+            "fuel_sha256": "1119eca86b9a9356e60aa6fabf406aed490e9b961aa27908b51db5b64df266f9",
+            "fuel_source_release": "LF2022",
+            "grid_resolution_m": 30,
+            "historical_weather_context_used": true,
+            "horizon_decisions": 24,
+            "placed_fireline": true,
+            "scenario_id": "fpa-fod-401316132-hayden",
+            "simfire_commit": "04905b19fe8c10dc08d64faddd00303e0561bb66",
+            "simfire_pixel_scale_ft": 98.42519685,
+            "simulated_minutes": 30,
+            "split": "validation",
+            "terrain_sha256": "4bd9613e6ed2171a368f3ebc6120d9b916b962cf3e5f4a5dc207926f48fde870",
+            "weather_mapping_sha256": "beb07aec9e941d3f0d3ff17bff3c6efd27d5e8b63ec344a9fd4f7845b252861e",
+            "weather_mapping_version": "gridmet-daily-simfire-proxy/1.0",
+            "weather_mode": "gridmet_daily_proxy",
+            "weather_proxy_parameters": {
+              "fuel_moisture_fraction_proxy": 0.03172309999999998,
+              "wind_adjustment_factor": 0.3,
+              "wind_direction_degrees_clockwise_north_to": 124.0,
+              "wind_speed_midflame_mph_proxy": 1.34216177526
+            },
+            "weather_source_sha256": "a15dac7d8895f71f1a4fed702b96fa5a11224a763f07a51c7101da47560f2ced"
+          },
+          "reward": -0.0005634155502691875,
+          "row": 63,
+          "terminated": false,
+          "truncated": false
+        },
+        {
+          "action": "no_op_after_budget_exhausted",
+          "info": {
+            "burnable_cells": 15974,
+            "cohort_id": "fpa-fod-western-us-2018-2024-v2",
+            "cumulative_burned_area_ha": 0.9,
+            "cumulative_burned_cells": 10,
+            "decision": 2,
+            "decision_minutes": 30,
+            "delta_burned_cells": 0,
+            "fireline_budget_initial": 1,
+            "fireline_budget_remaining": 0,
+            "fireline_points_used": 1,
+            "fuel_codes_present": [
+              2,
+              5,
+              6,
+              8,
+              9,
+              10,
+              98,
+              99
+            ],
+            "fuel_sha256": "1119eca86b9a9356e60aa6fabf406aed490e9b961aa27908b51db5b64df266f9",
+            "fuel_source_release": "LF2022",
+            "grid_resolution_m": 30,
+            "historical_weather_context_used": true,
+            "horizon_decisions": 24,
+            "placed_fireline": false,
+            "scenario_id": "fpa-fod-401316132-hayden",
+            "simfire_commit": "04905b19fe8c10dc08d64faddd00303e0561bb66",
+            "simfire_pixel_scale_ft": 98.42519685,
+            "simulated_minutes": 31,
+            "split": "validation",
+            "terrain_sha256": "4bd9613e6ed2171a368f3ebc6120d9b916b962cf3e5f4a5dc207926f48fde870",
+            "weather_mapping_sha256": "beb07aec9e941d3f0d3ff17bff3c6efd27d5e8b63ec344a9fd4f7845b252861e",
+            "weather_mapping_version": "gridmet-daily-simfire-proxy/1.0",
+            "weather_mode": "gridmet_daily_proxy",
+            "weather_proxy_parameters": {
+              "fuel_moisture_fraction_proxy": 0.03172309999999998,
+              "wind_adjustment_factor": 0.3,
+              "wind_direction_degrees_clockwise_north_to": 124.0,
+              "wind_speed_midflame_mph_proxy": 1.34216177526
+            },
+            "weather_source_sha256": "a15dac7d8895f71f1a4fed702b96fa5a11224a763f07a51c7101da47560f2ced"
+          },
+          "reward": -0.0,
+          "terminated": true,
+          "truncated": false
+        }
+      ],
+      "visual": "reports/real-fire-data/simfire-cohort-v2-gridmet-full-horizon-smoke/validation-fpa-fod-401316132-hayden.png"
+    },
+    {
+      "action_count": 16385,
+      "gym_observation_space_contains_final": true,
+      "observation_shapes": {
+        "map": [
+          24,
+          128,
+          128
+        ],
+        "state": [
+          7
+        ]
+      },
+      "policy_probe": null,
+      "reset_info": {
+        "burnable_cells": 15613,
+        "cohort_id": "fpa-fod-western-us-2018-2024-v2",
+        "cumulative_burned_area_ha": 0.09,
+        "cumulative_burned_cells": 1,
+        "decision": 0,
+        "decision_minutes": 30,
+        "delta_burned_cells": 0,
+        "fireline_budget_initial": 1,
+        "fireline_budget_remaining": 1,
+        "fireline_points_used": 0,
+        "fuel_codes_present": [
+          2,
+          5,
+          8,
+          9,
+          10,
+          91,
+          93,
+          98,
+          99
+        ],
+        "fuel_sha256": "d0d7a228840ed972f2cca2c6d5395d9c730072fcfe54ac86534c9acba2a79cad",
+        "fuel_source_release": "LF2022",
+        "grid_resolution_m": 30,
+        "historical_weather_context_used": true,
+        "horizon_decisions": 24,
+        "placed_fireline": false,
+        "scenario_id": "fpa-fod-401411292-larch-creek",
+        "simfire_commit": "04905b19fe8c10dc08d64faddd00303e0561bb66",
+        "simfire_pixel_scale_ft": 98.42519685,
+        "simulated_minutes": 0,
+        "split": "test",
+        "terrain_sha256": "fe56618b547a1b157a53a7b74384b244ada18f2fca8d83ce9c6a5c3de7defe3e",
+        "weather_mapping_sha256": "240f7af4b7528817057d04931be52ce07a109a6e20760c88281edd1168a440ae",
+        "weather_mapping_version": "gridmet-daily-simfire-proxy/1.0",
+        "weather_mode": "gridmet_daily_proxy",
+        "weather_proxy_parameters": {
+          "fuel_moisture_fraction_proxy": 0.03205429999999999,
+          "wind_adjustment_factor": 0.3,
+          "wind_direction_degrees_clockwise_north_to": 218.0,
+          "wind_speed_midflame_mph_proxy": 1.811918396601
+        },
+        "weather_source_sha256": "c3808462ebc7a46ab0f6073a0b9fc85c35a9fb02f081ee58ee6f284cb6db466a"
+      },
+      "scenario_id": "fpa-fod-401411292-larch-creek",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401411292-larch-creek.json",
+      "split": "test",
+      "transitions": [
+        {
+          "action": "place_one_30m_fireline_point",
+          "column": 64,
+          "info": {
+            "burnable_cells": 15613,
+            "cohort_id": "fpa-fod-western-us-2018-2024-v2",
+            "cumulative_burned_area_ha": 0.09,
+            "cumulative_burned_cells": 1,
+            "decision": 1,
+            "decision_minutes": 30,
+            "delta_burned_cells": 0,
+            "fireline_budget_initial": 1,
+            "fireline_budget_remaining": 0,
+            "fireline_points_used": 1,
+            "fuel_codes_present": [
+              2,
+              5,
+              8,
+              9,
+              10,
+              91,
+              93,
+              98,
+              99
+            ],
+            "fuel_sha256": "d0d7a228840ed972f2cca2c6d5395d9c730072fcfe54ac86534c9acba2a79cad",
+            "fuel_source_release": "LF2022",
+            "grid_resolution_m": 30,
+            "historical_weather_context_used": true,
+            "horizon_decisions": 24,
+            "placed_fireline": true,
+            "scenario_id": "fpa-fod-401411292-larch-creek",
+            "simfire_commit": "04905b19fe8c10dc08d64faddd00303e0561bb66",
+            "simfire_pixel_scale_ft": 98.42519685,
+            "simulated_minutes": 4,
+            "split": "test",
+            "terrain_sha256": "fe56618b547a1b157a53a7b74384b244ada18f2fca8d83ce9c6a5c3de7defe3e",
+            "weather_mapping_sha256": "240f7af4b7528817057d04931be52ce07a109a6e20760c88281edd1168a440ae",
+            "weather_mapping_version": "gridmet-daily-simfire-proxy/1.0",
+            "weather_mode": "gridmet_daily_proxy",
+            "weather_proxy_parameters": {
+              "fuel_moisture_fraction_proxy": 0.03205429999999999,
+              "wind_adjustment_factor": 0.3,
+              "wind_direction_degrees_clockwise_north_to": 218.0,
+              "wind_speed_midflame_mph_proxy": 1.811918396601
+            },
+            "weather_source_sha256": "c3808462ebc7a46ab0f6073a0b9fc85c35a9fb02f081ee58ee6f284cb6db466a"
+          },
+          "reward": -0.0,
+          "row": 62,
+          "terminated": true,
+          "truncated": false
+        }
+      ],
+      "visual": "reports/real-fire-data/simfire-cohort-v2-gridmet-full-horizon-smoke/test-fpa-fod-401411292-larch-creek.png"
+    }
+  ],
+  "weather_mode": "gridmet_daily_proxy"
+}
