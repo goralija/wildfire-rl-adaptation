@@ -1,0 +1,846 @@
+{
+  "attempted_this_run_case_count": 1,
+  "cases": [
+    {
+      "sampled_grid_point": {
+        "latitude": 41.941,
+        "longitude": -116.099
+      },
+      "scenario_id": "fpa-fod-400310930-owyhee",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400310930-owyhee.json",
+      "weather_sha256": "4f8feeb3278979561834b96d58af092739e3dace649a0c27f8a435f3def0fb3d"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 33.983,
+        "longitude": -111.099
+      },
+      "scenario_id": "fpa-fod-400302636-bears",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400302636-bears.json",
+      "weather_sha256": "b691dfb30e118b92891e6f9621fb81bd69c320c5a4f6e94a7a2ad5f0080b931d"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 39.275,
+        "longitude": -109.891
+      },
+      "scenario_id": "fpa-fod-400313301-bear-trap",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400313301-bear-trap.json",
+      "weather_sha256": "5f98fa376c89615606ddcdc2dc15e8be30fb4a47b6a5009f3c328bf63c9de952"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 39.066,
+        "longitude": -123.141
+      },
+      "scenario_id": "fpa-fod-400307064-river",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400307064-river.json",
+      "weather_sha256": "6a6b6be9015af818b27015a101712fd5248e7db7f8130bc71b9dc94fab487ce4"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 45.15,
+        "longitude": -119.974
+      },
+      "scenario_id": "fpa-fod-400312300-lone-rock",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400312300-lone-rock.json",
+      "weather_sha256": "a8bce64250f21bcd162e2595f4a8566136fc09f75757d11d635f117d22756acf"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 44.525,
+        "longitude": -116.849
+      },
+      "scenario_id": "fpa-fod-400304776-keithly",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400304776-keithly.json",
+      "weather_sha256": "306dbe2e0778a69befe54615abe187a483a781f2f9a612d566644a823bb76667"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 40.65,
+        "longitude": -108.558
+      },
+      "scenario_id": "fpa-fod-400307548-boone-draw",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400307548-boone-draw.json",
+      "weather_sha256": "0547074b948cbeb4a948b2c4f98053242d16500faa020acc80784b72b1c3fae8"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 46.316,
+        "longitude": -120.558
+      },
+      "scenario_id": "fpa-fod-400313679-meninick-pass",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400313679-meninick-pass.json",
+      "weather_sha256": "fbae6f63adb12316832563bfcd6f7ce7351e5b38ed074fba2a32e5646f3d9a3b"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 33.483,
+        "longitude": -103.349
+      },
+      "scenario_id": "fpa-fod-400310659-206",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400310659-206.json",
+      "weather_sha256": "6d49aa8a366a4f0ca536c044465e2d8144641033173e578002a183cbfa947f5e"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 44.983,
+        "longitude": -111.849
+      },
+      "scenario_id": "fpa-fod-400303610-monument",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400303610-monument.json",
+      "weather_sha256": "41be254e67c34caf4a7c3089d9f14492227458db59d4cc1f3e9fea9e5152e155"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 38.108,
+        "longitude": -112.933
+      },
+      "scenario_id": "fpa-fod-400312787-black-mountain",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400312787-black-mountain.json",
+      "weather_sha256": "bfb94aed468d9beceb68c11c3e64a8bb11dc9b163712e9c9b8983dcb8ae0d238"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 40.733,
+        "longitude": -114.599
+      },
+      "scenario_id": "fpa-fod-400310911-hogan",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400310911-hogan.json",
+      "weather_sha256": "7c0a7be2c907c936c6da3ec374a3be9f24046d8155fea86703172c23a7226f1c"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 38.358,
+        "longitude": -119.933
+      },
+      "scenario_id": "fpa-fod-400305203-donnell",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400305203-donnell.json",
+      "weather_sha256": "481e7350350020315b44255f931dceb66fd3a602c8702de9261f2b79c9ec04f7"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 41.9,
+        "longitude": -122.558
+      },
+      "scenario_id": "fpa-fod-400302872-klamathon",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400302872-klamathon.json",
+      "weather_sha256": "9f4c6d055f3faa5f9e34c3a865a9568c1b0efe40a341bea87cad20ea6c32cbaf"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 37.566,
+        "longitude": -119.141
+      },
+      "scenario_id": "fpa-fod-400389761-lions",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400389761-lions.json",
+      "weather_sha256": "a40a50a9e22ad056c700c3b1841ff121813e8bf72e2ef50dd041ac8016c8d7da"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 37.65,
+        "longitude": -108.474
+      },
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400300427-plateau.json",
+      "weather_sha256": "81d7c52409d6fdd255ca4a156530ac74fc5812b4ec7096b02049cdbebbdec500"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 41.941,
+        "longitude": -123.558
+      },
+      "scenario_id": "fpa-fod-400389771-natchez",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400389771-natchez.json",
+      "weather_sha256": "ab3f544894d5feddba16c486e8056f9688c7d51de0f1ea1dcd15c91effff5f04"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 32.441,
+        "longitude": -106.558
+      },
+      "scenario_id": "fpa-fod-400310583-organ",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400310583-organ.json",
+      "weather_sha256": "3097cce0facd9daeaa6ed67abda91dfe5f9dd646158291e60970fb963dfa62d6"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 44.566,
+        "longitude": -115.308
+      },
+      "scenario_id": "fpa-fod-400301084-prospect",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400301084-prospect.json",
+      "weather_sha256": "b12153460b527d59ceed237b869a8b76c904cf9dbe9bf59189b99f60c28e7905"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 40.775,
+        "longitude": -116.849
+      },
+      "scenario_id": "fpa-fod-400310977-sheep-creek",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400310977-sheep-creek.json",
+      "weather_sha256": "69e78c2290e9bfdbd9418f5012316290e79c451a54f39b5bb5fb430be359fbd8"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 42.275,
+        "longitude": -115.641
+      },
+      "scenario_id": "fpa-fod-400508306-lookout-point",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400508306-lookout-point.json",
+      "weather_sha256": "47333c625370aee375b776ae22863f9e0623373e3e1f3de57eac6280d688a908"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 34.691,
+        "longitude": -112.891
+      },
+      "scenario_id": "fpa-fod-400500160-sheridan",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400500160-sheridan.json",
+      "weather_sha256": "c6cebee75f8cae548e3016ddb0f582be828a5ec16fe328982cac30d89594c415"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 46.566,
+        "longitude": -119.766
+      },
+      "scenario_id": "fpa-fod-400513433-cold-creek",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400513433-cold-creek.json",
+      "weather_sha256": "8c0761bc6da4cb0fd20ffd3cc061ff8022bb88d37e3f1f995d2a6cebad95daaa"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 34.316,
+        "longitude": -119.058
+      },
+      "scenario_id": "fpa-fod-400732952-maria",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400732952-maria.json",
+      "weather_sha256": "d681a448d0bae682927384d06f4a537681c37bf9f964184a47ecfc55f740e290"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 42.608,
+        "longitude": -119.641
+      },
+      "scenario_id": "fpa-fod-400513550-poker",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400513550-poker.json",
+      "weather_sha256": "85ad109042a2c84c54900fbe9e1a3d015303e75c91c69679b3d246aacf97b84a"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 40.733,
+        "longitude": -114.558
+      },
+      "scenario_id": "fpa-fod-400510308-shafter",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400510308-shafter.json",
+      "weather_sha256": "f1b2f2a78960d6670565bc2451db5cf4428b02bea84b26c2eda5649620cdb8b6"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 47.483,
+        "longitude": -108.224
+      },
+      "scenario_id": "fpa-fod-400509143-ridgetop",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400509143-ridgetop.json",
+      "weather_sha256": "2cf23a46724418ae19151b2ad3f6d067a5d0d76bdd8e4532b0c4ca2b6e3dcf32"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 33.608,
+        "longitude": -105.224
+      },
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400505027-pine-lodge.json",
+      "weather_sha256": "6a311bcb371b7657041f54be8555e466895ac34c1e95f18b476f24f922b461e6"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 41.775,
+        "longitude": -112.891
+      },
+      "scenario_id": "fpa-fod-400512411-russell",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400512411-russell.json",
+      "weather_sha256": "9d35c188d589d668d4d8577d32156b5ceb64dcf9c7e3d256f78916c1e67237f5"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 38.4,
+        "longitude": -106.016
+      },
+      "scenario_id": "fpa-fod-400501480-decker",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400501480-decker.json",
+      "weather_sha256": "c759cabf9a29fd64211e48b9ff65171d4e2ffaa2b7378144f96c2c01d1197b2b"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 38.816,
+        "longitude": -122.766
+      },
+      "scenario_id": "fpa-fod-400506459-kincade",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400506459-kincade.json",
+      "weather_sha256": "ddb3d795177c308eb409cfc3e74b959949df61949ee54ffd56038c756d19c418"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 40.066,
+        "longitude": -120.683
+      },
+      "scenario_id": "fpa-fod-400732973-walker",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400732973-walker.json",
+      "weather_sha256": "8f49262f0c01bcbdcc61ea3deb5b4e2fc607a7621a4dca72b988c12c54e8ad01"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 33.358,
+        "longitude": -110.308
+      },
+      "scenario_id": "fpa-fod-400506885-huck",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400506885-huck.json",
+      "weather_sha256": "a1ee67030d77886a44bd2e83b72bc38ed941cd2cb5252fc0397da0d37b374822"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 46.858,
+        "longitude": -119.891
+      },
+      "scenario_id": "fpa-fod-400513361-243-command",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400513361-243-command.json",
+      "weather_sha256": "81b5f11bd192873fceb156e1e3a20e0eb8021ca33c5a14cc6a3ae7850a023ca2"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 43.733,
+        "longitude": -112.516
+      },
+      "scenario_id": "fpa-fod-400508285-sheep",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400508285-sheep.json",
+      "weather_sha256": "76475607747e4c5c6a7915391ba81be7e3b569ccbe9b199299be06223fe64006"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 40.65,
+        "longitude": -117.308
+      },
+      "scenario_id": "fpa-fod-400510515-summit",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400510515-summit.json",
+      "weather_sha256": "c624c14dca5bee43bfa9d7fa302331b06c6ff219201109c4c75c50b86bb37056"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 44.275,
+        "longitude": -118.474
+      },
+      "scenario_id": "fpa-fod-400732975-204-cow",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400732975-204-cow.json",
+      "weather_sha256": "3c439537fc0219c64b0c1aab2a96382c4a325a43c2d0ace261bc48d30556c6cb"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 37.025,
+        "longitude": -118.349
+      },
+      "scenario_id": "fpa-fod-400504463-taboose",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400504463-taboose.json",
+      "weather_sha256": "38f602777fa35bb35aaef870a92f9c18bf727b0a6e910b55231b62df3784ecb6"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 44.525,
+        "longitude": -115.016
+      },
+      "scenario_id": "fpa-fod-400504417-shady",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400504417-shady.json",
+      "weather_sha256": "12b1d770080c1d1254fe38ccfeb3bc2f24c711c88c382e6fe6494a45ce6f5ae3"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 37.608,
+        "longitude": -119.974
+      },
+      "scenario_id": "fpa-fod-400506448-briceburg",
+      "split": "train",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400506448-briceburg.json",
+      "weather_sha256": "16f84326f37cd33acf9c87e3c230608f6005b39b1e9e65a2db77a98f0c199b34"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 44.691,
+        "longitude": -113.724
+      },
+      "scenario_id": "fpa-fod-401316132-hayden",
+      "split": "validation",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401316132-hayden.json",
+      "weather_sha256": "a15dac7d8895f71f1a4fed702b96fa5a11224a763f07a51c7101da47560f2ced"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 33.233,
+        "longitude": -109.766
+      },
+      "scenario_id": "fpa-fod-401315922-red-point-tank",
+      "split": "validation",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401315922-red-point-tank.json",
+      "weather_sha256": "fea7f813811a4842d29b2cbfa96fcf7f1dd93cda939e8b6e2b074c330c50d028"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 33.025,
+        "longitude": -108.433
+      },
+      "scenario_id": "fpa-fod-401316696-turkey",
+      "split": "validation",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401316696-turkey.json",
+      "weather_sha256": "324ad4ae92ca626e19cab4a8bbfe17c458ec863f6d6ab40944730401713ed862"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 48.733,
+        "longitude": -121.141
+      },
+      "scenario_id": "fpa-fod-401317993-sourdough",
+      "split": "validation",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401317993-sourdough.json",
+      "weather_sha256": "a2b5119c1df5a4cef553cb95178c3e78852f2621aa6ca39ea24025e2cbef1e5d"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 41.691,
+        "longitude": -123.433
+      },
+      "scenario_id": "fpa-fod-401321294-ufish",
+      "split": "validation",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401321294-ufish.json",
+      "weather_sha256": "b2fd35c9dca97cfee2f5b4df40e2373ec8ba82b8073eb04f71c85509d8c27225"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 47.4,
+        "longitude": -114.808
+      },
+      "scenario_id": "fpa-fod-401321600-river-road-east",
+      "split": "validation",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401321600-river-road-east.json",
+      "weather_sha256": "0c13fe9ba8e368a0d2593f7891cb65f88defb83c32cdbe4860b441f2e2f2741c"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 43.983,
+        "longitude": -122.558
+      },
+      "scenario_id": "fpa-fod-401316681-bedrock",
+      "split": "validation",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401316681-bedrock.json",
+      "weather_sha256": "e42f47d3c60d7e5ae5cca542e5c3555c6b0cea66b297594776a43bf6a0c18d90"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 38.15,
+        "longitude": -112.474
+      },
+      "scenario_id": "fpa-fod-401319337-thompson-ridge",
+      "split": "validation",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401319337-thompson-ridge.json",
+      "weather_sha256": "6df7aeb71dc187bdcb829b32e8d8ed37ff7e5138ddda3ef3b93cff373671b670"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 40.691,
+        "longitude": -107.808
+      },
+      "scenario_id": "fpa-fod-401326006-iron",
+      "split": "validation",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401326006-iron.json",
+      "weather_sha256": "a32e036caab1f9f145a31a18909fbf4541558c36e496fe17fbc384f3fd58d0db"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 33.275,
+        "longitude": -108.391
+      },
+      "scenario_id": "fpa-fod-401317844-prior",
+      "split": "validation",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401317844-prior.json",
+      "weather_sha256": "5cf599e8ee6abba77c9896edaa38bc85e5adf275146eab2a5e7e7f1beebb4065"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 31.483,
+        "longitude": -111.141
+      },
+      "scenario_id": "fpa-fod-401312856-beehive",
+      "split": "validation",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401312856-beehive.json",
+      "weather_sha256": "423dc5f1734ca048d8dbef826bef7e3029888bf004ccdee0b6243e7a305eab6c"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 48.025,
+        "longitude": -117.224
+      },
+      "scenario_id": "fpa-fod-401321674-oregon",
+      "split": "validation",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401321674-oregon.json",
+      "weather_sha256": "46fb9ed085c03223a1ba7b76bf5af2857554228c0958c9005d7a57b4ecb9b221"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 31.525,
+        "longitude": -108.724
+      },
+      "scenario_id": "fpa-fod-401313289-brushy",
+      "split": "validation",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401313289-brushy.json",
+      "weather_sha256": "c2966d639f98a0344267668b61d4189dd8b69286e6602ce323ad5b70b0c6c812"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 46.233,
+        "longitude": -119.599
+      },
+      "scenario_id": "fpa-fod-401310829-hansen-road",
+      "split": "validation",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401310829-hansen-road.json",
+      "weather_sha256": "e51c2200ab6531062683a4dc39a3468178454f65a73ff8cf5ad0d901f0e4ac0c"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 33.9,
+        "longitude": -117.058
+      },
+      "scenario_id": "fpa-fod-401315421-rabbit",
+      "split": "validation",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401315421-rabbit.json",
+      "weather_sha256": "a904161a55d4c3a64e04f2e5deff93c7c6fdadd4ba6fc2eeccad7b7f2b99cb9c"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 41.775,
+        "longitude": -123.016
+      },
+      "scenario_id": "fpa-fod-401321046-head",
+      "split": "validation",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401321046-head.json",
+      "weather_sha256": "e3a8848c9abe1d8d663b9854782b69a8539b235a96d7a3f402a889546d4760f0"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 33.4,
+        "longitude": -108.308
+      },
+      "scenario_id": "fpa-fod-401308187-pass",
+      "split": "validation",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401308187-pass.json",
+      "weather_sha256": "bac180e495f64b55b89edadd70a4d5ec878d54e7d38cbfe95b58448cba10c831"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 41.316,
+        "longitude": -123.474
+      },
+      "scenario_id": "fpa-fod-401321340-pearch",
+      "split": "validation",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401321340-pearch.json",
+      "weather_sha256": "fd8fc9a8ba13014fc9761e2f3b4fdb758aac69a922ea2af565906819336b4b95"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 41.858,
+        "longitude": -123.849
+      },
+      "scenario_id": "fpa-fod-401321023-kelly",
+      "split": "validation",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401321023-kelly.json",
+      "weather_sha256": "511255017a844339420004ab492f8aa05cd0536e3e594983c6d6bca5b60c51f0"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 47.525,
+        "longitude": -117.724
+      },
+      "scenario_id": "fpa-fod-401321611-gray",
+      "split": "validation",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401321611-gray.json",
+      "weather_sha256": "d0ced1fc4714d27983f60acfcdb9c930b70a26ab71844b8da7e555f058821e5c"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 45.358,
+        "longitude": -121.224
+      },
+      "scenario_id": "fpa-fod-401411292-larch-creek",
+      "split": "test",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401411292-larch-creek.json",
+      "weather_sha256": "c3808462ebc7a46ab0f6073a0b9fc85c35a9fb02f081ee58ee6f284cb6db466a"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 34.108,
+        "longitude": -117.141
+      },
+      "scenario_id": "fpa-fod-401421943-line",
+      "split": "test",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401421943-line.json",
+      "weather_sha256": "dae88f4c9f352cba9be9d4731bf753b18cc9d047439b76e1a388d594fb0871a9"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 33.441,
+        "longitude": -111.433
+      },
+      "scenario_id": "fpa-fod-401422654-siphon",
+      "split": "test",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401422654-siphon.json",
+      "weather_sha256": "0507bee6694ba061ad504f445b56a723f03a8d7aba888c30102e974403b91119"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 45.275,
+        "longitude": -106.516
+      },
+      "scenario_id": "fpa-fod-401411758-mcghee",
+      "split": "test",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401411758-mcghee.json",
+      "weather_sha256": "c51a81a0d0a84a31f9013701f8541332297a1d8036268932a894f1b221a6dc22"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 41.316,
+        "longitude": -116.808
+      },
+      "scenario_id": "fpa-fod-401425511-castle-ridge",
+      "split": "test",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401425511-castle-ridge.json",
+      "weather_sha256": "ebb4a06259b3289d6856244a326ad112b4f7d2df260d36ebda450be07025b256"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 46.691,
+        "longitude": -120.974
+      },
+      "scenario_id": "fpa-fod-401414003-retreat",
+      "split": "test",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401414003-retreat.json",
+      "weather_sha256": "aca56656e81c30ab793a444eaa2caacc456eb4d048ed7f6deddad1cbf253c0e3"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 42.608,
+        "longitude": -115.891
+      },
+      "scenario_id": "fpa-fod-401414128-sugar",
+      "split": "test",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401414128-sugar.json",
+      "weather_sha256": "b32e3bdabc1c7f803ac59f1761d7cf6615dcf6a038179b80cef257c90c737d0c"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 33.441,
+        "longitude": -105.808
+      },
+      "scenario_id": "fpa-fod-401404229-blue-2",
+      "split": "test",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401404229-blue-2.json",
+      "weather_sha256": "cc091a615eec57fe931d8447135a22e6318ea45a91a01128201d2266c34db591"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 40.483,
+        "longitude": -111.058
+      },
+      "scenario_id": "fpa-fod-401424721-yellow-lake",
+      "split": "test",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401424721-yellow-lake.json",
+      "weather_sha256": "a724e96ab8378fb67047b8c6ed1dbd7604ace25d88872ff600054698c1770241"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 38.316,
+        "longitude": -108.474
+      },
+      "scenario_id": "fpa-fod-401415733-bucktail",
+      "split": "test",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401415733-bucktail.json",
+      "weather_sha256": "6eb1137352ef0bbb017ab6b7ec3be71d77511a986a48da9cfacdc5a5001cbed3"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 43.483,
+        "longitude": -121.099
+      },
+      "scenario_id": "fpa-fod-401422098-flat-top",
+      "split": "test",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401422098-flat-top.json",
+      "weather_sha256": "289dd6b41639d7a853693e76e53d85dcb928457e8d8c41155403a25f1bad301a"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 44.608,
+        "longitude": -117.391
+      },
+      "scenario_id": "fpa-fod-401413822-thompson",
+      "split": "test",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401413822-thompson.json",
+      "weather_sha256": "d92b884cbdd5a7a8ac262b480238a7f9024c9fd2f8b18a9451a335c58b0b7b35"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 44.858,
+        "longitude": -117.266
+      },
+      "scenario_id": "fpa-fod-401416435-town-gulch",
+      "split": "test",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401416435-town-gulch.json",
+      "weather_sha256": "09a7e3fb6435a7148e18c9346946d2587a78b351499fe5e09106bafd8a9dfb8b"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 44.65,
+        "longitude": -120.058
+      },
+      "scenario_id": "fpa-fod-401421390-shoe-fly",
+      "split": "test",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401421390-shoe-fly.json",
+      "weather_sha256": "e97e53906fe5d6a8dffba8d7d8f32f2e1747dded54b3fdd43a59d38674c1b622"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 40.775,
+        "longitude": -123.641
+      },
+      "scenario_id": "fpa-fod-401412417-hill",
+      "split": "test",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401412417-hill.json",
+      "weather_sha256": "2aa102ee65311b7a28e9f07b0568cf7e41a24b678513cc8726559856e89dfaed"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 39.816,
+        "longitude": -121.808
+      },
+      "scenario_id": "fpa-fod-401414148-park",
+      "split": "test",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401414148-park.json",
+      "weather_sha256": "e9cdb21d19c3197d1c8b4e64c2cbbbfc608c56048b53fafdfeb44eb0a8ba945c"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 41.233,
+        "longitude": -123.516
+      },
+      "scenario_id": "fpa-fod-401417248-boise",
+      "split": "test",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401417248-boise.json",
+      "weather_sha256": "e3d004028e5ea98200d7abfc7df77b66e6e573825a1c9f726ba852540cbed097"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 42.441,
+        "longitude": -119.808
+      },
+      "scenario_id": "fpa-fod-401416591-warner-peak",
+      "split": "test",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401416591-warner-peak.json",
+      "weather_sha256": "98caf6977022ce08acf8899151c83b44dcc0cd8ab93ad864f0d0f2732bfdebe5"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 33.983,
+        "longitude": -112.058
+      },
+      "scenario_id": "fpa-fod-401422688-point",
+      "split": "test",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401422688-point.json",
+      "weather_sha256": "7bb4e20e31a082e4f2b16842911cdb6d6159392216a1b06894768613bf6a4908"
+    },
+    {
+      "sampled_grid_point": {
+        "latitude": 44.358,
+        "longitude": -120.016
+      },
+      "scenario_id": "fpa-fod-401413757-0501-crazy-creek",
+      "split": "test",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401413757-0501-crazy-creek.json",
+      "weather_sha256": "f4b4df720e1d9e649fb72cafaeb7bc5e17bdf834971856786206e68c74c5fb9e"
+    }
+  ],
+  "cases_ready_for_historical_weather_training": 0,
+  "cohort_id": "fpa-fod-western-us-2018-2024-v2",
+  "created_at_utc": "2026-11-01T14:34:18.157762+00:00",
+  "downloaded_case_count": 80,
+  "downloaded_unmapped_weather_count_by_split": {
+    "test": 20,
+    "train": 40,
+    "validation": 20
+  },
+  "failed_case_count": 0,
+  "failures": [],
+  "historical_weather_mapped_case_count": 0,
+  "kind": "simfire_fpa_fod_gridmet_weather_acquisition",
+  "limitations": [
+    "gridMET is daily at approximately 4-km resolution; it does not provide the hourly weather sequence required to replay a 12-hour episode.",
+    "The daily series is not aligned to the discovery HHMM; the data provider defines days midnight-to-midnight MST.",
+    "10-m daily wind must be converted to SimFire midflame wind; terrain/canopy sheltering is not resolved by this extraction.",
+    "100-hour fuel moisture and ERC use NFDRS model-G context and must not be treated as exact FBFM13 fine-fuel moisture.",
+    "Downloaded daily observations are stored as historical context only; no simulator weather mapping is applied here."
+  ],
+  "requested_case_count": 80,
+  "scientific_result": false,
+  "source": {
+    "dataset_id": "d761426",
+    "doi": "10.5065/FDBC-FV90",
+    "name": "gridMET Daily Surface Data",
+    "nominal_resolution": "approximately 4 km, daily",
+    "provider": "NCAR GDEX / UCAR",
+    "service": "https://tds.gdex.ucar.edu/thredds/ncss/grid/files/d761426",
+    "variables": [
+      "wind_speed_10m",
+      "wind_from_direction_10m",
+      "daily_max_air_temperature",
+      "daily_min_relative_humidity",
+      "daily_max_relative_humidity",
+      "daily_precipitation",
+      "dead_fuel_moisture_100hr_model_g",
+      "energy_release_component_model_g"
+    ]
+  },
+  "weather_json_directory": "data/processed/simfire-cohort-v2-gridmet-weather"
+}

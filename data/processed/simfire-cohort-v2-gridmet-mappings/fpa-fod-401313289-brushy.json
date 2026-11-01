@@ -1,0 +1,56 @@
+{
+  "assumptions": [
+    "Treat gridMET daily 10-m wind speed as a proxy for the 20-ft surface reference; no site-specific height profile is available.",
+    "Use wind adjustment factor 0.30, the NWCG partially-sheltered reference value, as an assumed scenario; sheltering is not measured for these cases.",
+    "Reverse meteorological wind-from direction by 180 degrees because SimFire's spread calculation uses the direction toward which wind pushes spread.",
+    "Hold one representative daily weather condition constant during the 12-hour maximum episode; this is not an hourly replay or aligned to FPA-FOD discovery HHMM.",
+    "Estimate a dry-side equilibrium fine-fuel moisture proxy with Simard (1968), using separate daily maximum-temperature and minimum-RH fields; those extrema may not occur together and equilibrium is not actual measured fuel moisture.",
+    "Do not use gridMET NFDRS model-G 100-hour fuel moisture as if it were SimFire fine-fuel moisture; it remains in the raw context record."
+  ],
+  "date": "2023-07-03",
+  "derived_values": {
+    "daily_max_temperature_c": 35.55000000000001,
+    "daily_max_temperature_k": 308.7,
+    "daily_min_relative_humidity_percent": 6.2,
+    "simard_equilibrium_moisture_percent_proxy": 1.4288935999999999,
+    "simfire_fuel_moisture_fraction_proxy": 0.014288935999999999,
+    "wind_adjustment_factor": 0.3,
+    "wind_from_direction_degrees": 277.0,
+    "wind_speed_10m_m_s": 4.6,
+    "wind_speed_assumed_20ft_reference_mph": 10.289906943659998,
+    "wind_toward_direction_degrees": 97.0
+  },
+  "mapping_version": "gridmet-daily-simfire-proxy/1.0",
+  "scenario_id": "fpa-fod-401313289-brushy",
+  "sensitivity": {
+    "factor_note": "0.3 is the nominal partial-shelter scenario; 0.1 and 0.5 provide simple lower/upper WAF sensitivity cases, not measured local shelter classes.",
+    "fuel_moisture_alternatives": [
+      {
+        "fraction": 0.03,
+        "name": "fixed_demo_moisture"
+      },
+      {
+        "fraction_if_experimentally_substituted": 0.042,
+        "name": "gridmet_model_g_fm100_context_only",
+        "percent": 4.2
+      }
+    ],
+    "wind_adjustment_factors": [
+      0.1,
+      0.3,
+      0.5
+    ],
+    "wind_speed_mph_by_factor": {
+      "0.1": 1.0289906943659999,
+      "0.3": 3.0869720830979994,
+      "0.5": 5.144953471829999
+    }
+  },
+  "simfire_parameters": {
+    "fuel_moisture_fraction_proxy": 0.014288935999999999,
+    "wind_direction_degrees_clockwise_north_to": 97.0,
+    "wind_speed_midflame_mph_proxy": 3.0869720830979994
+  },
+  "source_file": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401313289-brushy.json",
+  "weather_source_sha256": "c2966d639f98a0344267668b61d4189dd8b69286e6602ce323ad5b70b0c6c812"
+}

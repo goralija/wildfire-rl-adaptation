@@ -1,0 +1,96 @@
+{
+  "date": "2023-07-22",
+  "kind": "gridmet_daily_point_weather",
+  "limitations": [
+    "Daily environmental context is not an hourly event replay; FPA-FOD discovery HHMM timezone is not used.",
+    "Wind is a gridMET daily 10-m product, not SimFire midflame wind; an explicit height/shelter conversion is still required.",
+    "100-hour fuel moisture and ERC are NFDRS model-G context, not direct FBFM13 fine-fuel moisture.",
+    "Daily max temperature/minimum relative humidity are separate daily extrema and are not asserted to co-occur at the fire start."
+  ],
+  "scenario_id": "fpa-fod-401316696-turkey",
+  "schema_version": "gridmet-point/1.0",
+  "source": {
+    "access": "GDEX NetCDF Subset Service (NCSS), nearest 4-km grid cell",
+    "daily_period_note": "Climatology Lab labels gridMET days midnight-to-midnight Mountain Standard Time (UTC-7); not aligned to the FPA-FOD HHMM field.",
+    "dataset_id": "d761426",
+    "doi": "10.5065/FDBC-FV90",
+    "name": "gridMET Daily Surface Data",
+    "nominal_resolution": "approximately 4 km; daily",
+    "provider": "NCAR GDEX, UCAR",
+    "reported_point": {
+      "latitude": 33.02846894036971,
+      "longitude": -108.45372265364983
+    },
+    "sample_query_utc": "2026-11-01T14:34:18.151586+00:00",
+    "sampled_grid_point": {
+      "latitude": 33.025,
+      "longitude": -108.433
+    }
+  },
+  "values": {
+    "daily_max_air_temperature": {
+      "provider_variable": "air_temperature",
+      "query_url": "https://tds.gdex.ucar.edu/thredds/ncss/grid/files/d761426/tmmx_2023.nc?var=air_temperature&latitude=33.02846894&longitude=-108.45372265&time_start=2023-07-22T00%3A00%3A00Z&time_end=2023-07-22T00%3A00%3A00Z&accept=csv",
+      "sample_grid_latitude": 33.025,
+      "sample_grid_longitude": -108.433,
+      "unit": "K",
+      "value": 305.4
+    },
+    "daily_max_relative_humidity": {
+      "provider_variable": "relative_humidity",
+      "query_url": "https://tds.gdex.ucar.edu/thredds/ncss/grid/files/d761426/rmax_2023.nc?var=relative_humidity&latitude=33.02846894&longitude=-108.45372265&time_start=2023-07-22T00%3A00%3A00Z&time_end=2023-07-22T00%3A00%3A00Z&accept=csv",
+      "sample_grid_latitude": 33.025,
+      "sample_grid_longitude": -108.433,
+      "unit": "%",
+      "value": 62.0
+    },
+    "daily_min_relative_humidity": {
+      "provider_variable": "relative_humidity",
+      "query_url": "https://tds.gdex.ucar.edu/thredds/ncss/grid/files/d761426/rmin_2023.nc?var=relative_humidity&latitude=33.02846894&longitude=-108.45372265&time_start=2023-07-22T00%3A00%3A00Z&time_end=2023-07-22T00%3A00%3A00Z&accept=csv",
+      "sample_grid_latitude": 33.025,
+      "sample_grid_longitude": -108.433,
+      "unit": "%",
+      "value": 14.4
+    },
+    "daily_precipitation": {
+      "provider_variable": "precipitation_amount",
+      "query_url": "https://tds.gdex.ucar.edu/thredds/ncss/grid/files/d761426/pr_2023.nc?var=precipitation_amount&latitude=33.02846894&longitude=-108.45372265&time_start=2023-07-22T00%3A00%3A00Z&time_end=2023-07-22T00%3A00%3A00Z&accept=csv",
+      "sample_grid_latitude": 33.025,
+      "sample_grid_longitude": -108.433,
+      "unit": "mm",
+      "value": 3.4
+    },
+    "dead_fuel_moisture_100hr_model_g": {
+      "provider_variable": "dead_fuel_moisture_100hr",
+      "query_url": "https://tds.gdex.ucar.edu/thredds/ncss/grid/files/d761426/fm100_2023.nc?var=dead_fuel_moisture_100hr&latitude=33.02846894&longitude=-108.45372265&time_start=2023-07-22T00%3A00%3A00Z&time_end=2023-07-22T00%3A00%3A00Z&accept=csv",
+      "sample_grid_latitude": 33.025,
+      "sample_grid_longitude": -108.433,
+      "unit": "Percent",
+      "value": 7.8
+    },
+    "energy_release_component_model_g": {
+      "provider_variable": "energy_release_component-g",
+      "query_url": "https://tds.gdex.ucar.edu/thredds/ncss/grid/files/d761426/erc_2023.nc?var=energy_release_component-g&latitude=33.02846894&longitude=-108.45372265&time_start=2023-07-22T00%3A00%3A00Z&time_end=2023-07-22T00%3A00%3A00Z&accept=csv",
+      "sample_grid_latitude": 33.025,
+      "sample_grid_longitude": -108.433,
+      "unit": "Unitless",
+      "value": 59.0
+    },
+    "wind_from_direction_10m": {
+      "provider_variable": "wind_from_direction",
+      "query_url": "https://tds.gdex.ucar.edu/thredds/ncss/grid/files/d761426/th_2023.nc?var=wind_from_direction&latitude=33.02846894&longitude=-108.45372265&time_start=2023-07-22T00%3A00%3A00Z&time_end=2023-07-22T00%3A00%3A00Z&accept=csv",
+      "sample_grid_latitude": 33.025,
+      "sample_grid_longitude": -108.433,
+      "unit": "Degrees Clockwise from north",
+      "value": 144.0
+    },
+    "wind_speed_10m": {
+      "provider_variable": "wind_speed",
+      "query_url": "https://tds.gdex.ucar.edu/thredds/ncss/grid/files/d761426/vs_2023.nc?var=wind_speed&latitude=33.02846894&longitude=-108.45372265&time_start=2023-07-22T00%3A00%3A00Z&time_end=2023-07-22T00%3A00%3A00Z&accept=csv",
+      "sample_grid_latitude": 33.025,
+      "sample_grid_longitude": -108.433,
+      "unit": "m/s",
+      "value": 3.9
+    }
+  }
+}

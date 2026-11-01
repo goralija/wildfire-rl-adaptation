@@ -1,0 +1,136 @@
+{
+  "agent_training": false,
+  "cases_by_split": [
+    {
+      "case_count": 1,
+      "scenario_id": "fpa-fod-400310930-owyhee",
+      "split": "train",
+      "wind_speed_mean_by_factor_mph": {
+        "0.1": 0.89477451684,
+        "0.3": 2.68432355052,
+        "0.5": 4.4738725842
+      }
+    },
+    {
+      "case_count": 1,
+      "scenario_id": "fpa-fod-401316132-hayden",
+      "split": "validation",
+      "wind_speed_mean_by_factor_mph": {
+        "0.1": 0.44738725842,
+        "0.3": 1.34216177526,
+        "0.5": 2.2369362921
+      }
+    },
+    {
+      "case_count": 1,
+      "scenario_id": "fpa-fod-401411292-larch-creek",
+      "split": "test",
+      "wind_speed_mean_by_factor_mph": {
+        "0.1": 0.6039727988670001,
+        "0.3": 1.811918396601,
+        "0.5": 3.019863994335
+      }
+    }
+  ],
+  "episode_scope": "One short integration smoke case per split and WAF; this is a software/data-flow check, not a policy evaluation.",
+  "errors": [],
+  "kind": "simfire_gridmet_weather_waf_sensitivity_smoke",
+  "physical_validation": false,
+  "receipt_paths": {
+    "0.1": "reports/real-fire-data/simfire-cohort-v2-gridmet-weather-smoke-waf-01/receipt.json",
+    "0.3": "reports/real-fire-data/simfire-cohort-v2-gridmet-weather-smoke-waf-03/receipt.json",
+    "0.5": "reports/real-fire-data/simfire-cohort-v2-gridmet-weather-smoke-waf-05/receipt.json"
+  },
+  "same_case_and_input_hashes_across_factors": true,
+  "same_weather_direction_and_moisture_across_factors": true,
+  "scientific_result": false,
+  "smoke_rows": [
+    {
+      "factor": 0.1,
+      "fuel_moisture_fraction_proxy": 0.029861099999999988,
+      "scenario_id": "fpa-fod-400310930-owyhee",
+      "split": "train",
+      "weather_mapping_sha256": "36123259730d4deb3b774be303d41da30ea5dc7f31708b7c5ca856a1be08b73e",
+      "wind_direction_degrees_clockwise_north_to": 51.0,
+      "wind_speed_midflame_mph_proxy": 0.89477451684
+    },
+    {
+      "factor": 0.1,
+      "fuel_moisture_fraction_proxy": 0.03172309999999998,
+      "scenario_id": "fpa-fod-401316132-hayden",
+      "split": "validation",
+      "weather_mapping_sha256": "beb07aec9e941d3f0d3ff17bff3c6efd27d5e8b63ec344a9fd4f7845b252861e",
+      "wind_direction_degrees_clockwise_north_to": 124.0,
+      "wind_speed_midflame_mph_proxy": 0.44738725842
+    },
+    {
+      "factor": 0.1,
+      "fuel_moisture_fraction_proxy": 0.03205429999999999,
+      "scenario_id": "fpa-fod-401411292-larch-creek",
+      "split": "test",
+      "weather_mapping_sha256": "240f7af4b7528817057d04931be52ce07a109a6e20760c88281edd1168a440ae",
+      "wind_direction_degrees_clockwise_north_to": 218.0,
+      "wind_speed_midflame_mph_proxy": 0.6039727988670001
+    },
+    {
+      "factor": 0.3,
+      "fuel_moisture_fraction_proxy": 0.029861099999999988,
+      "scenario_id": "fpa-fod-400310930-owyhee",
+      "split": "train",
+      "weather_mapping_sha256": "36123259730d4deb3b774be303d41da30ea5dc7f31708b7c5ca856a1be08b73e",
+      "wind_direction_degrees_clockwise_north_to": 51.0,
+      "wind_speed_midflame_mph_proxy": 2.68432355052
+    },
+    {
+      "factor": 0.3,
+      "fuel_moisture_fraction_proxy": 0.03172309999999998,
+      "scenario_id": "fpa-fod-401316132-hayden",
+      "split": "validation",
+      "weather_mapping_sha256": "beb07aec9e941d3f0d3ff17bff3c6efd27d5e8b63ec344a9fd4f7845b252861e",
+      "wind_direction_degrees_clockwise_north_to": 124.0,
+      "wind_speed_midflame_mph_proxy": 1.34216177526
+    },
+    {
+      "factor": 0.3,
+      "fuel_moisture_fraction_proxy": 0.03205429999999999,
+      "scenario_id": "fpa-fod-401411292-larch-creek",
+      "split": "test",
+      "weather_mapping_sha256": "240f7af4b7528817057d04931be52ce07a109a6e20760c88281edd1168a440ae",
+      "wind_direction_degrees_clockwise_north_to": 218.0,
+      "wind_speed_midflame_mph_proxy": 1.811918396601
+    },
+    {
+      "factor": 0.5,
+      "fuel_moisture_fraction_proxy": 0.029861099999999988,
+      "scenario_id": "fpa-fod-400310930-owyhee",
+      "split": "train",
+      "weather_mapping_sha256": "36123259730d4deb3b774be303d41da30ea5dc7f31708b7c5ca856a1be08b73e",
+      "wind_direction_degrees_clockwise_north_to": 51.0,
+      "wind_speed_midflame_mph_proxy": 4.4738725842
+    },
+    {
+      "factor": 0.5,
+      "fuel_moisture_fraction_proxy": 0.03172309999999998,
+      "scenario_id": "fpa-fod-401316132-hayden",
+      "split": "validation",
+      "weather_mapping_sha256": "beb07aec9e941d3f0d3ff17bff3c6efd27d5e8b63ec344a9fd4f7845b252861e",
+      "wind_direction_degrees_clockwise_north_to": 124.0,
+      "wind_speed_midflame_mph_proxy": 2.2369362921
+    },
+    {
+      "factor": 0.5,
+      "fuel_moisture_fraction_proxy": 0.03205429999999999,
+      "scenario_id": "fpa-fod-401411292-larch-creek",
+      "split": "test",
+      "weather_mapping_sha256": "240f7af4b7528817057d04931be52ce07a109a6e20760c88281edd1168a440ae",
+      "wind_direction_degrees_clockwise_north_to": 218.0,
+      "wind_speed_midflame_mph_proxy": 3.019863994335
+    }
+  ],
+  "waf_factors": [
+    0.1,
+    0.3,
+    0.5
+  ],
+  "wind_speed_scales_with_waf": true
+}

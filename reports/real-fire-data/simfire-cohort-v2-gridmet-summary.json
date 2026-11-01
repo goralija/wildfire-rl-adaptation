@@ -1,0 +1,105 @@
+{
+  "case_count": 80,
+  "cohort_id": "fpa-fod-western-us-2018-2024-v2",
+  "counts_by_split": {
+    "test": 20,
+    "train": 40,
+    "validation": 20
+  },
+  "created_at_utc": "2026-11-01T14:44:06.445309+00:00",
+  "daily_context_ranges_by_split": {
+    "test": {
+      "gridmet_fm100_model_g_percent": {
+        "count": 20,
+        "maximum": 9.9,
+        "median": 6.5,
+        "minimum": 4.0,
+        "unit": "%"
+      },
+      "gridmet_wind_speed_10m_m_s": {
+        "count": 20,
+        "maximum": 4.3,
+        "median": 2.5,
+        "minimum": 1.8,
+        "unit": "m/s"
+      }
+    },
+    "train": {
+      "gridmet_fm100_model_g_percent": {
+        "count": 40,
+        "maximum": 10.9,
+        "median": 7.25,
+        "minimum": 3.3,
+        "unit": "%"
+      },
+      "gridmet_wind_speed_10m_m_s": {
+        "count": 40,
+        "maximum": 9.6,
+        "median": 3.05,
+        "minimum": 1.2,
+        "unit": "m/s"
+      }
+    },
+    "validation": {
+      "gridmet_fm100_model_g_percent": {
+        "count": 20,
+        "maximum": 14.3,
+        "median": 6.6,
+        "minimum": 4.2,
+        "unit": "%"
+      },
+      "gridmet_wind_speed_10m_m_s": {
+        "count": 20,
+        "maximum": 6.8,
+        "median": 3.3499999999999996,
+        "minimum": 1.2,
+        "unit": "m/s"
+      }
+    }
+  },
+  "expected_case_count": 80,
+  "kind": "simfire_fpa_fod_gridmet_context_summary",
+  "limitations": [
+    "gridMET is daily, approximately 4-km regional gridded context, not hourly weather measured at the ignition point.",
+    "FPA-FOD coordinates are incident references; the source does not establish an exact ignition GPS point.",
+    "Daily gridMET periods are midnight-to-midnight Mountain Standard Time (UTC-7); FPA-FOD discovery HHMM has no confirmed timezone here.",
+    "10-m wind, air humidity and NFDRS model-G 100-hour fuel moisture are not silently equated to SimFire midflame wind or fine-fuel moisture.",
+    "This report verifies the downloaded context files; it is not a simulator validation or a trained-agent result."
+  ],
+  "scientific_result": false,
+  "source_receipt": "reports/real-fire-data/simfire-cohort-v2-gridmet-weather.json",
+  "validation": {
+    "all_cases_have_all_variables": true,
+    "all_variables_for_each_case_share_one_grid_cell": true,
+    "all_weather_json_files_match_manifest_hashes": true,
+    "error_count": 0,
+    "errors": [],
+    "missing_scenario_ids": [],
+    "variable_units": {
+      "daily_max_air_temperature": [
+        "K"
+      ],
+      "daily_max_relative_humidity": [
+        "%"
+      ],
+      "daily_min_relative_humidity": [
+        "%"
+      ],
+      "daily_precipitation": [
+        "mm"
+      ],
+      "dead_fuel_moisture_100hr_model_g": [
+        "Percent"
+      ],
+      "energy_release_component_model_g": [
+        "Unitless"
+      ],
+      "wind_from_direction_10m": [
+        "Degrees Clockwise from north"
+      ],
+      "wind_speed_10m": [
+        "m/s"
+      ]
+    }
+  }
+}
