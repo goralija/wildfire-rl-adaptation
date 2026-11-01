@@ -1,82 +1,70 @@
 ---
 type: Playbook
-title: Nastavak projekta — scenariji stvarnih požara u SimFire-u
+title: Handoff — stvarna kohorta u SimFire-u
 sources:
   - resource: /docs/STATUS.md
-  - resource: /docs/BACKLOG.md
-  - resource: /docs/research/REAL_IGNITION_SCENARIO_PIPELINE.md
+  - resource: /docs/NEXT_SESSION.md
+  - resource: /docs/research/SIMFIRE_FPA_COHORT.md
+  - resource: /docs/research/SIMFIRE_RL_ADAPTER.md
 ---
-# Handoff — trenutni cilj i konkretno stanje
+# Handoff
 
 ## Šta želimo pokazati
 
-Želimo uporediti osnovnog i dodatno naučenog agenta koji postavljaju vatrogasne linije.
-Oba se igraju u istoj simulaciji i dobijaju iste početne uslove i budžet. Pitanje je da li
-agent koji je dodatno učio na **raspodjeli uslova iz stvarnih požara** pravi manju štetu
-unutar simulacije. Ne predstavljamo to kao dokaz da bi u stvarnosti spasio isti broj
-hektara.
+U istoj simulaciji uporediti početnog PPO agenta i kopiju koja je dodatno učila na
+različitim uslovima stvarnih požara. Agent dobija prijavljenu lokaciju/datum i stvarne
+karte goriva i terena. SimFire generiše nove situacije, poteze i nagrade. Historijski
+završni obod ne postaje agentov “tačan odgovor”. Ne tvrdimo da je rezultat dokaz stvarno
+spašenih hektara.
 
-## Dizajn koji izbjegava prethodno kruženje
+## Šta je sada pripremljeno
 
-Historijski BurnMD line replay nije više ulazni uslov za glavni ogled. Mineral Fire 2020
-ima lokaciju, perimetre i linije, ali tačna vremena izgradnje linija nedostaju; korištenje
-`CreateDate` kao vremena akcije bilo bi nagađanje. Umjesto toga scenario počinje od stvarne
-prijavljene lokacije/datuma incidenta, a simulator dobija dokumentovan fuel, terrain i weather.
-FPA-FOD koordinata nije nužno potvrđena tačka paljenja. Budući
-obod/linije ne određuju mapu, stanje agenta ni RL nagradu.
+- 80 stvarnih USFS FPA-FOD požara: 40 train / 20 validation / 20 test, bez dijeljenja
+  jednog požara između splitova.
+- LANDFIRE gorivo i teren su preuzeti, poravnati i hash-provjereni za svih 80.
+- Osam dnevnih gridMET polja postoji za svih 80. Po-slučaju dnevni proxy je priključen u
+  Gymnasium adapter i mapping fajlovi su vezani hashovima za scenario manifeste.
+- Pinned SimFire 2.0.1 + lokalni Python 3.9.25 RL runtime; tačne dodatne verzije su u
+  `requirements/simfire-rl-macos-arm64-py39.freeze.txt`.
+- Proxy smoke je prošao kroz po jedan train/validation/test požar; WAF 0.1/0.3/0.5 su
+  tehnički provjereni. `learn()` nije pozvan, težine ne postoje.
+- Maksimalno trajanje jedne SimFire ćelije postavljeno je na 15 jednominutnih koraka;
+  postoje i no-op smoke rezultati/slike za po jedan slučaj iz svakog splita. Ovo nije
+  fizička kalibracija.
+- Manifesti i mali source/weather JSON-i su u Gitu; velike GeoTIFF karte ostaju u
+  ignorisanom `.local/simfire-cohort-v2/`.
 
-Kandidat za širu, javno dostupnu raspodjelu incidenata je USFS FPA-FOD. Ono nudi prijavljeno
-vrijeme/lokaciju i konačnu veličinu, uz prostornu nesigurnost lokacije; te vrijednosti nisu
-30-m GPS istina. Zašto i kako: [pipeline i laički opis](docs/research/REAL_IGNITION_SCENARIO_PIPELINE.md).
+## Šta proxy znači
 
-## Šta je stvarno spremno
+Izvorni gridMET je stvarni dnevni regionalni kontekst (~4 km), ne satno mjerenje na mjestu
+paljenja. Prva SimFire varijanta pretpostavlja 10 m vjetar kao približan 20 ft vjetar, koristi
+WAF 0.3, okrene vjetar iz “odakle” u “prema” i procijeni sitnu vlagu preko temperature/RH.
+Ovo pravi izvršive simulacijske uslove, ali nije tačna historijska rekonstrukcija. Ograničenja
+i izvori su u [dataset kartici](docs/research/SIMFIRE_FPA_COHORT.md) i [mapping logu](docs/research/EXPERIMENT_LOG.md#exp-038--map-daily-gridmet-context-into-explicit-simfire-proxy-inputs-2026-11-01).
 
-- `external/simfire` je MITRE SimFire 2.0.1 na commitu
-  `04905b19fe8c10dc08d64faddd00303e0561bb66`.
-- `.local/simfire-venv` je odvojen Python 3.9.25 environment. U njemu radi kratki demo i
-  novi 30-min smoke nad stvarnim gorivom i visinskim rasterom.
-- BurnMD ZIP je lokalno provjeren prema službenom LFS SHA-256. Mineralovi podaci su
-  pregledani, ali njegova linijska vremenska polja su prazna, a dataset reuse licenca
-  nije razjašnjena. Sirovi ZIP i izvedene BurnMD mape ne redistribuirati.
-- Dixie Fire 2021 (`FOD_ID 401019270`) je sačuvan kao mali FPA-FOD zapis i candidate
-  kartica. Tačka je incident-referentna, ne potvrđeno GPS paljenje. Grid kartice je sada
-  projektovan i tačan: 128×128 ćelija po 30 m u EPSG:32610.
-- `scripts/fetch_simfire_real_inputs.py` pribavlja LF2016 FBFM13, LF2020 visinu i 24-satni
-  ERA5 zapis za datum požara. Rasteri su provjereni po CRS-u, granicama, ćelijama i
-  kategorijama goriva. Sirovi fajlovi su ignorisani u Gitu pod `.local/real-input-dixie/`;
-  hashes su u kartici i receiptu.
-- `scripts/run_simfire_real_input_smoke.py --steps 30` je pokrenut nad pravim LANDFIRE
-  gorivom i terenom. [Karta, završno stanje, GIF i receipt](reports/real-fire-data/simfire-dixie-real-input-smoke/)
-  su mali, pregledljivi primjeri. Atmosfera u tom smokeu je jasno označena kao demo.
+## Šta još prije vjerodostojnog poređenja
 
-## Šta još nije spremno
+1. Zaključati poredbene baseline politike (no-op, deterministička heuristika, base PPO).
+2. Fiksirati evaluacijske seedove, metrike, checkpoint izbor i test protokol; sve politike
+   dobijaju iste scenarije, vrijeme, budžet i horizont.
+3. Provjeriti fizičko opravdanje postavki i zamrznuti mjerodavan evaluacijski protokol.
+4. Larch Creek testni slučaj korišten je u smoke-u; isključiti ga iz finala i preostalih
+   19 držati zatvorenim do završne uparene procjene prema
+   [`evaluation membership` manifestu](data/manifests/simfire-fpa-fod-evaluation-membership-v1.json).
+5. Trening nije pokrenut i ostaje odgođen; ova pripremna promjena ga ne pokreće.
 
-- Fuel je LF2016, pet godina prije Dixie požara. Jeste pre-event, ali nije dokazano da
-  tačno opisuje gorivo 2021.
-- ERA5 je oko 25 km rezolucije, a FPA-FOD HHMM nema razjašnjenu vremensku zonu. ERA5
-  10-m vjetar nije isto što i midflame vjetar u SimFire; relativna vlažnost nije vlaga
-  goriva. ERA5 zato još nije ubačen u simulaciju.
-- Imamo jedan razvojni događaj, ne pravu train/validation/test kohortu.
-- SimHarness/RLlib nije instaliran ni pokrenut; standalone SimFire smoke nije RL trening.
-- Nema fizičke validacije niti zaključka o stvarnim hektarima spašenim u požaru.
+## Ponoviti kratki smoke
 
-## Sljedeći redoslijed
+```sh
+.local/simfire-venv/bin/python scripts/smoke_simfire_gym_env.py
+```
 
-1. Provjeriti dostupnost i godinu boljeg fuel sloja za događaje koje ćemo stvarno uzeti.
-2. Odlučiti i zapisati opravdan pristup datumu, 10-m vjetru i vlazi goriva; ne izjednačiti
-   ERA5 RH sa fuel moisture.
-3. Napraviti FPA-FOD kandidatsku kohortu i zamrznuti split po cijelim incidentima.
-4. Postaviti/pinovati RL runtime u izolovanom okruženju i pokrenuti kratak CPU smoke.
-5. Definisati no-op i jednostavne baseline politike, jednak budžet i horizont.
-6. Tek nakon toga trenirati/fine-tunati i napraviti uparenu held-out evaluaciju i vizualizacije.
+No-op kroz duži horizont, bez agenta i bez linije:
 
-## Gdje je šta
+```sh
+.local/simfire-venv/bin/python scripts/smoke_simfire_noop_horizon.py --splits train validation
+```
 
-- [STATUS](docs/STATUS.md) — urađeno i otvoreno, jasno razdvojeno.
-- [BACKLOG](docs/BACKLOG.md) — aktivni taskovi; stari CFSDS plan je ispod označen kao arhiva.
-- [DESIGN](docs/DESIGN.md) — istraživačko pitanje i metod.
-- [Scenario pipeline](docs/research/REAL_IGNITION_SCENARIO_PIPELINE.md) — šta je Y, šta je X i kako ih spajamo.
-- [Mineral audit](docs/research/MINERAL_CASE_AUDIT.md) — dokaz šta je BurnMD slučaj dao i nije dao.
-- [SimFire runtime](docs/research/SIMFIRE_ENVIRONMENT.md) — instalacija i smoke izlaz.
-- [ADR-040](docs/specs/DECISION_RECORDS.md#adr-040--train-on-real-ignition-conditions-with-simulated-actions-2026-11-01) — odluka koja mijenja obavezni gate.
-- [Arhivirani CFSDS handoff](HANDOFF_CFSDS_ARCHIVE.md) — prethodna putanja, nije aktivni plan.
+Ispis i slike: `reports/real-fire-data/simfire-cohort-v2-gym-smoke/`. Za čistu instalaciju,
+preuzimanje podataka i sljedeće zadatke vidi [`docs/NEXT_SESSION.md`](docs/NEXT_SESSION.md).
+**Trening, fine-tuning i fizička validacija nisu još pokrenuti.**

@@ -14,6 +14,8 @@
 - [OKF 0.2 knowledge migration](OKF_MIGRATION_PLAN.md) - Implementation Plan
 - [Nezavisan pregled bootstrap koda — 2026-10-28](REVIEW.md) - Review Record
 - [Trenutno stanje — 2026-11-01](STATUS.md) - Project Status
+- [Stvarna FPA-FOD kohorta za SimFire](research/SIMFIRE_FPA_COHORT.md) - 80 slučajeva i stvarni fuel/terrain status
+- [Gymnasium RL adapter](research/SIMFIRE_RL_ADAPTER.md) - akcije, nagrada, opažanje i test status
 - [SimFire okruženje — stvarni lokalni smoke](research/SIMFIRE_ENVIRONMENT.md) - Python 3.9 venv, reproduktivna komanda, mapa i ograničenja
 - [Real fire → SimFire scenarij](research/REAL_IGNITION_SCENARIO_PIPELINE.md) - laički X/Y mapping, izvor FPA-FOD, zajednički JSON i split/claim pravila
 - [Prvi LANDFIRE/ERA5 ulazni smoke](../reports/real-fire-data/simfire-dixie-real-input-smoke/) - stvarno gorivo/teren u SimFire, zajedno s mapom, GIF-om i granicama vremenskog mapiranja

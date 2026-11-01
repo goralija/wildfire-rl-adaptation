@@ -1,5 +1,22 @@
 # real-fire-data
 
+## Aktivna SimFire kohorta — 80 stvarnih požara
+
+- [FPA-FOD/SimFire cohort manifest](../../data/manifests/simfire-fpa-fod-cohort-v2.json) — 40 train / 20 validation / 20 test, cijeli incident po split-u.
+- [Input acquisition](simfire-cohort-v2-input-acquisition.json) — gorivo i teren su provjereni za 80/80.
+- [gridMET weather acquisition](simfire-cohort-v2-gridmet-weather.json) — originalna osam-poljska dnevna vrijednost za 80/80 slučajeva; ovaj receipt bilježi samo preuzimanje.
+- [gridMET data QC summary](simfire-cohort-v2-gridmet-summary.json) i [vizualni pregled](simfire-cohort-v2-gridmet-overview.png) — provjera hashova/jedinica i raw raspodjele po split-u.
+- [gridMET → SimFire proxy mapping](simfire-cohort-v2-gridmet-simfire-mapping.json) — zasebni, pretpostavkama označeni SimFire proxyji za 80/80; tačan satni replay 0/80.
+- [WAF sensitivity smoke](simfire-cohort-v2-gridmet-waf-sensitivity.json) — isti train/validation/test primjerci pri 0.1/0.3/0.5, bez treniranja ili fizičke validacije.
+- [Seed ćelije](simfire-cohort-v2-seed-selection.json) — fuel-only lokacijsko pravilo, bez finalnih perimetara.
+- [Gymnasium demo smoke](simfire-cohort-v2-gym-smoke/) — stvarni fuel/terrain i demo weather, bez RL treninga.
+- [Gymnasium gridMET proxy smoke](simfire-cohort-v2-gridmet-weather-smoke/) — po jedan slučaj po splitu; mapirani meteo podaci, jedna linijska tačka i no-op; bez `learn()`.
+- [Duži proxy smoke](simfire-cohort-v2-gridmet-full-horizon-smoke-v2/) — po jedan train/validation/test incident, do 12 sati; PPO samo legalna inference proba, bez `learn()`.
+- [No-op horizont probe](simfire-cohort-v2-gridmet-noop-horizon/) — samo čekanje, bez linije i agenta; train Owyhee i validation Hayden, sa slikama i receiptom.
+- [Test smoke incident koji je otvoren](simfire-cohort-v2-gridmet-noop-test-exposed/) — Larch Creek je isključen iz budućeg završnog benchmarka; ostaje 19 test incidenata.
+- [WAF osjetljivost](simfire-cohort-v2-gridmet-waf-sensitivity.json) — isti uzorci pri 0.1/0.3/0.5; tehnička, ne fizička provjera.
+- [Dataset objašnjenje](../../docs/research/SIMFIRE_FPA_COHORT.md) i [adapter detalji](../../docs/research/SIMFIRE_RL_ADAPTER.md).
+
 ## Trenutni razvojni primjer
 
 - [Dixie Fire FPA-FOD izvorni zapis](fpa-fod-dixie-2021-source.geojson) i [scenario kartica](../../data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json) — incident-referentna tačka, ne potvrđeno paljenje; 128×128 UTM grid od 30 m.

@@ -1,152 +1,132 @@
 ---
 type: Data Pipeline Design
-title: Real fire locations into SimFire scenarios
+title: Real fire records into SimFire scenarios
 status: current-provisional
 sources:
   - resource: /data/manifests/simfire-scenario.schema.json
+  - resource: /data/manifests/simfire-fpa-fod-cohort-v2.json
   - resource: /docs/research/SOURCES.md
   - resource: /docs/specs/DECISION_RECORDS.md
 ---
-# Real fire locations into SimFire
+# Od stvarnog zapisa požara do SimFire scenarija
 
-## The simpler question we can actually test
+## Jednostavno objašnjenje
 
-The project asks whether fine-tuning a wildfire-control agent on real-fire-derived
-conditions can improve its **simulated** performance over the same frozen base agent and
-simple rules. We no longer require the central experiment to replay every historical
-firefighting action. That requirement made the project depend on line-construction times
-that the Mineral BurnMD files do not provide.
+Historijska baza nam kaže **gdje i kada je požar prijavljen**. Za taj približni položaj
+uzeli smo stvarnu kartu goriva i visine tla iz LANDFIRE-a. Te slojeve pretvaramo u isti
+kvadratni raster koji SimFire može učitati. Simulator zatim pravi nove pokušaje širenja i
+agentove poteze.
 
-Instead, use an incident record for its reported **place and discovery date**, then build a
-fixed, pre-declared local scenario from fuel, terrain and weather available for that place
-and date. The simulator generates the spread and agent experience. Historic lines and final
-perimeters stay separate from the agent and its reward. This tests policy adaptation to
-realistic event locations and environmental conditions; it does not claim that the agent
-would have changed the real event.
+Historijski zapis ne kaže šta bi se desilo da je agent drugačije djelovao. Zbog toga
+koristimo historijske uslove kao početnu podlogu, a ne završnu površinu požara kao nagradu.
+Završni obod može kasnije biti nacrtan odvojeno radi poređenja.
 
-## What real records and simulator each contribute
+## Šta izvorni podaci daju, a šta simulator treba
 
-| Real-world source provides | SimFire must receive |
-| --- | --- |
-| Fire occurrence ID and source/release | One frozen scenario ID and provenance record |
-| Reported discovery date/time and precision | Start time/window in an explicit timezone |
-| Reported incident location and known location uncertainty | A row/column plus a fixed-size landscape crop; the source may not give a verified ignition |
-| Fuel map and elevation for the incident region | Aligned fuel-class and elevation arrays in documented units |
-| Historical weather around discovery | Weather inputs with source, time-zone and unit conversion recorded |
-| Final perimeter/size, when available | A separate reference layer for a clearly labelled map, not an agent input or reward |
+| Historijski zapis (Y) | Ulaz koji treba SimFire (X) | Trenutni status |
+| --- | --- | --- |
+| ID, datum i približno mjesto incidenta | scenario JSON, početni red/kolona i izvorna nesigurnost | 80 slučajeva snimljeno; 71 prijavljena ćelija je goriva, za 9 je proxy ćelija do oko 62 m |
+| LANDFIRE FBFM13 karta | poravnata matrica kodova goriva, koju SimFire zna pretvoriti | preuzeto i provjereno za 80/80 |
+| LANDFIRE elevation | visinska matrica na istom projektovanom gridu | preuzeto i provjereno za 80/80 |
+| gridMET dnevne vremenske procjene | originalni dnevni kontekst + zaseban SimFire proxy po slučaju | izvorni podaci i proxy checksum-QC 80/80; satni replay 0/80 |
+| Konačna površina/MTBS obod, ako postoji | odvojen vizualni sloj | referenca samo; ne koristi se kao nagrada ili agentov ulaz |
 
-The common JSON contract is
-[`simfire-scenario.schema.json`](../../data/manifests/simfire-scenario.schema.json), with a
-blank [template](../../data/manifests/simfire-scenario.template.json). The JSON keeps
-small facts and file references; GeoTIFF rasters and weather series stay as separate files
-with checksums. This avoids stuffing large pixel arrays into a hard-to-review JSON file.
+Zajednički mali JSON format je [`simfire-scenario.schema.json`](../../data/manifests/simfire-scenario.schema.json).
+JSON čuva porijeklo i putanje; GeoTIFF rasteri ostaju odvojeni jer u njima žive hiljade
+prostorskih vrijednosti po slučaju. Sirovi rasteri su u Git-ignorisanom `.local/`, a
+manifeste, hashove i male receipte može pregledati cijeli tim.
 
-## Dataset choice
+## Kohorta koja se sada koristi
 
-The practical first source is the official US Forest Service FPA-FOD occurrence service.
-Its current seventh-edition sixth update covers 1992–2024 and has 2.66 million incident
-points; its published core fields include discovery date, final size and location. The
-source says locations are at least as precise as a one-square-mile Public Land Survey
-System section, so every coordinate must carry a precision warning rather than being
-treated as an exact 30-m ignition. Its identifiers can link to separate large-fire and
-incident-reporting datasets. The versioned archive permits use without added permissions
-or fees when cited. See [official metadata and terms](SOURCES.md#s-064).
+Izabrano je 80 stvarnih incidenata iz US Forest Service FPA-FOD-a. Filter traži barem
+5.000 acres, prijavljeni datum/lokaciju, MTBS ID za kasniji vizualni kontekst i jednu od
+deset zapadnih država. Izabran je ponovljiv uzorak od 20 slučajeva po godini:
 
-One real record is now mapped as a plumbing example: Dixie Fire 2021 (`FOD_ID 401019270`,
-`MTBS_ID CA3987612137920210714`). Its 455-byte source point record is saved with its hash.
-The coordinate is an incident reference point with unknown event-specific accuracy, not
-confirmed GPS ignition. It gives us an approximate anchor and date for assembling a demo
-landscape; it does not make this a Dixie fire replay. The case is not a representative
-sample, train/test split, or scientific benchmark.
+| Godina | Uloga | Požari |
+| --- | --- | ---: |
+| 2018–2019 | train | 40 |
+| 2023 | validation | 20 |
+| 2024 | test | 20 |
 
-BurnMD remains an optional source for line geometry and visual context. The Mineral case
-shows why those lines are not required to train the first simulator-policy experiment:
-the line categories are useful, but their construction-time fields are empty. Dataset-use
-terms for BurnMD also remain unresolved. No raw or geometry-derived BurnMD data are
-redistributed in this pipeline.
+Požar kao cjelina postoji samo u jednom splitu. Zato susjedni dani ili kvadrati istog
+požara ne mogu procuriti iz treninga u test. Godine 2020–2022 su preskočene jer nismo
+potvrdili odgovarajuću prije-požarnu FBFM13 verziju na javnom LANDFIRE ImageServeru.
+Filter je našao 373 kandidata ukupno, ali 80 je izabrano za prvi upravljiv i vremenski
+odvojen skup. Potpuna selekcija je u
+[`simfire-fpa-fod-cohort-v2.json`](../../data/manifests/simfire-fpa-fod-cohort-v2.json).
 
-WildfireSpreadTS is a strong independent dataset for historical daily-spread research,
-with 607 events and CC BY 4.0 terms, but its complete download is 48.4 GB and requires a
-separate conversion into SimFire fuel/weather inputs. It is not the first environment
-setup target on a machine with very little free storage. Its role and size are documented
-at [Zenodo](https://zenodo.org/records/8006177) and [S-016/S-063](SOURCES.md).
+## Kako su sirovi podaci pretvoreni
 
-## The conversion in ordinary language
+1. **Zamrznuti izvorni slučaj.** Za svaki izabrani `FOD_ID` sačuvan je mali izvorni zapis,
+   URL, verzija izvora i SHA-256. Tačka je označena kao incidentna referenca; ne tvrdi se
+   da je to tačan GPS položaj paljenja.
+2. **Napraviti isti oblik mape.** Oko prijavljene tačke izrezan je prozor od 128×128 ćelija,
+   tačno 30 m po ćeliji, u lokalnoj UTM projekciji. Kvadrat ne zavisi od kasnijeg perimetra.
+3. **Dodati gorivo i teren.** Za požare 2018–2019 koristi se pre-event LF2016 FBFM13; za
+   2023–2024 pre-event LF2022 FBFM13. Svima je dodan LF2020 elevation. Gorivo je izabrano
+   prije datuma događaja, ali nije terenski inventar tačno na dan događaja.
+4. **Odrediti simulator start.** Ako je prijavljena ćelija goriva, koristi se ona. Ako nije,
+   bira se najbliža goriva ćelija u radijusu do polovine PLSS sekcije (804.672 m). U našem
+   skupu svih devet zamjena su bile unutar oko 62 m. To je reproducibilna aproksimacija,
+   ne dokaz tačnog mjesta paljenja. Pravilo ne gleda obod požara.
+5. **Provjeriti svaki raster.** Skripta provjerava CRS, 30 m bounds, 128×128 oblik, no-data,
+   prepoznate kodove goriva i SHA-256. U svim 80 slučajevima gorivo i teren su prošli.
+6. **Dodati dnevni weather i jasno ga prevesti u simulator.** gridMET dnevni kontekst je
+   preuzet i provjeren za 80/80 slučajeva. Zasebna mapping skripta pravi ponovljiv proxy:
+   vjetar 10 m→približan 20 ft referentni vjetar→WAF 0.3; `wind_from`→SimFire smjer prema;
+   dnevni max T/min RH→Simard EMC procjena→SimFire moisture fraction. Pretpostavke i
+   alternativni WAF 0.1/0.5 se bilježe. Ovo nije satni replay ni fizički izmjerena vlaga;
+   vidjeti [mapping receipt](../../reports/real-fire-data/simfire-cohort-v2-gridmet-simfire-mapping.json).
+7. **Pokrenuti uporedive politike.** Nakon što se X kompletira, base PPO, fine-tuned
+   kopija, no-op i jednostavna heuristika dobijaju iste mape, vremenske uslove, trajanje,
+   seedove i budžet. Fine-tuning koristi samo TRAIN požare; validation podešava; test se
+   čuva za završnu provjeru. Jedan test incident, Larch Creek, već je otvoren za tehnički
+   smoke i treba ga isključiti; sačuvati preostalih 19 za završni benchmark.
 
-1. **Pick an event without peeking at policy results.** Save its official record ID, date,
-   point, stated point precision, release and license terms.
-2. **Draw the same-size square around the reported location.** Do not size the map from
-   the eventual fire perimeter or later fireline. That prevents future information from
-   silently changing the agent's map.
-3. **Fill that square with fuel and elevation.** Download the chosen source layers, align
-   them to one grid and save their hashes. Unknown fuel classes stay explicitly unknown
-   until mapped or excluded.
-4. **Add the weather for the actual date.** Keep local/UTC time, source grid location,
-   units and every conversion. SimFire's current simple wind/moisture settings are not
-   automatically historical weather; until an explicit mapping is validated, a run is
-   only an integration smoke.
-5. **Write one scenario JSON.** It points to the raster and weather files and records the
-   simulator version, map size, chosen starting cell, seed, duration and limitations.
-6. **Let each policy play the same scenario.** Base agent, fine-tuned agent and simple
-   controls use identical maps, weather, duration, random seeds and action budgets. The
-   fine-tuning split is by entire fire incident, never by days or tiles from the same fire.
-7. **Show both the simulation and the historical context.** Animate the simulated fire
-   and agent lines. If a final perimeter is available, draw it as a separate reference
-   outline and say that it includes real-world firefighting and reporting effects.
+## Koliko je trenutno spremno
 
-## What the comparison can and cannot say
+Za svih 80 incidenata postoje stvarni fuel/terrain rasteri, dnevni gridMET context i
+zaseban po-slučaju SimFire weather proxy. Mapping JSON-i su povezani sa manifestima
+checksumovima. Proxy-mode adapter se tehnički pokrenuo kroz jedan TRAIN, jedan validation
+i jedan test slučaj pri WAF 0.1, 0.3 i 0.5; učitavanjem svakog split-a provjereni su svi
+njegovi mapping hashovi. `learn()` nije pozvan.
 
-Valid claim: “On these fixed SimFire scenarios built from historical incident locations,
-maps and weather, policy A produced less simulated burned area than policy B under the
-same simulated line budget.”
+Ovo je **izvršivo simulacijsko okruženje sa stvarnim geografskim podacima i označenim
+pretpostavkama**, a ne historijski fire replay ili fizički potvrđen model. gridMET je dnevni
+oko 4 km; ne znamo tačan sat paljenja/time zone, canopy profil ni stvarnu vlagu sitnog goriva.
+No-op i test protokol još treba zamrznuti prije rezultatskog poređenja.
 
-Not supported: “The agent would have saved the same hectares in the real incident.” A
-reported final size includes real response, uncertain weather, reporting choices and fuel
-conditions that the simulator may not reproduce.
+SimFire stock trajanje jedne zapaljene ćelije bilo je 4 update-a. U 30 m mreži adapter sada
+koristi 15 jednominutnih update-a, jer se na Owyhee primjeru stock podešavanje gasilo prije
+sporijeg susjednog širenja. To je tehnički izbor, ne kalibracija požarne fizike. No-op
+receipti i reprodukcijska komanda su u [environment kartici](SIMFIRE_ENVIRONMENT.md).
 
-## First real inputs: what has been fetched and what has not
+## Šta rezultat može tvrditi
 
-The team can reproduce the first small input bundle with the two scripts below. The source
-GeoTIFFs and ERA5 response stay in ignored `.local/real-input-dixie/`; only code, scenario
-metadata, hashes and small visual outputs are committed.
+Možemo reći: “Na ovim SimFire scenarijima, sastavljenim od historijskih lokacija i
+provjerenih mapa goriva/terena, politika A je imala manje simuliranih izgorjelih ćelija od
+politike B, pod istim uslovima i budžetom.”
+
+Ne možemo reći: “Agent bi spasio određeni broj hektara u tom stvarnom požaru.” Historijski
+obod uključuje stvarno vrijeme, gašenje, izvještavanje i neizvjesnosti koje SimFire ne
+reprodukuje.
+
+## Reprodukcija
 
 ```sh
-.local/simfire-venv/bin/python scripts/fetch_simfire_real_inputs.py
-.local/simfire-venv/bin/python scripts/run_simfire_real_input_smoke.py --steps 30
+.local/simfire-venv/bin/python scripts/build_simfire_fpa_cohort.py --offline
+.local/simfire-venv/bin/python scripts/fetch_simfire_cohort_inputs.py --workers 3 --skip-weather
+.local/simfire-venv/bin/python scripts/resolve_simfire_seed_cells.py
+.local/simfire-venv/bin/python scripts/fetch_gridmet_cohort_weather.py --workers 4
+.local/simfire-venv/bin/python scripts/summarize_gridmet_cohort.py
+python3 scripts/map_gridmet_weather_to_simfire.py --wind-adjustment-factor 0.3
+.local/simfire-venv/bin/python scripts/smoke_simfire_gym_env.py --weather-mode gridmet_daily_proxy
 ```
 
-The current example has:
+`--skip-weather` služi da se odvojeno pribave gorivo i teren; gridMET se dohvaća zasebnom
+skriptom radi per-case receipta i nastavka nakon privremenog neuspjeha. Mapping je dodatni
+izričit korak; proxy smoke traži `--weather-mode gridmet_daily_proxy`.
 
-- **Fuel:** official LANDFIRE LF2016 FBFM13. It predates the 2021 event by five years, so
-  it is a real, pre-event fuel map, but may miss vegetation changes from 2016–2021.
-- **Terrain:** official LANDFIRE LF2020 elevation, source unit meters. The project bridge
-  checks the GeoTIFF and SimFire applies its own documented meter-to-foot conversion.
-- **Grid:** a true 128×128, 30 m grid in local UTM (EPSG:32610), centered on the reported
-  point and snapped to 30 m boundaries. LANDFIRE returns nearest-neighbor samples in that
-  projected grid. The incident point remains uncertain; the pixel size does not make it
-  more precise.
-- **Weather context:** 24 hourly ERA5 values from 2021-07-13 requested in UTC. ERA5 is a
-  reanalysis on an approximately 25 km grid, so it cannot describe 30 m wind variation.
-  The saved source time `1615` has no confirmed time zone in this project, so the ERA5
-  series is not aligned to that exact clock time.
-- **SimFire smoke:** the real fuel and terrain arrays are used. The 30-minute animation
-  still uses clearly labelled example wind/moisture. We keep ERA5 out of the run because
-  SimFire expects wind near the flame, while ERA5 reports 10-m wind, and air relative
-  humidity is not dead-fuel moisture. Converting one into the other needs an explicit,
-  defensible model.
-
-These outputs close **raster acquisition, alignment, source-to-array mapping and one
-executable real-layer smoke**. They do not close historical-weather mapping, fuel-vintage
-selection, precise ignition localization, RL runtime, or physical validation. See the
-[receipt and pictures](../../reports/real-fire-data/simfire-dixie-real-input-smoke/) and
-[source catalog entries S-065–S-066](SOURCES.md).
-
-Next: compare the chosen fuel vintage against better event-year alternatives, resolve how
-wind/fuel moisture enter SimFire without pretending ERA5 RH is fuel moisture, and only then
-build the multi-fire event cohort and the train/validation/test split. No historical final
-perimeter or line is used as agent state or as a no-action reward.
-
-Evidence: [ADR-040](../specs/DECISION_RECORDS.md#adr-040--train-on-real-ignition-conditions-with-simulated-actions-2026-11-01),
-[ADR-043](../specs/DECISION_RECORDS.md#adr-043--use-a-projected-grid-and-do-not-force-weather-variable-equivalence-2026-11-01),
-[EXP-033](EXPERIMENT_LOG.md#exp-033--real-layers-fetched-and-loaded-by-simfire-2026-11-01),
-[Mineral audit](MINERAL_CASE_AUDIT.md), and [SimFire environment](SIMFIRE_ENVIRONMENT.md).
+**Dokazi:** [kohorta](SIMFIRE_FPA_COHORT.md), [adapter](SIMFIRE_RL_ADAPTER.md),
+[input receipt](../../reports/real-fire-data/simfire-cohort-v2-input-acquisition.json),
+[ADR-044 i ADR-045](../specs/DECISION_RECORDS.md), [EXP-034 i EXP-035](EXPERIMENT_LOG.md).

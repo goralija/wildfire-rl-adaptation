@@ -30,26 +30,34 @@ navodi 400 ćelija, 4 rastera, Data.csv, lookup i 130 weather fajlova, uz provje
 ograničenja. Hash svakog fajla je u reports/firehose-verification/dataset-inventory.json.
 U Git idu ti mali manifesti, a sirovi dataset ostaje u external/firehose/data/Sub20x20/.
 
-## Aktivni scenarij izveden iz FPA-FOD-a
+## Aktivna kohorta: USFS FPA-FOD + LANDFIRE + SimFire
 
-Trenutni put je **USFS FPA-FOD → zajednički scenario JSON → LANDFIRE fuel/terrain +
-ERA5 context → SimFire**. Prvi mali zapis je Dixie Fire 2021, `FOD_ID 401019270`. Službeni
-archive navodi da se FPA-FOD može koristiti bez dodatne dozvole ili naknade uz citat Short
-(2026); priključene mape imaju svoja pravila. Koordinata je incident-referentna lokacija,
-ne potvrđen GPS položaj paljenja. Kartica je development primjer bez train/test pripadnosti.
-Stvarni fuel i teren su pokrenuti u SimFire smokeu; ERA5 je pribavljen, ali još nije
-mapiran u simulator.
+Trenutni put je **USFS FPA-FOD → 80 požarnih scenario JSON-ova → LANDFIRE gorivo/teren →
+dnevni gridMET kontekst → zaseban daily-weather proxy → SimFire**. Podjela je 40 train / 20
+validation / 20 test po cijelom događaju. Fuel/terrain rasteri su 128×128, 30 m i
+hash-provjereni. gridMET podaci i proxy postoje za 80/80; izvorni dnevni JSON ostaje odvojen
+od pretvorbe. Proxy je tehnički spojen, ali ne predstavlja satno mjerenje ili fizički
+validiran historijski replay. Težine agenta nisu trenirane.
 
-- [Scenario manifest](manifests/simfire-fpa-fod-401019270-dixie-candidate.json)
-- [Izvorni GeoJSON zapis, 455 B](../reports/real-fire-data/fpa-fod-dixie-2021-source.geojson)
-- [Pretvarač jednog FPA-FOD zapisa](../scripts/build_fpa_fod_scenario.py)
-- [LANDFIRE + ERA5 fetcher](../scripts/fetch_simfire_real_inputs.py)
-- [SimFire real-layer runner](../scripts/run_simfire_real_input_smoke.py) i [sačuvane slike/receipt](../reports/real-fire-data/simfire-dixie-real-input-smoke/)
-- [Zajednička šema i prazan template](manifests/simfire-scenario.schema.json), [template](manifests/simfire-scenario.template.json)
+- [Opis 80 stvarnih slučajeva i filtera](../docs/research/SIMFIRE_FPA_COHORT.md)
+- [Glavni cohort manifest](manifests/simfire-fpa-fod-cohort-v2.json)
+- [Eval membership manifest](manifests/simfire-fpa-fod-evaluation-membership-v1.json) — 40 train / 20 validation / 19 završnih test slučajeva; Larch Creek je isključen jer je tehnički otvoren.
+- [Input receipt](../reports/real-fire-data/simfire-cohort-v2-input-acquisition.json)
+- [Seed-cell receipt](../reports/real-fire-data/simfire-cohort-v2-seed-selection.json)
+- [gridMET weather po slučaju](processed/simfire-cohort-v2-gridmet-weather/) i [acquisition receipt](../reports/real-fire-data/simfire-cohort-v2-gridmet-weather.json)
+- [SimFire weather proxy po slučaju](processed/simfire-cohort-v2-gridmet-mappings/) i [mapping/QC receipt](../reports/real-fire-data/simfire-cohort-v2-gridmet-simfire-mapping.json)
+- [WAF smoke poređenje](../reports/real-fire-data/simfire-cohort-v2-gridmet-waf-sensitivity.json) - isti primjerci pri faktorima 0.1, 0.3, 0.5; tehnička provjera, ne fizikalna validacija
+- [No-op horizon smoke kod](../scripts/smoke_simfire_noop_horizon.py) i [receipti/mape](../reports/real-fire-data/simfire-cohort-v2-gridmet-noop-horizon/) - bez agenta, sa eksplicitnim 15-minutnim maksimumom trajanja jedne ćelije vatre; Larch Creek test uzorak je otvoren i neće biti u završnom benchmarku.
+- [Preuzimanje/preprocessing koda](../scripts/build_simfire_fpa_cohort.py) i
+  [LANDFIRE input fetcher](../scripts/fetch_simfire_cohort_inputs.py), [gridMET weather fetcher](../scripts/fetch_gridmet_cohort_weather.py)
+- [SimFire Gymnasium adapter](../src/wildfire_rl/simfire_gym_env.py) i
+  [sačuvani smoke izlazi](../reports/real-fire-data/simfire-cohort-v2-gym-smoke/)
+- [Zajednička scenario šema i template](manifests/simfire-scenario.schema.json)
 
-Raw TIFF/JSON su u Git-ignorisanom `.local/real-input-dixie/`; manifest i receipts sadrže
-source, verziju, preprocessing i SHA-256. U Gitu su male slike i reproducibilan kod, ne raw
-rasteri.
+GeoTIFF fajlovi su u Git-ignorisanom `.local/simfire-cohort-v2/`; u Git idu mali source
+snimci, scenario kartice, kodovi, hashovi, slike i receipts. Stari Dixie Fire (`FOD_ID
+401019270`) je samo development fixture iz ranije faze; njegov ERA5 niz ne popunjava novu
+kohortu.
 
 ## Arhivirani dataset opaženih požara
 

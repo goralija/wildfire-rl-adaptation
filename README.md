@@ -8,14 +8,16 @@ Istražujemo da li se RL agent može naučiti da bolje planira **vatrogasne lini
 scenarijima izvedenim iz historijskih požara, uz isti ograničeni budžet za početnog agenta,
 fine-tunirani agent i jednostavne kontrole.
 
-**Trenutni dizajn:** konvertovati stvarne lokacije/datume požara u reproducibilne
-SimFire scenarije sa odgovarajućim gorivom, terenom i vremenom; zatim uporediti osnovnog i
-fine-tuniranog agenta unutar iste simulacije. Historijski završni obod ili akcije nisu
-agentova nagrada. Tvrdnje su o simulatoru, ne o garantovanom smanjenju stvarnih hektara.
-Praktični izvor prijavljenih lokacija požara je USFS FPA-FOD; prvi zapis (Dixie Fire 2021) već je pretvoren
-u malu probnu scenario-karticu. Njegova tačka nije potvrđeno mjesto paljenja, a fuel, terrain
-i historijsko vrijeme još nedostaju. SimFire 2.0.1 radi u izolovanom Python 3.9.25
-okruženju, ali RL trening nije postavljen.
+**Trenutni dizajn:** 80 stvarnih USFS FPA-FOD požara podijeljeno je na train/validation/test.
+LANDFIRE karte goriva/terena i dnevni gridMET kontekst postoje za svih 80; gridMET je
+pretvoren i u transparentni, dnevni SimFire proxy, pa su ulazi spojeni kroz Gymnasium
+adapter. Proxy smoke prolazi na svim splitovima, uz WAF 0.1/0.3/0.5 tehničke varijante.
+Adapter koristi 15 jednominutnih koraka kao najduže trajanje jednog zapaljenog piksela;
+stock četiri koraka su se pokazala prekratkim za dio sporijih širenja po 30 m ćelijama.
+Ovo je izvršivo simulacijsko okruženje, ali weather i širenje nisu fizički validirani i ne
+predstavljaju satni replay. Agent nije treniran; prije poređenja treba zamrznuti
+baseline/evaluacijski protokol. Historijski završni obod i površina nisu agentova nagrada.
+
 [Laički workflow](docs/research/REAL_IGNITION_SCENARIO_PIPELINE.md),
 [SimFire funkcionalni demo](reports/environment-setup/simfire-functional-demo/functional-fire.gif).
 
@@ -39,10 +41,11 @@ prijedloge i otvorene odluke. [Pravila održavanja](knowledge/maintenance.md) i
    [trenutno stanje](docs/STATUS.md) i [upute za narednu sesiju](docs/NEXT_SESSION.md).
 2. Pogledaj [trenutni dizajn](docs/DESIGN.md), [scenario pipeline](docs/research/REAL_IGNITION_SCENARIO_PIPELINE.md)
    i [ADR-040](docs/specs/DECISION_RECORDS.md#adr-040--train-on-real-ignition-conditions-with-simulated-actions-2026-11-01).
-3. Sljedeći cilj je dobiti provjeren fuel/terrain/weather za Dixie scenario, napraviti
-   real-input kartu, pa onda veći reproducibilni USFS FPA-FOD uzorak i RL runtime.
-   [STATUS](docs/STATUS.md) i
-   [NEXT_SESSION](docs/NEXT_SESSION.md) imaju tačan redoslijed i lokalna ograničenja.
+3. Dnevni weather proxy i no-op smoke su spojeni; sljedeće je fizički opravdati postavke,
+   zaključati baseline/evaluacijski ugovor i pripremiti preflight. Trening ostaje odgođen.
+   Jedan testni slučaj je korišten u smoke-u, pa se isključuje; preostalih 19 test ID-jeva
+   su zatvoreni. Tačni koraci su u
+   [STATUS](docs/STATUS.md) i [NEXT_SESSION](docs/NEXT_SESSION.md).
 
 ## Pokretanje bez dodatnih biblioteka
 
@@ -98,13 +101,12 @@ probni zapis i scenario-kartica su u
 [candidate manifestu](data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json).
 BurnMD ostaje opcioni izvor ljudskih linija; njegova posebna data licenca je neriješena.
 
-## Šta se računa kao intervencija u novom dizajnu
+## Šta se računa kao intervencija u prvom adapteru
 
-SimFire agent se kreće i postavlja liniju na mapu; RL budžet će ograničiti broj ili dužinu
-linijskih poteza. Nećemo ih predstavljati kao stvarne crew-hours dok BurnMD ne potvrdi
-vremena i resurse. Za prvi prototip fokusiramo se na fireline, najbližu vrstu akcije
-historijskim linijskim podacima. Staro pravilo „jedna akcija izbriše jednu ćeliju“ pripada
-Firehose/Cell2Fire tracku i novom simulatoru se ne pripisuje.
+Prvi Gymnasium adapter postavlja jednu 30 m fireline tačku trenutnim potezom; svaka tačka
+troši jednu budžetsku jedinicu. Agent može staviti tačku bilo gdje na mapu, a kretanje posade
+i vrijeme gradnje nisu modelirani. To je pojednostavljen radni ugovor, ne stvarni crew-hour
+model. Vidi [detalje adaptera](docs/research/SIMFIRE_RL_ADAPTER.md).
 
 ## Sadržaj repozitorija
 

@@ -1,5 +1,12 @@
 # Promjene baze znanja
 
+## 2026-11-01: gridMET proxy spojen i SimFire trajanje ćelije provjereno
+
+- Dnevni gridMET podaci prevedeni su u transparentni SimFire proxy za svih 80 slučajeva; originalni JSON-i ostaju odvojeni.
+- No-op horizon provjera je našla da stock 4-minutna ćelija vatre može prerano ugasiti širenje po 30 m rasteru. Adapter sada koristi i bilježi 15 jednominutnih koraka; to je tehničko podešavanje, ne fizička kalibracija.
+- No-op ishodi: Owyhee 675 min/8.792 ćelije; Hayden 720 min/1.059; Larch Creek 84 min/24. Larch Creek je otvoren kao test smoke i izbačen je iz kasnijeg finalnog benchmarka; ostaje 19 zatvorenih test incidenata.
+- Dodani su repeatable no-op smoke kod, receipti i karte. `learn()` nije pozvan; trening nije počeo. Statusi su u [STATUS](docs/STATUS.md), [BACKLOG](docs/BACKLOG.md), [EXP-038/039](docs/research/EXPERIMENT_LOG.md) i [ADR-048](docs/specs/DECISION_RECORDS.md).
+
 ## 2026-11-01: Prvi SimFire smoke sa stvarnim LANDFIRE rasterima
 
 - Javni LANDFIRE ImageServer dao je LF2016 FBFM13 i LF2020 elevation na 128×128 tačnom 30 m UTM gridu; Open-Meteo je dao 24 sata ERA5 za datum.

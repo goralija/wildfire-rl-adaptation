@@ -1166,3 +1166,153 @@ Evidence: [EXP-033](../research/EXPERIMENT_LOG.md#exp-033--real-layers-fetched-a
 [scenario card](../../data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json),
 [real-input smoke](../../reports/real-fire-data/simfire-dixie-real-input-smoke/receipt.json),
 [LANDFIRE/Esri and Open-Meteo references S-065–S-066](../research/SOURCES.md).
+
+## ADR-044 — versioned 80-incident cohort with time-separated splits, 2026-11-01
+
+The single Dixie example proved the input conversion, but it was too small to support the
+planned base-vs-fine-tuned comparison. The USFS FPA-FOD current occurrence service
+contains many reported western-US large fires, and the public LANDFIRE image service has
+pre-event FBFM13 fuel releases for 2018–2019 and 2023–2024.
+
+**Decision:** use cohort `fpa-fod-western-us-2018-2024-v2`: select 20 cases per year from
+2018, 2019, 2023 and 2024 with a stable SHA-256 ranking, preferring state diversity. The
+whole-event split is 40 train (2018–2019), 20 validation (2023), 20 test (2024). Require a
+reported size of at least 5,000 acres, a date/location and MTBS ID for optional display.
+For fuel, use LF2016 FBFM13 on 2018–2019 and LF2022 FBFM13 on 2023–2024; use LF2020
+elevation as terrain. Store exact projected 128×128/30 m bounds, source snapshots and
+hashes. Do not use final reported area or MTBS perimeter as agent input or reward.
+
+The cohort is an engineering sample of screened large fires from ten western states, not a
+representative national sample. FPA-FOD locations are incident references with at least
+section-scale source precision, not verified ignition GPS. Fuel releases predate each
+event but are not event-day field surveys. All 80 fuel/terrain raster pairs passed current
+format/alignment/code checks; this is not physical validation.
+
+**Readiness:** the selected weather source was not reachable from the current runtime at
+cohort build time, so historical weather is 0/80. The cohort can support reproducible
+fuel/terrain adapter smoke, but it is not yet the complete historical-weather training
+set. Keep validation and test split IDs fixed; do not replace missing weather with silent
+synthetic values.
+
+Evidence: [cohort manifest](../../data/manifests/simfire-fpa-fod-cohort-v2.json),
+[input receipt](../../reports/real-fire-data/simfire-cohort-v2-input-acquisition.json),
+[seed receipt](../../reports/real-fire-data/simfire-cohort-v2-seed-selection.json),
+[EXP-034](../research/EXPERIMENT_LOG.md#exp-034--80-real-fpa-fod-cases-and-lanfire-maps-2026-11-01),
+[S-067–S-068](../research/SOURCES.md).
+
+## ADR-045 — implement a simple, auditable SimFire Gymnasium adapter, 2026-11-01
+
+The project needs an RL interface that can load the chosen real-data splits before
+training. SimHarness/RLlib was not necessary to check the experiment's first action and
+observation contract, so the environment uses the locally supported Gymnasium/SB3 stack.
+
+**Decision:** add a project-owned Gymnasium wrapper over pinned SimFire 2.0.1. It reads
+only the requested incident split and verifies raster hashes, CRS, bounds and shape. Fuel
+codes become categorical map channels; elevation uses one fixed 0–5,000 m normalization;
+the fire state is another channel. Action 0 is no-op; every other legal action adds one
+fireline point to an unburned burnable cell. Each point costs one unit from a 32-point
+budget. The first version assumes instantaneous construction and reachability anywhere.
+Each decision advances 30 minutes; maximum episode length is 24 decisions (12 hours).
+Reward is the negative increase in cumulative simulated burned cells divided by the
+number of burnable cells. The final historical perimeter/area never enters observation or
+reward.
+
+The current smoke fixes SimFire's `pixel_scale` to 30 m converted to 98.43 feet per grid
+cell. It checks one scenario in each split, a legal MaskablePPO inference action and the
+no-op mask at exhausted budget. It did not call `learn()`. The atmosphere is clearly marked
+demonstration-only because new cohort weather is absent; no policy result or simulator
+validity claim follows from this smoke. Movement, crew travel, line construction time and
+resource constraints are future model choices, not hidden capabilities.
+
+Evidence: [adapter specification](../research/SIMFIRE_RL_ADAPTER.md),
+[smoke receipt](../../reports/real-fire-data/simfire-cohort-v2-gym-smoke/receipt.json),
+[EXP-035](../research/EXPERIMENT_LOG.md#exp-035--gymnasium-simfire-cohort-smoke-2026-11-01),
+[S-070](../research/SOURCES.md).
+
+## ADR-046 — keep historical-weather training gated until weather is fetched and mapped, 2026-11-01
+
+The smoke path now runs, but the 80-case cohort has no weather files. A retry of the
+Open-Meteo archive URL from the current runtime failed DNS resolution. Separately, ERA5
+10 m wind is not the same quantity as SimFire's midflame wind, and air relative humidity
+is not dead-fuel moisture; FPA-FOD discovery HHMM has no confirmed timezone in this setup.
+
+**Decision:** mark only fuel/terrain acquisition ready, not “dataset ready for historical
+training.” Before starting the main historical-condition training, obtain source-backed
+weather for the selected cases, record timestamps/units/checksums, choose and document the
+variable conversion or deliberately narrow the claim, and run matched smoke/sensitivity
+checks. Do not relabel the current demo wind/moisture as observed conditions. After this
+gate, freeze baselines/seed protocol and test membership before training.
+
+This is an evidence/status gate, not a claim that one exact meteorological conversion is
+the only acceptable method. A documented and defensible alternative public source can
+replace Open-Meteo.
+
+Evidence: [weather/input status receipt](../../reports/real-fire-data/simfire-cohort-v2-input-acquisition.json),
+[adapter notes](../research/SIMFIRE_RL_ADAPTER.md),
+[EXP-036](../research/EXPERIMENT_LOG.md#exp-036--historical-weather-fetch-retry-from-cohort-runtime-2026-11-01),
+[S-069](../research/SOURCES.md).
+
+## ADR-047 — use gridMET as daily context; keep the SimFire mapping explicit, 2026-11-01
+
+The Open-Meteo archive host did not resolve from the local runtime, but the public NSF
+NCAR GDEX gridMET subset service was reachable. It returns daily, approximately 4-km
+historical values at the nearest grid cell for dates and reported points across the full
+cohort. A successful download by itself does not make these weather fields direct simulator
+inputs: gridMET is daily and at 10 m, while SimFire's simple config feeds midflame wind;
+air humidity and NFDRS model-G 100-hour moisture are not the same quantity as the one
+fuel-moisture parameter accepted by this SimFire integration.
+
+**Decision:** use gridMET d761426 as the cohort-wide historical daily-context source. Save
+the eight original variables, source unit, requested and sampled locations, query URL and
+hash in one small JSON per incident. Keep them in a candidate/context state; do not fill
+the SimFire atmospheric configuration with silent conversions. Report **80/80 daily
+context files acquired and QC-checked; 0/80 mapped into SimFire**. Before the main policy
+training, implement a labeled representative-day proxy and sensitivity checks for wind
+height/sheltering, direction convention, fuel moisture and the gridMET-vs-discovery-time
+window. If those choices are not defensible enough, narrow the experiment claim to real
+landscape/location with explicitly modeled weather.
+
+This is an acquisition and experimental-design decision, not evidence that gridMET predicts
+local fire behavior or that the weather values are point observations. GDEX lists CC BY
+4.0; cite dataset DOI 10.5065/FDBC-FV90. The provider says days are midnight-to-midnight
+Mountain Standard Time and warns that gridMET cannot capture fine local wind/topographic
+microclimate at scales smaller than its grid.
+
+Evidence: [80-case acquisition receipt](../../reports/real-fire-data/simfire-cohort-v2-gridmet-weather.json),
+[per-case values](../../data/processed/simfire-cohort-v2-gridmet-weather/),
+[QC summary and figure](../../reports/real-fire-data/simfire-cohort-v2-gridmet-summary.json),
+[EXP-037](../research/EXPERIMENT_LOG.md#exp-037--80-case-gridmet-historical-context-acquisition-and-qc-2026-11-01),
+[gridMET and conversion sources S-071–S-072](../research/SOURCES.md).
+
+## ADR-048 — set a 30 m cell duration and protect the test smoke case, 2026-11-01
+
+After mapping daily gridMET into explicitly labeled proxy inputs, we ran no-action
+SimFire episodes on representative train/validation/test cases. The stock config lets a
+burning pixel remain active for four update frames. At one minute per frame and 30 m cells,
+the Owyhee no-op example extinguished after 8 simulated minutes with two cells burned;
+one-minute inspection showed the next adjacent front was accumulating spread too slowly
+to reach a new 98.43 ft cell before its four-frame lifetime ended. The official SimFire docs
+define this field in frames (S-073).
+
+**Decision:** expose `max_fire_duration_updates` in the project adapter and default it to
+15, equal to 15 simulated minutes at the current one-minute update rate. This is a
+resolution-aware engineering setting to prevent an obviously too-short pixel lifetime from
+silencing some candidate cases. It is not a field measurement or a validated physical
+calibration. Record it in every environment info object and receipt. Keep the value
+configurable so a later validation study can compare settings. Do not interpret simulated
+area as a prediction of actual incident area.
+
+At WAF 0.3 and this setting, no-action smoke episodes lasted 675 minutes/8,792 cells on
+TRAIN Owyhee, 720 minutes/1,059 cells on VALIDATION Hayden, and 84 minutes/24 cells on TEST
+Larch Creek. This proves the software can produce different multi-hour/shorter episode
+behaviors, not that they are physically correct. Larch Creek has been viewed during
+technical troubleshooting; exclude it from final benchmark membership and retain the other
+19 test incidents as the held-out set. EXP-038 supersedes ADR-047's earlier “0/80 mapped”
+status while preserving ADR-047 as the historical acquisition-stage decision.
+
+Evidence: [adapter](../../src/wildfire_rl/simfire_gym_env.py),
+[no-op probe script](../../scripts/smoke_simfire_noop_horizon.py),
+[train/validation receipts](../../reports/real-fire-data/simfire-cohort-v2-gridmet-noop-horizon/),
+[test smoke receipt](../../reports/real-fire-data/simfire-cohort-v2-gridmet-noop-test-exposed/),
+[evaluation membership](../../data/manifests/simfire-fpa-fod-evaluation-membership-v1.json),
+[EXP-038/039](../research/EXPERIMENT_LOG.md), [S-073](../research/SOURCES.md).

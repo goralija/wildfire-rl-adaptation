@@ -4,6 +4,19 @@ title: Work log
 ---
 # Work log
 
+2026-11-01 — Completed the daily gridMET-to-SimFire proxy path for all 80 real FPA-FOD
+cases, then checked the environment's no-action behavior without calling `learn()`. A
+full-horizon probe found SimFire's stock four-frame pixel lifetime could extinguish an
+Owyhee sample after 8 minutes/2 cells on the 30 m grid. The adapter now exposes a 15-frame
+(15-minute) lifetime; direct no-op probes produced 675 min/8,792 cells for train Owyhee,
+720 min/1,059 cells for validation Hayden, and 84 min/24 cells for test Larch Creek. This
+setting is an engineering response to cell scale, not physical calibration. Larch Creek
+has been opened for smoke/configuration diagnostics and must be excluded from the later
+final test comparison; the other 19 test incidents remain closed. Added a reusable no-op
+smoke command, image/JSON receipts, and updated status/backlog/ADR/experiment/source/handoff
+records. No policy training or physical validation was performed. See EXP-038/039 and
+ADR-048.
+
 2026-11-01 — Kasniji isti-dnevni nastavak napravio je prvi cijeli put od realnih rastera
 do SimFire-a. Preuzeti su LF2016 FBFM13, LF2020 elevation i 24 sata ERA5 za datum požara;
 rasteri su provjereni i učitani u stvarno 30-minutno SimFire pokretanje. Stvarni vjetar/vlaga nisu

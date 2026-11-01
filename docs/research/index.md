@@ -4,6 +4,9 @@
 
 - [Trenutni dizajn](../DESIGN.md) - stvarni incidenti kao polazne lokacije i uslovi za SimFire, pa upareno poređenje osnovnog i treniranog agenta.
 - [Trenutni status](../STATUS.md) - šta je stvarno pokrenuto i koji ulazi još fale.
+- [80-case FPA-FOD/SimFire kohorta](SIMFIRE_FPA_COHORT.md) - službeni događaji, split, stvarni LANDFIRE gorivo/teren i dnevni gridMET kontekst.
+- [gridMET dataset QC i raspodjela](../../reports/real-fire-data/simfire-cohort-v2-gridmet-summary.json) - 80/80 vremenskih konteksta provjereno; još nisu mapirani na SimFire.
+- [SimFire Gymnasium/RL adapter](SIMFIRE_RL_ADAPTER.md) - laičko objašnjenje opažanja, akcije, nagrade i lokalnog smokea.
 - [X/Y tok običnim jezikom](REAL_IGNITION_SCENARIO_PIPELINE.md) - kako zapis požara postaje karta i uslovi za simulator.
 - [Dixie Fire probna scenario-kartica](../../data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json) - jedan stvarni zapis, još bez goriva, terena i istorijskog vremena.
 - [FPA-FOD zapis i porijeklo](../../reports/real-fire-data/fpa-fod-dixie-2021-source.geojson) - mali GeoJSON dokaz porijekla za probni slučaj.

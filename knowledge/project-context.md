@@ -1,56 +1,53 @@
 ---
 type: Project Context
-title: Projektni kontekst — stvarne lokacije požara u SimFire-u
-description: Kratki trenutni ulaz u cilj, izbor, izvedene provjere i naredni korak.
+title: Projektni kontekst — stvarna požarna okruženja u SimFire-u
+description: Aktivni dizajn, kohorta, RL adapter i otvoreni uslovi prije treninga.
 status: current
 sources:
   - resource: /docs/STATUS.md
-  - resource: /docs/DESIGN.md
+  - resource: /docs/research/SIMFIRE_FPA_COHORT.md
+  - resource: /docs/research/SIMFIRE_RL_ADAPTER.md
   - resource: /docs/specs/DECISION_RECORDS.md
 ---
 # Projektni kontekst
 
 ## Jedna rečenica
 
-Poredimo base i fine-tuned agenta koji postavljaju vatrogasne linije u istoj SimFire
-simulaciji, a scenarije gradimo iz stvarnih požarnih lokacija/datuma i okolišnih podataka.
+Uporediti PPO agenta i dodatno učenog PPO agenta u SimFire-u, pri čemu se mape i početni
+uslovi scenarija izvode iz stvarnih požara, a agentova iskustva i nagrade dolaze iz
+simulacije.
 
 ## Trenutni dizajn
 
-- **Prijavljene lokacije incidenata:** USFS FPA-FOD je kandidat za malu, version-pinned
-  kohortu; tačka nije nužno potvrđeno mjesto paljenja, a preciznost može biti samo PLSS sekcija.
-- **Simulacijski ulazi:** LANDFIRE fuel/elevation + zaseban historijski weather, na istom
-  georeferenciranom gridu i sa sačuvanim jedinicama/hashovima.
-- **Simulator:** MITRE SimFire 2.0.1 radi u lokalnom Python 3.9.25 venvu; SimHarness/RLlib
-  još nije instaliran.
-- **Agent:** PPO base i kopija dodatno učena samo na cijelim TRAIN incidentima.
-- **Historijski obod/linije:** zasebna kontekstna/replay referenca, ne agentov input ni
-  reward u trenutnom protokolu.
-- **X/Y format:** [scenario JSON schema](../data/manifests/simfire-scenario.schema.json)
-  povezuje izvorni incident s weather/raster fajlovima i simulator postavkama.
+- 80 FPA-FOD požara: 40 train / 20 validation / 20 test; cijeli incident ostaje u jednom
+  split-u.
+- Stvarni pre-event LANDFIRE FBFM13 fuel i elevation rasteri za svih 80; fiksni projected
+  UTM grid, 128×128, 30 m ćelije.
+- Pinovani SimFire 2.0.1, Python 3.9.25, Gymnasium/SB3/sb3-contrib adapter i CNN politika.
+- Agent bira no-op ili jednu 30 m fireline tačku. Jedna akcija troši jedan budžet; nema
+  kretanja posade ni vremena gradnje u prvom adapteru.
+- FPA final size i MTBS perimetri ostaju samo post-result kontekst, izvan agenta i rewarda.
 
-Običnim jezikom: [pipeline](../docs/research/REAL_IGNITION_SCENARIO_PIPELINE.md).
+## Šta je spremno, a šta nije
 
-## Zašto više ne čekamo BurnMD line-time replay
+Fuel i terrain su preuzeti/hash-provjereni za svih 80 požara. Osam dnevnih gridMET polja
+postoji za svih 80, a odvojeni weather proxy priključen je u adapteru. Proxy koristi
+približno 10 m→20 ft vjetar, WAF 0.3, obrtanje smjera vjetra i Simard EMC procjenu iz dnevne
+max temperature/min RH. WAF 0.1/0.3/0.5 smoke prolazi tehnički. To ne potvrđuje lokalni
+vjetar ili stvarnu vlagu goriva; dnevni gridMET (~4 km) nije satni replay.
 
-Mineral Fire audit ima geometrije linija, ali nema pouzdanih vremena njihove gradnje.
-`LineDateTi` je prazan za svih 249 linija, a `CreateDate` je vrijeme datoteke/feature zapisa,
-ne dokaz kada je ekipa radila. To znači da line replay danas zahtijeva nagađanje. Glavno
-pitanje se zato mijenja: učimo i poredimo agenta na simuliranim fire-control zadacima u
-scenarijima koji polaze od stvarnih događaja, bez lažne tvrdnje da ćemo ponoviti historiju.
+Proxy adapter, rasteri i Gymnasium smoke su pokretljivi; `learn()` nije pozvan i težine ne
+postoje. Baseline, evaluacijski seedovi i test protokol nisu zamrznuti. Vidi [status](../docs/STATUS.md),
+[kohortu](../docs/research/SIMFIRE_FPA_COHORT.md), [adapter](../docs/research/SIMFIRE_RL_ADAPTER.md)
+i [mapping receipt](../reports/real-fire-data/simfire-cohort-v2-gridmet-simfire-mapping.json).
+Adapter koristi 15 jednominutnih koraka kao maksimalno trajanje jedne ćelije vatre; stock
+četiri koraka su se gasila prerano u jednom 30 m primjeru. To je inženjerska postavka,
+ne potvrđena požarna fizika. Test slučaj Larch Creek je korišten u smoke-u i izostavlja se
+iz završne procjene; 19 test incidenata ostaje zatvoreno. Trening nije počeo.
 
-Prethodni CFSDS/Firehose nalazi ostaju arhivirani. BurnMD je dodatna lokalna referenca;
-njegova prava na reuse još nisu potvrđena.
+## Granice tvrdnje
 
-## Status i granice
-
-SimFire funkcionalni demo, BurnMD archive/schema audit i fixed-size event-location AOI dry-run su
-gotovi. Jedan stvarni FPA-FOD zapis (Dixie 2021) pretvoren je u development scenario-karticu
-i provučen kroz AOI dry-run; nije train/test primjer. Ne postoji real fuel/terrain/weather
-SimFire run, šira FPA kohorta/split, SimHarness/RLlib run ili trening. `LANDFIRE_EMAIL` nije
-postavljen; zadnja provjera pokazala je 3.0 GiB slobodno (2026-11-01), pa je stari 29-MiB
-navod zastario.
-
-Izvještavati samo ono što je testirano u simulatoru. Ne pretvarati konačnu historijsku
-požarnu površinu u agentovu reward vrijednost niti obećati da će realni požar biti manji.
-Trenutna odluka: [ADR-040](../docs/specs/DECISION_RECORDS.md#adr-040--train-on-real-ignition-conditions-with-simulated-actions-2026-11-01), uz lokacijsko pojašnjenje u [ADR-042](../docs/specs/DECISION_RECORDS.md#adr-042--scenario-coordinates-keep-their-source-role-2026-11-01).
+Rezultat eventualno može reći da je određena politika smanjila **simulirano** opožareno
+područje na zamrznutim test scenarijima. Ne može reći da bi požar u stvarnosti bio manji za
+isti iznos. Dodatna otvorena odluka: da li istraživački cilj ostaje “historijski uslovi” ili
+se sužava na stvarne mape/lokacije uz unaprijed izabranu kontrolisanu simuliranu atmosferu.
