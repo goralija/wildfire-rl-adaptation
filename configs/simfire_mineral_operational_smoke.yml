@@ -1,0 +1,104 @@
+# Integration smoke only: real LANDFIRE fuel/elevation cache, reported Mineral ignition,
+# and SimFire's simple demo wind/moisture. This is not historical weather or validation.
+area:
+  screen_size: [128, 128]
+  pixel_scale: 30
+
+display:
+  fire_size: 2
+  control_line_size: 2
+  agent_size: 4
+
+simulation:
+  update_rate: 1
+  runtime: 1h
+  headless: false
+  draw_spread_graph: false
+  record: true
+  save_data: false
+  data_type: "npy"
+  sf_home: ".local/simfire-mineral-2020"
+
+mitigation:
+  ros_attenuation: true
+
+operational:
+  seed:
+  latitude: 36.1127077777943 # top-left derived from reported ignition and 3840m tile
+  longitude: -120.5397077777943
+  height: 3840
+  width: 3840
+  resolution: 30
+  year: 2020 # selects local cache; requested bands are LF2016_FBFM13 + LF2020_Elev
+
+historical:
+  use: false
+  fire_init_pos_lat: 36.09493
+  fire_init_pos_long: -120.52193
+  name: Mineral
+  year: '2020'
+
+terrain:
+  topography:
+    type: operational
+    functional:
+      function: perlin
+      perlin: {}
+      gaussian: {}
+  fuel:
+    type: operational
+    functional:
+      function: chaparral
+      chaparral:
+        seed: 1113
+    burn_probability:
+      type: functional
+      functional:
+        function: perlin
+        perlin: {}
+        gaussian: {}
+
+fire:
+  fire_initial_position:
+    type: static
+    static:
+      position: (64, 64)
+    random:
+      seed: 1234
+  max_fire_duration: 4
+  diagonal_spread: true
+
+environment:
+  moisture: 0.03 # demo setting; not event-specific historical fuel moisture
+
+wind:
+  function: simple
+  cfd:
+    time_to_train: 1000
+    iterations: 1
+    scale: 1
+    timestep_dt: 1.0
+    diffusion: 0.0
+    viscosity: 0.0000001
+    speed: 19
+    direction: north
+  simple:
+    speed: 7
+    direction: 90.0
+  perlin:
+    speed:
+      seed: 2345
+      scale: 400
+      octaves: 3
+      persistence: 0.7
+      lacunarity: 2.0
+      range_min: 7
+      range_max: 47
+    direction:
+      seed: 650
+      scale: 1500
+      octaves: 2
+      persistence: 0.9
+      lacunarity: 1.0
+      range_min: 0.0
+      range_max: 360.0
