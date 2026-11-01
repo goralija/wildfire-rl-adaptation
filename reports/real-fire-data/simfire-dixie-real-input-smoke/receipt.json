@@ -1,0 +1,70 @@
+{
+  "agent_training": false,
+  "created_at_utc": "2026-11-01T10:03:30.874031+00:00",
+  "environment_used": {
+    "fuel_moisture": "configuration demo value; not inferred from ERA5 RH",
+    "wind": "configuration demo value"
+  },
+  "fire_active_after_horizon": true,
+  "fire_initial_position": {
+    "accuracy_note": "Point geometry requested from the current USFS service in EPSG:4326. The publication's stated minimum location precision is a PLSS section (one-square-mile grid); event-specific accuracy is not provided here.",
+    "cell_row_column": [
+      64,
+      64
+    ],
+    "simfire_xy_column_row": [
+      64,
+      64
+    ],
+    "source_role": "incident_reference_point"
+  },
+  "historical_action_replay": false,
+  "historical_weather_used_in_simulation": false,
+  "inputs": {
+    "fuel": {
+      "codes": [
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        91,
+        98,
+        99
+      ],
+      "path": ".local/real-input-dixie/fuel-lf2016-fbfm13.tif",
+      "sha256": "b5e0e5a3f61ad54d9b5f6e062b8ff1acc0ddc0af1e532b7aee9b92fc7c508065"
+    },
+    "terrain": {
+      "SimFire_units": "feet",
+      "path": ".local/real-input-dixie/elevation-lf2020-m.tif",
+      "sha256": "b9360ba55dbf3c0c6d37eb07fdb9518e1e49c7b7546cdfc8c7b164e3934492dc",
+      "source_units": "meters"
+    },
+    "weather": "ERA5 record fetched and retained in input receipt; not used because ERA5 wind is at 10 m and SimFire expects midflame wind, while RH is not fuel moisture."
+  },
+  "kind": "simfire_real_fuel_terrain_integration_smoke",
+  "limitations": [
+    "The FPA-FOD point is an incident reference with unknown event-specific precision, not GPS-confirmed ignition.",
+    "LANDFIRE FBFM13 vintage is 2016; it predates the 2021 fire by five years.",
+    "The 30-minute run demonstrates real fuel/terrain array integration only; its demo atmosphere is not historical weather.",
+    "The fetched ERA5 date is stored in UTC and is not aligned to discovery HHMM because the source timezone is unresolved.",
+    "The output is not a counterfactual reconstruction or a claim about real-world area saved."
+  ],
+  "outputs": [
+    "input-layers.png",
+    "final-state.png",
+    "dixie-real-fuel-terrain-demo-weather.gif"
+  ],
+  "physical_validation": false,
+  "scenario_id": "fpa-fod-401019270-dixie",
+  "scenario_manifest": "data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json",
+  "scenario_manifest_sha256": "6a79de542f55a2bf639be85da54009313e5af790fe97d0597c9f5fb96148d0d1",
+  "scientific_result": false,
+  "simfire_commit": "04905b19fe8c10dc08d64faddd00303e0561bb66",
+  "steps": 30
+}
