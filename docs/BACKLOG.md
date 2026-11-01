@@ -16,18 +16,18 @@ Detalji: [current scenario pipeline](research/REAL_IGNITION_SCENARIO_PIPELINE.md
 | ID | Status | Šta tačno treba završiti |
 | --- | --- | --- |
 | TASK-020 | Djelimično zatvoren | BurnMD LFS hash, archive inventory i Mineral GIS/time audit su izvršeni. Zasebna dataset licenca i 243-vs-308 archive/paper count nisu razriješeni; zato ne redistribuirati. Linijski timestamp/replay nije više uslov za glavni policy ogled. |
-| TASK-021 | Samostalni SimFire PASS; RL runtime otvoren | Python 3.9.25 SimFire 2.0.1 radi; functional GIF/map/receipt postoje. Potrebni su stvarni fuel/terrain raster i zaseban provjeren SimHarness/RLlib ili odgovarajući adapter. |
+| TASK-021 | Samostalni SimFire i real-layer smoke PASS; RL runtime otvoren | Python 3.9.25 SimFire 2.0.1 radi na funkcionalnoj mapi i na stvarnim LF2016 fuel/LF2020 terrain nizovima; mape/GIF/receipt postoje. SimHarness/RLlib ili odgovarajući agent adapter ostaje poseban zadatak. |
 | TASK-022 | Jedan razvojni slučaj spreman; širi uzorak otvoren | `simfire-scenario/1.0` šema/template postoje; Dixie Fire 2021 (`FOD_ID 401019270`) ima stvarni GeoJSON snapshot, hash, MTBS-ID i 128×128 fixed-grid karticu. To je adapter fixture, nije kohorta ili split. |
-| TASK-023 | U toku — raster/weather fajlovi nedostaju | Adapter prima scenario JSON, a Dixie AOI dry-run prolazi. Pribaviti pre-event fuel, elevation i historijski weather; validirati CRS/bandove/NoData; napraviti prvi real-input SimFire smoke i kartu/animaciju. LANDFIRE request čeka stvarni `LANDFIRE_EMAIL`. |
+| TASK-023 | Djelimično završeno — real fuel/terrain smoke radi; weather nije mapiran | `scripts/fetch_simfire_real_inputs.py` pribavlja javne LANDFIRE rastere bez emaila i ERA5 za datum; provjerava 128×128 EPSG:32610/30m CRS, granice, kodove i hash. `scripts/run_simfire_real_input_smoke.py` pokreće SimFire nad stvarnim fuel/DEM i pravi mapu/GIF. Fuel je LF2016 (pet godina prije požara); ERA5 ostaje arhiviran, jer 10m vjetar/RH nisu direktno SimFire midflame wind/moisture, a FPA vrijeme nema potvrđenu zonu. Ne trenirati dok se ove varijable i event split ne riješe. |
 | TASK-024 | Još nije počeo | Za isti scenarij definisati line-budget, no-op i jednostavne determinističke baseline strategije; provjeriti limit/horizon semantics. |
 | TASK-025 | Još nije počeo | Izabrati heldout incidente prije treniranja; sačuvati base PPO pa fine-tunovati kopiju samo na train scenarijima izvedenim iz historijskih uslova. |
 | TASK-026 | Još nije počeo | Upareno heldout poređenje, seedovi/intervali neizvjesnosti, karte i animacije; tvrditi samo rezultat u testiranoj simulaciji. |
 
-**Sada:** jedan stvarni Dixie record pretvoren je u scenario-karticu; generički LANDFIRE
-dry-run prolazi za nju. `LANDFIRE_EMAIL` nedostaje, a zadnja provjera diska pokazala je
-3.0 GiB slobodno (2026-11-01; raniji 29-MiB navod je zastario). Nastaviti s provjerom
-inputa za taj slučaj, pa širiti FPA-FOD uzorak i zamrznuti event-level split. Ne trenirati
-prije TASK-023 i zamrzavanja splita.
+**Sada:** postoji jedan runnable razvojni primjer na stvarnom gorivu i terenu, plus sačuvan
+ERA5 niz. Sirovi ulazi su u ignorisanom `.local/real-input-dixie/`; karta, GIF, receipt,
+skripte i scenario manifest su pregledljivi. Sljedeći rad je utvrditi opravdanu fuel
+vintage i vremensku/moisture konverziju, zatim napraviti kohortu i event-level split.
+Trening nije spreman prije toga i RL runtime još nije postavljen.
 
 ## Arhivirani CFSDS/Firehose plan
 

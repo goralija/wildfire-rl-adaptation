@@ -32,16 +32,24 @@ U Git idu ti mali manifesti, a sirovi dataset ostaje u external/firehose/data/Su
 
 ## Aktivni scenarij izveden iz FPA-FOD-a
 
-Trenutni put je **USFS FPA-FOD → zajednički scenario JSON → fuel/terrain/weather → SimFire**.
-Prvi mali zapis je Dixie Fire 2021, `FOD_ID 401019270`. Službeni archive navodi da se
-FPA-FOD može koristiti bez dodatne dozvole ili naknade uz citat Short (2026); druge mape
-koje ćemo spojiti uz požar imaju zasebna pravila. Koordinata je incident-referentna lokacija, ne potvrđen GPS položaj paljenja. Kartica je
-samo development primjer, bez realnih fuel/terrain/weather fajlova i bez train/test pripadnosti.
+Trenutni put je **USFS FPA-FOD → zajednički scenario JSON → LANDFIRE fuel/terrain +
+ERA5 context → SimFire**. Prvi mali zapis je Dixie Fire 2021, `FOD_ID 401019270`. Službeni
+archive navodi da se FPA-FOD može koristiti bez dodatne dozvole ili naknade uz citat Short
+(2026); priključene mape imaju svoja pravila. Koordinata je incident-referentna lokacija,
+ne potvrđen GPS položaj paljenja. Kartica je development primjer bez train/test pripadnosti.
+Stvarni fuel i teren su pokrenuti u SimFire smokeu; ERA5 je pribavljen, ali još nije
+mapiran u simulator.
 
 - [Scenario manifest](manifests/simfire-fpa-fod-401019270-dixie-candidate.json)
 - [Izvorni GeoJSON zapis, 455 B](../reports/real-fire-data/fpa-fod-dixie-2021-source.geojson)
 - [Pretvarač jednog FPA-FOD zapisa](../scripts/build_fpa_fod_scenario.py)
-- [Zajednička šema i prazni template](manifests/simfire-scenario.schema.json), [template](manifests/simfire-scenario.template.json)
+- [LANDFIRE + ERA5 fetcher](../scripts/fetch_simfire_real_inputs.py)
+- [SimFire real-layer runner](../scripts/run_simfire_real_input_smoke.py) i [sačuvane slike/receipt](../reports/real-fire-data/simfire-dixie-real-input-smoke/)
+- [Zajednička šema i prazan template](manifests/simfire-scenario.schema.json), [template](manifests/simfire-scenario.template.json)
+
+Raw TIFF/JSON su u Git-ignorisanom `.local/real-input-dixie/`; manifest i receipts sadrže
+source, verziju, preprocessing i SHA-256. U Gitu su male slike i reproducibilan kod, ne raw
+rasteri.
 
 ## Arhivirani dataset opaženih požara
 

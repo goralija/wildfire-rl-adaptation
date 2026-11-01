@@ -80,15 +80,14 @@ dalje imaju vlastite uslove korištenja.
 - SimFire samostalno radi u Python 3.9.25. SimHarness/RLlib još nije instaliran.
 - Mineralov LF2016 FBFM13 fallback je četiri godine prije događaja; to je privremeni
   tehnički kandidat, ne potvrđena godišnja fuel mapa.
-- LANDFIRE raster nije preuzet ni za Mineral ni za Dixie: `LANDFIRE_EMAIL` nije postavljen.
-  Zadnja provjera diska (2026-11-01) pokazala je 3.0 GiB slobodno; prethodna napomena o
-  29 MiB je zastarjela. SimHarness/RLlib ipak zahtijeva zasebnu procjenu platforme.
-- Weather mapping u SimFire još nije potvrđen. Dok ulaz ne koristi historijske vremenske
-  uslove, rezultat je samo integracijski smoke.
-- Ne trenirati niti izvještavati policy prednost dok se ne napravi najmanje jedan
-  provjerljiv scenario sa stvarnim fuel/terrain/weather ulazima i stabilnim RL runtimeom.
+- Dixie LF2016 FBFM13 i LF2020 elevation rasteri su pribavljeni i uvezeni u kratki smoke.
+  Fuel je pet godina stariji od požara, zato je pre-event kandidat, ne potvrđen 2021 snapshot.
+- ERA5 niz za datum postoji, ali nije ulaz modela: vjetar je na 10 m, RH nije gorivna vlaga,
+  a FPA discovery HHMM nema potvrđenu zonu. Real-layer smoke zato jasno koristi demo atmosferu.
+- SimHarness/RLlib nije instaliran. Ne trenirati niti izvještavati policy prednost dok se ne
+  opravdaju fuel vintage/weather tretman, ne napravi višedogađajni split i ne podigne stabilan
+  RL runtime.
 
-Trenutni najizvodljiviji sljedeći korak: za već pripremljeni Dixie kandidat dobiti
-odgovarajuće fuel/terrain slojeve i historijsko vrijeme, potvrditi njihovo poravnanje i
-napraviti prvu real-input kartu/animaciju. Tek zatim praviti kohortu i split po incidentu.
-Potpuni workflow: [pipeline](research/REAL_IGNITION_SCENARIO_PIPELINE.md).
+Trenutni najizvodljiviji sljedeći korak: izabrati vremenski adekvatan fuel sloj za uzorke,
+riješiti ili eksplicitno zadržati izvan modela ERA5 vjetar/vlagu, pa sastaviti FPA-FOD kohortu
+sa splitom po incidentu. Potpuni workflow: [pipeline](research/REAL_IGNITION_SCENARIO_PIPELINE.md).

@@ -20,7 +20,7 @@ nego što počnemo. Mineral Fire audit je pokazao prazna polja vremena; korište
 `CreateDate` bi značilo nagađanje. Umjesto toga, scenario počinje od prijavljene lokacije
 i datuma otkrivanja incidenta, stvarnog goriva/terena i dokumentovanog vremena. FPA-FOD
 tačka ne mora biti tačno mjesto paljenja, pa je za Dixie koristimo samo kao približnu
-početnu lokaciju. Budući perimetar/linija ostaju van agentovog opažanja i nagrade. Detalji: [pipeline](research/REAL_IGNITION_SCENARIO_PIPELINE.md)
+referencu scenarija. Budući perimetar/linija ostaju van agentovog opažanja i nagrade. Detalji: [pipeline](research/REAL_IGNITION_SCENARIO_PIPELINE.md)
 i [ADR-040](specs/DECISION_RECORDS.md#adr-040--train-on-real-ignition-conditions-with-simulated-actions-2026-11-01).
 
 ## Šta je stvarno urađeno
@@ -39,45 +39,53 @@ i [ADR-040](specs/DECISION_RECORDS.md#adr-040--train-on-real-ignition-conditions
   i [template](../data/manifests/simfire-scenario.template.json).
 - **Uvezen je jedan stvarni slučaj kao probna kartica.** Iz službenog USFS FPA-FOD servisa
   preuzet je Dixie Fire 2021 (`FOD_ID 401019270`). Skripta ga je pretvorila u fiksnu
-  scenario-karticu na mreži 128×128 nominalnih 30 m ćelija; sačuvala je izvorni zapis od
+  128×128 mrežu u UTM-u sa stvarnih 30 m ćelija; sačuvala je izvorni zapis od
   455 B, SHA-256, izvorni ID, MTBS vezu, ulogu incident-referentne tačke i napomenu o
   njenoj neizvjesnosti. To je razvojni primjer, još nije
   slučaj za trening niti simulaciju. [Kartica](../data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json),
   [izvorni zapis](../reports/real-fire-data/fpa-fod-dixie-2021-source.geojson).
-- **Prvi pravi-data most je provjeren u dry-run modu.** `scripts/prepare_mineral_landfire.py`
-  sada može čitati scenario-karticu ili default Mineral slučaj. Računa fiksnu mapu oko
-  prijavljene lokacije, tako da veličina ne zavisi od kasnijeg perimetra ili linije. Dry-run za Mineral
-  i Dixie prolazi; operativni SimFire runner može čitati istu karticu.
+- **Preuzeti su i provjereni stvarni okolišni ulazi.** Javni LANDFIRE ImageServer dao je
+  FBFM13 goriva za 2016. i visinu terena za 2020. ERA5 je dao 24 sata vremena na datum
+  otkrivanja. Dva rastera su poravnata na isti EPSG:32610 grid od 128×128 ćelija po 30 m;
+  u gorivu su provjereni kodovi i oba TIFF-a imaju odgovarajuće granice/CRS.
+- **SimFire je pokrenut nad tim rasterima.** 30-minutni smoke je napravio kartu goriva i
+  visine, završno stanje požara i GIF. Ovo dokazuje da stvarni rasteri ulaze u SimFire.
+  Vjetar i vlaga su još demonstracijske vrijednosti; ERA5 nije potajno proglašen istim
+  varijablama koje simulator traži. [Izlazi i receipt](../reports/real-fire-data/simfire-dixie-real-input-smoke/).
+- **Podaci su u lokalnom ignorisanom folderu.** Ponovno preuzimanje radi
+  `scripts/fetch_simfire_real_inputs.py`; sirovi GeoTIFF/JSON se ne commitaju, a njihove
+  putanje i SHA-256 su u scenario kartici i receiptu.
 - **CFSDS/Firehose faza je sačuvana**, ali više nije aktivni dizajn. Njeni prethodni
   izvještaji i metrički brojevi ostaju u arhivi, ne brišu se ni ne prepravljaju.
 
 ## Šta još nije urađeno
 
-1. Nema rastera LANDFIRE u SimFire cache-u; pravi request još nije poslan jer `LANDFIRE_EMAIL`
-   nije postavljen. Trenutno ima 3.0 GiB slobodno (provjera 2026-11-01), pa je stari navod
-   o 29 MiB zastario.
-2. Nema odabranog/historijski provjerenog weather niza za Dixie scenario.
+1. Fuel karta je LF2016, pet godina prije Dixie požara; to je pre-event kandidat, ne
+   potvrđena 2021 karta vegetacije. DEM je iz 2020.
+2. ERA5 niz je preuzet za 2021-07-13 u UTC, ali nije ubačen u simulaciju. Vrijeme FPA
+   `1615` nema potvrđenu zonu u našem zapisu; ERA5 vjetar je na 10 m, a SimFire očekuje
+   midflame wind; relativna vlažnost vazduha nije vlaga goriva.
 3. FPA-FOD pravila korištenja su provjerena, ali imamo samo jedan development kandidat;
    nije izabrana kohorta niti zamrznut event-level split.
 4. SimHarness/RLlib nije instaliran ni pokrenut u ovom environmentu.
-5. Nema real-input SimFire smokea, treninga, finetunea, heldout evaluacije ni naučnog
-   poređenja.
+5. Nema policy treninga, fine-tunea, heldout evaluacije ni naučnog poređenja. Real-input
+   smoke nije fizička validacija i ne govori koliko bi površine izgorjelo u stvarnosti.
 6. BurnMD data reuse licenca i razlika između 243 arhivskih foldera i 308 paper požara
    ostaju otvorena pitanja. BurnMD linijski replay je opcioni track.
 
 ## Ograničenja računara
 
-Na provjeri 2026-11-01 `LANDFIRE_EMAIL` nije bio postavljen, a `df -h .` je pokazao 3.0 GiB
-slobodno. To je dovoljno za mali podatkovni primjer, ali još ne potvrđuje da na ovom Macu
-stane/podržan je SimHarness/RLlib stack. Ne brisati venv, sirove podatke ni korisničke
-rezultate da bi se forsirala instalacija.
+Na provjeri 2026-11-01 `df -h .` je pokazao 3.0 GiB slobodno. To je bilo dovoljno za mali
+LANDFIRE/ERA5 izrez i smoke; još ne potvrđuje da na ovom Macu stane ili radi SimHarness/RLlib
+stack. Javni LANDFIRE ImageServer je omogućio preuzimanje bez LFPS kontaktnog emaila.
+Ne brisati venv, sirove podatke ni korisničke rezultate da bi se forsirala instalacija.
 
 ## Sljedeći taskovi
 
-Aktivni redoslijed je u [backlogu](BACKLOG.md): pribaviti fuel/terrain za već pripremljeni
-Dixie scenario; mapirati istorijski weather; provjeriti raster i napraviti prvu real-input
-kartu/animaciju; zatim sastaviti veći FPA-FOD uzorak i event-level split; postaviti RL
-runtime; tek onda trenirati i porediti politike.
+Aktivni redoslijed je u [backlogu](BACKLOG.md): prvo opravdati/izabrati datum i fuel-moisture
+ulaz, pa mapirati ERA5 10-m vjetar na smislen SimFire ulaz ili zadržati njegove vrijednosti
+izvan modela; zatim proširiti događaje, zamrznuti event-level split, postaviti RL runtime,
+pa trenirati i porediti politike.
 
 ## Kuda dalje
 

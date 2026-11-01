@@ -16,6 +16,7 @@
 - [Trenutno stanje — 2026-11-01](STATUS.md) - Project Status
 - [SimFire okruženje — stvarni lokalni smoke](research/SIMFIRE_ENVIRONMENT.md) - Python 3.9 venv, reproduktivna komanda, mapa i ograničenja
 - [Real fire → SimFire scenarij](research/REAL_IGNITION_SCENARIO_PIPELINE.md) - laički X/Y mapping, izvor FPA-FOD, zajednički JSON i split/claim pravila
+- [Prvi LANDFIRE/ERA5 ulazni smoke](../reports/real-fire-data/simfire-dixie-real-input-smoke/) - stvarno gorivo/teren u SimFire, zajedno s mapom, GIF-om i granicama vremenskog mapiranja
 - [BurnMD Mineral audit](research/MINERAL_CASE_AUDIT.md) - provjereni geometrijski slojevi i prazna vremena linija; optional replay, ne blocker glavnog ogleda
 - [Arhivirani CFSDS status i handoff](STATUS_CFSDS_ARCHIVE.md) - sačuvana prethodna putanja
 - [Arhivirani CFSDS glavni handoff](../HANDOFF_CFSDS_ARCHIVE.md) - prethodni plan i rezultati prije promjene

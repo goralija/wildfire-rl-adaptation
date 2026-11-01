@@ -15,7 +15,8 @@ okf_version: "0.2"
 
 - [Dokumenti i istraživanje](docs/index.md) - protokol, odluke, status, izvori i arhivirani rezultati.
 - [Podaci i porijeklo](data/index.md) - format scenarija, izvori i pravila za raw fajlove.
-- [SimFire okruženje i probni GIF](docs/research/SIMFIRE_ENVIRONMENT.md) - kako se pokreće simulator i šta demo dokazuje.
+- [SimFire okruženje i probe](docs/research/SIMFIRE_ENVIRONMENT.md) - izolovani runtime i razlika između generisanog demo GIF-a i prvog smokea sa stvarnim LANDFIRE gorivom/terenom.
+- [Prvi stvarni inputi i vizualizacije](reports/real-fire-data/simfire-dixie-real-input-smoke/) - FBFM13/visinski prikaz, 30-min GIF i receipt; demo vjetar/vlaga, ne naučni rezultat.
 - [Izvještaji i slike](reports/index.md) - mape, animacije i reproducibilni receipts.
 - [Arhivirani Firehose/Cell2Fire alati](docker/index.md) - prethodni runtime i eksperimenti.
 - [Mapa koda i održavanje](knowledge/index.md) - gdje se nalaze skripte i kako nastaviti.

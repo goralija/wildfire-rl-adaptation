@@ -1,5 +1,12 @@
 # Promjene baze znanja
 
+## 2026-11-01: Prvi SimFire smoke sa stvarnim LANDFIRE rasterima
+
+- Javni LANDFIRE ImageServer dao je LF2016 FBFM13 i LF2020 elevation na 128×128 tačnom 30 m UTM gridu; Open-Meteo je dao 24 sata ERA5 za datum.
+- SimFire je pokrenut nad pravim fuel/terrain slojevima i sačuvao je mapu, završno stanje, GIF i receipt u [real-input reportu](reports/real-fire-data/simfire-dixie-real-input-smoke/).
+- ERA5 nije ubačen kao da je isti što i midflame wind/moisture; vremenska zona FPA HHMM i fuel vintage ostaju otvoreni. [EXP-033](docs/research/EXPERIMENT_LOG.md#exp-033--real-layers-fetched-and-loaded-by-simfire-2026-11-01), [ADR-043](docs/specs/DECISION_RECORDS.md#adr-043--use-a-projected-grid-and-do-not-force-weather-variable-equivalence-2026-11-01).
+
+
 ## 2026-11-01: scenario iz prijavljene lokacije požara; SimFire radi
 
 - Glavni ogled je pojednostavljen: simulator dobija uslove izvedene iz stvarnih požara,

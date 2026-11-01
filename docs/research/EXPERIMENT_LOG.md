@@ -1012,3 +1012,43 @@ Current navigation was shortened so the root page leads to the live design, cand
 backlog and evidence; previous CFSDS documents remain reachable as an archive.
 
 The offline rebuild produced the expected FOD_ID and candidate manifest with the point role, nominal grid note and seed cell. Both Dixie and Mineral LANDFIRE dry-runs passed; Python compilation passed for the changed scenario scripts; the strict knowledge-bundle check passed for 86 Markdown files; `git diff --check` passed. The real raster request is still waiting for the actual requester email; there is still no real-fuel/weather smoke or RL result.
+
+## EXP-033 — real layers fetched and loaded by SimFire, 2026-11-01
+
+Revisited the data-to-simulator bridge against the actual source field meanings. The FPA-FOD
+Dixie point remains an incident reference with unknown event-specific accuracy, so it is
+used only as a provisional scenario anchor. Replaced the old degree-based grid in the
+scenario builder with a fixed 128×128 grid in the local UTM zone, aligned to exact 30 m
+boundaries. Dixie uses EPSG:32610, bounds `[636690, 4413360, 640530, 4417200]` meters,
+and stores the source point cell separately from the original coordinate.
+
+Added `scripts/fetch_simfire_real_inputs.py`. It requests two small public LANDFIRE
+ImageServer exports without the LFPS email workflow: LF2016 FBFM13 for fuel and LF2020
+elevation for terrain. Both arrive as one-band signed-16 GeoTIFFs on the same EPSG:32610
+grid with nearest-neighbor sampling. The fuel tile contains FBFM13 codes
+`1,2,4,5,6,7,8,9,10,91,98,99`; no unmapped code, NoData cell or CRS/bounds mismatch was
+found. Elevation values are 456–1385 m. The source fuel map predates Dixie by five years,
+so it is a pre-event candidate rather than a verified event-year map.
+
+Fetched a 24-hour ERA5 series for 2021-07-13 at the source location in UTC: temperature,
+relative humidity, 10 m wind speed/direction and precipitation. Kept the response locally
+with its SHA-256. It is not fed to SimFire: source discovery HHMM lacks a confirmed timezone,
+10 m wind is not midflame wind, and air RH is not dead-fuel moisture. The 30-minute smoke
+uses SimFire example wind/moisture values and labels them as demonstration conditions.
+
+Added `scripts/run_simfire_real_input_smoke.py`. It uses SimFire's FBFM13-to-fuel mapping
+and meters-to-feet elevation conversion, while bypassing the pinned simulator's retired
+network loader. The 30-minute run completed with the actual fuel and elevation arrays and
+generated an input-layer map, final-state map and GIF. Reproduction receipt and small
+visual outputs are in
+[`simfire-dixie-real-input-smoke`](../../reports/real-fire-data/simfire-dixie-real-input-smoke/).
+Raw TIFF/ERA5 files stay ignored under `.local/real-input-dixie/`; their paths and hashes
+are in the manifest/receipt. Added rasterio 1.4.3 to the local SimFire environment freeze.
+
+**What this closes:** public data retrieval, exact projected grid creation, GeoTIFF checks,
+class/unit mapping into SimFire, and one real-layer integration run. **What it does not
+close:** year-specific fuel validation, historical-weather-to-SimFire mapping, ignition
+point accuracy, RL runtime, training, held-out comparison or physical validation. Dixie
+remains a development fixture, not training data. See
+[ADR-043](../specs/DECISION_RECORDS.md#adr-043--use-a-projected-grid-and-do-not-force-weather-variable-equivalence-2026-11-01)
+and sources [S-065–S-066](SOURCES.md).

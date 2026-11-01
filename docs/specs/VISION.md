@@ -42,9 +42,10 @@ tvrdimo univerzalnu fizičku ili operativnu validaciju SimFire-a.
 
 USFS FPA-FOD je kandidat za incident distribuciju; službeni archive page dopušta
 korištenje bez dodatne dozvole ili naknade uz citat. Jedan Dixie Fire zapis pretvoren je u
-development scenario-karticu, ali real fuel/terrain/weather scenario i RLlib runtime nisu
-napravljeni. Zadnja provjera pokazala je 3.0 GiB slobodno, a `LANDFIRE_EMAIL` nije
-postavljen.
+development scenario-karticu. Stvarni LANDFIRE fuel/elevation rasteri su pribavljeni i
+pokrenuti u SimFire real-input smokeu; ERA5 niz je sačuvan, ali nije u simulatoru jer 10 m
+vjetar i vazdušna RH nisu direktno SimFire midflame wind i gorivna vlaga. SimHarness/RLlib,
+šira incident kohorta i validacija i dalje nisu napravljeni.
 
 Glavni opis: [DESIGN](../DESIGN.md),
 [pipeline](../research/REAL_IGNITION_SCENARIO_PIPELINE.md),

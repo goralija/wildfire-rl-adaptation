@@ -33,51 +33,42 @@ vrijeme/lokaciju i konačnu veličinu, uz prostornu nesigurnost lokacije; te vri
 
 - `external/simfire` je MITRE SimFire 2.0.1 na commitu
   `04905b19fe8c10dc08d64faddd00303e0561bb66`.
-- `.local/simfire-venv` je odvojen Python 3.9.25 environment; 30-min funkcionalni demo
-  ima GIF, završnu mapu i receipt u
-  [demo folderu](reports/environment-setup/simfire-functional-demo/). To je funkcionalni
-  smoke, ne historijski slučaj ili naučni rezultat.
-- BurnMD ZIP je lokalno provjeren prema službenom LFS SHA-256. Mineralovi 11 perimetara,
-  249 linija i 58 tačaka su pročitani i metadata audit je u
-  [receiptu](reports/real-fire-data/mineral-case-audit.json). Sirovi ZIP, GIS geometrije
-  i mapa ostaju van Git-a dok se data prava ne razjasne.
-- `data/manifests/simfire-scenario.schema.json` definiše mali zajednički JSON. Veliki
-  rasterski/weather ulazi ostaju fajlovi s vlastitim hashom.
-- Dixie Fire 2021 (`FOD_ID 401019270`) je sačuvan kao mali FPA-FOD GeoJSON izvorni zapis i
-  pretvoren u [candidate scenario karticu](data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json).
-  Kartica ima event ID, vrijeme bez izmišljene vremenske zone, WGS84 incident-referentnu
-  tačku (ne potvrđeno paljenje), PLSS napomenu i grid od 128×128 nominalnih 30 m ćelija.
-- `scripts/build_fpa_fod_scenario.py` može dohvatiti jedan FOD_ID i napraviti karticu.
-  `scripts/prepare_mineral_landfire.py --scenario-manifest ... --dry-run` računa Dixie AOI
-  i SimFire cache putanju. `scripts/run_simfire_operational_smoke.py` prima isti manifest
-  kada odgovarajući TIFF bude u cache-u.
+- `.local/simfire-venv` je odvojen Python 3.9.25 environment. U njemu radi kratki demo i
+  novi 30-min smoke nad stvarnim gorivom i visinskim rasterom.
+- BurnMD ZIP je lokalno provjeren prema službenom LFS SHA-256. Mineralovi podaci su
+  pregledani, ali njegova linijska vremenska polja su prazna, a dataset reuse licenca
+  nije razjašnjena. Sirovi ZIP i izvedene BurnMD mape ne redistribuirati.
+- Dixie Fire 2021 (`FOD_ID 401019270`) je sačuvan kao mali FPA-FOD zapis i candidate
+  kartica. Tačka je incident-referentna, ne potvrđeno GPS paljenje. Grid kartice je sada
+  projektovan i tačan: 128×128 ćelija po 30 m u EPSG:32610.
+- `scripts/fetch_simfire_real_inputs.py` pribavlja LF2016 FBFM13, LF2020 visinu i 24-satni
+  ERA5 zapis za datum požara. Rasteri su provjereni po CRS-u, granicama, ćelijama i
+  kategorijama goriva. Sirovi fajlovi su ignorisani u Gitu pod `.local/real-input-dixie/`;
+  hashes su u kartici i receiptu.
+- `scripts/run_simfire_real_input_smoke.py --steps 30` je pokrenut nad pravim LANDFIRE
+  gorivom i terenom. [Karta, završno stanje, GIF i receipt](reports/real-fire-data/simfire-dixie-real-input-smoke/)
+  su mali, pregledljivi primjeri. Atmosfera u tom smokeu je jasno označena kao demo.
 
 ## Šta još nije spremno
 
-- Pravi LANDFIRE raster nije preuzet. Trenutni shell nema `LANDFIRE_EMAIL`; zadnja provjera
-  pokazala je 3.0 GiB slobodno (2026-11-01; raniji 29-MiB podatak je zastario).
-- SimHarness/RLlib nije instaliran; treba izabrati podržan trening runtime nakon što se
-  oslobodi prostor. Sam standalone SimFire nije RL trening.
-- Nije potvrđena konverzija historijskog vremena/vremenskih uslova u SimFire ulaze.
-- Nije napravljena FPA-FOD kohorta, incident split niti stvarni real-landscape scenario.
-- BurnMD dataset reuse licenca je neriješena. Ne redistribuirati podatke niti izvedene mape.
+- Fuel je LF2016, pet godina prije Dixie požara. Jeste pre-event, ali nije dokazano da
+  tačno opisuje gorivo 2021.
+- ERA5 je oko 25 km rezolucije, a FPA-FOD HHMM nema razjašnjenu vremensku zonu. ERA5
+  10-m vjetar nije isto što i midflame vjetar u SimFire; relativna vlažnost nije vlaga
+  goriva. ERA5 zato još nije ubačen u simulaciju.
+- Imamo jedan razvojni događaj, ne pravu train/validation/test kohortu.
+- SimHarness/RLlib nije instaliran ni pokrenut; standalone SimFire smoke nije RL trening.
+- Nema fizičke validacije niti zaključka o stvarnim hektarima spašenim u požaru.
 
 ## Sljedeći redoslijed
 
-1. Za Dixie candidate pribaviti stvarni pre-event fuel/elevation i historijski weather.
-   LANDFIRE job traži stvarni `LANDFIRE_EMAIL`; ne koristiti adresu iz Git postavki.
-2. Pokrenuti `scripts/prepare_mineral_landfire.py --scenario-manifest data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json`
-   kad je email dostupan, pa provjeriti TIFF CRS/bounds/bands/no-data/lokaciju početne ćelije.
-   LF2016 FBFM13 je samo pre-event tehnički fallback, ne konačna fuel-vintage odluka.
-3. Napraviti scenario JSON sa verified raster/weather checksumima. Sve nedostajuće
-   vrijednosti ostaju `missing`, ne popunjavaju se izmišljeno.
-4. Pokrenuti scenario-manifest runner na jednom real-fuel/terrain tileu i napraviti
-   prvu kartu/animaciju.
-5. Sastaviti veći FPA-FOD uzorak i zamrznuti event-level train/validation/test split.
-6. Instalirati/pinovati kompatibilan SimHarness/RLlib runtime ili mali dokumentovani Gym
-   adapter; prvo kratki CPU smoke, pa tek onda budgeted RL.
-7. Base-vs-fine-tuned vs-heuristic/no-op poređenje na jednakim heldout scenarijima,
-   seedovima i budžetu.
+1. Provjeriti dostupnost i godinu boljeg fuel sloja za događaje koje ćemo stvarno uzeti.
+2. Odlučiti i zapisati opravdan pristup datumu, 10-m vjetru i vlazi goriva; ne izjednačiti
+   ERA5 RH sa fuel moisture.
+3. Napraviti FPA-FOD kandidatsku kohortu i zamrznuti split po cijelim incidentima.
+4. Postaviti/pinovati RL runtime u izolovanom okruženju i pokrenuti kratak CPU smoke.
+5. Definisati no-op i jednostavne baseline politike, jednak budžet i horizont.
+6. Tek nakon toga trenirati/fine-tunati i napraviti uparenu held-out evaluaciju i vizualizacije.
 
 ## Gdje je šta
 

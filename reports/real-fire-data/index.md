@@ -2,8 +2,10 @@
 
 ## Trenutni razvojni primjer
 
-- [Dixie Fire FPA-FOD izvorni zapis](fpa-fod-dixie-2021-source.geojson) i [scenario-kartica](../../data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json) — lokacija je samo incident referentna tačka; gorivo, teren i istorijsko vrijeme nisu još učitani.
-- [Mineral Fire audit](mineral-case-audit.json) i [objašnjenje](../../docs/research/MINERAL_CASE_AUDIT.md) — pregled drugog izvora; vremena linija su prazna, pa nije historijski replay.
+- [Dixie Fire FPA-FOD izvorni zapis](fpa-fod-dixie-2021-source.geojson) i [scenario kartica](../../data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json) — incident-referentna tačka, ne potvrđeno paljenje; 128×128 UTM grid od 30 m.
+- [Real-input SimFire smoke](simfire-dixie-real-input-smoke/) — stvarni LANDFIRE FBFM13 i elevation ulaze u SimFire; sačuvani su input-layer prikaz, završno stanje, 30-min GIF i receipt. Atmosfera je demonstracijska, nije historijski weather.
+- [Raw input pravilo i provenance](../../docs/research/REAL_IGNITION_SCENARIO_PIPELINE.md) — GeoTIFF/ERA5 JSON ostaju ignorisani u `.local/real-input-dixie/`; kartica i receipt čuvaju hashove.
+- [Mineral Fire audit](mineral-case-audit.json) i [objašnjenje](../../docs/research/MINERAL_CASE_AUDIT.md) — vremena linija su prazna; taj slučaj nije replay ulaz.
 
 ## Arhivirani CFSDS train-only ulazni gate
 

@@ -16,12 +16,14 @@ terenu i vremenu. Historijski završni obod nije ulaz/nagrada, a stvarno smanjen
 ne tvrdi. Kandidat za raspodjelu incidenata je USFS FPA-FOD; BurnMD ostaje opciona referenca
 za ljudske linije.
 
-Trenutno: SimFire 2.0.1 radi u lokalnom Python 3.9.25 venvu; funkcionalni 30-min demo je
-sačuvan. BurnMD arhiva je lokalno hashirana i Mineral GIS audit je izvršen. Dodatno postoje
-scenario JSON ugovor, Dixie Fire development kartica čija je koordinata incident-referentna, ne potvrđeno mjesto paljenja, i adapter koji računa fiksni LANDFIRE AOI iz scenario manifesta ili Mineral lokacije paljenja. Dry-run
-prolazi za oba slučaja. Stvarni raster nije preuzet: `LANDFIRE_EMAIL` nije postavljen. Zadnja
-provjera diska pokazala je 3.0 GiB slobodno; SimHarness/RLlib i historical-weather mapping
-još nisu završeni.
+Trenutno: SimFire 2.0.1 radi u lokalnom Python 3.9.25 venvu; sačuvani su i generisani demo
+i 30-minutni smoke nad stvarnim LANDFIRE gorivom/terenom. Dixie FPA-FOD kartica zadržava
+incident-referentnu koordinatu (nije potvrđen ignition) i tačan EPSG:32610 grid 128×128×30m.
+Javni LANDFIRE ImageServer i ERA5 niz su preuzeti lokalno i provjereni; input TIFF/JSON su u
+ignorisanom `.local/real-input-dixie/`. ERA5 nije ubačen u SimFire: vremenska zona discovery
+HHMM nije potvrđena, 10m vjetar nije midflame vjetar, a RH nije gorivna vlaga. Prvi smoke
+koristi demo atmosferu i nije historijski replay ili naučni rezultat. SimHarness/RLlib,
+višedogađajna kohorta i weather/moisture mapping još nisu završeni.
 
 Ne blokirati glavni policy eksperiment na nepostojećim Mineral line-time vrijednostima;
 njihovo korištenje je opcioni replay track. Ne trenirati niti tvrditi RL prednost dok barem

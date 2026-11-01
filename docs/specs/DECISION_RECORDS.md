@@ -1133,3 +1133,36 @@ Evidence: [updated scenario schema](../../data/manifests/simfire-scenario.schema
 [Dixie candidate](../../data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json),
 [EXP-032](../research/EXPERIMENT_LOG.md#exp-032--point-role-and-grid-semantics-made-explicit-2026-11-01),
 [SimFire environment notes](../research/SIMFIRE_ENVIRONMENT.md).
+
+## ADR-043 — use a projected grid and do not equate weather variables, 2026-11-01
+
+The first data bridge revealed two concrete mismatches between the recorded sources and
+the simulator. First, the pinned SimFire operational loader builds its 30 m landscape by
+adding a fixed number of degrees, which is not a constant ground distance. Second,
+historical reanalysis exposes 10 m wind and air relative humidity, while SimFire's fire
+spread layer expects wind near the flame and fuel moisture. Treating those as identical
+would hide a modelling choice inside an input conversion.
+
+**Decision:** new real-data scenario grids store a projected CRS, exact projected bounds
+and exact cell size (30 m here). Source points keep their original role and uncertainty;
+snapping them to a grid cell does not imply GPS accuracy. Weather reanalysis is retained
+with its model, scale, units, timestamp and location. Until a separately justified
+conversion is implemented, it remains historical context and is not silently injected as
+SimFire midflame wind or fuel moisture. Integration smoke runs can use the real fuel and
+terrain layers with explicitly labelled demonstration atmosphere settings, but they are
+not historical-weather runs or scientific results.
+
+For the Dixie plumbing example, LANDFIRE LF2016 FBFM13 is five years older than the event
+and is a pre-event candidate; LF2020 elevation is used as static terrain. Neither makes
+the scenario a fire replay. The 24-hour ERA5 response is approximately 25 km and uses UTC;
+FPA-FOD discovery HHMM remains unzoned. Keep the case at `candidate` readiness until the
+fuel vintage and weather/moisture treatment are justified.
+
+This supersedes only the nominal degrees-per-cell portion of ADR-042. The location-role
+and uncertainty requirement remains. Historical response lines/perimeters remain outside
+the policy input and reward.
+
+Evidence: [EXP-033](../research/EXPERIMENT_LOG.md#exp-033--real-layers-fetched-and-loaded-by-simfire-2026-11-01),
+[scenario card](../../data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json),
+[real-input smoke](../../reports/real-fire-data/simfire-dixie-real-input-smoke/receipt.json),
+[LANDFIRE/Esri and Open-Meteo references S-065–S-066](../research/SOURCES.md).

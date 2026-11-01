@@ -4,6 +4,13 @@ title: Work log
 ---
 # Work log
 
+2026-11-01 — Kasniji isti-dnevni nastavak napravio je prvi cijeli put od realnih rastera
+do SimFire-a. Preuzeti su LF2016 FBFM13, LF2020 elevation i 24 sata ERA5 za datum požara;
+rasteri su provjereni i učitani u stvarno 30-minutno SimFire pokretanje. Stvarni vjetar/vlaga nisu
+izmišljeni: demo atmosfera je označena, a ERA5 ostaje historijski kontekst dok se jedinice,
+visina vjetra i timezone ne razriješe. Karta, završno stanje, GIF i provenance receipt su
+sačuvani; detalji su u EXP-033, ADR-043 i reportu. Ovo nije trening ili fizička validacija.
+
 2026-11-01 — Made the FPA-FOD-to-SimFire example safer and easier to continue. The Dixie
 source point is explicitly an incident reference location, not a verified GPS ignition;
 the shared schema now records that role, its uncertainty note, SimFire's nominal grid-size
@@ -12,7 +19,9 @@ manifest grid matches its location-derived fixed bounds, and the operational smo
 and records the manifest seed cell. Shortened the root navigation to put the active
 scenario, status, next tasks and archived CFSDS evidence in distinct places. The remaining
 real-input gate is unchanged: the current host lacks LANDFIRE request email and no historic
-weather raster/scenario has been built. See ADR-042 and EXP-032.
+weather raster/scenario had been built at that earlier point in the work. This status was
+superseded later the same day by the real-layer smoke documented above. See ADR-042 and
+EXP-032.
 
 2026-10-31 — Rechecked the W.I.S.E. inclusion criteria and official national fire-history
 products. W.I.S.E. removes fires with any recorded CNFDB suppression because its model
