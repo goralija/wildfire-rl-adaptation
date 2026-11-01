@@ -19,3 +19,8 @@ Nema baze ili migracija. schema_version promijeniti kada se mijenja kontrakt,
 ne tiho reinterpretirati stare CSV-ove. Run je append-only direktorij.
 Source hash pokriva `src/wildfire_rl/*.py`; config hash pokriva cijeli JSON.
 Open Questions: glavni scenario manifest za weather i georeferencirane rastere.
+
+Za novi SimFire real-event format koristimo zaseban versioned contract:
+[`simfire-scenario.schema.json`](../../data/manifests/simfire-scenario.schema.json) i
+[template](../../data/manifests/simfire-scenario.template.json). Ovo još nije adapter za
+postojeće Cell2Fire FireCase JSON fajlove.

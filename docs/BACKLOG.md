@@ -1,10 +1,39 @@
 ---
 type: Backlog
-title: Naredni zadaci
+title: Aktivni zadaci i arhivirani prethodni plan
 ---
 # Naredni zadaci
 
 Napor je okvirni agentov prijedlog u aktivnim radnim satima, bez roka i dodjele članovima.
+
+## Aktivni plan — realni požarni uslovi kao SimFire scenariji, 2026-11-01
+
+Cilj je uporediti base PPO, fine-tuned kopiju i jednostavne kontrole u istim SimFire
+uslovima, uz jednaki budžet i simulirano vrijeme. Trening/heldout inputi dolaze iz cijelih
+historijskih incidenta; stvarni konačni obod ne ulazi agentu kao ulaz ili nagrada.
+Detalji: [current scenario pipeline](research/REAL_IGNITION_SCENARIO_PIPELINE.md).
+
+| ID | Status | Šta tačno treba završiti |
+| --- | --- | --- |
+| TASK-020 | Djelimično zatvoren | BurnMD LFS hash, archive inventory i Mineral GIS/time audit su izvršeni. Zasebna dataset licenca i 243-vs-308 archive/paper count nisu razriješeni; zato ne redistribuirati. Linijski timestamp/replay nije više uslov za glavni policy ogled. |
+| TASK-021 | Samostalni SimFire PASS; RL runtime otvoren | Python 3.9.25 SimFire 2.0.1 radi; functional GIF/map/receipt postoje. Potrebni su stvarni fuel/terrain raster i zaseban provjeren SimHarness/RLlib ili odgovarajući adapter. |
+| TASK-022 | Jedan razvojni slučaj spreman; širi uzorak otvoren | `simfire-scenario/1.0` šema/template postoje; Dixie Fire 2021 (`FOD_ID 401019270`) ima stvarni GeoJSON snapshot, hash, MTBS-ID i 128×128 fixed-grid karticu. To je adapter fixture, nije kohorta ili split. |
+| TASK-023 | U toku — raster/weather fajlovi nedostaju | Adapter prima scenario JSON, a Dixie AOI dry-run prolazi. Pribaviti pre-event fuel, elevation i historijski weather; validirati CRS/bandove/NoData; napraviti prvi real-input SimFire smoke i kartu/animaciju. LANDFIRE request čeka stvarni `LANDFIRE_EMAIL`. |
+| TASK-024 | Još nije počeo | Za isti scenarij definisati line-budget, no-op i jednostavne determinističke baseline strategije; provjeriti limit/horizon semantics. |
+| TASK-025 | Još nije počeo | Izabrati heldout incidente prije treniranja; sačuvati base PPO pa fine-tunovati kopiju samo na train scenarijima izvedenim iz historijskih uslova. |
+| TASK-026 | Još nije počeo | Upareno heldout poređenje, seedovi/intervali neizvjesnosti, karte i animacije; tvrditi samo rezultat u testiranoj simulaciji. |
+
+**Sada:** jedan stvarni Dixie record pretvoren je u scenario-karticu; generički LANDFIRE
+dry-run prolazi za nju. `LANDFIRE_EMAIL` nedostaje, a zadnja provjera diska pokazala je
+3.0 GiB slobodno (2026-11-01; raniji 29-MiB navod je zastario). Nastaviti s provjerom
+inputa za taj slučaj, pa širiti FPA-FOD uzorak i zamrznuti event-level split. Ne trenirati
+prije TASK-023 i zamrzavanja splita.
+
+## Arhivirani CFSDS/Firehose plan
+
+Sljedeća tabela i bilješke čuvaju status prethodne putanje Canada+CFSDS+Canadian FBP/
+Cell2Fire. Njeni brojevi i nalazi ostaju važni za historiju, ali njeni otvoreni gateovi
+više nisu aktivni preduslov za trenutni scenario-based SimFire eksperiment.
 
 | ID | Prioritet / stanje | Isporuka i provjera | Napor |
 | --- | --- | --- | --- |

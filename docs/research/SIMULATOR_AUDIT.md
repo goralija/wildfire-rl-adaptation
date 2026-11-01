@@ -4,6 +4,10 @@ title: Simulator i pretrained feasibility audit
 ---
 # Simulator i pretrained feasibility audit
 
+> **Historijski audit, 2026-10-28:** odluka Firehose/Cell2Fire-first ispod je zamijenjena
+> ADR-037. SimFire sada prolazi samo standalone sintetički smoke; stvarni BurnMD replay i
+> SimHarness/RLlib još nisu dokazani. Vidi [novi runtime zapis](SIMFIRE_ENVIRONMENT.md).
+
 Datum provjere: 2026-10-28. **Firehose s njegovom izmijenjenom Cell2Fire jezgrom**
 prošao je runtime provjeru oba modela. TASK-004c adapter je naknadno implementiran i
 prošao fixture/12-case runtime provjeru; istraživački gate sada čeka CFSDS no-action

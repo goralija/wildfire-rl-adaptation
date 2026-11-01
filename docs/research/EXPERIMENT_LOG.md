@@ -824,3 +824,191 @@ The service schema and source-access outcome are recorded in [S-043/S-052](SOURC
 
 Evidence: Alberta [official catalogue](https://open.canada.ca/data/en/dataset/a221e7a0-4f46-4be7-9c5a-e29de9a3447e), [official wildfire data page](https://www.alberta.ca/wildfire-maps-and-data),
 [historical wildfire REST service](https://geospatial.alberta.ca/mimas/rest/services/wildfire/historical_wildfires_data/FeatureServer), [S-043/S-052](SOURCES.md), and [ADR-036](../specs/DECISION_RECORDS.md#adr-036).
+
+## EXP-027 — pivot to BurnMD + SimFire/SimHarness, 2026-11-01
+
+The project instruction was to alter the research design so it fits the most useful real
+data and the actual wildfire-control question. A primary-source review found that BurnMD
+describes 308 western-US medium fires from 2018–2021 with perimeter histories and
+operational mitigation-line records. SimFire/SimHarness provide a paired simulator/RL
+workflow with real LANDFIRE fuel/terrain and line-placement actions. The published SimFire
+example used LANDFIRE 2019 near the 2020 Mineral Fire; we select Mineral Fire only as the
+first technical feasibility candidate, not as a final heldout case.
+
+This better matches a resource-limited line-placement study than forcing CFSDS daily burn
+maps into a small Canadian FBP/Cell2Fire input. The revised validation check replays
+documented historical lines at their times before comparing alternative policies. It does
+not ask for an untreated/no-action trajectory when suppression may have occurred. Agent
+inputs remain limited to information available at the decision time, and historical
+perimeters/actions remain separate reference data.
+
+Important unresolved checks: the 345 MB BurnMD archive is in Git LFS but a separate data
+license was not found; its paper reports approximate/missing timestamps, line-status
+filtering needs, assumed work rates and no included weather field. SimFire 2.0.1 declares
+Python ~3.9 while the project environment is 3.12, and the SimFire paper leaves detailed
+validation as future work. No archive was downloaded, no package installed, no simulator
+run, no conversion and no training occurred in this literature/design review.
+
+**Decision:** adopt BurnMD as the preferred primary data candidate and SimFire/SimHarness as
+the preferred backend candidate, conditional on bounded feasibility gates TASK-020–023.
+Archive the previous CFSDS/Cell2Fire workflow without discarding its results. Next step is
+inspect/download and license/schema audit, then an isolated Python 3.9 runtime and one
+Mineral Fire replay. See [new design](BURNMD_SIMFIRE_PIVOT.md), [ADR-037](../specs/DECISION_RECORDS.md#adr-037--pivot-to-burnmd-simfire-and-historical-action-replay-2026-11-01), and [sources S-053–S-056](SOURCES.md).
+
+## EXP-028 — SimFire standalone Python 3.9 functional smoke, 2026-11-01
+
+Installed official SimFire 2.0.1 at upstream source commit
+`04905b19fe8c10dc08d64faddd00303e0561bb66` into an isolated macOS ARM64/Python 3.9.25
+venv. A dependency-only freeze is saved at
+[`requirements/simfire-macos-arm64-py39.freeze.txt`](../../requirements/simfire-macos-arm64-py39.freeze.txt).
+The upstream import of `pkg_resources` required `setuptools<81`; it is pinned in the
+freeze. The existing project Python 3.12 environment was not modified. SimHarness/RLlib
+was not installed.
+
+Ran `scripts/run_simfire_demo.py --steps 30` with upstream `functional_config.yml`,
+Pygame dummy display and the default seeded functional landscape. Run completed on a
+225×225 grid (50,625 cells): 1,687 `BURNED`, 436 `BURNING`, 48,502 `UNBURNED`; no
+mitigation actions/agents. It produced a 30-minute GIF, final-state map and JSON receipt.
+The small artifacts are preserved in
+[`simfire-functional-demo/`](../../reports/environment-setup/simfire-functional-demo/).
+
+This is a **technical simulator smoke only**: no BurnMD file or LANDFIRE data was read,
+no historical event was initialized, no policy/agent or SimHarness was run, no training
+was performed, and the counts are not a scientific or real-world effect. It proves the
+selected standalone simulator imports, advances a fire map and emits visual output on
+this host. This closes only the local standalone portion of TASK-021; it does not clear
+the BurnMD license, historical replay or RL training gates.
+
+At the time of this log entry, the public 362,131,110-byte BurnMD Git LFS archive was
+being downloaded locally into ignored `data/raw/burnmd/`; its pointer SHA-256 is
+`4eefcbfdabce4966d68e0009e8a4b88dd34294a2cb5dee6aea84dd017eb334c7`. No archive contents
+or data-use license have been confirmed yet. See [runtime record](SIMFIRE_ENVIRONMENT.md),
+[receipt](../../reports/environment-setup/simfire-functional-demo/receipt.json),
+[EXP-027](#exp-027--pivot-to-burnmd-simfiresimharness-2026-11-01), and [S-053–S-058](SOURCES.md).
+
+## EXP-029 — BurnMD Mineral case and LANDFIRE API compatibility audit, 2026-11-01
+
+Verified the local BurnMD ZIP against the official LFS pointer SHA-256 and inspected
+Mineral's polygon, line and point shapefiles directly from the archive. They contain 11,
+249 and 58 records respectively; the 318 geometries are non-empty and valid. The event
+reports a 2020-07-13 start and 2020-07-26 containment; its 11 perimeter observation dates
+span 2020-07-15 to 2020-07-22. The line layer has 121 completed-dozer, 25 completed-hand,
+40 proposed-dozer and 27 uncontrolled-fire-edge records. However, `LineDateTi` is null on
+all 249 rows and `Mitigation` is an empty list for all 249. SimFire's historic loader
+calculates line timing from `CreateDate` at fixed 20 ft/min dozer and 2 ft/min hand-line
+rates, which differs from the paper's fuel/topography-dependent estimates. Mineral cannot
+currently support a reliable historical-action replay.
+
+The archive has 243 unique state/year/fire folders, whereas the paper reports 308 medium
+fires. The cause of the 65-count discrepancy is unknown. The repository has an Apache code
+license, but no dataset-specific use notice was found in the inspected repository or ZIP;
+do not redistribute the archive or derived map pending rights review.
+
+The bundled SimFire `landfire==0.5.0` client calls the retired pre-2025 ArcGIS endpoint;
+the official LFPS service now documents `/api/job/submit`, email, status polling and an
+output URL. Added `scripts/prepare_mineral_landfire.py` to target the current API and write
+its TIFF into the SimFire cache. Its dry-run succeeds. The adapter also was corrected to
+derive a fixed 128×128×30 m tile from the recorded ignition rather than later line/perimeter
+extent. SimFire's pinned code pads a lower-right corner by 100 arc-seconds (about 3.1 km
+north-south), despite an upstream comment describing about 90 m; the adapter mirrors the
+actual code so the cache path matches. A separate metadata-only report and a local-only QA
+map were produced.
+
+The adapter has not made an actual LANDFIRE request because no contact email is set and
+the host had only 29 MiB free. The LF2016 FBFM13 fallback is four years before Mineral and
+not a final scientific fuel-vintage decision. See [audit report](MINERAL_CASE_AUDIT.md),
+[receipt](../../reports/real-fire-data/mineral-case-audit.json), [ADR-039](../specs/DECISION_RECORDS.md#adr-039--mineral-is-a-spatial-fixture-only-pending-line-time-and-landfire-gates-2026-11-01),
+and [S-059–S-061](SOURCES.md).
+
+## EXP-030 — scenario-based design and FPA-FOD source review, 2026-11-01
+
+The missing Mineral line times made historical-action replay a poor prerequisite for the
+question the project actually wants to answer: whether fine-tuning helps an agent control
+fire spread in the simulator when its scenario distribution comes from real incidents.
+Reframed the main experiment to use real ignition locations/dates and separately sourced
+fuel, terrain and weather as scenario inputs. SimFire generates spread and reward; future
+perimeters and completed fire sizes remain separate references, not input or reward. This
+can test policy adaptation in the simulator without claiming a counterfactual real-world
+hectare reduction.
+
+Reviewed the current official USFS FPA-FOD ArcGIS service. Its seventh-edition sixth update
+covers 1992–2024 with about 2.66 million incident points and fields for record ID, discovery
+date/time, fire size, coordinate and possible perimeter/incident-report crosswalk IDs. Its
+metadata warns that locations may only be precise to a one-square-mile PLSS section; the
+scenario must preserve coordinate precision, not treat every point as exact GPS. The
+current service can update; a versioned Research Data Archive record is preferred for a
+frozen cohort. Dataset-specific reuse conditions still need review.
+
+The NeurIPS 2023 WildfireSpreadTS dataset has 607 fires and CC BY 4.0 terms, but the full
+archive is 48.4 GB. It is a good separate daily-spread benchmark, not a practical first
+download on this host and not a ready-made SimFire action dataset. Recorded in [S-062/S-063](SOURCES.md).
+
+Added a versioned
+[scenario manifest schema](../../data/manifests/simfire-scenario.schema.json),
+[blank template](../../data/manifests/simfire-scenario.template.json),
+[plain-language conversion pipeline](REAL_IGNITION_SCENARIO_PIPELINE.md), and the current
+design/backlog/handoff. Updated the Mineral LANDFIRE dry-run adapter to center a fixed map
+on ignition, not future event geometry. `--dry-run`, Python compilation and JSON parsing
+passed. No FPA sample was downloaded; no LANDFIRE job was submitted; there is no verified
+real-input SimFire run, SimHarness/RLlib installation or training result. The host had 29
+MiB free and `LANDFIRE_EMAIL` was unset.
+
+**Decision:** adopt the scenario-derived simulator experiment in [ADR-040](../specs/DECISION_RECORDS.md#adr-040--train-on-real-ignition-conditions-with-simulated-actions-2026-11-01).
+Historical line replay is optional evidence, not a prerequisite. The next task is a small,
+versioned FPA-FOD event cohort and the first verified fuel/terrain/weather scenario.
+
+## EXP-031 — first FPA-FOD to SimFire candidate card, 2026-11-01
+
+Queried the official current USFS FPA-FOD service for a reproducible single record,
+Dixie Fire 2021 (`FOD_ID=401019270`, `FPA_ID=INF-2021-CABTU-009205`,
+`MTBS_ID=CA3987612137920210714`). The returned 455-byte GeoJSON contains a point requested
+in EPSG:4326, discovery date 2021-07-13, reported HHMM `1615`, final size 963,309 acres,
+and the incident/perimeter join identifiers. The published metadata says event locations
+can be only as precise as a one-square-mile PLSS section; this record has no event-specific
+accuracy field. The discovery-time timezone is not specified in our source review and is
+left null in the manifest. The official versioned archive says the data may be used without
+extra permission or fee when the Short (2026) citation is included ([S-064](SOURCES.md)).
+
+Added `scripts/build_fpa_fod_scenario.py` to fetch one pinned FOD_ID or rebuild from a local
+GeoJSON, retain a small hashed source snapshot, convert acres to hectares only in a
+reference-only field, and create a `simfire-scenario/1.0` card. The record maps to a fixed
+128×128 grid at 30 m with the ignition in the centre. Fuel, elevation and weather are
+explicitly `missing`; readiness is `candidate`, split is `unassigned`, and final area/MTBS
+remain outside agent input/reward. The card and the 455-byte source snapshot are committed;
+the same raw download remains ignored under `data/raw/fpa-fod/`.
+
+Generalized `scripts/prepare_mineral_landfire.py` to accept a scenario manifest and produce
+the matching current-LFPS AOI/SimFire cache path. Dixie dry-run returned top-left
+`(39.89378816280924, -121.39663741862155)`, bounds
+`[-121.396637418622, 39.830454829417, -121.333304085229, 39.893788162809]`, and the
+2021 cache year. Updated `scripts/run_simfire_operational_smoke.py` so it can consume the
+same scenario, configure its grid/ignition, and use a timestamped result directory. Its
+actual run was not started because the TIFF is absent.
+
+Validation for this work: Python compilation for all new/changed scenario scripts passed;
+the offline candidate rebuild passed; both the default Mineral dry-run and Dixie
+scenario-manifest dry-run printed their expected fixed AOIs; the parsed source record and
+manifest paths/hashes agree. The last disk check showed 3.0 GiB free (replacing the stale
+29-MiB status snapshot), but `LANDFIRE_EMAIL` remains unset. No LANDFIRE job, historical
+weather fetch, real-raster smoke, RL install, training, or physical validation occurred.
+
+**Decision:** treat Dixie as a development fixture only, not a scientifically sampled fire
+or a train/test example ([ADR-041](../specs/DECISION_RECORDS.md#adr-041--fpa-fod-dixie-is-only-the-first-scenario-adapter-fixture-2026-11-01)). The next concrete gate is real fuel/terrain and weather input sourcing for this card, followed by a real-input map/animation.
+
+## EXP-032 — point-role and grid semantics made explicit, 2026-11-01
+
+A second review of the FPA-FOD record-to-SimFire bridge found that the source provides an
+incident reference coordinate, but does not establish that this is an exact fire-start GPS
+point. The prior candidate card called it an ignition without carrying that distinction.
+The grid also follows SimFire's fixed degrees-per-cell conversion, so its "30 m" is a
+nominal simulator cell size rather than a latitude-independent ground distance.
+
+Updated the shared scenario schema/template and rebuilt the Dixie card to store
+`event.location_wgs84.role=incident_reference_point`, point-accuracy note, a nominal-grid
+note and `fire_behavior.seed_cell`. The LANDFIRE adapter checks that the recorded grid
+origin matches the fixed-size location rule. The operational smoke runner validates and
+uses the seed cell from the manifest and records the location role/accuracy in its receipt.
+Current navigation was shortened so the root page leads to the live design, candidate,
+backlog and evidence; previous CFSDS documents remain reachable as an archive.
+
+The offline rebuild produced the expected FOD_ID and candidate manifest with the point role, nominal grid note and seed cell. Both Dixie and Mineral LANDFIRE dry-runs passed; Python compilation passed for the changed scenario scripts; the strict knowledge-bundle check passed for 86 Markdown files; `git diff --check` passed. The real raster request is still waiting for the actual requester email; there is still no real-fuel/weather smoke or RL result.

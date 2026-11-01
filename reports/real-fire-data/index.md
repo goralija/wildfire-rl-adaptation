@@ -1,6 +1,11 @@
 # real-fire-data
 
-## Najnoviji train-only ulazni gate
+## Trenutni razvojni primjer
+
+- [Dixie Fire FPA-FOD izvorni zapis](fpa-fod-dixie-2021-source.geojson) i [scenario-kartica](../../data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json) — lokacija je samo incident referentna tačka; gorivo, teren i istorijsko vrijeme nisu još učitani.
+- [Mineral Fire audit](mineral-case-audit.json) i [objašnjenje](../../docs/research/MINERAL_CASE_AUDIT.md) — pregled drugog izvora; vremena linija su prazna, pa nije historijski replay.
+
+## Arhivirani CFSDS train-only ulazni gate
 
 - [CFSDS train fuel QC metoda](../../docs/research/CFSDS_TRAIN_QC.md) i [mašinski čitljiv rezultat](cfsds-train-fuel-qc.json) — 20 train kandidata; 10 prolazi samo gorivnu provjeru, 10 pada; nijedan nije potvrđen kao kompletan simulator slučaj.
 - [CFSDS train input QC](../../docs/research/CFSDS_TRAIN_INPUT_QC.md) i [mašinski čitljiv rezultat](cfsds-train-input-qc.json) — poravnanje izmjereno za 3/20 dostupnih train FireCase paketa; fuel vintage nije potvrđen kao vremenski siguran, suppression ostaje unknown.

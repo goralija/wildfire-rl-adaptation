@@ -5,6 +5,11 @@ status: draft
 ---
 # Zahtjevi
 
+> **Status:** tabela ispod je naslijeđeni contract sintetičkog/Firehose cell-action pilota.
+> Ne dokazuje da SimFire transfer-learning postoji. Trenutni scenario-based cilj i
+> provjere su u [DESIGN](../DESIGN.md) i
+> [real ignition pipeline](../research/REAL_IGNITION_SCENARIO_PIPELINE.md).
+
 | ID | Zahtjev | Faza | Prihvat |
 | --- | --- | --- | --- |
 | FR-001 | trajna baza zahtjeva, izvora, odluka i statusa | sada | AC-001 |

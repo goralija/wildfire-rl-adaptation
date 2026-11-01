@@ -5,6 +5,10 @@ status: draft
 ---
 # Pravila i metrike
 
+> Ova pravila opisuju stari sintetički cell-action pilot. Ne primjenjivati njihove ćelijske
+> cijene/reward direktno na SimFire linijske poteze. Novi budget/reward contract tek treba
+> definisati u [scenario dizajnu](../DESIGN.md) nakon real-input smokea.
+
 BR-001: B je nenegativan cijeli broj; validna nova intervencija košta 1.
 BR-002: no-op uvijek vrijedi, ništa ne troši, ali požar napreduje.
 BR-003: iscrpljen B ne znači done. Aktivni požar se prati do kraja ili horizonta.

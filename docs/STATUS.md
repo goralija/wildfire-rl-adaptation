@@ -1,591 +1,89 @@
 ---
 type: Project Status
-title: Trenutno stanje — 2026-10-31
+title: Stanje projekta — simulator i realni scenariji
 sources:
-- resource: /reports/firehose-verification/verification.json
-- resource: /reports/firehose-verification/task004c-adapter-smoke.json
-- resource: /reports/real-fire-data/cfsds-train-spatial-feasibility.json
-- resource: /reports/real-fire-data/cfsds-train-full-day-pair-screen.json
-- resource: /reports/firehose-verification/nonfuel-initial-scar-contract.json
-- resource: /reports/real-fire-data/cfsds-train-bc-operational-evidence.json
-- resource: /reports/real-fire-data/cfsds-train-fuel-source-gate.json
-- resource: /reports/real-fire-data/cfsds-full-train-fuel-overlay.json
-- resource: /reports/real-fire-data/canfg-fuel-archive-member-review.json
-- resource: /reports/real-fire-data/cfsds-train-terrain-weather-provenance.json
-- resource: /reports/real-fire-data/dogrib-reference-alignment.json
-- resource: /docs/research/CFSDS_FUEL_VINTAGE_REVIEW.md
-- resource: /docs/WORK_LOG.md
+  - resource: /docs/specs/DECISION_RECORDS.md
+  - resource: /docs/research/EXPERIMENT_LOG.md
+  - resource: /docs/research/REAL_IGNITION_SCENARIO_PIPELINE.md
 ---
-# Trenutno stanje — 2026-10-31
-
-## Najnoviji nalaz — dnevni FWI izvor provjeren, glavni zastoji ostaju, 2026-10-31
-
-Za tri postojeća 2018 TRAIN dijagnostička slučaja preuzeti su i checksum-provjereni
-šest ERA5-FWI-SN dnevnih indeksa. Upareni replayi mijenjali su samo te indekse i
-uspješno su završeni: predviđene nove površine bile su 73→70 ha, 237→237 ha i
-66→66 ha. Sve tri simulacije i dalje su došle do ruba malog 2×2 km izreza. Dakle,
-novi vremenski izvor je sada ponovljiv i propisno dokumentovan, ali nije uzrok niti
-rješenje velikog neslaganja. Pogledati [EXP-025](research/EXPERIMENT_LOG.md#exp-025--era5-fwi-sn-daily-weather-paired-train-replays-2026-10-31),
-[kontrolno poređenje](../reports/real-fire-data/era5-fwi-sn-2018-weather-replay-comparison.json)
-i [objašnjenje](research/ERA5_FWI_SN_DIAGNOSTIC.md).
-
-Ponovo je provjeren i Alberta put za podatke o gašenju. Katalog najavljuje tačno
-potrebne zapise o prvom fizičkom suzbijanju, ali CSV u ovom okruženju vraća 403;
-službena dostupna GIS karta sadrži status i površinu, ne vrijeme prvog fizičkog
-gašenja. To ne rješava tri postojeća BC požara i ne može dokazati da su bili bez
-intervencije. Svi ostaju `suppression_status=unknown`. Glavne otvorene prepreke su
-gašenje po konkretnom incidentu/danu, vremenska pouzdanost stare karte goriva i
-simulatorska površina koja trenutno siječe rub. `research_ready=false`; bez treninga.
-Vidi [EXP-026](research/EXPERIMENT_LOG.md#exp-026--alberta-suppression-source-schema-and-access-audit-2026-10-31),
-[ADR-036](specs/DECISION_RECORDS.md#adr-036) i [S-052](research/SOURCES.md).
-
-## Najnoviji TRAIN fuel nalaz — 2026-10-31
-
-Nova target-blind provjera je preko fiksne mreže 20×20/100 m preklopila postojeću
-v2014b kartu na svih 1.301 TRAIN parova. Prozor stane u 1.295 slučajeva; početni scar/front
-prolazi samo klasni preklop u 701, traži pregled manjeg preklopa u 64, a pada u 530.
-Šest prozora se ne može napraviti. 477 parova ima susjednu day-n−1 front/day-n ciljnu
-masku bez dodira ruba mreže; to je geometrijska provjera, ne simulator prolaz. Ni jedan
-slučaj nije spreman za replay ili trening.
-
-U službenom CanFG v20191114 ZIP-u od 2.68 GB indeksiran je sadržaj bez skidanja karte.
-Nađen je interni `Burn Scar Rules.txt`: široka starosna pravila, 2018-07-26 NFDB izvor
-za požare veće od 50 ha, posebni slučajevi za O-1/vodu/ne-gorivo i nejasan regionalni
-prag 6–21 godine. To razjašnjava više od samog W.I.S.E. crteža, ali ne dokazuje kada je
-NFDB/NBAC zamrznut u starijoj 2014b karti. `research_ready=false` ostaje.
-
-Metoda i [CSV/JSON rezultate](research/CFSDS_FULL_TRAIN_FUEL_OVERLAY.md),
-[inventar arhive](../reports/real-fire-data/canfg-fuel-archive-member-review.json) i
-[odluku ADR-033](specs/DECISION_RECORDS.md#adr-033) čuvaju reproducibilan dokaz.
-
-## Dodatna metodološka provjera — TRAIN suppression i vintage, 2026-10-31
-
-W.I.S.E. izričito uklanja požare za koje CNFDB bilježi bilo kakvo gašenje jer model ne
-računa intervencije. Naša tri sačuvana 2018 slučaja su geografski kandidati bez zajedničkog
-ID-ja s CFSDS-om; dva imaju parcijalne izvještaje o aktivnosti, a treći samo statusne
-izvještaje. Nijedan nema potpun dnevni action log ni dokaz da se nije gasio. `unknown` ne
-može proći kao “nije bilo gašenja”, pa su slučajevi i dalje dijagnostički.
-
-Službeni v2014b metadata citira 2016 NFDB referencu, ali ne kaže koji su fire years
-uključeni. To nije dokaz da je mapa koristila 2016 zapise; jeste dokaz da naziv `2014b`
-ne može sam potvrditi vrijeme sloja ožiljaka. Aktuelni NBAC nudi godišnje poligone i
-datume/izvore, ali najnoviji proizvod retrospektivno mijenja ranije godine. Koristan je
-za zasebnu rekonstrukciju ranijih ožiljaka, ne kao gotova vremenski zamrznuta mapa. Nismo
-otvarali 2019+ heldout požare. Fuel cutoff, potpuno poznati inputi i no-action gate ostaju
-blokirani; `research_ready=false`. Vidi [EXP-024](research/EXPERIMENT_LOG.md#exp-024--wise-suppression-exclusion-and-national-burn-history-dating-2026-10-31),
-[ADR-034](specs/DECISION_RECORDS.md#adr-034) i [S-050](research/SOURCES.md).
-
-## Provjera ranijih rješenja — 2026-10-31
-
-Javni radovi potvrđuju da je ova vrsta pripreme izvodiva. CFSDS pretvara MODIS/VIIRS
-detekcije u procijenjeni dnevni dolazak vatre; W.I.S.E. je isti CFSDS format povezao s
-FBP gorivima, DEM-om i reanalysis vremenom; Dogrib je pripremljen za Cell2Fire uz fuel,
-teren i vremensku stanicu; Firehose je trenirao RL preko Cell2Fire scenarija. Razlika je
-u cilju i poštenju evaluacije: W.I.S.E. priznaje da početni front izvodi gledajući day-n
-target, a dijagnostički scenariji biraju najbolje trajanje i vjetar prema targetu.
-Dogrib optimizacija takođe je poređena na istom poznatom burn scar-u. Ovi radovi
-potvrđuju izvedivost komponenti, ali ne zatvaraju naš CFSDS + Firehose checkpoint +
-fine-tuning + heldout lanac. Naša konverzija je moguća i već je djelimično izvršena;
-no-action, provenance, prostor i nepristrasnost su preostali blokatori. Detalji i laičke
-analogije: [pregled ranijih radova](research/CFSDS_PRIOR_WORK_AND_PLAIN_EXPLANATION.md).
-
-## Izabrani recept i vizualizacijska osnova — 2026-10-31
-
-Sada je usvojen konkretan hibrid: **W.I.S.E. postupak za pakovanje CFSDS slučajeva**,
-**Cell2Fire/Firehose za širenje i RL**, te **Dogrib samo kao kontrolni primjer GIS ulaza i
-vizualizacije**. Preuzimamo W.I.S.E. filtere/prostorne slojeve/metrike, ali početno stanje
-biramo samo iz dana n−1; nećemo koristiti buduću ciljnu granicu za biranje fronta ili
-parametara. Novi Dogrib QA alat je nacrtao georeferenciranu kartu i zabilježio razliku od
-jedne ćelije između KML i CSV lokacije paljenja, 663 scar ćelije na kodu 101 koji označava
-non-fuel, te razliku 7h vremenskih uzoraka prema 22h52min između perimetara. Zato to još
-nije valjan replay cijelog požara.
-Karta i receipt su u [research indexu](research/index.md), a detaljni preuzeti recept i
-pravila za animacije su u [prilagođenom workflowu](research/ADAPTED_PRIOR_ART_WORKFLOW.md).
-Još nema novog CFSDS replaya ili RL treninga; `research_ready=false` ostaje.
-
-## Baza znanja u repozitoriju
-Repo je OKF 0.2 bundle s [root indeksom](../index.md),
-[sažetim kontekstom](../knowledge/project-context.md), [mapom koda](../knowledge/code-map.md)
-i [pravilima održavanja](../knowledge/maintenance.md). Dokumenti imaju tipove,
-lowercase indekse i navigaciju; agent ulazi dijele isti AGENTS kontekst. Zaseban
-knowledge checker/CI čuva strukturu i lokalne linkove. Migracija ne zatvara dataset
-refinement niti uvodi naučnu/humanu verifikaciju sadržaja.
-Trenutni strict OKF checker prolazi za 73 Markdown fajla. Odvojeni knowledge testovi i
-clean-clone rezultat iz ranije validacije su sažeti u
-[historijskom validation receiptu](../reports/knowledge-validation.json).
-Osnovni aplikacijski paket i dalje nema dodatne zavisnosti; PyYAML je samo knowledge alat.
-
-## Lokalni workspace
-Projektni bootstrap PR #1 je spojen u `main`; baza za ovaj nastavak je commit `ea5b8a7a`.
-Train-only fuel QC je urađen u zasebnom task worktreeu na grani `research/cfsds-train-qc`.
-Glavni klon i drugi postojeći worktree sačuvani su. Sirovi podaci i treći Firehose
-checkout ostaju izvan commita. Runbook za worktree raspored je u
-[workspace layout dokumentu](../knowledge/workspace-layout.md).
-[Provjera preseljenja](../reports/workspace-relocation.json): 13,246 ne-venv fajlova
-i 11 backup fajlova sa istim hashovima, 19 sačuvanih verzija paketa, ispravljene
-lokalne venv putanje, 26 aplikacijskih/15 knowledge testova i 64-file OKF provjera.
-
-## Najnoviji pomak
-**Cell2Fire je kompajliran i oba postojeća 20×20 Firehose PPO checkpointa rade.**
-Izvršeno je 12 kratkih inference rollouta, bez treniranja, u odvojenom Linux ARM64
-kontejneru sa SB3/contrib 1.5.0 i Gym 0.21.0. Runtime gate je prošao.
-
-- Isti input/seed ponavlja kompletan niz akcija/state hashova; drugačiji C++ seed mijenja širenje.
-- Budžet B=8 se poštuje; zatim no-op do simulator done. Težine ostaju nepromijenjene.
-- Svi subprocess returncodeovi su 0. Kontrole: no-action, min-L2, max-L2 i dva checkpointa.
-- Zabilježen input hash, izvorni commitovi, model hashovi, verzije i Docker image ID.
-- Dataset card: 141 fajl, 400 ćelija (307 gorivih), 130 weather fajlova sa po 8 redova.
-
-## Izabrani real-fire podaci i stvarni pilot — 2026-10-30
-
-Odabrana je **Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire** jer najbolje odgovara
-postojećem simulatoru i 20×20 agentu. CFSDS v1.1 ima 5,435 kanadskih požara za
-2002–2024, 90 m satelitski interpolisanu dnevnu kartu gorenja. Službeni CFSDS rad
-opisuje MODIS/VIIRS hot-spot interpolaciju; noviji W.I.S.E. rad ponavlja da je za
-kompatibilan no-action benchmark potrebno znatno strože birati događaje. [CFSDS rad](https://doi.org/10.1038/s41597-024-03436-4), [W.I.S.E. procjena](https://doi.org/10.1071/WF26072).
-
-Preuzeto je 23 godišnja ZIP para 2002–2024 (102,405,239 bajtova ukupno) lokalno u
-Git-ignorisan `data/raw/cfsds-v1_1`; datoteke su provjerene prema OSF manifestu. Prvi
-screen za godine 2014–2024 pregledao je 3,141 događaj/82,015 dnevnih redova i
-zadržao najviše pet geometrijski pogodnih događaja po godini: ukupno 44, podijeljena
-po godini požara u 20 train, 9 validation i 15 test kandidata. Ovaj spisak nije
-iscrpan niti pun benchmark; svi dani jednog požara ostaju u istoj particiji.
-[Screen izvještaj](../reports/real-fire-data/cfsds-cohort-screen.json),
-[kohort manifest](../data/manifests/cfsds-v1_1-pilot-cohort.json).
-
-**Prvi simulator slučaj `2018_747`, target 16.08.2018:** napravljena je 20×20 × 100 m
-karta s Canadian FBP 2014b gorivima, MRDEM 30 m terenom, ERA5-Seamless satnim vremenom,
-prethodnim požarnim stanjem i zasebnim targetom za naredni dan. Sve ćelije u scar/front
-/target su na podržanom C-3 ili D-1 gorivu. C++ je prihvatio 175 ranije opožarenih i
-31 aktivnu ćeliju. Šest no-action seedova (123–128; bez treniranja/intervencija) završilo
-je uspješno. Svih šest dalo je istu mapu od 66 ha prema CFSDS cilju 15.39 ha (IoU 0.2187),
-a novo širenje dodirnulo je 19 rubnih ćelija našeg 2×2 km isječka. Trajanje runova se
-razlikovalo. Dakle konverzija radi, ali
-ovaj replay pokazuje veliko neslaganje i rubni efekat; ne validira fiziku niti dokazuje
-korist agenta. Ovaj spremljeni pilot koristi historijski target-aware crop i ne smije se
-predstavljati kao target-blind niti retroaktivno mijenjati. [Replay mjere](../reports/real-fire-data/2018_747-day228-replay.json),
-[mapa](../reports/real-fire-data/2018_747-day228.png).
-
-**Dodatne train provjere, bez treniranja:** `2018_241` i `2018_1770` su pretvoreni i
-pokrenuti od historijskog stanja bez početnog zagrijavanja. Bez gašenja je simulator u
-prvom slučaju zahvatio svih 400 ćelija: 237 ha novog gorenja prema 12.15 ha opaženih
-(IoU 0.0376). U drugom je dodao 73 ha prema 12.15 ha (IoU 0.1361). `2018_241` je dao
-iste mjere i kad uključimo 20 minuta zagrijavanja, pa to zagrijavanje nije glavni uzrok
-neslaganja. Kandidat `2014_538` nije prošao konverziju jer dio historijskog scar/fronta
-upada na vodu ili ne-gorivo u FBP 2014b karti. Ovi nalazi potvrđuju da geometrijski
-odabrani kandidati još nisu provjereni slučajevi. [2018_241 mjere](../reports/real-fire-data/2018_241-day227-replay.json),
-[2018_1770 mjere](../reports/real-fire-data/2018_1770-day224-replay.json),
-[odbijeni `2014_538`](../reports/real-fire-data/2014_538-fuel-rejection.json).
-
-Nakon izmjene probe opcije i C++ initial-state podrške, novi isolated Docker image je
-ponovo prošao svih 12 kratkih postojećih Sub20 inference slučajeva; PPO težine su ostale
-iste. Sažetak: [regression receipt](../reports/firehose-verification/real-case-image-regression.json).
-
-CFSDS target je dnevna satelitska procjena, ne tačan satni ground-truth front; suppression
-status nije spojen. FBP karta je 250 m resamplovana na 100 m, DEM 30 m, a vrijeme je
-reanalysis tačka 5.2 km od centra. Dnevni FWI kodovi su ponavljani kroz 24 sata zbog
-nedostatka satnih vrijednosti u CFSDS. Za heldout 2019/2022–24 još treba odgovarajuće
-fuel-map vintages (2019/2024) i kvalitetni inputi. BiH/MedEU ostaje kasnija odvojena
-studija jer njegovi evropski NFFL fuel kodovi nisu isti kao Canadian FBP.
-
-## Train-only no-action mismatch dijagnostika — 2026-10-30
-
-TASK-018 dijagnostička faza je završena na sačuvanim train replayima. Poređeni su
-manifesti/hashovi, vrste goriva i FBP parametri, satno vrijeme i dnevni FWI, početni
-front, trajanje i rubovi 20×20 domena. Analiza fiksnih vremenskih presjeka pokazuje da
-area i IoU snažno zavise od vremena, a tri slučaja rastu različito. Za 30/120 minuta
-simulator prognozira 18/42 ha (`2018_747`), 8/46 ha (`2018_241`) i 0/13 ha
-(`2018_1770`), dok su ciljevi 15.39/12.15/12.15 ha. Završna predviđanja su 66/237/73 ha.
-
-Sva tri dodiruju rub mreže u prvih 34–52 minuta; `2018_241` popunjava svih 400 ćelija.
-Ispostavilo se i da je raw probe metapodatak horizon-a pogrešno računao 480 minuta iz
-intervala akcije. Stvarni C++ weather limit je 24 reda × 60 minuta = 1.440 minuta;
-probe sada računa horizon iz broja redova. To ne mijenja stare replays. Tačan razlog
-završetka i dalje nije u output adapteru, suppression je nepoznat, a CFSDS target nema
-tačno intradnevno vrijeme. Zato je dijagnostička faza završena, ali fizički uzrok
-neslaganja i no-action gate nisu zatvoreni.
-
-Potvrđene činjenice i hipoteze: [dijagnoza](research/CFSDS_NO_ACTION_DIAGNOSIS.md),
-[timeline receipt](../reports/real-fire-data/cfsds-no-action-timeline.json).
-
-TASK-004c adapter je lokalno završen: C++ šalje kumulativni affected/treatment skup,
-odvojeni aktivni front i reason (`weather_horizon`, `front_extinguished`, `grid_exhausted`,
-`no_ignition`); Python ga prenosi u episode `info` i uskladi cumulative counter. Fixture
-i 12/12 inference rollouta prolaze. Ako se ćelija istovremeno pojavi kao affected i
-treated, C++ terminalni skup je mjerodavan jer grid prikazuje `-1`; provjeravač zahtijeva
-da je svaka takva razlika objašnjena treated skupom. RGB/action/reward/checkpoint ugovori
-nisu promijenjeni. [Receipt i ograničenja](../reports/firehose-verification/task004c-adapter-smoke.json).
-
-TASK-015 ostaje djelimičan. Input audit je izmjerio 3/20 raspoloživih train FireCase
-paketa; fuel/weather/terrain/suppression poravnanje još nije zatvoreno za cijelu kohortu.
-FBP 2014b nema dokumentovan pixel-level vremenski cutoff; 2019 CanFG je u razvojnom
-direktoriju i koristi NBAC. Terrain tile provenance nedostaje, weather API field lineage
-treba eksplicitno snimiti, a suppression ostaje unknown za svih 20. Batch je runtime
-provjera na Sub20, ne CFSDS fizička validacija; no-action gate ostaje pao, nema dokaza
-o agentovom smanjenju štete i benchmark/fine-tuning su na čekanju.
-Validation/test ciljevi se ne koriste za QC/tuning.
-
-## Train-only input alignment gate — 2026-10-31
-
-Dodani su [lokalni input audit](../scripts/audit_cfsds_train_case_inputs.py),
-fokusirani testovi i [mašinski report](../reports/real-fire-data/cfsds-train-input-qc.json).
-Tri raspoloživa train FireCase paketa imaju usklađene 20×20/100 m ASCII gridove,
-400 terrain ćelija bez NoData i 24 uređena vremenska reda na lokalni target datum;
-weather lokacije su 2.436–5.195 km od CFSDS summary centroida. Preostalih 17 input
-paketa nije materijalizovano u ovom checkoutu. W.I.S.E. annual-fuel metod i službene
-2019/2024 mape su pregledani, ali nijedna se ne proglašava sigurnom zamjenom zbog
-vremenskog porijekla/NBAC i potrebe za leak-free succession mapom. Suppression ostaje
-unknown, bez novog C++ replaya ili treninga. Vidi
-[detaljnu metodu i otvorena pitanja](research/CFSDS_TRAIN_INPUT_QC.md).
-
-## Train-only fuel-vintage mask proof — 2026-10-31
-
-Dodani su [pre-target mask audit](../scripts/prove_cfsds_train_fuel_vintage.py), testovi i
-[mašinski receipt](../reports/real-fire-data/cfsds-train-fuel-vintage-mask-proof.json).
-Samo TRAIN događaj `2018_747` je obrađen: maska `arrival_day < 228` obuhvata 881 ćeliju
-u 48×50 source rasteru (272 u simulator cropu), dok je 19 ćelija dana 228 izostavljeno;
-u ovom event rasteru nema poslije-target ćelija. Unit test dodatno provjerava da se
-synthetic dan n+1 isključuje. Ovo dokazuje vremensko pravilo maske, ne godišnju FBP kartu.
-
-Isti audit je otkrio dodatni evaluation blocker: raniji `build_cfsds_case.py` birao je
-day n-1 aktivne ćelije provjeravajući dodiruju li target day n. Taj target-aware izbor
-zamijenjen je target-blind prototipom; detalji i nezavisni invariant dokaz su u odjeljku
-ispod. W.I.S.E. paper navodi i priznaje buduću informaciju u svom frontu, pa njegovu
-target-aware metodu ne koristimo za naš unbiased benchmark.
-
-Izolovani C++ fixture (`NF` cell 4 kao `burnt`, uz gorivnu cell 1 kao `burning`) potvrdio
-je poruku `InitialState.csv marks a non-fuel/harvested cell as burned`; importer odbija
-scar prije prvog grid exporta. To je očekivana odbijenica u
-[kompatibilnosnom receipt-u](../reports/firehose-verification/nonfuel-initial-scar-compatibility.json),
-ne simulator PASS. Nijedna fuel klasa nije promijenjena, nije pokrenut CFSDS replay ni RL
-trening i nisu otvoreni validation/test rasteri.
-
-Odluka [ADR-020](specs/DECISION_RECORDS.md#adr-020) blokira godišnje reclassifikovanje dok
-se ne potvrde per-pixel vintage/succession tree i importer/damage contract. Target-aware
-front je zamijenjen target-blind prototipom, ali post-selection screen pokazuje slabu
-target pokrivenost na fiksnom gridu, a no-action gate ostaje pao. Train terrain/weather
-provenance i suppression takođe nisu zatvoreni.
-
-## TRAIN-only target-blind initial-state proof — 2026-10-31
-
-Uvedeno je pravilo [CFSDS initial-state helpera](../scripts/cfsds_initial_state.py):
-prozor 23×23 se bira samo iz arrival vrijednosti prije target DOY i njegov centar se
-postavlja što bliže centroidu svih day n−1 piksela. Za početni model front uzimaju se
-day n−1 pikseli unutar sigurnog unutrašnjeg prstena; n−1 pikseli na samoj ivici prozora i
-stariji pre-target pikseli ostaju burnt scar. Dnevna satelitski interpolisana oznaka je
-proxy, ne satna mjera plamena.
-
-Na samo TRAIN događaju `2018_747` promjena pozicije svih 19 day-n target piksela promijenila
-je zasebnu target truth mapu, ali nije promijenila crop offset, 20×20 scar/front maske ni
-serijalizovani `InitialState.csv`: `PASS_TARGET_MASK_INVARIANCE`. Target-blind crop sadrži
-17/19 target piksela (0.894737), ali ta pokrivenost je samo post-selection dijagnostika.
-Pogledati [invariance receipt](../reports/real-fire-data/cfsds-target-blind-input-invariance.json)
-i [implementaciju/testove](../scripts/cfsds_initial_state.py).
-
-Drugi screen otvarao je samo godišnje CFSDS rastere 2014–2018 (train). 25 kandidata,
-pet po godini, odabrani su po target-independent pre-target front/history mjerama; target
-coverage je izračunat nakon izbora. Samo 4/25 prozora sadrže makar jedan target pixel;
-medijana target capture je 0, a maksimum 0.010402. Ovaj rezultat upozorava da trenutni
-fiksni 2×2 km model prozor često ne zahvata sljedeći dnevni rast. Nije korišten da se
-promijeni crop, rangiranje ili parametar; reality-check podobnost i domena ostaju otvoreni.
-Pogledati [train-only screen receipt](../reports/real-fire-data/cfsds-train-target-blind-window-screen.json).
-
-Nije napravljena godišnja fuel mapa, obnovljen FireCase, C++ replay, tuning ni trening.
-Target-mask invariance je jedan matematički/implementacijski dokaz, ne dokaz ponašanja
-požara. No-action gate, model-domain prikladnost, annual fuel provenance/importer contract,
-weather/terrain izvori i suppression i dalje blokiraju benchmark i fine-tuning.
-Raniji rezultat 10/20 `PASS_FUEL_ONLY` važio je za prethodnu kohortu/target-aware cropove;
-ne kvalifikuje novi target-blind shortlist, koji još nema ponovljen fuel audit. Sačuvani
-pilot FireCase-ovi ostaju historijski prototipi i nisu retroaktivno preimenovani u
-target-blind slučajeve.
-
-## TRAIN-only prostorni audit domena — 2026-10-31
-
-Isti 25 TRAIN event/day kandidata upoređeni su na 20×20/100, 150, 200 i 300 m te
-40×40/100 m. Prozor svakog slučaja prvo je izabran oko day n−1 centroida iz pre-target
-rastera; target geometrija je mjerena tek nakon izbora. Za 20×20/100 m target ulazi u
-4/25 prozora (median capture 0%, max 1.04%). Na oko 4 km, target se vidi u 19/25, ali
-medijalno je pokriveno samo 1.95%. Oko 6 km medijana je 15.31%, no dvije source slike su
-premale za 67×67 raster prozor. [Metoda i tumačenje](research/CFSDS_SPATIAL_FEASIBILITY.md),
-[mašinski report i hashovi](../reports/real-fire-data/cfsds-train-spatial-feasibility.json),
-[ADR-022](specs/DECISION_RECORDS.md#adr-022).
-
-**Odluka:** postojeći 2×2 km domen nije dovoljan za reality-check ovih shortlisted parova;
-ne usvaja se širi domen samo zato što target coverage raste. Audit ne resampluje gorivo,
-teren ni vrijeme i ne pravi simulator ulaze. 20×20 na 200/300 m zadržava checkpoint oblik
-ali mijenja fizičko značenje akcija; 40×40 na 100 m ne odgovara postojećem checkpointu.
-Stari day-pair shortlist uslovljen je target-day summary zapisom i pozitivnom firearea,
-pa je ovaj bounded audit ostao historical-only. Puni target-independent screen je naknadno
-završen; pogledati [EXP-013 izvještaj](research/CFSDS_FULL_DAY_PAIR_SCREEN.md) i
-[receipt](../reports/real-fire-data/cfsds-train-full-day-pair-screen.json). Nije otvoren
-validation/test raster; nema novog casea, replaya, kalibracije ili treninga.
-
-## Train-only fuel quality gate — 2026-10-30
-
-Implementiran je [per-cell audit](research/CFSDS_TRAIN_QC.md) za svih 20 preliminarnih
-train day-pair kandidata. Deset prolazi `PASS_FUEL_ONLY`, a deset dobija
-`FAIL_FUEL_OVERLAP`; processing grešaka nema. Aktivni front i naredni target su u svih
-20 geometrijski validni i većinski na modelskom gridu ne dodiruju rub. To nije potvrda
-potpunog simulator slučaja: terrain/weather, suppression i reality-check su posebne
-provjere. Sve tri postojeće replay studije (`2018_747`, `2018_241`, `2018_1770`) prolaze
-gorivni gate, pa fuel preklop sam ne objašnjava njihovo preveliko širenje.
-
-Audit je koristio samo train slučajeve za overlay. Cohort manifest i zajednički crop-screen
-JSON, koji sadrže i druge podjele, bili su učitani radi selekcije train redova;
-validation/test fuel i source rasteri nisu otvarani. Rezultati su zapisani i u train
-redove [kohort manifesta](../data/manifests/cfsds-v1_1-pilot-cohort.json). Nije bilo
-simulator replaya, RL treninga ili kalibracije.
-Suppression je nepoznat za svih 20. [Detaljni report](../reports/real-fire-data/cfsds-train-fuel-qc.json).
-
-## Environment reproducibility — 2026-10-30
-
-U feature checkoutu je napravljen moderni Python 3.12.4 `.venv` s optional RL, GIS i
-knowledge alatima. Geospatial stack je izolovan: rasterio 1.4.4, geopandas 1.2.0,
-pyproj 3.8.0, xarray/rioxarray, netCDF4, SciPy, CDS API klijent i ostale zavisnosti;
-GeoTIFF nearest-neighbour reprojection/import smoke je prošao. Kombinovani freeze je
-`requirements/research-macos-arm64-py312.freeze.txt`. Prošlo je 26 aplikacijskih testova, 15 knowledge testova, strogi checker za
-67 Markdown fajlova, synthetic CLI smoke i 1,024-koračni synthetic PPO
-smoke. Legacy Firehose image je svježe izgrađen na Linux ARM64 iz pinovanih upstream
-commitova; 12/12 inference slučajeva su prošli, sa ugašenom mrežom i bez treninga.
-Tačne verzije i image/source hashovi su u [environment receipt](../reports/environment-setup/README.md).
-TASK-004c adapter mismatch je riješen u izmijenjenom izolovanom imageu; environment/runtime
-PASS i dalje nije research-ready zbog neriješenog CFSDS no-action mismatcha, nepoznatog
-suppressiona, domena i intradnevne ground-truth granice.
-
-Dogrib gorivo/elevation dijele blok sa Sub20 mapom, pa nije nezavisan test prostorne
-generalizacije. MedEU je zaseban mogući evropski track, ali nije potreban za glavni
-Canadian FBP projekat i još nije pretvoren u simulator input.
-
-## Ograničenja koja su stvarno potvrđena
-Stari rollout receipt bilježi reset/brojač razliku 206 naspram 207; TASK-004c sada
-sinhronizuje reset observation i na terminalnom C++ receiptu provjerava/sinhronizuje
-kumulativnu štetu. Novi 12-case matrix daje isti Python/C++ cumulative count u svim
-slučajevima. Svi slučajevi u toj matrici ipak završe na `weather_horizon`; druge C++
-terminal grane nisu direktno pokrivene batchom. Stvarni CFSDS pilot ima multi-cell
-importer, ali njegovo fizičko neslaganje ostaje. Zbog toga **research_ready=false**.
-
-## Ostalo što radi
-Baza zahtjeva/rubrike/literature/odluka, synthetic-v1 engine i pet baseline politika,
-upareni eksperimenti i manifesti, 300-epizodni sintetički replay, moderni Gym/PPO smoke.
-Prethodni sintetički artefakti ostaju historijski dokaz; nisu Cell2Fire rezultati.
-
-## Dokazi
-- [Runtime nalazi](research/FIREHOSE_VERIFICATION.md), [dataset](research/DATASET.md).
-- `reports/firehose-verification/`: input inventar, legacy 12-case receipts i
-  [TASK-004c adapter receipt](../reports/firehose-verification/task004c-adapter-smoke.json).
-- 38 aplikacijskih testova prolazi s modernim environmentom; strict OKF provjera i
-  synthetic CLI smoke takođe prolaze nakon TASK-004c izmjena.
-- Originalni Firehose i contrib checkouti ostaju neizmijenjeni; samo build flagovi i
-  eksplicitna dijagnostika reset/seed ponašanja su dodani u naš kod.
-- Docker/legacy i moderni .venv su odvojeni. Legacy inference je bez treniranja i
-  plaćenog compute-a. Kod/dokumentacija su objavljeni kroz [PR #1](https://github.com/goralija/wildfire-rl-adaptation/pull/1).
-
-Sljedeće: potvrditi vremenski siguran FBP fuel vintage/succession, riješiti importer
-semantiku non-fuel historijskog scar-a i zatvoriti terrain/weather/suppression provenance
-samo na train događajima → unaprijed definisani train-only kontrolisani no-action replayi sa zajedničkim horizontom
-→ zasebna odluka o no-action gateu → tek zatim zamrznuti event-level heldout ID-jeve →
-frozen benchmark/trening samo nakon prihvatljivog replay gatea.
-Nema provjere fizike simulatora na BiH podacima, potvrde RL prednosti ili generalizacije.
-Deadline/compute i licence za sirove podatke ostaju otvoreni.
-
-## Pregled i odgođena sitnica
-I bootstrap i novi runtime pregled su prošli bez kritičnih ili važnih nalaza.
-Novi pregled nezavisno potvrđuje testove, evidence/provenance i dataset hashove.
-Jedan stari minor ostaje TASK-010:
-JSON null config u synthetic CLI-u daje traceback umjesto uredne poruke.
-
-## Handoff za kolegu
-[HANDOFF](../HANDOFF.md) sadrži prenosiv clone/setup, put do legacy runtimea,
-pribavljanje lokalnih podataka i trenutno stanje replaya.
-Za objavu ponovo prolazi svih 26 testova u modernom environmentu. Čisti lokalni
-Git klon s novim venvom i bez dodatnih paketa prolazi 22 testa (4 optional preskočena)
-i synthetic smoke; originalni lokalni setup nije preduslov za taj početak.
-Bootstrap rad je spojen kroz [PR #1](https://github.com/goralija/wildfire-rl-adaptation/pull/1).
-Ova statusna grana sadrži zaseban naredni train-data QC korak.
-
-## Puni TRAIN target-independent day-pair i prostorni screen — 2026-10-31
-
-Skripta [audit_cfsds_train_full_day_pairs.py](../scripts/audit_cfsds_train_full_day_pairs.py)
-pregledala je samo godišnje CFSDS arrival rastere 2014–2018: 1.301 TIFF, svi sa validnim
-parom po pravilu „najraniji DOY sa najmanje tri 90 m arrival piksela, pa naredni
-kalendarski dan“. Group CSV tabele, `firearea`, weather i target geometrija nisu korišteni
-za članstvo. Za svih 1.301 par ostaje u auditu; 1.010 imaju target piksele, 291 ima status
-`no_mapped_pixels_on_next_day`. Uklanjanje target i kasnijih raster oznaka ne promijeni
-izabrani input dan ni u jednom slučaju.
-
-Na unaprijed zadatom 20×20/100 m prozoru (oko 2 km), 1.295/1.301 cropova imaju najmanje
-tri input-front piksela u sigurnom unutrašnjem dijelu. Od 1.010 parova s mapiranim targetom,
-945 imaju makar jedan target piksel unutar prozora; medijalni capture je 36.71% za 1.008
-parova s opaženim targetom i prozorom. Veći fizički prozori povećavaju capture među
-slučajevima gdje prozor stane, ali 254 slučaja ne mogu smjestiti 4 km opcije, a 566 ne mogu
-smjestiti 6 km opciju. Capture je native-pixel naknadna dijagnostika, nije resamplana
-Cell2Fire maska i nije korištena za izbor para ili domena. Nije usvojen novi grid.
-
-Dokumentacija: [metoda i tumačenje](research/CFSDS_FULL_DAY_PAIR_SCREEN.md),
-[JSON receipt](../reports/real-fire-data/cfsds-train-full-day-pair-screen.json) i
-[case/domain CSV](../reports/real-fire-data/cfsds-train-full-day-pair-screen.csv).
-Nema godišnje leakage-safe fuel mape, importer non-fuel scar ugovora, potpunog terrain/
-weather/suppression paketa, no-action gate prolaza, nove FireCase konverzije, replaya,
-benchmarka ili treninga. Sljedeće potvrditi vremenski siguran fuel/source ugovor i novi
-target-blind slučajevi; target capture ostaje van izbora. **research_ready=false.**
-
-## TRAIN-only FBP fuel-vintage source review — 2026-10-31
-
-Pregledani su službeni CWFIS v2014b i v20191114 metadata, 2024/2026 fuel-map opisi,
-CWFIS download licence, službeni 2018 FBP baseline-class rules/base-layer PDFs i
-publisher tekst W.I.S.E. rada. v2014b metadata navodi Land Cover 2011 i NFDB/NBAC
-identifikaciju scars, ali ne navodi datum snapshot-a niti vremenski cutoff spaljenih
-poligona. Zato se v2014b zadržava za reprodukciju spremljenih pilota i nije potvrđen kao
-as-of-event input za nove slučajeve. v20191114 ima 2017 kNN/NBAC i nije direktan vintage
-za događaje 2014–2018; 2024/2026 mape takođe nisu TRAIN baseline. Sada je dokumentovano
-da CWFIS download-site licenca navodi Open Government Licence - Canada uz CFS attribution.
-
-Arhiva v20191114 sada sadrži pronađeni `Burn Scar Rules.txt`, koji opisuje post-fire
-succession. Dostupni 2014b ZIP zasebno je pregledan po imenima datoteka: ima raster,
-metadata i legendu, ali nema dodatni succession rule file. Za v2014b i dalje nema
-datuma NFDB/NBAC podataka. Nova full TRAIN klasa-provjera na v2014b dala je 701 prolaz
-od 1.295 prozora, 64 review i 530 fail; nijedan rezultat ne potvrđuje istorijsku
-tačnost karte. Nije izrađena godišnja mapa, FireCase ili replay. Vidi [fuel-vintage audit](research/CFSDS_FUEL_VINTAGE_REVIEW.md),
-[full TRAIN overlay](research/CFSDS_FULL_TRAIN_FUEL_OVERLAY.md), [archive receipt](../reports/real-fire-data/canfg-fuel-archive-member-review.json),
-[source register S-031–S-049](research/SOURCES.md), [EXP-022/023](research/EXPERIMENT_LOG.md#exp-022--full-train-fuel-class-overlay-on-target-blind-pairs-2026-10-31)
-i [ADR-033](specs/DECISION_RECORDS.md#adr-033).
-
-## NF historical-scar importer contract — 2026-10-31
-
-TASK-015 importer podzadatak je završen. `InitialState.csv` sada prihvata poseban
-`scar_nf` zapis samo kada caller izričito potvrdi da je ćelija historijski scar, a
-pinovani C++ `Data.csv` klasu vidi kao tačno `NF`. Scar ulazi u cumulative affected
-istoriju, ali ne postaje raspoloživo gorivo niti aktivni front. Obični `burnt` na NF,
-`burning` na NF i `scar_nf` na gorivu se odbijaju. Python serializer podržava masku
-koju caller dostavi, ali CFSDS case builder i dalje odbija nonfuel scar dok vremenski
-fuel vintage i succession crosswalk nisu dokazani.
-
-Sintetički Sub20 C++ rollout je završio na `weather_horizon`: početni scar `NF` ostaje
-u završnom cumulative setu, C++ i Python cumulative damage se slažu, terminalni grid se
-slaže s adapterom, a NF nikad nije u aktivnom frontu kroz tri prijelaza. Tri negativna
-fixturea su odbijena s očekivanim porukama. Ovo provjerava format/stanje adaptera, ne
-širenje požara u prirodi, CFSDS integraciju ili kvalitet treninga; nije pokrenuto
-treniranje ni CFSDS replay. Vidi [ADR-025](specs/DECISION_RECORDS.md#adr-025),
-[EXP-015](research/EXPERIMENT_LOG.md#exp-015--explicit-nonfuel-historical-scar-importer-contract-2026-10-31)
-i [runtime receipt](../reports/firehose-verification/nonfuel-initial-scar-contract.json).
-
-I dalje nema leakage-safe godišnje fuel mape: v2014b cutoff i regionalna/kalendarska
-semantika sukcesije nisu potvrđeni. Interni v20191114 `Burn Scar Rules.txt` sada je
-pregledan; full raster nije preuzet. Naredni rad je dobiti vremenski cutoff za v2014b i
-precizan ugovor za region/starost, zatim završiti DEM/weather/suppression provenance i
-preregistrovani no-action gate.
-**research_ready=false.**
-
-
-## TRAIN input provenance follow-up — 2026-10-31
-
-The source review corrected an earlier open question: W.I.S.E. paper Figure 2 is public
-and its succession tree is transcribed in the [fuel-vintage review](research/CFSDS_FUEL_VINTAGE_REVIEW.md).
-It keeps pre-fire O-1 as grass; other burns become C-2 after >21 years, M-2 C25% after
->5, D-2 after >2, and Non-Fuel otherwise. The small v20191114 `Burn Scar Rules.txt` was
-later inspected; the entire fuel raster was not downloaded or independently reproduced.
-Exact date arithmetic/region rules remain open. Official v2014b metadata still gives no
-NFDB/NBAC historical burn cutoff, so no annual fuel map is safe to claim or emit.
-
-The three saved FireCases are old target-aware builder outputs, not clean inputs for the
-new benchmark. Their generated terrain grids are hashed and the MRDEM-30 VRT / bilinear
-30 m to 100 m path is recorded, but upstream tile/cell IDs and acquisition dates are
-missing. Their raw weather responses preserve resolved point/timezone/fields/units/hash,
-but not the original request coordinate/URL, so selection of those historical points
-cannot be shown target-blind.
-
-A useful official suppression source is Alberta's 2006–2025 fire-level dataset. Its
-catalogue describes location, dates/duration, weather, staffing and physical suppression
-resources. The direct CSV endpoint returned HTTP 403 from this workspace; no Alberta
-file/event join was produced. Fire-level resources would still not amount to a daily action
-timeline. See [source register S-034–S-044](research/SOURCES.md),
-[ADR-026](specs/DECISION_RECORDS.md#adr-026) and [EXP-016](research/EXPERIMENT_LOG.md#exp-016--train-fuel-tree-correction-and-external-input-lineage-audit-2026-10-31).
-
-No raster was downloaded/generated, no FireCase was rebuilt, and no replay or training
-was run. No validation/test material was opened. **research_ready=false.**
-
-Next: verify the fuel tree's artifact and age rules and seek a dated v2014b cutoff; obtain
-the Alberta table through an official accessible route and attempt only TRAIN event
-matches; then repair DEM/weather query lineage before preregistering a common-horizon
-no-action gate.
-
-## BC historical-perimeter crosswalk — 2026-10-31
-
-A train-only query against the official BC Wildfire historical-perimeter layer found one
-2018 polygon at each of the three saved case target centroids: `2018_1770` → N12395,
-`2018_241` → C11937 and `2018_747` → N12413. Fire year, date and area are consistent
-candidate evidence to identify the matching BC operational records. This does not prove
-same-event identity via a shared key and the layer contains no crew/action history, so
-suppression remains `unknown`. Exact response bodies and hashes are in the
-[crosswalk receipt](../reports/real-fire-data/cfsds-train-bc-perimeter-crosswalk.json);
-the decision and query method are recorded in [ADR-027](specs/DECISION_RECORDS.md#adr-027)
-and [EXP-017](research/EXPERIMENT_LOG.md#exp-017--train-only-bc-historical-perimeter-crosswalk-2026-10-31).
-
-## TRAIN BC operational-record follow-up — 2026-10-31
-
-For the three saved TRAIN cases, the official historical-perimeter layer gave candidate
-incident numbers N12395, C11937 and N12413. Follow-up public reporting documents
-containment-line work and helicopter/heavy-equipment support at Coal Creek (N12395) on
-the `2018_1770` target date; Lost Dog Complex (N12413) had a reported planned ignition
-and complex-level resources one day before `2018_747`'s target. For North Baezaeko
-(C11937), the official August 16 report gives 2,500 ha and 0% contained, but no daily
-crew/action schedule. These sources are partial and the CFSDS-to-BC incident match has
-no shared event key, so saved case manifests remain `suppression_status=unknown`.
-Receipt: [dated operational evidence](../reports/real-fire-data/cfsds-train-bc-operational-evidence.json).
-No replay, FireCase rebuild, training or heldout inspection was done. The environment
-is still **not research-ready**; fuel vintage, candidate-level DEM/weather provenance,
-domain fitness and the no-action gate remain open.
-
-## TRAIN BC public status-record follow-up — 2026-10-31
-
-Expanded the search to the official EMBC 2018 response package. PECC Situation Report
-#10 gives an August 16 15:00 status snapshot of North Baezaeko (C11937) at 2,500 ha/
-0% contained and Lost Dog Complex (N12413) at 452.5 ha/out of control. Report #11,
-sent August 17, prints the same snapshot time but lists 4,000 ha/10% and 706 ha/out of
-control respectively. Keep report versions separate; these estimates do not form a
-resolved daily perimeter timeline. A text search of that package returned no N12395,
-and the indexed public search did not surface case-specific daily action plans for the
-three candidate IDs. This does not prove that no unpublished or request-only records
-exist. Coal Creek's contemporaneous local report remains the public source for action
-on its CFSDS target date.
-
-None of the newly found official status entries gives crew assignments or tactics. The
-CFSDS-to-BC incident matches still lack a shared event key; status estimates cannot be
-used as cell-level actions or no-action ground truth. All case manifests retain
-`suppression_status=unknown`. No simulator input, replay, benchmark, or training was
-created or run. See [EXP-021](research/EXPERIMENT_LOG.md#exp-021--train-only-bc-incident-status-snapshot-follow-up-2026-10-31),
-[ADR-032](specs/DECISION_RECORDS.md#adr-032), and the
-[updated evidence receipt](../reports/real-fire-data/cfsds-train-bc-operational-evidence.json).
-
-## TRAIN fuel-source artifact inventory — 2026-10-31
-
-The original source-gate inventory found the v2014b cutoff missing and the v20191114
-public Decision Rules PDF limited to base classification. A later ZIP-index pass found
-an internal succession-rules text file but no named standalone succession program. The
-v2014b cutoff remains missing and no annual map was generated. See the [source-gate
-receipt](../reports/real-fire-data/cfsds-train-fuel-source-gate.json), [archive receipt](../reports/real-fire-data/canfg-fuel-archive-member-review.json),
-[EXP-019/023](research/EXPERIMENT_LOG.md#exp-023--v20191114-archive-burn-scar-rules-and-v2014b-member-review-2026-10-31),
-and [ADR-033](specs/DECISION_RECORDS.md#adr-033).
-
-## TRAIN terrain and weather provenance follow-up — 2026-10-31
-
-For only the three existing 2018 TRAIN diagnostic cases, bounded reads of NRCan's
-MRDEM-30-SOURCE COG found adjusted Copernicus GLO-30 source class in all 4,489 30 m
-pixels covering each 2 km case grid. The product specification dates the underlying
-GLO-30 collection to 2011–2015, before these targets. This narrows the source category,
-but the exact DTM VRT revision, source checksum and per-pixel acquisition date used in
-the saved cases are still unknown.
-
-Fresh Open-Meteo ERA5-Seamless queries at reconstructed target-blind day-n−1 front
-centroids returned the same coarse grid point and timezone as the legacy manifests.
-Their temperature series differs for all 24 hours in each case; humidity differs for
-1–6 hours; wind and precipitation match. The cause of the historical mismatch is not
-established. Exact request URLs and three small response snapshots are now pinned. The
-old FireCase inputs were not changed and remain outputs of the target-aware builder.
-
-This closes neither historical-input validation nor the environment gate. No case was
-rebuilt, no replay or training ran, and no heldout data were opened. Annual fuel vintage,
-event-keyed suppression, model-domain fitness and pre-registered no-action acceptance
-remain blockers. See the [receipt](../reports/real-fire-data/cfsds-train-terrain-weather-provenance.json),
-[EXP-020](research/EXPERIMENT_LOG.md#exp-020--train-terrain-source-class-and-weather-snapshot-provenance-2026-10-31),
-[ADR-030](specs/DECISION_RECORDS.md#adr-030), and [S-049](research/SOURCES.md).
+# Gdje smo sada
+
+## Cilj, najjednostavnije
+
+Poredimo osnovnog agenta i istog agenta nakon dodatnog učenja. Obojica dobiju identične
+uslove i budžet da postave linije u **simulaciji**. Želimo da fine-tunirani agent sagori
+manje simuliranog prostora u odabranim scenarijima. Ne obećavamo da bi požar u stvarnosti
+bio manji za istu površinu.
+
+Više ne tražimo da svaki historijski red vatrogasne linije ima tačno vrijeme gradnje prije
+nego što počnemo. Mineral Fire audit je pokazao prazna polja vremena; korištenje obližnjeg
+`CreateDate` bi značilo nagađanje. Umjesto toga, scenario počinje od prijavljene lokacije
+i datuma otkrivanja incidenta, stvarnog goriva/terena i dokumentovanog vremena. FPA-FOD
+tačka ne mora biti tačno mjesto paljenja, pa je za Dixie koristimo samo kao približnu
+početnu lokaciju. Budući perimetar/linija ostaju van agentovog opažanja i nagrade. Detalji: [pipeline](research/REAL_IGNITION_SCENARIO_PIPELINE.md)
+i [ADR-040](specs/DECISION_RECORDS.md#adr-040--train-on-real-ignition-conditions-with-simulated-actions-2026-11-01).
+
+## Šta je stvarno urađeno
+
+- **SimFire se pokrenuo.** MITRE SimFire 2.0.1 je instaliran lokalno u posebnom Python
+  3.9.25 venvu. 30-min funkcionalni smoke je napravio GIF, mapu i receipt. To je bila
+  funkcionalna demonstracija na generisanoj mapi, ne historijski požar, trening ni
+  fizička validacija. [Slike i receipt](../reports/environment-setup/simfire-functional-demo/).
+- **Pravi BurnMD fajl je pregledan.** Hash ZIP-a odgovara MITRE LFS pointeru. Mineral ima
+  11 perimetara, 249 operativnih linija i 58 tačaka. Sve linije imaju prazne per-vertex
+  timestamp liste, a `LineDateTi` je null za 249/249. Apache oznaka repo-a nije potvrđena
+  licenca podataka. [Metadata audit](../reports/real-fire-data/mineral-case-audit.json),
+  [detaljno objašnjenje](research/MINERAL_CASE_AUDIT.md).
+- **Napravljen je zajednički scenario format.** JSON čuva mali opis događaja i putanje/hash
+  velikih fuel/terrain/weather ulaza; ima [šemu](../data/manifests/simfire-scenario.schema.json)
+  i [template](../data/manifests/simfire-scenario.template.json).
+- **Uvezen je jedan stvarni slučaj kao probna kartica.** Iz službenog USFS FPA-FOD servisa
+  preuzet je Dixie Fire 2021 (`FOD_ID 401019270`). Skripta ga je pretvorila u fiksnu
+  scenario-karticu na mreži 128×128 nominalnih 30 m ćelija; sačuvala je izvorni zapis od
+  455 B, SHA-256, izvorni ID, MTBS vezu, ulogu incident-referentne tačke i napomenu o
+  njenoj neizvjesnosti. To je razvojni primjer, još nije
+  slučaj za trening niti simulaciju. [Kartica](../data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json),
+  [izvorni zapis](../reports/real-fire-data/fpa-fod-dixie-2021-source.geojson).
+- **Prvi pravi-data most je provjeren u dry-run modu.** `scripts/prepare_mineral_landfire.py`
+  sada može čitati scenario-karticu ili default Mineral slučaj. Računa fiksnu mapu oko
+  prijavljene lokacije, tako da veličina ne zavisi od kasnijeg perimetra ili linije. Dry-run za Mineral
+  i Dixie prolazi; operativni SimFire runner može čitati istu karticu.
+- **CFSDS/Firehose faza je sačuvana**, ali više nije aktivni dizajn. Njeni prethodni
+  izvještaji i metrički brojevi ostaju u arhivi, ne brišu se ni ne prepravljaju.
+
+## Šta još nije urađeno
+
+1. Nema rastera LANDFIRE u SimFire cache-u; pravi request još nije poslan jer `LANDFIRE_EMAIL`
+   nije postavljen. Trenutno ima 3.0 GiB slobodno (provjera 2026-11-01), pa je stari navod
+   o 29 MiB zastario.
+2. Nema odabranog/historijski provjerenog weather niza za Dixie scenario.
+3. FPA-FOD pravila korištenja su provjerena, ali imamo samo jedan development kandidat;
+   nije izabrana kohorta niti zamrznut event-level split.
+4. SimHarness/RLlib nije instaliran ni pokrenut u ovom environmentu.
+5. Nema real-input SimFire smokea, treninga, finetunea, heldout evaluacije ni naučnog
+   poređenja.
+6. BurnMD data reuse licenca i razlika između 243 arhivskih foldera i 308 paper požara
+   ostaju otvorena pitanja. BurnMD linijski replay je opcioni track.
+
+## Ograničenja računara
+
+Na provjeri 2026-11-01 `LANDFIRE_EMAIL` nije bio postavljen, a `df -h .` je pokazao 3.0 GiB
+slobodno. To je dovoljno za mali podatkovni primjer, ali još ne potvrđuje da na ovom Macu
+stane/podržan je SimHarness/RLlib stack. Ne brisati venv, sirove podatke ni korisničke
+rezultate da bi se forsirala instalacija.
+
+## Sljedeći taskovi
+
+Aktivni redoslijed je u [backlogu](BACKLOG.md): pribaviti fuel/terrain za već pripremljeni
+Dixie scenario; mapirati istorijski weather; provjeriti raster i napraviti prvu real-input
+kartu/animaciju; zatim sastaviti veći FPA-FOD uzorak i event-level split; postaviti RL
+runtime; tek onda trenirati i porediti politike.
+
+## Kuda dalje
+
+- [HANDOFF](../HANDOFF.md) — kratki nastavak za kolege.
+- [NEXT_SESSION](NEXT_SESSION.md) — konkretne komande i zavisnosti.
+- [DESIGN](DESIGN.md) — šta se mjeri i zašto.
+- [Experiment log](research/EXPERIMENT_LOG.md) — provjere i zaključci.
+- [Izvori](research/SOURCES.md) — primarni izvori i datumi pregleda.
+- [Arhivirani CFSDS status](STATUS_CFSDS_ARCHIVE.md) — prethodna putanja.

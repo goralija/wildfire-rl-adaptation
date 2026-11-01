@@ -1,5 +1,20 @@
 # Promjene baze znanja
 
+## 2026-11-01: scenario iz prijavljene lokacije požara; SimFire radi
+
+- Glavni ogled je pojednostavljen: simulator dobija uslove izvedene iz stvarnih požara,
+  dok simulacija stvara širenje i akcije; agent se poredi samo unutar simulacije. Nema
+  više obavezne rekonstrukcije historijskih vatrogasnih akcija bez pouzdanih vremena.
+- SimFire 2.0.1 pokrenut je 30 minuta na razvojnoj mapi; GIF, PNG i receipt su sačuvani.
+  To potvrđuje lokalno funkcionalno okruženje, ne historijski replay ili trening.
+- Dixie Fire 2021 je pretvoren iz jednog službenog FPA-FOD zapisa u malu scenario-karticu.
+  Tačka je prijavljena lokacija incidenta, ne potvrđena GPS tačka paljenja. Fuel, terrain i
+  historijsko vrijeme još nedostaju. Adapter sužava na unaprijed fiksnu mapu; taj grid od
+  30 m prati SimFireovu nominalnu konverziju stepeni, ne tačno jednaku udaljenost širom mape.
+- Početna stranica je skraćena na aktivni status, karticu, backlog i put do dokaza. Stari
+  CFSDS/Firehose rad je sačuvan kao arhiva. Još nema pravog rastera, RL runtimea, treninga
+  ni rezultata poređenja.
+
 ## 2026-10-31: ERA5-FWI-SN paired replay i Alberta action-source provjera
 
 - Za tri postojeća TRAIN simulator slučaja checksum-provjereni su ERA5-FWI-SN dnevni indeksi i napravljeni su upareni replayi koji mijenjaju samo FFMC/DMC/DC/ISI/BUI/FWI. Rezultat se promijenio za 0–3 model ćelije; sve tri simulacije i dalje dodiruju rub, pa vrijeme nije riješilo glavni no-action mismatch.

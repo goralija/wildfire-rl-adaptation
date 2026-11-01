@@ -30,9 +30,22 @@ navodi 400 ćelija, 4 rastera, Data.csv, lookup i 130 weather fajlova, uz provje
 ograničenja. Hash svakog fajla je u reports/firehose-verification/dataset-inventory.json.
 U Git idu ti mali manifesti, a sirovi dataset ostaje u external/firehose/data/Sub20x20/.
 
-## Dataset opaženih požara
+## Aktivni scenarij izveden iz FPA-FOD-a
 
-Glavna putanja je odabrana: **CFSDS v1.1 + Canadian FBP/Cell2Fire**. 23 godišnja ZIP
+Trenutni put je **USFS FPA-FOD → zajednički scenario JSON → fuel/terrain/weather → SimFire**.
+Prvi mali zapis je Dixie Fire 2021, `FOD_ID 401019270`. Službeni archive navodi da se
+FPA-FOD može koristiti bez dodatne dozvole ili naknade uz citat Short (2026); druge mape
+koje ćemo spojiti uz požar imaju zasebna pravila. Koordinata je incident-referentna lokacija, ne potvrđen GPS položaj paljenja. Kartica je
+samo development primjer, bez realnih fuel/terrain/weather fajlova i bez train/test pripadnosti.
+
+- [Scenario manifest](manifests/simfire-fpa-fod-401019270-dixie-candidate.json)
+- [Izvorni GeoJSON zapis, 455 B](../reports/real-fire-data/fpa-fod-dixie-2021-source.geojson)
+- [Pretvarač jednog FPA-FOD zapisa](../scripts/build_fpa_fod_scenario.py)
+- [Zajednička šema i prazni template](manifests/simfire-scenario.schema.json), [template](manifests/simfire-scenario.template.json)
+
+## Arhivirani dataset opaženih požara
+
+Prethodna putanja je bila **CFSDS v1.1 + Canadian FBP/Cell2Fire**. 23 godišnja ZIP
 para iz 2002–2024 (102,405,239 bajtova) i svi veći sirovi slojevi su lokalno u
 Git-ignorisanom `data/raw/`. Candidate manifest je
 [`cfsds-v1_1-pilot-cohort.json`](manifests/cfsds-v1_1-pilot-cohort.json); njegov trenutni

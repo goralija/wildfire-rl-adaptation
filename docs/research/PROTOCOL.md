@@ -1,112 +1,96 @@
 ---
 type: Research Protocol
-title: Istraživački protokol — draft v1, 2026-10-28
-status: draft
+title: Protokol — stvarni požarni uslovi u SimFire-u
+status: draft-provisional
 sources:
-- resource: /docs/research/REQUIREMENTS_AND_RUBRIC.md
-- resource: /docs/specs/DECISION_RECORDS.md
+  - resource: /docs/DESIGN.md
+  - resource: /docs/research/REAL_IGNITION_SCENARIO_PIPELINE.md
+  - resource: /docs/specs/DECISION_RECORDS.md
 ---
-# Istraživački protokol — draft v1, 2026-10-28
+# Protokol: historical ignition scenarios + SimFire policy comparison
 
-## Pitanje i hipoteze
+Ovaj draft zamjenjuje obavezni BurnMD historical-action replay iz ranijeg protokola.
+Prethodni CFSDS/Firehose protokol je sačuvan u
+[arhivi](PROTOCOL_CFSDS_ARCHIVE.md). Trenutna odluka je [ADR-040](../specs/DECISION_RECORDS.md#adr-040--train-on-real-ignition-conditions-with-simulated-actions-2026-11-01).
 
-RQ-001: Može li prilagodba unaprijed treniranog MaskablePPO agenta različitim
-budžetima smanjiti kumulativnu opožarenu površinu u odnosu na zamrznuti početni
-model i heuristike pri istim scenarijima, budžetima i informacijama?
-RQ-002: Kako se mijenja kompromis ukupne štete i zaštite prioritetnih područja?
-H1: prilagođeni agent smanjuje štetu kroz više budžeta. H2: prioritetna adaptacija
-smanjuje prioritetne gubitke, uz moguće povećanje ukupne štete. Obje mogu biti odbačene.
+## Pitanje
 
-## Šta mijenjamo
+Da li se base PPO dodatno naučen na real-fire-derived scenarijima ponaša bolje u SimFire-u
+od svog zamrznutog početnog modela i jednostavnih pravila, kada svi dobiju iste početne
+uslove, weather, trajanje i linijski budžet?
 
-Minimalni glavni eksperiment: isti checkpoint, arhitektura, opažanje i akcije;
-fine-tuning zasebno na B={2,4,8,16}, uz zajednički budžetski/no-op adapter.
-To izoluje promjenu parametara politike od promjene arhitekture.
-Dodatni, ambiciozniji eksperiment: zajednička politika uslovljena početnim i
-preostalim budžetom, trenirana preko više B. To mijenja opažanje i možda izlaz;
-zahtijeva pravilo prenosa težina i matched kontrolu bez tih featurea.
-Ne učitati 400-action checkpoint u 401-action env i tvrditi da je neizmijenjen.
+Primarni ishod je razlika u **simuliranoj** opožarenoj površini. Historijski konačni obod
+ne postaje cilj za štimanje ni reward. Ne zaključujemo direktno o tome koliko bi se stvarni
+požar promijenio.
 
-Zamrznuti agent nakon B intervencija izvršava no-op do kraja, kao i svi ostali.
-Ako nema learned no-op izlaz, budžetski adapter ga prisilno šalje nakon B;
-takva evaluacija mjeri kvalitet izbora prvih B akcija, a ne naučeno čuvanje budžeta.
-Za učenje vremena intervencija treba dodatni no-op izlaz sa jasno opisanim
-proširenjem glave i kontrolama. Ovo je otvorena odluka nakon feasibility gatea.
+## Jedan scenario i ulazi
 
-## Kontrole
+- Incident je jedinica selekcije i train/validation/test splita.
+- Prvi dataset za širi uzorak je kandidat USFS FPA-FOD: zvanični source ID, verzija, datum,
+  lokacija i lokacijska preciznost moraju biti sačuvani. Koordinata nije automatski tačna
+  na 30 m.
+- Za svaki incident koristimo fiksnu veličinu prozora oko reported ignition. Kasniji obod
+  ni linije ne određuju koji dio karte agent vidi.
+- Fuel, elevation i weather se uzimaju iz posebno navedenih izvora. CRS, vintage, grid,
+  timezone, jedinice, mapping i SHA-256 se bilježe u
+  [scenario manifestu](../../data/manifests/simfire-scenario.schema.json).
+- Agent ne dobija konačni fire-size, kasnije fire perimeter ni ljudske akcije. Ti slojevi
+  mogu biti prikazani sa strane kao historijski kontekst.
+- Ne napredovati dok fali verified scenario input; ne popunjavati izmišljene weather ili
+  fuel vrijednosti kao stvarne.
 
-- Bez akcije B=0: donja granica intervencijskog napora; isti požar do kraja.
-- Random-valid, min-L2 i max-L2 prema zapaljenim ćelijama i udaljenosti od ignitiona.
-- Jednostavna priority heuristika sa istim informacijama kao priority agent.
-- Zamrznuti pretrained agent pod istim B i wrapperom.
-- Fine-tuned agent, ista inicijalizacija i jednak broj simulator koraka po B.
-- Ako resursi dozvole: from-scratch agent sa istim dodatnim training troškom,
-  i joint-budget politika. Jasno razlikovati ukupni od dodatnog compute troška.
+## Agenti, budžet i kontrole
 
-## Podaci i split
+- **Base:** PPO naučen na raznovrsnim SimFire funkcionalnim scenarijima.
+- **Fine-tuned:** kopija istog base checkpointa, dodatno učena samo na TRAIN incidentima
+  kroz simulatorove nagrade.
+- **Kontrole:** no-action i barem jedna unaprijed definisana linijska heuristika.
+- Svi koriste iste observation/action semantike, kraj horizonta, scenario ulaze, seedove,
+  budžete i simulator verziju. Potrošen budžet ne prekida širenje požara.
+- Budžet je simulirana količina poteza/dužina linije, osim ako se zasebno dokažu odgovarajući
+  stvarni crew/hour podaci.
 
-Početak: jedna 20×20 mapa, fiksni pa random ignition; ista meteorologija i tempo akcija.
-Odvojiti trening/validaciju/test po **scenario ID-u** (mapa, ignition, weather trace,
-simulator seed), a ne samo po broju Python seeda. Zamrznuti test manifest prije tuninga.
-`configs/splits.json` je prijedlog, ne gotov glavni dataset split.
-Provjeriti da sve ćelije imaju konzistentnu projekciju/rezoluciju i da su priority
-maske poravnate, NODATA isključen iz imenilaca, ignition na gorivu.
+## Event-level split
 
-Pilot koristi jednu sintetičku mapu, 12 seedova i 300 baseline epizoda.
-Njegovi seedovi nisu dokaz generalizacije; glavni eksperimenti trebaju novi odvojeni
-manifest. Testovi sintetičkog enginea ne validiraju Cell2Fire ili SimFire.
+1. Definisati kriterije kohorte bez pokretanja politike.
+2. Deduplikovati fire records i crosswalk ID-jeve, sačuvati izvornu lokacijsku nesigurnost.
+3. Dodijeliti cijeli incident train/validation/test dijelu; ništa iz istog požara ne smije
+   procuriti kroz drugi dan, crop ili tile.
+4. Sačuvati split manifest i hash prije treninga. Test incidenti se ne koriste za izbor
+   fuel/weather vintagea, horizon, wind parametara ili policy hyperparametara.
 
-## Metrike
+## Validacija i vizualizacije
 
-Primarno: `burned_fraction = |ever_burned| / |initial_burnable|`, manje je bolje.
-Ako je ćelija već gorjela, kasniji tretman ne briše štetu.
-`priority_burned_fraction = |ever_burned ∩ priority| / |priority ∩ initial_burnable|`.
-Uz praznu priority zonu pilot vraća 0; glavni izvještaj takvu metriku označi N/A.
-`interventions`: stvarno potrošene ćelije, uvijek <=B. Prijaviti i trajanje, runtime,
-invalid actions i udio epizoda koje dosegnu horizont uz aktivan požar.
-`area_saved`: uparena razlika no-action minus policy, u procentnim poenima.
-Učinkovitost po intervenciji sekundarna; ne dijeliti nulom i ne nagrađivati samo neaktivnost.
+Prvi gate je **input integration**, ne historical-action replay: jedan incident mora
+učitati stvarne fuel/elevation/weather podatke, mapirati ignition u grid, završiti bez
+greške i sačuvati receipt/hash. Zatim QA pregledava lokaciju, skalu, fuel klase, no-data i
+weather jedinice.
 
-Primarno poređenje adaptacije treba biti fine-tuned minus **frozen**, uz zasebne
-heurističke usporedbe. Sadašnji pilot summary podržava no-action reference;
-prije glavnih rezultata proširiti reference i višestruke training seedove (TASK-006).
+Izlaz prikazuje ulazni raster, prijavljeno paljenje i precision napomenu, simuliranu
+vatru/akcije kroz vrijeme, budžet, seed i geografski scale bar. Ako se pokaže finalni
+historijski perimeter, to je odvojena linija/reference i nije model reward target.
 
-## Poštena statistika
+Primarno: simulirana opožarena površina po paru scenario/seed; razlika fine-tuned minus
+base. Dodatno: dužina linije, potrošen budžet, aktivni front, vrijeme do zaustavljanja ili
+horizonta, i interval neizvjesnosti kroz više incidenata. Nema jedne odabrane animacije bez
+tabele svih evaluiranih incidenata.
 
-Za svaki policy/B isti skup scenario ID-eva, nezavisan RNG politike i simulatora.
-Sadašnji engine koristi random brojeve po (seed,time,edge), što omogućava uparivanje
-bez pomjeranja RNG toka nakon različitih akcija. Ne pretpostavljati da drugi simulator
-ima isto svojstvo samo zato što je seed isti.
-Plan glavnog minimuma: 3 nezavisna training seeda × 30 test scenarija × 4 B po modelu;
-5 training seedova ako runtime dopušta. Jedna mapa ograničava zaključak na tu mapu.
-Ne tretirati 90 rollouta istog checkpointa kao 90 nezavisnih treninga.
-Prijaviti uparene razlike, 95% intervale, median/IQM gdje je korisno i pojedinačne runove.
-Za glavni RL koristiti hijerarhijski bootstrap (training seed, pa scenario), ne sadašnji
-jednonivojski pilot bootstrap. 2,000 resampliranja je pilot implementacija.
-Izabrati primarni test i B prije konačnog izvođenja; sekundarna poređenja označiti
-kao eksplorativna. Ne birati najbolji seed ili video kao dokaz prosječnog uspjeha.
+## Faze i gates
 
-## Compute i stop pravila
+1. Zamrznuti mali, licencno pregledan FPA-FOD uzorak i event-level split.
+2. Napraviti jedan manifest i pribaviti verified fuel, elevation i historical weather.
+3. Pokrenuti jedan real-input SimFire integration smoke i provjeriti kartu/receipt.
+4. Instalirati/pinovati kompatibilan SimHarness/RLlib ili dokumentovani Gym adapter; kratko
+   CPU smoke prije treninga.
+5. Definisati budget semantics/no-op/heuristic i zamrznuti train/held-out manifests.
+6. Naučiti base PPO i fine-tuned kopiju; paired held-out runovi i vizualizacije.
 
-Prvo mjeriti 10 rollouta i 1,024 training koraka; procijeniti runtime prije 100k+.
-Predloženi početni fine-tuning cap je 50k koraka po training seedu/B; to je pretpostavka
-za planiranje, ne obaveza. Ne pokretati tu matricu dok simulator gate i procjena ne prođu.
-Pilot RL smoke je maksimalno 1,024 koraka na CPU-u. Nema plaćenog cloud pokretanja.
-Nulti rezultat ili nepouzdan simulator znače smanjiti obim i dokumentovati nalaz.
+Trening ne počinje prije faza 1–5. Mineral BurnMD action replay može se paralelno istražiti
+ako se pronađe pouzdan timestamp izvor; to nije gate glavnog ogleda.
 
-## Grafikoni i zaključak
+## Ograničenja
 
-1. Ukupna šteta prema B sa intervalima i svim kontrolama.
-2. Prioritetni gubici prema B i Pareto ukupna/prioritetna šteta.
-3. Krive učenja prema simulator koracima i vremenu, ne samo epizodama.
-4. Isti unaprijed izabrani scenarij kao mapa stanja kroz vrijeme za sve politike.
-5. Tabela efekata i limita. Bez prenošenja idealizovanih rezultata na realnu intervenciju.
-
-## Dopuna iz runtime provjere — 2026-10-28
-Firehose je izvršen. Originalni grid=1 kombinuje burning i burnt; postojeći min/max-L2
-stoga bira iz pogođenog footprinta, a ne nužno aktivne fronte. Prije glavnih rezultata
-jasno označiti legacy baseline ili dodati stvarni active-state export. Svim politikama
-primijeniti isti ispravljeni warmup observation/damage adapter. Originalni FireSizeReward
-penalizuje footprint kroz vrijeme; prelazak na incremental damage reward bio bi dodatna
-promjena uz budget adaptaciju i zahtijeva zasebnu kontrolu/ablation. Done na weather
-horizontu nije containment. Dataset split i priority maska još nisu gotovi.
+SimFire predstavlja pojednostavljenu fiziku. I FPA-FOD ignition i weather imaju prostorno/
+vremensku nesigurnost. Rezultat odgovara samo na pitanje „koji agent je imao manje štete u
+ovim podešenim simulacijama?“ Ne dokazuje da je alternativni potez u stvarnom požaru
+uzročno smanjio konačnu površinu.

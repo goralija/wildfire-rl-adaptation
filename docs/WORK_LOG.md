@@ -4,6 +4,16 @@ title: Work log
 ---
 # Work log
 
+2026-11-01 — Made the FPA-FOD-to-SimFire example safer and easier to continue. The Dixie
+source point is explicitly an incident reference location, not a verified GPS ignition;
+the shared schema now records that role, its uncertainty note, SimFire's nominal grid-size
+semantics and the separately declared starting cell. The LANDFIRE bridge checks that the
+manifest grid matches its location-derived fixed bounds, and the operational smoke reads
+and records the manifest seed cell. Shortened the root navigation to put the active
+scenario, status, next tasks and archived CFSDS evidence in distinct places. The remaining
+real-input gate is unchanged: the current host lacks LANDFIRE request email and no historic
+weather raster/scenario has been built. See ADR-042 and EXP-032.
+
 2026-10-31 — Rechecked the W.I.S.E. inclusion criteria and official national fire-history
 products. W.I.S.E. removes fires with any recorded CNFDB suppression because its model
 does not account for intervention. The three saved BC crosswalks do not have complete
@@ -795,3 +805,27 @@ Added [EXP-025/026](research/EXPERIMENT_LOG.md), [ADR-035/036](specs/DECISION_RE
 Updated STATUS/NEXT_SESSION/BACKLOG, AGENTS/HANDOFF, context, indexes and root knowledge
 log. No new FireCase, policy benchmark, training or heldout inspection was performed;
 `research_ready=false` remains.
+
+## 2026-11-01 — pivot and first local SimFire run
+
+Reframed the active research question around line placement so the selected historical
+source can include both fire growth and human interventions. BurnMD + SimFire/SimHarness
+is a provisional path; prior CFSDS/Firehose artifacts were preserved as an archive. The
+decision and limits are in ADR-037, EXP-027, `docs/DESIGN.md`, the new plain-language
+workflow, and the revised backlog.
+
+Installed official SimFire 2.0.1 at commit `04905b19fe8c10dc08d64faddd00303e0561bb66`
+in a local Python 3.9.25 venv. The 30-minute functional configuration advanced a 225×225
+map, producing 1,687 burned and 436 actively burning cells; a GIF, labeled final-state
+PNG and JSON receipt were saved in `reports/environment-setup/simfire-functional-demo/`.
+The runnable command is `scripts/run_simfire_demo.py`; the Python 3.12 project environment
+was untouched. This is a synthetic functional smoke only. No real event, LANDFIRE import,
+SimHarness/RLlib, agent training or historical replay was run. See EXP-028 and
+`docs/research/SIMFIRE_ENVIRONMENT.md`.
+
+Read the official BurnMD LFS pointer: it identifies a 362,131,110-byte ZIP and expected
+SHA-256 `4eefcbfdabce4966d68e0009e8a4b88dd34294a2cb5dee6aea84dd017eb334c7`. The official
+asset download is in progress under ignored `data/raw/burnmd/`. The root LICENSE is
+Apache-2.0 but a dataset-specific license was not found; archive contents and use rights
+remain unaudited. No dataset bytes entered Git. Next finish download/hash/archive inventory
+and test a documented historical event before any RL integration.

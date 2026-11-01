@@ -79,3 +79,33 @@ sada postoje i korišteni su za jedan CFSDS događaj. Početni 44-event crop scr
 splitovi su preliminarni; fuel/weather/suppression QC i 2019/2024 FBP vintage pripreme
 ostaju. MedEU/EFFIS sloj je i dalje samo prostorno pregledan: NFFL/Anderson nije direktan
 input Canadian FBP buildu, a MedEU licence/event IDs nisu potvrđeni za regionalni pilot.
+
+## Novi zasebni SimFire runtime — 2026-11-01
+
+Promjena dizajna dodala je izolovani Python 3.9.25 environment za zvanični MITRE SimFire
+2.0.1. Standalone funkcionalni primjer je stvarno pokrenut 30 simulacijskih minuta i
+sačuvao je GIF, završnu mapu i receipt: [artefakti](simfire-functional-demo/).
+Ovo je tehnička provjera simulatora, ne CFSDS/BurnMD slučaj, fine-tuning, SimHarness/RLlib
+run ili fizička validacija. Verzije i reprodukcija su u
+[`SIMFIRE_ENVIRONMENT.md`](../../docs/research/SIMFIRE_ENVIRONMENT.md).
+
+## Scenario contract and operational tile bridge — 2026-11-01
+
+Added a small shared [scenario manifest schema](../../data/manifests/simfire-scenario.schema.json)
+and a [template](../../data/manifests/simfire-scenario.template.json). The Mineral
+LANDFIRE adapter's dry-run now computes a fixed 128×128-cell, 30-m tile around the
+reported ignition; it mirrors the exact SimFire cache key and does not use later fireline
+or perimeter bounds. A smoke config and runner are ready for a future cached LF2016 fuel +
+LF2020 elevation TIFF:
+[`simfire_mineral_operational_smoke.yml`](../../configs/simfire_mineral_operational_smoke.yml)
+and [`run_simfire_operational_smoke.py`](../../scripts/run_simfire_operational_smoke.py).
+They explicitly use demo wind/moisture and are only a raster integration smoke, not
+historical weather, agent training or physical validation. No raster was downloaded because
+`LANDFIRE_EMAIL` is unset. The latest disk check showed 3.0 GiB free; the earlier 29-MiB
+warning is stale.
+
+One real USFS FPA-FOD record, Dixie Fire 2021 (`FOD_ID 401019270`), now runs through the
+candidate-card builder and produces the matching fixed tile path in the LANDFIRE dry-run
+bridge. See the [scenario card](../../data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json)
+and [source record](../real-fire-data/fpa-fod-dixie-2021-source.geojson). Fuel, terrain and
+historical weather are still missing; no real-raster SimFire run has happened.

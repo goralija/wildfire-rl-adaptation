@@ -1,6 +1,28 @@
 # Istraživanje i podaci
 
+## Trenutni pravac
+
+- [Trenutni dizajn](../DESIGN.md) - stvarni incidenti kao polazne lokacije i uslovi za SimFire, pa upareno poređenje osnovnog i treniranog agenta.
+- [Trenutni status](../STATUS.md) - šta je stvarno pokrenuto i koji ulazi još fale.
+- [X/Y tok običnim jezikom](REAL_IGNITION_SCENARIO_PIPELINE.md) - kako zapis požara postaje karta i uslovi za simulator.
+- [Dixie Fire probna scenario-kartica](../../data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json) - jedan stvarni zapis, još bez goriva, terena i istorijskog vremena.
+- [FPA-FOD zapis i porijeklo](../../reports/real-fire-data/fpa-fod-dixie-2021-source.geojson) - mali GeoJSON dokaz porijekla za probni slučaj.
+- [CFSDS/Cell2Fire prethodni track](../STATUS_CFSDS_ARCHIVE.md) - sačuvani raniji rezultati i otvoreni problemi.
+
 ## Dokumenti
+
+- [Prethodni BurnMD + SimFire prijedlog](BURNMD_SIMFIRE_PIVOT.md) - historijska verzija prije pojednostavljenja dizajna.
+- [Real ignition → SimFire pipeline](REAL_IGNITION_SCENARIO_PIPELINE.md) - FPA-FOD izvor, šta je Y, šta je X, JSON manifest, vremenska/fuel konverzija i ograničene tvrdnje.
+- [Mineral Fire 2020 audit](MINERAL_CASE_AUDIT.md) - archive hash, layer/schema QC, line-time blocker i current LANDFIRE bridge status.
+- [EXP-030: scenario-based redesign](EXPERIMENT_LOG.md#exp-030--scenario-based-design-and-fpa-fod-source-review-2026-11-01) - why historical-action replay is now optional and FPA-FOD fits the scenario distribution.
+- [FPA-FOD/SpreadTS sources](SOURCES.md) - S-062/S-063 current occurrence source and large-dataset alternative.
+- [EXP-032: source-point role and grid semantics](EXPERIMENT_LOG.md#exp-032--point-role-and-grid-semantics-made-explicit-2026-11-01) - correction that preserves the difference between incident location and verified ignition.
+- [SimFire lokalno okruženje i smoke rezultat](SIMFIRE_ENVIRONMENT.md) - Python 3.9.25, stvarno 30-min SimFire pokretanje, GIF/mapa i otvoreni RLlib/data koraci.
+- [Operativni real-raster smoke config](../../configs/simfire_mineral_operational_smoke.yml) i [runner](../../scripts/run_simfire_operational_smoke.py) - spremni za trenutak kad LANDFIRE TIFF bude u cache-u; demo weather, bez agenata ili validacije.
+- [EXP-028: SimFire 30-min functional smoke](EXPERIMENT_LOG.md#exp-028--simfire-standalone-python39-functional-smoke-2026-11-01) - receipt potvrđuje 225×225 funkcionalnu mapu; bez historijskog inputa i treninga.
+- [EXP-027: pivot na BurnMD/SimFire](EXPERIMENT_LOG.md#exp-027--pivot-to-burnmd-simfiresimharness-2026-11-01) - literaturni pregled koji je izabrao novu, uslovnu putanju.
+- [BurnMD/SimFire izvori](SOURCES.md) - S-053–S-063 navode paper, archive, service API, SimFire environment i FPA-FOD/SpreadTS alternatives.
+- [Arhivirani CFSDS protokol](PROTOCOL_CFSDS_ARCHIVE.md) - prethodni Firehose/Cell2Fire eksperiment.
 
 - [Dataset: šta imamo i šta ćemo koristiti](DATASET.md) - Dataset Review
 - [Experiment log](EXPERIMENT_LOG.md) - Experiment Log

@@ -8,6 +8,11 @@ sources:
 ---
 # Stvarni požari: izbor podataka i granica zaključaka
 
+> **Historijski dokument — CFSDS/Firehose preporuka je superseded 2026-11-01.** Sačuvan
+> je radi traga prethodnog istraživanja; trenutni izbor je uslovno BurnMD + SimFire.
+> Počni od [novog dizajna](BURNMD_SIMFIRE_PIVOT.md), [statusa](../STATUS.md) i
+> [SimFire smoke zapisa](SIMFIRE_ENVIRONMENT.md).
+
 Provjereno 2026-10-30. CFSDS v1.1 + Canadian FBP/Cell2Fire je odabrana glavna
 putanja jer se najbolje uklapa u već postojeći simulator i kontroler. Tri train slučaja
 su pretvorena i izvršena bez intervencija; za jedan slučaj urađeno je šest seedova.

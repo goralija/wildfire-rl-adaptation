@@ -4,7 +4,19 @@ title: 'Stvarni požari: pregled kandidata i mali uzorci'
 ---
 # Stvarni požari: kandidati, CFSDS pilot i mali uzorci
 
-Najnoviji train-only ulazni gate: [CFSDS fuel QC metoda](../../docs/research/CFSDS_TRAIN_QC.md)
+> **Status:** CFSDS/Firehose nalazi ispod su arhivirani prethodni track. Trenutni plan je
+> [FPA-FOD ignition distributions → SimFire](../../docs/research/REAL_IGNITION_SCENARIO_PIPELINE.md).
+> Novi BurnMD Mineral audit je u
+> [metadata receipt](mineral-case-audit.json) i [laičkom objašnjenju](../../docs/research/MINERAL_CASE_AUDIT.md);
+> raw archive/geometries ostaju git-ignored.
+
+Najkonkretniji novi primjer je [Dixie Fire scenario-kartica](../../data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json)
+napravljena iz malog [službenog FPA-FOD zapisa](fpa-fod-dixie-2021-source.geojson). Njegova
+tačka je lokacija incidenta iz kataloga, ne potvrđen GPS položaj paljenja. Kartica je
+korisna za izradu fiksne mape, ali nije runnable dok gorivo, teren i historijsko vrijeme
+ne budu pribavljeni i provjereni.
+
+Arhivirani CFSDS train-only ulazni gate: [CFSDS fuel QC metoda](../../docs/research/CFSDS_TRAIN_QC.md)
 i [mašinski čitljiv rezultat](cfsds-train-fuel-qc.json). Pregledano je 20 train
 kandidata: 10 prolazi samo gorivnu provjeru, 10 pada, a nijedan nije ovim auditom
 potvrđen kao kompletan simulator slučaj. Nisu pokretani replays ni treniranje.
@@ -21,10 +33,10 @@ Prikladnost izvora za naš projekat, ne rezultat fizičke validacije simulatora.
 Primarni nalazi i preporuka: docs/research/REAL_FIRE_DATASETS.md.
 Candidate manifest: data/manifests/real-fire-candidates.json.
 
-## Odabrani CFSDS put i prvi replay
+## Arhivirani CFSDS put i prvi replay
 
-Glavni izvor je sada CFSDS v1.1 jer se uklapa u Canadian FBP/Cell2Fire. Preliminarni
-screen iz 2014–2024 dao je 44 kandidata (do pet po godini; 20 train, 9 validation,
+U prethodnom tracku odabran je CFSDS v1.1 jer se uklapao u Canadian FBP/Cell2Fire. Tadašnji
+preliminarni screen iz 2014–2024 dao je 44 kandidata (do pet po godini; 20 train, 9 validation,
 15 test po godini cijelog požara); kohorta nije iscrpna niti zaključana za benchmark.
 Pogledaj [kohort manifest](../../data/manifests/cfsds-v1_1-pilot-cohort.json) i
 [screen izvještaj](cfsds-cohort-screen.json).

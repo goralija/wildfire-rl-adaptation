@@ -4,14 +4,23 @@ title: Wildfire RL adaptation — MPVI
 ---
 # Wildfire RL adaptation — MPVI
 
-Istražujemo može li prilagodba unaprijed treniranog RL agenta **različitim budžetima
-intervencija** smanjiti opožarenu površinu u odnosu na početni agent i heuristike,
-uz posebno ispitivanje zaštite prioritetnih područja.
+Istražujemo da li se RL agent može naučiti da bolje planira **vatrogasne linije** na
+scenarijima izvedenim iz historijskih požara, uz isti ograničeni budžet za početnog agenta,
+fine-tunirani agent i jednostavne kontrole.
 
-**Stanje:** istraživačka osnova i sintetički pilot; Cell2Fire je kompajliran, a oba
-postojeća 20×20 Firehose modela izvršena su u izolovanom legacy kontejneru.
-Fine-tuning i glavna evaluacija još nisu izvedeni.
-Pilot ne predviđa stvarne požare i nije dokaz uspješnosti RL pristupa.
+**Trenutni dizajn:** konvertovati stvarne lokacije/datume požara u reproducibilne
+SimFire scenarije sa odgovarajućim gorivom, terenom i vremenom; zatim uporediti osnovnog i
+fine-tuniranog agenta unutar iste simulacije. Historijski završni obod ili akcije nisu
+agentova nagrada. Tvrdnje su o simulatoru, ne o garantovanom smanjenju stvarnih hektara.
+Praktični izvor prijavljenih lokacija požara je USFS FPA-FOD; prvi zapis (Dixie Fire 2021) već je pretvoren
+u malu probnu scenario-karticu. Njegova tačka nije potvrđeno mjesto paljenja, a fuel, terrain
+i historijsko vrijeme još nedostaju. SimFire 2.0.1 radi u izolovanom Python 3.9.25
+okruženju, ali RL trening nije postavljen.
+[Laički workflow](docs/research/REAL_IGNITION_SCENARIO_PIPELINE.md),
+[SimFire funkcionalni demo](reports/environment-setup/simfire-functional-demo/functional-fire.gif).
+
+Sintetički pilot i raniji Firehose/Cell2Fire eksperimenti ostaju zapisani kao prethodna
+tehnička osnova; oni nisu rezultati novog istraživačkog pitanja.
 
 Tim: Amar Hodžić, Belmin Durmo, Harun Goralija. Predmet MPVI.
 
@@ -28,13 +37,12 @@ prijedloge i otvorene odluke. [Pravila održavanja](knowledge/maintenance.md) i
 
 1. Za novi računar/kolegu počni od [HANDOFF](HANDOFF.md); zatim pročitaj
    [trenutno stanje](docs/STATUS.md) i [upute za narednu sesiju](docs/NEXT_SESSION.md).
-2. Pogledaj [istraživački protokol](docs/research/PROTOCOL.md),
-   [provjeru simulatora](docs/research/SIMULATOR_AUDIT.md) i [odluke](docs/specs/DECISION_RECORDS.md).
-3. Pokreni testove i pilot ispod. Glavni real-fire pravac je odabran: Canada + CFSDS v1.1
-   + Canadian FBP/Cell2Fire. Prvi stvarni slučaj je već pretvoren i izvršen, ali njegov
-   no-action rezultat se još ne slaže dovoljno s opažanjem. [Od stvarnog događaja do
-   simulator ulaza X](docs/research/REAL_CASE_PIPELINE.md) objašnjava mapiranje i sljedeće
-   provjere običnim jezikom.
+2. Pogledaj [trenutni dizajn](docs/DESIGN.md), [scenario pipeline](docs/research/REAL_IGNITION_SCENARIO_PIPELINE.md)
+   i [ADR-040](docs/specs/DECISION_RECORDS.md#adr-040--train-on-real-ignition-conditions-with-simulated-actions-2026-11-01).
+3. Sljedeći cilj je dobiti provjeren fuel/terrain/weather za Dixie scenario, napraviti
+   real-input kartu, pa onda veći reproducibilni USFS FPA-FOD uzorak i RL runtime.
+   [STATUS](docs/STATUS.md) i
+   [NEXT_SESSION](docs/NEXT_SESSION.md) imaju tačan redoslijed i lokalna ograničenja.
 
 ## Pokretanje bez dodatnih biblioteka
 
@@ -84,18 +92,19 @@ klijent u istom modernom `.venv`; GIS paketi nisu potrebni legacy Firehose Docke
 rollouta, ponovljiv seed, budžetski no-op i nepromijenjene težine. [Docker runbook](docker/firehose/README.md)
 čuva build i inference komande. Nije bilo treniranja.
 
-[Dataset data card](docs/research/DATASET.md): postojeća mapa 400 ćelija, terrain/fuel
-inputi i 130 weather fajlova; zadani test koristi samo bazni Weather.csv. RL iskustvo
-nastaje interakcijom, a train/validation/test scenariji tek trebaju biti zamrznuti.
+[Prethodna CFSDS/Firehose putanja](docs/STATUS_CFSDS_ARCHIVE.md) čuva dataset kartice,
+inpute, hashove i tri no-action replaya. Trenutni izvor događaja je USFS FPA-FOD; prvi
+probni zapis i scenario-kartica su u
+[candidate manifestu](data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json).
+BurnMD ostaje opcioni izvor ljudskih linija; njegova posebna data licenca je neriješena.
 
-## Šta se računa kao intervencija
+## Šta se računa kao intervencija u novom dizajnu
 
-Jedna akcija tretira jednu gorivu ili aktivno zapaljenu ćeliju: trajno je uklanja iz
-širenja; cijena je jedna jedinica budžeta. Nema putovanja ekipa, trajanja gradnje,
-probabilističkog neuspjeha ni realističnog utroška vode. No-op je besplatan i uvijek
-dostupan. Nakon potrošnje budžeta simulacija nastavlja do gašenja ili horizonta.
-Sva ikad zapaljena površina ostaje u šteti, čak i kada se kasnije ugasi.
-Detalji i razlike u odnosu na Firehose: [pravila](docs/specs/BUSINESS_RULES.md).
+SimFire agent se kreće i postavlja liniju na mapu; RL budžet će ograničiti broj ili dužinu
+linijskih poteza. Nećemo ih predstavljati kao stvarne crew-hours dok BurnMD ne potvrdi
+vremena i resurse. Za prvi prototip fokusiramo se na fireline, najbližu vrstu akcije
+historijskim linijskim podacima. Staro pravilo „jedna akcija izbriše jednu ćeliju“ pripada
+Firehose/Cell2Fire tracku i novom simulatoru se ne pripisuje.
 
 ## Sadržaj repozitorija
 

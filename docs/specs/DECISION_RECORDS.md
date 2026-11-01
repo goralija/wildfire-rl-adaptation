@@ -964,3 +964,172 @@ fields, or a perimeter.
 
 Evidence: [EXP-026](../research/EXPERIMENT_LOG.md#exp-026--alberta-suppression-source-schema-and-access-audit-2026-10-31),
 [Alberta historical wildfire catalogue](https://open.canada.ca/data/en/dataset/a221e7a0-4f46-4be7-9c5a-e29de9a3447e), [official GIS schema S-052](../research/SOURCES.md), and [EXP-024](../research/EXPERIMENT_LOG.md#exp-024--wise-suppression-exclusion-and-national-burn-history-dating-2026-10-31).
+
+## ADR-037 — pivot to BurnMD, SimFire and historical-action replay, accepted 2026-11-01
+
+The user directed a change in the research design so the data and simulator better match
+the project’s purpose. The earlier primary route was Canada + CFSDS + Canadian FBP/
+Cell2Fire/Firehose. It required a strict no-action historical replay even though the saved
+events did not have event-keyed suppression logs, the fuel map vintage remained unresolved,
+and the 20×20/2 km domain was repeatedly too small. That path produced useful converters,
+runtime evidence and data-quality findings, but its unmet conditions should no longer
+block the main design.
+
+**Decision:** adopt BurnMD as the preferred real-event dataset candidate and SimFire +
+SimHarness as the preferred simulation/RL candidate, conditional on TASK-020–023. The new
+question compares a generic PPO policy with a fine-tuned copy, frozen base and simple
+controls, under the same line budget on event-level heldout scenarios. BurnMD's daily
+perimeters and operational line features can support a *historical-action replay* before
+counterfactual policy trials. The initial technical candidate is 2020 Mineral Fire because
+it is present in BurnMD and appears in a published SimFire example; it is not a frozen test
+case.
+
+Inputs remain time-causal: agents cannot see future perimeters or line actions. Dataset
+line records must be filtered to built/completed actions and checked for dates/geometries.
+Weather is obtained from a separately pinned source. Until operational line-time/cost
+fields are inspected, budget means simulator line actions/length, not claimed crew hours.
+The report will say “simulated damage in these SimFire scenarios,” not that the agent
+would have saved a specific number of real hectares. Historic lines are reference actions,
+not labels of optimal behavior.
+
+Reasons for preferring this design: the studied action (placing lines) is represented in
+both the historical dataset and simulator; the simulator directly offers line interactions,
+movement and visual output; and it can use real LANDFIRE fuel/topography. It removes the
+false assumption that a fire with unknown/known suppression should be reproduced without
+that suppression. This does not resolve physical fidelity: the BurnMD paper notes imperfect
+timestamps and assumed line-production rates, SimFire's published software requires Python
+~3.9, and its paper leaves detailed validation for future work.
+
+Feasibility conditions before implementation/training:
+
+1. Inspect/download the official 345 MB BurnMD archive into ignored local storage; record
+   hash, contents and the data-specific license. The repository Apache-2.0 license is not
+   assumed to license its data.
+2. Build an isolated, pinned Python 3.9 SimFire/SimHarness environment without modifying
+   the project’s Python 3.12 venv.
+3. Build one fully sourced Mineral case and QA map, separating observation inputs from
+   future perimeter/action references.
+4. Run one historical-action replay with an explicit pass/fail review. No policy training
+   begins before this gate and the event-split plan.
+
+If dataset access/rights, line-date meaning, simulator initialization or runtime fails, the
+project records the concrete failure and revises the design. CFSDS/Cell2Fire reports remain
+archived evidence and source code is preserved; the previous CFSDS gates are not silently
+marked as passed or erased.
+
+Evidence: [EXP-027](../research/EXPERIMENT_LOG.md#exp-027--pivot-to-burnmd-simfiresimharness-2026-11-01),
+[plain-language pivot and workflow](../research/BURNMD_SIMFIRE_PIVOT.md), [BurnMD paper and
+dataset](../research/SOURCES.md), [SimFire/SimHarness sources](../research/SOURCES.md),
+[revised design](../DESIGN.md), and [active backlog](../BACKLOG.md#aktivni-plan-nakon-dizajnerske-promjene--2026-11-01).
+
+## ADR-038 — standalone SimFire smoke is a local technical pass, 2026-11-01
+
+The official SimFire 2.0.1 source at commit
+`04905b19fe8c10dc08d64faddd00303e0561bb66` was installed in an isolated local Python
+3.9.25 environment. A 30-minute functional-config run advanced a 225×225 map and emitted
+a GIF, labeled final-state PNG and receipt. The existing project Python 3.12 environment
+was not modified.
+
+**Decision:** mark only the standalone local SimFire portion of TASK-021 as technically
+passed. The run used SimFire's functional configuration and generated terrain; it did not
+read BurnMD/LANDFIRE, initialize an observed historical fire, run SimHarness/RLlib, train
+an agent, or validate physical behavior. Keep dataset/license/replay and RL environment
+gates open. Do not present the smoke's burned-cell count as an experimental finding.
+
+Evidence: [EXP-028](../research/EXPERIMENT_LOG.md#exp-028--simfire-standalone-python39-functional-smoke-2026-11-01),
+[environment record](../research/SIMFIRE_ENVIRONMENT.md),
+[visual/JSON receipts](../../reports/environment-setup/simfire-functional-demo/), and
+[S-058](../research/SOURCES.md).
+
+## ADR-039 — Mineral je prostorni fixture dok se ne pojavi pouzdaniji line-time izvor, 2026-11-01
+
+Lokalni Mineral Fire 2020 BurnMD audit je našao čitljive perimetre i operativne linije, ali
+`LineDateTi` je null na svih 249 redova, `Mitigation` per-vertex liste su prazne, a
+`CreateDate` nije potvrđen kao vrijeme akcije. Zato se na osnovu tih vrijednosti ne može
+napraviti vjeran vremenski replay linija. BurnMD data reuse licenca je takođe neriješena.
+
+**Odluka:** Mineral ostaje razvojni prostorni/formatni fixture. Ne prikazivati linijski
+replay kao historijski validiran i ne zahtijevati taj replay prije glavnog simulator policy
+ogleda. Zasebno ostaje otvoreno da li će se pronaći drugi case ili timestamp-enriched
+izvor za replay.
+
+Dokazi: [Mineral audit](../research/MINERAL_CASE_AUDIT.md),
+[EXP-029](../research/EXPERIMENT_LOG.md#exp-029--burnmd-mineral-case-and-landfire-api-compatibility-audit-2026-11-01),
+[S-059–S-061](../research/SOURCES.md).
+
+## ADR-040 — agent se trenira na stvarnim uslovima paljenja, akcije ostaju simulirane, 2026-11-01
+
+Glavni cilj je porediti base PPO i fine-tuned PPO u SimFire-u na scenarijima čiji su
+početni događaji/lokacije i okolišni uslovi izvedeni iz stvarnih požara. Moramo ostati
+izvodljivi i bez Mineralovih nepostojećih vremena izgradnje linija. FPA-FOD ima veliki broj
+zabilježenih ignition događaja; uz ograničenje da pojedine lokacije mogu biti precizne tek
+do PLSS sekcije, daje širu i javno upitljivu distribuciju početnih uslova. LANDFIRE fuel,
+terrain i zaseban vremenski izvor moraju se verzionisati i prostorno/vremenski poravnati.
+
+**Odluka:**
+
+1. Osnovni scenario koristi incident ID, prijavljeno vrijeme/lokaciju paljenja (uz izvornu
+   prostornu i vremensku preciznost), i fiksnu unaprijed definisanu mapu oko paljenja.
+   Kasniji perimetri/linije ne određuju granice mape.
+2. SimFire generiše spread i PPO iskustvo; RL nagrada je simulatorova, a ne historijska
+   površina. Base, fine-tuned, no-op i heuristike dobijaju identične scenarije, seedove,
+   trajanje i budget.
+3. Cijeli incident ide u tačno jedan train/validation/test split. Konačna veličina i
+   historijski obod su samo odvojena referenca za kartiranje/QA, ne agent input ni reward.
+4. Report može reći da je politika imala manju **simuliranu** štetu na testiranim scenarijima.
+   Ne može tvrditi da bi promijenila stvarni fire size.
+5. BurnMD historijske linije mogu se koristiti za dodatni replay ako se nađe validan time
+   source i data rights; taj posao više nije blokator osnovnog benchmarka.
+
+Ova odluka zamjenjuje ADR-037 uslov da historijski-action replay prođe prije RL integracije.
+ADR-037 ostaje tačan zapis za prvobitni BurnMD/SimFire prijedlog i CFSDS arhivu; rezultati
+se ne prepisuju. Ne kaže da je SimFire fizički validiran ili da je eksperiment već spreman:
+FPA kohorta, fuel/terrain/weather scenario i RL runtime još nisu napravljeni.
+
+Dokazi: [scenario pipeline](../research/REAL_IGNITION_SCENARIO_PIPELINE.md),
+[EXP-030](../research/EXPERIMENT_LOG.md#exp-030--scenario-based-design-and-fpa-fod-source-review-2026-11-01),
+[FPA-FOD official schema S-062](../research/SOURCES.md) i
+[scenario manifest schema](../../data/manifests/simfire-scenario.schema.json).
+
+## ADR-041 — FPA-FOD Dixie je samo prvi scenario-adapter fixture, 2026-11-01
+
+Da bi provjerili put od historijskog izvora do simulatora bez čekanja na cijelu kohortu,
+preuzet je jedan zapis Dixie Fire 2021 iz FPA-FOD-a (`FOD_ID 401019270`). Kartica čuva
+prijavljenu incident-referentnu tačku, datum/vrijeme bez izmišljene zone, izvornu prostornu
+nesigurnost, referentnu površinu, verziju SimFire i fiksni grid. Prvi nacrt ju je nazvao
+tačkom paljenja; [ADR-042](#adr-042--scenario-coordinates-keep-their-source-role-2026-11-01)
+ispravlja značenje i čuva razliku između lokacije incidenta i potvrđenog paljenja.
+
+**Odluka:** ovaj zapis je razvojni fixture samo za testiranje konverzije, AOI/cache
+izračuna i kasnije karte. Nije reprezentativna kohorta, nema train/validation/test split,
+i nije runnable sve dok gorivo, teren i historijsko vrijeme nisu preuzeti, hashirani i
+provjereni. Konačna površina i MTBS veza ostaju referentne, nikad agentov ulaz/nagrada.
+Zapis snimljen u repozitoriju je mali izvorni GeoJSON; veliki ulazi ostaju ignored.
+
+Dokazi: [scenario card](../../data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json),
+[source snapshot](../../reports/real-fire-data/fpa-fod-dixie-2021-source.geojson),
+[EXP-031](../research/EXPERIMENT_LOG.md#exp-031--first-fpa-fod-to-simfire-candidate-card-2026-11-01),
+[S-064](../research/SOURCES.md).
+
+## ADR-042 — scenario coordinates keep their source role, 2026-11-01
+
+The first Dixie FPA-FOD card used a source point as the SimFire start without making its
+meaning explicit in the machine-readable field name. The source record establishes a
+reported incident location with limited/unknown event-specific accuracy; it does not prove
+that the coordinate is the exact point where ignition occurred. SimFire's geographic grid
+also applies a fixed degrees-per-cell conversion, so the configured 30 m cell size is
+nominal and east-west ground distance changes with latitude.
+
+**Decision:** every shared scenario must label a source coordinate as a reported ignition,
+an incident reference point, or unknown. A simulator starting cell is a separate field and
+must be inside the declared grid. For the Dixie development fixture, the incident reference
+point is only a provisional seed location. The card must keep a location precision note,
+and its grid must say that 30 m is nominal under the pinned SimFire conversion. These fields
+prevent an approximate event location or the final perimeter from being presented as exact
+historical evidence. This is a metadata/adapter correction; it does not promote the case to
+runnable or scientific status.
+
+Evidence: [updated scenario schema](../../data/manifests/simfire-scenario.schema.json),
+[Dixie candidate](../../data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json),
+[EXP-032](../research/EXPERIMENT_LOG.md#exp-032--point-role-and-grid-semantics-made-explicit-2026-11-01),
+[SimFire environment notes](../research/SIMFIRE_ENVIRONMENT.md).

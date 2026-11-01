@@ -7,6 +7,10 @@ sources:
 ---
 # Dataset: šta imamo i šta ćemo koristiti
 
+> **Historijski pregled:** preporuka Canada/CFSDS/Cell2Fire u nastavku važi za staru
+> putanju. Trenutni kandidati su BurnMD + SimFire; vidi
+> [novi dizajn](BURNMD_SIMFIRE_PIVOT.md) i [trenutni status](../STATUS.md).
+
 **Postavka okruženja i dataset opaženih požara su različite stvari.** Početni Firehose
 fajlovi su ulazi za simulaciju; agent interakcijom stvara RL iskustvo. Oni sami nisu
 skup stvarnih ishoda niti oznaka ispravnih intervencija. Korisnikov cilj je da ti ulazi
