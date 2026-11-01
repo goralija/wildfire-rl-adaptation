@@ -1,0 +1,26 @@
+{
+  "active_after_run": true,
+  "cell_counts": {
+    "burned": 1687,
+    "burning": 436,
+    "fireline": 0,
+    "scratchline": 0,
+    "unburned": 48502,
+    "wetline": 0
+  },
+  "created_at_utc": "2026-11-01T01:24:36.953929+00:00",
+  "grid_shape": [
+    225,
+    225
+  ],
+  "kind": "functional_simulator_smoke",
+  "outputs": [
+    "functional-fire.gif",
+    "final-state.png"
+  ],
+  "real_historical_data": false,
+  "scientific_result": false,
+  "simfire_version": "2.0.1",
+  "steps_minutes": 30,
+  "training_performed": false
+}
