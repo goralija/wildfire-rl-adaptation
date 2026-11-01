@@ -1,0 +1,137 @@
+{
+  "archive_bytes": 362131110,
+  "archive_file_entries_including_macos_sidecars": 6295,
+  "archive_member_names_matching_license_notice_readme_citation": [],
+  "archive_name": "BurnMD.zip",
+  "archive_uncompressed_bytes_including_macos_sidecars": 1189385692,
+  "created_at_utc": "2026-11-01T01:33:13.081625+00:00",
+  "event_directory_count": 243,
+  "expected_lfs_sha256": "4eefcbfdabce4966d68e0009e8a4b88dd34294a2cb5dee6aea84dd017eb334c7",
+  "first_30_burnmd_members": [
+    "BurnMD/.DS_Store",
+    "BurnMD/Washington/2019/WA_LINES_2019.prj",
+    "BurnMD/Washington/2019/WA_POINTS_2019.prj",
+    "BurnMD/Washington/2019/WA_POLYGONS_2019.prj",
+    "BurnMD/Washington/2019/WA_POLYGONS_2019.dbf",
+    "BurnMD/Washington/2019/WA_LINES_2019.shx",
+    "BurnMD/Washington/2019/WA_LINES_2019.shp",
+    "BurnMD/Washington/2019/WA_LINES_2019.cpg",
+    "BurnMD/Washington/2019/WA_POINTS_2019.dbf",
+    "BurnMD/Washington/2019/WA_POINTS_2019.shx",
+    "BurnMD/Washington/2019/WA_POINTS_2019.cpg",
+    "BurnMD/Washington/2019/WA_POINTS_2019.shp",
+    "BurnMD/Washington/2019/WA_LINES_2019.dbf",
+    "BurnMD/Washington/2019/WA_POLYGONS_2019.shx",
+    "BurnMD/Washington/2019/WA_POLYGONS_2019.shp",
+    "BurnMD/Washington/2019/WA_POLYGONS_2019.cpg",
+    "BurnMD/Washington/2021/WA_POLYGONS_2021.prj",
+    "BurnMD/Washington/2021/WA_POINTS_2021.prj",
+    "BurnMD/Washington/2021/WA_POINTS_2021.dbf",
+    "BurnMD/Washington/2021/WA_POLYGONS_2021.dbf",
+    "BurnMD/Washington/2021/WA_POLYGONS_2021.cpg",
+    "BurnMD/Washington/2021/WA_POLYGONS_2021.shp",
+    "BurnMD/Washington/2021/WA_POLYGONS_2021.shx",
+    "BurnMD/Washington/2021/WA_POINTS_2021.shp",
+    "BurnMD/Washington/2021/WA_POINTS_2021.cpg",
+    "BurnMD/Washington/2021/WA_POINTS_2021.shx",
+    "BurnMD/Washington/2020/WA_LINES_2020.prj",
+    "BurnMD/Washington/2020/WA_POLYGONS_2020.prj",
+    "BurnMD/Washington/2020/WA_POINTS_2020.prj",
+    "BurnMD/Washington/2020/WA_POINTS_2020.dbf"
+  ],
+  "inventory_scope": "ZIP directory and file names; no full extraction",
+  "mineral_fire_member_files": [
+    {
+      "bytes": 564,
+      "path": "BurnMD/California/2020/fires/Mineral/Mineral_POINTS.shx"
+    },
+    {
+      "bytes": 1724,
+      "path": "BurnMD/California/2020/fires/Mineral/Mineral_POINTS.shp"
+    },
+    {
+      "bytes": 10,
+      "path": "BurnMD/California/2020/fires/Mineral/Mineral_POINTS.cpg"
+    },
+    {
+      "bytes": 563019,
+      "path": "BurnMD/California/2020/fires/Mineral/Mineral_LINES.dbf"
+    },
+    {
+      "bytes": 188,
+      "path": "BurnMD/California/2020/fires/Mineral/Mineral_POLYGONS.shx"
+    },
+    {
+      "bytes": 10,
+      "path": "BurnMD/California/2020/fires/Mineral/Mineral_POLYGONS.cpg"
+    },
+    {
+      "bytes": 404140,
+      "path": "BurnMD/California/2020/fires/Mineral/Mineral_POLYGONS.shp"
+    },
+    {
+      "bytes": 24941,
+      "path": "BurnMD/California/2020/fires/Mineral/Mineral_POLYGONS.dbf"
+    },
+    {
+      "bytes": 2092,
+      "path": "BurnMD/California/2020/fires/Mineral/Mineral_LINES.shx"
+    },
+    {
+      "bytes": 10,
+      "path": "BurnMD/California/2020/fires/Mineral/Mineral_LINES.cpg"
+    },
+    {
+      "bytes": 953244,
+      "path": "BurnMD/California/2020/fires/Mineral/Mineral_LINES.shp"
+    },
+    {
+      "bytes": 138428,
+      "path": "BurnMD/California/2020/fires/Mineral/Mineral_POINTS.dbf"
+    },
+    {
+      "bytes": 145,
+      "path": "BurnMD/California/2020/fires/Mineral/Mineral_POINTS.prj"
+    },
+    {
+      "bytes": 145,
+      "path": "BurnMD/California/2020/fires/Mineral/Mineral_POLYGONS.prj"
+    },
+    {
+      "bytes": 145,
+      "path": "BurnMD/California/2020/fires/Mineral/Mineral_LINES.prj"
+    }
+  ],
+  "record_type": "burnmd_archive_inventory",
+  "sha256": "4eefcbfdabce4966d68e0009e8a4b88dd34294a2cb5dee6aea84dd017eb334c7",
+  "sha256_matches_lfs_pointer": true,
+  "shapefile_count": 616,
+  "source_file_entries_excluding_macos_sidecars_and_ds_store": 2955,
+  "source_file_extensions": {
+    ".cpg": 616,
+    ".dbf": 616,
+    ".prj": 491,
+    ".shp": 616,
+    ".shx": 616
+  },
+  "source_uncompressed_bytes": 1188667830,
+  "state_directory_file_counts": {
+    "Arizona": 519,
+    "California": 574,
+    "Colorado": 233,
+    "Idaho": 363,
+    "Montana": 218,
+    "Nevada": 236,
+    "New Mexico": 131,
+    "Oregon": 241,
+    "Utah": 146,
+    "Washington": 207,
+    "Wyoming": 87
+  },
+  "year_directory_file_counts": {
+    "2018": 577,
+    "2019": 532,
+    "2020": 1149,
+    "2021": 697
+  }
+}

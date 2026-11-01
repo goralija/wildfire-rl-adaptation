@@ -1,0 +1,163 @@
+{
+  "case_id": "CA-2020-MINERAL",
+  "created_at_utc": "2026-11-01T01:42:53.559858+00:00",
+  "event": {
+    "fire_containment": "2020/7/26 19:41:59.000",
+    "fire_name": "Mineral",
+    "fire_start": "2020/7/13 16:40:59.000",
+    "incident_name_values": {
+      "Mineral": 11
+    },
+    "initial_position_raw": "-120.52193, 36.09493",
+    "irwin_ids": {
+      "8D0B4D83-3B1E-47A1-9F56-C2CAEC1A6697": 11
+    },
+    "local_incident_ids": {
+      "010219": 11
+    },
+    "perimeter_collection_timestamp_field": {
+      "field_present": true,
+      "max_value": "2020/07/22 02:52:53.000",
+      "min_value": "2020/07/15 17:47:20.000",
+      "non_null": 11,
+      "null": 0,
+      "rows": 11,
+      "unique_non_null": 11
+    },
+    "perimeter_feature_created_field": {
+      "field_present": true,
+      "max_value": "2020/07/19 21:45:52.000",
+      "min_value": "2020/07/15 17:47:20.000",
+      "non_null": 11,
+      "null": 0,
+      "rows": 11,
+      "unique_non_null": 7
+    },
+    "perimeter_rows_by_feature_category": {
+      "Wildfire Daily Fire Perimeter": 11
+    },
+    "state": "California",
+    "year": 2020
+  },
+  "layers": {
+    "lines": {
+      "bounds_wgs84_minx_miny_maxx_maxy": [
+        -120.71970143399994,
+        36.081889053000054,
+        -120.418512712,
+        36.30185394200004
+      ],
+      "crs": "EPSG:4326",
+      "empty_geometries": 0,
+      "invalid_geometries": 0,
+      "rows": 249
+    },
+    "perimeters": {
+      "bounds_wgs84_minx_miny_maxx_maxy": [
+        -120.67104600799996,
+        36.081889053000054,
+        -120.43331579199997,
+        36.247191016000045
+      ],
+      "crs": "EPSG:4326",
+      "empty_geometries": 0,
+      "invalid_geometries": 0,
+      "rows": 11
+    },
+    "points": {
+      "bounds_wgs84_minx_miny_maxx_maxy": [
+        -120.63031170099998,
+        36.14535006500006,
+        -120.49659723099995,
+        36.24589446600004
+      ],
+      "crs": "EPSG:4326",
+      "empty_geometries": 0,
+      "invalid_geometries": 0,
+      "rows": 58
+    }
+  },
+  "lines": {
+    "completed_dozer_rows": 121,
+    "completed_hand_rows": 25,
+    "completed_length_feet_sum_from_source": 603198.0,
+    "per_vertex_mitigation_timestamp_field": {
+      "empty_rows": 249,
+      "field_present": true,
+      "non_empty_rows": 0,
+      "rows": 249
+    },
+    "rows_by_feature_category": {
+      "Access or Improved Road": 3,
+      "Completed Dozer Line": 121,
+      "Completed Hand Line": 25,
+      "Contained Line": 14,
+      "Line Break Completed": 2,
+      "Proposed Dozer Line": 40,
+      "Road as Completed Line": 17,
+      "Uncontrolled Fire Edge": 27
+    },
+    "rows_by_feature_status": {
+      "Approved": 225,
+      "Proposed": 24
+    },
+    "source_feature_created_timestamp": {
+      "field_present": true,
+      "max_value": "2020/09/15 02:21:27.000",
+      "min_value": "2020/07/15 17:47:19.000",
+      "non_null": 249,
+      "null": 0,
+      "rows": 249,
+      "unique_non_null": 40
+    },
+    "source_feature_database_timestamp": {
+      "field_present": true,
+      "max_value": "2020/09/15 04:00:25.000",
+      "min_value": "2020/07/15 17:47:19.000",
+      "non_null": 249,
+      "null": 0,
+      "rows": 249,
+      "unique_non_null": 55
+    },
+    "source_line_collection_timestamp": {
+      "field_present": true,
+      "max_value": null,
+      "min_value": null,
+      "non_null": 0,
+      "null": 249,
+      "rows": 249,
+      "unique_non_null": 0
+    },
+    "timestamp_interpretation": "CreateDate is a source-feature creation timestamp; it is not verified as the real action start/completion time. The paper describes estimated per-coordinate times, but this Mineral archive has no populated per-vertex timestamp lists and no LineDateTi anchors."
+  },
+  "local_preview": {
+    "created": true,
+    "path": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/cfsds-train-qc/.local/burnmd-mineral-case/mineral-case-qa.png",
+    "warning": "Derived from BurnMD source geometries; retain locally until reuse rights are confirmed."
+  },
+  "readiness": {
+    "agent_training_ready": false,
+    "blockers": [
+      "BurnMD data-specific reuse license is unresolved.",
+      "The archive's reported 243 event folders do not match the paper's 308-fire total; reconcile coverage.",
+      "Mineral's per-vertex Mitigation timestamp lists are empty and LineDateTi is null for all line records.",
+      "The official LANDFIRE service migrated in 2025; the SimFire-bundled 2023 client calls a retired endpoint.",
+      "A real LANDFIRE request requires a user-provided email; do not fabricate one.",
+      "The current public catalog does not list LF2019 FBFM13; the archived 2019 Limited product is available only via help desk."
+    ],
+    "historical_action_replay_ready": false,
+    "historical_simfire_case_loaded": false,
+    "simfire_functional_smoke_only": true,
+    "spatial_data_readable": true
+  },
+  "record_type": "burnmd_case_audit",
+  "source": {
+    "archive_event_folder_count": 243,
+    "archive_license": "unresolved; archive/repository contains no data-specific notice",
+    "archive_name": "BurnMD.zip",
+    "archive_sha256": "4eefcbfdabce4966d68e0009e8a4b88dd34294a2cb5dee6aea84dd017eb334c7",
+    "archive_vs_paper_event_count_discrepancy": 65,
+    "official_lfs_pointer_sha256_match": true,
+    "paper_reports_medium_fire_count": 308
+  }
+}
