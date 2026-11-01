@@ -25,11 +25,12 @@
     "final_perimeter_reference": null
   },
   "grid": {
-    "crs": "replace-with-simulator-grid-crs-after-conversion",
+    "crs": "replace-with-projected-grid-crs-after-conversion",
     "resolution_m": 30,
     "resolution_note": "Record whether this is an exact ground distance or the simulator's nominal cell size.",
     "rows": 128,
     "columns": 128,
+    "projected_bounds_m": null,
     "extent_selection": "fixed_around_event_location",
     "top_left_latitude": null,
     "top_left_longitude": null

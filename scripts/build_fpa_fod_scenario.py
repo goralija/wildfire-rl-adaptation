@@ -12,12 +12,15 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 import re
 import shutil
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlencode
+
+from pyproj import Transformer
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -28,8 +31,6 @@ SERVICE_LAYER = (
 QUERY_URL = f"{SERVICE_LAYER}/query"
 SOURCE_RELEASE = "FPA_FOD_20260615 (7th edition, 6th update)"
 SIMFIRE_COMMIT = "04905b19fe8c10dc08d64faddd00303e0561bb66"
-DEGREES_PER_30M = 0.00027777777803598015
-SIMFIRE_LOWER_RIGHT_PADDING_DEGREES = DEGREES_PER_30M * 100
 ACRES_TO_HECTARES = 0.40468564224
 OUT_FIELDS = (
     "fod_id,fpa_id,fire_name,fire_year,discovery_date,discovery_time,fire_size,"
@@ -105,22 +106,33 @@ def _sha256(path: Path) -> str:
 def _fixed_grid(latitude: float, longitude: float, height_m: int, width_m: int) -> dict:
     if height_m <= 0 or width_m <= 0 or height_m % 30 or width_m % 30:
         raise ValueError("Grid height and width must be positive multiples of 30 m.")
-    lat_span = (height_m / 30) * DEGREES_PER_30M
-    lon_span = (width_m / 30) * DEGREES_PER_30M
-    top_lat = latitude + lat_span / 2
-    top_lon = longitude - lon_span / 2
+    zone = min(60, max(1, int(math.floor((longitude + 180) / 6)) + 1))
+    epsg = (32600 if latitude >= 0 else 32700) + zone
+    crs = f"EPSG:{epsg}"
+    to_projected = Transformer.from_crs("EPSG:4326", crs, always_xy=True)
+    x, y = to_projected.transform(longitude, latitude)
+    xmin = math.floor((x - width_m / 2) / 30) * 30
+    ymax = math.ceil((y + height_m / 2) / 30) * 30
+    xmax = xmin + width_m
+    ymin = ymax - height_m
+    columns = width_m // 30
+    rows = height_m // 30
+    seed_column = min(columns - 1, max(0, int((x - xmin) // 30)))
+    seed_row = min(rows - 1, max(0, int((ymax - y) // 30)))
     return {
-        "crs": "EPSG:4326",
+        "crs": crs,
         "resolution_m": 30,
         "resolution_note": (
-            "Nominal 30 m increment following pinned SimFire's fixed degrees-per-cell "
-            "conversion; east-west ground distance varies by latitude."
+            "Exact 30 m projected cells in the event's UTM zone; the reported point is "
+            "assigned to its containing cell and remains spatially uncertain."
         ),
-        "rows": height_m // 30,
-        "columns": width_m // 30,
+        "rows": rows,
+        "columns": columns,
+        "projected_bounds_m": [xmin, ymin, xmax, ymax],
         "extent_selection": "fixed_around_event_location",
-        "top_left_latitude": top_lat,
-        "top_left_longitude": top_lon,
+        "top_left_latitude": None,
+        "top_left_longitude": None,
+        "seed_cell": [seed_row, seed_column],
     }
 
 
@@ -149,6 +161,7 @@ def _scenario(record: dict, height_m: int, width_m: int, snapshot_path: Path) ->
     query_url = f"{QUERY_URL}?{urlencode({'where': f'fod_id = {fod_id}', 'outFields': OUT_FIELDS, 'outSR': '4326', 'returnGeometry': 'true', 'f': 'geojson'})}"
     latitude = record["latitude"]
     longitude = record["longitude"]
+    grid = _fixed_grid(latitude, longitude, height_m, width_m)
     return {
         "schema_version": "simfire-scenario/1.0",
         "scenario_id": f"fpa-fod-{fod_id}-{slug}",
@@ -187,7 +200,7 @@ def _scenario(record: dict, height_m: int, width_m: int, snapshot_path: Path) ->
             "final_area_ha_reference_only": area_ha,
             "final_perimeter_reference": None,
         },
-        "grid": _fixed_grid(latitude, longitude, height_m, width_m),
+        "grid": {key: value for key, value in grid.items() if key != "seed_cell"},
         "inputs": {
             "fuel": {
                 "status": "missing",
@@ -217,7 +230,7 @@ def _scenario(record: dict, height_m: int, width_m: int, snapshot_path: Path) ->
         "fire_behavior": {
             "simulator": "SimFire",
             "simulator_commit": SIMFIRE_COMMIT,
-            "seed_cell": [height_m // 60, width_m // 60],
+            "seed_cell": grid["seed_cell"],
             "horizon_minutes": None,
             "seed": None,
             "weather_mapping_note": (
@@ -281,11 +294,16 @@ def main() -> int:
         actual_id = int(record["properties"]["fod_id"])
         if actual_id != args.fod_id:
             raise ValueError(f"Input FOD_ID {actual_id} does not match requested {args.fod_id}.")
-        snapshot_path = (
-            args.snapshot_out.expanduser().resolve()
-            if args.snapshot_out
-            else ROOT / "reports/real-fire-data" / f"fpa-fod-{actual_id}-source.geojson"
-        )
+        if args.snapshot_out:
+            snapshot_path = args.snapshot_out.expanduser().resolve()
+        elif args.input_geojson:
+            try:
+                source_path.relative_to(ROOT / "reports/real-fire-data")
+                snapshot_path = source_path
+            except ValueError:
+                snapshot_path = ROOT / "reports/real-fire-data" / f"fpa-fod-{actual_id}-source.geojson"
+        else:
+            snapshot_path = ROOT / "reports/real-fire-data" / f"fpa-fod-{actual_id}-source.geojson"
         if snapshot_path != source_path:
             snapshot_path.parent.mkdir(parents=True, exist_ok=True)
             if snapshot_path.exists():

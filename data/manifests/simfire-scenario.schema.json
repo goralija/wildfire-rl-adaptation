@@ -66,6 +66,16 @@
         "resolution_note": {"type": "string"},
         "rows": {"type": "integer", "minimum": 1},
         "columns": {"type": "integer", "minimum": 1},
+        "projected_bounds_m": {
+          "type": ["array", "null"],
+          "description": "[xmin, ymin, xmax, ymax] in the grid CRS; used for exact projected-pixel alignment.",
+          "prefixItems": [
+            {"type": "number"}, {"type": "number"},
+            {"type": "number"}, {"type": "number"}
+          ],
+          "minItems": 4,
+          "maxItems": 4
+        },
         "extent_selection": {
           "enum": ["fixed_around_event_location", "other_documented_method"]
         },
