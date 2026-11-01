@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -119.92806845482009,
+          38.35028295746976
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1533081600000,
+        "discovery_time": "1945",
+        "fire_name": "DONNELL",
+        "fire_size": 36450,
+        "fire_year": 2018,
+        "fod_id": 400305203,
+        "fpa_id": "FS-6884802",
+        "latitude": 38.35027778,
+        "longitude": -119.92805556,
+        "mtbs_fire_name": "DONNELL",
+        "mtbs_id": "CA3834911992920180801",
+        "state": "CA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

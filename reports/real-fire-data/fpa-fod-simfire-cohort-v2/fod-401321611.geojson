@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -117.74398108467415,
+          47.538039106738175
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1692316800000,
+        "discovery_time": "1227",
+        "fire_name": "GRAY",
+        "fire_size": 10064,
+        "fire_year": 2023,
+        "fod_id": 401321611,
+        "fpa_id": "INF-2023-WANES-001974",
+        "latitude": 47.538033,
+        "longitude": -117.743967,
+        "mtbs_fire_name": "GRAY",
+        "mtbs_id": "WA4753811774420230818",
+        "state": "WA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

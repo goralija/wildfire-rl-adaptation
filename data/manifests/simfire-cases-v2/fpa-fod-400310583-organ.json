@@ -1,0 +1,117 @@
+{
+  "event": {
+    "data_license_status": "USFS Research Data Archive says the data may be used without additional permissions or fees; cite Short (2026), DOI 10.2737/RDS-2013-0009.7. Check licenses separately for any joined raster or perimeter products.",
+    "discovery_time": {
+      "precision": "reported calendar date and HHMM; source timezone is not assigned by this adapter",
+      "timezone": null,
+      "value": "2018-06-24 2211"
+    },
+    "final_area_ha_reference_only": 2041.6390651007998,
+    "final_perimeter_reference": null,
+    "location_wgs84": {
+      "accuracy_m": null,
+      "accuracy_note": "Point geometry requested from the current USFS service in EPSG:4326. The publication's stated minimum location precision is a PLSS section (one-square-mile grid); event-specific accuracy is not provided here.",
+      "latitude": 32.42670523735608,
+      "longitude": -106.56110980810386,
+      "role": "incident_reference_point"
+    },
+    "source": "USFS FPA-FOD current edition",
+    "source_record_id": "FOD_ID:400310583; FPA_ID:W-724657",
+    "source_record_snapshot": {
+      "path": "reports/real-fire-data/fpa-fod-simfire-cohort-v2/fod-400310583.geojson",
+      "sha256": "f5d58fc14a98714ed23c41c110f79a68c9904f0de43aef0e4a0d284dceae266d",
+      "source_url": "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_FireOccurrenceCurrentEdition_01/MapServer/0/query?where=fod_id+%3D+400310583&outFields=fod_id%2Cfpa_id%2Cfire_name%2Cfire_year%2Cdiscovery_date%2Cdiscovery_time%2Cfire_size%2Clatitude%2Clongitude%2Cstate%2Cmtbs_id%2Cmtbs_fire_name&outSR=4326&returnGeometry=true&f=geojson"
+    },
+    "source_release": "FPA_FOD_20260615 (7th edition, 6th update)",
+    "source_url": "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_FireOccurrenceCurrentEdition_01/MapServer/0/query?where=fod_id+%3D+400310583&outFields=fod_id%2Cfpa_id%2Cfire_name%2Cfire_year%2Cdiscovery_date%2Cdiscovery_time%2Cfire_size%2Clatitude%2Clongitude%2Cstate%2Cmtbs_id%2Cmtbs_fire_name&outSR=4326&returnGeometry=true&f=geojson"
+  },
+  "fire_behavior": {
+    "horizon_minutes": null,
+    "seed": 400310583,
+    "seed_cell": [
+      64,
+      65
+    ],
+    "seed_cell_selection": {
+      "distance_from_reported_point_m": 42.60294348270217,
+      "method": "nearest_burnable_cell_within_half_section",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "search_radius_m": 804.672,
+      "selected_fuel_code": 2,
+      "uses_observed_perimeter": false
+    },
+    "simulator": "SimFire",
+    "simulator_commit": "04905b19fe8c10dc08d64faddd00303e0561bb66",
+    "weather_mapping": {
+      "path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400310583-organ.json",
+      "sha256": "a244e0788673d5b7e25f0f27717e6483172926dd4b75a0dc91bd1ab61b133237",
+      "status": "approximate_proxy",
+      "version": "gridmet-daily-simfire-proxy/1.0",
+      "wind_adjustment_factor": 0.3
+    },
+    "weather_mapping_note": "Mapped from per-case gridMET daily context using the explicit v1 proxy in weather_mapping. It is a stationary representative-day assumption, not an hourly event replay or measured midflame weather."
+  },
+  "grid": {
+    "columns": 128,
+    "crs": "EPSG:32613",
+    "extent_selection": "fixed_around_event_location",
+    "projected_bounds_m": [
+      351300,
+      3586890,
+      355140,
+      3590730
+    ],
+    "resolution_m": 30,
+    "resolution_note": "Exact 30 m projected cells in the event's UTM zone; the reported point is assigned to its containing cell and remains spatially uncertain.",
+    "rows": 128,
+    "top_left_latitude": null,
+    "top_left_longitude": null
+  },
+  "inputs": {
+    "fuel": {
+      "path": ".local/simfire-cohort-v2/fpa-fod-400310583-organ/fuel-lf2016-fbfm13.tif",
+      "sha256": "70006a1546b85c4e46686a1d9ab49d363c46550c7d79155a4b0bd9d5e83a0038",
+      "source": "LANDFIRE LF2016 FBFM13 CONUS ImageServer",
+      "source_release": "LF2016",
+      "status": "verified",
+      "units_and_mapping": "30 m nearest-neighbor sample from pre-event LF2016 FBFM13. Native codes must pass the pinned SimFire operational fuel mapping before case promotion."
+    },
+    "terrain": {
+      "path": ".local/simfire-cohort-v2/fpa-fod-400310583-organ/elevation-lf2020-m.tif",
+      "sha256": "56f8350813872502ededf3ba20acbd081af633a987e148e14dc5bbbb231ad9ab",
+      "source": "LANDFIRE LF2020 Elevation CONUS ImageServer",
+      "source_release": "LF2020 Elevation",
+      "status": "verified",
+      "units_and_mapping": "Source meters; nearest-neighbor aligned to the 30 m UTM grid; SimFire converts meters to feet."
+    },
+    "weather": {
+      "path": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400310583-organ.json",
+      "sha256": "3097cce0facd9daeaa6ed67abda91dfe5f9dd646158291e60970fb963dfa62d6",
+      "source": "gridMET daily point values via NCAR GDEX",
+      "source_release": "gridMET Daily Surface Data; GDEX dataset d761426",
+      "status": "candidate",
+      "units_and_mapping": "Original daily gridMET context; see fire_behavior.weather_mapping for the separate approximate SimFire proxy and its assumptions."
+    }
+  },
+  "limitations": [
+    "FPA-FOD point has unknown event-specific precision and represents an incident reference, not verified GPS ignition.",
+    "The cohort is screened to >=5000 reported acres and ten western states; it is not a representative sample of all fires.",
+    "FPA-reported final area is post-response context only and is not used as a no-action target or agent reward.",
+    "gridMET provides daily approximately 4-km context; its separate SimFire proxy is assumption-based and is not an hourly replay or measured fuel moisture.",
+    "A source-compatible fuel raster is pre-event but is not a field-verified vegetation survey for the event date.",
+    "Reported point landed on a non-burnable class; simulation starts at the nearest burnable fuel cell within 804.672 m, an uncertain proxy rather than a verified ignition."
+  ],
+  "readiness": "inputs_ready",
+  "references": {
+    "notes": "MTBS_ID=NM3242610655220180624 is a separate observed-perimeter reference for later visual context only. Neither MTBS perimeters nor FPA final size are agent input or reward. Simulation start is selected by the pre-event fuel-only rule recorded in fire_behavior.seed_cell_selection; it does not use observed burn perimeters.",
+    "perimeters_and_actions_are_agent_inputs": false,
+    "perimeters_and_actions_are_reward_inputs": false
+  },
+  "scenario_id": "fpa-fod-400310583-organ",
+  "schema_version": "simfire-scenario/1.0",
+  "split": "train"
+}

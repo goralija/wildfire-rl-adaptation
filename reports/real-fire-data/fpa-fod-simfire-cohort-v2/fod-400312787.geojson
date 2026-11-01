@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -112.9511116177832,
+          38.09250565317146
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1530144000000,
+        "discovery_time": "1248",
+        "fire_name": "BLACK MOUNTAIN",
+        "fire_size": 5634,
+        "fire_year": 2018,
+        "fod_id": 400312787,
+        "fpa_id": "W-721493",
+        "latitude": 38.0925,
+        "longitude": -112.9511,
+        "mtbs_fire_name": "BLACK MOUNTAIN",
+        "mtbs_id": "UT3809211295120180628",
+        "state": "UT"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

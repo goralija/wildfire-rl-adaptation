@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -112.5228123110779,
+          43.714706295154485
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1563753600000,
+        "discovery_time": "1809",
+        "fire_name": "SHEEP",
+        "fire_size": 112106.7,
+        "fire_year": 2019,
+        "fod_id": 400508285,
+        "fpa_id": "W-732062",
+        "latitude": 43.7147,
+        "longitude": -112.5228,
+        "mtbs_fire_name": "SHEEP",
+        "mtbs_id": "ID4371511252320190722",
+        "state": "ID"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

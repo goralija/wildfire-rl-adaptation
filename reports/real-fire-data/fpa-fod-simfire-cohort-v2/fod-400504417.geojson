@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -115.01890183802718,
+          44.51695058291372
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1562716800000,
+        "discovery_time": "2001",
+        "fire_name": "SHADY",
+        "fire_size": 6286,
+        "fire_year": 2019,
+        "fod_id": 400504417,
+        "fpa_id": "FS-6940208",
+        "latitude": 44.51694444,
+        "longitude": -115.01888889,
+        "mtbs_fire_name": "SHADY",
+        "mtbs_id": "ID4451711501920190710",
+        "state": "ID"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

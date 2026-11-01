@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -123.55141395892163,
+          41.95580516073057
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1531612800000,
+        "discovery_time": "2025",
+        "fire_name": "NATCHEZ",
+        "fire_size": 38134,
+        "fire_year": 2018,
+        "fod_id": 400389771,
+        "fpa_id": "ICS209_2018_9059104",
+        "latitude": 41.9558,
+        "longitude": -123.5514,
+        "mtbs_fire_name": "NATCHEZ",
+        "mtbs_id": "CA4195612355120180715",
+        "state": "CA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

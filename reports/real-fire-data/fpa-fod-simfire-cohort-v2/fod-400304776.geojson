@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -116.84973551390449,
+          44.516950410627615
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532476800000,
+        "discovery_time": "1240",
+        "fire_name": "KEITHLY",
+        "fire_size": 17600,
+        "fire_year": 2018,
+        "fod_id": 400304776,
+        "fpa_id": "FS-6887331",
+        "latitude": 44.51694444,
+        "longitude": -116.84972222,
+        "mtbs_fire_name": "KEITHLY",
+        "mtbs_id": "ID4451711685020180725",
+        "state": "ID"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

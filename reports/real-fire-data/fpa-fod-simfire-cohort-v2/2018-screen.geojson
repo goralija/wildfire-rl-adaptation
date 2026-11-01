@@ -1,0 +1,3510 @@
+{
+  "_cohort_query_url": "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_FireOccurrenceCurrentEdition_01/MapServer/0/query?where=fire_year+%3D+2018+AND+state+IN+%28%27CA%27%2C%27OR%27%2C%27WA%27%2C%27ID%27%2C%27NV%27%2C%27AZ%27%2C%27UT%27%2C%27CO%27%2C%27NM%27%2C%27MT%27%29+AND+fire_size+%3E%3D+5000+AND+latitude+IS+NOT+NULL+AND+longitude+IS+NOT+NULL+AND+discovery_date+IS+NOT+NULL+AND+mtbs_id+IS+NOT+NULL&outFields=fod_id%2Cfpa_id%2Cfire_name%2Cfire_year%2Cdiscovery_date%2Cdiscovery_time%2Cfire_size%2Clatitude%2Clongitude%2Cstate%2Cmtbs_id%2Cmtbs_fire_name&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=2000",
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -116.17251395712532,
+          48.26611743396158
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532736000000,
+        "discovery_time": "1711",
+        "fire_name": "COUGAR",
+        "fire_size": 7871,
+        "fire_year": 2018,
+        "fod_id": 400300024,
+        "fpa_id": "FS-6887304",
+        "latitude": 48.266111110000004,
+        "longitude": -116.1725,
+        "mtbs_fire_name": "COUGAR",
+        "mtbs_id": "ID4827011617020180728",
+        "state": "ID"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -108.47417732520421,
+          37.657783680530834
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532217600000,
+        "discovery_time": "1600",
+        "fire_name": "PLATEAU",
+        "fire_size": 19634,
+        "fire_year": 2018,
+        "fod_id": 400300427,
+        "fpa_id": "FS-6905284",
+        "latitude": 37.657777779999996,
+        "longitude": -108.47416667,
+        "mtbs_fire_name": "PLATEAU",
+        "mtbs_id": "CO3765810847420180722",
+        "state": "CO"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -110.82195530143778,
+          34.61611645456265
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532390400000,
+        "discovery_time": "1113",
+        "fire_name": "RANCH",
+        "fire_size": 5491,
+        "fire_year": 2018,
+        "fod_id": 400300631,
+        "fpa_id": "FS-6893065",
+        "latitude": 34.616111110000006,
+        "longitude": -110.82194444,
+        "mtbs_fire_name": "RANCH",
+        "mtbs_id": "AZ3461611082220180724",
+        "state": "AZ"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -108.53723254113608,
+          33.72361645024958
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1526947200000,
+        "discovery_time": "1500",
+        "fire_name": "BUZZARD",
+        "fire_size": 50296,
+        "fire_year": 2018,
+        "fod_id": 400300764,
+        "fpa_id": "FS-6917646",
+        "latitude": 33.72361111,
+        "longitude": -108.53722222,
+        "mtbs_fire_name": "BUZZARD",
+        "mtbs_id": "NM3372410853720180522",
+        "state": "NM"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -111.40251153032838,
+          39.950839312397925
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1533340800000,
+        "discovery_time": "0834",
+        "fire_name": "COAL HOLLOW",
+        "fire_size": 31661,
+        "fire_year": 2018,
+        "fod_id": 400300963,
+        "fpa_id": "FS-6903200",
+        "latitude": 39.95083333,
+        "longitude": -111.4025,
+        "mtbs_fire_name": "COAL HOLLOW",
+        "mtbs_id": "UT3995111140220180804",
+        "state": "UT"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -111.21640030893572,
+          39.35806148647937
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1528329600000,
+        "discovery_time": "0111",
+        "fire_name": "TRAIL MOUNTAIN",
+        "fire_size": 18080,
+        "fire_year": 2018,
+        "fod_id": 400300964,
+        "fpa_id": "FS-6903232",
+        "latitude": 39.35805556,
+        "longitude": -111.21638889,
+        "mtbs_fire_name": "TRAIL MOUNTAIN",
+        "mtbs_id": "UT3935811121620180607",
+        "state": "UT"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -111.74306714953313,
+          39.87222816772962
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1535068800000,
+        "discovery_time": "1323",
+        "fire_name": "BALD MOUNTAIN",
+        "fire_size": 18620,
+        "fire_year": 2018,
+        "fod_id": 400301022,
+        "fpa_id": "FS-6894330",
+        "latitude": 39.87222222,
+        "longitude": -111.74305556,
+        "mtbs_fire_name": "BALD MOUNTAIN",
+        "mtbs_id": "UT3987211174320180824",
+        "state": "UT"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -115.30890198274504,
+          44.99472837680082
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1536278400000,
+        "discovery_time": "0925",
+        "fire_name": "BUM CREEK",
+        "fire_size": 5640,
+        "fire_year": 2018,
+        "fod_id": 400301081,
+        "fpa_id": "FS-6897655",
+        "latitude": 44.99472222,
+        "longitude": -115.30888889,
+        "mtbs_fire_name": "BUM CREEK",
+        "mtbs_id": "ID4499511530920180907",
+        "state": "ID"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -115.32279079569642,
+          44.56667278881133
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1537833600000,
+        "discovery_time": "1645",
+        "fire_name": "PROSPECT",
+        "fire_size": 7024,
+        "fire_year": 2018,
+        "fod_id": 400301084,
+        "fpa_id": "FS-6898773",
+        "latitude": 44.566666670000004,
+        "longitude": -115.32277778,
+        "mtbs_fire_name": "PROSPECT",
+        "mtbs_id": "ID4456711532320180925",
+        "state": "ID"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -115.28640194610315,
+          44.822783924270354
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1531872000000,
+        "discovery_time": "1928",
+        "fire_name": "KIWAH",
+        "fire_size": 14603,
+        "fire_year": 2018,
+        "fod_id": 400301086,
+        "fpa_id": "FS-6890698",
+        "latitude": 44.822777779999996,
+        "longitude": -115.28638889,
+        "mtbs_fire_name": "KIWAH",
+        "mtbs_id": "ID4482311528620180718",
+        "state": "ID"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -115.05723499474506,
+          43.49000604763178
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1534723200000,
+        "discovery_time": "1630",
+        "fire_name": "STEWART CREEK",
+        "fire_size": 5375,
+        "fire_year": 2018,
+        "fod_id": 400301104,
+        "fpa_id": "FS-6893724",
+        "latitude": 43.49,
+        "longitude": -115.05722222,
+        "mtbs_fire_name": "STEWART CREEK",
+        "mtbs_id": "ID4349011505720180820",
+        "state": "ID"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -116.32390163234119,
+          41.81167245259143
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1534464000000,
+        "discovery_time": "1748",
+        "fire_name": "SOUTH SUGARLOAF",
+        "fire_size": 233458.32,
+        "fire_year": 2018,
+        "fod_id": 400301145,
+        "fpa_id": "FS-6904874",
+        "latitude": 41.81166667,
+        "longitude": -116.32388889,
+        "mtbs_fire_name": "SOUTH SUGARLOAF",
+        "mtbs_id": "NV4181211632420180817",
+        "state": "NV"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -110.90084484550574,
+          40.631117209325105
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1535414400000,
+        "discovery_time": "1847",
+        "fire_name": "MURDOCK",
+        "fire_size": 5026,
+        "fire_year": 2018,
+        "fod_id": 400301199,
+        "fpa_id": "FS-6894328",
+        "latitude": 40.631111110000006,
+        "longitude": -110.90083333,
+        "mtbs_fire_name": "MURDOCK",
+        "mtbs_id": "UT4063111090120180828",
+        "state": "UT"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.22834692650387,
+          40.89333853270072
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1533772800000,
+        "discovery_time": "0355",
+        "fire_name": "MOORE",
+        "fire_size": 5570,
+        "fire_year": 2018,
+        "fod_id": 400301421,
+        "fpa_id": "FS-6897777",
+        "latitude": 40.893333330000004,
+        "longitude": -122.22833333,
+        "mtbs_fire_name": "HIRZ",
+        "mtbs_id": "CA4089112222820180809",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.05084782151964,
+          48.98000616738054
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1533945600000,
+        "discovery_time": "1847",
+        "fire_name": "HORNS MOUNTAIN",
+        "fire_size": 5889,
+        "fire_year": 2018,
+        "fod_id": 400301802,
+        "fpa_id": "FS-6915010",
+        "latitude": 48.98,
+        "longitude": -118.05083332999999,
+        "mtbs_fire_name": "HORNS MOUNTAIN",
+        "mtbs_id": "WA4898011805120180811",
+        "state": "WA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -120.37223705930282,
+          48.707505893192774
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1533945600000,
+        "discovery_time": "1000",
+        "fire_name": "MCLEOD",
+        "fire_size": 24429,
+        "fire_year": 2018,
+        "fod_id": 400302086,
+        "fpa_id": "FS-6907759",
+        "latitude": 48.7075,
+        "longitude": -120.37222222000001,
+        "mtbs_fire_name": "MCLEOD",
+        "mtbs_id": "WA4870812037220180811",
+        "state": "WA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -121.34945894405782,
+          46.609727886740934
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532908800000,
+        "discovery_time": "1304",
+        "fire_name": "MIRIAM",
+        "fire_size": 5428,
+        "fire_year": 2018,
+        "fod_id": 400302100,
+        "fpa_id": "FS-6920367",
+        "latitude": 46.609722219999995,
+        "longitude": -121.34944444,
+        "mtbs_fire_name": "MIRIAM",
+        "mtbs_id": "WA4661012135020180730",
+        "state": "WA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -120.57918148013228,
+          48.451394745887185
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532822400000,
+        "discovery_time": "0800",
+        "fire_name": "CRESCENT MOUNTAIN",
+        "fire_size": 52711,
+        "fire_year": 2018,
+        "fod_id": 400302105,
+        "fpa_id": "FS-6905977",
+        "latitude": 48.451388890000004,
+        "longitude": -120.57916666999999,
+        "mtbs_fire_name": "CRESCENT MOUNTAIN",
+        "mtbs_id": "WA4845112057920180729",
+        "state": "WA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -106.65501054604262,
+          40.2233396960705
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1531958400000,
+        "discovery_time": "1533",
+        "fire_name": "SILVER CREEK",
+        "fire_size": 20120,
+        "fire_year": 2018,
+        "fod_id": 400302402,
+        "fpa_id": "FS-6880066",
+        "latitude": 40.22333333,
+        "longitude": -106.655,
+        "mtbs_fire_name": "SILVER CREEK",
+        "mtbs_id": "CO4022310665520180719",
+        "state": "CO"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -105.29084326676481,
+          37.49639497151185
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1529971200000,
+        "discovery_time": "1627",
+        "fire_name": "SPRING CREEK",
+        "fire_size": 107995,
+        "fire_year": 2018,
+        "fod_id": 400302444,
+        "fpa_id": "FS-6882587",
+        "latitude": 37.49638889,
+        "longitude": -105.29083333,
+        "mtbs_fire_name": "SPRING CREEK",
+        "mtbs_id": "CO3749610529120180627",
+        "state": "CO"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -107.80806605161223,
+          37.46056147685387
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1527811200000,
+        "discovery_time": "1102",
+        "fire_name": "416",
+        "fire_size": 54129,
+        "fire_year": 2018,
+        "fod_id": 400302446,
+        "fpa_id": "FS-6912905",
+        "latitude": 37.46055556,
+        "longitude": -107.80805556000001,
+        "mtbs_fire_name": "416",
+        "mtbs_id": "CO3746110780820180601",
+        "state": "CO"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -110.25751071826033,
+          34.257505325975536
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532649600000,
+        "discovery_time": "1849",
+        "fire_name": "HUB POINT",
+        "fire_size": 5056,
+        "fire_year": 2018,
+        "fod_id": 400302464,
+        "fpa_id": "FS-6915720",
+        "latitude": 34.2575,
+        "longitude": -110.2575,
+        "mtbs_fire_name": "HUB POINT",
+        "mtbs_id": "AZ3425711025720180727",
+        "state": "AZ"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -111.15973314439599,
+          34.556949757579204
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1524787200000,
+        "discovery_time": "1343",
+        "fire_name": "TINDER",
+        "fire_size": 16738,
+        "fire_year": 2018,
+        "fod_id": 400302533,
+        "fpa_id": "FS-6900961",
+        "latitude": 34.55694444,
+        "longitude": -111.15972222,
+        "mtbs_fire_name": "TINDER",
+        "mtbs_id": "AZ3455711116020180427",
+        "state": "AZ"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -111.11306642797943,
+          33.96500523893895
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532563200000,
+        "discovery_time": "1555",
+        "fire_name": "BEARS",
+        "fire_size": 7559,
+        "fire_year": 2018,
+        "fod_id": 400302636,
+        "fpa_id": "FS-6907681",
+        "latitude": 33.965,
+        "longitude": -111.11305556,
+        "mtbs_fire_name": "BEARS",
+        "mtbs_id": "AZ3396511111320180726",
+        "state": "AZ"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -119.45029060086482,
+          38.38444965605412
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1536019200000,
+        "discovery_time": "1621",
+        "fire_name": "BOOT",
+        "fire_size": 6974,
+        "fire_year": 2018,
+        "fod_id": 400302686,
+        "fpa_id": "FS-6908912",
+        "latitude": 38.38444444,
+        "longitude": -119.45027778,
+        "mtbs_fire_name": "BOOT",
+        "mtbs_id": "CA3839611945120180904",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -115.5102902069386,
+          40.673894630785384
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1538265600000,
+        "discovery_time": "1040",
+        "fire_name": "RANGE TWO",
+        "fire_size": 9205.25,
+        "fire_year": 2018,
+        "fod_id": 400302687,
+        "fpa_id": "FS-6913190",
+        "latitude": 40.67388889,
+        "longitude": -115.51027778,
+        "mtbs_fire_name": "RANGE TWO",
+        "mtbs_id": "NV4067411551020180930",
+        "state": "NV"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -111.66056712446456,
+          39.80583927623885
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1536192000000,
+        "discovery_time": "1239",
+        "fire_name": "POLE CREEK",
+        "fire_size": 102191,
+        "fire_year": 2018,
+        "fod_id": 400302700,
+        "fpa_id": "FS-6894321",
+        "latitude": 39.80583333,
+        "longitude": -111.66055556,
+        "mtbs_fire_name": "POLE CREEK",
+        "mtbs_id": "UT3980611166020180906",
+        "state": "UT"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -117.5144564737246,
+          33.678338184567714
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1533513600000,
+        "discovery_time": "1520",
+        "fire_name": "HOLY",
+        "fire_size": 23025,
+        "fire_year": 2018,
+        "fod_id": 400302837,
+        "fpa_id": "FS-6888610",
+        "latitude": 33.67833333,
+        "longitude": -117.51444443999999,
+        "mtbs_fire_name": "HOLY",
+        "mtbs_id": "CA3367611751620180806",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.54001379579957,
+          41.88083857624421
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1530748800000,
+        "discovery_time": "1430",
+        "fire_name": "KLAMATHON",
+        "fire_size": 38008,
+        "fire_year": 2018,
+        "fod_id": 400302872,
+        "fpa_id": "FS-6912699",
+        "latitude": 41.88083333,
+        "longitude": -122.54,
+        "mtbs_fire_name": "KLAMATHON",
+        "mtbs_id": "CA4188012254020180705",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -120.88279112745835,
+          40.625005295624476
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532649600000,
+        "discovery_time": "1530",
+        "fire_name": "WHALEBACK",
+        "fire_size": 18705,
+        "fire_year": 2018,
+        "fod_id": 400302877,
+        "fpa_id": "FS-6914909",
+        "latitude": 40.625,
+        "longitude": -120.88277778,
+        "mtbs_fire_name": "WHALEBACK",
+        "mtbs_id": "CA4063012088020180727",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -121.05668015557865,
+          41.37111644918641
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1534291200000,
+        "discovery_time": "0800",
+        "fire_name": "STONE",
+        "fire_size": 39387,
+        "fire_year": 2018,
+        "fod_id": 400302881,
+        "fpa_id": "FS-6923645",
+        "latitude": 41.37111111,
+        "longitude": -121.05666667,
+        "mtbs_fire_name": "STONE",
+        "mtbs_id": "CA4139512105720180815",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -116.76945634761253,
+          33.711393789243665
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532476800000,
+        "discovery_time": "1343",
+        "fire_name": "CRANSTON",
+        "fire_size": 13229,
+        "fire_year": 2018,
+        "fod_id": 400302943,
+        "fpa_id": "FS-6892586",
+        "latitude": 33.71138889,
+        "longitude": -116.76944444,
+        "mtbs_fire_name": "CRANSTON",
+        "mtbs_id": "CA3372011680020180725",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.4272358540669,
+          40.942505189325715
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1536105600000,
+        "discovery_time": "1451",
+        "fire_name": "DELTA",
+        "fire_size": 63458,
+        "fire_year": 2018,
+        "fod_id": 400302952,
+        "fpa_id": "FS-6900746",
+        "latitude": 40.9425,
+        "longitude": -122.42722222,
+        "mtbs_fire_name": "DELTA",
+        "mtbs_id": "CA4094312242720180905",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.64306918653281,
+          40.67000515113756
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532304000000,
+        "discovery_time": "1512",
+        "fire_name": "CARR",
+        "fire_size": 229651,
+        "fire_year": 2018,
+        "fod_id": 400302960,
+        "fpa_id": "FS-6916335",
+        "latitude": 40.67,
+        "longitude": -122.64305556000001,
+        "mtbs_fire_name": "CARR",
+        "mtbs_id": "CA4065012263020180723",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.22834692617506,
+          40.89111631253689
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1533772800000,
+        "discovery_time": "0355",
+        "fire_name": "HIRZ",
+        "fire_size": 40580,
+        "fire_year": 2018,
+        "fod_id": 400302964,
+        "fpa_id": "FS-6897723",
+        "latitude": 40.891111110000004,
+        "longitude": -122.22833333,
+        "mtbs_fire_name": "HIRZ",
+        "mtbs_id": "CA4089112222820180809",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -120.82751365288256,
+          42.64972767556276
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1534291200000,
+        "discovery_time": "1655",
+        "fire_name": "WATSON CREEK",
+        "fire_size": 59061,
+        "fire_year": 2018,
+        "fod_id": 400303049,
+        "fpa_id": "FS-6919138",
+        "latitude": 42.64972222,
+        "longitude": -120.8275,
+        "mtbs_fire_name": "WATSON CREEK",
+        "mtbs_id": "OR4265012082720180815",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -123.86029185194364,
+          42.369449599244206
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1531699200000,
+        "discovery_time": "0143",
+        "fire_name": "KLONDIKE",
+        "fire_size": 87701,
+        "fire_year": 2018,
+        "fod_id": 400303093,
+        "fpa_id": "FS-6890866",
+        "latitude": 42.36944444,
+        "longitude": -123.86027778,
+        "mtbs_fire_name": "KLONDIKE",
+        "mtbs_id": "OR4237012386020180716",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -120.54918132744062,
+          47.85139471516204
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532736000000,
+        "discovery_time": "2321",
+        "fire_name": "COUGAR CREEK",
+        "fire_size": 41404,
+        "fire_year": 2018,
+        "fod_id": 400303100,
+        "fpa_id": "FS-6918736",
+        "latitude": 47.85138889,
+        "longitude": -120.54916666999999,
+        "mtbs_fire_name": "COUGAR CREEK",
+        "mtbs_id": "WA4785112054920180728",
+        "state": "WA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -121.03362535923638,
+          45.66472786176098
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532995200000,
+        "discovery_time": "1800",
+        "fire_name": "MILEPOST 90",
+        "fire_size": 10232,
+        "fire_year": 2018,
+        "fod_id": 400303157,
+        "fpa_id": "FS-6899782",
+        "latitude": 45.66472222,
+        "longitude": -121.03361111000001,
+        "mtbs_fire_name": "MILEPOST 90",
+        "mtbs_id": "WA4567012103420180801",
+        "state": "WA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -113.5469572092908,
+          45.123061894731094
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1533168000000,
+        "discovery_time": "1921",
+        "fire_name": "GOLDSTONE",
+        "fire_size": 9360,
+        "fire_year": 2018,
+        "fod_id": 400303584,
+        "fpa_id": "FS-6918227",
+        "latitude": 45.12305556,
+        "longitude": -113.54694443999999,
+        "mtbs_fire_name": "GOLDSTONE",
+        "mtbs_id": "MT4512311354720180802",
+        "state": "MT"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -111.85667906474616,
+          44.97778425837622
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1533513600000,
+        "discovery_time": "2039",
+        "fire_name": "MONUMENT",
+        "fire_size": 6614,
+        "fire_year": 2018,
+        "fod_id": 400303610,
+        "fpa_id": "FS-6905729",
+        "latitude": 44.97777778,
+        "longitude": -111.85666667,
+        "mtbs_fire_name": "MONUMENT",
+        "mtbs_id": "MT4497811185720180806",
+        "state": "MT"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -111.10223445345761,
+          44.96778432649509
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532044800000,
+        "discovery_time": "2028",
+        "fire_name": "BACON RIND",
+        "fire_size": 5232,
+        "fire_year": 2018,
+        "fod_id": 400303631,
+        "fpa_id": "FS-6908839",
+        "latitude": 44.96777778,
+        "longitude": -111.10222222,
+        "mtbs_fire_name": "BACON RIND",
+        "mtbs_id": "MT4496811110220180720",
+        "state": "MT"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -115.93001407920484,
+          48.96000639837101
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532822400000,
+        "discovery_time": "1351",
+        "fire_name": "DAVIS",
+        "fire_size": 6614,
+        "fire_year": 2018,
+        "fod_id": 400303689,
+        "fpa_id": "FS-6907635",
+        "latitude": 48.96,
+        "longitude": -115.93,
+        "mtbs_fire_name": "DAVIS",
+        "mtbs_id": "MT4896011593020180729",
+        "state": "MT"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -115.52640279474119,
+          48.57667308494421
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1533945600000,
+        "discovery_time": "1724",
+        "fire_name": "GOLD HILL",
+        "fire_size": 6700,
+        "fire_year": 2018,
+        "fod_id": 400303711,
+        "fpa_id": "FS-6907706",
+        "latitude": 48.57666667,
+        "longitude": -115.52638889,
+        "mtbs_fire_name": "GOLD HILL",
+        "mtbs_id": "MT4857711552620180811",
+        "state": "MT"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -116.35529112460688,
+          45.26889496894922
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532304000000,
+        "discovery_time": "1402",
+        "fire_name": "RATTLESNAKE CREEK",
+        "fire_size": 8219.7,
+        "fire_year": 2018,
+        "fod_id": 400303744,
+        "fpa_id": "FS-6880991",
+        "latitude": 45.26888889,
+        "longitude": -116.35527778,
+        "mtbs_fire_name": "RATTLESNAKE CREEK",
+        "mtbs_id": "ID4533411639120180723",
+        "state": "ID"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -106.74723288222731,
+          40.97778423667357
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1536969600000,
+        "discovery_time": "2036",
+        "fire_name": "RYAN",
+        "fire_size": 28584,
+        "fire_year": 2018,
+        "fod_id": 400303807,
+        "fpa_id": "FS-6898086",
+        "latitude": 40.97777778,
+        "longitude": -106.74722222000001,
+        "mtbs_fire_name": "RYAN",
+        "mtbs_id": "CO4097810674720180915",
+        "state": "CO"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -103.02028714728439,
+          37.030283930194386
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1520640000000,
+        "discovery_time": "0600",
+        "fire_name": "STATELINE",
+        "fire_size": 17650,
+        "fire_year": 2018,
+        "fod_id": 400303899,
+        "fpa_id": "FS-6866740",
+        "latitude": 37.03027778,
+        "longitude": -103.02027778,
+        "mtbs_fire_name": "STATELINE",
+        "mtbs_id": "NM3692110306120180308",
+        "state": "NM"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -107.63973294770315,
+          39.916395145183536
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532822400000,
+        "discovery_time": "1354",
+        "fire_name": "CABIN LAKE",
+        "fire_size": 5967,
+        "fire_year": 2018,
+        "fod_id": 400303966,
+        "fpa_id": "FS-6917616",
+        "latitude": 39.91638889,
+        "longitude": -107.63972222000001,
+        "mtbs_fire_name": "CABIN LAKE",
+        "mtbs_id": "CO3991610764020180729",
+        "state": "CO"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -108.13501035142595,
+          35.183894466011104
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1523491200000,
+        "discovery_time": "1703",
+        "fire_name": "DIENER CANYON",
+        "fire_size": 9338,
+        "fire_year": 2018,
+        "fod_id": 400304100,
+        "fpa_id": "FS-6918455",
+        "latitude": 35.18388889,
+        "longitude": -108.135,
+        "mtbs_fire_name": "DIENER CANYON",
+        "mtbs_id": "NM3518410813520180412",
+        "state": "NM"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -112.96417796677989,
+          34.7794496846704
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1531008000000,
+        "discovery_time": "1842",
+        "fire_name": "STUBBS",
+        "fire_size": 8500,
+        "fire_year": 2018,
+        "fod_id": 400304594,
+        "fpa_id": "FS-6874414",
+        "latitude": 34.779444440000006,
+        "longitude": -112.96416667,
+        "mtbs_fire_name": "STUBBS",
+        "mtbs_id": "AZ3477911297320180708",
+        "state": "AZ"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -113.42334496359908,
+          37.3972277589578
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1530057600000,
+        "discovery_time": "1600",
+        "fire_name": "WEST VALLEY",
+        "fire_size": 11771,
+        "fire_year": 2018,
+        "fod_id": 400304718,
+        "fpa_id": "FS-6872400",
+        "latitude": 37.397222219999996,
+        "longitude": -113.42333332999999,
+        "mtbs_fire_name": "WEST VALLEY",
+        "mtbs_id": "UT3739711342320180627",
+        "state": "UT"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -116.84973551390449,
+          44.516950410627615
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532476800000,
+        "discovery_time": "1240",
+        "fire_name": "KEITHLY",
+        "fire_size": 17600,
+        "fire_year": 2018,
+        "fod_id": 400304776,
+        "fpa_id": "FS-6887331",
+        "latitude": 44.51694444,
+        "longitude": -116.84972222,
+        "mtbs_fire_name": "KEITHLY",
+        "mtbs_id": "ID4451711685020180725",
+        "state": "ID"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -116.44779102890615,
+          44.67583935180146
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532563200000,
+        "discovery_time": "2011",
+        "fire_name": "MESA",
+        "fire_size": 34729,
+        "fire_year": 2018,
+        "fod_id": 400304779,
+        "fpa_id": "FS-6887332",
+        "latitude": 44.67583333,
+        "longitude": -116.44777778,
+        "mtbs_fire_name": "MESA",
+        "mtbs_id": "ID4467611644820180726",
+        "state": "ID"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -114.3066795412151,
+          44.85639512950379
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1533168000000,
+        "discovery_time": "1440",
+        "fire_name": "RABBIT FOOT",
+        "fire_size": 34900,
+        "fire_year": 2018,
+        "fod_id": 400304799,
+        "fpa_id": "FS-6890714",
+        "latitude": 44.85638889,
+        "longitude": -114.30666667,
+        "mtbs_fire_name": "RABBIT FOOT",
+        "mtbs_id": "ID4485611430720180802",
+        "state": "ID"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.61640229682644,
+          39.099727255228316
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1529712000000,
+        "discovery_time": "2000",
+        "fire_name": "PAWNEE",
+        "fire_size": 15186,
+        "fire_year": 2018,
+        "fod_id": 400305002,
+        "fpa_id": "FS-6873311",
+        "latitude": 39.09972222,
+        "longitude": -122.61638889,
+        "mtbs_fire_name": "RANCH",
+        "mtbs_id": "CA3924012311020180727",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -123.10862460781563,
+          39.238893897088005
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532736000000,
+        "discovery_time": "1401",
+        "fire_name": "RANCH",
+        "fire_size": 410203,
+        "fire_year": 2018,
+        "fod_id": 400305003,
+        "fpa_id": "FS-6906035",
+        "latitude": 39.23888889,
+        "longitude": -123.10861111,
+        "mtbs_fire_name": "RANCH",
+        "mtbs_id": "CA3924012311020180727",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -119.92806845482009,
+          38.35028295746976
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1533081600000,
+        "discovery_time": "1945",
+        "fire_name": "DONNELL",
+        "fire_size": 36450,
+        "fire_year": 2018,
+        "fod_id": 400305203,
+        "fpa_id": "FS-6884802",
+        "latitude": 38.35027778,
+        "longitude": -119.92805556,
+        "mtbs_fire_name": "DONNELL",
+        "mtbs_id": "CA3834911992920180801",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.70418065023519,
+          42.84444973657411
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1531612800000,
+        "discovery_time": "1610",
+        "fire_name": "SUGAR PINE",
+        "fire_size": 17697,
+        "fire_year": 2018,
+        "fod_id": 400305302,
+        "fpa_id": "FS-6918922",
+        "latitude": 42.844444440000004,
+        "longitude": -122.70416666999999,
+        "mtbs_fire_name": "MILES",
+        "mtbs_id": "OR4282612280720180716",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.23779191042527,
+          44.08361653133811
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1534636800000,
+        "discovery_time": "1700",
+        "fire_name": "TERWILLIGER",
+        "fire_size": 11555,
+        "fire_year": 2018,
+        "fod_id": 400305445,
+        "fpa_id": "FS-6913815",
+        "latitude": 44.08361111,
+        "longitude": -122.23777778,
+        "mtbs_fire_name": "TERWILLIGER",
+        "mtbs_id": "OR4408412223820180819",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -109.50581051803023,
+          33.65580528005458
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1523404800000,
+        "discovery_time": "1323",
+        "fire_name": "RATTLESNAKE",
+        "fire_size": 26072,
+        "fire_year": 2018,
+        "fod_id": 400306102,
+        "fpa_id": "W-718107",
+        "latitude": 33.6558,
+        "longitude": -109.5058,
+        "mtbs_fire_name": "RATTLESNAKE",
+        "mtbs_id": "AZ3365610950620180411",
+        "state": "AZ"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -112.00994623495737,
+          36.165645479334664
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532131200000,
+        "discovery_time": "1625",
+        "fire_name": "OBI",
+        "fire_size": 11656,
+        "fire_year": 2018,
+        "fod_id": 400306199,
+        "fpa_id": "W-726692",
+        "latitude": 36.165639999999996,
+        "longitude": -112.009935,
+        "mtbs_fire_name": "OBI",
+        "mtbs_id": "AZ3616611201020180721",
+        "state": "AZ"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -123.13971347912566,
+          39.0600049911429
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532649600000,
+        "discovery_time": "1301",
+        "fire_name": "RIVER",
+        "fire_size": 48920,
+        "fire_year": 2018,
+        "fod_id": 400307064,
+        "fpa_id": "W-723599",
+        "latitude": 39.06,
+        "longitude": -123.1397,
+        "mtbs_fire_name": "RIVER",
+        "mtbs_id": "CA3906012314020180727",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.1997133072776,
+          38.81000504477203
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1530316800000,
+        "discovery_time": "1410",
+        "fire_name": "COUNTY",
+        "fire_size": 90288,
+        "fire_year": 2018,
+        "fod_id": 400307067,
+        "fpa_id": "W-723622",
+        "latitude": 38.81,
+        "longitude": -122.1997,
+        "mtbs_fire_name": "COUNTY",
+        "mtbs_id": "CA3881012220020180630",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -121.43471332109695,
+          39.81390518553039
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1541635200000,
+        "discovery_time": "0633",
+        "fire_name": "CAMP",
+        "fire_size": 153336,
+        "fire_year": 2018,
+        "fod_id": 400307281,
+        "fpa_id": "W-726519",
+        "latitude": 39.8139,
+        "longitude": -121.4347,
+        "mtbs_fire_name": "CAMP",
+        "mtbs_id": "CA3982012144020181108",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.69971227872776,
+          34.240004850508555
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1541635200000,
+        "discovery_time": "1424",
+        "fire_name": "WOOLSEY",
+        "fire_size": 96949,
+        "fire_year": 2018,
+        "fod_id": 400307326,
+        "fpa_id": "W-727307",
+        "latitude": 34.24,
+        "longitude": -118.6997,
+        "mtbs_fire_name": "WOOLSEY",
+        "mtbs_id": "CA3424011870020181108",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -119.88081280584913,
+          37.65190511692618
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1531440000000,
+        "discovery_time": "2007",
+        "fire_name": "FERGUSON",
+        "fire_size": 96953,
+        "fire_year": 2018,
+        "fod_id": 400307342,
+        "fpa_id": "W-727171",
+        "latitude": 37.6519,
+        "longitude": -119.8808,
+        "mtbs_fire_name": "FERGUSON",
+        "mtbs_id": "CA3765211988120180713",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -106.06881027678946,
+          39.055006250823716
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1530144000000,
+        "discovery_time": "1136",
+        "fire_name": "WESTON PASS",
+        "fire_size": 13023,
+        "fire_year": 2018,
+        "fod_id": 400307379,
+        "fpa_id": "W-720464",
+        "latitude": 39.055,
+        "longitude": -106.0688,
+        "mtbs_fire_name": "WESTON PASS",
+        "mtbs_id": "CO3905510606920180628",
+        "state": "CO"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -107.83611087984816,
+          40.78250635053738
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1530230400000,
+        "discovery_time": "1358",
+        "fire_name": "DIVIDE",
+        "fire_size": 19946,
+        "fire_year": 2018,
+        "fod_id": 400307420,
+        "fpa_id": "W-725478",
+        "latitude": 40.7825,
+        "longitude": -107.8361,
+        "mtbs_fire_name": "DIVIDE",
+        "mtbs_id": "CO4078210783620180629",
+        "state": "CO"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -108.20111088469159,
+          40.19140624935041
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532044800000,
+        "discovery_time": "1320",
+        "fire_name": "INDIAN VALLEY",
+        "fire_size": 6310,
+        "fire_year": 2018,
+        "fod_id": 400307462,
+        "fpa_id": "W-724248",
+        "latitude": 40.1914,
+        "longitude": -108.2011,
+        "mtbs_fire_name": "INDIAN VALLEY",
+        "mtbs_id": "CO4019210820120180720",
+        "state": "CO"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -108.75751094351162,
+          39.68890614554033
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532822400000,
+        "discovery_time": "1534",
+        "fire_name": "RED CANYON",
+        "fire_size": 5722,
+        "fire_year": 2018,
+        "fod_id": 400307488,
+        "fpa_id": "W-724245",
+        "latitude": 39.6889,
+        "longitude": -108.7575,
+        "mtbs_fire_name": "RED CANYON",
+        "mtbs_id": "CO3968910875820180729",
+        "state": "CO"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -108.57361102455943,
+          40.65300627909555
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1536796800000,
+        "discovery_time": "1143",
+        "fire_name": "BOONE DRAW",
+        "fire_size": 8610.6,
+        "fire_year": 2018,
+        "fod_id": 400307548,
+        "fpa_id": "W-725861",
+        "latitude": 40.653,
+        "longitude": -108.5736,
+        "mtbs_fire_name": "BOONE DRAW",
+        "mtbs_id": "CO4065310857420180913",
+        "state": "CO"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -108.66501078133311,
+          38.45694499381795
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532822400000,
+        "discovery_time": "1115",
+        "fire_name": "BULL DRAW",
+        "fire_size": 36520,
+        "fire_year": 2018,
+        "fod_id": 400307776,
+        "fpa_id": "W-726431",
+        "latitude": 38.456939,
+        "longitude": -108.665,
+        "mtbs_fire_name": "BULL DRAW",
+        "mtbs_id": "CO3845710866520180729",
+        "state": "CO"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -116.49042283137399,
+          42.191415803090514
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1531699200000,
+        "discovery_time": "1042",
+        "fire_name": "GARAT",
+        "fire_size": 9490,
+        "fire_year": 2018,
+        "fod_id": 400308335,
+        "fpa_id": "W-720009",
+        "latitude": 42.191410000000005,
+        "longitude": -116.49041,
+        "mtbs_fire_name": "GARAT",
+        "mtbs_id": "ID4219111649020180716",
+        "state": "ID"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -115.76081268318005,
+          42.104305857894424
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532390400000,
+        "discovery_time": "1818",
+        "fire_name": "CAT",
+        "fire_size": 26605,
+        "fire_year": 2018,
+        "fod_id": 400308339,
+        "fpa_id": "W-720847",
+        "latitude": 42.1043,
+        "longitude": -115.7608,
+        "mtbs_fire_name": "BRUNEAU",
+        "mtbs_id": "ID4204811559720180724",
+        "state": "ID"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -113.44971226112216,
+          42.243906068088414
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1537574400000,
+        "discovery_time": "1405",
+        "fire_name": "CONNER",
+        "fire_size": 13617.8,
+        "fire_year": 2018,
+        "fod_id": 400308380,
+        "fpa_id": "W-723902",
+        "latitude": 42.2439,
+        "longitude": -113.4497,
+        "mtbs_fire_name": "CONNER",
+        "mtbs_id": "ID4223511346220180922",
+        "state": "ID"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -111.86641224014384,
+          44.093106390967904
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532563200000,
+        "discovery_time": "1506",
+        "fire_name": "GRASSY RIDGE",
+        "fire_size": 99502,
+        "fire_year": 2018,
+        "fod_id": 400308495,
+        "fpa_id": "W-721007",
+        "latitude": 44.0931,
+        "longitude": -111.8664,
+        "mtbs_fire_name": "GRASSY RIDGE",
+        "mtbs_id": "ID4409311186520180726",
+        "state": "ID"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -112.39971238788516,
+          44.308906364291985
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1536710400000,
+        "discovery_time": "1832",
+        "fire_name": "INDIAN BUTTE",
+        "fire_size": 12572.4,
+        "fire_year": 2018,
+        "fod_id": 400308518,
+        "fpa_id": "W-724040",
+        "latitude": 44.3089,
+        "longitude": -112.3997,
+        "mtbs_fire_name": "INDIAN BUTTE",
+        "mtbs_id": "ID4430911239820180912",
+        "state": "ID"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -115.37831266106564,
+          42.421905920570325
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1531699200000,
+        "discovery_time": "1330",
+        "fire_name": "EAST FORK",
+        "fire_size": 8581.7,
+        "fire_year": 2018,
+        "fod_id": 400308542,
+        "fpa_id": "W-721371",
+        "latitude": 42.4219,
+        "longitude": -115.3783,
+        "mtbs_fire_name": "WINTER CAMP",
+        "mtbs_id": "ID4241811550420180717",
+        "state": "ID"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -115.50361268405233,
+          42.41810590936913
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1531785600000,
+        "discovery_time": "1036",
+        "fire_name": "WINTER CAMP",
+        "fire_size": 20654.1,
+        "fire_year": 2018,
+        "fod_id": 400308544,
+        "fpa_id": "W-721377",
+        "latitude": 42.4181,
+        "longitude": -115.5036,
+        "mtbs_fire_name": "WINTER CAMP",
+        "mtbs_id": "ID4241811550420180717",
+        "state": "ID"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -115.59691264393116,
+          42.04810586663641
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532390400000,
+        "discovery_time": "1741",
+        "fire_name": "BRUNEAU",
+        "fire_size": 60872.7,
+        "fire_year": 2018,
+        "fod_id": 400308546,
+        "fpa_id": "W-724411",
+        "latitude": 42.0481,
+        "longitude": -115.5969,
+        "mtbs_fire_name": "BRUNEAU",
+        "mtbs_id": "ID4204811559720180724",
+        "state": "ID"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -116.3918327889347,
+          42.03450579729504
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1531699200000,
+        "discovery_time": "1219",
+        "fire_name": "WEST DUCK",
+        "fire_size": 11194,
+        "fire_year": 2018,
+        "fod_id": 400308572,
+        "fpa_id": "W-720843",
+        "latitude": 42.0345,
+        "longitude": -116.39182000000001,
+        "mtbs_fire_name": "WEST DUCK",
+        "mtbs_id": "ID4203511639220180716",
+        "state": "ID"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -114.77391264577362,
+          43.04280603155024
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1531785600000,
+        "discovery_time": "1151",
+        "fire_name": "DOG CREEK",
+        "fire_size": 16324.3,
+        "fire_year": 2018,
+        "fod_id": 400308652,
+        "fpa_id": "W-725555",
+        "latitude": 43.0428,
+        "longitude": -114.7739,
+        "mtbs_fire_name": "DOG CREEK",
+        "mtbs_id": "ID4304311477420180717",
+        "state": "ID"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -114.14554259409422,
+          43.46669612708117
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532822400000,
+        "discovery_time": "1116",
+        "fire_name": "SHARPS",
+        "fire_size": 64763.5,
+        "fire_year": 2018,
+        "fod_id": 400308656,
+        "fpa_id": "W-721121",
+        "latitude": 43.46669,
+        "longitude": -114.14553,
+        "mtbs_fire_name": "SHARPS",
+        "mtbs_id": "ID4346711414520180729",
+        "state": "ID"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -105.32281156518829,
+          48.34190742335663
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1535673600000,
+        "discovery_time": "1806",
+        "fire_name": "BUFFALO PASTURE",
+        "fire_size": 7748,
+        "fire_year": 2018,
+        "fod_id": 400309598,
+        "fpa_id": "W-723426",
+        "latitude": 48.3419,
+        "longitude": -105.3228,
+        "mtbs_fire_name": "BUFFALO PASTURE",
+        "mtbs_id": "MT4835010534020180831",
+        "state": "MT"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -113.91641359367942,
+          48.64280659069727
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1533945600000,
+        "discovery_time": "1918",
+        "fire_name": "HOWE RIDGE",
+        "fire_size": 14522,
+        "fire_year": 2018,
+        "fod_id": 400309614,
+        "fpa_id": "W-724729",
+        "latitude": 48.6428,
+        "longitude": -113.9164,
+        "mtbs_fire_name": "HOWE RIDGE",
+        "mtbs_id": "MT4864311391620180811",
+        "state": "MT"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -103.48180617645355,
+          33.30329752625769
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1523923200000,
+        "discovery_time": "1525",
+        "fire_name": "380",
+        "fire_size": 20480,
+        "fire_year": 2018,
+        "fod_id": 400310400,
+        "fpa_id": "W-724606",
+        "latitude": 33.303292,
+        "longitude": -103.481797,
+        "mtbs_fire_name": "380",
+        "mtbs_id": "NM3330310348220180417",
+        "state": "NM"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -105.02650647448522,
+          32.50766632150161
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1529020800000,
+        "discovery_time": "1116",
+        "fire_name": "CROOKED CREEK",
+        "fire_size": 7082,
+        "fire_year": 2018,
+        "fod_id": 400310417,
+        "fpa_id": "W-725285",
+        "latitude": 32.507661,
+        "longitude": -105.02649699999999,
+        "mtbs_fire_name": "CROOKED CREEK",
+        "mtbs_id": "NM3250810502620180615",
+        "state": "NM"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -108.68581020785496,
+          31.570805006182628
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1524355200000,
+        "discovery_time": "2140",
+        "fire_name": "OK BAR",
+        "fire_size": 61620,
+        "fire_year": 2018,
+        "fod_id": 400310578,
+        "fpa_id": "W-724656",
+        "latitude": 31.5708,
+        "longitude": -108.6858,
+        "mtbs_fire_name": "OK BAR",
+        "mtbs_id": "NM3154510871520180422",
+        "state": "NM"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -108.67781019298073,
+          31.348904971983
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1526428800000,
+        "discovery_time": "1642",
+        "fire_name": "SAN LUIS",
+        "fire_size": 20586,
+        "fire_year": 2018,
+        "fod_id": 400310579,
+        "fpa_id": "W-724659",
+        "latitude": 31.3489,
+        "longitude": -108.6778,
+        "mtbs_fire_name": "SAN LUIS",
+        "mtbs_id": "NM3134910867820180516",
+        "state": "NM"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -106.56110980810386,
+          32.42670523735608
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1529798400000,
+        "discovery_time": "2211",
+        "fire_name": "ORGAN",
+        "fire_size": 5045,
+        "fire_year": 2018,
+        "fod_id": 400310583,
+        "fpa_id": "W-724657",
+        "latitude": 32.4267,
+        "longitude": -106.5611,
+        "mtbs_fire_name": "ORGAN",
+        "mtbs_id": "NM3242610655220180624",
+        "state": "NM"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -103.33800615665997,
+          33.4978835656799
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1523491200000,
+        "discovery_time": "1438",
+        "fire_name": "206",
+        "fire_size": 44162,
+        "fire_year": 2018,
+        "fod_id": 400310659,
+        "fpa_id": "W-725355",
+        "latitude": 33.497878,
+        "longitude": -103.337997,
+        "mtbs_fire_name": "206",
+        "mtbs_id": "NM3349810333820180412",
+        "state": "NM"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -114.77441237823749,
+          41.3058058635393
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1530403200000,
+        "discovery_time": "1059",
+        "fire_name": "HD",
+        "fire_size": 5042.5,
+        "fire_year": 2018,
+        "fod_id": 400310909,
+        "fpa_id": "W-721566",
+        "latitude": 41.3058,
+        "longitude": -114.7744,
+        "mtbs_fire_name": "HD",
+        "mtbs_id": "NV4130611477420180701",
+        "state": "NV"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -114.59551226380223,
+          40.73720582060318
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1530403200000,
+        "discovery_time": "1641",
+        "fire_name": "HOGAN",
+        "fire_size": 10907.4,
+        "fire_year": 2018,
+        "fod_id": 400310911,
+        "fpa_id": "W-720398",
+        "latitude": 40.7372,
+        "longitude": -114.5955,
+        "mtbs_fire_name": "HOGAN",
+        "mtbs_id": "NV4073711459620180701",
+        "state": "NV"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -115.07081234620371,
+          40.68360577706533
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1530748800000,
+        "discovery_time": "1014",
+        "fire_name": "ECHO",
+        "fire_size": 6089.4,
+        "fire_year": 2018,
+        "fod_id": 400310914,
+        "fpa_id": "W-720405",
+        "latitude": 40.6836,
+        "longitude": -115.0708,
+        "mtbs_fire_name": "ECHO",
+        "mtbs_id": "NV4069611507520180705",
+        "state": "NV"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -116.09801272181241,
+          41.94920581459412
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532131200000,
+        "discovery_time": "0859",
+        "fire_name": "OWYHEE",
+        "fire_size": 5082.4,
+        "fire_year": 2018,
+        "fod_id": 400310930,
+        "fpa_id": "W-722132",
+        "latitude": 41.9492,
+        "longitude": -116.098,
+        "mtbs_fire_name": "OWYHEE",
+        "mtbs_id": "NV4194911609820180721",
+        "state": "NV"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -114.06641231591196,
+          41.807205972353216
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532563200000,
+        "discovery_time": "1707",
+        "fire_name": "GOOSE CREEK",
+        "fire_size": 132216.5,
+        "fire_year": 2018,
+        "fod_id": 400310945,
+        "fpa_id": "W-725417",
+        "latitude": 41.8072,
+        "longitude": -114.0664,
+        "mtbs_fire_name": "GOOSE CREEK",
+        "mtbs_id": "NV4180711406520180726",
+        "state": "NV"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -116.84221268397948,
+          40.77280564235993
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1534550400000,
+        "discovery_time": "1401",
+        "fire_name": "SHEEP CREEK",
+        "fire_size": 59741.5,
+        "fire_year": 2018,
+        "fod_id": 400310977,
+        "fpa_id": "W-725156",
+        "latitude": 40.7728,
+        "longitude": -116.8422,
+        "mtbs_fire_name": "SHEEP CREEK",
+        "mtbs_id": "NV4077311684220180818",
+        "state": "NV"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -116.15861254246552,
+          40.646105685779425
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1534982400000,
+        "discovery_time": "1609",
+        "fire_name": "COUNTY LINE",
+        "fire_size": 12978.1,
+        "fire_year": 2018,
+        "fod_id": 400310985,
+        "fpa_id": "W-725181",
+        "latitude": 40.6461,
+        "longitude": -116.1586,
+        "mtbs_fire_name": "COUNTY LINE",
+        "mtbs_id": "NV4064611615820180823",
+        "state": "NV"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -114.84581222002151,
+          40.062805731328
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1534118400000,
+        "discovery_time": "1459",
+        "fire_name": "GOSHUTE CAVE",
+        "fire_size": 32215,
+        "fire_year": 2018,
+        "fod_id": 400311017,
+        "fpa_id": "W-725135",
+        "latitude": 40.0628,
+        "longitude": -114.8458,
+        "mtbs_fire_name": "GOSHUTE CAVE",
+        "mtbs_id": "NV4006311484620180813",
+        "state": "NV"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -117.42653589818629,
+          41.52733566304722
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1530748800000,
+        "discovery_time": "0048",
+        "fire_name": "MARTIN",
+        "fire_size": 416821.2,
+        "fire_year": 2018,
+        "fod_id": 400311253,
+        "fpa_id": "W-718913",
+        "latitude": 41.52733,
+        "longitude": -117.426523,
+        "mtbs_fire_name": "MARTIN",
+        "mtbs_id": "NV4152811742720180705",
+        "state": "NV"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -117.51973080254523,
+          40.759533585650196
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532390400000,
+        "discovery_time": "1731",
+        "fire_name": "GREGG",
+        "fire_size": 10131.6,
+        "fire_year": 2018,
+        "fod_id": 400311268,
+        "fpa_id": "W-720485",
+        "latitude": 40.759528,
+        "longitude": -117.519718,
+        "mtbs_fire_name": "GREGG",
+        "mtbs_id": "NV4076011752020180724",
+        "state": "NV"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -119.61581303575248,
+          39.86108533552445
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532649600000,
+        "discovery_time": "1722",
+        "fire_name": "PERRY",
+        "fire_size": 51386,
+        "fire_year": 2018,
+        "fod_id": 400311334,
+        "fpa_id": "W-726387",
+        "latitude": 39.861079999999994,
+        "longitude": -119.6158,
+        "mtbs_fire_name": "PERRY",
+        "mtbs_id": "NV3986111961620180727",
+        "state": "NV"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -123.15865002317774,
+          42.694566244648556
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1531612800000,
+        "discovery_time": "0900",
+        "fire_name": "GRAVE CREEK 3",
+        "fire_size": 7809,
+        "fire_year": 2018,
+        "fod_id": 400312130,
+        "fpa_id": "W-722679",
+        "latitude": 42.694561,
+        "longitude": -123.158636,
+        "mtbs_fire_name": "GRAVE CREEK #3",
+        "mtbs_id": "OR4269312315820180716",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -121.07051415233154,
+          45.15970560574903
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1529539200000,
+        "discovery_time": "0748",
+        "fire_name": "BOXCAR",
+        "fire_size": 100226,
+        "fire_year": 2018,
+        "fod_id": 400312226,
+        "fpa_id": "W-726066",
+        "latitude": 45.1597,
+        "longitude": -121.0705,
+        "mtbs_fire_name": "BOXCAR 0410 RN",
+        "mtbs_id": "OR4516012107120180621",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -120.61281409939038,
+          45.2717056589623
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1529625600000,
+        "discovery_time": "0811",
+        "fire_name": "JACK KNIFE",
+        "fire_size": 15589,
+        "fire_year": 2018,
+        "fod_id": 400312231,
+        "fpa_id": "W-726078",
+        "latitude": 45.2717,
+        "longitude": -120.6128,
+        "mtbs_fire_name": "JACK KNIFE 0440 RN",
+        "mtbs_id": "OR4527212061320180622",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -121.1025142420468,
+          45.57530562909198
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1531785600000,
+        "discovery_time": "1821",
+        "fire_name": "SUBSTATION",
+        "fire_size": 78425,
+        "fire_year": 2018,
+        "fod_id": 400312261,
+        "fpa_id": "W-726069",
+        "latitude": 45.5753,
+        "longitude": -121.1025,
+        "mtbs_fire_name": "SUBSTATION 0730 RN",
+        "mtbs_id": "OR4557512110320180717",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -121.06001420491798,
+          45.42830562406497
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532563200000,
+        "discovery_time": "1644",
+        "fire_name": "LONG HOLLOW",
+        "fire_size": 33451,
+        "fire_year": 2018,
+        "fod_id": 400312270,
+        "fpa_id": "W-726077",
+        "latitude": 45.4283,
+        "longitude": -121.06,
+        "mtbs_fire_name": "LONG HOLLOW 0806 RN",
+        "mtbs_id": "OR4542812106020180726",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -120.38531406609489,
+          45.29470568329981
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1534464000000,
+        "discovery_time": "0743",
+        "fire_name": "STUBBLEFIELD",
+        "fire_size": 54221,
+        "fire_year": 2018,
+        "fod_id": 400312290,
+        "fpa_id": "W-726076",
+        "latitude": 45.2947,
+        "longitude": -120.3853,
+        "mtbs_fire_name": "STUBBLEFIELD 1008 RN",
+        "mtbs_id": "OR4529512038520180817",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -120.2242139413055,
+          44.799705665775406
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1534464000000,
+        "discovery_time": "1646",
+        "fire_name": "JENNIES PEAK",
+        "fire_size": 45973,
+        "fire_year": 2018,
+        "fod_id": 400312299,
+        "fpa_id": "W-726074",
+        "latitude": 44.7997,
+        "longitude": -120.2242,
+        "mtbs_fire_name": "JENNIES PEAK 1039 RN",
+        "mtbs_id": "OR4480012022420180817",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -119.9844139687214,
+          45.14500571320373
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1534464000000,
+        "discovery_time": "1537",
+        "fire_name": "LONE ROCK",
+        "fire_size": 5056,
+        "fire_year": 2018,
+        "fod_id": 400312300,
+        "fpa_id": "W-726073",
+        "latitude": 45.145,
+        "longitude": -119.9844,
+        "mtbs_fire_name": "LONEROCK 1057 RN",
+        "mtbs_id": "OR4514511998420180817",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -120.83301421682393,
+          45.668005662418
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1538524800000,
+        "discovery_time": "0831",
+        "fire_name": "1241",
+        "fire_size": 5877,
+        "fire_year": 2018,
+        "fod_id": 400312315,
+        "fpa_id": "W-726726",
+        "latitude": 45.668,
+        "longitude": -120.833,
+        "mtbs_fire_name": "1241 RN",
+        "mtbs_id": "OR4566812083320181003",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -117.48341104099926,
+          42.383469733503546
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532390400000,
+        "discovery_time": "1643",
+        "fire_name": "BIG GRASSY",
+        "fire_size": 5313.4,
+        "fire_year": 2018,
+        "fod_id": 400312367,
+        "fpa_id": "W-720271",
+        "latitude": 42.383464000000004,
+        "longitude": -117.483398,
+        "mtbs_fire_name": "BIG GRASSY",
+        "mtbs_id": "OR4240411760120180724",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -121.36781411695425,
+          44.73610554868318
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1534464000000,
+        "discovery_time": "1256",
+        "fire_name": "TENINO FIRE",
+        "fire_size": 9083,
+        "fire_year": 2018,
+        "fod_id": 400312444,
+        "fpa_id": "W-721807",
+        "latitude": 44.7361,
+        "longitude": -121.3678,
+        "mtbs_fire_name": "TENINO FIRE",
+        "mtbs_id": "OR4473612136820180816",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -112.9511116177832,
+          38.09250565317146
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1530144000000,
+        "discovery_time": "1248",
+        "fire_name": "BLACK MOUNTAIN",
+        "fire_size": 5634,
+        "fire_year": 2018,
+        "fod_id": 400312787,
+        "fpa_id": "W-721493",
+        "latitude": 38.0925,
+        "longitude": -112.9511,
+        "mtbs_fire_name": "BLACK MOUNTAIN",
+        "mtbs_id": "UT3809211295120180628",
+        "state": "UT"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -112.96921191728906,
+          40.50720592496662
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532649600000,
+        "discovery_time": "1400",
+        "fire_name": "CEDAR MOUNTAIN ONE",
+        "fire_size": 13942,
+        "fire_year": 2018,
+        "fod_id": 400313239,
+        "fpa_id": "W-721275",
+        "latitude": 40.5072,
+        "longitude": -112.9692,
+        "mtbs_fire_name": "CEDAR MOUNTAIN ONE",
+        "mtbs_id": "UT4050711296920180727",
+        "state": "UT"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -112.75361192286613,
+          40.86300598055064
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1535760000000,
+        "discovery_time": "1400",
+        "fire_name": "LAKESIDE",
+        "fire_size": 9880,
+        "fire_year": 2018,
+        "fod_id": 400313254,
+        "fpa_id": "W-723768",
+        "latitude": 40.863,
+        "longitude": -112.7536,
+        "mtbs_fire_name": "LAKESIDE",
+        "mtbs_id": "UT4086311275320180901",
+        "state": "UT"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -110.81975343093349,
+          40.11000604479496
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1530403200000,
+        "discovery_time": "2030",
+        "fire_name": "DOLLAR RIDGE",
+        "fire_size": 68547,
+        "fire_year": 2018,
+        "fod_id": 400313293,
+        "fpa_id": "W-719340",
+        "latitude": 40.11,
+        "longitude": -110.81974199999999,
+        "mtbs_fire_name": "DOLLAR RIDGE",
+        "mtbs_id": "UT4010011096020180701",
+        "state": "UT"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -109.87391113304402,
+          39.29080601544422
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532044800000,
+        "discovery_time": "1440",
+        "fire_name": "BEAR TRAP",
+        "fire_size": 12789,
+        "fire_year": 2018,
+        "fod_id": 400313301,
+        "fpa_id": "W-720342",
+        "latitude": 39.2908,
+        "longitude": -109.8739,
+        "mtbs_fire_name": "BEAR TRAP",
+        "mtbs_id": "UT3930510987820180721",
+        "state": "UT"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -120.28330440231774,
+          46.95188580007046
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1531958400000,
+        "discovery_time": "1505",
+        "fire_name": "BOYLSTON",
+        "fire_size": 71209,
+        "fire_year": 2018,
+        "fod_id": 400313527,
+        "fpa_id": "W-722875",
+        "latitude": 46.951879999999996,
+        "longitude": -120.28329,
+        "mtbs_fire_name": "BOYLSTON",
+        "mtbs_id": "WA4695212028320180719",
+        "state": "WA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -119.33990444446846,
+          47.840005955790964
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1533945600000,
+        "discovery_time": "1220",
+        "fire_name": "GRASS VALLEY",
+        "fire_size": 76817.1,
+        "fire_year": 2018,
+        "fod_id": 400313543,
+        "fpa_id": "W-722879",
+        "latitude": 47.84,
+        "longitude": -119.33989,
+        "mtbs_fire_name": "GRASS VALLEY",
+        "mtbs_id": "WA4784011934020180811",
+        "state": "WA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.07512419461604,
+          47.748366085707424
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1533168000000,
+        "discovery_time": "1448",
+        "fire_name": "ANGEL SPRINGS",
+        "fire_size": 5046,
+        "fire_year": 2018,
+        "fod_id": 400313568,
+        "fpa_id": "W-733499",
+        "latitude": 47.74836,
+        "longitude": -118.07511000000001,
+        "mtbs_fire_name": "ANGEL SPRINGS",
+        "mtbs_id": "WA4774811807520180802",
+        "state": "WA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -120.56861430623853,
+          46.29860572953772
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1534377600000,
+        "discovery_time": "2355",
+        "fire_name": "MENINICK PASS",
+        "fire_size": 5500,
+        "fire_year": 2018,
+        "fod_id": 400313679,
+        "fpa_id": "W-723702",
+        "latitude": 46.2986,
+        "longitude": -120.5686,
+        "mtbs_fire_name": "MENINICK PASS",
+        "mtbs_id": "WA4630012057020180817",
+        "state": "WA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -111.1228117444543,
+          41.943306229498575
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1534377600000,
+        "discovery_time": "1256",
+        "fire_name": "NORTH EDEN",
+        "fire_size": 13763,
+        "fire_year": 2018,
+        "fod_id": 400313842,
+        "fpa_id": "W-725000",
+        "latitude": 41.9433,
+        "longitude": -111.1228,
+        "mtbs_fire_name": "NORTH EDEN",
+        "mtbs_id": "UT4194311112320180816",
+        "state": "UT"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -119.74818024456061,
+          46.656364837728056
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1531958400000,
+        "discovery_time": "1500",
+        "fire_name": "L ROAD",
+        "fire_size": 22316,
+        "fire_year": 2018,
+        "fod_id": 400314144,
+        "fpa_id": "FWS-2018USWAHFRL0Y9",
+        "latitude": 46.656359,
+        "longitude": -119.748166,
+        "mtbs_fire_name": "L RD SW",
+        "mtbs_id": "WA4665411975020180719",
+        "state": "WA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -119.48731422180792,
+          46.75839587158627
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1536278400000,
+        "discovery_time": "2230",
+        "fire_name": "WAHLUKE SLOPE",
+        "fire_size": 11464,
+        "fire_year": 2018,
+        "fod_id": 400314155,
+        "fpa_id": "FWS-2018USWAHFRL4Q7",
+        "latitude": 46.75839,
+        "longitude": -119.4873,
+        "mtbs_fire_name": "WAHLUKE SLOPE",
+        "mtbs_id": "WA4675811948720180908",
+        "state": "WA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -118.99771396750162,
+          45.97436586947033
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532822400000,
+        "discovery_time": "1700",
+        "fire_name": "LAKE WALLULA",
+        "fire_size": 12377,
+        "fire_year": 2018,
+        "fod_id": 400314399,
+        "fpa_id": "FWS-2018USWAMNRL14Z",
+        "latitude": 45.97436,
+        "longitude": -118.9977,
+        "mtbs_fire_name": "LAKE WALLULA",
+        "mtbs_id": "OR4597411899820180729",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -123.58173405457735,
+          42.509155193689594
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1531612800000,
+        "discovery_time": "1507",
+        "fire_name": "TAYLOR CREEK",
+        "fire_size": 52839,
+        "fire_year": 2018,
+        "fod_id": 400317066,
+        "fpa_id": "SFO-2018ORODF1871221219",
+        "latitude": 42.50915,
+        "longitude": -123.58172,
+        "mtbs_fire_name": "TAYLOR CREEK",
+        "mtbs_id": "OR4252812357120180715",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -104.90000978155062,
+          36.803339003329185
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1530144000000,
+        "discovery_time": null,
+        "fire_name": "EMILY",
+        "fire_size": 8432,
+        "fire_year": 2018,
+        "fod_id": 400317977,
+        "fpa_id": "SFO-2018NMN4S18-41520852X",
+        "latitude": 36.803333,
+        "longitude": -104.9,
+        "mtbs_fire_name": "EMILY",
+        "mtbs_id": "NM3597510490820180628",
+        "state": "NM"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -112.39251379142162,
+          41.85353699581543
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1533254400000,
+        "discovery_time": "1524",
+        "fire_name": "GORING",
+        "fire_size": 15046.281,
+        "fire_year": 2018,
+        "fod_id": 400318794,
+        "fpa_id": "SFO-2018UTBRSUTBRS-000714",
+        "latitude": 41.853530879999994,
+        "longitude": -112.3925018,
+        "mtbs_fire_name": "GORING",
+        "mtbs_id": "UT4185411239220180803",
+        "state": "UT"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -120.94549502176181,
+          38.052060075751555
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1530230400000,
+        "discovery_time": "1511",
+        "fire_name": "WAVERLY",
+        "fire_size": 11789,
+        "fire_year": 2018,
+        "fod_id": 400326089,
+        "fpa_id": "SFO-2018CACDFTCU007477",
+        "latitude": 38.052055,
+        "longitude": -120.94548200000001,
+        "mtbs_fire_name": "WAVERLY",
+        "mtbs_id": "CA3805012095020180629",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -102.35750931921454,
+          38.16450636425081
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1520035200000,
+        "discovery_time": "1747",
+        "fire_name": "RABBIT 22 FIRE",
+        "fire_size": 8000,
+        "fire_year": 2018,
+        "fod_id": 400361589,
+        "fpa_id": "SFO-201899350506WFD",
+        "latitude": 38.1645,
+        "longitude": -102.3575,
+        "mtbs_fire_name": "RABBIT 22",
+        "mtbs_id": "CO3773310232920180304",
+        "state": "CO"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -112.36631117343315,
+          34.68842526706041
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1525996800000,
+        "discovery_time": "1025",
+        "fire_name": "VIEWPOINT",
+        "fire_size": 5600,
+        "fire_year": 2018,
+        "fod_id": 400367632,
+        "fpa_id": "SFO-2018AZA5S573",
+        "latitude": 34.68842,
+        "longitude": -112.3663,
+        "mtbs_fire_name": "VIEWPOINT",
+        "mtbs_id": "AZ3468811236620180511",
+        "state": "AZ"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -120.08001437077536,
+          46.966165822464404
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1529452800000,
+        "discovery_time": "1717",
+        "fire_name": "MILE POST TWENTY TWO",
+        "fire_size": 7614,
+        "fire_year": 2018,
+        "fod_id": 400370314,
+        "fpa_id": "SFO-2018WADNR55856",
+        "latitude": 46.966159999999995,
+        "longitude": -120.08,
+        "mtbs_fire_name": "MILEPOST TWENTY TWO",
+        "mtbs_id": "WA4696612008020180620",
+        "state": "WA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -121.24529423333608,
+          45.419175604727506
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1533081600000,
+        "discovery_time": "1208",
+        "fire_name": "SOUTH VALLEY RD",
+        "fire_size": 20026,
+        "fire_year": 2018,
+        "fod_id": 400372333,
+        "fpa_id": "SFO-2018ORODF1895401819",
+        "latitude": 45.41917,
+        "longitude": -121.24528,
+        "mtbs_fire_name": "SOUTH VALLEY ROAD",
+        "mtbs_id": "OR4542012124020180801",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -105.12113480858204,
+          36.551394952455944
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1527724800000,
+        "discovery_time": null,
+        "fire_name": "UTE PARK",
+        "fire_size": 36740,
+        "fire_year": 2018,
+        "fod_id": 400376589,
+        "fpa_id": "SFO-2018NMN2S18-20820696X",
+        "latitude": 36.551389,
+        "longitude": -105.12112499999999,
+        "mtbs_fire_name": "UTE PARK",
+        "mtbs_id": "NM3655310510320180531",
+        "state": "NM"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -104.04700975675205,
+          38.53857631233474
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1523923200000,
+        "discovery_time": "1300",
+        "fire_name": "EDISON",
+        "fire_size": 5528,
+        "fire_year": 2018,
+        "fod_id": 400389703,
+        "fpa_id": "ICS209_2018_9016193",
+        "latitude": 38.53857,
+        "longitude": -104.047,
+        "mtbs_fire_name": "EDISON",
+        "mtbs_id": "CO3853910404720180417",
+        "state": "CO"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -103.4635096519219,
+          38.84077639432006
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1523923200000,
+        "discovery_time": "1300",
+        "fire_name": "HWY 94",
+        "fire_size": 7288,
+        "fire_year": 2018,
+        "fod_id": 400389704,
+        "fpa_id": "ICS209_2018_9016481",
+        "latitude": 38.84077,
+        "longitude": -103.4635,
+        "mtbs_fire_name": "HWY 94",
+        "mtbs_id": "CO3884110346320180417",
+        "state": "CO"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -102.2765092256268,
+          37.40070625196327
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1523923200000,
+        "discovery_time": "2149",
+        "fire_name": "BADGER HOLE",
+        "fire_size": 50671,
+        "fire_year": 2018,
+        "fod_id": 400389746,
+        "fpa_id": "ICS209_2018_9028320",
+        "latitude": 37.4007,
+        "longitude": -102.2765,
+        "mtbs_fire_name": "BADGER HOLE",
+        "mtbs_id": "CO3740110227620180417",
+        "state": "CO"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -119.12691267269842,
+          37.56544516243201
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1528675200000,
+        "discovery_time": "1749",
+        "fire_name": "LIONS",
+        "fire_size": 12990,
+        "fire_year": 2018,
+        "fod_id": 400389761,
+        "fpa_id": "ICS209_2018_9073354",
+        "latitude": 37.565439999999995,
+        "longitude": -119.1269,
+        "mtbs_fire_name": "LIONS",
+        "mtbs_id": "CA3756511912720180611",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -123.55141395892163,
+          41.95580516073057
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1531612800000,
+        "discovery_time": "2025",
+        "fire_name": "NATCHEZ",
+        "fire_size": 38134,
+        "fire_year": 2018,
+        "fod_id": 400389771,
+        "fpa_id": "ICS209_2018_9059104",
+        "latitude": 41.9558,
+        "longitude": -123.5514,
+        "mtbs_fire_name": "NATCHEZ",
+        "mtbs_id": "CA4195612355120180715",
+        "state": "CA"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -114.06981227523995,
+          41.527005943793355
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532736000000,
+        "discovery_time": "1325",
+        "fire_name": "CHINA JIM",
+        "fire_size": 20000,
+        "fire_year": 2018,
+        "fod_id": 400389780,
+        "fpa_id": "ICS209_2018_9063876",
+        "latitude": 41.527,
+        "longitude": -114.0698,
+        "mtbs_fire_name": "GOOSE CREEK",
+        "mtbs_id": "NV4180711406520180726",
+        "state": "NV"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.80671399262829,
+          42.82594528583572
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1531699200000,
+        "discovery_time": "0958",
+        "fire_name": "MILES",
+        "fire_size": 16679.5,
+        "fire_year": 2018,
+        "fod_id": 400389787,
+        "fpa_id": "ICS209_2018_9144638",
+        "latitude": 42.825939999999996,
+        "longitude": -122.8067,
+        "mtbs_fire_name": "MILES",
+        "mtbs_id": "OR4282612280720180716",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -104.67910937783547,
+          32.2118352882255
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1526947200000,
+        "discovery_time": "1045",
+        "fire_name": "KELLAR",
+        "fire_size": 5750,
+        "fire_year": 2018,
+        "fod_id": 400389800,
+        "fpa_id": "ICS209_2018_9174860",
+        "latitude": 32.21183,
+        "longitude": -104.6791,
+        "mtbs_fire_name": "KELLAR",
+        "mtbs_id": "NM3221210467920180522",
+        "state": "NM"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -120.47401406347782,
+          45.20783566863193
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1534464000000,
+        "discovery_time": "1957",
+        "fire_name": "SEALE 1045 RN",
+        "fire_size": 23600,
+        "fire_year": 2018,
+        "fod_id": 400389824,
+        "fpa_id": "ICS209_2018_9151636",
+        "latitude": 45.20783,
+        "longitude": -120.474,
+        "mtbs_fire_name": "STUBBLEFIELD 1008 RN",
+        "mtbs_id": "OR4529512038520180817",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -122.66111398970287,
+          42.93758530671748
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1531612800000,
+        "discovery_time": "1852",
+        "fire_name": "COLUMBUS",
+        "fire_size": 10697,
+        "fire_year": 2018,
+        "fod_id": 400389825,
+        "fpa_id": "ICS209_2018_9159692",
+        "latitude": 42.93758,
+        "longitude": -122.6611,
+        "mtbs_fire_name": "COLUMBUS",
+        "mtbs_id": "OR4293812266120180715",
+        "state": "OR"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -119.95931416171052,
+          46.105585780099275
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1536364800000,
+        "discovery_time": "1300",
+        "fire_name": "GLADE CREEK",
+        "fire_size": 12765,
+        "fire_year": 2018,
+        "fod_id": 400389848,
+        "fpa_id": "ICS209_2018_9263846",
+        "latitude": 46.105579999999996,
+        "longitude": -119.9593,
+        "mtbs_fire_name": "GLADE CREEK",
+        "mtbs_id": "WA4610611995920180908",
+        "state": "WA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

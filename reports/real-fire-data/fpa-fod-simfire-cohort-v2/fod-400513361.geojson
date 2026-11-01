@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -119.8980143176911,
+          46.869235835591105
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1559520000000,
+        "discovery_time": "0400",
+        "fire_name": "243 COMMAND",
+        "fire_size": 22672,
+        "fire_year": 2019,
+        "fod_id": 400513361,
+        "fpa_id": "FWS-2019USWACBRL9ZL",
+        "latitude": 46.86923,
+        "longitude": -119.898,
+        "mtbs_fire_name": "243 COMMAND",
+        "mtbs_id": "WA4686911989820190604",
+        "state": "WA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

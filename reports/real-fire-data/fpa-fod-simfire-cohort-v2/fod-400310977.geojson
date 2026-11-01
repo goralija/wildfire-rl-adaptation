@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -116.84221268397948,
+          40.77280564235993
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1534550400000,
+        "discovery_time": "1401",
+        "fire_name": "SHEEP CREEK",
+        "fire_size": 59741.5,
+        "fire_year": 2018,
+        "fod_id": 400310977,
+        "fpa_id": "W-725156",
+        "latitude": 40.7728,
+        "longitude": -116.8422,
+        "mtbs_fire_name": "SHEEP CREEK",
+        "mtbs_id": "NV4077311684220180818",
+        "state": "NV"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

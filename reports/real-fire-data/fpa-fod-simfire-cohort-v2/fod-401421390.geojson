@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -120.03842387750471,
+          44.63049567224103
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1725235200000,
+        "discovery_time": "0422",
+        "fire_name": "SHOE FLY",
+        "fire_size": 26817,
+        "fire_year": 2024,
+        "fod_id": 401421390,
+        "fpa_id": "INF-2024-OR953S-000766",
+        "latitude": 44.63049,
+        "longitude": -120.03841,
+        "mtbs_fire_name": "SHOE FLY",
+        "mtbs_id": "OR4463012003820240902",
+        "state": "OR"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

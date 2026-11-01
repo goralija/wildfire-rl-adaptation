@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -120.66891323291739,
+          40.05325526693838
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1567555200000,
+        "discovery_time": "1446",
+        "fire_name": "WALKER",
+        "fire_size": 54608,
+        "fire_year": 2019,
+        "fod_id": 400732973,
+        "fpa_id": "ICS209_2019_10802166",
+        "latitude": 40.05325,
+        "longitude": -120.6689,
+        "mtbs_fire_name": "WALKER",
+        "mtbs_id": "CA4005312066920190904",
+        "state": "CA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

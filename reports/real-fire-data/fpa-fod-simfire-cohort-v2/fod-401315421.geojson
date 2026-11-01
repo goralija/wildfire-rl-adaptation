@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -117.07082597410177,
+          33.88952090337679
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1689292800000,
+        "discovery_time": "1530",
+        "fire_name": "RABBIT",
+        "fire_size": 8354.8,
+        "fire_year": 2023,
+        "fod_id": 401315421,
+        "fpa_id": "INF-2023-CARRU-102458",
+        "latitude": 33.889516,
+        "longitude": -117.070814,
+        "mtbs_fire_name": "RABBIT",
+        "mtbs_id": "CA3389011707120230714",
+        "state": "CA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

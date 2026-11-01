@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -116.80139675541912,
+          41.31900569672606
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1728172800000,
+        "discovery_time": "1445",
+        "fire_name": "CASTLE RIDGE",
+        "fire_size": 25884,
+        "fire_year": 2024,
+        "fod_id": 401425511,
+        "fpa_id": "INF-2024-NVEKD-010442",
+        "latitude": 41.319,
+        "longitude": -116.801384,
+        "mtbs_fire_name": "CASTLE RIDGE",
+        "mtbs_id": "NV4131911680120241006",
+        "state": "NV"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -119.12691267269842,
+          37.56544516243201
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1528675200000,
+        "discovery_time": "1749",
+        "fire_name": "LIONS",
+        "fire_size": 12990,
+        "fire_year": 2018,
+        "fod_id": 400389761,
+        "fpa_id": "ICS209_2018_9073354",
+        "latitude": 37.565439999999995,
+        "longitude": -119.1269,
+        "mtbs_fire_name": "LIONS",
+        "mtbs_id": "CA3756511912720180611",
+        "state": "CA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

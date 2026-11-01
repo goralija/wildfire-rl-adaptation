@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -119.64781345202648,
+          42.609635559403344
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1568505600000,
+        "discovery_time": "1045",
+        "fire_name": "POKER",
+        "fire_size": 23400,
+        "fire_year": 2019,
+        "fod_id": 400513550,
+        "fpa_id": "FWS-2019USORHMRMS0T",
+        "latitude": 42.60963,
+        "longitude": -119.6478,
+        "mtbs_fire_name": "POKER",
+        "mtbs_id": "OR4261011964820190915",
+        "state": "OR"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

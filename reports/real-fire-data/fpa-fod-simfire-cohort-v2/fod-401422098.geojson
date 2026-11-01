@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -121.10214684333803,
+          43.49705549084811
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1725580800000,
+        "discovery_time": "1857",
+        "fire_name": "FLAT TOP",
+        "fire_size": 36471.75,
+        "fire_year": 2024,
+        "fod_id": 401422098,
+        "fpa_id": "INF-2024-ORDEF-000845",
+        "latitude": 43.49705,
+        "longitude": -121.102133,
+        "mtbs_fire_name": "FLAT TOP",
+        "mtbs_id": "OR4349712110220240907",
+        "state": "OR"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

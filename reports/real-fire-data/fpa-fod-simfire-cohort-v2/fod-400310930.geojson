@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -116.09801272181241,
+          41.94920581459412
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532131200000,
+        "discovery_time": "0859",
+        "fire_name": "OWYHEE",
+        "fire_size": 5082.4,
+        "fire_year": 2018,
+        "fod_id": 400310930,
+        "fpa_id": "W-722132",
+        "latitude": 41.9492,
+        "longitude": -116.098,
+        "mtbs_fire_name": "OWYHEE",
+        "mtbs_id": "NV4194911609820180721",
+        "state": "NV"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

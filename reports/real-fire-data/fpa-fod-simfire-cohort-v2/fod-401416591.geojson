@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -119.80521344846257,
+          42.42778853107823
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1722816000000,
+        "discovery_time": "1705",
+        "fire_name": "WARNER PEAK",
+        "fire_size": 65866,
+        "fire_year": 2024,
+        "fod_id": 401416591,
+        "fpa_id": "INF-2024-ORSHR-240269",
+        "latitude": 42.427783,
+        "longitude": -119.8052,
+        "mtbs_fire_name": "WARNER PEAK",
+        "mtbs_id": "OR4242811980520240806",
+        "state": "OR"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

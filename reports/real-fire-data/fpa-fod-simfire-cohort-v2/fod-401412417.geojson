@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -123.64251378829957,
+          40.76550507295686
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1721001600000,
+        "discovery_time": "1740",
+        "fire_name": "HILL",
+        "fire_size": 7224,
+        "fire_year": 2024,
+        "fod_id": 401412417,
+        "fpa_id": "INF-2024-CASRF-000586",
+        "latitude": 40.7655,
+        "longitude": -123.6425,
+        "mtbs_fire_name": "HILL",
+        "mtbs_id": "CA4076612364320240716",
+        "state": "CA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

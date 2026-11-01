@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -119.9844139687214,
+          45.14500571320373
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1534464000000,
+        "discovery_time": "1537",
+        "fire_name": "LONE ROCK",
+        "fire_size": 5056,
+        "fire_year": 2018,
+        "fod_id": 400312300,
+        "fpa_id": "W-726073",
+        "latitude": 45.145,
+        "longitude": -119.9844,
+        "mtbs_fire_name": "LONEROCK 1057 RN",
+        "mtbs_id": "OR4514511998420180817",
+        "state": "OR"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

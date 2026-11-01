@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -117.15463200734023,
+          34.12137392537601
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1725494400000,
+        "discovery_time": "1800",
+        "fire_name": "LINE",
+        "fire_size": 43978,
+        "fire_year": 2024,
+        "fod_id": 401421943,
+        "fpa_id": "INF-2024-CABDF-012520",
+        "latitude": 34.121369,
+        "longitude": -117.15462000000001,
+        "mtbs_fire_name": "LINE",
+        "mtbs_id": "CA3412111715520240906",
+        "state": "CA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -108.45372265364983,
+          33.02846894036971
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1689984000000,
+        "discovery_time": "1655",
+        "fire_name": "TURKEY",
+        "fire_size": 5612,
+        "fire_year": 2023,
+        "fod_id": 401316696,
+        "fpa_id": "INF-2023-NMGNF-000419",
+        "latitude": 33.028463699999996,
+        "longitude": -108.4537124,
+        "mtbs_fire_name": "TURKEY",
+        "mtbs_id": "NM3302810845420230722",
+        "state": "NM"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

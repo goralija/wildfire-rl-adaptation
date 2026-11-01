@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -109.87391113304402,
+          39.29080601544422
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532044800000,
+        "discovery_time": "1440",
+        "fire_name": "BEAR TRAP",
+        "fire_size": 12789,
+        "fire_year": 2018,
+        "fod_id": 400313301,
+        "fpa_id": "W-720342",
+        "latitude": 39.2908,
+        "longitude": -109.8739,
+        "mtbs_fire_name": "BEAR TRAP",
+        "mtbs_id": "UT3930510987820180721",
+        "state": "UT"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -119.05334563518575,
+          34.33722704051507
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1572480000000,
+        "discovery_time": "2115",
+        "fire_name": "MARIA",
+        "fire_size": 9999,
+        "fire_year": 2019,
+        "fod_id": 400732952,
+        "fpa_id": "ICS209_2019_10757785",
+        "latitude": 34.3372222,
+        "longitude": -119.05333329,
+        "mtbs_fire_name": "MARIA",
+        "mtbs_id": "CA3433711905320191031",
+        "state": "CA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

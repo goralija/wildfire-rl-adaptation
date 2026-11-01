@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -111.07571153027985,
+          40.469473067240735
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1727481600000,
+        "discovery_time": "1527",
+        "fire_name": "YELLOW LAKE",
+        "fire_size": 33045,
+        "fire_year": 2024,
+        "fod_id": 401424721,
+        "fpa_id": "INF-2024-UTUWF-200810",
+        "latitude": 40.469467,
+        "longitude": -111.0757,
+        "mtbs_fire_name": "YELLOW LAKE",
+        "mtbs_id": "UT4046911107620240928",
+        "state": "UT"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

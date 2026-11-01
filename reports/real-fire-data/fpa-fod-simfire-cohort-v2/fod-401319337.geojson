@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -112.4785115321507,
+          38.1551726934678
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1691107200000,
+        "discovery_time": "1755",
+        "fire_name": "THOMPSON RIDGE",
+        "fire_size": 7253,
+        "fire_year": 2023,
+        "fod_id": 401319337,
+        "fpa_id": "INF-2023-UTFIF-230252",
+        "latitude": 38.155167,
+        "longitude": -112.4785,
+        "mtbs_fire_name": "THOMPSON RIDGE",
+        "mtbs_id": "UT3815511247920230804",
+        "state": "UT"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -111.85667906474616,
+          44.97778425837622
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1533513600000,
+        "discovery_time": "2039",
+        "fire_name": "MONUMENT",
+        "fire_size": 6614,
+        "fire_year": 2018,
+        "fod_id": 400303610,
+        "fpa_id": "FS-6905729",
+        "latitude": 44.97777778,
+        "longitude": -111.85666667,
+        "mtbs_fire_name": "MONUMENT",
+        "mtbs_id": "MT4497811185720180806",
+        "state": "MT"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

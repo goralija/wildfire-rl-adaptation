@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -115.62531268687901,
+          42.290805886969245
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1563840000000,
+        "discovery_time": "0918",
+        "fire_name": "LOOKOUT POINT",
+        "fire_size": 9432.8,
+        "fire_year": 2019,
+        "fod_id": 400508306,
+        "fpa_id": "W-731363",
+        "latitude": 42.2908,
+        "longitude": -115.6253,
+        "mtbs_fire_name": "LOOKOUT POINT",
+        "mtbs_id": "ID4229111562520190723",
+        "state": "ID"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -108.22501208547602,
+          47.50140706393539
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1564617600000,
+        "discovery_time": "1129",
+        "fire_name": "RIDGETOP",
+        "fire_size": 11128,
+        "fire_year": 2019,
+        "fod_id": 400509143,
+        "fpa_id": "W-733239",
+        "latitude": 47.5014,
+        "longitude": -108.225,
+        "mtbs_fire_name": "RIDGETOP",
+        "mtbs_id": "MT4750210822520190801",
+        "state": "MT"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

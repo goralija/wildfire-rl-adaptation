@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -122.54612525731031,
+          43.971394284290724
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1689984000000,
+        "discovery_time": "1701",
+        "fire_name": "BEDROCK",
+        "fire_size": 31590,
+        "fire_year": 2023,
+        "fod_id": 401316681,
+        "fpa_id": "INF-2023-ORWIF-230266",
+        "latitude": 43.9713889,
+        "longitude": -122.54611109999999,
+        "mtbs_fire_name": "BEDROCK",
+        "mtbs_id": "OR4397112254620230723",
+        "state": "OR"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

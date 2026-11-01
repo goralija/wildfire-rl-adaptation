@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -111.15753270701333,
+          31.50130488605157
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1688083200000,
+        "discovery_time": "1820",
+        "fire_name": "BEEHIVE",
+        "fire_size": 10745,
+        "fire_year": 2023,
+        "fod_id": 401312856,
+        "fpa_id": "INF-2023-AZCNF-000554",
+        "latitude": 31.5013,
+        "longitude": -111.157522,
+        "mtbs_fire_name": "BEEHIVE",
+        "mtbs_id": "AZ3150111115820230701",
+        "state": "AZ"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

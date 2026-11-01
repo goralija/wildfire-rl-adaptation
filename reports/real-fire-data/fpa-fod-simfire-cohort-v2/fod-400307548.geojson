@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -108.57361102455943,
+          40.65300627909555
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1536796800000,
+        "discovery_time": "1143",
+        "fire_name": "BOONE DRAW",
+        "fire_size": 8610.6,
+        "fire_year": 2018,
+        "fod_id": 400307548,
+        "fpa_id": "W-725861",
+        "latitude": 40.653,
+        "longitude": -108.5736,
+        "mtbs_fire_name": "BOONE DRAW",
+        "mtbs_id": "CO4065310857420180913",
+        "state": "CO"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -108.45629372054397,
+          38.31047298870743
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1722470400000,
+        "discovery_time": "1118",
+        "fire_name": "BUCKTAIL",
+        "fire_size": 7078,
+        "fire_year": 2024,
+        "fod_id": 401415733,
+        "fpa_id": "INF-2024-COMRX-000086",
+        "latitude": 38.310467,
+        "longitude": -108.456283,
+        "mtbs_fire_name": "BUCKTAIL",
+        "mtbs_id": "CO3831010845620240801",
+        "state": "CO"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

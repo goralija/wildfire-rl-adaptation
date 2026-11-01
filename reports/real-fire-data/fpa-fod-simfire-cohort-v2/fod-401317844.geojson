@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -108.38806585852237,
+          33.294449683737035
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1690329600000,
+        "discovery_time": "1132",
+        "fire_name": "PRIOR",
+        "fire_size": 12833,
+        "fire_year": 2023,
+        "fod_id": 401317844,
+        "fpa_id": "INF-2023-NMGNF-000447",
+        "latitude": 33.2944444,
+        "longitude": -108.3880556,
+        "mtbs_fire_name": "PRIOR",
+        "mtbs_id": "NM3329410838820230726",
+        "state": "NM"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -113.74223493069782,
+          44.70250627834567
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1689724800000,
+        "discovery_time": "1128",
+        "fire_name": "HAYDEN",
+        "fire_size": 24706,
+        "fire_year": 2023,
+        "fod_id": 401316132,
+        "fpa_id": "INF-2023-IDSCF-023084",
+        "latitude": 44.7025,
+        "longitude": -113.7422222,
+        "mtbs_fire_name": "HAYDEN",
+        "mtbs_id": "ID4470311374220230719",
+        "state": "ID"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

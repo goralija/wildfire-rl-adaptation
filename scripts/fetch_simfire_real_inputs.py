@@ -20,10 +20,16 @@ import requests
 
 
 ROOT = Path(__file__).resolve().parents[1]
-FUEL_SERVICE = (
-    "https://lfps.usgs.gov/arcgis/rest/services/Landfire_LF2016/"
-    "LF2016_FBFM13_CONUS/ImageServer/exportImage"
-)
+FUEL_SERVICES = {
+    "LF2016": (
+        "https://lfps.usgs.gov/arcgis/rest/services/Landfire_LF2016/"
+        "LF2016_FBFM13_CONUS/ImageServer/exportImage"
+    ),
+    "LF2022": (
+        "https://lfps.usgs.gov/arcgis/rest/services/Landfire_LF2022/"
+        "LF2022_FBFM13_CONUS/ImageServer/exportImage"
+    ),
+}
 ELEVATION_SERVICE = (
     "https://lfps.usgs.gov/arcgis/rest/services/Landfire_Topo/"
     "LF2020_Elev_CONUS/ImageServer/exportImage"
@@ -42,6 +48,13 @@ def sha256_file(path: Path) -> str:
         for chunk in iter(lambda: stream.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def display_path(path: Path) -> str:
+    try:
+        return path.resolve().relative_to(ROOT).as_posix()
+    except ValueError:
+        return str(path.resolve())
 
 
 def load_scenario(path: Path) -> dict:
@@ -124,6 +137,11 @@ def main() -> int:
     )
     parser.add_argument("--out", type=Path, default=ROOT / ".local/real-input-dixie")
     parser.add_argument("--force", action="store_true", help="replace existing downloaded inputs")
+    parser.add_argument(
+        "--skip-weather",
+        action="store_true",
+        help="fetch and validate fuel/terrain even when the historical-weather API is unavailable",
+    )
     args = parser.parse_args()
     manifest_path = args.scenario_manifest.expanduser().resolve()
     output = args.out.expanduser().resolve()
@@ -136,12 +154,21 @@ def main() -> int:
     rows, columns = grid["rows"], grid["columns"]
     bounds = [float(value) for value in grid["projected_bounds_m"]]
     params = image_params(bounds, rows, columns, grid["crs"])
+    fuel_input = scenario["inputs"]["fuel"]
+    fuel_release = str(fuel_input.get("source_release") or "LF2016").split()[0]
+    if fuel_release not in FUEL_SERVICES:
+        parser.error(
+            "Unsupported fuel vintage {!r}; available: {}".format(
+                fuel_release, ", ".join(FUEL_SERVICES)
+            )
+        )
+    fuel_service = FUEL_SERVICES[fuel_release]
     output.mkdir(parents=True, exist_ok=True)
-    fuel_path = output / "fuel-lf2016-fbfm13.tif"
+    fuel_path = output / "fuel-{}-fbfm13.tif".format(fuel_release.lower())
     elevation_path = output / "elevation-lf2020-m.tif"
     weather_path = output / "weather-era5-discovery-date-utc.json"
 
-    fuel_hash = fetch_image(FUEL_SERVICE, params, fuel_path, args.force)
+    fuel_hash = fetch_image(fuel_service, params, fuel_path, args.force)
     elevation_hash = fetch_image(ELEVATION_SERVICE, params, elevation_path, args.force)
     fuel_info = validate_raster(fuel_path, grid["crs"], rows, columns, bounds)
     elevation_info = validate_raster(elevation_path, grid["crs"], rows, columns, bounds)
@@ -162,7 +189,11 @@ def main() -> int:
         "wind_speed_unit": "ms",
         "models": "era5",
     }
-    if not weather_path.exists() or args.force:
+    if args.skip_weather:
+        weather = {"hourly": {"time": []}, "hourly_units": None}
+        weather_url = None
+        weather_hash = None
+    elif not weather_path.exists() or args.force:
         response = requests.get(WEATHER_SERVICE, params=weather_params, timeout=180)
         response.raise_for_status()
         weather = response.json()
@@ -170,15 +201,18 @@ def main() -> int:
             raise ValueError("ERA5 response did not contain 24 hourly values for the discovery date.")
         weather_path.write_text(json.dumps(weather, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         weather_url = response.url
+        weather_hash = sha256_file(weather_path)
     else:
         weather = json.loads(weather_path.read_text(encoding="utf-8"))
-        weather_url = f"{WEATHER_SERVICE}?{urlencode(weather_params)}"
-    weather_hash = sha256_file(weather_path)
+        weather_url = "{}?{}".format(WEATHER_SERVICE, urlencode(weather_params))
+        weather_hash = sha256_file(weather_path)
 
     receipt = {
         "kind": "real_environmental_input_acquisition",
         "scientific_result": False,
         "scenario_id": scenario["scenario_id"],
+        "event_year": str(scenario["event"]["discovery_time"]["value"])[:4],
+        "split": scenario.get("split"),
         "scenario_manifest_sha256": sha256_file(manifest_path),
         "retrieved_at_utc": datetime.now(timezone.utc).isoformat(),
         "simfire_commit": SIMFIRE_COMMIT,
@@ -191,12 +225,15 @@ def main() -> int:
             "cell_alignment": "30 m UTM grid, nearest-neighbor export from native LANDFIRE service",
         },
         "fuel": {
-            "source": FUEL_SERVICE.removesuffix("/exportImage"),
-            "source_release": "LF2016 FBFM13 CONUS",
+            "source": fuel_service.removesuffix("/exportImage"),
+            "source_release": "{} FBFM13 CONUS".format(fuel_release),
             "file": fuel_path.name,
             "sha256": fuel_hash,
             "validation": fuel_info,
-            "use_limit": "pre-event candidate from 2016; five years before the 2021 incident, not a verified 2021 vegetation snapshot",
+            "use_limit": fuel_input.get(
+                "units_and_mapping",
+                "Pre-event candidate fuel map; not a field-verified event-year vegetation survey.",
+            ),
         },
         "terrain": {
             "source": ELEVATION_SERVICE.removesuffix("/exportImage"),
@@ -210,22 +247,38 @@ def main() -> int:
             "source": WEATHER_SERVICE,
             "source_release": "ERA5 historical reanalysis via Open-Meteo",
             "query_url": weather_url,
-            "file": weather_path.name,
+            "file": weather_path.name if weather_hash else None,
             "sha256": weather_hash,
             "time_zone": "UTC requested for unambiguous storage; source discovery HHMM timezone is unresolved",
             "spatial_resolution_note": "ERA5 is approximately 25 km, much coarser than the 30 m simulator grid.",
-            "simulator_use": "stored as historical context only; not fed into SimFire until wind-height and fuel-moisture semantics are mapped",
-            "hour_count": len(weather.get("hourly", {}).get("time", [])),
+            "simulator_use": "stored as historical context only; not fed into SimFire until wind-height and fuel-moisture semantics are mapped" if weather_hash else "not acquired in this run; the archive API host was not reachable from this runtime",
+            "hour_count": len(weather.get("hourly", {}).get("time", [])) if weather_hash else None,
             "hourly_units": weather.get("hourly_units"),
         },
         "limitations": [
             "FPA-FOD location is an incident reference point with unknown event-specific precision, not verified GPS ignition.",
             "FPA-FOD discovery time is retained without a time zone; the weather date is not aligned to the reported HHMM.",
-            "LF2016 FBFM13 is pre-event but five years older than the event.",
+            "The selected fuel layer is pre-event and source-compatible, but is not a field-verified event-year vegetation survey.",
             "This receipt proves source retrieval and spatial raster alignment, not model accuracy or physical fire replay.",
         ],
     }
     receipt_path = output / "input-receipt.json"
+    scenario["inputs"]["fuel"].update(
+        {"status": "verified", "path": display_path(fuel_path), "sha256": fuel_hash}
+    )
+    scenario["inputs"]["terrain"].update(
+        {"status": "verified", "path": display_path(elevation_path), "sha256": elevation_hash}
+    )
+    scenario["inputs"]["weather"].update(
+        {
+            "status": "candidate",
+            "path": display_path(weather_path) if weather_hash else scenario["inputs"]["weather"].get("path"),
+            "sha256": weather_hash,
+        }
+    )
+    scenario["readiness"] = "candidate"
+    manifest_path.write_text(json.dumps(scenario, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    receipt["scenario_manifest_sha256"] = sha256_file(manifest_path)
     receipt_path.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     print(json.dumps({"output": str(output), "receipt": str(receipt_path), "grid": receipt["grid"], "fuel_codes": fuel_info["unique_values"], "terrain_m": [elevation_info["minimum"], elevation_info["maximum"]], "weather_hours": receipt["weather"]["hour_count"]}, indent=2))
     return 0

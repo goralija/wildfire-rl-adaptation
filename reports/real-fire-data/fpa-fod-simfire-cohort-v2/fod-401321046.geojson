@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -123.0361178541062,
+          41.77767519496225
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1692057600000,
+        "discovery_time": "1541",
+        "fire_name": "HEAD",
+        "fire_size": 6954,
+        "fire_year": 2023,
+        "fod_id": 401321046,
+        "fpa_id": "INF-2023-CAKNF-006988",
+        "latitude": 41.77767,
+        "longitude": -123.03610400000001,
+        "mtbs_fire_name": "HEAD",
+        "mtbs_id": "CA4177812304120230815",
+        "state": "CA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

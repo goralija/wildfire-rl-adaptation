@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -107.81491086524292,
+          40.70582334254063
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1695945600000,
+        "discovery_time": "1154",
+        "fire_name": "IRON",
+        "fire_size": 7392,
+        "fire_year": 2023,
+        "fod_id": 401326006,
+        "fpa_id": "INF-2023-COLSD-000197",
+        "latitude": 40.705816999999996,
+        "longitude": -107.8149,
+        "mtbs_fire_name": "IRON",
+        "mtbs_id": "CO4070610781520230929",
+        "state": "CO"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

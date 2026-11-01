@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -117.40078341414248,
+          44.62090592649257
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1721606400000,
+        "discovery_time": "1702",
+        "fire_name": "THOMPSON",
+        "fire_size": 31557.42,
+        "fire_year": 2024,
+        "fod_id": 401413822,
+        "fpa_id": "INF-2024-ORVAD-240159",
+        "latitude": 44.6209,
+        "longitude": -117.40077,
+        "mtbs_fire_name": "THOMPSON",
+        "mtbs_id": "OR4462111740120240723",
+        "state": "OR"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

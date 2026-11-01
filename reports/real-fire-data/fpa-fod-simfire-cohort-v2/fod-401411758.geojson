@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -106.53439426395745,
+          45.26895698601445
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1720742400000,
+        "discovery_time": "1321",
+        "fire_name": "MCGHEE",
+        "fire_size": 19223.1,
+        "fire_year": 2024,
+        "fod_id": 401411758,
+        "fpa_id": "INF-2024-MTLG29-000245",
+        "latitude": 45.268950000000004,
+        "longitude": -106.534383,
+        "mtbs_fire_name": "MCGHEE",
+        "mtbs_id": "MT4526910653420240712",
+        "state": "MT"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

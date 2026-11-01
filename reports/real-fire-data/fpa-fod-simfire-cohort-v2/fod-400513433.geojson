@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -119.7579142271847,
+          46.56959583111615
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1563408000000,
+        "discovery_time": "1400",
+        "fire_name": "COLD CREEK",
+        "fire_size": 41748,
+        "fire_year": 2019,
+        "fod_id": 400513433,
+        "fpa_id": "FWS-2019USWAHFRMF5B",
+        "latitude": 46.56959,
+        "longitude": -119.7579,
+        "mtbs_fire_name": "COLD CREEK",
+        "mtbs_id": "WA4657011975820190718",
+        "state": "WA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

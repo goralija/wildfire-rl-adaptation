@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -123.13971347912566,
+          39.0600049911429
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532649600000,
+        "discovery_time": "1301",
+        "fire_name": "RIVER",
+        "fire_size": 48920,
+        "fire_year": 2018,
+        "fod_id": 400307064,
+        "fpa_id": "W-723599",
+        "latitude": 39.06,
+        "longitude": -123.1397,
+        "mtbs_fire_name": "RIVER",
+        "mtbs_id": "CA3906012314020180727",
+        "state": "CA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

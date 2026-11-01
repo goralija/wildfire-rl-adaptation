@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -119.61463113288926,
+          46.24825582493665
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1686614400000,
+        "discovery_time": "1509",
+        "fire_name": "HANSEN ROAD",
+        "fire_size": 6289,
+        "fire_year": 2023,
+        "fod_id": 401310829,
+        "fpa_id": "INF-2023-WASPD-000224",
+        "latitude": 46.24825,
+        "longitude": -119.614617,
+        "mtbs_fire_name": "HANSEN ROAD",
+        "mtbs_id": "WA4624811961520230613",
+        "state": "WA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

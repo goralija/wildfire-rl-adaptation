@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -115.32279079569642,
+          44.56667278881133
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1537833600000,
+        "discovery_time": "1645",
+        "fire_name": "PROSPECT",
+        "fire_size": 7024,
+        "fire_year": 2018,
+        "fod_id": 400301084,
+        "fpa_id": "FS-6898773",
+        "latitude": 44.566666670000004,
+        "longitude": -115.32277778,
+        "mtbs_fire_name": "PROSPECT",
+        "mtbs_id": "ID4456711532320180925",
+        "state": "ID"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

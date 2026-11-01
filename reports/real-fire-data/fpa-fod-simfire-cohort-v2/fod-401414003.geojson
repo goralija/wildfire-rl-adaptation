@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -120.9921719588657,
+          46.67188563813281
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1721692800000,
+        "discovery_time": "1546",
+        "fire_name": "RETREAT",
+        "fire_size": 45601,
+        "fire_year": 2024,
+        "fod_id": 401414003,
+        "fpa_id": "INF-2024-WASES-000477",
+        "latitude": 46.671879929999996,
+        "longitude": -120.99215749999999,
+        "mtbs_fire_name": "RETREAT",
+        "mtbs_id": "WA4667112099220240723",
+        "state": "WA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

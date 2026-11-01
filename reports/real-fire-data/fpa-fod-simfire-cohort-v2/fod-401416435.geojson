@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -117.25498043608512,
+          44.87750596076964
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1722816000000,
+        "discovery_time": "0927",
+        "fire_name": "TOWN GULCH",
+        "fire_size": 18393.46,
+        "fire_year": 2024,
+        "fod_id": 401416435,
+        "fpa_id": "INF-2024-ORWWF-000431",
+        "latitude": 44.8775,
+        "longitude": -117.25496700000001,
+        "mtbs_fire_name": "TOWN GULCH",
+        "mtbs_id": "OR4487811725520240805",
+        "state": "OR"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

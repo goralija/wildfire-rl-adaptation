@@ -1,0 +1,1632 @@
+{
+  "burnable_fbfm13_codes": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13
+  ],
+  "case_count": 80,
+  "cases": [
+    {
+      "distance_from_reported_point_m": 25.348455672305487,
+      "method": "nearest_burnable_cell_within_half_section",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400310930-owyhee",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400310930-owyhee.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        65
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:400310930",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 13.422274391425843,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400302636-bears",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400302636-bears.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 2,
+      "source_record_id": "FOD_ID:400302636",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 6.2498787976130386,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400313301-bear-trap",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400313301-bear-trap.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:400313301",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 12.090965442620913,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400307064-river",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400307064-river.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:400307064",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 14.175462947433617,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400312300-lone-rock",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400312300-lone-rock.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 2,
+      "source_record_id": "FOD_ID:400312300",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 14.03231942150979,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400304776-keithly",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400304776-keithly.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 2,
+      "source_record_id": "FOD_ID:400304776",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 6.844825567890167,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400307548-boone-draw",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400307548-boone-draw.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:400307548",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 8.058213376397488,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400313679-meninick-pass",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400313679-meninick-pass.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 2,
+      "source_record_id": "FOD_ID:400313679",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 13.429611625915307,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400310659-206",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400310659-206.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 8,
+      "source_record_id": "FOD_ID:400310659",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 17.87232360409585,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400303610-monument",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400303610-monument.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 10,
+      "source_record_id": "FOD_ID:400303610",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 32.06164073691273,
+      "method": "nearest_burnable_cell_within_half_section",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400312787-black-mountain",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400312787-black-mountain.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        65
+      ],
+      "selected_fuel_code": 2,
+      "source_record_id": "FOD_ID:400312787",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 9.67174607649053,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400310911-hogan",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400310911-hogan.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:400310911",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 4.513999682715001,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400305203-donnell",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400305203-donnell.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 10,
+      "source_record_id": "FOD_ID:400305203",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 17.246065099178416,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400302872-klamathon",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400302872-klamathon.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 2,
+      "source_record_id": "FOD_ID:400302872",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 10.459077920847491,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400389761-lions",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400389761-lions.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 11,
+      "source_record_id": "FOD_ID:400389761",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 7.0104376769156245,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400300427-plateau.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 6,
+      "source_record_id": "FOD_ID:400300427",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 11.873509323317423,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400389771-natchez",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400389771-natchez.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 10,
+      "source_record_id": "FOD_ID:400389771",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 42.60294348270217,
+      "method": "nearest_burnable_cell_within_half_section",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400310583-organ",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400310583-organ.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        65
+      ],
+      "selected_fuel_code": 2,
+      "source_record_id": "FOD_ID:400310583",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 12.4976170255001,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400301084-prospect",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400301084-prospect.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:400301084",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 3.855415882961476,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400310977-sheep-creek",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400310977-sheep-creek.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 2,
+      "source_record_id": "FOD_ID:400310977",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 7.5234736329605685,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400508306-lookout-point",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400508306-lookout-point.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:400508306",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 11.7997262223992,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400500160-sheridan",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400500160-sheridan.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 2,
+      "source_record_id": "FOD_ID:400500160",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 10.05554346153989,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400513433-cold-creek",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400513433-cold-creek.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 2,
+      "source_record_id": "FOD_ID:400513433",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 7.363995344357651,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400732952-maria",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400732952-maria.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 1,
+      "source_record_id": "FOD_ID:400732952",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 14.922190601110769,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400513550-poker",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400513550-poker.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 2,
+      "source_record_id": "FOD_ID:400513550",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 17.59508512446635,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400510308-shafter",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400510308-shafter.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:400510308",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 8.806187413579082,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400509143-ridgetop",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400509143-ridgetop.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 1,
+      "source_record_id": "FOD_ID:400509143",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 13.311939869035292,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400505027-pine-lodge.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 6,
+      "source_record_id": "FOD_ID:400505027",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 11.601045045031668,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400512411-russell",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400512411-russell.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 2,
+      "source_record_id": "FOD_ID:400512411",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 17.917155051320613,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400501480-decker",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400501480-decker.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 1,
+      "source_record_id": "FOD_ID:400501480",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 12.869358099435297,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400506459-kincade",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400506459-kincade.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 4,
+      "source_record_id": "FOD_ID:400506459",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 6.731820000262711,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400732973-walker",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400732973-walker.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 9,
+      "source_record_id": "FOD_ID:400732973",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 13.779837987727285,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400506885-huck",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400506885-huck.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:400506885",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 61.392374921324624,
+      "method": "nearest_burnable_cell_within_half_section",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400513361-243-command",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400513361-243-command.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        66,
+        63
+      ],
+      "selected_fuel_code": 2,
+      "source_record_id": "FOD_ID:400513361",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 11.597625471837484,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400508285-sheep",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400508285-sheep.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 2,
+      "source_record_id": "FOD_ID:400508285",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 15.020056257104526,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400510515-summit",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400510515-summit.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 2,
+      "source_record_id": "FOD_ID:400510515",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 13.843403929363603,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400732975-204-cow",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400732975-204-cow.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 10,
+      "source_record_id": "FOD_ID:400732975",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 6.510060222078303,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400504463-taboose",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400504463-taboose.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:400504463",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 13.442054567292281,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400504417-shady",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400504417-shady.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 10,
+      "source_record_id": "FOD_ID:400504417",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 33.151460335189064,
+      "method": "nearest_burnable_cell_within_half_section",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-400506448-briceburg",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400506448-briceburg.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        63,
+        65
+      ],
+      "selected_fuel_code": 8,
+      "source_record_id": "FOD_ID:400506448",
+      "split": "train",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 13.42474248649084,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401316132-hayden",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401316132-hayden.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:401316132",
+      "split": "validation",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 13.531669604856804,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401315922-red-point-tank",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401315922-red-point-tank.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:401315922",
+      "split": "validation",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 16.265920361369318,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401316696-turkey",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401316696-turkey.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:401316696",
+      "split": "validation",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 8.160870969302833,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401317993-sourdough",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401317993-sourdough.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 9,
+      "source_record_id": "FOD_ID:401317993",
+      "split": "validation",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 10.141360090777962,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401321294-ufish",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401321294-ufish.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 10,
+      "source_record_id": "FOD_ID:401321294",
+      "split": "validation",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 39.83262633037058,
+      "method": "nearest_burnable_cell_within_half_section",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401321600-river-road-east",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401321600-river-road-east.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        65
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:401321600",
+      "split": "validation",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 12.532565468098989,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401316681-bedrock",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401316681-bedrock.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 9,
+      "source_record_id": "FOD_ID:401316681",
+      "split": "validation",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 12.048518990613424,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401319337-thompson-ridge",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401319337-thompson-ridge.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 8,
+      "source_record_id": "FOD_ID:401319337",
+      "split": "validation",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 12.959071376532545,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401326006-iron",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401326006-iron.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:401326006",
+      "split": "validation",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 14.971967485346097,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401317844-prior",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401317844-prior.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 2,
+      "source_record_id": "FOD_ID:401317844",
+      "split": "validation",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 15.085120108017998,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401312856-beehive",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401312856-beehive.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 2,
+      "source_record_id": "FOD_ID:401312856",
+      "split": "validation",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 14.568122869111225,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401321674-oregon",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401321674-oregon.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:401321674",
+      "split": "validation",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 5.944947013391265,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401313289-brushy",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401313289-brushy.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 8,
+      "source_record_id": "FOD_ID:401313289",
+      "split": "validation",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 9.122760479699625,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401310829-hansen-road",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401310829-hansen-road.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 8,
+      "source_record_id": "FOD_ID:401310829",
+      "split": "validation",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 50.75800893242505,
+      "method": "nearest_burnable_cell_within_half_section",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401315421-rabbit",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401315421-rabbit.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        65,
+        63
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:401315421",
+      "split": "validation",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 34.59213043571456,
+      "method": "nearest_burnable_cell_within_half_section",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401321046-head",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401321046-head.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        63,
+        65
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:401321046",
+      "split": "validation",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 12.778176119426696,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401308187-pass",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401308187-pass.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 2,
+      "source_record_id": "FOD_ID:401308187",
+      "split": "validation",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 14.419897431484525,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401321340-pearch",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401321340-pearch.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 10,
+      "source_record_id": "FOD_ID:401321340",
+      "split": "validation",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 4.644510723195575,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401321023-kelly",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401321023-kelly.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 10,
+      "source_record_id": "FOD_ID:401321023",
+      "split": "validation",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 6.162216799310137,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401321611-gray",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401321611-gray.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:401321611",
+      "split": "validation",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 33.19316497148934,
+      "method": "nearest_burnable_cell_within_half_section",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401411292-larch-creek",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401411292-larch-creek.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        63,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:401411292",
+      "split": "test",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 11.365614181057285,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401421943-line",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401421943-line.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 8,
+      "source_record_id": "FOD_ID:401421943",
+      "split": "test",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 18.40669566060513,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401422654-siphon",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401422654-siphon.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:401422654",
+      "split": "test",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 1.8360233625408764,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401411758-mcghee",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401411758-mcghee.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 2,
+      "source_record_id": "FOD_ID:401411758",
+      "split": "test",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 16.325648514910757,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401425511-castle-ridge",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401425511-castle-ridge.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:401425511",
+      "split": "test",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 12.17888407039266,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401414003-retreat",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401414003-retreat.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 9,
+      "source_record_id": "FOD_ID:401414003",
+      "split": "test",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 3.373485761482732,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401414128-sugar",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401414128-sugar.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 9,
+      "source_record_id": "FOD_ID:401414128",
+      "split": "test",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 19.802810086183538,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401404229-blue-2",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401404229-blue-2.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:401404229",
+      "split": "test",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 15.55546734234898,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401424721-yellow-lake",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401424721-yellow-lake.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:401424721",
+      "split": "test",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 15.620226447605864,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401415733-bucktail",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401415733-bucktail.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:401415733",
+      "split": "test",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 12.33897962820496,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401422098-flat-top",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401422098-flat-top.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:401422098",
+      "split": "test",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 12.210607730885913,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401413822-thompson",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401413822-thompson.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:401413822",
+      "split": "test",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 10.48022827402701,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401416435-town-gulch",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401416435-town-gulch.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 8,
+      "source_record_id": "FOD_ID:401416435",
+      "split": "test",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 11.1469672264065,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401421390-shoe-fly",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401421390-shoe-fly.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 9,
+      "source_record_id": "FOD_ID:401421390",
+      "split": "test",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 16.084618969508686,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401412417-hill",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401412417-hill.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 10,
+      "source_record_id": "FOD_ID:401412417",
+      "split": "test",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 5.620612768945671,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401414148-park",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401414148-park.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 2,
+      "source_record_id": "FOD_ID:401414148",
+      "split": "test",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 13.196918591870743,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401417248-boise",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401417248-boise.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 8,
+      "source_record_id": "FOD_ID:401417248",
+      "split": "test",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 12.921727146007717,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401416591-warner-peak",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401416591-warner-peak.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:401416591",
+      "split": "test",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 12.806592385709571,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401422688-point",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401422688-point.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 8,
+      "source_record_id": "FOD_ID:401422688",
+      "split": "test",
+      "uses_observed_perimeter": false
+    },
+    {
+      "distance_from_reported_point_m": 15.89887851091604,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "scenario_id": "fpa-fod-401413757-0501-crazy-creek",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401413757-0501-crazy-creek.json",
+      "search_radius_m": 804.672,
+      "seed_cell": [
+        64,
+        64
+      ],
+      "selected_fuel_code": 5,
+      "source_record_id": "FOD_ID:401413757",
+      "split": "test",
+      "uses_observed_perimeter": false
+    }
+  ],
+  "created_at_utc": "2026-11-01T14:03:47.936983+00:00",
+  "kind": "simfire_cohort_seed_cell_resolution",
+  "limitations": [
+    "FPA-FOD gives an incident-reference coordinate with unknown event-specific accuracy, not GPS-confirmed ignition.",
+    "Fuel-only seed adjustment does not reconstruct the historical ignition or fire perimeter.",
+    "All policies must use the same selected cell and fixed selection rule."
+  ],
+  "method": "Map the incident-reference point into the projected grid. If its FBFM13 cell is non-burnable in SimFire, pick the nearest burnable cell within the 804.672m half-width of a one-mile PLSS section, with deterministic row/column tie-breaks.",
+  "reported_cell_already_burnable": 71,
+  "scientific_result": false,
+  "search_radius_m": 804.672,
+  "used_nearest_burnable_proxy": 9
+}

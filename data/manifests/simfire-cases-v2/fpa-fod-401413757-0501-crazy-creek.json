@@ -1,0 +1,116 @@
+{
+  "event": {
+    "data_license_status": "USFS Research Data Archive says the data may be used without additional permissions or fees; cite Short (2026), DOI 10.2737/RDS-2013-0009.7. Check licenses separately for any joined raster or perimeter products.",
+    "discovery_time": {
+      "precision": "reported calendar date and HHMM; source timezone is not assigned by this adapter",
+      "timezone": null,
+      "value": "2024-07-22 1107"
+    },
+    "final_area_ha_reference_only": 35192.726068394186,
+    "final_perimeter_reference": null,
+    "location_wgs84": {
+      "accuracy_m": null,
+      "accuracy_note": "Point geometry requested from the current USFS service in EPSG:4326. The publication's stated minimum location precision is a PLSS section (one-square-mile grid); event-specific accuracy is not provided here.",
+      "latitude": 44.35796765378535,
+      "longitude": -120.03071082451933,
+      "role": "incident_reference_point"
+    },
+    "source": "USFS FPA-FOD current edition",
+    "source_record_id": "FOD_ID:401413757; FPA_ID:INF-2024-OROCF-000501",
+    "source_record_snapshot": {
+      "path": "reports/real-fire-data/fpa-fod-simfire-cohort-v2/fod-401413757.geojson",
+      "sha256": "9e57fb489bd42582007275100255ebae3a97703dc8c0ca6cef2bef2f3f31222a",
+      "source_url": "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_FireOccurrenceCurrentEdition_01/MapServer/0/query?where=fod_id+%3D+401413757&outFields=fod_id%2Cfpa_id%2Cfire_name%2Cfire_year%2Cdiscovery_date%2Cdiscovery_time%2Cfire_size%2Clatitude%2Clongitude%2Cstate%2Cmtbs_id%2Cmtbs_fire_name&outSR=4326&returnGeometry=true&f=geojson"
+    },
+    "source_release": "FPA_FOD_20260615 (7th edition, 6th update)",
+    "source_url": "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_FireOccurrenceCurrentEdition_01/MapServer/0/query?where=fod_id+%3D+401413757&outFields=fod_id%2Cfpa_id%2Cfire_name%2Cfire_year%2Cdiscovery_date%2Cdiscovery_time%2Cfire_size%2Clatitude%2Clongitude%2Cstate%2Cmtbs_id%2Cmtbs_fire_name&outSR=4326&returnGeometry=true&f=geojson"
+  },
+  "fire_behavior": {
+    "horizon_minutes": null,
+    "seed": 401413757,
+    "seed_cell": [
+      64,
+      64
+    ],
+    "seed_cell_selection": {
+      "distance_from_reported_point_m": 15.89887851091604,
+      "method": "reported_point_cell_is_burnable",
+      "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+      "reported_point_cell": [
+        64,
+        64
+      ],
+      "search_radius_m": 804.672,
+      "selected_fuel_code": 5,
+      "uses_observed_perimeter": false
+    },
+    "simulator": "SimFire",
+    "simulator_commit": "04905b19fe8c10dc08d64faddd00303e0561bb66",
+    "weather_mapping": {
+      "path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401413757-0501-crazy-creek.json",
+      "sha256": "0820fde59cc0b767bf57d86a0dacec4b990ccd50aeb85413fba1d3a787e65271",
+      "status": "approximate_proxy",
+      "version": "gridmet-daily-simfire-proxy/1.0",
+      "wind_adjustment_factor": 0.3
+    },
+    "weather_mapping_note": "Mapped from per-case gridMET daily context using the explicit v1 proxy in weather_mapping. It is a stationary representative-day assumption, not an hourly event replay or measured midflame weather."
+  },
+  "grid": {
+    "columns": 128,
+    "crs": "EPSG:32610",
+    "extent_selection": "fixed_around_event_location",
+    "projected_bounds_m": [
+      734700,
+      4914030,
+      738540,
+      4917870
+    ],
+    "resolution_m": 30,
+    "resolution_note": "Exact 30 m projected cells in the event's UTM zone; the reported point is assigned to its containing cell and remains spatially uncertain.",
+    "rows": 128,
+    "top_left_latitude": null,
+    "top_left_longitude": null
+  },
+  "inputs": {
+    "fuel": {
+      "path": ".local/simfire-cohort-v2/fpa-fod-401413757-0501-crazy-creek/fuel-lf2022-fbfm13.tif",
+      "sha256": "41aaada9ed29ffedd3beb8c8b88644255b7e37566811bc4c465568db96a780e5",
+      "source": "LANDFIRE LF2022 FBFM13 CONUS ImageServer",
+      "source_release": "LF2022",
+      "status": "verified",
+      "units_and_mapping": "30 m nearest-neighbor sample from pre-event LF2022 FBFM13. Native codes must pass the pinned SimFire operational fuel mapping before case promotion."
+    },
+    "terrain": {
+      "path": ".local/simfire-cohort-v2/fpa-fod-401413757-0501-crazy-creek/elevation-lf2020-m.tif",
+      "sha256": "7eed96b7849b8462b3b375d1bbd0e0339c161a454965842040dc287b5c0cc30e",
+      "source": "LANDFIRE LF2020 Elevation CONUS ImageServer",
+      "source_release": "LF2020 Elevation",
+      "status": "verified",
+      "units_and_mapping": "Source meters; nearest-neighbor aligned to the 30 m UTM grid; SimFire converts meters to feet."
+    },
+    "weather": {
+      "path": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401413757-0501-crazy-creek.json",
+      "sha256": "f4b4df720e1d9e649fb72cafaeb7bc5e17bdf834971856786206e68c74c5fb9e",
+      "source": "gridMET daily point values via NCAR GDEX",
+      "source_release": "gridMET Daily Surface Data; GDEX dataset d761426",
+      "status": "candidate",
+      "units_and_mapping": "Original daily gridMET context; see fire_behavior.weather_mapping for the separate approximate SimFire proxy and its assumptions."
+    }
+  },
+  "limitations": [
+    "FPA-FOD point has unknown event-specific precision and represents an incident reference, not verified GPS ignition.",
+    "The cohort is screened to >=5000 reported acres and ten western states; it is not a representative sample of all fires.",
+    "FPA-reported final area is post-response context only and is not used as a no-action target or agent reward.",
+    "gridMET provides daily approximately 4-km context; its separate SimFire proxy is assumption-based and is not an hourly replay or measured fuel moisture.",
+    "A source-compatible fuel raster is pre-event but is not a field-verified vegetation survey for the event date."
+  ],
+  "readiness": "inputs_ready",
+  "references": {
+    "notes": "MTBS_ID=OR4435812003120240722 is a separate observed-perimeter reference for later visual context only. Neither MTBS perimeters nor FPA final size are agent input or reward. Simulation start is selected by the pre-event fuel-only rule recorded in fire_behavior.seed_cell_selection; it does not use observed burn perimeters.",
+    "perimeters_and_actions_are_agent_inputs": false,
+    "perimeters_and_actions_are_reward_inputs": false
+  },
+  "scenario_id": "fpa-fod-401413757-0501-crazy-creek",
+  "schema_version": "simfire-scenario/1.0",
+  "split": "test"
+}

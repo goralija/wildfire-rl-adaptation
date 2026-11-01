@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -121.24468122205877,
+          45.36433860131793
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1720483200000,
+        "discovery_time": "1232",
+        "fire_name": "LARCH CREEK",
+        "fire_size": 18286,
+        "fire_year": 2024,
+        "fod_id": 401411292,
+        "fpa_id": "INF-2024-OR954S-000514",
+        "latitude": 45.364333,
+        "longitude": -121.244667,
+        "mtbs_fire_name": "LARCH CREEK",
+        "mtbs_id": "OR4536412124520240709",
+        "state": "OR"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -123.51796384324399,
+          41.25147211682186
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1723161600000,
+        "discovery_time": "0850",
+        "fire_name": "BOISE",
+        "fire_size": 12929,
+        "fire_year": 2024,
+        "fod_id": 401417248,
+        "fpa_id": "INF-2024-CASRF-000729",
+        "latitude": 41.251467,
+        "longitude": -123.51795,
+        "mtbs_fire_name": "BOISE",
+        "mtbs_id": "CA4125112351820240809",
+        "state": "CA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -117.23043110470583,
+          48.03397319503322
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1692316800000,
+        "discovery_time": "1616",
+        "fire_name": "OREGON",
+        "fire_size": 10822,
+        "fire_year": 2023,
+        "fod_id": 401321674,
+        "fpa_id": "INF-2023-WANES-001979",
+        "latitude": 48.033967000000004,
+        "longitude": -117.230417,
+        "mtbs_fire_name": "OREGON",
+        "mtbs_id": "WA4803411723020230818",
+        "state": "WA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

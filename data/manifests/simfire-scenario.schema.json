@@ -108,7 +108,38 @@
         },
         "horizon_minutes": {"type": ["integer", "null"], "minimum": 1},
         "seed": {"type": ["integer", "null"]},
-        "weather_mapping_note": {"type": "string"}
+        "seed_cell_selection": {
+          "type": "object",
+          "required": ["method", "reported_point_cell", "selected_fuel_code", "distance_from_reported_point_m", "search_radius_m", "uses_observed_perimeter"],
+          "properties": {
+            "method": {"enum": ["reported_point_cell_is_burnable", "nearest_burnable_cell_within_half_section"]},
+            "reported_point_cell": {
+              "type": "array",
+              "prefixItems": [{"type": "integer", "minimum": 0}, {"type": "integer", "minimum": 0}],
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "selected_fuel_code": {"type": "integer"},
+            "distance_from_reported_point_m": {"type": "number", "minimum": 0},
+            "search_radius_m": {"type": "number", "exclusiveMinimum": 0},
+            "uses_observed_perimeter": {"const": false},
+            "note": {"type": "string"}
+          },
+          "additionalProperties": false
+        },
+        "weather_mapping_note": {"type": "string"},
+        "weather_mapping": {
+          "type": "object",
+          "required": ["status", "version", "path", "sha256", "wind_adjustment_factor"],
+          "properties": {
+            "status": {"enum": ["approximate_proxy"]},
+            "version": {"type": "string", "minLength": 1},
+            "path": {"type": "string", "minLength": 1},
+            "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+            "wind_adjustment_factor": {"type": "number", "minimum": 0.1, "maximum": 0.5}
+          },
+          "additionalProperties": false
+        }
       },
       "additionalProperties": false
     },

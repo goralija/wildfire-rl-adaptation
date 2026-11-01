@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -111.11306642797943,
+          33.96500523893895
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532563200000,
+        "discovery_time": "1555",
+        "fire_name": "BEARS",
+        "fire_size": 7559,
+        "fire_year": 2018,
+        "fod_id": 400302636,
+        "fpa_id": "FS-6907681",
+        "latitude": 33.965,
+        "longitude": -111.11305556,
+        "mtbs_fire_name": "BEARS",
+        "mtbs_id": "AZ3396511111320180726",
+        "state": "AZ"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

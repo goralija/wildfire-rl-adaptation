@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -112.90361208454506,
+          41.7894560669765
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1564963200000,
+        "discovery_time": "0038",
+        "fire_name": "RUSSELL",
+        "fire_size": 5949,
+        "fire_year": 2019,
+        "fod_id": 400512411,
+        "fpa_id": "W-731909",
+        "latitude": 41.78945,
+        "longitude": -112.9036,
+        "mtbs_fire_name": "RUSSELL",
+        "mtbs_id": "UT4178911290420190805",
+        "state": "UT"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

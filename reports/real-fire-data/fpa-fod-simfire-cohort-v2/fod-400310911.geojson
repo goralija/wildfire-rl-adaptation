@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -114.59551226380223,
+          40.73720582060318
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1530403200000,
+        "discovery_time": "1641",
+        "fire_name": "HOGAN",
+        "fire_size": 10907.4,
+        "fire_year": 2018,
+        "fod_id": 400310911,
+        "fpa_id": "W-720398",
+        "latitude": 40.7372,
+        "longitude": -114.5955,
+        "mtbs_fire_name": "HOGAN",
+        "mtbs_id": "NV4073711459620180701",
+        "state": "NV"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

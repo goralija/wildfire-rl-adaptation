@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -110.29971065974269,
+          33.373105198311826
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1563840000000,
+        "discovery_time": "1625",
+        "fire_name": "HUCK",
+        "fire_size": 11784,
+        "fire_year": 2019,
+        "fod_id": 400506885,
+        "fpa_id": "W-735517",
+        "latitude": 33.3731,
+        "longitude": -110.2997,
+        "mtbs_fire_name": "HUCK",
+        "mtbs_id": "AZ3337311029920190723",
+        "state": "AZ"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -123.48791384696598,
+          41.30440512302638
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1692144000000,
+        "discovery_time": "1818",
+        "fire_name": "PEARCH",
+        "fire_size": 12152.4,
+        "fire_year": 2023,
+        "fod_id": 401321340,
+        "fpa_id": "INF-2023-CASRF-000983",
+        "latitude": 41.3044,
+        "longitude": -123.4879,
+        "mtbs_fire_name": "PEARCH",
+        "mtbs_id": "CA4130412348820230817",
+        "state": "CA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

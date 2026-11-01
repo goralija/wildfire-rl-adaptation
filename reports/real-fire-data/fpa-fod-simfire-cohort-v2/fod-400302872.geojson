@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -122.54001379579957,
+          41.88083857624421
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1530748800000,
+        "discovery_time": "1430",
+        "fire_name": "KLAMATHON",
+        "fire_size": 38008,
+        "fire_year": 2018,
+        "fod_id": 400302872,
+        "fpa_id": "FS-6912699",
+        "latitude": 41.88083333,
+        "longitude": -122.54,
+        "mtbs_fire_name": "KLAMATHON",
+        "mtbs_id": "CA4188012254020180705",
+        "state": "CA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

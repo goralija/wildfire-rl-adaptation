@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -120.56861430623853,
+          46.29860572953772
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1534377600000,
+        "discovery_time": "2355",
+        "fire_name": "MENINICK PASS",
+        "fire_size": 5500,
+        "fire_year": 2018,
+        "fod_id": 400313679,
+        "fpa_id": "W-723702",
+        "latitude": 46.2986,
+        "longitude": -120.5686,
+        "mtbs_fire_name": "MENINICK PASS",
+        "mtbs_id": "WA4630012057020180817",
+        "state": "WA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

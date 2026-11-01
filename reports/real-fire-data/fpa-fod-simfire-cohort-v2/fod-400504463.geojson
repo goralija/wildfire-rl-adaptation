@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -118.34529026401076,
+          37.034171834604614
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1567555200000,
+        "discovery_time": "2012",
+        "fire_name": "TABOOSE",
+        "fire_size": 10265,
+        "fire_year": 2019,
+        "fod_id": 400504463,
+        "fpa_id": "FS-6968402",
+        "latitude": 37.034166670000005,
+        "longitude": -118.34527778,
+        "mtbs_fire_name": "TABOOSE",
+        "mtbs_id": "CA3703411834520190904",
+        "state": "CA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

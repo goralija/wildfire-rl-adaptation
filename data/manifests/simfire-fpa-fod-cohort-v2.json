@@ -1,0 +1,3188 @@
+{
+  "case_count": 80,
+  "case_counts_by_split": {
+    "test": 20,
+    "train": 40,
+    "validation": 20
+  },
+  "cases": [
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400310930-owyhee/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "NV4194911609820180721",
+      "name": "OWYHEE",
+      "reported_final_area_ha_reference_only": 2056.774308120576,
+      "scenario_id": "fpa-fod-400310930-owyhee",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400310930-owyhee.json",
+      "seed_cell": [
+        64,
+        65
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 25.348455672305487,
+        "method": "nearest_burnable_cell_within_half_section",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400310930",
+      "split": "train",
+      "state": "NV",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400310930-owyhee.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400310930-owyhee.json",
+      "weather_mapping_sha256": "36123259730d4deb3b774be303d41da30ea5dc7f31708b7c5ca856a1be08b73e",
+      "weather_sha256": "4f8feeb3278979561834b96d58af092739e3dace649a0c27f8a435f3def0fb3d",
+      "year": 2018
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400302636-bears/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "AZ3396511111320180726",
+      "name": "BEARS",
+      "reported_final_area_ha_reference_only": 3059.01876969216,
+      "scenario_id": "fpa-fod-400302636-bears",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400302636-bears.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 13.422274391425843,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 2,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400302636",
+      "split": "train",
+      "state": "AZ",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400302636-bears.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400302636-bears.json",
+      "weather_mapping_sha256": "3ffe9ee112a6c5e8a6a881593ab214e69d4971b17b265fe27918def684a8c5ab",
+      "weather_sha256": "b691dfb30e118b92891e6f9621fb81bd69c320c5a4f6e94a7a2ad5f0080b931d",
+      "year": 2018
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400313301-bear-trap/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "UT3930510987820180721",
+      "name": "BEAR TRAP",
+      "reported_final_area_ha_reference_only": 5175.524678607359,
+      "scenario_id": "fpa-fod-400313301-bear-trap",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400313301-bear-trap.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 6.2498787976130386,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400313301",
+      "split": "train",
+      "state": "UT",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400313301-bear-trap.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400313301-bear-trap.json",
+      "weather_mapping_sha256": "8652ba72dc05cacaaefdcfd9fcffe1f435c753431fad6912f41e9798e96d767a",
+      "weather_sha256": "5f98fa376c89615606ddcdc2dc15e8be30fb4a47b6a5009f3c328bf63c9de952",
+      "year": 2018
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400307064-river/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CA3906012314020180727",
+      "name": "RIVER",
+      "reported_final_area_ha_reference_only": 19797.221618380798,
+      "scenario_id": "fpa-fod-400307064-river",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400307064-river.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 12.090965442620913,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400307064",
+      "split": "train",
+      "state": "CA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400307064-river.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400307064-river.json",
+      "weather_mapping_sha256": "1fe1e2e1b98a6f9b397982075ce956246013200365b0e995a45c651ff4beb2f2",
+      "weather_sha256": "6a6b6be9015af818b27015a101712fd5248e7db7f8130bc71b9dc94fab487ce4",
+      "year": 2018
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400312300-lone-rock/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "OR4514511998420180817",
+      "name": "LONE ROCK",
+      "reported_final_area_ha_reference_only": 2046.09060716544,
+      "scenario_id": "fpa-fod-400312300-lone-rock",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400312300-lone-rock.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 14.175462947433617,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 2,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400312300",
+      "split": "train",
+      "state": "OR",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400312300-lone-rock.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400312300-lone-rock.json",
+      "weather_mapping_sha256": "95d202c8ef7bc98c8950a7dda09c777cf3eca648fb35750cae17f001cfa764a1",
+      "weather_sha256": "a8bce64250f21bcd162e2595f4a8566136fc09f75757d11d635f117d22756acf",
+      "year": 2018
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400304776-keithly/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "ID4451711685020180725",
+      "name": "KEITHLY",
+      "reported_final_area_ha_reference_only": 7122.4673034239995,
+      "scenario_id": "fpa-fod-400304776-keithly",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400304776-keithly.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 14.03231942150979,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 2,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400304776",
+      "split": "train",
+      "state": "ID",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400304776-keithly.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400304776-keithly.json",
+      "weather_mapping_sha256": "47434ddf7ba253f308018dd35d09ae6d35eed0d0cc2d7096d63db7b97ceeb911",
+      "weather_sha256": "306dbe2e0778a69befe54615abe187a483a781f2f9a612d566644a823bb76667",
+      "year": 2018
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400307548-boone-draw/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CO4065310857420180913",
+      "name": "BOONE DRAW",
+      "reported_final_area_ha_reference_only": 3484.586191071744,
+      "scenario_id": "fpa-fod-400307548-boone-draw",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400307548-boone-draw.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 6.844825567890167,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400307548",
+      "split": "train",
+      "state": "CO",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400307548-boone-draw.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400307548-boone-draw.json",
+      "weather_mapping_sha256": "94ee4bf586f038bd3c60b59e54c67e559fbd0dd4981615f7f2ad928cb6d9ff2a",
+      "weather_sha256": "0547074b948cbeb4a948b2c4f98053242d16500faa020acc80784b72b1c3fae8",
+      "year": 2018
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400313679-meninick-pass/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "WA4630012057020180817",
+      "name": "MENINICK PASS",
+      "reported_final_area_ha_reference_only": 2225.77103232,
+      "scenario_id": "fpa-fod-400313679-meninick-pass",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400313679-meninick-pass.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 8.058213376397488,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 2,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400313679",
+      "split": "train",
+      "state": "WA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400313679-meninick-pass.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400313679-meninick-pass.json",
+      "weather_mapping_sha256": "50a48635dea177bb92a5ad115b6fda26f67a64ad7cb6b577efddc2cfc2e95933",
+      "weather_sha256": "fbae6f63adb12316832563bfcd6f7ce7351e5b38ed074fba2a32e5646f3d9a3b",
+      "year": 2018
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400310659-206/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "NM3349810333820180412",
+      "name": "206",
+      "reported_final_area_ha_reference_only": 17871.727332602877,
+      "scenario_id": "fpa-fod-400310659-206",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400310659-206.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 13.429611625915307,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 8,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400310659",
+      "split": "train",
+      "state": "NM",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400310659-206.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400310659-206.json",
+      "weather_mapping_sha256": "dcbdb3b01fc4d8cabf338ac1197b26810a0df2140d5c0d9659b009a312929e7a",
+      "weather_sha256": "6d49aa8a366a4f0ca536c044465e2d8144641033173e578002a183cbfa947f5e",
+      "year": 2018
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400303610-monument/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "MT4497811185720180806",
+      "name": "MONUMENT",
+      "reported_final_area_ha_reference_only": 2676.59083777536,
+      "scenario_id": "fpa-fod-400303610-monument",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400303610-monument.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 17.87232360409585,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 10,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400303610",
+      "split": "train",
+      "state": "MT",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400303610-monument.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400303610-monument.json",
+      "weather_mapping_sha256": "3f296ac80ddeb79f45e85ca479cd026fd8234825f11781211d696be5fde93c52",
+      "weather_sha256": "41be254e67c34caf4a7c3089d9f14492227458db59d4cc1f3e9fea9e5152e155",
+      "year": 2018
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400312787-black-mountain/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "UT3809211295120180628",
+      "name": "BLACK MOUNTAIN",
+      "reported_final_area_ha_reference_only": 2279.9989083801597,
+      "scenario_id": "fpa-fod-400312787-black-mountain",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400312787-black-mountain.json",
+      "seed_cell": [
+        64,
+        65
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 32.06164073691273,
+        "method": "nearest_burnable_cell_within_half_section",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 2,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400312787",
+      "split": "train",
+      "state": "UT",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400312787-black-mountain.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400312787-black-mountain.json",
+      "weather_mapping_sha256": "ec782576b4a8d53f96ca7a8bfe41d72d414b814698bd620d148174d912593bfc",
+      "weather_sha256": "bfb94aed468d9beceb68c11c3e64a8bb11dc9b163712e9c9b8983dcb8ae0d238",
+      "year": 2018
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400310911-hogan/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "NV4073711459620180701",
+      "name": "HOGAN",
+      "reported_final_area_ha_reference_only": 4414.068174168576,
+      "scenario_id": "fpa-fod-400310911-hogan",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400310911-hogan.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 9.67174607649053,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400310911",
+      "split": "train",
+      "state": "NV",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400310911-hogan.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400310911-hogan.json",
+      "weather_mapping_sha256": "99557085bbf5ceb0973034a9a69582e8d151f32bdfa61adaef1f4c7dba9e5e06",
+      "weather_sha256": "7c0a7be2c907c936c6da3ec374a3be9f24046d8155fea86703172c23a7226f1c",
+      "year": 2018
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400305203-donnell/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CA3834911992920180801",
+      "name": "DONNELL",
+      "reported_final_area_ha_reference_only": 14750.791659647999,
+      "scenario_id": "fpa-fod-400305203-donnell",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400305203-donnell.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 4.513999682715001,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 10,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400305203",
+      "split": "train",
+      "state": "CA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400305203-donnell.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400305203-donnell.json",
+      "weather_mapping_sha256": "b3f262609949e599e0556e67f3a346d46d5f2a6b7b6c86311d688461f4b17599",
+      "weather_sha256": "481e7350350020315b44255f931dceb66fd3a602c8702de9261f2b79c9ec04f7",
+      "year": 2018
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400302872-klamathon/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CA4188012254020180705",
+      "name": "KLAMATHON",
+      "reported_final_area_ha_reference_only": 15381.291890257919,
+      "scenario_id": "fpa-fod-400302872-klamathon",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400302872-klamathon.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 17.246065099178416,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 2,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400302872",
+      "split": "train",
+      "state": "CA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400302872-klamathon.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400302872-klamathon.json",
+      "weather_mapping_sha256": "1aa1b04bce36b92ae01ab717733a2e7d316b4d139937a9e1a18732f2f0d22373",
+      "weather_sha256": "9f4c6d055f3faa5f9e34c3a865a9568c1b0efe40a341bea87cad20ea6c32cbaf",
+      "year": 2018
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400389761-lions/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CA3756511912720180611",
+      "name": "LIONS",
+      "reported_final_area_ha_reference_only": 5256.8664926976,
+      "scenario_id": "fpa-fod-400389761-lions",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400389761-lions.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 10.459077920847491,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 11,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400389761",
+      "split": "train",
+      "state": "CA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400389761-lions.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400389761-lions.json",
+      "weather_mapping_sha256": "3798152e3b02d15f9127d39e1ee560aa0a36d1753d6ca30a64dff45fe7dbb01b",
+      "weather_sha256": "a40a50a9e22ad056c700c3b1841ff121813e8bf72e2ef50dd041ac8016c8d7da",
+      "year": 2018
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400300427-plateau/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CO3765810847420180722",
+      "name": "PLATEAU",
+      "reported_final_area_ha_reference_only": 7945.59789974016,
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400300427-plateau.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 7.0104376769156245,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 6,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400300427",
+      "split": "train",
+      "state": "CO",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400300427-plateau.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400300427-plateau.json",
+      "weather_mapping_sha256": "3fac4f7651e9c333e5326566e69c3e364644d2b2f37e25e2abd40aed108e35f3",
+      "weather_sha256": "81d7c52409d6fdd255ca4a156530ac74fc5812b4ec7096b02049cdbebbdec500",
+      "year": 2018
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400389771-natchez/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CA4195612355120180715",
+      "name": "NATCHEZ",
+      "reported_final_area_ha_reference_only": 15432.28228118016,
+      "scenario_id": "fpa-fod-400389771-natchez",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400389771-natchez.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 11.873509323317423,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 10,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400389771",
+      "split": "train",
+      "state": "CA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400389771-natchez.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400389771-natchez.json",
+      "weather_mapping_sha256": "b3addf89bad415995c06cfba4ecabaf476a7ba5494bcbf7b80ff01ba3b9030c6",
+      "weather_sha256": "ab3f544894d5feddba16c486e8056f9688c7d51de0f1ea1dcd15c91effff5f04",
+      "year": 2018
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400310583-organ/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "NM3242610655220180624",
+      "name": "ORGAN",
+      "reported_final_area_ha_reference_only": 2041.6390651007998,
+      "scenario_id": "fpa-fod-400310583-organ",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400310583-organ.json",
+      "seed_cell": [
+        64,
+        65
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 42.60294348270217,
+        "method": "nearest_burnable_cell_within_half_section",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 2,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400310583",
+      "split": "train",
+      "state": "NM",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400310583-organ.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400310583-organ.json",
+      "weather_mapping_sha256": "a244e0788673d5b7e25f0f27717e6483172926dd4b75a0dc91bd1ab61b133237",
+      "weather_sha256": "3097cce0facd9daeaa6ed67abda91dfe5f9dd646158291e60970fb963dfa62d6",
+      "year": 2018
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400301084-prospect/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "ID4456711532320180925",
+      "name": "PROSPECT",
+      "reported_final_area_ha_reference_only": 2842.5119510937598,
+      "scenario_id": "fpa-fod-400301084-prospect",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400301084-prospect.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 12.4976170255001,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400301084",
+      "split": "train",
+      "state": "ID",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400301084-prospect.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400301084-prospect.json",
+      "weather_mapping_sha256": "196399a3310a33d0935b82c904674504229645d9d81b5dbf879fc2686236a91b",
+      "weather_sha256": "b12153460b527d59ceed237b869a8b76c904cf9dbe9bf59189b99f60c28e7905",
+      "year": 2018
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400310977-sheep-creek/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "NV4077311684220180818",
+      "name": "SHEEP CREEK",
+      "reported_final_area_ha_reference_only": 24176.52729588096,
+      "scenario_id": "fpa-fod-400310977-sheep-creek",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400310977-sheep-creek.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 3.855415882961476,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 2,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400310977",
+      "split": "train",
+      "state": "NV",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400310977-sheep-creek.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400310977-sheep-creek.json",
+      "weather_mapping_sha256": "d4858ef82d06d46e6aa435fff6211bc9c42e1085d6f76bd2dd21e6632cb1f931",
+      "weather_sha256": "69e78c2290e9bfdbd9418f5012316290e79c451a54f39b5bb5fb430be359fbd8",
+      "year": 2018
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400508306-lookout-point/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "ID4229111562520190723",
+      "name": "LOOKOUT POINT",
+      "reported_final_area_ha_reference_only": 3817.3187261214716,
+      "scenario_id": "fpa-fod-400508306-lookout-point",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400508306-lookout-point.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 7.5234736329605685,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400508306",
+      "split": "train",
+      "state": "ID",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400508306-lookout-point.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400508306-lookout-point.json",
+      "weather_mapping_sha256": "ce80f2bf8f1b1af5e6d44e224031f013637ce6822111cbdc11d8955e2339b90a",
+      "weather_sha256": "47333c625370aee375b776ae22863f9e0623373e3e1f3de57eac6280d688a908",
+      "year": 2019
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400500160-sheridan/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "AZ3467811289020190805",
+      "name": "SHERIDAN",
+      "reported_final_area_ha_reference_only": 8704.7881645824,
+      "scenario_id": "fpa-fod-400500160-sheridan",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400500160-sheridan.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 11.7997262223992,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 2,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400500160",
+      "split": "train",
+      "state": "AZ",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400500160-sheridan.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400500160-sheridan.json",
+      "weather_mapping_sha256": "c95cdda48467c560555d5efebd47dd82eba54bac3279f873b79ada206244b67c",
+      "weather_sha256": "c6cebee75f8cae548e3016ddb0f582be828a5ec16fe328982cac30d89594c415",
+      "year": 2019
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400513433-cold-creek/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "WA4657011975820190718",
+      "name": "COLD CREEK",
+      "reported_final_area_ha_reference_only": 16894.816192235518,
+      "scenario_id": "fpa-fod-400513433-cold-creek",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400513433-cold-creek.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 10.05554346153989,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 2,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400513433",
+      "split": "train",
+      "state": "WA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400513433-cold-creek.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400513433-cold-creek.json",
+      "weather_mapping_sha256": "29730e711b0a94bc289c0803f85d82aa6ecccc5e66481ce89f62a75ddfaa21d9",
+      "weather_sha256": "8c0761bc6da4cb0fd20ffd3cc061ff8022bb88d37e3f1f995d2a6cebad95daaa",
+      "year": 2019
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400732952-maria/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CA3433711905320191031",
+      "name": "MARIA",
+      "reported_final_area_ha_reference_only": 4046.4517367577596,
+      "scenario_id": "fpa-fod-400732952-maria",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400732952-maria.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 7.363995344357651,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 1,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400732952",
+      "split": "train",
+      "state": "CA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400732952-maria.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400732952-maria.json",
+      "weather_mapping_sha256": "c7b55cbe5220640dd1830a95ecfe725ad14b40c6947f1a288205b45ffebadf72",
+      "weather_sha256": "d681a448d0bae682927384d06f4a537681c37bf9f964184a47ecfc55f740e290",
+      "year": 2019
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400513550-poker/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "OR4261011964820190915",
+      "name": "POKER",
+      "reported_final_area_ha_reference_only": 9469.644028416,
+      "scenario_id": "fpa-fod-400513550-poker",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400513550-poker.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 14.922190601110769,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 2,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400513550",
+      "split": "train",
+      "state": "OR",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400513550-poker.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400513550-poker.json",
+      "weather_mapping_sha256": "f155b9bc249731103d7ca5c6f0c7c8d3fd69ffa4ac407f93247674c6ef9fd639",
+      "weather_sha256": "85ad109042a2c84c54900fbe9e1a3d015303e75c91c69679b3d246aacf97b84a",
+      "year": 2019
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400510308-shafter/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "NV4073111456120190804",
+      "name": "SHAFTER",
+      "reported_final_area_ha_reference_only": 2679.0189516287996,
+      "scenario_id": "fpa-fod-400510308-shafter",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400510308-shafter.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 17.59508512446635,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400510308",
+      "split": "train",
+      "state": "NV",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400510308-shafter.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400510308-shafter.json",
+      "weather_mapping_sha256": "a29fd2349ffd3c8559d14df85b4e967dda29291105c61ea0766b8eecf32d976d",
+      "weather_sha256": "f1b2f2a78960d6670565bc2451db5cf4428b02bea84b26c2eda5649620cdb8b6",
+      "year": 2019
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400509143-ridgetop/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "MT4750210822520190801",
+      "name": "RIDGETOP",
+      "reported_final_area_ha_reference_only": 4503.341826846719,
+      "scenario_id": "fpa-fod-400509143-ridgetop",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400509143-ridgetop.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 8.806187413579082,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 1,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400509143",
+      "split": "train",
+      "state": "MT",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400509143-ridgetop.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400509143-ridgetop.json",
+      "weather_mapping_sha256": "081eeeba89b786c83aa85f7050f7c166c2be36a96dbee5c503ca665e9628c2b9",
+      "weather_sha256": "2cf23a46724418ae19151b2ad3f6d067a5d0d76bdd8e4532b0c4ca2b6e3dcf32",
+      "year": 2019
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400505027-pine-lodge/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "NM3362410524420190619",
+      "name": "PINE LODGE",
+      "reported_final_area_ha_reference_only": 6070.284633599999,
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400505027-pine-lodge.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 13.311939869035292,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 6,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400505027",
+      "split": "train",
+      "state": "NM",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400505027-pine-lodge.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400505027-pine-lodge.json",
+      "weather_mapping_sha256": "e9fd22d327ee904b645fcb5f3f986a72103dddbc22374d3388a3b16bb19df361",
+      "weather_sha256": "6a311bcb371b7657041f54be8555e466895ac34c1e95f18b476f24f922b461e6",
+      "year": 2019
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400512411-russell/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "UT4178911290420190805",
+      "name": "RUSSELL",
+      "reported_final_area_ha_reference_only": 2407.47488568576,
+      "scenario_id": "fpa-fod-400512411-russell",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400512411-russell.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 11.601045045031668,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 2,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400512411",
+      "split": "train",
+      "state": "UT",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400512411-russell.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400512411-russell.json",
+      "weather_mapping_sha256": "6e2f928a003826fbfeb59f43594e0228e634e7fbbb7f3e81c6bc5cb1595aa585",
+      "weather_sha256": "9d35c188d589d668d4d8577d32156b5ceb64dcf9c7e3d256f78916c1e67237f5",
+      "year": 2019
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400501480-decker/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CO3840910600420190908",
+      "name": "DECKER",
+      "reported_final_area_ha_reference_only": 3625.5786688281596,
+      "scenario_id": "fpa-fod-400501480-decker",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400501480-decker.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 17.917155051320613,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 1,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400501480",
+      "split": "train",
+      "state": "CO",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400501480-decker.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400501480-decker.json",
+      "weather_mapping_sha256": "3be6b362e73c24523000ed40b8e157237a05685100fef963c2615dd4048dd6c5",
+      "weather_sha256": "c759cabf9a29fd64211e48b9ff65171d4e2ffaa2b7378144f96c2c01d1197b2b",
+      "year": 2019
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400506459-kincade/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CA3879612276720191023",
+      "name": "KINCADE",
+      "reported_final_area_ha_reference_only": 31089.974465088,
+      "scenario_id": "fpa-fod-400506459-kincade",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400506459-kincade.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 12.869358099435297,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 4,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400506459",
+      "split": "train",
+      "state": "CA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400506459-kincade.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400506459-kincade.json",
+      "weather_mapping_sha256": "42b0e731d20cdc90414a801cc315c18bb856e55a80efbba4ed9fef9cc3221886",
+      "weather_sha256": "ddb3d795177c308eb409cfc3e74b959949df61949ee54ffd56038c756d19c418",
+      "year": 2019
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400732973-walker/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CA4005312066920190904",
+      "name": "WALKER",
+      "reported_final_area_ha_reference_only": 22099.073551441918,
+      "scenario_id": "fpa-fod-400732973-walker",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400732973-walker.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 6.731820000262711,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 9,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400732973",
+      "split": "train",
+      "state": "CA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400732973-walker.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400732973-walker.json",
+      "weather_mapping_sha256": "7edc4aeb6dfde32719828933599f04db2a5db0796e29ea15681ad1b64d935a7f",
+      "weather_sha256": "8f49262f0c01bcbdcc61ea3deb5b4e2fc607a7621a4dca72b988c12c54e8ad01",
+      "year": 2019
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400506885-huck/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "AZ3337311029920190723",
+      "name": "HUCK",
+      "reported_final_area_ha_reference_only": 4768.81560815616,
+      "scenario_id": "fpa-fod-400506885-huck",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400506885-huck.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 13.779837987727285,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400506885",
+      "split": "train",
+      "state": "AZ",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400506885-huck.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400506885-huck.json",
+      "weather_mapping_sha256": "ffb226a0453442bd9ea9cb99768552f1607928a0a9548b3cea1e8f114b473a7c",
+      "weather_sha256": "a1ee67030d77886a44bd2e83b72bc38ed941cd2cb5252fc0397da0d37b374822",
+      "year": 2019
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400513361-243-command/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "WA4686911989820190604",
+      "name": "243 COMMAND",
+      "reported_final_area_ha_reference_only": 9175.03288086528,
+      "scenario_id": "fpa-fod-400513361-243-command",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400513361-243-command.json",
+      "seed_cell": [
+        66,
+        63
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 61.392374921324624,
+        "method": "nearest_burnable_cell_within_half_section",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 2,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400513361",
+      "split": "train",
+      "state": "WA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400513361-243-command.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400513361-243-command.json",
+      "weather_mapping_sha256": "498c1d608491a68c759dccc69e235df3204d4fef13e27fe00b29462b01ccb619",
+      "weather_sha256": "81b5f11bd192873fceb156e1e3a20e0eb8021ca33c5a14cc6a3ae7850a023ca2",
+      "year": 2019
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400508285-sheep/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "ID4371511252320190722",
+      "name": "SHEEP",
+      "reported_final_area_ha_reference_only": 45367.971888907006,
+      "scenario_id": "fpa-fod-400508285-sheep",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400508285-sheep.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 11.597625471837484,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 2,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400508285",
+      "split": "train",
+      "state": "ID",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400508285-sheep.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400508285-sheep.json",
+      "weather_mapping_sha256": "1ec0f1a77ae5421d2780e8d2da84a526d60c356792b261358b6aef69b4bffc8d",
+      "weather_sha256": "76475607747e4c5c6a7915391ba81be7e3b569ccbe9b199299be06223fe64006",
+      "year": 2019
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400510515-summit/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "NV4064811732520190722",
+      "name": "SUMMIT",
+      "reported_final_area_ha_reference_only": 2606.98490731008,
+      "scenario_id": "fpa-fod-400510515-summit",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400510515-summit.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 15.020056257104526,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 2,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400510515",
+      "split": "train",
+      "state": "NV",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400510515-summit.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400510515-summit.json",
+      "weather_mapping_sha256": "8c8dd6d803ab59bb54e111e43805b40e894f4d509f5309851aa6a598e6a4d4f5",
+      "weather_sha256": "c624c14dca5bee43bfa9d7fa302331b06c6ff219201109c4c75c50b86bb37056",
+      "year": 2019
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400732975-204-cow/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "OR4428511846020190809",
+      "name": "204 COW",
+      "reported_final_area_ha_reference_only": 3912.50078917632,
+      "scenario_id": "fpa-fod-400732975-204-cow",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400732975-204-cow.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 13.843403929363603,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 10,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400732975",
+      "split": "train",
+      "state": "OR",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400732975-204-cow.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400732975-204-cow.json",
+      "weather_mapping_sha256": "86248d87d57a8931f733a45755bdd5f932f1c6ab3d89c44f0f82da2f30852d0c",
+      "weather_sha256": "3c439537fc0219c64b0c1aab2a96382c4a325a43c2d0ace261bc48d30556c6cb",
+      "year": 2019
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400504463-taboose/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CA3703411834520190904",
+      "name": "TABOOSE",
+      "reported_final_area_ha_reference_only": 4154.098117593599,
+      "scenario_id": "fpa-fod-400504463-taboose",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400504463-taboose.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 6.510060222078303,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400504463",
+      "split": "train",
+      "state": "CA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400504463-taboose.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400504463-taboose.json",
+      "weather_mapping_sha256": "396aa68aed7225fe07dc6dc3399927acc900441fa090f27cf6d1746352e2a3c5",
+      "weather_sha256": "38f602777fa35bb35aaef870a92f9c18bf727b0a6e910b55231b62df3784ecb6",
+      "year": 2019
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400504417-shady/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "ID4451711501920190710",
+      "name": "SHADY",
+      "reported_final_area_ha_reference_only": 2543.85394712064,
+      "scenario_id": "fpa-fod-400504417-shady",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400504417-shady.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 13.442054567292281,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 10,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400504417",
+      "split": "train",
+      "state": "ID",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400504417-shady.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400504417-shady.json",
+      "weather_mapping_sha256": "73d20d8a52d17febe505c8e736d530e641a094614d6dc7f58e39d5e5d7be3e35",
+      "weather_sha256": "12b1d770080c1d1254fe38ccfeb3bc2f24c711c88c382e6fe6494a45ce6f5ae3",
+      "year": 2019
+    },
+    {
+      "fuel_release": "LF2016",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-400506448-briceburg/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CA3760511996620191006",
+      "name": "BRICEBURG",
+      "reported_final_area_ha_reference_only": 2293.3535345740797,
+      "scenario_id": "fpa-fod-400506448-briceburg",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-400506448-briceburg.json",
+      "seed_cell": [
+        63,
+        65
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 33.151460335189064,
+        "method": "nearest_burnable_cell_within_half_section",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 8,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:400506448",
+      "split": "train",
+      "state": "CA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-400506448-briceburg.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-400506448-briceburg.json",
+      "weather_mapping_sha256": "1281ff3d23874dcaace0ea47fae4a912342373cf38379fefca2f58770c631a17",
+      "weather_sha256": "16f84326f37cd33acf9c87e3c230608f6005b39b1e9e65a2db77a98f0c199b34",
+      "year": 2019
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401316132-hayden/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "ID4470311374220230719",
+      "name": "HAYDEN",
+      "reported_final_area_ha_reference_only": 9998.163477181439,
+      "scenario_id": "fpa-fod-401316132-hayden",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401316132-hayden.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 13.42474248649084,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401316132",
+      "split": "validation",
+      "state": "ID",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401316132-hayden.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401316132-hayden.json",
+      "weather_mapping_sha256": "beb07aec9e941d3f0d3ff17bff3c6efd27d5e8b63ec344a9fd4f7845b252861e",
+      "weather_sha256": "a15dac7d8895f71f1a4fed702b96fa5a11224a763f07a51c7101da47560f2ced",
+      "year": 2023
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401315922-red-point-tank/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "AZ3323510975820230717",
+      "name": "RED POINT TANK",
+      "reported_final_area_ha_reference_only": 2091.8200847385597,
+      "scenario_id": "fpa-fod-401315922-red-point-tank",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401315922-red-point-tank.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 13.531669604856804,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401315922",
+      "split": "validation",
+      "state": "AZ",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401315922-red-point-tank.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401315922-red-point-tank.json",
+      "weather_mapping_sha256": "c1cffe26d6c15817224e954628dd6d8dfd45d486b6ea1285a72c912781bb247c",
+      "weather_sha256": "fea7f813811a4842d29b2cbfa96fcf7f1dd93cda939e8b6e2b074c330c50d028",
+      "year": 2023
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401316696-turkey/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "NM3302810845420230722",
+      "name": "TURKEY",
+      "reported_final_area_ha_reference_only": 2271.09582425088,
+      "scenario_id": "fpa-fod-401316696-turkey",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401316696-turkey.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 16.265920361369318,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401316696",
+      "split": "validation",
+      "state": "NM",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401316696-turkey.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401316696-turkey.json",
+      "weather_mapping_sha256": "82b5d14144ecb36206135266b6a769a26051c35f2c62c01053d9a7b32263c7f8",
+      "weather_sha256": "324ad4ae92ca626e19cab4a8bbfe17c458ec863f6d6ab40944730401713ed862",
+      "year": 2023
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401317993-sourdough/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "WA4872212113620230729",
+      "name": "SOURDOUGH",
+      "reported_final_area_ha_reference_only": 2985.3659828044797,
+      "scenario_id": "fpa-fod-401317993-sourdough",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401317993-sourdough.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 8.160870969302833,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 9,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401317993",
+      "split": "validation",
+      "state": "WA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401317993-sourdough.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401317993-sourdough.json",
+      "weather_mapping_sha256": "af79a2c3a3074d24e43b75c8bc8476568021a2984836ff30cfdeb1d1bb3958c5",
+      "weather_sha256": "a2b5119c1df5a4cef553cb95178c3e78852f2621aa6ca39ea24025e2cbef1e5d",
+      "year": 2023
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401321294-ufish/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CA4168112342020230816",
+      "name": "UFISH",
+      "reported_final_area_ha_reference_only": 2781.80910475776,
+      "scenario_id": "fpa-fod-401321294-ufish",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401321294-ufish.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 10.141360090777962,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 10,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401321294",
+      "split": "validation",
+      "state": "CA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401321294-ufish.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401321294-ufish.json",
+      "weather_mapping_sha256": "89b46c341ec73ae28ffab600e68660e3e22786819aad5f19bf1d75f14883468c",
+      "weather_sha256": "b2fd35c9dca97cfee2f5b4df40e2373ec8ba82b8073eb04f71c85509d8c27225",
+      "year": 2023
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401321600-river-road-east/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "MT4738211480620230818",
+      "name": "RIVER ROAD EAST",
+      "reported_final_area_ha_reference_only": 7006.32252410112,
+      "scenario_id": "fpa-fod-401321600-river-road-east",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401321600-river-road-east.json",
+      "seed_cell": [
+        64,
+        65
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 39.83262633037058,
+        "method": "nearest_burnable_cell_within_half_section",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401321600",
+      "split": "validation",
+      "state": "MT",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401321600-river-road-east.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401321600-river-road-east.json",
+      "weather_mapping_sha256": "2741eabe767090dbb722a1f163a9e536b843bc9f765d8148ee91ae86f9dcfa3f",
+      "weather_sha256": "0c13fe9ba8e368a0d2593f7891cb65f88defb83c32cdbe4860b441f2e2f2741c",
+      "year": 2023
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401316681-bedrock/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "OR4397112254620230723",
+      "name": "BEDROCK",
+      "reported_final_area_ha_reference_only": 12784.0194383616,
+      "scenario_id": "fpa-fod-401316681-bedrock",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401316681-bedrock.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 12.532565468098989,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 9,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401316681",
+      "split": "validation",
+      "state": "OR",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401316681-bedrock.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401316681-bedrock.json",
+      "weather_mapping_sha256": "f3523c1d1363c5624dbf126a782f002078e83d0beacafdbd8ee3d302bf7494c1",
+      "weather_sha256": "e42f47d3c60d7e5ae5cca542e5c3555c6b0cea66b297594776a43bf6a0c18d90",
+      "year": 2023
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401319337-thompson-ridge/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "UT3815511247920230804",
+      "name": "THOMPSON RIDGE",
+      "reported_final_area_ha_reference_only": 2935.1849631667196,
+      "scenario_id": "fpa-fod-401319337-thompson-ridge",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401319337-thompson-ridge.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 12.048518990613424,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 8,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401319337",
+      "split": "validation",
+      "state": "UT",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401319337-thompson-ridge.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401319337-thompson-ridge.json",
+      "weather_mapping_sha256": "9e2b0d85459f33d4009d793a30edd8088b7f6e41b82250b85c0f6cdaa6aff850",
+      "weather_sha256": "6df7aeb71dc187bdcb829b32e8d8ed37ff7e5138ddda3ef3b93cff373671b670",
+      "year": 2023
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401326006-iron/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CO4070610781520230929",
+      "name": "IRON",
+      "reported_final_area_ha_reference_only": 2991.43626743808,
+      "scenario_id": "fpa-fod-401326006-iron",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401326006-iron.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 12.959071376532545,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401326006",
+      "split": "validation",
+      "state": "CO",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401326006-iron.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401326006-iron.json",
+      "weather_mapping_sha256": "8bdaabac2ae97f61ea5f5e43ab0f21a0ba1afc145ff5b2dd84a2173ff8d5a53e",
+      "weather_sha256": "a32e036caab1f9f145a31a18909fbf4541558c36e496fe17fbc384f3fd58d0db",
+      "year": 2023
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401317844-prior/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "NM3329410838820230726",
+      "name": "PRIOR",
+      "reported_final_area_ha_reference_only": 5193.33084686592,
+      "scenario_id": "fpa-fod-401317844-prior",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401317844-prior.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 14.971967485346097,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 2,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401317844",
+      "split": "validation",
+      "state": "NM",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401317844-prior.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401317844-prior.json",
+      "weather_mapping_sha256": "76ffa3f1398cac8e4f41d45ae81e0b090e04dfe1f88360748c9602cb2663e237",
+      "weather_sha256": "5cf599e8ee6abba77c9896edaa38bc85e5adf275146eab2a5e7e7f1beebb4065",
+      "year": 2023
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401312856-beehive/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "AZ3150111115820230701",
+      "name": "BEEHIVE",
+      "reported_final_area_ha_reference_only": 4348.3472258688,
+      "scenario_id": "fpa-fod-401312856-beehive",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401312856-beehive.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 15.085120108017998,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 2,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401312856",
+      "split": "validation",
+      "state": "AZ",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401312856-beehive.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401312856-beehive.json",
+      "weather_mapping_sha256": "d36a0590f8e2850577e9a7603ec6fb3ef5d36f8ebf356fa6585d398ac265d7ed",
+      "weather_sha256": "423dc5f1734ca048d8dbef826bef7e3029888bf004ccdee0b6243e7a305eab6c",
+      "year": 2023
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401321674-oregon/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "WA4803411723020230818",
+      "name": "OREGON",
+      "reported_final_area_ha_reference_only": 4379.50802032128,
+      "scenario_id": "fpa-fod-401321674-oregon",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401321674-oregon.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 14.568122869111225,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401321674",
+      "split": "validation",
+      "state": "WA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401321674-oregon.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401321674-oregon.json",
+      "weather_mapping_sha256": "13da15fdd7491c765a0e1ccf83f637d38332a9bc2bd173a3efc423140d29b163",
+      "weather_sha256": "46fb9ed085c03223a1ba7b76bf5af2857554228c0958c9005d7a57b4ecb9b221",
+      "year": 2023
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401313289-brushy/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "NM3152910871320230703",
+      "name": "BRUSHY",
+      "reported_final_area_ha_reference_only": 2446.3247073407997,
+      "scenario_id": "fpa-fod-401313289-brushy",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401313289-brushy.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 5.944947013391265,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 8,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401313289",
+      "split": "validation",
+      "state": "NM",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401313289-brushy.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401313289-brushy.json",
+      "weather_mapping_sha256": "e111c6272a2a66ffa539ba710ab8cc8c02aa89338b55166146c604a39b1791da",
+      "weather_sha256": "c2966d639f98a0344267668b61d4189dd8b69286e6602ce323ad5b70b0c6c812",
+      "year": 2023
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401310829-hansen-road/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "WA4624811961520230613",
+      "name": "HANSEN ROAD",
+      "reported_final_area_ha_reference_only": 2545.06800404736,
+      "scenario_id": "fpa-fod-401310829-hansen-road",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401310829-hansen-road.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 9.122760479699625,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 8,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401310829",
+      "split": "validation",
+      "state": "WA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401310829-hansen-road.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401310829-hansen-road.json",
+      "weather_mapping_sha256": "30d87840479bc44c49da3f229e410386d8a7ffb12a7999e7e2406c275a8162d7",
+      "weather_sha256": "e51c2200ab6531062683a4dc39a3468178454f65a73ff8cf5ad0d901f0e4ac0c",
+      "year": 2023
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401315421-rabbit/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CA3389011707120230714",
+      "name": "RABBIT",
+      "reported_final_area_ha_reference_only": 3381.0676037867515,
+      "scenario_id": "fpa-fod-401315421-rabbit",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401315421-rabbit.json",
+      "seed_cell": [
+        65,
+        63
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 50.75800893242505,
+        "method": "nearest_burnable_cell_within_half_section",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401315421",
+      "split": "validation",
+      "state": "CA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401315421-rabbit.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401315421-rabbit.json",
+      "weather_mapping_sha256": "852e5ab9780c1f6975e1e1bdc2357da105f21066250d2bd07515f5c354b89427",
+      "weather_sha256": "a904161a55d4c3a64e04f2e5deff93c7c6fdadd4ba6fc2eeccad7b7f2b99cb9c",
+      "year": 2023
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401321046-head/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CA4177812304120230815",
+      "name": "HEAD",
+      "reported_final_area_ha_reference_only": 2814.1839561369598,
+      "scenario_id": "fpa-fod-401321046-head",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401321046-head.json",
+      "seed_cell": [
+        63,
+        65
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 34.59213043571456,
+        "method": "nearest_burnable_cell_within_half_section",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401321046",
+      "split": "validation",
+      "state": "CA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401321046-head.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401321046-head.json",
+      "weather_mapping_sha256": "391365dcc084ec52954644d025e187f0e06005089e7c7d71d099b33c10d50c92",
+      "weather_sha256": "e3a8848c9abe1d8d663b9854782b69a8539b235a96d7a3f402a889546d4760f0",
+      "year": 2023
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401308187-pass/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "NM3340610828920230519",
+      "name": "PASS",
+      "reported_final_area_ha_reference_only": 24233.79031425792,
+      "scenario_id": "fpa-fod-401308187-pass",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401308187-pass.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 12.778176119426696,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 2,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401308187",
+      "split": "validation",
+      "state": "NM",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401308187-pass.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401308187-pass.json",
+      "weather_mapping_sha256": "e0253bf487d4a0884500551c2bb16d94f9015f6b4c09ceed0ef7f72ccebd4406",
+      "weather_sha256": "bac180e495f64b55b89edadd70a4d5ec878d54e7d38cbfe95b58448cba10c831",
+      "year": 2023
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401321340-pearch/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CA4130412348820230817",
+      "name": "PEARCH",
+      "reported_final_area_ha_reference_only": 4917.901798757375,
+      "scenario_id": "fpa-fod-401321340-pearch",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401321340-pearch.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 14.419897431484525,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 10,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401321340",
+      "split": "validation",
+      "state": "CA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401321340-pearch.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401321340-pearch.json",
+      "weather_mapping_sha256": "26aadb49fd6a0db25ac279ee1b5bcd37d9415ec9f3218f4bf4d9e328f97d7d8e",
+      "weather_sha256": "fd8fc9a8ba13014fc9761e2f3b4fdb758aac69a922ea2af565906819336b4b95",
+      "year": 2023
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401321023-kelly/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CA4185912384020230815",
+      "name": "KELLY",
+      "reported_final_area_ha_reference_only": 32839.55190218419,
+      "scenario_id": "fpa-fod-401321023-kelly",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401321023-kelly.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 4.644510723195575,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 10,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401321023",
+      "split": "validation",
+      "state": "CA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401321023-kelly.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401321023-kelly.json",
+      "weather_mapping_sha256": "a5dfe2d93fa9dba5eb002778380f93cd668a546d9a41c4b0b48ffbcd70f6cffb",
+      "weather_sha256": "511255017a844339420004ab492f8aa05cd0536e3e594983c6d6bca5b60c51f0",
+      "year": 2023
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401321611-gray/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "WA4753811774420230818",
+      "name": "GRAY",
+      "reported_final_area_ha_reference_only": 4072.75630350336,
+      "scenario_id": "fpa-fod-401321611-gray",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401321611-gray.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 6.162216799310137,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401321611",
+      "split": "validation",
+      "state": "WA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401321611-gray.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401321611-gray.json",
+      "weather_mapping_sha256": "30cfeb451fd64264af68a87f32a1260126562e2e8efe0ff3d0a40410bb0dbd0d",
+      "weather_sha256": "d0ced1fc4714d27983f60acfcdb9c930b70a26ab71844b8da7e555f058821e5c",
+      "year": 2023
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401411292-larch-creek/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "OR4536412124520240709",
+      "name": "LARCH CREEK",
+      "reported_final_area_ha_reference_only": 7400.08165400064,
+      "scenario_id": "fpa-fod-401411292-larch-creek",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401411292-larch-creek.json",
+      "seed_cell": [
+        63,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 33.19316497148934,
+        "method": "nearest_burnable_cell_within_half_section",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401411292",
+      "split": "test",
+      "state": "OR",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401411292-larch-creek.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401411292-larch-creek.json",
+      "weather_mapping_sha256": "240f7af4b7528817057d04931be52ce07a109a6e20760c88281edd1168a440ae",
+      "weather_sha256": "c3808462ebc7a46ab0f6073a0b9fc85c35a9fb02f081ee58ee6f284cb6db466a",
+      "year": 2024
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401421943-line/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CA3412111715520240906",
+      "name": "LINE",
+      "reported_final_area_ha_reference_only": 17797.26517443072,
+      "scenario_id": "fpa-fod-401421943-line",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401421943-line.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 11.365614181057285,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 8,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401421943",
+      "split": "test",
+      "state": "CA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401421943-line.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401421943-line.json",
+      "weather_mapping_sha256": "065f066782aecef1cdd81511b6b1387f3b4c64f01b8b166616a4ed011c4f3bf7",
+      "weather_sha256": "dae88f4c9f352cba9be9d4731bf753b18cc9d047439b76e1a388d594fb0871a9",
+      "year": 2024
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401422654-siphon/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "AZ3343911144120240910",
+      "name": "SIPHON",
+      "reported_final_area_ha_reference_only": 6283.553967060479,
+      "scenario_id": "fpa-fod-401422654-siphon",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401422654-siphon.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 18.40669566060513,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401422654",
+      "split": "test",
+      "state": "AZ",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401422654-siphon.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401422654-siphon.json",
+      "weather_mapping_sha256": "e88252eb7161acec120c7666812db0b7d548608a12845ed389ac1bf46bde7418",
+      "weather_sha256": "0507bee6694ba061ad504f445b56a723f03a8d7aba888c30102e974403b91119",
+      "year": 2024
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401411758-mcghee/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "MT4526910653420240712",
+      "name": "MCGHEE",
+      "reported_final_area_ha_reference_only": 7779.312569343743,
+      "scenario_id": "fpa-fod-401411758-mcghee",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401411758-mcghee.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 1.8360233625408764,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 2,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401411758",
+      "split": "test",
+      "state": "MT",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401411758-mcghee.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401411758-mcghee.json",
+      "weather_mapping_sha256": "018f67f140629c7ee7e273b3ebf09ac7efed6db43244a2e13b120f6ce781905c",
+      "weather_sha256": "c51a81a0d0a84a31f9013701f8541332297a1d8036268932a894f1b221a6dc22",
+      "year": 2024
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401425511-castle-ridge/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "NV4131911680120241006",
+      "name": "CASTLE RIDGE",
+      "reported_final_area_ha_reference_only": 10474.88316374016,
+      "scenario_id": "fpa-fod-401425511-castle-ridge",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401425511-castle-ridge.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 16.325648514910757,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401425511",
+      "split": "test",
+      "state": "NV",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401425511-castle-ridge.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401425511-castle-ridge.json",
+      "weather_mapping_sha256": "205e27ab591caf57fc4f5818350e7dd166597ce220b95b62817b0e2e9e638fb5",
+      "weather_sha256": "ebb4a06259b3289d6856244a326ad112b4f7d2df260d36ebda450be07025b256",
+      "year": 2024
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401414003-retreat/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "WA4667112099220240723",
+      "name": "RETREAT",
+      "reported_final_area_ha_reference_only": 18454.069971786237,
+      "scenario_id": "fpa-fod-401414003-retreat",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401414003-retreat.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 12.17888407039266,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 9,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401414003",
+      "split": "test",
+      "state": "WA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401414003-retreat.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401414003-retreat.json",
+      "weather_mapping_sha256": "edc79acf86d9f88c3e6e46ef024f25929466d3d1c1c258270d744ca57a206703",
+      "weather_sha256": "aca56656e81c30ab793a444eaa2caacc456eb4d048ed7f6deddad1cbf253c0e3",
+      "year": 2024
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401414128-sugar/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "ID4260911591020240724",
+      "name": "SUGAR",
+      "reported_final_area_ha_reference_only": 5557.871673395712,
+      "scenario_id": "fpa-fod-401414128-sugar",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401414128-sugar.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 3.373485761482732,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 9,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401414128",
+      "split": "test",
+      "state": "ID",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401414128-sugar.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401414128-sugar.json",
+      "weather_mapping_sha256": "ba343765c1fa2de38ef394a07170af0ca209c0a9233fa222fab089b019ac1a8d",
+      "weather_sha256": "b32e3bdabc1c7f803ac59f1761d7cf6615dcf6a038179b80cef257c90c737d0c",
+      "year": 2024
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401404229-blue-2/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "NM3342810580020240516",
+      "name": "BLUE 2",
+      "reported_final_area_ha_reference_only": 3048.09225735168,
+      "scenario_id": "fpa-fod-401404229-blue-2",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401404229-blue-2.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 19.802810086183538,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401404229",
+      "split": "test",
+      "state": "NM",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401404229-blue-2.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401404229-blue-2.json",
+      "weather_mapping_sha256": "870c19506270873e00c8f5cf6fe5f17e7140ad4a292dd47c9b27e446e3e4ad77",
+      "weather_sha256": "cc091a615eec57fe931d8447135a22e6318ea45a91a01128201d2266c34db591",
+      "year": 2024
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401424721-yellow-lake/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "UT4046911107620240928",
+      "name": "YELLOW LAKE",
+      "reported_final_area_ha_reference_only": 13372.8370478208,
+      "scenario_id": "fpa-fod-401424721-yellow-lake",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401424721-yellow-lake.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 15.55546734234898,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401424721",
+      "split": "test",
+      "state": "UT",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401424721-yellow-lake.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401424721-yellow-lake.json",
+      "weather_mapping_sha256": "2f37a38be8a03b3d10e46a9b6d54d0bf3f30d7ac9a9458db3fd92de26edfa750",
+      "weather_sha256": "a724e96ab8378fb67047b8c6ed1dbd7604ace25d88872ff600054698c1770241",
+      "year": 2024
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401415733-bucktail/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CO3831010845620240801",
+      "name": "BUCKTAIL",
+      "reported_final_area_ha_reference_only": 2864.36497577472,
+      "scenario_id": "fpa-fod-401415733-bucktail",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401415733-bucktail.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 15.620226447605864,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401415733",
+      "split": "test",
+      "state": "CO",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401415733-bucktail.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401415733-bucktail.json",
+      "weather_mapping_sha256": "fd20e9c78db16cc23d85df0ec5b74395df6de3783f70179883396519ba651162",
+      "weather_sha256": "6eb1137352ef0bbb017ab6b7ec3be71d77511a986a48da9cfacdc5a5001cbed3",
+      "year": 2024
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401422098-flat-top/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "OR4349712110220240907",
+      "name": "FLAT TOP",
+      "reported_final_area_ha_reference_only": 14759.593572366719,
+      "scenario_id": "fpa-fod-401422098-flat-top",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401422098-flat-top.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 12.33897962820496,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401422098",
+      "split": "test",
+      "state": "OR",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401422098-flat-top.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401422098-flat-top.json",
+      "weather_mapping_sha256": "7c28d74ac8526373cb81ac2b926a3085f09c9f2e4879dcab1f095a2b9d4f4361",
+      "weather_sha256": "289dd6b41639d7a853693e76e53d85dcb928457e8d8c41155403a25f1bad301a",
+      "year": 2024
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401413822-thompson/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "OR4462111740120240723",
+      "name": "THOMPSON",
+      "reported_final_area_ha_reference_only": 12770.83478013742,
+      "scenario_id": "fpa-fod-401413822-thompson",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401413822-thompson.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 12.210607730885913,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401413822",
+      "split": "test",
+      "state": "OR",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401413822-thompson.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401413822-thompson.json",
+      "weather_mapping_sha256": "6c9cb5368c00a47bb74c6fd58c072cde83dbea5e0c331dd077407f9f20f883cb",
+      "weather_sha256": "d92b884cbdd5a7a8ac262b480238a7f9024c9fd2f8b18a9451a335c58b0b7b35",
+      "year": 2024
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401416435-town-gulch/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "OR4487811725520240805",
+      "name": "TOWN GULCH",
+      "reported_final_area_ha_reference_only": 7443.569173115749,
+      "scenario_id": "fpa-fod-401416435-town-gulch",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401416435-town-gulch.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 10.48022827402701,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 8,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401416435",
+      "split": "test",
+      "state": "OR",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401416435-town-gulch.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401416435-town-gulch.json",
+      "weather_mapping_sha256": "65d687aaef64a7f8c9a755b1613a8616be30e366428c94865720ad77b0beab62",
+      "weather_sha256": "09a7e3fb6435a7148e18c9346946d2587a78b351499fe5e09106bafd8a9dfb8b",
+      "year": 2024
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401421390-shoe-fly/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "OR4463012003820240902",
+      "name": "SHOE FLY",
+      "reported_final_area_ha_reference_only": 10852.454867950079,
+      "scenario_id": "fpa-fod-401421390-shoe-fly",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401421390-shoe-fly.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 11.1469672264065,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 9,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401421390",
+      "split": "test",
+      "state": "OR",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401421390-shoe-fly.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401421390-shoe-fly.json",
+      "weather_mapping_sha256": "c58329dd1a9f030eb02bba2e8e446316d39e8fbbebae2deccb2b40c22ad67ed6",
+      "weather_sha256": "e97e53906fe5d6a8dffba8d7d8f32f2e1747dded54b3fdd43a59d38674c1b622",
+      "year": 2024
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401412417-hill/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CA4076612364320240716",
+      "name": "HILL",
+      "reported_final_area_ha_reference_only": 2923.44907954176,
+      "scenario_id": "fpa-fod-401412417-hill",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401412417-hill.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 16.084618969508686,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 10,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401412417",
+      "split": "test",
+      "state": "CA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401412417-hill.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401412417-hill.json",
+      "weather_mapping_sha256": "f125e3efeb8023b2b69ac851fa9d4ba7c8eda3f8da54366173d0a9be8c7c8563",
+      "weather_sha256": "2aa102ee65311b7a28e9f07b0568cf7e41a24b678513cc8726559856e89dfaed",
+      "year": 2024
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401414148-park/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CA3981912180320240724",
+      "name": "PARK",
+      "reported_final_area_ha_reference_only": 173854.1659632307,
+      "scenario_id": "fpa-fod-401414148-park",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401414148-park.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 5.620612768945671,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 2,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401414148",
+      "split": "test",
+      "state": "CA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401414148-park.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401414148-park.json",
+      "weather_mapping_sha256": "a2f028f43c9cc618671ba5efb711682c9abaae3b731e8c2c90dff6cf78f98dc6",
+      "weather_sha256": "e9cdb21d19c3197d1c8b4e64c2cbbbfc608c56048b53fafdfeb44eb0a8ba945c",
+      "year": 2024
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401417248-boise/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "CA4125112351820240809",
+      "name": "BOISE",
+      "reported_final_area_ha_reference_only": 5232.180668520959,
+      "scenario_id": "fpa-fod-401417248-boise",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401417248-boise.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 13.196918591870743,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 8,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401417248",
+      "split": "test",
+      "state": "CA",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401417248-boise.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401417248-boise.json",
+      "weather_mapping_sha256": "3418ca8a91c78b2783bbbcb32bf1ea28ca4d9cdc707cd1865833e9bb3f3fcfd6",
+      "weather_sha256": "e3d004028e5ea98200d7abfc7df77b66e6e573825a1c9f726ba852540cbed097",
+      "year": 2024
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401416591-warner-peak/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "OR4242811980520240806",
+      "name": "WARNER PEAK",
+      "reported_final_area_ha_reference_only": 26655.024511779837,
+      "scenario_id": "fpa-fod-401416591-warner-peak",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401416591-warner-peak.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 12.921727146007717,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401416591",
+      "split": "test",
+      "state": "OR",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401416591-warner-peak.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401416591-warner-peak.json",
+      "weather_mapping_sha256": "2e30cb65bd8463068d11d1000ffb0be4f1ac461dc7ca9f53a23c3b40ccd2085d",
+      "weather_sha256": "98caf6977022ce08acf8899151c83b44dcc0cd8ab93ad864f0d0f2732bfdebe5",
+      "year": 2024
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401422688-point/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "AZ3396411204220240910",
+      "name": "POINT",
+      "reported_final_area_ha_reference_only": 2085.74980010496,
+      "scenario_id": "fpa-fod-401422688-point",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401422688-point.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 12.806592385709571,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 8,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401422688",
+      "split": "test",
+      "state": "AZ",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401422688-point.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401422688-point.json",
+      "weather_mapping_sha256": "c669817987b6a4d13e9e04852767dbdf8bc6bfbfed47f15941b951ddf8530121",
+      "weather_sha256": "7bb4e20e31a082e4f2b16842911cdb6d6159392216a1b06894768613bf6a4908",
+      "year": 2024
+    },
+    {
+      "fuel_release": "LF2022",
+      "input_receipt": ".local/simfire-cohort-v2/fpa-fod-401413757-0501-crazy-creek/input-receipt.json",
+      "input_status": {
+        "fuel": "verified",
+        "terrain": "verified",
+        "weather": "mapped_proxy"
+      },
+      "mtbs_id_reference_only": "OR4435812003120240722",
+      "name": "0501 CRAZY CREEK",
+      "reported_final_area_ha_reference_only": 35192.726068394186,
+      "scenario_id": "fpa-fod-401413757-0501-crazy-creek",
+      "scenario_manifest": "data/manifests/simfire-cases-v2/fpa-fod-401413757-0501-crazy-creek.json",
+      "seed_cell": [
+        64,
+        64
+      ],
+      "seed_selection": {
+        "distance_from_reported_point_m": 15.89887851091604,
+        "method": "reported_point_cell_is_burnable",
+        "note": "Starting cell is selected from the pre-event FBFM13 map only. If the reported cell is non-burnable, the closest burnable cell within half a PLSS section is used as an uncertain proxy; this does not claim a verified ignition location.",
+        "reported_point_cell": [
+          64,
+          64
+        ],
+        "search_radius_m": 804.672,
+        "selected_fuel_code": 5,
+        "uses_observed_perimeter": false
+      },
+      "source_record_id": "FOD_ID:401413757",
+      "split": "test",
+      "state": "OR",
+      "weather_json": "data/processed/simfire-cohort-v2-gridmet-weather/fpa-fod-401413757-0501-crazy-creek.json",
+      "weather_mapping_path": "data/processed/simfire-cohort-v2-gridmet-mappings/fpa-fod-401413757-0501-crazy-creek.json",
+      "weather_mapping_sha256": "0820fde59cc0b767bf57d86a0dacec4b990ccd50aeb85413fba1d3a787e65271",
+      "weather_sha256": "f4b4df720e1d9e649fb72cafaeb7bc5e17bdf834971856786206e68c74c5fb9e",
+      "year": 2024
+    }
+  ],
+  "cohort_id": "fpa-fod-western-us-2018-2024-v2",
+  "cohort_screen_receipts": [
+    {
+      "query_url": "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_FireOccurrenceCurrentEdition_01/MapServer/0/query?where=fire_year+%3D+2018+AND+state+IN+%28%27CA%27%2C%27OR%27%2C%27WA%27%2C%27ID%27%2C%27NV%27%2C%27AZ%27%2C%27UT%27%2C%27CO%27%2C%27NM%27%2C%27MT%27%29+AND+fire_size+%3E%3D+5000+AND+latitude+IS+NOT+NULL+AND+longitude+IS+NOT+NULL+AND+discovery_date+IS+NOT+NULL+AND+mtbs_id+IS+NOT+NULL&outFields=fod_id%2Cfpa_id%2Cfire_name%2Cfire_year%2Cdiscovery_date%2Cdiscovery_time%2Cfire_size%2Clatitude%2Clongitude%2Cstate%2Cmtbs_id%2Cmtbs_fire_name&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=2000",
+      "screened_pool_count": 146,
+      "selected_count": 20,
+      "snapshot": "reports/real-fire-data/fpa-fod-simfire-cohort-v2/2018-screen.geojson",
+      "snapshot_sha256": "b21849c231ba735121d3fc989ab821af89011b7b0aa0b90c0eb55622a60122b1",
+      "split": "train",
+      "year": 2018
+    },
+    {
+      "query_url": "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_FireOccurrenceCurrentEdition_01/MapServer/0/query?where=fire_year+%3D+2019+AND+state+IN+%28%27CA%27%2C%27OR%27%2C%27WA%27%2C%27ID%27%2C%27NV%27%2C%27AZ%27%2C%27UT%27%2C%27CO%27%2C%27NM%27%2C%27MT%27%29+AND+fire_size+%3E%3D+5000+AND+latitude+IS+NOT+NULL+AND+longitude+IS+NOT+NULL+AND+discovery_date+IS+NOT+NULL+AND+mtbs_id+IS+NOT+NULL&outFields=fod_id%2Cfpa_id%2Cfire_name%2Cfire_year%2Cdiscovery_date%2Cdiscovery_time%2Cfire_size%2Clatitude%2Clongitude%2Cstate%2Cmtbs_id%2Cmtbs_fire_name&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=2000",
+      "screened_pool_count": 62,
+      "selected_count": 20,
+      "snapshot": "reports/real-fire-data/fpa-fod-simfire-cohort-v2/2019-screen.geojson",
+      "snapshot_sha256": "ca8f96734ff91392f1125b122bb5fa25065e04407ed1ebfe2e6ae700e1d1de06",
+      "split": "train",
+      "year": 2019
+    },
+    {
+      "query_url": "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_FireOccurrenceCurrentEdition_01/MapServer/0/query?where=fire_year+%3D+2023+AND+state+IN+%28%27CA%27%2C%27OR%27%2C%27WA%27%2C%27ID%27%2C%27NV%27%2C%27AZ%27%2C%27UT%27%2C%27CO%27%2C%27NM%27%2C%27MT%27%29+AND+fire_size+%3E%3D+5000+AND+latitude+IS+NOT+NULL+AND+longitude+IS+NOT+NULL+AND+discovery_date+IS+NOT+NULL+AND+mtbs_id+IS+NOT+NULL&outFields=fod_id%2Cfpa_id%2Cfire_name%2Cfire_year%2Cdiscovery_date%2Cdiscovery_time%2Cfire_size%2Clatitude%2Clongitude%2Cstate%2Cmtbs_id%2Cmtbs_fire_name&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=2000",
+      "screened_pool_count": 56,
+      "selected_count": 20,
+      "snapshot": "reports/real-fire-data/fpa-fod-simfire-cohort-v2/2023-screen.geojson",
+      "snapshot_sha256": "f14cd70374ce808f889d0c05959387b899e4b4e5d2a8b9acaee7b78c6e016c3a",
+      "split": "validation",
+      "year": 2023
+    },
+    {
+      "query_url": "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_FireOccurrenceCurrentEdition_01/MapServer/0/query?where=fire_year+%3D+2024+AND+state+IN+%28%27CA%27%2C%27OR%27%2C%27WA%27%2C%27ID%27%2C%27NV%27%2C%27AZ%27%2C%27UT%27%2C%27CO%27%2C%27NM%27%2C%27MT%27%29+AND+fire_size+%3E%3D+5000+AND+latitude+IS+NOT+NULL+AND+longitude+IS+NOT+NULL+AND+discovery_date+IS+NOT+NULL+AND+mtbs_id+IS+NOT+NULL&outFields=fod_id%2Cfpa_id%2Cfire_name%2Cfire_year%2Cdiscovery_date%2Cdiscovery_time%2Cfire_size%2Clatitude%2Clongitude%2Cstate%2Cmtbs_id%2Cmtbs_fire_name&returnGeometry=true&outSR=4326&f=geojson&resultRecordCount=2000",
+      "screened_pool_count": 109,
+      "selected_count": 20,
+      "snapshot": "reports/real-fire-data/fpa-fod-simfire-cohort-v2/2024-screen.geojson",
+      "snapshot_sha256": "3a157756659d42036a67c915e9e0d8388644a2d13b8c58e2660ea974ecf754c6",
+      "split": "test",
+      "year": 2024
+    }
+  ],
+  "created_at_utc": "2026-11-01T14:02:20.768287+00:00",
+  "fuel_vintage_rule": {
+    "2018-2019": "LF2016 FBFM13, pre-event by 2-3 calendar years",
+    "2023-2024": "LF2022 FBFM13, pre-event by 1-2 calendar years; LF2022 fuel disturbance layers include disturbances through 2022",
+    "terrain": "LF2020 elevation, treated as static terrain"
+  },
+  "input_acquisition_report": "reports/real-fire-data/simfire-cohort-v2-input-acquisition.json",
+  "input_acquisition_summary": {
+    "agent_training_started": false,
+    "exact_historical_weather_replay_ready": 0,
+    "failed_cases": 0,
+    "fuel_terrain_verified": 80,
+    "historical_weather_training_ready": 0,
+    "successful_cases": 80,
+    "weather_fetched": 0,
+    "weather_mapping": "mapped_daily_proxy_80_of_80",
+    "weather_proxy_environment_inputs_ready": 80
+  },
+  "limitations": [
+    "FPA-FOD occurrence points are not verified ignition coordinates and have at least section-scale source precision.",
+    "Twenty per year is still a screened western-US large-fire sample, not a representative national benchmark.",
+    "All 80 cases have daily gridMET context and an explicit versioned SimFire proxy. This is not an hourly replay or physical validation.",
+    "Fuel map vintages are pre-event and public-service available, but are not per-event vegetation surveys.",
+    "MTBS IDs support later visual reference only; no historical perimeter defines the simulator reward."
+  ],
+  "purpose": "Small, reproducible, real-incident environmental cohort for SimFire policy experiments; not a physical reconstruction.",
+  "schema_version": "simfire-cohort/1.0",
+  "seed_selection_report": "reports/real-fire-data/simfire-cohort-v2-seed-selection.json",
+  "seed_selection_summary": {
+    "cases": 80,
+    "nearest_burnable_proxy": 9,
+    "reported_point_cell_burnable": 71,
+    "uses_observed_perimeter": false
+  },
+  "source": {
+    "license_and_citation": "USFS Research Data Archive says FPA-FOD may be used without additional permissions or fees; cite Short (2026), DOI 10.2737/RDS-2013-0009.7. Check joined raster and perimeter products separately.",
+    "name": "USFS FPA-FOD current edition",
+    "query_date": "2026-11-01",
+    "release": "FPA_FOD_20260615 (7th edition, 6th update)",
+    "selection_rule": {
+      "minimum_reported_fire_size_acres": 5000,
+      "requires_location_and_discovery_date": true,
+      "requires_mtbs_id": true,
+      "sample_per_year": 20,
+      "sampling": "Stable SHA-256 ranking of FOD_ID, greedily preferring one event per state before filling the annual quota; selection does not rank by final size.",
+      "states": [
+        "CA",
+        "OR",
+        "WA",
+        "ID",
+        "NV",
+        "AZ",
+        "UT",
+        "CO",
+        "NM",
+        "MT"
+      ],
+      "years": [
+        2018,
+        2019,
+        2023,
+        2024
+      ]
+    },
+    "service_url": "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_FireOccurrenceCurrentEdition_01/MapServer/0"
+  },
+  "split_rule": {
+    "note": "Out-of-time validation/test. Years 2020-2022 are omitted from this first cohort because their best pre-event FBFM13 layer is not presently available from the public ImageServer endpoint; do not substitute a post-event fuel map.",
+    "test": [
+      2024
+    ],
+    "train": [
+      2018,
+      2019
+    ],
+    "unit": "whole incident; events from one fire never cross splits",
+    "validation": [
+      2023
+    ]
+  },
+  "training_rule": "The agent learns only from SimFire rollouts on each case's environmental inputs. FPA final size and MTBS historical perimeters stay hidden from observations and rewards.",
+  "weather_acquisition_report": "reports/real-fire-data/simfire-cohort-v2-gridmet-weather.json",
+  "weather_acquisition_summary": {
+    "downloaded": 80,
+    "failed": 0,
+    "mapped_to_simfire": 0,
+    "ready_for_historical_weather_training": 0,
+    "requested": 80
+  },
+  "weather_mapping_report": "reports/real-fire-data/simfire-cohort-v2-gridmet-simfire-mapping.json",
+  "weather_mapping_summary": {
+    "agent_training_started": false,
+    "exact_historical_mapping": 0,
+    "failed": 0,
+    "mapped_proxy": 80,
+    "mapping_version": "gridmet-daily-simfire-proxy/1.0",
+    "proxy_environment_inputs_ready": 80,
+    "requested": 80
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -118.45981354097592,
+          44.285055799200855
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1565308800000,
+        "discovery_time": "2134",
+        "fire_name": "204 COW",
+        "fire_size": 9668,
+        "fire_year": 2019,
+        "fod_id": 400732975,
+        "fpa_id": "ICS209_2019_10805427",
+        "latitude": 44.28505,
+        "longitude": -118.4598,
+        "mtbs_fire_name": "204 COW",
+        "mtbs_id": "OR4428511846020190809",
+        "state": "OR"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

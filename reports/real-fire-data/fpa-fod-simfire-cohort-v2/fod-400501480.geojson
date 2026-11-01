@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -106.00389908159958,
+          38.409450605854985
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1567900800000,
+        "discovery_time": "1316",
+        "fire_name": "DECKER",
+        "fire_size": 8959,
+        "fire_year": 2019,
+        "fod_id": 400501480,
+        "fpa_id": "FS-6983738",
+        "latitude": 38.40944444,
+        "longitude": -106.00388889,
+        "mtbs_fire_name": "DECKER",
+        "mtbs_id": "CO3840910600420190908",
+        "state": "CO"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

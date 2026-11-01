@@ -35,14 +35,23 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def read_inputs(input_dir: Path, manifest: dict) -> tuple[np.ndarray, np.ndarray, dict[str, Path]]:
+def read_inputs(manifest: dict, input_dir: Path | None = None) -> tuple[np.ndarray, np.ndarray, dict[str, Path]]:
     grid = manifest["grid"]
     bounds = [float(value) for value in grid["projected_bounds_m"]]
     shape = (int(grid["rows"]), int(grid["columns"]))
-    paths = {
-        "fuel": input_dir / "fuel-lf2016-fbfm13.tif",
-        "elevation": input_dir / "elevation-lf2020-m.tif",
-    }
+    fuel_release = str(manifest["inputs"]["fuel"].get("source_release") or "LF2016").split()[0]
+    paths = {}
+    for key, path_key, fallback_name in (
+        ("fuel", "fuel", "fuel-{}-fbfm13.tif".format(fuel_release.lower())),
+        ("elevation", "terrain", "elevation-lf2020-m.tif"),
+    ):
+        reference = manifest["inputs"][path_key].get("path")
+        path = ROOT / reference if reference and not Path(reference).is_absolute() else Path(reference or "")
+        if not path.is_file() and input_dir:
+            path = input_dir / fallback_name
+        if not path.is_file():
+            raise FileNotFoundError("Missing {} raster: {}".format(path_key, path))
+        paths[key] = path
     arrays: dict[str, np.ndarray] = {}
     for key, path in paths.items():
         with rasterio.open(path) as dataset:
@@ -69,7 +78,15 @@ def display_path(path: Path) -> str:
         return str(path.resolve())
 
 
-def render_inputs(fuel: np.ndarray, elevation: np.ndarray, bounds: list[float], point_cell: list[int], destination: Path) -> None:
+def render_inputs(
+    fuel: np.ndarray,
+    elevation: np.ndarray,
+    bounds: list[float],
+    point_cell: list[int],
+    destination: Path,
+    scenario_id: str,
+    fuel_release: str,
+) -> None:
     import matplotlib
 
     matplotlib.use("Agg")
@@ -93,7 +110,7 @@ def render_inputs(fuel: np.ndarray, elevation: np.ndarray, bounds: list[float], 
         [ymax / 1000 - (point_cell[0] + 0.5) * 0.03],
         marker="+", s=120, linewidths=2, color="black", label="reported point cell (uncertain)",
     )
-    axes[0].set_title("LANDFIRE FBFM13 — 2016")
+    axes[0].set_title("LANDFIRE FBFM13 — {}".format(fuel_release))
     axes[0].set_xlabel("UTM easting (km)")
     axes[0].set_ylabel("UTM northing (km)")
     axes[0].legend(loc="upper right", fontsize=8)
@@ -105,7 +122,7 @@ def render_inputs(fuel: np.ndarray, elevation: np.ndarray, bounds: list[float], 
     axes[1].set_xlabel("UTM easting (km)")
     axes[1].set_ylabel("UTM northing (km)")
     fig.colorbar(elevation_image, ax=axes[1], label="Elevation (m)")
-    fig.suptitle("Dixie incident reference — exact 30 m UTM grid; point accuracy unknown")
+    fig.suptitle("{} — exact 30 m UTM grid; point accuracy unknown".format(scenario_id))
     fig.savefig(destination, dpi=160)
     plt.close(fig)
 
@@ -117,7 +134,7 @@ def main() -> int:
         type=Path,
         default=ROOT / "data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json",
     )
-    parser.add_argument("--inputs", type=Path, default=ROOT / ".local/real-input-dixie")
+    parser.add_argument("--inputs", type=Path, help="optional override directory for raster files")
     parser.add_argument(
         "--out",
         type=Path,
@@ -128,11 +145,11 @@ def main() -> int:
     if args.steps < 1:
         parser.error("--steps must be at least 1")
     manifest_path = args.scenario_manifest.expanduser().resolve()
-    input_dir = args.inputs.expanduser().resolve()
+    input_dir = args.inputs.expanduser().resolve() if args.inputs else None
     output = args.out.expanduser().resolve()
     try:
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-        fuel_codes, elevation_m, input_paths = read_inputs(input_dir, manifest)
+        fuel_codes, elevation_m, input_paths = read_inputs(manifest, input_dir)
     except (OSError, json.JSONDecodeError, KeyError, TypeError, ValueError) as exc:
         parser.error(str(exc))
     if not SIMFIRE_ROOT.is_dir():
@@ -166,6 +183,8 @@ def main() -> int:
         parser.error(f"FBFM13 codes are not mapped by pinned SimFire: {unmapped}")
     config_dict = yaml.safe_load(CONFIG_PATH.read_text(encoding="utf-8"))
     config_dict["area"]["screen_size"] = list(fuel_codes.shape)
+    # The manifest's 30 m projected pixels must match SimFire's feet-per-pixel scale.
+    config_dict["area"]["pixel_scale"] = float(manifest["grid"]["resolution_m"]) * 3.280839895
     config_dict["terrain"]["fuel"]["type"] = "functional"
     config_dict["terrain"]["topography"]["type"] = "functional"
     config_dict["simulation"]["headless"] = False
@@ -190,19 +209,22 @@ def main() -> int:
     try:
         simulation.rendering = True
         fire_map, active = simulation.run(f"{args.steps}m")
-        gif_path = output / "dixie-real-fuel-terrain-demo-weather.gif"
+        gif_path = output / "{}-demo-weather.gif".format(manifest["scenario_id"])
         simulation.save_gif(gif_path)
     finally:
         if simulation.rendering:
             simulation.rendering = False
 
     xmin, ymin, xmax, ymax = [float(value) for value in manifest["grid"]["projected_bounds_m"]]
+    fuel_release = str(manifest["inputs"]["fuel"].get("source_release") or "LF2016").split()[0]
     render_inputs(
         fuel_codes,
         elevation_m,
         [xmin, ymin, xmax, ymax],
         seed_cell,
         output / "input-layers.png",
+        manifest["scenario_id"],
+        fuel_release,
     )
     fig, axis = plt.subplots(figsize=(7, 6))
     image = axis.imshow(fire_map, cmap=ListedColormap(["#536b3f", "#e63946", "#8d5524", "#f1faee", "#2a9d8f", "#457b9d"]), vmin=0, vmax=5, interpolation="nearest")
@@ -226,21 +248,27 @@ def main() -> int:
         "scenario_manifest": str(manifest_path.relative_to(ROOT)),
         "scenario_manifest_sha256": sha256_file(manifest_path),
         "simfire_commit": SIMFIRE_COMMIT,
+        "grid_resolution_m": manifest["grid"]["resolution_m"],
+        "simfire_pixel_scale_ft": config_dict["area"]["pixel_scale"],
         "steps": args.steps,
         "fire_active_after_horizon": bool(active),
         "inputs": {
             "fuel": {"path": display_path(input_paths["fuel"]), "sha256": sha256_file(input_paths["fuel"]), "codes": sorted(int(value) for value in np.unique(fuel_codes))},
             "terrain": {"path": display_path(input_paths["elevation"]), "sha256": sha256_file(input_paths["elevation"]), "source_units": "meters", "SimFire_units": "feet"},
-            "weather": "ERA5 record fetched and retained in input receipt; not used because ERA5 wind is at 10 m and SimFire expects midflame wind, while RH is not fuel moisture.",
+            "weather": (
+                "Historical ERA5 record is stored but not used because ERA5 wind is at 10 m and SimFire expects midflame wind, while RH is not fuel moisture."
+                if manifest["inputs"]["weather"].get("sha256")
+                else "Historical weather was not downloaded; explicit demonstration wind/moisture are used."
+            ),
         },
         "fire_initial_position": {"cell_row_column": seed_cell, "simfire_xy_column_row": [seed_cell[1], seed_cell[0]], "source_role": manifest["event"]["location_wgs84"]["role"], "accuracy_note": manifest["event"]["location_wgs84"].get("accuracy_note")},
         "environment_used": {"wind": "configuration demo value", "fuel_moisture": "configuration demo value; not inferred from ERA5 RH"},
         "outputs": ["input-layers.png", "final-state.png", gif_path.name],
         "limitations": [
             "The FPA-FOD point is an incident reference with unknown event-specific precision, not GPS-confirmed ignition.",
-            "LANDFIRE FBFM13 vintage is 2016; it predates the 2021 fire by five years.",
-            "The 30-minute run demonstrates real fuel/terrain array integration only; its demo atmosphere is not historical weather.",
-            "The fetched ERA5 date is stored in UTC and is not aligned to discovery HHMM because the source timezone is unresolved.",
+            "LANDFIRE {} FBFM13 is a pre-event candidate, not a field-verified event-year vegetation survey.".format(fuel_release),
+            "The run demonstrates real fuel/terrain array integration only; its demo atmosphere is not historical weather.",
+            "The event discovery HHMM timezone is unresolved, and 10 m wind/RH are not yet mapped to SimFire's midflame wind/fuel moisture.",
             "The output is not a counterfactual reconstruction or a claim about real-world area saved.",
         ],
         "created_at_utc": datetime.now(timezone.utc).isoformat(),

@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -123.84001398540228,
+          41.85860512848153
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1692057600000,
+        "discovery_time": "0630",
+        "fire_name": "KELLY",
+        "fire_size": 81148.3,
+        "fire_year": 2023,
+        "fod_id": 401321023,
+        "fpa_id": "INF-2023-CASRF-000939",
+        "latitude": 41.8586,
+        "longitude": -123.84,
+        "mtbs_fire_name": "KELLY",
+        "mtbs_id": "CA4185912384020230815",
+        "state": "CA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

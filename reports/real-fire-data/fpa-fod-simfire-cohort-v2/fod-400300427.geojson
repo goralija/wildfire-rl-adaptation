@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -108.47417732520421,
+          37.657783680530834
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1532217600000,
+        "discovery_time": "1600",
+        "fire_name": "PLATEAU",
+        "fire_size": 19634,
+        "fire_year": 2018,
+        "fod_id": 400300427,
+        "fpa_id": "FS-6905284",
+        "latitude": 37.657777779999996,
+        "longitude": -108.47416667,
+        "mtbs_fire_name": "PLATEAU",
+        "mtbs_id": "CO3765810847420180722",
+        "state": "CO"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

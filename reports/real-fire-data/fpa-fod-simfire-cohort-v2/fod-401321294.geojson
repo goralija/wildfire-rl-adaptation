@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -123.42023089580233,
+          41.681422154322554
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1692144000000,
+        "discovery_time": "1421",
+        "fire_name": "UFISH",
+        "fire_size": 6874,
+        "fire_year": 2023,
+        "fod_id": 401321294,
+        "fpa_id": "INF-2023-CAKNF-007029",
+        "latitude": 41.681416999999996,
+        "longitude": -123.420217,
+        "mtbs_fire_name": "UFISH",
+        "mtbs_id": "CA4168112342020230816",
+        "state": "CA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

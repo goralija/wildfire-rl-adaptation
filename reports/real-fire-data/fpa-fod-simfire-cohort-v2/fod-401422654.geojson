@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -111.44137789351716,
+          33.43905514871649
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1725926400000,
+        "discovery_time": "1259",
+        "fire_name": "SIPHON",
+        "fire_size": 15527,
+        "fire_year": 2024,
+        "fod_id": 401422654,
+        "fpa_id": "INF-2024-AZTNF-001687",
+        "latitude": 33.43905,
+        "longitude": -111.441367,
+        "mtbs_fire_name": "SIPHON",
+        "mtbs_id": "AZ3343911144120240910",
+        "state": "AZ"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

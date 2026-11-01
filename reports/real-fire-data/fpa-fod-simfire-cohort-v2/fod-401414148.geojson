@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -121.8026143787126,
+          39.81858415619141
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1721779200000,
+        "discovery_time": "1452",
+        "fire_name": "PARK",
+        "fire_size": 429603,
+        "fire_year": 2024,
+        "fod_id": 401414148,
+        "fpa_id": "INF-2024-CABTU-013761",
+        "latitude": 39.818579,
+        "longitude": -121.802601,
+        "mtbs_fire_name": "PARK",
+        "mtbs_id": "CA3981912180320240724",
+        "state": "CA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

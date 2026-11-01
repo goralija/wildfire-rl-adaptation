@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -112.89028905401624,
+          34.67778301579427
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1564963200000,
+        "discovery_time": "1700",
+        "fire_name": "SHERIDAN",
+        "fire_size": 21510,
+        "fire_year": 2019,
+        "fod_id": 400500160,
+        "fpa_id": "FS-6948109",
+        "latitude": 34.67777778,
+        "longitude": -112.89027777999999,
+        "mtbs_fire_name": "SHERIDAN",
+        "mtbs_id": "AZ3467811289020190805",
+        "state": "AZ"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

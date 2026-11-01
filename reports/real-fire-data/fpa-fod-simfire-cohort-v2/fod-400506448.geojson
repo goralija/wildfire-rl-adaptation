@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -119.96607281429668,
+          37.60464510645345
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1570320000000,
+        "discovery_time": "1434",
+        "fire_name": "BRICEBURG",
+        "fire_size": 5667,
+        "fire_year": 2019,
+        "fod_id": 400506448,
+        "fpa_id": "W-735086",
+        "latitude": 37.604639999999996,
+        "longitude": -119.96606,
+        "mtbs_fire_name": "BRICEBURG",
+        "mtbs_id": "CA3760511996620191006",
+        "state": "CA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

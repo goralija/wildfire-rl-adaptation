@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -122.76641339039902,
+          38.79610499994517
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1571788800000,
+        "discovery_time": "2124",
+        "fire_name": "KINCADE",
+        "fire_size": 76825,
+        "fire_year": 2019,
+        "fod_id": 400506459,
+        "fpa_id": "W-735880",
+        "latitude": 38.7961,
+        "longitude": -122.7664,
+        "mtbs_fire_name": "KINCADE",
+        "mtbs_id": "CA3879612276720191023",
+        "state": "CA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

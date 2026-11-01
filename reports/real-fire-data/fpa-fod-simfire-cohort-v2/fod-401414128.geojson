@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -115.9104627905266,
+          42.60895489155482
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1721779200000,
+        "discovery_time": "1407",
+        "fire_name": "SUGAR",
+        "fire_size": 13733.8,
+        "fire_year": 2024,
+        "fod_id": 401414128,
+        "fpa_id": "INF-2024-IDSWS-000668",
+        "latitude": 42.608948999999996,
+        "longitude": -115.91045,
+        "mtbs_fire_name": "SUGAR",
+        "mtbs_id": "ID4260911591020240724",
+        "state": "ID"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

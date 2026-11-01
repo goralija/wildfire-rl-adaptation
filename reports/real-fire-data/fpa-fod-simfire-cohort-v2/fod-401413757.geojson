@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -120.03071082451933,
+          44.35796765378535
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1721606400000,
+        "discovery_time": "1107",
+        "fire_name": "0501 CRAZY CREEK",
+        "fire_size": 86963.12,
+        "fire_year": 2024,
+        "fod_id": 401413757,
+        "fpa_id": "INF-2024-OROCF-000501",
+        "latitude": 44.357962,
+        "longitude": -120.030697,
+        "mtbs_fire_name": "0501 CRAZY CREEK",
+        "mtbs_id": "OR4435812003120240722",
+        "state": "OR"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

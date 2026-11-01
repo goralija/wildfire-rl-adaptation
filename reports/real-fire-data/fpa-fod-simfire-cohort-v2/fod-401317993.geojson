@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -121.13557057351363,
+          48.721672508364165
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1690588800000,
+        "discovery_time": "0911",
+        "fire_name": "SOURDOUGH",
+        "fire_size": 7377,
+        "fire_year": 2023,
+        "fod_id": 401317993,
+        "fpa_id": "INF-2023-WANCP-000262",
+        "latitude": 48.7216667,
+        "longitude": -121.13555559999999,
+        "mtbs_fire_name": "SOURDOUGH",
+        "mtbs_id": "WA4872212113620230729",
+        "state": "WA"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

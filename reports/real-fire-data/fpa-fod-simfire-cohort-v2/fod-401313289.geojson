@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -108.7133435110672,
+          31.528616098416503
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1688342400000,
+        "discovery_time": "1252",
+        "fire_name": "BRUSHY",
+        "fire_size": 6045,
+        "fire_year": 2023,
+        "fod_id": 401313289,
+        "fpa_id": "INF-2023-NMN3S-000324",
+        "latitude": 31.5286111,
+        "longitude": -108.7133333,
+        "mtbs_fire_name": "BRUSHY",
+        "mtbs_id": "NM3152910871320230703",
+        "state": "NM"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

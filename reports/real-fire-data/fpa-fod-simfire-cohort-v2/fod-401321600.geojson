@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -114.80584678360066,
+          47.38167310105646
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1692316800000,
+        "discovery_time": "1318",
+        "fire_name": "RIVER ROAD EAST",
+        "fire_size": 17313,
+        "fire_year": 2023,
+        "fod_id": 401321600,
+        "fpa_id": "INF-2023-MTLNF-200730",
+        "latitude": 47.3816667,
+        "longitude": -114.8058333,
+        "mtbs_fire_name": "RIVER ROAD EAST",
+        "mtbs_id": "MT4738211480620230818",
+        "state": "MT"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}

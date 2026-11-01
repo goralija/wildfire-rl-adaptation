@@ -1,0 +1,29 @@
+{
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -109.75806613923619,
+          33.234727405882936
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "discovery_date": 1689552000000,
+        "discovery_time": "1628",
+        "fire_name": "RED POINT TANK",
+        "fire_size": 5169,
+        "fire_year": 2023,
+        "fod_id": 401315922,
+        "fpa_id": "INF-2023-AZSCA-000983",
+        "latitude": 33.23472219999999,
+        "longitude": -109.75805559999999,
+        "mtbs_fire_name": "RED POINT TANK",
+        "mtbs_id": "AZ3323510975820230717",
+        "state": "AZ"
+      },
+      "type": "Feature"
+    }
+  ],
+  "type": "FeatureCollection"
+}
