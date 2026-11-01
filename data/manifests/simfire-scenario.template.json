@@ -1,0 +1,82 @@
+{
+  "schema_version": "simfire-scenario/1.0",
+  "scenario_id": "replace-with-source-and-event-id",
+  "readiness": "template",
+  "event": {
+    "source": "replace-with-official-dataset-name",
+    "source_release": null,
+    "source_record_id": "replace-with-source-record-id",
+    "source_url": null,
+    "source_record_snapshot": null,
+    "data_license_status": "must be checked before use or redistribution",
+    "discovery_time": {
+      "value": null,
+      "timezone": null,
+      "precision": "record source value and its known precision; do not invent a time"
+    },
+    "location_wgs84": {
+      "latitude": null,
+      "longitude": null,
+      "role": "unknown",
+      "accuracy_m": null,
+      "accuracy_note": "record whether this is an actual reported ignition or only an incident reference point"
+    },
+    "final_area_ha_reference_only": null,
+    "final_perimeter_reference": null
+  },
+  "grid": {
+    "crs": "replace-with-simulator-grid-crs-after-conversion",
+    "resolution_m": 30,
+    "resolution_note": "Record whether this is an exact ground distance or the simulator's nominal cell size.",
+    "rows": 128,
+    "columns": 128,
+    "extent_selection": "fixed_around_event_location",
+    "top_left_latitude": null,
+    "top_left_longitude": null
+  },
+  "inputs": {
+    "fuel": {
+      "status": "missing",
+      "source": null,
+      "source_release": null,
+      "path": null,
+      "sha256": null,
+      "units_and_mapping": "native source fuel class to SimFire/Anderson fuel model; document unmapped classes"
+    },
+    "terrain": {
+      "status": "missing",
+      "source": null,
+      "source_release": null,
+      "path": null,
+      "sha256": null,
+      "units_and_mapping": "record elevation units, CRS, resampling and NoData treatment"
+    },
+    "weather": {
+      "status": "missing",
+      "source": null,
+      "source_release": null,
+      "path": null,
+      "sha256": null,
+      "units_and_mapping": "record time zone and conversion to simulator wind, moisture and weather inputs"
+    }
+  },
+  "fire_behavior": {
+    "simulator": "SimFire",
+    "simulator_commit": null,
+    "seed_cell": [64, 64],
+    "horizon_minutes": null,
+    "seed": null,
+    "weather_mapping_note": "not ready until verified historical weather is mapped to SimFire"
+  },
+  "split": "unassigned",
+  "references": {
+    "perimeters_and_actions_are_agent_inputs": false,
+    "perimeters_and_actions_are_reward_inputs": false,
+    "notes": "Use final perimeters only for separately labelled context/visual comparison unless a preregistered target-based objective is adopted."
+  },
+  "limitations": [
+    "Template only; not a runnable or validated case.",
+    "A reported final fire size includes the actual response and cannot be treated as an untreated-fire label.",
+    "Simulator outcomes support claims about the tested simulator, not guaranteed real-world damage reduction."
+  ]
+}

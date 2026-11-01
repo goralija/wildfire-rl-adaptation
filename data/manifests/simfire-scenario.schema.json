@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:wildfire-rl-adaptation:simfire-scenario:1.0",
+  "title": "Real-fire-derived SimFire scenario manifest",
+  "description": "Small, versioned bridge from a real incident record and external raster/weather files to one simulator-ready scenario. Large rasters and time series stay in separate files and are referenced by path and SHA-256.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "scenario_id",
+    "readiness",
+    "event",
+    "grid",
+    "inputs",
+    "fire_behavior",
+    "split"
+  ],
+  "properties": {
+    "schema_version": {"const": "simfire-scenario/1.0"},
+    "scenario_id": {"type": "string", "minLength": 1},
+    "readiness": {
+      "enum": ["template", "candidate", "inputs_ready", "simulator_ready", "rejected"]
+    },
+    "event": {
+      "type": "object",
+      "required": ["source", "source_record_id", "discovery_time", "location_wgs84"],
+      "properties": {
+        "source": {"type": "string", "minLength": 1},
+        "source_release": {"type": ["string", "null"]},
+        "source_record_id": {"type": "string", "minLength": 1},
+        "source_url": {"type": ["string", "null"], "format": "uri"},
+        "source_record_snapshot": {"$ref": "#/$defs/file_reference"},
+        "data_license_status": {"type": "string", "minLength": 1},
+        "discovery_time": {
+          "type": "object",
+          "required": ["value", "timezone", "precision"],
+          "properties": {
+            "value": {"type": ["string", "null"]},
+            "timezone": {"type": ["string", "null"]},
+            "precision": {"type": "string", "minLength": 1}
+          },
+          "additionalProperties": false
+        },
+        "location_wgs84": {
+          "type": "object",
+          "required": ["latitude", "longitude", "role", "accuracy_m"],
+          "properties": {
+            "latitude": {"type": ["number", "null"], "minimum": -90, "maximum": 90},
+            "longitude": {"type": ["number", "null"], "minimum": -180, "maximum": 180},
+            "accuracy_m": {"type": ["number", "null"], "exclusiveMinimum": 0},
+            "role": {"enum": ["reported_ignition", "incident_reference_point", "unknown"]},
+            "accuracy_note": {"type": "string"}
+          },
+          "additionalProperties": false
+        },
+        "final_area_ha_reference_only": {"type": ["number", "null"], "minimum": 0},
+        "final_perimeter_reference": {"$ref": "#/$defs/file_reference"}
+      },
+      "additionalProperties": false
+    },
+    "grid": {
+      "type": "object",
+      "required": ["crs", "resolution_m", "rows", "columns", "extent_selection"],
+      "properties": {
+        "crs": {"type": "string", "minLength": 1},
+        "resolution_m": {"type": "number", "exclusiveMinimum": 0},
+        "resolution_note": {"type": "string"},
+        "rows": {"type": "integer", "minimum": 1},
+        "columns": {"type": "integer", "minimum": 1},
+        "extent_selection": {
+          "enum": ["fixed_around_event_location", "other_documented_method"]
+        },
+        "top_left_latitude": {"type": ["number", "null"], "minimum": -90, "maximum": 90},
+        "top_left_longitude": {"type": ["number", "null"], "minimum": -180, "maximum": 180}
+      },
+      "additionalProperties": false
+    },
+    "inputs": {
+      "type": "object",
+      "required": ["fuel", "terrain", "weather"],
+      "properties": {
+        "fuel": {"$ref": "#/$defs/input_reference"},
+        "terrain": {"$ref": "#/$defs/input_reference"},
+        "weather": {"$ref": "#/$defs/input_reference"}
+      },
+      "additionalProperties": false
+    },
+    "fire_behavior": {
+      "type": "object",
+      "required": ["simulator", "seed_cell", "horizon_minutes", "seed"],
+      "properties": {
+        "simulator": {"const": "SimFire"},
+        "simulator_commit": {"type": ["string", "null"]},
+        "seed_cell": {
+          "type": "array",
+          "prefixItems": [{"type": "integer", "minimum": 0}, {"type": "integer", "minimum": 0}],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "horizon_minutes": {"type": ["integer", "null"], "minimum": 1},
+        "seed": {"type": ["integer", "null"]},
+        "weather_mapping_note": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "split": {"enum": ["unassigned", "train", "validation", "test"]},
+    "references": {
+      "type": "object",
+      "properties": {
+        "perimeters_and_actions_are_agent_inputs": {"const": false},
+        "perimeters_and_actions_are_reward_inputs": {"const": false},
+        "notes": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "limitations": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "file_reference": {
+      "type": ["object", "null"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "source_url": {"type": ["string", "null"], "format": "uri"}
+      },
+      "required": ["path", "sha256"],
+      "additionalProperties": false
+    },
+    "input_reference": {
+      "type": "object",
+      "required": ["status", "source", "path", "sha256"],
+      "properties": {
+        "status": {"enum": ["missing", "candidate", "verified"]},
+        "source": {"type": ["string", "null"]},
+        "source_release": {"type": ["string", "null"]},
+        "path": {"type": ["string", "null"]},
+        "sha256": {"type": ["string", "null"], "pattern": "^[a-fA-F0-9]{64}$"},
+        "units_and_mapping": {"type": "string"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
