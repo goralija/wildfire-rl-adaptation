@@ -1,7 +1,9 @@
 # Snapshot of the local SimFire 2.0.1 environment, created 2026-11-01.
 # Target: macOS ARM64, Python 3.9.25. Not a portable Linux/Windows lock.
 # Install the source separately from external/simfire at commit
-# 04905b19fe8c10dc08d64faddd00303e0561bb66; setuptools stays below 81 for pkg_resources.
+# 04905b19fe8c10dc08d64faddd00303e0561bb66; includes rasterio for real-input GeoTIFF checks;
+# setuptools stays below 81 for pkg_resources.
+affine==3.0.1
 annotated-types==0.7.0
 asciitree==1.0.0
 attrs==26.1.0
@@ -50,6 +52,7 @@ python-dateutil==3.0.0
 pytz==2026.6
 pywavelets==1.6.0
 pyyaml==6.0.3
+rasterio==1.4.3
 reportlab==3.6.13
 requests==2.32.5
 rich==12.6.0

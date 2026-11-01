@@ -34,50 +34,57 @@
     ],
     "simulator": "SimFire",
     "simulator_commit": "04905b19fe8c10dc08d64faddd00303e0561bb66",
-    "weather_mapping_note": "Candidate only; FPA-FOD point is an incident reference point, not a verified ignition; it is used as a provisional seed location. Weather is missing."
+    "weather_mapping_note": "A source-referenced ERA5 series is present locally, but simulator wind-height and fuel-moisture conversions are unresolved; the integration smoke uses explicit demo atmosphere values."
   },
   "grid": {
     "columns": 128,
-    "crs": "EPSG:4326",
+    "crs": "EPSG:32610",
     "extent_selection": "fixed_around_event_location",
+    "projected_bounds_m": [
+      636690,
+      4413360,
+      640530,
+      4417200
+    ],
     "resolution_m": 30,
-    "resolution_note": "Nominal 30 m increment following pinned SimFire's fixed degrees-per-cell conversion; east-west ground distance varies by latitude.",
+    "resolution_note": "Exact 30 m projected cells in the event's UTM zone; the reported point is assigned to its containing cell and remains spatially uncertain.",
     "rows": 128,
-    "top_left_latitude": 39.89378816280924,
-    "top_left_longitude": -121.39663741862155
+    "top_left_latitude": null,
+    "top_left_longitude": null
   },
   "inputs": {
     "fuel": {
-      "path": null,
-      "sha256": null,
-      "source": null,
-      "source_release": null,
-      "status": "missing",
-      "units_and_mapping": "Need a pre-event fuel layer; document native classes, vintage and SimFire conversion."
+      "path": ".local/real-input-dixie/fuel-lf2016-fbfm13.tif",
+      "sha256": "b5e0e5a3f61ad54d9b5f6e062b8ff1acc0ddc0af1e532b7aee9b92fc7c508065",
+      "source": "LANDFIRE LF2016 FBFM13 CONUS ImageServer",
+      "source_release": "LF2016 FBFM13",
+      "status": "candidate",
+      "units_and_mapping": "Source FBFM13 integer codes are checked against pinned SimFire FuelModelToFuel; 12 codes occur in this 128x128 tile. LF2016 is five years before the 2021 event."
     },
     "terrain": {
-      "path": null,
-      "sha256": null,
-      "source": null,
-      "source_release": null,
-      "status": "missing",
-      "units_and_mapping": "Need an elevation raster aligned to the fixed grid; document units, resampling and NoData handling."
+      "path": ".local/real-input-dixie/elevation-lf2020-m.tif",
+      "sha256": "b9360ba55dbf3c0c6d37eb07fdb9518e1e49c7b7546cdfc8c7b164e3934492dc",
+      "source": "LANDFIRE LF2020 Elevation CONUS ImageServer",
+      "source_release": "LF2020 Elevation",
+      "status": "candidate",
+      "units_and_mapping": "Source elevation is meters and is converted to feet with pinned SimFire meters_to_feet; EPSG:32610 nearest-neighbor aligned 30m grid."
     },
     "weather": {
-      "path": null,
-      "sha256": null,
-      "source": null,
-      "source_release": null,
-      "status": "missing",
-      "units_and_mapping": "Need event-date weather and explicit timezone/unit conversion into SimFire wind and moisture."
+      "path": ".local/real-input-dixie/weather-era5-discovery-date-utc.json",
+      "sha256": "e5ba5ae3bc473e6de1746400132cd29bf2c9d99a0bb31952ced4c5280db5d20b",
+      "source": "Open-Meteo Historical Weather API (ERA5 reanalysis)",
+      "source_release": "ERA5 hourly, UTC request, 2021-07-13",
+      "status": "candidate",
+      "units_and_mapping": "Hourly temperature, RH, 10m wind and precipitation retained in UTC. Not yet fed to SimFire: ERA5 10m wind is not midflame wind, RH is not fuel moisture, and FPA discovery HHMM timezone is unresolved."
     }
   },
   "limitations": [
-    "Candidate record only: fuel, terrain and historical weather files have not been obtained or validated.",
-    "The source coordinate's event-specific accuracy is unknown; do not treat it as a 30-m GPS ignition.",
-    "The reported final fire size reflects actual response and reporting; it is context only, not a no-action target.",
-    "Discovery HHMM is kept without an assumed timezone until the source field definition is checked.",
-    "Final area was converted from 963309 acres using 1 acre = 0.40468564224 hectares."
+    "Dixie is a development fixture only, not a representative training sample or held-out evaluation event.",
+    "The FPA-FOD point is an incident reference with unknown event-specific precision, not GPS-confirmed ignition.",
+    "The 2016 FBFM13 layer is pre-event but five years older than the 2021 incident; it is not a verified 2021 vegetation snapshot.",
+    "ERA5 hourly values are about 25 km resolution and are not yet mapped to SimFire midflame wind/fuel moisture.",
+    "The source discovery HHMM timezone is unresolved; the UTC weather date is not aligned to that clock time.",
+    "Reported final fire size includes real-world response and is not an untreated-fire target or agent reward."
   ],
   "readiness": "candidate",
   "references": {
