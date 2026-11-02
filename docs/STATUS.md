@@ -95,18 +95,27 @@ poređenje. FPA-FOD/SimFire agent trening nije pokrenut. Prije tumačenja poređ
 fizički pregledati postavke širenja i definisati base/fine-tuning trening recept. Detalji su u
 [dataset kartici](research/SIMFIRE_FPA_COHORT.md), [adapteru](research/SIMFIRE_RL_ADAPTER.md)
 i [mapping receiptu](../reports/real-fire-data/simfire-cohort-v2-gridmet-simfire-mapping.json).
+Za fizički gate pregledan je dio novog [NIROPS skupa dnevnih oboda](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md).
+Osam požara iz 2023 validation split-a ima poklapanje po tačnom incidentnom kodu, državi i
+imenu. Pregledan je jedan zbirni grafikon za Hayden; **originalni obodi i prostorna
+poređenja još ne postoje**, pa fizička validacija nije urađena. Detalji i po-slučaj nalazi su
+u [crosswalk receiptu](../reports/real-fire-data/nirops-validation-id-crosswalk-20261102.json).
 
 ## Sljedeći redoslijed
 
-1. Na drugom računaru/klonu ponoviti setup i pokrenuti samo validation preflight:
+1. Nastaviti TASK-026: pribaviti NIROPS poligone samo za osam tačno identifikovanih 2023
+   validation incidenata ako se mogu izdvojiti bez skidanja cijelog velikog arhiva. Potvrditi
+   vremena/atribute, pa provjeriti mogućnost početka SimFire-a iz opaženog oboda. Ne otvarati
+   test geometrije. Pravila su u [NIROPS validation gateu](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md).
+2. Na drugom računaru/klonu ponoviti setup i pokrenuti samo validation preflight:
    `.local/simfire-venv/bin/python scripts/evaluate_simfire_benchmark.py --preflight-only`.
-2. Prije treninga zasebno zapisati porijeklo i raspored generičkog base PPO treninga, broj
+3. Prije treninga zasebno zapisati porijeklo i raspored generičkog base PPO treninga, broj
    trening-koraka i checkpoint frekvenciju finog učenja, te pregledati fizičke pretpostavke
    za vjetar/vlagu i 15-minutni vijek ćelije.
-3. Trening ostaje zaustavljen dok ga korisnik izričito ne odobri. Poslije treninga validation
+4. Trening ostaje zaustavljen dok ga korisnik izričito ne odobri. Poslije treninga validation
    bira checkpoint; rezervisanih 19 test incidenata otvara se samo za finalnu uparenu
    evaluaciju.
-4. Završni report čuva epizode, uparene razlike po požaru i buduće karte/animacije.
+5. Završni report čuva epizode, uparene razlike po požaru i buduće karte/animacije.
 
 ## Stari CFSDS/Firehose rad
 

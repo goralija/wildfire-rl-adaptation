@@ -4,6 +4,37 @@ title: Work log
 ---
 # Work log
 
+2026-11-02 — Advanced TASK-026 from a dataset lead to an incident-code crosswalk. Downloaded
+only the NIROPS v2 time-series chart archive and small author-code member; verified the full
+outer archive's byte length without downloading its raw perimeter geometry. Matched the
+official FPA-FOD incident code, state and name against 20 frozen 2023 VALIDATION cases: 8
+exact matches. Rejected 3 misleading same-name/state candidates because their incident
+codes differ. Visually checked one Hayden area-over-time chart; it approximately agrees with
+the FPA-FOD final area, but it is not a spatial or physical validation. Added a reproducible
+crosswalk script and receipt, and updated source, status, handoff and gate documents. No
+perimeter polygons, 2024 TEST data, simulator steps, policy evaluation or training were
+opened/run. TASK-026 remains active until source polygons, timestamp/suppression review and
+an observed-perimeter SimFire import are resolved. See
+[`nirops-validation-id-crosswalk-20261102.json`](../reports/real-fire-data/nirops-validation-id-crosswalk-20261102.json)
+and [the physical gate](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md). A CC BY 4.0 Hayden
+chart copy is saved at
+[`hayden-area-progression.png`](../reports/real-fire-data/nirops-validation-charts/hayden-area-progression.png)
+with source attribution.
+
+2026-11-02 — Advanced the pre-training readiness work with a new source audit. Found the
+latest USFS NIROPS daily fire-perimeter progression dataset (Mendeley v2, 737 incidents,
+2020–2024), which could independently check SimFire spread instead of relying only on
+successful data loading. Recorded the limits: selected flights often begin after ignition,
+perimeters are irregular/incomplete active-fire observations rather than a full untreated
+history, and suppression can confound a no-action comparison. The version 1 page showed a
+1.62 GB full archive; the v2 size remains unconfirmed. No files were downloaded, no incident
+overlaps were claimed, and the 2024 test geometries were
+not opened. Added a validation-only next-step gate and revised the backlog so the next task
+is an evidence-backed 2023 crosswalk and physical-alignment check. The SimFire/SimHarness
+paper's DQN setup and future-fire-map observation are not copied into this PPO design.
+No simulator training or policy evaluation was run. See TASK-026 and
+[`SIMFIRE_PHYSICAL_VALIDATION_GATE.md`](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md).
+
 2026-11-02 — Finished TASK-025's pre-training comparison setup. Wrote a versioned SimFire
 evaluation contract for no-op, a deterministic front-edge rule, generic base PPO and a
 TRAIN-only fine-tuned copy. It fixes five shared environment seeds, 32 line points, a

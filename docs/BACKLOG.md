@@ -21,13 +21,16 @@ Detalji: [current scenario pipeline](research/REAL_IGNITION_SCENARIO_PIPELINE.md
 | TASK-023 | Podaci i proxy ulazi spremni 80/80 | LANDFIRE FBFM13 i LF2020 teren su 128×128, 30 m, poravnati i hash-provjereni. Početna goriva ćelija postoji za svih 80 (71 direktno, 9 bliski proxy). Osam dnevnih gridMET polja i zaseban transparentni SimFire proxy postoje za svih 80. Tačan replay: 0/80. Vidi acquisition, QC i mapping receipts. |
 | TASK-024 | Proxy spojen; trajanje ćelije podešeno; fizička validacija otvorena | Nominalni gridMET→SimFire proxy je spojen za 80/80. Stock trajanje od 4 jednominutna koraka gasilo je neke požare prije širenja preko 30 m ćelije; adapter sada koristi 15 koraka. No-op probe na Owyhee/Hayden/Larch Creek prolaze kroz horizont ili se gase po modelu. To je inženjerska provjera, ne fizička kalibracija. Larch Creek je smoke-otvoren test slučaj. |
 | TASK-025 | Ugovor i inference runner završeni; fizički review otvoren | Ugovor u [SimFire evaluation protocol](research/SIMFIRE_EVALUATION_PROTOCOL.md), config u `configs/simfire/evaluation-v1.json`, inference-only runner u `scripts/evaluate_simfire_benchmark.py`. Fiksirani su no-op/front-edge/base/fine-tuned, 5 paired seedova, metrike, incident-bootstrap i checkpoint izbor. Validation preflight je lokalno prošao 20/20; još ga treba ponoviti na drugom računaru i definisati base/fine-tune trening recepte. Larch Creek ostaje isključen; test runner traži eksplicitne zastavice. |
-| TASK-026 | Nije započet — trenutno namjerno odgođen | Korisnik je izričito tražio da se trening sada ne pokreće. Prije eventualnog treninga treba zasebno odobriti tu fazu; tada koristiti samo TRAIN za učenje, validation za izbor, 19 zatvorenih test ID-jeva za završnu procjenu. |
-| TASK-027 | P1 nakon treninga — završna poređenja/vizuali | Upariti base/fine-tuned/no-op/heuristic na istim test scenarijima, uslovima i više seedova. Sačuvati CSV/JSON receipt, intervale i georeferencirane karte/animacije; zaključak važi za SimFire, ne historijske hektare. |
+| TASK-026 | Aktivno — 8 NIROPS incident-code matcha; geometrije nisu pribavljene | Za 2023 VALIDATION poređeno je 20 FPA-FOD slučajeva s NIROPS chart ID-jevima: 8 tačnih code/state/name matcha; 3 name-only pogotka su odbačena kao drugi incidenti. Vizuelno je pregledan samo Haydenov graf. Sljedeće pribaviti odgovarajuće originalne NIROPS poligone, provjeriti vremenske oznake i efekte gašenja, zatim odlučiti može li se SimFire poravnati s njima. Bez test geometrija i treninga. Vidi [validation gate](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md) i [crosswalk receipt](../reports/real-fire-data/nirops-validation-id-crosswalk-20261102.json). |
+| TASK-027 | Namjerno odgođen — trening nije odobren | Tek nakon TASK-026 i zasebne korisnikove odluke: generički base PPO, pa njegova kopija na 40 TRAIN slučajeva. Validation bira checkpoint; test ostaje zatvoren do završnog uparenog runa. |
+| TASK-028 | P1 nakon treninga — završna poređenja/vizuali | Upariti base/fine-tuned/no-op/heuristic na istim test scenarijima, uslovima i više seedova. Sačuvati CSV/JSON receipt, intervale i georeferencirane karte/animacije; zaključak važi za SimFire, ne historijske hektare. |
 
-**Sada:** podaci i okruženje se pokreću, a benchmark pravila i runner su zapisani. To ne
-znači da su vremenski proxy, parametri širenja ili pojednostavljene akcije fizički validirani;
-rezultati mogu govoriti samo o SimFire-u. Training recipe i težine još ne postoje, pa trening
-nije počeo i namjerno ostaje odgođen. Pogledaj [dataset karticu](research/SIMFIRE_FPA_COHORT.md),
+**Sada:** podaci i okruženje se pokreću, a benchmark pravila i runner su zapisani. Lokalni
+validation preflight je prošao. NIROPS v2 je djelimično preuzet: 8/20 2023 validation
+slučajeva ima tačan incident-code match, ali nijedna NIROPS geometrija nije pribavljena ili
+upoređena sa SimFire-om. Vremenski proxy, parametri širenja i pojednostavljene akcije zato
+nisu fizički validirani. Training recipe i težine još ne postoje; trening nije počeo i ostaje
+odgođen. Pogledaj [dataset karticu](research/SIMFIRE_FPA_COHORT.md),
 [weather QC](../reports/real-fire-data/simfire-cohort-v2-gridmet-summary.json),
 [no-op receipt](../reports/real-fire-data/simfire-cohort-v2-gridmet-noop-horizon/receipt.json),
 [adapter](research/SIMFIRE_RL_ADAPTER.md) i [status](STATUS.md).

@@ -87,15 +87,27 @@ snapshotovi, hashovi, mali receiptovi i pregledne slike idu u Git.
 
 ## Šta je sljedeće
 
-1. Lokalni validation preflight je već prošao 20/20 ulaznih paketa bez napredovanja
+1. Nastaviti TASK-026 od tačke gdje je stao: [NIROPS ID crosswalk](../reports/real-fire-data/nirops-validation-id-crosswalk-20261102.json)
+   izdvaja 8 tačnih incident-code/state/name matcha među 20 požara iz 2023 VALIDATION.
+   Tri dodatna name-only pogotka (Turkey, Beehive, Pearch) imaju pogrešan incidentni kod.
+   Sljedeće pribaviti izvorne geometrije za tih osam incidenata, provjeriti njihove stvarne
+   UTC timestampove i utvrditi može li se u SimFire uvesti opaženi početni poligon. Raw ZIP
+   je 1.29 GB unutar v2 arhiva od 1,735,431,121 bajt; chart ZIP je lokalno, a sirovi poligoni
+   nisu skinuti. Autorov NIFC FTP root trenutno vraća 404, pa provjeriti da li se konkretne
+   2023 `IR/` podmape mogu dohvatiti ili je potreban veći ZIP. Ne čitati 2024 TEST geometrije.
+   Ograničenja i metode su u
+   [`SIMFIRE_PHYSICAL_VALIDATION_GATE.md`](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md).
+2. Lokalni validation preflight je već prošao 20/20 ulaznih paketa bez napredovanja
    simulacije. Na drugom računaru/klonu ponoviti instalaciju i podatke, pa pokrenuti:
    `.local/simfire-venv/bin/python scripts/evaluate_simfire_benchmark.py --preflight-only`.
-2. Prije treninga definisati base PPO trening recept, fine-tuning budžet i raspored čuvanja
+3. Prije treninga definisati base PPO trening recept, fine-tuning budžet i raspored čuvanja
    checkpointa; pregledati vremenske i spread pretpostavke.
-3. Trening/fine-tuning tek nakon posebne izričite odluke. Koristiti samo TRAIN za učenje,
+4. Trening/fine-tuning tek nakon posebne izričite odluke. Koristiti samo TRAIN za učenje,
    VALIDATION za izbor, a test za finalnu uparenu procjenu.
-4. Sačuvati CSV/JSON epizode, checkpoint hashove i georeferencirane mape/animacije.
+5. Sačuvati CSV/JSON epizode, checkpoint hashove i georeferencirane mape/animacije.
 
-**Još nije urađeno:** agent trening, fine-tuning, held-out policy rezultat ili fizička
-validacija. Pogledati [status](STATUS.md), [backlog](BACKLOG.md) i
-[adapter spec](research/SIMFIRE_RL_ADAPTER.md).
+**Još nije urađeno:** agent trening, fine-tuning, held-out policy rezultat, NIROPS
+geometrijski import ili fizička validacija. Crosswalk po incidentnim kodovima za osam
+2023 validation slučajeva jeste napravljen; pogledati [status](STATUS.md),
+[backlog](BACKLOG.md), [crosswalk receipt](../reports/real-fire-data/nirops-validation-id-crosswalk-20261102.json)
+i [adapter spec](research/SIMFIRE_RL_ADAPTER.md).

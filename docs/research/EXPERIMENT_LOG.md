@@ -1229,3 +1229,49 @@ records 20/20 validation input checks, a legal no-op, zero advanced simulation s
 test inputs opened. See [protocol](SIMFIRE_EVALUATION_PROTOCOL.md),
 [runner](../../scripts/evaluate_simfire_benchmark.py), [ADR-049](../specs/DECISION_RECORDS.md#adr-049--freeze-the-simfire-policy-comparison-contract-2026-11-02),
 and [status](../STATUS.md).
+
+## TASK-026 — NIROPS progression source audit for the physical validation gate, 2026-11-02
+
+Identified the latest USFS National Infrared Operations (NIROPS) perimeter progression
+dataset as a candidate independent check for SimFire spread. The current Mendeley v2 record
+describes 12,705 timestamped IR perimeters across 737 western-US incidents from June 2020 to
+November 2024, with UTC timestamps and WGS84 geometry. Its 2020–2024 coverage overlaps the
+cohort's 2023 VALIDATION and 2024 TEST years, but no exact incident match has been verified.
+The version 1 page showed a 1.62 GB archive; the v2 size is unconfirmed. No data were
+downloaded and no TEST perimeter geometry was opened.
+
+Recorded the main limits before proposing use: NIROPS coverage is selective and can start
+after ignition; observations are active-fire extents, not complete cumulative burn records
+or untreated counterfactuals; irregular acquisition and unrecorded suppression can confound
+spread comparisons. The current SimFire adapter also starts from a single FPA-FOD reference
+cell rather than an observed perimeter. The SimFire paper's SimHarness demonstration used
+DQN and included an unmitigated final map in the observation, so it is not copied as a
+direct PPO recipe or validation proof. Kept the benchmark cohort/test membership unchanged.
+
+TASK-026 remains open. Its next operation is a metadata-first, VALIDATION-only 2023
+crosswalk, followed by a check of geometry meaning, timestamps, suppression evidence and
+whether an initial-perimeter importer is necessary. Training remains prohibited in this
+phase. See the [physical validation gate](SIMFIRE_PHYSICAL_VALIDATION_GATE.md),
+[source records S-074/S-075](SOURCES.md), and [backlog](../BACKLOG.md).
+
+### TASK-026 follow-up — exact incident-code crosswalk, 2026-11-02
+
+Inspected the small v2 time-series-chart archive and author-code member; the full v2 archive
+size is 1,735,431,121 bytes, while no raw perimeter archive was downloaded. Screened the
+frozen 20-case 2023 VALIDATION cohort against NIROPS chart incident codes and FPA-FOD
+`FPA_ID`s. Eight cases have an exact normalized incident-code match, with state and fire
+name also agreeing. Three extra same-name/state candidates (Turkey, Beehive, Pearch) have
+different incident codes and are rejected. The reproducible output is
+[`nirops-validation-id-crosswalk-20261102.json`](../../reports/real-fire-data/nirops-validation-id-crosswalk-20261102.json).
+
+Visually reviewed only the Hayden chart. Its charted area rises from about 3,000 acres on
+2023-07-21 to about 24,800 acres on 2023-08-31, near the FPA-FOD reported 24,706 acres; the
+chart is an area summary, not a map. An unchanged copy is saved at
+[`hayden-area-progression.png`](../../reports/real-fire-data/nirops-validation-charts/hayden-area-progression.png)
+under the dataset's CC BY 4.0 license, with attribution in the crosswalk receipt. The
+date/area readings are approximate and cannot
+establish polygon alignment. No perimeter geometry, TEST content, or simulator step was
+opened or advanced. No training or policy evaluation ran. TASK-026 stays open for obtaining
+the eight validation polygons, checking their timestamps/meaning and suppression context,
+and establishing whether SimFire can import an observed perimeter without leaking later
+observations to the policy. See [gate details](SIMFIRE_PHYSICAL_VALIDATION_GATE.md).
