@@ -970,3 +970,17 @@ simulation step, policy evaluation, training or 2024 TEST access was performed. 
 and [eight-case map preview](../reports/real-fire-data/validation-perimeter-map-footprints-20261102.png).
 The requests and derivations are repeatable with
 `.local/simfire-venv/bin/python scripts/qc_simfire_validation_perimeters.py --overwrite`.
+
+## 2026-11-02 — veća SimFire mapa i veličina skupa akcija
+
+Pregled koda bez pokretanja simulatora: adapter čita redove/kolone iz manifesta, ali
+`build_simfire_fpa_cohort.py` i dalje stvara tileove 3.840 m stranice; postojeći validation
+fuel/terrain rasteri su 128×128 na 30 m. Whole-fire mreža zaokružena na 704×704 imala bi
+495.617 akcija, uključujući no-op, umjesto sadašnjih 16.385. Sa postojećom 256-širokom PPO
+glavom, samo izlazni sloj za izbor ćelije ima 126.877.952 float32 težina (oko 484 MiB), prije
+kritičara, optimizatora i stanja simulatora. To je statička procjena iz koda, ne izmjeren RAM
+ili brzina. Nije pokrenuta veća mapa, evaluacija niti trening.
+
+TASK-026 handoff sada traži da se zajedno riješe veći georeferencirani rasteri i manji/drukčiji
+skup prostornih poteza, ili da se precizno ograniči lokalna studija. Nije promijenjen aktivni
+dizajn niti su otvarani TEST podaci/geometrije.

@@ -1428,3 +1428,26 @@ The remaining physical-data requirements are a deliberate whole-fire versus loca
 a dated sequence of observed growth (likely NIROPS), unresolved survey-time interpretation,
 and a safe observed-perimeter initial-state path. No simulation step, policy evaluation,
 training, or 2024 TEST access was performed.
+
+### TASK-026 follow-up — larger-grid action-space feasibility, 2026-11-02
+
+Read the current adapter, cohort builder, and PPO policy definition without advancing SimFire.
+The environment takes dimensions from the selected manifest, while the cohort builder still
+calls the scenario constructor with a fixed 3,840×3,840 m tile. Current validation fuel and
+terrain inputs remain 128×128 at 30 m, so larger maps also need a new raster-acquisition and
+alignment path.
+
+The environment maps every grid cell to one fireline-point action and reserves action 0 for
+no-op. A 128×128 map therefore declares 16,385 actions; a square 704×704 whole-fire envelope
+would declare 495,617 (30.25× as many). The existing policy's 256-wide action projection would
+need 126,877,952 float32 weights for that output alone, about 484 MiB, before its other layers,
+optimizer state, observations, or simulator state. This is an architecture-based size estimate,
+not a measured RAM need or proof that a run cannot fit. No larger-map simulation or training
+was run.
+
+The practical next gate is to design the map extent, raster preparation, and number/meaning of
+spatial actions as one unit. Candidate directions are a compact fireline-action vocabulary for
+the whole-fire grid or a precisely bounded local study area. Any action redesign must expose
+the same legal opportunities to no-op, heuristic, base, and fine-tuned comparisons. The
+physical/data gate still requires time-ordered observed perimeters and an observed initial
+state; the final perimeter must not be used as the starting state or agent input.

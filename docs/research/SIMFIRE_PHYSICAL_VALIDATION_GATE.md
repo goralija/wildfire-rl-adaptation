@@ -163,6 +163,28 @@ poligon na 30 m treba 203–701 kolona i 235–691 redova; najveći pravougaoni 
 obuhvat obrisa, bez sigurnosne margine za simulirano širenje, i nije prognoza brzine ili
 memorije.
 
+### Veća mapa traži i promjenu načina biranja poteza
+
+[SimFire adapter](../../src/wildfire_rl/simfire_gym_env.py) može pročitati dimenzije iz
+manifesta, ali [kohortni graditelj](../../scripts/build_simfire_fpa_cohort.py) i dalje pravi
+3.840×3.840 m isječke (128×128 ćelija), a postojeći lokalni fuel/terrain fajlovi za validation
+slučajeve imaju upravo taj oblik. Veći isječak zato traži nove rastere i zasebnu, provjerenu
+putanju za njihove granice i poravnanje.
+
+Još važnije, adapter trenutno daje agentu jednu akciju po ćeliji, plus `no-op`. Današnjih
+128×128 znači 16.385 mogućih akcija; okvir 704×704 značio bi 495.617, oko 30 puta više.
+Trenutna [PPO politika](../../src/wildfire_rl/simfire_policy.py) ima izlazni sloj sa 256 ulaza
+po akciji. Sam taj sloj bi za 704×704
+imao oko 126,9 miliona težina, odnosno oko 484 MiB u float32 formatu, bez ostatka politike,
+optimizatora i memorije za simulaciju. Ovo je procjena iz arhitekture koda, ne izmjereno
+vrijeme ili stvarni RAM; veća mreža nije još pokrenuta.
+
+Zato nije dovoljno samo promijeniti veličinu rastera. Prije whole-fire mape treba ili
+osmisliti znatno sažetiji skup poteza (npr. ograničene linije uz aktivni rub vatre), ili
+odabrati drugi prostorni obuhvat/rezoluciju. Ista pravila poteza moraju važiti za no-op,
+heuristiku, base i fine-tuned agenta. Promjena rezolucije mijenja značenje jedne ćelije i
+zahtijeva zasebnu fizičku provjeru.
+
 USFS i NIFC oblici za Hayden, River Road East, Prior i Pass međusobno su gotovo identični.
 Ipak, Grayov NIFC `gis_acres=200` i Priorov `gis_acres=0.1` ne slažu se s njihovim vlastitim
 oblicima ni s FPA-FOD veličinama; projicirane površine oblika su oko 10,057 i 12,842 acres.
@@ -209,9 +231,11 @@ bez gašenja niti koliko bi agent spasio hektara.
 1. Javni USFS/NIFC attribute-only screen za osam slučajeva je završen. Za stvarni replay i
    dalje trebaju višednevne NIROPS geometrije iz zaštićenog /protected foldera ili arhive uz
    veći scratch prostor. Ne čitati 2024 TEST geometrije.
-2. Prvo riješiti prostorni obim: za cijeli požar pribaviti šire LANDFIRE/elevation isječke
-   prema stvarnim obodima i povećati mrežu; ili, ako se ostaje na 128×128, unaprijed definisati
+2. Prvo riješiti prostorni obim i poteze zajedno: za cijeli požar pribaviti šire
+   LANDFIRE/elevation isječke prema stvarnim obodima, prilagoditi graditelj/manifeste i
+   smanjiti broj mogućih akcija; ili, ako se ostaje na 128×128, unaprijed definisati
    ograničeni lokalni zadatak i lokalne metrike. Ne nazivati lokalni grid cijelim požarom.
+   Prije treninga napraviti samo tehnički smoke većeg rastera i memorije, bez `learn()`.
 3. Za svaki pribavljeni NIROPS niz provjeriti atribute i vrijeme snimanja (`DateFlown`, UTC,
    incident ID), projekciju i topologiju; zabilježiti gdje su vremena procijenjena.
 4. Potvrditi veze s originalnim vremenima snimanja i završnim vremenom požara. Ne porediti

@@ -96,9 +96,13 @@ snapshotovi, hashovi, mali receiptovi i pregledne slike idu u Git.
    Nijedan servis nema višednevnu geometrijsku progresiju za ove slučajeve. Raw NIROPS
    geometrija je jedan 1.39 GB komprimovani shapefile bez zasebne datoteke po požaru; u
    trenutku screeninga bilo je 699 MiB slobodno. Stari NIFC /public put sada je /protected i
-   traži FAMAuth. Prije replaya odlučiti da li se širi mreža ili se zadatak sužava na lokalni
-   segment, zatim pribaviti odobren pristup/veći scratch i provjeriti samo 2023 validation
-   shape-ove. Ne čitati 2024 TEST geometrije. Vidi [polygon QA](../reports/real-fire-data/usfs-nifc-validation-perimeter-polygon-qc-20261102.json)
+   traži FAMAuth. Prije replaya riješiti prostorni obuhvat **i veličinu akcijskog skupa**.
+   704×704 bi agentu dalo 495.617 poteza umjesto 16.385; trenutna akcijska glava procjenjuje
+   se na oko 484 MiB težina. Kod simulatora prima dimenzije iz manifesta, ali graditelj kohorte
+   i postojeći rasteri su 128×128, pa treba posebna veća ulazna putanja. Procjena je statička;
+   velika mreža nije pokrenuta. Tek nakon izbora lokalnog ili whole-fire dizajna pribaviti veće
+   fuel/terrain karte i odobren pristup/veći scratch za vremenski poredanu NIROPS progresiju.
+   Ne čitati 2024 TEST geometrije. Vidi [polygon QA](../reports/real-fire-data/usfs-nifc-validation-perimeter-polygon-qc-20261102.json)
    i [vizualni pregled](../reports/real-fire-data/validation-perimeter-map-footprints-20261102.png),
    [extent screen](../reports/real-fire-data/simfire-validation-perimeter-extent-screen-20261102.json),
    [public perimeter screen](../reports/real-fire-data/usfs-nifc-validation-perimeter-screen-20261102.json),
@@ -106,8 +110,10 @@ snapshotovi, hashovi, mali receiptovi i pregledne slike idu u Git.
    i [physical validation gate](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md).
 2. Riješiti veličinu karte prije fizičkog poređenja: postojeći 128×128 grid od 30 m pokriva
    najviše 3,644 acres, a svih 20 slučajeva iz 2023 VALIDATION ima veću prijavljenu završnu
-   površinu. Za tvrdnju o cijelom požaru treba veća karta i šire fuel/terrain karte; ako mapa
-   ostane ove veličine, istraživanje mora biti ograničeno na jasno definisan lokalni dio.
+   površinu. Za tvrdnju o cijelom požaru treba veća karta, šire fuel/terrain karte i rjeđe ili
+   sažetije prostorne akcije; 704×704 inače daje oko 496 hiljada akcija. Ako mapa ostane ove
+   veličine, istraživanje mora biti ograničeno na jasno definisan lokalni dio. Najprije napraviti
+   memorijski smoke za predloženu mrežu, bez treninga.
    Vidi [grid-capacity audit](../reports/real-fire-data/simfire-validation-grid-capacity-20261102.json)
    i [physical validation gate](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md).
 3. Lokalni validation preflight je već prošao 20/20 ulaznih paketa bez napredovanja

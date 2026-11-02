@@ -120,6 +120,12 @@ i [NIROPS crosswalku](../reports/real-fire-data/nirops-validation-id-crosswalk-2
 Obrisi i postojeće karte prikazani su u [vizualnom pregledu](../reports/real-fire-data/validation-perimeter-map-footprints-20261102.png).
 Za ponavljanje polygon QA-a koristi
 `.local/simfire-venv/bin/python scripts/qc_simfire_validation_perimeters.py --overwrite`.
+Veća karta nije samo postavka dimenzija: trenutni agent bira jednu od 16.385 akcija na
+128×128 mapi. Kvadrat od 704×704 imao bi 495.617 akcija; njegov sadašnji izlazni sloj politike
+sam bi tražio oko 484 MiB težina. Adapter čita dimenzije iz manifesta, ali kohortni graditelj
+i lokalni rasteri ostaju 128×128. Treba napraviti veću ulaznu putanju i riješiti prostorne
+akcije prije whole-fire rada. Procjena je statička, ne izmjeren RAM ili trajanje. Vidi
+[physical validation gate](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md).
 Još jedan važan limit: postojeće SimFire mape su 128×128 ćelija od 30 m, maksimalno
 **3.644 acres**. Svih 20 validation požara ima veću FPA-FOD završnu površinu (5.169–81.148
 acres; medijan 9.209), pa mapa ne može prikazati cijeli historijski požar. To je izmjereno u
