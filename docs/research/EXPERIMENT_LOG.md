@@ -1322,3 +1322,109 @@ NIROPS access or another time-series source. See [USFS screen receipt](../../rep
 [NIFC archive screen](../../reports/real-fire-data/nirops-geometry-archive-screen-20261102.json),
 and [the gate](SIMFIRE_PHYSICAL_VALIDATION_GATE.md). No TEST geometry, simulation step,
 policy evaluation or training was accessed/run.
+
+### TASK-026 follow-up — NIFC and USFS public perimeter attribute screen, 2026-11-02
+
+Completed a read-only attribute screen for all eight exact-code 2023 VALIDATION cases from
+the NIROPS crosswalk. The USFS 2023 layer was queried by exact incident identifier. The
+broader NIFC WFIGS public layer was filtered to the eight incident names and 2023 discovery
+dates, then checked against exact unique fire identifier, state/unit, local number and
+incident size. Geometry was not requested in these queries.
+
+Seven of eight cases have an exact NIFC incident record. Six have a final-perimeter row:
+Hayden, Sourdough, River Road East, Prior, Pass and Gray. Four NIFC final GIS areas are close
+to the FPA-FOD reported sizes (Hayden 24,708.7 vs 24,706; Sourdough 7,336.918 vs 7,377;
+River Road East 17,312.92 vs 17,313; Pass 59,883.41 vs 59,883). The NIFC Prior row reports
+only 0.1 GIS acres against a 12,833-acre incident, while the separate USFS final row reports
+12,833.22 GIS acres. Gray's NIFC final row reports 200 acres against a 10,064-acre incident.
+Rabbit's exact NIFC daily row matches 8,354.8 incident acres but has null geometry-area and
+polygon-time attributes. Bedrock has no matching NIFC row; the USFS service has one daily
+perimeter feature at 31,589.2 GIS acres, close to FPA-FOD's 31,590.
+
+These records are useful candidates for visual/spatial QA, but neither service supplies a
+multi-day geometry progression for the screened incidents. Their final shapes cannot be used
+as a starting perimeter or as an agent input. Two USFS comments (Hayden, Pass) give a local
+MDT flight time equal to the numeric time interpreted as UTC; Esri's layer date-time
+convention treats a null dateFieldsTimeReference as UTC, so source-owner clarification is
+needed before either time can anchor a replay. Details and object IDs are in the
+[attribute-only receipt](../../reports/real-fire-data/usfs-nifc-validation-perimeter-screen-20261102.json),
+[USFS Hayden receipt](../../reports/real-fire-data/usfs-hayden-final-perimeter-screen-20261102.json),
+and [physical validation gate](SIMFIRE_PHYSICAL_VALIDATION_GATE.md).
+
+This closes the public-source attribute screen portion of TASK-026, not physical validation.
+At this point the remaining gates were spatial extent choice, public-shape QA, obtaining NIROPS
+progression geometry, resolving source timestamps and checking that the adapter can begin from
+an observed perimeter. No geometry, TEST data, simulator step, policy evaluation or training
+was accessed/run during the attribute-only screen.
+
+### TASK-026 follow-up — validation perimeter extent-only screen, 2026-11-02
+
+Used the ArcGIS `returnExtentOnly=true` query option on one identified 2023 VALIDATION
+perimeter feature at a time, projected into that incident's existing raster CRS. Esri
+documents this option as returning the result extent instead of feature geometry. The query
+therefore returned server-side bounding rectangles only; no polygon coordinates were
+requested, downloaded or saved. The eight requests use only the already crosswalked 2023
+VALIDATION cases; the 2024 TEST split was not queried.
+
+All eight perimeter rectangles are larger than the current 3.84 km square raster: widths
+range from 6.35 to 21.55 km and heights from 7.05 to 21.32 km. The current raster rectangle
+intersects 3.2% to 22.5% of each perimeter's bounding rectangle. These percentages compare
+rectangles only. They are not polygon intersection, percentage of burned area covered, IoU,
+or evidence that the current maps are physically aligned with the incident. Hayden, River
+Road East, Prior and Pass have cross-service bounding rectangles matching within 0.01 m per
+coordinate; that independently checks the service extents but not their polygon topology.
+Rabbit also has a server-returned extent despite null NIFC geometry-area and time attributes.
+
+At 30 m per cell, the axis-aligned bounding rectangles need 212×309 to 719×711 cells, or
+about 4.0–31.2 times the cells in today's 128×128 maps. Pass is the largest estimate at
+719×711 (about 511,000 cells). These are rectangular-footprint counts derived by rounding
+each projected extent dimension up to a whole cell. They do not estimate runtime or memory,
+and the actual irregular fire shapes may occupy less area than their rectangles.
+
+The result answers one design question: the current map cannot represent the full spatial
+envelope of any of the eight candidate fires. Whole-fire coverage at the existing 30 m cell
+size would require a substantially larger map and newly acquired fuel/terrain/weather crops;
+keeping 128×128 would mean defining a local fireline experiment and evaluating it only as a
+local SimFire task. Neither option is chosen by this extent screen alone. Raw extents, grid
+dimensions and per-case rectangle calculations are in the [receipt](../../reports/real-fire-data/simfire-validation-perimeter-extent-screen-20261102.json);
+the query semantics are documented by Esri in [Feature Service/Layer Query](https://developers.arcgis.com/rest/services-reference/enterprise/query-feature-service-layer/).
+
+This extent-only entry measures rectangle-envelope feasibility, not polygon coverage or
+simulator spread. At this stage, geometry review and an observed growth sequence were still
+open; the immediately following polygon-QA entry records the later geometry review. No full
+perimeter geometry was requested in the extent-only queries, and no TEST content, simulation
+step, policy evaluation or training was accessed/run in this step.
+
+### TASK-026 follow-up — polygon and current-map footprint QA, 2026-11-02
+
+After the extent screen, requested the full geometries for only the eight code-matched 2023
+VALIDATION candidates and four corresponding alternate-service features (Hayden, River Road
+East, Prior, Pass). Geometry coordinates were held in memory and not written as raw dataset
+files. The saved receipt retains exact service/object IDs and derived QA values. The query
+used exact object IDs, `returnGeometry=true`, and the CRS of each case's existing fuel raster.
+No TEST feature was queried.
+
+All eight primary shapes are valid after assembling Esri clockwise exterior and
+counterclockwise interior rings by full containment. Their projected planar areas are within
+0.58% of the FPA-FOD reported incident areas. This is a strong geometry/incident-size
+cross-check, not proof of the fire's hourly growth. The current map rectangle intersects all
+eight, but contains only 4.834%–26.115% of each polygon's area. At 30 m, the axis-aligned
+polygon bounds need 203–701 columns and 235–691 rows; the largest actual rectangular footprint
+is Pass at 699×691, or 29.5 times the current 128×128 cell count. This excludes any safety
+margin for future spread and says nothing about simulator runtime.
+
+The NIFC `gis_acres` values for Prior (0.1) and Gray (200) conflict sharply with their
+geometries; the projected polygon areas are 12,841.81 and 10,056.84 acres, close to their
+12,833 and 10,064 FPA-FOD incident sizes. For Hayden, River Road East, Prior and Pass, the
+USFS and NIFC shapes differ by less than 0.24 mm in Hausdorff distance. That demonstrates
+publication consistency, but the services may share an underlying source, so it is not
+independent survey verification.
+
+This completed spatial QA for the publicly accessible candidate shapes, but no geometry was
+saved or imported into SimFire. The per-case map-footprint results, area calculations, source
+IDs and limitations are in the [polygon QA receipt](../../reports/real-fire-data/usfs-nifc-validation-perimeter-polygon-qc-20261102.json).
+The visual comparison is in the [eight-case footprint figure](../../reports/real-fire-data/validation-perimeter-map-footprints-20261102.png).
+The remaining physical-data requirements are a deliberate whole-fire versus local-task scope,
+a dated sequence of observed growth (likely NIROPS), unresolved survey-time interpretation,
+and a safe observed-perimeter initial-state path. No simulation step, policy evaluation,
+training, or 2024 TEST access was performed.

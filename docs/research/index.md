@@ -8,10 +8,14 @@
 - [gridMET dataset QC i raspodjela](../../reports/real-fire-data/simfire-cohort-v2-gridmet-summary.json) - 80/80 stvarnih dnevnih konteksta; zasebni, jasno označeni proxy ulazi već su mapirani za SimFire.
 - [SimFire Gymnasium/RL adapter](SIMFIRE_RL_ADAPTER.md) - laičko objašnjenje opažanja, akcije, nagrade i lokalnog smokea.
 - [Zamrznut benchmark protokol](SIMFIRE_EVALUATION_PROTOCOL.md) - baseline politike, seedovi, mjere, checkpoint izbor i held-out test pravila.
-- [Fizička provjera prije treninga](SIMFIRE_PHYSICAL_VALIDATION_GATE.md) - 8 NIROPS incident-code poklapanja s 2023 VALIDATION; geometrije i poređenje još otvoreni.
+- [Fizička provjera prije treninga](SIMFIRE_PHYSICAL_VALIDATION_GATE.md) - javni poligoni 8 NIROPS incident-code poklapanja prostorno provjereni prema mapama; vremenska progresija i stvarna validacija još otvorene.
 - [Grid kapacitet za validation požare](../../reports/real-fire-data/simfire-validation-grid-capacity-20261102.json) - 128×128 ćelija od 30 m ne može obuhvatiti prijavljenu završnu površinu nijednog od 20 slučajeva.
 - [NIROPS ZIP archive screen](../../reports/real-fire-data/nirops-geometry-archive-screen-20261102.json) - samo indeks datoteka pregledan; jedan veliki shapefile, bez čitanja poligona/atributa.
-- [USFS javni Hayden završni obod](../../reports/real-fire-data/usfs-hayden-final-perimeter-screen-20261102.json) - jedan validation oblik pregledan; nije dnevna progresija, a vrijeme polja je nerazriješeno.
+- [USFS/NIFC javni obodni screen](../../reports/real-fire-data/usfs-nifc-validation-perimeter-screen-20261102.json) - atributi za 8 validation slučajeva; 5 kandidata ima finalnu površinu koja se slaže, ali nema nizova dnevnih geometrija; izvorni Hayden geometry-page pregled je odvojen.
+- [USFS/NIFC extent-only screen](../../reports/real-fire-data/simfire-validation-perimeter-extent-screen-20261102.json) - osam javnih fire-perimeter bounding boxova u istoj projekciji kao postojeći rasteri; samo okvirni preklop, bez geometrijskih koordinata.
+- [USFS/NIFC polygon QA](../../reports/real-fire-data/usfs-nifc-validation-perimeter-polygon-qc-20261102.json) - 8 primarnih oblika poravnatih u projekciju mapa; mjera stvarnog poligon/map preklopa i potreban obuhvat 30 m mreže.
+- [Vizualni pregled oblika i mapa](../../reports/real-fire-data/validation-perimeter-map-footprints-20261102.png) - na stvarnim javnim poligonima se vidi koliko je postojeći SimFire isječak manji od požara.
+- [Skripta za ponavljanje javnog perimeter QA](../../scripts/qc_simfire_validation_perimeters.py) - traži samo unaprijed spremljene 2023 VALIDATION object ID-jeve; ne čita TEST podatke.
 - [X/Y tok običnim jezikom](REAL_IGNITION_SCENARIO_PIPELINE.md) - kako zapis požara postaje karta i uslovi za simulator.
 - [Dixie Fire probna scenario-kartica](../../data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json) - jedan stvarni zapis, još bez goriva, terena i istorijskog vremena.
 - [FPA-FOD zapis i porijeklo](../../reports/real-fire-data/fpa-fod-dixie-2021-source.geojson) - mali GeoJSON dokaz porijekla za probni slučaj.
@@ -41,6 +45,9 @@
 - [NIROPS 2023 validation crosswalk](../../reports/real-fire-data/nirops-validation-id-crosswalk-20261102.json) - po-slučaju poklapanja FPA-ID/NIROPS, odbijeni name-only kandidati i Hayden grafik pregled.
 - [TASK-026 prostorni nastavak](EXPERIMENT_LOG.md#task-026-follow-up--archive-structure-and-map-size-gate-2026-11-02) - zašto treba povećati mapu ili suziti ogled na lokalni segment prije fizičke provjere.
 - [TASK-026 javni USFS finalni obod](EXPERIMENT_LOG.md#task-026-follow-up--public-usfs-final-perimeter-2026-11-02) - završni Hayden poligon bez NIROPS bulk ZIP-a, ali bez dnevnog rasta i sa nerazriješenim vremenom.
+- [TASK-026 USFS/NIFC atributni screen](EXPERIMENT_LOG.md#task-026-follow-up--nifc-and-usfs-public-perimeter-attribute-screen-2026-11-02) - 8 crosswalk slučajeva provjereno bez geometrijskog downloada; finalni obodi postoje za dio požara, ali ne postoji javni progresijski niz.
+- [TASK-026 extent-only screen](EXPERIMENT_LOG.md#task-026-follow-up--validation-perimeter-extent-only-screen-2026-11-02) - 3.84 km rasterni okvir je mali u odnosu na svih osam 2023 validation perimeter bounding boxova.
+- [TASK-026 polygon/map-footprint QA](EXPERIMENT_LOG.md#task-026-follow-up--polygon-and-current-map-footprint-qa-2026-11-02) - pregledani pravi obrisi; trenutni raster obuhvata samo 4.8–26.1% svake poligonalne površine.
 - [Stvarni požari: izbor podataka i granica zaključaka](REAL_FIRE_DATASETS.md) - Dataset Review
 - [Train-only CFSDS fuel QC](CFSDS_TRAIN_QC.md) - Metoda, nalaz i ograničenja prvog train input gatea
 - [Train-only CFSDS input QC](CFSDS_TRAIN_INPUT_QC.md) - Poravnanje dostupnih train FireCase mapa, weather inputa, fuel vintagea i suppression evidencije

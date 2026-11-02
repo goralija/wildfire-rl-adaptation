@@ -88,15 +88,21 @@ snapshotovi, hashovi, mali receiptovi i pregledne slike idu u Git.
 ## Šta je sljedeće
 
 1. Nastaviti TASK-026: [NIROPS crosswalk](../reports/real-fire-data/nirops-validation-id-crosswalk-20261102.json)
-   daje 8 tačnih ID/država/ime poklapanja među 20 slučajeva iz 2023 VALIDATION. Tri dodatna
-   ista imena (Turkey, Beehive, Pearch) imaju pogrešan incidentni ID. ZIP indeks kaže da je
-   NIROPS raw geometrija jedan 1.39 GB komprimovani shapefile bez zasebne datoteke po požaru;
-   u trenutku screeninga bilo je 699 MiB slobodno. Stari `/public` NIFC put sada je
-   `/protected` i traži FAMAuth, prema zvaničnoj stranici. Za Hayden je pronađen javni USFS
-   završni obod, ali ne i dnevni niz; vrijeme iz jednog atributa se ne slaže s komentarom
-   leta za šest sati. Sljedeće provjeriti preostalih 7 USFS završnih oboda, timestampove i
-   pristup NIROPS progresiji. Ne čitati 2024 TEST geometrije. Vidi [archive screen](../reports/real-fire-data/nirops-geometry-archive-screen-20261102.json),
-   [USFS receipt](../reports/real-fire-data/usfs-hayden-final-perimeter-screen-20261102.json)
+   daje 8 tačnih ID/država/ime poklapanja među 20 slučajeva iz 2023 VALIDATION. Javni shape QA
+   za svih 8 slučajeva je gotov: poligoni su validni, projektovane površine su unutar 0.58% FPA-FOD
+   veličina, a trenutna karta zahvata samo 4.8–26.1% površine svakog oblika. NIFC GIS-acre
+   atributi za Prior (0.1) i Gray (200) nisu saglasni s geometrijom. Za cijeli poligon treba
+   pravougaona 30 m mreža do 701×691 ćelija; Passu treba 699×691, oko 29.5× sadašnje ćelije.
+   Nijedan servis nema višednevnu geometrijsku progresiju za ove slučajeve. Raw NIROPS
+   geometrija je jedan 1.39 GB komprimovani shapefile bez zasebne datoteke po požaru; u
+   trenutku screeninga bilo je 699 MiB slobodno. Stari NIFC /public put sada je /protected i
+   traži FAMAuth. Prije replaya odlučiti da li se širi mreža ili se zadatak sužava na lokalni
+   segment, zatim pribaviti odobren pristup/veći scratch i provjeriti samo 2023 validation
+   shape-ove. Ne čitati 2024 TEST geometrije. Vidi [polygon QA](../reports/real-fire-data/usfs-nifc-validation-perimeter-polygon-qc-20261102.json)
+   i [vizualni pregled](../reports/real-fire-data/validation-perimeter-map-footprints-20261102.png),
+   [extent screen](../reports/real-fire-data/simfire-validation-perimeter-extent-screen-20261102.json),
+   [public perimeter screen](../reports/real-fire-data/usfs-nifc-validation-perimeter-screen-20261102.json),
+   [archive screen](../reports/real-fire-data/nirops-geometry-archive-screen-20261102.json)
    i [physical validation gate](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md).
 2. Riješiti veličinu karte prije fizičkog poređenja: postojeći 128×128 grid od 30 m pokriva
    najviše 3,644 acres, a svih 20 slučajeva iz 2023 VALIDATION ima veću prijavljenu završnu
@@ -114,8 +120,11 @@ snapshotovi, hashovi, mali receiptovi i pregledne slike idu u Git.
 6. Sačuvati CSV/JSON epizode, checkpoint hashove i georeferencirane mape/animacije.
 
 **Još nije urađeno:** agent trening, fine-tuning, held-out policy rezultat, NIROPS
-geometrijski import ili fizička validacija. Crosswalk po incidentnim kodovima za osam
-2023 validation slučajeva jeste napravljen; pogledati [status](STATUS.md),
-[backlog](BACKLOG.md), [crosswalk receipt](../reports/real-fire-data/nirops-validation-id-crosswalk-20261102.json)
-i [USFS final-perimeter receipt](../reports/real-fire-data/usfs-hayden-final-perimeter-screen-20261102.json)
-i [adapter spec](research/SIMFIRE_RL_ADAPTER.md).
+geometrijski import ili fizička validacija. Javni USFS/NIFC poligoni za osam 2023 validation
+slučajeva su prostorno QA-irani prema trenutnim mapama, ali NIROPS progresija i poređenje
+simuliranog rasta nisu urađeni. Pogledati [status](STATUS.md),
+[backlog](BACKLOG.md), [crosswalk receipt](../reports/real-fire-data/nirops-validation-id-crosswalk-20261102.json),
+[public perimeter receipt](../reports/real-fire-data/usfs-nifc-validation-perimeter-screen-20261102.json),
+[polygon QA receipt](../reports/real-fire-data/usfs-nifc-validation-perimeter-polygon-qc-20261102.json),
+[map preview](../reports/real-fire-data/validation-perimeter-map-footprints-20261102.png) and
+[adapter spec](research/SIMFIRE_RL_ADAPTER.md).

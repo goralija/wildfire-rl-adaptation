@@ -97,11 +97,29 @@ fizički pregledati postavke širenja i definisati base/fine-tuning trening rece
 i [mapping receiptu](../reports/real-fire-data/simfire-cohort-v2-gridmet-simfire-mapping.json).
 Za fizički gate pregledan je dio novog [NIROPS skupa dnevnih oboda](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md).
 Osam požara iz 2023 validation split-a ima poklapanje po tačnom incidentnom kodu, državi i
-imenu. Pregledani su Haydenov zbirni grafikon i jedan javni USFS završni poligon za Hayden;
-to nije NIROPS dnevni niz, nije poravnat s SimFire mapom i nije urađeno prostorno poređenje.
-Vremensko polje USFS zapisa se ne slaže sa komentarom leta za šest sati, pa ne može još
-služiti za replay. Fizička validacija nije urađena. Detalji su u [crosswalk receiptu](../reports/real-fire-data/nirops-validation-id-crosswalk-20261102.json)
-i [USFS perimeter screen receiptu](../reports/real-fire-data/usfs-hayden-final-perimeter-screen-20261102.json).
+imenu. Pregledani su javni USFS i NIFC atributi i pune geometrije za osam slučajeva, uz četiri
+dodatna poligona za poređenje izvora; sirove koordinate su korištene samo u memoriji.
+Osam glavnih poligona je topološki ispravno, a njihove projektovane površine su unutar 0.58%
+FPA-FOD prijavljenih veličina. USFS i NIFC oblici za Hayden, River Road East, Prior i Pass
+gotovo su isti, ali to je provjera dosljednosti, ne nezavisna izmjera. NIFC površinska polja
+za Prior (0.1 acres) i Gray (200 acres) nisu dosljedna samim geometrijama, koje iznose oko
+12,842 odnosno 10,057 acres. Bedrock i Rabbit imaju po jedan dnevni obod bez potvrđenog
+vremena snimanja. Javni servisi ne daju niz uzastopnih oboda za replay. Fizička validacija
+simulatora nije urađena.
+
+Sadašnja mapa presijeca svih osam oboda, ali obuhvata samo **4.8–26.1% površine svakog
+požara**. Da stane cijeli geometrijski obris na 30 m, potrebna je mreža široka 203–701 kolonu
+i visoka 235–691 redova; najveći pojedinačni okvir je 699×691 (Pass), oko 29.5 puta više
+ćelija od trenutne mape. To je geometrijski proračun, ne procjena brzine. USFS letni
+komentari za Hayden i Pass odstupaju šest sati od UTC čitanja vremenskog polja; porijeklo
+vremena i dalje treba razjasniti. Detalji su u
+[polygon QC receiptu](../reports/real-fire-data/usfs-nifc-validation-perimeter-polygon-qc-20261102.json),
+[extent receipt](../reports/real-fire-data/simfire-validation-perimeter-extent-screen-20261102.json),
+[public-perimeter screen receiptu](../reports/real-fire-data/usfs-nifc-validation-perimeter-screen-20261102.json)
+i [NIROPS crosswalku](../reports/real-fire-data/nirops-validation-id-crosswalk-20261102.json).
+Obrisi i postojeće karte prikazani su u [vizualnom pregledu](../reports/real-fire-data/validation-perimeter-map-footprints-20261102.png).
+Za ponavljanje polygon QA-a koristi
+`.local/simfire-venv/bin/python scripts/qc_simfire_validation_perimeters.py --overwrite`.
 Još jedan važan limit: postojeće SimFire mape su 128×128 ćelija od 30 m, maksimalno
 **3.644 acres**. Svih 20 validation požara ima veću FPA-FOD završnu površinu (5.169–81.148
 acres; medijan 9.209), pa mapa ne može prikazati cijeli historijski požar. To je izmjereno u
@@ -111,12 +129,14 @@ Za punu požarnu površinu treba veća mreža i odgovarajuće šire fuel/terrain
 
 ## Sljedeći redoslijed
 
-1. Nastaviti TASK-026: provjeriti javne USFS završne obode za preostalih sedam validation
-   podudaranja. NIROPS progresija ostaje drugačiji izvor: stari `/public` FTP put je
-   premješten na zaštićeni `/protected`, koji traži FAMAuth; jedan 1.39 GB NIROPS ZIP je
-   alternativa uz veći disk. Zatim riješiti grid, vrijeme i suppression. Test geometrije ne
+1. Nastaviti TASK-026 nakon završenog javnog shape QA: odlučiti da li se mijenja 128×128 mapa
+   ili se pitanje sužava na lokalni segment. Za stvarni replay i dalje treba vremenski poredana
+   višednevna NIROPS geometrija; stari `/public/incident_specific_data` put je premješten na
+   zaštićeni `/protected`, koji traži FAMAuth, a jedan 1.39 GB NIROPS ZIP traži više slobodnog
+   diska. Ne koristiti završni obod kao početno stanje niti ga dati agentu. Test geometrije ne
    otvarati. Vidi [NIROPS gate](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md),
-   [USFS screen](../reports/real-fire-data/usfs-hayden-final-perimeter-screen-20261102.json),
+   [polygon QC](../reports/real-fire-data/usfs-nifc-validation-perimeter-polygon-qc-20261102.json),
+   [public perimeter screen](../reports/real-fire-data/usfs-nifc-validation-perimeter-screen-20261102.json),
    [archive screen](../reports/real-fire-data/nirops-geometry-archive-screen-20261102.json)
    i [grid audit](../reports/real-fire-data/simfire-validation-grid-capacity-20261102.json).
 2. Na drugom računaru/klonu ponoviti setup i pokrenuti samo validation preflight:

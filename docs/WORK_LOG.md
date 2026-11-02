@@ -931,3 +931,42 @@ asset download is in progress under ignored `data/raw/burnmd/`. The root LICENSE
 Apache-2.0 but a dataset-specific license was not found; archive contents and use rights
 remain unaudited. No dataset bytes entered Git. Next finish download/hash/archive inventory
 and test a documented historical event before any RL integration.
+
+## 2026-11-02 — public validation perimeter attribute screen
+
+Completed an attribute-only screen of the USFS 2023 perimeter layer and NIFC WFIGS public
+perimeter service for the eight exact-code 2023 VALIDATION incidents. Five have a final
+perimeter candidate whose reported acreage is close to FPA-FOD (Hayden, Sourdough, River
+Road East, Prior via USFS, Pass). Bedrock has one USFS daily record; Rabbit's NIFC daily row
+has no geometry acreage or perimeter time; Gray's NIFC final row reports 200 acres against a
+10,064-acre incident. No service provides a multi-day spatial progression for these cases.
+
+The screen receipt records all identifiers, public feature IDs, query scope, and limitations.
+Updated the physical validation gate, status, backlog, handoff, experiment log, source records,
+and indexes. Current SimFire maps still top out at 3,644 acres, so the next design choice is
+whole-fire map expansion versus an explicitly local fireline question. NIROPS geometry still
+requires protected NIFC access or at least 1.39 GB free for its compressed archive; the
+workstation now has 623 MiB available. No new geometry, 2024 TEST data, simulation step,
+policy evaluation or training was accessed/run.
+
+## 2026-11-02 — public validation perimeter polygon/map-footprint QA
+
+Retrieved exact feature IDs for the eight 2023 VALIDATION perimeters and four alternate-service
+copies for source comparison. Queried polygon vertices were held in memory and not committed;
+the receipt stores identifiers and derived checks only. All eight primary shapes are valid.
+Their projected UTM areas differ from the FPA-FOD reported incident sizes by at most 0.58%.
+Four USFS/NIFC geometry pairs are nearly identical to submillimeter precision, which is a
+publication-consistency check and not independent survey confirmation.
+
+The current 128×128 map rectangle intersects all eight polygons, but contains only 4.8–26.1%
+of each polygon area. At 30 m, rectangular bounds of the actual vertex geometries require
+203–701 columns and 235–691 rows; Pass needs 699×691 cells, 29.5 times the current cell count.
+The NIFC Prior and Gray `gis_acres` fields (0.1 and 200) conflict with polygon-derived areas
+(about 12,842 and 10,057 acres) and FPA-FOD sizes. Updated the physical validation gate,
+backlog, status, handoff, source register and indexes. No multi-day public progression series
+was found; NIROPS archive access/space, timestamps and map-scale decision remain open. No
+simulation step, policy evaluation, training or 2024 TEST access was performed. See the
+[polygon QA receipt](../reports/real-fire-data/usfs-nifc-validation-perimeter-polygon-qc-20261102.json)
+and [eight-case map preview](../reports/real-fire-data/validation-perimeter-map-footprints-20261102.png).
+The requests and derivations are repeatable with
+`.local/simfire-venv/bin/python scripts/qc_simfire_validation_perimeters.py --overwrite`.
