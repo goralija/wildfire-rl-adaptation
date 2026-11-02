@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 from copy import deepcopy
+import hashlib
 import json
 import math
 import sys
@@ -41,6 +42,38 @@ FLE_QUERY = (
 )
 FEDS_EPSG_FALLBACK = "EPSG:9311"
 FEDS_TIME_STEP = timedelta(hours=12)
+FEDS_LOCAL_CACHE = Path(__file__).resolve().parents[1] / ".local/feds-conus"
+FEDS_FILE_MD5 = {
+    2018: "c205abae4b12544e6cfb2d754a21981c",
+    2019: "3b921e9a28d045ffcf3015f893ed5831",
+    2023: "ad32170e694e42127f3b865d93e1a81a",
+}
+
+
+def _md5_file(path: Path) -> str:
+    digest = hashlib.md5()
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def _feds_file_path(year: int) -> str:
+    """Prefer a checksum-verified local archive; otherwise use remote byte ranges."""
+    filename = f"feds_{year}_lf_perimeter.fgb"
+    local_path = FEDS_LOCAL_CACHE / filename
+    if local_path.is_file():
+        expected_md5 = FEDS_FILE_MD5.get(year)
+        if expected_md5 is None:
+            raise ValueError(f"No pinned checksum is recorded for local FEDS year {year}.")
+        actual_md5 = _md5_file(local_path)
+        if actual_md5 != expected_md5:
+            raise ValueError(
+                f"Local FEDS archive checksum mismatch for {year}: {local_path} "
+                f"({actual_md5} != {expected_md5})."
+            )
+        return str(local_path)
+    return "/vsicurl/" + FEDS_FILE_URL.format(year=year)
 
 
 def parse_timestamp(value: Any) -> datetime | None:
@@ -61,8 +94,10 @@ def parse_timestamp(value: Any) -> datetime | None:
 
 
 def parse_discovery_date(value: str) -> date:
-    """Read FPA-FOD's date + HHMM string while retaining the date as the join key."""
-    return datetime.strptime(value, "%Y-%m-%d %H%M").date()
+    """Read FPA-FOD discovery date, whose reported HHMM may be unavailable."""
+    text = str(value).strip()
+    date_text = text.split(" ", 1)[0]
+    return date.fromisoformat(date_text)
 
 
 def consecutive_halfday_run(values: Iterable[datetime]) -> int:
@@ -357,8 +392,7 @@ def _feds_crosswalk(cases: list[dict[str, Any]], radius_m: float) -> list[dict[s
 
     results: dict[str, dict[str, Any]] = {}
     for year in sorted({int(case["year"]) for case in cases}):
-        url = FEDS_FILE_URL.format(year=year)
-        path = "/vsicurl/" + url
+        path = _feds_file_path(year)
         year_cases = [case for case in cases if int(case["year"]) == year]
         with fiona.open(path) as collection:
             target_crs = collection.crs_wkt or collection.crs or FEDS_EPSG_FALLBACK

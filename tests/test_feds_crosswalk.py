@@ -9,6 +9,7 @@ from scripts.audit_feds_fpa_fle_crosswalk import (
     consecutive_halfday_run,
     filter_report_to_start_window,
     _feds_case_candidates,
+    _feds_file_path,
     parse_discovery_date,
     parse_timestamp,
     run_audit,
@@ -31,6 +32,24 @@ def _case(number, split):
 
 
 class FedsCrosswalkTests(unittest.TestCase):
+    def test_feds_path_prefers_local_archive_and_falls_back_to_remote_ranges(self):
+        with patch("scripts.audit_feds_fpa_fle_crosswalk.FEDS_LOCAL_CACHE", Path("/missing/feds-cache")):
+            self.assertEqual(
+                _feds_file_path(2018),
+                "/vsicurl/https://zenodo.org/api/records/22921773/files/feds_2018_lf_perimeter.fgb/content",
+            )
+        with patch("scripts.audit_feds_fpa_fle_crosswalk.FEDS_LOCAL_CACHE", Path("/feds-cache")), patch(
+            "scripts.audit_feds_fpa_fle_crosswalk.Path.is_file", return_value=True
+        ), patch(
+            "scripts.audit_feds_fpa_fle_crosswalk._md5_file", return_value="ad32170e694e42127f3b865d93e1a81a"
+        ):
+            self.assertEqual(_feds_file_path(2023), "/feds-cache/feds_2023_lf_perimeter.fgb")
+        with patch("scripts.audit_feds_fpa_fle_crosswalk.FEDS_LOCAL_CACHE", Path("/feds-cache")), patch(
+            "scripts.audit_feds_fpa_fle_crosswalk.Path.is_file", return_value=True
+        ), patch("scripts.audit_feds_fpa_fle_crosswalk._md5_file", return_value="bad"):
+            with self.assertRaisesRegex(ValueError, "checksum mismatch"):
+                _feds_file_path(2023)
+
     def test_portable_cohort_manifest_excludes_test_and_keeps_incidents_whole(self):
         path = Path(__file__).resolve().parents[1] / "data/manifests/fireline-benchmark-cohort-v1.json"
         cohort = json.loads(path.read_text())
@@ -48,6 +67,7 @@ class FedsCrosswalkTests(unittest.TestCase):
         self.assertEqual(first, parse_timestamp("2023-07-01T02:00:00+02:00"))
         self.assertEqual(consecutive_halfday_run([first, second, third, gap]), 3)
         self.assertEqual(parse_discovery_date("2023-07-01 1200").isoformat(), "2023-07-01")
+        self.assertEqual(parse_discovery_date("2023-07-01").isoformat(), "2023-07-01")
 
     @unittest.skipUnless(importlib.util.find_spec("shapely"), "optional geo extra is not installed")
     def test_feds_candidate_uses_start_date_and_point_not_reported_final_area(self):
