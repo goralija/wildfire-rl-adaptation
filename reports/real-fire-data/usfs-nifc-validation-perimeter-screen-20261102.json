@@ -1,0 +1,221 @@
+{
+  "kind": "public_validation_perimeter_attribute_screen",
+  "screened_utc": "2026-11-02",
+  "scope": {
+    "cohort": "fpa-fod-western-us-2018-2024-v2",
+    "split": "VALIDATION",
+    "incident_year": 2023,
+    "cases_screened": 8,
+    "source_geometry_requested": false,
+    "test_geometry_or_attributes_opened": false,
+    "simulator_advanced": false,
+    "policy_evaluation": false,
+    "agent_training": false
+  },
+  "sources": {
+    "usfs": {
+      "name": "USDA Forest Service EDW 2023 Fire Perimeter",
+      "url": "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_FireOccurrenceAndPerimeter_01/MapServer/30",
+      "query": "Exact uniqfireid values for the seven non-Hayden matched validation cases; outFields contained attributes only; returnGeometry=false.",
+      "scope_note": "The layer description says daily/final mapped perimeters are maintained for Forest Service fires with FIRESTAT records; this is not a complete national incident archive."
+    },
+    "nifc": {
+      "name": "NIFC WFIGS Interagency Fire Perimeters public FeatureServer",
+      "url": "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/WFIGS_Interagency_Perimeters/FeatureServer/0",
+      "item_url": "https://www.arcgis.com/home/item.html?id=2140078c59714858b67feb33df4bc69e",
+      "query": "Candidate names limited to the eight frozen validation cases and attr_FireDiscoveryDateTime in calendar 2023; output attributes only; returnGeometry=false. Results were cross-checked by attr_UniqueFireIdentifier, state/unit, local incident identifier, and incident size.",
+      "scope_note": "The public item describes an ongoing historical perimeter service that is incomplete and restricts its public layer to approved/visible records."
+    },
+    "timezone_reference": {
+      "url": "https://developers.arcgis.com/rest/services-reference/enterprise/query-feature-service/",
+      "finding": "Esri states that when dateFieldsTimeReference is null, date values are assumed to be UTC; the USFS layer reports null and datesInUnknownTimezone=false. This does not resolve disagreement between USFS numeric timestamps and local-time flight comments."
+    }
+  },
+  "summary": {
+    "nifc_exact_unique_fire_id_candidates": 7,
+    "nifc_exact_candidates_with_final_perimeter_category": 6,
+    "nifc_final_area_close_to_fpa_reported_area": 4,
+    "additional_usfs_final_area_close_candidate": 1,
+    "nifc_exact_daily_candidate_with_null_acreage_and_polygon_time": 1,
+    "case_without_nifc_match": 1,
+    "usfs_exact_code_features_returned_for_seven_cases": 4,
+    "public_progression_timeseries_found": false,
+    "interpretation": "Public services provide a small number of final-shape candidates useful for later map QA. They do not provide a reliable dated sequence of observed fire growth for this validation cohort."
+  },
+  "cases": [
+    {
+      "scenario_id": "fpa-fod-401316132-hayden",
+      "fpa_id": "INF-2023-IDSCF-023084",
+      "fpa_reported_final_area_acres": 24706,
+      "nifc": {
+        "objectid": 22816,
+        "unique_fire_identifier": "2023-IDSCF-023084",
+        "state": "US-ID",
+        "feature_category": "Wildfire Final Fire Perimeter",
+        "gis_acres": 24708.7,
+        "incident_size_acres": 24706,
+        "polygon_datetime_epoch_ms": 1700149456008
+      },
+      "usfs": {
+        "objectid": 8040665,
+        "feature_category": "Final Wildfire Perimeter",
+        "total_acres": 24706,
+        "gis_acres": 24730.34,
+        "perimeter_datetime_epoch_ms": 1693435920000,
+        "comment": "IR Flight 8/30/2023 @2252 MDT; N350FV TK-9; acres geodesic UTM Zone 12"
+      },
+      "assessment": "Exact incident/state match; both sources report a final-area scale consistent with FPA-FOD. The USFS timestamp/comment has an unresolved six-hour timezone discrepancy."
+    },
+    {
+      "scenario_id": "fpa-fod-401317993-sourdough",
+      "fpa_id": "INF-2023-WANCP-000262",
+      "fpa_reported_final_area_acres": 7377,
+      "nifc": {
+        "objectid": 23957,
+        "unique_fire_identifier": "2023-WANCP-000262",
+        "state": "US-WA",
+        "local_incident_identifier": "000262",
+        "feature_category": "Wildfire Final Fire Perimeter",
+        "gis_acres": 7336.918,
+        "incident_size_acres": 7377,
+        "polygon_datetime_epoch_ms": 1707247059602
+      },
+      "usfs": {
+        "exact_unique_fire_id_feature": false
+      },
+      "assessment": "Exact incident/state/local-number match and close final-area agreement in NIFC. Geometry and its spatial placement were not inspected."
+    },
+    {
+      "scenario_id": "fpa-fod-401321600-river-road-east",
+      "fpa_id": "INF-2023-MTLNF-200730",
+      "fpa_reported_final_area_acres": 17313,
+      "nifc": {
+        "objectid": 42212,
+        "unique_fire_identifier": "2023-MTLNF-200730",
+        "state": "US-MT",
+        "local_incident_identifier": "200730",
+        "feature_category": "Wildfire Final Fire Perimeter",
+        "gis_acres": 17312.92,
+        "incident_size_acres": 17313,
+        "polygon_datetime_epoch_ms": 1710449985125
+      },
+      "usfs": {
+        "objectid": 8054743,
+        "feature_category": "Final Wildfire Perimeter",
+        "total_acres": 17313,
+        "gis_acres": 17310.59,
+        "perimeter_datetime_epoch_ms": 1694493300000
+      },
+      "assessment": "Exact incident/state/local-number match and close final-area agreement in both services. Geometry and its spatial placement were not inspected."
+    },
+    {
+      "scenario_id": "fpa-fod-401316681-bedrock",
+      "fpa_id": "INF-2023-ORWIF-230266",
+      "fpa_reported_final_area_acres": 31590,
+      "nifc": {
+        "exact_unique_fire_id_feature": false
+      },
+      "usfs": {
+        "objectid": 8033394,
+        "feature_category": "Daily Wildfire Perimeter",
+        "total_acres": 31590,
+        "gis_acres": 31589.2,
+        "perimeter_datetime_epoch_ms": 1694867082000,
+        "comment": "10 miles NE of Lowell, Oregon"
+      },
+      "assessment": "USFS has one size-matching daily perimeter record, not a sequence. Its time field is not independently tied to a survey timestamp by the available comment."
+    },
+    {
+      "scenario_id": "fpa-fod-401317844-prior",
+      "fpa_id": "INF-2023-NMGNF-000447",
+      "fpa_reported_final_area_acres": 12833,
+      "nifc": {
+        "objectid": 21475,
+        "unique_fire_identifier": "2023-NMGNF-000447",
+        "state": "US-NM",
+        "local_incident_identifier": "000447",
+        "feature_category": "Wildfire Final Fire Perimeter",
+        "gis_acres": 0.1,
+        "incident_size_acres": 12833,
+        "polygon_datetime_epoch_ms": 1696353674942
+      },
+      "usfs": {
+        "objectid": 8041501,
+        "feature_category": "Final Wildfire Perimeter",
+        "total_acres": 12833,
+        "gis_acres": 12833.22,
+        "perimeter_datetime_epoch_ms": 1692403200000
+      },
+      "assessment": "The exact incident candidate is confirmed. NIFC geometry-area attribute is inconsistent with its own incident size; separate USFS final-area attributes match FPA-FOD. Do not trust the NIFC shape without geometry QA."
+    },
+    {
+      "scenario_id": "fpa-fod-401315421-rabbit",
+      "fpa_id": "INF-2023-CARRU-102458",
+      "fpa_reported_final_area_acres": 8354.8,
+      "nifc": {
+        "objectid": 18238,
+        "unique_fire_identifier": "2023-CARRU-102458",
+        "state": "US-CA",
+        "local_incident_identifier": "102458",
+        "feature_category": "Wildfire Daily Fire Perimeter",
+        "gis_acres": null,
+        "incident_size_acres": 8354.8,
+        "polygon_datetime_epoch_ms": null
+      },
+      "usfs": {
+        "exact_unique_fire_id_feature": false
+      },
+      "assessment": "The NIFC incident attributes match, but this row has no perimeter acreage or polygon time. A later extent-only query returned a server-side bounding rectangle; the full geometry still needs QA before spatial use."
+    },
+    {
+      "scenario_id": "fpa-fod-401308187-pass",
+      "fpa_id": "INF-2023-NMGNF-000191",
+      "fpa_reported_final_area_acres": 59883,
+      "nifc": {
+        "objectid": 21480,
+        "unique_fire_identifier": "2023-NMGNF-000191",
+        "state": "US-NM",
+        "local_incident_identifier": "000191",
+        "feature_category": "Wildfire Final Fire Perimeter",
+        "gis_acres": 59883.41,
+        "incident_size_acres": 59883,
+        "polygon_datetime_epoch_ms": 1696354814197
+      },
+      "usfs": {
+        "objectid": 8041650,
+        "feature_category": "Final Wildfire Perimeter",
+        "total_acres": 59883,
+        "gis_acres": 59883.43,
+        "perimeter_datetime_epoch_ms": 1688861160000,
+        "comment": "Flight 7/9/2023 @0006 MDT, 350SM Tenax"
+      },
+      "assessment": "Exact incident/state/local-number match and close final-area agreement in both services. The USFS timestamp/comment has an unresolved six-hour timezone discrepancy."
+    },
+    {
+      "scenario_id": "fpa-fod-401321611-gray",
+      "fpa_id": "INF-2023-WANES-001974",
+      "fpa_reported_final_area_acres": 10064,
+      "nifc": {
+        "objectid": 23496,
+        "unique_fire_identifier": "2023-WANES-001974",
+        "state": "US-WA",
+        "local_incident_identifier": "001974",
+        "feature_category": "Wildfire Final Fire Perimeter",
+        "gis_acres": 200,
+        "incident_size_acres": 10064,
+        "polygon_datetime_epoch_ms": 1703799298594
+      },
+      "usfs": {
+        "exact_unique_fire_id_feature": false
+      },
+      "assessment": "Exact incident candidate is confirmed, but the NIFC final geometry-area attribute is only 200 acres against a 10,064-acre incident size. Require geometry/source QA before using it."
+    }
+  ],
+  "limitations": [
+    "This screen requested no new public perimeter geometry. The earlier Hayden feature page was viewed as noted in usfs-hayden-final-perimeter-screen-20261102.json; its shape was not saved or spatially processed.",
+    "Exact name/date/state/local incident identifiers establish a crosswalk candidate, not spatial correctness of a perimeter.",
+    "Final mapped perimeters do not provide historical spread progression or the ignition/start perimeter.",
+    "USFS numeric perimeter times for Hayden and Pass match local MDT clock readings but are six hours earlier if interpreted as UTC; the producer must clarify the source semantics.",
+    "The 2024 TEST split was not queried or opened. No simulation, policy evaluation, or training was performed."
+  ]
+}

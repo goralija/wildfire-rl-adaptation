@@ -1,0 +1,366 @@
+{
+  "kind": "validation_perimeter_extent_only_screen",
+  "screened_utc": "2026-11-02",
+  "scope": {
+    "cohort": "fpa-fod-western-us-2018-2024-v2",
+    "split": "VALIDATION",
+    "incident_year": 2023,
+    "cases_screened": 8,
+    "geometry_query": "ArcGIS returnExtentOnly=true, projected to each existing fuel raster CRS",
+    "perimeter_vertices_requested": false,
+    "geometry_saved_or_rasterized": false,
+    "test_geometry_or_attributes_opened": false,
+    "simulator_advanced": false,
+    "policy_evaluation": false,
+    "agent_training": false,
+    "grid_cell_estimate": "Ceil projected bounding extent width/height divided by 30 m; counts cover the bounding rectangle, not the polygon interior."
+  },
+  "sources": {
+    "nifc": "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/WFIGS_Interagency_Perimeters/FeatureServer/0",
+    "usfs": "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_FireOccurrenceAndPerimeter_01/MapServer/30",
+    "existing_raster_bounds": "reports/real-fire-data/simfire-cohort-v2-input-acquisition.json",
+    "method": "One identified 2023 validation feature per request; server returned its bounding rectangle only, with no perimeter vertices."
+  },
+  "summary": {
+    "all_8_perimeter_extents_wider_or_taller_than_3_84_km_grid": true,
+    "perimeter_bbox_width_km_range": [
+      6.35,
+      21.55
+    ],
+    "perimeter_bbox_height_km_range": [
+      7.05,
+      21.32
+    ],
+    "existing_crop_intersection_of_perimeter_bbox_percent_range": [
+      3.2,
+      22.5
+    ],
+    "cross_service_extent_pairs": {
+      "Hayden": "NIFC and USFS extents agree within 0.01 m per coordinate.",
+      "River Road East": "NIFC and USFS extents agree within 0.01 m per coordinate.",
+      "Prior": "NIFC and USFS extents agree within 0.01 m per coordinate, despite NIFC poly_GISAcres=0.1.",
+      "Pass": "NIFC and USFS extents agree within 0.01 m per coordinate."
+    },
+    "interpretation": "The existing 128x128 crop intersects part of every returned final/daily perimeter bounding box but is much smaller than each box. The intersection percentages refer only to bounding rectangles; they are not polygon-area overlap, IoU, or physical-validation metrics.",
+    "grid_cells_to_cover_bbox_at_30m": {
+      "columns_range": [
+        212,
+        719
+      ],
+      "rows_range": [
+        235,
+        711
+      ],
+      "rectangular_cells_vs_current_128x128_range": [
+        4.0,
+        31.2
+      ],
+      "largest_case": "Pass",
+      "largest_case_dimensions": [
+        719,
+        711
+      ],
+      "largest_case_cells": 511209,
+      "note": "Cell count is a footprint estimate only; it does not predict simulator runtime or memory, and an actual irregular perimeter can occupy fewer cells than its bounding rectangle."
+    }
+  },
+  "cases": [
+    {
+      "scenario_id": "fpa-fod-401316132-hayden",
+      "fpa_reported_final_area_acres": 24706,
+      "map_crs": "EPSG:32612",
+      "map_bounds_m": [
+        280830.0,
+        4951650.0,
+        284670.0,
+        4955490.0
+      ],
+      "perimeter_extent_m": [
+        277776.7485515746,
+        4947636.324359144,
+        295305.56465349556,
+        4961781.187773735
+      ],
+      "perimeter_extent_sources": [
+        {
+          "service": "NIFC",
+          "objectid": 22816
+        },
+        {
+          "service": "USFS",
+          "objectid": 8040665
+        }
+      ],
+      "extent_size_km": [
+        17.53,
+        14.14
+      ],
+      "crop_perimeter_bbox_intersection_percent": 5.9,
+      "rectangular_grid_to_cover_extent_at_30m": {
+        "columns": 585,
+        "rows": 472,
+        "cells": 276120,
+        "cells_vs_existing_128x128_ratio": 16.9
+      }
+    },
+    {
+      "scenario_id": "fpa-fod-401317993-sourdough",
+      "fpa_reported_final_area_acres": 7377,
+      "map_crs": "EPSG:32610",
+      "map_bounds_m": [
+        635190.0,
+        5396280.0,
+        639030.0,
+        5400120.0
+      ],
+      "perimeter_extent_m": [
+        632280.7449809436,
+        5395837.037389425,
+        638629.9439177986,
+        5405088.293344457
+      ],
+      "perimeter_extent_sources": [
+        {
+          "service": "NIFC",
+          "objectid": 23957
+        }
+      ],
+      "extent_size_km": [
+        6.35,
+        9.25
+      ],
+      "crop_perimeter_bbox_intersection_percent": 22.5,
+      "rectangular_grid_to_cover_extent_at_30m": {
+        "columns": 212,
+        "rows": 309,
+        "cells": 65508,
+        "cells_vs_existing_128x128_ratio": 4.0
+      }
+    },
+    {
+      "scenario_id": "fpa-fod-401321600-river-road-east",
+      "fpa_reported_final_area_acres": 17313,
+      "map_crs": "EPSG:32611",
+      "map_bounds_m": [
+        663690.0,
+        5248020.0,
+        667530.0,
+        5251860.0
+      ],
+      "perimeter_extent_m": [
+        659568.12052912,
+        5246075.326506491,
+        675873.3007031503,
+        5256818.786058729
+      ],
+      "perimeter_extent_sources": [
+        {
+          "service": "NIFC",
+          "objectid": 42212
+        },
+        {
+          "service": "USFS",
+          "objectid": 8054743
+        }
+      ],
+      "extent_size_km": [
+        16.31,
+        10.74
+      ],
+      "crop_perimeter_bbox_intersection_percent": 8.4,
+      "rectangular_grid_to_cover_extent_at_30m": {
+        "columns": 544,
+        "rows": 359,
+        "cells": 195296,
+        "cells_vs_existing_128x128_ratio": 11.9
+      }
+    },
+    {
+      "scenario_id": "fpa-fod-401316681-bedrock",
+      "fpa_reported_final_area_acres": 31590,
+      "map_crs": "EPSG:32610",
+      "map_bounds_m": [
+        534480.0,
+        4866900.0,
+        538320.0,
+        4870740.0
+      ],
+      "perimeter_extent_m": [
+        528340.4348002438,
+        4863968.622855266,
+        549451.3729556439,
+        4877474.571005845
+      ],
+      "perimeter_extent_sources": [
+        {
+          "service": "USFS",
+          "objectid": 8033394
+        }
+      ],
+      "extent_size_km": [
+        21.11,
+        13.51
+      ],
+      "crop_perimeter_bbox_intersection_percent": 5.2,
+      "rectangular_grid_to_cover_extent_at_30m": {
+        "columns": 704,
+        "rows": 451,
+        "cells": 317504,
+        "cells_vs_existing_128x128_ratio": 19.4
+      }
+    },
+    {
+      "scenario_id": "fpa-fod-401317844-prior",
+      "fpa_reported_final_area_acres": 12833,
+      "map_crs": "EPSG:32612",
+      "map_bounds_m": [
+        741270.0,
+        3685080.0,
+        745110.0,
+        3688920.0
+      ],
+      "perimeter_extent_m": [
+        738433.6850487425,
+        3684469.5741778263,
+        750268.0198869061,
+        3692152.4721403113
+      ],
+      "perimeter_extent_sources": [
+        {
+          "service": "NIFC",
+          "objectid": 21475
+        },
+        {
+          "service": "USFS",
+          "objectid": 8041501
+        }
+      ],
+      "extent_size_km": [
+        11.83,
+        7.68
+      ],
+      "crop_perimeter_bbox_intersection_percent": 16.2,
+      "note": "NIFC area attribute is 0.1 acres, while the NIFC and USFS extents agree within 0.01 m per coordinate. This is an extent cross-check only; polygon topology and true area were not inspected.",
+      "rectangular_grid_to_cover_extent_at_30m": {
+        "columns": 395,
+        "rows": 257,
+        "cells": 101515,
+        "cells_vs_existing_128x128_ratio": 6.2
+      }
+    },
+    {
+      "scenario_id": "fpa-fod-401315421-rabbit",
+      "fpa_reported_final_area_acres": 8354.8,
+      "map_crs": "EPSG:32611",
+      "map_bounds_m": [
+        491520.0,
+        3747990.0,
+        495360.0,
+        3751830.0
+      ],
+      "perimeter_extent_m": [
+        493319.18948718533,
+        3746386.078867228,
+        501898.9262868068,
+        3753432.361197611
+      ],
+      "perimeter_extent_sources": [
+        {
+          "service": "NIFC",
+          "objectid": 18238
+        }
+      ],
+      "extent_size_km": [
+        8.58,
+        7.05
+      ],
+      "crop_perimeter_bbox_intersection_percent": 13.0,
+      "note": "NIFC has a server-side extent even though its GIS-acre and polygon-time attributes are null; spatial QA is required before deciding whether the feature is usable.",
+      "rectangular_grid_to_cover_extent_at_30m": {
+        "columns": 286,
+        "rows": 235,
+        "cells": 67210,
+        "cells_vs_existing_128x128_ratio": 4.1
+      }
+    },
+    {
+      "scenario_id": "fpa-fod-401308187-pass",
+      "fpa_reported_final_area_acres": 59883,
+      "map_crs": "EPSG:32612",
+      "map_bounds_m": [
+        750150.0,
+        3697710.0,
+        753990.0,
+        3701550.0
+      ],
+      "perimeter_extent_m": [
+        747897.0856832901,
+        3683846.6465400383,
+        769450.8043897152,
+        3705169.598683546
+      ],
+      "perimeter_extent_sources": [
+        {
+          "service": "NIFC",
+          "objectid": 21480
+        },
+        {
+          "service": "USFS",
+          "objectid": 8041650
+        }
+      ],
+      "extent_size_km": [
+        21.55,
+        21.32
+      ],
+      "crop_perimeter_bbox_intersection_percent": 3.2,
+      "rectangular_grid_to_cover_extent_at_30m": {
+        "columns": 719,
+        "rows": 711,
+        "cells": 511209,
+        "cells_vs_existing_128x128_ratio": 31.2
+      }
+    },
+    {
+      "scenario_id": "fpa-fod-401321611-gray",
+      "fpa_reported_final_area_acres": 10064,
+      "map_crs": "EPSG:32611",
+      "map_bounds_m": [
+        442080.0,
+        5263320.0,
+        445920.0,
+        5267160.0
+      ],
+      "perimeter_extent_m": [
+        443936.3959320757,
+        5259262.738608969,
+        454649.6956017017,
+        5269223.418925031
+      ],
+      "perimeter_extent_sources": [
+        {
+          "service": "NIFC",
+          "objectid": 23496
+        }
+      ],
+      "extent_size_km": [
+        10.71,
+        9.96
+      ],
+      "crop_perimeter_bbox_intersection_percent": 7.1,
+      "note": "NIFC incident-size and GIS-acre attributes differ sharply; extent-only response does not validate its area.",
+      "rectangular_grid_to_cover_extent_at_30m": {
+        "columns": 358,
+        "rows": 333,
+        "cells": 119214,
+        "cells_vs_existing_128x128_ratio": 7.3
+      }
+    }
+  ],
+  "limitations": [
+    "Extent queries returned projected bounding rectangles only. No perimeter coordinate arrays or full geometries were downloaded or opened.",
+    "Bounding-rectangle intersection is not polygon overlap, burn-area intersection, or IoU.",
+    "The original 2024 TEST split was not queried or opened.",
+    "No simulator step, policy evaluation, or agent training was performed."
+  ]
+}

@@ -1,0 +1,484 @@
+{
+  "kind": "validation_perimeter_polygon_crop_qc",
+  "created_utc": "2026-11-02T16:55:31+00:00",
+  "scope": {
+    "cohort": "fpa-fod-western-us-2018-2024-v2",
+    "split": "VALIDATION",
+    "incident_year": 2023,
+    "validation_incidents": 8,
+    "exact_feature_ids_queried": 12,
+    "query_breakdown": "8 primary validation polygons plus 4 alternate-source duplicates.",
+    "return_geometry": true,
+    "geometry_output_crs": "each incident's existing raster CRS",
+    "raw_shapes_saved": false,
+    "full_geometry_held_in_memory_for_qc_and_plot_only": true,
+    "2024_TEST_data_or_geometry_opened": false,
+    "simulator_advanced": false,
+    "policy_evaluation": false,
+    "agent_training": false
+  },
+  "sources": {
+    "nifc": "https://services3.arcgis.com/T4QMspbfLg3qTGWY/arcgis/rest/services/WFIGS_Interagency_Perimeters/FeatureServer/0",
+    "usfs": "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_FireOccurrenceAndPerimeter_01/MapServer/30",
+    "existing_raster_bounds": "reports/real-fire-data/simfire-cohort-v2-input-acquisition.json",
+    "method": "One identified 2023 validation feature per request; server returned its bounding rectangle only, with no perimeter vertices."
+  },
+  "method": {
+    "selected_primary_source_by_scenario": {
+      "fpa-fod-401316132-hayden": "USFS",
+      "fpa-fod-401317993-sourdough": "NIFC",
+      "fpa-fod-401321600-river-road-east": "USFS",
+      "fpa-fod-401316681-bedrock": "USFS",
+      "fpa-fod-401317844-prior": "USFS",
+      "fpa-fod-401315421-rabbit": "NIFC",
+      "fpa-fod-401308187-pass": "USFS",
+      "fpa-fod-401321611-gray": "NIFC"
+    },
+    "ring_topology": "Esri clockwise exterior and counterclockwise interior rings; a hole is assigned to the smallest exterior that covers its full ring.",
+    "area": "Planar area in each local UTM raster CRS; approximate acreage check, not authoritative geodesic area.",
+    "map_overlap": "Exact vector intersection with the existing raster bounding rectangle, measuring map footprint only.",
+    "grid_size": "Projected polygon vertex bounds divided by 30 m and rounded up per axis; excludes safety margin and does not estimate runtime or memory.",
+    "extent_comparison": "Extent-only envelopes contain projected geometry vertices within a 0.05 m numeric tolerance; these are separate service response products."
+  },
+  "summary": {
+    "exact_features_queried": 12,
+    "primary_features_queried": 8,
+    "alternate_cross_source_features_queried": 4,
+    "validation_incidents": 8,
+    "valid_primary_geometries": 8,
+    "all_geometry_vertices_within_extent_only_bounds_to_0_05m": true,
+    "primary_shapes_intersecting_current_map": 8,
+    "fraction_of_polygon_area_inside_current_map_percent_range": [
+      4.834,
+      26.115
+    ],
+    "maximum_absolute_projected_area_difference_from_fpa_percent": 0.578,
+    "minimum_rectangular_grid_columns_range": [
+      203,
+      701
+    ],
+    "minimum_rectangular_grid_rows_range": [
+      235,
+      691
+    ],
+    "minimum_rectangular_grid_cell_ratio_range_vs_128x128": [
+      3.8,
+      29.5
+    ],
+    "largest_footprint_case": "Pass",
+    "largest_footprint_grid": [
+      699,
+      691
+    ],
+    "four_cross_service_pairs_within_1mm": true
+  },
+  "primary_case_results": [
+    {
+      "scenario_id": "fpa-fod-401316132-hayden",
+      "service": "USFS",
+      "objectid": 8040665,
+      "feature_category": "Final Wildfire Perimeter",
+      "requested_output_crs": "EPSG:32612",
+      "response_bytes": 977045,
+      "ring_count": 537,
+      "vertex_count": 24527,
+      "orphan_counterclockwise_rings": 0,
+      "geometry_valid": true,
+      "geometry_validity_reason": "Valid Geometry",
+      "projected_vertex_bounds_m": [
+        277923.727,
+        4948010.106,
+        295047.628,
+        4961657.364
+      ],
+      "extent_only_envelope_margin_m": [
+        146.978,
+        373.782,
+        257.937,
+        123.824
+      ],
+      "extent_only_envelope_contains_vertices_with_0_05m_tolerance": true,
+      "projected_polygon_area_acres": 24716.85,
+      "source_reported_gis_acres": 24730.34,
+      "source_reported_incident_size_acres": 24706,
+      "fpa_reported_final_area_acres": 24706,
+      "projected_area_difference_from_fpa_pct": 0.044,
+      "projected_area_difference_from_service_gis_acres_pct": -0.055,
+      "area_inside_current_map_acres": 2589.16,
+      "percent_polygon_area_inside_current_map": 10.475,
+      "percent_current_map_area_inside_polygon": 71.058,
+      "intersects_current_map": true,
+      "minimum_rectangular_grid_at_30m": {
+        "columns": 571,
+        "rows": 455,
+        "cells": 259805,
+        "times_current_128x128_cells": 15.9
+      }
+    },
+    {
+      "scenario_id": "fpa-fod-401317993-sourdough",
+      "service": "NIFC",
+      "objectid": 23957,
+      "feature_category": "Wildfire Final Fire Perimeter",
+      "requested_output_crs": "EPSG:32610",
+      "response_bytes": 77605,
+      "ring_count": 29,
+      "vertex_count": 2152,
+      "orphan_counterclockwise_rings": 0,
+      "geometry_valid": true,
+      "geometry_validity_reason": "Valid Geometry",
+      "projected_vertex_bounds_m": [
+        632495.343,
+        5395846.589,
+        638567.726,
+        5404986.159
+      ],
+      "extent_only_envelope_margin_m": [
+        214.598,
+        9.552,
+        62.218,
+        102.134
+      ],
+      "extent_only_envelope_contains_vertices_with_0_05m_tolerance": true,
+      "projected_polygon_area_acres": 7334.34,
+      "source_reported_gis_acres": 7336.918,
+      "source_reported_incident_size_acres": 7377,
+      "fpa_reported_final_area_acres": 7377,
+      "projected_area_difference_from_fpa_pct": -0.578,
+      "projected_area_difference_from_service_gis_acres_pct": -0.035,
+      "area_inside_current_map_acres": 1809.69,
+      "percent_polygon_area_inside_current_map": 24.674,
+      "percent_current_map_area_inside_polygon": 49.666,
+      "intersects_current_map": true,
+      "minimum_rectangular_grid_at_30m": {
+        "columns": 203,
+        "rows": 305,
+        "cells": 61915,
+        "times_current_128x128_cells": 3.8
+      }
+    },
+    {
+      "scenario_id": "fpa-fod-401321600-river-road-east",
+      "service": "USFS",
+      "objectid": 8054743,
+      "feature_category": "Final Wildfire Perimeter",
+      "requested_output_crs": "EPSG:32611",
+      "response_bytes": 228768,
+      "ring_count": 29,
+      "vertex_count": 5741,
+      "orphan_counterclockwise_rings": 0,
+      "geometry_valid": true,
+      "geometry_validity_reason": "Valid Geometry",
+      "projected_vertex_bounds_m": [
+        659697.445,
+        5246239.035,
+        675726.604,
+        5256686.565
+      ],
+      "extent_only_envelope_margin_m": [
+        129.325,
+        163.709,
+        146.696,
+        132.221
+      ],
+      "extent_only_envelope_contains_vertices_with_0_05m_tolerance": true,
+      "projected_polygon_area_acres": 17311.13,
+      "source_reported_gis_acres": 17310.59,
+      "source_reported_incident_size_acres": 17313,
+      "fpa_reported_final_area_acres": 17313,
+      "projected_area_difference_from_fpa_pct": -0.011,
+      "projected_area_difference_from_service_gis_acres_pct": 0.003,
+      "area_inside_current_map_acres": 2538.29,
+      "percent_polygon_area_inside_current_map": 14.663,
+      "percent_current_map_area_inside_polygon": 69.662,
+      "intersects_current_map": true,
+      "minimum_rectangular_grid_at_30m": {
+        "columns": 535,
+        "rows": 349,
+        "cells": 186715,
+        "times_current_128x128_cells": 11.4
+      }
+    },
+    {
+      "scenario_id": "fpa-fod-401316681-bedrock",
+      "service": "USFS",
+      "objectid": 8033394,
+      "feature_category": "Daily Wildfire Perimeter",
+      "requested_output_crs": "EPSG:32610",
+      "response_bytes": 606982,
+      "ring_count": 95,
+      "vertex_count": 15246,
+      "orphan_counterclockwise_rings": 0,
+      "geometry_valid": true,
+      "geometry_validity_reason": "Valid Geometry",
+      "projected_vertex_bounds_m": [
+        528364.614,
+        4864015.705,
+        549367.873,
+        4877418.709
+      ],
+      "extent_only_envelope_margin_m": [
+        24.18,
+        47.082,
+        83.5,
+        55.862
+      ],
+      "extent_only_envelope_contains_vertices_with_0_05m_tolerance": true,
+      "projected_polygon_area_acres": 31565.07,
+      "source_reported_gis_acres": 31589.2,
+      "source_reported_incident_size_acres": 31590,
+      "fpa_reported_final_area_acres": 31590,
+      "projected_area_difference_from_fpa_pct": -0.079,
+      "projected_area_difference_from_service_gis_acres_pct": -0.076,
+      "area_inside_current_map_acres": 3316.34,
+      "percent_polygon_area_inside_current_map": 10.506,
+      "percent_current_map_area_inside_polygon": 91.015,
+      "intersects_current_map": true,
+      "minimum_rectangular_grid_at_30m": {
+        "columns": 701,
+        "rows": 447,
+        "cells": 313347,
+        "times_current_128x128_cells": 19.1
+      }
+    },
+    {
+      "scenario_id": "fpa-fod-401317844-prior",
+      "service": "USFS",
+      "objectid": 8041501,
+      "feature_category": "Final Wildfire Perimeter",
+      "requested_output_crs": "EPSG:32612",
+      "response_bytes": 6717,
+      "ring_count": 1,
+      "vertex_count": 161,
+      "orphan_counterclockwise_rings": 0,
+      "geometry_valid": true,
+      "geometry_validity_reason": "Valid Geometry",
+      "projected_vertex_bounds_m": [
+        738570.248,
+        3684642.689,
+        750243.331,
+        3691959.399
+      ],
+      "extent_only_envelope_margin_m": [
+        136.563,
+        173.115,
+        24.689,
+        193.073
+      ],
+      "extent_only_envelope_contains_vertices_with_0_05m_tolerance": true,
+      "projected_polygon_area_acres": 12841.81,
+      "source_reported_gis_acres": 12833.22,
+      "source_reported_incident_size_acres": 12833,
+      "fpa_reported_final_area_acres": 12833,
+      "projected_area_difference_from_fpa_pct": 0.069,
+      "projected_area_difference_from_service_gis_acres_pct": 0.067,
+      "area_inside_current_map_acres": 3353.7,
+      "percent_polygon_area_inside_current_map": 26.115,
+      "percent_current_map_area_inside_polygon": 92.041,
+      "intersects_current_map": true,
+      "minimum_rectangular_grid_at_30m": {
+        "columns": 390,
+        "rows": 244,
+        "cells": 95160,
+        "times_current_128x128_cells": 5.8
+      }
+    },
+    {
+      "scenario_id": "fpa-fod-401315421-rabbit",
+      "service": "NIFC",
+      "objectid": 18238,
+      "feature_category": "Wildfire Daily Fire Perimeter",
+      "requested_output_crs": "EPSG:32611",
+      "response_bytes": 47623,
+      "ring_count": 2,
+      "vertex_count": 1316,
+      "orphan_counterclockwise_rings": 0,
+      "geometry_valid": true,
+      "geometry_validity_reason": "Valid Geometry",
+      "projected_vertex_bounds_m": [
+        493321.614,
+        3746386.052,
+        501897.789,
+        3753430.013
+      ],
+      "extent_only_envelope_margin_m": [
+        2.425,
+        -0.027,
+        1.138,
+        2.348
+      ],
+      "extent_only_envelope_contains_vertices_with_0_05m_tolerance": true,
+      "projected_polygon_area_acres": 8349.47,
+      "source_reported_gis_acres": null,
+      "source_reported_incident_size_acres": 8354.8,
+      "fpa_reported_final_area_acres": 8354.8,
+      "projected_area_difference_from_fpa_pct": -0.064,
+      "projected_area_difference_from_service_gis_acres_pct": null,
+      "area_inside_current_map_acres": 840.7,
+      "percent_polygon_area_inside_current_map": 10.069,
+      "percent_current_map_area_inside_polygon": 23.073,
+      "intersects_current_map": true,
+      "minimum_rectangular_grid_at_30m": {
+        "columns": 286,
+        "rows": 235,
+        "cells": 67210,
+        "times_current_128x128_cells": 4.1
+      }
+    },
+    {
+      "scenario_id": "fpa-fod-401308187-pass",
+      "service": "USFS",
+      "objectid": 8041650,
+      "feature_category": "Final Wildfire Perimeter",
+      "requested_output_crs": "EPSG:32612",
+      "response_bytes": 359451,
+      "ring_count": 26,
+      "vertex_count": 9027,
+      "orphan_counterclockwise_rings": 0,
+      "geometry_valid": true,
+      "geometry_validity_reason": "Valid Geometry",
+      "projected_vertex_bounds_m": [
+        748054.385,
+        3684103.026,
+        768999.645,
+        3704813.907
+      ],
+      "extent_only_envelope_margin_m": [
+        157.299,
+        256.38,
+        451.16,
+        355.692
+      ],
+      "extent_only_envelope_contains_vertices_with_0_05m_tolerance": true,
+      "projected_polygon_area_acres": 59934.4,
+      "source_reported_gis_acres": 59883.43,
+      "source_reported_incident_size_acres": 59883,
+      "fpa_reported_final_area_acres": 59883,
+      "projected_area_difference_from_fpa_pct": 0.086,
+      "projected_area_difference_from_service_gis_acres_pct": 0.085,
+      "area_inside_current_map_acres": 2896.95,
+      "percent_polygon_area_inside_current_map": 4.834,
+      "percent_current_map_area_inside_polygon": 79.505,
+      "intersects_current_map": true,
+      "minimum_rectangular_grid_at_30m": {
+        "columns": 699,
+        "rows": 691,
+        "cells": 483009,
+        "times_current_128x128_cells": 29.5
+      }
+    },
+    {
+      "scenario_id": "fpa-fod-401321611-gray",
+      "service": "NIFC",
+      "objectid": 23496,
+      "feature_category": "Wildfire Final Fire Perimeter",
+      "requested_output_crs": "EPSG:32611",
+      "response_bytes": 56608,
+      "ring_count": 1,
+      "vertex_count": 1567,
+      "orphan_counterclockwise_rings": 0,
+      "geometry_valid": true,
+      "geometry_validity_reason": "Valid Geometry",
+      "projected_vertex_bounds_m": [
+        443992.507,
+        5259300.916,
+        454639.353,
+        5269154.462
+      ],
+      "extent_only_envelope_margin_m": [
+        56.111,
+        38.177,
+        10.343,
+        68.957
+      ],
+      "extent_only_envelope_contains_vertices_with_0_05m_tolerance": true,
+      "projected_polygon_area_acres": 10056.84,
+      "source_reported_gis_acres": 200,
+      "source_reported_incident_size_acres": 10064,
+      "fpa_reported_final_area_acres": 10064,
+      "projected_area_difference_from_fpa_pct": -0.071,
+      "projected_area_difference_from_service_gis_acres_pct": 4928.419,
+      "area_inside_current_map_acres": 556.43,
+      "percent_polygon_area_inside_current_map": 5.533,
+      "percent_current_map_area_inside_polygon": 15.271,
+      "intersects_current_map": true,
+      "minimum_rectangular_grid_at_30m": {
+        "columns": 355,
+        "rows": 329,
+        "cells": 116795,
+        "times_current_128x128_cells": 7.1
+      }
+    }
+  ],
+  "cross_service_shape_comparison": [
+    {
+      "scenario_id": "fpa-fod-401316132-hayden",
+      "both_valid": true,
+      "symmetric_difference_percent_of_union": 1.6e-05,
+      "hausdorff_distance_m": 0.000238,
+      "nifc_area_acres": 24716.85,
+      "usfs_area_acres": 24716.85,
+      "near_identical_within_1mm": true,
+      "interpretation": "Cross-publication consistency, not independent survey evidence."
+    },
+    {
+      "scenario_id": "fpa-fod-401321600-river-road-east",
+      "both_valid": true,
+      "symmetric_difference_percent_of_union": 5e-06,
+      "hausdorff_distance_m": 0.000121,
+      "nifc_area_acres": 17311.13,
+      "usfs_area_acres": 17311.13,
+      "near_identical_within_1mm": true,
+      "interpretation": "Cross-publication consistency, not independent survey evidence."
+    },
+    {
+      "scenario_id": "fpa-fod-401317844-prior",
+      "both_valid": true,
+      "symmetric_difference_percent_of_union": 1e-06,
+      "hausdorff_distance_m": 7e-05,
+      "nifc_area_acres": 12841.81,
+      "usfs_area_acres": 12841.81,
+      "near_identical_within_1mm": true,
+      "interpretation": "Cross-publication consistency, not independent survey evidence."
+    },
+    {
+      "scenario_id": "fpa-fod-401308187-pass",
+      "both_valid": true,
+      "symmetric_difference_percent_of_union": 3e-06,
+      "hausdorff_distance_m": 0.000136,
+      "nifc_area_acres": 59934.4,
+      "usfs_area_acres": 59934.4,
+      "near_identical_within_1mm": true,
+      "interpretation": "Cross-publication consistency, not independent survey evidence."
+    }
+  ],
+  "source_attribute_discrepancies": [
+    {
+      "scenario_id": "fpa-fod-401317844-prior",
+      "service": "NIFC",
+      "objectid": 21475,
+      "published_gis_acres": 0.1,
+      "published_incident_size_acres": 12833,
+      "projected_polygon_area_acres": 12841.81,
+      "interpretation": "NIFC GIS-acre attribute conflicts with both the outline and incident-reported size."
+    },
+    {
+      "scenario_id": "fpa-fod-401321611-gray",
+      "service": "NIFC",
+      "objectid": 23496,
+      "published_gis_acres": 200,
+      "published_incident_size_acres": 10064,
+      "projected_polygon_area_acres": 10056.84,
+      "interpretation": "NIFC GIS-acre attribute conflicts with both the outline and incident-reported size."
+    }
+  ],
+  "limitations": [
+    "These observed perimeters are mostly final shapes, not a dated sequence of growth; Bedrock and Rabbit daily feature times are unverified.",
+    "Final polygons are not starting conditions, agent observations, rewards, or training labels.",
+    "Map overlap does not validate spread timing, suppression effects, timestamp alignment, or fuel/weather alignment.",
+    "Extent-only envelopes are more conservative than projected polygon vertex bounds; both receipts are retained.",
+    "Cross-service shape agreement is publication consistency and may reflect shared geometry, not independent confirmation.",
+    "No 2024 TEST data or geometry was queried. No simulation, policy evaluation, or training was run."
+  ],
+  "visualization": "reports/real-fire-data/validation-perimeter-map-footprints-20261102.png"
+}
