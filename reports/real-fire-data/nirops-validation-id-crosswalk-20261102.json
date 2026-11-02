@@ -1,0 +1,537 @@
+{
+  "kind": "nirops_validation_id_crosswalk",
+  "created_utc": "2026-11-02",
+  "sources": {
+    "dataset": "USFS NIROPS fire-perimeter progression, Mendeley v2",
+    "record_url": "https://data.mendeley.com/datasets/95rj5d379g/2",
+    "chart_archive_member": "Area_Progression_TimeSeries.zip",
+    "chart_archive_bytes": 78086022,
+    "chart_archive_sha256": "dd7eed2587eb15aeccaaa547e47935613b0131a076901384499377639c96be1e",
+    "chart_count": 709,
+    "fpa_screen": "reports/real-fire-data/fpa-fod-simfire-cohort-v2/2023-screen.geojson",
+    "fpa_screen_sha256": "f14cd70374ce808f889d0c05959387b899e4b4e5d2a8b9acaee7b78c6e016c3a",
+    "cohort_manifest": "data/manifests/simfire-fpa-fod-cohort-v2.json",
+    "cohort_manifest_sha256": "f6c58b4685dcf24bf17f16c000b5d60d784f6ee49d85b43f750aef20939a4481"
+  },
+  "method": {
+    "primary_key": "FPA-FOD FPA_ID event identifier after INF-YYYY- equals NIROPS chart event code after punctuation normalization",
+    "corroborating_fields": [
+      "state",
+      "incident name in chart label"
+    ],
+    "scope": "only frozen 2023 VALIDATION cases; chart filenames and a single validation chart visual review",
+    "interpretation": "Exact code, year, state, and name matches establish an incident crosswalk candidate for acquiring source polygons; they do not validate simulated spread."
+  },
+  "screen": {
+    "cases_screened": 20,
+    "exact_incident_code_state_name_matches": 8,
+    "same_state_name_candidates_without_exact_incident_code": 3,
+    "charts_visually_reviewed": 1,
+    "perimeter_geometries_opened": false,
+    "test_geometries_opened": false,
+    "simulator_advanced": false,
+    "agent_training": false,
+    "policy_evaluation": false
+  },
+  "visually_reviewed_charts": [
+    {
+      "scenario_id": "fpa-fod-401316132-hayden",
+      "path": "Area_Progression_TimeSeries/Great_Basin/ID-SCF-023084_Hayden_progression.png"
+    }
+  ],
+  "visual_chart_copy": {
+    "path": "reports/real-fire-data/nirops-validation-charts/hayden-area-progression.png",
+    "sha256": "28a669a8be127e77321e4e44944f6cfe6d8041e7a9a8ee38980d9f064bcc4ce9",
+    "source_attribution": "Magstadt et al. (2026), NIROPS fire-perimeter progression dataset, Mendeley Data v2, DOI 10.17632/95rj5d379g.2, CC BY 4.0; original chart copied unchanged."
+  },
+  "cases": [
+    {
+      "scenario_id": "fpa-fod-401316132-hayden",
+      "fpa_fod_id": 401316132,
+      "fpa_id": "INF-2023-IDSCF-023084",
+      "fpa_event_code_normalized": "IDSCF023084",
+      "incident_name": "HAYDEN",
+      "state": "ID",
+      "year": 2023,
+      "fpa_discovery_date_utc": "2023-07-19",
+      "fpa_reported_final_area_acres": 24706,
+      "exact_event_code_chart_matches": [
+        {
+          "state": "ID",
+          "event_code": "ID-SCF-023084",
+          "normalized_event_code": "IDSCF023084",
+          "label": "Hayden",
+          "path": "Area_Progression_TimeSeries/Great_Basin/ID-SCF-023084_Hayden_progression.png"
+        }
+      ],
+      "same_state_name_chart_candidates": [
+        {
+          "state": "ID",
+          "event_code": "ID-SCF-023084",
+          "normalized_event_code": "IDSCF023084",
+          "label": "Hayden",
+          "path": "Area_Progression_TimeSeries/Great_Basin/ID-SCF-023084_Hayden_progression.png"
+        }
+      ],
+      "crosswalk_outcome": "exact_incident_code_state_name_match",
+      "date_alignment_checked": false,
+      "perimeter_geometry_obtained": false,
+      "chart_visual_review": {
+        "chart_axis": "UTC Date and Time; Area (acres)",
+        "first_plotted_observation_approx": "2023-07-21",
+        "last_plotted_observation_approx": "2023-08-31",
+        "final_plotted_area_acres_approx": 24800,
+        "fpa_reported_final_area_acres": 24706,
+        "fpa_discovery_date_utc": "2023-07-19",
+        "interpretation": "The chart begins about two days after FPA-FOD discovery and its final plotted area is close to FPA-FOD reported final size. Visual axis estimates only; not a polygon comparison or proof of complete containment timing."
+      }
+    },
+    {
+      "scenario_id": "fpa-fod-401315922-red-point-tank",
+      "fpa_fod_id": 401315922,
+      "fpa_id": "INF-2023-AZSCA-000983",
+      "fpa_event_code_normalized": "AZSCA000983",
+      "incident_name": "RED POINT TANK",
+      "state": "AZ",
+      "year": 2023,
+      "fpa_discovery_date_utc": "2023-07-17",
+      "fpa_reported_final_area_acres": 5169,
+      "exact_event_code_chart_matches": [],
+      "same_state_name_chart_candidates": [],
+      "crosswalk_outcome": "no_exact_event_code_match",
+      "date_alignment_checked": false,
+      "perimeter_geometry_obtained": false
+    },
+    {
+      "scenario_id": "fpa-fod-401316696-turkey",
+      "fpa_fod_id": 401316696,
+      "fpa_id": "INF-2023-NMGNF-000419",
+      "fpa_event_code_normalized": "NMGNF000419",
+      "incident_name": "TURKEY",
+      "state": "NM",
+      "year": 2023,
+      "fpa_discovery_date_utc": "2023-07-22",
+      "fpa_reported_final_area_acres": 5612,
+      "exact_event_code_chart_matches": [],
+      "same_state_name_chart_candidates": [
+        {
+          "state": "NM",
+          "event_code": "NM-GNF-000227",
+          "normalized_event_code": "NMGNF000227",
+          "label": "Turkey",
+          "path": "Area_Progression_TimeSeries/South_West/NM-GNF-000227_Turkey_progression.png"
+        }
+      ],
+      "crosswalk_outcome": "no_exact_event_code_match",
+      "date_alignment_checked": false,
+      "perimeter_geometry_obtained": false
+    },
+    {
+      "scenario_id": "fpa-fod-401317993-sourdough",
+      "fpa_fod_id": 401317993,
+      "fpa_id": "INF-2023-WANCP-000262",
+      "fpa_event_code_normalized": "WANCP000262",
+      "incident_name": "SOURDOUGH",
+      "state": "WA",
+      "year": 2023,
+      "fpa_discovery_date_utc": "2023-07-29",
+      "fpa_reported_final_area_acres": 7377,
+      "exact_event_code_chart_matches": [
+        {
+          "state": "WA",
+          "event_code": "WA-NCP-000262",
+          "normalized_event_code": "WANCP000262",
+          "label": "Sourdough",
+          "path": "Area_Progression_TimeSeries/Pacific_NW/WA-NCP-000262_Sourdough_progression.png"
+        }
+      ],
+      "same_state_name_chart_candidates": [
+        {
+          "state": "WA",
+          "event_code": "WA-NCP-000262",
+          "normalized_event_code": "WANCP000262",
+          "label": "Sourdough",
+          "path": "Area_Progression_TimeSeries/Pacific_NW/WA-NCP-000262_Sourdough_progression.png"
+        }
+      ],
+      "crosswalk_outcome": "exact_incident_code_state_name_match",
+      "date_alignment_checked": false,
+      "perimeter_geometry_obtained": false
+    },
+    {
+      "scenario_id": "fpa-fod-401321294-ufish",
+      "fpa_fod_id": 401321294,
+      "fpa_id": "INF-2023-CAKNF-007029",
+      "fpa_event_code_normalized": "CAKNF007029",
+      "incident_name": "UFISH",
+      "state": "CA",
+      "year": 2023,
+      "fpa_discovery_date_utc": "2023-08-16",
+      "fpa_reported_final_area_acres": 6874,
+      "exact_event_code_chart_matches": [],
+      "same_state_name_chart_candidates": [],
+      "crosswalk_outcome": "no_exact_event_code_match",
+      "date_alignment_checked": false,
+      "perimeter_geometry_obtained": false
+    },
+    {
+      "scenario_id": "fpa-fod-401321600-river-road-east",
+      "fpa_fod_id": 401321600,
+      "fpa_id": "INF-2023-MTLNF-200730",
+      "fpa_event_code_normalized": "MTLNF200730",
+      "incident_name": "RIVER ROAD EAST",
+      "state": "MT",
+      "year": 2023,
+      "fpa_discovery_date_utc": "2023-08-18",
+      "fpa_reported_final_area_acres": 17313,
+      "exact_event_code_chart_matches": [
+        {
+          "state": "MT",
+          "event_code": "MT-LNF-200730",
+          "normalized_event_code": "MTLNF200730",
+          "label": "RiverRoadEast",
+          "path": "Area_Progression_TimeSeries/Northern_Rockies/MT-LNF-200730_RiverRoadEast_progression.png"
+        }
+      ],
+      "same_state_name_chart_candidates": [
+        {
+          "state": "MT",
+          "event_code": "MT-LNF-200730",
+          "normalized_event_code": "MTLNF200730",
+          "label": "RiverRoadEast",
+          "path": "Area_Progression_TimeSeries/Northern_Rockies/MT-LNF-200730_RiverRoadEast_progression.png"
+        }
+      ],
+      "crosswalk_outcome": "exact_incident_code_state_name_match",
+      "date_alignment_checked": false,
+      "perimeter_geometry_obtained": false
+    },
+    {
+      "scenario_id": "fpa-fod-401316681-bedrock",
+      "fpa_fod_id": 401316681,
+      "fpa_id": "INF-2023-ORWIF-230266",
+      "fpa_event_code_normalized": "ORWIF230266",
+      "incident_name": "BEDROCK",
+      "state": "OR",
+      "year": 2023,
+      "fpa_discovery_date_utc": "2023-07-22",
+      "fpa_reported_final_area_acres": 31590,
+      "exact_event_code_chart_matches": [
+        {
+          "state": "OR",
+          "event_code": "OR-WIF-230266",
+          "normalized_event_code": "ORWIF230266",
+          "label": "Bedrock",
+          "path": "Area_Progression_TimeSeries/Pacific_NW/OR-WIF-230266_Bedrock_progression.png"
+        }
+      ],
+      "same_state_name_chart_candidates": [
+        {
+          "state": "OR",
+          "event_code": "OR-WIF-230266",
+          "normalized_event_code": "ORWIF230266",
+          "label": "Bedrock",
+          "path": "Area_Progression_TimeSeries/Pacific_NW/OR-WIF-230266_Bedrock_progression.png"
+        }
+      ],
+      "crosswalk_outcome": "exact_incident_code_state_name_match",
+      "date_alignment_checked": false,
+      "perimeter_geometry_obtained": false
+    },
+    {
+      "scenario_id": "fpa-fod-401319337-thompson-ridge",
+      "fpa_fod_id": 401319337,
+      "fpa_id": "INF-2023-UTFIF-230252",
+      "fpa_event_code_normalized": "UTFIF230252",
+      "incident_name": "THOMPSON RIDGE",
+      "state": "UT",
+      "year": 2023,
+      "fpa_discovery_date_utc": "2023-08-04",
+      "fpa_reported_final_area_acres": 7253,
+      "exact_event_code_chart_matches": [],
+      "same_state_name_chart_candidates": [],
+      "crosswalk_outcome": "no_exact_event_code_match",
+      "date_alignment_checked": false,
+      "perimeter_geometry_obtained": false
+    },
+    {
+      "scenario_id": "fpa-fod-401326006-iron",
+      "fpa_fod_id": 401326006,
+      "fpa_id": "INF-2023-COLSD-000197",
+      "fpa_event_code_normalized": "COLSD000197",
+      "incident_name": "IRON",
+      "state": "CO",
+      "year": 2023,
+      "fpa_discovery_date_utc": "2023-09-29",
+      "fpa_reported_final_area_acres": 7392,
+      "exact_event_code_chart_matches": [],
+      "same_state_name_chart_candidates": [],
+      "crosswalk_outcome": "no_exact_event_code_match",
+      "date_alignment_checked": false,
+      "perimeter_geometry_obtained": false
+    },
+    {
+      "scenario_id": "fpa-fod-401317844-prior",
+      "fpa_fod_id": 401317844,
+      "fpa_id": "INF-2023-NMGNF-000447",
+      "fpa_event_code_normalized": "NMGNF000447",
+      "incident_name": "PRIOR",
+      "state": "NM",
+      "year": 2023,
+      "fpa_discovery_date_utc": "2023-07-26",
+      "fpa_reported_final_area_acres": 12833,
+      "exact_event_code_chart_matches": [
+        {
+          "state": "NM",
+          "event_code": "NM-GNF-000447",
+          "normalized_event_code": "NMGNF000447",
+          "label": "Prior",
+          "path": "Area_Progression_TimeSeries/South_West/NM-GNF-000447_Prior_progression.png"
+        }
+      ],
+      "same_state_name_chart_candidates": [
+        {
+          "state": "NM",
+          "event_code": "NM-GNF-000447",
+          "normalized_event_code": "NMGNF000447",
+          "label": "Prior",
+          "path": "Area_Progression_TimeSeries/South_West/NM-GNF-000447_Prior_progression.png"
+        }
+      ],
+      "crosswalk_outcome": "exact_incident_code_state_name_match",
+      "date_alignment_checked": false,
+      "perimeter_geometry_obtained": false
+    },
+    {
+      "scenario_id": "fpa-fod-401312856-beehive",
+      "fpa_fod_id": 401312856,
+      "fpa_id": "INF-2023-AZCNF-000554",
+      "fpa_event_code_normalized": "AZCNF000554",
+      "incident_name": "BEEHIVE",
+      "state": "AZ",
+      "year": 2023,
+      "fpa_discovery_date_utc": "2023-06-30",
+      "fpa_reported_final_area_acres": 10745,
+      "exact_event_code_chart_matches": [],
+      "same_state_name_chart_candidates": [
+        {
+          "state": "AZ",
+          "event_code": "AZ-CNF-000552",
+          "normalized_event_code": "AZCNF000552",
+          "label": "Beehive",
+          "path": "Area_Progression_TimeSeries/South_West/AZ-CNF-000552_Beehive_progression.png"
+        }
+      ],
+      "crosswalk_outcome": "no_exact_event_code_match",
+      "date_alignment_checked": false,
+      "perimeter_geometry_obtained": false
+    },
+    {
+      "scenario_id": "fpa-fod-401321674-oregon",
+      "fpa_fod_id": 401321674,
+      "fpa_id": "INF-2023-WANES-001979",
+      "fpa_event_code_normalized": "WANES001979",
+      "incident_name": "OREGON",
+      "state": "WA",
+      "year": 2023,
+      "fpa_discovery_date_utc": "2023-08-18",
+      "fpa_reported_final_area_acres": 10822,
+      "exact_event_code_chart_matches": [],
+      "same_state_name_chart_candidates": [],
+      "crosswalk_outcome": "no_exact_event_code_match",
+      "date_alignment_checked": false,
+      "perimeter_geometry_obtained": false
+    },
+    {
+      "scenario_id": "fpa-fod-401313289-brushy",
+      "fpa_fod_id": 401313289,
+      "fpa_id": "INF-2023-NMN3S-000324",
+      "fpa_event_code_normalized": "NMN3S000324",
+      "incident_name": "BRUSHY",
+      "state": "NM",
+      "year": 2023,
+      "fpa_discovery_date_utc": "2023-07-03",
+      "fpa_reported_final_area_acres": 6045,
+      "exact_event_code_chart_matches": [],
+      "same_state_name_chart_candidates": [],
+      "crosswalk_outcome": "no_exact_event_code_match",
+      "date_alignment_checked": false,
+      "perimeter_geometry_obtained": false
+    },
+    {
+      "scenario_id": "fpa-fod-401310829-hansen-road",
+      "fpa_fod_id": 401310829,
+      "fpa_id": "INF-2023-WASPD-000224",
+      "fpa_event_code_normalized": "WASPD000224",
+      "incident_name": "HANSEN ROAD",
+      "state": "WA",
+      "year": 2023,
+      "fpa_discovery_date_utc": "2023-06-13",
+      "fpa_reported_final_area_acres": 6289,
+      "exact_event_code_chart_matches": [],
+      "same_state_name_chart_candidates": [],
+      "crosswalk_outcome": "no_exact_event_code_match",
+      "date_alignment_checked": false,
+      "perimeter_geometry_obtained": false
+    },
+    {
+      "scenario_id": "fpa-fod-401315421-rabbit",
+      "fpa_fod_id": 401315421,
+      "fpa_id": "INF-2023-CARRU-102458",
+      "fpa_event_code_normalized": "CARRU102458",
+      "incident_name": "RABBIT",
+      "state": "CA",
+      "year": 2023,
+      "fpa_discovery_date_utc": "2023-07-14",
+      "fpa_reported_final_area_acres": 8354.8,
+      "exact_event_code_chart_matches": [
+        {
+          "state": "CA",
+          "event_code": "CA-RRU-102458",
+          "normalized_event_code": "CARRU102458",
+          "label": "RiversideSupport_Rabbit",
+          "path": "Area_Progression_TimeSeries/Calif_S/CA-RRU-102458_RiversideSupport_Rabbit_progression.png"
+        }
+      ],
+      "same_state_name_chart_candidates": [
+        {
+          "state": "CA",
+          "event_code": "CA-RRU-102458",
+          "normalized_event_code": "CARRU102458",
+          "label": "RiversideSupport_Rabbit",
+          "path": "Area_Progression_TimeSeries/Calif_S/CA-RRU-102458_RiversideSupport_Rabbit_progression.png"
+        }
+      ],
+      "crosswalk_outcome": "exact_incident_code_state_name_match",
+      "date_alignment_checked": false,
+      "perimeter_geometry_obtained": false
+    },
+    {
+      "scenario_id": "fpa-fod-401321046-head",
+      "fpa_fod_id": 401321046,
+      "fpa_id": "INF-2023-CAKNF-006988",
+      "fpa_event_code_normalized": "CAKNF006988",
+      "incident_name": "HEAD",
+      "state": "CA",
+      "year": 2023,
+      "fpa_discovery_date_utc": "2023-08-15",
+      "fpa_reported_final_area_acres": 6954,
+      "exact_event_code_chart_matches": [],
+      "same_state_name_chart_candidates": [],
+      "crosswalk_outcome": "no_exact_event_code_match",
+      "date_alignment_checked": false,
+      "perimeter_geometry_obtained": false
+    },
+    {
+      "scenario_id": "fpa-fod-401308187-pass",
+      "fpa_fod_id": 401308187,
+      "fpa_id": "INF-2023-NMGNF-000191",
+      "fpa_event_code_normalized": "NMGNF000191",
+      "incident_name": "PASS",
+      "state": "NM",
+      "year": 2023,
+      "fpa_discovery_date_utc": "2023-05-18",
+      "fpa_reported_final_area_acres": 59883,
+      "exact_event_code_chart_matches": [
+        {
+          "state": "NM",
+          "event_code": "NM-GNF-000191",
+          "normalized_event_code": "NMGNF000191",
+          "label": "Pass",
+          "path": "Area_Progression_TimeSeries/South_West/NM-GNF-000191_Pass_progression.png"
+        }
+      ],
+      "same_state_name_chart_candidates": [
+        {
+          "state": "NM",
+          "event_code": "NM-GNF-000191",
+          "normalized_event_code": "NMGNF000191",
+          "label": "Pass",
+          "path": "Area_Progression_TimeSeries/South_West/NM-GNF-000191_Pass_progression.png"
+        }
+      ],
+      "crosswalk_outcome": "exact_incident_code_state_name_match",
+      "date_alignment_checked": false,
+      "perimeter_geometry_obtained": false
+    },
+    {
+      "scenario_id": "fpa-fod-401321340-pearch",
+      "fpa_fod_id": 401321340,
+      "fpa_id": "INF-2023-CASRF-000983",
+      "fpa_event_code_normalized": "CASRF000983",
+      "incident_name": "PEARCH",
+      "state": "CA",
+      "year": 2023,
+      "fpa_discovery_date_utc": "2023-08-16",
+      "fpa_reported_final_area_acres": 12152.4,
+      "exact_event_code_chart_matches": [],
+      "same_state_name_chart_candidates": [
+        {
+          "state": "CA",
+          "event_code": "CA-SRF-000986",
+          "normalized_event_code": "CASRF000986",
+          "label": "Pearch",
+          "path": "Area_Progression_TimeSeries/Calif_N/CA-SRF-000986_Pearch_progression.png"
+        }
+      ],
+      "crosswalk_outcome": "no_exact_event_code_match",
+      "date_alignment_checked": false,
+      "perimeter_geometry_obtained": false
+    },
+    {
+      "scenario_id": "fpa-fod-401321023-kelly",
+      "fpa_fod_id": 401321023,
+      "fpa_id": "INF-2023-CASRF-000939",
+      "fpa_event_code_normalized": "CASRF000939",
+      "incident_name": "KELLY",
+      "state": "CA",
+      "year": 2023,
+      "fpa_discovery_date_utc": "2023-08-15",
+      "fpa_reported_final_area_acres": 81148.3,
+      "exact_event_code_chart_matches": [],
+      "same_state_name_chart_candidates": [],
+      "crosswalk_outcome": "no_exact_event_code_match",
+      "date_alignment_checked": false,
+      "perimeter_geometry_obtained": false
+    },
+    {
+      "scenario_id": "fpa-fod-401321611-gray",
+      "fpa_fod_id": 401321611,
+      "fpa_id": "INF-2023-WANES-001974",
+      "fpa_event_code_normalized": "WANES001974",
+      "incident_name": "GRAY",
+      "state": "WA",
+      "year": 2023,
+      "fpa_discovery_date_utc": "2023-08-18",
+      "fpa_reported_final_area_acres": 10064,
+      "exact_event_code_chart_matches": [
+        {
+          "state": "WA",
+          "event_code": "WA-NES-001974",
+          "normalized_event_code": "WANES001974",
+          "label": "Gray",
+          "path": "Area_Progression_TimeSeries/Pacific_NW/WA-NES-001974_Gray_progression.png"
+        }
+      ],
+      "same_state_name_chart_candidates": [
+        {
+          "state": "WA",
+          "event_code": "WA-NES-001974",
+          "normalized_event_code": "WANES001974",
+          "label": "Gray",
+          "path": "Area_Progression_TimeSeries/Pacific_NW/WA-NES-001974_Gray_progression.png"
+        }
+      ],
+      "crosswalk_outcome": "exact_incident_code_state_name_match",
+      "date_alignment_checked": false,
+      "perimeter_geometry_obtained": false
+    }
+  ],
+  "limitations": [
+    "NIROPS chart PNGs summarize area over time; they are not the underlying perimeter polygons.",
+    "The Hayden chart was visually reviewed; its first/last dates and final acreage are approximate axis readings.",
+    "No actual NIROPS shapefile geometry, suppression log, weather replay, or spatial overlap metric was inspected.",
+    "Eight code matches nominate 2023 validation cases for polygon acquisition; they are not physical validation results.",
+    "The 2024 held-out test cohort was not read or opened."
+  ]
+}
