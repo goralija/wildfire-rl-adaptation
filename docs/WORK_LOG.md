@@ -4,6 +4,33 @@ title: Work log
 ---
 # Work log
 
+2026-11-02 — Nastavio sam provjeru podataka bez treninga: umjesto da odmah skidam NIROPS
+ZIP, provjerio sam javni USFS 2023 perimeter servis. Za validation slučaj Hayden pronađen je
+tačan incident ID `2023-IDSCF-023084` i pregledan jedan **završni** poligon; prijavljena
+površina se poklapa sa FPA-FOD 24.706 acres. Ovo daje način da se pojedini završni obodi nađu
+bez bulk downloada, ali ne daje ranije dnevne obode za simulaciju rasta. Vremensko polje i
+komentar leta se razlikuju za šest sati ako se epoch polje tumači kao UTC, pa timing nije
+odobren za replay. Zvanični NIFC folder je u maju 2026. premješten pod `/protected` i sada
+traži FAMAuth. Ažurirani su TASK-026, status, handoff, provenance i source zapisi. Otvoren je
+samo 2023 validation geometrijski zapis; NIROPS payload i testne geometrije nisu otvoreni,
+simulator nije pokrenut i trening nije počeo. Vidi [USFS screen receipt](../reports/real-fire-data/usfs-hayden-final-perimeter-screen-20261102.json),
+[NIROPS access screen](../reports/real-fire-data/nirops-geometry-archive-screen-20261102.json)
+i [physical gate](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md).
+
+2026-11-02 — Provjerio sam da li sadašnja SimFire karta može obuhvatiti požare kojima
+želimo provjeriti vjerodostojnost. Audit je koristio samo 20 zamrznutih 2023 VALIDATION
+scenario manifestova i njihove FPA-FOD završne površine; ne čita test scenarije. Mapa
+128×128 ćelija od 30 m ima teorijski plafon od 3.644 acres, a svih 20 zabilježenih požara je
+veće (5.169–81.148 acres). To znači da se cijeli požar ne može prikazati u trenutnom kvadratu;
+za ovaj grid se može tvrditi samo lokalni eksperiment. Odvojeno sam pročitao samo kraj NIROPS
+ZIP-a radi indeksa: to je jedan komprimovani shapefile bez podfajla po incidentu, pa osam
+validacijskih geometrija nije moguće jednostavno izdvojiti byte-range zahtjevom. Raw
+geometrije/DBF, testne geometrije i simulator nisu otvarani/pokretani; trening i policy
+evaluacija nisu pokrenuti. Izmijenjeni su TASK-026, status, handoff i indexi, a dodani su
+reproducibilni grid-capacity skript i oba audita. Vidi [gate](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md),
+[archive screen](../reports/real-fire-data/nirops-geometry-archive-screen-20261102.json) i
+[grid audit](../reports/real-fire-data/simfire-validation-grid-capacity-20261102.json).
+
 2026-11-02 — Advanced TASK-026 from a dataset lead to an incident-code crosswalk. Downloaded
 only the NIROPS v2 time-series chart archive and small author-code member; verified the full
 outer archive's byte length without downloading its raw perimeter geometry. Matched the

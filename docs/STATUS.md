@@ -97,16 +97,28 @@ fizički pregledati postavke širenja i definisati base/fine-tuning trening rece
 i [mapping receiptu](../reports/real-fire-data/simfire-cohort-v2-gridmet-simfire-mapping.json).
 Za fizički gate pregledan je dio novog [NIROPS skupa dnevnih oboda](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md).
 Osam požara iz 2023 validation split-a ima poklapanje po tačnom incidentnom kodu, državi i
-imenu. Pregledan je jedan zbirni grafikon za Hayden; **originalni obodi i prostorna
-poređenja još ne postoje**, pa fizička validacija nije urađena. Detalji i po-slučaj nalazi su
-u [crosswalk receiptu](../reports/real-fire-data/nirops-validation-id-crosswalk-20261102.json).
+imenu. Pregledani su Haydenov zbirni grafikon i jedan javni USFS završni poligon za Hayden;
+to nije NIROPS dnevni niz, nije poravnat s SimFire mapom i nije urađeno prostorno poređenje.
+Vremensko polje USFS zapisa se ne slaže sa komentarom leta za šest sati, pa ne može još
+služiti za replay. Fizička validacija nije urađena. Detalji su u [crosswalk receiptu](../reports/real-fire-data/nirops-validation-id-crosswalk-20261102.json)
+i [USFS perimeter screen receiptu](../reports/real-fire-data/usfs-hayden-final-perimeter-screen-20261102.json).
+Još jedan važan limit: postojeće SimFire mape su 128×128 ćelija od 30 m, maksimalno
+**3.644 acres**. Svih 20 validation požara ima veću FPA-FOD završnu površinu (5.169–81.148
+acres; medijan 9.209), pa mapa ne može prikazati cijeli historijski požar. To je izmjereno u
+[grid-capacity auditu](../reports/real-fire-data/simfire-validation-grid-capacity-20261102.json).
+Za punu požarnu površinu treba veća mreža i odgovarajuće šire fuel/terrain karte; ako ostane
+128×128, rezultat mora biti opisan kao lokalni dio požara.
 
 ## Sljedeći redoslijed
 
-1. Nastaviti TASK-026: pribaviti NIROPS poligone samo za osam tačno identifikovanih 2023
-   validation incidenata ako se mogu izdvojiti bez skidanja cijelog velikog arhiva. Potvrditi
-   vremena/atribute, pa provjeriti mogućnost početka SimFire-a iz opaženog oboda. Ne otvarati
-   test geometrije. Pravila su u [NIROPS validation gateu](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md).
+1. Nastaviti TASK-026: provjeriti javne USFS završne obode za preostalih sedam validation
+   podudaranja. NIROPS progresija ostaje drugačiji izvor: stari `/public` FTP put je
+   premješten na zaštićeni `/protected`, koji traži FAMAuth; jedan 1.39 GB NIROPS ZIP je
+   alternativa uz veći disk. Zatim riješiti grid, vrijeme i suppression. Test geometrije ne
+   otvarati. Vidi [NIROPS gate](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md),
+   [USFS screen](../reports/real-fire-data/usfs-hayden-final-perimeter-screen-20261102.json),
+   [archive screen](../reports/real-fire-data/nirops-geometry-archive-screen-20261102.json)
+   i [grid audit](../reports/real-fire-data/simfire-validation-grid-capacity-20261102.json).
 2. Na drugom računaru/klonu ponoviti setup i pokrenuti samo validation preflight:
    `.local/simfire-venv/bin/python scripts/evaluate_simfire_benchmark.py --preflight-only`.
 3. Prije treninga zasebno zapisati porijeklo i raspored generičkog base PPO treninga, broj

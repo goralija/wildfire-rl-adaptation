@@ -19,6 +19,9 @@
 - [Zamrznut SimFire benchmark protokol](research/SIMFIRE_EVALUATION_PROTOCOL.md) - baselinei, seedovi, metrike, checkpoint izbor i finalni test gate
 - [Fizička provjera prije treninga](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md) - osam 2023 validation poklapanja s NIROPS; geometrije i fizičko poređenje su sljedeći
 - [NIROPS incident crosswalk receipt](../reports/real-fire-data/nirops-validation-id-crosswalk-20261102.json) - provjerljivi FPA-FOD ↔ NIROPS identifikatori; bez treninga i testnih podataka
+- [Zašto trenutna SimFire karta ne obuhvata cijele požare](../reports/real-fire-data/simfire-validation-grid-capacity-20261102.json) - poređenje veličine 20 validation požara sa 128×128 mapom
+- [NIROPS arhiva — pregled samo ZIP indeksa](../reports/real-fire-data/nirops-geometry-archive-screen-20261102.json) - potvrđuje jedan veliki shapefile; nijedna geometrija nije otvorena
+- [Hayden završni obod iz javnog USFS sloja](../reports/real-fire-data/usfs-hayden-final-perimeter-screen-20261102.json) - jedan validation poligon, završna površina se poklapa; vrijeme i dnevni rast nisu potvrđeni
 - [SimFire okruženje — stvarni lokalni smoke](research/SIMFIRE_ENVIRONMENT.md) - Python 3.9 venv, reproduktivna komanda, mapa i ograničenja
 - [Real fire → SimFire scenarij](research/REAL_IGNITION_SCENARIO_PIPELINE.md) - laički X/Y mapping, izvor FPA-FOD, zajednički JSON i split/claim pravila
 - [Prvi LANDFIRE/ERA5 ulazni smoke](../reports/real-fire-data/simfire-dixie-real-input-smoke/) - stvarno gorivo/teren u SimFire, zajedno s mapom, GIF-om i granicama vremenskog mapiranja

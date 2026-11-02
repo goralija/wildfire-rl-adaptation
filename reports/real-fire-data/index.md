@@ -13,6 +13,10 @@
 - [Gymnasium gridMET proxy smoke](simfire-cohort-v2-gridmet-weather-smoke/) — po jedan slučaj po splitu; mapirani meteo podaci, jedna linijska tačka i no-op; bez `learn()`.
 - [Duži proxy smoke](simfire-cohort-v2-gridmet-full-horizon-smoke-v2/) — po jedan train/validation/test incident, do 12 sati; PPO samo legalna inference proba, bez `learn()`.
 - [Benchmark validation preflight](simfire-benchmark-validation-preflight-20261102.json) — svih 20 validation paketa hash-provjereno; observation i no-op provjereni, 0 simulacijskih koraka, testni ulazi nisu otvoreni.
+- [Validation grid-capacity audit](simfire-validation-grid-capacity-20261102.json) — 20 slučajeva iz 2023; trenutna 128×128×30 m karta ima kapacitet 3.644 acres, ispod prijavljene završne površine svih 20 požara.
+- [NIROPS geometrijska arhiva — ZIP index screen](nirops-geometry-archive-screen-20261102.json) — centralni ZIP indeks kaže da je sve u jednom velikom shapefile-u; nije skinut ni pročitan nijedan poligon ili DBF red.
+- [USFS Hayden final perimeter screen](usfs-hayden-final-perimeter-screen-20261102.json) — javni servis daje jedan tačno spojen 2023 finalni validation poligon; ne daje dnevni niz, a timestamp je nerazriješen.
+- [NIROPS incident crosswalk](nirops-validation-id-crosswalk-20261102.json) i [Hayden area chart](nirops-validation-charts/hayden-area-progression.png) — 8 tačnih 2023 validation kodnih poklapanja; samo jedan area grafikon pregledan, bez prostorne validacije.
 - [No-op horizont probe](simfire-cohort-v2-gridmet-noop-horizon/) — samo čekanje, bez linije i agenta; train Owyhee i validation Hayden, sa slikama i receiptom.
 - [Test smoke incident koji je otvoren](simfire-cohort-v2-gridmet-noop-test-exposed/) — Larch Creek je isključen iz budućeg završnog benchmarka; ostaje 19 test incidenata.
 - [WAF osjetljivost](simfire-cohort-v2-gridmet-waf-sensitivity.json) — isti uzorci pri 0.1/0.3/0.5; tehnička, ne fizička provjera.

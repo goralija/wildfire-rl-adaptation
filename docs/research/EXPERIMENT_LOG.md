@@ -1275,3 +1275,50 @@ opened or advanced. No training or policy evaluation ran. TASK-026 stays open fo
 the eight validation polygons, checking their timestamps/meaning and suppression context,
 and establishing whether SimFire can import an observed perimeter without leaking later
 observations to the policy. See [gate details](SIMFIRE_PHYSICAL_VALIDATION_GATE.md).
+
+### TASK-026 follow-up — archive structure and map-size gate, 2026-11-02
+
+Read only the last 4 MiB of the raw geometry ZIP using an HTTP range request, then parsed its
+central directory. The archive contains one shapefile, not incident-specific ZIP members; its
+compressed `.shp` stream is 1,387,126,470 bytes and expands to 2,067,807,444 bytes. The
+geometry payload and `.dbf` attributes were not opened, so no incident shapes were identified
+or inspected. At the time of the check the machine had 699 MiB free, less than the archive;
+the author-documented NIFC FTP root returned 404, and no specific incident subfolder has yet
+been checked. See the [archive screen receipt](../../reports/real-fire-data/nirops-geometry-archive-screen-20261102.json).
+
+Separately audited only the 20 frozen 2023 VALIDATION scenario manifests. Their current
+128×128 cells at 30 m cover at most 3,643.72 acres if every cell burns. All 20 FPA-FOD
+reported final areas are larger: 5,169–81,148 acres, with a 9,209-acre median. The square
+cell counts in the receipt are area-only lower bounds; real perimeter shapes and map margins
+can require larger extents. Thus the current crop cannot support a whole-fire extent/area
+claim, though a deliberately bounded local fireline task remains possible. Reproduction is
+available in [`audit_simfire_validation_grid_capacity.py`](../../scripts/audit_simfire_validation_grid_capacity.py)
+and its [receipt](../../reports/real-fire-data/simfire-validation-grid-capacity-20261102.json).
+
+This changes TASK-026's next gate: first decide whether to enlarge the physical map and
+reacquire aligned fuel/elevation layers, or explicitly narrow the research question to one
+local segment; then obtain and inspect only the matched 2023 VALIDATION polygons. The raw
+archive did not make that decision for us. No geometry payload, test data, simulation step,
+policy evaluation or training was run.
+
+### TASK-026 follow-up — public USFS final perimeter, 2026-11-02
+
+Checked the official public USDA Forest Service 2023 perimeter layer as a smaller alternative
+for final shapes. An exact Hayden record was found by its incident name and matched the
+crosswalk code `ID-SCF-023084`; its feature is `2023-IDSCF-023084`, categorized as Final
+Wildfire Perimeter. The source shows 24,706 `totalacres` and 24,730.34 `gisacres`, consistent
+with the FPA-FOD final area. One validation geometry page was opened for provenance/availability
+inspection but the polygon was not saved or aligned with SimFire. The layer returned one final
+record for Hayden, not a sequence of daily progression shapes.
+
+The numeric `perimeterdatetime` is 2023-08-30 22:52 UTC if interpreted as UTC, while the
+feature's comment says an IR flight at 22:52 MDT, which converts to 2023-08-31 04:52 UTC. Do
+not use this field for a timed replay until its timezone semantics are resolved. The NIFC
+landing page now documents that the older `/public/incident_specific_data` path moved to
+`/protected/incident_specific_data` on 2026-05-04 and that protected content requires FAMAuth.
+Therefore the immediate next step is to screen the same public USFS layer for the other seven
+validation matches and treat it only as final perimeter coverage; progression still needs
+NIROPS access or another time-series source. See [USFS screen receipt](../../reports/real-fire-data/usfs-hayden-final-perimeter-screen-20261102.json),
+[NIFC archive screen](../../reports/real-fire-data/nirops-geometry-archive-screen-20261102.json),
+and [the gate](SIMFIRE_PHYSICAL_VALIDATION_GATE.md). No TEST geometry, simulation step,
+policy evaluation or training was accessed/run.

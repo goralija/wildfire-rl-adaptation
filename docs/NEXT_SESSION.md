@@ -36,9 +36,9 @@ ne fizički kalibrisana. Vjetar/vlaga su otvorene aproksimacije; policy nije tre
 [`SIMFIRE_EVALUATION_PROTOCOL.md`](research/SIMFIRE_EVALUATION_PROTOCOL.md), a inference-only
 runner je `scripts/evaluate_simfire_benchmark.py`. Preflight provjerava samo VALIDATION i ne
 pokreće simulacijski korak. Samo 40 TRAIN incidenata smije se koristiti za učenje; 20
-VALIDATION bira checkpoint; 19 test incidenata ostaje rezervisano za finalnu uparenu
-procjenu. Larch Creek je već korišten u smoke-u i izbačen iz završnog benchmarka. Nijedna
-train komanda nije pokrenuta.
+VALIDATION bira checkpoint. Test split ima 20 slučajeva, od kojih je Larch Creek već otvoren
+za smoke i izbačen iz završnog benchmarka; preostalih 19 ostaje rezervisano za finalnu
+uparenu procjenu. Nijedna train komanda nije pokrenuta.
 
 Evaluation membership je zabilježen u
 [`simfire-fpa-fod-evaluation-membership-v1.json`](../data/manifests/simfire-fpa-fod-evaluation-membership-v1.json).
@@ -87,27 +87,35 @@ snapshotovi, hashovi, mali receiptovi i pregledne slike idu u Git.
 
 ## Šta je sljedeće
 
-1. Nastaviti TASK-026 od tačke gdje je stao: [NIROPS ID crosswalk](../reports/real-fire-data/nirops-validation-id-crosswalk-20261102.json)
-   izdvaja 8 tačnih incident-code/state/name matcha među 20 požara iz 2023 VALIDATION.
-   Tri dodatna name-only pogotka (Turkey, Beehive, Pearch) imaju pogrešan incidentni kod.
-   Sljedeće pribaviti izvorne geometrije za tih osam incidenata, provjeriti njihove stvarne
-   UTC timestampove i utvrditi može li se u SimFire uvesti opaženi početni poligon. Raw ZIP
-   je 1.29 GB unutar v2 arhiva od 1,735,431,121 bajt; chart ZIP je lokalno, a sirovi poligoni
-   nisu skinuti. Autorov NIFC FTP root trenutno vraća 404, pa provjeriti da li se konkretne
-   2023 `IR/` podmape mogu dohvatiti ili je potreban veći ZIP. Ne čitati 2024 TEST geometrije.
-   Ograničenja i metode su u
-   [`SIMFIRE_PHYSICAL_VALIDATION_GATE.md`](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md).
-2. Lokalni validation preflight je već prošao 20/20 ulaznih paketa bez napredovanja
+1. Nastaviti TASK-026: [NIROPS crosswalk](../reports/real-fire-data/nirops-validation-id-crosswalk-20261102.json)
+   daje 8 tačnih ID/država/ime poklapanja među 20 slučajeva iz 2023 VALIDATION. Tri dodatna
+   ista imena (Turkey, Beehive, Pearch) imaju pogrešan incidentni ID. ZIP indeks kaže da je
+   NIROPS raw geometrija jedan 1.39 GB komprimovani shapefile bez zasebne datoteke po požaru;
+   u trenutku screeninga bilo je 699 MiB slobodno. Stari `/public` NIFC put sada je
+   `/protected` i traži FAMAuth, prema zvaničnoj stranici. Za Hayden je pronađen javni USFS
+   završni obod, ali ne i dnevni niz; vrijeme iz jednog atributa se ne slaže s komentarom
+   leta za šest sati. Sljedeće provjeriti preostalih 7 USFS završnih oboda, timestampove i
+   pristup NIROPS progresiji. Ne čitati 2024 TEST geometrije. Vidi [archive screen](../reports/real-fire-data/nirops-geometry-archive-screen-20261102.json),
+   [USFS receipt](../reports/real-fire-data/usfs-hayden-final-perimeter-screen-20261102.json)
+   i [physical validation gate](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md).
+2. Riješiti veličinu karte prije fizičkog poređenja: postojeći 128×128 grid od 30 m pokriva
+   najviše 3,644 acres, a svih 20 slučajeva iz 2023 VALIDATION ima veću prijavljenu završnu
+   površinu. Za tvrdnju o cijelom požaru treba veća karta i šire fuel/terrain karte; ako mapa
+   ostane ove veličine, istraživanje mora biti ograničeno na jasno definisan lokalni dio.
+   Vidi [grid-capacity audit](../reports/real-fire-data/simfire-validation-grid-capacity-20261102.json)
+   i [physical validation gate](research/SIMFIRE_PHYSICAL_VALIDATION_GATE.md).
+3. Lokalni validation preflight je već prošao 20/20 ulaznih paketa bez napredovanja
    simulacije. Na drugom računaru/klonu ponoviti instalaciju i podatke, pa pokrenuti:
    `.local/simfire-venv/bin/python scripts/evaluate_simfire_benchmark.py --preflight-only`.
-3. Prije treninga definisati base PPO trening recept, fine-tuning budžet i raspored čuvanja
+4. Prije treninga definisati base PPO trening recept, fine-tuning budžet i raspored čuvanja
    checkpointa; pregledati vremenske i spread pretpostavke.
-4. Trening/fine-tuning tek nakon posebne izričite odluke. Koristiti samo TRAIN za učenje,
+5. Trening/fine-tuning tek nakon posebne izričite odluke. Koristiti samo TRAIN za učenje,
    VALIDATION za izbor, a test za finalnu uparenu procjenu.
-5. Sačuvati CSV/JSON epizode, checkpoint hashove i georeferencirane mape/animacije.
+6. Sačuvati CSV/JSON epizode, checkpoint hashove i georeferencirane mape/animacije.
 
 **Još nije urađeno:** agent trening, fine-tuning, held-out policy rezultat, NIROPS
 geometrijski import ili fizička validacija. Crosswalk po incidentnim kodovima za osam
 2023 validation slučajeva jeste napravljen; pogledati [status](STATUS.md),
 [backlog](BACKLOG.md), [crosswalk receipt](../reports/real-fire-data/nirops-validation-id-crosswalk-20261102.json)
+i [USFS final-perimeter receipt](../reports/real-fire-data/usfs-hayden-final-perimeter-screen-20261102.json)
 i [adapter spec](research/SIMFIRE_RL_ADAPTER.md).

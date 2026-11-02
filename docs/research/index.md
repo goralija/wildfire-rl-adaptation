@@ -9,6 +9,9 @@
 - [SimFire Gymnasium/RL adapter](SIMFIRE_RL_ADAPTER.md) - laičko objašnjenje opažanja, akcije, nagrade i lokalnog smokea.
 - [Zamrznut benchmark protokol](SIMFIRE_EVALUATION_PROTOCOL.md) - baseline politike, seedovi, mjere, checkpoint izbor i held-out test pravila.
 - [Fizička provjera prije treninga](SIMFIRE_PHYSICAL_VALIDATION_GATE.md) - 8 NIROPS incident-code poklapanja s 2023 VALIDATION; geometrije i poređenje još otvoreni.
+- [Grid kapacitet za validation požare](../../reports/real-fire-data/simfire-validation-grid-capacity-20261102.json) - 128×128 ćelija od 30 m ne može obuhvatiti prijavljenu završnu površinu nijednog od 20 slučajeva.
+- [NIROPS ZIP archive screen](../../reports/real-fire-data/nirops-geometry-archive-screen-20261102.json) - samo indeks datoteka pregledan; jedan veliki shapefile, bez čitanja poligona/atributa.
+- [USFS javni Hayden završni obod](../../reports/real-fire-data/usfs-hayden-final-perimeter-screen-20261102.json) - jedan validation oblik pregledan; nije dnevna progresija, a vrijeme polja je nerazriješeno.
 - [X/Y tok običnim jezikom](REAL_IGNITION_SCENARIO_PIPELINE.md) - kako zapis požara postaje karta i uslovi za simulator.
 - [Dixie Fire probna scenario-kartica](../../data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json) - jedan stvarni zapis, još bez goriva, terena i istorijskog vremena.
 - [FPA-FOD zapis i porijeklo](../../reports/real-fire-data/fpa-fod-dixie-2021-source.geojson) - mali GeoJSON dokaz porijekla za probni slučaj.
@@ -36,6 +39,8 @@
 - [TASK-025 benchmark i evaluator](EXPERIMENT_LOG.md#task-025--freeze-the-simfire-benchmark-and-prepare-a-non-training-evaluator-2026-11-02) - priprema bez treninga ili test evaluacije.
 - [TASK-026 NIROPS izvor za fizičku provjeru](EXPERIMENT_LOG.md#task-026--nirops-progression-source-audit-for-the-physical-validation-gate-2026-11-02) - 8 code crosswalka; još nema poligona ili fizičke validacije.
 - [NIROPS 2023 validation crosswalk](../../reports/real-fire-data/nirops-validation-id-crosswalk-20261102.json) - po-slučaju poklapanja FPA-ID/NIROPS, odbijeni name-only kandidati i Hayden grafik pregled.
+- [TASK-026 prostorni nastavak](EXPERIMENT_LOG.md#task-026-follow-up--archive-structure-and-map-size-gate-2026-11-02) - zašto treba povećati mapu ili suziti ogled na lokalni segment prije fizičke provjere.
+- [TASK-026 javni USFS finalni obod](EXPERIMENT_LOG.md#task-026-follow-up--public-usfs-final-perimeter-2026-11-02) - završni Hayden poligon bez NIROPS bulk ZIP-a, ali bez dnevnog rasta i sa nerazriješenim vremenom.
 - [Stvarni požari: izbor podataka i granica zaključaka](REAL_FIRE_DATASETS.md) - Dataset Review
 - [Train-only CFSDS fuel QC](CFSDS_TRAIN_QC.md) - Metoda, nalaz i ograničenja prvog train input gatea
 - [Train-only CFSDS input QC](CFSDS_TRAIN_INPUT_QC.md) - Poravnanje dostupnih train FireCase mapa, weather inputa, fuel vintagea i suppression evidencije
