@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "benchmark_id": "simfire-fpa-fod-evaluation-v1",
+  "membership": {
+    "path": "data/manifests/simfire-fpa-fod-evaluation-membership-v1.json",
+    "sha256": "aab5f623a46c3b2c86ab58b367f1103499905e7ac42e16d53a3b572528c859bc"
+  },
+  "cohort_manifest": {
+    "path": "data/manifests/simfire-fpa-fod-cohort-v2.json",
+    "sha256": "f6c58b4685dcf24bf17f16c000b5d60d784f6ee49d85b43f750aef20939a4481"
+  },
+  "excluded_test_ids": [
+    "fpa-fod-401411292-larch-creek"
+  ],
+  "episode": {
+    "weather_mode": "gridmet_daily_proxy",
+    "weather_wind_adjustment_factor": null,
+    "fireline_budget": 32,
+    "decision_minutes": 30,
+    "horizon_decisions": 24,
+    "max_fire_duration_updates": 15
+  },
+  "evaluation_seeds": [
+    101,
+    211,
+    307,
+    401,
+    503
+  ],
+  "policies": [
+    "no_op",
+    "front_edge_heuristic",
+    "base_ppo",
+    "fine_tuned_ppo"
+  ],
+  "ppo": {
+    "algorithm": "MaskablePPO",
+    "policy": "MultiInputPolicy",
+    "policy_kwargs_factory": "wildfire_rl.simfire_policy.simfire_policy_kwargs",
+    "deterministic_inference": true,
+    "base_checkpoint_role": "generic SimFire functional-scenario PPO before exposure to FPA-FOD cohort cases",
+    "fine_tuned_checkpoint_role": "a copy of that base checkpoint continued on TRAIN incidents only"
+  },
+  "checkpoint_selection": {
+    "split": "validation",
+    "metric": "mean_incident_area_ha",
+    "aggregation": "mean over fixed evaluation seeds per incident, then equal-weight mean over 20 validation incidents",
+    "direction": "minimize",
+    "tie_break": "choose the earliest saved checkpoint"
+  },
+  "metrics": {
+    "primary_episode": "cumulative_burned_area_ha",
+    "primary_comparison": "base_ppo_burned_area_ha_minus_fine_tuned_ppo_burned_area_ha",
+    "paired_unit": "incident; average the five matched environment seeds within each incident first",
+    "secondary": [
+      "cumulative_burned_cells",
+      "burnable_area_fraction",
+      "fireline_points_used",
+      "simulated_minutes",
+      "terminated",
+      "truncated"
+    ],
+    "confidence_interval": {
+      "method": "incident-cluster percentile bootstrap",
+      "resamples": 10000,
+      "confidence_level": 0.95,
+      "seed": 20261102
+    }
+  },
+  "reporting": {
+    "output_root": ".local/simfire-benchmark-runs",
+    "include_episode_rows": true,
+    "include_per_incident_paired_rows": true,
+    "include_checkpoint_sha256": true,
+    "scientific_claim_scope": "SimFire outcomes under this fixed configuration only; not a forecast of historical fire size or real hectares saved"
+  }
+}

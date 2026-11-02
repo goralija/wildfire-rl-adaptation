@@ -1195,3 +1195,34 @@ script, receipts, and map images are in [no-op horizon probes](../../reports/rea
 No learning, checkpoint update, or policy training occurred. See [adapter](SIMFIRE_RL_ADAPTER.md),
 [status](../STATUS.md), [ADR-048](../specs/DECISION_RECORDS.md#adr-048--set-a-30-m-cell-duration-and-protect-the-test-smoke-case-2026-11-01),
 and [SimFire configuration source S-073](SOURCES.md).
+
+## TASK-025 — freeze the SimFire benchmark and prepare a non-training evaluator, 2026-11-02
+
+Recorded the policy comparison contract before any policy learning: no-op, deterministic
+front-edge rule, generic base MaskablePPO and a copy fine-tuned on the 40 TRAIN incidents.
+Fixed the per-incident settings, five paired environment seeds, primary simulated-area
+measure, validation checkpoint selection, equal-incident weighting, incident-cluster
+bootstrap and final TEST gate in a versioned JSON config and research protocol. Larch Creek
+remains excluded from the final test membership.
+
+Added `scripts/evaluate_simfire_benchmark.py` for an input/hash preflight and inference-only
+policy runs. Its default preflight opens only VALIDATION, initializes one observation, and
+does not advance the simulator. TEST runs require two explicit flags and both model
+checkpoints. The runner has no `learn()` path and writes fresh receipts under ignored
+`.local/` output. Pure tests cover membership integrity, heuristic masking/tie-breaking and
+paired incident summaries.
+
+This protocol/task update is not a simulation experiment or physical validation. No
+FPA-FOD/SimFire policy training, project checkpoint creation, or evaluation on the 19
+reserved TEST fires was performed. During verification, the legacy full test suite did run
+its 16-step `.learn()` smoke on a tiny synthetic `GridFire` fixture; it saved a checkpoint
+only in a temporary directory that the test removed. The validation preflight verified all
+20 validation input packages and initialized Hayden with zero simulator steps; no TEST
+input was opened. Future no-training sessions must skip
+that test (as now documented in `AGENTS.md`). The first full-suite invocation also found an
+incorrect expected value in the new paired-summary test; that arithmetic expectation was
+fixed and the six focused evaluator tests pass. The full suite was not rerun to avoid
+repeating the synthetic learning call. The generic PPO training recipe, fine-tuning budget,
+and physical review of weather/spread assumptions remain open. See [protocol](SIMFIRE_EVALUATION_PROTOCOL.md),
+[runner](../../scripts/evaluate_simfire_benchmark.py), [ADR-049](../specs/DECISION_RECORDS.md#adr-049--freeze-the-simfire-policy-comparison-contract-2026-11-02),
+and [status](../STATUS.md).

@@ -1316,3 +1316,36 @@ Evidence: [adapter](../../src/wildfire_rl/simfire_gym_env.py),
 [test smoke receipt](../../reports/real-fire-data/simfire-cohort-v2-gridmet-noop-test-exposed/),
 [evaluation membership](../../data/manifests/simfire-fpa-fod-evaluation-membership-v1.json),
 [EXP-038/039](../research/EXPERIMENT_LOG.md), [S-073](../research/SOURCES.md).
+
+## ADR-049 — freeze the SimFire policy comparison contract, 2026-11-02
+
+The 80-case adapter and daily weather proxy can now be exercised, but the intended
+base-versus-fine-tuned comparison previously had no fixed policy rules, repeat seeds,
+primary measure, checkpoint choice rule, or executable guard around the reserved TEST
+incidents. Choosing any of these after observing held-out outcomes would make the final
+comparison difficult to interpret.
+
+**Decision:** use `configs/simfire/evaluation-v1.json` as the machine-readable evaluation
+contract. Compare no-op, a deterministic current-front heuristic, a generic SimFire
+MaskablePPO checkpoint, and a copy fine-tuned on TRAIN incidents. Use the same five
+environment seeds per incident, 32-point line budget, 30-minute decisions, 12-hour horizon,
+15 one-minute cell lifetime, and stored daily gridMET proxy for every policy. Select a
+fine-tuned checkpoint by equal-weight mean simulated burned area over the 20 VALIDATION
+incidents; compare final policy output on the 19 reserved TEST incidents using paired
+incident-level differences and a 10,000-resample incident bootstrap. Report only simulated
+area and clearly label it as SimFire output.
+
+The inference-only runner defaults to a VALIDATION preflight that advances no simulator
+steps. TEST execution requires both explicit `--open-test` and `--final-evaluation` flags
+and both checkpoint files. The runner contains no learning call. This decision freezes
+evaluation mechanics only; it does not resolve physical validation, the generic base-PPO
+training recipe, or fine-tuning budget. FPA-FOD/SimFire policy training remains unstarted and
+requires the user's separate authorization. One existing unit test separately invokes
+`learn(16)` on a small synthetic `GridFire` fixture; its temporary checkpoint is deleted at
+test exit and it does not use the FPA-FOD/SimFire agent.
+
+Evidence: [benchmark protocol](../research/SIMFIRE_EVALUATION_PROTOCOL.md),
+[configuration](../../configs/simfire/evaluation-v1.json),
+[membership manifest](../../data/manifests/simfire-fpa-fod-evaluation-membership-v1.json),
+[inference runner](../../scripts/evaluate_simfire_benchmark.py),
+[pure protocol/metric tests](../../tests/test_simfire_evaluation.py).

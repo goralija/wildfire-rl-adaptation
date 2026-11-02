@@ -9,6 +9,12 @@ sources:
 ---
 # Protokol: historical ignition scenarios + SimFire policy comparison
 
+Operativni benchmark ugovor je zamrznut u
+[`SIMFIRE_EVALUATION_PROTOCOL.md`](SIMFIRE_EVALUATION_PROTOCOL.md), uz konfiguraciju
+[`evaluation-v1.json`](../../configs/simfire/evaluation-v1.json). Ako se razlikuju ovaj
+širi nacrt i v1 ugovor, za evaluaciju vrijedi v1. Trening recepti i fizička validacija su
+i dalje otvoreni; ništa ovdje ne pokreće trening.
+
 Ovaj draft zamjenjuje obavezni BurnMD historical-action replay iz ranijeg protokola.
 Prethodni CFSDS/Firehose protokol je sačuvan u
 [arhivi](PROTOCOL_CFSDS_ARCHIVE.md). Trenutna odluka je [ADR-040](../specs/DECISION_RECORDS.md#adr-040--train-on-real-ignition-conditions-with-simulated-actions-2026-11-01).
