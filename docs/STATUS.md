@@ -78,7 +78,8 @@ nagradu. Ne tvrdimo da je simulator dokazao koliko bi stvarni požar bio manji.
    sintetičkom `GridFire` fixtureu u privremenom folderu; to nije FPA-FOD/SimFire trening
    niti checkpoint. Vidi [protokol](research/SIMFIRE_EVALUATION_PROTOCOL.md),
    [konfiguraciju](../configs/simfire/evaluation-v1.json) i
-   [pokretač](../scripts/evaluate_simfire_benchmark.py).
+   [pokretač](../scripts/evaluate_simfire_benchmark.py) i [sačuvani validation preflight
+   receipt](../reports/real-fire-data/simfire-benchmark-validation-preflight-20261102.json).
    Validation preflight je prošao za svih 20 slučajeva: raster/weather proxy hashovi su
    provjereni, Hayden observation je u dozvoljenom formatu, no-op je legalan, nijedan
    simulacijski korak nije napredovao i rezervisani testni inputi nisu otvoreni.

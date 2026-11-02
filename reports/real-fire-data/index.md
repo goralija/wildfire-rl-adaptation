@@ -12,6 +12,7 @@
 - [Gymnasium demo smoke](simfire-cohort-v2-gym-smoke/) — stvarni fuel/terrain i demo weather, bez RL treninga.
 - [Gymnasium gridMET proxy smoke](simfire-cohort-v2-gridmet-weather-smoke/) — po jedan slučaj po splitu; mapirani meteo podaci, jedna linijska tačka i no-op; bez `learn()`.
 - [Duži proxy smoke](simfire-cohort-v2-gridmet-full-horizon-smoke-v2/) — po jedan train/validation/test incident, do 12 sati; PPO samo legalna inference proba, bez `learn()`.
+- [Benchmark validation preflight](simfire-benchmark-validation-preflight-20261102.json) — svih 20 validation paketa hash-provjereno; observation i no-op provjereni, 0 simulacijskih koraka, testni ulazi nisu otvoreni.
 - [No-op horizont probe](simfire-cohort-v2-gridmet-noop-horizon/) — samo čekanje, bez linije i agenta; train Owyhee i validation Hayden, sa slikama i receiptom.
 - [Test smoke incident koji je otvoren](simfire-cohort-v2-gridmet-noop-test-exposed/) — Larch Creek je isključen iz budućeg završnog benchmarka; ostaje 19 test incidenata.
 - [WAF osjetljivost](simfire-cohort-v2-gridmet-waf-sensitivity.json) — isti uzorci pri 0.1/0.3/0.5; tehnička, ne fizička provjera.

@@ -1,0 +1,34 @@
+{
+  "agent_training": false,
+  "benchmark_id": "simfire-fpa-fod-evaluation-v1",
+  "config_sha256": "b89962cb71f29b8a978a02f56bd1d3b5764f0441bab32fc5632b671bb6279272",
+  "created_at_utc": "2026-11-02T15:08:18.320574+00:00",
+  "fuel_sha256": "1119eca86b9a9356e60aa6fabf406aed490e9b961aa27908b51db5b64df266f9",
+  "initialized_scenario_id": "fpa-fod-401316132-hayden",
+  "kind": "simfire_benchmark_validation_preflight",
+  "legal_no_op": true,
+  "membership_sha256": "aab5f623a46c3b2c86ab58b367f1103499905e7ac42e16d53a3b572528c859bc",
+  "observation_shapes": {
+    "map": [
+      24,
+      128,
+      128
+    ],
+    "state": [
+      7
+    ]
+  },
+  "scenario_count_inputs_verified": 20,
+  "simulation_steps_advanced": 0,
+  "source_environment": {
+    "git_commit": "85e24f414848771d1e119aaad5df8a85a74e4645",
+    "git_dirty": false,
+    "platform": "macOS-14.2-arm64-arm-64bit",
+    "python_version": "3.9.25"
+  },
+  "split_checked": "validation",
+  "terrain_sha256": "4bd9613e6ed2171a368f3ebc6120d9b916b962cf3e5f4a5dc207926f48fde870",
+  "test_inputs_opened": false,
+  "weather_mapping_sha256": "beb07aec9e941d3f0d3ff17bff3c6efd27d5e8b63ec344a9fd4f7845b252861e",
+  "weather_mode": "gridmet_daily_proxy"
+}

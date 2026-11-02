@@ -1223,6 +1223,9 @@ that test (as now documented in `AGENTS.md`). The first full-suite invocation al
 incorrect expected value in the new paired-summary test; that arithmetic expectation was
 fixed and the six focused evaluator tests pass. The full suite was not rerun to avoid
 repeating the synthetic learning call. The generic PPO training recipe, fine-tuning budget,
-and physical review of weather/spread assumptions remain open. See [protocol](SIMFIRE_EVALUATION_PROTOCOL.md),
+and physical review of weather/spread assumptions remain open. The saved [validation
+preflight receipt](../../reports/real-fire-data/simfire-benchmark-validation-preflight-20261102.json)
+records 20/20 validation input checks, a legal no-op, zero advanced simulation steps, and no
+test inputs opened. See [protocol](SIMFIRE_EVALUATION_PROTOCOL.md),
 [runner](../../scripts/evaluate_simfire_benchmark.py), [ADR-049](../specs/DECISION_RECORDS.md#adr-049--freeze-the-simfire-policy-comparison-contract-2026-11-02),
 and [status](../STATUS.md).
