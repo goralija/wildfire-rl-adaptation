@@ -20,14 +20,17 @@ Detalji: [current scenario pipeline](research/REAL_IGNITION_SCENARIO_PIPELINE.md
 | TASK-022 | Kohorta završena lokalno | 80 FPA-FOD događaja: 40 train (2018–2019), 20 validation (2023), 20 test (2024), bez dijeljenja istog incidenta. Izbor je ponovljiv i source snapshots/manifests su u Git-u. To je screened uzorak velikih zapadnoameričkih požara, ne reprezentativan nacionalni uzorak. |
 | TASK-023 | Podaci i proxy ulazi spremni 80/80 | LANDFIRE FBFM13 i LF2020 teren su 128×128, 30 m, poravnati i hash-provjereni. Početna goriva ćelija postoji za svih 80 (71 direktno, 9 bliski proxy). Osam dnevnih gridMET polja i zaseban transparentni SimFire proxy postoje za svih 80. Tačan replay: 0/80. Vidi acquisition, QC i mapping receipts. |
 | TASK-024 | Proxy spojen; trajanje ćelije podešeno; fizička validacija otvorena | Nominalni gridMET→SimFire proxy je spojen za 80/80. Stock trajanje od 4 jednominutna koraka gasilo je neke požare prije širenja preko 30 m ćelije; adapter sada koristi 15 koraka. No-op probe na Owyhee/Hayden/Larch Creek prolaze kroz horizont ili se gase po modelu. To je inženjerska provjera, ne fizička kalibracija. Larch Creek je smoke-otvoren test slučaj. |
-| TASK-025 | P0, otvoren — mjerodavan benchmark | Zaključati no-op/heuristic/base PPO kontrole, broj seedova, metrike i protokol; runner mora čitati [evaluation membership manifest](../data/manifests/simfire-fpa-fod-evaluation-membership-v1.json). Iz završnog testa izbaciti tehnički otvoreni Larch Creek; sačuvati ostalih 19 incidenta za završnu uparenu evaluaciju. Prije toga uraditi fizikalno opravdanje postavke širenja i provjeriti seed-varijabilnost. |
+| TASK-025 | Ugovor i inference runner završeni; fizički review otvoren | Ugovor u [SimFire evaluation protocol](research/SIMFIRE_EVALUATION_PROTOCOL.md), config u `configs/simfire/evaluation-v1.json`, inference-only runner u `scripts/evaluate_simfire_benchmark.py`. Fiksirani su no-op/front-edge/base/fine-tuned, 5 paired seedova, metrike, incident-bootstrap i checkpoint izbor. Validation preflight je lokalno prošao 20/20; još ga treba ponoviti na drugom računaru i definisati base/fine-tune trening recepte. Larch Creek ostaje isključen; test runner traži eksplicitne zastavice. |
 | TASK-026 | Nije započet — trenutno namjerno odgođen | Korisnik je izričito tražio da se trening sada ne pokreće. Prije eventualnog treninga treba zasebno odobriti tu fazu; tada koristiti samo TRAIN za učenje, validation za izbor, 19 zatvorenih test ID-jeva za završnu procjenu. |
 | TASK-027 | P1 nakon treninga — završna poređenja/vizuali | Upariti base/fine-tuned/no-op/heuristic na istim test scenarijima, uslovima i više seedova. Sačuvati CSV/JSON receipt, intervale i georeferencirane karte/animacije; zaključak važi za SimFire, ne historijske hektare. |
 
-**Sada:** podaci i okruženje se pokreću; ispravljen je i evidentiran prekratak stock život
-vatrene ćelije. Rezultati još nisu mjerodavni za tvrdnju da bi agent smanjio stvarni požar:
-vremenski proxy, parametri širenja i akcije nisu fizički validirani, a benchmark nije
-zaključan. Trening nije počeo i namjerno ostaje odgođen. Pogledaj [dataset karticu](research/SIMFIRE_FPA_COHORT.md), [weather QC](../reports/real-fire-data/simfire-cohort-v2-gridmet-summary.json), [no-op receipt](../reports/real-fire-data/simfire-cohort-v2-gridmet-noop-horizon/receipt.json), [adapter](research/SIMFIRE_RL_ADAPTER.md) i [status](STATUS.md).
+**Sada:** podaci i okruženje se pokreću, a benchmark pravila i runner su zapisani. To ne
+znači da su vremenski proxy, parametri širenja ili pojednostavljene akcije fizički validirani;
+rezultati mogu govoriti samo o SimFire-u. Training recipe i težine još ne postoje, pa trening
+nije počeo i namjerno ostaje odgođen. Pogledaj [dataset karticu](research/SIMFIRE_FPA_COHORT.md),
+[weather QC](../reports/real-fire-data/simfire-cohort-v2-gridmet-summary.json),
+[no-op receipt](../reports/real-fire-data/simfire-cohort-v2-gridmet-noop-horizon/receipt.json),
+[adapter](research/SIMFIRE_RL_ADAPTER.md) i [status](STATUS.md).
 
 ## Arhivirani CFSDS/Firehose plan
 

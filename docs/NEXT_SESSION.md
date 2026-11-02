@@ -32,16 +32,18 @@ ne fizički kalibrisana. Vjetar/vlaga su otvorene aproksimacije; policy nije tre
 [weather figure](../reports/real-fire-data/simfire-cohort-v2-gridmet-overview.png), te
 [no-op probe](../reports/real-fire-data/simfire-cohort-v2-gridmet-noop-horizon/).
 
-**Prije bilo kakvog treninga:** zaključati no-op i determinističku heuristiku, broj seedova,
-metriku, checkpoint odabir i upareni test postupak. Sačuvati split membership: samo 40 TRAIN
-incidenata se koriste za učenje, 20 validation za odluke, 19 zatvorenih test incidenata za
-završni rezultat. Larch Creek je već korišten u smoke-u i mora se izbaciti iz završnog
-benchmarka. Nijedna train komanda nije pokrenuta u ovoj pripremnoj fazi.
+**Poredbena pravila su unaprijed zapisana** u
+[`SIMFIRE_EVALUATION_PROTOCOL.md`](research/SIMFIRE_EVALUATION_PROTOCOL.md), a inference-only
+runner je `scripts/evaluate_simfire_benchmark.py`. Preflight provjerava samo VALIDATION i ne
+pokreće simulacijski korak. Samo 40 TRAIN incidenata smije se koristiti za učenje; 20
+VALIDATION bira checkpoint; 19 test incidenata ostaje rezervisano za finalnu uparenu
+procjenu. Larch Creek je već korišten u smoke-u i izbačen iz završnog benchmarka. Nijedna
+train komanda nije pokrenuta.
 
 Evaluation membership je zabilježen u
 [`simfire-fpa-fod-evaluation-membership-v1.json`](../data/manifests/simfire-fpa-fod-evaluation-membership-v1.json).
-To zamrzava samo incidente; benchmark ugovor (baseline, metričke mjere, sjemena i
-checkpoint pravilo) ostaje naredni posao.
+Ovaj manifest zamrzava članstvo; benchmark ugovor, seedovi, metrike, checkpoint pravilo i
+runner su u `configs/simfire/evaluation-v1.json` i protokolu iznad.
 
 ## Lokalni environment
 
@@ -85,12 +87,14 @@ snapshotovi, hashovi, mali receiptovi i pregledne slike idu u Git.
 
 ## Šta je sljedeće
 
-1. Zamrznuti baseline politike (no-op, jednostavna heuristika, base PPO), seedove, metrike,
-   horizon/budžet i checkpoint pravilo.
-2. Potvrditi ponovljivi preflight i pripremiti runner/receipt bez poziva `learn()`.
-3. U zasebnoj fazi, po izričitoj odluci, trenirati samo na TRAIN incidentima; validation
-   koristiti za izbor postavki, test za završnu uparenu procjenu.
-4. Sačuvati CSV/JSON epizode, hashove checkpointa i georeferencirane mape/animacije.
+1. Lokalni validation preflight je već prošao 20/20 ulaznih paketa bez napredovanja
+   simulacije. Na drugom računaru/klonu ponoviti instalaciju i podatke, pa pokrenuti:
+   `.local/simfire-venv/bin/python scripts/evaluate_simfire_benchmark.py --preflight-only`.
+2. Prije treninga definisati base PPO trening recept, fine-tuning budžet i raspored čuvanja
+   checkpointa; pregledati vremenske i spread pretpostavke.
+3. Trening/fine-tuning tek nakon posebne izričite odluke. Koristiti samo TRAIN za učenje,
+   VALIDATION za izbor, a test za finalnu uparenu procjenu.
+4. Sačuvati CSV/JSON epizode, checkpoint hashove i georeferencirane mape/animacije.
 
 **Još nije urađeno:** agent trening, fine-tuning, held-out policy rezultat ili fizička
 validacija. Pogledati [status](STATUS.md), [backlog](BACKLOG.md) i

@@ -5,8 +5,9 @@
 - [Trenutni dizajn](../DESIGN.md) - stvarni incidenti kao polazne lokacije i uslovi za SimFire, pa upareno poređenje osnovnog i treniranog agenta.
 - [Trenutni status](../STATUS.md) - šta je stvarno pokrenuto i koji ulazi još fale.
 - [80-case FPA-FOD/SimFire kohorta](SIMFIRE_FPA_COHORT.md) - službeni događaji, split, stvarni LANDFIRE gorivo/teren i dnevni gridMET kontekst.
-- [gridMET dataset QC i raspodjela](../../reports/real-fire-data/simfire-cohort-v2-gridmet-summary.json) - 80/80 vremenskih konteksta provjereno; još nisu mapirani na SimFire.
+- [gridMET dataset QC i raspodjela](../../reports/real-fire-data/simfire-cohort-v2-gridmet-summary.json) - 80/80 stvarnih dnevnih konteksta; zasebni, jasno označeni proxy ulazi već su mapirani za SimFire.
 - [SimFire Gymnasium/RL adapter](SIMFIRE_RL_ADAPTER.md) - laičko objašnjenje opažanja, akcije, nagrade i lokalnog smokea.
+- [Zamrznut benchmark protokol](SIMFIRE_EVALUATION_PROTOCOL.md) - baseline politike, seedovi, mjere, checkpoint izbor i held-out test pravila.
 - [X/Y tok običnim jezikom](REAL_IGNITION_SCENARIO_PIPELINE.md) - kako zapis požara postaje karta i uslovi za simulator.
 - [Dixie Fire probna scenario-kartica](../../data/manifests/simfire-fpa-fod-401019270-dixie-candidate.json) - jedan stvarni zapis, još bez goriva, terena i istorijskog vremena.
 - [FPA-FOD zapis i porijeklo](../../reports/real-fire-data/fpa-fod-dixie-2021-source.geojson) - mali GeoJSON dokaz porijekla za probni slučaj.
@@ -31,6 +32,7 @@
 - [Experiment log](EXPERIMENT_LOG.md) - Experiment Log
 - [Firehose/Cell2Fire izvršavanje — 2026-10-28](FIREHOSE_VERIFICATION.md) - Verification Record
 - [Istraživački protokol — draft v1, 2026-10-28](PROTOCOL.md) - Research Protocol
+- [TASK-025 benchmark i evaluator](EXPERIMENT_LOG.md#task-025--freeze-the-simfire-benchmark-and-prepare-a-non-training-evaluator-2026-11-02) - priprema bez treninga ili test evaluacije.
 - [Stvarni požari: izbor podataka i granica zaključaka](REAL_FIRE_DATASETS.md) - Dataset Review
 - [Train-only CFSDS fuel QC](CFSDS_TRAIN_QC.md) - Metoda, nalaz i ograničenja prvog train input gatea
 - [Train-only CFSDS input QC](CFSDS_TRAIN_INPUT_QC.md) - Poravnanje dostupnih train FireCase mapa, weather inputa, fuel vintagea i suppression evidencije

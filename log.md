@@ -1,5 +1,24 @@
 # Promjene baze znanja
 
+## 2026-11-02: benchmark pravila za SimFire i evaluator bez treniranja
+
+- Zamrznuta su pravila poređenja no-op, front-edge heuristike, base PPO i fine-tuned PPO:
+  5 zajedničkih seedova, 32 linijske tačke, 12 sati, primarna mjera simulirane opožarene
+  površine i uparena analiza po požaru. Test ostaje zatvoren dok se ne odobri završna faza.
+- Dodat je evaluator koji može samo provjeravati ulaze i raditi inference; ne poziva `learn()`.
+  Njegov validation preflight uspješno je provjerio 20/20 lokalnih validation input paketa
+  bez napredovanja simulacije i bez otvaranja rezervisanog testa.
+- Ispravljene su opšte `AGENTS.md` upute koje su još opisivale staru Dixie/ERA5 etapu kao
+  aktivnu. Status, backlog, handoff, indeks i projektni kontekst sada usmjeravaju kolege na
+  aktuelnu FPA-FOD/LANDFIRE/gridMET/SimFire putanju.
+- Nije treniran FPA-FOD/SimFire agent, nije sačuvan projektni checkpoint i nije pokrenuta
+  evaluacija na 19 rezervisanih test požara. Puni postojeći test paket je jednom pokrenuo
+  kratki `learn(16)` samo na sintetičkom `GridFire` fixtureu; privremena težina je obrisana.
+  Agentima je sada navedeno da ne pokreću taj test kad je trening zabranjen. Vidi
+  [TASK-025](docs/research/EXPERIMENT_LOG.md#task-025--freeze-the-simfire-benchmark-and-prepare-a-non-training-evaluator-2026-11-02),
+  [ADR-049](docs/specs/DECISION_RECORDS.md#adr-049--freeze-the-simfire-policy-comparison-contract-2026-11-02) i
+  [status](docs/STATUS.md).
+
 ## 2026-11-01: gridMET proxy spojen i SimFire trajanje ćelije provjereno
 
 - Dnevni gridMET podaci prevedeni su u transparentni SimFire proxy za svih 80 slučajeva; originalni JSON-i ostaju odvojeni.

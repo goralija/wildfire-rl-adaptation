@@ -4,6 +4,28 @@ title: Work log
 ---
 # Work log
 
+2026-11-02 — Finished TASK-025's pre-training comparison setup. Wrote a versioned SimFire
+evaluation contract for no-op, a deterministic front-edge rule, generic base PPO and a
+TRAIN-only fine-tuned copy. It fixes five shared environment seeds, 32 line points, a
+12-hour horizon, simulated burned area as the primary measure, incident-level paired
+analysis, validation-only checkpoint selection and the held-out test gate. Added a
+non-training evaluator that can preflight the local validation inputs or later run policy
+inference, with the test split blocked unless both explicit final-run flags and both PPO
+checkpoints are supplied. Corrected `AGENTS.md` so future collaborators see the current
+FPA-FOD/LANDFIRE/gridMET/SimFire direction rather than the earlier Dixie/ERA5 bootstrap.
+Updated status, backlog, protocol, ADR, indexes and handoffs. No FPA-FOD/SimFire policy was
+trained, no project checkpoint was created, no physical validation was performed, and the
+19 reserved test incidents were not run. The validation preflight hash-checked all 20
+validation input packages, initialized Hayden's observation, and advanced zero simulator
+steps. The full existing test suite was run once; its
+`test_masks_save_load_and_short_learning` case called `learn(16)` on a tiny synthetic
+`GridFire` fixture and saved a checkpoint only inside a temporary directory that was removed
+by the test. `AGENTS.md` now warns future sessions not to run that test when the user forbids
+training. That first full-suite invocation also caught a wrong expected value in the new
+paired-summary test; after correcting the expected arithmetic, the six focused evaluator
+tests pass. The full suite was not rerun because it would execute the synthetic `.learn(16)`
+case again. See TASK-025, ADR-049 and the benchmark protocol.
+
 2026-11-01 — Completed the daily gridMET-to-SimFire proxy path for all 80 real FPA-FOD
 cases, then checked the environment's no-action behavior without calling `learn()`. A
 full-horizon probe found SimFire's stock four-frame pixel lifetime could extinguish an

@@ -10,27 +10,25 @@ Repo je OKF 0.2 knowledge bundle. Na početku sesije pročitaj [index.md](index.
 Zatim koristi [mapu zadataka/koda](knowledge/code-map.md) za relevantne izvore i testove.
 Korisnikove direktne upute imaju prednost; kasniji ADR može zamijeniti raniji.
 
-**Trenutni dizajn je scenarij iz stvarne požarne lokacije + SimFire (ADR-040).** Uči se i
-poredi ponašanje agenta u simulatoru na provjerljivim stvarnim lokacijama, datumima, gorivu,
-terenu i vremenu. Historijski završni obod nije ulaz/nagrada, a stvarno smanjenje štete se
-ne tvrdi. Kandidat za raspodjelu incidenata je USFS FPA-FOD; BurnMD ostaje opciona referenca
-za ljudske linije.
+**Aktivni dizajn je USFS FPA-FOD + LANDFIRE + dnevni gridMET proxy + SimFire (ADR-040).**
+Kohorta ima 80 incidenata (40 train / 20 validation / 20 izvorno test); Larch Creek je
+otvoren tokom integracionog smoke-a i izbačen iz konačnog testa, tako da ostaje 19
+rezervisanih test incidenata. Veliki TIFF-ovi i izolovani Python 3.9.25 runtime su lokalno u
+ignorisanom `.local/`, a ne u Gitu.
 
-Trenutno: SimFire 2.0.1 radi u lokalnom Python 3.9.25 venvu; sačuvani su i generisani demo
-i 30-minutni smoke nad stvarnim LANDFIRE gorivom/terenom. Dixie FPA-FOD kartica zadržava
-incident-referentnu koordinatu (nije potvrđen ignition) i tačan EPSG:32610 grid 128×128×30m.
-Javni LANDFIRE ImageServer i ERA5 niz su preuzeti lokalno i provjereni; input TIFF/JSON su u
-ignorisanom `.local/real-input-dixie/`. ERA5 nije ubačen u SimFire: vremenska zona discovery
-HHMM nije potvrđena, 10m vjetar nije midflame vjetar, a RH nije gorivna vlaga. Prvi smoke
-koristi demo atmosferu i nije historijski replay ili naučni rezultat. SimHarness/RLlib,
-višedogađajna kohorta i weather/moisture mapping još nisu završeni.
+Gymnasium adapter, pinovani SimFire 2.0.1, karte goriva/terena i dnevni vremenski proxy
+postoje za 80 slučajeva. WAF 0.3 i 15 jednominutnih SimFire ćelijskih koraka su početne
+inženjerske postavke, ne fizički potvrđene vrijednosti. Smoke je prošao; FPA-FOD/SimFire
+agent nije treniran i njegovi checkpointi ne postoje. Mogući ishod opisuje samo SimFire, ne hektare spašene u stvarnom požaru. CFSDS/
+Cell2Fire rad je arhiviran.
 
-Ne blokirati glavni policy eksperiment na nepostojećim Mineral line-time vrijednostima;
-njihovo korištenje je opcioni replay track. Ne trenirati niti tvrditi RL prednost dok barem
-jedan scenarij nema provjeren fuel/terrain/weather ulaz i stabilan trening runtime. Ne
-tvrdimo da model smanjuje stvarni požar; prijavljujemo isključivo testirane simulacije.
-CFSDS/Cell2Fire rad je sačuvan kao arhivirani prethodni track u
-`docs/STATUS_CFSDS_ARCHIVE.md` i `HANDOFF_CFSDS_ARCHIVE.md`.
+Aktivni evaluacijski ugovor je
+[`docs/research/SIMFIRE_EVALUATION_PROTOCOL.md`](docs/research/SIMFIRE_EVALUATION_PROTOCOL.md)
+uz mašinski čitljiv
+[`configs/simfire/evaluation-v1.json`](configs/simfire/evaluation-v1.json). Evaluator nema
+trening funkciju. Njegov default preflight čita samo VALIDATION; TEST zahtijeva posebne
+zastavice `--open-test --final-evaluation` i oba sačuvana PPO checkpointa. Ne pokretati
+`learn()` niti otvarati TEST dok korisnik posebno ne odobri tu fazu.
 
 Održavanje znanja: [maintenance](knowledge/maintenance.md), format:
 [OKF profil](knowledge/okf-format.md). Novi `.md` koncept dobija YAML `type` i vezu iz
@@ -52,7 +50,11 @@ CI checker provjerava strukturu/linkove, ne istinitost naučnih nalaza.
 - Ne commituj privatnu prepisku, emailove, `.venv`, vanjski repo, velike mape ili težine.
 - Ne pokreći plaćeni compute, dugo treniranje, globalne instalacije, push/merge ili cloud deploy
   bez odgovarajućeg korisničkog naloga. Kratki lokalni testovi su normalni dio rada.
-- Prije predaje pokreni `PYTHONPATH=src python3 -m unittest discover -s tests -v` i smoke CLI.
+- Prije predaje pokreni `PYTHONPATH=src python3 -m unittest discover -s tests -v`, knowledge
+  validator i odgovarajući smoke/preflight CLI. **Ako korisnik zabrani trening, ne pokreći
+  puni suite:** `tests/test_gym_env.py::test_masks_save_load_and_short_learning` poziva
+  `.learn()` nad malim sintetičkim fixtureom. U tom slučaju biraj sigurne ciljane testove,
+  knowledge validator i preflight bez simulator koraka.
 - Ažuriraj STATUS, NEXT_SESSION, odluke i experiment log nakon značajnog pomaka.
 - Ažuriraj i root log/index kad se znanje mijenja; pokreni
   `python3 scripts/validate_knowledge.py --strict` uz requirements/knowledge.txt.

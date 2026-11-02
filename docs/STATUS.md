@@ -70,28 +70,42 @@ nagradu. Ne tvrdimo da je simulator dokazao koliko bi stvarni požar bio manji.
 4. **Akcije su pojednostavljene.** Fireline tačka postavlja se odmah bilo gdje na mapi;
    kretanje ekipe, vrijeme gradnje i dostupni resursi nisu modelirani. Budžet 32 tačke,
    odluka svakih 30 minuta i horizont do 12 sati su početne pretpostavke.
-5. **Benchmark nije zamrznut i agent nije treniran.** Treba unaprijed fiksirati no-op i
-   heurističke kontrole, seedove, metrike, checkpoint izbor i završni test protokol.
-   Nijedna naučena težina ili policy rezultat još ne postoji.
+5. **Poredbena pravila i inference runner su pripremljeni; agent nije treniran.** Ugovor
+   fiksira no-op, front-edge heuristiku, base PPO i fine-tuned PPO, 5 istih seedova, budžet,
+   horizont, primarni ishod, interval neizvjesnosti i checkpoint izbor na validation. TEST
+   ostaje zatvoren u runneru dok se ne potvrdi završna evaluacija. Nema naučenih težina ni
+   policy rezultata. Jedan postojeći test paketa pokreće 16 koraka učenja na malom
+   sintetičkom `GridFire` fixtureu u privremenom folderu; to nije FPA-FOD/SimFire trening
+   niti checkpoint. Vidi [protokol](research/SIMFIRE_EVALUATION_PROTOCOL.md),
+   [konfiguraciju](../configs/simfire/evaluation-v1.json) i
+   [pokretač](../scripts/evaluate_simfire_benchmark.py).
+   Validation preflight je prošao za svih 20 slučajeva: raster/weather proxy hashovi su
+   provjereni, Hayden observation je u dozvoljenom formatu, no-op je legalan, nijedan
+   simulacijski korak nije napredovao i rezervisani testni inputi nisu otvoreni.
 
 Znači: **imamo izvršiv put od 80 stvarnih slučajeva preko dnevnih weather proxyja do
-SimFire-a, sa stvarnim mapama goriva/terena i ponovljivim no-op probama.** Četverominutna
+SimFire-a, sa stvarnim mapama goriva/terena, ponovljivim no-op probama i unaprijed opisanim
+načinom poređenja.** Preflight provjerava validation ulaze bez napredovanja simulacije.
+Četverominutna
 stock postavka bila je prekratka za dio simuliranih 30 m ćelija; adapter sada bilježi i
 koristi 15 jednominutnih koraka. To poboljšava pokretljivost, ali samo po sebi ne potvrđuje
 fizičku tačnost. Jedan testni požar korišten je u tehničkoj provjeri i neće ući u završno
-poređenje. `learn()` nije pozvan. Prije vjerodostojnog poređenja treba validirati postavke
-širenja, zaključati kontrole i metrike te koristiti preostalih 19 test požara. Detalji su u
+poređenje. FPA-FOD/SimFire agent trening nije pokrenut. Prije tumačenja poređenja treba
+fizički pregledati postavke širenja i definisati base/fine-tuning trening recept. Detalji su u
 [dataset kartici](research/SIMFIRE_FPA_COHORT.md), [adapteru](research/SIMFIRE_RL_ADAPTER.md)
 i [mapping receiptu](../reports/real-fire-data/simfire-cohort-v2-gridmet-simfire-mapping.json).
 
 ## Sljedeći redoslijed
 
-1. Završiti benchmark ugovor: no-op, jednostavna unaprijed definisana heuristika i base PPO;
-   isti scenario IDs, vrijeme, budžet i sjemena za sve poredbene politike.
-2. Zapisati metrike i protokol izbora modela na validation; zadržati test ID-jeve za jednu
-   završnu uparenu evaluaciju. U izvještaju mjeriti samo simulirano opožareno područje.
-3. Dokumentovati preflight i komande za evaluaciju. **Trening se ne pokreće u ovoj fazi.**
-4. Sačuvati epizodne receipte i georeferencirane karte/animacije za konačnu usporedbu.
+1. Na drugom računaru/klonu ponoviti setup i pokrenuti samo validation preflight:
+   `.local/simfire-venv/bin/python scripts/evaluate_simfire_benchmark.py --preflight-only`.
+2. Prije treninga zasebno zapisati porijeklo i raspored generičkog base PPO treninga, broj
+   trening-koraka i checkpoint frekvenciju finog učenja, te pregledati fizičke pretpostavke
+   za vjetar/vlagu i 15-minutni vijek ćelije.
+3. Trening ostaje zaustavljen dok ga korisnik izričito ne odobri. Poslije treninga validation
+   bira checkpoint; rezervisanih 19 test incidenata otvara se samo za finalnu uparenu
+   evaluaciju.
+4. Završni report čuva epizode, uparene razlike po požaru i buduće karte/animacije.
 
 ## Stari CFSDS/Firehose rad
 

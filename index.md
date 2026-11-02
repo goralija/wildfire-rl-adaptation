@@ -7,6 +7,7 @@ okf_version: "0.2"
 
 - [Projekt i pokretanje](README.md) - Cilj istraživanja i minimalni setup.
 - [Trenutni dizajn i status](docs/STATUS.md) - Šta je napravljeno i šta stvarno još nedostaje.
+- [Pravila poređenja agenata](docs/research/SIMFIRE_EVALUATION_PROTOCOL.md) - unaprijed zaključani baselinei, seedovi, mjere i test gate; bez pokretanja treninga.
 - [80 stvarnih požara](data/manifests/simfire-fpa-fod-cohort-v2.json) - 40 train / 20 validation / 20 test; gorivo/teren, raw gridMET i eksplicitni SimFire daily proxy postoje za svih 80.
 - [Naredni koraci](docs/BACKLOG.md) - Redoslijed do validnog ulaza, prve karte i poređenja agenata.
 - [Kontekst za nastavnika ili kolegu](HANDOFF.md) - prenosiv pregled projekta bez historije razgovora.

@@ -27,7 +27,11 @@ spašenih hektara.
 - Pinned SimFire 2.0.1 + lokalni Python 3.9.25 RL runtime; tačne dodatne verzije su u
   `requirements/simfire-rl-macos-arm64-py39.freeze.txt`.
 - Proxy smoke je prošao kroz po jedan train/validation/test požar; WAF 0.1/0.3/0.5 su
-  tehnički provjereni. `learn()` nije pozvan, težine ne postoje.
+  tehnički provjereni. FPA-FOD/SimFire agent nije treniran i nema njegovih težina.
+- Postojeći puni test paket sadrži jedan test koji trenira 16 koraka na malom sintetičkom
+  `GridFire` fixtureu i odmah briše privremene težine. Taj test je izvršen tokom ove sesije;
+  nije koristio FPA-FOD slučajeve ili SimFire. Ako je trening zabranjen, ne pokretati puni
+  suite; vidi upozorenje u `AGENTS.md`.
 - Maksimalno trajanje jedne SimFire ćelije postavljeno je na 15 jednominutnih koraka;
   postoje i no-op smoke rezultati/slike za po jedan slučaj iz svakog splita. Ovo nije
   fizička kalibracija.
@@ -44,14 +48,20 @@ i izvori su u [dataset kartici](docs/research/SIMFIRE_FPA_COHORT.md) i [mapping 
 
 ## Šta još prije vjerodostojnog poređenja
 
-1. Zaključati poredbene baseline politike (no-op, deterministička heuristika, base PPO).
-2. Fiksirati evaluacijske seedove, metrike, checkpoint izbor i test protokol; sve politike
-   dobijaju iste scenarije, vrijeme, budžet i horizont.
-3. Provjeriti fizičko opravdanje postavki i zamrznuti mjerodavan evaluacijski protokol.
-4. Larch Creek testni slučaj korišten je u smoke-u; isključiti ga iz finala i preostalih
-   19 držati zatvorenim do završne uparene procjene prema
-   [`evaluation membership` manifestu](data/manifests/simfire-fpa-fod-evaluation-membership-v1.json).
-5. Trening nije pokrenut i ostaje odgođen; ova pripremna promjena ga ne pokreće.
+1. Benchmark ugovor i inference-only runner su pripremljeni:
+   [`SIMFIRE_EVALUATION_PROTOCOL.md`](docs/research/SIMFIRE_EVALUATION_PROTOCOL.md) i
+   [`evaluation-v1.json`](configs/simfire/evaluation-v1.json). Ugovor koristi no-op,
+   front-edge pravilo, base PPO i fine-tuned PPO na istim scenarijima i seedovima.
+2. Lokalni validation preflight je prošao: svih 20 validation input paketa provjereno,
+   jedna početna observation učitana, nula simulacijskih koraka i bez otvaranja test inputa.
+3. Na svakom novom checkoutu ponoviti instalaciju i podatke iz
+   [`docs/NEXT_SESSION.md`](docs/NEXT_SESSION.md), zatim pokrenuti validation preflight.
+   Veliki rasteri i venv nisu u Gitu.
+4. Još treba definisati base PPO trening recept, fine-tuning budžet i pregledati fizičke
+   pretpostavke. SimFire model nije fizički validiran.
+5. Larch Creek je isključen; preostalih 19 test požara ostaje zatvoreno do finalne uparene
+   procjene. Runner blokira test bez eksplicitnih zastavica i oba checkpointa.
+6. Trening nije pokrenut i ostaje odgođen; ova pripremna promjena ga ne pokreće.
 
 ## Ponoviti kratki smoke
 

@@ -36,8 +36,13 @@ približno 10 m→20 ft vjetar, WAF 0.3, obrtanje smjera vjetra i Simard EMC pro
 max temperature/min RH. WAF 0.1/0.3/0.5 smoke prolazi tehnički. To ne potvrđuje lokalni
 vjetar ili stvarnu vlagu goriva; dnevni gridMET (~4 km) nije satni replay.
 
-Proxy adapter, rasteri i Gymnasium smoke su pokretljivi; `learn()` nije pozvan i težine ne
-postoje. Baseline, evaluacijski seedovi i test protokol nisu zamrznuti. Vidi [status](../docs/STATUS.md),
+Proxy adapter, rasteri i Gymnasium smoke su pokretljivi; FPA-FOD/SimFire agent nije treniran
+i njegove težine/checkpointi ne postoje. Ugovor za kontrole, pet evaluacijskih seedova,
+metrike, izbor checkpointa i TEST
+gate je zapisan u [SimFire evaluation protocol](../docs/research/SIMFIRE_EVALUATION_PROTOCOL.md)
+i `configs/simfire/evaluation-v1.json`; evaluator je inference-only. Trening-recept za
+generički base checkpoint, budžet finog učenja i fizička opravdanost postavki su još otvoreni.
+Vidi [status](../docs/STATUS.md),
 [kohortu](../docs/research/SIMFIRE_FPA_COHORT.md), [adapter](../docs/research/SIMFIRE_RL_ADAPTER.md)
 i [mapping receipt](../reports/real-fire-data/simfire-cohort-v2-gridmet-simfire-mapping.json).
 Adapter koristi 15 jednominutnih koraka kao maksimalno trajanje jedne ćelije vatre; stock

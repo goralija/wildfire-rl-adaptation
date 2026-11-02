@@ -95,19 +95,21 @@ za stvarne događaje. Kod, JSON receipti i karte su u
 [`simfire-cohort-v2-gridmet-noop-horizon`](../../reports/real-fire-data/simfire-cohort-v2-gridmet-noop-horizon/)
 i [`smoke-otvorenom test slučaju`](../../reports/real-fire-data/simfire-cohort-v2-gridmet-noop-test-exposed/).
 
-## Šta još treba prije vjerodostojnog poređenja
+## Evaluacijski ugovor i šta još nedostaje
 
 Tehnički environment smoke-radi s realnim fuel/terrain ulazima i dnevnim proxyjima za svih
 80 scenarija; svaki split se može odvojeno učitati, a proxy checksum provjerava se pri
 učitavanju. Ovo znači da je put podataka izvršiv i ponovljiv, ne da SimFire tačno reprodukuje
 stvarne požare.
 
-Prije poređenja politika treba zaključati tri kontrole (no-op, deterministička heuristika,
-base PPO), jednake scenario IDs, vremenske uslove, budžet/horizont i evaluacijske seedove,
-metriku, način izbora checkpointa te pravilo da se test split otvori tek na kraju. Trenutni
-adapter još nema evaluacijski ugovor ni potvrđene naučene težine. Trening se namjerno ne
-pokreće u fazi pripreme.
+Kontrole, scenario IDs, vrijeme, budžet/horizont, pet seedova, metrike, checkpoint izbor i
+test gate su fiksirani u [benchmark protokolu](SIMFIRE_EVALUATION_PROTOCOL.md) i
+[`evaluation-v1.json`](../../configs/simfire/evaluation-v1.json). Inference-only runner je
+[`evaluate_simfire_benchmark.py`](../../scripts/evaluate_simfire_benchmark.py); njegov
+preflight provjerava validation ulaze bez napredovanja simulacije. Potvrđenih checkpointa
+nema, a trening se namjerno ne pokreće.
 
 Tehničke provjere su otvorile test incident Larch Creek (`fpa-fod-401411292-larch-creek`);
 izostaviti ga iz završnog benchmarka. Sačuvati preostalih 19 test požara za završnu uparenu
-evaluaciju i taj izuzetak zapisati u zaključani manifest.
+evaluaciju. Pre treninga još zapisati base PPO recept, fine-tuning budžet i pregledati
+nevalidirane pretpostavke za vremenski proxy i 15-minutni vijek ćelije.
