@@ -1,5 +1,21 @@
 # Promjene baze znanja
 
+## 2026-11-03: SimFire/FEDS podaci i pre-agent gate
+
+- Po korisničkoj odluci novi aktivni pravac je SimFire + FPA-FOD/FEDS-CONUS, uz
+  ograničeni FLE/ICS-209 post-hoc kontekst. Stari CFSDS/Cell2Fire izbor ostaje historijski.
+- Napravljen je test-excluded manifest od 40 train i 20 validation požara; FEDS tražen
+  prostornim HTTP Range upitima, bez preuzimanja 1.2 GB godišnjih fajlova.
+- Strogi datum/tačka/3 km crosswalk traži obod u prvih 24h od `t_st`; nalazi 13/40
+  train i 7/20 validation sa ≥2 uzastopna 12h FEDS stanja. Prag 20/8 pada u oba splita.
+  Eksplorativnih 17/12 slučajeva koristilo je preširok vremenski kriterij i supersedovano je.
+- FLE grupisani incidentni sažetak: 0/40 train, 13/20 validation. Test nije učitan.
+  SimFire nije portovan, no-op replay/PPO nisu pokrenuti. Validation je deterministički
+  postfiltriran iz sačuvanih kandidata; nova Zenodo provjera nije uspjela zbog DNS-a.
+- [Detaljna metoda i ograničenja](docs/research/FPA_FEDS_CROSSWALK.md),
+  [kombinovani JSON](reports/real-fire-data/fpa-feds-fle-crosswalk-v1.json),
+  [ADR-017](docs/specs/DECISION_RECORDS.md), [radni dnevnik](docs/WORK_LOG.md).
+
 ## 2026-10-30: CFSDS putanja izabrana i prvi stvarni C++ replay
 
 - Po korisnikovoj uputi odabrana je Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire, jer je to najbolji fit postojećem simulatoru. Stvarni historijski rast ostaje zaseban reality-check; RL iskustvo generiše simulator.

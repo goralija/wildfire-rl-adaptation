@@ -8,6 +8,17 @@ sources:
 ---
 # Istraživački protokol — draft v1, 2026-10-28
 
+## Aktivni protokol nakon ADR-017 — 2026-11-03
+
+Ovaj draft je originalni synthetic/Firehose adaptacioni protokol. Aktivni plan je sada
+SimFire sa real-derived FPA-FOD početnim uslovima i FEDS-CONUS istorijskim tokom;
+sažetak definicija, akcija i metrika je u
+[FPA-FOD/FEDS crosswalk i data gate dokumentu](FPA_FEDS_CROSSWALK.md). Njegov
+pre-agent prag trenutno nije zadovoljen: 13/40 train i 7/20 validation slučajeva
+imaju dovoljno FEDS stanja prema strogom fiksnom joinu, naspram pragova 20/8. Ne koristiti
+ovaj v1 protokol kao odobrenje da se krene u PPO: train/validation pokrivenost se prvo
+mora razriješiti ili se nova odluka o podacima mora izričito donijeti. Test split ostaje zatvoren.
+
 ## Pitanje i hipoteze
 
 RQ-001: Može li prilagodba unaprijed treniranog MaskablePPO agenta različitim

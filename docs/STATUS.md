@@ -1,11 +1,43 @@
 ---
 type: Project Status
-title: Trenutno stanje — 2026-10-30
+title: Trenutno stanje — 2026-11-03
 sources:
 - resource: /reports/firehose-verification/verification.json
 - resource: /docs/WORK_LOG.md
 ---
-# Trenutno stanje — 2026-10-30
+# Trenutno stanje — 2026-11-03
+
+## Najnovije: FPA-FOD/FEDS crosswalk gate
+
+Aktivni benchmark pravac je po korisničkoj odluci SimFire + FPA-FOD/FEDS-CONUS,
+sa FLE/ICS-209 samo kao ograničenim post-hoc kontekstom. Ovaj pravac superseduje
+raniji CFSDS/Cell2Fire izbor kao aktivni projekat; CFSDS dokazi niže su historijski
+i ostaju sačuvani.
+
+Crosswalk je izveden na 40 train (2018/2019) i 20 validation (2023) slučajeva;
+test 2024 nije učitan. Fiksni join koristi FPA discovery date, tačku, FEDS `t_st`,
+3 km toleranciju u prvih 24 h i jedinstvenog kandidata, bez završnog oboda/površine.
+Strogi rezultat: 13/40 train i 7/20 validation imaju jedinstven događaj s najmanje dva
+uzastopna FEDS stanja na 12h koraku; prag je 20/8. **Pre-agent data gate FAIL** u oba
+splita. Početna provjera 17/40 i 12/20 koristila je širi vremenski kriterij i više se ne
+koristi za odluku. FLE incidentni
+sažetak spojen je za 0/40 train i 13/20 validation; sažetak nije line-level geometrija.
+
+Zato u ovom worktreeu nema SimFire koda, no-op simulator rezultata, PPO treninga,
+finetuninga ili tvrdnje o RL prednosti. Sljedeće je razriješiti nedovoljnu pokrivenost
+oba splita bez mijenjanja praga ili otvaranja testa; postojeći validation slučajevi ostaju
+izvan tuninga. Detalji:
+[crosswalk audit](research/FPA_FEDS_CROSSWALK.md), [combined JSON](../reports/real-fire-data/fpa-feds-fle-crosswalk-v1.json),
+[ADR-017](specs/DECISION_RECORDS.md).
+
+Rad je izolovan na `codex/fireline-simfire-benchmark`, izveden iz `main`. Tri
+necommitovane izmjene u glavnom checkoutu i stara `research/cfsds-train-qc` grana su
+sačuvane. Nema preuzetih godišnjih FEDS arhiva ili novih sirovih podataka.
+
+## Historijski status — CFSDS/Firehose, 2026-10-30
+
+Sadržaj ispod ovog naslova dokumentuje raniji CFSDS/Cell2Fire track i runtime rad.
+Njegovi nalazi nisu prošireni na novi SimFire/FEDS benchmark.
 
 ## Baza znanja u repozitoriju
 Repo je OKF 0.2 bundle s [root indeksom](../index.md),

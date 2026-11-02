@@ -1,5 +1,11 @@
 # real-fire-data
 
+- [FPA-FOD ↔ FEDS-CONUS ↔ FLE crosswalk](fpa-feds-fle-crosswalk-v1.json) - combined 40/20 train/validation gate; FAIL u oba splita, test nije učitan.
+- [FPA-FOD/FEDS metoda i odluka](../../docs/research/FPA_FEDS_CROSSWALK.md) - izvori, metod i nastavak.
+- [Train split crosswalk](fpa-feds-fle-crosswalk-train-v1.json) - 13 od 40 slučajeva prolazi strogi vremenski uslov.
+- [Validation kandidatska pretraga](fpa-feds-fle-crosswalk-validation-candidate-search-v1.json) - sačuvani kandidati prije strogog 24h filtera.
+- [Validation split crosswalk](fpa-feds-fle-crosswalk-validation-v1.json) - 7 od 20 slučajeva prolazi strogi vremenski uslov; izvještaj je izveden determinističkim postfilterom sačuvanih kandidata.
+
 ## Dokumenti
 
 - [CFSDS pilot `2018_747` case manifest](2018_747-case.json) - public source versions, conversion decisions and input checksums.

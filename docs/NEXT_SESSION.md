@@ -1,61 +1,77 @@
 ---
 type: Handoff
-title: Nastavak nakon prvog stvarnog CFSDS replaya
+title: SimFire benchmark — nastavak nakon FEDS crosswalk gatea
 ---
 # Naredna sesija
 
-## Trenutno stanje
+## Trenutno stanje — 2026-11-03
 
-Glavni pravac je izabran: **Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire**. Razlog je
-kompatibilnost s simulatorom i postojećim 20×20 agentom. Tri train slučaja (`2018_747`,
-`2018_241`, `2018_1770`) su pretvorena i pokrenuta bez intervencija i bez treniranja.
-Za `2018_747` imamo šest seedova; druga dva zasad imaju po jedan.
+Aktivna korisnička odluka je novi agentni benchmark u SimFireu, sa stvarnim
+FPA-FOD uslovima, FEDS-CONUS vremenskim obodima i ograničenim FLE/ICS-209 kontekstom.
+Radi se u izolovanom worktreeu iz `main`:
+`.worktrees/fireline-simfire-benchmark`, grana `codex/fireline-simfire-benchmark`.
+Glavni checkout ima tri tuđe necommitovane izmjene, a stara research grana je sačuvana;
+nijedna nije mijenjana ni masovno prenesena.
 
-No-action rezultat za `2018_747` je 66 ha prema 15.39 ha opaženih (IoU .2187); šest
-seedova daje istu mapu, a predikcija dotiče rub. Za `2018_241` simulator je zahvatio
-svih 400 ćelija i dodao 237 ha prema 12.15 ha (IoU .0376); za `2018_1770` dodao je
-73 ha prema 12.15 ha (IoU .1361). Prva dva slučaja ponovljena su bez 20-minutnog
-početnog zagrijavanja s istim završnim mjerama. Kandidat `2014_538` nije prošao
-konverziju jer historijske ćelije padaju na vodu/ne-gorivo u FBP karti. Nepoznat status
-gašenja ostaje moguć uzrok razlike, ali ovo nisu fizička validacija ni rezultat agenta.
+Crosswalk audit nije preuzeo godišnje FEDS fajlove. Konačni strogi kriterij traži da
+najraniji FEDS obod unutar 3 km od FPA-FOD tačke bude zabilježen od `t_st` do `t_st`
++24 h, uz FEDS datum `t_st` u prozoru -1/+2 dana od FPA discovery datuma. Rezultat je
+13/40 train i 7/20 validation sa jedinstvenim događajem i ≥2 uzastopna 12h stanja;
+prag 20/8 **pada u oba splita**. Validation dio je tačno postfiltriran iz sačuvanih
+kandidatskih vremenskih sažetaka jer Zenodo DNS nije bio dostupan pri nastavku; nema
+nove mrežne provjere validation izvora.
 
-Važni artefakti:
+FLE spajanje postoji za 13/20 validation slučajeva, ali za 0/40 train slučajeva jer
+njihovi FPA ID formati nemaju odgovarajući WFIGS IRWIN ID u direktnom joinu. ArcGIS
+FLE rezultat je incidentni grupisani sažetak, ne linijska geometrija. Test nije učitan.
+Nema SimFire porta, no-op kalibracije, PPO treninga ni agentnih rezultata.
 
-- [jednostavno X/Y objašnjenje i konverzija](../docs/research/REAL_CASE_PIPELINE.md)
-- [izbor skupa i granice zaključaka](../docs/research/REAL_FIRE_DATASETS.md)
-- [split manifest s preliminarnim fire ID-jevima](../data/manifests/cfsds-v1_1-pilot-cohort.json)
-- [case ulazi i provenance](../reports/real-fire-data/2018_747-case.json)
-- [replay mjere](../reports/real-fire-data/2018_747-day228-replay.json)
-- [vizualna karta](../reports/real-fire-data/2018_747-day228.png)
-- [dodatni train slučajevi, karte i fuel odbijanje](../reports/real-fire-data/README.md)
+## Artefakti i izvori
 
-## Nastavak rada
+- [Odluka i detaljna metodologija](research/FPA_FEDS_CROSSWALK.md)
+- [Kombinovani crosswalk rezultat](../reports/real-fire-data/fpa-feds-fle-crosswalk-v1.json)
+- [Train detalji](../reports/real-fire-data/fpa-feds-fle-crosswalk-train-v1.json)
+- [Validation kandidati prije strogog filtera](../reports/real-fire-data/fpa-feds-fle-crosswalk-validation-candidate-search-v1.json)
+- [Validation detalji](../reports/real-fire-data/fpa-feds-fle-crosswalk-validation-v1.json)
+- [Train/validation cohort manifest](../data/manifests/fireline-benchmark-cohort-v1.json)
+- [Izvori i istraživački nalazi](research/SOURCES.md)
+- [Aktivna odluka ADR-017](specs/DECISION_RECORDS.md)
 
-1. Sistemski provjeri gorivo za train shortlist i napravi per-cell QC. Odbaci slučajeve
-gdje scar/front/target pada na water/nonfuel; `2014_538` je već poznat primjer.
-2. Istraži zašto se no-action toliko širi u tri izvršena slučaja. Provjeri gorivnu mapu,
-FBP parametre (curing/mixedwood gdje postoje), vremenske jedinice/profil, početni front
-i veličinu izreza. Drži iste ulaze i ne podešavaj prema validation/test ciljevima.
-3. Odredi može li 20×20 prozor predstaviti događaj bez rubnog rezanja. Ako je potreban
-40×40 model, to mijenja agentov ulaz i broj akcija; prvo uradi poseban feasibility check,
-ne predstavljaj ga kao isti pretrained agent.
-4. Prije heldout slučajeva pribavi FBP fuel vintages koji odgovaraju periodu:
-2014 za train slučajeve 2014–2018, 2019 za validation 2019–2021, 2024 za test 2022–2024.
-5. Pokušaj povezati fire ID-jeve sa službenim incident/suppression zapisima i označi
-nepoznate slučajeve. Trenutni geometrijski screen daje do pet kandidata godišnje i nije
-iscrpan; pun benchmark tek treba usaglasiti.
-6. Proširi TASK-004c: pouzdan cumulative-damage export i terminalni razlog (containment
-naspram isteka vremenskih ulaza). TASK-017 initial-state import i tri TASK-016 konverzije
-su ostvareni.
-7. Pokreni glavni agent benchmark/fine-tuning tek kad no-action ponašanje prođe gate na
-više train požara i heldout ID-jevi budu zamrznuti.
+## Sljedeći korak
 
-## Lokalno okruženje
+Ne popuštati ni mijenjati join pravilo nakon rezultata. Pripremiti novu, eksplicitnu
+prijedlog-kohortu za train/validation koja primjenjuje isti fiksni kriterij i zadržava
+test 2024 zatvoren. Ne koristiti završne obode ili FLE ishode pri izboru kandidata.
+Ako se pragovi 20/8 ne mogu ispuniti u unaprijed dozvoljenim splitovima, vratiti
+korisniku alternative (druga unaprijed odabrana kohorta ili izvor) prije simulator rada.
 
-Moderni Python 3.12.4 `.venv` ima GIS i knowledge pakete. Legacy Firehose radi u zasebnom
-Linux ARM64 Docker imageu. Sirovi CFSDS, DEM i FBP fajlovi su u Git-ignorisanom
-`data/raw/`; generisani simulator paketi su pod `runs/`. U čistom checkoutu pribavi ih
-prema [manifestu preuzimanja](../reports/real-fire-data/cfsds-download-manifest.json)
-i ponovi build skriptom. Ne instaliraj legacy pakete u moderni venv.
+Tek nakon prolaza novog data gatea:
 
-Prije predaje pokreni testove, synthetic CLI smoke i `python3 scripts/validate_knowledge.py --strict`.
+1. Selektivno prenijeti provjereni SimFire adapter i scenario ugovor, bez 133k linija
+   CFSDS izvještaja/generisanih artefakata.
+2. Importovati opaženi FEDS stanje za svaku odluku: istorijski opožarena unutrašnjost,
+   aktivni front i 180m/256×256 strateška karta. Vrijeme ide u 12h koracima, horizont
+   je fiksnih 48h.
+3. Izvršiti no-op poređenje sa persistence i jednostavnom elipsnom referencom. Provjeriti
+   dodatnu opožarenu površinu, rub mape i pristranost oblika. Opaženi završni obod je
+   samo post-hoc evaluacija; simulator se nastavlja i nakon njega i nakon praznog budžeta.
+4. Ako no-op gate ne prođe, zaustaviti agentni rad. Kalibrisati mali broj zajedničkih
+   parametara samo na trainu, izabrati na validationu, zaključati prije testiranja.
+5. Zatim implementirati i testirati liniju koja se gradi tokom vremena, budžet
+   0/1/2/4 smjena, 20 ljudi × 8h, sektore fronta/čekanje i precizno računovodstvo.
+   Sve politike dobijaju isti scenario, seedove, budžet, trajanje i informacije.
+6. Nakon mjerenja vremena kratkih rollouta tek odlučiti o PPO treningu. Test split
+   koristiti samo za završni izvještaj.
+
+## Istorijska putanja
+
+Stari [CFSDS/Cell2Fire rad](../data/manifests/cfsds-v1_1-pilot-cohort.json) i njegovi
+replayi ostaju u repou kao odvojeni nalazi. Oni nisu SimFire benchmark niti zamjena za
+pre-agent FEDS gate.
+
+## Provjere pred predaju
+
+Pokrenuti ciljane crosswalk testove, cijeli `PYTHONPATH=src python3 -m unittest discover -s tests -v`,
+synthetic CLI smoke i `python3 scripts/validate_knowledge.py --strict`; provjeriti
+`git diff --check`. Ne instalirati pakete globalno, ne pokretati dugo/plaćeno treniranje,
+ne pushati/mergovati i ne objavljivati sirove podatke ili težine.
