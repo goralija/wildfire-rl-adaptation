@@ -1,0 +1,80 @@
+{
+  "kind": "nirops_geometry_archive_index_screen",
+  "screened_utc": "2026-11-02T15:35:43Z",
+  "dataset": {
+    "record_url": "https://data.mendeley.com/datasets/95rj5d379g/2",
+    "dataset_id": "95rj5d379g",
+    "version": 2,
+    "outer_archive_bytes": 1735431121,
+    "geometry_archive_name": "NIROPS_2020_2024_R1_R6.zip",
+    "geometry_archive_file_id": "e9caf5e3-dcd1-4633-98a9-7f857d110b29",
+    "geometry_archive_bytes": 1387524228,
+    "license": "CC BY 4.0"
+  },
+  "range_screen": {
+    "http_status": 206,
+    "content_range": "bytes 1383329924-1387524227/1387524228",
+    "tail_bytes": 4194304,
+    "tail_sha256": "33c52b9545d4f765c5cda880a7b5d165a298d57f78647963843acf7dbd9fe9f3",
+    "etag": "58bbcf45df4510ef1438f4de425a68a4-67",
+    "etag_is_content_hash": false,
+    "method": "HTTP Range read of ZIP tail; sparse local index used only to parse central directory"
+  },
+  "zip_entries": [
+    {
+      "name": "NIROPS_2020_2024_R1_R6/",
+      "compressed_bytes": 0,
+      "uncompressed_bytes": 0,
+      "method": "stored"
+    },
+    {
+      "name": "NIROPS_2020_2024_R1_R6/NIROPS_2020_2024_R1_R6.cpg",
+      "compressed_bytes": 7,
+      "uncompressed_bytes": 5,
+      "method": "deflate"
+    },
+    {
+      "name": "NIROPS_2020_2024_R1_R6/NIROPS_2020_2024_R1_R6.dbf",
+      "compressed_bytes": 315685,
+      "uncompressed_bytes": 5501956,
+      "method": "deflate"
+    },
+    {
+      "name": "NIROPS_2020_2024_R1_R6/NIROPS_2020_2024_R1_R6.prj",
+      "compressed_bytes": 121,
+      "uncompressed_bytes": 145,
+      "method": "deflate"
+    },
+    {
+      "name": "NIROPS_2020_2024_R1_R6/NIROPS_2020_2024_R1_R6.shp",
+      "compressed_bytes": 1387126470,
+      "uncompressed_bytes": 2067807444,
+      "method": "deflate"
+    },
+    {
+      "name": "NIROPS_2020_2024_R1_R6/NIROPS_2020_2024_R1_R6.shx",
+      "compressed_bytes": 80515,
+      "uncompressed_bytes": 101748,
+      "method": "deflate"
+    }
+  ],
+  "conclusion": {
+    "incident_level_zip_members_available": false,
+    "shapefile_geometry_is_one_deflate_stream": true,
+    "simple_byte_range_extraction_of_individual_shapes_available": false,
+    "source_author_ftp_root_check": "https://ftp.wildfire.gov/public/incident_specific_data/ returned 404 in browser; no specific subfolders checked",
+    "current_nifc_access_update": "The NIFC File Share landing page says that on 2026-05-04 /public/incident_specific_data moved to /protected/incident_specific_data and authenticated areas now require FAMAuth and folder authorization. The public Incident Specific Maps area remains unauthenticated, but is not the same as a guaranteed historical polygon archive.",
+    "smaller_public_final_perimeter_alternative": "The official USFS 2023 mapped-perimeter layer yielded one exact Hayden final-perimeter feature through its public service; this is a final shape only, not the NIROPS progression time series. See usfs-hayden-final-perimeter-screen-20261102.json.",
+    "next_option": "For the matched 2023 validation incidents, first screen the public USFS final-perimeter service by exact incident code and inspect its time fields; obtain the earlier NIROPS progression polygons only through authorized access or a sufficiently large scratch area with a strict VALIDATION-only filter."
+  },
+  "local_constraints": {
+    "free_disk_at_screen_mib": 699,
+    "raw_archive_downloaded": false,
+    "geometry_payload_opened": false,
+    "dbf_payload_opened": false,
+    "test_geometries_opened": false,
+    "simulator_advanced": false,
+    "agent_training": false,
+    "policy_evaluation": false
+  }
+}

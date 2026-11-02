@@ -1,0 +1,60 @@
+{
+  "kind": "usfs_validation_final_perimeter_screen",
+  "screened_utc": "2026-11-02",
+  "source": {
+    "service": "USDA Forest Service EDW Fire Occurrence and Perimeter MapServer",
+    "layer_name": "2023 Fire Perimeter",
+    "layer_url": "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_FireOccurrenceAndPerimeter_01/MapServer/30",
+    "feature_url": "https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_FireOccurrenceAndPerimeter_01/MapServer/30/8040665",
+    "layer_description_scope": "Daily and final mapped wildfire perimeters maintained for Forest Service fire records; not a guaranteed complete national incident history.",
+    "access": "Public read-only feature service; this one feature was inspected in the browser."
+  },
+  "case": {
+    "scenario_id": "fpa-fod-401316132-hayden",
+    "split": "VALIDATION",
+    "year": 2023,
+    "state": "ID",
+    "fpa_id": "INF-2023-IDSCF-023084",
+    "nirops_chart_event_code": "ID-SCF-023084",
+    "usfs_unique_fire_id": "2023-IDSCF-023084",
+    "usfs_local_fire_number": "23084",
+    "usfs_feature_objectid": 8040665,
+    "usfs_feature_category": "Final Wildfire Perimeter",
+    "owner_agency": "USFS",
+    "fpa_reported_final_area_acres": 24706.0,
+    "usfs_total_acres": 24706.0,
+    "usfs_gis_acres": 24730.34,
+    "usfs_comments": "IR Flight 8/30/2023 @2252 MDT; N350FV TK-9; acres geodesic UTM Zone 12",
+    "perimeter_datetime_epoch_ms": 1693435920000,
+    "perimeter_datetime_if_interpreted_as_utc": "2023-08-30T22:52:00Z",
+    "comment_flight_time_if_interpreted_as_mdt": "2023-08-31T04:52:00Z",
+    "timestamp_note": "The numeric perimeterdatetime and the comment's stated 22:52 MDT differ by six hours if the numeric field is UTC. Resolve field timezone semantics before any timed replay."
+  },
+  "screen_method": {
+    "filter": "FIRENAME LIKE '%Hayden%' on the 2023 Fire Perimeter layer",
+    "attribute_records_returned": 1,
+    "geometry_viewed": true,
+    "geometry_saved_locally": false,
+    "only_validation_case_accessed": true
+  },
+  "interpretation": {
+    "useful_for": [
+      "confirming that a public per-incident final polygon is available for this matched validation fire",
+      "checking its final map extent and preparing a future visualization",
+      "confirming the reported final acreage is reproduced by the USFS totalacres attribute"
+    ],
+    "not_evidence_for": [
+      "daily perimeter progression",
+      "an earlier observed starting perimeter",
+      "the timing of every edge of the fire",
+      "untreated spread or counterfactual acres saved by an agent",
+      "physical validation of the current SimFire run"
+    ],
+    "nirops_bulk_archive_still_needed_for_progression": true,
+    "test_cases_or_geometries_opened": false,
+    "simulator_advanced": false,
+    "policy_evaluation": false,
+    "agent_training": false
+  },
+  "next_step": "Check whether the same public layer has exact-code final polygons for the other seven matched 2023 VALIDATION cases. Keep the final-only shapes separate from the NIROPS progression data and investigate the time-field mismatch before using any date for replay."
+}
