@@ -32,7 +32,21 @@ U Git idu ti mali manifesti, a sirovi dataset ostaje u external/firehose/data/Su
 
 ## Dataset opaženih požara
 
-Glavna putanja je odabrana: **CFSDS v1.1 + Canadian FBP/Cell2Fire**. 23 godišnja ZIP
+### Aktivna SimFire/FEDS putanja — 2026-11-03
+
+Korisnik je usmjerio novi benchmark na SimFire, FPA-FOD početne uslove i FEDS-CONUS
+12-satna stanja. Test-excluded train/validation manifest je
+[`fireline-benchmark-cohort-v1.json`](manifests/fireline-benchmark-cohort-v1.json).
+Njegov [crosswalk audit](../reports/real-fire-data/fpa-feds-fle-crosswalk-v1.json)
+ima 13/40 train i 7/20 validation događaja sa najmanje dva uzastopna FEDS stanja
+prema strogom 24h početnom pravilu; nijedan minimum (20/8) nije dostignut. Ne
+započinjati SimFire port, no-op replay ili trening dok se ne razriješi pokrivenost oba
+splita i gate ne ponovi. FLE incidentni sažetak je 0/40 train i 13/20 validation, bez
+line-level geometrije.
+
+### Historijska Cell2Fire putanja
+
+Ranija putanja je **CFSDS v1.1 + Canadian FBP/Cell2Fire**. 23 godišnja ZIP
 para iz 2002–2024 (102,405,239 bajtova) i svi veći sirovi slojevi su lokalno u
 Git-ignorisanom `data/raw/`. Candidate manifest je
 [`cfsds-v1_1-pilot-cohort.json`](manifests/cfsds-v1_1-pilot-cohort.json); njegov trenutni

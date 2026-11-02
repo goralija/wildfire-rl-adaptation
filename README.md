@@ -8,10 +8,12 @@ Istražujemo može li prilagodba unaprijed treniranog RL agenta **različitim bu
 intervencija** smanjiti opožarenu površinu u odnosu na početni agent i heuristike,
 uz posebno ispitivanje zaštite prioritetnih područja.
 
-**Stanje:** istraživačka osnova i sintetički pilot; Cell2Fire je kompajliran, a oba
-postojeća 20×20 Firehose modela izvršena su u izolovanom legacy kontejneru.
-Fine-tuning i glavna evaluacija još nisu izvedeni.
-Pilot ne predviđa stvarne požare i nije dokaz uspješnosti RL pristupa.
+**Stanje:** aktivni plan je SimFire + FPA-FOD/FEDS-CONUS, ali pre-agent crosswalk gate
+trenutno ne prolazi pragove ni u jednom splitu (13/40 train i 7/20 validation prema
+pragu 20/8). Zato nema SimFire adaptera,
+no-op replaya ni PPO treninga. Raniji Cell2Fire/Firehose runtime i CFSDS nalazi su
+sačuvani kao historijski odvojen rad. Sintetički pilot ne predviđa stvarne požare i
+nije dokaz uspješnosti RL pristupa.
 
 Tim: Amar Hodžić, Belmin Durmo, Harun Goralija. Predmet MPVI.
 
@@ -30,11 +32,10 @@ prijedloge i otvorene odluke. [Pravila održavanja](knowledge/maintenance.md) i
    [trenutno stanje](docs/STATUS.md) i [upute za narednu sesiju](docs/NEXT_SESSION.md).
 2. Pogledaj [istraživački protokol](docs/research/PROTOCOL.md),
    [provjeru simulatora](docs/research/SIMULATOR_AUDIT.md) i [odluke](docs/specs/DECISION_RECORDS.md).
-3. Pokreni testove i pilot ispod. Glavni real-fire pravac je odabran: Canada + CFSDS v1.1
-   + Canadian FBP/Cell2Fire. Prvi stvarni slučaj je već pretvoren i izvršen, ali njegov
-   no-action rezultat se još ne slaže dovoljno s opažanjem. [Od stvarnog događaja do
-   simulator ulaza X](docs/research/REAL_CASE_PIPELINE.md) objašnjava mapiranje i sljedeće
-   provjere običnim jezikom.
+3. Pokreni testove i pilot ispod. Za aktivni FPA-FOD/FEDS-CONUS pravac prvo vidi
+   [crosswalk i pre-agent data gate](docs/research/FPA_FEDS_CROSSWALK.md). Pokrivenost
+   oba splita treba razriješiti prije SimFire implementacije. CFSDS/Cell2Fire replayi su
+   historijski nalazi opisani u [starom X/Y pipelineu](docs/research/REAL_CASE_PIPELINE.md).
 
 ## Pokretanje bez dodatnih biblioteka
 
@@ -80,7 +81,7 @@ klijent u istom modernom `.venv`; GIS paketi nisu potrebni legacy Firehose Docke
 
 ## Postojeći model i dataset
 
-[Firehose runtime nalaz](docs/research/FIREHOSE_VERIFICATION.md): 12 uspješnih kratkih
+[Legacy Firehose runtime nalaz](docs/research/FIREHOSE_VERIFICATION.md): 12 uspješnih kratkih
 rollouta, ponovljiv seed, budžetski no-op i nepromijenjene težine. [Docker runbook](docker/firehose/README.md)
 čuva build i inference komande. Nije bilo treniranja.
 
@@ -90,12 +91,14 @@ nastaje interakcijom, a train/validation/test scenariji tek trebaju biti zamrznu
 
 ## Šta se računa kao intervencija
 
-Jedna akcija tretira jednu gorivu ili aktivno zapaljenu ćeliju: trajno je uklanja iz
+Ovaj legacy/synthetic ugovor tretira jednu gorivu ili aktivno zapaljenu ćeliju: trajno je uklanja iz
 širenja; cijena je jedna jedinica budžeta. Nema putovanja ekipa, trajanja gradnje,
 probabilističkog neuspjeha ni realističnog utroška vode. No-op je besplatan i uvijek
 dostupan. Nakon potrošnje budžeta simulacija nastavlja do gašenja ili horizonta.
 Sva ikad zapaljena površina ostaje u šteti, čak i kada se kasnije ugasi.
-Detalji i razlike u odnosu na Firehose: [pravila](docs/specs/BUSINESS_RULES.md).
+To nije nova SimFire operativna akcija. Predloženi sektor-front/ekipa/linija ugovor
+čeka prolaz data gatea i opisan je u [FEDS crosswalk protokolu](docs/research/FPA_FEDS_CROSSWALK.md).
+Legacy detalji: [pravila](docs/specs/BUSINESS_RULES.md).
 
 ## Sadržaj repozitorija
 

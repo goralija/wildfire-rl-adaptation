@@ -142,3 +142,33 @@ Receipts: `reports/real-fire-data/2018_241-case.json`, `2018_241-day227-replay.j
 `2018_1770-*` files; rejection receipt `2014_538-fuel-rejection.json`. These runs
 confirm that geometric crop screening is insufficient and that simulator no-action
 behavior needs input/model diagnosis before policy training. No RL training performed.
+
+## EXP-006 — FPA-FOD ↔ FEDS-CONUS ↔ FLE crosswalk, 2026-11-03
+
+Read-only indexed HTTP Range audit of the 60-case, test-excluded FPA-FOD manifest
+(40 train in 2018/2019; 20 validation in 2023). Match rule fixed before reading endpoint
+results: FEDS `t_st` date within -1/+2 days of FPA discovery date, within 3 km of the
+FPA reported point, with exactly one candidate; no final area/perimeter or test data
+selects a fire ID. FEDS perimeters are expected at 12h cadence.
+
+The exploratory any-time proximity rule returned 17/40 train and 12/20 validation;
+that result was superseded because a perimeter could be near the FPA-FOD point long
+after `t_st`, which is not a sound initial-state match. The fixed strict rule requires
+an in-radius perimeter during the first 24 hours after `t_st`, inclusive. It returns
+13/40 train and 7/20 validation, each with ≥2 consecutive 12h states and ≥5 states
+within 48h. Both predeclared thresholds (20/8) fail. The train split was rerun with
+the strict spatial-time query. Validation was deterministically post-filtered from
+the saved candidate summary because Zenodo DNS was unavailable during continuation;
+the original candidate report and this limitation are retained. FLE grouped incident
+summary exists for 0/40 train and 13/20 validation cases; validation WFIGS IRWIN
+matches are 20/20. The FLE service query is incident-level aggregate, not individual
+line geometry.
+
+The first combined run hit Zenodo HTTP 429 on opening the validation-year file after
+both train years; split-only reports were then combined locally. A later attempt to
+freshly re-read the validation file failed at DNS resolution, so the stricter criterion
+was applied offline to the saved earliest-in-radius timestamps. The final combined
+report labels that derivation and still records the gate as FAIL.
+Exact per-case results, archive metadata and limitations: [combined crosswalk report](../../reports/real-fire-data/fpa-feds-fle-crosswalk-v1.json),
+[method/data gate](FPA_FEDS_CROSSWALK.md). This is dataset coverage only: no SimFire
+port, no-op simulation, physical-validation claim, PPO training or test-split access.

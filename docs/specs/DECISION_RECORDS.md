@@ -261,3 +261,66 @@ interpolisani dnevni target, zato rezultat nije sam po sebi dokaz greške Cell2F
 Evidence: `reports/real-fire-data/2018_241-day227-replay.json`,
 `2018_1770-day224-replay.json`, `2014_538-fuel-rejection.json` i
 `reports/real-fire-data/README.md`.
+
+## ADR-016 — SimFire/FEDS benchmark i pre-agent crosswalk gate, accepted 2026-11-03
+
+Korisnik je promijenio aktivni benchmark pravac: koristiti SimFire kao zajednički
+simulator, postojeću FPA-FOD incidentnu kohortu spojiti sa FEDS-CONUS vremenskim
+obodima, a FLE/ICS-209 koristiti kao post-hoc operativni kontekst. Test ostaje zatvoren.
+Ova odluka superseduje ADR-013 kao aktivni plan za novu benchmark granu; raniji CFSDS/
+Cell2Fire rezultati ostaju sačuvani kao historijska, odvojena putanja.
+
+Prije porta simulatora ili treniranja važi fiksni crosswalk gate: najmanje 20 train i
+8 validation požara moraju imati najmanje dva uzastopna FEDS stanja na 12h koraku.
+Join koristi samo FPA-FOD discovery date, izvornu tačku i FEDS `t_st`; 3 km je fiksna
+prostorna tolerancija, a datum prozor je -1/+2 dana. Završna površina/obod, FLE ishodi
+i test događaji ne biraju FEDS ID. Spajanje ostaje provisional jer FPA tačka i datum
+imaju nepoznatu event-level nesigurnost.
+
+Audit 2026-11-03 našao je 17/40 train slučajeva sa jedinstvenim FEDS događajem; svih
+17 ima ≥2 uzastopna stanja i ≥5 poludnevnih stanja. Validation ima 12/20 sa istim
+vremenskim minimumom. Zato prag validation=8 prolazi, ali train=20 pada i cijeli gate
+je **FAIL**. FLE summary je spojen za 0/40 train i 13/20 validation slučajeva; dostupni
+ArcGIS rezultat je grupisani incidentni sažetak, ne line-level geometrija. SimFire
+adapter, no-op gate, budžetske akcije i PPO nisu implementirani niti pokrenuti.
+
+**Posljedica:** zaustaviti se prije agenta. Sljedeći posao je train-only refiniranje
+FPA-FOD kohorte pod istim join pravilom, bez pristupa testu; ako se kohorta ili pravilo
+moraju promijeniti, dodati novu odluku prije izmjene. FEDS-MTBS može biti zaseban,
+endpoint-conditioned prikaz jer koristi konačni MTBS obod; ne predstavljati ga kao
+nezavisnu zamjenu za FEDS-CONUS no-action gate. Dok se FLE stari ID-jevi ne razriješe,
+sve politike dobijaju jednake standardne budžete i ne tvrdi se uzročna efikasnost
+konkretne historijske linije.
+
+Evidence: [FPA↔FEDS↔FLE crosswalk audit](../research/FPA_FEDS_CROSSWALK.md),
+[kombinovani JSON](../../reports/real-fire-data/fpa-feds-fle-crosswalk-v1.json),
+[train/validation manifest](../../data/manifests/fireline-benchmark-cohort-v1.json).
+
+## ADR-017 — strogi početni FEDS join i potvrda data gatea, recorded 2026-11-03
+
+Prva eksplorativna crosswalk provjera je našla 17/40 train i 12/20 validation
+slučajeva, ali je dozvoljavala da FEDS obod priđe FPA-FOD tački bilo kada u toku
+požara. To nije dovoljno pouzdano za izbor početnog stanja simulatora. Ovaj ADR
+bilježi stroži kriterij koji je primijenjen u ovom auditu (nije promjena korisnički
+odobrenih pragova): kandidat mora imati barem jedan obod najviše 3 km od FPA-FOD tačke
+između FEDS `t_st` i `t_st + 24 h` uključivo, uz isti FEDS start-date prozor -1/+2 dana
+i jedinstveno poklapanje. Potom mora imati najmanje dva uzastopna 12h stanja. Pragovi
+ostaju 20 train / 8 validation; završni obodi/površine i test i dalje su zabranjeni za
+izbor kandidata.
+
+Strogi audit nalazi 13/40 train i 7/20 validation događaja. Gate je **FAIL za oba
+splita**. Train je manji od praga za 7, validation za 1. Validation rezultat je
+deterministički izveden iz prethodno sačuvanog izvještaja kandidata: najranije vrijeme
+unutar radiusa dovoljno je da primijeni novo 24h pravilo bez pristupa testu. Novi
+mrežni upit nije uspio zbog nedostupnog Zenodo DNS-a; izvorni kandidatski izvještaj je
+sačuvan i način postfiltriranja zabilježen. Ograničenje je evidentirano u izvještaju.
+
+**Posljedica:** ne implementirati SimFire adapter niti pokretati no-op poređenje ili
+trening dok nova, unaprijed definisana train/validation kohorta ili drugi izvor ne
+zadovolji pragove. Ne podešavati radius, datum prozor ili prag na osnovu ishoda. Test
+ostaje zatvoren. Potrebna je nova odluka prije izmjene splita ili eksperimentalnog
+ugovora.
+
+Evidence: [strogi FEDS crosswalk](../research/FPA_FEDS_CROSSWALK.md),
+[combined JSON](../../reports/real-fire-data/fpa-feds-fle-crosswalk-v1.json),
+[sačuvani kandidati](../../reports/real-fire-data/fpa-feds-fle-crosswalk-validation-candidate-search-v1.json).

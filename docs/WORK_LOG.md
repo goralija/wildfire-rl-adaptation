@@ -4,6 +4,40 @@ title: Work log
 ---
 # Work log
 
+2026-11-03 — Korisnik je odobrio novu aktivnu putanju SimFire + FPA-FOD/FEDS-CONUS,
+uz FLE/ICS-209 kao ograničen post-hoc kontekst, i implementaciju prvo kroz pre-agent
+data gate. Sačuvan je novi worktree `codex/fireline-simfire-benchmark` od `main`;
+tri lokalne izmjene glavnog checkouta i stari research worktree ostali su netaknuti.
+
+Napravljen je test-excluded manifest od 40 train / 20 validation događaja. U prvoj,
+eksplorativnoj provjeri FEDS-CONUS FlatGeobuf godišnje datoteke čitane su samo
+prostornim HTTP Range upitima, bez punog downloada; širi vremenski join dao je 17/40
+train i 12/20 validation. Taj preliminarni rezultat je supersedovan strogim 24h
+startnim kriterijem u zapisu ispod. FLE incidentni sažetak se spaja za 0/40 train i
+13/20 validation; servis nije line-level geometrija.
+
+Sačuvani su split izvještaji, kombinovani JSON, crosswalk skripta/testovi i novi
+protokol/source/status/ADR-016 zapisi; korekcija i ADR-017 slijede niže. Prvi puni cross-split poziv dobio je Zenodo
+429 na 2023 fajlu; split-only pozivi su kompletirani i kombinovani lokalno. Nema
+preuzetih godišnjih arhiva. Provjere: 33 application testa prolaze (5 opcionalnih
+geo/RL testova preskočeno u Python 3.12 core environmentu); svih 7 crosswalk testova
+prošlo je u GIS-enabled environmentu; 15 knowledge testa i strict OKF/link provjera
+za 68 Markdown fajlova prolaze; synthetic CLI smoke i `git diff --check` su čisti.
+Prvi atomarni commit je sljedeći.
+
+2026-11-03 — Korekcija crosswalk gatea prije predaje. Eksplorativni join od 17/40
+train i 12/20 validation dopuštao je blizinu FPA tački bilo kada u toku požara. Zbog
+početnog stanja simulatora kriterij je pooštren: obod unutar 3 km mora biti opažen u
+prvih 24h od `t_st`; pragovi ostaju nepromijenjeni. Train je ponovo auditiran i daje
+13/40; validation je deterministički postfiltriran iz sačuvanog najranijeg
+in-radius vremena i daje 7/20. Stari kandidatski izvještaj je sačuvan; novi audit
+alat i test pokrivaju ponovljivi offline filter. Gate pada u oba splita, pa SimFire
+implementacija i no-op replay nisu započeti. Validation mrežna provjera nije ponovljena
+jer Zenodo DNS nije bio dostupan; ovo je zabilježeno u izvještajima.
+Provjere nakon korekcije: 34 aplikacijska testa prošla (5 opcionalnih preskočeno), svih
+8 crosswalk testova u GIS environmentu, 15 knowledge testova, strict OKF/link check za
+68 Markdown fajlova, CLI smoke i `git diff --check` su prošli.
+
 2026-10-28 — empty upstream repository cloned; local empty base commit created to permit
 worktree isolation. Work occurs on `feature/project-bootstrap`. No original project files
 existed. User opted out of questions; all unconfirmed project choices remain assumptions.

@@ -8,6 +8,14 @@ sources:
 ---
 # Stvarni požari: izbor podataka i granica zaključaka
 
+## Aktivna odluka — 2026-11-03
+
+Raniji CFSDS/Cell2Fire izbor ispod je historijska procjena i više nije aktivni glavni
+pravac. Korisnik je odobrio SimFire + FPA-FOD/FEDS-CONUS benchmark. Prije simulator
+porta novi podaci moraju proći [FPA↔FEDS↔FLE coverage gate](FPA_FEDS_CROSSWALK.md);
+trenutni rezultat je FAIL u oba splita (13/40 train i 7/20 validation naspram minimuma 20/8). Ne prenositi
+Cell2Fire zaključke na SimFire.
+
 Provjereno 2026-10-30. CFSDS v1.1 + Canadian FBP/Cell2Fire je odabrana glavna
 putanja jer se najbolje uklapa u već postojeći simulator i kontroler. Tri train slučaja
 su pretvorena i izvršena bez intervencija; za jedan slučaj urađeno je šest seedova.

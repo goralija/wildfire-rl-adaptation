@@ -17,6 +17,20 @@ budžetima intervencija pri šumskim požarima, uz poređenje sa zamrznutim mode
 i heuristikama te razmatranje prioritetnih područja. Polazna tema i profesorovi
 zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUBRIC.md).
 
+## Trenutni pravac — 2026-11-03
+
+Korisnik je za novi benchmark izabrao **SimFire + FPA-FOD početne uslove + FEDS-CONUS
+tok opaženih oboda**, uz FLE/ICS-209 kao ograničeni post-hoc kontekst. Ova uputa
+superseduje raniji CFSDS/Cell2Fire izbor kao aktivni pravac; CFSDS replayi ostaju
+historijski dokaz odvojene grane.
+
+Prvi obavezni korak je završeni [FPA↔FEDS↔FLE crosswalk](../docs/research/FPA_FEDS_CROSSWALK.md).
+Od 40 train slučajeva 13 ima jedinstven FEDS match i dovoljno 12h stanja; od 20
+validation slučajeva to postiže 7. Pragovi su 20/8, zato je data gate **FAIL u oba splita**.
+FLE incidentni sažetak spojen je za 0/40 train i 13/20 validation slučajeva. Ne
+portati SimFire adapter, ne pokretati no-op kalibraciju ni PPO dok pokrivenost oba
+splita ne bude razriješena i novi gate ne prođe. Test split ostaje neotvoren.
+
 ## Šta je potvrđeno
 
 - Naš sintetički engine, baseline politike i paired evaluacija rade; provjeren je
@@ -28,9 +42,9 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
   [bez tvrdnje o transferu ili istraživačkom poboljšanju](../reports/rl-smoke/README.md).
 - Simulator inputi su inventarisani; mali Dogrib/CFSDS uzorci su pregledani i imaju
   [izvore/hashove/provjerljive profile](../docs/research/REAL_FIRE_DATASETS.md).
-- Glavni real-fire pravac je odabran: Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire.
-  44 početna geometrijska kandidata podijeljena su 20/9/15 po godini požara; to nije
-  finalan benchmark. Sirovi CFSDS ZIP-ovi ostaju u ignorisanom `data/raw/`.
+- Historijska CFSDS putanja (44 kandidata, Canada + FBP/Cell2Fire) je raniji odvojeni
+  rad. Njena tri train replaya i mismatch nalazi nisu SimFire rezultati i ne prenose
+  se kao validacija novog benchmarka.
 - Tri train slučaja (`2018_747`, `2018_241`, `2018_1770`) pretvorena su i replayana bez
   intervencija/treninga; no-action prognoze 66/237/73 ha prema 15.39/12.15/12.15 ha
   pokazuju veliko neslaganje i rubni efekat. `2014_538` pada na fuel/water provjeri.
@@ -45,14 +59,15 @@ na istim historijskim uslovima. To ne znači učiti „tačnu akciju“ iz perim
 generiše counterfactual ishode. Pročitaj [X/Y mapiranje i ograničenja](../docs/research/REAL_CASE_PIPELINE.md)
 i [izbor izvora](../docs/research/REAL_FIRE_DATASETS.md).
 
-Glavni izbor geografije i simulatora je zatvoren po korisnikovoj uputi. Sljedeće je
-sistemski provjeriti fuel-vintage, FWI/weather i FBP parametre za train događaje,
-razumjeti no-action prekomjerno širenje, pripremiti 2019/2024 FBP map vintages i spojiti
-suppression/QC metadata.
-Preliminarni 44 ID-ja i pilot su u
-[CFSDS kohort manifestu](../data/manifests/cfsds-v1_1-pilot-cohort.json). Adapter za
-`burnt` + višestruki `burning` početni state i jedan case converter su već ostvareni;
-TASK-004c još treba terminalni razlog i cumulative-damage export.
+Trenutni prvi zadatak je riješiti train/validation pokrivenost FPA-FOD kohorte pod istim
+datum/tačka/3 km/prvih-24h FEDS join pravilom. Sačuvati test 2024 zatvoren. Ako nova
+kohorta ne može ispuniti pragove bez promjene pravila/splita, zabilježiti novu odluku
+prije nastavka. Potom tek slijede SimFire adapter, opaženi-state no-op poređenje,
+kalibracija zajedničkih parametara i agent benchmark po
+[aktivnom protokolu](../docs/research/FPA_FEDS_CROSSWALK.md).
+
+Stari Firehose TASK-004c i CFSDS TASK-015/016 adapteri ne ispunjavaju automatski
+SimFire kontrakt. Portovati samo mali, pregledan dio ako novi data gate prođe.
 
 TASK-014 core/legacy environment je lokalno reproducovan na macOS ARM64 + Linux ARM64;
 moderni venv ima geospatial ETL stack. Receipt bilježi pakete, image hash i inference.
