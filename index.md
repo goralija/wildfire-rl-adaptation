@@ -19,7 +19,7 @@ okf_version: "0.2"
 - [Podaci](data/index.md) - Porijeklo, FPA-FOD/FEDS kohorta i historijski CFSDS nalazi.
 - [Real-case pipeline](docs/research/REAL_CASE_PIPELINE.md) - Jednostavan opis šta stvarni podaci daju (Y), šta simulator prima (X), te jaz početnog fronta.
 - [FPA-FOD/FEDS crosswalk i data gate](docs/research/FPA_FEDS_CROSSWALK.md) - Aktivni SimFire benchmark pravac, pokrivenost i stop-uslov.
-- [SimFire/FEDS runtime environment](docs/research/SIMFIRE_ENVIRONMENT.md) - pinovani Python 3.9 runtime, raw cache i setup komande.
+- [SimFire/FEDS runtime i trening](docs/research/SIMFIRE_ENVIRONMENT.md) - pinovani Python 3.9 runtime, TRAIN-only PPO komanda i naučna ograničenja.
 - [Izvještaji](reports/index.md) - Sintetički pilot, runtime dokazi, FEDS crosswalk i historijski CFSDS replay.
 - [Runtime okruženja](docker/index.md) - Pinovani legacy setup i inference bez treniranja.
 - [Promjene baze znanja](log.md) - Najnovije promjene prve i veze na detaljnu historiju.

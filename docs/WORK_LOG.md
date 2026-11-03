@@ -418,3 +418,26 @@ SimFire internom koraku WAF-1 rollout trajao je oko 40 sekundi;
 ne kohortni gate; nijedan faktor ili time-step još nije zaključan. Pilot je zabilježen u
 `reports/real-fire-data/feds-simfire-noop-pilot-v1.json`. Nema suppression akcija, RL,
 validation rastera ili TEST pristupa.
+
+2026-11-03 — na korisnikov direktni zahtjev dovršena je tehnička TRAIN-only FEDS/SimFire
+PPO putanja. Ciljni `.local/uv-python` launcher bio je zaglavljen u I/O; sačuvan je kao
+backup, a `bin/python` sada poziva provjereni Python 3.9.25 iz susjednog očuvanog
+`cfsds-train-qc` worktreea uz lokalnih 85 paketa. `uv pip check` prolazi. Novi
+`FedsSimFireEnv` uzorkuje isključivo 99 train slučajeva, koristi četiri 12h odluke kroz
+48h, budžete, stalno legalan no-op, kumulativnu štetu i kratku osmosmjernu fireline
+akciju. Budžet ili gašenje vatre ne prekida epizodu. Budući FEDS obodi ne ulaze u
+policy observation/reward.
+
+Pokrenut je 64-decision CPU MaskablePPO smoke sa WAF .605 kao eksplicitnim provisional
+parametrom. Checkpoint je sačuvan/ponovo učitan, završni TRAIN rollout odrađen, a zaseban
+budget-1 TRAIN potez potrošio je jednu jedinicu i postavio fireline. Svi izlazi/težine
+su ostali u `.local/feds-ppo-smoke-waf-0.605-64steps`; ovo nije benchmark ili RL rezultat.
+Ponavljanje Plateau .605 no-op-a dalo je 19 ćelija/61.56 ha, IoU .64 i bez ruba u četiri
+tačke; WAF nije izabran i cohort persistence/elipsa gate je još otvoren. Validation
+mape i 2024 TEST nisu preuzeti/učitani.
+
+Provjera: Python 3.9.25 suite 63/63 PASS; project Python 3.12 suite 60 PASS i 9 optional
+dependency skips; strict knowledge validation 69 Markdown PASS; glavni CLI smoke,
+85-package `uv pip check` i `git diff --check` prolaze. Detalji i tačna trening komanda
+su u [environment record](research/SIMFIRE_ENVIRONMENT.md), [EXP-010](research/EXPERIMENT_LOG.md)
+i [handoff](NEXT_SESSION.md).

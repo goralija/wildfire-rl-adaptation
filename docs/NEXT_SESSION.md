@@ -1,86 +1,96 @@
 ---
 type: Handoff
-title: SimFire/FEDS no-op gate — setup završен
+title: SimFire/FEDS TRAIN-only PPO path and calibration status
 ---
 # Naredni korak
 
 ## Trenutno stanje — 2026-11-03
 
-Rad je na grani `codex/fireline-simfire-benchmark` u izdvojenom
-`.worktrees/fireline-simfire-benchmark` worktreeu izvedenom iz `main`. Main checkout i
-stari research worktree ostaju sačuvani.
+Aktivan worktree je `.worktrees/fireline-simfire-benchmark` na grani
+`codex/fireline-simfire-benchmark`, izvedenoj iz `main`. Glavni checkout i raniji
+`cfsds-train-qc` worktree su sačuvani.
 
-Početni data/environment gate sada prolazi za prošireni, predeklarisani okvir velikih
-požara: 99 train (2018/2019) + 20 validation (2023), sa pet FEDS stanja po 12h kroz
-48h. Originalni 60-fire uzorak i dalje pada prag 20/8 (19 train, 7 validation); taj
-neuspjeh nije prepisan. Test 2024 nije preuzet niti otvoren.
+TRAIN input setup je završen: 99 train slučajeva, svi sa checksum-verifikovanim
+LANDFIRE gorivom/terenom i FEDS početnom scar/front maskom. Tačan front postoji za
+119/119 train/validation startova; episode manifest i gridMET forcing pokrivaju 99 train
+i 20 validation slučajeva. Validation mape nisu preuzete, a 2024 TEST nije preuzet ni
+učitan.
 
-Završeno na ovom worktreeu:
+### Treniranje je tehnički dostupno
 
-- checksum-verified FEDS perimeter i aktivni-front arhivi; tačan aktivni front postoji
-  za 119/119 početnih stanja i svaka linija je unutar 375m izvornog piksela od oboda;
-- geometrijski preflight: cijeli početni obod/front stane u 256×256 ćelija po 180m za
-  99/99 train i 20/20 validation;
-- python 3.9.25 SimFire venv je lokalno postavljen, 85 paketa prolazi `uv pip check`;
-- svih 99/99 train slučajeva ima validirane LANDFIRE fuel/elevation mape i početne
-  FEDS maske; coverage receipt sadrži SHA-256 za 198 rastera. Validation mape se još
-  ne povlače prije nego se parametri izaberu na trainu;
-- checksum-verified gridMET `th`, `vs`, `fm100` godišnji arhivi za 2018/2019/2023;
-  za 119 slučajeva uzorkovana su 4 dnevna vremenska forcing segmenta (396 train,
-  80 validation). WAF faktor nije izabran;
-- jedan 60-min SimFire integracijski smoke prolazi sa demonstracijskim vremenom:
-  16 početnih ćelija, 27 kumulativnih ćelija nakon sata. To nije historijski no-op gate
-  niti fizička validacija;
-- istorijski 48h no-op runner radi na train slučaju uz gridMET po 12h segmentima. Plateau
-  pilot daje 61.56 ha/IoU .64 pri WAF .20–.60, a pri .65 skače na 1,244 ha u 12h; .75–1.0
-  preplavljuje model i dotiče rub. Nijedan WAF nije izabran. 5-min interni korak je samo
-  kandidat za efikasnost i nije zaključan;
-- puni suite od 58 testova prolazi bez preskakanja u SimFire venv-u; strict validator
-  provjerava 69 Markdown fajlova, a CLI smoke i svih 85 paketnih zavisnosti prolaze.
+Na korisnikov zahtjev dodan je pravi FEDS/SimFire Gymnasium env i MaskablePPO CLI,
+odvojeni od starog sintetičkog env-a i Firehose checkpointa. Env uzorkuje samo TRAIN
+epizode, koristi četiri 12h odluke kroz 48h, budžet `0,2,4` po defaultu, no-op plus osam
+smjerova za kratku fireline akciju. Budžet ne prekida epizodu, no-op ostaje dostupan, a
+kumulativna šteta se čuva i nakon fireline upisa. Reward koristi samo dodatne SimFire
+burn ćelije; budući FEDS obodi ne ulaze u policy observation ili reward.
+Na stvarnom Plateau TRAIN slučaju potvrđen je i budžet-1 potez: validan fireline je
+postavljen, jedna jedinica potrošena, pa se sva četiri 12h koraka završe.
 
-Raw arhive, venv, case rasteri, weather uzorci i rollout izlazi nalaze se u ignorisanom
-`.local/`. Glavni kod, sažeti izvještaji i checksumi su verzionisani.
+Pokreni novi, kratak trening direktorij pod ignorisanim `.local/`:
 
-## Glavni artefakti
+```sh
+PYTHONPATH=src MPLCONFIGDIR=.local/mpl-cache XDG_CACHE_HOME=.local/cache SDL_VIDEODRIVER=dummy \
+  .local/simfire-venv/bin/python scripts/train_feds_simfire.py \
+  --steps 64 --out .local/feds-ppo-experiments/NEW-ID \
+  --wind-adjustment-factor 0.605 --budgets 0,2,4 --seed 7
+```
 
-- [Dataset crosswalk i ograničenja](research/FPA_FEDS_CROSSWALK.md)
-- [Environment setup, mapa i weather provenance](research/SIMFIRE_ENVIRONMENT.md)
-- [ADR-019: mreža, agentova informacija i no-op gate](specs/DECISION_RECORDS.md)
-- [119-case episode manifest](../data/manifests/feds-episode-cohort-v1.json)
-- [Active-front coverage](../reports/real-fire-data/feds-active-front-coverage-v1.json)
-- [180m map preflight](../reports/real-fire-data/feds-simfire-grid-preflight-v1.json)
-- [gridMET archive/sample coverage](../reports/real-fire-data/feds-gridmet-weather-coverage-v1.json)
-- [one-case LANDFIRE/SimFire smoke receipt](../reports/real-fire-data/feds-simfire-input-smoke-v1.json)
-- [99-case train LANDFIRE coverage](../reports/real-fire-data/feds-simfire-input-train-coverage-v1.json)
-- [single-case no-op WAF sensitivity diagnostic](../reports/real-fire-data/feds-simfire-noop-pilot-v1.json)
-- [Pythoni lock](../requirements/simfire-macos-arm64-py39.freeze.txt)
+`--steps` mora biti višekratnik 64; 64 je bounded smoke, veće vrijednosti treniraju
+duže. `0.605` je samo eksplicitan, provisional primjer za reprodukciju Plateau smokea,
+ne zaključena postavka. Izlazni direktorij mora biti nov. Checkpoint i training receipt
+se ne commituju. Jedan stvarni 64-step smoke već je završio: sačuvan/ponovo učitan model
+i završni TRAIN rollout su u `.local/feds-ppo-smoke-waf-0.605-64steps/`.
 
-## Sljedeća implementacija
+QA je završena: SimFire Python 3.9 suite 63/63 PASS; glavni Python 3.12 suite 60 PASS uz
+9 očekivanih optional-dependency skips; knowledge validator 69/69 Markdown PASS; CLI
+smoke, svih 85 package checks i `git diff --check` prolaze.
 
-1. Kalibrisati mali broj zajedničkih simulator parametara na train kohorti uz train-only
-   48h no-op i persistence/elipsu. Pilot pokazuje pragovno ponašanje, zato ne podešavati
-   WAF po požaru ili samo prema Plateau cilju; izmjeriti cijenu rollouts prije batcha.
-2. Kad je shared setup izabran i zaključan, preuzeti validation mape i provjeriti no-op
-   prema istim metrikama. Ako ne nadmaši persistence i elipsu ili udara u rub, zaustaviti
-   RL dio i dijagnosticirati model/inpute.
-3. Tek nakon no-op gatea implementirati sporo građenje linije, wait/16 sektora,
-   20-članu ekipu × 8h i budžete 0/1/2/4 smjene. Nakon tih testova dodati frozen PPO i
-   fine-tuning na istim epizodama, budžetima, vremenu, informacijama i seedovima.
-4. Otvoriti 2024 test samo za završni obračun, nakon što su izbori zaključani.
+Okruženje i testovi: [SimFire/FEDS env](../src/wildfire_rl/feds_simfire_env.py),
+[trening CLI](../scripts/train_feds_simfire.py),
+[env testovi](../tests/test_feds_simfire_env.py). Paketni `uv pip check` prolazi za 85
+paketa. Originalni target Python runtime je bio zaglavljen; trenutni `bin/python` poziva
+isti provjereni Python 3.9.25 preko susjednog `cfsds-train-qc` worktreea, dok target
+venv i njegove biblioteke ostaju u ovom worktreeu. Originalni symlink je sačuvan kao
+`.local/simfire-venv/bin/python.stalled-target-runtime`; ne uklanjati susjedni worktree
+dok se lokalni Python runtime ne zamijeni samostalnom kopijom.
 
-Pri radu ostaviti 2024 zatvoren. Ne učitavati buduće FEDS obode u početno stanje ili
-policy observation; mogu se koristiti samo za post-hoc poređenje. GridMET budućih 12h
-segmenata je ex-post forcing za simulator, ne prognoza dostupna agentu.
+### Naučni status
 
-## Provjere pred predaju
+Jedan Plateau TRAIN no-op recheck pri WAF .605 ponovio je 19 kumulativnih ćelija
+(61.56 ha), IoU .64 prema 71.28 ha observed, bez dodira ruba u 4/4 vremenske tačke.
+WAF oko .615–.625 brzo prerasta mapu. To je jedan požar, ne izbor WAF-a ni cohort gate.
+Nijedan WAF/timebase nije izabran.
 
-Pokrenuti `PYTHONPATH=src python3 -m unittest discover -s tests -v`, repo smoke CLI,
-`python3 scripts/validate_knowledge.py --strict` sa `requirements/knowledge.txt`,
-`uv pip check --python .local/simfire-venv/bin/python` i `git diff --check`.
-Ne preuzimati/commitovati raw arhive ili venv. Ne pokretati dug trening, cloud compute,
-push ili merge.
+TRAIN-only no-op kohorta i poređenje sa persistence/elipsnom referencom još su otvoreni.
+Zato je omogućena tehnička PPO putanja, ali PPO smoke nije benchmark, fizička validacija
+ili dokaz prednosti. Za sve train/validation/test granice i ograničenja vidi
+[environment record](research/SIMFIRE_ENVIRONMENT.md) i
+[ADR-021](specs/DECISION_RECORDS.md). Test 2024 ostaje zatvoren.
 
-## Starija putanja
+## Za mjerodavno poređenje
 
-CFSDS/Cell2Fire izvještaji su historijski i odvojeni. Njihovi nalazi nisu SimFire
-rezultati niti zamjena za ovaj 48h no-op gate.
+1. Na TRAIN-u izmjeriti zajedničke WAF/timebase kandidate, no-op, persistence i
+   unaprijed definisanu elipsu uz iste 48h vremenske tačke i map-edge metrike.
+2. Zamrznuti zajedničke postavke prije preuzimanja validation mapa; validation koristiti
+   samo za provjeru već fiksiranih postavki.
+3. Prije policy-benefit poređenja precizirati operativnu gradnju linije, pa svim
+   agentima dati iste scenarije, budžete, horizonte, observations i seedove.
+4. TEST 2024 otvoriti tek za završni obračun poslije zaključavanja izbora.
+
+Ove naučne provjere ne blokiraju lokalni tehnički PPO trening; blokiraju samo tvrdnje o
+validaciji i koristi politike.
+
+## Provjere prije predaje
+
+```sh
+PYTHONPATH=src python3 -m unittest discover -s tests -v
+PYTHONPATH=src python3 -m wildfire_rl.cli --config configs/smoke.json --out runs/NEW-ID
+python3 scripts/validate_knowledge.py --strict
+UV_CACHE_DIR=.local/uv-cache uv pip check --python .local/simfire-venv/bin/python
+git diff --check
+```
+
+Ne preuzimati validation rastere ni TEST podatke tokom PPO smokea. Ne pokretati plaćeni
+compute, dugi trening, push ili merge bez odgovarajućeg naloga/upute. CFSDS/Cell2Fire
+rezultati ostaju historijski i odvojeni od SimFire/FEDS.

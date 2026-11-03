@@ -32,12 +32,13 @@ FEDS stanja kroz 48h. Taj prošireni pre-agent data-coverage gate je PASS, ali r
 je za selektovan okvir velikih požara, ne nacionalno reprezentativan uzorak.
 
 FEDS active-front coverage potvrđen je za 119/119 početnih stanja; 119/119 početnih
-geometrija stane u 256×256×180m mapu. SimFire Python 3.9.25 runtime je postavljen,
-gridMET raw forcing je uzorkovan za 119 slučajeva, a jedan train slučaj je pokrenut
-sa stvarnim LANDFIRE mapama i demonstracijskim vremenom. Sljedeće je bulk train fuel/
-terrain mapiranje i no-op replay s persistence/elipsnom referencom. Wind adjustment
-faktor nije izabran. Ne pokretati PPO dok no-op ne prođe. Originalni kohortni neuspjeh
-i prošireni frame ostaju odvojeno dokumentovani; test 2024 nije učitan.
+geometrija stane u 256×256×180m mapu. SimFire Python 3.9.25 runtime i 99/99 TRAIN
+LANDFIRE rastera su postavljeni; gridMET forcing je uzorkovan za 119 slučajeva. No-op
+Plateau pilot pokazuje oštar WAF prag; parametar i interni korak nisu izabrani, a
+cohort no-op gate s persistence/elipsnom referencom ostaje otvoren. Na direktan
+korisnikov zahtjev sada postoji zaseban TRAIN-only MaskablePPO put za tehničko treniranje
+iz početka; to ne prolazi niti zamjenjuje research gate. Validation mape nisu preuzete,
+a test 2024 nije učitan.
 
 ## Šta je potvrđeno
 
@@ -48,6 +49,9 @@ i prošireni frame ostaju odvojeno dokumentovani; test 2024 nije učitan.
   potvrđuje izvodivost, seed/budžet i nepromijenjene težine.
 - Moderni Gymnasium/PPO smoke je zaseban mali model u sintetičkom engineu,
   [bez tvrdnje o transferu ili istraživačkom poboljšanju](../reports/rl-smoke/README.md).
+- Zaseban FEDS/SimFire TRAIN env omogućio je 64-step MaskablePPO trening, spremanje/
+  ponovno učitavanje checkpointa i završni TRAIN rollout; to je tehnička provjera
+  [train putanje](../docs/research/SIMFIRE_ENVIRONMENT.md), ne kalibrisan benchmark.
 - Simulator inputi su inventarisani; mali Dogrib/CFSDS uzorci su pregledani i imaju
   [izvore/hashove/provjerljive profile](../docs/research/REAL_FIRE_DATASETS.md).
 - Historijska CFSDS putanja (44 kandidata, Canada + FBP/Cell2Fire) je raniji odvojeni
@@ -56,7 +60,7 @@ i prošireni frame ostaju odvojeno dokumentovani; test 2024 nije učitan.
 - Tri train slučaja (`2018_747`, `2018_241`, `2018_1770`) pretvorena su i replayana bez
   intervencija/treninga; no-action prognoze 66/237/73 ha prema 15.39/12.15/12.15 ha
   pokazuju veliko neslaganje i rubni efekat. `2014_538` pada na fuel/water provjeri.
-  Treba riješiti input/extent/model gate prije treniranja agenta.
+  Zato no-op/reference gate za research tvrdnje ostaje otvoren.
 - FireSpread_MedEU/EFFIS ostaje odvojeni mogući BiH pravac; evropski NFFL fuel kodovi
   nisu direktno kompatibilni s trenutnim Canadian FBP.
 
@@ -67,11 +71,11 @@ na istim historijskim uslovima. To ne znači učiti „tačnu akciju“ iz perim
 generiše counterfactual ishode. Pročitaj [X/Y mapiranje i ograničenja](../docs/research/REAL_CASE_PIPELINE.md)
 i [izbor izvora](../docs/research/REAL_FIRE_DATASETS.md).
 
-Trenutni prvi zadatak je no-op SimFire replay na proširenom, unaprijed spremljenom
-FPA-FOD/FEDS frame-u: dovršiti sve train LANDFIRE izvatke, koristiti gridMET samo kao
+Sljedeći research gate je no-op SimFire replay na train kohorti: koristiti gridMET kao
 skriveni ex-post simulator forcing, porediti dodatni burn sa persistence/elipsom i
 provjeriti rub mape. Zaključati mali skup zajedničkih parametara prije validation
-provjere. Ne otvarati test 2024 niti pokretati PPO prije no-op gatea prema
+provjere. Tehnički PPO smoke/trening sada može raditi na TRAIN-u, ali se ne koristi kao
+benchmark ili tvrdnja o koristi dok ovaj gate nije završen prema
 [aktivnom crosswalk protokolu](../docs/research/FPA_FEDS_CROSSWALK.md).
 
 TASK-014 core/legacy environment je lokalno reproducovan na macOS ARM64 + Linux ARM64;
