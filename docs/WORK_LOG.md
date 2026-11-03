@@ -4,6 +4,13 @@ title: Work log
 ---
 # Work log
 
+2026-11-03 — Pregledao sam glavne ulaze za novu sesiju i našao zastarjele prioritete:
+AGENTS i tri agent shima još su stavljali TASK-012/CFSDS na prvo mjesto; project
+context i backlog još su prikazivali cohort no-op gate kao budući korak; HANDOFF/README
+su prikazivali stari pre-agent crosswalk FAIL. Uskladio sam te ulaze, navigaciju koda,
+podataka i istraživanja s ADR-022 i trenutnim rezultatima. Starije odluke/eksperimenti ostaju
+neizmijenjena historija. Sljedeći posao ostaje dijagnostika i ponovljeni TRAIN-only gate.
+
 2026-11-03 — Korisnik je odobrio novu aktivnu putanju SimFire + FPA-FOD/FEDS-CONUS,
 uz FLE/ICS-209 kao ograničen post-hoc kontekst, i implementaciju prvo kroz pre-agent
 data gate. Sačuvan je novi worktree `codex/fireline-simfire-benchmark` od `main`;

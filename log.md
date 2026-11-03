@@ -1,5 +1,15 @@
 # Promjene baze znanja
 
+## 2026-11-03: Handoff i agent upute usklađeni s ADR-022
+
+- Ažurirani su AGENTS, Claude/Gemini/Copilot ulazi, project context, HANDOFF, README,
+  backlog, code map i data/research ulazi da razlikuju data-coverage PASS od TRAIN
+  no-op FAIL.
+- Ispravljena je zastarjela uputa da je TASK-012/CFSDS još aktivan i da no-op kohortni
+  gate tek slijedi. Stariji eksperimenti i odluke ostaju u historiji.
+- Sljedeći korak je dijagnostika i ponovljeni zajednički TRAIN gate; validation rasteri
+  i TEST 2024 ostaju zatvoreni do prolaza/odgovarajuće faze.
+
 ## 2026-11-03: TRAIN-only SimFire no-op screen — gate FAIL
 
 - Osam WAF kandidata je poređeno na istih 99 TRAIN slučajeva i 396 vremenskih tačaka po kandidatu, uz no-op, persistence i fiksnu 2:1 elipsu.
