@@ -48,7 +48,10 @@ class GridmetWeatherTests(unittest.TestCase):
         self.assertEqual(mapped["fuel_moisture_fraction_proxy"], 0.1)
 
     def test_nearest_rectilinear_gridmet_cell(self):
-        import numpy as np
+        try:
+            import numpy as np
+        except ImportError as exc:
+            self.skipTest("optional NumPy dependency is not installed: %s" % exc)
 
         row, column, longitude, latitude = select_gridmet_nearest_cell(
             np.array([-110.0, -109.95]),
