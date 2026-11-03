@@ -441,3 +441,21 @@ dependency skips; strict knowledge validation 69 Markdown PASS; glavni CLI smoke
 85-package `uv pip check` i `git diff --check` prolaze. Detalji i tačna trening komanda
 su u [environment record](research/SIMFIRE_ENVIRONMENT.md), [EXP-010](research/EXPERIMENT_LOG.md)
 i [handoff](NEXT_SESSION.md).
+
+2026-11-03 — dovršen je TRAIN-only no-op screen uz persistence i unaprijed definisanu
+elipsu. Osam WAF-ova (0, .0025, .01, .025, .05, .10, .20, .605) obrađeno je na istih
+99 slučajeva, 5-min internom koraku, seed=0 i 48h horizontu; svaki run dao je 99/99
+uspješnih epizoda i 396 vremenskih poređenja. Nijedan kandidat nije prošao strogi uslov
+(bez ruba i bolji mean IoU i površinska greška od obje reference). Persistence je .5343
+IoU / 2351.7ha greške; elipsa .5308 / 2346.6ha. Najbolji kandidat IoU-om je WAF .0025
+(.4769), najniži area error je WAF .01 (2262.1ha); WAF .605 dodiruje rub u 61 slučaju.
+Zato nema izabranog WAF ili timebase; benchmark PPO ostaje blokiran, a tehnički smoke
+ostaje moguć. Validation mape i TEST 2024 nisu učitani. Sažetak/hashovi su u
+`reports/real-fire-data/feds-simfire-train-noop-screen-v1.json`, raw reporti ostaju u
+`.local/`. Suite Python 3.9: 65 PASS; glavni suite: 62 PASS, 9 optional skips; CLI smoke
+and 85-package check prolaze. Ovo je model screen, ne fizička validacija.
+
+Dodatna WAF .01 / 1-min timebase osjetljivost takođe je završila 99/99: mean IoU .4771,
+bez rubnih kontakata, naspram .4769 na 5-min koraku. Rezultat ne mijenja gate; 3/10/15-
+min koraci nisu pokretani i interni korak ostaje neizabran. Strict knowledge validator
+prošao je 69 Markdown fajlova, a `git diff --check` je čist.

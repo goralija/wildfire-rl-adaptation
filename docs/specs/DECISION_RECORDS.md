@@ -444,3 +444,34 @@ Evidence: [environment record and command](../research/SIMFIRE_ENVIRONMENT.md),
 [environment](../../src/wildfire_rl/feds_simfire_env.py),
 [training CLI](../../scripts/train_feds_simfire.py),
 [budget/damage tests](../../tests/test_feds_simfire_env.py).
+
+## ADR-022 — TRAIN no-op screen fails; no shared WAF accepted, recorded 2026-11-03
+
+Completed the paired historical-weather no-op screen over all 99 manifest TRAIN cases
+for WAF `0, 0.0025, 0.01, 0.025, 0.05, 0.10, 0.20, 0.605`, with seed 0, 5-minute
+internal updates, four 12-hour forcing segments, and 48-hour episodes. Each candidate
+has 396 scored case-timepoints and 99/99 successful cases. The future FEDS perimeters
+are loaded only after each simulator episode and used only for scoring.
+
+The reference scores are mean IoU .5343 / mean absolute area error 2,351.7ha for
+persistence and .5308 / 2,346.6ha for the fixed 2:1 ellipse. The best candidate mean
+IoU is .4769 (WAF .0025); the lowest candidate area error is 2,262.1ha (WAF .01). High
+WAF values create map-edge artifacts; low WAF values avoid the edge but remain materially
+below both references on IoU. **No candidate satisfies the screen** (complete cohort,
+zero edge contacts, and better mean IoU plus lower area error than both references). No
+WAF or internal timestep is accepted.
+
+**Consequence:** technical PPO smoke remains possible, but benchmark/policy-benefit
+training is blocked. Diagnose shared forcing, rasterization, and SimFire response; then
+repeat the unchanged TRAIN gate with an explicitly documented candidate set. Do not
+fetch validation maps until a TRAIN candidate passes and settings are frozen; keep 2024
+TEST closed. This is a TRAIN-only model screen, not physical validation because FEDS
+perimeters are satellite-derived estimates and gridMET values are coarse proxies.
+
+A follow-up sensitivity run at WAF .01 with a 1-minute internal step also completed
+99/99 cases with no edge contact and mean IoU .4771, effectively unchanged from .4769
+at 5 minutes. The supported 3/10/15-minute steps were not run; no timebase is selected.
+
+Evidence: [cohort screen report](../../reports/real-fire-data/feds-simfire-train-noop-screen-v1.json),
+[environment record](../research/SIMFIRE_ENVIRONMENT.md),
+[TRAIN evaluator](../../scripts/evaluate_feds_train_noop.py).

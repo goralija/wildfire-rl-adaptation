@@ -303,3 +303,44 @@ venv entrypoint uses the verified Python 3.9 base from the preserved neighboring
 `cfsds-train-qc` worktree while retaining this worktree's installed packages. This
 launcher dependency is local and documented; replace it before moving/removing that
 worktree.
+
+## EXP-011 — SimFire TRAIN-only no-op/reference screen, 2026-11-03
+
+Completed eight paired shared-WAF screens on all 99 manifest TRAIN cases. Each used
+seed 0, the provisional 5-minute SimFire update, four historical 12-hour gridMET
+segments, a 48-hour horizon, and four exact FEDS post-hoc target times (396 scored
+case-timepoints per candidate). All eight reports completed 99/99 cases with zero
+runner failures. FEDS future outlines were loaded only after the no-op episode and were
+never provided to SimFire or the policy. Validation rasters and 2024 TEST were not
+loaded.
+
+| WAF | Mean IoU | Mean absolute area error (ha) | Edge-contact timepoints | Strict screen |
+|---:|---:|---:|---:|---|
+| 0 | .4768 | 2,263.1 | 0 | FAIL |
+| .0025 | .4769 | 2,265.0 | 0 | FAIL |
+| .01 | .4769 | 2,262.1 | 0 | FAIL |
+| .025 | .4679 | 2,314.2 | 0 | FAIL |
+| .05 | .4386 | 2,483.8 | 0 | FAIL |
+| .10 | .3854 | 3,360.1 | 1 | FAIL |
+| .20 | .2984 | 7,176.8 | 22 | FAIL |
+| .605 | .1425 | 27,624.2 | 157 | FAIL |
+
+Persistence scored mean IoU .5343 and mean area error 2,351.7ha; the predeclared 2:1
+ellipse scored .5308 and 2,346.6ha. The rule required complete coverage, no edge contact,
+and both better mean IoU and lower mean area error than each reference. No candidate
+passed. WAF .01 has the lowest area error but does not approach reference IoU; WAF .605
+has edge contacts in 61/99 cases. Thus no WAF/timebase is selected and benchmark PPO
+training remains blocked pending diagnosis and a new train-only screen. This result is
+not physical validation; FEDS is satellite-derived and gridMET is a coarse proxy.
+
+A WAF .01 sensitivity run with a 1-minute internal step also completed 99/99 cases.
+Mean IoU was .4771 (versus .4769 at 5 minutes), with zero edge contacts; this is no
+meaningful change relative to the .054 IoU deficit against the references. The 3/10/15-
+minute options were not run, so the internal timestep remains unselected.
+
+Aggregate report: `reports/real-fire-data/feds-simfire-train-noop-screen-v1.json`.
+Full per-case reports (with checksums listed in that aggregate) remain in ignored
+`.local/feds-noop-diagnostics/`. QA after code changes: SimFire Python 3.9.25 suite
+65/65 pass; project Python 3.12 suite 62 pass with 9 optional dependency skips; CLI
+smoke passes; all 85 venv packages are compatible; strict knowledge validation passes
+69 Markdown files and `git diff --check` is clean.

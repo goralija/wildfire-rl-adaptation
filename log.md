@@ -1,5 +1,13 @@
 # Promjene baze znanja
 
+## 2026-11-03: TRAIN-only SimFire no-op screen — gate FAIL
+
+- Osam WAF kandidata je poređeno na istih 99 TRAIN slučajeva i 396 vremenskih tačaka po kandidatu, uz no-op, persistence i fiksnu 2:1 elipsu.
+- WAF .01 sa 1-min internim korakom dao je IoU .4771 (naspram .4769 na 5 min), bez rubnog kontakta; zaključak se nije promijenio.
+- Nijedan kandidat nije prošao; persistence IoU=.5343, elipsa=.5308, najbolji SimFire=.4769. WAF .605 ima rubne kontakte u 61/99 slučajeva.
+- Nije izabran WAF/timebase. Validation rasteri i 2024 TEST ostaju zatvoreni; benchmark PPO čeka dijagnostiku i prolaz novog TRAIN gatea.
+- [Izvještaj](reports/real-fire-data/feds-simfire-train-noop-screen-v1.json), [status](docs/STATUS.md), [ADR-022](docs/specs/DECISION_RECORDS.md), [environment record](docs/research/SIMFIRE_ENVIRONMENT.md).
+
 ## 2026-11-03: TRAIN-only FEDS/SimFire PPO putanja
 
 - Na korisnikov direktni zahtjev dodan je Gymnasium env i MaskablePPO CLI za 99 TRAIN
@@ -13,8 +21,8 @@
   worktreea; lokalne biblioteke ostaju u aktivnom venv-u.
 - Završio je 64-step CPU PPO smoke, checkpoint save/reload i završni TRAIN rollout.
   Izlaz ostaje ignorisan pod `.local/feds-ppo-smoke-waf-0.605-64steps`. WAF .605 je samo
-  provisionalni smoke ulaz; nije kalibrisan. Cohort no-op/persistence/elipsa gate je i
-  dalje otvoren, a validation mape i test 2024 nisu otvoreni.
+  provisionalni smoke ulaz; nije kalibrisan. TRAIN cohort gate je naknadno dovršen i
+  pao; vidi novi screening izvještaj. Validation mape i test 2024 nisu otvoreni.
 - [ADR-021](docs/specs/DECISION_RECORDS.md), [environment/runbook](docs/research/SIMFIRE_ENVIRONMENT.md),
   [TRAIN env](src/wildfire_rl/feds_simfire_env.py), [CLI](scripts/train_feds_simfire.py)
   i [regresijski testovi](tests/test_feds_simfire_env.py).
