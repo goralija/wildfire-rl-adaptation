@@ -19,17 +19,25 @@ zahtjevi su sažeti u [rubrici/zahtjevima](../docs/research/REQUIREMENTS_AND_RUB
 
 ## Trenutni pravac — 2026-11-03
 
-Korisnik je za novi benchmark izabrao **SimFire + FPA-FOD početne uslove + FEDS-CONUS
-tok opaženih oboda**, uz FLE/ICS-209 kao ograničeni post-hoc kontekst. Ova uputa
-superseduje raniji CFSDS/Cell2Fire izbor kao aktivni pravac; CFSDS replayi ostaju
-historijski dokaz odvojene grane.
+Korisnik je izabrao **SimFire + FPA-FOD početne uslove + FEDS-CONUS opažene obode**,
+uz FLE/ICS-209 kao ograničeni post-hoc kontekst. FPA-FOD godina drži isti incidentni
+split: train 2018/2019, validation 2023, test 2024; test ostaje zatvoren.
 
-Prvi obavezni korak je završeni [FPA↔FEDS↔FLE crosswalk](../docs/research/FPA_FEDS_CROSSWALK.md).
-Od 40 train slučajeva 13 ima jedinstven FEDS match i dovoljno 12h stanja; od 20
-validation slučajeva to postiže 7. Pragovi su 20/8, zato je data gate **FAIL u oba splita**.
-FLE incidentni sažetak spojen je za 0/40 train i 13/20 validation slučajeva. Ne
-portati SimFire adapter, ne pokretati no-op kalibraciju ni PPO dok pokrivenost oba
-splita ne bude razriješena i novi gate ne prođe. Test split ostaje neotvoren.
+Kompletni lokalni FEDS perimeter fajlovi za 2018, 2019. i 2023. checksum-verifikovani
+su. Originalna 60-case kohorta po fiksnom ranom join pravilu ima 19/40 train i 7/20
+validation te pada pragove 20/8. Širi, unaprijed spremljeni FPA-FOD candidate frame za
+iste godine ima 208 train i 56 validation screen kandidata; isti join pravac nalazi
+99/208 train i 20/56 validation jedinstvenih match-eva. Svih 119 ima pet uzastopnih
+FEDS stanja kroz 48h. Taj prošireni pre-agent data-coverage gate je PASS, ali rezultat
+je za selektovan okvir velikih požara, ne nacionalno reprezentativan uzorak.
+
+FEDS active-front coverage potvrđen je za 119/119 početnih stanja; 119/119 početnih
+geometrija stane u 256×256×180m mapu. SimFire Python 3.9.25 runtime je postavljen,
+gridMET raw forcing je uzorkovan za 119 slučajeva, a jedan train slučaj je pokrenut
+sa stvarnim LANDFIRE mapama i demonstracijskim vremenom. Sljedeće je bulk train fuel/
+terrain mapiranje i no-op replay s persistence/elipsnom referencom. Wind adjustment
+faktor nije izabran. Ne pokretati PPO dok no-op ne prođe. Originalni kohortni neuspjeh
+i prošireni frame ostaju odvojeno dokumentovani; test 2024 nije učitan.
 
 ## Šta je potvrđeno
 
@@ -59,15 +67,12 @@ na istim historijskim uslovima. To ne znači učiti „tačnu akciju“ iz perim
 generiše counterfactual ishode. Pročitaj [X/Y mapiranje i ograničenja](../docs/research/REAL_CASE_PIPELINE.md)
 i [izbor izvora](../docs/research/REAL_FIRE_DATASETS.md).
 
-Trenutni prvi zadatak je riješiti train/validation pokrivenost FPA-FOD kohorte pod istim
-datum/tačka/3 km/prvih-24h FEDS join pravilom. Sačuvati test 2024 zatvoren. Ako nova
-kohorta ne može ispuniti pragove bez promjene pravila/splita, zabilježiti novu odluku
-prije nastavka. Potom tek slijede SimFire adapter, opaženi-state no-op poređenje,
-kalibracija zajedničkih parametara i agent benchmark po
-[aktivnom protokolu](../docs/research/FPA_FEDS_CROSSWALK.md).
-
-Stari Firehose TASK-004c i CFSDS TASK-015/016 adapteri ne ispunjavaju automatski
-SimFire kontrakt. Portovati samo mali, pregledan dio ako novi data gate prođe.
+Trenutni prvi zadatak je no-op SimFire replay na proširenom, unaprijed spremljenom
+FPA-FOD/FEDS frame-u: dovršiti sve train LANDFIRE izvatke, koristiti gridMET samo kao
+skriveni ex-post simulator forcing, porediti dodatni burn sa persistence/elipsom i
+provjeriti rub mape. Zaključati mali skup zajedničkih parametara prije validation
+provjere. Ne otvarati test 2024 niti pokretati PPO prije no-op gatea prema
+[aktivnom crosswalk protokolu](../docs/research/FPA_FEDS_CROSSWALK.md).
 
 TASK-014 core/legacy environment je lokalno reproducovan na macOS ARM64 + Linux ARM64;
 moderni venv ima geospatial ETL stack. Receipt bilježi pakete, image hash i inference.

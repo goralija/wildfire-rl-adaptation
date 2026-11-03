@@ -1,5 +1,22 @@
 # Promjene baze znanja
 
+## 2026-11-03: lokalni FEDS audit, širi candidate frame i SimFire runtime lock
+
+- Checksum-verifikovane su train/validation FEDS perimetar arhive 2018/2019/2023; 2024
+  test nije preuzet. Originalna kohorta lokalno daje 19/40 train i 7/20 validation, i
+  dalje ispod 20/8. Širi, unaprijed spremljeni FPA screen frame daje 99/208 i 20/56 te
+  119 punih FEDS 48h epizoda. Ova eksplicitna izmjena je u [ADR-018](docs/specs/DECISION_RECORDS.md).
+- Dodani su local MD5 audit, checksum-aware, year-limited FEDS downloader i episode
+  manifest builder. Crosswalk provjerava kompletan event time series nakon ranog
+  3km matcha; 14 ciljanih testova prolazi.
+- SimFire 2.0.1 pinovan je na upstream commit; Python 3.9 ARM64 freeze/setup je odvojen
+  od projekta Python ≥3.11. [Environment record](docs/research/SIMFIRE_ENVIRONMENT.md).
+- Active-front, 180m grid i inputi prolaze za 119 train/validation startova, a svih 99
+  train slučajeva imaju checksum-verifikovane LANDFIRE rastere. Jedan 48h historijski
+  Plateau no-op pilot otkriva strm WAF prag; parametar nije izabran i no-op gate ostaje
+  otvoren. Sljedeće: cohort train kalibracija i persistence/elipsa prije validation.
+  To nije fizička validacija; nema PPO treninga ni test pristupa.
+
 ## 2026-11-03: SimFire/FEDS podaci i pre-agent gate
 
 - Po korisničkoj odluci novi aktivni pravac je SimFire + FPA-FOD/FEDS-CONUS, uz

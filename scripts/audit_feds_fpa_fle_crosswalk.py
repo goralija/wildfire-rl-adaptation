@@ -29,7 +29,7 @@ ZENODO_RECORD = "https://zenodo.org/api/records/22921773"
 ZENODO_LANDING = "https://zenodo.org/records/22921773"
 FEDS_FILE_URL = (
     "https://zenodo.org/api/records/22921773/files/"
-    "feds_{year}_lf_perimeter.fgb/content"
+    "feds_{year}_lf_{layer}.fgb/content"
 )
 FPA_FOD_SOURCE = "https://www.fs.usda.gov/rds/archive/products/RDS-2013-0009.7"
 WFIGS_QUERY = (
@@ -44,9 +44,16 @@ FEDS_EPSG_FALLBACK = "EPSG:9311"
 FEDS_TIME_STEP = timedelta(hours=12)
 FEDS_LOCAL_CACHE = Path(__file__).resolve().parents[1] / ".local/feds-conus"
 FEDS_FILE_MD5 = {
-    2018: "c205abae4b12544e6cfb2d754a21981c",
-    2019: "3b921e9a28d045ffcf3015f893ed5831",
-    2023: "ad32170e694e42127f3b865d93e1a81a",
+    "perimeter": {
+        2018: "c205abae4b12544e6cfb2d754a21981c",
+        2019: "3b921e9a28d045ffcf3015f893ed5831",
+        2023: "ad32170e694e42127f3b865d93e1a81a",
+    },
+    "fireline": {
+        2018: "51207e8d755e66adcc21030b645e9a0a",
+        2019: "ddaeabf52982b9d58e4ac78becf92ba6",
+        2023: "f3be707ef58ca9dcf5837fcbbdbf7997",
+    },
 }
 
 
@@ -58,22 +65,24 @@ def _md5_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def _feds_file_path(year: int) -> str:
+def _feds_file_path(year: int, layer: str = "perimeter") -> str:
     """Prefer a checksum-verified local archive; otherwise use remote byte ranges."""
-    filename = f"feds_{year}_lf_perimeter.fgb"
+    if layer not in FEDS_FILE_MD5:
+        raise ValueError(f"Unsupported FEDS layer: {layer}")
+    filename = f"feds_{year}_lf_{layer}.fgb"
     local_path = FEDS_LOCAL_CACHE / filename
     if local_path.is_file():
-        expected_md5 = FEDS_FILE_MD5.get(year)
+        expected_md5 = FEDS_FILE_MD5[layer].get(year)
         if expected_md5 is None:
-            raise ValueError(f"No pinned checksum is recorded for local FEDS year {year}.")
+            raise ValueError(f"No pinned checksum is recorded for local FEDS {layer} year {year}.")
         actual_md5 = _md5_file(local_path)
         if actual_md5 != expected_md5:
             raise ValueError(
-                f"Local FEDS archive checksum mismatch for {year}: {local_path} "
+                f"Local FEDS archive checksum mismatch for {layer} {year}: {local_path} "
                 f"({actual_md5} != {expected_md5})."
             )
         return str(local_path)
-    return "/vsicurl/" + FEDS_FILE_URL.format(year=year)
+    return "/vsicurl/" + FEDS_FILE_URL.format(year=year, layer=layer)
 
 
 def parse_timestamp(value: Any) -> datetime | None:
@@ -98,6 +107,19 @@ def parse_discovery_date(value: str) -> date:
     text = str(value).strip()
     date_text = text.split(" ", 1)[0]
     return date.fromisoformat(date_text)
+
+
+def _discovery_time_text(case: dict[str, Any]) -> str:
+    """Normalize discovery time from either cohort or broad-screen manifest fields."""
+    if case.get("discovery_time"):
+        return str(case["discovery_time"])
+    discovery_date = str(case.get("discovery_date", "")).strip()
+    hhmm = str(case.get("discovery_time_hhmm", "")).strip()
+    if len(hhmm) == 4 and hhmm.isdigit():
+        return f"{discovery_date} {hhmm}"
+    if discovery_date:
+        return discovery_date
+    raise ValueError(f"Case {case.get('scenario_id')} lacks an FPA-FOD discovery date.")
 
 
 def consecutive_halfday_run(values: Iterable[datetime]) -> int:
@@ -310,7 +332,7 @@ def _feds_case_candidates(
         point_x + radius_m,
         point_y + radius_m,
     )
-    discovery = parse_discovery_date(case["discovery_time"])
+    discovery = parse_discovery_date(_discovery_time_text(case))
     grouped: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
 
     # Use Fiona's collection.filter spatial filter. Passing bbox to open() is an
@@ -357,6 +379,7 @@ def _feds_case_candidates(
         if minimum_start_distance_m > radius_m:
             continue
         times = sorted({row["observed_time"] for row in rows})
+        start_window_times = sorted({row["observed_time"] for row in start_window_rows})
         longest_run = consecutive_halfday_run(times)
         areas = [float(row["area_km2"]) for row in rows if row["area_km2"] is not None]
         candidates.append(
@@ -366,11 +389,15 @@ def _feds_case_candidates(
                 "discovery_date_offset_days": (start_time.date() - discovery).days,
                 "minimum_start_window_distance_m": round(minimum_start_distance_m, 1),
                 "observed_states_in_spatial_window": len(times),
+                # This is the earliest perimeter close to the reported ignition
+                # point during the fixed start window, not the earliest FEDS row
+                # in the entire event.
+                "first_observed_state": start_window_times[0].isoformat(),
+                "first_observed_state_any_time": times[0].isoformat() if times else None,
+                "last_observed_state": times[-1].isoformat() if times else None,
                 "longest_12h_run": longest_run,
                 "two_consecutive_12h_states": longest_run >= 2,
                 "five_states_cover_48h": longest_run >= 5,
-                "first_observed_state": times[0].isoformat() if times else None,
-                "last_observed_state": times[-1].isoformat() if times else None,
                 "area_range_km2_in_spatial_window": (
                     [round(min(areas), 3), round(max(areas), 3)] if areas else None
                 ),
@@ -397,8 +424,12 @@ def _feds_crosswalk(cases: list[dict[str, Any]], radius_m: float) -> list[dict[s
         with fiona.open(path) as collection:
             target_crs = collection.crs_wkt or collection.crs or FEDS_EPSG_FALLBACK
             transformer = Transformer.from_crs("EPSG:4326", target_crs, always_xy=True)
+            year_results: dict[str, dict[str, Any]] = {}
+            matched_keys: set[tuple[str, str]] = set()
             for case in year_cases:
                 candidates = _feds_case_candidates(collection, transformer, case, radius_m)
+                for candidate in candidates:
+                    matched_keys.add((candidate["fire_id"], candidate["t_start"]))
                 if len(candidates) == 1:
                     selected = candidates[0]
                     status = "unique_spatiotemporal_candidate"
@@ -408,7 +439,7 @@ def _feds_crosswalk(cases: list[dict[str, Any]], radius_m: float) -> list[dict[s
                 else:
                     selected = None
                     status = "ambiguous"
-                results[case["scenario_id"]] = {
+                year_results[case["scenario_id"]] = {
                     "status": status,
                     "candidate_count": len(candidates),
                     "selected": selected,
@@ -416,12 +447,67 @@ def _feds_crosswalk(cases: list[dict[str, Any]], radius_m: float) -> list[dict[s
                     "selection_used_final_area_or_perimeter": False,
                     "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
                 }
+            # A spatial lookup finds incidents near the reported discovery point.
+            # Once an event is identified, scan its full timestamp series so states
+            # that have moved outside the initial 3 km search area still count as
+            # observed progression and can support the later 48-hour replay.
+            timelines: dict[tuple[str, str], set[datetime]] = defaultdict(set)
+            if matched_keys:
+                for feature in collection:
+                    properties = feature["properties"]
+                    key = (
+                        _as_fire_id(properties.get("fireID")),
+                        (parse_timestamp(properties.get("t_st")) or datetime.min).isoformat(),
+                    )
+                    if key not in matched_keys:
+                        continue
+                    observed_time = parse_timestamp(properties.get("t"))
+                    if observed_time is not None:
+                        timelines[key].add(observed_time)
+
+            for case in year_cases:
+                row = year_results[case["scenario_id"]]
+                for candidate in row["candidates"]:
+                    key = (candidate["fire_id"], candidate["t_start"])
+                    global_times = sorted(timelines.get(key, set()))
+                    longest_run = consecutive_halfday_run(global_times)
+                    episode_start = datetime.fromisoformat(candidate["first_observed_state"])
+                    expected_48h = [episode_start + FEDS_TIME_STEP * step for step in range(5)]
+                    observed_set = set(global_times)
+                    candidate.update(
+                        {
+                            "event_observed_states": len(global_times),
+                            "event_longest_12h_run": longest_run,
+                            "two_consecutive_12h_states": longest_run >= 2,
+                            "episode_start_state": episode_start.isoformat(),
+                            "episode_48h_state_timestamps": [
+                                timestamp.isoformat()
+                                for timestamp in expected_48h
+                                if timestamp in observed_set
+                            ],
+                            "episode_48h_state_count": sum(
+                                timestamp in observed_set for timestamp in expected_48h
+                            ),
+                            "five_states_cover_48h": all(
+                                timestamp in observed_set for timestamp in expected_48h
+                            ),
+                        }
+                    )
+                selected = row["selected"]
+                if selected is not None:
+                    selected_key = (selected["fire_id"], selected["t_start"])
+                    row["selected"] = next(
+                        candidate
+                        for candidate in row["candidates"]
+                        if (candidate["fire_id"], candidate["t_start"]) == selected_key
+                    )
                 print(
-                    f"FEDS {case['split']} {case['scenario_id']}: {status} "
-                    f"candidates={len(candidates)}",
+                    f"FEDS {case['split']} {case['scenario_id']}: {row['status']} "
+                    f"candidates={row['candidate_count']}",
                     file=sys.stderr,
                     flush=True,
                 )
+                results[case["scenario_id"]] = row
     return [
         {"scenario_id": case["scenario_id"], **results[case["scenario_id"]]}
         for case in cases
@@ -490,6 +576,7 @@ def run_audit(
     *,
     radius_m: float = 3000.0,
     include_feds_metadata: bool = True,
+    include_fle: bool = True,
     splits: set[str] | None = None,
     cohort_manifest: str = "data/manifests/fireline-benchmark-cohort-v1.json",
 ) -> dict[str, Any]:
@@ -510,7 +597,7 @@ def run_audit(
         raise ValueError("Selected split has no cases in the input manifest.")
 
     feds_rows = _feds_crosswalk(cases, radius_m)
-    fle_rows = _fle_crosswalk(cases)
+    fle_rows = _fle_crosswalk(cases) if include_fle else {}
     feds_by_id = {row["scenario_id"]: row for row in feds_rows}
     for case in cases:
         feds_by_id[case["scenario_id"]]["fle"] = fle_rows.get(case["scenario_id"], {})
@@ -524,7 +611,7 @@ def run_audit(
             "state": case["state"],
             "year": case["year"],
             "split": case["split"],
-            "discovery_date": case["discovery_time"].split(" ", 1)[0],
+            "discovery_date": _discovery_time_text(case).split(" ", 1)[0],
             "feds": feds_by_id[case["scenario_id"]],
         }
         for case in cases
@@ -568,6 +655,7 @@ def run_audit(
         "cohort_source_commit": cohort.get("source_cohort_commit"),
         "cohort_case_count": len(all_cases),
         "test_cases_loaded": False,
+        "fle_crosswalk_included": include_fle,
         "audited_splits": sorted(allowed_splits),
         "spatial_search_radius_m": radius_m,
         "feds_start_date_window_days": {"before": 1, "after": 2},
@@ -696,6 +784,11 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument("--radius-km", type=float, default=3.0)
     parser.add_argument(
+        "--skip-fle",
+        action="store_true",
+        help="skip the optional WFIGS/FLE incident join while auditing a broad candidate frame",
+    )
+    parser.add_argument(
         "--split",
         choices=("train", "validation"),
         action="append",
@@ -753,6 +846,7 @@ def main(argv: list[str] | None = None) -> int:
     report = run_audit(
         cohort,
         radius_m=args.radius_km * 1000.0,
+        include_fle=not args.skip_fle,
         splits=splits,
         cohort_manifest=str(args.cohort),
     )

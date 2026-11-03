@@ -172,3 +172,96 @@ report labels that derivation and still records the gate as FAIL.
 Exact per-case results, archive metadata and limitations: [combined crosswalk report](../../reports/real-fire-data/fpa-feds-fle-crosswalk-v1.json),
 [method/data gate](FPA_FEDS_CROSSWALK.md). This is dataset coverage only: no SimFire
 port, no-op simulation, physical-validation claim, PPO training or test-split access.
+
+
+## EXP-007 — locally verified FEDS crosswalk and expanded candidate frame, 2026-11-03
+
+The initial FPA-FOD frame (40 train/20 validation) was re-audited against locally
+cached and checksum-verified FEDS-CONUS `lf_perimeter` archives for 2018/2019/2023. With
+the unchanged join rule (FEDS start date -1/+2 days from FPA discovery, at least one
+perimeter within 3 km during the first 24 hours from `t_st`, unique fire event), it
+returns 19/40 train and 7/20 validation. The exact original frame fails both 20/8
+minimums. Six additional train matches versus the prior 13/40 remote report were found
+in the complete 2019 archive; the old result remains preserved as historical provenance.
+
+To avoid adding only one post-result match, the same annual FPA-FOD screen snapshots
+were treated as the candidate frame: all saved qualifying records for 2018/2019 train
+(208) and 2023 validation (56), with the same original year split. The screen was
+constructed without the FEDS crosswalk; it requires known date/location, MTBS ID, ten
+western states, and reported final size >=5,000 acres. Under the same FEDS rule, 99/208
+train and 20/56 validation incidents have unique matches and >=2 consecutive 12h states.
+A full event timeline scan confirms all 119 have five exact 12h states from the selected
+initial observation through +48h. This revised candidate-frame data-coverage gate passes
+20/8. Selection on reported size means the resulting sample is conditioned on large
+incidents; this is not a representative US fire sample. Neither area nor MTBS enters the
+FEDS ID match, simulator observation, reward, or checkpoint choice. No 2024 test ID/data
+was fetched or loaded.
+
+Receipts: `reports/real-fire-data/fpa-feds-original-cohort-crosswalk-local-v1.json`,
+`reports/real-fire-data/fpa-feds-candidate-frame-crosswalk-v1.json`,
+`data/manifests/fpa-feds-candidate-frame-v1.json`, and
+`data/manifests/feds-episode-cohort-v1.json`. Implementation: local-checksum-aware
+`scripts/audit_feds_fpa_fle_crosswalk.py`, `scripts/fetch_feds_archive.py`, and
+`scripts/build_feds_episode_manifest.py`. SimFire 2.0.1 at upstream commit
+`04905b19fe8c10dc08d64faddd00303e0561bb66` was kept in the required separate Python
+3.9.25 environment; exact macOS ARM64 lock is
+`requirements/simfire-macos-arm64-py39.freeze.txt`.
+
+Gate: data coverage passes for the revised frame, but active-front completeness, regional
+fuel/terrain coverage, the SimFire train-only no-op comparison, and map-edge QC remain
+open. This is not physical validation or an RL result. No training or test access.
+
+## EXP-008 — SimFire environment and FEDS input integration, 2026-11-03
+
+The active-front archive audit now finds an exact-timestamp `lf_fireline` feature for
+all 99 train and 20 validation starts. Each line lies within one 375m FEDS pixel of
+its perimeter; boundary overlap varies and is not assumed to be exact everywhere.
+The complete initial scar/front fits a fixed 256×256 grid at 180m for 119/119 cases.
+
+Created an isolated Python 3.9.25/macOS ARM64 SimFire 2.0.1 environment pinned to
+upstream commit `04905b19fe8c10dc08d64faddd00303e0561bb66`; `uv pip check` passes for
+85 packages. Official gridMET `th`, `vs`, and `fm100` annual archives for 2018/2019/2023
+were checksum-verified; raw values were sampled at all 119 episode locations for four
+12h segments each (396 train, 80 validation). Conversion code maps daily temperature,
+wind, and 100h moisture fields to SimFire input units; WAF remains deliberately unset.
+
+One Plateau train case has valid LANDFIRE LF2016 FBFM13 fuel and LF2020 elevation
+rasters on the fixed 180m grid. A one-hour no-op integration smoke with placeholder
+demo weather ended at 27 cumulative cells (87.48ha), with fire still active. It exposed
+and fixed SimFire adapter issues (shape type, parsed runtime units, coarse-cell fire
+lifetime). The 90-update lifetime is a shared 180m/30m resolution scaling from the
+upstream demo setting; it was not fit to this case's future perimeter.
+
+This is runtime/input integration only, not the historical no-op gate, physical
+validation, or a scientific result. Bulk train fuel/terrain coverage, hidden historical
+weather rollouts against persistence/ellipse, and map-edge checks remain next. No
+suppression action, PPO training, or test-split access occurred.
+
+## EXP-009 — bulk TRAIN inputs and one-case no-op response diagnostic, 2026-11-03
+
+Fetched and validated LANDFIRE FBFM13 plus LF2020 elevation GeoTIFFs for all 99/99
+TRAIN episodes (198 rasters, plus FEDS start masks) at the fixed 256×256, 180m grids.
+Validation rasters remain unrequested until parameters are selected on TRAIN. The
+per-case receipt records source product, resampling, grid metadata and raster SHA-256:
+`reports/real-fire-data/feds-simfire-input-train-coverage-v1.json`.
+
+Added a one-case 48h no-op runner that updates SimFire wind/moisture every 12h from the
+four historical gridMET segments, then loads the five FEDS perimeters only after the
+full run and compares each saved checkpoint. It records IoU, precision/recall, burned hectares,
+edge contact, elapsed fire status and the candidate wind-adjustment factor. The future
+perimeters are not imported into the simulation or policy.
+
+On the TRAIN Plateau case, WAF values 0.20–0.60 yield the same 61.56ha prediction (three
+new cells) and IoU 0.64 against 71.28ha observed. At WAF 0.65, predicted area jumps to
+1,244ha by +12h; at 0.75 it is 2,262ha, and at 1.0 it is 9,487ha. Factors 0.75 and 1.0
+touch the map edge by +36h and +24h. A 5-minute internal timestep with a 90-minute
+active-cell lifetime (18 updates) ran the high-spread 48h case in about 40 seconds.
+This timestep is a tested runtime candidate, not a locked simulator choice. Full per-candidate inputs/output hashes and
+trajectory summaries are in `reports/real-fire-data/feds-simfire-noop-pilot-v1.json`;
+raw full trajectories remain ignored under `.local/`.
+
+This exploratory response check is a single event and does not pass or fail the whole
+no-op gate. It shows that neither a WAF nor an internal step can be selected from one
+incident: calibrate shared settings on the TRAIN cohort, compare against persistence and
+a prespecified ellipse, then fetch validation maps and assess the frozen setup. No PPO,
+suppression action, validation map, or test split was run/opened.

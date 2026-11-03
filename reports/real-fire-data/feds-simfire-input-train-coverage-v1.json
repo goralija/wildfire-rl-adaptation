@@ -1,0 +1,809 @@
+{
+  "all_cases_verified": true,
+  "cases": [
+    {
+      "fuel_sha256": "e863e7832a3808db211edb7501e85db137f02f1bd826849e186a11c53bf62434",
+      "mask_sha256": "6b8b8a718c3cdc5838b204ae430248337d3755fb2761c1d19621da5eb97745da",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400300427-plateau/input-receipt.json",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "status": "verified",
+      "terrain_sha256": "d3948a3157a65b88a4630fe557cedc6d4c77aff114d3bdb71f1232bcdb95aefd"
+    },
+    {
+      "fuel_sha256": "f3d8645bc45e59232f9d863ae38cfc2a48f2639cff852dff6b87c4771611fc7b",
+      "mask_sha256": "3c129e12c83c9d69357164ca202aca4f41105501b4fdd45bcb9ebd3acb49cfe9",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400300631-ranch/input-receipt.json",
+      "scenario_id": "fpa-fod-400300631-ranch",
+      "status": "verified",
+      "terrain_sha256": "d8a629f2055249f7c3c6f293bee574c9eb11c3ad41cc7f14bd97094fd1a6f73a"
+    },
+    {
+      "fuel_sha256": "3690db9e1e6830a53081e87f3b27c2ee6bd8879c6c41cf5d36f0f2372cdfbdc5",
+      "mask_sha256": "a9d6b839ac5f3098c30383e190a76cd4ce1653a7808e03a5bcc0107487e3c7d7",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400300764-buzzard/input-receipt.json",
+      "scenario_id": "fpa-fod-400300764-buzzard",
+      "status": "verified",
+      "terrain_sha256": "28347313c820cbdf95581bde34c8165c643454b1ecec0a677dd6d5d4fe2e28c2"
+    },
+    {
+      "fuel_sha256": "755e27a64a3df5a289f1296ee647397ba691dab59273163e7e52aaadb9f47630",
+      "mask_sha256": "a9d6b839ac5f3098c30383e190a76cd4ce1653a7808e03a5bcc0107487e3c7d7",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400300963-coal-hollow/input-receipt.json",
+      "scenario_id": "fpa-fod-400300963-coal-hollow",
+      "status": "verified",
+      "terrain_sha256": "9e61be930507de210dc9bbc51586d49106a830a17824775ec8e0bf39c8e7e40a"
+    },
+    {
+      "fuel_sha256": "e23e8ab9a6ecca320e0685dcaf350ff0ba6c5f792830fa24d8458fff38b391f5",
+      "mask_sha256": "d5a4f05c3a4d20b3cdf538f315e510c2421efd6a27edab7bd3067e4e75795895",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400301084-prospect/input-receipt.json",
+      "scenario_id": "fpa-fod-400301084-prospect",
+      "status": "verified",
+      "terrain_sha256": "da0de8763016650e8e5eddd35c8007310e86e53f74e40c92b70c42f88f4d5ed7"
+    },
+    {
+      "fuel_sha256": "d0ade3813c8b8672061d00557ede4ba4615bf3af5020488183a49a95346addab",
+      "mask_sha256": "83097d135e5375592d168bc1d1ccfddd1b90394fe5a0226a9aa41b4623b670c6",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400301086-kiwah/input-receipt.json",
+      "scenario_id": "fpa-fod-400301086-kiwah",
+      "status": "verified",
+      "terrain_sha256": "bef25debe91d424c946cd329c92266ae0ecd619bd4d1c9db78d9d3bacca138a0"
+    },
+    {
+      "fuel_sha256": "943c80acec916b120fab5b9493dbf541950f7d42bddfcc72ae7c2a0cc5b12b8e",
+      "mask_sha256": "2a2763de12e6912ccd887f2668391b7478eea11152ac378fc3ee9001132cca0d",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400301104-stewart-creek/input-receipt.json",
+      "scenario_id": "fpa-fod-400301104-stewart-creek",
+      "status": "verified",
+      "terrain_sha256": "ca3c407fa5d7d82f26592aaeb229ecbabd9dc95a1562b80a729baf30b337aa9a"
+    },
+    {
+      "fuel_sha256": "ef012a006e402eedeb7333127a4722a5ba6a57a247abdcf173926a95c935547c",
+      "mask_sha256": "3d83d374ed71965b9dc5b4e81be70d06a4aaf5d59143be32a9f8918d56ef5608",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400301199-murdock/input-receipt.json",
+      "scenario_id": "fpa-fod-400301199-murdock",
+      "status": "verified",
+      "terrain_sha256": "caf3984da87e759e249acb8ed800074b63b6f06703cf37c58890af7cdda782b3"
+    },
+    {
+      "fuel_sha256": "c67528725a7e637e9b83d7bca72448a217cca9986ffd8be197c01116103893bc",
+      "mask_sha256": "a9d6b839ac5f3098c30383e190a76cd4ce1653a7808e03a5bcc0107487e3c7d7",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400302402-silver-creek/input-receipt.json",
+      "scenario_id": "fpa-fod-400302402-silver-creek",
+      "status": "verified",
+      "terrain_sha256": "7bd724d40f5ec80b0b7e10f2382d7acd3fc521bbd50039f2791c084f3382504f"
+    },
+    {
+      "fuel_sha256": "212aa1cb598ddfe681bdaccb01c77c9033f7ba1c66b93b98a07c7f3296d94233",
+      "mask_sha256": "8134464adb6ca325d588a71c705cafe613389b084590b4429dffa6c230d68a35",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400302444-spring-creek/input-receipt.json",
+      "scenario_id": "fpa-fod-400302444-spring-creek",
+      "status": "verified",
+      "terrain_sha256": "b1df25717b83a29b4837cc455e50fc2363106de34c6de741fa88772cc89876e2"
+    },
+    {
+      "fuel_sha256": "6a024a195bdbbdeb7ddd2754570abbcca1fa526498d8bd91bae83be076560301",
+      "mask_sha256": "e142c82e60805ac868d60c59f8f293d512cc709b26808aab57898da1b39be25d",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400302446-416/input-receipt.json",
+      "scenario_id": "fpa-fod-400302446-416",
+      "status": "verified",
+      "terrain_sha256": "8a16927574657983fe288e8da4c6dd47d7ed1efa5474796d4c556ddf87c875f4"
+    },
+    {
+      "fuel_sha256": "a7cf6bcdef5221795df8d274de777a8a7205e9634d75968506ec51e40c5de615",
+      "mask_sha256": "9f89ca66e4f77ea2268f55f212bf166cf68e9a7c261d5bce35642e23f6eea6c0",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400302533-tinder/input-receipt.json",
+      "scenario_id": "fpa-fod-400302533-tinder",
+      "status": "verified",
+      "terrain_sha256": "486227ff76fbe87bf815c645b2b316ab1883d48e5d88cbf1bd921bf93d051c51"
+    },
+    {
+      "fuel_sha256": "739f4e973d55c0a3d2df6a81c2852e9808e9dfe87d988ef084608d01535992bc",
+      "mask_sha256": "4da6a9689a6ef252c38670130ae65dcb9a2f773b2323dd3e9ffef0a89d205138",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400302636-bears/input-receipt.json",
+      "scenario_id": "fpa-fod-400302636-bears",
+      "status": "verified",
+      "terrain_sha256": "75983fd5c5f25a688d64d9b14df2004307501e168caaf7a37ba87a30d011a719"
+    },
+    {
+      "fuel_sha256": "78918a9f08d82008b87938bb420c197207ee2fd6ae4dfe57da897265abf9a2ec",
+      "mask_sha256": "6278916f7963c9eb5a11aad48912e1818d555e760cdfe1acbe1e1cfb5c6fc0c0",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400302686-boot/input-receipt.json",
+      "scenario_id": "fpa-fod-400302686-boot",
+      "status": "verified",
+      "terrain_sha256": "5095884c5afbf16f9555c311c3ee3e51a80330319942f1c8b579521395640718"
+    },
+    {
+      "fuel_sha256": "2d59ff2723c2cde56c7fbb49be4cbe8afe63c3c919d8c0b4a49d21db23f68085",
+      "mask_sha256": "92a103844e31c0a924ff3df9f3772d718e90398cbdc3445b72d1196d86899af2",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400302877-whaleback/input-receipt.json",
+      "scenario_id": "fpa-fod-400302877-whaleback",
+      "status": "verified",
+      "terrain_sha256": "77d8e635616e8c3020dc6ebe4d806ebd0cd37a1f206ea85e912cb6e1250ca3ee"
+    },
+    {
+      "fuel_sha256": "5ac62a051dc51b66adde2e556b803282416fb91c34726039af6bd87d7a28da83",
+      "mask_sha256": "6f3f048f104403a0376ef8b49953af8971a37629089db52af0b8e3d14b1eec7d",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400302943-cranston/input-receipt.json",
+      "scenario_id": "fpa-fod-400302943-cranston",
+      "status": "verified",
+      "terrain_sha256": "ab7037e9c731d586852f44d0c740403deec0c1d02bc8e3be30318936e87551a1"
+    },
+    {
+      "fuel_sha256": "40d08523cd9f2c9881a52d63da3b44caa488c643e9c60ddff21cf71d6efefcab",
+      "mask_sha256": "8fd00b2342dca9b84a5c7a529f7bc7f456ad8d707fb78b5b539d0bd5b62e6b72",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400303584-goldstone/input-receipt.json",
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "status": "verified",
+      "terrain_sha256": "68233590b4faba879077773c020d2d408078af59e68ba514368907b42b1721b5"
+    },
+    {
+      "fuel_sha256": "0a83e97691d34588cb8701d4c51c7043397345f39985254b2c8b8c780b2795e2",
+      "mask_sha256": "043ef6ed770a22318d3a4d7e6850b2c79fe2b4c4c7c9e8fb3a212c5261a5c8f6",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400303631-bacon-rind/input-receipt.json",
+      "scenario_id": "fpa-fod-400303631-bacon-rind",
+      "status": "verified",
+      "terrain_sha256": "56e316e18fd76da14c50f67bfb31df501405c45dd4ef8031126a055ec51dcd28"
+    },
+    {
+      "fuel_sha256": "d04e11504e370d80c4054693acb1ec7cacda84417b973564ff6aebce82883d2e",
+      "mask_sha256": "a3d0884bfb1c84adba0d1eda504055b636e1bbd69944eb60c04f7afd0d19ce16",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400303711-gold-hill/input-receipt.json",
+      "scenario_id": "fpa-fod-400303711-gold-hill",
+      "status": "verified",
+      "terrain_sha256": "f858a62c18b064344298bf8e5642267fd93dd744e52e4bce3e47fd4c0afe4192"
+    },
+    {
+      "fuel_sha256": "3325bc296e3e94761a389654d2ba0bd52bd831145b5b4b85a2c97fcc7b6b25b7",
+      "mask_sha256": "b37d60ef56d4f2ab704987be8003eefc7e9a7536685605bff03f4f45052d5bd5",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400303744-rattlesnake-creek/input-receipt.json",
+      "scenario_id": "fpa-fod-400303744-rattlesnake-creek",
+      "status": "verified",
+      "terrain_sha256": "ee454fd33ff1f1203d862fe132f8f0d3b872baa2c758ea2243aba65de3a3f474"
+    },
+    {
+      "fuel_sha256": "9adcfa6483aea227c14da8d44428cfe65aff898fcd57ef9578c6dc2550833b90",
+      "mask_sha256": "1d0df36e782a7975c2919a62e602fe234eb85dc7c0a39146f5e23e5390575a9f",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400303807-ryan/input-receipt.json",
+      "scenario_id": "fpa-fod-400303807-ryan",
+      "status": "verified",
+      "terrain_sha256": "310625dff8fdca5a68ca3bff7a507bb04762b0c020ab33c142dee757c208f4f4"
+    },
+    {
+      "fuel_sha256": "6aa2cdc873d208545c259f3d940ae1dcb880bd873d3c93ffcf9193f8b2fdd1ec",
+      "mask_sha256": "0843ad425aeee63a7d61983d8cc5bfa089bf04a72a4f829776e66c4ef9f65e56",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400303966-cabin-lake/input-receipt.json",
+      "scenario_id": "fpa-fod-400303966-cabin-lake",
+      "status": "verified",
+      "terrain_sha256": "af145f9e93950c1d8254f310b6c89119597685e77ed74c3429e7c4648cf65f31"
+    },
+    {
+      "fuel_sha256": "81b9b71924c0418517d3db2af8d8f63cf44fdfffe6398d86b21ba0953a850c8d",
+      "mask_sha256": "6d7e2408e65e34f24eb51c054db9f8f634b07b7b930f749297466632de14e518",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400304718-west-valley/input-receipt.json",
+      "scenario_id": "fpa-fod-400304718-west-valley",
+      "status": "verified",
+      "terrain_sha256": "7d256b6c3602e2ea75038203c7632cad80c27162b5a88999bfa4ce718133af0d"
+    },
+    {
+      "fuel_sha256": "f3e3b85dd15b477685d7755bac86c6d55e5e29fd70a1389a4bdbacefccbe07b4",
+      "mask_sha256": "ff20d7a10e7f73add2de0eaa92198f0750590791fa23489e70af6393cb39db0f",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400304799-rabbit-foot/input-receipt.json",
+      "scenario_id": "fpa-fod-400304799-rabbit-foot",
+      "status": "verified",
+      "terrain_sha256": "93da3ec32dc994173ec7145f07f978b967db99854e439b6bb3cdc651a8d82a60"
+    },
+    {
+      "fuel_sha256": "686ab1dade9d7467dc0cab5a78bbac005fe8badc898f27a3fcd0aa245bed445c",
+      "mask_sha256": "ab1e0b95468e739260b91b80a3a42dce95e8883f613102c3010c5f6e5ee49e5d",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400305302-sugar-pine/input-receipt.json",
+      "scenario_id": "fpa-fod-400305302-sugar-pine",
+      "status": "verified",
+      "terrain_sha256": "56932d4dc29c7f556cde0f8d2f8e60a780e3e489e839b6544b4fea79b15c0159"
+    },
+    {
+      "fuel_sha256": "55778b0a8e715de06db9f15384abb2888c65b71b00245c4fb185413a4854a28f",
+      "mask_sha256": "eb233280ccb0be8625686ff5f374aa7b3a3318789c3f6cdf8ae6ecd70c6614ee",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400306102-rattlesnake/input-receipt.json",
+      "scenario_id": "fpa-fod-400306102-rattlesnake",
+      "status": "verified",
+      "terrain_sha256": "a58119e9685c19c38f5c866ec76372e44e2f6f05d8d9968713113636346706b4"
+    },
+    {
+      "fuel_sha256": "879917caa24eb56f1a3e4c8bd38f313d613acd25a85dc96690ca019c8f161e7e",
+      "mask_sha256": "a1aca36eeb4b99dc3d88ad67dc323e6590d210187f3aa984983e2f01771f98b5",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400306199-obi/input-receipt.json",
+      "scenario_id": "fpa-fod-400306199-obi",
+      "status": "verified",
+      "terrain_sha256": "8c88820ba9fd993f76462680c4e13982337208ea749a1e13ce1adf2d760e8ceb"
+    },
+    {
+      "fuel_sha256": "a98533b0e2326c3b2e919902899f5d3494d7b5dfce5b1252c0ef2ce5d8858619",
+      "mask_sha256": "8d1be0390610638dd9e7ea091e3f1858cfa818ab9a8ccc861747909e3ab95238",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400307067-county/input-receipt.json",
+      "scenario_id": "fpa-fod-400307067-county",
+      "status": "verified",
+      "terrain_sha256": "c872dfe52a790a020b98aa5e073261455c0a77d7ce2af0a3e0dd73d9910064aa"
+    },
+    {
+      "fuel_sha256": "ecb0dd99ec44d02977f8c12b389e75d4b8ca8c484d763f73b101897bc71d363a",
+      "mask_sha256": "0c2df9434ac3574824067245b1d9deae9c878a9f30432f771b61d06c419e90fa",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400307281-camp/input-receipt.json",
+      "scenario_id": "fpa-fod-400307281-camp",
+      "status": "verified",
+      "terrain_sha256": "5c9dfaff72c1f52ed5cd6ee11d9e1649556627ddbc05b93928ee2ffc250a7572"
+    },
+    {
+      "fuel_sha256": "4345aea5b285782d7750927b87cb7a7a05cc8b2b24fd2c87c1ee277956aeebd6",
+      "mask_sha256": "5006bbf49053a0d16d845d230837dcee812ff09789f7c1fb09462c03c0782b3e",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400307326-woolsey/input-receipt.json",
+      "scenario_id": "fpa-fod-400307326-woolsey",
+      "status": "verified",
+      "terrain_sha256": "57552ab8a153ebc116d8901a2722cae5709b92cd10383d35d98536fa55e5b970"
+    },
+    {
+      "fuel_sha256": "8bc6db759744ce12b12d567f9586404ce6b2c5cad5feb2144936f09127550af4",
+      "mask_sha256": "2796cd02a610608cdc7265fb69038a947a4b561467515b8676fe90635dce9afb",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400307342-ferguson/input-receipt.json",
+      "scenario_id": "fpa-fod-400307342-ferguson",
+      "status": "verified",
+      "terrain_sha256": "e558e1606babbc10bee98eb9493301f1535fda0638797c25b60e73b679e7ed28"
+    },
+    {
+      "fuel_sha256": "6625315f490d3738182d9ad91662612a0ba6ee184184aefe7167d768d26d9685",
+      "mask_sha256": "608e72e4c5c309d3f7b074cf59f335c271d28e5de0746fc1c7c3c6317625796b",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400307379-weston-pass/input-receipt.json",
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "status": "verified",
+      "terrain_sha256": "2f62dcad8a29f423d6d6ba5389f210710e8e120e9084f1fcc28b482af83780eb"
+    },
+    {
+      "fuel_sha256": "37f3258dcac89eee9dccb26dbecb566f3f353078c60dc7730000b4197965cbaf",
+      "mask_sha256": "accf3667374053a041e9162457e05434c99728dd946163edca846e8dd1dc292a",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400307462-indian-valley/input-receipt.json",
+      "scenario_id": "fpa-fod-400307462-indian-valley",
+      "status": "verified",
+      "terrain_sha256": "ed14a660e6927b1162f65fd53ead68abd3690f124670dd402370279c7cb35b03"
+    },
+    {
+      "fuel_sha256": "6c031eafb93c8021aeb53242452678b53792036b754b0954c3b4e97444df7052",
+      "mask_sha256": "f04a293df255d824cf39cdf6d7a50c3c318015f13e156dd77d76561697ee5f36",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400307488-red-canyon/input-receipt.json",
+      "scenario_id": "fpa-fod-400307488-red-canyon",
+      "status": "verified",
+      "terrain_sha256": "82bbc1525b6ee899b17f72940be060a4955f03bf8d75a837240d56cbb5affca2"
+    },
+    {
+      "fuel_sha256": "84e8a40717a51457ecc2520b6a21b131b94c7c8523e68d606dcdcee61e9454b5",
+      "mask_sha256": "b13784a15fc673126583f0937b67a7283797156f218d8adf80c4322612dad3fe",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400307548-boone-draw/input-receipt.json",
+      "scenario_id": "fpa-fod-400307548-boone-draw",
+      "status": "verified",
+      "terrain_sha256": "70b5fdb29a18afa85401005aced7263098074b56e1062207eb07c581a919bd16"
+    },
+    {
+      "fuel_sha256": "d5f29d69180235576251b62e301e7ccb395ff8fb94815c507dc5bed2722d8f88",
+      "mask_sha256": "2deca40077a4fe84439c0d0001221a876af2bacf555dd3815998144dc3171d71",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400307776-bull-draw/input-receipt.json",
+      "scenario_id": "fpa-fod-400307776-bull-draw",
+      "status": "verified",
+      "terrain_sha256": "e09de1b844fad231bace3da9efe2ad62c8b4cfe308b46d5e84b988408dd6d9ca"
+    },
+    {
+      "fuel_sha256": "109b12e6aa3d929877d9e4619d5edd94923a53ce96d3db406f9ca2d83a719d9e",
+      "mask_sha256": "8e189870c1fc7bab559ac6565964dfccbb2032545a9e764d1af78ab72db091b3",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400308380-conner/input-receipt.json",
+      "scenario_id": "fpa-fod-400308380-conner",
+      "status": "verified",
+      "terrain_sha256": "5da9d9c42c143b58cfda57e8d1c19caf174f468b4b74a17e5742c18ddafcd2f1"
+    },
+    {
+      "fuel_sha256": "5978488c31e729581935f6e05fa07df1985875e891fd6af4ac16e5a5cdf36b1e",
+      "mask_sha256": "b048f81448f94d18a4f8e10cfeeab671a4a4df8a0ad631384094f5856b766c83",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400308544-winter-camp/input-receipt.json",
+      "scenario_id": "fpa-fod-400308544-winter-camp",
+      "status": "verified",
+      "terrain_sha256": "133433c74741a3ca6bb5de47fb50cd3f2bbfb10bac59b14f415d32daff9bb7ba"
+    },
+    {
+      "fuel_sha256": "39a02090c642789f635346cf9a7ed3bf2fc114d3170c0191d0de7b5ad2017f45",
+      "mask_sha256": "36a4009fecd006ab48ecf272cb00ca1c83fb142888000085c468c38eaf475a8f",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400308652-dog-creek/input-receipt.json",
+      "scenario_id": "fpa-fod-400308652-dog-creek",
+      "status": "verified",
+      "terrain_sha256": "56c42ea8dc38849a23dc4742d214d2d270e1d4a1354d37a0066868e810f6cdc2"
+    },
+    {
+      "fuel_sha256": "3734bf5336cc2ac728c98156ebc55814d4429379d7fce79780d0745693f3f703",
+      "mask_sha256": "8843a98b7232143d5fb78ca7189d32122c5a70150269d1bcd66cfb4b6a97c9e8",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400308656-sharps/input-receipt.json",
+      "scenario_id": "fpa-fod-400308656-sharps",
+      "status": "verified",
+      "terrain_sha256": "5cd857fb787e6474503f3cf683eb30dd4a96c0810cf672100a38f433d3e3d7d6"
+    },
+    {
+      "fuel_sha256": "59bed1df867372b13c9e83237fa56064ae9ce89ad6b4dd67c591ca930c9515bf",
+      "mask_sha256": "8f1a855829079b1237b3d7ec296c2947493f9a97ad14199be91ea47d0bf380a1",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400309598-buffalo-pasture/input-receipt.json",
+      "scenario_id": "fpa-fod-400309598-buffalo-pasture",
+      "status": "verified",
+      "terrain_sha256": "ee2bbe77d2af2741ee800a4986be41d418c0c542d8428b46f2dfa0103f51be39"
+    },
+    {
+      "fuel_sha256": "0e4bf231bb92efd2b7e84dbed5ab14d481a5615431e8a233ad402f300b56eff0",
+      "mask_sha256": "a9d6b839ac5f3098c30383e190a76cd4ce1653a7808e03a5bcc0107487e3c7d7",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400309614-howe-ridge/input-receipt.json",
+      "scenario_id": "fpa-fod-400309614-howe-ridge",
+      "status": "verified",
+      "terrain_sha256": "e302c9628ee003dea7c8f4c7a24ed0234ee81d99cec6f0b63ad32d66b7c8c422"
+    },
+    {
+      "fuel_sha256": "ab0a2c93eb1e5399b71893aac9d219779eeb21d43a7ac756708d3280bf96da07",
+      "mask_sha256": "b447454bc1d68843b60c3e0e70e035732ece4fe9cf82ff7842be2a1a989aeae7",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400310578-ok-bar/input-receipt.json",
+      "scenario_id": "fpa-fod-400310578-ok-bar",
+      "status": "verified",
+      "terrain_sha256": "5de644b7c3bfec89b55fb3d3941430cbb1f0d26403b87f8b6cb96c06ca4e3e86"
+    },
+    {
+      "fuel_sha256": "ad173e6e7a567a0e88d6c00454851ba4e11f8f953f40da0cc148cc3cdd96aab9",
+      "mask_sha256": "af828a61a2adcc273ab91c170fe5c45301f9a0b03c5b3ef33893cbb54f63b9c4",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400310583-organ/input-receipt.json",
+      "scenario_id": "fpa-fod-400310583-organ",
+      "status": "verified",
+      "terrain_sha256": "62b8f09fd2cfcc26dc3d2b5316cb29b89e503ab770709e48fb3c4d5bf21980b6"
+    },
+    {
+      "fuel_sha256": "18d7b80c9e9f8c1bcc483106e1bbd6fce4b8f0b0dec6df1cdc4b07f3b4d8c0dc",
+      "mask_sha256": "cfb88b1e58b9a8163e776a536db5c6224c35f30fda343d176e4483f82654c533",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400310659-206/input-receipt.json",
+      "scenario_id": "fpa-fod-400310659-206",
+      "status": "verified",
+      "terrain_sha256": "fafc70a68e843a2dfbc862c0bf515fdf7abc20fbfdd850a6bd41a6ec9c16df74"
+    },
+    {
+      "fuel_sha256": "96185cb071d95c7d70aab0df684b26fb7195909a7c7a350b79d966a94d49a680",
+      "mask_sha256": "3c179629a8edcb6cd00b18a86b6e06050277d4a0241f8d108f63c05ad6534c19",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400310914-echo/input-receipt.json",
+      "scenario_id": "fpa-fod-400310914-echo",
+      "status": "verified",
+      "terrain_sha256": "15bd158ee2c664ecf6ae86a8a99d4854fd02316ff380bf4af0a6efb113edfa50"
+    },
+    {
+      "fuel_sha256": "9b770a4c7b242777c528952c1d710586ec88a571e6f33b238fafa22222758605",
+      "mask_sha256": "0e09b8f38382e4370e0d76dae3479fd334ccbc3bd462e33b7f923e65cfe2f45e",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400310945-goose-creek/input-receipt.json",
+      "scenario_id": "fpa-fod-400310945-goose-creek",
+      "status": "verified",
+      "terrain_sha256": "2dfa8bc5ee15a2d6c86fdc2d86b25d3378f60ae298a0d6458163c19f538a957b"
+    },
+    {
+      "fuel_sha256": "3be283b4b799ee9fc93e666b1285e817651bf1078d49fe6a11ebec94e4ec4c8f",
+      "mask_sha256": "e04da251ef58005a0eebe18555cf7c42a3d5db5402893fbc63ebb229c98df6a2",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400310977-sheep-creek/input-receipt.json",
+      "scenario_id": "fpa-fod-400310977-sheep-creek",
+      "status": "verified",
+      "terrain_sha256": "c25e832cc5390d23fed1ff05e2ee5a795b415ab8364baaa1db5bb1e06855eb46"
+    },
+    {
+      "fuel_sha256": "a70fa434ecdee91a1ee88855017fc9f84cd861318cd3538da4df2a7c85a5ca00",
+      "mask_sha256": "a9d6b839ac5f3098c30383e190a76cd4ce1653a7808e03a5bcc0107487e3c7d7",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400311017-goshute-cave/input-receipt.json",
+      "scenario_id": "fpa-fod-400311017-goshute-cave",
+      "status": "verified",
+      "terrain_sha256": "49aefd670265fe4868ca37873f163dc5a8c5c7e9513f1bb0d0587ed36c30e8c1"
+    },
+    {
+      "fuel_sha256": "26b0b1933409410451fbc1a118b39738ff8cd0a39ab4cc0d78d43a0d707d5bbe",
+      "mask_sha256": "519e8f6a38aebc208e4ad4fcf128ab5793b13fdac0caf9b22e32b445d495f546",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400311253-martin/input-receipt.json",
+      "scenario_id": "fpa-fod-400311253-martin",
+      "status": "verified",
+      "terrain_sha256": "21e77624e4bc8d6b0a26420a779d2bb28de2e151592d46734207c0f4f5833fb9"
+    },
+    {
+      "fuel_sha256": "ead531de5f69ac491fe2a19a2206accb523ec5a5377327a5df4b3e54a9a02be9",
+      "mask_sha256": "eabbaa5f08f2b60d07c31bfca8f6d3f2aa3a4171aae95ba288dfeb9551376cd2",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400311268-gregg/input-receipt.json",
+      "scenario_id": "fpa-fod-400311268-gregg",
+      "status": "verified",
+      "terrain_sha256": "1e4e56fc802a2bf56b2be2a736ebed9d8fdfafabcbbc5ffc688c0c6ae755fa14"
+    },
+    {
+      "fuel_sha256": "a2669dd58340f94b935209acc79746610b7994067769cf1bb604da924bee524c",
+      "mask_sha256": "b84727e21fc6b41b1a105b13e12bed163bfca1b95bf652a8d47dd2443e3717c7",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400312226-boxcar/input-receipt.json",
+      "scenario_id": "fpa-fod-400312226-boxcar",
+      "status": "verified",
+      "terrain_sha256": "4f9c15dbbaf00b5c17120b6f55ac88af96e310b665a8b933f3a062b3d117c2ba"
+    },
+    {
+      "fuel_sha256": "06ebfac085593f547b03bb0800a0282a7e2ac253b19384c274db2d1df9f3eda9",
+      "mask_sha256": "deaf901cca54b37547c61359a50514277e2e7263acad23c0964a24859518ca24",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400312231-jack-knife/input-receipt.json",
+      "scenario_id": "fpa-fod-400312231-jack-knife",
+      "status": "verified",
+      "terrain_sha256": "1cdd37259576ded03929be2cde9c1f11b3de001efc07721dd069e967400d2f0f"
+    },
+    {
+      "fuel_sha256": "e8817ae9e8c804c9ca9c1ee66451043fd1e5a8cb9825d7f23755c2997799466c",
+      "mask_sha256": "7909fb3e0709483a77394f41a8b8d16137ad0c13ee83b4bda267222dcb91c990",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400312290-stubblefield/input-receipt.json",
+      "scenario_id": "fpa-fod-400312290-stubblefield",
+      "status": "verified",
+      "terrain_sha256": "61e36c4e686d9cf6721b0c638b91d9af64eceb91b57c58cb393ff4d2b0b03ac0"
+    },
+    {
+      "fuel_sha256": "c73222f06198b0336a7ea792e114cf1a448c506c4b87c4f242c763b9399a7013",
+      "mask_sha256": "a8d9542dfdfa2a6ccc4d25f421addeef3585af5ce46242ad8085fbda02764475",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400312444-tenino-fire/input-receipt.json",
+      "scenario_id": "fpa-fod-400312444-tenino-fire",
+      "status": "verified",
+      "terrain_sha256": "607b6b9bed3707670637ee031f2af1abe19ec140b75dea2733fd622897a844dd"
+    },
+    {
+      "fuel_sha256": "0526160e1bf3fe62b3de4372699a5ac78b4a6fc018e77d3ca3823504f65d415b",
+      "mask_sha256": "48618fa068a3916912c5ab6f76dcb8b3ebede7f9f502950cfef63135ea2fc737",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400312787-black-mountain/input-receipt.json",
+      "scenario_id": "fpa-fod-400312787-black-mountain",
+      "status": "verified",
+      "terrain_sha256": "b4bdd544a17d256aed727b8e6c7805f3051e6c3f61ccdb2c8ec1d81f9420276c"
+    },
+    {
+      "fuel_sha256": "fbbdca2be70a71e4ae69e628f760eb30b9c19496f41882891f2d13407cbc4ba6",
+      "mask_sha256": "a9d6b839ac5f3098c30383e190a76cd4ce1653a7808e03a5bcc0107487e3c7d7",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400313239-cedar-mountain-one/input-receipt.json",
+      "scenario_id": "fpa-fod-400313239-cedar-mountain-one",
+      "status": "verified",
+      "terrain_sha256": "bbe60b02b94c95cd8ce487af6ec0a5d63f1dcd67bc93138c3c1c048bfc5a3daa"
+    },
+    {
+      "fuel_sha256": "45136992af4cf0613faf946138f90c2c2bf273409a985dc88d564a06ea633cf1",
+      "mask_sha256": "5e9797127ea8520b330263db12fed19e09140d52dbb4779d7de7c31030640c76",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400313254-lakeside/input-receipt.json",
+      "scenario_id": "fpa-fod-400313254-lakeside",
+      "status": "verified",
+      "terrain_sha256": "da280fdcc1651f74e3ccd36f93ff6f74636b90502d86325a76c9bbf861cca719"
+    },
+    {
+      "fuel_sha256": "6914fc6a840cbdd5bb86300b6dc0e6196c4d82b9f3e3c45352e6bddc9baf6d47",
+      "mask_sha256": "b3491ab780897c5ca7d7dc426954cecca4b842b0bf0254e40b9c1855f48d0d65",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400313293-dollar-ridge/input-receipt.json",
+      "scenario_id": "fpa-fod-400313293-dollar-ridge",
+      "status": "verified",
+      "terrain_sha256": "32f0ea23d96ce907b0f71bc7e3c48a5f7349f78fd7b8b052903fbc4e93ef1bd8"
+    },
+    {
+      "fuel_sha256": "a9af684eeadd493efa5bdd9c831738a047841bafaa4f9a878f25f4d4e656d4f7",
+      "mask_sha256": "a9d6b839ac5f3098c30383e190a76cd4ce1653a7808e03a5bcc0107487e3c7d7",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400313301-bear-trap/input-receipt.json",
+      "scenario_id": "fpa-fod-400313301-bear-trap",
+      "status": "verified",
+      "terrain_sha256": "53eee220308d733e8b49680cf5bc0be2d39286e2167424e0ac90c96364ddedda"
+    },
+    {
+      "fuel_sha256": "67b4fb8052b3c37e17b5f82dcf13934986e1dfda43fc6ffe514a68f9805601c3",
+      "mask_sha256": "8fe8472d6a8b60128b32d4f3552c69cdf19f768f511755f879ba987b946f49c3",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400313842-north-eden/input-receipt.json",
+      "scenario_id": "fpa-fod-400313842-north-eden",
+      "status": "verified",
+      "terrain_sha256": "e076ba9abf16acf9ed931848d13d09389de8acbfb8d1b0e56630462b8819fc5d"
+    },
+    {
+      "fuel_sha256": "8e2de847c8f0523184f160bbcb6bbb0f0396ad0d5a60aba4cd517269b97cb163",
+      "mask_sha256": "54c21f8f54a45eb281879e8ba9ea3736dc523331f140e71e7608718d74542efd",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400314155-wahluke-slope/input-receipt.json",
+      "scenario_id": "fpa-fod-400314155-wahluke-slope",
+      "status": "verified",
+      "terrain_sha256": "8c15c3607598fe5d8c6d7e21224f7d60f0c55decee55bb41b417b0e8d7f83db3"
+    },
+    {
+      "fuel_sha256": "c6a00baef3bbcb1f2f51b4354f7ec1f22cbe9db433010ede07f482e73ff67517",
+      "mask_sha256": "12438179ac8429e0d68bf562140d9444bb39482099f8d09cdd68cf8490a82c27",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400314399-lake-wallula/input-receipt.json",
+      "scenario_id": "fpa-fod-400314399-lake-wallula",
+      "status": "verified",
+      "terrain_sha256": "65d07f463633803f4729f12c72bb773091e9362911c27df0a08c1411cd6cdd14"
+    },
+    {
+      "fuel_sha256": "5156460a5b1ed71777c124e1378534e46df9ad651d17bfd9ae6a0df0b72a0a99",
+      "mask_sha256": "14e2b278e561affd694b6cad21a38cd5b1aa284857702cf49d4f7fd9c7d66885",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400318794-goring/input-receipt.json",
+      "scenario_id": "fpa-fod-400318794-goring",
+      "status": "verified",
+      "terrain_sha256": "fb54dcc3c02260226773ebc107aebe250fe85c0d3da930880935083bb3dc4521"
+    },
+    {
+      "fuel_sha256": "c9c2334c346f8ab379c7a3d2058be60e1f1cdb2e3466c13f9e084589d66030b5",
+      "mask_sha256": "6da43e42f0cd961e4e6bcf349334a3cd363d62cf9571c866e933676faf20a0ac",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400367632-viewpoint/input-receipt.json",
+      "scenario_id": "fpa-fod-400367632-viewpoint",
+      "status": "verified",
+      "terrain_sha256": "115a679e3f5b2d95d23930cb0acfade25aa170fa9940b8bf67b045bf2600ae08"
+    },
+    {
+      "fuel_sha256": "f7de71e529031e77be889c73cf751ec9d24503fe682cbfcfb735c5b2ff8c54fc",
+      "mask_sha256": "4c1732a6ce53c4e225bae292cfd09092efdeff1f68eb9472aae803f765026054",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400370314-mile-post-twenty-two/input-receipt.json",
+      "scenario_id": "fpa-fod-400370314-mile-post-twenty-two",
+      "status": "verified",
+      "terrain_sha256": "cb5ac05e4bd7ea2f892859768425656e49dff5fb4557e049e3eb8250b6c75f5c"
+    },
+    {
+      "fuel_sha256": "644f2d87b75a08cd45dbecd1a323512b5ece98d2dd3a14d8bbe17c2fe08c9c80",
+      "mask_sha256": "6e610c88a551012e6cb52dd862c745611d2b0582c493e7312e3f596d9543a00a",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400376589-ute-park/input-receipt.json",
+      "scenario_id": "fpa-fod-400376589-ute-park",
+      "status": "verified",
+      "terrain_sha256": "fd7d9197c2170d7577d157ea6155159255fef824e9b66b967e71748272809231"
+    },
+    {
+      "fuel_sha256": "61ce3f43f2263a2a06fd9818a867a9f8a75dfba1b398340d55b8da5003873c11",
+      "mask_sha256": "ec79286678a0b0d4cdb8a33bd11bef648ab239bda5617acfbcabb08377702f0a",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400389704-hwy-94/input-receipt.json",
+      "scenario_id": "fpa-fod-400389704-hwy-94",
+      "status": "verified",
+      "terrain_sha256": "4461d1816418e21362b37e71728367a795c1e82a26f54c388101a50be96375b6"
+    },
+    {
+      "fuel_sha256": "d757acc9d19c8bc43ea110f5f72e4e9517717b08caceedefb48d1ee2f3894a00",
+      "mask_sha256": "b416031e9893a19750ee74674c6c07b91dd9b0509cad6713b3b7515077ec554a",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400389746-badger-hole/input-receipt.json",
+      "scenario_id": "fpa-fod-400389746-badger-hole",
+      "status": "verified",
+      "terrain_sha256": "d92776096e1f7ba8007f80036f720e05a20c5ca455d9fa6e530a045c474aabe9"
+    },
+    {
+      "fuel_sha256": "686ab1dade9d7467dc0cab5a78bbac005fe8badc898f27a3fcd0aa245bed445c",
+      "mask_sha256": "ab1e0b95468e739260b91b80a3a42dce95e8883f613102c3010c5f6e5ee49e5d",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400389825-columbus/input-receipt.json",
+      "scenario_id": "fpa-fod-400389825-columbus",
+      "status": "verified",
+      "terrain_sha256": "56932d4dc29c7f556cde0f8d2f8e60a780e3e489e839b6544b4fea79b15c0159"
+    },
+    {
+      "fuel_sha256": "341792a5b56f29d7d29bb221eb6571161ffb80277a153cb09c877d6ee59f83ff",
+      "mask_sha256": "23f3c9cd02457222a4fcfc23d0cbb703fc54fa220143b04b726128a933f42638",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400389848-glade-creek/input-receipt.json",
+      "scenario_id": "fpa-fod-400389848-glade-creek",
+      "status": "verified",
+      "terrain_sha256": "ae07cf4fc47b83fdfffee8b0f5513880c58f9cc667fcf99b96ab9e3c8d85c100"
+    },
+    {
+      "fuel_sha256": "b2707045537a383624789e78f49042f0e8bc56eabba01cf2748074cc1b301f3d",
+      "mask_sha256": "8edfbb8b150e71ef049f84e20cbbcfba9a15a711d9d94b45d708e0d62a6c9105",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400500346-south/input-receipt.json",
+      "scenario_id": "fpa-fod-400500346-south",
+      "status": "verified",
+      "terrain_sha256": "0075e2fbb26cf20a8404f690a0542469cd2a4bd8f06d2844767c2930584d0e80"
+    },
+    {
+      "fuel_sha256": "8a28d785f7d51013f0c8a8b08279c11ec9ebf54ccafe15cce4d75a2bf4e026a8",
+      "mask_sha256": "3245b80624936b07ba0d3fcbaf13dca36368675fa374269fb08606d482d42647",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400500878-cellar/input-receipt.json",
+      "scenario_id": "fpa-fod-400500878-cellar",
+      "status": "verified",
+      "terrain_sha256": "8b0ad6006b23cafca40d7e92cecf01571eea58e8be97a0989f60ae8c6150211f"
+    },
+    {
+      "fuel_sha256": "733cd9b2511665760a2b1b62153d4b8dfc97bf75584b96f9f6eb8a431898f34f",
+      "mask_sha256": "a9d6b839ac5f3098c30383e190a76cd4ce1653a7808e03a5bcc0107487e3c7d7",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400501480-decker/input-receipt.json",
+      "scenario_id": "fpa-fod-400501480-decker",
+      "status": "verified",
+      "terrain_sha256": "38942200cade6988692d6458979e92c6ff594c2c354d42f88f9a0d9fe85e91d8"
+    },
+    {
+      "fuel_sha256": "d425407e160f57bad8fe167a5254abb92ff8cb31529aa5b2a4616e892af68634",
+      "mask_sha256": "78be8780446c2fcdd2821cfce6336148f608ef927ab1bdafdb9d105d5518c522",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400501641-mountain/input-receipt.json",
+      "scenario_id": "fpa-fod-400501641-mountain",
+      "status": "verified",
+      "terrain_sha256": "d720521f70a80f6d891844a8d8e285fe2cb55ba21d37c0960fd74ed4e3fbdf13"
+    },
+    {
+      "fuel_sha256": "dfe8e88eb1bb0ee2437b1221ea55ea9fa63e11b88732f68c149ef1704933fdd6",
+      "mask_sha256": "b37582558d33e2e6bfd19655e3d7745ef8185e5a425786b681a6984aa6267abc",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400502172-roberts/input-receipt.json",
+      "scenario_id": "fpa-fod-400502172-roberts",
+      "status": "verified",
+      "terrain_sha256": "7a305cac6c1e7c7ad9181bfe5e0ce4f1c16c13759c222a51ca279bd91f8aec0a"
+    },
+    {
+      "fuel_sha256": "c2aebfcb970a2146721d1722407bee73f46265e3b448b1e059cf6a8358a48c63",
+      "mask_sha256": "5e9797127ea8520b330263db12fed19e09140d52dbb4779d7de7c31030640c76",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400503581-coldwater/input-receipt.json",
+      "scenario_id": "fpa-fod-400503581-coldwater",
+      "status": "verified",
+      "terrain_sha256": "d5e58884d44ac1d2fa017066556c972627832cfeb188501cc24040fdbd1e0946"
+    },
+    {
+      "fuel_sha256": "c77316ace4e3abab233b20b2622dbb28aa652cdc4b54d5d677b99955f8203c8f",
+      "mask_sha256": "3884e42f5fa733e77a1639a342cd5856a4611b152da30e6448ea1938f8282141",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400504417-shady/input-receipt.json",
+      "scenario_id": "fpa-fod-400504417-shady",
+      "status": "verified",
+      "terrain_sha256": "0caf2c42a61956a651680dbff117d34a4ab0d697e8a58bb606c36ef2432953dc"
+    },
+    {
+      "fuel_sha256": "2ca9cfbaef47291d7ef3064804e6270a49f33aa094cdaaabd2cf02dcb7fbb853",
+      "mask_sha256": "3d83d374ed71965b9dc5b4e81be70d06a4aaf5d59143be32a9f8918d56ef5608",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400505027-pine-lodge/input-receipt.json",
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "status": "verified",
+      "terrain_sha256": "551ed30172d8070d15bb8666325d77022bb84d583a3deac4df771429c7c0fbcd"
+    },
+    {
+      "fuel_sha256": "c69d0c33170bed3c9ad6c54ce866d1fc8b2861f85d6439e6ceecdeefcebc5682",
+      "mask_sha256": "ac6e70b08d5568563c71dbef17f71967d428737da727b144b6171a33e339a869",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400505059-river/input-receipt.json",
+      "scenario_id": "fpa-fod-400505059-river",
+      "status": "verified",
+      "terrain_sha256": "c9cd78e4bdd7b343ccc4e05e575d067e33dd24116393814f03e07240a5d3e4bc"
+    },
+    {
+      "fuel_sha256": "8feeb3afca7df7b54e30734d53781792fafdf8cadb8f15d54c511bef18b39b69",
+      "mask_sha256": "95d12a3d4e447eaf62254dc0601aad9f27f2a5a4230a145276fa82f02e4bbbd6",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400505118-cove-creek/input-receipt.json",
+      "scenario_id": "fpa-fod-400505118-cove-creek",
+      "status": "verified",
+      "terrain_sha256": "00b9f23a1c521c85580bcca3eab8ba3ac5d75ca7f513b0c0d2860e89a043ed9c"
+    },
+    {
+      "fuel_sha256": "9d00872c1b4db7ff5208b64228ddac07883a3456ec5eefab3357c0c776a34fea",
+      "mask_sha256": "6dcd388ea3fb538673f3073f9de7f1382836d8f4c602c2a2c2fa009734bacf22",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400506459-kincade/input-receipt.json",
+      "scenario_id": "fpa-fod-400506459-kincade",
+      "status": "verified",
+      "terrain_sha256": "8327aaf6acc052ed897cda9be6c926c2b9c5b5ca508c9a970ffeabffb41c4df8"
+    },
+    {
+      "fuel_sha256": "2a7b1ee11fb35f0c16a4af6265f4514e85a89c0b4bade6e2761a05bba197aae8",
+      "mask_sha256": "fb6c045f5fd8d4c34790730dab80207b1513c3f654665a64a4b608b9d0759166",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400506867-bronco-gulch/input-receipt.json",
+      "scenario_id": "fpa-fod-400506867-bronco-gulch",
+      "status": "verified",
+      "terrain_sha256": "82bde3cdbd8a8b36a65f7a7416a2583b9ae9305b9c074f6bfcaa956d5f745e67"
+    },
+    {
+      "fuel_sha256": "27ed3db2c620556b334786ce8ca81822a99bb2a4b6b60a6a99d37c6a680f7355",
+      "mask_sha256": "48d03da708d7d06906b5c622dc771d91134510e1e1ed6084b82d2eb6b8e3d48f",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400507579-red-bank/input-receipt.json",
+      "scenario_id": "fpa-fod-400507579-red-bank",
+      "status": "verified",
+      "terrain_sha256": "b680d336d2612bd43915f3943d244635887c7ec67388adadf3a4d77a8a6b93ff"
+    },
+    {
+      "fuel_sha256": "cd919576f5df0e8a35740660813a1fee322d507c46d0afb148d230b031a9a927",
+      "mask_sha256": "7b7e2960b5233a08a310f58b5a3b9948b113bdfde882ef244c7e10efd7c751c7",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400508306-lookout-point/input-receipt.json",
+      "scenario_id": "fpa-fod-400508306-lookout-point",
+      "status": "verified",
+      "terrain_sha256": "2300d3b4b21597921b02c5c9c7a832b3b6cddb6e6f7ef363b32d65d1301d8823"
+    },
+    {
+      "fuel_sha256": "7d417d33f6d65b6d91a30112d9c7569ee95b6913b438410823d907c85aea2d47",
+      "mask_sha256": "b9465723a946360df9d64a98d6a0c591f021e777eb85199c07f4cf96a06b9f12",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400508308-pot-hole/input-receipt.json",
+      "scenario_id": "fpa-fod-400508308-pot-hole",
+      "status": "verified",
+      "terrain_sha256": "4363dace0dc08ac74222a9ae3e445d6a7926b0878c526d63c4395f6c6f74d6b1"
+    },
+    {
+      "fuel_sha256": "0cdcdfab0ba9a8769a0c82c6d3e2f21c7f7a91e49637c84cfbcc9db8d7bac42e",
+      "mask_sha256": "95ba07771a3a550ad78973883ff2890d01f002474bb9e5a34330c9cb5d95d92e",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400508892-north-hills/input-receipt.json",
+      "scenario_id": "fpa-fod-400508892-north-hills",
+      "status": "verified",
+      "terrain_sha256": "10d2fb1bc302dd07bc927bc84ceb86b4b6ae0c5653f34670231fa1354d890245"
+    },
+    {
+      "fuel_sha256": "d32ea945dffdd44640d369efb15252c1af044227b95cbdb5b6b17ceabde06dd9",
+      "mask_sha256": "e142414d2b507ce6ca548487b6f7c39cf5f899673176ff13275e78158e8b1c3a",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400509040-moss-ranch/input-receipt.json",
+      "scenario_id": "fpa-fod-400509040-moss-ranch",
+      "status": "verified",
+      "terrain_sha256": "d16931325ed7afe5995271e09a5f0e6f211cef3f58c9a61ed3abdfb9f8d926d1"
+    },
+    {
+      "fuel_sha256": "f50fc64ac4c0b095496a935961ecc22e29a3cfd9f8c6eba4b5430fde7fb36e9c",
+      "mask_sha256": "b213be14cf38c0aef11268b8bc869b2e5eb577aead70c5c5bd13516680300328",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400509143-ridgetop/input-receipt.json",
+      "scenario_id": "fpa-fod-400509143-ridgetop",
+      "status": "verified",
+      "terrain_sha256": "e5a5cfd396af8880394d798549fbbf9ef7dbc2325be77c9c3f5478a5b9e39d56"
+    },
+    {
+      "fuel_sha256": "df0b570cb32a50fbb8bb48514b106c4487a1253098709b2657f41a05501ee7f6",
+      "mask_sha256": "c5753d2b1e67981e2f0ee297195eb4ce1d256313835bf7a6640d19a32511ad27",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400510304-goose/input-receipt.json",
+      "scenario_id": "fpa-fod-400510304-goose",
+      "status": "verified",
+      "terrain_sha256": "b87813a0c14a05ef300cb239d0d0971a8c3d12f69cc84a60e44c4e6e160b422c"
+    },
+    {
+      "fuel_sha256": "d208a5dd64e7805ec3f988fe079f76b828c7447f503f3795b53d418f9c475d4a",
+      "mask_sha256": "e87363459591cbb95137eed39e399ed57b7eef04988d159c20dd5c1035b1024e",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400510515-summit/input-receipt.json",
+      "scenario_id": "fpa-fod-400510515-summit",
+      "status": "verified",
+      "terrain_sha256": "7b6ce0f058a9b04ddddf7005ea52e4bbfec7bae8536e0ab37ec385f23b19526a"
+    },
+    {
+      "fuel_sha256": "f4ef97eae7e5684ab4efb648f07f52d63fb5ef58379c3d1fe8f132215d6ddfdc",
+      "mask_sha256": "e4022f335b77fef0e8efaf0520bb9acc890327dc7bb03d0c12eddc23776a9513",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400512411-russell/input-receipt.json",
+      "scenario_id": "fpa-fod-400512411-russell",
+      "status": "verified",
+      "terrain_sha256": "67b5a00eff2ad4ab16efadb84a3edd2ce6f878bcdda7266d53d143dcb33dbe08"
+    },
+    {
+      "fuel_sha256": "c24122a028c0e5a4a82a6a19a39f4f143d2169663d90f6b81166c1d89f3f43ae",
+      "mask_sha256": "c3ae1af367320f920ba9ce6daa209fa53eb380801b748baa57d167e05ca00ccf",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400512420-shelter-pass/input-receipt.json",
+      "scenario_id": "fpa-fod-400512420-shelter-pass",
+      "status": "verified",
+      "terrain_sha256": "f79b5168038a00ba713444f099152b411d4993dd7bdc0b9a6f788803c2fbe1ae"
+    },
+    {
+      "fuel_sha256": "06bb03d22bb62ba68e60522c3d239fde7789b147e399f1bd8063ec263c4feac5",
+      "mask_sha256": "a2df2daa82cd801f6075bf74411241ab5fab74858e2d20a407cd0d9a24fe1a45",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400512424-goose-point/input-receipt.json",
+      "scenario_id": "fpa-fod-400512424-goose-point",
+      "status": "verified",
+      "terrain_sha256": "16ad6e317966649fb97e58d1ee05361619b9cf651787ff1011a0ed521e42f0cb"
+    },
+    {
+      "fuel_sha256": "1afaaa7ea35648069c636dee7375b27f80847f6c5a439437fcf74954b043a087",
+      "mask_sha256": "e1341c8895f8af94ae4ee9875bbff91c5f9e910d67975e1e6182bab1feb96a61",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400512651-powerline/input-receipt.json",
+      "scenario_id": "fpa-fod-400512651-powerline",
+      "status": "verified",
+      "terrain_sha256": "9a541e943e8d209fb1740a2b084668a5b53065a678eddb0ff4a3d3bbbd9e797b"
+    },
+    {
+      "fuel_sha256": "fd97f637d411086a50439298405ce57be106ebfb737022494aaaf67a54d69831",
+      "mask_sha256": "ff914e85bdfe303178189807c2716770a079aa8a9be24b08a1de457b1b032e7b",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400513361-243-command/input-receipt.json",
+      "scenario_id": "fpa-fod-400513361-243-command",
+      "status": "verified",
+      "terrain_sha256": "23dca407b1624a225abdfb992522ea331da50dc2c0c641fd4bdfc88e4cd6dc79"
+    },
+    {
+      "fuel_sha256": "c45076dd9c8d534bd028c93f59f505a0e547b7fe5cdfa6e804ae72ff23c6a33a",
+      "mask_sha256": "b7bf883e95de36ab0d252ec9d7e5afb0d6fab1318b9c0df5b67c78e227dd243f",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400513488-sage/input-receipt.json",
+      "scenario_id": "fpa-fod-400513488-sage",
+      "status": "verified",
+      "terrain_sha256": "facea219d571c3d6bb41c0f4b3121dab7ce634d32ec6d0640c6cfa8198a67a44"
+    },
+    {
+      "fuel_sha256": "dde19ed80b5bf6dfcb23b7ea2f69f6e6f533093f753d6f76134fa827944583cd",
+      "mask_sha256": "415bcb64a9a3e1c2ce397a4a6133bdf0b818928582ea7e5883e734042891fd49",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400541373-mp-97/input-receipt.json",
+      "scenario_id": "fpa-fod-400541373-mp-97",
+      "status": "verified",
+      "terrain_sha256": "79086bcc8d7c4d51ac2a801019f3c9846cb206711b4c2e141ee6b32973b477e4"
+    },
+    {
+      "fuel_sha256": "bd1612d986afd35b46d2e1c695df66c82e3a7177323bd62557fc2b250184f43e",
+      "mask_sha256": "d046b648cc33036e6a30059a6ca0b663f1d7e86d11d9c81413031aae607c5613",
+      "receipt": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/fireline-simfire-benchmark/.local/feds-simfire-cases/fpa-fod-400732973-walker/input-receipt.json",
+      "scenario_id": "fpa-fod-400732973-walker",
+      "status": "verified",
+      "terrain_sha256": "257765e379e461149d962e237c56e6f6f2aeb795818ea4a80aa876bf7a888133"
+    }
+  ],
+  "failed_case_count": 0,
+  "kind": "landfire_input_fetch_and_validation_not_simulation_or_physical_validation",
+  "limitations": [
+    "FEDS initial states are satellite-derived estimates, not ground truth.",
+    "LANDFIRE products are candidate fuel/terrain layers, not field-verified event-date measurements.",
+    "Successful raster validation does not validate SimFire spread or suppression outcomes."
+  ],
+  "schema_version": "feds-simfire-input-coverage/1.0",
+  "selected_case_count": 99,
+  "split": "train",
+  "test_cases_loaded": false,
+  "verified_case_count": 99
+}

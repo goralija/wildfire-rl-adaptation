@@ -1,0 +1,3290 @@
+{
+  "candidate_frame": {
+    "case_count": 264,
+    "manifest": "data/manifests/fpa-feds-candidate-frame-v1.json",
+    "selection_filter": {
+      "minimum_reported_fire_size_acres": 5000,
+      "requires": "known discovery date, latitude/longitude, MTBS ID",
+      "western_states": [
+        "CA",
+        "OR",
+        "WA",
+        "ID",
+        "NV",
+        "AZ",
+        "UT",
+        "CO",
+        "NM",
+        "MT"
+      ]
+    },
+    "sha256": "373256cdcbde4f876d064f25a5fc53e0f7b21af0a337fcbf42a011242caf0adb"
+  },
+  "case_count": 119,
+  "case_counts_by_split": {
+    "train": 99,
+    "validation": 20
+  },
+  "cases": [
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-24T00:00:00",
+        "initial_state_time": "2018-07-24T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-24T00:00:00",
+          "2018-07-24T12:00:00",
+          "2018-07-25T00:00:00",
+          "2018-07-25T12:00:00",
+          "2018-07-26T00:00:00"
+        ],
+        "source_fire_id": "60225",
+        "start_point_distance_m": 1415.2
+      },
+      "event": {
+        "discovery_date": "2018-07-22",
+        "fod_id": 400300427,
+        "fpa_unique_fire_id": "FS-6905284",
+        "latitude": 37.657777779999996,
+        "longitude": -108.47416667,
+        "name": "PLATEAU",
+        "state": "CO",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-24T12:00:00",
+        "initial_state_time": "2018-07-24T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-24T12:00:00",
+          "2018-07-25T00:00:00",
+          "2018-07-25T12:00:00",
+          "2018-07-26T00:00:00",
+          "2018-07-26T12:00:00"
+        ],
+        "source_fire_id": "60370",
+        "start_point_distance_m": 1890.1
+      },
+      "event": {
+        "discovery_date": "2018-07-24",
+        "fod_id": 400300631,
+        "fpa_unique_fire_id": "FS-6893065",
+        "latitude": 34.616111110000006,
+        "longitude": -110.82194444,
+        "name": "RANCH",
+        "state": "AZ",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400300631-ranch",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-05-22T12:00:00",
+        "initial_state_time": "2018-05-22T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-05-22T12:00:00",
+          "2018-05-23T00:00:00",
+          "2018-05-23T12:00:00",
+          "2018-05-24T00:00:00",
+          "2018-05-24T12:00:00"
+        ],
+        "source_fire_id": "46045",
+        "start_point_distance_m": 1095.9
+      },
+      "event": {
+        "discovery_date": "2018-05-22",
+        "fod_id": 400300764,
+        "fpa_unique_fire_id": "FS-6917646",
+        "latitude": 33.72361111,
+        "longitude": -108.53722222,
+        "name": "BUZZARD",
+        "state": "NM",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400300764-buzzard",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-08-04T00:00:00",
+        "initial_state_time": "2018-08-04T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-08-04T00:00:00",
+          "2018-08-04T12:00:00",
+          "2018-08-05T00:00:00",
+          "2018-08-05T12:00:00",
+          "2018-08-06T00:00:00"
+        ],
+        "source_fire_id": "62417",
+        "start_point_distance_m": 2222.0
+      },
+      "event": {
+        "discovery_date": "2018-08-04",
+        "fod_id": 400300963,
+        "fpa_unique_fire_id": "FS-6903200",
+        "latitude": 39.95083333,
+        "longitude": -111.4025,
+        "name": "COAL HOLLOW",
+        "state": "UT",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400300963-coal-hollow",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-09-26T00:00:00",
+        "initial_state_time": "2018-09-26T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-09-26T00:00:00",
+          "2018-09-26T12:00:00",
+          "2018-09-27T00:00:00",
+          "2018-09-27T12:00:00",
+          "2018-09-28T00:00:00"
+        ],
+        "source_fire_id": "72680",
+        "start_point_distance_m": 1771.3
+      },
+      "event": {
+        "discovery_date": "2018-09-25",
+        "fod_id": 400301084,
+        "fpa_unique_fire_id": "FS-6898773",
+        "latitude": 44.566666670000004,
+        "longitude": -115.32277778,
+        "name": "PROSPECT",
+        "state": "ID",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400301084-prospect",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-19T00:00:00",
+        "initial_state_time": "2018-07-19T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-19T00:00:00",
+          "2018-07-19T12:00:00",
+          "2018-07-20T00:00:00",
+          "2018-07-20T12:00:00",
+          "2018-07-21T00:00:00"
+        ],
+        "source_fire_id": "59230",
+        "start_point_distance_m": 2008.1
+      },
+      "event": {
+        "discovery_date": "2018-07-18",
+        "fod_id": 400301086,
+        "fpa_unique_fire_id": "FS-6890698",
+        "latitude": 44.822777779999996,
+        "longitude": -115.28638889,
+        "name": "KIWAH",
+        "state": "ID",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400301086-kiwah",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-08-21T00:00:00",
+        "initial_state_time": "2018-08-21T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-08-21T00:00:00",
+          "2018-08-21T12:00:00",
+          "2018-08-22T00:00:00",
+          "2018-08-22T12:00:00",
+          "2018-08-23T00:00:00"
+        ],
+        "source_fire_id": "65484",
+        "start_point_distance_m": 2691.5
+      },
+      "event": {
+        "discovery_date": "2018-08-20",
+        "fod_id": 400301104,
+        "fpa_unique_fire_id": "FS-6893724",
+        "latitude": 43.49,
+        "longitude": -115.05722222,
+        "name": "STEWART CREEK",
+        "state": "ID",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400301104-stewart-creek",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-08-29T12:00:00",
+        "initial_state_time": "2018-08-29T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-08-29T12:00:00",
+          "2018-08-30T00:00:00",
+          "2018-08-30T12:00:00",
+          "2018-08-31T00:00:00",
+          "2018-08-31T12:00:00"
+        ],
+        "source_fire_id": "67355",
+        "start_point_distance_m": 2168.1
+      },
+      "event": {
+        "discovery_date": "2018-08-28",
+        "fod_id": 400301199,
+        "fpa_unique_fire_id": "FS-6894328",
+        "latitude": 40.631111110000006,
+        "longitude": -110.90083333,
+        "name": "MURDOCK",
+        "state": "UT",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400301199-murdock",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-20T00:00:00",
+        "initial_state_time": "2018-07-20T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-20T00:00:00",
+          "2018-07-20T12:00:00",
+          "2018-07-21T00:00:00",
+          "2018-07-21T12:00:00",
+          "2018-07-22T00:00:00"
+        ],
+        "source_fire_id": "59467",
+        "start_point_distance_m": 1050.8
+      },
+      "event": {
+        "discovery_date": "2018-07-19",
+        "fod_id": 400302402,
+        "fpa_unique_fire_id": "FS-6880066",
+        "latitude": 40.22333333,
+        "longitude": -106.655,
+        "name": "SILVER CREEK",
+        "state": "CO",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400302402-silver-creek",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-06-28T00:00:00",
+        "initial_state_time": "2018-06-28T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-06-28T00:00:00",
+          "2018-06-28T12:00:00",
+          "2018-06-29T00:00:00",
+          "2018-06-29T12:00:00",
+          "2018-06-30T00:00:00"
+        ],
+        "source_fire_id": "54927",
+        "start_point_distance_m": 1373.5
+      },
+      "event": {
+        "discovery_date": "2018-06-26",
+        "fod_id": 400302444,
+        "fpa_unique_fire_id": "FS-6882587",
+        "latitude": 37.49638889,
+        "longitude": -105.29083333,
+        "name": "SPRING CREEK",
+        "state": "CO",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400302444-spring-creek",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-06-01T12:00:00",
+        "initial_state_time": "2018-06-01T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-06-01T12:00:00",
+          "2018-06-02T00:00:00",
+          "2018-06-02T12:00:00",
+          "2018-06-03T00:00:00",
+          "2018-06-03T12:00:00"
+        ],
+        "source_fire_id": "48698",
+        "start_point_distance_m": 0.0
+      },
+      "event": {
+        "discovery_date": "2018-06-01",
+        "fod_id": 400302446,
+        "fpa_unique_fire_id": "FS-6912905",
+        "latitude": 37.46055556,
+        "longitude": -107.80805556000001,
+        "name": "416",
+        "state": "CO",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400302446-416",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-04-28T00:00:00",
+        "initial_state_time": "2018-04-28T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-04-28T00:00:00",
+          "2018-04-28T12:00:00",
+          "2018-04-29T00:00:00",
+          "2018-04-29T12:00:00",
+          "2018-04-30T00:00:00"
+        ],
+        "source_fire_id": "36940",
+        "start_point_distance_m": 1557.2
+      },
+      "event": {
+        "discovery_date": "2018-04-27",
+        "fod_id": 400302533,
+        "fpa_unique_fire_id": "FS-6900961",
+        "latitude": 34.55694444,
+        "longitude": -111.15972222,
+        "name": "TINDER",
+        "state": "AZ",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400302533-tinder",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-27T12:00:00",
+        "initial_state_time": "2018-07-27T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-27T12:00:00",
+          "2018-07-28T00:00:00",
+          "2018-07-28T12:00:00",
+          "2018-07-29T00:00:00",
+          "2018-07-29T12:00:00"
+        ],
+        "source_fire_id": "61068",
+        "start_point_distance_m": 2132.3
+      },
+      "event": {
+        "discovery_date": "2018-07-26",
+        "fod_id": 400302636,
+        "fpa_unique_fire_id": "FS-6907681",
+        "latitude": 33.965,
+        "longitude": -111.11305556,
+        "name": "BEARS",
+        "state": "AZ",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400302636-bears",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-09-05T00:00:00",
+        "initial_state_time": "2018-09-05T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-09-05T00:00:00",
+          "2018-09-05T12:00:00",
+          "2018-09-06T00:00:00",
+          "2018-09-06T12:00:00",
+          "2018-09-07T00:00:00"
+        ],
+        "source_fire_id": "68481",
+        "start_point_distance_m": 1428.7
+      },
+      "event": {
+        "discovery_date": "2018-09-04",
+        "fod_id": 400302686,
+        "fpa_unique_fire_id": "FS-6908912",
+        "latitude": 38.38444444,
+        "longitude": -119.45027778,
+        "name": "BOOT",
+        "state": "CA",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400302686-boot",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-28T00:00:00",
+        "initial_state_time": "2018-07-28T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-28T00:00:00",
+          "2018-07-28T12:00:00",
+          "2018-07-29T00:00:00",
+          "2018-07-29T12:00:00",
+          "2018-07-30T00:00:00"
+        ],
+        "source_fire_id": "61178",
+        "start_point_distance_m": 2790.7
+      },
+      "event": {
+        "discovery_date": "2018-07-27",
+        "fod_id": 400302877,
+        "fpa_unique_fire_id": "FS-6914909",
+        "latitude": 40.625,
+        "longitude": -120.88277778,
+        "name": "WHALEBACK",
+        "state": "CA",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400302877-whaleback",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-25T12:00:00",
+        "initial_state_time": "2018-07-25T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-25T12:00:00",
+          "2018-07-26T00:00:00",
+          "2018-07-26T12:00:00",
+          "2018-07-27T00:00:00",
+          "2018-07-27T12:00:00"
+        ],
+        "source_fire_id": "60669",
+        "start_point_distance_m": 2944.0
+      },
+      "event": {
+        "discovery_date": "2018-07-25",
+        "fod_id": 400302943,
+        "fpa_unique_fire_id": "FS-6892586",
+        "latitude": 33.71138889,
+        "longitude": -116.76944444,
+        "name": "CRANSTON",
+        "state": "CA",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400302943-cranston",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-08-03T12:00:00",
+        "initial_state_time": "2018-08-03T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-08-03T12:00:00",
+          "2018-08-04T00:00:00",
+          "2018-08-04T12:00:00",
+          "2018-08-05T00:00:00",
+          "2018-08-05T12:00:00"
+        ],
+        "source_fire_id": "62346",
+        "start_point_distance_m": 2904.5
+      },
+      "event": {
+        "discovery_date": "2018-08-02",
+        "fod_id": 400303584,
+        "fpa_unique_fire_id": "FS-6918227",
+        "latitude": 45.12305556,
+        "longitude": -113.54694443999999,
+        "name": "GOLDSTONE",
+        "state": "MT",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-21T12:00:00",
+        "initial_state_time": "2018-07-21T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-21T12:00:00",
+          "2018-07-22T00:00:00",
+          "2018-07-22T12:00:00",
+          "2018-07-23T00:00:00",
+          "2018-07-23T12:00:00"
+        ],
+        "source_fire_id": "59832",
+        "start_point_distance_m": 2001.4
+      },
+      "event": {
+        "discovery_date": "2018-07-20",
+        "fod_id": 400303631,
+        "fpa_unique_fire_id": "FS-6908839",
+        "latitude": 44.96777778,
+        "longitude": -111.10222222,
+        "name": "BACON RIND",
+        "state": "MT",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400303631-bacon-rind",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-08-12T00:00:00",
+        "initial_state_time": "2018-08-12T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-08-12T12:00:00",
+          "2018-08-13T00:00:00",
+          "2018-08-13T12:00:00",
+          "2018-08-14T00:00:00",
+          "2018-08-14T12:00:00"
+        ],
+        "source_fire_id": "63897",
+        "start_point_distance_m": 2803.5
+      },
+      "event": {
+        "discovery_date": "2018-08-11",
+        "fod_id": 400303711,
+        "fpa_unique_fire_id": "FS-6907706",
+        "latitude": 48.57666667,
+        "longitude": -115.52638889,
+        "name": "GOLD HILL",
+        "state": "MT",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400303711-gold-hill",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-23T12:00:00",
+        "initial_state_time": "2018-07-23T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-23T12:00:00",
+          "2018-07-24T00:00:00",
+          "2018-07-24T12:00:00",
+          "2018-07-25T00:00:00",
+          "2018-07-25T12:00:00"
+        ],
+        "source_fire_id": "60172",
+        "start_point_distance_m": 953.2
+      },
+      "event": {
+        "discovery_date": "2018-07-23",
+        "fod_id": 400303744,
+        "fpa_unique_fire_id": "FS-6880991",
+        "latitude": 45.26888889,
+        "longitude": -116.35527778,
+        "name": "RATTLESNAKE CREEK",
+        "state": "ID",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400303744-rattlesnake-creek",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-09-16T12:00:00",
+        "initial_state_time": "2018-09-16T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-09-16T12:00:00",
+          "2018-09-17T00:00:00",
+          "2018-09-17T12:00:00",
+          "2018-09-18T00:00:00",
+          "2018-09-18T12:00:00"
+        ],
+        "source_fire_id": "70561",
+        "start_point_distance_m": 1409.6
+      },
+      "event": {
+        "discovery_date": "2018-09-15",
+        "fod_id": 400303807,
+        "fpa_unique_fire_id": "FS-6898086",
+        "latitude": 40.97777778,
+        "longitude": -106.74722222000001,
+        "name": "RYAN",
+        "state": "CO",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400303807-ryan",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-29T12:00:00",
+        "initial_state_time": "2018-07-29T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-29T12:00:00",
+          "2018-07-30T00:00:00",
+          "2018-07-30T12:00:00",
+          "2018-07-31T00:00:00",
+          "2018-07-31T12:00:00"
+        ],
+        "source_fire_id": "61465",
+        "start_point_distance_m": 1156.6
+      },
+      "event": {
+        "discovery_date": "2018-07-29",
+        "fod_id": 400303966,
+        "fpa_unique_fire_id": "FS-6917616",
+        "latitude": 39.91638889,
+        "longitude": -107.63972222000001,
+        "name": "CABIN LAKE",
+        "state": "CO",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400303966-cabin-lake",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-06-28T00:00:00",
+        "initial_state_time": "2018-06-28T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-06-28T00:00:00",
+          "2018-06-28T12:00:00",
+          "2018-06-29T00:00:00",
+          "2018-06-29T12:00:00",
+          "2018-06-30T00:00:00"
+        ],
+        "source_fire_id": "54928",
+        "start_point_distance_m": 2062.6
+      },
+      "event": {
+        "discovery_date": "2018-06-27",
+        "fod_id": 400304718,
+        "fpa_unique_fire_id": "FS-6872400",
+        "latitude": 37.397222219999996,
+        "longitude": -113.42333332999999,
+        "name": "WEST VALLEY",
+        "state": "UT",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400304718-west-valley",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-08-03T00:00:00",
+        "initial_state_time": "2018-08-03T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-08-03T00:00:00",
+          "2018-08-03T12:00:00",
+          "2018-08-04T00:00:00",
+          "2018-08-04T12:00:00",
+          "2018-08-05T00:00:00"
+        ],
+        "source_fire_id": "62193",
+        "start_point_distance_m": 1799.0
+      },
+      "event": {
+        "discovery_date": "2018-08-02",
+        "fod_id": 400304799,
+        "fpa_unique_fire_id": "FS-6890714",
+        "latitude": 44.85638889,
+        "longitude": -114.30666667,
+        "name": "RABBIT FOOT",
+        "state": "ID",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400304799-rabbit-foot",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-17T00:00:00",
+        "initial_state_time": "2018-07-18T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-18T00:00:00",
+          "2018-07-18T12:00:00",
+          "2018-07-19T00:00:00",
+          "2018-07-19T12:00:00",
+          "2018-07-20T00:00:00"
+        ],
+        "source_fire_id": "58826",
+        "start_point_distance_m": 2599.1
+      },
+      "event": {
+        "discovery_date": "2018-07-15",
+        "fod_id": 400305302,
+        "fpa_unique_fire_id": "FS-6918922",
+        "latitude": 42.844444440000004,
+        "longitude": -122.70416666999999,
+        "name": "SUGAR PINE",
+        "state": "OR",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400305302-sugar-pine",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-04-11T12:00:00",
+        "initial_state_time": "2018-04-11T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-04-11T12:00:00",
+          "2018-04-12T00:00:00",
+          "2018-04-12T12:00:00",
+          "2018-04-13T00:00:00",
+          "2018-04-13T12:00:00"
+        ],
+        "source_fire_id": "29778",
+        "start_point_distance_m": 2381.2
+      },
+      "event": {
+        "discovery_date": "2018-04-11",
+        "fod_id": 400306102,
+        "fpa_unique_fire_id": "W-718107",
+        "latitude": 33.6558,
+        "longitude": -109.5058,
+        "name": "RATTLESNAKE",
+        "state": "AZ",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400306102-rattlesnake",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-23T12:00:00",
+        "initial_state_time": "2018-07-24T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-24T00:00:00",
+          "2018-07-24T12:00:00",
+          "2018-07-25T00:00:00",
+          "2018-07-25T12:00:00",
+          "2018-07-26T00:00:00"
+        ],
+        "source_fire_id": "60160",
+        "start_point_distance_m": 2287.3
+      },
+      "event": {
+        "discovery_date": "2018-07-21",
+        "fod_id": 400306199,
+        "fpa_unique_fire_id": "W-726692",
+        "latitude": 36.165639999999996,
+        "longitude": -112.009935,
+        "name": "OBI",
+        "state": "AZ",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400306199-obi",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-01T00:00:00",
+        "initial_state_time": "2018-07-01T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-01T00:00:00",
+          "2018-07-01T12:00:00",
+          "2018-07-02T00:00:00",
+          "2018-07-02T12:00:00",
+          "2018-07-03T00:00:00"
+        ],
+        "source_fire_id": "55565",
+        "start_point_distance_m": 1542.4
+      },
+      "event": {
+        "discovery_date": "2018-06-30",
+        "fod_id": 400307067,
+        "fpa_unique_fire_id": "W-723622",
+        "latitude": 38.81,
+        "longitude": -122.1997,
+        "name": "COUNTY",
+        "state": "CA",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400307067-county",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-11-08T12:00:00",
+        "initial_state_time": "2018-11-08T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-11-08T12:00:00",
+          "2018-11-09T00:00:00",
+          "2018-11-09T12:00:00",
+          "2018-11-10T00:00:00",
+          "2018-11-10T12:00:00"
+        ],
+        "source_fire_id": "81682",
+        "start_point_distance_m": 0.0
+      },
+      "event": {
+        "discovery_date": "2018-11-08",
+        "fod_id": 400307281,
+        "fpa_unique_fire_id": "W-726519",
+        "latitude": 39.8139,
+        "longitude": -121.4347,
+        "name": "CAMP",
+        "state": "CA",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400307281-camp",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-11-09T00:00:00",
+        "initial_state_time": "2018-11-09T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-11-09T00:00:00",
+          "2018-11-09T12:00:00",
+          "2018-11-10T00:00:00",
+          "2018-11-10T12:00:00",
+          "2018-11-11T00:00:00"
+        ],
+        "source_fire_id": "81834",
+        "start_point_distance_m": 1752.1
+      },
+      "event": {
+        "discovery_date": "2018-11-08",
+        "fod_id": 400307326,
+        "fpa_unique_fire_id": "W-727307",
+        "latitude": 34.24,
+        "longitude": -118.6997,
+        "name": "WOOLSEY",
+        "state": "CA",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400307326-woolsey",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-14T00:00:00",
+        "initial_state_time": "2018-07-15T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-15T00:00:00",
+          "2018-07-15T12:00:00",
+          "2018-07-16T00:00:00",
+          "2018-07-16T12:00:00",
+          "2018-07-17T00:00:00"
+        ],
+        "source_fire_id": "58351",
+        "start_point_distance_m": 2976.2
+      },
+      "event": {
+        "discovery_date": "2018-07-13",
+        "fod_id": 400307342,
+        "fpa_unique_fire_id": "W-727171",
+        "latitude": 37.6519,
+        "longitude": -119.8808,
+        "name": "FERGUSON",
+        "state": "CA",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400307342-ferguson",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-06-29T12:00:00",
+        "initial_state_time": "2018-06-29T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-06-29T12:00:00",
+          "2018-06-30T00:00:00",
+          "2018-06-30T12:00:00",
+          "2018-07-01T00:00:00",
+          "2018-07-01T12:00:00"
+        ],
+        "source_fire_id": "55262",
+        "start_point_distance_m": 718.0
+      },
+      "event": {
+        "discovery_date": "2018-06-28",
+        "fod_id": 400307379,
+        "fpa_unique_fire_id": "W-720464",
+        "latitude": 39.055,
+        "longitude": -106.0688,
+        "name": "WESTON PASS",
+        "state": "CO",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-20T12:00:00",
+        "initial_state_time": "2018-07-20T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-20T12:00:00",
+          "2018-07-21T00:00:00",
+          "2018-07-21T12:00:00",
+          "2018-07-22T00:00:00",
+          "2018-07-22T12:00:00"
+        ],
+        "source_fire_id": "59628",
+        "start_point_distance_m": 1209.3
+      },
+      "event": {
+        "discovery_date": "2018-07-20",
+        "fod_id": 400307462,
+        "fpa_unique_fire_id": "W-724248",
+        "latitude": 40.1914,
+        "longitude": -108.2011,
+        "name": "INDIAN VALLEY",
+        "state": "CO",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400307462-indian-valley",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-30T00:00:00",
+        "initial_state_time": "2018-07-30T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-30T00:00:00",
+          "2018-07-30T12:00:00",
+          "2018-07-31T00:00:00",
+          "2018-07-31T12:00:00",
+          "2018-08-01T00:00:00"
+        ],
+        "source_fire_id": "61508",
+        "start_point_distance_m": 1312.6
+      },
+      "event": {
+        "discovery_date": "2018-07-29",
+        "fod_id": 400307488,
+        "fpa_unique_fire_id": "W-724245",
+        "latitude": 39.6889,
+        "longitude": -108.7575,
+        "name": "RED CANYON",
+        "state": "CO",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400307488-red-canyon",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-09-13T12:00:00",
+        "initial_state_time": "2018-09-13T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-09-13T12:00:00",
+          "2018-09-14T00:00:00",
+          "2018-09-14T12:00:00",
+          "2018-09-15T00:00:00",
+          "2018-09-15T12:00:00"
+        ],
+        "source_fire_id": "69948",
+        "start_point_distance_m": 776.6
+      },
+      "event": {
+        "discovery_date": "2018-09-13",
+        "fod_id": 400307548,
+        "fpa_unique_fire_id": "W-725861",
+        "latitude": 40.653,
+        "longitude": -108.5736,
+        "name": "BOONE DRAW",
+        "state": "CO",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400307548-boone-draw",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-30T00:00:00",
+        "initial_state_time": "2018-07-30T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-30T00:00:00",
+          "2018-07-30T12:00:00",
+          "2018-07-31T00:00:00",
+          "2018-07-31T12:00:00",
+          "2018-08-01T00:00:00"
+        ],
+        "source_fire_id": "61511",
+        "start_point_distance_m": 1340.6
+      },
+      "event": {
+        "discovery_date": "2018-07-29",
+        "fod_id": 400307776,
+        "fpa_unique_fire_id": "W-726431",
+        "latitude": 38.456939,
+        "longitude": -108.665,
+        "name": "BULL DRAW",
+        "state": "CO",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400307776-bull-draw",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-09-22T12:00:00",
+        "initial_state_time": "2018-09-22T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-09-22T12:00:00",
+          "2018-09-23T00:00:00",
+          "2018-09-23T12:00:00",
+          "2018-09-24T00:00:00",
+          "2018-09-24T12:00:00"
+        ],
+        "source_fire_id": "72206",
+        "start_point_distance_m": 1044.3
+      },
+      "event": {
+        "discovery_date": "2018-09-22",
+        "fod_id": 400308380,
+        "fpa_unique_fire_id": "W-723902",
+        "latitude": 42.2439,
+        "longitude": -113.4497,
+        "name": "CONNER",
+        "state": "ID",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400308380-conner",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-16T12:00:00",
+        "initial_state_time": "2018-07-17T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-17T12:00:00",
+          "2018-07-18T00:00:00",
+          "2018-07-18T12:00:00",
+          "2018-07-19T00:00:00",
+          "2018-07-19T12:00:00"
+        ],
+        "source_fire_id": "58771",
+        "start_point_distance_m": 2748.5
+      },
+      "event": {
+        "discovery_date": "2018-07-17",
+        "fod_id": 400308544,
+        "fpa_unique_fire_id": "W-721377",
+        "latitude": 42.4181,
+        "longitude": -115.5036,
+        "name": "WINTER CAMP",
+        "state": "ID",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400308544-winter-camp",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-17T12:00:00",
+        "initial_state_time": "2018-07-17T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-17T12:00:00",
+          "2018-07-18T00:00:00",
+          "2018-07-18T12:00:00",
+          "2018-07-19T00:00:00",
+          "2018-07-19T12:00:00"
+        ],
+        "source_fire_id": "58956",
+        "start_point_distance_m": 2851.9
+      },
+      "event": {
+        "discovery_date": "2018-07-17",
+        "fod_id": 400308652,
+        "fpa_unique_fire_id": "W-725555",
+        "latitude": 43.0428,
+        "longitude": -114.7739,
+        "name": "DOG CREEK",
+        "state": "ID",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400308652-dog-creek",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-29T12:00:00",
+        "initial_state_time": "2018-07-29T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-29T12:00:00",
+          "2018-07-30T00:00:00",
+          "2018-07-30T12:00:00",
+          "2018-07-31T00:00:00",
+          "2018-07-31T12:00:00"
+        ],
+        "source_fire_id": "61467",
+        "start_point_distance_m": 2436.3
+      },
+      "event": {
+        "discovery_date": "2018-07-29",
+        "fod_id": 400308656,
+        "fpa_unique_fire_id": "W-721121",
+        "latitude": 43.46669,
+        "longitude": -114.14553,
+        "name": "SHARPS",
+        "state": "ID",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400308656-sharps",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-09-01T12:00:00",
+        "initial_state_time": "2018-09-01T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-09-01T12:00:00",
+          "2018-09-02T00:00:00",
+          "2018-09-02T12:00:00",
+          "2018-09-03T00:00:00",
+          "2018-09-03T12:00:00"
+        ],
+        "source_fire_id": "67928",
+        "start_point_distance_m": 1138.3
+      },
+      "event": {
+        "discovery_date": "2018-08-31",
+        "fod_id": 400309598,
+        "fpa_unique_fire_id": "W-723426",
+        "latitude": 48.3419,
+        "longitude": -105.3228,
+        "name": "BUFFALO PASTURE",
+        "state": "MT",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400309598-buffalo-pasture",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-08-12T00:00:00",
+        "initial_state_time": "2018-08-12T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-08-12T00:00:00",
+          "2018-08-12T12:00:00",
+          "2018-08-13T00:00:00",
+          "2018-08-13T12:00:00",
+          "2018-08-14T00:00:00"
+        ],
+        "source_fire_id": "63895",
+        "start_point_distance_m": 1184.6
+      },
+      "event": {
+        "discovery_date": "2018-08-11",
+        "fod_id": 400309614,
+        "fpa_unique_fire_id": "W-724729",
+        "latitude": 48.6428,
+        "longitude": -113.9164,
+        "name": "HOWE RIDGE",
+        "state": "MT",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400309614-howe-ridge",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-04-23T00:00:00",
+        "initial_state_time": "2018-04-23T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-04-23T00:00:00",
+          "2018-04-23T12:00:00",
+          "2018-04-24T00:00:00",
+          "2018-04-24T12:00:00",
+          "2018-04-25T00:00:00"
+        ],
+        "source_fire_id": "34556",
+        "start_point_distance_m": 0.0
+      },
+      "event": {
+        "discovery_date": "2018-04-22",
+        "fod_id": 400310578,
+        "fpa_unique_fire_id": "W-724656",
+        "latitude": 31.5708,
+        "longitude": -108.6858,
+        "name": "OK BAR",
+        "state": "NM",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400310578-ok-bar",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-06-25T00:00:00",
+        "initial_state_time": "2018-06-25T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-06-25T00:00:00",
+          "2018-06-25T12:00:00",
+          "2018-06-26T00:00:00",
+          "2018-06-26T12:00:00",
+          "2018-06-27T00:00:00"
+        ],
+        "source_fire_id": "54339",
+        "start_point_distance_m": 1523.6
+      },
+      "event": {
+        "discovery_date": "2018-06-24",
+        "fod_id": 400310583,
+        "fpa_unique_fire_id": "W-724657",
+        "latitude": 32.4267,
+        "longitude": -106.5611,
+        "name": "ORGAN",
+        "state": "NM",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400310583-organ",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-04-12T12:00:00",
+        "initial_state_time": "2018-04-12T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-04-12T12:00:00",
+          "2018-04-13T00:00:00",
+          "2018-04-13T12:00:00",
+          "2018-04-14T00:00:00",
+          "2018-04-14T12:00:00"
+        ],
+        "source_fire_id": "30459",
+        "start_point_distance_m": 1502.9
+      },
+      "event": {
+        "discovery_date": "2018-04-12",
+        "fod_id": 400310659,
+        "fpa_unique_fire_id": "W-725355",
+        "latitude": 33.497878,
+        "longitude": -103.337997,
+        "name": "206",
+        "state": "NM",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400310659-206",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-05T12:00:00",
+        "initial_state_time": "2018-07-05T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-05T12:00:00",
+          "2018-07-06T00:00:00",
+          "2018-07-06T12:00:00",
+          "2018-07-07T00:00:00",
+          "2018-07-07T12:00:00"
+        ],
+        "source_fire_id": "56572",
+        "start_point_distance_m": 2653.2
+      },
+      "event": {
+        "discovery_date": "2018-07-05",
+        "fod_id": 400310914,
+        "fpa_unique_fire_id": "W-720405",
+        "latitude": 40.6836,
+        "longitude": -115.0708,
+        "name": "ECHO",
+        "state": "NV",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400310914-echo",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-27T00:00:00",
+        "initial_state_time": "2018-07-27T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-27T00:00:00",
+          "2018-07-27T12:00:00",
+          "2018-07-28T00:00:00",
+          "2018-07-28T12:00:00",
+          "2018-07-29T00:00:00"
+        ],
+        "source_fire_id": "60957",
+        "start_point_distance_m": 1455.5
+      },
+      "event": {
+        "discovery_date": "2018-07-26",
+        "fod_id": 400310945,
+        "fpa_unique_fire_id": "W-725417",
+        "latitude": 41.8072,
+        "longitude": -114.0664,
+        "name": "GOOSE CREEK",
+        "state": "NV",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400310945-goose-creek",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-08-19T00:00:00",
+        "initial_state_time": "2018-08-19T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-08-19T00:00:00",
+          "2018-08-19T12:00:00",
+          "2018-08-20T00:00:00",
+          "2018-08-20T12:00:00",
+          "2018-08-21T00:00:00"
+        ],
+        "source_fire_id": "65196",
+        "start_point_distance_m": 582.9
+      },
+      "event": {
+        "discovery_date": "2018-08-18",
+        "fod_id": 400310977,
+        "fpa_unique_fire_id": "W-725156",
+        "latitude": 40.7728,
+        "longitude": -116.8422,
+        "name": "SHEEP CREEK",
+        "state": "NV",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400310977-sheep-creek",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-08-14T00:00:00",
+        "initial_state_time": "2018-08-14T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-08-14T00:00:00",
+          "2018-08-14T12:00:00",
+          "2018-08-15T00:00:00",
+          "2018-08-15T12:00:00",
+          "2018-08-16T00:00:00"
+        ],
+        "source_fire_id": "64243",
+        "start_point_distance_m": 2659.1
+      },
+      "event": {
+        "discovery_date": "2018-08-13",
+        "fod_id": 400311017,
+        "fpa_unique_fire_id": "W-725135",
+        "latitude": 40.0628,
+        "longitude": -114.8458,
+        "name": "GOSHUTE CAVE",
+        "state": "NV",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400311017-goshute-cave",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-05T00:00:00",
+        "initial_state_time": "2018-07-06T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-06T00:00:00",
+          "2018-07-06T12:00:00",
+          "2018-07-07T00:00:00",
+          "2018-07-07T12:00:00",
+          "2018-07-08T00:00:00"
+        ],
+        "source_fire_id": "56422",
+        "start_point_distance_m": 2847.0
+      },
+      "event": {
+        "discovery_date": "2018-07-05",
+        "fod_id": 400311253,
+        "fpa_unique_fire_id": "W-718913",
+        "latitude": 41.52733,
+        "longitude": -117.426523,
+        "name": "MARTIN",
+        "state": "NV",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400311253-martin",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-25T12:00:00",
+        "initial_state_time": "2018-07-25T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-25T12:00:00",
+          "2018-07-26T00:00:00",
+          "2018-07-26T12:00:00",
+          "2018-07-27T00:00:00",
+          "2018-07-27T12:00:00"
+        ],
+        "source_fire_id": "60648",
+        "start_point_distance_m": 1007.2
+      },
+      "event": {
+        "discovery_date": "2018-07-24",
+        "fod_id": 400311268,
+        "fpa_unique_fire_id": "W-720485",
+        "latitude": 40.759528,
+        "longitude": -117.519718,
+        "name": "GREGG",
+        "state": "NV",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400311268-gregg",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-06-21T12:00:00",
+        "initial_state_time": "2018-06-22T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-06-22T00:00:00",
+          "2018-06-22T12:00:00",
+          "2018-06-23T00:00:00",
+          "2018-06-23T12:00:00",
+          "2018-06-24T00:00:00"
+        ],
+        "source_fire_id": "53765",
+        "start_point_distance_m": 2558.8
+      },
+      "event": {
+        "discovery_date": "2018-06-21",
+        "fod_id": 400312226,
+        "fpa_unique_fire_id": "W-726066",
+        "latitude": 45.1597,
+        "longitude": -121.0705,
+        "name": "BOXCAR",
+        "state": "OR",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400312226-boxcar",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-06-22T00:00:00",
+        "initial_state_time": "2018-06-23T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-06-23T00:00:00",
+          "2018-06-23T12:00:00",
+          "2018-06-24T00:00:00",
+          "2018-06-24T12:00:00",
+          "2018-06-25T00:00:00"
+        ],
+        "source_fire_id": "53827",
+        "start_point_distance_m": 2783.0
+      },
+      "event": {
+        "discovery_date": "2018-06-22",
+        "fod_id": 400312231,
+        "fpa_unique_fire_id": "W-726078",
+        "latitude": 45.2717,
+        "longitude": -120.6128,
+        "name": "JACK KNIFE",
+        "state": "OR",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400312231-jack-knife",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-08-17T12:00:00",
+        "initial_state_time": "2018-08-18T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-08-18T00:00:00",
+          "2018-08-18T12:00:00",
+          "2018-08-19T00:00:00",
+          "2018-08-19T12:00:00",
+          "2018-08-20T00:00:00"
+        ],
+        "source_fire_id": "64966",
+        "start_point_distance_m": 948.4
+      },
+      "event": {
+        "discovery_date": "2018-08-17",
+        "fod_id": 400312290,
+        "fpa_unique_fire_id": "W-726076",
+        "latitude": 45.2947,
+        "longitude": -120.3853,
+        "name": "STUBBLEFIELD",
+        "state": "OR",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400312290-stubblefield",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-08-17T12:00:00",
+        "initial_state_time": "2018-08-18T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-08-18T00:00:00",
+          "2018-08-18T12:00:00",
+          "2018-08-19T00:00:00",
+          "2018-08-19T12:00:00",
+          "2018-08-20T00:00:00"
+        ],
+        "source_fire_id": "64962",
+        "start_point_distance_m": 1241.4
+      },
+      "event": {
+        "discovery_date": "2018-08-17",
+        "fod_id": 400312444,
+        "fpa_unique_fire_id": "W-721807",
+        "latitude": 44.7361,
+        "longitude": -121.3678,
+        "name": "TENINO FIRE",
+        "state": "OR",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400312444-tenino-fire",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-06-28T12:00:00",
+        "initial_state_time": "2018-06-28T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-06-28T12:00:00",
+          "2018-06-29T00:00:00",
+          "2018-06-29T12:00:00",
+          "2018-06-30T00:00:00",
+          "2018-06-30T12:00:00"
+        ],
+        "source_fire_id": "55076",
+        "start_point_distance_m": 2096.3
+      },
+      "event": {
+        "discovery_date": "2018-06-28",
+        "fod_id": 400312787,
+        "fpa_unique_fire_id": "W-721493",
+        "latitude": 38.0925,
+        "longitude": -112.9511,
+        "name": "BLACK MOUNTAIN",
+        "state": "UT",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400312787-black-mountain",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-27T12:00:00",
+        "initial_state_time": "2018-07-27T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-27T12:00:00",
+          "2018-07-28T00:00:00",
+          "2018-07-28T12:00:00",
+          "2018-07-29T00:00:00",
+          "2018-07-29T12:00:00"
+        ],
+        "source_fire_id": "61080",
+        "start_point_distance_m": 2568.1
+      },
+      "event": {
+        "discovery_date": "2018-07-27",
+        "fod_id": 400313239,
+        "fpa_unique_fire_id": "W-721275",
+        "latitude": 40.5072,
+        "longitude": -112.9692,
+        "name": "CEDAR MOUNTAIN ONE",
+        "state": "UT",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400313239-cedar-mountain-one",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-09-01T12:00:00",
+        "initial_state_time": "2018-09-01T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-09-01T12:00:00",
+          "2018-09-02T00:00:00",
+          "2018-09-02T12:00:00",
+          "2018-09-03T00:00:00",
+          "2018-09-03T12:00:00"
+        ],
+        "source_fire_id": "67945",
+        "start_point_distance_m": 929.9
+      },
+      "event": {
+        "discovery_date": "2018-09-01",
+        "fod_id": 400313254,
+        "fpa_unique_fire_id": "W-723768",
+        "latitude": 40.863,
+        "longitude": -112.7536,
+        "name": "LAKESIDE",
+        "state": "UT",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400313254-lakeside",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-01T12:00:00",
+        "initial_state_time": "2018-07-02T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-02T00:00:00",
+          "2018-07-02T12:00:00",
+          "2018-07-03T00:00:00",
+          "2018-07-03T12:00:00",
+          "2018-07-04T00:00:00"
+        ],
+        "source_fire_id": "55656",
+        "start_point_distance_m": 1673.7
+      },
+      "event": {
+        "discovery_date": "2018-07-01",
+        "fod_id": 400313293,
+        "fpa_unique_fire_id": "W-719340",
+        "latitude": 40.11,
+        "longitude": -110.81974199999999,
+        "name": "DOLLAR RIDGE",
+        "state": "UT",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400313293-dollar-ridge",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-22T12:00:00",
+        "initial_state_time": "2018-07-22T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-22T12:00:00",
+          "2018-07-23T00:00:00",
+          "2018-07-23T12:00:00",
+          "2018-07-24T00:00:00",
+          "2018-07-24T12:00:00"
+        ],
+        "source_fire_id": "59984",
+        "start_point_distance_m": 1341.2
+      },
+      "event": {
+        "discovery_date": "2018-07-20",
+        "fod_id": 400313301,
+        "fpa_unique_fire_id": "W-720342",
+        "latitude": 39.2908,
+        "longitude": -109.8739,
+        "name": "BEAR TRAP",
+        "state": "UT",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400313301-bear-trap",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-08-16T12:00:00",
+        "initial_state_time": "2018-08-16T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-08-16T12:00:00",
+          "2018-08-17T00:00:00",
+          "2018-08-17T12:00:00",
+          "2018-08-18T00:00:00",
+          "2018-08-18T12:00:00"
+        ],
+        "source_fire_id": "64773",
+        "start_point_distance_m": 1815.5
+      },
+      "event": {
+        "discovery_date": "2018-08-16",
+        "fod_id": 400313842,
+        "fpa_unique_fire_id": "W-725000",
+        "latitude": 41.9433,
+        "longitude": -111.1228,
+        "name": "NORTH EDEN",
+        "state": "UT",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400313842-north-eden",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-09-08T00:00:00",
+        "initial_state_time": "2018-09-08T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-09-08T00:00:00",
+          "2018-09-08T12:00:00",
+          "2018-09-09T00:00:00",
+          "2018-09-09T12:00:00",
+          "2018-09-10T00:00:00"
+        ],
+        "source_fire_id": "69025",
+        "start_point_distance_m": 573.9
+      },
+      "event": {
+        "discovery_date": "2018-09-07",
+        "fod_id": 400314155,
+        "fpa_unique_fire_id": "FWS-2018USWAHFRL4Q7",
+        "latitude": 46.75839,
+        "longitude": -119.4873,
+        "name": "WAHLUKE SLOPE",
+        "state": "WA",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400314155-wahluke-slope",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-30T00:00:00",
+        "initial_state_time": "2018-07-30T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-30T00:00:00",
+          "2018-07-30T12:00:00",
+          "2018-07-31T00:00:00",
+          "2018-07-31T12:00:00",
+          "2018-08-01T00:00:00"
+        ],
+        "source_fire_id": "61537",
+        "start_point_distance_m": 1069.4
+      },
+      "event": {
+        "discovery_date": "2018-07-29",
+        "fod_id": 400314399,
+        "fpa_unique_fire_id": "FWS-2018USWAMNRL14Z",
+        "latitude": 45.97436,
+        "longitude": -118.9977,
+        "name": "LAKE WALLULA",
+        "state": "OR",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400314399-lake-wallula",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-08-04T00:00:00",
+        "initial_state_time": "2018-08-04T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-08-04T00:00:00",
+          "2018-08-04T12:00:00",
+          "2018-08-05T00:00:00",
+          "2018-08-05T12:00:00",
+          "2018-08-06T00:00:00"
+        ],
+        "source_fire_id": "62402",
+        "start_point_distance_m": 2533.2
+      },
+      "event": {
+        "discovery_date": "2018-08-03",
+        "fod_id": 400318794,
+        "fpa_unique_fire_id": "SFO-2018UTBRSUTBRS-000714",
+        "latitude": 41.853530879999994,
+        "longitude": -112.3925018,
+        "name": "GORING",
+        "state": "UT",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400318794-goring",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-05-11T12:00:00",
+        "initial_state_time": "2018-05-11T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-05-11T12:00:00",
+          "2018-05-12T00:00:00",
+          "2018-05-12T12:00:00",
+          "2018-05-13T00:00:00",
+          "2018-05-13T12:00:00"
+        ],
+        "source_fire_id": "42794",
+        "start_point_distance_m": 2998.4
+      },
+      "event": {
+        "discovery_date": "2018-05-11",
+        "fod_id": 400367632,
+        "fpa_unique_fire_id": "SFO-2018AZA5S573",
+        "latitude": 34.68842,
+        "longitude": -112.3663,
+        "name": "VIEWPOINT",
+        "state": "AZ",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400367632-viewpoint",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-06-21T00:00:00",
+        "initial_state_time": "2018-06-21T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-06-21T00:00:00",
+          "2018-06-21T12:00:00",
+          "2018-06-22T00:00:00",
+          "2018-06-22T12:00:00",
+          "2018-06-23T00:00:00"
+        ],
+        "source_fire_id": "53583",
+        "start_point_distance_m": 2772.0
+      },
+      "event": {
+        "discovery_date": "2018-06-20",
+        "fod_id": 400370314,
+        "fpa_unique_fire_id": "SFO-2018WADNR55856",
+        "latitude": 46.966159999999995,
+        "longitude": -120.08,
+        "name": "MILE POST TWENTY TWO",
+        "state": "WA",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400370314-mile-post-twenty-two",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-06-01T00:00:00",
+        "initial_state_time": "2018-06-01T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-06-01T00:00:00",
+          "2018-06-01T12:00:00",
+          "2018-06-02T00:00:00",
+          "2018-06-02T12:00:00",
+          "2018-06-03T00:00:00"
+        ],
+        "source_fire_id": "48447",
+        "start_point_distance_m": 2894.2
+      },
+      "event": {
+        "discovery_date": "2018-05-31",
+        "fod_id": 400376589,
+        "fpa_unique_fire_id": "SFO-2018NMN2S18-20820696X",
+        "latitude": 36.551389,
+        "longitude": -105.12112499999999,
+        "name": "UTE PARK",
+        "state": "NM",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400376589-ute-park",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-04-17T12:00:00",
+        "initial_state_time": "2018-04-17T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-04-17T12:00:00",
+          "2018-04-18T00:00:00",
+          "2018-04-18T12:00:00",
+          "2018-04-19T00:00:00",
+          "2018-04-19T12:00:00"
+        ],
+        "source_fire_id": "32410",
+        "start_point_distance_m": 0.0
+      },
+      "event": {
+        "discovery_date": "2018-04-17",
+        "fod_id": 400389704,
+        "fpa_unique_fire_id": "ICS209_2018_9016481",
+        "latitude": 38.84077,
+        "longitude": -103.4635,
+        "name": "HWY 94",
+        "state": "CO",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400389704-hwy-94",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-04-17T12:00:00",
+        "initial_state_time": "2018-04-17T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-04-17T12:00:00",
+          "2018-04-18T00:00:00",
+          "2018-04-18T12:00:00",
+          "2018-04-19T00:00:00",
+          "2018-04-19T12:00:00"
+        ],
+        "source_fire_id": "32401",
+        "start_point_distance_m": 783.5
+      },
+      "event": {
+        "discovery_date": "2018-04-17",
+        "fod_id": 400389746,
+        "fpa_unique_fire_id": "ICS209_2018_9028320",
+        "latitude": 37.4007,
+        "longitude": -102.2765,
+        "name": "BADGER HOLE",
+        "state": "CO",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400389746-badger-hole",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-07-17T00:00:00",
+        "initial_state_time": "2018-07-18T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-07-18T00:00:00",
+          "2018-07-18T12:00:00",
+          "2018-07-19T00:00:00",
+          "2018-07-19T12:00:00",
+          "2018-07-20T00:00:00"
+        ],
+        "source_fire_id": "58826",
+        "start_point_distance_m": 2831.2
+      },
+      "event": {
+        "discovery_date": "2018-07-15",
+        "fod_id": 400389825,
+        "fpa_unique_fire_id": "ICS209_2018_9159692",
+        "latitude": 42.93758,
+        "longitude": -122.6611,
+        "name": "COLUMBUS",
+        "state": "OR",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400389825-columbus",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2018-09-08T00:00:00",
+        "initial_state_time": "2018-09-08T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2018-09-08T12:00:00",
+          "2018-09-09T00:00:00",
+          "2018-09-09T12:00:00",
+          "2018-09-10T00:00:00",
+          "2018-09-10T12:00:00"
+        ],
+        "source_fire_id": "69029",
+        "start_point_distance_m": 1919.5
+      },
+      "event": {
+        "discovery_date": "2018-09-08",
+        "fod_id": 400389848,
+        "fpa_unique_fire_id": "ICS209_2018_9263846",
+        "latitude": 46.105579999999996,
+        "longitude": -119.9593,
+        "name": "GLADE CREEK",
+        "state": "WA",
+        "year": 2018
+      },
+      "scenario_id": "fpa-fod-400389848-glade-creek",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-09-05T12:00:00",
+        "initial_state_time": "2019-09-06T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-09-06T12:00:00",
+          "2019-09-07T00:00:00",
+          "2019-09-07T12:00:00",
+          "2019-09-08T00:00:00",
+          "2019-09-08T12:00:00"
+        ],
+        "source_fire_id": "60071",
+        "start_point_distance_m": 106.3
+      },
+      "event": {
+        "discovery_date": "2019-09-05",
+        "fod_id": 400500346,
+        "fpa_unique_fire_id": "FS-6978386",
+        "latitude": 40.10888889,
+        "longitude": -122.78888889,
+        "name": "SOUTH",
+        "state": "CA",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400500346-south",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-07-16T12:00:00",
+        "initial_state_time": "2019-07-16T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-07-16T12:00:00",
+          "2019-07-17T00:00:00",
+          "2019-07-17T12:00:00",
+          "2019-07-18T00:00:00",
+          "2019-07-18T12:00:00"
+        ],
+        "source_fire_id": "48981",
+        "start_point_distance_m": 1459.7
+      },
+      "event": {
+        "discovery_date": "2019-07-14",
+        "fod_id": 400500878,
+        "fpa_unique_fire_id": "FS-6940817",
+        "latitude": 34.24305556,
+        "longitude": -112.4875,
+        "name": "CELLAR",
+        "state": "AZ",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400500878-cellar",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-09-09T12:00:00",
+        "initial_state_time": "2019-09-09T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-09-09T12:00:00",
+          "2019-09-10T00:00:00",
+          "2019-09-10T12:00:00",
+          "2019-09-11T00:00:00",
+          "2019-09-11T12:00:00"
+        ],
+        "source_fire_id": "61143",
+        "start_point_distance_m": 986.5
+      },
+      "event": {
+        "discovery_date": "2019-09-08",
+        "fod_id": 400501480,
+        "fpa_unique_fire_id": "FS-6983738",
+        "latitude": 38.40944444,
+        "longitude": -106.00388889,
+        "name": "DECKER",
+        "state": "CO",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400501480-decker",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-06-07T12:00:00",
+        "initial_state_time": "2019-06-07T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-06-07T12:00:00",
+          "2019-06-08T00:00:00",
+          "2019-06-08T12:00:00",
+          "2019-06-09T00:00:00",
+          "2019-06-09T12:00:00"
+        ],
+        "source_fire_id": "39826",
+        "start_point_distance_m": 2057.0
+      },
+      "event": {
+        "discovery_date": "2019-06-07",
+        "fod_id": 400501641,
+        "fpa_unique_fire_id": "FS-6979350",
+        "latitude": 33.87083333,
+        "longitude": -111.75416666999999,
+        "name": "MOUNTAIN",
+        "state": "AZ",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400501641-mountain",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-07-13T12:00:00",
+        "initial_state_time": "2019-07-13T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-07-13T12:00:00",
+          "2019-07-14T00:00:00",
+          "2019-07-14T12:00:00",
+          "2019-07-15T00:00:00",
+          "2019-07-15T12:00:00"
+        ],
+        "source_fire_id": "48333",
+        "start_point_distance_m": 2248.1
+      },
+      "event": {
+        "discovery_date": "2019-07-13",
+        "fod_id": 400502172,
+        "fpa_unique_fire_id": "FS-6946023",
+        "latitude": 33.61,
+        "longitude": -107.40583333,
+        "name": "ROBERTS",
+        "state": "NM",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400502172-roberts",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-05-31T12:00:00",
+        "initial_state_time": "2019-05-31T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-05-31T12:00:00",
+          "2019-06-01T00:00:00",
+          "2019-06-01T12:00:00",
+          "2019-06-02T00:00:00",
+          "2019-06-02T12:00:00"
+        ],
+        "source_fire_id": "37690",
+        "start_point_distance_m": 1178.0
+      },
+      "event": {
+        "discovery_date": "2019-05-30",
+        "fod_id": 400503581,
+        "fpa_unique_fire_id": "FS-6984338",
+        "latitude": 34.491944440000005,
+        "longitude": -111.30222222,
+        "name": "COLDWATER",
+        "state": "AZ",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400503581-coldwater",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-07-11T00:00:00",
+        "initial_state_time": "2019-07-11T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-07-11T00:00:00",
+          "2019-07-11T12:00:00",
+          "2019-07-12T00:00:00",
+          "2019-07-12T12:00:00",
+          "2019-07-13T00:00:00"
+        ],
+        "source_fire_id": "47816",
+        "start_point_distance_m": 2579.4
+      },
+      "event": {
+        "discovery_date": "2019-07-10",
+        "fod_id": 400504417,
+        "fpa_unique_fire_id": "FS-6940208",
+        "latitude": 44.51694444,
+        "longitude": -115.01888889,
+        "name": "SHADY",
+        "state": "ID",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400504417-shady",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-06-19T12:00:00",
+        "initial_state_time": "2019-06-19T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-06-19T12:00:00",
+          "2019-06-20T00:00:00",
+          "2019-06-20T12:00:00",
+          "2019-06-21T00:00:00",
+          "2019-06-21T12:00:00"
+        ],
+        "source_fire_id": "42756",
+        "start_point_distance_m": 1348.6
+      },
+      "event": {
+        "discovery_date": "2019-06-19",
+        "fod_id": 400505027,
+        "fpa_unique_fire_id": "FS-6965087",
+        "latitude": 33.624444440000005,
+        "longitude": -105.24416667,
+        "name": "PINE LODGE",
+        "state": "NM",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-09-04T12:00:00",
+        "initial_state_time": "2019-09-04T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-09-04T12:00:00",
+          "2019-09-05T00:00:00",
+          "2019-09-05T12:00:00",
+          "2019-09-06T00:00:00",
+          "2019-09-06T12:00:00"
+        ],
+        "source_fire_id": "59615",
+        "start_point_distance_m": 2793.7
+      },
+      "event": {
+        "discovery_date": "2019-09-03",
+        "fod_id": 400505059,
+        "fpa_unique_fire_id": "FS-6979732",
+        "latitude": 33.95305556,
+        "longitude": -112.01194444,
+        "name": "RIVER",
+        "state": "AZ",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400505059-river",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-08-03T12:00:00",
+        "initial_state_time": "2019-08-04T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-08-04T00:00:00",
+          "2019-08-04T12:00:00",
+          "2019-08-05T00:00:00",
+          "2019-08-05T12:00:00",
+          "2019-08-06T00:00:00"
+        ],
+        "source_fire_id": "52940",
+        "start_point_distance_m": 2483.7
+      },
+      "event": {
+        "discovery_date": "2019-08-03",
+        "fod_id": 400505118,
+        "fpa_unique_fire_id": "FS-6948928",
+        "latitude": 45.32805556,
+        "longitude": -114.45277777999999,
+        "name": "COVE CREEK",
+        "state": "ID",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400505118-cove-creek",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-10-24T00:00:00",
+        "initial_state_time": "2019-10-24T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-10-24T00:00:00",
+          "2019-10-24T12:00:00",
+          "2019-10-25T00:00:00",
+          "2019-10-25T12:00:00",
+          "2019-10-26T00:00:00"
+        ],
+        "source_fire_id": "72868",
+        "start_point_distance_m": 0.0
+      },
+      "event": {
+        "discovery_date": "2019-10-23",
+        "fod_id": 400506459,
+        "fpa_unique_fire_id": "W-735880",
+        "latitude": 38.7961,
+        "longitude": -122.7664,
+        "name": "KINCADE",
+        "state": "CA",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400506459-kincade",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-07-16T00:00:00",
+        "initial_state_time": "2019-07-16T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-07-16T00:00:00",
+          "2019-07-16T12:00:00",
+          "2019-07-17T00:00:00",
+          "2019-07-17T12:00:00",
+          "2019-07-18T00:00:00"
+        ],
+        "source_fire_id": "48841",
+        "start_point_distance_m": 0.0
+      },
+      "event": {
+        "discovery_date": "2019-07-15",
+        "fod_id": 400506867,
+        "fpa_unique_fire_id": "W-733936",
+        "latitude": 33.3892,
+        "longitude": -110.1383,
+        "name": "BRONCO GULCH",
+        "state": "AZ",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400506867-bronco-gulch",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-09-05T12:00:00",
+        "initial_state_time": "2019-09-06T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-09-06T00:00:00",
+          "2019-09-06T12:00:00",
+          "2019-09-07T00:00:00",
+          "2019-09-07T12:00:00",
+          "2019-09-08T00:00:00"
+        ],
+        "source_fire_id": "60070",
+        "start_point_distance_m": 1406.1
+      },
+      "event": {
+        "discovery_date": "2019-09-05",
+        "fod_id": 400507579,
+        "fpa_unique_fire_id": "W-734886",
+        "latitude": 40.12,
+        "longitude": -122.6397,
+        "name": "RED BANK",
+        "state": "CA",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400507579-red-bank",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-07-23T00:00:00",
+        "initial_state_time": "2019-07-23T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-07-23T00:00:00",
+          "2019-07-23T12:00:00",
+          "2019-07-24T00:00:00",
+          "2019-07-24T12:00:00",
+          "2019-07-25T00:00:00"
+        ],
+        "source_fire_id": "50233",
+        "start_point_distance_m": 224.5
+      },
+      "event": {
+        "discovery_date": "2019-07-23",
+        "fod_id": 400508306,
+        "fpa_unique_fire_id": "W-731363",
+        "latitude": 42.2908,
+        "longitude": -115.6253,
+        "name": "LOOKOUT POINT",
+        "state": "ID",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400508306-lookout-point",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-08-06T12:00:00",
+        "initial_state_time": "2019-08-06T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-08-06T12:00:00",
+          "2019-08-07T00:00:00",
+          "2019-08-07T12:00:00",
+          "2019-08-08T00:00:00",
+          "2019-08-08T12:00:00"
+        ],
+        "source_fire_id": "53539",
+        "start_point_distance_m": 2442.0
+      },
+      "event": {
+        "discovery_date": "2019-08-06",
+        "fod_id": 400508308,
+        "fpa_unique_fire_id": "W-732082",
+        "latitude": 42.7769,
+        "longitude": -115.5239,
+        "name": "POT HOLE",
+        "state": "ID",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400508308-pot-hole",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-07-27T12:00:00",
+        "initial_state_time": "2019-07-27T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-07-27T12:00:00",
+          "2019-07-28T00:00:00",
+          "2019-07-28T12:00:00",
+          "2019-07-29T00:00:00",
+          "2019-07-29T12:00:00"
+        ],
+        "source_fire_id": "51482",
+        "start_point_distance_m": 2469.7
+      },
+      "event": {
+        "discovery_date": "2019-07-26",
+        "fod_id": 400508892,
+        "fpa_unique_fire_id": "W-735477",
+        "latitude": 46.7544,
+        "longitude": -111.9625,
+        "name": "NORTH HILLS",
+        "state": "MT",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400508892-north-hills",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-07-23T12:00:00",
+        "initial_state_time": "2019-07-23T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-07-23T12:00:00",
+          "2019-07-24T00:00:00",
+          "2019-07-24T12:00:00",
+          "2019-07-25T00:00:00",
+          "2019-07-25T12:00:00"
+        ],
+        "source_fire_id": "50374",
+        "start_point_distance_m": 2134.1
+      },
+      "event": {
+        "discovery_date": "2019-07-23",
+        "fod_id": 400509040,
+        "fpa_unique_fire_id": "W-735014",
+        "latitude": 47.4347,
+        "longitude": -114.3567,
+        "name": "MOSS RANCH",
+        "state": "MT",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400509040-moss-ranch",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-08-01T12:00:00",
+        "initial_state_time": "2019-08-01T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-08-01T12:00:00",
+          "2019-08-02T00:00:00",
+          "2019-08-02T12:00:00",
+          "2019-08-03T00:00:00",
+          "2019-08-03T12:00:00"
+        ],
+        "source_fire_id": "52554",
+        "start_point_distance_m": 538.9
+      },
+      "event": {
+        "discovery_date": "2019-08-01",
+        "fod_id": 400509143,
+        "fpa_unique_fire_id": "W-733239",
+        "latitude": 47.5014,
+        "longitude": -108.225,
+        "name": "RIDGETOP",
+        "state": "MT",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400509143-ridgetop",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-08-05T00:00:00",
+        "initial_state_time": "2019-08-05T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-08-05T00:00:00",
+          "2019-08-05T12:00:00",
+          "2019-08-06T00:00:00",
+          "2019-08-06T12:00:00",
+          "2019-08-07T00:00:00"
+        ],
+        "source_fire_id": "53132",
+        "start_point_distance_m": 1.8
+      },
+      "event": {
+        "discovery_date": "2019-08-04",
+        "fod_id": 400510304,
+        "fpa_unique_fire_id": "W-732820",
+        "latitude": 41.9372,
+        "longitude": -114.1664,
+        "name": "GOOSE",
+        "state": "NV",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400510304-goose",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-07-23T00:00:00",
+        "initial_state_time": "2019-07-23T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-07-23T00:00:00",
+          "2019-07-23T12:00:00",
+          "2019-07-24T00:00:00",
+          "2019-07-24T12:00:00",
+          "2019-07-25T00:00:00"
+        ],
+        "source_fire_id": "50239",
+        "start_point_distance_m": 1412.2
+      },
+      "event": {
+        "discovery_date": "2019-07-22",
+        "fod_id": 400510515,
+        "fpa_unique_fire_id": "W-730884",
+        "latitude": 40.648,
+        "longitude": -117.3253,
+        "name": "SUMMIT",
+        "state": "NV",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400510515-summit",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-08-05T00:00:00",
+        "initial_state_time": "2019-08-05T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-08-05T00:00:00",
+          "2019-08-05T12:00:00",
+          "2019-08-06T00:00:00",
+          "2019-08-06T12:00:00",
+          "2019-08-07T00:00:00"
+        ],
+        "source_fire_id": "53135",
+        "start_point_distance_m": 1389.0
+      },
+      "event": {
+        "discovery_date": "2019-08-05",
+        "fod_id": 400512411,
+        "fpa_unique_fire_id": "W-731909",
+        "latitude": 41.78945,
+        "longitude": -112.9036,
+        "name": "RUSSELL",
+        "state": "UT",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400512411-russell",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-08-07T00:00:00",
+        "initial_state_time": "2019-08-07T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-08-07T00:00:00",
+          "2019-08-07T12:00:00",
+          "2019-08-08T00:00:00",
+          "2019-08-08T12:00:00",
+          "2019-08-09T00:00:00"
+        ],
+        "source_fire_id": "53584",
+        "start_point_distance_m": 2228.1
+      },
+      "event": {
+        "discovery_date": "2019-08-06",
+        "fod_id": 400512420,
+        "fpa_unique_fire_id": "W-731948",
+        "latitude": 41.450667,
+        "longitude": -113.1749,
+        "name": "SHELTER PASS",
+        "state": "UT",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400512420-shelter-pass",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-08-22T00:00:00",
+        "initial_state_time": "2019-08-22T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-08-22T00:00:00",
+          "2019-08-22T12:00:00",
+          "2019-08-23T00:00:00",
+          "2019-08-23T12:00:00",
+          "2019-08-24T00:00:00"
+        ],
+        "source_fire_id": "56869",
+        "start_point_distance_m": 2879.9
+      },
+      "event": {
+        "discovery_date": "2019-08-21",
+        "fod_id": 400512424,
+        "fpa_unique_fire_id": "W-732671",
+        "latitude": 40.0855,
+        "longitude": -111.8508,
+        "name": "GOOSE POINT",
+        "state": "UT",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400512424-goose-point",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-07-14T12:00:00",
+        "initial_state_time": "2019-07-15T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-07-15T00:00:00",
+          "2019-07-15T12:00:00",
+          "2019-07-16T00:00:00",
+          "2019-07-16T12:00:00",
+          "2019-07-17T00:00:00"
+        ],
+        "source_fire_id": "48564",
+        "start_point_distance_m": 2860.6
+      },
+      "event": {
+        "discovery_date": "2019-07-14",
+        "fod_id": 400512651,
+        "fpa_unique_fire_id": "W-730463",
+        "latitude": 46.76971,
+        "longitude": -119.88,
+        "name": "POWERLINE",
+        "state": "WA",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400512651-powerline",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-06-04T00:00:00",
+        "initial_state_time": "2019-06-04T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-06-04T00:00:00",
+          "2019-06-04T12:00:00",
+          "2019-06-05T00:00:00",
+          "2019-06-05T12:00:00",
+          "2019-06-06T00:00:00"
+        ],
+        "source_fire_id": "38832",
+        "start_point_distance_m": 822.0
+      },
+      "event": {
+        "discovery_date": "2019-06-03",
+        "fod_id": 400513361,
+        "fpa_unique_fire_id": "FWS-2019USWACBRL9ZL",
+        "latitude": 46.86923,
+        "longitude": -119.898,
+        "name": "243 COMMAND",
+        "state": "WA",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400513361-243-command",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-08-10T00:00:00",
+        "initial_state_time": "2019-08-10T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-08-10T00:00:00",
+          "2019-08-10T12:00:00",
+          "2019-08-11T00:00:00",
+          "2019-08-11T12:00:00",
+          "2019-08-12T00:00:00"
+        ],
+        "source_fire_id": "54218",
+        "start_point_distance_m": 59.7
+      },
+      "event": {
+        "discovery_date": "2019-08-09",
+        "fod_id": 400513488,
+        "fpa_unique_fire_id": "FWS-2019USMTCMRMLW5",
+        "latitude": 47.63707616,
+        "longitude": -108.15377358,
+        "name": "SAGE",
+        "state": "MT",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400513488-sage",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-07-25T00:00:00",
+        "initial_state_time": "2019-07-26T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-07-26T00:00:00",
+          "2019-07-26T12:00:00",
+          "2019-07-27T00:00:00",
+          "2019-07-27T12:00:00",
+          "2019-07-28T00:00:00"
+        ],
+        "source_fire_id": "50784",
+        "start_point_distance_m": 2536.0
+      },
+      "event": {
+        "discovery_date": "2019-07-24",
+        "fod_id": 400541373,
+        "fpa_unique_fire_id": "SFO-2019ORODF1973206920",
+        "latitude": 42.913830000000004,
+        "longitude": -123.2685,
+        "name": "MP 97",
+        "state": "OR",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400541373-mp-97",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2019-09-04T12:00:00",
+        "initial_state_time": "2019-09-05T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2019-09-05T00:00:00",
+          "2019-09-05T12:00:00",
+          "2019-09-06T00:00:00",
+          "2019-09-06T12:00:00",
+          "2019-09-07T00:00:00"
+        ],
+        "source_fire_id": "59691",
+        "start_point_distance_m": 2001.7
+      },
+      "event": {
+        "discovery_date": "2019-09-04",
+        "fod_id": 400732973,
+        "fpa_unique_fire_id": "ICS209_2019_10802166",
+        "latitude": 40.05325,
+        "longitude": -120.6689,
+        "name": "WALKER",
+        "state": "CA",
+        "year": 2019
+      },
+      "scenario_id": "fpa-fod-400732973-walker",
+      "split": "train"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2023-06-30T12:00:00",
+        "initial_state_time": "2023-07-01T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2023-07-01T00:00:00",
+          "2023-07-01T12:00:00",
+          "2023-07-02T00:00:00",
+          "2023-07-02T12:00:00",
+          "2023-07-03T00:00:00"
+        ],
+        "source_fire_id": "55555",
+        "start_point_distance_m": 1535.1
+      },
+      "event": {
+        "discovery_date": "2023-06-30",
+        "fod_id": 401312856,
+        "fpa_unique_fire_id": "INF-2023-AZCNF-000554",
+        "latitude": 31.5013,
+        "longitude": -111.157522,
+        "name": "BEEHIVE",
+        "state": "AZ",
+        "year": 2023
+      },
+      "scenario_id": "fpa-fod-401312856-beehive",
+      "split": "validation"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2023-07-03T12:00:00",
+        "initial_state_time": "2023-07-04T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2023-07-04T00:00:00",
+          "2023-07-04T12:00:00",
+          "2023-07-05T00:00:00",
+          "2023-07-05T12:00:00",
+          "2023-07-06T00:00:00"
+        ],
+        "source_fire_id": "56108",
+        "start_point_distance_m": 2248.9
+      },
+      "event": {
+        "discovery_date": "2023-07-03",
+        "fod_id": 401313289,
+        "fpa_unique_fire_id": "INF-2023-NMN3S-000324",
+        "latitude": 31.5286111,
+        "longitude": -108.7133333,
+        "name": "BRUSHY",
+        "state": "NM",
+        "year": 2023
+      },
+      "scenario_id": "fpa-fod-401313289-brushy",
+      "split": "validation"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2023-07-15T00:00:00",
+        "initial_state_time": "2023-07-15T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2023-07-15T00:00:00",
+          "2023-07-15T12:00:00",
+          "2023-07-16T00:00:00",
+          "2023-07-16T12:00:00",
+          "2023-07-17T00:00:00"
+        ],
+        "source_fire_id": "58383",
+        "start_point_distance_m": 1113.3
+      },
+      "event": {
+        "discovery_date": "2023-07-13",
+        "fod_id": 401315078,
+        "fpa_unique_fire_id": "INF-2023-NMGNF-000360",
+        "latitude": 33.540333000000004,
+        "longitude": -108.387833,
+        "name": "DIVIDE",
+        "state": "NM",
+        "year": 2023
+      },
+      "scenario_id": "fpa-fod-401315078-divide",
+      "split": "validation"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2023-07-16T00:00:00",
+        "initial_state_time": "2023-07-16T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2023-07-16T12:00:00",
+          "2023-07-17T00:00:00",
+          "2023-07-17T12:00:00",
+          "2023-07-18T00:00:00",
+          "2023-07-18T12:00:00"
+        ],
+        "source_fire_id": "58570",
+        "start_point_distance_m": 1506.1
+      },
+      "event": {
+        "discovery_date": "2023-07-15",
+        "fod_id": 401315590,
+        "fpa_unique_fire_id": "INF-2023-ORRSF-000209",
+        "latitude": 42.51562202,
+        "longitude": -124.03718769999999,
+        "name": "FLAT",
+        "state": "OR",
+        "year": 2023
+      },
+      "scenario_id": "fpa-fod-401315590-flat",
+      "split": "validation"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2023-07-18T00:00:00",
+        "initial_state_time": "2023-07-18T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2023-07-18T00:00:00",
+          "2023-07-18T12:00:00",
+          "2023-07-19T00:00:00",
+          "2023-07-19T12:00:00",
+          "2023-07-20T00:00:00"
+        ],
+        "source_fire_id": "58891",
+        "start_point_distance_m": 806.2
+      },
+      "event": {
+        "discovery_date": "2023-07-17",
+        "fod_id": 401315922,
+        "fpa_unique_fire_id": "INF-2023-AZSCA-000983",
+        "latitude": 33.23472219999999,
+        "longitude": -109.75805559999999,
+        "name": "RED POINT TANK",
+        "state": "AZ",
+        "year": 2023
+      },
+      "scenario_id": "fpa-fod-401315922-red-point-tank",
+      "split": "validation"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2023-07-19T12:00:00",
+        "initial_state_time": "2023-07-19T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2023-07-19T12:00:00",
+          "2023-07-20T00:00:00",
+          "2023-07-20T12:00:00",
+          "2023-07-21T00:00:00",
+          "2023-07-21T12:00:00"
+        ],
+        "source_fire_id": "59310",
+        "start_point_distance_m": 489.8
+      },
+      "event": {
+        "discovery_date": "2023-07-19",
+        "fod_id": 401316132,
+        "fpa_unique_fire_id": "INF-2023-IDSCF-023084",
+        "latitude": 44.7025,
+        "longitude": -113.7422222,
+        "name": "HAYDEN",
+        "state": "ID",
+        "year": 2023
+      },
+      "scenario_id": "fpa-fod-401316132-hayden",
+      "split": "validation"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2023-07-21T00:00:00",
+        "initial_state_time": "2023-07-21T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2023-07-21T00:00:00",
+          "2023-07-21T12:00:00",
+          "2023-07-22T00:00:00",
+          "2023-07-22T12:00:00",
+          "2023-07-23T00:00:00"
+        ],
+        "source_fire_id": "59632",
+        "start_point_distance_m": 748.7
+      },
+      "event": {
+        "discovery_date": "2023-07-19",
+        "fod_id": 401316438,
+        "fpa_unique_fire_id": "INF-2023-MTBDF-006210",
+        "latitude": 46.1902778,
+        "longitude": -113.8125,
+        "name": "BOWLES CREEK",
+        "state": "MT",
+        "year": 2023
+      },
+      "scenario_id": "fpa-fod-401316438-bowles-creek",
+      "split": "validation"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2023-07-22T00:00:00",
+        "initial_state_time": "2023-07-22T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2023-07-22T00:00:00",
+          "2023-07-22T12:00:00",
+          "2023-07-23T00:00:00",
+          "2023-07-23T12:00:00",
+          "2023-07-24T00:00:00"
+        ],
+        "source_fire_id": "59853",
+        "start_point_distance_m": 2784.7
+      },
+      "event": {
+        "discovery_date": "2023-07-21",
+        "fod_id": 401316520,
+        "fpa_unique_fire_id": "INF-2023-WASES-000464",
+        "latitude": 45.8308333,
+        "longitude": -120.45888889999999,
+        "name": "NEWELL ROAD",
+        "state": "WA",
+        "year": 2023
+      },
+      "scenario_id": "fpa-fod-401316520-newell-road",
+      "split": "validation"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2023-07-23T00:00:00",
+        "initial_state_time": "2023-07-23T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2023-07-23T00:00:00",
+          "2023-07-23T12:00:00",
+          "2023-07-24T00:00:00",
+          "2023-07-24T12:00:00",
+          "2023-07-25T00:00:00"
+        ],
+        "source_fire_id": "60066",
+        "start_point_distance_m": 1644.5
+      },
+      "event": {
+        "discovery_date": "2023-07-22",
+        "fod_id": 401316682,
+        "fpa_unique_fire_id": "INF-2023-AZTNF-001046",
+        "latitude": 33.8486111,
+        "longitude": -111.5077778,
+        "name": "DIAMOND",
+        "state": "AZ",
+        "year": 2023
+      },
+      "scenario_id": "fpa-fod-401316682-diamond",
+      "split": "validation"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2023-07-24T12:00:00",
+        "initial_state_time": "2023-07-25T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2023-07-25T12:00:00",
+          "2023-07-26T00:00:00",
+          "2023-07-26T12:00:00",
+          "2023-07-27T00:00:00",
+          "2023-07-27T12:00:00"
+        ],
+        "source_fire_id": "60405",
+        "start_point_distance_m": 2712.4
+      },
+      "event": {
+        "discovery_date": "2023-07-22",
+        "fod_id": 401316696,
+        "fpa_unique_fire_id": "INF-2023-NMGNF-000419",
+        "latitude": 33.028463699999996,
+        "longitude": -108.4537124,
+        "name": "TURKEY",
+        "state": "NM",
+        "year": 2023
+      },
+      "scenario_id": "fpa-fod-401316696-turkey",
+      "split": "validation"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2023-07-25T00:00:00",
+        "initial_state_time": "2023-07-25T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2023-07-25T00:00:00",
+          "2023-07-25T12:00:00",
+          "2023-07-26T00:00:00",
+          "2023-07-26T12:00:00",
+          "2023-07-27T00:00:00"
+        ],
+        "source_fire_id": "60498",
+        "start_point_distance_m": 2313.5
+      },
+      "event": {
+        "discovery_date": "2023-07-24",
+        "fod_id": 401317023,
+        "fpa_unique_fire_id": "INF-2023-IDPAF-002673",
+        "latitude": 45.504167,
+        "longitude": -115.315367,
+        "name": "ELKHORN",
+        "state": "ID",
+        "year": 2023
+      },
+      "scenario_id": "fpa-fod-401317023-elkhorn",
+      "split": "validation"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2023-07-28T00:00:00",
+        "initial_state_time": "2023-07-28T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2023-07-28T00:00:00",
+          "2023-07-28T12:00:00",
+          "2023-07-29T00:00:00",
+          "2023-07-29T12:00:00",
+          "2023-07-30T00:00:00"
+        ],
+        "source_fire_id": "60856",
+        "start_point_distance_m": 0.0
+      },
+      "event": {
+        "discovery_date": "2023-07-27",
+        "fod_id": 401317799,
+        "fpa_unique_fire_id": "INF-2023-AZNAA-000118",
+        "latitude": 36.076944440000005,
+        "longitude": -111.7316667,
+        "name": "GOLD HILL",
+        "state": "AZ",
+        "year": 2023
+      },
+      "scenario_id": "fpa-fod-401317799-gold-hill",
+      "split": "validation"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2023-07-30T00:00:00",
+        "initial_state_time": "2023-07-30T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2023-07-30T00:00:00",
+          "2023-07-30T12:00:00",
+          "2023-07-31T00:00:00",
+          "2023-07-31T12:00:00",
+          "2023-08-01T00:00:00"
+        ],
+        "source_fire_id": "61339",
+        "start_point_distance_m": 1803.6
+      },
+      "event": {
+        "discovery_date": "2023-07-30",
+        "fod_id": 401318129,
+        "fpa_unique_fire_id": "INF-2023-MTFHA-000098",
+        "latitude": 47.5216667,
+        "longitude": -114.4147222,
+        "name": "MIDDLE RIDGE",
+        "state": "MT",
+        "year": 2023
+      },
+      "scenario_id": "fpa-fod-401318129-middle-ridge",
+      "split": "validation"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2023-07-30T12:00:00",
+        "initial_state_time": "2023-07-31T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2023-07-31T00:00:00",
+          "2023-07-31T12:00:00",
+          "2023-08-01T00:00:00",
+          "2023-08-01T12:00:00",
+          "2023-08-02T00:00:00"
+        ],
+        "source_fire_id": "61489",
+        "start_point_distance_m": 1892.6
+      },
+      "event": {
+        "discovery_date": "2023-07-30",
+        "fod_id": 401318133,
+        "fpa_unique_fire_id": "INF-2023-MTFHA-000100",
+        "latitude": 47.8277778,
+        "longitude": -114.5925,
+        "name": "NIARADA",
+        "state": "MT",
+        "year": 2023
+      },
+      "scenario_id": "fpa-fod-401318133-niarada",
+      "split": "validation"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2023-07-30T00:00:00",
+        "initial_state_time": "2023-07-30T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2023-07-30T12:00:00",
+          "2023-07-31T00:00:00",
+          "2023-07-31T12:00:00",
+          "2023-08-01T00:00:00",
+          "2023-08-01T12:00:00"
+        ],
+        "source_fire_id": "61361",
+        "start_point_distance_m": 1181.1
+      },
+      "event": {
+        "discovery_date": "2023-07-29",
+        "fod_id": 401318180,
+        "fpa_unique_fire_id": "INF-2023-AZA3S-231390",
+        "latitude": 33.094167,
+        "longitude": -109.7689,
+        "name": "TREADWAY",
+        "state": "AZ",
+        "year": 2023
+      },
+      "scenario_id": "fpa-fod-401318180-treadway",
+      "split": "validation"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2023-07-31T00:00:00",
+        "initial_state_time": "2023-07-31T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2023-07-31T00:00:00",
+          "2023-07-31T12:00:00",
+          "2023-08-01T00:00:00",
+          "2023-08-01T12:00:00",
+          "2023-08-02T00:00:00"
+        ],
+        "source_fire_id": "61582",
+        "start_point_distance_m": 2969.0
+      },
+      "event": {
+        "discovery_date": "2023-07-30",
+        "fod_id": 401318190,
+        "fpa_unique_fire_id": "INF-2023-MTKNF-000262",
+        "latitude": 48.529722199999995,
+        "longitude": -114.8547222,
+        "name": "EAST FORK",
+        "state": "MT",
+        "year": 2023
+      },
+      "scenario_id": "fpa-fod-401318190-east-fork",
+      "split": "validation"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2023-08-15T12:00:00",
+        "initial_state_time": "2023-08-16T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2023-08-16T12:00:00",
+          "2023-08-17T00:00:00",
+          "2023-08-17T12:00:00",
+          "2023-08-18T00:00:00",
+          "2023-08-18T12:00:00"
+        ],
+        "source_fire_id": "65013",
+        "start_point_distance_m": 1562.4
+      },
+      "event": {
+        "discovery_date": "2023-08-15",
+        "fod_id": 401320960,
+        "fpa_unique_fire_id": "INF-2023-CAKNF-006944",
+        "latitude": 41.604117,
+        "longitude": -123.517283,
+        "name": "ELLIOT",
+        "state": "CA",
+        "year": 2023
+      },
+      "scenario_id": "fpa-fod-401320960-elliot",
+      "split": "validation"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2023-08-16T00:00:00",
+        "initial_state_time": "2023-08-17T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2023-08-17T00:00:00",
+          "2023-08-17T12:00:00",
+          "2023-08-18T00:00:00",
+          "2023-08-18T12:00:00",
+          "2023-08-19T00:00:00"
+        ],
+        "source_fire_id": "65109",
+        "start_point_distance_m": 2922.1
+      },
+      "event": {
+        "discovery_date": "2023-08-15",
+        "fod_id": 401321046,
+        "fpa_unique_fire_id": "INF-2023-CAKNF-006988",
+        "latitude": 41.77767,
+        "longitude": -123.03610400000001,
+        "name": "HEAD",
+        "state": "CA",
+        "year": 2023
+      },
+      "scenario_id": "fpa-fod-401321046-head",
+      "split": "validation"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2023-08-18T12:00:00",
+        "initial_state_time": "2023-08-18T12:00:00",
+        "observed_state_times_0_to_48h": [
+          "2023-08-18T12:00:00",
+          "2023-08-19T00:00:00",
+          "2023-08-19T12:00:00",
+          "2023-08-20T00:00:00",
+          "2023-08-20T12:00:00"
+        ],
+        "source_fire_id": "65949",
+        "start_point_distance_m": 578.4
+      },
+      "event": {
+        "discovery_date": "2023-08-18",
+        "fod_id": 401321600,
+        "fpa_unique_fire_id": "INF-2023-MTLNF-200730",
+        "latitude": 47.3816667,
+        "longitude": -114.8058333,
+        "name": "RIVER ROAD EAST",
+        "state": "MT",
+        "year": 2023
+      },
+      "scenario_id": "fpa-fod-401321600-river-road-east",
+      "split": "validation"
+    },
+    {
+      "evaluation_reference": {
+        "event_start_time": "2023-08-19T00:00:00",
+        "initial_state_time": "2023-08-19T00:00:00",
+        "observed_state_times_0_to_48h": [
+          "2023-08-19T00:00:00",
+          "2023-08-19T12:00:00",
+          "2023-08-20T00:00:00",
+          "2023-08-20T12:00:00",
+          "2023-08-21T00:00:00"
+        ],
+        "source_fire_id": "66091",
+        "start_point_distance_m": 0.0
+      },
+      "event": {
+        "discovery_date": "2023-08-18",
+        "fod_id": 401321698,
+        "fpa_unique_fire_id": "INF-2023-IDBOD-000755",
+        "latitude": 44.32772,
+        "longitude": -116.5909,
+        "name": "ANT",
+        "state": "ID",
+        "year": 2023
+      },
+      "scenario_id": "fpa-fod-401321698-ant",
+      "split": "validation"
+    }
+  ],
+  "cohort_id": "fpa-fod-western-us-feds-frame-2018-2019-2023-v1",
+  "created_utc": "2026-11-02T23:56:26.667398+00:00",
+  "crosswalk": {
+    "feds_start_date_window_days": {
+      "after": 2,
+      "before": 1
+    },
+    "matching_rule": "One unique FEDS fire whose t_st date is within -1/+2 days of the FPA-FOD discovery date and whose perimeter lies within the fixed 3 km radius during the first 24 hours after t_st. Each retained episode has five consecutive 12-hour FEDS states from its initial observed state through +48 hours.",
+    "report": "reports/real-fire-data/fpa-feds-candidate-frame-crosswalk-v1.json",
+    "sha256": "d24e5a600ddf461776de377ead37e389befb9b9912fd5202e7292150fe6d039d",
+    "spatial_search_radius_m": 3000.0
+  },
+  "information_boundary": {
+    "agent_inputs": [
+      "initial FEDS perimeter and active-front state",
+      "LANDFIRE fuels and terrain for the episode map",
+      "declared weather inputs",
+      "standardized resource budget and current simulator state"
+    ],
+    "evaluation_only": [
+      "future FEDS state timestamps and geometries",
+      "FPA-FOD discovery point and metadata"
+    ],
+    "excluded_from_policy": [
+      "reported final area",
+      "MTBS identifier and final perimeter",
+      "FLE post-hoc outcome",
+      "all test-year records"
+    ]
+  },
+  "limitations": [
+    "The FPA-FOD discovery point is an incident reference point with unknown case-specific positional uncertainty, not a verified ignition coordinate.",
+    "The candidate frame is restricted to screened >=5,000-acre incidents in ten western states and is not a representative national sample.",
+    "FEDS perimeters are satellite-derived 375 m observations and are noisy references, not ground-truth fire boundaries.",
+    "FLE outcomes are not included in this episode manifest and cannot identify counterfactual line effectiveness."
+  ],
+  "pre_agent_data_gate": {
+    "instruction": "Stop before agent training if false; a split-only audit is incomplete; do not replace the cohort silently.",
+    "pass": true,
+    "status": "pass",
+    "threshold": {
+      "train_two_state_minimum": 20,
+      "validation_two_state_minimum": 8
+    }
+  },
+  "schema_version": "fpa-feds-episode-manifest/1.0",
+  "test_cases_loaded": false
+}

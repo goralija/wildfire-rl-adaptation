@@ -7,6 +7,7 @@
 
 ## Dokumenti
 
+- [SimFire/FEDS runner environment](research/SIMFIRE_ENVIRONMENT.md) - Environment Record
 - [Naredni zadaci](BACKLOG.md) - Backlog
 - [Bootstrap design — 2026-10-28](DESIGN.md) - Design
 - [Project bootstrap implementation plan](IMPLEMENTATION_PLAN.md) - Implementation Plan

@@ -9,6 +9,22 @@ uz FLE/ICS-209 kao ograničen post-hoc kontekst, i implementaciju prvo kroz pre-
 data gate. Sačuvan je novi worktree `codex/fireline-simfire-benchmark` od `main`;
 tri lokalne izmjene glavnog checkouta i stari research worktree ostali su netaknuti.
 
+Nastavak, 2026-11-03: checksum-verifikovani `lf_fireline` zapisi postoje na tačnom
+početnom vremenu za 119/119 train/validation epizoda. Linije su blizu početnog oboda
+(unutar 375m FEDS piksela), ali preklapanje s obodom varira; ovo je opaženi aktivni
+front, ne evidencija izgrađene vatrogasne linije. Fiksna 256×256/180m mapa prima
+cijele početne obode/frontove za svih 119 slučajeva.
+
+Postavljen je izolovani SimFire 2.0.1/Python 3.9.25 macOS ARM64 environment; svih
+85 zaključanih paketa prolazi `uv pip check`. Službeni gridMET `th`, `vs`, `fm100`
+arhivi za 2018/2019/2023 su checksum-verifikovani; četiri 12h forcing uzorka postoje
+za svaki od 119 slučajeva. Raw forcing je pretvoren u SimFire jedinice, ali
+wind-adjustment faktor nije izabran. Jedan Plateau train slučaj ima LANDFIRE
+LF2016 fuel i LF2020 elevation rastere; input smoke od 60 minuta sa demo vjetrom
+spalio je 27 kumulativnih ćelija/87.48ha. To potvrđuje povezivanje kodnih putanja,
+ne historijski no-op gate, spread validaciju ili fizičku tačnost. Još nema bulk
+train mapa, poređenja sa persistence/elipsom, suppression akcija ili PPO treninga.
+
 Napravljen je test-excluded manifest od 40 train / 20 validation događaja. U prvoj,
 eksplorativnoj provjeri FEDS-CONUS FlatGeobuf godišnje datoteke čitane su samo
 prostornim HTTP Range upitima, bez punog downloada; širi vremenski join dao je 17/40
@@ -358,3 +374,47 @@ the existing 12-case Sub20 inference matrix: 12/12 succeeded, all C++ exit codes
 and all existing PPO checkpoint weights remained unchanged. The run was offline/CPU-only,
 without training. Compact receipt: `reports/firehose-verification/real-case-image-regression.json`;
 raw logs stay in ignored `runs/firehose-final-check/`.
+
+
+2026-11-03 — FEDS archive crosswalk and reproducible SimFire setup. Downloaded FEDS-CONUS
+`lf_perimeter` FlatGeobufs for 2018, 2019, 2023 into ignored `.local/feds-conus/`; each
+matches its published Zenodo MD5. The 2024 archive and test records were not fetched or
+read. Re-ran the original 60-case FPA-FOD train/validation cohort locally: 19/40 and 7/20,
+so the old cohort still misses the 20/8 gate. To avoid selecting a single extra fire after
+seeing outcomes, screened the full saved FPA-FOD frames for the same years (208 train,
+56 validation) and applied the unchanged early FEDS date/point/3km/unique-match rule.
+The broad predeclared frame yields 99 train + 20 validation episodes, each with five
+12-hour FEDS states from the initial state through +48h. This explicitly revises the
+candidate universe under ADR-018; it does not alter the thresholds or test boundary.
+
+Hardened the audit to handle date-only discovery times, verify local FEDS archives, and
+scan the full selected event timeline after the initial 3km match so a moving perimeter
+is not mistaken for missing time coverage. Added a checksum-aware fetcher restricted to
+2018/2019/2023 and an episode-manifest builder that excludes FPA final area and MTBS IDs
+from the policy scenario. Added a Python 3.9.25/macOS ARM64 lock pinned to SimFire 2.0.1
+upstream commit `04905b19fe8c10dc08d64faddd00303e0561bb66`; SimFire remains a separate
+runtime from the project's Python >=3.11 environment. Targeted crosswalk/fetcher/manifest
+tests: 14 passed. No SimFire historical no-op, PPO training, test split, or physical
+validation was run. Next: schema-check exact-time active fronts, prepare LANDFIRE inputs,
+then begin the train-only no-op gate.
+
+2026-11-03 — završena priprema TRAIN input okruženja i pokrenuta no-op dijagnostika.
+Batch LANDFIRE builder preuzeo je 99/99 train FBFM13 + LF2020 elevation parova (198
+GeoTIFF-ova), njihove početne FEDS maske i receipts. Sva rastera su na 256×256/180m,
+provjerenih granica/CRS/dimenzija/NoData i fuel code skupa. Validation mape nisu
+preuzete prije train kalibracije. Coverage je u
+`reports/real-fire-data/feds-simfire-input-train-coverage-v1.json`; raw ostaje u
+`.local/feds-simfire-cases`.
+
+Dodani su bulk fetch CLI/testovi, kumulativna burn-mask metrika, 90-min ćelijskog
+trajanja/timebase test i historijski no-op runner. Runner koristi svaki od četiri
+12h gridMET segmenata u SimFire, pa nakon cijelog roll-outa otvara pet budućih oboda
+isključivo za post-hoc poređenje spremljenih stanja. Pilot na TRAIN Plateau pokazuje
+da WAF 0.20–0.60 ostaje praktično na
+persistence (61.56 ha; tri nova ćelije; IoU .64 prema 71.28 ha), a 0.65 skoči na
+1,244 ha za 12h; 0.75 i 1.0 su znatno veći i do +24/+36h dodiruju rub. Na 5-minutnom
+SimFire internom koraku WAF-1 rollout trajao je oko 40 sekundi;
+5m × 18 update-a zadržava nominalnih 90 minuta aktivne ćelije. Ovo je jedan događaj,
+ne kohortni gate; nijedan faktor ili time-step još nije zaključan. Pilot je zabilježen u
+`reports/real-fire-data/feds-simfire-noop-pilot-v1.json`. Nema suppression akcija, RL,
+validation rastera ili TEST pristupa.

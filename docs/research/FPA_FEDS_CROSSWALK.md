@@ -2,7 +2,6 @@
 type: Data Quality Audit
 title: FPA-FOD, FEDS-CONUS i FLE — crosswalk i pre-agent gate
 status: current
-generated: {by: "process:codex", at: "2026-11-02T23:20:54Z"}
 sources:
   - resource: /data/manifests/fireline-benchmark-cohort-v1.json
   - resource: /reports/real-fire-data/fpa-feds-fle-crosswalk-v1.json
@@ -12,83 +11,81 @@ sources:
 ---
 # FPA-FOD, FEDS-CONUS i FLE — crosswalk i pre-agent gate
 
-## Odluka
+## Trenutna odluka — 2026-11-03
 
-**Dogovoreni pre-agent data gate nije prošao u oba splita. Ne prelaziti na SimFire
-adapter, no-op kalibraciju ili PPO trening dok se pokrivenost ne razriješi pod
-unaprijed određenim pravilom ili se protokol izričito ne promijeni.** Test kohorta nije
-učitana. Godišnje FEDS arhive nisu preuzete; audit je koristio prostorno indeksirane
-FlatGeobuf upite preko HTTP Range-a, a validation je završno filtriran iz sačuvanog
-kandidatskog izvještaja jer Zenodo nije bio dostupan pri nastavku.
+**Originalna 60-case FPA-FOD kohorta ne prolazi prag:** lokalni audit nad kompletnim,
+checksum-verifikovanim FEDS arhivama nalazi 19/40 train i 7/20 validation slučajeva.
+Pošto je train za jedan slučaj ispod praga 20, ta kohorta nije dovoljna za planirani
+benchmark.
 
-## Činjenice i rezultati audita
+Uveden je odvojeno označen, unaprijed spremljen širi candidate frame: svi 264 zapisa iz
+FPA-FOD screenova za iste dozvoljene godine (208 train iz 2018/2019; 56 validation iz
+2023). Koristi se isti godišnji split i nepromijenjeno pravilo datuma, tačke, radijusa,
+jedinstvenosti i minimuma. Rezultat je **99/208 train** i **20/56 validation**; svih
+119 odabranih događaja ima pet uzastopnih FEDS stanja od početnog opaženog stanja do
+48 sati. Širi frame doseže unaprijed postavljene pragove 20/8 i njegov pre-agent
+coverage gate je **PASS**. Ova promjena candidate-universe je dokumentovana u
+[ADR-018](../specs/DECISION_RECORDS.md), bez tihog mijenjanja kriterija ili testa.
 
-Ulaz je verzionisana kohorta od 60 požara iz FPA-FOD-a: 40 train (2018/2019) i 20
-validation (2023). Test slučajevi iz prvobitnog 80-požarnog uzorka namjerno nisu u
-manifestu. Manifest čuva FPA-FOD ID, incidentni naziv/državu, datum otkrića i izvornu
-tačku. Prijavljena završna površina i MTBS ID nose oznaku `reference_only`.
+| Kohorta | Split | Screen slučajevi | Jedinstven rani FEDS match + ≥2 stanja | Pun 48h niz | Prag |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Originalna kohorta | Train | 40 | 19 | 19 | ≥20 |
+| Originalna kohorta | Validation | 20 | 7 | 7 | ≥8 |
+| Prošireni candidate frame | Train | 208 | 99 | 99 | ≥20 |
+| Prošireni candidate frame | Validation | 56 | 20 | 20 | ≥8 |
 
-FEDS-CONUS ne sadrži FPA-FOD ID, zato se događaji spajaju samo po početnim
-informacijama: FEDS `t_st` datum je od 1 dan prije do 2 dana poslije FPA-FOD datuma
-otkrića, a barem jedan FEDS obod od `t_st` do `t_st + 24 h` mora biti najviše 3 km od
-FPA-FOD tačke. Slučaj se prihvata samo ako je takav kandidat jedinstven i ima barem
-dva uzastopna 12h stanja. Konačna površina, završni obod, FLE ishod i test split ne
-biraju FEDS ID. Koordinata i datum FPA-FOD-a imaju nepoznatu event-specifičnu
-nesigurnost, pa je veza označena kao provisional.
+Proširenje je formirano prije FEDS spajanja iz cijelog sačuvanog godišnjeg FPA-FOD
+screen okvira za dozvoljene godine. Frame zahtijeva poznat datum i lokaciju, MTBS ID i
+prijavljenu površinu ≥5.000 acres u deset zapadnih saveznih država; zato rezultat nije
+reprezentativan za sve američke požare. Ta površina utiče samo na unaprijed definisani
+screen incidenata. Ne ulazi u FEDS fireID join, početno stanje, nagradu ili izbor
+checkpointa. MTBS ID, završni obod, FLE rezultat i 2024 test ne biraju FEDS događaj.
 
-| Split | FPA slučajevi | Jedinstven FEDS kandidat | ≥2 uzastopna 12h stanja | ≥5 stanja / 48h | FLE incidentni sažetak |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Train | 40 | 13 | **13** | 13 | 0 |
-| Validation | 20 | 7 | **7** | 7 | 13 |
-| Prag | — | — | train ≥20; validation ≥8 | — | informativno |
+FEDS-CONUS nema FPA-FOD ID. Fiksno pravilo traži FEDS `t_st` datum od 1 dan prije do
+2 dana poslije FPA-FOD datuma otkrića, te barem jedan obod najviše 3 km od FPA-FOD
+referentne tačke između `t_st` i `t_st + 24 h` uključivo. Kandidat se koristi samo ako
+je jedinstven. Nakon identifikacije `fireID`, audit pročita cijeli njegov vremenski niz,
+uključujući obode koji su kasnije otišli izvan početnog radijusa. Episode manifest
+zatim zadržava samo požare s pet tačnih 12h stanja od prvog kvalifikovanog početnog
+opažanja do +48h. FPA tačka/datum imaju nepoznatu događajsku nesigurnost; crosswalk je
+provisional veza, ne ground truth.
 
-Nijedan split ne doseže svoj prag: train nedostaje najmanje 7, validation najmanje 1
-slučaj. Svih 13 train i 7 validation kandidata imaju najmanje pet tačno razmaknutih
-FEDS opservacija unutar lokalnog spatial query-a. To je pokrivenost postojećeg
-manifest-a, ne procjena ukupne dostupnosti FEDS-a. Pre-agent gate je **FAIL**.
+Prethodni rezultat 13/40 train i 7/20 validation koristio je udaljeni `/vsicurl/`
+pristup, a validation postfilter sačuvanih kandidata. Nakon preuzimanja cijelih FEDS
+perimeter arhiva sa službenim checksummima, lokalni pregled iste originalne kohorte
+otkrio je još šest jedinstvenih train podudaranja iz 2019. Stari izvještaj ostaje kao
+istorijski trag, dok [lokalno ponovljen izvještaj](../../reports/real-fire-data/fpa-feds-original-cohort-crosswalk-local-v1.json)
+predstavlja aktuelni rezultat za originalni 60-case uzorak.
 
-Prva eksplorativna provjera dala je 17/40 i 12/20 jer je spajala događaje koji su bili
-blizu FPA-FOD tačke bilo kad u cijelom FEDS toku. To je previše permisivno za inicijalno
-stanje. Strogi rezultat iznad traži blizinu u prvih 24 sata od `t_st`. Za validation
-je taj kriterij deterministički primijenjen na ranije sačuvane kandidate: njihov
-izvještaj čuva najraniji timestamp unutar 3 km, pa se može tačno odbaciti kasno prvo
-pojavljivanje bez ponovnog preuzimanja geometrije. [Kandidatski izvještaj](../../reports/real-fire-data/fpa-feds-fle-crosswalk-validation-candidate-search-v1.json)
-je sačuvan radi porijekla; skripta podržava isti postupak preko
-`--filter-existing-report`. Zenodo DNS nije bio dostupan pri nastavku, zato validation
-filter nije nezavisno ponovljen preko mreže.
+Godišnji FEDS perimetri 2018, 2019. i 2023. su preuzeti lokalno, MD5 je potvrđen prema
+Zenodo manifestu, a sirovi fajlovi ostaju u ignorisanom `.local/feds-conus/`. Njihov
+ukupni sadržaj nije stavljen u Git. [FPA-FEDS candidate-frame report](../../reports/real-fire-data/fpa-feds-candidate-frame-crosswalk-v1.json)
+i [episode manifest](../../data/manifests/feds-episode-cohort-v1.json) sadrže male
+rezultate/provenance.
 
-WFIGS/IRWIN tačan ID spoj radi za 20/20 slučajeva validation 2023; agregirani FLE
-incidentni sažetak postoji za 13/20. Za svih 40 train slučajeva iz 2018–2019 nije
-nađen WFIGS IRWIN ID iz FPA-FOD `FPA_ID` vrijednosti, pa nema ni FLE sažetka u ovom
-spoju. To je zasebna prepreka za historijski suppression/resource opis. Dostupni FLE
-servis je grupisani incidentni sažetak i nije linijska geometrija. FLE kategorije
-„Held / Burned Over / Not Engaged“ i završni perimetar su post-hoc evidencija, ne
-uzročna procjena rezultata linije u counterfactual epizodi.
+FLE incidentni join iz starog audit-a postoji za 0/40 train i 13/20 validation zapisa;
+to je agregirani incidentni sažetak, ne line-level geometrija. Prošireni crosswalk je
+namjerno rađen sa `--skip-fle`; line-level operativne podatke i njihove ishode treba
+pribaviti odvojeno, uz očuvanje istih train/validation godina. FEDS `lf_fireline` je
+satelitski opažen aktivni front, a ne USFS izgrađena suppression linija. Završni FLE
+ishod je post-hoc i nije uzročna procjena ishoda linije u counterfactual epizodi.
 
-Slučaj `Hayden` (`FOD_ID 401316132`) je ručno provjeren kao kontrola: FPA-FOD
-`2023-IDSCF-023084` → WFIGS `poly_IRWINID` `{3B96070F-23BB-4B83-A2CB-5FA4C2E741E2}`
-→ FLE sažetak. FEDS `fireID=59310`, `t_st=2023-07-19T12:00:00`; postoje 68 poludnevnih
-opservacija koje sijeku početnu okolinu, do 2023-08-22. Ovo potvrđuje da pipeline radi
-za taj događaj, ne da je cijeli izvor fizički validiran.
-
-Pojedinačni redovi su sačuvani u [kombinovanom JSON izvještaju](../../reports/real-fire-data/fpa-feds-fle-crosswalk-v1.json),
-[train izvještaju](../../reports/real-fire-data/fpa-feds-fle-crosswalk-train-v1.json)
-i [validation izvještaju](../../reports/real-fire-data/fpa-feds-fle-crosswalk-validation-v1.json).
-Reproducibilna skripta je
-[`audit_feds_fpa_fle_crosswalk.py`](../../scripts/audit_feds_fpa_fle_crosswalk.py).
-Da se smanji opterećenje Zenodo arhive, svaki split se pokreće odvojeno:
-
-```sh
-python scripts/audit_feds_fpa_fle_crosswalk.py --split train --out reports/real-fire-data/fpa-feds-fle-crosswalk-train-v1.json
-python scripts/audit_feds_fpa_fle_crosswalk.py --split validation --out reports/real-fire-data/fpa-feds-fle-crosswalk-validation-v1.json
-python scripts/audit_feds_fpa_fle_crosswalk.py --combine-split-reports reports/real-fire-data/fpa-feds-fle-crosswalk-train-v1.json reports/real-fire-data/fpa-feds-fle-crosswalk-validation-v1.json --out reports/real-fire-data/fpa-feds-fle-crosswalk-v1.json
-```
-
-Kada FEDS arhiva nije dostupna, sačuvani kandidatski izvještaj može se strogo
-postfiltrirati bez ponovnog mrežnog upita:
+Izvorni i novi redovi su sačuvani u [originalnom crosswalk-u](../../reports/real-fire-data/fpa-feds-original-cohort-crosswalk-local-v1.json),
+[proširenom candidate-frame crosswalk-u](../../reports/real-fire-data/fpa-feds-candidate-frame-crosswalk-v1.json),
+[train split-u](../../reports/real-fire-data/fpa-feds-candidate-frame-train-v1.json)
+i [validation split-u](../../reports/real-fire-data/fpa-feds-candidate-frame-validation-v1.json).
+Reproducibilne skripte su
+[`audit_feds_fpa_fle_crosswalk.py`](../../scripts/audit_feds_fpa_fle_crosswalk.py),
+[`fetch_feds_archive.py`](../../scripts/fetch_feds_archive.py) i
+[`build_feds_episode_manifest.py`](../../scripts/build_feds_episode_manifest.py).
+Naredbe za lokalni checksum-aware audit:
 
 ```sh
-python scripts/audit_feds_fpa_fle_crosswalk.py --filter-existing-report reports/real-fire-data/fpa-feds-fle-crosswalk-validation-candidate-search-v1.json --out reports/real-fire-data/fpa-feds-fle-crosswalk-validation-v1.json
+python scripts/fetch_feds_archive.py --year 2018 2019 2023 --layer perimeter
+python scripts/audit_feds_fpa_fle_crosswalk.py --cohort data/manifests/fpa-feds-candidate-frame-v1.json --split train --skip-fle --out reports/real-fire-data/fpa-feds-candidate-frame-train-v1.json
+python scripts/audit_feds_fpa_fle_crosswalk.py --cohort data/manifests/fpa-feds-candidate-frame-v1.json --split validation --skip-fle --out reports/real-fire-data/fpa-feds-candidate-frame-validation-v1.json
+python scripts/audit_feds_fpa_fle_crosswalk.py --combine-split-reports reports/real-fire-data/fpa-feds-candidate-frame-train-v1.json reports/real-fire-data/fpa-feds-candidate-frame-validation-v1.json --out reports/real-fire-data/fpa-feds-candidate-frame-crosswalk-v1.json
+python scripts/build_feds_episode_manifest.py
 ```
 
 ## Izvori i šta oni podržavaju
@@ -127,36 +124,42 @@ python scripts/audit_feds_fpa_fle_crosswalk.py --filter-existing-report reports/
   svaki posmatrani dan. Ovdje zato nema podešavanja svakog požara prema njegovom
   završnom obodu. [W.I.S.E. evaluacija](https://doi.org/10.1071/WF26072).
 
-## Predloženi nastavak — nije pokrenut
+## Gateovi i sadašnje stanje
 
-1. Pripremiti prijedlog kako dostići pragove za train i validation pod istim ranim
-   prozorom, bez mijenjanja pravila nakon gledanja rezultata. Postojeći validation set
-   je viđen i ne smije se koristiti za tuning; svaki novi validation izbor mora imati
-   unaprijed dokumentovan selekcijski okvir. Test ostaje zatvoren.
-2. Ako dozvoljeni kohortni poolovi ne daju najmanje 20 train i 8 validation požara,
-   donijeti novu izričitu odluku o drugom izvoru/kohorti ili revidiranom benchmarku.
-   Ne širiti radius ili vremenski prozor samo da bi prag prošao.
-3. Razriješiti FLE spoj starih FPA ID formata. U međuvremenu ne porediti historijski
-   resurs po liniji; dati svim agentima identičan unaprijed definisan budžet. Ne
-   koristiti završni obod kao nagradu ili terminalni uslov.
-4. Tek nakon prolaza data gatea selektivno portati provjereni SimFire scenario
-   adapter. Početno stanje nosi već opožareni scar i više aktivnih ćelija; decisions
-   su svakih 12h do fiksnih 48h. Politika bira čekanje ili jedan od 16 sektora fronta.
-   Standardni resurs je 20-člana ekipa tokom 8h smjene; linija se gradi postepeno dok
-   se vatra širi. Budžeti su 0/1/2/4 smjene. NWCG tabele daju početni produktivni
-   raspon, a ne obećanu stvarnu operativnu brzinu. [NWCG production tables](https://www.fs.usda.gov/t-d/nwcg/files/NWCG_production_tables_2021.pdf),
-   [Holmes & Calkin (2013)](https://doi.org/10.1071/WF11098).
-5. Agent ne vidi ni ne dobija nagradu iz istorijskog završnog oboda; simulator se
-   nastavlja nakon nultog budžeta i poslije kraja historijskog toka. Porediti no-op,
-   front-edge heuristiku, zamrznutog PPO-a i kopiju fine-tunanu samo na trainu, uz
-   iste scenarije, budžete, vrijeme i uparena sjemena. Primarno mjeriti novo izgorjelu
-   površinu u 48h; zatim trajanje/containment, radne sate ekipe, dužinu izgrađene linije
-   i trade-off štete prema resursima. Otvoriti test tek za završni obračun.
-6. Ovaj benchmark bi pokazao razliku politika **unutar SimFire parametara**, ne broj
-   hektara koje bi stvarni agent sigurno spasio. Za simulator se prije agentnog testa
-   traži no-op poređenje s persistence i jednostavnom elipsnom referencom te provjera
-   rubnog efekta mape.
+Završena je checksum-verifikacija FEDS `lf_fireline` sloja za 2018/2019/2023. Tačan
+početni front postoji za 119/119 epizoda; fronti se nalaze unutar jedne 375m izvorne
+ćelije od odgovarajućeg FEDS perimetra. Pogledaj
+[active-front audit](../../reports/real-fire-data/feds-active-front-coverage-v1.json).
+FEDS front je satelitski aktivni front, ne izgrađena suppression linija.
 
-Ovaj audit je data-coverage rezultat, ne simulacija širenja, ne fizička validacija i
-ne RL rezultat. SimFire kod, scenariji, PPO checkpointovi i produženo treniranje nisu
-preuzeti niti pokrenuti u ovom koraku.
+Preflight je potvrdio da svih 119 početnih geometrija stane u dogovorenu 256×256×180m
+mapu. FEDS poligon postaje istorijski scar; linija istog `fireID+t` postaje višestruko
+aktivno stanje. [Preflight izvještaj](../../reports/real-fire-data/feds-simfire-grid-preflight-v1.json)
+ne koristi buduće obode za kreiranje starta. LANDFIRE LF2016/LF2022 FBFM13 i LF2020
+terrain izvatci provjereni su na jednom train požaru; bulk mapiranje svih train
+slučajeva ostaje otvoreno.
+
+gridMET `th`, `vs`, `fm100` arhive za 2018/2019/2023 su checksum-verifikovane i
+uzorkovane na četiri 12h segmenta za svih 119 slučajeva. WAF nije kalibrisan, a daily
+historijski forcing ostaje skriven od policy observacija. Jedan kratki SimFire no-op
+smoke sa demo vjetrom/vlagom potvrđuje samo integraciju inputa; to nije spread validacija.
+Detalji su u [environment record](SIMFIRE_ENVIRONMENT.md) i
+[gridMET provenance](../../reports/real-fire-data/feds-gridmet-weather-coverage-v1.json).
+
+Pre-agent gate koji slijedi:
+
+1. Povući i provjeriti LANDFIRE mapu za svaki train slučaj; NoData/unknown fuel ili
+   rubni počeci moraju biti raportirani, ne tiho uklonjeni ili popunjeni.
+2. Izvesti no-op SimFire rollout 48h po 12h koracima uz istorijski gridMET forcing.
+   Porediti cumulative dodatno opožarenu površinu sa persistence i jednim zajedničkim
+   elipsnim baselineom, te kontrolisati map-edge kontakt.
+3. WAF i eventualne zajedničke spread postavke kalibrisati samo na trainu; zaključati
+   prije validation. Ako model ne nadmaši reference ili sistematski dira rub mape,
+   zaustaviti PPO i dijagnosticirati inpute/parametre.
+4. Nakon no-op gatea implementirati temporalnu gradnju linije, wait/16 front sektora,
+   20 ljudi × 8h i smjene 0/1/2/4. Budžet ne završava epizodu, a završni obod ostaje
+   samo post-hoc poređenje.
+
+Crosswalk i environment izvještaji potvrđuju data/runtime pokrivenost, ne fizičku
+validaciju ili RL rezultat. Preuzeti su samo podaci train/validation godina. PPO trening
+i test split ostaju zatvoreni.
