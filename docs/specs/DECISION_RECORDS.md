@@ -324,3 +324,98 @@ ugovora.
 Evidence: [strogi FEDS crosswalk](../research/FPA_FEDS_CROSSWALK.md),
 [combined JSON](../../reports/real-fire-data/fpa-feds-fle-crosswalk-v1.json),
 [sačuvani kandidati](../../reports/real-fire-data/fpa-feds-fle-crosswalk-validation-candidate-search-v1.json).
+
+## ADR-018 — prošireni FPA-FOD candidate frame nakon lokalnog crosswalk audita, provisional 2026-11-03
+
+Kompletne FEDS `lf_perimeter` arhive za 2018, 2019. i 2023. preuzete su u ignorisani
+`.local/` i provjerene službenim MD5 checksumima. Ponovljeni audit prvobitne 60-case
+kohorte nalazi 19/40 train i 7/20 validation; prag 20/8 ostaje nepromijenjen i stari
+uzorak zato ne prolazi.
+
+Da se izbjegne proizvoljno dodavanje jednog požara nakon gledanja FEDS ishoda, aktivni
+feasibility frame uzima sve redove iz unaprijed sačuvanih FPA-FOD screenova za iste
+godine i split po požar-godini: 208 train 2018/2019, 56 validation 2023. Screen pravilo
+je poznata lokacija/datum, MTBS ID, deset zapadnih država i prijavljena završna površina
+≥5.000 acres. Posljednja dva ograničenja čine uzorak selektovanim za velike požare;
+prijavljena površina ne bira FEDS fireID, ne ulazi u policy input/reward i nije metrika
+benchmarka.
+
+Pod istim ranijim vremensko-prostornim FEDS joinom, 99/208 train i 20/56 validation
+kandidata imaju jedinstven match i najmanje dva uzastopna 12h stanja. Svih 119 imaju
+pet očekivanih 12h stanja od početnog opažanja do +48h, pa širi frame prolazi pre-agent
+coverage gate. FPA/FEDS mapiranje ostaje provisional zbog nesigurne incidentne tačke i
+vremena; FEDS obodi su satelitske procjene. Test 2024 nije preuzet ni učitan.
+
+**Posljedica:** nastaviti samo na širem, jasno označenom candidate frame-u do train-only
+no-op replay gatea. Originalni 60-case rezultat i dalje je sačuvan i ne prolazi. Ne
+počinjati PPO trening dok SimFire no-op ne uporedi observed growth s persistence i
+elipsnom referencom te ne prođe map-boundary/QC provjere. Ovaj ADR mijenja cohort frame,
+ne pragove, join pravilo, test pristup ni zaključak da benchmark rezultat važi unutar
+simulatora, a ne kao stvarna causalna korist.
+
+Evidence: [kandidat-frame manifest](../../data/manifests/fpa-feds-candidate-frame-v1.json),
+[119-case episode manifest](../../data/manifests/feds-episode-cohort-v1.json),
+[novi crosswalk](../../reports/real-fire-data/fpa-feds-candidate-frame-crosswalk-v1.json),
+[originalna kohorta lokalno ponovljena](../../reports/real-fire-data/fpa-feds-original-cohort-crosswalk-local-v1.json),
+[FEDS/SimFire environment record](../research/SIMFIRE_ENVIRONMENT.md).
+
+## ADR-019 — SimFire/FEDS prostorna mreža, weather granica i setup gate, accepted 2026-11-03
+
+FEDS početno stanje rasterizuje se na 256×256 ćelija od 180m u UTM projekciji,
+centrirano na centroidu tačnog početnog `lf_perimeter` stanja. Početni poligon čuva
+kumulativni burn scar; tačni `fireID+t` `lf_fireline` segmenti postaju burning ćelije.
+FEDS ulazna nominalna rezolucija ostaje 375m i ne predstavlja se kao 180m ground truth.
+Preflight koji uključuje samo početna stanja potvrđuje da svih 119 train/validation
+požara stane u mrežu; eventualni neuspjeh izvatka ili fuel kodova mora se prijaviti.
+
+gridMET se koristi kao dnevni, ex-post simulator forcing na četiri 12h segmenta kroz
+48h. FEDS naive `t` pretpostavlja se UTC, a gridMET day label računa po njegovoj MST
+granici; budući dnevni weather segmenti se ne daju agentu kao observation niti se
+predstavljaju kao operativna prognoza. `th` NetCDF varijabla je `wind_from_direction`;
+adapter je rotira za 180° radi SimFire downstream smjera. `vs` m/s i `fm100` procenti
+pretvaraju se uz eksplicitan wind-adjustment faktor i procenat/razlomak konverziju.
+Faktor još nije izabran i ne smije se fitovati prema svakom požaru posebno.
+
+Uspješan one-hour Plateau smoke koristi demonstracijski vjetar/vlagu i potvrđuje samo
+da SimFire v2 prima multi-cell scar/front i LANDFIRE mape. U smoke configu aktivno
+trajanje ćelije je 90 update-a, što je šestostruko skaliranje 15 update-a prema omjeru
+180m/30m, a ne fit prema opaženom budućem obodu. Ovo nije no-op gate.
+
+**Posljedica:** prije PPO implementirati train-only 48h no-op replay, persistence i
+zajedničku elipsnu referencu, te map-edge/area provjere. Zajedničke postavke se zaključaju
+na trainu, validation se koristi samo za izbor, a 2024 test ostaje zatvoren. Ako no-op
+ne nadmaši reference ili sistematski udara rub, zaustaviti agentni trening i prvo
+dijagnosticirati kalibraciju ili podatke.
+
+Evidence: [active-front audit](../../reports/real-fire-data/feds-active-front-coverage-v1.json),
+[grid preflight](../../reports/real-fire-data/feds-simfire-grid-preflight-v1.json),
+[gridMET archive coverage](../../reports/real-fire-data/feds-gridmet-weather-coverage-v1.json),
+[one-case SimFire smoke](../../reports/real-fire-data/feds-simfire-input-smoke-v1.json),
+[environment record](../research/SIMFIRE_ENVIRONMENT.md).
+
+## ADR-020 — train-only no-op diagnostics and unselected timebase, provisional 2026-11-03
+
+All 99 train FEDS starts now have checksum-audited LANDFIRE FBFM13 and LF2020 elevation
+maps on the fixed 256×256/180m grid. A historical-weather 48h no-op runner updates
+SimFire from gridMET at 12h intervals and scores cumulative burn against future FEDS
+perimeters only after each segment.
+
+A single Plateau train case is highly sensitive to wind adjustment: WAF 0.20–0.60
+produces only three new cells and 61.56ha; WAF .65 produces 1,244ha by +12h, and .75–1.0
+overgrow substantially and eventually touch the map edge. This is an exploratory
+single-event diagnostic, not evidence about the whole cohort and not a valid setting.
+No WAF is selected. A 5-minute internal step preserves the nominal 90-minute active-cell
+lifetime as 18 updates; the high-spread 48h pilot on this step took about 40 seconds,
+while agent decision cadence remains 12h. The 5-minute timestep is also unselected
+pending train-only cohort comparison.
+
+**Posljedica:** do not use either pilot setting for validation selection or RL. Calibrate
+a small shared parameter set and choose the internal timestep using TRAIN rollouts,
+compare no-op with persistence and a prespecified ellipse, then fetch validation maps
+and evaluate frozen settings. Stop before PPO if the calibrated no-op misses those
+baselines or exhibits map-edge artifacts. 2024 remains closed.
+
+Evidence: [99-case train input coverage](../../reports/real-fire-data/feds-simfire-input-train-coverage-v1.json),
+[single-case parameter pilot](../../reports/real-fire-data/feds-simfire-noop-pilot-v1.json),
+[runner](../../scripts/run_feds_noop_episode.py),
+[environment record](../research/SIMFIRE_ENVIRONMENT.md).

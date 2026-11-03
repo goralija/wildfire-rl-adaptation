@@ -6,10 +6,11 @@ title: Naredni zadaci
 
 ## Aktivni prioritet — 2026-11-03
 
-ADR-016 uspostavlja aktivni SimFire/FEDS pravac, a ADR-017 fiksira strogi početni join.
-FPA-FOD ↔ FEDS-CONUS crosswalk gate je pao u oba splita (13/40 train, 7/20 validation
-prema minimumima 20/8). Agentni kod i trening čekaju unaprijed definisano rješenje
-pokrivenosti bez otvaranja testa.
+ADR-016 uspostavlja SimFire/FEDS pravac, ADR-017 fiksira rani join, a ADR-018 bilježi
+širi, unaprijed spremljeni FPA-FOD candidate frame. Originalnih 60 slučajeva i dalje
+ne prolazi (19/40 train, 7/20 validation), dok prošireni frame prolazi data gate sa
+99/208 train i 20/56 validation. 119 slučajeva imaju punih 48h FEDS vremenskih referenci.
+Sljedeći je pre-agent no-op simulator gate; PPO još čeka.
 
 Napor je okvirni agentov prijedlog u aktivnim radnim satima, bez roka i dodjele članovima.
 
@@ -25,8 +26,9 @@ Napor je okvirni agentov prijedlog u aktivnim radnim satima, bez roka i dodjele 
 | TASK-015 | P0, djelimično završeno | odabrana CFSDS putanja; 44 preliminarna compact-crop kandidata podijeljena 20/9/15; tri train slučaja su pokrenuta, jedan je odbijen zbog water/nonfuel ćelija; treba fuel-vintage, suppression i vremenski QC prije benchmarka | 2–4 h + data QC |
 | TASK-004c | P0, djelimično | multi-cell C++ početni state radi; preostaje kumulativna šteta i terminalni razlog containment naspram isteka weather horizonta za RL evaluator | 3–6 h |
 | TASK-017 | završeno 2026-10-30 | `InitialState.csv` uvozi raniji scar i više aktivnih ćelija; fixture i stvarni `2018_747` C++ import/replay su uspješni | ostvareno |
-| TASK-018 | P0, blokira simulator implementaciju | Predložiti train/validation kandidatske kohorte koje zadovoljavaju fiksni 3 km + prvih 24h FEDS join; zadržati test zatvoren; prihvat ≥20/8 događaja sa ≥2 uzastopna 12h stanja ili vratiti odluku korisniku | crosswalk + odluka |
-| TASK-019 | P0 poslije 018 | Selektivni SimFire scenario adapter, observed-state no-op gate prema persistence/elipsi, rub mape i history-only endpoint | 4–8 h + model QC |
+| TASK-018 | P0 završeno 2026-11-03 | Lokalno checksum-verifikovati FEDS, ponoviti originalnu kohortu (19/7 FAIL), auditovati unaprijed definisani širi frame (99/20 PASS), izvesti 119 full-48h episode zapisa; test 2024 zatvoren | ostvareno |
+| TASK-019 | P0 aktivno | Active-front/grid 119/119 i train LANDFIRE 99/99 su spremni. Plateau no-op pilot pokazuje WAF prag i mogući rub; preostaje kohortna train kalibracija, persistence/elipsa poređenje, pa zaključan validation gate | 4–8 h + model QC |
+| TASK-020 | P0 poslije no-op gatea | Fireline build-over-time, wait/16 front sektora, 20 ljudi × 8h i 0/1/2/4 smjene; precizna potrošnja i nastavak nakon praznog budžeta | zavisi od rollout mjerenja |
 | TASK-016 | P0, tri pilot konverzije; no-action gate nije prošao | FireCase JSON→raster/weather→Cell2Fire radi; tri train-only replaya šire 66/237/73 ha prema 15.39/12.15/12.15 ha; jedan kandidat odbijen na fuel provjeri; prvo ulazni QC i dijagnostika širenja, bez fine-tuninga | 6–12 h + GIS/model |
 | TASK-004b | historijski prijedlog; superseded ADR-016 | Raniji SimFire fallback spike je zamijenjen aktivnim TASK-018/019 tokom | — |
 | TASK-005 | P1 nakon gatea | budžetski adapter + frozen benchmark + cijena 10 rollouta | 3–6 h |
@@ -35,8 +37,8 @@ Napor je okvirni agentov prijedlog u aktivnim radnim satima, bez roka i dodjele 
 | TASK-008 | P2 | joint budget features/weight transfer i ablation bez njih | samo uz prostor |
 | TASK-009 | P1 predaja | glavni grafikoni, poster, interpretacija i usmeni | 4–8 h |
 
-Aktivni redoslijed po ADR-017: TASK-018 train/validation FPA-FOD/FEDS pokrivenost
-po fiksnom ranom prozoru→ponovljeni crosswalk gate→TASK-019 SimFire input/no-op usklađenost→zajednički train-only tuning
+Aktivni redoslijed po ADR-018: TASK-019 FEDS active-front/LANDFIRE inputi→train-only
+no-op prema persistence/elipsi→zajednički train-only tuning
 malog broja fizičkih parametara→zamrzavanje protokola/modela→matched no-op/heuristika/
 frozen PPO/fine-tuned PPO benchmark→završno otvaranje test split-a. Firehose TASK-004c,
 CFSDS TASK-015/016 i njihovi adapteri ne prenose se automatski.
