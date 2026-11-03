@@ -541,3 +541,34 @@ committed. 2024 TEST remains closed.
 **Consequence / recommendation for the team (not adopted here):** consider a growth-aware
 gate (e.g. scored only on fires that FEDS shows growing, or with a containment model)
 before treating any no-op setting as calibrated.
+
+## ADR-025 — step-7 intervention unit, matched heuristics and paired benchmark, accepted 2026-11-04
+
+**Budget unit.** One unit is one 20-person handcrew shift. It builds one straight fireline
+segment of seven 180 m cells: about 1.26 km on an axis, up to about 1.8 km diagonally.
+NWCG sustained production tables for 20-person crews list roughly 2–15 chains/h
+(about 40–300 m/h) depending on fuel and crew type, i.e. about 0.3–2.4 km per 8h shift
+([NWCG Firefighter Math 9.8 / PMS 410-1 Appendix A](https://www.nwcg.gov/course/ffm/math-terms-and-statistics/98-production-rates),
+consulted 2026-11-04 through search excerpts; the tables are based on pre-1980 sources
+and real rates vary widely). The segment length sits inside that range. Line is placed
+instantly at the 12h decision; travel time, build-over-time, holding, burnout and line
+failure are not modelled. This simplifies TASK-020 (16 sectors, crew-hours over time).
+That remains future work.
+
+**Action and placement.** Discrete(9): no-op or one of eight sectors. The new
+`front_edge` placement anchors the segment two cells (360 m) beyond the active-front cell
+that leads in the chosen sector, perpendicular to it. Only unburned cells receive line.
+The older centroid placement is kept for the earlier smoke. Budgets per 48h episode are
+0, 1, 2 and 4; at most one line per 12h decision; no-op always legal; the episode always
+runs four decisions. Damage is SimFire cumulative burned area added after the FEDS start;
+the reward is its negative (cells/100). Future FEDS outlines are never used.
+
+**Matched heuristics** decide from the same observation dictionary and action mask as
+PPO, never the full-resolution map: no-op, uniformly random legal line, downwind (current
+12h wind-to heading) and advancing-front (pooled burned-area centroid → active-front
+centroid). Each spends a unit at the first legal opportunity.
+
+**Benchmark** ([script](../../scripts/benchmark_feds_policies.py)): every policy runs on the
+same scenarios, budgets, horizon, simulator record and seed, paired by scenario. At B=0
+every policy must reproduce no-op exactly (determinism check). VALIDATION requires a
+TRAIN freeze record. A smoke on seven TRAIN cases passed the B=0 check.
