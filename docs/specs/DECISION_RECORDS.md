@@ -510,3 +510,34 @@ closed.
 Evidence: [diagnosis tool](../../scripts/diagnose_feds_noop_gate.py),
 [shared setup](../../src/wildfire_rl/feds_simfire_setup.py),
 [evaluator](../../scripts/evaluate_feds_train_noop.py).
+
+## ADR-024 — gate result frozen as FAIL; separate free-burn stress scenario for steps 7–8, accepted 2026-11-04
+
+None of the nine ADR-023 candidates passed. The best zero-edge candidate, ROS 0.35 /
+WAF 0.05, reaches mean IoU .5266 and area error 2,350.5ha against persistence .5343 /
+2,351.7ha and the ellipse .5308 / 2,346.6ha. By the preregistered rule it is frozen in
+[the gate freeze record](../../configs/frozen/feds-simfire-gate-freeze-v1.json) as
+`FAIL_exploratory`. Higher WAF or ROS created map-edge contacts and lower IoU.
+
+That frozen setting approaches persistence by suppressing spread: on TRAIN the median
+fire adds 0 cells in 48h, only 30/99 fires grow at all and 2/99 add ≥50 cells. A fireline
+benchmark on it cannot discriminate policies, because there is almost nothing to stop.
+The gate itself is structurally biased toward persistence: many FEDS fires were
+evidently contained, while a no-op simulator burns freely.
+
+So steps 7–8 use a second, separately labelled **free-burn stress scenario**, chosen from
+no-op statistics only and before any policy run: the zero-edge TRAIN candidate with the
+lowest mean absolute area error across ADR-022/023 and the reproduction, i.e. WAF .01 /
+ROS 1.0 / 90-min lifetime / 5-min step (2,262.1ha, below both references; IoU .4769,
+below both). [Stress record](../../configs/frozen/feds-simfire-stress-scenario-v1.json),
+`gate_status: FAIL_stress_scenario`. Results on it are simulator policy comparisons, not
+calibrated or physically validated suppression effects.
+
+Both records are scored once on VALIDATION no-op and are not re-selected afterwards. Note
+for the audit trail: the validation LANDFIRE fetch was started about one minute before the
+gate freeze commit; no validation case was simulated or scored before either record was
+committed. 2024 TEST remains closed.
+
+**Consequence / recommendation for the team (not adopted here):** consider a growth-aware
+gate (e.g. scored only on fires that FEDS shows growing, or with a containment model)
+before treating any no-op setting as calibrated.
