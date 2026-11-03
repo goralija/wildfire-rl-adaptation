@@ -1,5 +1,24 @@
 # Promjene baze znanja
 
+## 2026-11-03: TRAIN-only FEDS/SimFire PPO putanja
+
+- Na korisnikov direktni zahtjev dodan je Gymnasium env i MaskablePPO CLI za 99 TRAIN
+  slučajeva. Epizoda ima 48h/četiri 12h koraka; budžet ne prekida epizodu, no-op je uvijek
+  legalan, a kumulativno opožarene ćelije ostaju šteta i kad ih SimFire prepiše linijom.
+- Agent ne prima buduće FEDS obode; reward koristi samo dodatni simulator burn. Akcijski
+  prostor (no-op + 8 kratkih sektorskih fireline poteza) je prototip, ne operativno
+  validiran model gašenja.
+- Python 3.9.25 venv package check je vraćen na PASS. Pošto je ciljni UV interpreter
+  zaglavljen, `bin/python` poziva isti provjereni 3.9 runtime iz sačuvanog susjednog
+  worktreea; lokalne biblioteke ostaju u aktivnom venv-u.
+- Završio je 64-step CPU PPO smoke, checkpoint save/reload i završni TRAIN rollout.
+  Izlaz ostaje ignorisan pod `.local/feds-ppo-smoke-waf-0.605-64steps`. WAF .605 je samo
+  provisionalni smoke ulaz; nije kalibrisan. Cohort no-op/persistence/elipsa gate je i
+  dalje otvoren, a validation mape i test 2024 nisu otvoreni.
+- [ADR-021](docs/specs/DECISION_RECORDS.md), [environment/runbook](docs/research/SIMFIRE_ENVIRONMENT.md),
+  [TRAIN env](src/wildfire_rl/feds_simfire_env.py), [CLI](scripts/train_feds_simfire.py)
+  i [regresijski testovi](tests/test_feds_simfire_env.py).
+
 ## 2026-11-03: lokalni FEDS audit, širi candidate frame i SimFire runtime lock
 
 - Checksum-verifikovane su train/validation FEDS perimetar arhive 2018/2019/2023; 2024

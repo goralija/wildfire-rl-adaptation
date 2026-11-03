@@ -29,6 +29,15 @@ Tačan macOS ARM64 freeze je u
 Venv, uv cache, FEDS/NetCDF arhive, LANDFIRE rasteri, case maske i no-op izlazi ostaju
 u ignorisanom `.local/` i ne idu u Git.
 
+Na ovoj mašini je originalni Python interpreter u `.local/uv-python` ostao neupotrebljiv
+i njegovi raniji procesi su zaglavljeni u macOS I/O stanju. Da se sačuvaju instalirani
+paketi, `.local/simfire-venv/bin/python` sada poziva provjereni Python 3.9 interpreter iz
+susjednog `cfsds-train-qc` worktreea, dok `sys.prefix` i 85 paketnih instalacija ostaju
+u ovom worktreeu. `uv pip check` nad ovim venv-om prolazi. Originalna Python veza je
+sačuvana kao `.local/simfire-venv/bin/python.stalled-target-runtime`. Ovo je lokalna
+veza na zajednički osnovni interpreter; pri premještanju/uklanjanju susjednog worktreea
+treba je zamijeniti nezavisnim Python runtimeom.
+
 Ponovno postavljanje u čistom klonu:
 
 ```sh
@@ -160,7 +169,45 @@ Testni 5-min unutrašnji korak čuva 90-min nominalni aktivni vijek ćelije kao 
 WAF-1.0 pilot na tom koraku trajao je oko 40 s za 48h. Ovo je kandidat numeričke
 postavke, nije konačna kalibracija. Agentove odluke ostaju na 12h. Train/validation
 no-op gate sa persistence i unaprijed definisanom elipsom nije prošao niti je završen.
-PPO i test split su zatvoreni.
+
+## TRAIN-only PPO putanja
+
+Na korisnikov zahtjev sada postoji tehnička MaskablePPO putanja nad FEDS/LANDFIRE
+epizodama, bez čekanja na naučni no-op gate. [`FedsSimFireEnv`](../../src/wildfire_rl/feds_simfire_env.py)
+dozvoljava samo manifest TRAIN slučajeve (99), drži isti 48h horizont i četiri 12h
+odluke, a budžet se nasumično uzorkuje iz CLI skupa. Akcije su uvijek legalni no-op ili
+jedan od osam smjerova koji polaže najviše sedam `FIRELINE` ćelija ispred trenutnog
+centroida fronta i troši jednu budžetsku jedinicu. Ovo je diskretni prototip politike,
+ne provjeren model operativne gradnje linije.
+
+Observation sadrži samo sažeto trenutno stanje (16×16 agregati burn/front/linija/gorivo),
+budžet, vrijeme epizode i **trenutni** weather segment. Budući gridMET segmenti ostaju
+skriveni policy-ju. Reward je negativan broj dodatnih kumulativno opožarenih ćelija
+skaliran sa 100; FEDS budući obodi se ne koriste ni u observation ni u reward. Kumulativni
+scar ostaje zabilježen i kad SimFire na ćeliju postavi liniju. Pražnjenje budžeta ili
+gašenje vatre ne prekida epizodu: sva četiri 12h koraka se završe, uz no-op kada nema
+akcije. PPO je from-scratch; prethodni Firehose checkpointi se ne učitavaju.
+
+Kratki CPU smoke (64 odluke, približno 16 epizoda) može se pokrenuti ovako; odaberi
+novi izlazni direktorij pod `.local/`:
+
+```sh
+PYTHONPATH=src MPLCONFIGDIR=.local/mpl-cache XDG_CACHE_HOME=.local/cache SDL_VIDEODRIVER=dummy \
+  .local/simfire-venv/bin/python scripts/train_feds_simfire.py \
+  --steps 64 --out .local/feds-ppo-experiments/NEW-ID \
+  --wind-adjustment-factor 0.605 --budgets 0,2,4 --seed 7
+```
+
+WAF 0.605 u komandi je samo eksplicitan **provisional** kandidat radi reproducibilnog
+smokea, nije izabran parametar. Veći `--steps` produžava trening; smoke težine i manifest
+ostaju u ignorisanom `.local/`. Svaki receipt izričito označava da nije fizička validacija,
+benchmark ni dokaz RL prednosti. Poslije dodavanja trenažnog adaptera, Plateau no-op
+recheck sa WAF .605 ponovio je 19 kumulativnih ćelija/61.56 ha, 4/4 poređenja bez rubnog
+udara; to i dalje nije cohort-level kalibracija.
+
+Odvojeni Plateau TRAIN action smoke s budžetom 1 potrošio je tačno jednu jedinicu na
+legalnu fireline akciju, a zatim završio preostala tri 12h koraka. To potvrđuje samo
+API/budget plumbing; ne potvrđuje učinkovitost ili realističnost linije.
 
 ## Sljedeće provjere
 
@@ -169,10 +216,11 @@ PPO i test split su zatvoreni.
 2. Dodati persistence i unaprijed definisanu zajedničku elipsnu referencu, zatim izmjeriti
    48h no-op na TRAIN i VALIDATION: površinu, IoU/area error i map-edge dodire svakih 12h.
    Validation mape preuzeti tek kad su TRAIN postavke zaključane.
-3. Ako SimFire ne nadmaši reference ili udara u rub, zaustaviti se i popraviti
-   simulator/inpute. Bez PPO prije tog gatea.
-4. Nakon prolaska no-op gatea implementirati gradnju linije kroz vrijeme i tek onda
-   budžetsko poređenje politika, uz jednake scenarije, budžete, horizonte i seedove.
+3. Tehničko PPO treniranje je dostupno, ali benchmark ili policy-benefit poređenje
+   ostaje blokirano dok no-op ne bude upoređen sa referencama na TRAIN kohorti i dok se
+   zajednički WAF/timebase ne zaključa. Trenutna sektor-akcija je samo prototype.
+4. Za naučno poređenje unaprijed definisati operativnu gradnju linije i zatim dati svim
+   politikama iste epizode, budžete, horizonte, observacije i seedove.
 
 ## Primarni izvori (provjereni 2026-11-03)
 

@@ -419,3 +419,28 @@ Evidence: [99-case train input coverage](../../reports/real-fire-data/feds-simfi
 [single-case parameter pilot](../../reports/real-fire-data/feds-simfire-noop-pilot-v1.json),
 [runner](../../scripts/run_feds_noop_episode.py),
 [environment record](../research/SIMFIRE_ENVIRONMENT.md).
+
+## ADR-021 — expose a TRAIN-only PPO execution path before benchmark calibration, accepted 2026-11-03
+
+At the user's direct request, make it possible to run local PPO training now rather than
+leave the project in another setup-only cycle. This is an execution-path decision, not
+an acceptance of SimFire calibration or scientific validity. The existing no-op gate
+and the unselected shared wind/timebase remain open for any benchmark, baseline, or
+policy-benefit claim.
+
+The new `FedsSimFireEnv` samples only the 99 manifest TRAIN cases, runs four 12h
+decisions over 48h, and never loads future FEDS outlines for observation or reward.
+Its current discrete prototype is no-op plus eight directional short fireline actions;
+each line costs one budget unit, no-op stays available at zero budget, cumulative burn
+is preserved, and the episode continues after budget exhaustion or fire extinction.
+The CPU CLI trains a fresh MaskablePPO and stores checkpoints under ignored `.local/`.
+The chosen wind factor is required explicitly and remains labeled provisional.
+
+The bounded 64-step training smoke is only a runtime proof. Validation maps remain
+unfetched, the 2024 TEST split remains closed, and this technical path does not replace
+TRAIN-only no-op comparison against persistence and a predeclared ellipse.
+
+Evidence: [environment record and command](../research/SIMFIRE_ENVIRONMENT.md),
+[environment](../../src/wildfire_rl/feds_simfire_env.py),
+[training CLI](../../scripts/train_feds_simfire.py),
+[budget/damage tests](../../tests/test_feds_simfire_env.py).

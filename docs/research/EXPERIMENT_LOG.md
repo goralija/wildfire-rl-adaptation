@@ -265,3 +265,41 @@ no-op gate. It shows that neither a WAF nor an internal step can be selected fro
 incident: calibrate shared settings on the TRAIN cohort, compare against persistence and
 a prespecified ellipse, then fetch validation maps and assess the frozen setup. No PPO,
 suppression action, validation map, or test split was run/opened.
+
+## EXP-010 — TRAIN-only SimFire MaskablePPO execution smoke, 2026-11-03
+
+At the user's direct request, added a technical from-scratch PPO path rather than leaving
+the work at environment setup. `src/wildfire_rl/feds_simfire_env.py` samples only the 99
+manifest TRAIN cases and uses four shared 12h decisions through 48h. Its current
+prototype has a no-op and eight directional actions that place up to seven `FIRELINE`
+cells for one budget unit. No-op is always legal; the episode continues after budget
+exhaustion or fire extinction; cumulative burn is retained if SimFire overwrites a cell
+with a line. The observation includes current pooled map/fuel state, budget/time, and
+only the current forcing segment. The reward is incremental cumulative SimFire burn;
+future FEDS outlines are not loaded by the environment and do not enter observation or
+reward. This action design and reward are technical prototypes, not field-validated
+fireline operations or selected benchmark definitions.
+
+`scripts/train_feds_simfire.py` completed 64 CPU MaskablePPO decisions, saved and loaded
+the checkpoint, then completed a four-decision TRAIN rollout on
+`fpa-fod-400500346-south`. WAF `.605` and 5-minute updates were explicit provisional
+smoke inputs, not selected parameters. The checkpoint and full receipt remain ignored
+in `.local/feds-ppo-smoke-waf-0.605-64steps/`; the manifest labels the run as neither a
+benchmark nor research result and hashes the inputs/checkpoint. No validation map or
+2024 test record was opened. A separate Plateau no-op rerun at `.605` reproduced 19
+cumulative cells/61.56ha, IoU .64 vs 71.28ha, no edge touch at four checkpoints; it
+still does not calibrate a cohort or pass the persistence/ellipse gate.
+
+A separate real TRAIN action-branch smoke reset Plateau with budget 1, selected a legal
+direction, placed a fireline, spent exactly one unit, then completed the remaining
+three no-op decisions through the fixed horizon. This verifies placement and budget
+plumbing only; it is not evidence the line is operationally realistic or beneficial.
+
+QA: the complete Python 3.9.25 SimFire suite passes 63 tests; the default Python 3.12
+suite passes 60 tests with 9 optional-dependency skips. Strict OKF validation passes
+69 Markdown files, the main CLI smoke succeeds, `uv pip check` confirms all 85 packages,
+and `git diff --check` passes. The original target UV Python binary is stalled, so its
+venv entrypoint uses the verified Python 3.9 base from the preserved neighboring
+`cfsds-train-qc` worktree while retaining this worktree's installed packages. This
+launcher dependency is local and documented; replace it before moving/removing that
+worktree.

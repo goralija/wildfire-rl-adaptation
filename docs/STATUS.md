@@ -43,11 +43,28 @@ Nijedan WAF nije zaključan, a ovo nije cohort-level no-op gate. Testni interni 
 5 minuta čuva 90-min ćelijsko trajanje kao 18 update-a; visoko-šireći 48h pilot trajao
 je oko 40 sekundi. Ovo ostaje kandidat za train kalibraciju.
 
-**Pre-agent gate još nije završen:** train cohort no-op i persistence/elipsa poređenje,
+Korisnik je tražio da može trenirati bez novog setup ciklusa. Dodani su TRAIN-only
+Gymnasium/MaskablePPO adapter i CLI nad 99 dostupnih TRAIN epizoda: 48h/four 12h odluka,
+budžet, no-op i osam kratkih sektorskih fireline akcija. Potvrđeni su reset/step na
+stvarnom Plateau inputu, fiksni horizont nakon gašenja vatre, te četiri budžet/šteta
+regresijska testa. Dodatni TRAIN action smoke sa budžetom 1 postavio je legalnu
+fireline akciju, potrošio jednu jedinicu i završio sva četiri koraka. Završio je bounded
+smoke od 64 PPO koraka; checkpoint je sačuvan i ponovo učitan, pa je odrađen dodatni
+4-korak TRAIN rollout na
+`fpa-fod-400500346-south`. Checkpoint i receipt su samo u ignorisanom
+`.local/feds-ppo-smoke-waf-0.605-64steps/`. WAF se mora eksplicitno zadati i ostaje
+provisional.
+
+Završna QA: SimFire Python 3.9 suite 63/63 PASS; project Python 3.12 suite 60 PASS uz
+9 optional-dependency skips; strict knowledge validator 69 Markdown fajlova PASS; CLI
+smoke, 85-package `uv pip check` i `git diff --check` PASS.
+
+**Research gate ostaje otvoren:** train cohort no-op i persistence/elipsa poređenje,
 zajednički parametri, zatim validation mape i zaključana provjera te map-edge analiza.
-Ako SimFire ne nadmaši reference, PPO se zaustavlja prije implementacije/treninga.
-2024 test ostaje zatvoren. Izvještaji i komande su u
-[environment record](research/SIMFIRE_ENVIRONMENT.md) i [NEXT_SESSION](NEXT_SESSION.md).
+Tehnička PPO putanja ne predstavlja benchmark, fizičku validaciju ili dokaz RL prednosti.
+2024 test ostaje zatvoren. Komande i ograničenja su u
+[environment record](research/SIMFIRE_ENVIRONMENT.md),
+[ADR-021](specs/DECISION_RECORDS.md) i [NEXT_SESSION](NEXT_SESSION.md).
 
 Rad je izolovan na `codex/fireline-simfire-benchmark`, izveden iz `main`. Tri
 necommitovane izmjene u glavnom checkoutu i stara `research/cfsds-train-qc` grana su

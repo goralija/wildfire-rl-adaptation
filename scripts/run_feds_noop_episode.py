@@ -43,6 +43,8 @@ def load_observed_timeline(case: dict, grid: dict) -> list[dict[str, Any]]:
     from affine import Affine
     from pyproj import CRS, Transformer
     from rasterio.features import rasterize
+    from rasterio.transform import array_bounds
+    from rasterio.warp import transform_bounds
     from shapely.geometry import shape
     from shapely.ops import transform as transform_geometry, unary_union
 
@@ -61,11 +63,21 @@ def load_observed_timeline(case: dict, grid: dict) -> list[dict[str, Any]]:
     wanted = {(fire_id, timestamp) for timestamp in times}
     geometries: dict[tuple[str, str], list] = {key: [] for key in wanted}
     path = Path(_feds_file_path(year, "perimeter"))
+    transform = Affine(*grid["raster_transform"][:6])
+    height, width = (int(value) for value in grid["shape"])
+    target_bounds = array_bounds(height, width, transform)
+    target_crs = CRS.from_user_input(grid["crs"])
+    # FlatGeobuf has a spatial index. Restrict the query to this episode grid;
+    # iterating the whole annual CONUS layer made each TRAIN case scan hundreds
+    # of megabytes even though only a few local perimeters can be relevant.
+    target_masks = []
     with fiona.open(path) as source:
         source_crs = CRS.from_user_input(source.crs_wkt or source.crs or "EPSG:9311")
-        target_crs = CRS.from_user_input(grid["crs"])
+        source_bounds = transform_bounds(
+            target_crs.to_wkt(), source_crs.to_wkt(), *target_bounds, densify_pts=21
+        )
         project = Transformer.from_crs(source_crs, target_crs, always_xy=True).transform
-        for feature in source:
+        for feature in source.filter(bbox=source_bounds):
             properties = feature["properties"]
             if properties.get("fireID") is None or properties.get("t") is None:
                 continue
@@ -75,8 +87,6 @@ def load_observed_timeline(case: dict, grid: dict) -> list[dict[str, Any]]:
                     transform_geometry(project, shape(feature["geometry"]))
                 )
 
-    transform = Affine(*grid["raster_transform"][:6])
-    target_masks = []
     for index, timestamp in enumerate(times):
         key = (fire_id, timestamp)
         parts = geometries.get(key, [])
@@ -85,7 +95,7 @@ def load_observed_timeline(case: dict, grid: dict) -> list[dict[str, Any]]:
         merged = unary_union(parts)
         mask = rasterize(
             [(merged, 1)],
-            out_shape=tuple(grid["shape"]),
+            out_shape=(height, width),
             transform=transform,
             fill=0,
             all_touched=True,
