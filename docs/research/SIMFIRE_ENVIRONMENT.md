@@ -203,6 +203,57 @@ Validation rasteri nisu preuzeti; 2024 TEST nije otvoren. Benchmark PPO trening 
 policy-benefit poređenje ostaju blokirani dok se uzroci prostornog nesklada ne istraže,
 postavke zajednički ne kalibrišu i gate ne prođe.
 
+## Dijagnoza i ponovljeni gate — 2026-11-04 (ADR-023/024)
+
+Na drugom računaru su ulazi ponovo izgrađeni iz javnih izvora: svih 99 TRAIN LANDFIRE
+fuel/elevation rastera i FEDS početnih maski ima isti SHA-256 kao
+[committed coverage report](../../reports/real-fire-data/feds-simfire-input-train-coverage-v1.json),
+a svih devet gridMET arhiva isti SHA-256 kao weather report. Python 3.9.25 venv je
+samostalan (`uv python install` u `.local/uv-python`); nema više veze na susjedni worktree.
+WAF .01 cohort run reproducira ADR-022 do zadnje decimale (IoU .476852, 2,262.1 ha) za
+~42 s uz 7 procesa.
+
+[Dijagnoza](../../reports/real-fire-data/feds-simfire-train-noop-diagnosis-v1.json):
+cijeli IoU deficit je u trećini timepointa gdje FEDS gotovo ne raste; tamo SimFire dodaje
+~262 ćelije uz 2.9% preciznosti. Na brzo rastućim požarima SimFire već pobjeđuje
+persistence. Problem je razlikovanje koji požar raste (vjerovatno zbog stvarnog gašenja ili
+zaustavljanja), ne smjer vjetra.
+
+Zajednički modul [`feds_simfire_setup.py`](../../src/wildfire_rl/feds_simfire_setup.py)
+sada gradi simulaciju za runner, env i benchmark, uz `SimFireParams` (WAF, interni
+korak, životni vijek aktivne ćelije, `ros_multiplier`). `ros_multiplier` skalira SimFire
+prag paljenja susjedne ćelije, što je ekvivalentno skaliranju Rothermel brzine širenja.
+VALIDATION se učitava samo eksplicitno uz commitan TRAIN freeze zapis; TEST se odbija.
+
+Preregistrovana 3×3 mreža (ROS 0.35/0.5/0.7 × WAF 0.05/0.2/0.4) nije dala prolaz. Najbolji
+kandidat bez rubnog kontakta, ROS 0.35 / WAF 0.05, ima IoU .5266 i 2,350.5 ha naspram
+persistence .5343 / 2,351.7 ha. On je zamrznut kao `FAIL_exploratory`
+([gate freeze](../../configs/frozen/feds-simfire-gate-freeze-v1.json)), ali gotovo ne širi
+vatru (medijan 0 novih ćelija za 48h). Za korake 7–8 je zato zaseban, jasno označen
+free-burn stress zapis WAF .01 / ROS 1.0
+([stress record](../../configs/frozen/feds-simfire-stress-scenario-v1.json)).
+
+[VALIDATION no-op](../../reports/real-fire-data/feds-simfire-validation-noop-v1.json),
+jednom po zapisu: gate freeze IoU .5419 naspram persistence .5432 (FAIL); stress zapis
+IoU .5452 i 1,275.3 ha naspram .5432/1,501.9 ha, bez ruba, pa prolazi strogo pravilo na
+ovih 20 slučajeva. Zbog pada na TRAIN-u i malog uzorka to nije dokaz kalibracije.
+
+Komande (sve iz worktree roota, uz `PYTHONPATH=src`, `SDL_VIDEODRIVER=dummy`,
+`OMP_NUM_THREADS=1`):
+
+```sh
+.local/simfire-venv/bin/python scripts/evaluate_feds_train_noop.py --wind-adjustment-factor 0.05 \
+  --ros-multiplier 0.35 --workers 7 --out .local/gate/NEW.json
+.local/simfire-venv/bin/python scripts/diagnose_feds_noop_gate.py .local/gate/NEW.json
+.local/simfire-venv/bin/python scripts/evaluate_feds_train_noop.py --split validation \
+  --frozen-params configs/frozen/feds-simfire-stress-scenario-v1.json \
+  --wind-adjustment-factor 0.01 --ros-multiplier 1.0 --workers 7 --out .local/gate/NEW-val.json
+```
+
+`build_feds_simfire_inputs.py --fetch-split` piše coverage report direktno u
+`reports/real-fire-data/`; pri ponovnoj izgradnji uporedi ga s commitanom verzijom prije
+commita.
+
 ## TRAIN-only PPO putanja
 
 Na korisnikov zahtjev sada postoji tehnička MaskablePPO putanja nad FEDS/LANDFIRE
