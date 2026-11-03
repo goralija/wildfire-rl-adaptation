@@ -135,7 +135,10 @@ def run_episode(
     import rasterio
     import yaml
 
-    from wildfire_rl.feds_spread_metrics import binary_burn_metrics
+    from wildfire_rl.feds_spread_metrics import (
+        binary_burn_metrics,
+        elliptical_growth_reference,
+    )
     from wildfire_rl.gridmet_weather import gridmet_proxy_to_simfire
     from wildfire_rl.simfire_initial_state import compose_initial_fire_map, update_cumulative_burned
     from wildfire_rl.simfire_timebase import updates_for_duration
@@ -282,9 +285,28 @@ def run_episode(
     if targets[0]["timestamp"] != expected_time:
         raise AssertionError("The first evaluation reference is not the imported initial state.")
     metrics = []
+    front_center_row = float(front_rows.mean())
+    front_center_column = float(front_columns.mean())
+    ellipse_heading = forcing[0]["wind_direction_degrees_clockwise_north_to"]
     for rollout, target in zip(rollout_segments, targets[1:]):
         score = binary_burn_metrics(
             rollout["predicted_mask"], target["mask"],
+            initial_burn=initial_mask, cell_resolution_m=180.0
+        )
+        persistence = binary_burn_metrics(
+            initial_mask, target["mask"],
+            initial_burn=initial_mask, cell_resolution_m=180.0
+        )
+        ellipse_mask = elliptical_growth_reference(
+            initial_mask,
+            center_row=front_center_row,
+            center_column=front_center_column,
+            hours=target["hours_since_start"],
+            downwind_degrees=ellipse_heading,
+            cell_resolution_m=180.0,
+        )
+        ellipse = binary_burn_metrics(
+            ellipse_mask, target["mask"],
             initial_burn=initial_mask, cell_resolution_m=180.0
         )
         score.update({
@@ -292,6 +314,8 @@ def run_episode(
             "hours_since_start": target["hours_since_start"],
             "fire_active_after_segment": rollout["fire_active_after_segment"],
             "forcing": rollout["forcing"],
+            "persistence_reference": persistence,
+            "ellipse_reference": ellipse,
         })
         metrics.append(score)
 
@@ -314,6 +338,18 @@ def run_episode(
         "active_cell_lifetime_updates": base_config["fire"]["max_fire_duration"],
         "wind_adjustment_factor_candidate": wind_adjustment_factor,
         "wind_adjustment_factor_locked": False,
+        "baseline_protocol": {
+            "persistence": "The initial FEDS burn-scar plus active-front mask is held unchanged through each horizon.",
+            "ellipse": {
+                "shape": "fixed 2:1 downwind ellipse unioned with the initial burn mask",
+                "center": "centroid of the initial FEDS active-front cells",
+                "heading": "first 12-hour gridMET wind-to direction",
+                "semi_major_growth": "180 m per 12 hours (one study-grid cell)",
+                "semi_minor_growth": "semi-major axis divided by 2",
+                "future_feds_used": False,
+                "calibrated_from_future_feds": False,
+            },
+        },
         "initial_feds_state": {
             "time": expected_time,
             "burn_scar_cells": int(scar.sum()),

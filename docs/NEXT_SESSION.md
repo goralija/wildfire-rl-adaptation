@@ -16,7 +16,7 @@ LANDFIRE gorivom/terenom i FEDS početnom scar/front maskom. Tačan front postoj
 i 20 validation slučajeva. Validation mape nisu preuzete, a 2024 TEST nije preuzet ni
 učitan.
 
-### Treniranje je tehnički dostupno
+### Treniranje je tehnički dostupno; research gate nije prošao
 
 Na korisnikov zahtjev dodan je pravi FEDS/SimFire Gymnasium env i MaskablePPO CLI,
 odvojeni od starog sintetičkog env-a i Firehose checkpointa. Env uzorkuje samo TRAIN
@@ -27,24 +27,28 @@ burn ćelije; budući FEDS obodi ne ulaze u policy observation ili reward.
 Na stvarnom Plateau TRAIN slučaju potvrđen je i budžet-1 potez: validan fireline je
 postavljen, jedna jedinica potrošena, pa se sva četiri 12h koraka završe.
 
-Pokreni novi, kratak trening direktorij pod ignorisanim `.local/`:
+Za bounded tehnički PPO smoke (ne benchmark trening), koristi nov izlazni direktorij
+pod ignorisanim `.local/`:
 
 ```sh
 PYTHONPATH=src MPLCONFIGDIR=.local/mpl-cache XDG_CACHE_HOME=.local/cache SDL_VIDEODRIVER=dummy \
   .local/simfire-venv/bin/python scripts/train_feds_simfire.py \
   --steps 64 --out .local/feds-ppo-experiments/NEW-ID \
-  --wind-adjustment-factor 0.605 --budgets 0,2,4 --seed 7
+  --wind-adjustment-factor 0.01 --budgets 0,2,4 --seed 7
 ```
 
 `--steps` mora biti višekratnik 64; 64 je bounded smoke, veće vrijednosti treniraju
-duže. `0.605` je samo eksplicitan, provisional primjer za reprodukciju Plateau smokea,
-ne zaključena postavka. Izlazni direktorij mora biti nov. Checkpoint i training receipt
-se ne commituju. Jedan stvarni 64-step smoke već je završio: sačuvan/ponovo učitan model
-i završni TRAIN rollout su u `.local/feds-ppo-smoke-waf-0.605-64steps/`.
+duže. WAF je obavezno eksplicitan i trenutno nema kalibrisanog izbora. `.605` iz ranije
+smoke komande sada je poznato loš cohort kandidat (157 map-edge kontakata u 396
+case-timepointa); nemoj ga koristiti za glavni trening. `.01` izbjegao je rub, ali je
+takođe pao po IoU i nije validan izbor. Ako treba provjeriti samo tehničku putanju,
+koristi bounded smoke s novim `.local/` outputom i tretiraj ga kao exploratory.
+Checkpoint i training receipt se ne commituju. Raniji 64-step smoke pri `.605` dokazuje
+da CLI radi, ali nije preporučena postavka.
 
-QA je završena: SimFire Python 3.9 suite 63/63 PASS; glavni Python 3.12 suite 60 PASS uz
-9 očekivanih optional-dependency skips; knowledge validator 69/69 Markdown PASS; CLI
-smoke, svih 85 package checks i `git diff --check` prolaze.
+QA koda prolazi: SimFire Python 3.9 suite 65/65 PASS; glavni Python 3.12 suite 62 PASS
+uz 9 optional-dependency skips; CLI smoke, svih 85 package checks, strict knowledge
+validation za 69 Markdown fajlova i `git diff --check` prolaze.
 
 Okruženje i testovi: [SimFire/FEDS env](../src/wildfire_rl/feds_simfire_env.py),
 [trening CLI](../scripts/train_feds_simfire.py),
@@ -57,29 +61,43 @@ dok se lokalni Python runtime ne zamijeni samostalnom kopijom.
 
 ### Naučni status
 
-Jedan Plateau TRAIN no-op recheck pri WAF .605 ponovio je 19 kumulativnih ćelija
-(61.56 ha), IoU .64 prema 71.28 ha observed, bez dodira ruba u 4/4 vremenske tačke.
-WAF oko .615–.625 brzo prerasta mapu. To je jedan požar, ne izbor WAF-a ni cohort gate.
-Nijedan WAF/timebase nije izabran.
+TRAIN-only no-op screening je završen na svih 99 slučajeva za WAF
+`0, 0.0025, 0.01, 0.025, 0.05, 0.10, 0.20, 0.605`, uz 5-min interni korak, seed=0,
+48h horizont i 12h forcing segmente. Svaki run je završio 99/99; svaki kandidat je imao
+396 scored case-timepointa. Budući FEDS obodi nisu ulazili u simulaciju/policy; korišteni
+su samo nakon simulacije za ocjenu.
 
-TRAIN-only no-op kohorta i poređenje sa persistence/elipsnom referencom još su otvoreni.
-Zato je omogućena tehnička PPO putanja, ali PPO smoke nije benchmark, fizička validacija
-ili dokaz prednosti. Za sve train/validation/test granice i ograničenja vidi
-[environment record](research/SIMFIRE_ENVIRONMENT.md) i
-[ADR-021](specs/DECISION_RECORDS.md). Test 2024 ostaje zatvoren.
+Dodatna osjetljivost WAF .01 / 1-min korak dala je mean IoU .4771, praktično isto kao
+.4769 na 5-min koraku, uz nula rubnih kontakata; strict screen je i dalje FAIL. Koraci
+3/10/15 min nisu pokretani jer ova provjera nije promijenila zaključak. Interni korak
+ostaje neizabran.
+
+**Gate: FAIL.** Persistence baseline je mean IoU .5343 i area error 2,351.7 ha; elipsa
+.5308 i 2,346.6 ha. Najbolji IoU među WAF kandidatima je .4769 (.0025), a najmanja
+greška površine 2,262.1 ha (.01). Nijedan kandidat ne nadmašuje obje reference po oba
+kriterija uz nula rubnih kontakata. WAF/timebase nije zaključan; validation mape nisu
+preuzete, 2024 TEST nije učitan. Potpuni sažetak i checksumi su u
+[TRAIN reportu](../reports/real-fire-data/feds-simfire-train-noop-screen-v1.json).
+
+Tehnički PPO CLI/env i kratki smoke ostaju dostupni, ali validirano benchmark treniranje
+je blokirano. Sljedeći korak je pregledati greške i forcing/spatial assumptions, izabrati
+revidiranu zajedničku kalibraciju na TRAIN-u i ponoviti no-op gate; tek nakon prolaza
+smiju se preuzeti validation rasteri. Ne podešavati reference ili test slučajeve radi
+prolaza. Vidi [environment record](research/SIMFIRE_ENVIRONMENT.md) i
+[ADR-022](specs/DECISION_RECORDS.md).
 
 ## Za mjerodavno poređenje
 
-1. Na TRAIN-u izmjeriti zajedničke WAF/timebase kandidate, no-op, persistence i
-   unaprijed definisanu elipsu uz iste 48h vremenske tačke i map-edge metrike.
-2. Zamrznuti zajedničke postavke prije preuzimanja validation mapa; validation koristiti
-   samo za provjeru već fiksiranih postavki.
+1. Dijagnosticirati zašto simulirani burn ima niži mean IoU od persistence i elipse;
+   kalibrisati zajedničke forcing/SimFire postavke samo na TRAIN kohorti.
+2. Ponoviti isti no-op gate protiv nepromijenjenih baseline pravila. Ne preuzimati
+   validation mape dok TRAIN kandidat ne prođe i parametri ne budu zamrznuti.
 3. Prije policy-benefit poređenja precizirati operativnu gradnju linije, pa svim
    agentima dati iste scenarije, budžete, horizonte, observations i seedove.
 4. TEST 2024 otvoriti tek za završni obračun poslije zaključavanja izbora.
 
-Ove naučne provjere ne blokiraju lokalni tehnički PPO trening; blokiraju samo tvrdnje o
-validaciji i koristi politike.
+Trenutni kod može izvršiti kratki tehnički PPO smoke. Gate blokira duži benchmark/policy
+trening i tvrdnje o validaciji ili koristi politike.
 
 ## Provjere prije predaje
 

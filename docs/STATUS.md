@@ -39,9 +39,40 @@ GeoTIFF-ova. Validation rasteri ostaju odloženi dok se train parametri ne zaklj
 Dodani su 48h no-op runner i metrički helpers. Jedan TRAIN Plateau pilot pokazuje oštar
 WAF prag: 0.20–0.60 daje 61.56 ha (tri nova rastera, IoU .64) naspram 71.28 ha opaženih;
 0.65 daje 1,244 ha u prvih 12h, a 0.75–1.0 višestruko više i dodiruju rub do 48h.
-Nijedan WAF nije zaključan, a ovo nije cohort-level no-op gate. Testni interni korak od
-5 minuta čuva 90-min ćelijsko trajanje kao 18 update-a; visoko-šireći 48h pilot trajao
-je oko 40 sekundi. Ovo ostaje kandidat za train kalibraciju.
+Taj pilot nije bio cohort-level gate. Testni interni korak od 5 minuta čuva 90-min
+ćelijsko trajanje kao 18 update-a; visoko-šireći 48h pilot trajao je oko 40 sekundi.
+
+### TRAIN-only no-op screening — završeno, gate FAIL
+
+Osam WAF kandidata pokrenuto je na svih 99 TRAIN slučajeva, svaki kroz 48h i četiri
+poređenja (396 case-timepointa po kandidatu), uz isti 5-min interni korak i seed=0.
+Svaki run je završio 99/99 slučajeva bez greške. Future FEDS obodi učitavani su tek
+nakon simulacije i korišteni samo za post-hoc scoring. Referentne metode su početna-mask
+persistence i unaprijed definisana 2:1 downwind elipsa.
+
+| WAF | Mean IoU | Mean apsolutna greška površine (ha) | Rubni kontakti |
+|---:|---:|---:|---:|
+| 0.0000 | 0.4768 | 2,263.1 | 0 |
+| 0.0025 | 0.4769 | 2,265.0 | 0 |
+| 0.0100 | 0.4769 | 2,262.1 | 0 |
+| 0.0250 | 0.4679 | 2,314.2 | 0 |
+| 0.0500 | 0.4386 | 2,483.8 | 0 |
+| 0.1000 | 0.3854 | 3,360.1 | 1 |
+| 0.2000 | 0.2984 | 7,176.8 | 22 |
+| 0.6050 | 0.1425 | 27,624.2 | 157 |
+
+Persistence ima mean IoU **0.5343** i mean area error **2,351.7 ha**; elipsa ima
+**0.5308** i **2,346.6 ha**. Nijedan WAF nije nadmašio obje reference po oba kriterija
+uz nula rubnih kontakata. Zato **TRAIN no-op gate nije prošao** i WAF/timebase nisu
+zaključani. Najniži WAF-i su nešto bolji po površinskoj grešci, ali gube oko 0.054
+mean IoU prema objema referencama. Detaljni receipt i hashovi su u
+[TRAIN no-op screen reportu](../reports/real-fire-data/feds-simfire-train-noop-screen-v1.json);
+raw 1MB izlazi svakog kandidata ostaju ignorisani u `.local/`.
+
+Jedna timebase osjetljivost za WAF 0.01 na 1-min koraku takođe završila je 99/99 bez
+grešaka i rubnog kontakta; mean IoU .4771 naspram .4769 na 5-min koraku (razlika
+.0003). Nalaz je praktično isti, pa 3/10/15-min koraci nisu pokretani; interni korak
+ostaje neizabran.
 
 Korisnik je tražio da može trenirati bez novog setup ciklusa. Dodani su TRAIN-only
 Gymnasium/MaskablePPO adapter i CLI nad 99 dostupnih TRAIN epizoda: 48h/four 12h odluka,
@@ -55,16 +86,18 @@ smoke od 64 PPO koraka; checkpoint je sačuvan i ponovo učitan, pa je odrađen 
 `.local/feds-ppo-smoke-waf-0.605-64steps/`. WAF se mora eksplicitno zadati i ostaje
 provisional.
 
-Završna QA: SimFire Python 3.9 suite 63/63 PASS; project Python 3.12 suite 60 PASS uz
-9 optional-dependency skips; strict knowledge validator 69 Markdown fajlova PASS; CLI
-smoke, 85-package `uv pip check` i `git diff --check` PASS.
+Završna QA: SimFire Python 3.9 suite 65/65 PASS; project Python 3.12 suite 62 PASS uz
+9 optional-dependency skips; strict knowledge validation 69 Markdown PASS; CLI smoke,
+85-package `uv pip check` i `git diff --check` PASS.
 
-**Research gate ostaje otvoren:** train cohort no-op i persistence/elipsa poređenje,
-zajednički parametri, zatim validation mape i zaključana provjera te map-edge analiza.
-Tehnička PPO putanja ne predstavlja benchmark, fizičku validaciju ili dokaz RL prednosti.
-2024 test ostaje zatvoren. Komande i ograničenja su u
+**Research gate je pao na TRAIN no-op poređenju:** prije validacijskih mapa treba
+dijagnosticirati zašto SimFire prostorni rast zaostaje za obje reference i definisati
+novi zajednički kandidat. Validation rasteri nisu preuzeti; 2024 TEST ostaje zatvoren.
+Tehnička PPO putanja radi, ali duži policy trening/benchmark nije mjerodavan dok gate ne
+prođe. Komande i ograničenja su u
 [environment record](research/SIMFIRE_ENVIRONMENT.md),
-[ADR-021](specs/DECISION_RECORDS.md) i [NEXT_SESSION](NEXT_SESSION.md).
+[ADR-022](specs/DECISION_RECORDS.md), [NEXT_SESSION](NEXT_SESSION.md) i
+[TRAIN reportu](../reports/real-fire-data/feds-simfire-train-noop-screen-v1.json).
 
 Rad je izolovan na `codex/fireline-simfire-benchmark`, izveden iz `main`. Tri
 necommitovane izmjene u glavnom checkoutu i stara `research/cfsds-train-qc` grana su

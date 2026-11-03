@@ -14,6 +14,7 @@
 - [One-case SimFire input smoke](feds-simfire-input-smoke-v1.json) - Plateau real-input runtime smoke s demonstracijskim vremenom; nije no-op gate.
 - [SimFire TRAIN inputs](feds-simfire-input-train-coverage-v1.json) - 99/99 početnih scar/front + LANDFIRE fuel/terrain pairs; hashes i validation status.
 - [SimFire no-op pilot](feds-simfire-noop-pilot-v1.json) - jedan TRAIN Plateau slučaj; ne zaključava WAF ili timestep i nije fizička validacija.
+- [TRAIN-only SimFire no-op screen](feds-simfire-train-noop-screen-v1.json) - osam WAF kandidata × 99 TRAIN slučajeva; 0/8 je prošlo persistence/elipsa gate.
 - [SimFire/FEDS environment](../../docs/research/SIMFIRE_ENVIRONMENT.md) - reproducibilan Python 3.9 runtime, LANDFIRE/weather setup i naredni gate.
 - [Crosswalk method and data gate](../../docs/research/FPA_FEDS_CROSSWALK.md) - metod, odluke i ograničenja.
 

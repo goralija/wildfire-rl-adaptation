@@ -167,8 +167,41 @@ izabran ili zaključan. Detalji i hashes su u
 
 Testni 5-min unutrašnji korak čuva 90-min nominalni aktivni vijek ćelije kao 18 update-a;
 WAF-1.0 pilot na tom koraku trajao je oko 40 s za 48h. Ovo je kandidat numeričke
-postavke, nije konačna kalibracija. Agentove odluke ostaju na 12h. Train/validation
-no-op gate sa persistence i unaprijed definisanom elipsom nije prošao niti je završen.
+postavke, nije konačna kalibracija. Agentove odluke ostaju na 12h.
+
+## TRAIN-only no-op screen — završen, nije prošao
+
+Osam WAF kandidata (`0, 0.0025, 0.01, 0.025, 0.05, 0.10, 0.20, 0.605`) pokrenuto je
+na svih 99 TRAIN slučajeva, uz seed 0, 5-min SimFire korak i isti 48h horizont. Svaki
+case je ocijenjen na +12/+24/+36/+48h, ukupno 396 case-timepointa po kandidatu. Svi
+runovi su završili 99/99, bez grešaka. SimFire rezultat nije prešao rub na WAF ≤0.05;
+WAF 0.10 imao je jedan case sa rubnim kontaktom, 0.20 22 vremenska kontakta, a 0.605
+157 kontakata u 61 slučaju.
+
+| Referenca/kandidat | Mean IoU | Mean apsolutna area error (ha) | Rubni kontakti |
+|---|---:|---:|---:|
+| Persistence | 0.5343 | 2,351.7 | 0 |
+| Elipsa | 0.5308 | 2,346.6 | 0 |
+| Najbolji kandidat po IoU: WAF 0.0025 | 0.4769 | 2,265.0 | 0 |
+| Najbolji kandidat po površinskoj grešci: WAF 0.01 | 0.4769 | 2,262.1 | 0 |
+
+Strogi uslov je bio: 99/99 slučajeva, nula SimFire edge kontakata, veći mean IoU i
+manja mean absolute area error od persistence i elipse istovremeno. **0/8 kandidata je
+prošlo.** Nije izabran WAF; 5-min korak takođe ostaje provisionalni numerički kandidat.
+Detalji i SHA-256 lokalnih run receiptova su u
+[TRAIN no-op screen reportu](../../reports/real-fire-data/feds-simfire-train-noop-screen-v1.json);
+raw per-case izlazi ostaju ignorisani pod `.local/`.
+
+Osjetljivost za WAF .01 na 1-min koraku dala je IoU .4771, area error 2,265.8ha i nula
+edge kontakata, praktično isto kao 5-min korak (.4769 / 2,262.1ha / nula rubova).
+Zato nisu pokretani dodatni 3/10/15-min runovi. Ovaj ograničeni nalaz ne zaključava
+timebase; interni korak ostaje neizabran.
+
+Ovo je train-only screening, ne fizička validacija: FEDS su satelitske procjene, gridMET
+je dnevni 4km proxy, a elipsa jednostavna unaprijed definisana geometrijska referenca.
+Validation rasteri nisu preuzeti; 2024 TEST nije otvoren. Benchmark PPO trening i
+policy-benefit poređenje ostaju blokirani dok se uzroci prostornog nesklada ne istraže,
+postavke zajednički ne kalibrišu i gate ne prođe.
 
 ## TRAIN-only PPO putanja
 
@@ -195,15 +228,14 @@ novi izlazni direktorij pod `.local/`:
 PYTHONPATH=src MPLCONFIGDIR=.local/mpl-cache XDG_CACHE_HOME=.local/cache SDL_VIDEODRIVER=dummy \
   .local/simfire-venv/bin/python scripts/train_feds_simfire.py \
   --steps 64 --out .local/feds-ppo-experiments/NEW-ID \
-  --wind-adjustment-factor 0.605 --budgets 0,2,4 --seed 7
+  --wind-adjustment-factor 0.01 --budgets 0,2,4 --seed 7
 ```
 
-WAF 0.605 u komandi je samo eksplicitan **provisional** kandidat radi reproducibilnog
-smokea, nije izabran parametar. Veći `--steps` produžava trening; smoke težine i manifest
-ostaju u ignorisanom `.local/`. Svaki receipt izričito označava da nije fizička validacija,
-benchmark ni dokaz RL prednosti. Poslije dodavanja trenažnog adaptera, Plateau no-op
-recheck sa WAF .605 ponovio je 19 kumulativnih ćelija/61.56 ha, 4/4 poređenja bez rubnog
-udara; to i dalje nije cohort-level kalibracija.
+WAF 0.01 u komandi je samo eksplicitan tehnički smoke ulaz; cohort screen je pokazao da
+ne prolazi persistence/elipsa gate. WAF .605 iz ranijeg smokea dodiruje rub u 61/99
+caseova i ne smije biti korišten kao benchmark parametar. Ne pokretati duži PPO benchmark
+dok TRAIN gate ne prođe. Smoke težine i manifest ostaju u ignorisanom `.local/`; svaki
+receipt izričito označava da nije fizička validacija, benchmark ni dokaz RL prednosti.
 
 Odvojeni Plateau TRAIN action smoke s budžetom 1 potrošio je tačno jednu jedinicu na
 legalnu fireline akciju, a zatim završio preostala tri 12h koraka. To potvrđuje samo
@@ -211,16 +243,15 @@ API/budget plumbing; ne potvrđuje učinkovitost ili realističnost linije.
 
 ## Sljedeće provjere
 
-1. TRAIN fuel/terrain je pribavljen za 99/99 slučajeva. Kalibrisati mali zajednički
-   parametarski skup preko TRAIN uz istu grid i vrijeme; bez podešavanja po požaru.
-2. Dodati persistence i unaprijed definisanu zajedničku elipsnu referencu, zatim izmjeriti
-   48h no-op na TRAIN i VALIDATION: površinu, IoU/area error i map-edge dodire svakih 12h.
-   Validation mape preuzeti tek kad su TRAIN postavke zaključane.
-3. Tehničko PPO treniranje je dostupno, ali benchmark ili policy-benefit poređenje
-   ostaje blokirano dok no-op ne bude upoređen sa referencama na TRAIN kohorti i dok se
-   zajednički WAF/timebase ne zaključa. Trenutna sektor-akcija je samo prototype.
-4. Za naučno poređenje unaprijed definisati operativnu gradnju linije i zatim dati svim
-   politikama iste epizode, budžete, horizonte, observacije i seedove.
+1. Dijagnosticirati zašto SimFire no-op mean IoU zaostaje za obije reference; provjeriti
+   gridMET proxy, vjetar, fuel/moisture mapping, FEDS rasterizaciju i zajednički grid.
+2. Formulisati mali unaprijed dokumentovan shared-parameter candidate set i ponoviti
+   TRAIN screen. Bez fitovanja po požaru i bez mijenjanja baseline/metrike nakon ishoda.
+3. Validation mape preuzeti tek nakon TRAIN gate prolaza i zaključavanja parametara.
+   2024 TEST ostaje zatvoren do završnog obračuna.
+4. PPO smoke je tehnički dostupan, ali duži benchmark/policy trening čeka gate. Prije
+   agentnog poređenja precizirati operativnu gradnju linije i uskladiti scenarije,
+   budžete, horizonte, informacije i seedove.
 
 ## Primarni izvori (provjereni 2026-11-03)
 
