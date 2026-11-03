@@ -572,3 +572,25 @@ centroid). Each spends a unit at the first legal opportunity.
 same scenarios, budgets, horizon, simulator record and seed, paired by scenario. At B=0
 every policy must reproduce no-op exactly (determinism check). VALIDATION requires a
 TRAIN freeze record. A smoke on seven TRAIN cases passed the B=0 check.
+
+## ADR-026 — step-8 budget-adaptation protocol, accepted 2026-11-04 (before any policy result)
+
+Simulator: the ADR-024 free-burn stress record only. Training uses the 99 TRAIN cases;
+evaluation uses the 20 VALIDATION cases once; TEST stays closed.
+
+- **Base ("pretrained") policy:** MaskablePPO from scratch at reference budget B=2, 8,064
+  decisions (7 parallel envs × 16-step rollouts, batch 56, 4 epochs, γ=1, lr 3e-4,
+  entropy 0.01, MLP 64×64, observation budget scale fixed at 4).
+- **Adaptation:** each base is fine-tuned for 3,024 decisions at B=1 and at B=4. The
+  **matched control** is the same-length fine-tune at B=2, which separates "more training"
+  from "budget-specific adaptation".
+- **Seeds:** 11, 12 and 13 in the first round. Measured throughput (16.7 min per base) leaves
+  room for seeds 14 and 15; they are added now, before any evaluation, and run
+  unconditionally if time allows. The report states how many seeds finished.
+- **Evaluation:** paired by VALIDATION scenario at B ∈ {0,1,2,4} for no-op, the ADR-025
+  heuristics, every frozen base and every fine-tune (deterministic actions). Primary
+  contrasts: fine-tuned-at-B minus frozen base at B, and fine-tuned-at-B minus matched
+  control at B, for B ∈ {1,4}. Seed-averaged scenario bootstrap 95% intervals; per-seed means
+  reported too. B=0 must reproduce no-op exactly.
+- Compute: local CPU only, about 6–8k decisions/h per process group. This is a small,
+  underpowered study; null or negative results are reported as such.
