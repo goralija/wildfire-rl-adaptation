@@ -1,0 +1,222 @@
+{
+  "candidate_results": [
+    {
+      "hours_12": {
+        "fire_active": false,
+        "iou": 0.64,
+        "new_burned_cells": 3,
+        "observed_area_ha": 71.28,
+        "predicted_area_ha": 61.56,
+        "touches_map_edge": false
+      },
+      "hours_48": {
+        "fire_active": false,
+        "iou": 0.64,
+        "new_burned_cells": 3,
+        "observed_area_ha": 71.28,
+        "predicted_area_ha": 61.56,
+        "touches_map_edge": false
+      },
+      "internal_update_minutes": 5,
+      "relative_result_path": ".local/feds-noop-diagnostics/fpa-fod-400300427-plateau/step-5m-waf-0.2-seed-0.json",
+      "result_sha256": "8d8813b74914093c8beae3c689988191bb012e82f3ff4cc0466cb2c4966f1a02",
+      "truth_loaded_after_simulation": true,
+      "wind_adjustment_factor_candidate": 0.2
+    },
+    {
+      "hours_12": {
+        "fire_active": false,
+        "iou": 0.64,
+        "new_burned_cells": 3,
+        "observed_area_ha": 71.28,
+        "predicted_area_ha": 61.56,
+        "touches_map_edge": false
+      },
+      "hours_48": {
+        "fire_active": false,
+        "iou": 0.64,
+        "new_burned_cells": 3,
+        "observed_area_ha": 71.28,
+        "predicted_area_ha": 61.56,
+        "touches_map_edge": false
+      },
+      "internal_update_minutes": 5,
+      "relative_result_path": ".local/feds-noop-diagnostics/fpa-fod-400300427-plateau/step-5m-waf-0.25-seed-0.json",
+      "result_sha256": "564aafe06a5d111a4439c6630dcb45a979e0f31b7e3183cca5d936d9c5d43cfb",
+      "truth_loaded_after_simulation": true,
+      "wind_adjustment_factor_candidate": 0.25
+    },
+    {
+      "hours_12": {
+        "fire_active": false,
+        "iou": 0.64,
+        "new_burned_cells": 3,
+        "observed_area_ha": 71.28,
+        "predicted_area_ha": 61.56,
+        "touches_map_edge": false
+      },
+      "hours_48": {
+        "fire_active": false,
+        "iou": 0.64,
+        "new_burned_cells": 3,
+        "observed_area_ha": 71.28,
+        "predicted_area_ha": 61.56,
+        "touches_map_edge": false
+      },
+      "internal_update_minutes": 5,
+      "relative_result_path": ".local/feds-noop-diagnostics/fpa-fod-400300427-plateau/step-5m-waf-0.35-seed-0.json",
+      "result_sha256": "12c51381aad8f77edbbaa87e501a90a6614eb96f5630fb29484ea57e2cd00059",
+      "truth_loaded_after_simulation": true,
+      "wind_adjustment_factor_candidate": 0.35
+    },
+    {
+      "hours_12": {
+        "fire_active": false,
+        "iou": 0.64,
+        "new_burned_cells": 3,
+        "observed_area_ha": 71.28,
+        "predicted_area_ha": 61.56,
+        "touches_map_edge": false
+      },
+      "hours_48": {
+        "fire_active": false,
+        "iou": 0.64,
+        "new_burned_cells": 3,
+        "observed_area_ha": 71.28,
+        "predicted_area_ha": 61.56,
+        "touches_map_edge": false
+      },
+      "internal_update_minutes": 5,
+      "relative_result_path": ".local/feds-noop-diagnostics/fpa-fod-400300427-plateau/step-5m-waf-0.5-seed-0.json",
+      "result_sha256": "f84ca5ad4c38b5af62810cfbe7ff2dd95db3c6b2961b4073340b305cc3a22cc8",
+      "truth_loaded_after_simulation": true,
+      "wind_adjustment_factor_candidate": 0.5
+    },
+    {
+      "hours_12": {
+        "fire_active": false,
+        "iou": 0.64,
+        "new_burned_cells": 3,
+        "observed_area_ha": 71.28,
+        "predicted_area_ha": 61.56,
+        "touches_map_edge": false
+      },
+      "hours_48": {
+        "fire_active": false,
+        "iou": 0.64,
+        "new_burned_cells": 3,
+        "observed_area_ha": 71.28,
+        "predicted_area_ha": 61.56,
+        "touches_map_edge": false
+      },
+      "internal_update_minutes": 5,
+      "relative_result_path": ".local/feds-noop-diagnostics/fpa-fod-400300427-plateau/step-5m-waf-0.6-seed-0.json",
+      "result_sha256": "e7b50128e0dc7e92af48f0e7006df331f9392152b4fcdd4c5a043304ed86e25f",
+      "truth_loaded_after_simulation": true,
+      "wind_adjustment_factor_candidate": 0.6
+    },
+    {
+      "hours_12": {
+        "fire_active": true,
+        "iou": 0.041025641025641026,
+        "new_burned_cells": 368,
+        "observed_area_ha": 71.28,
+        "predicted_area_ha": 1244.16,
+        "touches_map_edge": false
+      },
+      "hours_48": {
+        "fire_active": true,
+        "iou": 0.0010756157900397977,
+        "new_burned_cells": 18576,
+        "observed_area_ha": 71.28,
+        "predicted_area_ha": 60238.08,
+        "touches_map_edge": true
+      },
+      "internal_update_minutes": 5,
+      "relative_result_path": ".local/feds-noop-diagnostics/fpa-fod-400300427-plateau/step-5m-waf-0.65-seed-0.json",
+      "result_sha256": "28def7a4338e91680e38f1f54453107359920640b4ba8af5be04e90ad465e550",
+      "truth_loaded_after_simulation": true,
+      "wind_adjustment_factor_candidate": 0.65
+    },
+    {
+      "hours_12": {
+        "fire_active": true,
+        "iou": 0.022727272727272728,
+        "new_burned_cells": 682,
+        "observed_area_ha": 71.28,
+        "predicted_area_ha": 2261.52,
+        "touches_map_edge": false
+      },
+      "hours_48": {
+        "fire_active": true,
+        "iou": 0.000980872976949485,
+        "new_burned_cells": 20372,
+        "observed_area_ha": 71.28,
+        "predicted_area_ha": 66057.12000000001,
+        "touches_map_edge": true
+      },
+      "internal_update_minutes": 5,
+      "relative_result_path": ".local/feds-noop-diagnostics/fpa-fod-400300427-plateau/step-5m-waf-0.75-seed-0.json",
+      "result_sha256": "b22681d9e41d7a9d775dfbfc1d4ad74bc2d6ed8d636111554b56c5a9158a21b2",
+      "truth_loaded_after_simulation": true,
+      "wind_adjustment_factor_candidate": 0.75
+    },
+    {
+      "hours_12": {
+        "fire_active": true,
+        "iou": 0.006482429205049471,
+        "new_burned_cells": 2912,
+        "observed_area_ha": 71.28,
+        "predicted_area_ha": 9486.720000000001,
+        "touches_map_edge": false
+      },
+      "hours_48": {
+        "fire_active": true,
+        "iou": 0.0008497208060208788,
+        "new_burned_cells": 24697,
+        "observed_area_ha": 71.28,
+        "predicted_area_ha": 80070.12000000001,
+        "touches_map_edge": true
+      },
+      "internal_update_minutes": 5,
+      "relative_result_path": ".local/feds-noop-diagnostics/fpa-fod-400300427-plateau/step-5m-waf-1-seed-0.json",
+      "result_sha256": "4a07297461cf5ebc1718e59dc12e9d4f752821b2c196f20b4c4df01b495905d0",
+      "truth_loaded_after_simulation": true,
+      "wind_adjustment_factor_candidate": 1.0
+    }
+  ],
+  "created_date": "2026-11-03",
+  "forcing": "historical daily gridMET sampled in four 12h segments; WAF varied as exploratory shared-parameter candidates",
+  "grid": {
+    "active_cell_lifetime_updates": 18,
+    "decision_step_hours": 12,
+    "horizon_hours": 48,
+    "internal_update_minutes": 5,
+    "nominal_active_cell_lifetime_minutes": 90,
+    "resolution_m": 180,
+    "shape": [
+      256,
+      256
+    ]
+  },
+  "input_receipt_sha256": "d348cd7f9aee80ac87390e54b2c29cf187361cf08094e59c5b7a2218e0819f82",
+  "interpretation": [
+    "On this one TRAIN case, WAF 0.20 through 0.60 produces the same 61.56 ha predicted area (three new cells) and IoU 0.64 against a 71.28 ha observed outline; this equals persistence behavior after early fire extinction.",
+    "At WAF 0.65, predicted area jumps to 1244.16 ha by +12h; WAF 0.75 yields 2261.52 ha and WAF 1.0 yields 9486.72 ha. At +48h their map-edge status is true; first edge contact is +36h for .65/.75 and +24h for 1.0.",
+    "The five-minute internal timestep preserves the nominal 90-minute active-cell lifetime as 18 updates and agent decisions remain every 12h. This is a tested numeric candidate, not a locked setting.",
+    "This one-event response cliff means no global wind-adjustment value has been selected or locked. Do not run validation or train an agent with these pilot settings."
+  ],
+  "kind": "single_train_case_parameter_sensitivity_not_noop_gate_or_physical_validation",
+  "next_gate": "Calibrate a small shared parameter set on the predeclared TRAIN cohort and evaluate frozen settings on VALIDATION. If the model still cannot beat persistence and a predeclared ellipse reference without map-edge artifacts, stop the RL comparison.",
+  "observed_states": "five FEDS lf_perimeter states are loaded only after the complete no-op simulation for post-hoc scoring",
+  "physical_validation": false,
+  "runner_sha256": "2b39257ddcc375070092affbb6f6506d48c78d6f5c99e8e0255ed99604c1f716",
+  "scenario_id": "fpa-fod-400300427-plateau",
+  "schema_version": "feds-simfire-noop-pilot/1.0",
+  "scientific_result": false,
+  "simfire_commit": "04905b19fe8c10dc08d64faddd00303e0561bb66",
+  "split": "train",
+  "suppression_counterfactual": false,
+  "test_cases_loaded": false,
+  "weather_sample_sha256": "163bab3094dfaad7c64a775e33b247127d85a901e9974c8b3b90b2c33f8b3703"
+}

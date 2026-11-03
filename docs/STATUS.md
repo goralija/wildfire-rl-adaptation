@@ -1,11 +1,113 @@
 ---
 type: Project Status
-title: Trenutno stanje — 2026-10-30
+title: Trenutno stanje — 2026-11-03
 sources:
 - resource: /reports/firehose-verification/verification.json
 - resource: /docs/WORK_LOG.md
 ---
-# Trenutno stanje — 2026-10-30
+# Trenutno stanje — 2026-11-03
+
+## Najnovije: SimFire/FEDS data i runtime setup
+
+Korisnikov benchmark pravac ostaje SimFire + FPA-FOD/FEDS-CONUS, uz FLE/ICS-209 kao
+ograničeni post-hoc kontekst. Originalna 60-case FPA-FOD kohorta, ponovljena nad
+lokalnim checksum-verifikovanim FEDS arhivama, ima 19/40 train i 7/20 validation
+slučajeva; zato ne prolazi prag 20/8.
+
+Da se ne dodaje jedan požar post-hoc, napravljena je eksplicitno dokumentovana šira
+kandidat-kohorta iz cijelog sačuvanog FPA-FOD screen okvira za iste dozvoljene godine:
+208 train zapisa (2018/2019) i 56 validation (2023). Uz nepromijenjeno FEDS spajanje,
+99 train i 20 validation slučajeva imaju jedinstven početni match i ≥2 uzastopna 12h
+stanja; svih 119 imaju punih pet 12h stanja od početka epizode do +48h. Pre-agent data
+coverage gate za taj revidirani okvir je **PASS**. Candidate frame uključuje samo
+prijavljene požare ≥5.000 acres u deset zapadnih država, zato nije reprezentativan za
+sve požare; završna površina/MTBS ne ulaze u FEDS ID spajanje ni agentovu informaciju.
+
+FEDS `lf_perimeter` i `lf_fireline` arhive za 2018/2019/2023 su checksum-verifikovane.
+Aktivni front je dostupan na tačnom početnom vremenu za svih 119 epizoda (99 train,
+20 validation). Geometrijski preflight potvrđuje da cijeli početni obod/front stane u
+256×256×180m mapu za 119/119 slučajeva. U gridMET-u su uzorkovana četiri 12h forcing
+intervala za svaki slučaj (396 train, 80 validation); wind-adjustment faktor nije
+izabran. Test 2024 nije preuzet ni učitan.
+
+Python 3.9.25 SimFire venv je postavljen u ignorisanom `.local/simfire-venv`; svih 85
+paketa prolazi `uv pip check`. LANDFIRE fuel/elevation i FEDS početne maske su preuzeti
+i provjereni za **99/99 train** slučajeva. Njihov coverage report bilježi SHA-256 za 198
+GeoTIFF-ova. Validation rasteri ostaju odloženi dok se train parametri ne zaključe.
+60-min demo-weather integration smoke radi, ali nije historijska validacija.
+
+Dodani su 48h no-op runner i metrički helpers. Jedan TRAIN Plateau pilot pokazuje oštar
+WAF prag: 0.20–0.60 daje 61.56 ha (tri nova rastera, IoU .64) naspram 71.28 ha opaženih;
+0.65 daje 1,244 ha u prvih 12h, a 0.75–1.0 višestruko više i dodiruju rub do 48h.
+Taj pilot nije bio cohort-level gate. Testni interni korak od 5 minuta čuva 90-min
+ćelijsko trajanje kao 18 update-a; visoko-šireći 48h pilot trajao je oko 40 sekundi.
+
+### TRAIN-only no-op screening — završeno, gate FAIL
+
+Osam WAF kandidata pokrenuto je na svih 99 TRAIN slučajeva, svaki kroz 48h i četiri
+poređenja (396 case-timepointa po kandidatu), uz isti 5-min interni korak i seed=0.
+Svaki run je završio 99/99 slučajeva bez greške. Future FEDS obodi učitavani su tek
+nakon simulacije i korišteni samo za post-hoc scoring. Referentne metode su početna-mask
+persistence i unaprijed definisana 2:1 downwind elipsa.
+
+| WAF | Mean IoU | Mean apsolutna greška površine (ha) | Rubni kontakti |
+|---:|---:|---:|---:|
+| 0.0000 | 0.4768 | 2,263.1 | 0 |
+| 0.0025 | 0.4769 | 2,265.0 | 0 |
+| 0.0100 | 0.4769 | 2,262.1 | 0 |
+| 0.0250 | 0.4679 | 2,314.2 | 0 |
+| 0.0500 | 0.4386 | 2,483.8 | 0 |
+| 0.1000 | 0.3854 | 3,360.1 | 1 |
+| 0.2000 | 0.2984 | 7,176.8 | 22 |
+| 0.6050 | 0.1425 | 27,624.2 | 157 |
+
+Persistence ima mean IoU **0.5343** i mean area error **2,351.7 ha**; elipsa ima
+**0.5308** i **2,346.6 ha**. Nijedan WAF nije nadmašio obje reference po oba kriterija
+uz nula rubnih kontakata. Zato **TRAIN no-op gate nije prošao** i WAF/timebase nisu
+zaključani. Najniži WAF-i su nešto bolji po površinskoj grešci, ali gube oko 0.054
+mean IoU prema objema referencama. Detaljni receipt i hashovi su u
+[TRAIN no-op screen reportu](../reports/real-fire-data/feds-simfire-train-noop-screen-v1.json);
+raw 1MB izlazi svakog kandidata ostaju ignorisani u `.local/`.
+
+Jedna timebase osjetljivost za WAF 0.01 na 1-min koraku takođe završila je 99/99 bez
+grešaka i rubnog kontakta; mean IoU .4771 naspram .4769 na 5-min koraku (razlika
+.0003). Nalaz je praktično isti, pa 3/10/15-min koraci nisu pokretani; interni korak
+ostaje neizabran.
+
+Korisnik je tražio da može trenirati bez novog setup ciklusa. Dodani su TRAIN-only
+Gymnasium/MaskablePPO adapter i CLI nad 99 dostupnih TRAIN epizoda: 48h/four 12h odluka,
+budžet, no-op i osam kratkih sektorskih fireline akcija. Potvrđeni su reset/step na
+stvarnom Plateau inputu, fiksni horizont nakon gašenja vatre, te četiri budžet/šteta
+regresijska testa. Dodatni TRAIN action smoke sa budžetom 1 postavio je legalnu
+fireline akciju, potrošio jednu jedinicu i završio sva četiri koraka. Završio je bounded
+smoke od 64 PPO koraka; checkpoint je sačuvan i ponovo učitan, pa je odrađen dodatni
+4-korak TRAIN rollout na
+`fpa-fod-400500346-south`. Checkpoint i receipt su samo u ignorisanom
+`.local/feds-ppo-smoke-waf-0.605-64steps/`. WAF se mora eksplicitno zadati i ostaje
+provisional.
+
+Završna QA: SimFire Python 3.9 suite 65/65 PASS; project Python 3.12 suite 62 PASS uz
+9 optional-dependency skips; strict knowledge validation 69 Markdown PASS; CLI smoke,
+85-package `uv pip check` i `git diff --check` PASS.
+
+**Research gate je pao na TRAIN no-op poređenju:** prije validacijskih mapa treba
+dijagnosticirati zašto SimFire prostorni rast zaostaje za obje reference i definisati
+novi zajednički kandidat. Validation rasteri nisu preuzeti; 2024 TEST ostaje zatvoren.
+Tehnička PPO putanja radi, ali duži policy trening/benchmark nije mjerodavan dok gate ne
+prođe. Komande i ograničenja su u
+[environment record](research/SIMFIRE_ENVIRONMENT.md),
+[ADR-022](specs/DECISION_RECORDS.md), [NEXT_SESSION](NEXT_SESSION.md) i
+[TRAIN reportu](../reports/real-fire-data/feds-simfire-train-noop-screen-v1.json).
+
+Rad je izolovan na `codex/fireline-simfire-benchmark`, izveden iz `main`. Tri
+necommitovane izmjene u glavnom checkoutu i stara `research/cfsds-train-qc` grana su
+sačuvane. U ovoj grani nema tuđih report fajlova, sirovih arhiva, model težina ili
+long-running treninga.
+
+## Historijski status — CFSDS/Firehose, 2026-10-30
+
+Sadržaj ispod ovog naslova dokumentuje raniji CFSDS/Cell2Fire track i runtime rad.
+Njegovi nalazi nisu prošireni na novi SimFire/FEDS benchmark.
 
 ## Baza znanja u repozitoriju
 Repo je OKF 0.2 bundle s [root indeksom](../index.md),

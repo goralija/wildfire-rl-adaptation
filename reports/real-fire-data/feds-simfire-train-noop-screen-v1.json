@@ -1,0 +1,253 @@
+{
+  "additional_timebase_sensitivity": {
+    "interpretation": "One-minute and five-minute updates give effectively the same low mean IoU at this screened WAF. Three-, ten-, and fifteen-minute steps were not run; no internal timebase is selected.",
+    "local_full_report": ".local/feds-noop-diagnostics/train-noop-screen-waf-0.01-step1m.json",
+    "local_full_report_sha256": "ed07652f4cf9210eee9969d04abfaaa699bfe68f5fbb2fcb70a51cadcbf46dfd",
+    "primary_step_metrics": {
+      "edge_contact_cases": 0,
+      "edge_contact_timepoints": 0,
+      "mean_absolute_area_error_ha": 2262.1090909090913,
+      "mean_iou": 0.47685197951101377,
+      "median_absolute_area_error_ha": 623.7000000000002,
+      "median_iou": 0.4286244192436429,
+      "scored_case_timepoints": 396
+    },
+    "primary_step_minutes": 5,
+    "scenario_count": 99,
+    "scored_case_timepoints": 396,
+    "seed": 0,
+    "sensitivity_minus_primary": {
+      "edge_contact_timepoints": 0,
+      "mean_absolute_area_error_ha": 3.6818181818180165,
+      "mean_iou": 0.0002966569412777287
+    },
+    "sensitivity_step_metrics": {
+      "edge_contact_cases": 0,
+      "edge_contact_timepoints": 0,
+      "mean_absolute_area_error_ha": 2265.7909090909093,
+      "mean_iou": 0.4771486364522915,
+      "median_absolute_area_error_ha": 635.0400000000002,
+      "median_iou": 0.4294586552203156,
+      "scored_case_timepoints": 396
+    },
+    "sensitivity_step_minutes": 1,
+    "status": "complete_screen_failed",
+    "strict_screen_pass": false,
+    "wind_adjustment_factor": 0.01
+  },
+  "candidate_protocol": {
+    "decision_step_hours": 12,
+    "horizon_hours": 48,
+    "internal_update_minutes": 5,
+    "one_shared_waf_per_candidate": true,
+    "seed": 0
+  },
+  "candidate_results": [
+    {
+      "failed_scenarios": 0,
+      "internal_update_minutes": 5,
+      "local_full_report": ".local/feds-noop-diagnostics/train-noop-screen-waf-0-step5m.json",
+      "local_full_report_sha256": "66848f106c95e0e5d05a09ce935948442ab0472b948c37dcb7ce1cfb1d875aee",
+      "scored_case_timepoints": 396,
+      "seed": 0,
+      "simfire_noop": {
+        "edge_contact_cases": 0,
+        "edge_contact_timepoints": 0,
+        "mean_absolute_area_error_ha": 2263.107272727273,
+        "mean_iou": 0.47677637647548116,
+        "median_absolute_area_error_ha": 623.7,
+        "median_iou": 0.43342032767870087,
+        "scored_case_timepoints": 396
+      },
+      "strict_screen_pass": false,
+      "successful_scenarios": 99,
+      "wind_adjustment_factor": 0.0
+    },
+    {
+      "failed_scenarios": 0,
+      "internal_update_minutes": 5,
+      "local_full_report": ".local/feds-noop-diagnostics/train-noop-screen-waf-0.0025-step5m.json",
+      "local_full_report_sha256": "f7104e9cee8ca9948e336b059f23260cbc90c8087570c2d6c61dff32fb905d29",
+      "scored_case_timepoints": 396,
+      "seed": 0,
+      "simfire_noop": {
+        "edge_contact_cases": 0,
+        "edge_contact_timepoints": 0,
+        "mean_absolute_area_error_ha": 2265.03,
+        "mean_iou": 0.47690303866941025,
+        "median_absolute_area_error_ha": 662.58,
+        "median_iou": 0.43342032767870087,
+        "scored_case_timepoints": 396
+      },
+      "strict_screen_pass": false,
+      "successful_scenarios": 99,
+      "wind_adjustment_factor": 0.0025
+    },
+    {
+      "failed_scenarios": 0,
+      "internal_update_minutes": 5,
+      "local_full_report": ".local/feds-noop-diagnostics/train-noop-screen-waf-0.01-step5m.json",
+      "local_full_report_sha256": "b462936450ff029f1cb796e3d4e61efddc22ada5fa161558175aa3603e3efc67",
+      "scored_case_timepoints": 396,
+      "seed": 0,
+      "simfire_noop": {
+        "edge_contact_cases": 0,
+        "edge_contact_timepoints": 0,
+        "mean_absolute_area_error_ha": 2262.1090909090913,
+        "mean_iou": 0.47685197951101377,
+        "median_absolute_area_error_ha": 623.7000000000002,
+        "median_iou": 0.4286244192436429,
+        "scored_case_timepoints": 396
+      },
+      "strict_screen_pass": false,
+      "successful_scenarios": 99,
+      "wind_adjustment_factor": 0.01
+    },
+    {
+      "failed_scenarios": 0,
+      "internal_update_minutes": 5,
+      "local_full_report": ".local/feds-noop-diagnostics/train-noop-screen-waf-0.025-step5m.json",
+      "local_full_report_sha256": "0c841df46d39c30a01eafdb479d7b64821fb01fd4c7cd064751aea060749a166",
+      "scored_case_timepoints": 396,
+      "seed": 0,
+      "simfire_noop": {
+        "edge_contact_cases": 0,
+        "edge_contact_timepoints": 0,
+        "mean_absolute_area_error_ha": 2314.2436363636366,
+        "mean_iou": 0.46793885192671847,
+        "median_absolute_area_error_ha": 672.3000000000001,
+        "median_iou": 0.4250625330104537,
+        "scored_case_timepoints": 396
+      },
+      "strict_screen_pass": false,
+      "successful_scenarios": 99,
+      "wind_adjustment_factor": 0.025
+    },
+    {
+      "failed_scenarios": 0,
+      "internal_update_minutes": 5,
+      "local_full_report": ".local/feds-noop-diagnostics/train-noop-screen-waf-0.05-step5m.json",
+      "local_full_report_sha256": "d307288ebc524059e79b0fc095c2a7ff159087951b7e7200b566439b00086a64",
+      "scored_case_timepoints": 396,
+      "seed": 0,
+      "simfire_noop": {
+        "edge_contact_cases": 0,
+        "edge_contact_timepoints": 0,
+        "mean_absolute_area_error_ha": 2483.836363636364,
+        "mean_iou": 0.4386289163234445,
+        "median_absolute_area_error_ha": 751.6800000000007,
+        "median_iou": 0.39857528598620184,
+        "scored_case_timepoints": 396
+      },
+      "strict_screen_pass": false,
+      "successful_scenarios": 99,
+      "wind_adjustment_factor": 0.05
+    },
+    {
+      "failed_scenarios": 0,
+      "internal_update_minutes": 5,
+      "local_full_report": ".local/feds-noop-diagnostics/train-noop-screen-waf-0.10-step5m.json",
+      "local_full_report_sha256": "32b7010d0c10f29cbfba9b5d3bf461f9d2b0e26e7b3dfae6604ed807fa142371",
+      "scored_case_timepoints": 396,
+      "seed": 0,
+      "simfire_noop": {
+        "edge_contact_cases": 1,
+        "edge_contact_timepoints": 1,
+        "mean_absolute_area_error_ha": 3360.1009090909088,
+        "mean_iou": 0.3854104251331179,
+        "median_absolute_area_error_ha": 994.6800000000001,
+        "median_iou": 0.3395063828805578,
+        "scored_case_timepoints": 396
+      },
+      "strict_screen_pass": false,
+      "successful_scenarios": 99,
+      "wind_adjustment_factor": 0.1
+    },
+    {
+      "failed_scenarios": 0,
+      "internal_update_minutes": 5,
+      "local_full_report": ".local/feds-noop-diagnostics/train-noop-screen-waf-0.20-step5m.json",
+      "local_full_report_sha256": "bd46b0c9a8265d143ef15495302c1f794e00c6adffefdb0d57b1359ae93000de",
+      "scored_case_timepoints": 396,
+      "seed": 0,
+      "simfire_noop": {
+        "edge_contact_cases": 10,
+        "edge_contact_timepoints": 22,
+        "mean_absolute_area_error_ha": 7176.780000000001,
+        "mean_iou": 0.2984071203568844,
+        "median_absolute_area_error_ha": 1956.96,
+        "median_iou": 0.2593706293706294,
+        "scored_case_timepoints": 396
+      },
+      "strict_screen_pass": false,
+      "successful_scenarios": 99,
+      "wind_adjustment_factor": 0.2
+    },
+    {
+      "failed_scenarios": 0,
+      "internal_update_minutes": 5,
+      "local_full_report": ".local/feds-noop-diagnostics/train-noop-screen-waf-0.605-step5m.json",
+      "local_full_report_sha256": "208bb15f5f1df1098e9183b29f3cbe2c3149a947e8f4cd2d21ea3984ec12ac84",
+      "scored_case_timepoints": 396,
+      "seed": 0,
+      "simfire_noop": {
+        "edge_contact_cases": 61,
+        "edge_contact_timepoints": 157,
+        "mean_absolute_area_error_ha": 27624.15,
+        "mean_iou": 0.14252304090228032,
+        "median_absolute_area_error_ha": 16734.600000000002,
+        "median_iou": 0.07936932841726013,
+        "scored_case_timepoints": 396
+      },
+      "strict_screen_pass": false,
+      "successful_scenarios": 99,
+      "wind_adjustment_factor": 0.605
+    }
+  ],
+  "created_date": "2026-11-03",
+  "interpretation": "All eight primary 5-minute runs completed all 99 TRAIN cases with no runner errors; none passed the predefined screen. A separate 1-minute sensitivity run at WAF 0.01 also completed 99/99 and failed with effectively unchanged IoU. Validation maps and the 2024 TEST split were not loaded. FEDS perimeters are satellite-derived estimates, not ground truth; this is TRAIN-only screening, not physical validation.",
+  "manifest_sha256": "54acdbb216cf134ddd173aa0e3bc32427659614c0dff49de3109ae75e798444c",
+  "physical_validation": false,
+  "reference_protocol": {
+    "ellipse": {
+      "center": "centroid of the initial active-front cells",
+      "future_feds_used": false,
+      "heading": "first 12-hour gridMET wind-to direction",
+      "purpose": "simple predeclared geometric reference, not a physical spread model",
+      "semi_major_growth": "180 m per 12 hours (one 180 m study-grid cell)",
+      "semi_minor_growth": "semi-major axis divided by 2",
+      "shape": "2:1 downwind ellipse, unioned with the initial FEDS scar/front"
+    },
+    "persistence": "Hold the exact initial FEDS scar/front mask unchanged."
+  },
+  "references": {
+    "ellipse_reference": {
+      "edge_contact_cases": null,
+      "edge_contact_timepoints": 0,
+      "mean_absolute_area_error_ha": 2346.5618181818186,
+      "mean_iou": 0.530767361439469,
+      "median_absolute_area_error_ha": 686.8800000000001,
+      "median_iou": 0.5189772306110494,
+      "scored_case_timepoints": 396
+    },
+    "persistence": {
+      "edge_contact_cases": null,
+      "edge_contact_timepoints": 0,
+      "mean_absolute_area_error_ha": 2351.708181818182,
+      "mean_iou": 0.5343450948980945,
+      "median_absolute_area_error_ha": 709.56,
+      "median_iou": 0.5189772306110494,
+      "scored_case_timepoints": 396
+    }
+  },
+  "scenario_count": 99,
+  "schema_version": "feds-simfire-train-noop-screen-summary/1.0",
+  "scientific_result": false,
+  "scored_case_timepoints_per_candidate": 396,
+  "simfire_commit": "04905b19fe8c10dc08d64faddd00303e0561bb66",
+  "split": "train",
+  "status": "complete_screen_failed",
+  "strict_screen_passed_candidates": 0,
+  "strict_screen_rule": "All TRAIN cases complete; no SimFire edge contacts; SimFire has higher mean IoU and lower mean absolute area error than both references.",
+  "test_cases_loaded": false
+}

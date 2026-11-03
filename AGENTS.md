@@ -10,8 +10,14 @@ Repo je OKF 0.2 knowledge bundle. Na početku sesije pročitaj [index.md](index.
 Zatim koristi [mapu zadataka/koda](knowledge/code-map.md) za relevantne izvore i testove.
 Korisnikove direktne upute imaju prednost; kasniji ADR može zamijeniti raniji.
 
-**Prvi fokus je TASK-012 dataset refinement.** Izbor, uloga i obim podataka su otvoreni;
-Dogrib/CFSDS su pregledani kandidati. TASK-004c je tehnički nastavak nakon refinementa.
+**Aktivni pravac je SimFire + FPA-FOD/FEDS-CONUS; najnoviji status je ADR-022.** Data
+coverage gate za prošireni, unaprijed spremljeni okvir prolazi (99 TRAIN, 20 validation),
+ali TRAIN no-op gate je završio **FAIL**: nijedan od osam WAF kandidata nije nadmašio
+persistence i elipsnu referencu po oba kriterija uz nula rubnih kontakata. Prvi posao je
+dijagnostika i novi zajednički TRAIN-only no-op screen; validation rastere ostaviti
+zatvorene dok TRAIN kandidat ne prođe, a TEST 2024 ne otvarati do završne evaluacije.
+TASK-012/CFSDS/Cell2Fire je historijski odvojeni pravac; Firehose TASK-004c nije trenutni
+SimFire blocker. PPO putanja radi samo kao tehnički smoke, ne kao validiran benchmark.
 Runtime PASS nije dokaz fizičke validacije ili RL prednosti. Čuvaj ovu razliku u sažecima.
 
 Održavanje znanja: [maintenance](knowledge/maintenance.md), format:
