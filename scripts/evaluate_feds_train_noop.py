@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Run a reproducible no-op/reference comparison over manifest TRAIN cases only."""
+"""Run a reproducible no-op/reference comparison over manifest TRAIN cases.
+
+VALIDATION is available only through ``--split validation`` together with
+``--frozen-params``, a committed parameter-freeze record. TEST is never loaded.
+"""
 
 from __future__ import annotations
 
@@ -76,6 +80,24 @@ def summarize(results: list[dict]) -> dict:
     return {"methods": summary, "paired_comparisons": comparisons}
 
 
+def _run_one(job):
+    """Run one case in a worker; failures are recorded, not raised."""
+    import os
+
+    os.environ.setdefault("OMP_NUM_THREADS", "1")
+    from run_feds_noop_episode import run_episode
+
+    scenario_id, params, seed, split = job
+    try:
+        return scenario_id, run_episode(scenario_id, seed=seed, split=split, **params), None
+    except Exception as exc:  # retain cohort coverage and all failure detail
+        return scenario_id, None, {
+            "scenario_id": scenario_id,
+            "error_type": type(exc).__name__,
+            "error": str(exc),
+        }
+
+
 def atomic_write(path: Path, payload: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")
@@ -87,7 +109,13 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--wind-adjustment-factor", type=float, required=True)
     parser.add_argument("--internal-update-minutes", type=int, choices=(1, 3, 5, 10, 15), default=5)
+    parser.add_argument("--active-cell-lifetime-minutes", type=int, default=90)
+    parser.add_argument("--ros-multiplier", type=float, default=1.0)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--split", choices=("train", "validation"), default="train")
+    parser.add_argument("--frozen-params", type=Path,
+                        help="required for VALIDATION: JSON freeze record whose params match this run")
+    parser.add_argument("--workers", type=int, default=1)
     parser.add_argument("--out", type=Path)
     parser.add_argument("--resume", action="store_true", help="continue a matching partial report")
     args = parser.parse_args(argv)
@@ -97,23 +125,38 @@ def main(argv: list[str] | None = None) -> int:
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     if manifest.get("test_cases_loaded") is not False:
         parser.error("Refusing a manifest that includes TEST cases.")
-    train_cases = [case for case in manifest["cases"] if case.get("split") == "train"]
-    if len(train_cases) != manifest.get("case_counts_by_split", {}).get("train"):
-        parser.error("Manifest TRAIN count is inconsistent.")
+    params = {
+        "wind_adjustment_factor": args.wind_adjustment_factor,
+        "internal_update_minutes": args.internal_update_minutes,
+        "active_cell_lifetime_minutes": args.active_cell_lifetime_minutes,
+        "ros_multiplier": args.ros_multiplier,
+    }
+    freeze_sha256 = None
+    if args.split == "validation":
+        if args.frozen_params is None:
+            parser.error("VALIDATION requires --frozen-params from a committed TRAIN freeze.")
+        freeze = json.loads(args.frozen_params.read_text(encoding="utf-8"))
+        if freeze.get("frozen_params") != params or freeze.get("selected_on_split") != "train":
+            parser.error("Requested parameters do not match the TRAIN freeze record.")
+        freeze_sha256 = sha256_file(args.frozen_params)
+    train_cases = [case for case in manifest["cases"] if case.get("split") == args.split]
+    if len(train_cases) != manifest.get("case_counts_by_split", {}).get(args.split):
+        parser.error("Manifest %s count is inconsistent." % args.split.upper())
     if len({case["scenario_id"] for case in train_cases}) != len(train_cases):
-        parser.error("Manifest contains duplicate TRAIN scenario IDs.")
+        parser.error("Manifest contains duplicate scenario IDs.")
     out = args.out or DEFAULT_OUT / (
-        "train-noop-waf-%g-step-%dm-seed-%d.json"
-        % (args.wind_adjustment_factor, args.internal_update_minutes, args.seed)
+        "%s-noop-waf-%g-life-%dm-ros-%g-step-%dm-seed-%d.json"
+        % (args.split, args.wind_adjustment_factor, args.active_cell_lifetime_minutes,
+           args.ros_multiplier, args.internal_update_minutes, args.seed)
     )
     manifest_hash = sha256_file(MANIFEST)
     configuration = {
-        "wind_adjustment_factor": args.wind_adjustment_factor,
-        "internal_update_minutes": args.internal_update_minutes,
+        **params,
         "seed": args.seed,
         "manifest_sha256": manifest_hash,
-        "split": "train",
+        "split": args.split,
         "expected_scenarios": len(train_cases),
+        "frozen_params_sha256": freeze_sha256,
     }
     if out.exists():
         if not args.resume:
@@ -153,27 +196,23 @@ def main(argv: list[str] | None = None) -> int:
 
     done = {result["scenario_id"] for result in payload["results"]}
     failed = {error["scenario_id"] for error in payload["errors"]}
-    from run_feds_noop_episode import run_episode
-
     started = time.monotonic()
-    for index, case in enumerate(train_cases, start=1):
-        scenario_id = case["scenario_id"]
-        if scenario_id in done or scenario_id in failed:
-            continue
-        try:
-            result = run_episode(
-                scenario_id,
-                args.wind_adjustment_factor,
-                seed=args.seed,
-                internal_update_minutes=args.internal_update_minutes,
-            )
+    pending = [case["scenario_id"] for case in train_cases
+               if case["scenario_id"] not in done and case["scenario_id"] not in failed]
+    jobs = [(scenario_id, params, args.seed, args.split) for scenario_id in pending]
+    if args.workers > 1:
+        from concurrent.futures import ProcessPoolExecutor
+
+        executor = ProcessPoolExecutor(max_workers=args.workers)
+        outcomes = executor.map(_run_one, jobs)
+    else:
+        executor = None
+        outcomes = map(_run_one, jobs)
+    for scenario_id, result, error in outcomes:
+        if result is not None:
             payload["results"].append(result)
-        except Exception as exc:  # retain cohort coverage and all failure detail
-            payload["errors"].append({
-                "scenario_id": scenario_id,
-                "error_type": type(exc).__name__,
-                "error": str(exc),
-            })
+        else:
+            payload["errors"].append(error)
         completed = len(payload["results"]) + len(payload["errors"])
         payload["status"] = "running"
         payload["updated_utc"] = datetime.now(timezone.utc).isoformat()
@@ -186,6 +225,8 @@ def main(argv: list[str] | None = None) -> int:
             (time.monotonic() - started) / 60.0,
         ), flush=True)
 
+    if executor is not None:
+        executor.shutdown()
     complete_ids = {result["scenario_id"] for result in payload["results"]}
     error_ids = {error["scenario_id"] for error in payload["errors"]}
     missing = [case["scenario_id"] for case in train_cases if case["scenario_id"] not in complete_ids | error_ids]
@@ -201,7 +242,7 @@ def main(argv: list[str] | None = None) -> int:
     noop = payload["summary"]["methods"]["simfire_noop"]
     refs = payload["summary"]["methods"]
     payload["strict_screen"] = {
-        "rule": "All TRAIN cases complete; no SimFire edge contacts; SimFire has higher mean IoU and lower mean absolute area error than both references.",
+        "rule": "All split cases complete; no SimFire edge contacts; SimFire has higher mean IoU and lower mean absolute area error than both references.",
         "pass": bool(
             payload["status"] == "complete"
             and not payload["errors"]

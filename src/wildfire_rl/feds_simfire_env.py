@@ -6,26 +6,25 @@ the post-hoc FEDS perimeter, and the provisional wind factor is not calibrated.
 
 from __future__ import annotations
 
-import hashlib
-import json
 from pathlib import Path
-import random
-from types import SimpleNamespace
 from typing import Any, Dict, Optional, Sequence, Tuple
 
 import gymnasium as gym
 import numpy as np
 
-from .gridmet_weather import gridmet_proxy_to_simfire
-from .simfire_initial_state import compose_initial_fire_map, update_cumulative_burned
-from .simfire_timebase import updates_for_duration
+from .feds_simfire_setup import (
+    INPUT_ROOT,
+    MANIFEST,
+    WEATHER,
+    SimFireParams,
+    apply_forcing,
+    build_simulation,
+    load_case_inputs,
+    load_split_cases,
+    load_weather_records,
+    sha256_file,
+)
 
-
-ROOT = Path(__file__).resolve().parents[2]
-MANIFEST = ROOT / "data/manifests/feds-episode-cohort-v1.json"
-WEATHER = ROOT / ".local/gridmet/feds-episode-weather-v1.json"
-INPUT_ROOT = ROOT / ".local/feds-simfire-cases"
-CONFIG_TEMPLATE = ROOT / "configs/simfire_feds_base.yml"
 
 SIMFIRE_UNBURNED = 0
 SIMFIRE_BURNING = 1
@@ -41,14 +40,6 @@ SECTOR_DIRECTIONS = (
     (0.0, -1.0),
     (1.0, -1.0),
 )
-
-
-def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as stream:
-        for block in iter(lambda: stream.read(1024 * 1024), b""):
-            digest.update(block)
-    return digest.hexdigest()
 
 
 def fireline_points(
@@ -93,7 +84,72 @@ def fireline_points(
     return tuple(points)
 
 
-def build_action_mask(fire_map: Any, active_front: Any, remaining_budget: int) -> np.ndarray:
+def front_edge_line_points(
+    fire_map: Any,
+    active_front: Any,
+    sector: int,
+    *,
+    standoff: int = 2,
+    half_length: int = 3,
+) -> Tuple[Tuple[int, int], ...]:
+    """Place a short line just beyond the front's leading edge in one sector.
+
+    The anchor is the active-front cell that lies furthest along the sector
+    direction; the line centre sits ``standoff`` cells beyond it and runs
+    perpendicular to the sector. Only unburned cells receive line.
+    """
+    state = np.asarray(fire_map)
+    front = np.asarray(active_front, dtype=bool)
+    if state.ndim != 2 or front.shape != state.shape:
+        raise ValueError("fire map and active front must have the same 2-D shape")
+    if type(sector) is not int or not 0 <= sector < len(SECTOR_DIRECTIONS):
+        raise ValueError("sector must be an integer in [0, 7]")
+    if type(standoff) is not int or standoff < 0 or type(half_length) is not int or half_length < 0:
+        raise ValueError("line standoff and half-length must be nonnegative integers")
+    rows, columns = np.nonzero(front)
+    if rows.size == 0:
+        return ()
+    dx, dy = SECTOR_DIRECTIONS[sector]
+    norm = float(np.hypot(dx, dy))
+    dx, dy = dx / norm, dy / norm
+    projection = columns * dx + rows * dy
+    lead = int(np.argmax(projection))
+    center_x = float(columns[lead]) + standoff * dx
+    center_y = float(rows[lead]) + standoff * dy
+    tangent_x, tangent_y = -dy, dx
+    points = []
+    seen = set()
+    for offset in range(-half_length, half_length + 1):
+        x = int(round(center_x + offset * tangent_x))
+        y = int(round(center_y + offset * tangent_y))
+        if (x, y) in seen:
+            continue
+        seen.add((x, y))
+        if 0 <= y < state.shape[0] and 0 <= x < state.shape[1]:
+            if int(state[y, x]) == SIMFIRE_UNBURNED:
+                points.append((x, y))
+    return tuple(points)
+
+
+LINE_PLACEMENTS = {
+    "centroid": fireline_points,
+    "front_edge": front_edge_line_points,
+}
+
+
+def line_points_for(placement: str, fire_map: Any, active_front: Any, sector: int):
+    if placement not in LINE_PLACEMENTS:
+        raise ValueError("unknown line placement %r" % placement)
+    return LINE_PLACEMENTS[placement](fire_map, active_front, sector)
+
+
+def build_action_mask(
+    fire_map: Any,
+    active_front: Any,
+    remaining_budget: int,
+    *,
+    placement: str = "centroid",
+) -> np.ndarray:
     """Keep no-op legal in every state; mask lines without budget or placement cells."""
     if type(remaining_budget) is not int or remaining_budget < 0:
         raise ValueError("remaining budget must be a nonnegative integer")
@@ -101,7 +157,7 @@ def build_action_mask(fire_map: Any, active_front: Any, remaining_budget: int) -
     mask[0] = True
     if remaining_budget:
         for sector in range(len(SECTOR_DIRECTIONS)):
-            mask[sector + 1] = bool(fireline_points(fire_map, active_front, sector))
+            mask[sector + 1] = bool(line_points_for(placement, fire_map, active_front, sector))
     return mask
 
 
@@ -115,12 +171,12 @@ def cumulative_burn_mask(previous: Any, fire_map: Any) -> np.ndarray:
 
 
 class FedsSimFireEnv(gym.Env):
-    """A 48h TRAIN episode with four shared 12h decisions and a discrete crew budget.
+    """A 48h episode with four shared 12h decisions and a discrete crew budget.
 
-    Actions are no-op plus eight directions around the current active-front centroid.
-    Each non-no-op action places at most seven SimFire fireline cells and costs one
-    budget unit. This deliberately simple action mapping enables PPO execution; it is
-    not a field-validated line-construction model.
+    Actions are no-op plus eight sector directions. Each non-no-op action places at
+    most seven SimFire fireline cells (one budget unit). This deliberately simple
+    action mapping is not a field-validated line-construction model. TRAIN is the
+    default split; VALIDATION requires ``split="validation"``; TEST is refused.
     """
 
     metadata = {"render_modes": []}
@@ -128,66 +184,65 @@ class FedsSimFireEnv(gym.Env):
     def __init__(
         self,
         *,
-        wind_adjustment_factor: float,
+        wind_adjustment_factor: Optional[float] = None,
         budgets: Sequence[int] = (0, 2, 4),
         scenario_ids: Optional[Sequence[str]] = None,
         internal_update_minutes: int = 5,
+        sim_params: Optional[SimFireParams] = None,
+        split: str = "train",
+        line_placement: str = "centroid",
+        max_budget: Optional[int] = None,
         manifest_path: Path = MANIFEST,
         weather_path: Path = WEATHER,
         input_root: Path = INPUT_ROOT,
     ) -> None:
-        if not np.isfinite(wind_adjustment_factor) or not 0.0 <= wind_adjustment_factor <= 1.0:
-            raise ValueError("wind adjustment factor must be in [0, 1]")
+        if sim_params is None:
+            if wind_adjustment_factor is None:
+                raise ValueError("either sim_params or wind_adjustment_factor is required")
+            sim_params = SimFireParams(
+                wind_adjustment_factor=float(wind_adjustment_factor),
+                internal_update_minutes=internal_update_minutes,
+            )
         if not budgets or any(type(value) is not int or value < 0 for value in budgets):
             raise ValueError("budgets must be nonempty nonnegative integers")
-        if internal_update_minutes not in (1, 3, 5, 10, 15):
-            raise ValueError("internal update interval must be 1, 3, 5, 10, or 15 minutes")
+        if line_placement not in LINE_PLACEMENTS:
+            raise ValueError("unknown line placement %r" % line_placement)
 
-        self.wind_adjustment_factor = float(wind_adjustment_factor)
+        self.sim_params = sim_params
+        self.wind_adjustment_factor = sim_params.wind_adjustment_factor
+        self.internal_update_minutes = sim_params.internal_update_minutes
+        self.split = split
+        self.line_placement = line_placement
         self.budgets = tuple(budgets)
-        self.max_budget = max(1, max(self.budgets))
-        self.internal_update_minutes = internal_update_minutes
+        # Observation scaling must match across training and evaluation runs.
+        self.max_budget = max(1, max(self.budgets)) if max_budget is None else int(max_budget)
+        if self.max_budget < max(self.budgets):
+            raise ValueError("max_budget must cover every sampled budget")
         self.horizon_steps = 4
         self.block_count = 16
 
         manifest_path = Path(manifest_path)
         weather_path = Path(weather_path)
-        input_root = Path(input_root)
+        self.manifest_path = manifest_path
+        self.weather_path = weather_path
         self.manifest_sha256 = sha256_file(manifest_path)
-        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-        if manifest.get("test_cases_loaded") is not False:
-            raise ValueError("Refusing an episode manifest that includes TEST cases")
-        all_cases = {
-            case["scenario_id"]: case
-            for case in manifest["cases"]
-            if case.get("split") == "train"
-        }
-        if not all_cases:
-            raise ValueError("The FEDS manifest has no TRAIN episodes")
+        all_cases = load_split_cases(split, manifest_path)
         if scenario_ids is not None:
             requested = tuple(scenario_ids)
             unknown = set(requested) - set(all_cases)
             if unknown:
-                raise ValueError("Only manifest TRAIN scenario IDs are accepted: %s" % sorted(unknown))
+                raise ValueError("Only manifest %s scenario IDs are accepted: %s"
+                                 % (split.upper(), sorted(unknown)))
             all_cases = {key: all_cases[key] for key in requested}
         self.cases = all_cases
         self.scenario_ids = tuple(all_cases)
-
-        weather = json.loads(weather_path.read_text(encoding="utf-8"))
-        if weather.get("test_cases_loaded") is not False:
-            raise ValueError("Refusing gridMET records that include TEST cases")
-        if weather.get("episode_manifest_sha256") != self.manifest_sha256:
-            raise ValueError("gridMET file was built from a different episode manifest")
-        train_weather = {
-            item["scenario_id"]: item
-            for item in weather["cases"]
-            if item.get("split") == "train"
-        }
-        if set(self.scenario_ids) - set(train_weather):
-            raise ValueError("At least one selected TRAIN case is missing gridMET forcing")
-        self.weather_by_id = {key: train_weather[key] for key in self.scenario_ids}
+        weather = load_weather_records(split, manifest_path=manifest_path, weather_path=weather_path)
+        if set(self.scenario_ids) - set(weather):
+            raise ValueError("At least one selected case is missing gridMET forcing")
+        self.weather_by_id = {key: weather[key] for key in self.scenario_ids}
         self.weather_sha256 = sha256_file(weather_path)
-        self.input_root = input_root
+        self.input_root = Path(input_root)
+        self._input_cache: Dict[str, Dict[str, Any]] = {}
 
         self.action_space = gym.spaces.Discrete(9)
         self.observation_space = gym.spaces.Dict({
@@ -198,109 +253,31 @@ class FedsSimFireEnv(gym.Env):
         })
         self._done = True
 
+    def _placement(self) -> str:
+        return getattr(self, "line_placement", "centroid")
+
     def action_masks(self) -> np.ndarray:
         fire_map = self.simulation.fire_map
         front = fire_map == SIMFIRE_BURNING
-        return build_action_mask(fire_map, front, self.remaining_budget)
+        return build_action_mask(fire_map, front, self.remaining_budget, placement=self._placement())
 
     def _load_episode(self, scenario_id: str) -> None:
-        import rasterio
-        import yaml
-        from simfire.enums import FuelModelRGB13, FuelModelToFuel
-        from simfire.game.sprites import Fire
-        from simfire.sim.simulation import FireSimulation
-        from simfire.utils.config import Config
-        from simfire.utils.layers import OperationalFuelLayer, OperationalTopographyLayer
-
-        case = self.cases[scenario_id]
-        weather = self.weather_by_id[scenario_id]
-        expected_time = case["evaluation_reference"]["initial_state_time"]
-        if weather.get("initial_state_time") != expected_time or len(weather.get("segments", [])) != 4:
-            raise ValueError("TRAIN weather must match the initial time and four 12h segments")
-
-        case_dir = self.input_root / scenario_id
-        receipt_path = case_dir / "input-receipt.json"
-        receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
-        if (receipt.get("scenario_id") != scenario_id or receipt.get("split") != "train"
-                or receipt.get("test_cases_loaded") is not False
-                or receipt.get("initial_state_time") != expected_time):
-            raise ValueError("LANDFIRE/FEDS input receipt is not the requested TRAIN start")
-
-        paths = (
-            (case_dir / receipt["fuel"]["file"], receipt["fuel"]["sha256"]),
-            (case_dir / receipt["terrain"]["file"], receipt["terrain"]["sha256"]),
-            (case_dir / receipt["initial_feds_state"]["mask_file"],
-             receipt["initial_feds_state"]["mask_sha256"]),
+        inputs = self._input_cache.get(scenario_id)
+        if inputs is None:
+            inputs = load_case_inputs(
+                scenario_id,
+                split=self.split,
+                manifest_path=self.manifest_path,
+                weather_path=self.weather_path,
+                input_root=self.input_root,
+                cases=self.cases,
+                weather_records=self.weather_by_id,
+            )
+            self._input_cache[scenario_id] = inputs
+        self.simulation, self.forcing, self.cumulative_burned = build_simulation(
+            inputs, self.sim_params, seed=0
         )
-        for path, expected_hash in paths:
-            if not path.is_file() or sha256_file(path) != expected_hash:
-                raise ValueError("Missing or changed verified TRAIN input: %s" % path)
-        fuel_path, terrain_path, masks_path = (item[0] for item in paths)
-        with rasterio.open(fuel_path) as source:
-            fuel = source.read(1)
-        with rasterio.open(terrain_path) as source:
-            elevation = source.read(1)
-        with np.load(masks_path) as masks:
-            scar = masks["burn_scar"].astype(bool)
-            front = masks["active_front"].astype(bool)
-        if fuel.shape != (256, 256) or elevation.shape != fuel.shape:
-            raise ValueError("Verified LANDFIRE rasters must match the 256x256 study grid")
-        if scar.shape != fuel.shape or front.shape != fuel.shape or not front.any():
-            raise ValueError("FEDS start masks are invalid")
-
-        forcing = []
-        for segment in weather["segments"]:
-            values = segment["gridmet_values"]
-            forcing.append(gridmet_proxy_to_simfire(
-                wind_speed_m_s=values["vs"]["value"],
-                wind_from_degrees=values["th"]["value"],
-                fm100_percent=values["fm100"]["value"],
-                wind_adjustment_factor=self.wind_adjustment_factor,
-            ))
-        self.forcing = forcing
-
-        unsupported = sorted(set(int(value) for value in np.unique(fuel)) - set(FuelModelToFuel))
-        unsupported_rgb = sorted(set(int(value) for value in np.unique(fuel)) - set(FuelModelRGB13))
-        if unsupported or unsupported_rgb:
-            raise ValueError("Pinned SimFire cannot map TRAIN LANDFIRE fuel codes: %s" % (unsupported or unsupported_rgb))
-
-        base_config = yaml.safe_load(CONFIG_TEMPLATE.read_text(encoding="utf-8"))
-        base_config["simulation"]["update_rate"] = self.internal_update_minutes
-        base_config["fire"]["max_fire_duration"] = updates_for_duration(
-            90, self.internal_update_minutes
-        )
-        rows, columns = fuel.shape
-        front_rows, front_columns = np.where(front)
-        base_config["fire"]["fire_initial_position"]["static"]["position"] = [
-            int(front_columns[0]), int(front_rows[0])
-        ]
-        config = Config(config_dict=base_config)
-        config.area.screen_size = (rows, columns)
-        config.area.pixel_scale = 180.0 * 3.280839895
-        layers = SimpleNamespace(layers=["fuel"], fuel=fuel, topography=elevation)
-        config.terrain.fuel_layer = OperationalFuelLayer(layers)
-        config.terrain.topography_layer = OperationalTopographyLayer(layers)
-        config.wind.speed = np.full(
-            (rows, columns), forcing[0]["wind_speed_midflame_ft_per_min_proxy"], dtype=np.float64
-        )
-        config.wind.direction = np.full(
-            (rows, columns), forcing[0]["wind_direction_degrees_clockwise_north_to"], dtype=np.float64
-        )
-        config.environment.moisture = forcing[0]["fuel_moisture_fraction_proxy"]
-
-        random.seed(0)
-        np.random.seed(0)
-        self.simulation = FireSimulation(config)
-        initial_map = compose_initial_fire_map(scar, front)
-        self.simulation.fire_map = initial_map.astype(np.int64)
-        self.simulation.fire_manager.sprites = [
-            Fire((int(column), int(row)), config.display.fire_size, headless=True)
-            for row, column in zip(front_rows, front_columns)
-        ]
-        self.simulation.fire_manager.durations = [0] * len(self.simulation.fire_manager.sprites)
-        self.simulation.fire_sprites = self.simulation.fire_manager.sprites
-        self.cumulative_burned = update_cumulative_burned(scar, self.simulation.fire_map)
-        self.fuel = fuel
+        self.fuel = inputs["fuel"]
         self.simulation_active = True
 
     def _pool(self, values: np.ndarray) -> np.ndarray:
@@ -337,19 +314,33 @@ class FedsSimFireEnv(gym.Env):
         return {"grid": grid, "budget": budget, "weather": weather, "time": time}
 
     def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None):
+        """Sample a case and budget, or pin them with ``options`` for paired evaluation."""
         super().reset(seed=seed)
-        if options:
-            raise ValueError("reset options are not supported")
-        index = int(self.np_random.integers(len(self.scenario_ids)))
-        self.scenario_id = self.scenario_ids[index]
-        self.initial_budget = int(self.np_random.choice(self.budgets))
+        options = dict(options or {})
+        unknown = set(options) - {"scenario_id", "budget"}
+        if unknown:
+            raise ValueError("unsupported reset options: %s" % sorted(unknown))
+        if "scenario_id" in options:
+            if options["scenario_id"] not in self.cases:
+                raise ValueError("scenario is not in this environment's %s set" % self.split.upper())
+            self.scenario_id = options["scenario_id"]
+        else:
+            index = int(self.np_random.integers(len(self.scenario_ids)))
+            self.scenario_id = self.scenario_ids[index]
+        if "budget" in options:
+            budget = options["budget"]
+            if type(budget) is not int or budget < 0 or budget > self.max_budget:
+                raise ValueError("budget must be an integer in [0, max_budget]")
+            self.initial_budget = budget
+        else:
+            self.initial_budget = int(self.np_random.choice(self.budgets))
         self.remaining_budget = self.initial_budget
         self.decision_index = 0
         self._load_episode(self.scenario_id)
         self._done = False
         return self._observation(), {
             "scenario_id": self.scenario_id,
-            "split": "train",
+            "split": self.split,
             "budget": self.initial_budget,
             "test_cases_loaded": False,
         }
@@ -366,7 +357,9 @@ class FedsSimFireEnv(gym.Env):
         applied_points = ()
         if action and self.remaining_budget > 0:
             front = self.simulation.fire_map == SIMFIRE_BURNING
-            applied_points = fireline_points(self.simulation.fire_map, front, action - 1)
+            applied_points = line_points_for(
+                self._placement(), self.simulation.fire_map, front, action - 1
+            )
             if applied_points:
                 self.simulation.update_mitigation([
                     (x, y, SIMFIRE_FIRELINE) for x, y in applied_points
@@ -375,10 +368,7 @@ class FedsSimFireEnv(gym.Env):
 
         previous = self.cumulative_burned.copy()
         if self.simulation_active:
-            current = self.forcing[self.decision_index]
-            self.simulation.fire_manager.U[:] = current["wind_speed_midflame_ft_per_min_proxy"]
-            self.simulation.fire_manager.U_dir[:] = current["wind_direction_degrees_clockwise_north_to"]
-            self.simulation.fire_manager.environment.M_f = current["fuel_moisture_fraction_proxy"]
+            apply_forcing(self.simulation, self.forcing[self.decision_index])
             _fire_map, self.simulation_active = self.simulation.run("12h")
             self.cumulative_burned = cumulative_burn_mask(
                 self.cumulative_burned, self.simulation.fire_map
@@ -393,13 +383,14 @@ class FedsSimFireEnv(gym.Env):
         self._done = terminated
         info = {
             "scenario_id": self.scenario_id,
-            "split": "train",
+            "split": getattr(self, "split", "train"),
             "decision_step": self.decision_index,
             "remaining_budget": self.remaining_budget,
             "new_burned_cells": new_burned_cells,
             "cumulative_burned_cells": int(self.cumulative_burned.sum()),
             "fire_active": bool(self.simulation_active),
             "action_applied": bool(applied_points),
+            "line_cells_applied": len(applied_points),
             "invalid_action": invalid,
             "feds_future_perimeters_used": False,
         }
