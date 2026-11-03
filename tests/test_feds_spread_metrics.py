@@ -1,6 +1,9 @@
 import unittest
 
-import numpy as np
+try:
+    import numpy as np
+except ImportError as exc:
+    raise unittest.SkipTest("optional NumPy dependency is not installed: %s" % exc)
 
 from wildfire_rl.feds_spread_metrics import binary_burn_metrics
 
