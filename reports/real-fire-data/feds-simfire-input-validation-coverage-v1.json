@@ -1,0 +1,177 @@
+{
+  "all_cases_verified": true,
+  "cases": [
+    {
+      "fuel_sha256": "10ab5e677e46d8937bed98f0b310a77e5f850659c1b9706166dbb39edd092ce0",
+      "mask_sha256": "1a3f362f3fd7fb0d7fba48e4777bb76be328848efefbeaadf3f4f9b532a8e376",
+      "receipt": "/Users/harungoralija/Desktop/mpvi/.worktrees/overnight-steps-5-8/.local/feds-simfire-cases/fpa-fod-401312856-beehive/input-receipt.json",
+      "scenario_id": "fpa-fod-401312856-beehive",
+      "status": "verified",
+      "terrain_sha256": "cd46c3aa6dab0c9159df4a6cba6d8c8a0ce9cf8611d75aaa12e3a7945b100e42"
+    },
+    {
+      "fuel_sha256": "8b38ec595888c5dc595405e5e91853a1f82265185c2fadc21eb25f042250771e",
+      "mask_sha256": "59eb48526dc5887cf91a02da000f32640330c60b72231f234df63189a692153c",
+      "receipt": "/Users/harungoralija/Desktop/mpvi/.worktrees/overnight-steps-5-8/.local/feds-simfire-cases/fpa-fod-401313289-brushy/input-receipt.json",
+      "scenario_id": "fpa-fod-401313289-brushy",
+      "status": "verified",
+      "terrain_sha256": "f5c07661931a16a700e786fc2140504c7af7033610e16a3670e7ae641217fc99"
+    },
+    {
+      "fuel_sha256": "86b111b052814691054163c1087d6a81f6debe8e6aa133bee33321fc6e1085f7",
+      "mask_sha256": "a9d6b839ac5f3098c30383e190a76cd4ce1653a7808e03a5bcc0107487e3c7d7",
+      "receipt": "/Users/harungoralija/Desktop/mpvi/.worktrees/overnight-steps-5-8/.local/feds-simfire-cases/fpa-fod-401315078-divide/input-receipt.json",
+      "scenario_id": "fpa-fod-401315078-divide",
+      "status": "verified",
+      "terrain_sha256": "621ab290df1131b95157097f2dbb2b6a1766d4a0a190f47daff05a8818af3440"
+    },
+    {
+      "fuel_sha256": "9691ae112138b9635e4c9f4b2be21164ffb20cc7f19833b3987ce8cc6d3f71e0",
+      "mask_sha256": "774094b450be3cf3b64c28623423db50f095762aac4955eeed8ea599795a70fe",
+      "receipt": "/Users/harungoralija/Desktop/mpvi/.worktrees/overnight-steps-5-8/.local/feds-simfire-cases/fpa-fod-401315590-flat/input-receipt.json",
+      "scenario_id": "fpa-fod-401315590-flat",
+      "status": "verified",
+      "terrain_sha256": "f475aaa97c8f9559fecac5ca3575a2f0da427b7e5d50829f6c00dd7bafc3752e"
+    },
+    {
+      "fuel_sha256": "399521a470785e82045ddecf42e07cc761138968713128c872aa6ebc21367ab8",
+      "mask_sha256": "d94cd05d0abe39c40d735de7303a774935fa99924cb061d46cbb5d600013b734",
+      "receipt": "/Users/harungoralija/Desktop/mpvi/.worktrees/overnight-steps-5-8/.local/feds-simfire-cases/fpa-fod-401315922-red-point-tank/input-receipt.json",
+      "scenario_id": "fpa-fod-401315922-red-point-tank",
+      "status": "verified",
+      "terrain_sha256": "cd502c697d2d4d5e3e05d365949f1b6a707d4992b909373269650d8ca4310228"
+    },
+    {
+      "fuel_sha256": "72c5baf321a1b048595df6f80dcc523217f4cc2ecf8c7106693023fa4888e53a",
+      "mask_sha256": "6e5d04309f6ce26eb8a3bee00a08fd6e6c1c568b9f70a8cdd7fe46d5d1dd9783",
+      "receipt": "/Users/harungoralija/Desktop/mpvi/.worktrees/overnight-steps-5-8/.local/feds-simfire-cases/fpa-fod-401316132-hayden/input-receipt.json",
+      "scenario_id": "fpa-fod-401316132-hayden",
+      "status": "verified",
+      "terrain_sha256": "a0b24b83c19c80ba8604ae6b2c04df1ee4d573515bc8a60864424bbca767d83e"
+    },
+    {
+      "fuel_sha256": "89675d3df4fbf0b979b075bfeba576a7c68a9017b9d85fdd379cc525bac02ddd",
+      "mask_sha256": "b96dcdb2bf9bda7a20078dc835cfc50652fbb506ff0a786b9a691b40c6b97438",
+      "receipt": "/Users/harungoralija/Desktop/mpvi/.worktrees/overnight-steps-5-8/.local/feds-simfire-cases/fpa-fod-401316438-bowles-creek/input-receipt.json",
+      "scenario_id": "fpa-fod-401316438-bowles-creek",
+      "status": "verified",
+      "terrain_sha256": "b9f3984c7429464c1aa817851b44470438269b2bc21715d22a58de1da430daea"
+    },
+    {
+      "fuel_sha256": "c0eaf2e6d5bb288a49adc758ef55cc094f34cf201274e46757f39e6d0e32131a",
+      "mask_sha256": "46634d690bb68d8f4c86629666af08d39f41618d7bef0be56fbf6927e6f5db47",
+      "receipt": "/Users/harungoralija/Desktop/mpvi/.worktrees/overnight-steps-5-8/.local/feds-simfire-cases/fpa-fod-401316520-newell-road/input-receipt.json",
+      "scenario_id": "fpa-fod-401316520-newell-road",
+      "status": "verified",
+      "terrain_sha256": "41c57f0ed6771a9fc01ee1fa098491f7bb23cace63d76a0b20697fc6c84267a4"
+    },
+    {
+      "fuel_sha256": "19945c50d61a4fd760c77796224f99f7431d4598f617358d81e660ad20292d10",
+      "mask_sha256": "1a59c369cba5f933bf9e18c22a442a14b977e1060d3aa96ad4ed7b43cd0d0162",
+      "receipt": "/Users/harungoralija/Desktop/mpvi/.worktrees/overnight-steps-5-8/.local/feds-simfire-cases/fpa-fod-401316682-diamond/input-receipt.json",
+      "scenario_id": "fpa-fod-401316682-diamond",
+      "status": "verified",
+      "terrain_sha256": "5cd348eb19edabcdfdfc4111752dd961d2ace62090bef7a91f19a5f98ca43e5c"
+    },
+    {
+      "fuel_sha256": "452601d9bc786ba0cc382b217fe4b1201f42636dbb1ade50ed48b6b9851fa377",
+      "mask_sha256": "653b86de0a59e41b006bd440f52e4be2e840bdbaed044a1eaf4d7418d9af6ec8",
+      "receipt": "/Users/harungoralija/Desktop/mpvi/.worktrees/overnight-steps-5-8/.local/feds-simfire-cases/fpa-fod-401316696-turkey/input-receipt.json",
+      "scenario_id": "fpa-fod-401316696-turkey",
+      "status": "verified",
+      "terrain_sha256": "9c9ae975e20bde66de84de046d25b07e2c7444726d96295b72675da5ca6b5ddd"
+    },
+    {
+      "fuel_sha256": "1873423a9058f929df8634da881cfc83ba8eaa75c2ceaf500cab8b622d0f5b66",
+      "mask_sha256": "87d2ca7af3b3edacf60dd9f0579b1a3b9f02d6606d21551313ddc8f4870880df",
+      "receipt": "/Users/harungoralija/Desktop/mpvi/.worktrees/overnight-steps-5-8/.local/feds-simfire-cases/fpa-fod-401317023-elkhorn/input-receipt.json",
+      "scenario_id": "fpa-fod-401317023-elkhorn",
+      "status": "verified",
+      "terrain_sha256": "82619df2272800545c6d6e894a3e9db1f44a1245aa15c0ccc408fbefabde3c8b"
+    },
+    {
+      "fuel_sha256": "7d6aff58712867182bb84fee39fa682a9f6894407eb59cf0f8e713cf5a5e9683",
+      "mask_sha256": "1d9084b6275f9ecb9bb8eee5e2d2fe292fe2df2ee4375bfcedb259bb7cc3c2b7",
+      "receipt": "/Users/harungoralija/Desktop/mpvi/.worktrees/overnight-steps-5-8/.local/feds-simfire-cases/fpa-fod-401317799-gold-hill/input-receipt.json",
+      "scenario_id": "fpa-fod-401317799-gold-hill",
+      "status": "verified",
+      "terrain_sha256": "0e90f8d151c2dd4b7575592748f477ca9f1326482e711a85df165231ff698557"
+    },
+    {
+      "fuel_sha256": "fe03ec2b4034eba152949a2f653eb39290e3f7c8bb3c7cdf4e9dbf48fc7ee699",
+      "mask_sha256": "02bacc49847b217164c15a0adc2355358ea7672fdcb0b796b82be4555581bfd1",
+      "receipt": "/Users/harungoralija/Desktop/mpvi/.worktrees/overnight-steps-5-8/.local/feds-simfire-cases/fpa-fod-401318129-middle-ridge/input-receipt.json",
+      "scenario_id": "fpa-fod-401318129-middle-ridge",
+      "status": "verified",
+      "terrain_sha256": "588f03551736e9d4bd3936dffe619344c0812fffae65ac356bafc109a82c5c17"
+    },
+    {
+      "fuel_sha256": "329b8ed0b2934306cce44b874537403e7351acef47aaa70674482bf3498694d8",
+      "mask_sha256": "2ad916383f55c1e36ed4969d269190bec43c0705d2c9661b5fe257daa9bb934b",
+      "receipt": "/Users/harungoralija/Desktop/mpvi/.worktrees/overnight-steps-5-8/.local/feds-simfire-cases/fpa-fod-401318133-niarada/input-receipt.json",
+      "scenario_id": "fpa-fod-401318133-niarada",
+      "status": "verified",
+      "terrain_sha256": "c94189a71dc7d6c8135ff977e8f9eb9606e147fe2ff74f2ac6fd8097086648c0"
+    },
+    {
+      "fuel_sha256": "af703ec1a7daf42376c057431803c238164a2adf4d221ae5996e94e05ea80812",
+      "mask_sha256": "085af9c16cc5f7403591f7f77316524d64be66d2217911bad83bed966878397f",
+      "receipt": "/Users/harungoralija/Desktop/mpvi/.worktrees/overnight-steps-5-8/.local/feds-simfire-cases/fpa-fod-401318180-treadway/input-receipt.json",
+      "scenario_id": "fpa-fod-401318180-treadway",
+      "status": "verified",
+      "terrain_sha256": "3b90bbeb68104adbdb7ec53cb99df00e99445023b947270697a19d55e3a8f7da"
+    },
+    {
+      "fuel_sha256": "1875c671602123ce5b90fbcf89abc780fc192fa3dc699d591fa0c70fe8998e56",
+      "mask_sha256": "b96dcdb2bf9bda7a20078dc835cfc50652fbb506ff0a786b9a691b40c6b97438",
+      "receipt": "/Users/harungoralija/Desktop/mpvi/.worktrees/overnight-steps-5-8/.local/feds-simfire-cases/fpa-fod-401318190-east-fork/input-receipt.json",
+      "scenario_id": "fpa-fod-401318190-east-fork",
+      "status": "verified",
+      "terrain_sha256": "cca4851b85c2b18f379dd2f0f7142c0f6836328a90eb1fb1da0e2b4cd780da25"
+    },
+    {
+      "fuel_sha256": "1895b02482a41c6bef99d8e7e03d1ca39ac68986e22bde37e5f819507b4891b3",
+      "mask_sha256": "08860fbb81403b7f06684c4067a39de8261b76f6ab085432da5feb53e3140bc7",
+      "receipt": "/Users/harungoralija/Desktop/mpvi/.worktrees/overnight-steps-5-8/.local/feds-simfire-cases/fpa-fod-401320960-elliot/input-receipt.json",
+      "scenario_id": "fpa-fod-401320960-elliot",
+      "status": "verified",
+      "terrain_sha256": "0f0da955310b41bf472871c245829a66a95c06105d58842d3785fff719645ee6"
+    },
+    {
+      "fuel_sha256": "eebbc470af0c73ce8b23642cb385d6fe342a3f694014a3bb33b018492fe8d3dd",
+      "mask_sha256": "2e9d934ff56106ef63309fc34e6c04d92c6018b9acaffbf3f9be164c0f5b62dc",
+      "receipt": "/Users/harungoralija/Desktop/mpvi/.worktrees/overnight-steps-5-8/.local/feds-simfire-cases/fpa-fod-401321046-head/input-receipt.json",
+      "scenario_id": "fpa-fod-401321046-head",
+      "status": "verified",
+      "terrain_sha256": "7d842ae2fae3fd018d25ab1f23f3e37b13ca17e7ddc41607f56f733bb101da6c"
+    },
+    {
+      "fuel_sha256": "b679a4a8b7b788f858a2113458705586cb741b245539baf55157f31ab84df82c",
+      "mask_sha256": "70be1619a4fdb3bd8ac3d238c2fd31e38c6bde8aa52c9d4363e282f2aa6c2bc0",
+      "receipt": "/Users/harungoralija/Desktop/mpvi/.worktrees/overnight-steps-5-8/.local/feds-simfire-cases/fpa-fod-401321600-river-road-east/input-receipt.json",
+      "scenario_id": "fpa-fod-401321600-river-road-east",
+      "status": "verified",
+      "terrain_sha256": "c75d3b38e37830bff864d5674707bc1a36dd451ecff31c62354c27ff06341330"
+    },
+    {
+      "fuel_sha256": "b746650b29ac7c49afa516cc0823656e56f0001b16bc7ccac4424d5aee32ea59",
+      "mask_sha256": "3ad0d9a27cf294f59eb8bb058826aa9b889984c91a366502771c5525431b4b0f",
+      "receipt": "/Users/harungoralija/Desktop/mpvi/.worktrees/overnight-steps-5-8/.local/feds-simfire-cases/fpa-fod-401321698-ant/input-receipt.json",
+      "scenario_id": "fpa-fod-401321698-ant",
+      "status": "verified",
+      "terrain_sha256": "37debd3c7d133dd69721a126d713bd8f48e28f2e11661f49e9a4849020bfa669"
+    }
+  ],
+  "failed_case_count": 0,
+  "kind": "landfire_input_fetch_and_validation_not_simulation_or_physical_validation",
+  "limitations": [
+    "FEDS initial states are satellite-derived estimates, not ground truth.",
+    "LANDFIRE products are candidate fuel/terrain layers, not field-verified event-date measurements.",
+    "Successful raster validation does not validate SimFire spread or suppression outcomes."
+  ],
+  "schema_version": "feds-simfire-input-coverage/1.0",
+  "selected_case_count": 20,
+  "split": "validation",
+  "test_cases_loaded": false,
+  "verified_case_count": 20
+}
