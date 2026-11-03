@@ -56,7 +56,7 @@ def main(argv=None) -> int:
     parser.add_argument("--budgets", type=_parse_budgets, required=True)
     parser.add_argument("--steps", type=int, required=True, help="total environment decisions")
     parser.add_argument("--init", type=Path, help="base checkpoint for --phase finetune")
-    parser.add_argument("--n-envs", type=int, default=6)
+    parser.add_argument("--n-envs", type=int, default=7)
     parser.add_argument("--n-steps", type=int, default=16, help="rollout length per env")
     parser.add_argument("--learning-rate", type=float, default=3e-4)
     parser.add_argument("--line-placement", choices=("centroid", "front_edge"), default="front_edge")
@@ -88,7 +88,7 @@ def main(argv=None) -> int:
             "MultiInputPolicy",
             env,
             n_steps=args.n_steps,
-            batch_size=min(64, args.n_steps * args.n_envs),
+            batch_size=(args.n_steps * args.n_envs) // 2,
             n_epochs=4,
             gamma=1.0,
             learning_rate=args.learning_rate,
@@ -99,8 +99,9 @@ def main(argv=None) -> int:
             policy_kwargs={"net_arch": [64, 64]},
         )
     else:
-        model = MaskablePPO.load(args.init, env=env, device="cpu", seed=args.seed)
-        model.learning_rate = args.learning_rate
+        # The restored learning-rate schedule is kept; fine-tuning uses the base rate.
+        model = MaskablePPO.load(args.init, env=env, device="cpu")
+        model.set_random_seed(args.seed)
     model.learn(total_timesteps=args.steps, reset_num_timesteps=True)
     elapsed = time.monotonic() - started
 
