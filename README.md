@@ -8,12 +8,13 @@ Istražujemo može li prilagodba unaprijed treniranog RL agenta **različitim bu
 intervencija** smanjiti opožarenu površinu u odnosu na početni agent i heuristike,
 uz posebno ispitivanje zaštite prioritetnih područja.
 
-**Stanje:** aktivni plan je SimFire + FPA-FOD/FEDS-CONUS, ali pre-agent crosswalk gate
-trenutno ne prolazi pragove ni u jednom splitu (13/40 train i 7/20 validation prema
-pragu 20/8). Zato nema SimFire adaptera,
-no-op replaya ni PPO treninga. Raniji Cell2Fire/Firehose runtime i CFSDS nalazi su
-sačuvani kao historijski odvojen rad. Sintetički pilot ne predviđa stvarne požare i
-nije dokaz uspješnosti RL pristupa.
+**Stanje:** aktivni plan je SimFire + FPA-FOD/FEDS-CONUS. Prošireni, unaprijed
+sačuvani data frame prolazi coverage gateom (99 train/20 validation), ali TRAIN-only
+no-op screen na 99 slučajevima **nije prošao** persistence/elipsa poređenje. SimFire
+adapter i PPO CLI tehnički rade; benchmark trening čeka dijagnostiku i novi TRAIN gate.
+Validation rasteri nisu preuzeti, a TEST 2024 ostaje zatvoren. Raniji
+Cell2Fire/Firehose nalazi su odvojeni historijski rad. Sintetički pilot ne predviđa
+stvarne požare i nije dokaz uspješnosti RL pristupa.
 
 Tim: Amar Hodžić, Belmin Durmo, Harun Goralija. Predmet MPVI.
 
@@ -32,9 +33,11 @@ prijedloge i otvorene odluke. [Pravila održavanja](knowledge/maintenance.md) i
    [trenutno stanje](docs/STATUS.md) i [upute za narednu sesiju](docs/NEXT_SESSION.md).
 2. Pogledaj [istraživački protokol](docs/research/PROTOCOL.md),
    [provjeru simulatora](docs/research/SIMULATOR_AUDIT.md) i [odluke](docs/specs/DECISION_RECORDS.md).
-3. Pokreni testove i pilot ispod. Za aktivni FPA-FOD/FEDS-CONUS pravac prvo vidi
-   [crosswalk i pre-agent data gate](docs/research/FPA_FEDS_CROSSWALK.md). Pokrivenost
-   oba splita treba razriješiti prije SimFire implementacije. CFSDS/Cell2Fire replayi su
+3. Za aktivni FPA-FOD/FEDS-CONUS pravac vidi
+   [crosswalk i cohort no-op gate](docs/research/FPA_FEDS_CROSSWALK.md), zatim
+   [TRAIN no-op rezultat](reports/real-fire-data/feds-simfire-train-noop-screen-v1.json)
+   i [sljedeći korak](docs/NEXT_SESSION.md). Data coverage je prošla, ali no-op
+   screening nije; ne tretirati PPO smoke kao benchmark. CFSDS/Cell2Fire replayi su
    historijski nalazi opisani u [starom X/Y pipelineu](docs/research/REAL_CASE_PIPELINE.md).
 
 ## Pokretanje bez dodatnih biblioteka

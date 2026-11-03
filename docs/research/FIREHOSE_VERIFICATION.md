@@ -76,10 +76,11 @@ scenariju**, ne poređenje kvaliteta, statistički rezultat ili dokaz RL prednos
    ali rows mode sam ih ne bira. Provenance i izrada tih alternativa nisu potvrđeni.
    Nema priority maske za Sub20x20; treba je posebno definisati i verzionisati.
 
-## Tehnički nastavak nakon dataset refinementa — TASK-004c
+## Historijski tehnički nastavak za CFSDS/Firehose — TASK-004c
 
-Neposredni projektni fokus je TASK-012 — razjašnjenje i usaglašavanje podataka,
-vidjeti [REAL_FIRE_DATASETS](REAL_FIRE_DATASETS.md). Ispod ostaje poznata tehnička
+Ovaj nastavak pripada ranijem CFSDS/Cell2Fire pravcu i nije blocker za aktivni
+SimFire/FEDS worktree. Za aktuelni prioritet vidi [STATUS](../STATUS.md) i
+[NEXT_SESSION](../NEXT_SESSION.md). U ovom legacy pravcu ostaje poznata tehnička
 prepreka prije glavnih eksperimenata postojećim pristupom.
 Formalizovati tanki adapter sa stvarnim početnim opažanjem, trajnim damage skupom,
 validnim gorivim akcijama i prisilnim no-op nakon B. Eksportovati termination reason i

@@ -146,20 +146,20 @@ smoke sa demo vjetrom/vlagom potvrđuje samo integraciju inputa; to nije spread 
 Detalji su u [environment record](SIMFIRE_ENVIRONMENT.md) i
 [gridMET provenance](../../reports/real-fire-data/feds-gridmet-weather-coverage-v1.json).
 
-Pre-agent gate koji slijedi:
+Pre-agent data gate je prošao za prošireni okvir, a inputi su postavljeni: LANDFIRE
+fuel/terrain i početne FEDS maske postoje za 99/99 TRAIN slučajeva. Zatim je kohortni
+TRAIN-only no-op screen završen za osam WAF kandidata; **nijedan nije prošao** unaprijed
+zadan uslov prema persistence/elipsi i rubu mape. Mjere, reference i run receipt hashovi
+su u [screen reportu](../../reports/real-fire-data/feds-simfire-train-noop-screen-v1.json)
+i [ADR-022](../specs/DECISION_RECORDS.md).
 
-1. Povući i provjeriti LANDFIRE mapu za svaki train slučaj; NoData/unknown fuel ili
-   rubni počeci moraju biti raportirani, ne tiho uklonjeni ili popunjeni.
-2. Izvesti no-op SimFire rollout 48h po 12h koracima uz istorijski gridMET forcing.
-   Porediti cumulative dodatno opožarenu površinu sa persistence i jednim zajedničkim
-   elipsnim baselineom, te kontrolisati map-edge kontakt.
-3. WAF i eventualne zajedničke spread postavke kalibrisati samo na trainu; zaključati
-   prije validation. Ako model ne nadmaši reference ili sistematski dira rub mape,
-   zaustaviti PPO i dijagnosticirati inpute/parametre.
-4. Nakon no-op gatea implementirati temporalnu gradnju linije, wait/16 front sektora,
-   20 ljudi × 8h i smjene 0/1/2/4. Budžet ne završava epizodu, a završni obod ostaje
-   samo post-hoc poređenje.
+Sljedeći research korak je dijagnosticirati po-požar neslaganje i provjeriti gridMET
+forcing, vjetar/vlagu, rasterizaciju i SimFire prostorni odgovor. Zatim dokumentovati
+mali zajednički kandidat skup i ponoviti isti TRAIN-only gate. Ne mijenjati baseline,
+score rule ili postavke po požaru radi prolaza. Validation rasteri se mogu koristiti
+tek nakon TRAIN gate prolaza i zamrzavanja postavki; 2024 TEST ostaje zatvoren.
 
-Crosswalk i environment izvještaji potvrđuju data/runtime pokrivenost, ne fizičku
-validaciju ili RL rezultat. Preuzeti su samo podaci train/validation godina. PPO trening
-i test split ostaju zatvoreni.
+Crosswalk/environment izvještaji potvrđuju data/runtime pokrivenost, ne fizičku
+validaciju ili RL rezultat. Tehnički PPO smoke je dostupan, ali benchmark/policy-benefit
+trening ostaje blokiran do gate prolaza. FEDS je satelitska procjena, gridMET proxy, a
+aktivni `lf_fireline` sloj nije izgrađena suppression linija.
