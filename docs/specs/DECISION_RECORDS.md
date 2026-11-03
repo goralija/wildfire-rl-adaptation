@@ -475,3 +475,38 @@ at 5 minutes. The supported 3/10/15-minute steps were not run; no timebase is se
 Evidence: [cohort screen report](../../reports/real-fire-data/feds-simfire-train-noop-screen-v1.json),
 [environment record](../research/SIMFIRE_ENVIRONMENT.md),
 [TRAIN evaluator](../../scripts/evaluate_feds_train_noop.py).
+
+## ADR-023 — diagnosed no-op deficit and preregistered spread-threshold candidates, accepted 2026-11-04
+
+Under the user's overnight mandate (2026-11-03: work through roadmap steps 5–8 without
+questions; if the gate fails again, continue clearly labelled as exploratory), the
+TRAIN inputs were rebuilt on a second machine. All 99 LANDFIRE fuel/elevation/start-mask
+hashes and all nine gridMET archive hashes equal the committed reports, and the WAF .01
+cohort rerun reproduces ADR-022 exactly (mean IoU .476852, area error 2,262.1ha).
+
+[Diagnosis](../../reports/real-fire-data/feds-simfire-train-noop-diagnosis-v1.json):
+the entire mean-IoU deficit sits in the third of timepoints where FEDS barely grows
+(observed/initial ≤1.36). There SimFire adds ~262 cells against ~59 observed, with 2.9%
+precision. In the fastest-growing third SimFire already beats persistence (+.035).
+Even at WAF .01 SimFire grows in 63% of timepoints regardless of observed growth. The
+failure is discrimination of *which* fires grow, not heading. Many static FEDS fires were
+probably contained or suppressed, which a free-burning no-op cannot represent.
+
+SimFire ignites a neighbour only when accumulated spread exceeds the 180 m cell within
+the active-cell lifetime (90 min), i.e. R ≥ ~6.6 ft/min. A shared rate-of-spread
+multiplier below one therefore acts as a spread threshold: weak no-wind/slope spread
+stops, while windier or drier segments still grow. The preregistered set, fixed before
+any run, is the 3×3 grid `ros_multiplier ∈ {0.35, 0.5, 0.7}` × `WAF ∈ {0.05, 0.2,
+0.4}`, with lifetime 90 min, 5-min internal step and seed 0, scored with the unchanged
+strict rule and unchanged persistence/ellipse references.
+
+**Selection rule:** if any candidate passes, freeze the passing candidate with the highest
+mean IoU (tie: lower area error). If none passes, freeze the zero-edge candidate with the
+highest mean IoU among these nine plus the reproduced WAF .01/ROS 1.0 run, labelled
+`gate_status: FAIL_exploratory`; steps 6–8 then proceed as exploratory only. Validation
+is scored once with the frozen record and is not used for re-selection. 2024 TEST stays
+closed.
+
+Evidence: [diagnosis tool](../../scripts/diagnose_feds_noop_gate.py),
+[shared setup](../../src/wildfire_rl/feds_simfire_setup.py),
+[evaluator](../../scripts/evaluate_feds_train_noop.py).
