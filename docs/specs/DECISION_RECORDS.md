@@ -648,3 +648,23 @@ against 1,343.6ha). Fine-tuning again shows no gain (two-level CIs span zero), a
 is at least as good. Budget fine-tuning does not help even on the fires it was trained on,
 so the null is not an overfitting artefact. It points to a weak budget signal in this action
 and simulator design.
+
+### ADR-024 addendum — verbatim approval and validation-use rule, recorded 2026-11-04
+
+The user's words in the session, verbatim (2026-11-03, about 23:50 CET):
+
+- Request: "da do 6 ujutro pokusas uraditi do (i ukljucujuci) 8. zadatka da li mislis da
+  bi to mogao da uradis, koristeci internet resurse, lokalne resurse koje imas, i
+  pokusavajuci da napredujes ka tome da uradis to najbolje sto mozes" and "da mene ne
+  pitas nista jer necu biti tu da odgovorim".
+- The option proposed to them, including the starred defaults: "Ako gate ponovo padne: ★
+  nastavljam korake 6–8 sa najboljim TRAIN kandidatom, jasno označeno kao *eksploratorno,
+  gate FAIL*." Downloads: "★ dozvoljeni validation LANDFIRE/FEDS rasteri, ako gate prođe ili
+  po tački 1".
+- Reply: "potvrdjujem sve sto si rekao".
+
+**Validation-use rule:** every VALIDATION result was produced after the TRAIN gate failed
+and was **not** used to choose candidates, tune parameters, or decide that the gate
+passes. The stress record was chosen from TRAIN no-op statistics before any validation
+scoring. If a later TASK-019 fix makes the TRAIN gate pass, rerun the gate on TRAIN first,
+then validation, and mark the exploratory step 6–8 results superseded.

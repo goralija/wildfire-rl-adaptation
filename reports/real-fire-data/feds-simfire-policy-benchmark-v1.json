@@ -2690,5 +2690,6 @@
       }
     },
     "reading": "Same pattern in-sample: frozen base beats no-op (-35.9/-71.3/-99.8 ha at B=1/2/4 against 1,343.6 ha), fine-tuned minus frozen base is -0.9/-13.9 (control)/-8.3 ha with two-level CIs spanning zero, and downwind (-45.8/-77.5/-102.8 ha) is at least as good. The null is not an overfitting artefact."
-  }
+  },
+  "validation_use": "VALIDATION episodes were run after the TRAIN gate failed and were not used to select simulator settings, policies or hyperparameters (ADR-024 addendum)."
 }
