@@ -373,3 +373,16 @@ stress record (WAF .01 / ROS 1.0). [VALIDATION once per record](../../reports/re
 1,501.9ha); stress IoU .5452 / 1,275.3ha, no edge (meets the strict rule on VALIDATION only).
 Heuristic benchmark on the gate-freeze setting (VALIDATION): no-op adds 5.8ha on average
 and no heuristic changes that by more than 0.3ha — no room for interventions.
+
+## EXP-014 — budget-adaptation study on the free-burn stress scenario, 2026-11-04
+
+ADR-026 protocol, local CPU (macOS ARM64, 7 env processes). Five seeds × (base PPO at
+B=2, 8,064 decisions, about 15–25 min; fine-tunes at B=1/2/4, 3,024 decisions, about
+6 min each) = 20 checkpoints, all kept in ignored `.local/ppo/adr024/`; SHA-256 values are
+in the [summary](../../reports/real-fire-data/feds-simfire-policy-benchmark-v1.json).
+VALIDATION benchmark: 24 policies × 20 fires × B∈{0,1,2,4} = 1,920 episodes in 5.1 min on
+7 workers, no errors, with the B=0 determinism check passed. Main result in ADR-027: base PPO beats no-op
+(−5 to −20ha against a 324ha mean), budget fine-tuning shows no gain over the frozen base
+or matched control, and the downwind heuristic is at least as good. A first pass with
+three seeds was run while seeds 14–15 trained; its 1,280 shared episodes match the final
+pass exactly and were not used to change the protocol.
