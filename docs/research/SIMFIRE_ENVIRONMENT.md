@@ -254,6 +254,19 @@ Komande (sve iz worktree roota, uz `PYTHONPATH=src`, `SDL_VIDEODRIVER=dummy`,
 `reports/real-fire-data/`; pri ponovnoj izgradnji uporedi ga s commitanom verzijom prije
 commita.
 
+## Intervencije i prilagodba budžetu — 2026-11-04 (ADR-025–027)
+
+`FedsSimFireEnv` sada prima `sim_params`, `split` (TRAIN zadano, VALIDATION eksplicitno),
+`line_placement` (`front_edge` za benchmark) i fiksnu skalu budžeta (`max_budget=4`), te
+`reset(options={"scenario_id", "budget"})` za uparenu evaluaciju. Heuristike su u
+[`feds_heuristics.py`](../../src/wildfire_rl/feds_heuristics.py). Trening
+([`train_feds_budget_adaptation.py`](../../scripts/train_feds_budget_adaptation.py))
+koristi 7 `SubprocVecEnv` procesa i ~8 odluka/s; osnovni model od 8,064 odluke traje
+15–25 min, fine-tune od 3,024 oko 6 min. Upareni VALIDATION benchmark za 24 politike traje
+~5 min na 7 procesa. Checkpointi i puni izvještaji ostaju u `.local/`; commitani su samo
+[sažetak s hashovima](../../reports/real-fire-data/feds-simfire-policy-benchmark-v1.json)
+i [grafikon](../../reports/real-fire-data/feds-simfire-policy-benchmark-v1.png).
+
 ## TRAIN-only PPO putanja
 
 Na korisnikov zahtjev sada postoji tehnička MaskablePPO putanja nad FEDS/LANDFIRE
