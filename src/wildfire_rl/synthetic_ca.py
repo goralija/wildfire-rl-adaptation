@@ -161,6 +161,8 @@ class Landscape:
             source = padded[1 - dr:1 - dr + rows, 1 - dc:1 - dc + cols]
             self.slope_into[k] = np.degrees(np.arctan((self.elevation - source)
                                                       / OFFSET_DISTANCE[k]))
+        self.slope_factor = np.exp(SLOPE_A * np.clip(self.slope_into, -25.0, 25.0))
+        self.log_q_cache = {}
         gy, gx = np.gradient(self.elevation, CELL_SIZE_M)
         self.slope_percent = 100.0 * np.hypot(gx, gy)
 
@@ -231,21 +233,31 @@ class FireState:
         return bool(self.burning.any())
 
     def set_weather(self, weather: Weather) -> None:
-        """Precompute log(1 - p) per direction for the next decision interval."""
+        """Precompute log(1 - p) per direction for the next decision interval.
+
+        Results are cached on the landscape, so the agent and no-op rollouts of one
+        episode (and repeated blocky gridMET-like hours) share the same arrays.
+        """
         land = self.landscape
         speed = max(0.0, float(weather.wind_midflame_m_s))
         to = np.deg2rad(weather.wind_to_deg)
         scale = (CONTACT_CALIBRATION * self.params.spread_scale * moisture_factor(weather.moisture)
                  * diurnal_factor(weather.local_hour))
         self._wind = (speed, to)
-        self._log_q = np.zeros((8,) + land.shape)
-        phi = land.phi_ref * (speed / REFERENCE_MIDFLAME_WIND_M_S) ** WIND_EXPONENT
-        for k in range(8):
-            alignment = ((1.0 + np.cos(OFFSET_BEARINGS[k] - to)) / 2.0) ** 2
-            slope = np.exp(SLOPE_A * np.clip(land.slope_into[k], -25.0, 25.0))
-            rate = land.nowind_ros * scale * (1.0 + phi * alignment) * slope
-            # log(1 - p) with p = 1 - exp(-rate dt / d)  =>  -rate dt / d
-            self._log_q[k] = -rate * SUBSTEP_MINUTES / OFFSET_DISTANCE[k]
+        key = (speed, to, scale)
+        cached = land.log_q_cache.get(key)
+        if cached is None:
+            cached = np.zeros((8,) + land.shape)
+            phi = land.phi_ref * (speed / REFERENCE_MIDFLAME_WIND_M_S) ** WIND_EXPONENT
+            for k in range(8):
+                alignment = ((1.0 + np.cos(OFFSET_BEARINGS[k] - to)) / 2.0) ** 2
+                rate = land.nowind_ros * scale * (1.0 + phi * alignment) * land.slope_factor[k]
+                # log(1 - p) with p = 1 - exp(-rate dt / d)  =>  -rate dt / d
+                cached[k] = -rate * SUBSTEP_MINUTES / OFFSET_DISTANCE[k]
+            if len(land.log_q_cache) >= 64:
+                land.log_q_cache.clear()
+            land.log_q_cache[key] = cached
+        self._log_q = cached
 
     def _uniform(self, flat_index: np.ndarray, purpose: int) -> np.ndarray:
         """Counter-based uniforms keyed on (seed, substep, cell, purpose).

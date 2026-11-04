@@ -8,6 +8,7 @@ normalised so that an episode's return is the fraction of no-op damage saved.
 
 from __future__ import annotations
 
+import dataclasses
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Sequence, Tuple
 
@@ -130,6 +131,7 @@ class EpisodeSpec:
     params: SpreadParams = field(default_factory=SpreadParams)
     start_minute: float = 0.0
     name: str = "synthetic"
+    variant: int = 0
 
 
 @dataclass
@@ -202,13 +204,17 @@ def sample_synthetic_episode(seed: int, curriculum: Curriculum, attempt: int = 0
         scar = np.zeros_like(ignition)
     remaining = WeatherSeries(weather.steps[pre_steps:])
 
-    count = int(rng.choice(curriculum.unit_counts))
-    kinds = [DOZER if rng.random() < curriculum.dozer_share else HAND_CREW for _ in range(count)]
-    arrivals = sorted(float(rng.uniform(0.0, 180.0)) for _ in range(count))
-    units = list(zip(kinds, arrivals))
+    units = sample_units(rng, curriculum)
     return EpisodeSpec(landscape=landscape, weather=remaining, scar=scar, front=front,
                        units=units, horizon=horizon, seed=episode_seed, params=params,
                        name="synthetic-%d-%d" % (int(seed), int(attempt)))
+
+
+def sample_units(rng: np.random.Generator, curriculum: Curriculum) -> List[Tuple[int, float]]:
+    count = int(rng.choice(curriculum.unit_counts))
+    kinds = [DOZER if rng.random() < curriculum.dozer_share else HAND_CREW for _ in range(count)]
+    arrivals = sorted(float(rng.uniform(0.0, 180.0)) for _ in range(count))
+    return list(zip(kinds, arrivals))
 
 
 def order_units(units: Sequence[Tuple[int, float]]) -> List[Tuple[int, float]]:
@@ -224,7 +230,7 @@ class SyntheticSuppressionEnv(gym.Env):
                  unit_loss_penalty: float = UNIT_LOSS_PENALTY,
                  close_call_penalty: float = CLOSE_CALL_PENALTY,
                  urban_weight: float = URBAN_WEIGHT, auto_retreat: bool = True,
-                 map_shape: Tuple[int, int] = (128, 128)) -> None:
+                 map_shape: Tuple[int, int] = (128, 128), reuse_fires: int = 1) -> None:
         self.curriculum = curriculum or Curriculum()
         self.seed_offset = int(seed_offset)
         self.episode_specs = list(episode_specs) if episode_specs is not None else None
@@ -245,6 +251,9 @@ class SyntheticSuppressionEnv(gym.Env):
             "globals": gym.spaces.Box(-1.0, 1.0, shape=(9,), dtype=np.float32),
         })
         self._episode_counter = 0
+        self.reuse_fires = int(reuse_fires)
+        self._reusable = None
+        self._reuse_left = 0
         self.spec_now: Optional[EpisodeSpec] = None
 
     def set_curriculum(self, **changes) -> None:
@@ -252,6 +261,7 @@ class SyntheticSuppressionEnv(gym.Env):
         values = dict(self.curriculum.__dict__)
         values.update(changes)
         self.curriculum = Curriculum(**values)
+        self._reusable, self._reuse_left = None, 0
 
     # ------------------------------------------------------------------ episode set-up
     def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None):
@@ -264,6 +274,17 @@ class SyntheticSuppressionEnv(gym.Env):
             index = options.get("index", (self._episode_counter - 1) % len(self.episode_specs))
             return self._start(self.episode_specs[index])
         base = options.get("seed")
+        if base is None and self._reuse_left > 0 and self._reusable is not None:
+            # Same fire and no-op rollout, new unit set and staging: cheap training reset.
+            self._reuse_left -= 1
+            spec, noop = self._reusable
+            variant = spec.variant + 1
+            rng = np.random.default_rng([13, spec.seed, variant])
+            spec = dataclasses.replace(spec, units=sample_units(rng, self.curriculum),
+                                       variant=variant)
+            self._reusable = (spec, noop)
+            return self._start(spec, noop)
+        training = base is None
         if base is None:
             base = self.seed_offset + int(self.np_random.integers(0, 2 ** 31 - 1))
         for attempt in range(self.curriculum.max_attempts):
@@ -271,9 +292,12 @@ class SyntheticSuppressionEnv(gym.Env):
             grown = int((self.noop_final.ever_burned & ~self.prior_damage).sum())
             if grown >= self.curriculum.min_noop_growth_cells:
                 break
+        if training and self.reuse_fires > 1:
+            self._reusable = (self.spec_now, (list(self.noop_damage), self.noop_final))
+            self._reuse_left = self.reuse_fires - 1
         return result
 
-    def _start(self, spec: EpisodeSpec):
+    def _start(self, spec: EpisodeSpec, noop_cache=None):
         if spec.landscape.shape != self.map_shape:
             raise ValueError("episode landscape must match the environment map shape")
         self.spec_now = spec
@@ -286,11 +310,15 @@ class SyntheticSuppressionEnv(gym.Env):
         self.decision = 0
         self.units = [Unit(kind=k, arrival_minute=a) for k, a in order_units(spec.units)]
 
-        # No-op rollout on identical random numbers, including the post-horizon tail.
-        noop = start.copy()
-        self.noop_damage = []
-        for index in range(spec.horizon + TAIL_DECISIONS):
-            self.noop_damage.append(self._advance(noop, index, units=None))
+        # No-op rollout on identical random numbers, including the post-horizon tail. It does
+        # not depend on units, so a reused fire keeps its rollout.
+        if noop_cache is not None:
+            self.noop_damage, noop = list(noop_cache[0]), noop_cache[1]
+        else:
+            noop = start.copy()
+            self.noop_damage = []
+            for index in range(spec.horizon + TAIL_DECISIONS):
+                self.noop_damage.append(self._advance(noop, index, units=None))
         self.noop_total = float(sum(self.noop_damage))
         self.norm = max(self.noop_total, 20.0)
         self.noop_final = noop
@@ -301,7 +329,7 @@ class SyntheticSuppressionEnv(gym.Env):
     def _staging_cell(self, slot: int, unit: Unit) -> Tuple[int, int]:
         """A passable cell 2-4 km beyond the fire at arrival time, keyed per episode and slot."""
         rows, cols = self.land.shape
-        rng = np.random.default_rng([11, self.spec_now.seed, slot])
+        rng = np.random.default_rng([11, self.spec_now.seed, self.spec_now.variant, slot])
         burning = np.argwhere(self.fire.ever_burned)
         centre = burning.mean(axis=0) if len(burning) else np.array([rows / 2, cols / 2])
         radius = np.sqrt(len(burning) / np.pi) + rng.uniform(11.0, 22.0)
@@ -396,9 +424,9 @@ class SyntheticSuppressionEnv(gym.Env):
         pocket that the fire is closing.
         """
         r, c = unit.row, unit.col
-        distance = self._fire_distance()
-        if self._is_refuge(r, c) or distance[r, c] > RETREAT_RADIUS:
+        if self._is_refuge(r, c) or not self._threat(r, c, RETREAT_RADIUS):
             return
+        distance = self._fire_distance()
         passable = self._passable_grid(unit.kind)
         refuge = ((self.fire.state == BURNED) | ~self.land.burnable | self.fire.line) & passable
         safe = (refuge | (distance >= SAFE_DISTANCE)) & passable

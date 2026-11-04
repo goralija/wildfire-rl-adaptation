@@ -258,6 +258,25 @@ class EnvironmentTest(unittest.TestCase):
         self.assertTrue(unit.lost)
         self.assertLess(reward, -0.5)
 
+    def test_reused_fire_keeps_noop_and_changes_units(self):
+        se = self.se
+        env = se.SyntheticSuppressionEnv(reuse_fires=3)
+        env.reset(seed=1)
+        first = (env.spec_now.seed, env.noop_total, env.spec_now.units)
+        env.reset()
+        second = (env.spec_now.seed, env.noop_total, env.spec_now.units)
+        self.assertEqual(first[:2], second[:2])
+        self.assertEqual(env.spec_now.variant, 1)
+        env.reset()
+        env.reset()
+        self.assertNotEqual(env.spec_now.seed, first[0])
+        # Validation seeds never reuse.
+        env.reset(options={"seed": 0})
+        a = env.noop_total
+        env.reset(options={"seed": 0})
+        self.assertEqual(a, env.noop_total)
+        self.assertEqual(env.spec_now.variant, 0)
+
     def test_synthetic_episodes_are_reproducible(self):
         se = self.se
         a = se.sample_synthetic_episode(5, se.Curriculum())
