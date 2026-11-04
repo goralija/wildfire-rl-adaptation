@@ -146,6 +146,65 @@ kontrafaktualna:
 
 ## Heurističke politike (osnova za poređenje)
 
-`noop`, `random`, `direct_flank` (prilaz na 3 ćelije, linija oko vatre prema strani niz
-vjetar), `downwind_indirect` (linija preko vjetra 8 ćelija ispred čela) i `protect_urban`
-(prsten linije oko ugroženog naselja). Vide samo ono što je i u opažanju agenta.
+Kod je u `src/wildfire_rl/synthetic_heuristics.py`. Heuristike vide samo ono što je i u
+opažanju agenta: trenutnu vatru, liniju, gorivo, jedinice i trenutni vjetar. Ne vide
+no-op rollout niti buduće vrijeme.
+
+| Politika | Šta radi (svaki sat, za svaku jedinicu) |
+|---|---|
+| `noop` | sve jedinice stoje; automatsko povlačenje i dalje važi |
+| `random` | nasumična dozvoljena akcija |
+| `direct_flank` | prilaz na 3 ćelije (~540 m) od najbliže goruće ćelije, zatim gradnja linije tangencijalno oko požara, okrenuto prema strani niz vjetar; pola jedinica ide u jednom, pola u drugom smjeru |
+| `downwind_indirect` | linija poprečno na vjetar, 8 ćelija ispred čela, jedinice raspoređene bočno |
+| `protect_urban` | prsten linije 2 ćelije oko najugroženijeg naselja; bez ugroženog naselja ponaša se kao `direct_flank` |
+
+### Porijeklo heuristika (napomena za dokumentaciju)
+
+- **Autorstvo.** Heuristike je napisao Claude za ovaj projekat (2026-11-04) kao osnovu
+  za poređenje. Nisu preuzete iz rada, biblioteke ni validiranog algoritma.
+- **Inspiracija.** Labavo prate standardne taktike gašenja šumskih požara, po opštem
+  znanju: direktni napad po boku od sidrišta prema čelu, indirektni napad linijom ispred
+  čela i zaštitu objekata.
+  - Opisi taktika **nisu provjereni u doktrinarnom izvoru** (npr. NWCG IRPG PMS 461,
+    Fireline Handbook PMS 410-1). Iz PMS 410-1 su uzete samo brzine gradnje linije.
+  - Slična "downwind" heuristika postojala je u ADR-025, ali je ova napisana iznova.
+- **Parametri.** Odstojanje 3 ćelije, 8 ćelija ispred čela, prsten 2 ćelije i sva
+  geometrija su vlastiti izbor. Nisu podešavani ni kalibrisani.
+- **Kako ih predstaviti.** Kao jednostavne, ručno pisane, fiksne baseline-ove, ne kao
+  "ono što bi vatrogasci uradili". Ako ih rad predstavi kao doktrinarne taktike, prvo
+  treba provjeriti i navesti izvore te uskladiti opise.
+
+### Uloga heuristika i značenje rezultata
+
+- **Prostor za poboljšanje.** Heuristike prvo pokazuju da agent u okruženju uopšte može
+  nešto promijeniti. To je headroom gate u ADR-028: najbolja taktika mora sačuvati
+  ≥ 5%, uz 95% CI razlike prema nasumičnoj politici iznad 0.
+- **Rezultat gate-a v4** (sjemena 0–127, puni kurikulum):
+
+  | Politika | Prosjek sačuvano | Medijan | Izgubljene jedinice |
+  |---|---|---|---|
+  | random | 1.5% | 0% | 0 |
+  | direct_flank | 11.6% | 1.6% | 0 |
+  | protect_urban | 8.9% | 0.1% | 0 |
+  | downwind_indirect | 4.0% | 0% | 3 |
+
+  - "Sačuvano" je prosjek udjela težinske štete sačuvane u odnosu na isti požar bez
+    intervencije, na istim slučajnim brojevima.
+  - Medijan je mnogo niži od prosjeka. Na većini požara ni najbolja taktika ne mijenja
+    mnogo; prosjek vuče manji broj požara (često sporijih) na kojima linija stigne.
+  - Ključ za mjesto okupljanja jedinica kasnije je promijenjen (ponovna upotreba
+    požara u treningu). Heuristike se zato ponovo mjere na konačnom okruženju i na
+    sjemenima 0–255, zajedno s agentom.
+- **Ljestvica za agenta.** Heuristike su fiksna pravila: rade isto bez obzira na gorivo,
+  vjetar, teren, vrstu i dolazak jedinica ili blizinu naselja. Agent treba naučiti da se
+  prilagođava situaciji, pa ga prihvatamo samo ako na validaciji pobijedi **najbolju**
+  heuristiku (paired 95% CI iznad 0) i ne gubi više jedinica od nje.
+- **Šta ishod znači.**
+  - Ako agent ne pobijedi heuristike, nije naučio ništa korisnije od jednostavnog pravila.
+  - Ako ih pobijedi, to pokazuje da je bolji od *ovih* jednostavnih pravila u *ovom*
+    simulatoru. To nije dokaz da je bolji od iskusnih vatrogasaca: heuristike nisu
+    podešavane ni provjerene s praksom, pa je ljestvica relativno niska.
+- **Moguća stroža poređenja kasnije:**
+  - heuristike s parametrima podešenim na validacijskim sjemenima;
+  - "oracle" koji za svaki požar naknadno uzme najbolju heuristiku. Pobjeda nad njim
+    pokazala bi da agent bira taktiku prema situaciji.
