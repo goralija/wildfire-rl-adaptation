@@ -668,3 +668,46 @@ and was **not** used to choose candidates, tune parameters, or decide that the g
 passes. The stress record was chosen from TRAIN no-op statistics before any validation
 scoring. If a later TASK-019 fix makes the TRAIN gate pass, rerun the gate on TRAIN first,
 then validation, and mark the exploratory step 6–8 results superseded.
+
+## ADR-028 — synthetic CA training with physically bounded units; real FEDS cases only for the final test, accepted 2026-11-04
+
+The user asked on 2026-11-04 to stop training on real cases and to train and validate
+on synthetic fires whose spread probability depends on cell fuel type. Units must obey
+real-world limits: finite count, no teleporting, bounded line production. Human life
+has priority. Real cases are kept for testing the trained agent. The previous path
+(ADR-021–027) trained on real FEDS cases in an uncalibrated SimFire and placed line
+instantly in 12h steps, so its policy results cannot support a transfer claim.
+
+Decision:
+- **Simulator.** A new numpy CA ([spec](../research/SYNTHETIC_CA_ENV.md)) on 180 m
+  FBFM13 grids. Per-pair contact rates come from Anderson (1982) ROS with a
+  Rothermel-style wind term and an Alexandridis-style slope term. A contact calibration
+  makes the emergent head rate on flat line fires match the table within about 15%.
+  It is a training simulator, not a validated fire model.
+- **Data roles.** Training uses procedurally generated landscapes, weather and ignitions
+  (seed ≥ 1,000,000). In-training validation uses fixed seeds 0–255. The 119 local FEDS
+  cases (99 ex-TRAIN, 20 ex-VALIDATION, reported separately) are touched only by the
+  final test of locked policies, plus a calibration-gap diagnostic (no-op versus FEDS
+  growth) that is reported but never used as a gate. TEST 2024 stays closed.
+- **Units.** 20-person hand crews and dozers. Line rates come from PMS 410-1 App. A,
+  travel speeds from Sullivan et al. 2020 or stated assumptions. Units arrive over time
+  2–4 km from the fire, cannot enter burning cells or water, retreat automatically
+  when fire is within two cells, and are lost if their cell ignites.
+- **Reward.** The user's intent ("reward lower fire growth, penalise same or higher")
+  is implemented counterfactually. `r_t = (D_noop,t − D_agent,t) / max(W_noop, 20) −
+  1.0 × units lost`. D is weighted new damage (vegetation 1, urban 91 = 50), and the
+  no-op rollout uses common random numbers. The episode return is the fraction of no-op
+  damage saved. Both rollouts continue 12h past the horizon with lines held, so merely
+  delaying the fire earns nothing. A literal growth-trend reward would telescope and
+  pay for natural burnout; it is not used.
+- **Headroom gate before PPO (preregistered here).** On synthetic validation seeds
+  0–127 (full curriculum), the best scripted tactic must reach a mean saved fraction
+  ≥ 0.05, with a paired bootstrap 95% CI for (best − random) above 0. If this fails, unit
+  or simulator settings change first, not the RL setup.
+- **PPO acceptance (preregistered here).** A checkpoint is chosen only by synthetic
+  validation. It counts as learned if, on validation seeds 0–255, its mean return beats
+  the best scripted tactic with a paired 95% CI above 0 and it loses no more units than
+  that tactic. The real-case test is then run once per locked checkpoint.
+
+Consequences: results are simulator-only. The calibration gap to FEDS growth bounds any
+real-world reading. The old SimFire/FEDS path remains historical and unchanged.
