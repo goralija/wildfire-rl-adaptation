@@ -55,8 +55,8 @@ def main(argv=None) -> int:
     axis.set_xticks(budgets)
     axis.set_xlabel("crew-shift budget per 48 h episode")
     axis.set_ylabel("mean added burned area (ha)")
-    axis.set_title("SimFire %s cases, %s setting (simulator only)" % (
-        report["split"].upper(), report.get("params_gate_status")))
+    axis.set_title("SimFire %s cases, %s — gate FAIL, nije mjerodavno (simulator only)" % (
+        report["split"].upper(), report.get("params_gate_status")), fontsize=9)
     axis.grid(alpha=0.3)
     axis.legend(fontsize=7, ncol=2)
     figure.tight_layout()

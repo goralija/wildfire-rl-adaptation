@@ -21,6 +21,24 @@ puni izvještaji su u ignorisanom `.local/` na Harunovom računaru; obnova je op
    po budžetu ne daje mjerljivu korist, a downwind heuristika je jednako dobra ili bolja.
    Sve je simulatorski i eksploratorno.
 
+## TASK-019 hipoteze — šta je provjereno (pozitivno i negativno)
+
+| Hipoteza | Provjera | Rezultat |
+|---|---|---|
+| Nepotpune/izmijenjene FEDS arhive | MD5 svih 6 slojeva nakon prekinutog sekvencijalnog preuzimanja (exit 144 = namjerno ugašen i zamijenjen paralelnim) | sve OK, nema `.partial` |
+| Vremensko poravnanje 0–48h | svih 119 epizoda: start maske = prvi FEDS timestamp, četiri razmaka od tačno 12h; runner provjerava start | OK |
+| Konvencija vjetra | gridMET `th` je odakle puše; kod rotira +180° u SimFire smjer kuda; jedinični test; `vs` m/s → ft/min × WAF | OK; smjer nije uzrok (dijagnoza: deficit nije u smjeru nego u tome koji požar raste) |
+| Isti grid za SimFire, persistence, elipsu | isti 256×256/180 m raster, isti `all_touched`, ista inicijalna maska u sve tri metode | OK |
+| Nulti vjetar (sanity) | WAF 0 na 99 TRAIN (ADR-022): IoU .4768, i dalje raste u ~63% timepointa | rast bez vjetra postoji (Rothermel + nagib); potvrđuje pretjeran rast na statičnim požarima |
+| Ulazi drugačiji od Belminovih | 99/99 LANDFIRE/maski + 9 gridMET identični hashovi; WAF .01 reproduciran tačno | nije uzrok |
+| Prag paljenja / vijek ćelije | ROS × WAF mreža (ADR-023) | smanjuje lažni rast, ali do persistence se dolazi tek gašenjem skoro svega; FAIL |
+| Trening samo na TRAIN | env odbija ne-TRAIN bez eksplicitnog `split`; trening skripta fiksira `split="train"` | OK |
+
+Neprovjereno: vremenska zona FEDS `t` (pretpostavka UTC), finija vlaga goriva od `fm100`,
+model zaustavljanja/gašenja. **Svi rezultati koraka 7–8 su "gate FAIL, nije mjerodavno"**
+u smislu kalibracije; validation je preuzet i skoriran po korisnikovom odobrenju za
+eksploratorni nastavak (ADR-024).
+
 ## Odluke za tim (ne donositi ih bez korisnika)
 
 - Prihvatiti li stress scenarij kao radni simulator za predaju ili tražiti growth-aware

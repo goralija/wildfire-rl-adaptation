@@ -355,7 +355,7 @@ rerun reproduced ADR-022 exactly (IoU .476852, area error 2,262.1ha) in ~42 s on
 processes. The stratified [diagnosis](../../reports/real-fire-data/feds-simfire-train-noop-diagnosis-v1.json)
 puts the whole IoU deficit in fires that barely grow in FEDS. Decision: ADR-023.
 
-## EXP-013 — preregistered spread-threshold grid and frozen VALIDATION scoring, 2026-11-04
+## EXP-013 — preregistered spread-threshold grid and frozen VALIDATION scoring, 2026-11-04 (gate FAIL, nije mjerodavno)
 
 ADR-023 grid ROS {0.35,0.5,0.7} × WAF {0.05,0.2,0.4}, lifetime 90 min, 5-min step, seed 0,
 99 TRAIN cases each, zero runner errors. Mean IoU / area error (ha) / edge timepoints:
@@ -374,7 +374,7 @@ stress record (WAF .01 / ROS 1.0). [VALIDATION once per record](../../reports/re
 Heuristic benchmark on the gate-freeze setting (VALIDATION): no-op adds 5.8ha on average
 and no heuristic changes that by more than 0.3ha — no room for interventions.
 
-## EXP-014 — budget-adaptation study on the free-burn stress scenario, 2026-11-04
+## EXP-014 — budget-adaptation study on the free-burn stress scenario, 2026-11-04 (gate FAIL, nije mjerodavno)
 
 ADR-026 protocol, local CPU (macOS ARM64, 7 env processes). Five seeds × (base PPO at
 B=2, 8,064 decisions, about 15–25 min; fine-tunes at B=1/2/4, 3,024 decisions, about
