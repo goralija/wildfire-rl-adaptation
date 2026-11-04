@@ -35,10 +35,16 @@ STAGES = {
 }
 
 
+# Each prepared training fire (landscape, start, no-op rollout) serves this many episodes
+# with freshly sampled units; validation never reuses.
+REUSE_FIRES = 4
+
+
 def make_env(rank: int, seed: int):
     def thunk():
         env = SyntheticSuppressionEnv(curriculum=Curriculum(**STAGES["A"]),
-                                      seed_offset=1_000_000 + 10_000_000 * rank)
+                                      seed_offset=1_000_000 + 10_000_000 * rank,
+                                      reuse_fires=REUSE_FIRES if rank < 100 else 1)
         env.reset(seed=seed * 1000 + rank)
         return env
     return thunk
@@ -140,7 +146,7 @@ def main() -> None:
             seed=args.seed, device="cpu", verbose=0,
         )
     receipt = {"created_utc": datetime.now(timezone.utc).isoformat(), "args": vars(args),
-               "stages": STAGES, "environment": "synthetic CA ADR-028 v4",
+               "stages": STAGES, "environment": "synthetic CA ADR-028 v4", "reuse_fires": REUSE_FIRES,
                "real_cases_loaded": False}
     (args.out / "receipt.json").write_text(json.dumps(receipt, indent=1, default=str))
     callback = ValidationCallback(eval_vec, list(range(args.eval_seeds)), args.eval_every,
