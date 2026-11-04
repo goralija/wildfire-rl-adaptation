@@ -46,11 +46,12 @@ def main(argv=None) -> int:
     for name in sorted(families):
         runs = families[name]
         mean = [statistics.fmean(values) for values in zip(*runs)]
-        axis.plot(budgets, mean, marker="o", label="%s (n=%d)" % (name, len(runs)) if len(runs) > 1 else name)
+        (line,) = axis.plot(budgets, mean, marker="o",
+                            label="%s (n=%d)" % (name, len(runs)) if len(runs) > 1 else name)
         if len(runs) > 1:
             low = [min(values) for values in zip(*runs)]
             high = [max(values) for values in zip(*runs)]
-            axis.fill_between(budgets, low, high, alpha=0.15)
+            axis.fill_between(budgets, low, high, alpha=0.08, color=line.get_color())
     axis.set_xticks(budgets)
     axis.set_xlabel("crew-shift budget per 48 h episode")
     axis.set_ylabel("mean added burned area (ha)")
