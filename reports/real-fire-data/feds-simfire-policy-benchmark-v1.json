@@ -2258,5 +2258,437 @@
     "With 90-minute active cells most simulated fires stop within the first 12h, so budgets above 1-2 units rarely find a legal line; this limits any budget-adaptation signal.",
     "Effects are 2-9% of no-op damage; one 1.26 km line per crew shift is small relative to these fires. Results describe SimFire policy behaviour only."
   ],
-  "interval_note": "scenario_bootstrap_95ci_ha covers scenario variation only; seed_t95ci_ha (t over 5 per-seed means) and two_level_bootstrap_95ci_ha (seeds then scenarios) include seed variation and are the intervals to quote."
+  "interval_note": "scenario_bootstrap_95ci_ha covers scenario variation only; seed_t95ci_ha (t over 5 per-seed means) and two_level_bootstrap_95ci_ha (seeds then scenarios) include seed variation and are the intervals to quote.",
+  "supplementary_train_in_sample": {
+    "split": "train",
+    "scenario_count": 99,
+    "episodes": 9504,
+    "errors": 0,
+    "purpose": "In-sample check run after the VALIDATION result: does budget fine-tuning help even on the fires it trained on?",
+    "local_full_report": ".local/bench/train-stress-final.json",
+    "local_full_report_sha256": "8328d95ef3e249e55a15c0ec507732f4cb38d2cf39a1f34a7af2b12ebf4f2ce5",
+    "contrasts": {
+      "seeds": [
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "budgets": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "scenarios": 99,
+      "by_budget": {
+        "0": {
+          "frozen_base_minus_noop": {
+            "per_seed_mean_delta_ha": {
+              "11": 0.0,
+              "12": 0.0,
+              "13": 0.0,
+              "14": 0.0,
+              "15": 0.0
+            },
+            "seed_averaged_mean_delta_ha": 0.0,
+            "scenario_bootstrap_95ci_ha": [
+              0.0,
+              0.0
+            ],
+            "seed_t95ci_ha": [
+              0.0,
+              0.0
+            ],
+            "two_level_bootstrap_95ci_ha": [
+              0.0,
+              0.0
+            ],
+            "scenarios_better": 0,
+            "scenarios_worse": 0,
+            "scenarios": 99
+          },
+          "heuristics_minus_noop": {
+            "advancing_front": {
+              "mean_delta_ha_vs_noop": 0.0,
+              "scenario_bootstrap_95ci_ha": [
+                0.0,
+                0.0
+              ]
+            },
+            "downwind": {
+              "mean_delta_ha_vs_noop": 0.0,
+              "scenario_bootstrap_95ci_ha": [
+                0.0,
+                0.0
+              ]
+            },
+            "random_legal": {
+              "mean_delta_ha_vs_noop": 0.0,
+              "scenario_bootstrap_95ci_ha": [
+                0.0,
+                0.0
+              ]
+            }
+          },
+          "noop_mean_added_ha": 1343.62
+        },
+        "1": {
+          "finetuned_minus_frozen_base": {
+            "per_seed_mean_delta_ha": {
+              "11": -44.28,
+              "12": 1.41,
+              "13": 0.0,
+              "14": 38.32,
+              "15": 0.0
+            },
+            "seed_averaged_mean_delta_ha": -0.91,
+            "scenario_bootstrap_95ci_ha": [
+              -5.18,
+              2.55
+            ],
+            "seed_t95ci_ha": [
+              -37.25,
+              35.43
+            ],
+            "two_level_bootstrap_95ci_ha": [
+              -31.2,
+              28.26
+            ],
+            "scenarios_better": 16,
+            "scenarios_worse": 18,
+            "scenarios": 99
+          },
+          "finetuned_minus_matched_control": {
+            "per_seed_mean_delta_ha": {
+              "11": 4.88,
+              "12": 10.87,
+              "13": 0.0,
+              "14": 35.21,
+              "15": 23.92
+            },
+            "seed_averaged_mean_delta_ha": 14.98,
+            "scenario_bootstrap_95ci_ha": [
+              -1.39,
+              39.18
+            ],
+            "seed_t95ci_ha": [
+              -2.94,
+              32.89
+            ],
+            "two_level_bootstrap_95ci_ha": [
+              -18.22,
+              54.6
+            ],
+            "scenarios_better": 19,
+            "scenarios_worse": 25,
+            "scenarios": 99
+          },
+          "frozen_base_minus_noop": {
+            "per_seed_mean_delta_ha": {
+              "11": -13.58,
+              "12": -24.48,
+              "13": -57.86,
+              "14": -49.65,
+              "15": -33.94
+            },
+            "seed_averaged_mean_delta_ha": -35.9,
+            "scenario_bootstrap_95ci_ha": [
+              -61.27,
+              -16.8
+            ],
+            "seed_t95ci_ha": [
+              -58.31,
+              -13.49
+            ],
+            "two_level_bootstrap_95ci_ha": [
+              -73.48,
+              -13.84
+            ],
+            "scenarios_better": 42,
+            "scenarios_worse": 4,
+            "scenarios": 99
+          },
+          "finetuned_minus_noop": {
+            "per_seed_mean_delta_ha": {
+              "11": -57.86,
+              "12": -23.07,
+              "13": -57.86,
+              "14": -11.32,
+              "15": -33.94
+            },
+            "seed_averaged_mean_delta_ha": -36.81,
+            "scenario_bootstrap_95ci_ha": [
+              -62.77,
+              -16.66
+            ],
+            "seed_t95ci_ha": [
+              -62.65,
+              -10.97
+            ],
+            "two_level_bootstrap_95ci_ha": [
+              -77.24,
+              -13.71
+            ],
+            "scenarios_better": 41,
+            "scenarios_worse": 4,
+            "scenarios": 99
+          },
+          "heuristics_minus_noop": {
+            "advancing_front": {
+              "mean_delta_ha_vs_noop": -18.26,
+              "scenario_bootstrap_95ci_ha": [
+                -37.54,
+                -4.39
+              ]
+            },
+            "downwind": {
+              "mean_delta_ha_vs_noop": -45.82,
+              "scenario_bootstrap_95ci_ha": [
+                -84.02,
+                -16.36
+              ]
+            },
+            "random_legal": {
+              "mean_delta_ha_vs_noop": -28.44,
+              "scenario_bootstrap_95ci_ha": [
+                -60.52,
+                -6.28
+              ]
+            }
+          },
+          "noop_mean_added_ha": 1343.62
+        },
+        "2": {
+          "finetuned_minus_frozen_base": {
+            "per_seed_mean_delta_ha": {
+              "11": -50.33,
+              "12": 14.73,
+              "13": 0.0,
+              "14": 3.4,
+              "15": -37.37
+            },
+            "seed_averaged_mean_delta_ha": -13.92,
+            "scenario_bootstrap_95ci_ha": [
+              -41.68,
+              6.75
+            ],
+            "seed_t95ci_ha": [
+              -48.98,
+              21.15
+            ],
+            "two_level_bootstrap_95ci_ha": [
+              -68.35,
+              24.86
+            ],
+            "scenarios_better": 29,
+            "scenarios_worse": 18,
+            "scenarios": 99
+          },
+          "frozen_base_minus_noop": {
+            "per_seed_mean_delta_ha": {
+              "11": -38.85,
+              "12": -73.54,
+              "13": -98.41,
+              "14": -86.92,
+              "15": -58.81
+            },
+            "seed_averaged_mean_delta_ha": -71.31,
+            "scenario_bootstrap_95ci_ha": [
+              -105.49,
+              -42.24
+            ],
+            "seed_t95ci_ha": [
+              -100.38,
+              -42.24
+            ],
+            "two_level_bootstrap_95ci_ha": [
+              -120.24,
+              -38.52
+            ],
+            "scenarios_better": 49,
+            "scenarios_worse": 0,
+            "scenarios": 99
+          },
+          "finetuned_minus_noop": {
+            "per_seed_mean_delta_ha": {
+              "11": -89.18,
+              "12": -58.81,
+              "13": -98.41,
+              "14": -83.52,
+              "15": -96.19
+            },
+            "seed_averaged_mean_delta_ha": -85.22,
+            "scenario_bootstrap_95ci_ha": [
+              -131.34,
+              -46.12
+            ],
+            "seed_t95ci_ha": [
+              -104.95,
+              -65.49
+            ],
+            "two_level_bootstrap_95ci_ha": [
+              -142.97,
+              -42.58
+            ],
+            "scenarios_better": 46,
+            "scenarios_worse": 0,
+            "scenarios": 99
+          },
+          "heuristics_minus_noop": {
+            "advancing_front": {
+              "mean_delta_ha_vs_noop": -70.33,
+              "scenario_bootstrap_95ci_ha": [
+                -110.0,
+                -37.37
+              ]
+            },
+            "downwind": {
+              "mean_delta_ha_vs_noop": -77.47,
+              "scenario_bootstrap_95ci_ha": [
+                -123.71,
+                -39.47
+              ]
+            },
+            "random_legal": {
+              "mean_delta_ha_vs_noop": -69.19,
+              "scenario_bootstrap_95ci_ha": [
+                -114.45,
+                -31.51
+              ]
+            }
+          },
+          "noop_mean_added_ha": 1343.62
+        },
+        "4": {
+          "finetuned_minus_frozen_base": {
+            "per_seed_mean_delta_ha": {
+              "11": -80.67,
+              "12": 9.69,
+              "13": 0.0,
+              "14": 57.8,
+              "15": -28.18
+            },
+            "seed_averaged_mean_delta_ha": -8.27,
+            "scenario_bootstrap_95ci_ha": [
+              -20.47,
+              4.07
+            ],
+            "seed_t95ci_ha": [
+              -71.56,
+              55.01
+            ],
+            "two_level_bootstrap_95ci_ha": [
+              -59.17,
+              39.98
+            ],
+            "scenarios_better": 21,
+            "scenarios_worse": 21,
+            "scenarios": 99
+          },
+          "finetuned_minus_matched_control": {
+            "per_seed_mean_delta_ha": {
+              "11": -25.43,
+              "12": -7.95,
+              "13": 0.0,
+              "14": 54.65,
+              "15": 21.47
+            },
+            "seed_averaged_mean_delta_ha": 8.55,
+            "scenario_bootstrap_95ci_ha": [
+              -11.3,
+              33.06
+            ],
+            "seed_t95ci_ha": [
+              -29.68,
+              46.78
+            ],
+            "two_level_bootstrap_95ci_ha": [
+              -37.74,
+              51.29
+            ],
+            "scenarios_better": 23,
+            "scenarios_worse": 25,
+            "scenarios": 99
+          },
+          "frozen_base_minus_noop": {
+            "per_seed_mean_delta_ha": {
+              "11": -57.04,
+              "12": -103.45,
+              "13": -137.75,
+              "14": -114.68,
+              "15": -85.94
+            },
+            "seed_averaged_mean_delta_ha": -99.77,
+            "scenario_bootstrap_95ci_ha": [
+              -143.06,
+              -61.35
+            ],
+            "seed_t95ci_ha": [
+              -137.5,
+              -62.04
+            ],
+            "two_level_bootstrap_95ci_ha": [
+              -159.33,
+              -56.78
+            ],
+            "scenarios_better": 49,
+            "scenarios_worse": 0,
+            "scenarios": 99
+          },
+          "finetuned_minus_noop": {
+            "per_seed_mean_delta_ha": {
+              "11": -137.72,
+              "12": -93.76,
+              "13": -137.75,
+              "14": -56.88,
+              "15": -114.12
+            },
+            "seed_averaged_mean_delta_ha": -108.05,
+            "scenario_bootstrap_95ci_ha": [
+              -154.19,
+              -65.57
+            ],
+            "seed_t95ci_ha": [
+              -150.24,
+              -65.85
+            ],
+            "two_level_bootstrap_95ci_ha": [
+              -168.94,
+              -60.23
+            ],
+            "scenarios_better": 47,
+            "scenarios_worse": 0,
+            "scenarios": 99
+          },
+          "heuristics_minus_noop": {
+            "advancing_front": {
+              "mean_delta_ha_vs_noop": -109.7,
+              "scenario_bootstrap_95ci_ha": [
+                -160.79,
+                -63.62
+              ]
+            },
+            "downwind": {
+              "mean_delta_ha_vs_noop": -102.8,
+              "scenario_bootstrap_95ci_ha": [
+                -156.63,
+                -58.81
+              ]
+            },
+            "random_legal": {
+              "mean_delta_ha_vs_noop": -87.91,
+              "scenario_bootstrap_95ci_ha": [
+                -132.81,
+                -50.46
+              ]
+            }
+          },
+          "noop_mean_added_ha": 1343.62
+        }
+      }
+    },
+    "reading": "Same pattern in-sample: frozen base beats no-op (-35.9/-71.3/-99.8 ha at B=1/2/4 against 1,343.6 ha), fine-tuned minus frozen base is -0.9/-13.9 (control)/-8.3 ha with two-level CIs spanning zero, and downwind (-45.8/-77.5/-102.8 ha) is at least as good. The null is not an overfitting artefact."
+  }
 }

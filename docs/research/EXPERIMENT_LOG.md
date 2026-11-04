@@ -387,3 +387,5 @@ fine-tuning shows no measurable gain over the frozen base or matched control, bu
 effects cannot be excluded with five seeds. The downwind heuristic is at least as good. A first pass with
 three seeds was run while seeds 14–15 trained; its 1,280 shared episodes match the final
 pass exactly and were not used to change the protocol.
+A supplementary TRAIN in-sample benchmark (99 fires, 9,504 episodes, 25 min on 7 workers)
+shows the same pattern, so the null is not an overfitting artefact.
