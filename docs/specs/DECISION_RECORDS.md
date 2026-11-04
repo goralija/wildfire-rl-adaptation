@@ -728,3 +728,30 @@ v1 passed narrowly, but half of its episodes carried no signal. v2 to v4 change 
 environment, not the gate. The 180 m cell is far wider than the tabled flame length (at
 most ~6 m, Anderson 1982), so working next to the fire edge is realistic. Only being
 surrounded is treated as an entrapment. **Gate: PASS on v4.** PPO training uses v4.
+
+### ADR-028 addendum — validation bar, stop rule and selection bias, recorded 2026-11-04 (main-1 at 200k steps)
+
+- **Comparable bar.** The training callback validates on seeds 0–63 with the full
+  curriculum on the current environment, which includes the per-variant staging key.
+  The heuristics measured on the same seeds and environment:
+
+  | Policy | Mean saved | Mean return |
+  |---|---|---|
+  | direct_flank | 0.087 | **0.062** |
+  | protect_urban | 0.062 | 0.045 |
+  | downwind_indirect | 0.040 | 0.030 |
+  | random | 0.010 | −0.007 |
+  | no-op | 0 | −0.017 |
+
+  The v4 headroom figure of 0.116 used seeds 0–127 before the staging change and is not
+  this bar.
+- **Stop rule for main-1 (written before the 300k result).** Stage B starts at 450k, so
+  judge only from 600k onward. If three consecutive validations bring no new best and the
+  best validation return is still below direct_flank's 0.062, stop main-1 and switch to
+  plan B. Plan B is a behaviour-cloning warm start: copy direct_flank (plus
+  protect_urban) actions on training seeds ≥ 1M only, then MaskablePPO fine-tuning with
+  the same environment and reward. Documentation must then say that the policy starts
+  from the scripted tactic.
+- **Selection bias.** The best checkpoint is chosen on seeds 0–63, while acceptance runs
+  on 0–255, which contains them. Acceptance stays as preregistered, and 64–255 is also
+  reported as the selection-free result.
