@@ -4,7 +4,24 @@ title: Naredni zadaci
 ---
 # Naredni zadaci
 
-## Aktivni prioritet — 2026-11-03
+## Aktivni prioritet — 2026-11-04 (noćni rad, koraci 5–8)
+
+TASK-019 je izveden do kraja: ulazi su reproducirani, dijagnoza i preregistrovana 3×3
+mreža (ADR-023) nisu dale prolaz; gate je zamrznut kao FAIL_exploratory (ADR-024).
+Validation je skoriran jednom po zapisu. TASK-020 je pojednostavljen u ADR-025 (jedinica =
+smjena ekipe od 20 ljudi, linija od 7 ćelija, bez gradnje kroz vrijeme). TASK-005/006 su
+izvedeni kao mala eksploratorna studija na free-burn stress zapisu (ADR-026); rezultati su
+u [policy benchmarku](../reports/real-fire-data/feds-simfire-policy-benchmark-v1.json).
+
+| ID | Stanje | Sljedeće |
+| --- | --- | --- |
+| TASK-019 | završeno, gate FAIL | timski odlučiti o growth-aware gateu ili modelu zaustavljanja/gašenja prije bilo kakve tvrdnje o kalibraciji |
+| TASK-020 | ADR-025 minimum | gradnja linije kroz vrijeme, 16 sektora, više jedinica po odluci |
+| TASK-005/006 | eksploratorno izvedeno | više seedova/koraka, observation koji vidi buduće rastuće dijelove fronta, opcija više linija po 12h |
+| TASK-007 | nije rađeno | ablacija prioritetnih područja (prvo izbačeno zbog vremena) |
+| TASK-009 | čeka | grafikoni i poster; `scripts/plot_budget_benchmark.py` daje osnovni grafikon |
+
+## Prioritet — 2026-11-03 (historijski)
 
 ADR-016/018 definišu SimFire/FEDS pravac i prošireni, unaprijed spremljeni FPA-FOD
 candidate frame. Originalna kohorta ne prolazi (19/40 train, 7/20 validation); prošireni

@@ -344,3 +344,48 @@ Full per-case reports (with checksums listed in that aggregate) remain in ignore
 65/65 pass; project Python 3.12 suite 62 pass with 9 optional dependency skips; CLI
 smoke passes; all 85 venv packages are compatible; strict knowledge validation passes
 69 Markdown files and `git diff --check` is clean.
+
+## EXP-012 — rebuild, reproduction and diagnosis of the TRAIN no-op gate, 2026-11-04
+
+Second macOS ARM64 machine, fresh `.local/`: Python 3.9.25 venv from the pinned freeze
+(85 packages, `uv pip check` PASS); FEDS 2018/2019/2023 perimeter and fireline archives
+(MD5 match); nine gridMET archives (SHA-256 match); 99/99 TRAIN LANDFIRE/mask inputs with
+SHA-256 identical to the committed coverage report. The WAF .01 / 5-min / seed 0 cohort
+rerun reproduced ADR-022 exactly (IoU .476852, area error 2,262.1ha) in ~42 s on 7
+processes. The stratified [diagnosis](../../reports/real-fire-data/feds-simfire-train-noop-diagnosis-v1.json)
+puts the whole IoU deficit in fires that barely grow in FEDS. Decision: ADR-023.
+
+## EXP-013 — preregistered spread-threshold grid and frozen VALIDATION scoring, 2026-11-04 (gate FAIL, nije mjerodavno)
+
+ADR-023 grid ROS {0.35,0.5,0.7} × WAF {0.05,0.2,0.4}, lifetime 90 min, 5-min step, seed 0,
+99 TRAIN cases each, zero runner errors. Mean IoU / area error (ha) / edge timepoints:
+
+| ROS \ WAF | 0.05 | 0.2 | 0.4 |
+|---|---|---|---|
+| 0.35 | .5266 / 2,350.5 / 0 | .4807 / 2,482.4 / 1 | .3886 / 3,239.2 / 20 |
+| 0.5 | .5176 / 2,346.4 / 0 | .4410 / 2,695.1 / 2 | .3205 / 5,519.6 / 30 |
+| 0.7 | .5012 / 2,375.9 / 0 | .3849 / 3,726.5 / 12 | .2644 / 9,816.9 / 50 |
+
+No pass (persistence .5343 / 2,351.7). Frozen by rule: ROS .35 / WAF .05 as
+`FAIL_exploratory`; its TRAIN median 48h growth is 0 cells. ADR-024 adds the free-burn
+stress record (WAF .01 / ROS 1.0). [VALIDATION once per record](../../reports/real-fire-data/feds-simfire-validation-noop-v1.json),
+20 cases / 80 timepoints: gate freeze IoU .5419 / 1,496.6ha (FAIL vs persistence .5432 /
+1,501.9ha); stress IoU .5452 / 1,275.3ha, no edge (meets the strict rule on VALIDATION only).
+Heuristic benchmark on the gate-freeze setting (VALIDATION): no-op adds 5.8ha on average
+and no heuristic changes that by more than 0.3ha — no room for interventions.
+
+## EXP-014 — budget-adaptation study on the free-burn stress scenario, 2026-11-04 (gate FAIL, nije mjerodavno)
+
+ADR-026 protocol, local CPU (macOS ARM64, 7 env processes). Five seeds × (base PPO at
+B=2, 8,064 decisions, about 15–25 min; fine-tunes at B=1/2/4, 3,024 decisions, about
+6 min each) = 20 checkpoints, all kept in ignored `.local/ppo/adr024/`; SHA-256 values are
+in the [summary](../../reports/real-fire-data/feds-simfire-policy-benchmark-v1.json).
+VALIDATION benchmark: 24 policies × 20 fires × B∈{0,1,2,4} = 1,920 episodes in 5.1 min on
+7 workers, no errors, with the B=0 determinism check passed. Main result in ADR-027 and its seed-level addendum: base PPO
+beats no-op at B=2/4 (−16.6/−19.7ha against a 324ha mean; marginal at B=1). Budget
+fine-tuning shows no measurable gain over the frozen base or matched control, but ±12–20ha
+effects cannot be excluded with five seeds. The downwind heuristic is at least as good. A first pass with
+three seeds was run while seeds 14–15 trained; its 1,280 shared episodes match the final
+pass exactly and were not used to change the protocol.
+A supplementary TRAIN in-sample benchmark (99 fires, 9,504 episodes, 25 min on 7 workers)
+shows the same pattern, so the null is not an overfitting artefact.

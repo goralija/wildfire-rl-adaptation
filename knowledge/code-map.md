@@ -3,7 +3,7 @@ type: Playbook
 title: Gdje pronaći kod, podatke i način rada
 description: Rutiranje istraživačkih i tehničkih zadataka na kanonske fajlove i komande.
 status: stable
-generated: {by: "process:codex", at: "2026-11-03T20:58:26Z"}
+generated: {by: "process:claude-code", at: "2026-11-04T03:40:00Z"}
 sources:
   - resource: /src/wildfire_rl/simulator.py
   - resource: /src/wildfire_rl/evaluation.py
@@ -15,8 +15,9 @@ sources:
 | Ako radiš na… | Prvo pročitaj | Kod/dokazi i provjera |
 | --- | --- | --- |
 | CFSDS cohort/replay TASK-015/016 | [pipeline](../docs/research/REAL_CASE_PIPELINE.md), [dataset pregled](../docs/research/REAL_FIRE_DATASETS.md) | [cohort manifest](../data/manifests/cfsds-v1_1-pilot-cohort.json), [case builder](../scripts/build_cfsds_case.py), [replay metrics](../scripts/evaluate_cfsds_replay.py), [reports](../reports/real-fire-data/index.md) |
-| SimFire/FEDS cohort and failed no-op gate | [crosswalk and current result](../docs/research/FPA_FEDS_CROSSWALK.md), [ADR-022](../docs/specs/DECISION_RECORDS.md), [next steps](../docs/NEXT_SESSION.md) | [119-case episode manifest](../data/manifests/feds-episode-cohort-v1.json), [cohort no-op evaluator](../scripts/evaluate_feds_train_noop.py), [screen report](../reports/real-fire-data/feds-simfire-train-noop-screen-v1.json); data coverage PASS, model gate FAIL |
-| FEDS/SimFire technical PPO smoke | [runtime and limitations](../docs/research/SIMFIRE_ENVIRONMENT.md), [ADR-021](../docs/specs/DECISION_RECORDS.md) | [Gymnasium env](../src/wildfire_rl/feds_simfire_env.py), [MaskablePPO CLI](../scripts/train_feds_simfire.py), [budget/damage tests](../tests/test_feds_simfire_env.py); technical path only, benchmark training waits for no-op gate |
+| SimFire/FEDS no-op gate (ADR-022–024) | [environment record](../docs/research/SIMFIRE_ENVIRONMENT.md), [odluke](../docs/specs/DECISION_RECORDS.md), [next steps](../docs/NEXT_SESSION.md) | [shared setup](../src/wildfire_rl/feds_simfire_setup.py), [cohort evaluator](../scripts/evaluate_feds_train_noop.py), [diagnosis](../scripts/diagnose_feds_noop_gate.py), [freeze records](../configs/frozen/feds-simfire-gate-freeze-v1.json), [validation no-op](../reports/real-fire-data/feds-simfire-validation-noop-v1.json); gate FAIL |
+| Intervencije, heuristike, budget adaptation (ADR-025–027) | [ADR-025–027](../docs/specs/DECISION_RECORDS.md), [benchmark summary](../reports/real-fire-data/feds-simfire-policy-benchmark-v1.json) | [env](../src/wildfire_rl/feds_simfire_env.py), [heuristics](../src/wildfire_rl/feds_heuristics.py), [training](../scripts/train_feds_budget_adaptation.py), [experiment runner](../scripts/run_budget_adaptation_experiment.sh), [benchmark](../scripts/benchmark_feds_policies.py), [benchmark runner](../scripts/run_budget_adaptation_benchmark.sh), [analysis](../scripts/analyze_budget_adaptation.py), [plot](../scripts/plot_budget_benchmark.py); simulator-only, stress scenario |
+| FEDS/SimFire technical PPO smoke | [runtime and limitations](../docs/research/SIMFIRE_ENVIRONMENT.md), [ADR-021](../docs/specs/DECISION_RECORDS.md) | [MaskablePPO smoke CLI](../scripts/train_feds_simfire.py), [budget/damage tests](../tests/test_feds_simfire_env.py) |
 | Sintetičkoj dinamici, budžetu i šteti | [pravila](../docs/specs/BUSINESS_RULES.md), [domain](../docs/specs/DOMAIN.md) | [simulator.py](../src/wildfire_rl/simulator.py): Scenario/GridFire; [testovi](../tests/test_simulator.py) |
 | Politikama i paired evaluaciji | [protokol](../docs/research/PROTOCOL.md), [pilot](../reports/pilot/README.md) | [policies.py](../src/wildfire_rl/policies.py), [evaluation.py](../src/wildfire_rl/evaluation.py), [CLI](../src/wildfire_rl/cli.py), [testovi](../tests/test_evaluation.py) |
 | Modernom Gym/PPO smokeu | [HANDOFF](../HANDOFF.md), [RL manifest](../reports/rl-smoke/README.md) | [gym_env.py](../src/wildfire_rl/gym_env.py), [train.py](../src/wildfire_rl/train.py), [testovi](../tests/test_gym_env.py) |
