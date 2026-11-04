@@ -21,7 +21,7 @@ pobjeđuje persistence. Preregistrovana 3×3 mreža (ROS × WAF, ADR-023) nije p
 kandidat ROS .35 / WAF .05 (IoU .5266 prema .5343) je zamrznut kao `FAIL_exploratory`, ali
 praktično ne širi vatru (medijan 0 novih ćelija za 48h).
 
-**Korak 6 — validation.** Validation rasteri (20/20) su preuzeti; preuzimanje je krenulo oko minutu prije freeze commita, ali ništa nije simulirano ni skorirano prije njega (ADR-024). Svaki
+**Korak 6 — validation.** Validation rasteri (20/20) su preuzeti; preuzimanje je krenulo oko minutu prije freeze commita, ali ništa nije simulirano ni skorirano prije njega (ADR-024). Validation rezultati su dobijeni poslije pada gatea i nisu korišteni za izbor kandidata, parametara ni odluku o gateu. Svaki
 zamrznuti zapis skoriran jednom ([izvještaj](../reports/real-fire-data/feds-simfire-validation-noop-v1.json)):
 gate freeze IoU .5419 prema persistence .5432 (FAIL); free-burn stress zapis (WAF .01 /
 ROS 1.0, ADR-024) IoU .5452 i 1,275 ha prema 1,502 ha, pa prolazi strogo pravilo samo na

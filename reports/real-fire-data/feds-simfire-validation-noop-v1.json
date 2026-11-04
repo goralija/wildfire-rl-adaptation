@@ -96,5 +96,6 @@
       "local_full_report_sha256": "88f51958bc38a6265de759e1a92d2ba347517b56aa53c73c6cc1f71f88a865ae"
     }
   },
-  "interpretation": "The TRAIN-selected gate setting stays just below persistence on VALIDATION mean IoU (.5419 vs .5432) and fails. The free-burn stress setting, which failed TRAIN on IoU, meets the strict rule on these 20 VALIDATION cases (IoU .5452, area error 1,275.3ha, no edge). With 20 fires, a TRAIN failure and satellite-derived references, this does not establish calibration; it is recorded, not used for re-selection."
+  "interpretation": "The TRAIN-selected gate setting stays just below persistence on VALIDATION mean IoU (.5419 vs .5432) and fails. The free-burn stress setting, which failed TRAIN on IoU, meets the strict rule on these 20 VALIDATION cases (IoU .5452, area error 1,275.3ha, no edge). With 20 fires, a TRAIN failure and satellite-derived references, this does not establish calibration; it is recorded, not used for re-selection.",
+  "validation_use": "Produced after the TRAIN gate failed; not used for candidate selection, parameter tuning, or any gate-pass decision (ADR-024 addendum)."
 }

@@ -39,6 +39,9 @@ model zaustavljanja/gašenja. **Svi rezultati koraka 7–8 su "gate FAIL, nije m
 u smislu kalibracije; validation je preuzet i skoriran po korisnikovom odobrenju za
 eksploratorni nastavak (ADR-024).
 
+**Ako TASK-019 popravka učini da gate prođe:** prvo ponoviti gate na TRAIN-u, tek onda
+validation, a eksploratorne rezultate koraka 6–8 označiti kao zastarjele (ADR-024 dopuna).
+
 ## Odluke za tim (ne donositi ih bez korisnika)
 
 - Prihvatiti li stress scenarij kao radni simulator za predaju ili tražiti growth-aware
