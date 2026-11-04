@@ -21,7 +21,7 @@ pobjeđuje persistence. Preregistrovana 3×3 mreža (ROS × WAF, ADR-023) nije p
 kandidat ROS .35 / WAF .05 (IoU .5266 prema .5343) je zamrznut kao `FAIL_exploratory`, ali
 praktično ne širi vatru (medijan 0 novih ćelija za 48h).
 
-**Korak 6 — validation.** Validation rasteri (20/20) preuzeti nakon freeze odluke. Svaki
+**Korak 6 — validation.** Validation rasteri (20/20) su preuzeti; preuzimanje je krenulo oko minutu prije freeze commita, ali ništa nije simulirano ni skorirano prije njega (ADR-024). Svaki
 zamrznuti zapis skoriran jednom ([izvještaj](../reports/real-fire-data/feds-simfire-validation-noop-v1.json)):
 gate freeze IoU .5419 prema persistence .5432 (FAIL); free-burn stress zapis (WAF .01 /
 ROS 1.0, ADR-024) IoU .5452 i 1,275 ha prema 1,502 ha, pa prolazi strogo pravilo samo na
@@ -35,10 +35,11 @@ provjerava determinizam na B=0.
 
 **Korak 8 — prilagodba budžetu (ADR-026/027), na stress zapisu.** 5 seedova × (osnovni PPO
 na B=2 + fine-tune na B=1, B=4 i kontrola B=2) = 20 modela; 1,920 uparenih VALIDATION
-epizoda. No-op dodaje 324 ha po požaru. Zamrznuti osnovni PPO smanjuje štetu (−5.1 /
-−16.6 / −19.7 ha za B=1/2/4, intervali ispod nule). **Fine-tuning po budžetu nema mjerljive
-koristi** (−0.4 i +0.6 ha prema osnovnom; +0.9 i −1.6 ha prema kontroli, svi intervali
-uključuju nulu). Downwind heuristika (−28 ha za B=2/4) je jednako dobra ili bolja.
+epizoda. No-op dodaje 324 ha po požaru. Zamrznuti osnovni PPO smanjuje štetu kod B=2 i
+B=4 (−16.6 i −19.7 ha, dvoslojni 95% CI ispod nule); kod B=1 je efekat (−5.1 ha) granični.
+**Fine-tuning po budžetu nema mjerljive koristi** (−0.4 i +0.6 ha prema osnovnom; +0.9 i
+−1.6 ha prema kontroli), ali s 5 seedova se efekti od oko ±12–20 ha ne mogu isključiti
+(ADR-027 dopuna). Downwind heuristika (−28 ha za B=2/4) je jednako dobra ili bolja.
 [Sažetak](../reports/real-fire-data/feds-simfire-policy-benchmark-v1.json),
 [grafikon](../reports/real-fire-data/feds-simfire-policy-benchmark-v1.png).
 

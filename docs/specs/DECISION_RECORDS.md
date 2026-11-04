@@ -624,3 +624,20 @@ finding, not evidence about real suppression.
 Evidence: [benchmark summary and training receipts](../../reports/real-fire-data/feds-simfire-policy-benchmark-v1.json),
 [figure](../../reports/real-fire-data/feds-simfire-policy-benchmark-v1.png),
 [analysis](../../scripts/analyze_budget_adaptation.py).
+
+### ADR-027 addendum — seed-level intervals, recorded 2026-11-04
+
+The ADR-027 table intervals resample scenarios after averaging seeds, so they omit
+seed-to-seed variation, which dominates here. Recomputed on the same 1,920 episodes
+(no new simulation), with a two-level bootstrap over seeds then scenarios (95%):
+
+| Contrast | B=1 | B=2 | B=4 |
+|---|---|---|---|
+| frozen base − no-op | −5.1 [−13.2, +0.5] | −16.6 [−43.0, −2.8] | −19.7 [−46.7, −3.1] |
+| fine-tuned − frozen base | −0.4 [−5.4, +3.8] | +1.3 [−17.9, +20.9] (control) | +0.6 [−14.5, +15.6] |
+| fine-tuned − matched control | +0.9 [−4.8, +8.3] | — | −1.6 [−17.8, +15.2] |
+
+Corrected reading: the base policy's benefit over no-op holds at B=2 and B=4 and is
+marginal at B=1. Budget fine-tuning shows no measurable gain, but with five seeds effects
+of roughly ±12–20ha at B=2/4 cannot be excluded. These intervals, and the per-seed t-intervals in the
+[summary](../../reports/real-fire-data/feds-simfire-policy-benchmark-v1.json), are the ones to quote.

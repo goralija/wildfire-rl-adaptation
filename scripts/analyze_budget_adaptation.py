@@ -8,8 +8,10 @@ evaluation budget B with a fine-tuned policy, reports (all paired by scenario):
 * fine-tuned at B minus the matched-control fine-tune at the base budget;
 * every policy minus no-op.
 
-Negative values mean less added burned area. Bootstrap intervals resample scenarios
-after averaging over seeds, so they reflect scenario variation only.
+Negative values mean less added burned area. ``scenario_bootstrap_95ci_ha`` resamples
+scenarios after averaging over seeds, so it reflects scenario variation only.
+``seed_t95ci_ha`` is a t-interval over per-seed means and ``two_level_bootstrap_95ci_ha``
+resamples seeds and then scenarios; both include seed-to-seed variation.
 """
 
 from __future__ import annotations
@@ -27,6 +29,29 @@ def _bootstrap(values, draws=4000, seed=20261104):
     values = np.asarray(values, dtype=float)
     generator = np.random.default_rng(seed)
     samples = generator.choice(values, size=(draws, values.size), replace=True).mean(axis=1)
+    return [float(np.percentile(samples, 2.5)), float(np.percentile(samples, 97.5))]
+
+
+T975 = {1: 12.706, 2: 4.303, 3: 3.182, 4: 2.776, 5: 2.571, 6: 2.447, 7: 2.365, 8: 2.306, 9: 2.262}
+
+
+def _seed_t_interval(per_seed_means):
+    values = np.asarray(per_seed_means, dtype=float)
+    if values.size < 2 or values.size - 1 not in T975:
+        return None
+    half = T975[values.size - 1] * values.std(ddof=1) / np.sqrt(values.size)
+    return [float(values.mean() - half), float(values.mean() + half)]
+
+
+def _two_level_bootstrap(matrix, draws=4000, seed=20261105):
+    values = np.asarray(matrix, dtype=float)  # seeds x scenarios
+    generator = np.random.default_rng(seed)
+    seeds, scenarios = values.shape
+    samples = np.empty(draws)
+    for index in range(draws):
+        rows = generator.integers(seeds, size=seeds)
+        columns = generator.integers(scenarios, size=scenarios)
+        samples[index] = values[np.ix_(rows, columns)].mean()
     return [float(np.percentile(samples, 2.5)), float(np.percentile(samples, 97.5))]
 
 
@@ -59,6 +84,8 @@ def contrasts(report: dict, base_budget: int = 2) -> dict:
             "per_seed_mean_delta_ha": per_seed,
             "seed_averaged_mean_delta_ha": float(scenario_means.mean()),
             "scenario_bootstrap_95ci_ha": _bootstrap(scenario_means),
+            "seed_t95ci_ha": _seed_t_interval(list(per_seed.values())),
+            "two_level_bootstrap_95ci_ha": _two_level_bootstrap(stacked),
             "scenarios_better": int((scenario_means < 0).sum()),
             "scenarios_worse": int((scenario_means > 0).sum()),
             "scenarios": len(scenarios),
