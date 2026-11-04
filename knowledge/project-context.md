@@ -1,14 +1,15 @@
 ---
 type: Project Context
 title: Projektni kontekst i stanje istraživanja
-description: Sažetak aktivnog SimFire/FEDS benchmarka, dokaza i sljedećeg research gatea.
+description: Sažetak aktivnog SimFire/FEDS benchmarka, koraka 5–8 i otvorenih odluka.
 status: stable
-generated: {by: "process:codex", at: "2026-11-03T20:58:26Z"}
+generated: {by: "process:claude-code", at: "2026-11-04T03:45:00Z"}
 sources:
   - resource: /docs/STATUS.md
   - resource: /docs/NEXT_SESSION.md
   - resource: /docs/specs/DECISION_RECORDS.md
   - resource: /reports/real-fire-data/feds-simfire-train-noop-screen-v1.json
+  - resource: /reports/real-fire-data/feds-simfire-policy-benchmark-v1.json
 ---
 # Projektni kontekst
 
@@ -18,64 +19,45 @@ su sažeti u [rubrici](../docs/research/REQUIREMENTS_AND_RUBRIC.md). Aktivni ben
 koristi SimFire, FPA-FOD početne uslove i FEDS-CONUS vremenske obode; stariji
 CFSDS/Cell2Fire rad ostaje odvojen i historijski.
 
-## Aktivni pravac — 2026-11-03
+## Aktivni pravac
 
 Korisnik je odabrao **SimFire + FPA-FOD + FEDS-CONUS**, uz FLE/ICS-209 samo kao
-ograničeni post-hoc kontekst. Podjela po godini je train 2018/2019, validation 2023,
-test 2024. Test je zatvoren.
+ograničeni post-hoc kontekst. Split je po godini: train 2018/2019 (99 požara), validation
+2023 (20), test 2024 (zatvoren). Okvir obuhvata veće požare u deset zapadnih država i nije
+reprezentativan za sve požare. FEDS/FPA veza ostaje provisionalna.
 
-Originalna 60-case kohorta lokalno daje 19/40 train i 7/20 validation poklapanja pa
-ne prolazi pragove 20/8. Unaprijed sačuvani širi FPA-FOD frame daje 99 train i 20
-validation slučajeva od 208/56 kandidata; svih 119 ima pet FEDS stanja kroz 48h. Ovaj
-**data coverage gate je PASS**, ali frame je ograničen na veće požare u deset zapadnih
-država i nije reprezentativan za sve požare. FEDS/FPA veza ostaje provisionalna.
+## Stanje koraka 5–8 — 2026-11-04
 
-SimFire Python 3.9.25 runtime, 99/99 train LANDFIRE gorivo/teren i početne FEDS maske
-su pripremljeni. GridMET forcing je uzorkovan za 99 train i 20 validation slučajeva.
-Validation rasteri nisu preuzeti.
-
-## Mjerodavan rezultat no-op provjere
-
-Na svih 99 TRAIN slučajeva izvršeno je osam 48h no-op kandidata s različitim WAF
-vrijednostima. Svaki slučaj poređen je na četiri vremena; svi runovi su završili bez
-greške. Persistence baseline ima mean IoU .5343, elipsna referenca .5308. Najbolji
-SimFire kandidat po IoU imao je .4769. Nijedan od osam kandidata nije istovremeno
-nadmašio obje reference po IoU i grešci opožarene površine uz nula rubnih kontakata.
-Zato je **TRAIN no-op research gate FAIL**; nijedan WAF ni interni korak nije
-izabran. Jednominutna osjetljivost nije promijenila nalaz. Detalji su u
-[no-op izvještaju](../reports/real-fire-data/feds-simfire-train-noop-screen-v1.json)
-i [ADR-022](../docs/specs/DECISION_RECORDS.md).
-
-Na zahtjev korisnika postoji odvojena TRAIN-only Gymnasium/MaskablePPO putanja i
-završen je 64-step tehnički smoke. To dokazuje da se kod može pokrenuti, ne da je
-simulator validiran ili da je politika korisna. Benchmark/PPO policy-benefit trening
-ostaje blokiran dok se neslaganje ne dijagnosticira i novi zajednički TRAIN no-op gate
-ne prođe. 2024 TEST nije učitan.
+- **Kalibracija (korak 5) je FAIL.** Nakon dijagnoze i preregistrovane 3×3 mreže
+  (ADR-023/024) nijedan zajednički SimFire parametar ne pobjeđuje persistence i elipsu
+  istovremeno na TRAIN-u. Deficit dolazi iz požara koji u FEDS-u ne rastu, vjerovatno
+  zaustavljenih ili ugašenih; slobodno-goreći no-op to ne može predstaviti. Zamrznuti
+  gate zapis je `FAIL_exploratory` i gotovo ne širi vatru.
+- **Validation (korak 6)** je skoriran jednom po zapisu
+  ([izvještaj](../reports/real-fire-data/feds-simfire-validation-noop-v1.json)).
+- **Koraci 7–8** rade na zasebnom, jasno označenom free-burn stress zapisu (ADR-024–027):
+  jedinica budžeta je smjena ekipe od 20 ljudi = linija od ~1.26 km. Osnovni PPO pobjeđuje
+  no-op, fine-tuning po budžetu nema mjerljive koristi, a downwind heuristika je jednako
+  dobra ili bolja ([sažetak](../reports/real-fire-data/feds-simfire-policy-benchmark-v1.json)).
 
 ## Šta je potvrđeno, a šta nije
 
-- Sintetički engine i heuristički pilot rade, ali nisu rezultati stvarnih požara.
-- Firehose/Cell2Fire checkpoint inference je raniji, odvojeni runtime nalaz.
-- FEDS-CONUS obodi su satelitske procjene, ne ground truth; gridMET je grubi historical
-  forcing proxy, ne operativna vremenska prognoza.
-- Runner, testovi i PPO smoke potvrđuju tehničko izvršavanje. Ne potvrđuju fizičku
-  tačnost, fizičku validaciju niti RL prednost.
-- SimFire akcije i nagrada su prototip; fireline ponašanje nije operativno validirano.
+- Ulazi i no-op rezultati su reproducibilni na drugom računaru (isti hashovi, isti IoU).
+- Benchmark je determinističan; politike dobijaju iste scenarije, budžete, opservacije i seed.
+- Nije potvrđena fizička kalibracija SimFire-a, korist RL-a u stvarnom gašenju, niti
+  korist prilagodbe budžetu. FEDS su satelitske procjene, gridMET je grubi proxy.
+- Prioritetna područja (TASK-007), gradnja linije kroz vrijeme i TEST evaluacija nisu rađeni.
 
 ## Šta prvo raditi
 
-1. Pregledati po-požar greške i provjeriti forcing, vjetra/moisture mapiranje,
-   rasterizaciju i prostornu mrežu. Ne podešavati po požaru.
-2. Dokumentovati mali zajednički kandidat skup samo na TRAIN kohorti i ponoviti isti
-   no-op gate prema nepromijenjenim persistence/elipsa referencama.
-3. Validation rastere koristiti tek nakon prolaza TRAIN gatea i zamrzavanja parametara;
-   2024 TEST ostaviti zatvoren do završnog obračuna.
-4. Prije policy poređenja precizirati intervenciju i dati svim agentima iste požare,
-   budžete, horizont, informacije i seedove.
+1. Timski odlučiti o growth-aware gateu ili modelu zaustavljanja prije tvrdnje o
+   kalibraciji, i o tome da li stress scenarij ostaje radni simulator.
+2. Ako se nastavlja korak 8: nova preregistracija s jačim signalom budžeta (više linija po
+   odluci ili duži vijek aktivne ćelije) i više seedova.
+3. TASK-007 i TASK-009 (poster); TEST 2024 tek na kraju, sa zaključanim politikama.
 
-TASK-012 CFSDS izbor je historijski i više nije aktivni benchmark. Firehose TASK-004c
-je zaseban legacy adapter koji nije SimFire gate. Kasnija odluka/ADR ima prednost nad
-starijim task opisima.
+TASK-012 CFSDS izbor i Firehose TASK-004c su historijski, odvojeni pravci. Kasnija
+odluka/ADR ima prednost nad starijim task opisima.
 
 ## Kako nastaviti
 

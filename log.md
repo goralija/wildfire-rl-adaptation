@@ -1,5 +1,18 @@
 # Promjene baze znanja
 
+## 2026-11-04: koraci 5–8 (noćni samostalni rad)
+
+- Ulazi ponovo izgrađeni i reproducirani (isti hashovi, isti WAF .01 IoU). Dijagnoza
+  pada gatea i preregistrovana 3×3 mreža (ADR-023): bez prolaza; gate zamrznut kao
+  `FAIL_exploratory` (ADR-024).
+- Validation skoriran jednom po zapisu; free-burn stress zapis deklarisan za korake 7–8.
+- ADR-025: jedinica budžeta = smjena ekipe od 20 ljudi = linija od 7 ćelija; heuristike i
+  upareni benchmark. ADR-026/027: 5 seedova, 20 modela, 1,920 VALIDATION epizoda; osnovni
+  PPO pobjeđuje no-op, fine-tuning po budžetu nema mjerljive koristi.
+- [STATUS](docs/STATUS.md), [NEXT_SESSION](docs/NEXT_SESSION.md),
+  [benchmark](reports/real-fire-data/feds-simfire-policy-benchmark-v1.json),
+  [odluke](docs/specs/DECISION_RECORDS.md).
+
 ## 2026-11-03: Handoff i agent upute usklađeni s ADR-022
 
 - Ažurirani su AGENTS, Claude/Gemini/Copilot ulazi, project context, HANDOFF, README,

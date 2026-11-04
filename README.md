@@ -8,11 +8,12 @@ Istražujemo može li prilagodba unaprijed treniranog RL agenta **različitim bu
 intervencija** smanjiti opožarenu površinu u odnosu na početni agent i heuristike,
 uz posebno ispitivanje zaštite prioritetnih područja.
 
-**Stanje:** aktivni plan je SimFire + FPA-FOD/FEDS-CONUS. Prošireni, unaprijed
-sačuvani data frame prolazi coverage gateom (99 train/20 validation), ali TRAIN-only
-no-op screen na 99 slučajevima **nije prošao** persistence/elipsa poređenje. SimFire
-adapter i PPO CLI tehnički rade; benchmark trening čeka dijagnostiku i novi TRAIN gate.
-Validation rasteri nisu preuzeti, a TEST 2024 ostaje zatvoren. Raniji
+**Stanje (2026-11-04):** aktivni plan je SimFire + FPA-FOD/FEDS-CONUS (99 train / 20
+validation požara). TRAIN no-op gate je i nakon dijagnoze **FAIL** (ADR-023/024).
+Intervencije, heuristike i PPO prilagodba budžetu izvedeni su eksploratorno na zasebnom
+free-burn stress zapisu: osnovni PPO smanjuje štetu u odnosu na no-op, a fine-tuning po
+budžetu nema mjerljive koristi (ADR-027). Validation je skoriran jednom po zapisu, TEST
+2024 je zatvoren. Raniji
 Cell2Fire/Firehose nalazi su odvojeni historijski rad. Sintetički pilot ne predviđa
 stvarne požare i nije dokaz uspješnosti RL pristupa.
 
