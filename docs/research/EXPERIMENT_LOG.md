@@ -344,3 +344,32 @@ Full per-case reports (with checksums listed in that aggregate) remain in ignore
 65/65 pass; project Python 3.12 suite 62 pass with 9 optional dependency skips; CLI
 smoke passes; all 85 venv packages are compatible; strict knowledge validation passes
 69 Markdown files and `git diff --check` is clean.
+
+## EXP-012 — rebuild, reproduction and diagnosis of the TRAIN no-op gate, 2026-11-04
+
+Second macOS ARM64 machine, fresh `.local/`: Python 3.9.25 venv from the pinned freeze
+(85 packages, `uv pip check` PASS); FEDS 2018/2019/2023 perimeter and fireline archives
+(MD5 match); nine gridMET archives (SHA-256 match); 99/99 TRAIN LANDFIRE/mask inputs with
+SHA-256 identical to the committed coverage report. The WAF .01 / 5-min / seed 0 cohort
+rerun reproduced ADR-022 exactly (IoU .476852, area error 2,262.1ha) in ~42 s on 7
+processes. The stratified [diagnosis](../../reports/real-fire-data/feds-simfire-train-noop-diagnosis-v1.json)
+puts the whole IoU deficit in fires that barely grow in FEDS. Decision: ADR-023.
+
+## EXP-013 — preregistered spread-threshold grid and frozen VALIDATION scoring, 2026-11-04
+
+ADR-023 grid ROS {0.35,0.5,0.7} × WAF {0.05,0.2,0.4}, lifetime 90 min, 5-min step, seed 0,
+99 TRAIN cases each, zero runner errors. Mean IoU / area error (ha) / edge timepoints:
+
+| ROS \ WAF | 0.05 | 0.2 | 0.4 |
+|---|---|---|---|
+| 0.35 | .5266 / 2,350.5 / 0 | .4807 / 2,482.4 / 1 | .3886 / 3,239.2 / 20 |
+| 0.5 | .5176 / 2,346.4 / 0 | .4410 / 2,695.1 / 2 | .3205 / 5,519.6 / 30 |
+| 0.7 | .5012 / 2,375.9 / 0 | .3849 / 3,726.5 / 12 | .2644 / 9,816.9 / 50 |
+
+No pass (persistence .5343 / 2,351.7). Frozen by rule: ROS .35 / WAF .05 as
+`FAIL_exploratory`; its TRAIN median 48h growth is 0 cells. ADR-024 adds the free-burn
+stress record (WAF .01 / ROS 1.0). [VALIDATION once per record](../../reports/real-fire-data/feds-simfire-validation-noop-v1.json),
+20 cases / 80 timepoints: gate freeze IoU .5419 / 1,496.6ha (FAIL vs persistence .5432 /
+1,501.9ha); stress IoU .5452 / 1,275.3ha, no edge (meets the strict rule on VALIDATION only).
+Heuristic benchmark on the gate-freeze setting (VALIDATION): no-op adds 5.8ha on average
+and no heuristic changes that by more than 0.3ha — no room for interventions.
