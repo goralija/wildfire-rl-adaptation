@@ -594,3 +594,33 @@ evaluation uses the 20 VALIDATION cases once; TEST stays closed.
   reported too. B=0 must reproduce no-op exactly.
 - Compute: local CPU only, about 6–8k decisions/h per process group. This is a small,
   underpowered study; null or negative results are reported as such.
+
+## ADR-027 — step-8 result: base PPO helps, budget fine-tuning shows no gain, recorded 2026-11-04
+
+The ADR-026 protocol ran to completion: five seeds (11–15), each with a base PPO at B=2
+(8,064 decisions) and three 3,024-decision fine-tunes (B=1, B=4, matched control B=2),
+for 20 policies. With no-op and the three ADR-025 heuristics, that is 24 policies × 20
+VALIDATION fires × 4 budgets = 1,920 paired episodes, with no errors. At B=0 every policy
+equals no-op; the 1,280 episodes shared with an earlier three-seed pass are bit-identical.
+
+On the free-burn stress scenario, no-op adds 324.3ha per fire on average. Seed-averaged
+deltas (scenario bootstrap 95% CI):
+
+| Contrast | B=1 | B=2 | B=4 |
+|---|---|---|---|
+| frozen base − no-op | −5.1 [−10.9, −0.4] | −16.6 [−35.4, −3.7] | −19.7 [−42.0, −4.1] |
+| fine-tuned − frozen base | −0.4 [−1.2, 0.4] | +1.3 [−3.0, 6.8] (control) | +0.6 [−1.5, 2.3] |
+| fine-tuned − matched control | +0.9 [−1.3, 3.6] | — | −1.6 [−8.7, 4.1] |
+| downwind heuristic − no-op | −9.1 [−21.7, 0.0] | −28.0 [−69.7, −0.2] | −28.0 [−69.7, −0.2] |
+
+**Reading:** a learned policy beats doing nothing in this simulator, but budget-specific
+fine-tuning gives no measurable benefit over the frozen base or over equal extra training.
+A simple downwind rule is at least as good as PPO. Per-seed results differ widely, and
+several seeds converge on downwind-like behaviour. Most simulated fires stop within 12h
+(90-min active cells), so extra budget rarely finds a legal placement. That, the
+single-segment action and 20 scenarios bound this null result. It is a simulator
+finding, not evidence about real suppression.
+
+Evidence: [benchmark summary and training receipts](../../reports/real-fire-data/feds-simfire-policy-benchmark-v1.json),
+[figure](../../reports/real-fire-data/feds-simfire-policy-benchmark-v1.png),
+[analysis](../../scripts/analyze_budget_adaptation.py).
