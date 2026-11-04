@@ -29,11 +29,34 @@ def _curriculum(name: str) -> Curriculum:
     raise ValueError(name)
 
 
+_MODELS = {}
+
+
+def _predictor(path: str):
+    """Deterministic masked PPO predictor; one loaded model per worker process."""
+    if path not in _MODELS:
+        import torch
+        from sb3_contrib import MaskablePPO
+        torch.set_num_threads(1)
+        _MODELS[path] = MaskablePPO.load(path, device="cpu")
+    model = _MODELS[path]
+
+    def predict(obs, mask):
+        action, _ = model.predict({k: v[None] for k, v in obs.items()},
+                                  action_masks=mask[None], deterministic=True)
+        return action[0]
+
+    return predict
+
+
 def _job(args):
     seed, policies, curriculum = args
     env = SyntheticSuppressionEnv(curriculum=_curriculum(curriculum))
     rows = {}
     for name in policies:
+        if name.startswith("ppo="):
+            rows[name] = run_episode(env, None, {"seed": seed}, predictor=_predictor(name[4:]))
+            continue
         policy = make_random_policy(seed) if name == "random" else HEURISTICS[name]
         rows[name] = run_episode(env, policy, {"seed": seed})
     return seed, rows
@@ -74,6 +97,7 @@ def main() -> None:
             "noop_new_cells_burned": int(sum(r["noop_new_cells"] for r in rows)),
             "edge_contact_episodes": int(sum(r["edge_contact"] for r in rows)),
             "line_cells": int(sum(r["line_cells"] for r in rows)),
+            "close_calls": int(sum(r.get("close_calls", 0) for r in rows)),
         }
         if "random" in policies and name != "random":
             table[name]["return_minus_random_ci95"] = paired_ci(
