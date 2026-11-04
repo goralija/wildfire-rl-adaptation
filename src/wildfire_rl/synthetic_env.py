@@ -247,6 +247,12 @@ class SyntheticSuppressionEnv(gym.Env):
         self._episode_counter = 0
         self.spec_now: Optional[EpisodeSpec] = None
 
+    def set_curriculum(self, **changes) -> None:
+        """Replace curriculum fields (used by the training script between stages)."""
+        values = dict(self.curriculum.__dict__)
+        values.update(changes)
+        self.curriculum = Curriculum(**values)
+
     # ------------------------------------------------------------------ episode set-up
     def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None):
         super().reset(seed=seed)
