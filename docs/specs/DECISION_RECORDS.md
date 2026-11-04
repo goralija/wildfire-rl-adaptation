@@ -711,3 +711,20 @@ Decision:
 
 Consequences: results are simulator-only. The calibration gap to FEDS growth bounds any
 real-world reading. The old SimFire/FEDS path remains historical and unchanged.
+
+### ADR-028 addendum — headroom gate history, recorded 2026-11-04
+
+All runs use synthetic validation seeds 0–127 on the full curriculum, scored as the
+paired saved fraction against the random policy.
+
+| Version | Environment change | Best tactic, mean saved | CI (best − random) | Units lost (best) |
+|---|---|---|---|---|
+| v1 | as accepted | direct flank 0.058 | [0.026, 0.086] | 16 |
+| v2 | resample fires whose no-op adds < 30 cells (the v1 median was 15 cells) | 0.117 | — | 33 |
+| v3 | BFS escape at 4 cells | 0.029 | — | 31 |
+| v4 | overrun with an open neighbour = close call (−0.1, displaced); surrounded = loss (−1.0); escape at 2 cells | **0.116** | **[0.069, 0.135]** | **0** |
+
+v1 passed narrowly, but half of its episodes carried no signal. v2 to v4 change the
+environment, not the gate. The 180 m cell is far wider than the tabled flame length (at
+most ~6 m, Anderson 1982), so working next to the fire edge is realistic. Only being
+surrounded is treated as an entrapment. **Gate: PASS on v4.** PPO training uses v4.

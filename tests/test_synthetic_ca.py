@@ -217,13 +217,43 @@ class EnvironmentTest(unittest.TestCase):
         nearest = np.abs(burned - (unit.row, unit.col)).max(axis=1).min()
         self.assertGreater(nearest, 3)
 
-    def test_unit_inside_fire_is_lost_and_penalised(self):
+    def _unit_at(self, row, col):
         se = self.se
         env = se.SyntheticSuppressionEnv(auto_retreat=False)
         env.reset(options={"episode_spec": self._spec([(se.HAND_CREW, 0.0)])})
         unit = env.units[0]
         unit.active = True
-        unit.row, unit.col = 64, 61
+        unit.row, unit.col = row, col
+        return env, unit
+
+    def test_surrounded_unit_is_lost_and_penalised(self):
+        se = self.se
+        env, unit = self._unit_at(30, 30)
+        ring = np.zeros(env.land.shape, dtype=bool)
+        ring[29:32, 29:32] = True
+        env.fire.ignite(ring)
+        env._overrun(unit)
+        self.assertTrue(unit.lost)
+        self.assertFalse(unit.active)
+
+    def test_unit_with_open_neighbour_is_displaced_not_lost(self):
+        env, unit = self._unit_at(30, 30)
+        cell = np.zeros(env.land.shape, dtype=bool)
+        cell[30, 29:31] = True
+        env.fire.ignite(cell)
+        env._overrun(unit)
+        self.assertFalse(unit.lost)
+        self.assertEqual(unit.close_calls, 1)
+        self.assertNotEqual((unit.row, unit.col), (30, 30))
+        self.assertNotEqual(env.fire.state[unit.row, unit.col], 1)
+
+    def test_loss_penalty_reaches_reward(self):
+        se = self.se
+        env, unit = self._unit_at(30, 30)
+        ring = np.zeros(env.land.shape, dtype=bool)
+        ring[29:32, 29:32] = True
+        ring[30, 30] = False
+        env.fire.ignite(ring)
         _, reward, _, _, _ = env.step(np.zeros(se.MAX_UNITS, dtype=int))
         self.assertTrue(unit.lost)
         self.assertLess(reward, -0.5)

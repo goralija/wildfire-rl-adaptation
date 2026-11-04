@@ -13,6 +13,7 @@ from typing import Dict, List, Optional, Sequence, Tuple
 
 import gymnasium as gym
 import numpy as np
+from scipy.ndimage import binary_dilation, distance_transform_cdt
 
 from .synthetic_ca import (
     BURNED,
@@ -40,6 +41,9 @@ MAX_UNITS = 4
 ACTIONS_PER_UNIT = 17  # 0 stay, 1-8 move in OFFSETS direction, 9-16 build line and advance
 URBAN_WEIGHT = 50.0
 UNIT_LOSS_PENALTY = 1.0
+CLOSE_CALL_PENALTY = 0.1
+RETREAT_RADIUS = 2
+SAFE_DISTANCE = 5
 PATCH = 7  # half-width of the full-resolution crop around each unit (15x15)
 MAP_POOL = 2
 
@@ -105,6 +109,7 @@ class Unit:
     action: int = 0
     line_cells: int = 0
     retreats: int = 0
+    close_calls: int = 0
 
     @property
     def spec(self) -> UnitType:
@@ -138,6 +143,9 @@ class Curriculum:
     wind_adjustment: Tuple[float, float] = (0.1, 0.5)
     blocky_weather_share: float = 0.5
     shape: Tuple[int, int] = (128, 128)
+    # Fires whose no-op rollout adds fewer cells carry no learning signal; resample them.
+    min_noop_growth_cells: int = 30
+    max_attempts: int = 16
 
 
 def _blocky(series: WeatherSeries, block: int) -> WeatherSeries:
@@ -150,8 +158,9 @@ def _blocky(series: WeatherSeries, block: int) -> WeatherSeries:
     return WeatherSeries(steps)
 
 
-def sample_synthetic_episode(seed: int, curriculum: Curriculum) -> EpisodeSpec:
-    rng = np.random.default_rng([7, int(seed)])
+def sample_synthetic_episode(seed: int, curriculum: Curriculum, attempt: int = 0) -> EpisodeSpec:
+    rng = np.random.default_rng([7, int(seed), int(attempt)])
+    episode_seed = int(seed) * 64 + int(attempt)
     landscape = generate_landscape(rng, curriculum.shape)
     horizon = int(rng.choice(curriculum.horizons))
     start_hour = float(rng.uniform(0.0, 24.0))
@@ -179,7 +188,7 @@ def sample_synthetic_episode(seed: int, curriculum: Curriculum) -> EpisodeSpec:
     ignition[r, c] = True
 
     # Pre-grow without suppression, then reduce to (scar, front) exactly like a real start.
-    fire = FireState(landscape, 10_000_000 + int(seed), params)
+    fire = FireState(landscape, episode_seed + 2 ** 40, params)
     fire.ignite(ignition)
     pre_steps = int(np.ceil(pregrow))
     for hour in range(pre_steps):
@@ -198,7 +207,8 @@ def sample_synthetic_episode(seed: int, curriculum: Curriculum) -> EpisodeSpec:
     arrivals = sorted(float(rng.uniform(0.0, 180.0)) for _ in range(count))
     units = list(zip(kinds, arrivals))
     return EpisodeSpec(landscape=landscape, weather=remaining, scar=scar, front=front,
-                       units=units, horizon=horizon, seed=int(seed), params=params)
+                       units=units, horizon=horizon, seed=episode_seed, params=params,
+                       name="synthetic-%d-%d" % (int(seed), int(attempt)))
 
 
 def order_units(units: Sequence[Tuple[int, float]]) -> List[Tuple[int, float]]:
@@ -212,12 +222,14 @@ class SyntheticSuppressionEnv(gym.Env):
     def __init__(self, *, curriculum: Optional[Curriculum] = None,
                  seed_offset: int = 1_000_000, episode_specs: Optional[Sequence] = None,
                  unit_loss_penalty: float = UNIT_LOSS_PENALTY,
+                 close_call_penalty: float = CLOSE_CALL_PENALTY,
                  urban_weight: float = URBAN_WEIGHT, auto_retreat: bool = True,
                  map_shape: Tuple[int, int] = (128, 128)) -> None:
         self.curriculum = curriculum or Curriculum()
         self.seed_offset = int(seed_offset)
         self.episode_specs = list(episode_specs) if episode_specs is not None else None
         self.unit_loss_penalty = float(unit_loss_penalty)
+        self.close_call_penalty = float(close_call_penalty)
         self.urban_weight = float(urban_weight)
         self.auto_retreat = auto_retreat
         self.map_shape = tuple(map_shape)
@@ -236,22 +248,26 @@ class SyntheticSuppressionEnv(gym.Env):
         self.spec_now: Optional[EpisodeSpec] = None
 
     # ------------------------------------------------------------------ episode set-up
-    def _next_spec(self, options: dict) -> EpisodeSpec:
-        if "episode_spec" in options:
-            return options["episode_spec"]
-        if self.episode_specs is not None:
-            index = options.get("index", self._episode_counter % len(self.episode_specs))
-            return self.episode_specs[index]
-        seed = options.get("seed")
-        if seed is None:
-            seed = self.seed_offset + int(self.np_random.integers(0, 2 ** 31 - 1))
-        return sample_synthetic_episode(int(seed), self.curriculum)
-
     def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None):
         super().reset(seed=seed)
         options = dict(options or {})
-        spec = self._next_spec(options)
         self._episode_counter += 1
+        if "episode_spec" in options:
+            return self._start(options["episode_spec"])
+        if self.episode_specs is not None:
+            index = options.get("index", (self._episode_counter - 1) % len(self.episode_specs))
+            return self._start(self.episode_specs[index])
+        base = options.get("seed")
+        if base is None:
+            base = self.seed_offset + int(self.np_random.integers(0, 2 ** 31 - 1))
+        for attempt in range(self.curriculum.max_attempts):
+            result = self._start(sample_synthetic_episode(int(base), self.curriculum, attempt))
+            grown = int((self.noop_final.ever_burned & ~self.prior_damage).sum())
+            if grown >= self.curriculum.min_noop_growth_cells:
+                break
+        return result
+
+    def _start(self, spec: EpisodeSpec):
         if spec.landscape.shape != self.map_shape:
             raise ValueError("episode landscape must match the environment map shape")
         self.spec_now = spec
@@ -337,42 +353,105 @@ class SyntheticSuppressionEnv(gym.Env):
             slots.append(np.eye(ACTIONS_PER_UNIT, dtype=bool)[0])
         return np.concatenate(slots)
 
-    def _threat(self, r: int, c: int) -> int:
-        """Burning cells within two cells (Chebyshev) of (r, c)."""
+    def _threat(self, r: int, c: int, radius: int = 2) -> int:
+        """Burning cells within ``radius`` cells (Chebyshev) of (r, c)."""
         burning = self.fire.burning
-        return int(burning[max(r - 2, 0):r + 3, max(c - 2, 0):c + 3].sum())
+        return int(burning[max(r - radius, 0):r + radius + 1,
+                           max(c - radius, 0):c + radius + 1].sum())
 
     def _is_refuge(self, r: int, c: int) -> bool:
         fire = self.fire
         return bool(fire.state[r, c] == BURNED or not self.land.burnable[r, c] or fire.line[r, c])
 
+    def _fire_distance(self) -> np.ndarray:
+        """Chessboard distance (cells) to the nearest burning cell, cached per substep."""
+        key = self.fire.substep
+        if getattr(self, "_distance_key", None) != key:
+            burning = self.fire.burning
+            if burning.any():
+                self._distance = distance_transform_cdt(~burning, metric="chessboard")
+            else:
+                self._distance = np.full(burning.shape, 10 ** 6)
+            self._distance_key = key
+        return self._distance
+
+    def _passable_grid(self, kind: int) -> np.ndarray:
+        grid = ~self.land.water & ~self.fire.burning
+        if kind == DOZER:
+            grid &= self.land.slope_percent <= UNIT_TYPES[DOZER].max_slope_percent
+        return grid
+
     def _retreat(self, unit: Unit) -> None:
-        """LCES-style automatic escape when fire is within two cells of an exposed unit."""
+        """LCES-style automatic escape once fire is within RETREAT_RADIUS cells.
+
+        The unit heads for the nearest reachable safe cell: a refuge (black, non-burnable
+        or line) or a cell at least SAFE_DISTANCE cells from any burning cell. The route is
+        a breadth-first search over passable cells, so the unit does not walk into a
+        pocket that the fire is closing.
+        """
         r, c = unit.row, unit.col
-        if self._is_refuge(r, c) or not self._threat(r, c):
+        distance = self._fire_distance()
+        if self._is_refuge(r, c) or distance[r, c] > RETREAT_RADIUS:
             return
-        rows, cols = self.land.shape
-        # Prefer a refuge (black, non-burnable or line), then the least threatened cell.
-        best, best_score = None, (1, self._threat(r, c))
-        for dr, dc in OFFSETS:
+        passable = self._passable_grid(unit.kind)
+        refuge = ((self.fire.state == BURNED) | ~self.land.burnable | self.fire.line) & passable
+        safe = (refuge | (distance >= SAFE_DISTANCE)) & passable
+        # Breadth-first distance from the safe set, restricted to passable cells.
+        hops = np.full(passable.shape, -1, dtype=np.int32)
+        frontier = safe.copy()
+        hops[frontier] = 0
+        step = 0
+        while frontier.any() and hops[r, c] < 0 and step < 4 * max(passable.shape):
+            step += 1
+            grown = binary_dilation(frontier, structure=np.ones((3, 3), dtype=bool))
+            frontier = grown & passable & (hops < 0)
+            hops[frontier] = step
+        if hops[r, c] <= 0:
+            return
+        rows, cols = passable.shape
+        for dr, dc in sorted(OFFSETS, key=lambda o: -distance[min(max(r + o[0], 0), rows - 1),
+                                                             min(max(c + o[1], 0), cols - 1)]):
             rr, cc = r + dr, c + dc
-            if not (0 <= rr < rows and 0 <= cc < cols) or not self._passable(unit.kind, rr, cc):
-                continue
-            score = (0 if self._is_refuge(rr, cc) else 1, self._threat(rr, cc))
-            if score < best_score:
-                best, best_score = (rr, cc), score
-        if best is not None:
-            unit.row, unit.col = best
-            unit.progress_m = 0.0
-            unit.retreats += 1
+            if 0 <= rr < rows and 0 <= cc < cols and 0 <= hops[rr, cc] < hops[r, c]:
+                unit.row, unit.col = rr, cc
+                unit.progress_m = 0.0
+                unit.retreats += 1
+                return
+
+    def _overrun(self, unit: Unit) -> None:
+        """Fire reached the unit's cell: a close call if an adjacent cell is open, else loss.
+
+        At 180 m cells the flame (at most ~6 m long in the Anderson table) occupies a small
+        part of a cell, so a unit with an open neighbour is displaced, not killed. Being
+        surrounded is an entrapment and the unit is lost.
+        """
+        rows, cols = self.land.shape
+        distance = self._fire_distance()
+        best, best_score = None, None
+        for dr, dc in OFFSETS:
+            rr, cc = unit.row + dr, unit.col + dc
+            if 0 <= rr < rows and 0 <= cc < cols and self._passable(unit.kind, rr, cc):
+                score = (0 if self._is_refuge(rr, cc) else 1, -int(distance[rr, cc]))
+                if best_score is None or score < best_score:
+                    best, best_score = (rr, cc), score
+        if best is None:
+            unit.active = False
+            unit.lost = True
+            return
+        unit.row, unit.col = best
+        unit.progress_m = 0.0
+        unit.close_calls += 1
 
     def _unit_substep(self, unit: Unit) -> None:
         if not unit.active:
             return
         if self.auto_retreat:
+            # Assumption (ADR-028): escape along a prepared route, partly by vehicle, covers
+            # up to two cells (360 m) per 2-minute substep.
             before = (unit.row, unit.col)
             self._retreat(unit)
             if (unit.row, unit.col) != before:
+                self._retreat(unit)
                 return
         action = unit.action
         if action == 0:
@@ -419,8 +498,7 @@ class SyntheticSuppressionEnv(gym.Env):
             if units is not None:
                 for unit in units:
                     if unit.active and fire.state[unit.row, unit.col] == BURNING:
-                        unit.active = False
-                        unit.lost = True
+                        self._overrun(unit)
         return damage
 
     # ------------------------------------------------------------------ gym API
@@ -439,6 +517,7 @@ class SyntheticSuppressionEnv(gym.Env):
             unit.action = chosen
 
         lost_before = sum(unit.lost for unit in self.units)
+        calls_before = sum(unit.close_calls for unit in self.units)
         damage = self._advance(self.fire, self.decision, self.units)
         reward = (self.noop_damage[self.decision] - damage) / self.norm
         self.stats["agent_damage"] += damage
@@ -458,7 +537,9 @@ class SyntheticSuppressionEnv(gym.Env):
                 self.stats["agent_damage"] += tail
             terminated = True
         lost_now = sum(unit.lost for unit in self.units) - lost_before
-        reward -= self.unit_loss_penalty * lost_now
+        calls_now = sum(unit.close_calls for unit in self.units) - calls_before
+        reward -= self.unit_loss_penalty * lost_now + self.close_call_penalty * calls_now
+        self.stats["close_calls"] = self.stats.get("close_calls", 0) + calls_now
         self.stats["units_lost"] += lost_now
         self.stats["retreats"] = sum(unit.retreats for unit in self.units)
         self.stats["line_cells"] = int(self.fire.line.sum())
@@ -487,6 +568,7 @@ class SyntheticSuppressionEnv(gym.Env):
             "agent_urban_cells": agent_urban,
             "units_lost": int(self.stats["units_lost"]),
             "retreats": int(self.stats["retreats"]),
+            "close_calls": int(self.stats.get("close_calls", 0)),
             "line_cells": int(self.stats["line_cells"]),
             "edge_contact": self.stats["edge_contact"],
         }
