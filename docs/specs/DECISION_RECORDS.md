@@ -641,3 +641,10 @@ Corrected reading: the base policy's benefit over no-op holds at B=2 and B=4 and
 marginal at B=1. Budget fine-tuning shows no measurable gain, but with five seeds effects
 of roughly ±12–20ha at B=2/4 cannot be excluded. These intervals, and the per-seed t-intervals in the
 [summary](../../reports/real-fire-data/feds-simfire-policy-benchmark-v1.json), are the ones to quote.
+
+In-sample supplement (same day, after the VALIDATION result, TRAIN only): on all 99 TRAIN
+fires (9,504 episodes) the frozen base again beats no-op (−35.9/−71.3/−99.8ha at B=1/2/4
+against 1,343.6ha). Fine-tuning again shows no gain (two-level CIs span zero), and downwind
+is at least as good. Budget fine-tuning does not help even on the fires it was trained on,
+so the null is not an overfitting artefact. It points to a weak budget signal in this action
+and simulator design.

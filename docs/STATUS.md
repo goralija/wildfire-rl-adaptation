@@ -39,7 +39,8 @@ epizoda. No-op dodaje 324 ha po požaru. Zamrznuti osnovni PPO smanjuje štetu k
 B=4 (−16.6 i −19.7 ha, dvoslojni 95% CI ispod nule); kod B=1 je efekat (−5.1 ha) granični.
 **Fine-tuning po budžetu nema mjerljive koristi** (−0.4 i +0.6 ha prema osnovnom; +0.9 i
 −1.6 ha prema kontroli), ali s 5 seedova se efekti od oko ±12–20 ha ne mogu isključiti
-(ADR-027 dopuna). Downwind heuristika (−28 ha za B=2/4) je jednako dobra ili bolja.
+(ADR-027 dopuna). Ni na 99 TRAIN požara fine-tuning ne pomaže, pa to nije overfitting nego
+slab signal budžeta. Downwind heuristika (−28 ha za B=2/4) je jednako dobra ili bolja.
 [Sažetak](../reports/real-fire-data/feds-simfire-policy-benchmark-v1.json),
 [grafikon](../reports/real-fire-data/feds-simfire-policy-benchmark-v1.png).
 
