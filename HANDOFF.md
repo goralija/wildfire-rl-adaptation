@@ -9,6 +9,13 @@ potreban kontekst bez prethodne chat historije.
 
 ## Aktivni cilj i status
 
+**Najnovije (2026-11-05, ADR-028, grana `codex/synthetic-ca-training`):**
+- Trening je prebačen na sintetičke požare u vlastitom CA simulatoru, s fizički
+  ograničenim jedinicama ([spec](docs/research/SYNTHETIC_CA_ENV.md)).
+- `policy-v1` je zaključan i testiran jednom na 119 stvarnih startova (simulirani ishod).
+- Rezultati: [STATUS](docs/STATUS.md), [izvještaji](reports/synthetic/index.md).
+- Tekst ispod opisuje prethodni SimFire put.
+
 Aktivna putanja je **SimFire + FPA-FOD početni uslovi + FEDS-CONUS opaženi obodi**.
 Godine požara određuju split: train 2018/2019, validation 2023, test 2024. FLE/ICS-209
 je samo mogući post-hoc operativni kontekst.

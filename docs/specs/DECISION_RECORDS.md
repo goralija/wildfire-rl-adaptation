@@ -876,3 +876,22 @@ direct_flank. The outcomes are simulated, the simulator is uncalibrated (median 
 0.27–0.30 at 48h), and nothing here is evidence about real suppression.
 Evidence: [real-case test](../../reports/synthetic/real-cases-test-v1.json),
 [calibration gap](../../reports/synthetic/calibration-gap-v1.json).
+
+### ADR-028 addendum — real-case exposure and edge sensitivity, recorded 2026-11-05
+
+- **Exposure before locking.** Before policy-v1 was locked, all 119 real cases were
+  loaded for shape, fuel-code and crop checks. One train case (plateau) was smoke-run
+  through the gap diagnostic (no-op only) to test the script. No simulator, reward,
+  training or selection setting was changed after that.
+- **Edge sensitivity.** The test was recomputed from the same report on the 85 cases
+  where the no-op fire never reaches the crop edge and no initial cells lie outside the
+  crop:
+
+  | Contrast (85 cases) | Saved fraction | Return |
+  |---|---|---|
+  | policy-v1 − no-op | +0.149 [0.110, 0.193], wins 67 / losses 2 | +0.119 [0.078, 0.165] |
+  | policy-v1 − direct_flank | +0.017 [−0.019, 0.054] | +0.044 [0.000, 0.087] |
+
+  - Close calls: 26 against 49. Units lost: 0 against 0.
+  - Saved area: 35,400 ha against 32,900 ha, out of 223,200 ha of no-op damage.
+- **Conclusion.** The headline holds without the edge cases.
