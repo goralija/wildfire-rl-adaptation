@@ -4,7 +4,9 @@ title: Sintetičko CA trening okruženje s fizički ograničenim jedinicama (v1,
 ---
 # Sintetičko CA trening okruženje (v1)
 
-Status: **prijedlog i implementacija u toku**, grana `codex/synthetic-ca-training`.
+Status: **implementirano i korišteno za policy-v1 (2026-11-05)**, grana
+`codex/synthetic-ca-training`. Rezultati su u ADR-028 dopunama i
+[izvještajima](../../reports/synthetic/index.md).
 Ovo je vlastiti, pojednostavljeni probabilistički cellular-automaton (CA) simulator.
 Nije Cell2Fire, nije SimFire i nije fizički validiran. Odluka je zapisana u ADR-028.
 
