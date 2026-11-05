@@ -10,6 +10,11 @@ import unittest
 
 import numpy as np
 
+try:
+    import gymnasium  # noqa: F401
+except ImportError:  # the core suite runs without the training venv
+    raise unittest.SkipTest("gymnasium is only in the training venv")
+
 from wildfire_rl.feds_simfire_setup import INPUT_ROOT, MANIFEST, WEATHER
 from wildfire_rl.synthetic_env import TAIL_DECISIONS
 from wildfire_rl.synthetic_real_cases import (
