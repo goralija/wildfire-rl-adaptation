@@ -801,3 +801,35 @@ Evidence: [acceptance report](../../reports/synthetic/acceptance-main1-best.json
   checkpoint. The one with the highest return on seeds 0–63 is locked and goes through the
   preregistered acceptance on 0–255, with 64–255 reported as the selection-free result.
 - **Reporting.** Documentation must say the policy starts from the scripted tactic.
+
+### ADR-028 addendum — policy-v1 locked; acceptance FAIL (tie with direct_flank), recorded 2026-11-05
+
+The ft-1 validation return on seeds 0–63 was 0.086, **0.109** (200k), 0.088, 0.087, 0.065
+and 0.101 (600k). The 200k checkpoint beats bc-2 (0.093) and is locked as
+`policy-v1` (sha256 `701ccce2…6ad9`, [hash file](../../reports/synthetic/policy-v1.sha256)).
+
+Acceptance on seeds 0–255 (paired, deterministic):
+
+| Policy | Return | Saved | Units lost | Close calls |
+|---|---|---|---|---|
+| policy-v1 | **0.091** | 0.122 | 1 | 70 |
+| bc-2 | 0.090 | 0.118 | 0 | 72 |
+| direct_flank | 0.088 | 0.123 | 0 | 90 |
+| protect_urban | 0.062 | 0.088 | 0 | 66 |
+| downwind_indirect | 0.031 | 0.051 | 1 | 42 |
+| random | 0.010 | 0.020 | 1 | 14 |
+| no-op | −0.010 | 0 | 2 | 5 |
+
+- **Against direct_flank:** policy-v1 − direct_flank = +0.003, CI [−0.026, +0.032],
+  wins 102 and losses 111. On selection-free seeds 64–255 it is −0.012, CI [−0.047,
+  +0.021]. Policy-v1 also loses one unit more. **FAIL**: the learned policy is
+  statistically tied with its teacher. The 0.109 measured on 0–63 was inflated by
+  selection.
+- **Against no-op:** +0.101, CI [0.075, 0.129], wins 162 and losses 38. The agent clearly
+  reduces simulated damage relative to doing nothing.
+- **Next step.** Per ADR-028 the locked checkpoint is now tested once on the 119 real
+  cases, and the calibration-gap diagnostic is run. The real cases did not influence any
+  training, selection or simulator setting up to this point.
+
+Evidence: [acceptance report](../../reports/synthetic/acceptance-policy-v1.json),
+[ft-1 validation](../../reports/synthetic/ft-1-validation.jsonl).
