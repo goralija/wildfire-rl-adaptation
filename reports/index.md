@@ -7,6 +7,7 @@
 - [pilot](pilot/index.md) - Dokumenti grupe.
 - [real-fire-data](real-fire-data/index.md) - Dokumenti grupe.
 - [rl-smoke](rl-smoke/index.md) - Dokumenti grupe.
+- [synthetic](synthetic/index.md) - Sintetičko CA okruženje, trening i test na stvarnim slučajevima (ADR-028).
 
 ## Dokumenti
 
