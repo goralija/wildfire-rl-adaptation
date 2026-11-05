@@ -64,6 +64,9 @@ def main() -> None:
     parser.add_argument("--episodes-per-round", type=int, default=42)
     parser.add_argument("--epochs", type=int, default=3)
     parser.add_argument("--batch-size", type=int, default=256)
+    parser.add_argument("--lr", type=float, default=1e-3)
+    parser.add_argument("--keep-rounds", type=int, default=3,
+                        help="fit on the samples of this many most recent rounds")
     parser.add_argument("--workers", type=int, default=7)
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
@@ -72,17 +75,20 @@ def main() -> None:
     torch.set_num_threads(4)
     model = MaskablePPO.load(args.init, device="cpu")
     policy = model.policy
-    optimiser = torch.optim.Adam(policy.parameters(), lr=3e-4)
+    optimiser = torch.optim.Adam(policy.parameters(), lr=args.lr)
+    recent = []
     log = []
     next_seed = 0
     with ProcessPoolExecutor(args.workers) as pool:
         for round_index in range(args.rounds):
             jobs = [(next_seed + i, args.teacher) for i in range(args.episodes_per_round)]
             next_seed += args.episodes_per_round
-            samples = [s for episode in pool.map(_collect, jobs) for s in episode]
+            recent.append([s for episode in pool.map(_collect, jobs) for s in episode])
+            recent = recent[-args.keep_rounds:]
+            samples = [s for batch in recent for s in batch]
             losses, agree = [], []
-            for _ in range(args.epochs):
-                order = np.random.default_rng(round_index).permutation(len(samples))
+            for epoch in range(args.epochs):
+                order = np.random.default_rng([round_index, epoch]).permutation(len(samples))
                 for start in range(0, len(order), args.batch_size):
                     obs, masks, actions = _batch([samples[i] for i in order[start:start + args.batch_size]],
                                                  "cpu")
@@ -96,7 +102,10 @@ def main() -> None:
                     with torch.no_grad():
                         dist = policy.get_distribution(obs, action_masks=masks)
                         predicted = dist.get_actions(deterministic=True)
-                        agree.append(float((predicted == actions).float().mean()))
+                        # Agreement only on slots with a real choice (more than "stay" legal).
+                        choice = masks.view(masks.shape[0], actions.shape[1], -1).sum(-1) > 1
+                        if choice.any():
+                            agree.append(float((predicted == actions)[choice].float().mean()))
             row = {"round": round_index, "samples": len(samples),
                    "mean_loss": float(np.mean(losses)) if losses else None,
                    "slot_agreement": float(np.mean(agree)) if agree else None}
