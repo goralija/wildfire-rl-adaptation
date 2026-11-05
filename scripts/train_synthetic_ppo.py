@@ -128,6 +128,10 @@ def main() -> None:
     parser.add_argument("--stage-b-share", type=float, default=0.3)
     parser.add_argument("--seed", type=int, default=1)
     parser.add_argument("--resume", type=Path)
+    parser.add_argument("--learning-rate", type=float, default=3e-4)
+    parser.add_argument("--ent-coef", type=float, default=0.01)
+    parser.add_argument("--clip-range", type=float, default=0.2)
+    parser.add_argument("--start-stage", choices=sorted(STAGES), default="A")
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
@@ -136,12 +140,15 @@ def main() -> None:
     vec = VecMonitor(SubprocVecEnv([make_env(i, args.seed) for i in range(args.envs)]))
     eval_vec = SubprocVecEnv([make_env(100 + i, args.seed) for i in range(args.eval_envs)])
     if args.resume:
-        model = MaskablePPO.load(args.resume, env=vec, device="cpu")
+        # Fine-tuning settings replace the stored ones (used for the plan-B warm start).
+        model = MaskablePPO.load(args.resume, env=vec, device="cpu", custom_objects={
+            "learning_rate": args.learning_rate, "lr_schedule": lambda _: args.learning_rate,
+            "ent_coef": args.ent_coef, "clip_range": lambda _: args.clip_range})
     else:
         model = MaskablePPO(
             "MultiInputPolicy", vec, n_steps=256, batch_size=512, n_epochs=4,
-            learning_rate=3e-4, gamma=0.995, gae_lambda=0.95, ent_coef=0.01,
-            clip_range=0.2, policy_kwargs=dict(normalize_images=False,
+            learning_rate=args.learning_rate, gamma=0.995, gae_lambda=0.95,
+            ent_coef=args.ent_coef, clip_range=args.clip_range, policy_kwargs=dict(normalize_images=False,
                                                net_arch=dict(pi=[256, 256], vf=[256, 256])),
             seed=args.seed, device="cpu", verbose=0,
         )
@@ -149,9 +156,12 @@ def main() -> None:
                "stages": STAGES, "environment": "synthetic CA ADR-028 v4", "reuse_fires": REUSE_FIRES,
                "real_cases_loaded": False}
     (args.out / "receipt.json").write_text(json.dumps(receipt, indent=1, default=str))
+    if args.start_stage == "B":
+        vec.env_method("set_curriculum", **STAGES["B"])
     callback = ValidationCallback(eval_vec, list(range(args.eval_seeds)), args.eval_every,
-                                  args.out, int(args.stage_b_share * args.steps))
-    model.learn(total_timesteps=args.steps, callback=callback, reset_num_timesteps=not args.resume)
+                                  args.out, 0 if args.start_stage == "B"
+                                  else int(args.stage_b_share * args.steps))
+    model.learn(total_timesteps=args.steps, callback=callback, reset_num_timesteps=True)
     model.save(args.out / "final_model.zip")
     vec.close()
     eval_vec.close()
