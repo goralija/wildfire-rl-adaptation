@@ -786,3 +786,18 @@ the stop-rule addendum the next step is plan B: a behaviour-cloning warm start f
 direct_flank, the best tactic, on training seeds ≥ 500M only, then PPO fine-tuning.
 Evidence: [acceptance report](../../reports/synthetic/acceptance-main1-best.json),
 [validation curve](../../reports/synthetic/main-1-validation.jsonl).
+
+### ADR-028 addendum — plan B: BC warm start and fine-tuning, recorded 2026-11-05 (before fine-tune results)
+
+- **bc-2.** Behaviour cloning of direct_flank, initialised from main-1 final weights. 40
+  rounds × 42 episodes on training seeds ≥ 500M; each fit uses the last 3 rounds, 8
+  epochs, lr 1e-3. Agreement with the teacher on slots that had a real choice reached
+  about 95–96%. A first attempt (bc-1) took too few gradient steps and was stopped at 41%.
+- **bc-2 on validation seeds 0–63:** return 0.093 (saved 0.115, 0 units lost), against
+  direct_flank's 0.062. The clone outperforms its teacher on these seeds.
+- **ft-1.** MaskablePPO fine-tuning from bc-2, stage B only, 600k steps, lr 1e-4, entropy
+  0.001, clip 0.1.
+- **Candidate selection.** The candidates are bc-2 itself and every ft-1 validation
+  checkpoint. The one with the highest return on seeds 0–63 is locked and goes through the
+  preregistered acceptance on 0–255, with 64–255 reported as the selection-free result.
+- **Reporting.** Documentation must say the policy starts from the scripted tactic.
