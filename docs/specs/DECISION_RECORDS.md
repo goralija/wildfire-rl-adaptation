@@ -833,3 +833,46 @@ Acceptance on seeds 0–255 (paired, deterministic):
 
 Evidence: [acceptance report](../../reports/synthetic/acceptance-policy-v1.json),
 [ft-1 validation](../../reports/synthetic/ft-1-validation.jsonl).
+
+### ADR-028 addendum — one-time real-case test and calibration gap, recorded 2026-11-05
+
+Locked checkpoints (policy-v1, plus bc-2 and main-1 best for reference) were tested once
+on the 119 local FEDS cases. Each case uses its real LANDFIRE fuel and terrain, gridMET
+weather and initial FEDS perimeter. The CA computes the outcome, with 48h + 12h tail and
+the same units for every policy: 2 dozers and 2 hand crews arriving at 30–120 min.
+
+| Contrast (all 119) | Saved fraction | Return |
+|---|---|---|
+| policy-v1 − no-op | **+0.120** [0.089, 0.154], wins 100 / losses 2 | +0.076 [0.040, 0.115] |
+| policy-v1 − direct_flank | +0.002 [−0.026, 0.031] | **+0.048** [0.012, 0.084] |
+| policy-v1 − protect_urban | +0.034 [0.008, 0.062] | +0.052 [0.015, 0.088] |
+
+- **Groups.** Ex-train (99) and ex-validation (20) point the same way. The 20-case
+  intervals are wide.
+- **Return.** The return advantage over direct_flank comes from safety: 53 close calls
+  against 107, with no units lost by either. The saved area is the same.
+- **Totals.** Urban cells burned: no-op 1,623, direct_flank 1,543, policy-v1 1,513.
+  Saved area: policy-v1 about 56,000 ha, direct_flank about 60,000 ha.
+- **Caveats.** In 34 of 119 cases the no-op fire reaches the crop edge, and 4 cases have
+  initial cells outside the crop.
+
+Calibration gap: the no-op CA compared with the observed FEDS perimeters. This is a
+diagnostic only, never a gate, and it was run after locking.
+
+| Hour | Median sim/obs area (ex-train / ex-val) | Median IoU | Sim grows more |
+|---|---|---|---|
+| 12 | 1.29 / 1.00 | 0.52 / 0.58 | 67% / 50% |
+| 24 | 1.25 / 1.11 | 0.35 / 0.38 | 66% / 60% |
+| 48 | 1.60 / 1.24 | 0.27 / 0.30 | 65% / 65% |
+
+The simulator overgrows the typical real fire, which is expected for unsuppressed spread
+against suppressed reality. It undergrows about a third of the cases.
+
+**Reading.** In the CA, on real landscapes, weather and ignitions it never trained on,
+the agent trained only on synthetic fires keeps its synthetic behaviour. It clearly
+beats doing nothing and matches the best scripted tactic in saved area with fewer
+close calls. It did not pass the preregistered synthetic acceptance against
+direct_flank. The outcomes are simulated, the simulator is uncalibrated (median IoU
+0.27–0.30 at 48h), and nothing here is evidence about real suppression.
+Evidence: [real-case test](../../reports/synthetic/real-cases-test-v1.json),
+[calibration gap](../../reports/synthetic/calibration-gap-v1.json).
