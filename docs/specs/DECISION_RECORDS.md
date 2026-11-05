@@ -755,3 +755,34 @@ surrounded is treated as an entrapment. **Gate: PASS on v4.** PPO training uses 
 - **Selection bias.** The best checkpoint is chosen on seeds 0–63, while acceptance runs
   on 0–255, which contains them. Acceptance stays as preregistered, and 64–255 is also
   reported as the selection-free result.
+
+### ADR-028 addendum — main-1 result: FAIL against the best heuristic, recorded 2026-11-05
+
+The main-1 run used MaskablePPO with 1.5M steps (stage A to 450k, then B), 6 environments,
+fire reuse ×4 and about 4.3h of compute. Validation return on seeds 0–63 went 0.037
+(100k), 0.024 (400k), 0.038 (800k), 0.044 (1.1M), **0.058 (1.2M, best)** and 0.035
+(1.5M). The stop rule never triggered, because a new best kept arriving.
+
+A diagnosis at 400k showed the policy built more line than direct_flank (613 versus 242
+cells on 12 seeds), but with a median distance to the fire of 14 cells against 3. Most
+of its line was therefore too far away to matter within the horizon, which is a
+credit-assignment failure.
+
+Acceptance (preregistered) on seeds 0–255, best checkpoint, deterministic:
+
+| Policy | Mean return | Mean saved | Units lost |
+|---|---|---|---|
+| direct_flank | **0.088** | 0.123 | 0 |
+| protect_urban | 0.062 | 0.088 | 0 |
+| PPO main-1 | 0.047 | 0.052 | 0 |
+| downwind_indirect | 0.031 | 0.051 | 1 |
+| random | 0.010 | 0.020 | 1 |
+| no-op | −0.010 | 0 | 2 |
+
+PPO − direct_flank = −0.042, 95% CI [−0.071, −0.012]. On the selection-free seeds 64–255
+it is −0.054, CI [−0.091, −0.019]. **FAIL.** The learned policy beats random and
+downwind_indirect and loses no units, but it is worse than the simple flank rule. Per
+the stop-rule addendum the next step is plan B: a behaviour-cloning warm start from
+direct_flank, the best tactic, on training seeds ≥ 500M only, then PPO fine-tuning.
+Evidence: [acceptance report](../../reports/synthetic/acceptance-main1-best.json),
+[validation curve](../../reports/synthetic/main-1-validation.jsonl).
