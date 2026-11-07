@@ -14,4 +14,6 @@ su u ADR-028 i njegovim dopunama u [odlukama](../../docs/specs/DECISION_RECORDS.
 - `calibration-gap-v1.json` - no-op CA protiv opaženih FEDS perimetara, 12–48h.
 - `main-1-validation.jsonl`, `ft-1-validation.jsonl` - validacijske krive (sjemena 0–63).
 - `bc-2-log.json` - imitacija direct_flank, 40 rundi.
-- `policy-v1.sha256` - SHA-256 zaključane politike (težine su lokalne, u `.local/`).
+- `policy-v1.sha256`, `bc2.sha256`, `main1-best.sha256` - SHA-256 zaključanih modela.
+  Težine nisu u gitu; nalaze se kao prilozi draft GitHub releasea `synthetic-policy-v1`
+  (vidljiv samo članovima s pristupom repou), a postupak je opisan u [HANDOFF](../../HANDOFF.md).
