@@ -1,5 +1,14 @@
 # Promjene baze znanja
 
+## 2026-11-05: sintetički CA trening i jednokratni test (ADR-028)
+
+- Novi CA simulator, okruženje s fizički ograničenim jedinicama i kontrafaktualna nagrada.
+- PPO od nule nije prošao; imitacija + PPO je dala policy-v1, izjednačenu s heuristikom
+  i jasno bolju od no-op. Na 119 stvarnih startova čuva 12% više od no-op (simulirani
+  ishod). Jaz kalibracije: medijan IoU 0.27–0.30 na 48h.
+- [STATUS](docs/STATUS.md), [NEXT_SESSION](docs/NEXT_SESSION.md),
+  [spec](docs/research/SYNTHETIC_CA_ENV.md), [izvještaji](reports/synthetic/index.md).
+
 ## 2026-11-04: koraci 5–8 (noćni samostalni rad)
 
 - Ulazi ponovo izgrađeni i reproducirani (isti hashovi, isti WAF .01 IoU). Dijagnoza

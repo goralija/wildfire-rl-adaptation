@@ -389,3 +389,31 @@ three seeds was run while seeds 14–15 trained; its 1,280 shared episodes match
 pass exactly and were not used to change the protocol.
 A supplementary TRAIN in-sample benchmark (99 fires, 9,504 episodes, 25 min on 7 workers)
 shows the same pattern, so the null is not an overfitting artefact.
+
+## EXP-015 — synthetic CA environment and headroom gate, 2026-11-04 (ADR-028)
+New numpy CA on 180 m FBFM13 grids, with units bounded by NWCG production rates and a
+counterfactual no-op reward on common random numbers. The heuristic headroom gate went
+through four environment versions (v1–v4: growth filter, then the escape and close-call
+safety model) and passed on v4: direct_flank saved 0.116 against random, CI [0.069, 0.135].
+Details: [environment spec](SYNTHETIC_CA_ENV.md), ADR-028 addenda.
+
+## EXP-016 — PPO from scratch (main-1) and plan B (bc-2, ft-1), 2026-11-04/05
+- **main-1.** MaskablePPO for 1.5M steps (~4.3h). Its best validation return on seeds
+  0–63 was 0.058. On 0–255 it scored 0.047 against direct_flank's 0.088: FAIL. It built
+  line too far from the fire.
+- **bc-2.** Behaviour cloning of direct_flank on training seeds ≥ 500M, with ~96%
+  agreement.
+- **ft-1.** PPO fine-tuning from bc-2. The 200k checkpoint was locked as policy-v1.
+- **Acceptance on 0–255.** policy-v1 0.091 against direct_flank 0.088, CI of the
+  difference [−0.026, +0.032]: a tie, so FAIL. Against no-op +0.101, CI [0.075, 0.129].
+Evidence: [reports/synthetic](../../reports/synthetic/index.md).
+
+## EXP-017 — one-time real-case test and calibration gap, 2026-11-05
+119 FEDS starts (99 ex-train, 20 ex-validation) with real LANDFIRE and gridMET inputs,
+48h, and outcomes simulated by the CA.
+- policy-v1 against no-op: saved +0.120, CI [0.089, 0.154], 100 wins and 2 losses.
+- Against direct_flank: equal saved area, +0.048 return because of half as many close
+  calls.
+- Calibration gap at 48h: median sim/obs area 1.60 (ex-train) and 1.24 (ex-val), median
+  IoU 0.27 and 0.30.
+Simulator-only; not evidence about real suppression.

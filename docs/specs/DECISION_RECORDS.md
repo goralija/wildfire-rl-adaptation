@@ -668,3 +668,230 @@ and was **not** used to choose candidates, tune parameters, or decide that the g
 passes. The stress record was chosen from TRAIN no-op statistics before any validation
 scoring. If a later TASK-019 fix makes the TRAIN gate pass, rerun the gate on TRAIN first,
 then validation, and mark the exploratory step 6–8 results superseded.
+
+## ADR-028 — synthetic CA training with physically bounded units; real FEDS cases only for the final test, accepted 2026-11-04
+
+The user asked on 2026-11-04 to stop training on real cases and to train and validate
+on synthetic fires whose spread probability depends on cell fuel type. Units must obey
+real-world limits: finite count, no teleporting, bounded line production. Human life
+has priority. Real cases are kept for testing the trained agent. The previous path
+(ADR-021–027) trained on real FEDS cases in an uncalibrated SimFire and placed line
+instantly in 12h steps, so its policy results cannot support a transfer claim.
+
+Decision:
+- **Simulator.** A new numpy CA ([spec](../research/SYNTHETIC_CA_ENV.md)) on 180 m
+  FBFM13 grids. Per-pair contact rates come from Anderson (1982) ROS with a
+  Rothermel-style wind term and an Alexandridis-style slope term. A contact calibration
+  makes the emergent head rate on flat line fires match the table within about 15%.
+  It is a training simulator, not a validated fire model.
+- **Data roles.** Training uses procedurally generated landscapes, weather and ignitions
+  (seed ≥ 1,000,000). In-training validation uses fixed seeds 0–255. The 119 local FEDS
+  cases (99 ex-TRAIN, 20 ex-VALIDATION, reported separately) are touched only by the
+  final test of locked policies, plus a calibration-gap diagnostic (no-op versus FEDS
+  growth) that is reported but never used as a gate. TEST 2024 stays closed.
+- **Units.** 20-person hand crews and dozers. Line rates come from PMS 410-1 App. A,
+  travel speeds from Sullivan et al. 2020 or stated assumptions. Units arrive over time
+  2–4 km from the fire, cannot enter burning cells or water, retreat automatically
+  when fire is within two cells, and are lost if their cell ignites.
+- **Reward.** The user's intent ("reward lower fire growth, penalise same or higher")
+  is implemented counterfactually. `r_t = (D_noop,t − D_agent,t) / max(W_noop, 20) −
+  1.0 × units lost`. D is weighted new damage (vegetation 1, urban 91 = 50), and the
+  no-op rollout uses common random numbers. The episode return is the fraction of no-op
+  damage saved. Both rollouts continue 12h past the horizon with lines held, so merely
+  delaying the fire earns nothing. A literal growth-trend reward would telescope and
+  pay for natural burnout; it is not used.
+- **Headroom gate before PPO (preregistered here).** On synthetic validation seeds
+  0–127 (full curriculum), the best scripted tactic must reach a mean saved fraction
+  ≥ 0.05, with a paired bootstrap 95% CI for (best − random) above 0. If this fails, unit
+  or simulator settings change first, not the RL setup.
+- **PPO acceptance (preregistered here).** A checkpoint is chosen only by synthetic
+  validation. It counts as learned if, on validation seeds 0–255, its mean return beats
+  the best scripted tactic with a paired 95% CI above 0 and it loses no more units than
+  that tactic. The real-case test is then run once per locked checkpoint.
+
+Consequences: results are simulator-only. The calibration gap to FEDS growth bounds any
+real-world reading. The old SimFire/FEDS path remains historical and unchanged.
+
+### ADR-028 addendum — headroom gate history, recorded 2026-11-04
+
+All runs use synthetic validation seeds 0–127 on the full curriculum, scored as the
+paired saved fraction against the random policy.
+
+| Version | Environment change | Best tactic, mean saved | CI (best − random) | Units lost (best) |
+|---|---|---|---|---|
+| v1 | as accepted | direct flank 0.058 | [0.026, 0.086] | 16 |
+| v2 | resample fires whose no-op adds < 30 cells (the v1 median was 15 cells) | 0.117 | — | 33 |
+| v3 | BFS escape at 4 cells | 0.029 | — | 31 |
+| v4 | overrun with an open neighbour = close call (−0.1, displaced); surrounded = loss (−1.0); escape at 2 cells | **0.116** | **[0.069, 0.135]** | **0** |
+
+v1 passed narrowly, but half of its episodes carried no signal. v2 to v4 change the
+environment, not the gate. The 180 m cell is far wider than the tabled flame length (at
+most ~6 m, Anderson 1982), so working next to the fire edge is realistic. Only being
+surrounded is treated as an entrapment. **Gate: PASS on v4.** PPO training uses v4.
+
+### ADR-028 addendum — validation bar, stop rule and selection bias, recorded 2026-11-04 (main-1 at 200k steps)
+
+- **Comparable bar.** The training callback validates on seeds 0–63 with the full
+  curriculum on the current environment, which includes the per-variant staging key.
+  The heuristics measured on the same seeds and environment:
+
+  | Policy | Mean saved | Mean return |
+  |---|---|---|
+  | direct_flank | 0.087 | **0.062** |
+  | protect_urban | 0.062 | 0.045 |
+  | downwind_indirect | 0.040 | 0.030 |
+  | random | 0.010 | −0.007 |
+  | no-op | 0 | −0.017 |
+
+  The v4 headroom figure of 0.116 used seeds 0–127 before the staging change and is not
+  this bar.
+- **Stop rule for main-1 (written before the 300k result).** Stage B starts at 450k, so
+  judge only from 600k onward. If three consecutive validations bring no new best and the
+  best validation return is still below direct_flank's 0.062, stop main-1 and switch to
+  plan B. Plan B is a behaviour-cloning warm start: copy direct_flank (plus
+  protect_urban) actions on training seeds ≥ 1M only, then MaskablePPO fine-tuning with
+  the same environment and reward. Documentation must then say that the policy starts
+  from the scripted tactic.
+- **Selection bias.** The best checkpoint is chosen on seeds 0–63, while acceptance runs
+  on 0–255, which contains them. Acceptance stays as preregistered, and 64–255 is also
+  reported as the selection-free result.
+
+### ADR-028 addendum — main-1 result: FAIL against the best heuristic, recorded 2026-11-05
+
+The main-1 run used MaskablePPO with 1.5M steps (stage A to 450k, then B), 6 environments,
+fire reuse ×4 and about 4.3h of compute. Validation return on seeds 0–63 went 0.037
+(100k), 0.024 (400k), 0.038 (800k), 0.044 (1.1M), **0.058 (1.2M, best)** and 0.035
+(1.5M). The stop rule never triggered, because a new best kept arriving.
+
+A diagnosis at 400k showed the policy built more line than direct_flank (613 versus 242
+cells on 12 seeds), but with a median distance to the fire of 14 cells against 3. Most
+of its line was therefore too far away to matter within the horizon, which is a
+credit-assignment failure.
+
+Acceptance (preregistered) on seeds 0–255, best checkpoint, deterministic:
+
+| Policy | Mean return | Mean saved | Units lost |
+|---|---|---|---|
+| direct_flank | **0.088** | 0.123 | 0 |
+| protect_urban | 0.062 | 0.088 | 0 |
+| PPO main-1 | 0.047 | 0.052 | 0 |
+| downwind_indirect | 0.031 | 0.051 | 1 |
+| random | 0.010 | 0.020 | 1 |
+| no-op | −0.010 | 0 | 2 |
+
+PPO − direct_flank = −0.042, 95% CI [−0.071, −0.012]. On the selection-free seeds 64–255
+it is −0.054, CI [−0.091, −0.019]. **FAIL.** The learned policy beats random and
+downwind_indirect and loses no units, but it is worse than the simple flank rule. Per
+the stop-rule addendum the next step is plan B: a behaviour-cloning warm start from
+direct_flank, the best tactic, on training seeds ≥ 500M only, then PPO fine-tuning.
+Evidence: [acceptance report](../../reports/synthetic/acceptance-main1-best.json),
+[validation curve](../../reports/synthetic/main-1-validation.jsonl).
+
+### ADR-028 addendum — plan B: BC warm start and fine-tuning, recorded 2026-11-05 (before fine-tune results)
+
+- **bc-2.** Behaviour cloning of direct_flank, initialised from main-1 final weights. 40
+  rounds × 42 episodes on training seeds ≥ 500M; each fit uses the last 3 rounds, 8
+  epochs, lr 1e-3. Agreement with the teacher on slots that had a real choice reached
+  about 95–96%. A first attempt (bc-1) took too few gradient steps and was stopped at 41%.
+- **bc-2 on validation seeds 0–63:** return 0.093 (saved 0.115, 0 units lost), against
+  direct_flank's 0.062. The clone outperforms its teacher on these seeds.
+- **ft-1.** MaskablePPO fine-tuning from bc-2, stage B only, 600k steps, lr 1e-4, entropy
+  0.001, clip 0.1.
+- **Candidate selection.** The candidates are bc-2 itself and every ft-1 validation
+  checkpoint. The one with the highest return on seeds 0–63 is locked and goes through the
+  preregistered acceptance on 0–255, with 64–255 reported as the selection-free result.
+- **Reporting.** Documentation must say the policy starts from the scripted tactic.
+
+### ADR-028 addendum — policy-v1 locked; acceptance FAIL (tie with direct_flank), recorded 2026-11-05
+
+The ft-1 validation return on seeds 0–63 was 0.086, **0.109** (200k), 0.088, 0.087, 0.065
+and 0.101 (600k). The 200k checkpoint beats bc-2 (0.093) and is locked as
+`policy-v1` (sha256 `701ccce2…6ad9`, [hash file](../../reports/synthetic/policy-v1.sha256)).
+
+Acceptance on seeds 0–255 (paired, deterministic):
+
+| Policy | Return | Saved | Units lost | Close calls |
+|---|---|---|---|---|
+| policy-v1 | **0.091** | 0.122 | 1 | 70 |
+| bc-2 | 0.090 | 0.118 | 0 | 72 |
+| direct_flank | 0.088 | 0.123 | 0 | 90 |
+| protect_urban | 0.062 | 0.088 | 0 | 66 |
+| downwind_indirect | 0.031 | 0.051 | 1 | 42 |
+| random | 0.010 | 0.020 | 1 | 14 |
+| no-op | −0.010 | 0 | 2 | 5 |
+
+- **Against direct_flank:** policy-v1 − direct_flank = +0.003, CI [−0.026, +0.032],
+  wins 102 and losses 111. On selection-free seeds 64–255 it is −0.012, CI [−0.047,
+  +0.021]. Policy-v1 also loses one unit more. **FAIL**: the learned policy is
+  statistically tied with its teacher. The 0.109 measured on 0–63 was inflated by
+  selection.
+- **Against no-op:** +0.101, CI [0.075, 0.129], wins 162 and losses 38. The agent clearly
+  reduces simulated damage relative to doing nothing.
+- **Next step.** Per ADR-028 the locked checkpoint is now tested once on the 119 real
+  cases, and the calibration-gap diagnostic is run. The real cases did not influence any
+  training, selection or simulator setting up to this point.
+
+Evidence: [acceptance report](../../reports/synthetic/acceptance-policy-v1.json),
+[ft-1 validation](../../reports/synthetic/ft-1-validation.jsonl).
+
+### ADR-028 addendum — one-time real-case test and calibration gap, recorded 2026-11-05
+
+Locked checkpoints (policy-v1, plus bc-2 and main-1 best for reference) were tested once
+on the 119 local FEDS cases. Each case uses its real LANDFIRE fuel and terrain, gridMET
+weather and initial FEDS perimeter. The CA computes the outcome, with 48h + 12h tail and
+the same units for every policy: 2 dozers and 2 hand crews arriving at 30–120 min.
+
+| Contrast (all 119) | Saved fraction | Return |
+|---|---|---|
+| policy-v1 − no-op | **+0.120** [0.089, 0.154], wins 100 / losses 2 | +0.076 [0.040, 0.115] |
+| policy-v1 − direct_flank | +0.002 [−0.026, 0.031] | **+0.048** [0.012, 0.084] |
+| policy-v1 − protect_urban | +0.034 [0.008, 0.062] | +0.052 [0.015, 0.088] |
+
+- **Groups.** Ex-train (99) and ex-validation (20) point the same way. The 20-case
+  intervals are wide.
+- **Return.** The return advantage over direct_flank comes from safety: 53 close calls
+  against 107, with no units lost by either. The saved area is the same.
+- **Totals.** Urban cells burned: no-op 1,623, direct_flank 1,543, policy-v1 1,513.
+  Saved area: policy-v1 about 56,000 ha, direct_flank about 60,000 ha.
+- **Caveats.** In 34 of 119 cases the no-op fire reaches the crop edge, and 4 cases have
+  initial cells outside the crop.
+
+Calibration gap: the no-op CA compared with the observed FEDS perimeters. This is a
+diagnostic only, never a gate, and it was run after locking.
+
+| Hour | Median sim/obs area (ex-train / ex-val) | Median IoU | Sim grows more |
+|---|---|---|---|
+| 12 | 1.29 / 1.00 | 0.52 / 0.58 | 67% / 50% |
+| 24 | 1.25 / 1.11 | 0.35 / 0.38 | 66% / 60% |
+| 48 | 1.60 / 1.24 | 0.27 / 0.30 | 65% / 65% |
+
+The simulator overgrows the typical real fire, which is expected for unsuppressed spread
+against suppressed reality. It undergrows about a third of the cases.
+
+**Reading.** In the CA, on real landscapes, weather and ignitions it never trained on,
+the agent trained only on synthetic fires keeps its synthetic behaviour. It clearly
+beats doing nothing and matches the best scripted tactic in saved area with fewer
+close calls. It did not pass the preregistered synthetic acceptance against
+direct_flank. The outcomes are simulated, the simulator is uncalibrated (median IoU
+0.27–0.30 at 48h), and nothing here is evidence about real suppression.
+Evidence: [real-case test](../../reports/synthetic/real-cases-test-v1.json),
+[calibration gap](../../reports/synthetic/calibration-gap-v1.json).
+
+### ADR-028 addendum — real-case exposure and edge sensitivity, recorded 2026-11-05
+
+- **Exposure before locking.** Before policy-v1 was locked, all 119 real cases were
+  loaded for shape, fuel-code and crop checks. One train case (plateau) was smoke-run
+  through the gap diagnostic (no-op only) to test the script. No simulator, reward,
+  training or selection setting was changed after that.
+- **Edge sensitivity.** The test was recomputed from the same report on the 85 cases
+  where the no-op fire never reaches the crop edge and no initial cells lie outside the
+  crop:
+
+  | Contrast (85 cases) | Saved fraction | Return |
+  |---|---|---|
+  | policy-v1 − no-op | +0.149 [0.110, 0.193], wins 67 / losses 2 | +0.119 [0.078, 0.165] |
+  | policy-v1 − direct_flank | +0.017 [−0.019, 0.054] | +0.044 [0.000, 0.087] |
+
+  - Close calls: 26 against 49. Units lost: 0 against 0.
+  - Saved area: 35,400 ha against 32,900 ha, out of 223,200 ha of no-op damage.
+- **Conclusion.** The headline holds without the edge cases.

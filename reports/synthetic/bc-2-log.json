@@ -1,0 +1,246 @@
+{
+ "teacher": "direct_flank",
+ "training_seed_base": 500000000,
+ "rounds": [
+  {
+   "round": 0,
+   "samples": 894,
+   "mean_loss": 5.4256542176008224,
+   "slot_agreement": 0.4562615940812975
+  },
+  {
+   "round": 1,
+   "samples": 1921,
+   "mean_loss": 3.694419801235199,
+   "slot_agreement": 0.6723670586943626
+  },
+  {
+   "round": 2,
+   "samples": 2960,
+   "mean_loss": 2.0001522544771433,
+   "slot_agreement": 0.8552396961798271
+  },
+  {
+   "round": 3,
+   "samples": 3114,
+   "mean_loss": 1.1460283977481036,
+   "slot_agreement": 0.9292428109508294
+  },
+  {
+   "round": 4,
+   "samples": 3213,
+   "mean_loss": 0.9289531732121339,
+   "slot_agreement": 0.9383461423791372
+  },
+  {
+   "round": 5,
+   "samples": 3320,
+   "mean_loss": 0.9774881725987563,
+   "slot_agreement": 0.9332875403074118
+  },
+  {
+   "round": 6,
+   "samples": 3478,
+   "mean_loss": 0.9416313308424183,
+   "slot_agreement": 0.9399563180548804
+  },
+  {
+   "round": 7,
+   "samples": 3492,
+   "mean_loss": 0.8082798289002052,
+   "slot_agreement": 0.9515632098274571
+  },
+  {
+   "round": 8,
+   "samples": 3550,
+   "mean_loss": 0.7706369296647608,
+   "slot_agreement": 0.9510706450257983
+  },
+  {
+   "round": 9,
+   "samples": 3566,
+   "mean_loss": 0.8688343741398837,
+   "slot_agreement": 0.9431792087852955
+  },
+  {
+   "round": 10,
+   "samples": 3598,
+   "mean_loss": 0.700920091321071,
+   "slot_agreement": 0.9577385043104489
+  },
+  {
+   "round": 11,
+   "samples": 3557,
+   "mean_loss": 0.6847189571043211,
+   "slot_agreement": 0.957606842475278
+  },
+  {
+   "round": 12,
+   "samples": 3427,
+   "mean_loss": 0.6478745997218149,
+   "slot_agreement": 0.9592911569135529
+  },
+  {
+   "round": 13,
+   "samples": 3212,
+   "mean_loss": 0.6017489065416157,
+   "slot_agreement": 0.9619225779405007
+  },
+  {
+   "round": 14,
+   "samples": 3178,
+   "mean_loss": 0.6379157152886574,
+   "slot_agreement": 0.9581904015862025
+  },
+  {
+   "round": 15,
+   "samples": 3118,
+   "mean_loss": 0.8296111425958,
+   "slot_agreement": 0.9448155502860363
+  },
+  {
+   "round": 16,
+   "samples": 3087,
+   "mean_loss": 0.5998293521742408,
+   "slot_agreement": 0.9633256311600025
+  },
+  {
+   "round": 17,
+   "samples": 3059,
+   "mean_loss": 0.8230117175262421,
+   "slot_agreement": 0.9484547643611828
+  },
+  {
+   "round": 18,
+   "samples": 3056,
+   "mean_loss": 0.8115825017836565,
+   "slot_agreement": 0.9494623442490896
+  },
+  {
+   "round": 19,
+   "samples": 3111,
+   "mean_loss": 0.6883821943416618,
+   "slot_agreement": 0.9606189830945089
+  },
+  {
+   "round": 20,
+   "samples": 3000,
+   "mean_loss": 0.6593794916601231,
+   "slot_agreement": 0.960203722740213
+  },
+  {
+   "round": 21,
+   "samples": 2955,
+   "mean_loss": 0.7424561385608589,
+   "slot_agreement": 0.954412721718351
+  },
+  {
+   "round": 22,
+   "samples": 2861,
+   "mean_loss": 0.7402421841785932,
+   "slot_agreement": 0.954576151445508
+  },
+  {
+   "round": 23,
+   "samples": 3068,
+   "mean_loss": 1.0104870176098,
+   "slot_agreement": 0.938703860466679
+  },
+  {
+   "round": 24,
+   "samples": 3153,
+   "mean_loss": 0.8324626123962494,
+   "slot_agreement": 0.9510028310693227
+  },
+  {
+   "round": 25,
+   "samples": 3263,
+   "mean_loss": 0.6088128772994074,
+   "slot_agreement": 0.9647234076490769
+  },
+  {
+   "round": 26,
+   "samples": 3185,
+   "mean_loss": 0.8707608343460239,
+   "slot_agreement": 0.9484586681310947
+  },
+  {
+   "round": 27,
+   "samples": 3035,
+   "mean_loss": 0.6716386566792304,
+   "slot_agreement": 0.9600010272115469
+  },
+  {
+   "round": 28,
+   "samples": 3071,
+   "mean_loss": 0.7530345363775268,
+   "slot_agreement": 0.9549309158076843
+  },
+  {
+   "round": 29,
+   "samples": 3101,
+   "mean_loss": 0.8143386168477054,
+   "slot_agreement": 0.9513244777917862
+  },
+  {
+   "round": 30,
+   "samples": 3241,
+   "mean_loss": 0.6536236298986926,
+   "slot_agreement": 0.9594727370601434
+  },
+  {
+   "round": 31,
+   "samples": 3263,
+   "mean_loss": 0.7477251588223646,
+   "slot_agreement": 0.9543625827019031
+  },
+  {
+   "round": 32,
+   "samples": 3251,
+   "mean_loss": 0.7916033722173709,
+   "slot_agreement": 0.95212144863147
+  },
+  {
+   "round": 33,
+   "samples": 3294,
+   "mean_loss": 0.8351945612722864,
+   "slot_agreement": 0.9517004799384338
+  },
+  {
+   "round": 34,
+   "samples": 3341,
+   "mean_loss": 0.6857692450950188,
+   "slot_agreement": 0.9608619963484151
+  },
+  {
+   "round": 35,
+   "samples": 3311,
+   "mean_loss": 0.641619005992722,
+   "slot_agreement": 0.9613820406106802
+  },
+  {
+   "round": 36,
+   "samples": 3082,
+   "mean_loss": 0.675927429424169,
+   "slot_agreement": 0.9612722889735148
+  },
+  {
+   "round": 37,
+   "samples": 2916,
+   "mean_loss": 0.5649183826365819,
+   "slot_agreement": 0.9661324849973122
+  },
+  {
+   "round": 38,
+   "samples": 2869,
+   "mean_loss": 0.9026109093101695,
+   "slot_agreement": 0.9470623893042406
+  },
+  {
+   "round": 39,
+   "samples": 2970,
+   "mean_loss": 0.6190767916850746,
+   "slot_agreement": 0.9628464312603077
+  }
+ ]
+}

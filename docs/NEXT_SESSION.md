@@ -4,6 +4,34 @@ title: Nastavak nakon koraka 5–8 (SimFire/FEDS, 2026-11-04)
 ---
 # Naredni korak
 
+## Najnovije — 2026-11-05: sintetički CA (ADR-028), grana `codex/synthetic-ca-training`
+
+**Stanje.** policy-v1 je zaključan (hash u `reports/synthetic/policy-v1.sha256`; težine su prilog draft releasea
+`synthetic-policy-v1`, lokalno u ignorisanom `.local/synthetic/locked/`; preuzimanje u
+[HANDOFF](../HANDOFF.md)). Jednokratni test na stvarnim slučajevima je
+izveden. Svaki novi checkpoint koji ide na stvarne slučajeve prvo se zaključava i
+prijavljuje kao nova verzija, jer višestruki pokušaji na istih 119 slučajeva unose selekciju.
+
+**Odluke za tim:**
+- Da li je izjednačenje s heuristikom dovoljno za poster ili tražimo agenta koji je
+  pobjeđuje. Kandidati za to: DAgger, duži fine-tuning, više sjemena, više jedinica i
+  oracle baseline.
+- Da li heuristike treba povezati s doktrinarnim izvorima (vidi "Porijeklo heuristika" u
+  spec dokumentu).
+
+**Tehnički nastavak:**
+1. DAgger umjesto čiste imitacije, pa PPO s value pre-trainingom.
+2. Ablacija doslovne "growth trend" nagrade, za objašnjenje u radu.
+3. Vizualizacija epizoda je urađena: `scripts/synthetic_case_viewer.py` (lokalni viewer,
+   politika naspram no-op na jednom stvarnom startu, s FEDS obodima).
+
+**Komande** (iz roota worktreea, `PY=.local/simfire-venv/bin/python`, `PYTHONPATH=src`):
+`scripts/evaluate_synthetic_policies.py`, `scripts/train_synthetic_ppo.py`,
+`scripts/bc_warm_start.py`, `scripts/evaluate_real_cases.py --policy-locked`,
+`scripts/diagnose_synthetic_calibration_gap.py --all --policy-locked`,
+`scripts/synthetic_case_viewer.py`. Tačne argumente stvarnih runova daje [HANDOFF](../HANDOFF.md).
+
+
 ## Trenutno stanje — 2026-11-04
 
 Grana `codex/overnight-steps-5-8` je izvedena iz `codex/fireline-simfire-benchmark`
