@@ -8,7 +8,10 @@ import subprocess
 import sys
 import unittest
 
-import numpy as np
+try:
+    import numpy as np
+except ImportError as exc:
+    raise unittest.SkipTest("optional NumPy dependency is not installed: %s" % exc)
 
 try:
     import gymnasium  # noqa: F401
