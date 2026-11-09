@@ -226,7 +226,7 @@ def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path) -> dict:
         "limitations": [
             "gridMET is daily and approximately 4 km; each 12-hour interval uses one sampled daily cell.",
             "10 m wind and NFDRS 100-hour fuel moisture are proxies, not measured SimFire midflame wind or FBFM13 fine-fuel moisture.",
-            "FEDS `t` has no timezone; it is read as the nominal 01:30/13:30 local solar overpass (TASK-027). Lon/15 ignores the equation of time and swath-edge time spread; segment midpoints stay at least 3 h from the MST day boundary, so daily labels do not depend on it.",
+            "FEDS `t` has no timezone; it is read as the nominal 01:30/13:30 local solar overpass (TASK-027). Lon/15 ignores the equation of time and swath-edge time spread; segment midpoints stay at least 3.2 h from the MST day boundary over the cohort, so daily labels do not depend on it.",
             "Raw weather presence does not validate SimFire spread or any suppression counterfactual.",
         ],
     }

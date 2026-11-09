@@ -184,9 +184,9 @@ class FedsCrosswalkTests(unittest.TestCase):
         date_only = dict(case, discovery_time_hhmm="")
         self.assertEqual(_discovery_time_text(date_only), case["discovery_date"])
 
-    def _two_records_one_fire(self, splits=("train", "train")):
+    def _two_records_one_fire(self, splits=("train", "train"), starts=("2018-07-01", "2018-07-01")):
         frame_cases, crosswalk_cases = [], []
-        for fod_id, split in zip((20, 10), splits):
+        for fod_id, split, start in zip((20, 10), splits, starts):
             frame_cases.append({**_case(fod_id, split), "discovery_date": "2018-07-01"})
             crosswalk_cases.append({
                 "scenario_id": f"case-{fod_id}",
@@ -195,7 +195,7 @@ class FedsCrosswalkTests(unittest.TestCase):
                     "status": "unique_spatiotemporal_candidate",
                     "selected": {
                         "fire_id": "58826",
-                        "t_start": "2018-07-01T00:00:00",
+                        "t_start": f"{start}T00:00:00",
                         "episode_start_state": "2018-07-01T00:00:00",
                         "episode_48h_state_timestamps": [
                             f"2018-07-{day:02}T{hour:02}:00:00"
@@ -242,6 +242,23 @@ class FedsCrosswalkTests(unittest.TestCase):
         self.assertEqual(excluded[0]["scenario_id"], "case-20")
         self.assertEqual(excluded[0]["kept_scenario_id"], "case-10")
         self.assertEqual(excluded[0]["source_fire_id"], "58826")
+
+    def test_same_fire_id_with_another_start_is_another_fire(self):
+        # FEDS-CONUS numbers fires per yearly file; the crosswalk keys a fire by
+        # (fireID, start), so the same ID in another year is a different fire.
+        frame, crosswalk = self._two_records_one_fire(starts=("2018-07-01", "2019-07-01"))
+        result = build_episode_manifest(
+            frame, crosswalk, frame_sha256="a" * 64, crosswalk_sha256="b" * 64
+        )
+        self.assertEqual(sorted(case["scenario_id"] for case in result["cases"]),
+                         ["case-10", "case-20"])
+        self.assertEqual(result["deduplication"]["excluded_records"], [])
+        frame, crosswalk = self._two_records_one_fire(
+            splits=("train", "validation"), starts=("2018-07-01", "2023-07-01"))
+        result = build_episode_manifest(
+            frame, crosswalk, frame_sha256="a" * 64, crosswalk_sha256="b" * 64
+        )
+        self.assertEqual(result["case_counts_by_split"], {"train": 1, "validation": 1})
 
     def test_episode_manifest_refuses_one_feds_fire_in_two_splits(self):
         frame, crosswalk = self._two_records_one_fire(splits=("train", "validation"))

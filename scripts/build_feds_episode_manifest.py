@@ -22,13 +22,19 @@ def sha256_file(path: Path) -> str:
 def _one_record_per_feds_fire(
     cases: list[dict[str, Any]],
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    """Keep the lowest-fod_id record per FEDS fire (ADR-030 §6); return kept and excluded."""
-    by_fire: dict[str, list[dict[str, Any]]] = {}
+    """Keep the lowest-fod_id record per FEDS fire (ADR-030 §6); return kept and excluded.
+
+    A FEDS fire is (fireID, start), the crosswalk's key: FEDS-CONUS numbers fires per
+    yearly file, so the same fireID in another year is another fire.
+    """
+    by_fire: dict[tuple[str, str], list[dict[str, Any]]] = {}
     for case in cases:
-        by_fire.setdefault(case["evaluation_reference"]["source_fire_id"], []).append(case)
+        reference = case["evaluation_reference"]
+        key = (reference["source_fire_id"], reference["event_start_time"])
+        by_fire.setdefault(key, []).append(case)
     kept_ids = set()
     excluded = []
-    for fire_id, group in by_fire.items():
+    for (fire_id, _start), group in by_fire.items():
         if len({case["split"] for case in group}) > 1:
             raise ValueError(
                 f"FEDS fire {fire_id} is joined by records in both TRAIN and VALIDATION."
@@ -164,8 +170,9 @@ def build_episode_manifest(
         },
         "deduplication": {
             "rule": (
-                "ADR-030 §6: one record per FEDS fire; when several FPA-FOD records "
-                "join the same FEDS fireID, keep the one with the lowest fod_id."
+                "ADR-030 §6: one record per FEDS fire (fireID and start time); when "
+                "several FPA-FOD records join the same FEDS fire, keep the one with the "
+                "lowest fod_id."
             ),
             "excluded_records": excluded_duplicates,
         },

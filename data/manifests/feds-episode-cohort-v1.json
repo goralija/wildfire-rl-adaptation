@@ -3214,7 +3214,7 @@
     }
   ],
   "cohort_id": "fpa-fod-western-us-feds-frame-2018-2019-2023-v1",
-  "created_utc": "2026-11-09T15:56:26.679168+00:00",
+  "created_utc": "2026-11-09T19:17:07.025349+00:00",
   "crosswalk": {
     "feds_start_date_window_days": {
       "after": 2,
@@ -3235,7 +3235,7 @@
         "split": "train"
       }
     ],
-    "rule": "ADR-030 \u00a76: one record per FEDS fire; when several FPA-FOD records join the same FEDS fireID, keep the one with the lowest fod_id."
+    "rule": "ADR-030 \u00a76: one record per FEDS fire (fireID and start time); when several FPA-FOD records join the same FEDS fire, keep the one with the lowest fod_id."
   },
   "information_boundary": {
     "agent_inputs": [

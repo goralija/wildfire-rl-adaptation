@@ -45,8 +45,8 @@ dopunama ADR-030.
    je oznaka VIIRS prolaza u lokalnom sunčevom vremenu, ne UTC; korisnik je izabrao preračun
    01:30/13:30 lokalno → UTC po dužini ([dopuna ADR-030](specs/DECISION_RECORDS.md),
    [dokazi](research/SIMFIRE_ENVIRONMENT.md)). Novi gridMET fajl: sha256
-   `8e0e70a5f49552930ccc08fbf14e5bdccc5394b234012f228bd3e986a34043fb`, manifest
-   `d30508c9…`. RNG reset je riješen u TASK-023.
+   `7a51aadd46b894d9cd80835d7953107271b3182c776d7bb464d7abae826afac1`, manifest
+   `013be9a1…`. RNG reset je riješen u TASK-023.
 
 **Šta faza 1 još traži:** merge TASK-027 nakon revizije; isti gridMET fajl (ili ponovo
 generisan, pa novi hash u izvještaju i freeze zapisu) u `.local/gridmet/` worktreea koji

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Final, one-time test of locked policies on the 119 local real FEDS cases (ADR-028).
+"""Final, one-time test of locked policies on the manifest's real FEDS cases (ADR-028).
 
 Each case uses its real LANDFIRE fuel and elevation, its gridMET weather and its real
 initial FEDS perimeter; spread is computed by the synthetic CA. Every policy sees the same

@@ -1104,9 +1104,12 @@ From TASK-027, before any stage-1 run. Evidence and links:
   from that instant in one function. Keeping UTC (option 1) was rejected as contradicted by
   the source; a fixed MST reading (option 3) gives the same daily labels on this cohort, but
   only because of its longitude range.
-- **Robustness.** Segment midpoints stay at least 3.25 h from the MST day boundary across
-  the cohort, so the daily labels do not depend on the equation of time or swath-edge
-  spread that longitude / 15 ignores.
+- **Robustness.** Segment midpoints stay at least 3.2 h from the MST day boundary across
+  the cohort (minimum 3.235 h, at the westernmost case), so the daily labels do not depend
+  on the equation of time or swath-edge spread that longitude / 15 ignores. The observed
+  daily record always ends before its decision's segment starts (at least 1.3 h). An
+  overpass that falls on another UTC date than the label is refused, because fireatlas
+  dates `t` by the UTC acquisition date.
 - **Guards.** Weather files must state `temporal_mapping.feds_time_reference` =
   `feds_t_viirs_overpass_local_solar/v1`, or loading is refused. Real-case CA episodes start
   at segment 0's UTC start, and a naive FEDS time is never parsed as UTC.
@@ -1118,13 +1121,16 @@ From TASK-027, before any stage-1 run. Evidence and links:
   at 144 of 294 later decisions, and in AM-start cases decisions 0 and 1 both observe the
   pre-start day. This is the intended information lag, not a new rule.
 - **Duplicate (§6).** It is implemented in the manifest generator as a rule (lowest
-  `fod_id` per FEDS fireID), with excluded records listed in the manifest; columbus is
+  `fod_id` per FEDS fire, keyed like the crosswalk by fireID and start time, because
+  FEDS-CONUS numbers fires per yearly file), with excluded records listed in the manifest; columbus is
   dropped and TRAIN has 98 cases. The generator also refuses a FEDS fire joined from both
   TRAIN and VALIDATION. §6 did not ask for this; it is a leakage guard, and no such case
   exists.
-- **Regenerated weather.** sha256 `8e0e70a5f49552930ccc08fbf14e5bdccc5394b234012f228bd3e986a34043fb`
-  from manifest `d30508c94578d3034b677a7d4226190fd6f767c300b6ef79e362252f293cb400`. All
+- **Regenerated weather.** sha256 `7a51aadd46b894d9cd80835d7953107271b3182c776d7bb464d7abae826afac1`
+  from manifest `013be9a1632abcbc29d86f4bc16af89d3c074503f5899d1e39903d76ec2c28d5`. All
   118 cases have a pre-start record and one cell each (118 distinct, at most 2.80 km). The
   receipt is the [weather coverage report](../../reports/real-fire-data/feds-gridmet-weather-coverage-v1.json),
   which compares the file with the defective file `7b0aa405…`: 3 distinct cells for 119
   records, no pre-start, and 115 of 118 cases on another cell.
+- **Real-case test count.** "The 119 FEDS starts" in the synthetic CA addendum above now
+  means the manifest's 118 starts; the stage-3 run has not happened.

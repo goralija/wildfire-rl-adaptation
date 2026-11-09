@@ -10,7 +10,7 @@
 - [Episode cohort derivation](../../data/manifests/feds-episode-cohort-v1.json) - 118 epizoda (98 train, 20 validation) s pet poludnevnih stanja kroz 48 h; duplikat FEDS požara 58826 isključen po ADR-030 §6 (TASK-027). Coverage i preflight izvještaji ispod su izrađeni na ranijih 119 i sadrže i isključeni zapis.
 - [FEDS active-front coverage](feds-active-front-coverage-v1.json) - isti timestamp front/perimeter pronađen za 119/119 epizoda.
 - [180m map preflight](feds-simfire-grid-preflight-v1.json) - početni obod i front stanu u 256×256 mrežu za 99 train i 20 validation požara.
-- [gridMET archive/weather coverage](feds-gridmet-weather-coverage-v1.json) - devet arhiva s SHA-256; 392 train i 80 validation segmenta plus `pre_start` za 118 slučajeva, FEDS `t` kao lokalni prolaz (TASK-027); hash fajla s vremenom (`8e0e70a5…`), hash manifesta i poređenje sa starim neispravnim fajlom; raw-only forcing.
+- [gridMET archive/weather coverage](feds-gridmet-weather-coverage-v1.json) - devet arhiva s SHA-256; 392 train i 80 validation segmenta plus `pre_start` za 118 slučajeva, FEDS `t` kao lokalni prolaz (TASK-027); hash fajla s vremenom (`7a51aadd…`), hash manifesta i poređenje sa starim neispravnim fajlom; raw-only forcing.
 - [One-case SimFire input smoke](feds-simfire-input-smoke-v1.json) - Plateau real-input runtime smoke s demonstracijskim vremenom; nije no-op gate.
 - [SimFire TRAIN inputs](feds-simfire-input-train-coverage-v1.json) - 99/99 početnih scar/front + LANDFIRE fuel/terrain pairs; hashes i validation status.
 - [SimFire no-op pilot](feds-simfire-noop-pilot-v1.json) - jedan TRAIN Plateau slučaj; ne zaključava WAF ili timestep i nije fizička validacija.

@@ -96,7 +96,7 @@ for m in policy-v1 bc2 main1-best; do shasum -a 256 -c reports/synthetic/$m.sha2
 iz javnih izvora po [SIMFIRE_ENVIRONMENT](docs/research/SIMFIRE_ENVIRONMENT.md):
 `build_feds_simfire_inputs.py --fetch-split train`, zatim `--fetch-split validation`
 (freeze zapis je commitan), plus `sample_gridmet_episode_weather.py`. Test split 2024
-se ne preuzima. Fajl s vremenom iz TASK-027 (sha256 `8e0e70a5…`, prolaz FEDS `t` u lokalnom
+se ne preuzima. Fajl s vremenom iz TASK-027 (sha256 `7a51aadd…`, prolaz FEDS `t` u lokalnom
 sunčevom vremenu) je u `.local/gridmet/` worktreea `task-027-feds-utc-dedup`, s kopijom u
 `.local/backups/gridmet/` glavnog klona; worktree koji pokreće fazu 1 kopira ga u svoj
 `.local/gridmet/` i provjerava hash. Svako ponovno generisanje daje novi hash (`created_utc`),

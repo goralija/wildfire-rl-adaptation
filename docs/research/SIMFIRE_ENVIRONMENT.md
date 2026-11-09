@@ -180,7 +180,7 @@ jer 00:00 i 12:00 ni u jednom čitanju nisu trenuci akvizicije.
 **Posljedice UTC čitanja (izmjereno na manifestu sa 118 slučajeva, prije izmjene).**
 - gridMET: tumačenje kao prolaz (01:30/13:30 lokalnog sunčevog minus `Lon/15`), kao lokalno
   sunčevo 00:00/12:00 i kao fiksni MST daju iste dnevne oznake za 118/118 slučajeva; sredine
-  segmenata su najmanje 3.25 h od MST ponoći. U odnosu na UTC čitanje mijenja se 236/472
+  segmenata su najmanje 3.2 h od MST ponoći (najmanje 3.235 h, kod najzapadnijeg slučaja). U odnosu na UTC čitanje mijenja se 236/472
   segmenta (svaki slučaj, jedan dan, naizmjenično) i `pre_start` za 66 slučajeva s AM startom.
 - Sintetički CA na stvarnim startovima (`synthetic_real_cases.py`) iz `initial_state_time`
   računa lokalni sat za dnevni ciklus; pod UTC čitanjem AM start na −120° dobija oko 16 h

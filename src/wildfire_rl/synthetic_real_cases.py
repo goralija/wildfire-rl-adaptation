@@ -1,7 +1,7 @@
 """Real FEDS/LANDFIRE/gridMET cases as episodes of the synthetic CA (ADR-028).
 
-The 119 local FEDS cases (99 ex-TRAIN, 20 ex-VALIDATION) supply the landscape, the
-observed initial state and the historical forcing. Spread is computed by the synthetic
+The manifest's FEDS cases (118 after ADR-030 §6: 98 ex-TRAIN, 20 ex-VALIDATION) supply
+the landscape, the observed initial state and the historical forcing. Spread is computed by the synthetic
 CA, so these episodes are the final test of locked policies and the input of the
 calibration-gap diagnostic, never a training or tuning set. TEST cases are refused
 before any file is opened.
