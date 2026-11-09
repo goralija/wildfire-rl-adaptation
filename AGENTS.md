@@ -17,7 +17,10 @@ kao historija; njihovi brojevi se ne citiraju kao nalazi. Ispravke TASK-021–02
 spojene; odluke su u ADR-030 i dopunama. TASK-027 je spojen (PR #15: 98 TRAIN, FEDS `t` kao
 lokalni prolaz, novi gridMET fajl). Faze 1 i 2 ponovnog pokretanja (TASK-026) agent smije
 pokrenuti sam, fazu 2 samo ako faza 1 prođe; merge i faza 3 ostaju korisnikovi (dopuna ADR-030,
-[handoff](docs/HANDOFF_STAGE_1_2.md)). TEST 2024 ostaje zatvoren. TASK-012/CFSDS/Cell2Fire je historijski odvojeni pravac.
+[handoff](docs/HANDOFF_STAGE_1_2.md)). Faza 1 je prošla (ADR-031: zamrznut WAF 0.10 / ROS 1.0,
+VALIDATION ocijenjen jednom; unaprijed zadano pravilo, ne fizička validacija). Faza 2 se
+izvještava u vlastitom PR-u i ADR-u.
+TEST 2024 ostaje zatvoren. TASK-012/CFSDS/Cell2Fire je historijski odvojeni pravac.
 Runtime PASS nije dokaz fizičke validacije ili RL prednosti. Čuvaj ovu razliku u sažecima.
 
 Održavanje znanja: [maintenance](knowledge/maintenance.md), format:

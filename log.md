@@ -1,5 +1,20 @@
 # Promjene baze znanja
 
+## 2026-11-09: TASK-026 faza 1, gate PASS i zamrzavanje (ADR-031)
+
+- Gate po ADR-030 §3 na 98 TRAIN požara: 8 od 17 kandidata prolazi; zamrznut je WAF 0.10 /
+  ROS 1.0 (IoU rasta 0.0958 prema 0.0258 za elipsu na 82 rastuća požara, bez dodira s rubom).
+  [Sažetak gatea](reports/real-fire-data/feds-simfire-train-growth-gate-v1.json),
+  [freeze zapis](configs/frozen/feds-simfire-growth-gate-freeze-v1.json).
+- VALIDATION je ocijenjen jednom: 0.0983 prema 0.0278 na 18 rastućih požara
+  ([izvještaj](reports/real-fire-data/feds-simfire-validation-growth-gate-v1.json)).
+- Granica: oba IoU su ispod 0.10 i simulator prerasta nerastuće požare (oko 9,000 ha po
+  požaru na TRAIN-u). PASS nije fizička validacija ([ADR-031](docs/specs/DECISION_RECORDS.md)).
+- Pravilo izbora je u `scripts/select_feds_growth_gate.py`, commitovano s testom prije
+  pokretanja. Faza 2 se radi na grani `f/task-026-stage-2`.
+- Nezavisna revizija PR-a #17 nije našla blokere; dopune su u ADR-031 (koliko je elipsa
+  niska letvica, skripta za VALIDATION sažetak, dodatni testovi).
+
 ## 2026-11-09: TASK-027 spojen; faze 1 i 2 autonomno
 
 - PR #15 je spojen nakon nezavisne revizije. Korisnik je odobrio da agent sam pokrene fazu 1
