@@ -1,0 +1,2087 @@
+{
+  "by_split": {
+    "train": {
+      "episode_count": 99,
+      "exact_front_count": 99,
+      "missing_front_count": 0
+    },
+    "validation": {
+      "episode_count": 20,
+      "exact_front_count": 20,
+      "missing_front_count": 0
+    }
+  },
+  "cases": [
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 2355.2483677159908,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "60225",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.9999999999999994,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-24T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 2355.2483677158843,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "60370",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-24T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400300631-ranch",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 1177.6241838579422,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "46045",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-05-22T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400300764-buzzard",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 1375.2419300533084,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "62417",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-08-04T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400300963-coal-hollow",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 3626.6150466686477,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "72680",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-09-26T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400301084-prospect",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 4621.254124251253,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "59230",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-19T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400301086-kiwah",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 2658.9450978289733,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "65484",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-08-21T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400301104-stewart-creek",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 2302.58022248882,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "67355",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-08-29T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400301199-murdock",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 1177.6241838580345,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "59467",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-20T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400302402-silver-creek",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 17596.105473056086,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "54927",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.8579229947103924,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-06-28T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400302444-spring-creek",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 6791.41414624636,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "48698",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-06-01T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400302446-416",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 6359.59314976259,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "36940",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-04-28T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400302533-tinder",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 2355.2483677158843,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "61068",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-27T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400302636-bears",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 14308.440875476044,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "68481",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-09-05T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400302686-boot",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 30312.64924976723,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "61178",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.9563819952247454,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-28T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400302877-whaleback",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 14937.712666170577,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "60669",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0000000000000007,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-25T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400302943-cranston",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 2563.0446384716083,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "62346",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-08-03T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 2891.3869319887685,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "59832",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-21T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400303631-bacon-rind",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 3710.6601537021534,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "63897",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.5965810889394018,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-08-12T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400303711-gold-hill",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 6006.93505714761,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "60172",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-23T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400303744-rattlesnake-creek",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 6832.271784836938,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "70561",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-09-16T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400303807-ryan",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 2492.867428863309,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "61465",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-29T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400303966-cabin-lake",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 20793.539958082816,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "54928",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-06-28T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400304718-west-valley",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 4895.366171499851,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "62193",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-08-03T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400304799-rabbit-foot",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 21235.40716984328,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "58826",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.806888823086556,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-18T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400305302-sugar-pine",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 2355.2483677158843,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "29778",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-04-11T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400306102-rattlesnake",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 3997.225814506607,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "60160",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0000000000000002,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-24T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400306199-obi",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 50570.24272564029,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "55565",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.786098512151364,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-01T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400307067-county",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 60237.09481362564,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "81682",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.8038849220305615,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-11-08T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400307281-camp",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 39412.01014862706,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "81834",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.9223680032338959,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-11-09T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400307326-woolsey",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 17008.12488647843,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "58351",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.7704532360401963,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-15T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400307342-ferguson",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 8762.196769067465,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "55262",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0000000000000004,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-06-29T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 3503.3716912398727,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "59628",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-20T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400307462-indian-valley",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 11501.783518773416,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "61508",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.9278719171682329,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-30T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400307488-red-canyon",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 25143.018860529985,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "69948",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.9329548966627086,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-09-13T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400307548-boone-draw",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 8983.809859652367,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "61511",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-30T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400307776-bull-draw",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 27875.955427958597,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "72206",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.7956415734210918,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-09-22T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400308380-conner",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 11509.56398438508,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "58771",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.6588578580161011,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-17T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400308544-winter-camp",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 7947.802241133557,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "58956",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-17T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400308652-dog-creek",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 14779.791272944181,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "61467",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.758676606451142,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-29T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400308656-sharps",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 11113.043326220595,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "67928",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.8142369471323002,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-09-01T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400309598-buffalo-pasture",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 1326.1954260297207,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "63895",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-08-12T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400309614-howe-ridge",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 11372.075428838218,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "34556",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-04-23T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400310578-ok-bar",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 6986.564473190425,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "54339",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-06-25T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400310583-organ",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 10254.303112283382,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "30459",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-04-12T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400310659-206",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 8782.273843472472,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "56572",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-05T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400310914-echo",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 14875.501838656239,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "60957",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.6649868195588218,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-27T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400310945-goose-creek",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 28526.34075041289,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "65196",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.8844501249968167,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-08-19T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400310977-sheep-creek",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 1507.3436512983806,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "64243",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-08-14T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400311017-goshute-cave",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 104187.61041838986,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "56422",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.8446421010954062,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-06T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400311253-martin",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 15376.262554755654,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "60648",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-25T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400311268-gregg",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 55540.43837051768,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "53765",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.8676422948513169,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-06-22T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400312226-boxcar",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 17646.811373325192,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "53827",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.6993849099631583,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-06-23T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400312231-jack-knife",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 23161.966599714582,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "64966",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.6996537060235969,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-08-18T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400312290-stubblefield",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 24125.547386986735,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "64962",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.8978749051547954,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-08-18T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400312444-tenino-fire",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 18535.707718748657,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "55076",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.911082697433244,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-06-28T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400312787-black-mountain",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 1177.6241838579813,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "61080",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-27T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400313239-cedar-mountain-one",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 2355.2483677159626,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "67945",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-09-01T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400313254-lakeside",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 21714.659696253817,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "55656",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.9005834119520293,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-02T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400313293-dollar-ridge",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 1177.6241838579954,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "59984",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-22T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400313301-bear-trap",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 5405.994617562388,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "64773",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-08-16T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400313842-north-eden",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 30308.52755688057,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "69025",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.7792095720073815,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-09-08T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400314155-wahluke-slope",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 22959.340031317828,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "61537",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.8731987072262858,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-30T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400314399-lake-wallula",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 28149.863519411203,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "62402",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.8128276039432456,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-08-04T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400318794-goring",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 25677.260542369128,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "42794",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.8319807957694201,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-05-11T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400367632-viewpoint",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 21692.523540573373,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "53583",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.8101844238313618,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-06-21T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400370314-mile-post-twenty-two",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 35912.25007752546,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "48447",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.9091766062577276,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-06-01T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400376589-ute-park",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 13191.803140001499,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "32410",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.8194499051361434,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-04-17T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400389704-hwy-94",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 32731.560656598835,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "32401",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.9271720438769745,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-04-17T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400389746-badger-hole",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 21235.40716984328,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "58826",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.806888823086556,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-07-18T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400389825-columbus",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 23387.9892464496,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "69029",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.6396879405461116,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2018-09-08T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400389848-glade-creek",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2018
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 15022.31120831782,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "60071",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.8788462822143115,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-09-06T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400500346-south",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 2355.2483677157766,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "48981",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0000000000000004,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-07-16T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400500878-cellar",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 1177.6241838580345,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "61143",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-09-09T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400501480-decker",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 10880.56752723474,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "39826",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-06-07T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400501641-mountain",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 2743.9685052322584,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "48333",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-07-13T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400502172-roberts",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 2355.2483677158843,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "37690",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-05-31T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400503581-coldwater",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 2685.8733019961064,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "47816",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-07-11T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400504417-shady",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 2277.9274123381997,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "42756",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-06-19T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 5756.908431196246,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "59615",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-09-04T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400505059-river",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 6807.073947537077,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "52940",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-08-04T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400505118-cove-creek",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 33826.18831215967,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "72868",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.747677057917689,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-10-24T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400506459-kincade",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 7049.844221873759,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "48841",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-07-16T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400506867-bronco-gulch",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 22585.97825940949,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "60070",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.7915141741768844,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-09-06T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400507579-red-bank",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 3950.0181987051647,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "50233",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-07-23T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400508306-lookout-point",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 9922.800347628774,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "53539",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.8705307135839057,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-08-06T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400508308-pot-hole",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 3460.5156303572194,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "51482",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-07-27T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400508892-north-hills",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 3336.949464323751,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "50374",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-07-23T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400509040-moss-ranch",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 5110.080619252087,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "52554",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-08-01T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400509143-ridgetop",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 14503.002866836992,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "53132",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.7495227352754629,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-08-05T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400510304-goose",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 11958.939233645837,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "50239",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.7836777086730761,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-07-23T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400510515-summit",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 20147.51234448758,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "53135",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.8394763950404498,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-08-05T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400512411-russell",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 10385.375794487645,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "53584",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.7929284030872558,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-08-07T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400512420-shelter-pass",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 17502.971460858564,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "56869",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.8895955118583193,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-08-22T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400512424-goose-point",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 9937.990229098368,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "48564",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0000000000000004,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-07-15T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400512651-powerline",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 20765.9868309261,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "38832",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.8097569020026993,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-06-04T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400513361-243-command",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 8548.091213049662,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "54218",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.5467927462962835,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-08-10T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400513488-sage",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 21305.563182887374,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "50784",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.8685985565760203,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-07-26T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400541373-mp-97",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 9375.253495130299,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "59691",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.9268796266301607,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2019-09-05T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-400732973-walker",
+      "split": "train",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2019
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 4733.238901593565,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "55555",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2023-07-01T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-401312856-beehive",
+      "split": "validation",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2023
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 12450.695915275508,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "56108",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.6115775945717492,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2023-07-04T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-401313289-brushy",
+      "split": "validation",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2023
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 1177.6241838579422,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "58383",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2023-07-15T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-401315078-divide",
+      "split": "validation",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2023
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 24516.651916865943,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "58570",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.7454510362664598,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2023-07-16T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-401315590-flat",
+      "split": "validation",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2023
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 16797.005222977397,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "58891",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2023-07-18T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-401315922-red-point-tank",
+      "split": "validation",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2023
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 4971.676895403298,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "59310",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2023-07-19T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-401316132-hayden",
+      "split": "validation",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2023
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 2355.248367715946,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "59632",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2023-07-21T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-401316438-bowles-creek",
+      "split": "validation",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2023
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 53611.53072114318,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "59853",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.800956988342397,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2023-07-22T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-401316520-newell-road",
+      "split": "validation",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2023
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 5547.674006243013,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "60066",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2023-07-23T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-401316682-diamond",
+      "split": "validation",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2023
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 2355.248367715884,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "60405",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2023-07-25T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-401316696-turkey",
+      "split": "validation",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2023
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "LineString"
+      ],
+      "active_front_length_m": 8938.005545963544,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "60498",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2023-07-25T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-401317023-elkhorn",
+      "split": "validation",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2023
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 13530.606646246324,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "60856",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.9032789928318286,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2023-07-28T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-401317799-gold-hill",
+      "split": "validation",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2023
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 6220.778758533826,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "61339",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.5749213856445757,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2023-07-30T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-401318129-middle-ridge",
+      "split": "validation",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2023
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 36558.29844925231,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "61489",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.8919127583879413,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2023-07-31T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-401318133-niarada",
+      "split": "validation",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2023
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 12997.816201040383,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "61361",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.7580797898906793,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2023-07-30T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-401318180-treadway",
+      "split": "validation",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2023
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 2355.2483677159626,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "61582",
+      "fraction_of_front_overlapping_perimeter_boundary": 1.0,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2023-07-31T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-401318190-east-fork",
+      "split": "validation",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2023
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 17080.089125610353,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "65013",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.993818429703295,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2023-08-16T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-401320960-elliot",
+      "split": "validation",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2023
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 8078.876379894674,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "65109",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.6156703599990507,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2023-08-17T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-401321046-head",
+      "split": "validation",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2023
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 12877.88718930397,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "65949",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.7392601655713651,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2023-08-18T12:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-401321600-river-road-east",
+      "split": "validation",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2023
+    },
+    {
+      "active_front_feature_count": 1,
+      "active_front_geometry_types": [
+        "MultiLineString"
+      ],
+      "active_front_length_m": 11199.779829088277,
+      "distance_to_perimeter_boundary_m": 0.0,
+      "feds_fire_id": "66091",
+      "fraction_of_front_overlapping_perimeter_boundary": 0.8858023158978451,
+      "fraction_of_front_within_375m_of_perimeter_boundary": 1.0,
+      "initial_state_time": "2023-08-19T00:00:00",
+      "perimeter_feature_count": 1,
+      "scenario_id": "fpa-fod-401321698-ant",
+      "split": "validation",
+      "status": "exact_timestamp_front_and_perimeter_available",
+      "year": 2023
+    }
+  ],
+  "coverage": {
+    "all_fronts_intersect_matching_perimeter": true,
+    "episode_count": 119,
+    "exact_active_front_count": 119,
+    "fraction": 1.0,
+    "max_distance_to_perimeter_boundary_m": 0.0,
+    "median_boundary_overlap_fraction": 1.0,
+    "median_front_length_m": 9937.990229098368,
+    "minimum_boundary_overlap_fraction": 0.5467927462962835,
+    "minimum_front_fraction_within_375m_of_perimeter_boundary": 1.0,
+    "missing_active_front_count": 0
+  },
+  "created_utc": "2026-11-03T00:12:04.506286+00:00",
+  "episode_manifest": "data/manifests/feds-episode-cohort-v1.json",
+  "episode_manifest_sha256": "54acdbb216cf134ddd173aa0e3bc32427659614c0dff49de3109ae75e798444c",
+  "feature_geometry_types": {
+    "LineString": 46,
+    "MultiLineString": 73
+  },
+  "kind": "data_coverage_audit_not_simulation_or_physical_validation",
+  "limitations": [
+    "FEDS is a satellite-derived estimate, not a ground-truth fire edge.",
+    "This verifies exact-time vector availability and geometric alignment only; it does not assess SimFire spread or suppression effects.",
+    "Source event identity still depends on the documented provisional FPA-FOD to FEDS crosswalk."
+  ],
+  "matching_rule": "Exact episode source_fire_id plus exact initial_state_time; no future timestamp used to create the initial front.",
+  "schema_version": "feds-active-front-coverage/1.0",
+  "source": {
+    "checksums_md5": {
+      "2018": {
+        "fireline_md5": "51207e8d755e66adcc21030b645e9a0a",
+        "perimeter_md5": "c205abae4b12544e6cfb2d754a21981c"
+      },
+      "2019": {
+        "fireline_md5": "ddaeabf52982b9d58e4ac78becf92ba6",
+        "perimeter_md5": "3b921e9a28d045ffcf3015f893ed5831"
+      },
+      "2023": {
+        "fireline_md5": "f3be707ef58ca9dcf5837fcbbdbf7997",
+        "perimeter_md5": "ad32170e694e42127f3b865d93e1a81a"
+      }
+    },
+    "dataset": "FEDS-CONUS v1 lf_fireline and lf_perimeter",
+    "meaning": "satellite-estimated active front; not a constructed suppression line",
+    "record": "https://zenodo.org/records/22921773",
+    "spatial_temporal_resolution_note": "FEDS active fronts/perimeters are 12-hourly products derived from VIIRS detections with 375 m nominal pixel resolution."
+  },
+  "test_cases_loaded": false
+}

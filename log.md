@@ -1,5 +1,75 @@
 # Promjene baze znanja
 
+## 2026-11-03: Handoff i agent upute usklađeni s ADR-022
+
+- Ažurirani su AGENTS, Claude/Gemini/Copilot ulazi, project context, HANDOFF, README,
+  backlog, code map i data/research ulazi da razlikuju data-coverage PASS od TRAIN
+  no-op FAIL.
+- Ispravljena je zastarjela uputa da je TASK-012/CFSDS još aktivan i da no-op kohortni
+  gate tek slijedi. Stariji eksperimenti i odluke ostaju u historiji.
+- Sljedeći korak je dijagnostika i ponovljeni zajednički TRAIN gate; validation rasteri
+  i TEST 2024 ostaju zatvoreni do prolaza/odgovarajuće faze.
+
+## 2026-11-03: TRAIN-only SimFire no-op screen — gate FAIL
+
+- Osam WAF kandidata je poređeno na istih 99 TRAIN slučajeva i 396 vremenskih tačaka po kandidatu, uz no-op, persistence i fiksnu 2:1 elipsu.
+- WAF .01 sa 1-min internim korakom dao je IoU .4771 (naspram .4769 na 5 min), bez rubnog kontakta; zaključak se nije promijenio.
+- Nijedan kandidat nije prošao; persistence IoU=.5343, elipsa=.5308, najbolji SimFire=.4769. WAF .605 ima rubne kontakte u 61/99 slučajeva.
+- Nije izabran WAF/timebase. Validation rasteri i 2024 TEST ostaju zatvoreni; benchmark PPO čeka dijagnostiku i prolaz novog TRAIN gatea.
+- [Izvještaj](reports/real-fire-data/feds-simfire-train-noop-screen-v1.json), [status](docs/STATUS.md), [ADR-022](docs/specs/DECISION_RECORDS.md), [environment record](docs/research/SIMFIRE_ENVIRONMENT.md).
+
+## 2026-11-03: TRAIN-only FEDS/SimFire PPO putanja
+
+- Na korisnikov direktni zahtjev dodan je Gymnasium env i MaskablePPO CLI za 99 TRAIN
+  slučajeva. Epizoda ima 48h/četiri 12h koraka; budžet ne prekida epizodu, no-op je uvijek
+  legalan, a kumulativno opožarene ćelije ostaju šteta i kad ih SimFire prepiše linijom.
+- Agent ne prima buduće FEDS obode; reward koristi samo dodatni simulator burn. Akcijski
+  prostor (no-op + 8 kratkih sektorskih fireline poteza) je prototip, ne operativno
+  validiran model gašenja.
+- Python 3.9.25 venv package check je vraćen na PASS. Pošto je ciljni UV interpreter
+  zaglavljen, `bin/python` poziva isti provjereni 3.9 runtime iz sačuvanog susjednog
+  worktreea; lokalne biblioteke ostaju u aktivnom venv-u.
+- Završio je 64-step CPU PPO smoke, checkpoint save/reload i završni TRAIN rollout.
+  Izlaz ostaje ignorisan pod `.local/feds-ppo-smoke-waf-0.605-64steps`. WAF .605 je samo
+  provisionalni smoke ulaz; nije kalibrisan. TRAIN cohort gate je naknadno dovršen i
+  pao; vidi novi screening izvještaj. Validation mape i test 2024 nisu otvoreni.
+- [ADR-021](docs/specs/DECISION_RECORDS.md), [environment/runbook](docs/research/SIMFIRE_ENVIRONMENT.md),
+  [TRAIN env](src/wildfire_rl/feds_simfire_env.py), [CLI](scripts/train_feds_simfire.py)
+  i [regresijski testovi](tests/test_feds_simfire_env.py).
+
+## 2026-11-03: lokalni FEDS audit, širi candidate frame i SimFire runtime lock
+
+- Checksum-verifikovane su train/validation FEDS perimetar arhive 2018/2019/2023; 2024
+  test nije preuzet. Originalna kohorta lokalno daje 19/40 train i 7/20 validation, i
+  dalje ispod 20/8. Širi, unaprijed spremljeni FPA screen frame daje 99/208 i 20/56 te
+  119 punih FEDS 48h epizoda. Ova eksplicitna izmjena je u [ADR-018](docs/specs/DECISION_RECORDS.md).
+- Dodani su local MD5 audit, checksum-aware, year-limited FEDS downloader i episode
+  manifest builder. Crosswalk provjerava kompletan event time series nakon ranog
+  3km matcha; 14 ciljanih testova prolazi.
+- SimFire 2.0.1 pinovan je na upstream commit; Python 3.9 ARM64 freeze/setup je odvojen
+  od projekta Python ≥3.11. [Environment record](docs/research/SIMFIRE_ENVIRONMENT.md).
+- Active-front, 180m grid i inputi prolaze za 119 train/validation startova, a svih 99
+  train slučajeva imaju checksum-verifikovane LANDFIRE rastere. Jedan 48h historijski
+  Plateau no-op pilot otkriva strm WAF prag; parametar nije izabran i no-op gate ostaje
+  otvoren. Sljedeće: cohort train kalibracija i persistence/elipsa prije validation.
+  To nije fizička validacija; nema PPO treninga ni test pristupa.
+
+## 2026-11-03: SimFire/FEDS podaci i pre-agent gate
+
+- Po korisničkoj odluci novi aktivni pravac je SimFire + FPA-FOD/FEDS-CONUS, uz
+  ograničeni FLE/ICS-209 post-hoc kontekst. Stari CFSDS/Cell2Fire izbor ostaje historijski.
+- Napravljen je test-excluded manifest od 40 train i 20 validation požara; FEDS tražen
+  prostornim HTTP Range upitima, bez preuzimanja 1.2 GB godišnjih fajlova.
+- Strogi datum/tačka/3 km crosswalk traži obod u prvih 24h od `t_st`; nalazi 13/40
+  train i 7/20 validation sa ≥2 uzastopna 12h FEDS stanja. Prag 20/8 pada u oba splita.
+  Eksplorativnih 17/12 slučajeva koristilo je preširok vremenski kriterij i supersedovano je.
+- FLE grupisani incidentni sažetak: 0/40 train, 13/20 validation. Test nije učitan.
+  SimFire nije portovan, no-op replay/PPO nisu pokrenuti. Validation je deterministički
+  postfiltriran iz sačuvanih kandidata; nova Zenodo provjera nije uspjela zbog DNS-a.
+- [Detaljna metoda i ograničenja](docs/research/FPA_FEDS_CROSSWALK.md),
+  [kombinovani JSON](reports/real-fire-data/fpa-feds-fle-crosswalk-v1.json),
+  [ADR-017](docs/specs/DECISION_RECORDS.md), [radni dnevnik](docs/WORK_LOG.md).
+
 ## 2026-10-30: CFSDS putanja izabrana i prvi stvarni C++ replay
 
 - Po korisnikovoj uputi odabrana je Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire, jer je to najbolji fit postojećem simulatoru. Stvarni historijski rast ostaje zaseban reality-check; RL iskustvo generiše simulator.

@@ -1,0 +1,113 @@
+{
+  "by_split": {
+    "train": {
+      "episode_count": 99,
+      "sampled_12h_segment_count": 396
+    },
+    "validation": {
+      "episode_count": 20,
+      "sampled_12h_segment_count": 80
+    }
+  },
+  "case_level_values": "ignored local cache: .local/gridmet/feds-episode-weather-v1.json",
+  "created_utc": "2026-11-03T00:24:24.322433+00:00",
+  "episode_manifest": "data/manifests/feds-episode-cohort-v1.json",
+  "episode_manifest_sha256": "54acdbb216cf134ddd173aa0e3bc32427659614c0dff49de3109ae75e798444c",
+  "kind": "weather_input_coverage_and_provenance_not_simulation_or_physical_validation",
+  "limitations": [
+    "gridMET is daily and approximately 4 km; each 12-hour interval uses one sampled daily cell.",
+    "10 m wind and NFDRS 100-hour fuel moisture are proxies, not measured SimFire midflame wind or FBFM13 fine-fuel moisture.",
+    "FEDS timestamps omit timezone metadata in the selected FlatGeobuf fields; UTC interpretation is recorded as an assumption.",
+    "Raw weather presence does not validate SimFire spread or any suppression counterfactual."
+  ],
+  "mapping_status": "raw_values_only_no_wind_adjustment_factor_selected",
+  "sampled_value_ranges": {
+    "fm100": {
+      "maximum": 15.200000000000001,
+      "minimum": 3.5
+    },
+    "th": {
+      "maximum": 347.0,
+      "minimum": 21.0
+    },
+    "vs": {
+      "maximum": 11.600000000000001,
+      "minimum": 1.1
+    }
+  },
+  "schema_version": "feds-gridmet-weather-coverage/1.0",
+  "source": {
+    "access": "official annual NetCDF archives",
+    "archives": [
+      {
+        "file": "th_2018.nc",
+        "sha256": "01e2a33c84ad65cf19be933b757c813c9ef9452e99487d8ade06ac014e699478",
+        "size_bytes": 30171476,
+        "source_url": "https://www.northwestknowledge.net/metdata/data/th_2018.nc"
+      },
+      {
+        "file": "vs_2018.nc",
+        "sha256": "892533970770c1a925904ebcc87bb7e2b79088b607a7841c2126361abdcb695d",
+        "size_bytes": 60689617,
+        "source_url": "https://www.northwestknowledge.net/metdata/data/vs_2018.nc"
+      },
+      {
+        "file": "fm100_2018.nc",
+        "sha256": "81445396bd3e8530869a4416acfefd9b76f154b4abb4685d93083f0cd5e49c92",
+        "size_bytes": 129048699,
+        "source_url": "https://www.northwestknowledge.net/metdata/data/fm100_2018.nc"
+      },
+      {
+        "file": "th_2019.nc",
+        "sha256": "f1220c699eb63e3e72a667db78659001e2f5912b983a044b52a209782377c5d5",
+        "size_bytes": 30179276,
+        "source_url": "https://www.northwestknowledge.net/metdata/data/th_2019.nc"
+      },
+      {
+        "file": "vs_2019.nc",
+        "sha256": "5db7cf87ba3b081b660669a0a29039bb7cb379a23256163176493e9770597e1e",
+        "size_bytes": 60712321,
+        "source_url": "https://www.northwestknowledge.net/metdata/data/vs_2019.nc"
+      },
+      {
+        "file": "fm100_2019.nc",
+        "sha256": "de1221272b80009810ccfc5b03b6d57b33e69dab3d8f6deb17b5ef7bdb5de041",
+        "size_bytes": 132422365,
+        "source_url": "https://www.northwestknowledge.net/metdata/data/fm100_2019.nc"
+      },
+      {
+        "file": "th_2023.nc",
+        "sha256": "38ec938522a17c0763ad0f93d88c12a4b3a957c5996a1907f1cd47a984a4b038",
+        "size_bytes": 28271561,
+        "source_url": "https://www.northwestknowledge.net/metdata/data/th_2023.nc"
+      },
+      {
+        "file": "vs_2023.nc",
+        "sha256": "7ca76850bdae4c4316b460eed7674624976fe1372b45b644a2a90980a47e64a9",
+        "size_bytes": 59825061,
+        "source_url": "https://www.northwestknowledge.net/metdata/data/vs_2023.nc"
+      },
+      {
+        "file": "fm100_2023.nc",
+        "sha256": "55bedefbef3e4a7fd4f8d4cf50e2754ce4dbee74c5ff7166ea196c3d58f8442e",
+        "size_bytes": 137491749,
+        "source_url": "https://www.northwestknowledge.net/metdata/data/fm100_2023.nc"
+      }
+    ],
+    "dataset": "gridMET daily surface meteorology",
+    "source_note": "gridMET daily labels correspond approximately to MST day boundaries; FEDS naive timestamps are treated as UTC by explicit assumption.",
+    "variables": {
+      "fm100": "100-hour dead fuel moisture, percent",
+      "th": "wind-from direction, degrees clockwise from north",
+      "vs": "10 m wind speed, m/s"
+    }
+  },
+  "temporal_mapping": {
+    "agent_visibility": "daily records are simulator forcing only; future segment weather is not included in policy observations",
+    "decision_step_hours": 12,
+    "horizon_hours": 48,
+    "interpretation": "ex-post historical forcing, not a forecast available to crews at decision time",
+    "segment_weather_sample": "six-hour midpoint of each 12-hour interval mapped to the fixed MST daily label"
+  },
+  "test_cases_loaded": false
+}

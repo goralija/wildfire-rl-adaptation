@@ -1,5 +1,23 @@
 # real-fire-data
 
+- [FPA-FOD ↔ FEDS-CONUS ↔ FLE crosswalk](fpa-feds-fle-crosswalk-v1.json) - combined 40/20 train/validation gate; FAIL u oba splita, test nije učitan.
+- [FPA-FOD/FEDS metoda i odluka](../../docs/research/FPA_FEDS_CROSSWALK.md) - izvori, metod i nastavak.
+- [Train split crosswalk](fpa-feds-fle-crosswalk-train-v1.json) - 13 od 40 slučajeva prolazi strogi vremenski uslov.
+- [Validation kandidatska pretraga](fpa-feds-fle-crosswalk-validation-candidate-search-v1.json) - sačuvani kandidati prije strogog 24h filtera.
+- [Validation split crosswalk](fpa-feds-fle-crosswalk-validation-v1.json) - 7 od 20 slučajeva prolazi strogi vremenski uslov; izvještaj je izveden determinističkim postfilterom sačuvanih kandidata.
+- [Prvobitna kohorta, lokalno ponovljen crosswalk](fpa-feds-original-cohort-crosswalk-local-v1.json) - 19/40 train i 7/20 validation; gate i dalje FAIL.
+- [Prošireni candidate-frame crosswalk](fpa-feds-candidate-frame-crosswalk-v1.json) - 99/208 train i 20/56 validation; checksum-verifikovane lokalne FEDS arhive; gate PASS.
+- [Episode cohort derivation](../../data/manifests/feds-episode-cohort-v1.json) - 119 epizoda s pet poludnevnih stanja kroz 48 h.
+- [FEDS active-front coverage](feds-active-front-coverage-v1.json) - isti timestamp front/perimeter pronađen za 119/119 epizoda.
+- [180m map preflight](feds-simfire-grid-preflight-v1.json) - početni obod i front stanu u 256×256 mrežu za 99 train i 20 validation požara.
+- [gridMET archive/weather coverage](feds-gridmet-weather-coverage-v1.json) - devet arhiva s SHA-256; 396 train i 80 validation segmenta, raw-only forcing.
+- [One-case SimFire input smoke](feds-simfire-input-smoke-v1.json) - Plateau real-input runtime smoke s demonstracijskim vremenom; nije no-op gate.
+- [SimFire TRAIN inputs](feds-simfire-input-train-coverage-v1.json) - 99/99 početnih scar/front + LANDFIRE fuel/terrain pairs; hashes i validation status.
+- [SimFire no-op pilot](feds-simfire-noop-pilot-v1.json) - jedan TRAIN Plateau slučaj; ne zaključava WAF ili timestep i nije fizička validacija.
+- [TRAIN-only SimFire no-op screen](feds-simfire-train-noop-screen-v1.json) - osam WAF kandidata × 99 TRAIN slučajeva; 0/8 je prošlo persistence/elipsa gate.
+- [SimFire/FEDS environment](../../docs/research/SIMFIRE_ENVIRONMENT.md) - reproducibilan Python 3.9 runtime, LANDFIRE/weather setup i naredni gate.
+- [Crosswalk method and data gate](../../docs/research/FPA_FEDS_CROSSWALK.md) - metod, odluke i ograničenja.
+
 ## Dokumenti
 
 - [CFSDS pilot `2018_747` case manifest](2018_747-case.json) - public source versions, conversion decisions and input checksums.

@@ -113,6 +113,45 @@ konačne tvrdnje; nije provedena sistematska literature review.
   RL wrapper, exact fuel crosswalk and transfer of this project's Firehose weights have
   not been tested.
 
+## SimFire/FEDS benchmark sources reviewed 2026-11-03
+
+- S-031: [Fire Events Data Suite CONUS Archive v1](https://zenodo.org/records/22921773),
+  published 2026-10-02, and [UCI/UBC/NASA FEDS overview](https://www.ess.uci.edu/~uci-nasa-firetracking/).
+  Annual `lf_perimeter` files provide postprocessed 12-hour records for large fires;
+  the archive reports CC BY 4.0. The crosswalk only used indexed remote ranges; no annual
+  archive was downloaded.
+- S-032: [FEDS NRT documentation](https://earth-information-system.github.io/fireatlas/docs/nrt.html).
+  The published OGC time coverage is 2018–2021 for Western US and Jan 2025–present for
+  North America; it does not replace the published 2023 archive for this cohort.
+- S-033: [FPA-FOD 7th edition, 6th update](https://www.fs.usda.gov/rds/archive/products/RDS-2013-0009.7).
+  Its incident ID, discovery date and reported point are the join inputs in the compact
+  60-case train/validation manifest; area and MTBS ID are reference-only.
+- S-034: [WFIGS Interagency Perimeters feature service](https://services3.arcgis.com/T4QMspbfLg3qTGWY/ArcGIS/rest/services/WFIGS_Interagency_Perimeters/FeatureServer/0)
+  and [FLE RDS 2017–2024](https://doi.org/10.2737/RDS-2025-0011). The live query bridges
+  FPA unique-fire ID → WFIGS IRWINID → grouped FLE incident summary. FLE geometry must be
+  acquired separately for post-hoc line overlays; grouped engagement is not causal.
+- S-035: [GOFER hourly fire-tracking study](https://essd.copernicus.org/articles/16/1395/2024/).
+  The published collection covers 28 very large California fires from 2019–2021 at
+  roughly 2 km GOES resolution; it is a secondary temporal reference, not complete
+  coverage for the current 2023 validation split.
+- S-036: [SimFire/SimHarness paper](https://arxiv.org/abs/2311.15925), and the
+  [SimFire](https://github.com/mitrefireline/simfire) / [SimHarness](https://github.com/mitrefireline/simharness)
+  repositories. They motivate an agent-oriented simulator/harness; our project has no
+  locally verified checkpoint, port or physical-validation result from them.
+- S-037: [NWCG fireline production tables](https://www.fs.usda.gov/t-d/nwcg/files/NWCG_production_tables_2021.pdf)
+  and [Holmes & Calkin (2013)](https://doi.org/10.1071/WF11098), for future initial
+  production-rate ranges. A table rate is not a guarantee of incident-specific output.
+- S-038: [ICS-209-PLUS](https://research.fs.usda.gov/firelab/products/dataandtools/ics-209-plus),
+  USFS data publication covering 1999–2020 incident status/resource reports. It can
+  supply daily incident context, not assignments to individual FLE line segments.
+- S-039: [Bennett et al. (2026), W.I.S.E. assessment](https://doi.org/10.1071/WF26072).
+  Its duration-selection comparison motivates the rule against selecting each event's
+  model duration using that event's observed final perimeter.
+
+The active coverage result, method, data gate and SimFire benchmark protocol are in
+[FPA-FOD/FEDS/FLE crosswalk](FPA_FEDS_CROSSWALK.md); execution details are in the
+[crosswalk report](../../reports/real-fire-data/fpa-feds-fle-crosswalk-v1.json).
+
 [REAL_FIRE_DATASETS](REAL_FIRE_DATASETS.md) čuva preporuku, obim uzorka i nedostatke;
 reports/real-fire-data/ čuva download SHA256 i provjere stvarno preuzetih fajlova.
 
