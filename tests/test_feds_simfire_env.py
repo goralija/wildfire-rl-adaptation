@@ -20,7 +20,12 @@ try:
         line_length_m,
         sector_line_cells,
     )
-    from wildfire_rl.feds_simfire_setup import SimFireParams
+    from wildfire_rl.feds_simfire_setup import (
+        WEATHER_OBSERVATIONS,
+        SimFireParams,
+        observed_weather_records,
+    )
+    from wildfire_rl.gridmet_weather import gridmet_proxy_to_simfire
 except ImportError as exc:
     raise unittest.SkipTest("optional SimFire/Gymnasium dependencies are not installed: %s" % exc)
 
@@ -123,11 +128,11 @@ class FedsSimFireEnvironmentTests(unittest.TestCase):
             env.simulation = SimpleNamespace(fire_map=np.zeros((16, 16), dtype=np.uint8))
             env.cumulative_burned = np.zeros((16, 16), dtype=bool)
             env.fuel = np.zeros((16, 16), dtype=np.uint8)
-            env.forcing = [{"wind_speed_midflame_ft_per_min_proxy": 0.0,
-                            "wind_direction_degrees_clockwise_north_to": 0.0,
-                            "fuel_moisture_fraction_proxy": 0.1}] * 4
+            env._set_observed_weather(_weather(SHARED_DAYS))
 
         env._load_episode = fake_load
+        env.weather_observation = "previous"
+        env.sim_params = SimFireParams(wind_adjustment_factor=0.5)
         env.block_count = 16
         observation, info = env.reset(seed=1, options={"scenario_id": "b", "budget": 4})
 
@@ -196,16 +201,31 @@ class LineGeometryTests(unittest.TestCase):
         self.assertAlmostEqual(info["line_length_m"], line_length_m(1))
 
 
-def _forcing(values):
-    return [{"wind_speed_midflame_ft_per_min_proxy": 100.0 * value,
-             "wind_direction_degrees_clockwise_north_to": 10.0 * value,
-             "fuel_moisture_fraction_proxy": 0.01 * value} for value in values]
+def _record(label, value):
+    return {"gridmet_daily_label_mst": label, "gridmet_values": {
+        "vs": {"value": float(value)}, "th": {"value": 10.0 * value}, "fm100": {"value": float(value)},
+    }}
 
 
-def _bare_env(weather_observation=None):
+def _weather(labels, pre_start_label="2018-07-22"):
+    """Four segments with the given daily labels; values 1..4, pre-start value 9."""
+    weather = {"segments": [dict(_record(label, index + 1), segment=str(index))
+                            for index, label in enumerate(labels)]}
+    if pre_start_label is not None:
+        weather["pre_start"] = dict(_record(pre_start_label, 9), segment="pre_start")
+    return weather
+
+
+# Two 12h segments often share one gridMET day (244/396 TRAIN decisions in the
+# ADR-029-era file), so "the previous segment" can be the upcoming day's forcing.
+SHARED_DAYS = ("2018-07-23", "2018-07-23", "2018-07-24", "2018-07-24")
+DISTINCT_DAYS = ("2018-07-23", "2018-07-24", "2018-07-25", "2018-07-26")
+
+
+def _bare_env(weather_observation="previous", labels=SHARED_DAYS):
     env = object.__new__(FedsSimFireEnv)
-    if weather_observation is not None:
-        env.weather_observation = weather_observation
+    env.weather_observation = weather_observation
+    env.sim_params = SimFireParams(wind_adjustment_factor=0.5)
     env.simulation = SimpleNamespace(fire_map=np.zeros((16, 16), dtype=np.uint8))
     env.cumulative_burned = np.zeros((16, 16), dtype=bool)
     env.fuel = np.zeros((16, 16), dtype=np.uint8)
@@ -213,42 +233,95 @@ def _bare_env(weather_observation=None):
     env.horizon_steps = 4
     env.initial_budget = env.remaining_budget = 0
     env.max_budget = 4
-    env.forcing = _forcing((1, 2, 3, 4))
+    env._set_observed_weather(_weather(labels))
     return env
 
 
-def _expected_weather(segment):
-    current = _forcing((1, 2, 3, 4))[segment]
+def _expected_weather(record):
+    current = gridmet_proxy_to_simfire(
+        wind_speed_m_s=record["gridmet_values"]["vs"]["value"],
+        wind_from_degrees=record["gridmet_values"]["th"]["value"],
+        fm100_percent=record["gridmet_values"]["fm100"]["value"],
+        wind_adjustment_factor=0.5,
+    )
     direction = np.deg2rad(current["wind_direction_degrees_clockwise_north_to"])
-    return np.asarray((current["wind_speed_midflame_ft_per_min_proxy"] / 3000.0, np.sin(direction),
-                       np.cos(direction), current["fuel_moisture_fraction_proxy"] / 0.3), dtype=np.float32)
+    return np.asarray((min(current["wind_speed_midflame_ft_per_min_proxy"] / 3000.0, 1.0),
+                       np.sin(direction), np.cos(direction),
+                       min(current["fuel_moisture_fraction_proxy"] / 0.3, 1.0)), dtype=np.float32)
 
 
 class WeatherObservationTests(unittest.TestCase):
-    """ADR-030: policies observe the previous 12h segment, never the upcoming one."""
+    """ADR-030: the observed daily record is always strictly earlier than the upcoming
+    segment's record; decision 0 observes the pre-start day."""
 
-    def test_default_never_shows_the_segment_about_to_run(self):
-        env = _bare_env()
-        env.decision_index = 0
-        # Decision 0 sees the initial condition the simulation was built with.
-        np.testing.assert_allclose(env._observation()["weather"], _expected_weather(0))
-        for decision in (1, 2, 3):
-            env.decision_index = decision
-            observed = env._observation()["weather"]
-            with self.subTest(decision=decision):
-                np.testing.assert_allclose(observed, _expected_weather(decision - 1))
-                self.assertFalse(np.allclose(observed, _expected_weather(decision)))
+    def test_observed_record_is_strictly_earlier_than_the_upcoming_segment(self):
+        expected = {SHARED_DAYS: ("2018-07-22", "2018-07-22", "2018-07-23", "2018-07-23"),
+                    DISTINCT_DAYS: ("2018-07-22", "2018-07-23", "2018-07-24", "2018-07-25")}
+        for labels, observed_labels in expected.items():
+            weather = _weather(labels)
+            observed = observed_weather_records(weather)
+            with self.subTest(labels=labels):
+                self.assertEqual(tuple(r["gridmet_daily_label_mst"] for r in observed), observed_labels)
+                for decision, record in enumerate(observed):
+                    self.assertLess(record["gridmet_daily_label_mst"],
+                                    weather["segments"][decision]["gridmet_daily_label_mst"])
+                    self.assertIsNot(record, weather["segments"][decision])
+
+    def test_environment_observation_shows_the_strictly_earlier_record(self):
+        for labels in (SHARED_DAYS, DISTINCT_DAYS):
+            env = _bare_env(labels=labels)
+            weather = _weather(labels)
+            records = [weather["pre_start"], *weather["segments"]]
+            by_label = {}
+            for record in records:
+                by_label.setdefault(record["gridmet_daily_label_mst"], []).append(record)
+            for decision in range(4):
+                env.decision_index = decision
+                label = env.observed_weather_labels[decision]
+                upcoming = weather["segments"][decision]
+                with self.subTest(labels=labels, decision=decision):
+                    self.assertLess(label, upcoming["gridmet_daily_label_mst"])
+                    np.testing.assert_allclose(env._observation()["weather"],
+                                               _expected_weather(by_label[label][-1]), rtol=1e-6)
+                    self.assertFalse(np.allclose(env._observation()["weather"],
+                                                 _expected_weather(upcoming)))
+            # The terminal observation after the last step must not index past the horizon.
+            env.decision_index = 4
+            env._observation()
 
     def test_perfect_forecast_ablation_shows_the_upcoming_segment(self):
         env = _bare_env("upcoming_perfect_forecast")
+        weather = _weather(SHARED_DAYS)
         for decision in range(4):
             env.decision_index = decision
-            np.testing.assert_allclose(env._observation()["weather"], _expected_weather(decision))
+            np.testing.assert_allclose(env._observation()["weather"],
+                                       _expected_weather(weather["segments"][decision]), rtol=1e-6)
 
     def test_old_upcoming_label_is_not_accepted(self):
         with self.assertRaisesRegex(ValueError, "weather observation"):
             FedsSimFireEnv(sim_params=SimFireParams(wind_adjustment_factor=0.01),
                            weather_observation="upcoming")
+
+    def test_weather_file_without_pre_start_record_is_refused(self):
+        import hashlib
+        import json
+
+        for mode in WEATHER_OBSERVATIONS:
+            with self.subTest(mode=mode), tempfile.TemporaryDirectory() as directory:
+                manifest = Path(directory) / "manifest.json"
+                manifest.write_text(json.dumps({"test_cases_loaded": False, "cases": [
+                    {"scenario_id": "a", "split": "train"}]}), encoding="utf-8")
+                old = dict(_weather(SHARED_DAYS, pre_start_label=None), scenario_id="a", split="train")
+                weather = Path(directory) / "weather.json"
+                weather.write_text(json.dumps({
+                    "test_cases_loaded": False,
+                    "episode_manifest_sha256": hashlib.sha256(manifest.read_bytes()).hexdigest(),
+                    "cases": [old],
+                }), encoding="utf-8")
+                with self.assertRaisesRegex(ValueError, "pre_start.*stage 1"):
+                    FedsSimFireEnv(sim_params=SimFireParams(wind_adjustment_factor=0.01),
+                                   weather_observation=mode, manifest_path=manifest,
+                                   weather_path=weather)
 
 
 class SplitGuardTests(unittest.TestCase):
