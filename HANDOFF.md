@@ -4,10 +4,17 @@ title: Handoff za nastavak projekta
 ---
 # Handoff za nastavak projekta
 
-Stanje **2026-11-04**. Ovaj dokument i linkovani izvještaji daju kolegi ili agentu
+Stanje **2026-11-07**. Ovaj dokument i linkovani izvještaji daju kolegi ili agentu
 potreban kontekst bez prethodne chat historije.
 
 ## Aktivni cilj i status
+
+**Najnovije (2026-11-05, ADR-028, grana `codex/synthetic-ca-training`):**
+- Trening je prebačen na sintetičke požare u vlastitom CA simulatoru, s fizički
+  ograničenim jedinicama ([spec](docs/research/SYNTHETIC_CA_ENV.md)).
+- `policy-v1` je zaključan i testiran jednom na 119 stvarnih startova (simulirani ishod).
+- Rezultati: [STATUS](docs/STATUS.md), [izvještaji](reports/synthetic/index.md).
+- Tekst ispod opisuje prethodni SimFire put.
 
 Aktivna putanja je **SimFire + FPA-FOD početni uslovi + FEDS-CONUS opaženi obodi**.
 Godine požara određuju split: train 2018/2019, validation 2023, test 2024. FLE/ICS-209
@@ -52,15 +59,74 @@ procjena, a gridMET je grubi vremenski proxy, pa gate ne predstavlja fizičku va
 - [Mapa koda](knowledge/code-map.md): skripte, paketi i testovi.
 - [Backlog](docs/BACKLOG.md): sljedeći taskovi; posljednja odluka ima prednost.
 
-## Klon i lokalni environment
+## Nastavak sintetičkog CA rada (ADR-028)
 
-Grana `codex/overnight-steps-5-8` (izvedena iz PR #3 grane
-`codex/fireline-simfire-benchmark`) sadrži korake 5–8; nijedna nije spojena. Za novi klon:
+Grana `codex/synthetic-ca-training` nastavlja `codex/overnight-steps-5-8` (PR #4), koja
+nastavlja `codex/fireline-simfire-benchmark` (PR #3). Nijedna nije spojena u `main`.
 
 ```sh
-git clone --branch codex/overnight-steps-5-8 https://github.com/goralija/wildfire-rl-adaptation.git
+git clone --branch codex/synthetic-ca-training https://github.com/goralija/wildfire-rl-adaptation.git
 cd wildfire-rl-adaptation
 ```
+
+**Okruženje.** Sav sintetički rad koristi Python 3.9 venv iz
+[`requirements/simfire-macos-arm64-py39.freeze.txt`](requirements/simfire-macos-arm64-py39.freeze.txt)
+(numpy 1.26.4, torch 2.3.1, gymnasium 1.1.1, sb3/sb3-contrib 2.7.1). Postupak je u
+[SIMFIRE_ENVIRONMENT](docs/research/SIMFIRE_ENVIRONMENT.md). Komande ispod pretpostavljaju
+`P=".local/simfire-venv/bin/python"` i `PYTHONPATH=src PYTHONWARNINGS=ignore`.
+
+**Šta treba za šta.**
+
+| Posao | Treba stvarne podatke? | Treba težine? |
+|---|---|---|
+| Testovi, sintetički trening, BC, validacija na sjemenima | ne | ne (osim `--resume`) |
+| Jednokratni test na 119 startova, dijagnostika, viewer | da: `.local/feds-simfire-cases` i gridMET | da |
+
+**Težine** (~27 MB svaka) nisu u gitu. Prilozi su draft GitHub releasea
+`synthetic-policy-v1`, koji vide samo članovi s pristupom repou. Preuzmi ih u
+`.local/synthetic/locked/` i provjeri hash prije učitavanja (zip sadrži pickle):
+
+```sh
+mkdir -p .local/synthetic/locked
+gh release download synthetic-policy-v1 --repo goralija/wildfire-rl-adaptation --dir .local/synthetic/locked
+for m in policy-v1 bc2 main1-best; do shasum -a 256 -c reports/synthetic/$m.sha256; done
+```
+
+**Stvarni ulazi.** `.local/feds-simfire-cases` (~46 MB) i gridMET vrijeme obnavljaju se
+iz javnih izvora po [SIMFIRE_ENVIRONMENT](docs/research/SIMFIRE_ENVIRONMENT.md):
+`build_feds_simfire_inputs.py --fetch-split train`, zatim `--fetch-split validation`
+(freeze zapis je commitan), plus `sample_gridmet_episode_weather.py`. Test split 2024
+se ne preuzima.
+
+**Komande** (stvarno korištene; sve izlaze u ignorisani `.local/`):
+
+```sh
+$P -m unittest discover -s tests -p "test_synthetic*.py"
+# PPO od nule (main-1, ~4.5h na 6 procesa)
+$P scripts/train_synthetic_ppo.py --steps 1500000 --eval-every 100000 --eval-seeds 64 --out .local/synthetic/runs/main-1
+# Plan B: imitacija direct_flank (bc-2), pa PPO fine-tune (ft-1 -> policy-v1)
+$P scripts/bc_warm_start.py --init .local/synthetic/runs/main-1/final_model.zip --teacher direct_flank --rounds 40 --episodes-per-round 42 --epochs 8 --keep-rounds 3 --workers 7 --out .local/synthetic/runs/bc-2/bc_model.zip
+$P scripts/train_synthetic_ppo.py --resume .local/synthetic/runs/bc-2/bc_model.zip --steps 600000 --eval-every 100000 --eval-seeds 64 --learning-rate 1e-4 --ent-coef 0.001 --clip-range 0.1 --start-stage B --out .local/synthetic/runs/ft-1
+# Prihvatanje na sjemenima 0-255 (pravilo iz ADR-028)
+$P scripts/evaluate_synthetic_policies.py --seeds 256 --first-seed 0 --workers 7 --policies noop,random,direct_flank,protect_urban,downwind_indirect,ppo=.local/synthetic/locked/policy-v1.zip --out .local/synthetic/acceptance.json
+# Jednokratni test zaključanih politika na stvarnim startovima
+$P scripts/evaluate_real_cases.py --policy-locked --workers 7 --policies noop,direct_flank,ppo=.local/synthetic/locked/policy-v1.zip --out .local/synthetic/real-cases.json
+$P scripts/diagnose_synthetic_calibration_gap.py --all --policy-locked --out .local/synthetic/calibration-gap.json
+# Viewer: http://127.0.0.1:8766, politika protiv no-op na jednom stvarnom startu
+$P scripts/synthetic_case_viewer.py --port 8766
+```
+
+**Otvorena timska odluka.** policy-v1 je izjednačen s `direct_flank` (prihvatanje FAIL),
+a jasno je bolji od no-op. Treba odlučiti da li se ide dalje (DAgger, duži fine-tune,
+oracle osnova za plafon) ili se rad zaključuje sa sadašnjim rezultatom. Za novi pokušaj
+predlažemo novu preregistraciju i prihvatanje na novim sjemenima, jer su sjemena 0–255
+već korištena za izbor checkpointa (napomena o selekciji u ADR-028). Detalji su u [NEXT_SESSION](docs/NEXT_SESSION.md) i ADR-028.
+
+## Klon i lokalni environment (raniji SimFire put)
+
+Grana `codex/overnight-steps-5-8` (izvedena iz PR #3 grane
+`codex/fireline-simfire-benchmark`) sadrži korake 5–8. Sve je uključeno i u granu
+`codex/synthetic-ca-training` iznad.
 
 Prvo pročitaj [index](index.md), [AGENTS](AGENTS.md),
 [projektni kontekst](knowledge/project-context.md), [STATUS](docs/STATUS.md),

@@ -1,0 +1,6 @@
+{"mean_return": 0.0859772020435466, "mean_saved_fraction": 0.10628970204354661, "units_lost": 0, "close_calls": 13, "episodes": 64, "steps": 100002, "stage": "B", "minutes": 17.5, "best": true}
+{"mean_return": 0.10878761068971828, "mean_saved_fraction": 0.12910011068971827, "units_lost": 0, "close_calls": 13, "episodes": 64, "steps": 200004, "stage": "B", "minutes": 34.9, "best": true}
+{"mean_return": 0.08796521992363898, "mean_saved_fraction": 0.106715219923639, "units_lost": 0, "close_calls": 12, "episodes": 64, "steps": 300000, "stage": "B", "minutes": 52.2}
+{"mean_return": 0.08656336526670476, "mean_saved_fraction": 0.10687586526670476, "units_lost": 0, "close_calls": 13, "episodes": 64, "steps": 400002, "stage": "B", "minutes": 70.2}
+{"mean_return": 0.06472324794995321, "mean_saved_fraction": 0.08659824794995322, "units_lost": 0, "close_calls": 14, "episodes": 64, "steps": 500004, "stage": "B", "minutes": 87.5}
+{"mean_return": 0.1008978715238161, "mean_saved_fraction": 0.1212103715238161, "units_lost": 0, "close_calls": 13, "episodes": 64, "steps": 600000, "stage": "B", "minutes": 105.0}

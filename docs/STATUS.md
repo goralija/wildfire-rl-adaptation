@@ -1,11 +1,50 @@
 ---
 type: Project Status
-title: Trenutno stanje — 2026-11-04
+title: Trenutno stanje — 2026-11-09
 sources:
 - resource: /reports/firehose-verification/verification.json
 - resource: /docs/WORK_LOG.md
 ---
-# Trenutno stanje — 2026-11-04
+# Trenutno stanje — 2026-11-09
+
+## Najnovije — 2026-11-09: rezultati ADR-022–028 nevažeći do ponovnog pokretanja (ADR-029)
+
+- **Greška u podacima.** gridMET uzorkovanje je za svaki požar u godini koristilo ćeliju
+  prvog požara te godine: 97/99 TRAIN i 19/20 VALIDATION požara imalo je tuđe vrijeme
+  (medijan 782 km). Ispravka je u PR #3 (lokalna regeneracija: 118 ćelija za 119 požara,
+  najviše 2,8 km).
+- **Posljedica.** SimFire gate (ADR-022–024), validacija, benchmark i studija budžeta
+  (ADR-024–027) i test CA politika na 119 požara (ADR-028) nisu važeći zaključci.
+  Sintetička provjera na proceduralnim požarima (ADR-028, seedovi 0–255) ne koristi gridMET,
+  ali ima druge greške (napredak linije, ćelije linije kao "spašene").
+- **Stanje grana.** PR-ovi #3–#5 su spojeni u `main` merge commitima kao historija; grane
+  ostaju. Ispravke idu kao novi PR-ovi (TASK-021–024), zatim odluke (TASK-025) i ponovno
+  pokretanje (TASK-026). Plan: [NEXT_SESSION](NEXT_SESSION.md), odluka: ADR-029.
+
+
+## Najnovije — 2026-11-05: sintetički CA trening (ADR-028)
+
+Korisnik je 2026-11-04 tražio da se agent trenira samo na sintetičkim požarima, uz
+fizička ograničenja jedinica, a da se stvarni podaci ostave za test. Rad je na grani
+`codex/synthetic-ca-training`, izvedenoj iz `codex/overnight-steps-5-8`; ništa nije spojeno.
+
+- **Okruženje.** Vlastiti CA ([spec](research/SYNTHETIC_CA_ENV.md)):
+  - vjerovatnoća paljenja po tipu goriva (Anderson 1982), uz vjetar, nagib, vlagu i
+    dnevni ciklus;
+  - ručne ekipe i dozeri s brzinama iz PMS 410-1 (bez teleportacije);
+  - kontrafaktualna nagrada protiv no-op rollouta na istim slučajnim brojevima;
+  - LCES povlačenje, kazna za bliske susrete i velika kazna za izgubljenu jedinicu.
+- **Trening.** PPO od nule (main-1) nije dostigao heuristiku. Plan B (imitacija
+  direct_flank, pa PPO) dao je zaključanu politiku `policy-v1`.
+- **Sintetička provjera (0–255).** policy-v1 je izjednačen s najboljom heuristikom
+  (FAIL po preregistrovanom kriteriju) i jasno bolji od no-op (+0.10 povrata).
+- **Stvarni slučajevi (119, jednokratno, simulirani ishod).** policy-v1 čuva 12% više od
+  no-op (CI [8.9%, 15.4%]). Sačuvana površina je jednaka kao kod bočnog napada, uz upola
+  manje bliskih susreta.
+- **Jaz kalibracije.** Medijan IoU na 48h je 0.27–0.30; simulator uglavnom prerasta
+  stvarne (gašene) požare.
+- **Granica tvrdnje.** Rezultati su simulatorski i nisu dokaz o stvarnom gašenju.
+- **Gdje su detalji.** ADR-028 i dopune, EXP-015–017, [izvještaji](../reports/synthetic/index.md).
 
 ## Najnovije — 2026-11-04: koraci 5–8 izvedeni (noćni samostalni rad)
 

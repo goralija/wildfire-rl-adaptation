@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="bs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent na stvarnim požarima</title>
+<style>
+  :root {
+    --bg: #f6f5f1; --panel: #ffffff; --ink: #1f2328; --muted: #6a6f76; --line: #d8d6cf;
+    --accent: #c2410c; --good: #15803d; --bad: #b91c1c;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #16181b; --panel: #1f2226; --ink: #e8e6e1; --muted: #9aa0a6; --line: #34383d;
+            --accent: #fb923c; --good: #4ade80; --bad: #f87171; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  header { padding: 14px 20px 6px; }
+  h1 { font-size: 18px; margin: 0 0 2px; }
+  .sub { color: var(--muted); font-size: 12.5px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; padding: 8px 20px; }
+  label { display: flex; flex-direction: column; gap: 3px; font-size: 12px; color: var(--muted); }
+  select, button { font: inherit; padding: 6px 8px; border-radius: 6px; border: 1px solid var(--line);
+                   background: var(--panel); color: var(--ink); }
+  button.primary { background: var(--accent); color: #fff; border-color: var(--accent); cursor: pointer; }
+  button:disabled { opacity: .5; }
+  main { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; padding: 6px 20px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px; }
+  .card h2 { font-size: 14px; margin: 0 0 6px; display: flex; justify-content: space-between; }
+  canvas { width: 100%; aspect-ratio: 1; image-rendering: pixelated; border-radius: 6px; display: block; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 8px; }
+  .stat { font-size: 12px; color: var(--muted); }
+  .stat b { display: block; font-size: 16px; color: var(--ink); font-variant-numeric: tabular-nums; }
+  .timeline { display: flex; gap: 10px; align-items: center; padding: 8px 20px; }
+  .timeline input { flex: 1; }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px 16px; padding: 4px 20px 6px; font-size: 12px; color: var(--muted); }
+  .sw { display: inline-block; width: 11px; height: 11px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+  .summary { padding: 6px 20px 20px; }
+  .summary table { border-collapse: collapse; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .summary td, .summary th { padding: 6px 12px; border-bottom: 1px solid var(--line); text-align: right; font-variant-numeric: tabular-nums; }
+  .summary th:first-child, .summary td:first-child { text-align: left; }
+  .note { color: var(--muted); font-size: 12px; max-width: 900px; }
+  .pos { color: var(--good); } .neg { color: var(--bad); }
+  #status { color: var(--muted); font-size: 12.5px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Istrenirani agent na stvarnim FEDS požarima</h1>
+  <div class="sub">Stvarni pejzaž (LANDFIRE), stvarno vrijeme (gridMET) i stvarni početni perimetar; širenje računa sintetički CA simulator (ADR-028). Ishod je simuliran, nije opažen.</div>
+</header>
+
+<div class="controls">
+  <label>Požar <select id="case"></select></label>
+  <label>Politika <select id="policy"></select></label>
+  <button id="run" class="primary">Pokreni</button>
+  <label><span><input type="checkbox" id="feds" checked> FEDS obod (stvarni, gašeni požar)</span></label>
+  <span id="status">Učitavam listu…</span>
+</div>
+
+<div class="timeline">
+  <button id="play" disabled>▶</button>
+  <input type="range" id="hour" min="0" max="48" value="0" disabled>
+  <span id="hourLabel" style="min-width:210px">—</span>
+</div>
+
+<main>
+  <div class="card">
+    <h2><span id="agentTitle">Agent</span><span id="agentRet" class="stat"></span></h2>
+    <canvas id="agentCanvas" width="512" height="512"></canvas>
+    <div class="stats" id="agentStats"></div>
+  </div>
+  <div class="card">
+    <h2><span>Bez intervencije (no-op)</span><span class="stat">ista vatra, isti slučajni brojevi</span></h2>
+    <canvas id="noopCanvas" width="512" height="512"></canvas>
+    <div class="stats" id="noopStats"></div>
+  </div>
+</main>
+
+<div class="legend" id="legend"></div>
+<div class="summary" id="summary"></div>
+
+<script>
+const SIZE = 128, PX = 4;
+const FUEL = {1: [214, 196, 120], 2: [170, 160, 96], 3: [92, 128, 84], 4: [128, 112, 84],
+              5: [150, 150, 165], 6: [96, 140, 200], 7: [205, 202, 195]};
+const STATE = {1: [255, 120, 20], 2: [60, 45, 40], 3: [110, 95, 90], 4: [40, 90, 230]};
+let data = null, frame = 0, timer = null;
+
+const $ = id => document.getElementById(id);
+const decode = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+
+function legend() {
+  const items = [["trava", FUEL[1]], ["grmlje", FUEL[2]], ["šuma", FUEL[3]], ["otpad/slash", FUEL[4]],
+    ["naselje (91)", FUEL[5]], ["voda", FUEL[6]], ["negorivo", FUEL[7]], ["gori", STATE[1]],
+    ["izgorjelo", STATE[2]], ["početno izgorjelo", STATE[3]], ["linija", STATE[4]]];
+  $("legend").innerHTML = items.map(([t, c]) =>
+    `<span><span class="sw" style="background:rgb(${c})"></span>${t}</span>`).join("") +
+    `<span>● ručna ekipa &nbsp; ■ dozer &nbsp; ✕ izgubljena</span>` +
+    `<span><span class="sw" style="border:2px solid #e11d48;background:transparent"></span>FEDS obod</span>`;
+}
+
+async function init() {
+  legend();
+  const r = await fetch("/api/cases").then(r => r.json());
+  const groups = {train: "ex-train (99)", validation: "ex-validation (20)"};
+  $("case").innerHTML = Object.entries(groups).map(([split, title]) =>
+    `<optgroup label="${title}">` + r.cases.filter(c => c.split === split).map(c =>
+      `<option value="${c.id}">${c.name} (${c.state} ${c.year})</option>`).join("") + "</optgroup>").join("");
+  $("policy").innerHTML = r.policies.map(p => `<option>${p}</option>`).join("");
+  $("status").textContent = "Odaberi požar i politiku, pa Pokreni.";
+}
+
+async function runCase() {
+  stop();
+  $("run").disabled = true;
+  $("status").textContent = "Simuliram (agent + no-op, 60h)…";
+  const q = new URLSearchParams({case: $("case").value, policy: $("policy").value});
+  const r = await fetch("/api/run?" + q).then(r => r.json());
+  $("run").disabled = false;
+  if (r.error) { $("status").textContent = "Greška: " + r.error; return; }
+  data = r;
+  data.fuelArr = decode(r.fuel);
+  data.obs = Object.fromEntries(Object.entries(r.observed).map(([h, s]) => [Number(h), decode(s)]));
+  for (const side of [r.agent, r.noop]) side.frames.forEach(f => f.arr = decode(f.state));
+  const n = Math.max(r.agent.frames.length, r.noop.frames.length) - 1;
+  $("hour").max = n; $("hour").disabled = false; $("play").disabled = false;
+  $("agentTitle").textContent = r.policy;
+  $("status").textContent = `${r.case} · ${r.split === "train" ? "ex-train" : "ex-validation"}`;
+  summary();
+  show(0);
+}
+
+function draw(canvas, fr, hour) {
+  const ctx = canvas.getContext("2d");
+  const img = ctx.createImageData(SIZE, SIZE);
+  for (let i = 0; i < SIZE * SIZE; i++) {
+    const s = fr.arr[i];
+    const c = s ? STATE[s] : FUEL[data.fuelArr[i]];
+    img.data.set([c[0], c[1], c[2], 255], i * 4);
+  }
+  const off = new OffscreenCanvas(SIZE, SIZE);
+  off.getContext("2d").putImageData(img, 0, 0);
+  ctx.imageSmoothingEnabled = false;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(off, 0, 0, SIZE * PX, SIZE * PX);
+  if ($("feds").checked) {
+    const hours = Object.keys(data.obs).map(Number).filter(h => h <= hour);
+    if (hours.length) outline(ctx, data.obs[Math.max(...hours)]);
+  }
+  for (const u of fr.units) {
+    if (u.row < 0) continue;
+    const x = u.col * PX + PX / 2, y = u.row * PX + PX / 2;
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "#fff"; ctx.fillStyle = u.lost ? "#b91c1c" : "#111";
+    if (u.lost) { ctx.font = "bold 14px sans-serif"; ctx.fillText("✕", x - 5, y + 5); continue; }
+    if (!u.active) continue;
+    ctx.beginPath();
+    if (u.kind === "dozer") ctx.rect(x - 5, y - 5, 10, 10); else ctx.arc(x, y, 5.5, 0, 7);
+    ctx.fill(); ctx.stroke();
+  }
+}
+
+function outline(ctx, mask) {
+  ctx.fillStyle = "#e11d48";
+  for (let r = 0; r < SIZE; r++) for (let c = 0; c < SIZE; c++) {
+    const i = r * SIZE + c;
+    if (!mask[i]) continue;
+    const edge = r === 0 || c === 0 || r === SIZE - 1 || c === SIZE - 1 ||
+      !mask[i - 1] || !mask[i + 1] || !mask[i - SIZE] || !mask[i + SIZE];
+    if (edge) ctx.fillRect(c * PX, r * PX, PX, PX);
+  }
+}
+
+function stats(el, fr, side) {
+  const ha = v => (v * data.hectares_per_cell).toLocaleString("bs", {maximumFractionDigits: 0}) + " ha";
+  const calls = fr.units.reduce((a, u) => a + u.close_calls, 0);
+  const lost = fr.units.filter(u => u.lost).length;
+  el.innerHTML = `<div class="stat">Novo izgorjelo<b>${ha(fr.new_cells)}</b></div>` +
+    `<div class="stat">Naselje izgorjelo<b>${fr.urban_cells} ćel.</b></div>` +
+    (side === "agent" ? `<div class="stat">Linija<b>${fr.line_cells} ćel.</b></div>
+     <div class="stat">Jedinice aktivne<b>${fr.units.filter(u => u.active).length}/${fr.units.length}</b></div>
+     <div class="stat">Bliski susreti<b>${calls}</b></div>
+     <div class="stat">Izgubljene<b class="${lost ? "neg" : ""}">${lost}</b></div>` : "");
+}
+
+function show(i) {
+  frame = i; $("hour").value = i;
+  const a = data.agent.frames[Math.min(i, data.agent.frames.length - 1)];
+  const n = data.noop.frames[Math.min(i, data.noop.frames.length - 1)];
+  const last = i === data.agent.frames.length - 1 && data.agent.summary.final_frame_includes_tail;
+  const hour = last ? data.horizon + 12 : i;
+  draw($("agentCanvas"), a, hour); draw($("noopCanvas"), n, hour);
+  stats($("agentStats"), a, "agent"); stats($("noopStats"), n, "noop");
+  const dir = ["S", "SI", "I", "JI", "J", "JZ", "Z", "SZ"][Math.round(a.wind_to / 45) % 8];
+  $("hourLabel").textContent = last
+    ? `${data.horizon}h + 12h repa (jedinice povučene, linija ostaje)`
+    : `sat ${i} · vjetar ${a.wind_ms} m/s prema ${dir} · vlaga ${(a.moisture * 100).toFixed(0)}% · ${a.local_hour.toFixed(0)}h lokalno`;
+}
+
+function summary() {
+  const s = data.agent.summary, ha = v => (v * data.hectares_per_cell).toLocaleString("bs", {maximumFractionDigits: 0});
+  const saved = s.noop_new_cells - s.agent_new_cells;
+  $("summary").innerHTML = `<table>
+    <tr><th>Kraj epizode (48h + 12h rep)</th><th>Agent</th><th>No-op</th></tr>
+    <tr><td>Novo izgorjelo</td><td>${ha(s.agent_new_cells)} ha</td><td>${ha(s.noop_new_cells)} ha</td></tr>
+    <tr><td>Naselje izgorjelo (ćelije)</td><td>${s.agent_urban_cells}</td><td>${s.noop_urban_cells}</td></tr>
+    <tr><td>Sačuvano (težinski udio)</td><td class="${s.saved_fraction > 0 ? "pos" : s.saved_fraction < 0 ? "neg" : ""}">${(100 * s.saved_fraction).toFixed(1)}%</td><td>0%</td></tr>
+    <tr><td>Sačuvano (ha)</td><td>${ha(saved)} ha</td><td>—</td></tr>
+    <tr><td>Bliski susreti / izgubljene jedinice</td><td>${s.close_calls} / ${s.units_lost}</td><td>—</td></tr>
+    <tr><td>Povrat (nagrada)</td><td>${s.return.toFixed(3)}</td><td>0</td></tr>
+  </table>
+  <p class="note">Jedinice: 2 dozera i 2 ručne ekipe, dolaze nakon 30–120 min, 2–4 km od vatre, isto za svaku politiku.
+  Crveni obod je opaženi FEDS perimetar (12h koraci). Stvarni požar je gašen, a simulator nije kalibrisan
+  (medijan IoU 0.27–0.30 na 48h), pa obod služi samo kao kontekst.
+  ${s.edge_contact ? "<b>Napomena:</b> vatra je u ovoj epizodi došla do ruba izreza 128×128 (23 km)." : ""}</p>`;
+}
+
+function stop() { if (timer) clearInterval(timer); timer = null; $("play").textContent = "▶"; }
+$("play").onclick = () => {
+  if (timer) return stop();
+  if (frame >= Number($("hour").max)) show(0);
+  $("play").textContent = "❚❚";
+  timer = setInterval(() => frame >= Number($("hour").max) ? stop() : show(frame + 1), 250);
+};
+$("hour").oninput = e => { stop(); show(Number(e.target.value)); };
+$("feds").onchange = () => data && show(frame);
+$("run").onclick = runCase;
+init();
+</script>
+</body>
+</html>

@@ -4,6 +4,22 @@ title: Naredni zadaci
 ---
 # Naredni zadaci
 
+## Aktivni prioritet — 2026-11-09 (ADR-029, ispravke prije ponovnog pokretanja)
+
+Rezultati ADR-022–028 su nevažeći zbog gridMET greške; redoslijed i prihvat su u
+[NEXT_SESSION](NEXT_SESSION.md).
+
+| ID | Stanje | Sljedeće |
+| --- | --- | --- |
+| TASK-021 | otvoreno | CI posao s NumPy/geo paketima |
+| TASK-022 | otvoreno | IoU rasta, downwind elipsa |
+| TASK-023 | otvoreno | linije bez dijagonalnih rupa, jačina linije, VALIDATION zaštita, testovi statistike |
+| TASK-024 | otvoreno | CA: napredak gradnje, ćelije linije, sigurnost odvojeno |
+| TASK-025 | čeka odluku | novi ADR: vrijeme u observationu, korak, gate pravilo, benchmark plan |
+| TASK-026 | čeka 021–025 i nalog | ponovno pokretanje gatea, benchmarka i treninga |
+| TASK-027 | otvoreno | FEDS UTC, dupli FEDS požar, RNG reset |
+
+
 ## Aktivni prioritet — 2026-11-04 (noćni rad, koraci 5–8)
 
 TASK-019 je izveden do kraja: ulazi su reproducirani, dijagnoza i preregistrovana 3×3

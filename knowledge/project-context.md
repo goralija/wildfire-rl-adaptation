@@ -1,7 +1,7 @@
 ---
 type: Project Context
 title: Projektni kontekst i stanje istraživanja
-description: Sažetak aktivnog SimFire/FEDS benchmarka, koraka 5–8 i otvorenih odluka.
+description: Sažetak aktivnog SimFire/FEDS benchmarka, ADR-029 ispravki i otvorenih odluka.
 status: stable
 generated: {by: "process:claude-code", at: "2026-11-04T03:45:00Z"}
 sources:
@@ -25,6 +25,38 @@ Korisnik je odabrao **SimFire + FPA-FOD + FEDS-CONUS**, uz FLE/ICS-209 samo kao
 ograničeni post-hoc kontekst. Split je po godini: train 2018/2019 (99 požara), validation
 2023 (20), test 2024 (zatvoren). Okvir obuhvata veće požare u deset zapadnih država i nije
 reprezentativan za sve požare. FEDS/FPA veza ostaje provisionalna.
+
+## Aktuelno — ADR-029, 2026-11-09: rezultati nevažeći, prvo ispravke
+
+- **Greška.** gridMET uzorkovanje je svim požarima jedne godine davalo vrijeme prvog
+  požara te godine (97/99 TRAIN, 19/20 VALIDATION). Ispravljeno u PR #3.
+- **Posljedica.** SimFire gate, validacija, benchmark, studija budžeta i test CA politika
+  na stvarnim požarima (ADR-022–028) nisu važeći zaključci; sekcije ispod su historija.
+- **Druge potvrđene greške.** IoU uključuje početnu površinu; dijagonalne linije
+  propuštaju vatru; PPO nije bolji od nasumične linije; u CA se napredak linije briše pri
+  promjeni smjera, a ćelije linije se računaju kao spašene.
+- **Dalje.** TASK-021–027 u [NEXT_SESSION](../docs/NEXT_SESSION.md); odluka u ADR-029.
+
+## Ranije — sintetički CA trening (ADR-028), 2026-11-05
+
+- **Trening.** Agent se trenira samo na proceduralno generisanim sintetičkim požarima,
+  u vlastitom CA simulatoru ([spec](../docs/research/SYNTHETIC_CA_ENV.md)):
+  - vjerovatnoća paljenja zavisi od tipa goriva;
+  - jedinice imaju fizičke brzine kretanja i gradnje linije;
+  - nagrada je kontrafaktualna, protiv no-op rollouta;
+  - jedinice se povlače po LCES pravilu i kažnjavaju se bliski susreti i gubici.
+- **Uloga stvarnih slučajeva.** 119 FEDS startova služi samo kao jednokratni test
+  zaključanih politika. Ishod je simuliran.
+- **Rezultat.**
+  - PPO od nule nije dostigao heuristiku.
+  - `policy-v1` (imitacija direct_flank, pa PPO) je na sintetičkoj validaciji izjednačena
+    s direct_flank (preregistrovani kriterij: FAIL) i jasno bolja od no-op.
+  - Na stvarnim startovima čuva u prosjeku 12% no-op štete po slučaju više od no-op, uz
+    upola manje bliskih susreta od direct_flank.
+- **Granica.** Jaz kalibracije prema FEDS-u je velik (medijan IoU 0.27–0.30 na 48h).
+  Detalji su u ADR-028 i [izvještajima](../reports/synthetic/index.md).
+- **Odnos prema ranijem radu.** Koraci 5–8 ispod su historijski i ostaju na snazi kao
+  dokaz da SimFire gate pada.
 
 ## Stanje koraka 5–8 — 2026-11-04
 
