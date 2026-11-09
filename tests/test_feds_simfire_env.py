@@ -200,6 +200,47 @@ class LineGeometryTests(unittest.TestCase):
         self.assertEqual((env.remaining_budget, info["line_cells_applied"], len(placed)), (1, 9, 9))
         self.assertAlmostEqual(info["line_length_m"], line_length_m(1))
 
+    def _step_clipped(self, fire_map, sector):
+        env = object.__new__(FedsSimFireEnv)
+        env.action_space = SimpleNamespace(contains=lambda action: 0 <= action < 9)
+        env.scenario_id = "train-fixture"
+        env._done = False
+        env.remaining_budget = env.initial_budget = 1
+        env.max_budget = 4
+        env.decision_index = 0
+        env.horizon_steps = 4
+        env.line_placement = "front_edge"
+        env.simulation_active = False
+        placed = []
+        env.simulation = SimpleNamespace(fire_map=fire_map, update_mitigation=placed.extend)
+        env.cumulative_burned = fire_map > 0
+        env._observation = lambda: None
+        return env.step(sector + 1)[4], placed
+
+    def test_clipped_line_reports_the_length_actually_placed(self):
+        nominal_cells = {0: 7, 1: 9}
+        # A front cell one row from the top edge: the east line loses its northern
+        # cells to the grid edge. One near the right edge: the south-east diagonal
+        # loses its north-eastern cells.
+        edge = np.zeros((41, 41), dtype=np.uint8)
+        edge[1, 20] = 1
+        right = np.zeros((41, 41), dtype=np.uint8)
+        right[20, 38] = 1
+        # A burned strip where the east line would run removes cells from inside.
+        burned = np.zeros((41, 41), dtype=np.uint8)
+        burned[20, 20] = 1
+        burned[17:20, 22] = 2
+        for name, fire_map, sector in (("edge-axis", edge, 0), ("edge-diagonal", right, 1),
+                                       ("burned-axis", burned, 0)):
+            info, placed = self._step_clipped(fire_map, sector)
+            with self.subTest(case=name):
+                self.assertGreater(len(placed), 0)
+                self.assertLess(len(placed), nominal_cells[sector])
+                self.assertEqual(info["line_cells_applied"], len(placed))
+                self.assertAlmostEqual(
+                    info["line_length_m"],
+                    line_length_m(sector) * len(placed) / nominal_cells[sector])
+
 
 def _record(label, value):
     return {"gridmet_daily_label_mst": label, "gridmet_values": {

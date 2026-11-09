@@ -79,6 +79,21 @@ def line_length_m(sector: int, half_steps: Optional[int] = None) -> float:
     return (2 * steps + 1) * CELL_SIZE_M * float(np.hypot(*tangent))
 
 
+def placed_line_length_m(sector: int, placed_cells: int) -> float:
+    """Length of a possibly clipped line: the nominal length times the placed share of
+    the nominal cell count (7 axis cells, or 5 diagonal plus 4 corner cells).
+
+    An unclipped line reports exactly ``line_length_m(sector)``; a line cut by the grid
+    edge or by burned cells reports proportionally less.
+    """
+    if type(placed_cells) is not int or placed_cells < 0:
+        raise ValueError("placed cell count must be a nonnegative integer")
+    nominal = len(sector_line_cells(0, 0, sector))
+    if placed_cells > nominal:
+        raise ValueError("a sector line has at most %d cells" % nominal)
+    return line_length_m(sector) * placed_cells / nominal
+
+
 def sector_line_cells(center_x: int, center_y: int, sector: int,
                       half_steps: Optional[int] = None) -> Tuple[Tuple[int, int], ...]:
     """Ordered (x, y) cells of a 4-connected line through an integer centre cell.
@@ -424,7 +439,7 @@ class FedsSimFireEnv(gym.Env):
                     (x, y, SIMFIRE_FIRELINE) for x, y in applied_points
                 ])
                 self.remaining_budget -= 1
-                applied_length_m = line_length_m(action - 1)
+                applied_length_m = placed_line_length_m(action - 1, len(applied_points))
 
         previous = self.cumulative_burned.copy()
         if self.simulation_active:
