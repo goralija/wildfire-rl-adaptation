@@ -4,6 +4,15 @@ title: Work log
 ---
 # Work log
 
+2026-11-09 — TASK-027 u worktreeu `.worktrees/task-027-feds-utc-dedup`. Generator manifesta
+zadržava jedan zapis po FEDS požaru (columbus ispada, 98 TRAIN); prije izmjene je reprodukovao
+stari manifest osim `created_utc`. Provjera izvora (fireatlas v1.4.1, Zenodo, Chen 2022) je
+pokazala da FEDS `t` nije UTC nego AM/PM oznaka prolaza po lokalnom sunčevom vremenu; zastao
+sam i dao korisniku tri opcije, a on je izabrao preračun prolaza u UTC po dužini. Mapiranje je
+u jednoj funkciji, s testovima napisanim prije koda; CA real-case start i lokalni test su
+usklađeni. Novi gridMET fajl je napravljen samo lokalno (sha256 `8e0e70a5…`); stari
+neispravni fajl `7b0aa405…` nije diran. Gate ni VALIDATION nisu pokretani.
+
 2026-11-03 — Pregledao sam glavne ulaze za novu sesiju i našao zastarjele prioritete:
 AGENTS i tri agent shima još su stavljali TASK-012/CFSDS na prvo mjesto; project
 context i backlog još su prikazivali cohort no-op gate kao budući korak; HANDOFF/README

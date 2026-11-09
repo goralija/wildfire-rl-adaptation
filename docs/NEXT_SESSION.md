@@ -40,13 +40,17 @@ dopunama ADR-030.
    zamrzavanje, jedna VALIDATION ocjena) tek kad su TASK-021–024 spojeni i FEDS vremenska
    zona provjerena. Faza 2: SimFire benchmark i studija budžeta. Faza 3: ponovni trening CA
    politika, tek nakon odluke koji je simulator glavni za poster.
-7. **TASK-027 — provjere prije faze 1.** Da li je FEDS `t` UTC (00:00/12:00 liče na
-   poludnevne intervale); ukloniti `fpa-fod-400389825-columbus` iz manifesta (ADR-030 §6,
-   98 TRAIN). RNG reset je riješen u TASK-023.
+7. **TASK-027 — urađeno na grani `f/task-027-feds-utc-dedup` (čeka PR i reviziju).**
+   Columbus je isključen pravilom u generatoru manifesta (98 TRAIN, 20 VALIDATION). FEDS `t`
+   je oznaka VIIRS prolaza u lokalnom sunčevom vremenu, ne UTC; korisnik je izabrao preračun
+   01:30/13:30 lokalno → UTC po dužini ([dopuna ADR-030](specs/DECISION_RECORDS.md),
+   [dokazi](research/SIMFIRE_ENVIRONMENT.md)). Novi gridMET fajl: sha256
+   `8e0e70a5f49552930ccc08fbf14e5bdccc5394b234012f228bd3e986a34043fb`, manifest
+   `d30508c9…`. RNG reset je riješen u TASK-023.
 
-**Šta faza 1 još traži:** TASK-027 provjere; ponovo napraviti gridMET fajl ispravljenim
-uzorkovačem (s `pre_start` zapisom, koji okruženje sada zahtijeva) i upisati njegov hash u
-izvještaje; zatim izričit nalog korisnika.
+**Šta faza 1 još traži:** merge TASK-027 nakon revizije; isti gridMET fajl (ili ponovo
+generisan, pa novi hash u izvještaju i freeze zapisu) u `.local/gridmet/` worktreea koji
+pokreće gate; zatim izričit nalog korisnika. Komande i kandidati su u ADR-030 §3.
 
 Paralelni PR-ovi (TASK-021–024) ne mijenjaju zajedničke fajlove znanja (STATUS,
 NEXT_SESSION, BACKLOG, log, agent ulazi); promjene opisuju u PR-u, a znanje se ažurira pri
