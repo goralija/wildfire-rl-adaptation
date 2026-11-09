@@ -1,5 +1,10 @@
 # Promjene baze znanja
 
+## 2026-11-09: dopuna ADR-030, ćelije linije i nagrada
+
+- Ćelija linije koju no-op vatra zahvati računa se kao šteta i u nagradi za trening, ne
+  samo u evaluaciji (odluka korisnika uz PR #11). [Odluke](docs/specs/DECISION_RECORDS.md).
+
 ## 2026-11-09: ADR-030, odluke prije ponovnog pokretanja
 
 - Gate na IoU rasta prema downwind elipsi na požarima koji rastu; vrijeme prethodnog
