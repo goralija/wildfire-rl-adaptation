@@ -107,6 +107,9 @@ class Unit:
     active: bool = False
     lost: bool = False
     progress_m: float = 0.0
+    # What ``progress_m`` accumulates for: ("build", row, col) or ("move", row, col). It is
+    # keyed to the cell, so changing heading while building the same cell keeps progress.
+    progress_key: Optional[Tuple[str, int, int]] = None
     action: int = 0
     line_cells: int = 0
     retreats: int = 0
@@ -448,7 +451,7 @@ class SyntheticSuppressionEnv(gym.Env):
             rr, cc = r + dr, c + dc
             if 0 <= rr < rows and 0 <= cc < cols and 0 <= hops[rr, cc] < hops[r, c]:
                 unit.row, unit.col = rr, cc
-                unit.progress_m = 0.0
+                unit.progress_m, unit.progress_key = 0.0, None
                 unit.retreats += 1
                 return
 
@@ -473,8 +476,14 @@ class SyntheticSuppressionEnv(gym.Env):
             unit.lost = True
             return
         unit.row, unit.col = best
-        unit.progress_m = 0.0
+        unit.progress_m, unit.progress_key = 0.0, None
         unit.close_calls += 1
+
+    @staticmethod
+    def _key_progress(unit: Unit, key: Tuple[str, int, int]) -> None:
+        """Keep accumulated metres only while the unit works toward the same cell."""
+        if unit.progress_key != key:
+            unit.progress_m, unit.progress_key = 0.0, key
 
     def _unit_substep(self, unit: Unit) -> None:
         if not unit.active:
@@ -494,25 +503,27 @@ class SyntheticSuppressionEnv(gym.Env):
         building = action >= 9
         dt = SUBSTEP_MINUTES
         if building and self._buildable(unit.row, unit.col):
+            self._key_progress(unit, ("build", unit.row, unit.col))
             rate = unit.spec.line_m_per_min(self.land.fuel[unit.row, unit.col],
                                             self.land.slope_percent[unit.row, unit.col])
             unit.progress_m += rate * dt
             if unit.progress_m >= CELL_SIZE_M:
                 self.fire.line[unit.row, unit.col] = True
                 unit.line_cells += 1
-                unit.progress_m = 0.0
+                unit.progress_m, unit.progress_key = 0.0, None
             return
         target = self._target(unit, k)
         if target is None:
-            unit.progress_m = 0.0
+            unit.progress_m, unit.progress_key = 0.0, None
             return
+        self._key_progress(unit, ("move",) + tuple(int(v) for v in target))
         slope = abs(self.land.elevation[target] - self.land.elevation[unit.row, unit.col])
         # Slope slowdown roughly matching Sullivan et al. 2020 (x0.6 at 15 deg, x0.4 at 30 deg).
         slowdown = np.exp(-2.0 * slope / OFFSET_DISTANCE[k])
         unit.progress_m += unit.spec.travel_m_per_min * slowdown * dt
         if unit.progress_m >= OFFSET_DISTANCE[k]:
             unit.row, unit.col = target
-            unit.progress_m = 0.0
+            unit.progress_m, unit.progress_key = 0.0, None
 
     def _advance(self, fire: FireState, index: int, units: Optional[List[Unit]]) -> float:
         """Run one decision interval; return weighted new damage."""
@@ -546,8 +557,6 @@ class SyntheticSuppressionEnv(gym.Env):
             chosen = int(action[slot])
             if not mask[slot, chosen]:
                 chosen, invalid = 0, invalid + 1
-            if chosen != unit.action:
-                unit.progress_m = 0.0
             unit.action = chosen
 
         lost_before = sum(unit.lost for unit in self.units)
