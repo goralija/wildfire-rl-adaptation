@@ -1,5 +1,11 @@
 # Promjene baze znanja
 
+## 2026-11-09: TASK-027 spojen; faze 1 i 2 autonomno
+
+- PR #15 je spojen nakon nezavisne revizije. Korisnik je odobrio da agent sam pokrene fazu 1
+  i, ako prođe, fazu 2; merge i faza 3 ostaju njegovi ([dopuna ADR-030](docs/specs/DECISION_RECORDS.md)).
+- Prompt za sljedećeg agenta: [HANDOFF_STAGE_1_2](docs/HANDOFF_STAGE_1_2.md).
+
 ## 2026-11-09: TASK-027, duplikat i FEDS vremenska zona
 
 - Generator manifesta zadržava jedan zapis po FEDS požaru (najniži `fod_id`); columbus je

@@ -1134,3 +1134,24 @@ From TASK-027, before any stage-1 run. Evidence and links:
   records, no pre-start, and 115 of 118 cases on another cell.
 - **Real-case test count.** "The 119 FEDS starts" in the synthetic CA addendum above now
   means the manifest's 118 starts; the stage-3 run has not happened.
+
+### ADR-030 addendum — autonomous stages 1 and 2, accepted 2026-11-09
+
+The user (Harun) decided this on 2026-11-09, after PR #15 (TASK-027) was merged and before
+any stage-1 run. It replaces §7's "each stage needs the user's explicit go-ahead" for
+stages 1 and 2 only.
+- **Stage 1** may run without a further go-ahead: the gate on TRAIN, the freeze, and one
+  VALIDATION score.
+- **Stage 2** may follow without a further go-ahead **only if stage 1 passes**: the SimFire
+  benchmark and budget study, run locally, with 10 seeds and the §4 plan.
+- **If stage 1 fails**, the agent records FAIL, freezes nothing, does not score VALIDATION,
+  and stops for a decision.
+- **Spread ordering.** Stage 2 keeps `spread_aggregation="last_write"` (pinned SimFire). The
+  number of episodes where a line burns more than no-op is reported as a known limitation;
+  `"max"` would need its own decision and gate.
+- **Merges stay with the user.** Agents may push branches and open PRs, with an independent,
+  narrow-context review.
+- **Unchanged:** stage 3 still needs the user's decision, and TEST 2024 stays closed. No gate
+  rule, candidate, metric or statistic may change after a result is seen.
+
+The agent prompt is [HANDOFF_STAGE_1_2](../HANDOFF_STAGE_1_2.md).

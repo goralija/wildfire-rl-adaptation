@@ -29,7 +29,8 @@ sources:
   → UTC po dužini (dopuna ADR-030). Novi gridMET fajl je napravljen lokalno (sha256
   `7a51aadd…`, 118 ćelija za 118 slučajeva, svi s `pre_start`); hash je u
   [coverage reportu](../reports/real-fire-data/feds-gridmet-weather-coverage-v1.json).
-  Faza 1 čeka merge i nalog.
+  Spojeno kao PR #15. Faze 1 i 2 agent smije pokrenuti sam (faza 2 samo ako faza 1 prođe;
+  dopuna ADR-030, [handoff](HANDOFF_STAGE_1_2.md)); nijedna još nije pokrenuta.
 - **Odluke za ponovno pokretanje (ADR-030).** Gate na IoU rasta prema downwind elipsi,
   vrijeme prethodnog segmenta u observationu, linija neovisna o koraku, 10 seedova i
   poređenje s nasumičnom linijom; ponovno pokretanje ide u tri faze uz nalog za svaku.
