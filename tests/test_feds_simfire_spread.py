@@ -14,7 +14,12 @@ except ImportError as exc:
 try:
     import simfire  # noqa: F401
     from wildfire_rl.feds_simfire_env import SIMFIRE_FIRELINE, sector_line_cells
-    from wildfire_rl.feds_simfire_setup import SimFireParams, apply_forcing, build_simulation
+    from wildfire_rl.feds_simfire_setup import (
+        SimFireParams,
+        apply_forcing,
+        build_simulation,
+        forcing_segments,
+    )
 except ImportError as exc:
     raise unittest.SkipTest("optional SimFire/Gymnasium dependencies are not installed: %s" % exc)
 
@@ -111,6 +116,75 @@ class FirelineAttenuationStepTests(unittest.TestCase):
                   for mode in ("per_update", "per_minute")]
         maps = [_burn(self.inputs, self.line, item, duration="2h") for item in params]
         np.testing.assert_array_equal(maps[0], maps[1])
+
+
+class FirelineBankingTests(unittest.TestCase):
+    """Pinned SimFire subtracts the line attenuation from every line cell on every update,
+    fire or no fire, so an idle line banks a large negative burn amount and becomes a
+    near-absolute barrier. The ADR-030 wrapper floors line burn amounts at zero, so a
+    line holds iff the rate of spread reaching it stays below 980 ft/min."""
+
+    LINE_X = 37
+
+    def _line(self):
+        return [(x, y) for x, y in sector_line_cells(self.LINE_X, 20, 0, half_steps=SIZE)
+                if 0 <= y < SIZE]
+
+    def _approach_then_push(self, minutes, wind_m_s):
+        """A slow 3 m/s approach for 3h (the line waits), then 3h of a strong west wind."""
+        inputs = _inputs([(1, y) for y in range(14, 26)], wind_m_s=3.0)
+        params = SimFireParams(wind_adjustment_factor=1.0, internal_update_minutes=minutes)
+        simulation, forcing, _cumulative = build_simulation(inputs, params, seed=0)
+        line = self._line()
+        simulation.update_mitigation([(x, y, SIMFIRE_FIRELINE) for x, y in line])
+        apply_forcing(simulation, forcing[0])
+        lowest = []
+        for _hour in range(3):
+            simulation.run("1h")
+            lowest.append(min(float(simulation.fire_manager.burn_amounts[y, x]) for x, y in line))
+        burned = np.isin(simulation.fire_map, (1, 2))
+        self.assertFalse(burned[:, self.LINE_X:].any())
+        self.assertTrue(burned[:, self.LINE_X - 6:self.LINE_X].any(), "the fire must be near the line")
+        push = forcing_segments(_inputs([(0, 0)], wind_m_s=wind_m_s)["weather"], params)[0]
+        apply_forcing(simulation, push)
+        simulation.run("3h")
+        beyond = int(np.isin(simulation.fire_map, (1, 2))[:, self.LINE_X + 1:].sum())
+        return lowest, beyond
+
+    @staticmethod
+    def _rates_ft_per_min(wind_m_s):
+        """Eastward rates of spread from a north-south front: (diagonal, straight)."""
+        inputs = _inputs([(20, y) for y in range(14, 26)], wind_m_s=wind_m_s)
+        params = SimFireParams(wind_adjustment_factor=1.0, internal_update_minutes=1)
+        simulation, forcing, _cumulative = build_simulation(inputs, params, seed=0)
+        apply_forcing(simulation, forcing[0])
+        simulation.fire_manager.update(simulation.fire_map)
+        rate = simulation.fire_manager.rate_of_spread
+        # Interior targets are last written by a diagonal neighbour; the end target by
+        # its straight neighbour.
+        return float(rate[20, 21]), float(rate[25, 21])
+
+    def test_premise_rates_straddle_the_fireline_attenuation(self):
+        diagonal, straight = self._rates_ft_per_min(10.0)
+        self.assertGreater(min(diagonal, straight), 980.0 * 1.1)
+        diagonal, straight = self._rates_ft_per_min(6.0)
+        self.assertLess(max(diagonal, straight), 980.0 * 0.9)
+
+    def test_idle_line_does_not_bank_negative_burn(self):
+        for minutes in (1, 5):
+            lowest, _beyond = self._approach_then_push(minutes, 6.0)
+            with self.subTest(minutes=minutes):
+                self.assertEqual(min(lowest), 0.0)
+
+    def test_fire_above_the_attenuation_crosses_a_waiting_line_at_one_and_five_minutes(self):
+        for minutes in (1, 5):
+            with self.subTest(minutes=minutes):
+                self.assertGreater(self._approach_then_push(minutes, 10.0)[1], 0)
+
+    def test_fire_below_the_attenuation_is_held_at_one_and_five_minutes(self):
+        for minutes in (1, 5):
+            with self.subTest(minutes=minutes):
+                self.assertEqual(self._approach_then_push(minutes, 6.0)[1], 0)
 
 
 class SpreadAggregationTests(unittest.TestCase):
