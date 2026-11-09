@@ -119,10 +119,19 @@ class SignFlipTests(unittest.TestCase):
 CELL_HA = 3.24
 
 
-def _report(rows, split="validation"):
-    return {"split": split, "test_cases_loaded": False, "episodes": rows,
-            "sim_params": {"wind_adjustment_factor": 0.2}, "line_placement": "front_edge",
-            "weather_observation": "previous"}
+SETTINGS = {"weather_observation": "previous", "weather_observation_rule": "rule/v1",
+            "sim_params": {"wind_adjustment_factor": 0.2}, "fireline_attenuation": "per_minute",
+            "line_banking_floor": "zero", "line_placement": "front_edge",
+            "observation_max_budget": 4}
+
+
+def _report(rows, split="validation", settings=SETTINGS):
+    report = {"split": split, "test_cases_loaded": False, "episodes": rows,
+              "sim_params": {"wind_adjustment_factor": 0.2}, "line_placement": "front_edge",
+              "weather_observation": "previous", "legacy_checkpoints": []}
+    if settings is not None:
+        report["policy_settings"] = dict(settings)
+    return report
 
 
 def _train_heuristic_rows():
@@ -278,6 +287,18 @@ class PrimaryFamilyTests(unittest.TestCase):
                         self.assertRaises(SystemExit):
                     main([str(report), "--train-report", str(wrong)])
                 self.assertIn("TRAIN", err.getvalue())
+            # A TRAIN report from banking lines or the old observation rule matches on the
+            # old top-level keys but not on its policy settings; one without them is refused.
+            for name, settings in (("banking", dict(SETTINGS, line_banking_floor="none_pinned_simfire")),
+                                   ("pre-receipt", None)):
+                stale = Path(directory) / ("%s.json" % name)
+                stale.write_text(json.dumps(_report(_train_heuristic_rows(), split="train",
+                                                    settings=settings)), encoding="utf-8")
+                with self.subTest(train_report=name), \
+                        contextlib.redirect_stderr(io.StringIO()) as err, \
+                        self.assertRaises(SystemExit):
+                    main([str(report), "--train-report", str(stale)])
+                self.assertIn("policy_settings", err.getvalue())
             train = Path(directory) / "train.json"
             train.write_text(json.dumps(_report(_train_heuristic_rows(), split="train")),
                              encoding="utf-8")
@@ -318,6 +339,17 @@ class FineTuneInferenceTests(unittest.TestCase):
         self.assertNotEqual(mean, 0.0)
         result = sign_flip_test([mean, -CELL_HA, -2 * CELL_HA])
         self.assertEqual(result["scenarios_changed"], 2)
+
+    def test_float_residue_is_neither_better_nor_worse(self):
+        rows = []
+        # Cell deltas (+1, +1, -2) in scenario a leave a residue of about -5e-15 ha.
+        for seed, cells in zip((1, 2, 3), (1, 1, -2)):
+            for scenario, delta in (("a", CELL_HA * cells), ("b", -CELL_HA)):
+                rows.append(_row("noop", 2, scenario, 100.0))
+                rows.append(_row("base-s%d" % seed, 2, scenario, 100.0 + delta))
+        entry = contrasts(_report(rows))["by_budget"]["2"]["frozen_base_minus_noop"]
+        self.assertEqual((entry["scenarios_changed"], entry["scenarios_better"],
+                          entry["scenarios_worse"]), (1, 1, 0))
 
 
 if __name__ == "__main__":
