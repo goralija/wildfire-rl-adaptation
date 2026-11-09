@@ -169,3 +169,73 @@ class CalibrationGapGrowthTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+def _gate_case(scenario_id, sim, ellipse, observed, initial, edge_hour=None):
+    """Four-timepoint case with SimFire, ellipse and FEDS masks given per horizon."""
+    rows = []
+    for hours in (12, 24, 36, 48):
+        row = binary_burn_metrics(sim[hours], observed[hours], initial_burn=initial)
+        row.update({
+            "hours_since_start": hours,
+            "persistence_reference": binary_burn_metrics(initial, observed[hours], initial_burn=initial),
+            "ellipse_reference": binary_burn_metrics(ellipse[hours], observed[hours], initial_burn=initial),
+        })
+        if edge_hour == hours:
+            row["touches_map_edge"] = True
+        rows.append(row)
+    return {"scenario_id": scenario_id, "trajectory": rows}
+
+
+def _late_growing_case(scenario_id="late", edge_hour=None):
+    """Growing under ADR-030 (48h area 2.5x) but flat at 12h and 24h, as in the review repro."""
+    initial = np.zeros((40, 40), dtype=bool)
+    initial[18:22, 18:22] = True
+    observed = {hours: initial.copy() for hours in (12, 24, 36, 48)}
+    observed[36][14:18, 18:22] = True
+    observed[48][12:18, 18:22] = True
+    sim = {hours: initial.copy() for hours in observed}
+    sim[36][16:18, 18:22] = True
+    sim[48][14:18, 18:22] = True
+    ellipse = {hours: initial.copy() for hours in observed}
+    ellipse[24][17, 18:22] = True
+    ellipse[36][16:18, 18:22] = True
+    ellipse[48][15:18, 18:22] = True
+    return _gate_case(scenario_id, sim, ellipse, observed, initial, edge_hour)
+
+
+def _stalled_case(scenario_id="stalled"):
+    initial = np.zeros((40, 40), dtype=bool)
+    initial[18:22, 18:22] = True
+    observed = {hours: initial.copy() for hours in (12, 24, 36, 48)}
+    sim = {hours: initial.copy() for hours in observed}
+    sim[48][22:26, 18:22] = True
+    return _gate_case(scenario_id, sim, dict(observed), observed, initial)
+
+
+class GrowthGateTests(unittest.TestCase):
+    def payload(self, cases, status="complete", errors=()):
+        return {"status": status, "errors": list(errors), "results": cases}
+
+    def test_case_level_strata_and_pooled_iou_are_defined_for_late_growth(self):
+        gate = evaluator.growth_gate(self.payload([_late_growing_case(), _stalled_case()]))
+        self.assertEqual((gate["growing_cases"], gate["non_growing_cases"]), (1, 1))
+        # SimFire hits 8 of a 16-cell union at 36h and 16 of 24 at 48h; pooled 24/40.
+        self.assertAlmostEqual(gate["simfire_mean_case_growth_iou"], (8 + 16) / (16 + 24))
+        # Ellipse grows early (24h) while FEDS has not: that false growth is part of its union.
+        self.assertAlmostEqual(gate["ellipse_mean_case_growth_iou"], (8 + 12) / (4 + 16 + 24))
+        self.assertTrue(gate["pass"])
+        self.assertEqual(gate["non_growing_overgrowth"]["mean_simfire_growth_cells_48h"], 16)
+
+    def test_gate_fails_on_any_edge_contact_or_incomplete_cohort(self):
+        self.assertFalse(evaluator.growth_gate(
+            self.payload([_late_growing_case(edge_hour=24)]))["pass"])
+        self.assertFalse(evaluator.growth_gate(
+            self.payload([_late_growing_case()], status="incomplete"))["pass"])
+        self.assertFalse(evaluator.growth_gate(
+            self.payload([_late_growing_case()], errors=[{"scenario_id": "x"}]))["pass"])
+
+    def test_gate_without_growing_cases_cannot_pass(self):
+        gate = evaluator.growth_gate(self.payload([_stalled_case()]))
+        self.assertEqual(gate["growing_cases"], 0)
+        self.assertFalse(gate["pass"])

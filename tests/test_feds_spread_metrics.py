@@ -174,6 +174,30 @@ class FedsSpreadMetricTests(unittest.TestCase):
         self.assertGreater(upper_right, 0)
         self.assertEqual(lower_left, 0)
 
+    def test_ignition_point_is_the_leading_edge_of_a_ring_front(self):
+        from wildfire_rl.feds_spread_metrics import ellipse_ignition_point
+
+        rows, columns = np.indices((41, 41))
+        distance = np.hypot(rows - 20, columns - 20)
+        scar = distance <= 15
+        front = (distance <= 15) & (distance > 14)
+        # Heading east (90 degrees): the leading edge is the eastern rim, not the centre.
+        row, column = ellipse_ignition_point(front, 90.0)
+        self.assertAlmostEqual(row, 20.0, places=6)
+        self.assertGreaterEqual(column, 34.5)
+        # From the centroid the 12h ellipse adds nothing; from the leading edge it grows.
+        centred = elliptical_growth_reference(scar, center_row=20.0, center_column=20.0,
+                                              hours=12, downwind_degrees=90.0)
+        leading = elliptical_growth_reference(scar, center_row=row, center_column=column,
+                                              hours=12, downwind_degrees=90.0)
+        self.assertEqual(int((centred & ~scar).sum()), 0)
+        self.assertGreater(int((leading & ~scar).sum()), 0)
+        # North heading picks the northern rim (row 0 is north).
+        north_row, _ = ellipse_ignition_point(front, 0.0)
+        self.assertLessEqual(north_row, 5.5)
+        with self.assertRaises(ValueError):
+            ellipse_ignition_point(np.zeros((3, 3), dtype=bool), 0.0)
+
     def test_ellipse_rejects_invalid_grid_and_time_parameters(self):
         initial = np.zeros((3, 3), dtype=bool)
         with self.assertRaises(ValueError):

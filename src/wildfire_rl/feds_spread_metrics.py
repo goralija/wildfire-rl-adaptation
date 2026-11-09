@@ -7,11 +7,11 @@ from typing import Any
 import numpy as np
 
 # Bump when a scored field changes meaning, so reports built on old metrics cannot mix with new ones.
-METRICS_VERSION = "feds-spread-metrics/2"
+METRICS_VERSION = "feds-spread-metrics/3"
 
 ELLIPSE_REFERENCE_PROTOCOL = {
     "shape": "fixed 2:1 ellipse with the ignition point at its rear focus, unioned with the initial burn mask",
-    "ignition_point": "centroid of the initial FEDS active-front cells, placed at the rear focus",
+    "ignition_point": "leading edge of the initial FEDS active front along the heading (mean of front cells within half a cell of the most downwind one), placed at the rear focus",
     "heading": "first 12-hour gridMET wind-to direction; the ellipse centre lies downwind of the ignition point",
     "semi_major_growth": "180 m per 12 hours (one study-grid cell)",
     "semi_minor_growth": "semi-major axis divided by 2",
@@ -42,6 +42,7 @@ def elliptical_growth_reference(
     the head reaches about 1.87a downwind and the back about 0.13a upwind. The
     baseline uses only the initial mask, the starting active-front centroid, and
     the first gridMET wind-to direction; it never reads a future FEDS perimeter.
+    Use ``ellipse_ignition_point`` for the ignition point.
     """
     initial = np.asarray(initial_burn, dtype=bool)
     if initial.ndim != 2 or not initial.size:
@@ -72,6 +73,27 @@ def elliptical_growth_reference(
     ellipse = ((along_wind_m / semi_major_m) ** 2
                + (cross_wind_m / semi_minor_m) ** 2) <= 1.0
     return initial | ellipse
+
+
+def ellipse_ignition_point(active_front: Any, downwind_degrees: float) -> tuple[float, float]:
+    """Return the leading edge of the active front along the downwind heading.
+
+    The front centroid can sit inside the burn scar (a ring-shaped front), where a
+    small ellipse adds no new cells. The reference instead starts at the front's
+    leading edge: the mean of the front cells within half a cell of the most
+    downwind one, so ties along a straight front stay centred.
+    """
+    front = np.asarray(active_front, dtype=bool)
+    if front.ndim != 2 or not front.any():
+        raise ValueError("Active front must be a 2-D mask with at least one cell.")
+    if not np.isfinite(downwind_degrees):
+        raise ValueError("Ellipse heading must be finite.")
+    rows, columns = np.nonzero(front)
+    angle = np.deg2rad(float(downwind_degrees) % 360.0)
+    # Same axes as elliptical_growth_reference: east = +column, north = -row.
+    along_wind = columns * np.sin(angle) - rows * np.cos(angle)
+    leading = along_wind >= along_wind.max() - 0.5
+    return float(rows[leading].mean()), float(columns[leading].mean())
 
 
 def growth_overlap_metrics(

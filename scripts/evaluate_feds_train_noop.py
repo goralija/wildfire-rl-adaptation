@@ -60,6 +60,84 @@ def _growth_summary(rows: list[dict]) -> dict:
     }
 
 
+GROWING_AREA_RATIO = 1.10  # ADR-030 section 3: observed +48h area >= 1.10 x initial area
+
+
+def _pooled_case_growth_iou(rows: list[dict]) -> float | None:
+    """Pool growth overlap over a case's timepoints: sum of hits / sum of unions.
+
+    Defined whenever any timepoint has predicted or observed growth, so every method
+    is scored on the same cases (ADR-030 addendum: replaces a per-timepoint mean,
+    which is undefined when neither mask has grown yet).
+    """
+    hits = sum(int(row["growth_intersection_cells"]) for row in rows)
+    unions = sum(
+        int(row["predicted_growth_cells"]) + int(row["observed_growth_cells"])
+        - int(row["growth_intersection_cells"])
+        for row in rows
+    )
+    return hits / unions if unions else None
+
+
+def growth_gate(payload: dict) -> dict:
+    """ADR-030 section 3 gate: growth-only IoU against the downwind ellipse on growing cases."""
+    growing, non_growing = [], []
+    for case in payload["results"]:
+        trajectory = sorted(case["trajectory"], key=lambda row: row["hours_since_start"])
+        initial_cells = int(trajectory[-1]["persistence_reference"]["predicted_burned_cells"])
+        final_observed = int(trajectory[-1]["observed_burned_cells"])
+        record = {
+            "scenario_id": case["scenario_id"],
+            "initial_cells": initial_cells,
+            "observed_cells_48h": final_observed,
+            "simfire_growth_iou": _pooled_case_growth_iou(trajectory),
+            "ellipse_growth_iou": _pooled_case_growth_iou(
+                [row["ellipse_reference"] for row in trajectory]),
+            "simfire_edge_contact": any(bool(row["touches_map_edge"]) for row in trajectory),
+            "ellipse_adds_no_cells": all(
+                int(row["ellipse_reference"]["predicted_growth_cells"]) == 0 for row in trajectory),
+            "simfire_growth_cells_48h": int(trajectory[-1]["predicted_growth_cells"]),
+            "observed_growth_cells_48h": int(trajectory[-1]["observed_growth_cells"]),
+        }
+        if final_observed >= GROWING_AREA_RATIO * initial_cells:
+            growing.append(record)
+        else:
+            non_growing.append(record)
+
+    def mean(values):
+        values = [value for value in values if value is not None]
+        return statistics.fmean(values) if values else None
+
+    simfire = mean(case["simfire_growth_iou"] for case in growing)
+    ellipse = mean(case["ellipse_growth_iou"] for case in growing)
+    edge_cases = sum(case["simfire_edge_contact"] for case in growing + non_growing)
+    complete = payload.get("status") == "complete" and not payload.get("errors")
+    passed = bool(complete and edge_cases == 0 and growing
+                  and simfire is not None and ellipse is not None and simfire > ellipse)
+    return {
+        "rule": ("ADR-030 section 3: all cases complete without errors; zero SimFire map-edge "
+                 "contacts in any case; on growing cases (observed +48h area >= %.2f x initial) "
+                 "SimFire mean case growth IoU (pooled over the four timepoints) is higher than "
+                 "the downwind ellipse's." % GROWING_AREA_RATIO),
+        "pass": passed,
+        "growing_cases": len(growing),
+        "non_growing_cases": len(non_growing),
+        "simfire_mean_case_growth_iou": simfire,
+        "ellipse_mean_case_growth_iou": ellipse,
+        "simfire_minus_ellipse": (simfire - ellipse
+                                  if simfire is not None and ellipse is not None else None),
+        "simfire_edge_contact_cases": edge_cases,
+        "ellipse_cases_without_new_cells": sum(
+            case["ellipse_adds_no_cells"] for case in growing + non_growing),
+        "non_growing_overgrowth": {
+            "description": "known limitation of a free-burning no-op against contained fires; not part of the pass rule",
+            "mean_simfire_growth_cells_48h": mean(case["simfire_growth_cells_48h"] for case in non_growing),
+            "mean_observed_growth_cells_48h": mean(case["observed_growth_cells_48h"] for case in non_growing),
+        },
+        "cases": growing + non_growing,
+    }
+
+
 def summarize(results: list[dict]) -> dict:
     """Summarize paired no-op, persistence, and ellipse scores at all horizons."""
     metric_rows = {
@@ -274,7 +352,9 @@ def main(argv: list[str] | None = None) -> int:
     payload["summary"] = summarize(payload["results"])
     noop = payload["summary"]["methods"]["simfire_noop"]
     refs = payload["summary"]["methods"]
+    payload["growth_gate"] = growth_gate(payload)
     payload["strict_screen"] = {
+        "superseded_by": "growth_gate (ADR-030 section 3); kept for comparison with ADR-022/023 reports only",
         "rule": "All split cases complete; no SimFire edge contacts; SimFire has higher mean IoU and lower mean absolute area error than both references.",
         "pass": bool(
             payload["status"] == "complete"
@@ -293,6 +373,7 @@ def main(argv: list[str] | None = None) -> int:
         "output": str(out),
         "status": payload["status"],
         "progress": payload["progress"],
+        "growth_gate": {key: value for key, value in payload["growth_gate"].items() if key != "cases"},
         "strict_screen": payload["strict_screen"],
         "summary": payload["summary"],
     }, indent=2))
