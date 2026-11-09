@@ -12,6 +12,10 @@ Negative values mean less added burned area. ``scenario_bootstrap_95ci_ha`` resa
 scenarios after averaging over seeds, so it reflects scenario variation only.
 ``seed_t95ci_ha`` is a t-interval over per-seed means and ``two_level_bootstrap_95ci_ha``
 resamples seeds and then scenarios; both include seed-to-seed variation.
+
+Heuristic-minus-no-op contrasts also carry an exact two-sided sign-flip (paired
+permutation) p-value, the number of scenarios whose damage changed at all, and the
+mean delta after dropping the single scenario with the largest absolute delta.
 """
 
 from __future__ import annotations
@@ -32,7 +36,11 @@ def _bootstrap(values, draws=4000, seed=20261104):
     return [float(np.percentile(samples, 2.5)), float(np.percentile(samples, 97.5))]
 
 
-T975 = {1: 12.706, 2: 4.303, 3: 3.182, 4: 2.776, 5: 2.571, 6: 2.447, 7: 2.365, 8: 2.306, 9: 2.262}
+# Two-sided 95% Student t critical values by degrees of freedom.
+T975 = {1: 12.706, 2: 4.303, 3: 3.182, 4: 2.776, 5: 2.571, 6: 2.447, 7: 2.365, 8: 2.306,
+        9: 2.262, 10: 2.228, 11: 2.201, 12: 2.179, 13: 2.160, 14: 2.145, 15: 2.131,
+        16: 2.120, 17: 2.110, 18: 2.101, 19: 2.093, 20: 2.086, 21: 2.080, 22: 2.074,
+        23: 2.069, 24: 2.064, 25: 2.060, 26: 2.056, 27: 2.052, 28: 2.048, 29: 2.045, 30: 2.042}
 
 
 def _seed_t_interval(per_seed_means):
@@ -53,6 +61,52 @@ def _two_level_bootstrap(matrix, draws=4000, seed=20261105):
         columns = generator.integers(scenarios, size=scenarios)
         samples[index] = values[np.ix_(rows, columns)].mean()
     return [float(np.percentile(samples, 2.5)), float(np.percentile(samples, 97.5))]
+
+
+def _signed_sums(values):
+    sums = np.zeros(1)
+    for value in values:
+        sums = np.concatenate((sums + value, sums - value))
+    return sums
+
+
+def sign_flip_test(deltas, exact_limit=22, draws=200000, seed=20261109):
+    """Two-sided paired sign-flip test of a zero mean delta.
+
+    Zero deltas cannot change sign and are dropped; ``scenarios_changed`` counts the
+    rest. Up to ``exact_limit`` changed scenarios every one of the 2^n sign patterns is
+    enumerated (the observed one included, so the smallest p is 2 / 2^n); above that a
+    seeded Monte Carlo estimate (1 + hits) / (1 + draws) is returned.
+    """
+    values = np.asarray(deltas, dtype=float)
+    changed = values[values != 0.0]
+    if changed.size == 0:
+        return {"scenarios_changed": 0, "sign_flip_p_two_sided": 1.0, "sign_flip_method": "exact"}
+    observed = abs(changed.sum())
+    tolerance = 1e-9 * max(1.0, float(np.abs(changed).sum()))
+    if changed.size <= exact_limit:
+        half = changed.size // 2
+        totals = _signed_sums(changed[:half])[:, None] + _signed_sums(changed[half:])[None, :]
+        p_value = float(np.mean(np.abs(totals) >= observed - tolerance))
+        method = "exact"
+    else:
+        generator = np.random.default_rng(seed)
+        signs = generator.choice((-1.0, 1.0), size=(draws, changed.size))
+        hits = int(np.count_nonzero(np.abs(signs @ changed) >= observed - tolerance))
+        p_value = (1 + hits) / float(1 + draws)
+        method = "monte_carlo"
+    return {"scenarios_changed": int(changed.size), "sign_flip_p_two_sided": p_value,
+            "sign_flip_method": method}
+
+
+def leave_largest_out(deltas, scenarios):
+    """Mean delta without the one scenario whose absolute delta is largest."""
+    values = np.asarray(deltas, dtype=float)
+    if values.size < 2:
+        return {"leave_largest_out_mean_delta_ha": None, "leave_largest_out_scenario": None}
+    largest = int(np.argmax(np.abs(values)))
+    return {"leave_largest_out_mean_delta_ha": float(np.delete(values, largest).mean()),
+            "leave_largest_out_scenario": scenarios[largest]}
 
 
 def contrasts(report: dict, base_budget: int = 2) -> dict:
@@ -111,9 +165,12 @@ def contrasts(report: dict, base_budget: int = 2) -> dict:
                 continue
             deltas = paired(policy, "noop", budget)
             if deltas:
+                ids = [s for s in scenarios if (policy, budget, s) in added and ("noop", budget, s) in added]
                 heuristics[policy] = {
                     "mean_delta_ha_vs_noop": statistics.fmean(deltas),
                     "scenario_bootstrap_95ci_ha": _bootstrap(deltas),
+                    **sign_flip_test(deltas),
+                    **leave_largest_out(deltas, ids),
                 }
         entry["heuristics_minus_noop"] = heuristics
         noop = [added[("noop", budget, s)] for s in scenarios if ("noop", budget, s) in added]
