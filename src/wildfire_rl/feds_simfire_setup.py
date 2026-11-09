@@ -36,6 +36,16 @@ FIRELINE_ATTENUATIONS = ("per_update", "per_minute")
 # sprite in list order sets its rate of spread. "max" uses the fastest approach instead,
 # which does not depend on sprite order.
 SPREAD_AGGREGATIONS = ("last_write", "max")
+# ADR-030: "previous" (default) shows, at decision k, the latest gridMET daily record
+# whose label is strictly earlier than segment k's label: the pre-start day for decision
+# 0, otherwise the last earlier segment with an earlier day. Two 12h segments often share
+# one daily record, so "the segment that just ran" can be the upcoming forcing and is
+# not used. "upcoming_perfect_forecast" shows the ex-post forcing of the segment about to
+# run and exists only as a labelled ablation.
+WEATHER_OBSERVATIONS = ("previous", "upcoming_perfect_forecast")
+WEATHER_REGENERATION_HINT = (
+    "regenerate it with scripts/sample_gridmet_episode_weather.py (TASK-026 stage 1)"
+)
 CELL_SIZE_M = 180.0
 FEET_PER_METER = 3.280839895
 SIMFIRE_COMMIT = "04905b19fe8c10dc08d64faddd00303e0561bb66"
@@ -232,17 +242,66 @@ def load_case_inputs(
     }
 
 
+def record_forcing(record: dict, params: SimFireParams) -> Dict[str, float]:
+    """SimFire proxy values for one daily gridMET record (segment or pre-start)."""
+    values = record["gridmet_values"]
+    return gridmet_proxy_to_simfire(
+        wind_speed_m_s=values["vs"]["value"],
+        wind_from_degrees=values["th"]["value"],
+        fm100_percent=values["fm100"]["value"],
+        wind_adjustment_factor=params.wind_adjustment_factor,
+    )
+
+
 def forcing_segments(weather: dict, params: SimFireParams) -> List[Dict[str, float]]:
-    forcing = []
-    for segment in weather["segments"]:
-        values = segment["gridmet_values"]
-        forcing.append(gridmet_proxy_to_simfire(
-            wind_speed_m_s=values["vs"]["value"],
-            wind_from_degrees=values["th"]["value"],
-            fm100_percent=values["fm100"]["value"],
-            wind_adjustment_factor=params.wind_adjustment_factor,
-        ))
-    return forcing
+    """Simulator forcing of the four 12h segments; the pre-start record is never forcing."""
+    return [record_forcing(segment, params) for segment in weather["segments"]]
+
+
+def _has_pre_start(weather: dict) -> bool:
+    pre_start = weather.get("pre_start")
+    segments = weather.get("segments") or []
+    return (isinstance(pre_start, dict) and bool(segments)
+            and set(pre_start.get("gridmet_values", {})) >= {"th", "vs", "fm100"}
+            and str(pre_start.get("gridmet_daily_label_mst", "9999"))
+            < str(segments[0].get("gridmet_daily_label_mst", "")))
+
+
+def require_pre_start_weather(records: Dict[str, dict], weather_path: Path = WEATHER) -> None:
+    """Refuse gridMET files that predate the ADR-030 pre-start observation record."""
+    missing = sorted(key for key, record in records.items() if not _has_pre_start(record))
+    if missing:
+        raise ValueError(
+            "gridMET file %s has no valid pre_start observation record for %d case(s) (first: %s); "
+            "it predates the ADR-030 observation rule. Stage 1 regeneration is needed: %s."
+            % (weather_path, len(missing), missing[0], WEATHER_REGENERATION_HINT)
+        )
+
+
+def observed_weather_records(weather: dict, mode: str = "previous") -> List[dict]:
+    """The daily gridMET record each of the four decisions observes (ADR-030).
+
+    ``"previous"``: at decision k, the latest record among the pre-start day and the
+    segments before k whose label is strictly earlier than segment k's label, so the
+    upcoming segment's forcing is never observed, even when two segments share a day.
+    ``"upcoming_perfect_forecast"``: segment k itself (labelled ablation only).
+    """
+    if mode not in WEATHER_OBSERVATIONS:
+        raise ValueError("weather observation must be one of %s" % (WEATHER_OBSERVATIONS,))
+    segments = list(weather["segments"])
+    if mode == "upcoming_perfect_forecast":
+        return segments
+    if not _has_pre_start(weather):
+        raise ValueError("gridMET record has no valid pre_start observation record; Stage 1 "
+                         "regeneration is needed: %s." % WEATHER_REGENERATION_HINT)
+    candidates = [weather["pre_start"], *segments]
+    observed = []
+    for decision, segment in enumerate(segments):
+        label = segment["gridmet_daily_label_mst"]
+        earlier = [record for record in candidates[:decision + 1]
+                   if record["gridmet_daily_label_mst"] < label]
+        observed.append(earlier[-1])
+    return observed
 
 
 def build_simulation(inputs: Dict[str, Any], params: SimFireParams, *, seed: int = 0):

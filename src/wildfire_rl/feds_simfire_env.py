@@ -18,6 +18,7 @@ from .feds_simfire_setup import (
     INPUT_ROOT,
     MANIFEST,
     WEATHER,
+    WEATHER_OBSERVATIONS,
     SimFireParams,
     apply_forcing,
     build_simulation,
@@ -25,6 +26,9 @@ from .feds_simfire_setup import (
     load_case_inputs,
     load_split_cases,
     load_weather_records,
+    observed_weather_records,
+    record_forcing,
+    require_pre_start_weather,
     sha256_file,
 )
 
@@ -43,11 +47,6 @@ SECTOR_DIRECTIONS = (
     (0.0, -1.0),
     (1.0, -1.0),
 )
-# ADR-030: policies and heuristics observe the forcing of the 12h segment that just ran;
-# at decision 0 that is the initial condition the simulation was built with (segment 0,
-# whose daily gridMET label is the start day). "upcoming_perfect_forecast" shows the
-# ex-post forcing of the segment about to run and exists only as a labelled ablation.
-WEATHER_OBSERVATIONS = ("previous", "upcoming_perfect_forecast")
 
 
 # One budget unit is one 20-person crew shift building about 1.26 km of line (ADR-025).
@@ -288,6 +287,9 @@ class FedsSimFireEnv(gym.Env):
         if set(self.scenario_ids) - set(weather):
             raise ValueError("At least one selected case is missing gridMET forcing")
         self.weather_by_id = {key: weather[key] for key in self.scenario_ids}
+        # ADR-030: the observation rule needs the pre-start day, in either mode, so a
+        # pre-ADR-030 file cannot silently fall back to showing a forcing day.
+        require_pre_start_weather(self.weather_by_id, weather_path)
         self.weather_sha256 = sha256_file(weather_path)
         self.input_root = Path(input_root)
         self._input_cache: Dict[str, Dict[str, Any]] = {}
@@ -327,6 +329,13 @@ class FedsSimFireEnv(gym.Env):
         )
         self.fuel = inputs["fuel"]
         self.simulation_active = True
+        self._set_observed_weather(inputs["weather"])
+
+    def _set_observed_weather(self, weather: dict) -> None:
+        """Fix, per decision, the daily record the policy observes (ADR-030)."""
+        records = observed_weather_records(weather, self.weather_observation)
+        self.observed_weather_labels = tuple(r["gridmet_daily_label_mst"] for r in records)
+        self.observed_forcing = [record_forcing(r, self.sim_params) for r in records]
 
     def _pool(self, values: np.ndarray) -> np.ndarray:
         rows, columns = values.shape
@@ -346,10 +355,8 @@ class FedsSimFireEnv(gym.Env):
             self._pool(np.isin(fire_map, (3, 4, 5)).astype(np.float32)),
             self._pool(np.clip(self.fuel.astype(np.float32) / 13.0, 0.0, 1.0)),
         )).astype(np.float32)
-        segment = self.decision_index
-        if getattr(self, "weather_observation", "previous") == "previous":
-            segment = max(0, segment - 1)
-        current = self.forcing[min(segment, self.horizon_steps - 1)]
+        # The terminal observation (after the last decision) repeats the last decision's.
+        current = self.observed_forcing[min(self.decision_index, self.horizon_steps - 1)]
         direction = np.deg2rad(current["wind_direction_degrees_clockwise_north_to"])
         weather = np.asarray((
             np.clip(current["wind_speed_midflame_ft_per_min_proxy"] / 3000.0, 0.0, 1.0),

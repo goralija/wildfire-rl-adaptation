@@ -13,6 +13,7 @@ try:
         sector_for_vector,
     )
     from wildfire_rl.feds_simfire_env import FedsSimFireEnv, build_action_mask, front_edge_line_points
+    from wildfire_rl.feds_simfire_setup import SimFireParams
 except ImportError as exc:
     raise unittest.SkipTest("optional SimFire/Gymnasium dependencies are not installed: %s" % exc)
 
@@ -77,12 +78,24 @@ class FedsHeuristicTests(unittest.TestCase):
         env.block_count, env.horizon_steps, env.max_budget = 16, 4, 4
         env.initial_budget = env.remaining_budget = 1
         env.decision_index = 1
-        env.forcing = [{"wind_speed_midflame_ft_per_min_proxy": 10.0,
-                        "wind_direction_degrees_clockwise_north_to": heading,
-                        "fuel_moisture_fraction_proxy": 0.05} for heading in (90.0, 0.0, 0.0, 0.0)]
+        env.sim_params = SimFireParams(wind_adjustment_factor=0.5)
+
+        def record(label, wind_from):
+            return {"gridmet_daily_label_mst": label, "gridmet_values": {
+                "vs": {"value": 1.0}, "th": {"value": wind_from}, "fm100": {"value": 5.0}}}
+
+        # Wind from the west (to the east) on the pre-start day, from the south (to the
+        # north) on every simulated day.
+        weather = {"pre_start": record("2018-07-22", 270.0),
+                   "segments": [record(label, 180.0) for label in
+                                ("2018-07-23", "2018-07-24", "2018-07-25", "2018-07-26")]}
         mask = np.ones(9, dtype=bool)
-        self.assertEqual(downwind_policy(env._observation(), mask), 1)   # default, previous: east
+        env.weather_observation = "previous"
+        env._set_observed_weather(weather)
+        env.decision_index = 0
+        self.assertEqual(downwind_policy(env._observation(), mask), 1)   # default, pre-start: east
         env.weather_observation = "upcoming_perfect_forecast"
+        env._set_observed_weather(weather)
         self.assertEqual(downwind_policy(env._observation(), mask), 7)   # ablation, upcoming: north
 
 
