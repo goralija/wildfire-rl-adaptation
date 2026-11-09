@@ -1029,3 +1029,15 @@ footprint, not when the no-op fire would reach it. Undiscounted totals, and ther
 evaluation numbers, are identical; under PPO discounting early line inside the footprint
 pays a small extra cost. This is accepted as is and recorded here; charging at the no-op
 burn time would need a per-cell burn index and is not planned.
+
+### ADR-030 addendum — synthetic CA comparator and the real-case test, recorded 2026-11-09
+
+From the review of PR #11 (TASK-024), fixed before any rerun of locked or new policies.
+- **Comparator.** "The comparator heuristic" in §5 is the scripted heuristic with the highest
+  mean saved fraction on the synthetic acceptance seeds. Safety non-inferiority is measured
+  against that same heuristic, so the primary and the safety comparison stay paired. This is
+  the bar with the most suppression, not the safest one; the safety block reports every
+  heuristic so a reader can see the difference.
+- **Real-case test.** The one-time test on the 119 FEDS starts is descriptive, as ADR-028
+  intended: the comparator is fixed before the run (`--comparator-heuristic`, the synthetic
+  acceptance comparator) and no pass/fail is produced per group.

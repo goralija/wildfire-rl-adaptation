@@ -81,6 +81,9 @@ brojevima. Zasebna dijagnostika poredi no-op rast u simulatoru s opaženim FEDS 
   2–4 km od požara, na mjesto koje tad ne gori.
 - Kretanje i gradnja koriste akumulator napretka u metrima. Jedinica pređe ćeliju tek kad
   skupi dovoljno metara. Linija u ćeliji je gotova kad se izgradi 180 m linije.
+- Napredak je vezan za ćeliju koja se gradi ili cilj kretanja, ne za broj akcije (TASK-024):
+  promjena smjera gradnje u istoj ćeliji ne briše napredak, a promjena cilja kretanja ga
+  vraća na nulu.
 - Jedinica ne ulazi u ćeliju koja gori niti u vodu, a izgorjelu ("crnu") površinu smije.
 - **Sigurnost (LCES):**
   - Kad je vatra na ≤2 ćelije, jedinica automatski bježi pretragom u širinu prema
@@ -121,6 +124,16 @@ kontrafaktualna:
 - Oba rollouta nastavljaju 12h nakon horizonta, s linijama koje ostaju. Samo odgađanje
   vatre zato ne donosi nagradu.
 - Ako agentova vatra ranije potpuno stane, ostatak no-op štete se odmah pripisuje.
+- **Ćelije linije (TASK-024, dopuna ADR-030).** Ćelija linije nikad ne gori. Ako bi je
+  upareni no-op požar zahvatio, ona je potrošena, ne spašena: računa se kao šteta agenta
+  (urbano 50) u odluci u kojoj se pojavi, i u nagradi za trening i u evaluaciji.
+
+**Evaluacija (ADR-030 §5).** Glavni ishod je udio spašene štete; bliski susreti i izgubljene
+jedinice su poseban sigurnosni blok, a povrat se prijavljuje ali ne odlučuje. Prihvat se
+odlučuje samo na sintetičkim sjemenima prema heuristici s najvećim prosječnim spašenim
+udjelom na tim sjemenima (ista heuristika je mjerilo i za sigurnost). Test na stvarnim
+slučajevima je opisni: heuristika za poređenje zadaje se unaprijed
+(`--comparator-heuristic`) i ne daje se ocjena prolaz/pad.
 
 ## Generator epizoda
 
