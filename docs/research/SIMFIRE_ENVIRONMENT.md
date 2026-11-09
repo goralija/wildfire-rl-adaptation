@@ -173,7 +173,7 @@ prije validation provjere. 2024 test ni njegovi zapisi nisu učitani.
 
 **Zaključak.** `t` je oznaka poludnevnog prolaza (00:00 = AM, oko 01:30 lokalnog sunčevog
 vremena; 12:00 = PM, oko 13:30), a ne UTC trenutak. Za kohortu (dužine −124° do −102°) stvarni
-prolaz je oko 8–10 h kasnije u UTC nego što ga čita trenutni kod. Nesigurno: da je ulazno
+prolaz je oko 8–10 h kasnije u UTC nego što ga je čitao raniji kod. Nesigurno: da je ulazno
 `HHMM` u UTC slijedi iz logike koda, ne iz dokumentacije proizvoda; to ne mijenja zaključak,
 jer 00:00 i 12:00 ni u jednom čitanju nisu trenuci akvizicije.
 
