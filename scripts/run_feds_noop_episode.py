@@ -130,6 +130,7 @@ def run_episode(
         ELLIPSE_REFERENCE_PROTOCOL,
         METRICS_VERSION,
         binary_burn_metrics,
+        ellipse_ignition_point,
         elliptical_growth_reference,
     )
     from wildfire_rl.simfire_initial_state import update_cumulative_burned
@@ -177,9 +178,8 @@ def run_episode(
     if targets[0]["timestamp"] != expected_time:
         raise AssertionError("The first evaluation reference is not the imported initial state.")
     metrics = []
-    front_center_row = float(front_rows.mean())
-    front_center_column = float(front_columns.mean())
     ellipse_heading = forcing[0]["wind_direction_degrees_clockwise_north_to"]
+    ignition_row, ignition_column = ellipse_ignition_point(front, ellipse_heading)
     for rollout, target in zip(rollout_segments, targets[1:]):
         score = binary_burn_metrics(
             rollout["predicted_mask"], target["mask"],
@@ -191,8 +191,8 @@ def run_episode(
         )
         ellipse_mask = elliptical_growth_reference(
             initial_mask,
-            center_row=front_center_row,
-            center_column=front_center_column,
+            center_row=ignition_row,
+            center_column=ignition_column,
             hours=target["hours_since_start"],
             downwind_degrees=ellipse_heading,
             cell_resolution_m=180.0,
