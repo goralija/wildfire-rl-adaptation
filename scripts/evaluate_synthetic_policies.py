@@ -25,7 +25,7 @@ os.environ.setdefault("OMP_NUM_THREADS", "1")
 
 from wildfire_rl.synthetic_env import Curriculum, SyntheticSuppressionEnv  # noqa: E402
 from wildfire_rl.synthetic_heuristics import HEURISTICS, make_random_policy, run_episode  # noqa: E402
-from wildfire_rl.synthetic_stats import format_table, summarize_groups  # noqa: E402
+from wildfire_rl.synthetic_stats import format_table, summarize_groups, validate_comparator  # noqa: E402
 
 
 def _curriculum(name: str) -> Curriculum:
@@ -91,6 +91,10 @@ def main() -> None:
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
     policies = args.policies.split(",")
+    try:
+        validate_comparator(args.best_heuristic, policies)
+    except ValueError as exc:
+        parser.error(str(exc))
     seeds = list(range(args.first_seed, args.first_seed + args.seeds))
     with ProcessPoolExecutor(args.workers) as pool:
         results = dict(pool.map(_job, [(s, policies, args.curriculum) for s in seeds]))
