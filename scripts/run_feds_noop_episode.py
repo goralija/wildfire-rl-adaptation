@@ -116,14 +116,19 @@ def run_episode(
     active_cell_lifetime_minutes: int = 90,
     ros_multiplier: float = 1.0,
     split: str = "train",
+    freeze_record: Path | None = None,
 ) -> dict:
-    """Simulate one 48h no-op case; VALIDATION must be requested explicitly."""
+    """Simulate one 48h no-op case; VALIDATION needs an allowlisted TRAIN freeze record.
+
+    The internal step is fixed at 5 minutes (ADR-030 section 2).
+    """
     import numpy as np
 
     from wildfire_rl.feds_simfire_setup import (
         SimFireParams,
         apply_forcing,
         build_simulation,
+        check_split_access,
         load_case_inputs,
     )
     from wildfire_rl.feds_spread_metrics import (
@@ -141,6 +146,10 @@ def run_episode(
         active_cell_lifetime_minutes=active_cell_lifetime_minutes,
         ros_multiplier=ros_multiplier,
     )
+    if internal_update_minutes != 5:
+        raise ValueError("ADR-030 section 2 fixes the SimFire internal step at 5 minutes.")
+    # The SimFire no-op gate path: TEST is refused, VALIDATION only under a committed freeze.
+    check_split_access(split, params, freeze_record, weather_path=WEATHER)
     inputs = load_case_inputs(scenario_id, split=split, manifest_path=MANIFEST,
                               weather_path=WEATHER, input_root=INPUT_ROOT)
     case = inputs["case"]
@@ -263,7 +272,8 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--scenario-id", required=True)
     parser.add_argument("--wind-adjustment-factor", type=float, required=True)
-    parser.add_argument("--internal-update-minutes", type=int, choices=(1, 3, 5, 10, 15), default=5)
+    parser.add_argument("--internal-update-minutes", type=int, choices=(5,), default=5,
+                        help="fixed at 5 minutes (ADR-030 section 2)")
     parser.add_argument("--active-cell-lifetime-minutes", type=int, default=90)
     parser.add_argument("--ros-multiplier", type=float, default=1.0)
     parser.add_argument("--seed", type=int, default=0)

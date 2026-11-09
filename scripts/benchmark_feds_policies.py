@@ -3,9 +3,14 @@
 
 Every policy is run on the same scenarios, budgets, 48h horizon, simulator
 parameters and observations. Damage is cumulative SimFire-burned area added after
-the observed FEDS start (cells, then hectares). VALIDATION requires a committed
-TRAIN parameter freeze record; TEST is never loaded. This is a simulator benchmark,
-not physical validation of suppression effectiveness.
+the observed FEDS start (cells, then hectares). VALIDATION requires a TRAIN freeze
+record whose sha256 is in the committed allowlist and whose parameters and gridMET
+hash match this run; the environment checks the same record again. TEST is never
+loaded. A PPO checkpoint is evaluated only if its training receipt states the same
+observation rule, simulator parameters, line attenuation and banking floor as this run;
+checkpoints without a complete receipt need --allow-legacy-checkpoints and are marked
+legacy in the report. This is a simulator benchmark, not physical validation of
+suppression effectiveness.
 """
 
 from __future__ import annotations
@@ -48,12 +53,68 @@ def _policy_for(spec: str, seed: int):
     raise ValueError("policy spec must be heuristic:<name> or ppo:<checkpoint>")
 
 
+RECEIPT_NAME = "training_manifest.json"
+
+
+class CheckpointReceiptError(ValueError):
+    pass
+
+
+def check_checkpoint_receipt(checkpoint: Path, expected: dict, *, allow_legacy: bool) -> dict:
+    """Compare a PPO checkpoint's training receipt with this benchmark's settings.
+
+    The receipt is ``training_manifest.json`` next to the checkpoint (written by
+    ``train_feds_budget_adaptation.py`` and ``train_feds_simfire.py``). Its
+    ``checkpoint_sha256`` must match the file and every stated setting must equal the
+    benchmark's. A missing receipt, or one that predates some of the required fields, is
+    *legacy*: refused unless ``allow_legacy`` is set, then recorded as legacy. A stated
+    setting that differs is always refused. Nothing is unpickled here.
+    """
+    from wildfire_rl.feds_simfire_setup import POLICY_SETTING_KEYS, sha256_file
+
+    checkpoint = Path(checkpoint)
+    if not checkpoint.is_file():
+        raise CheckpointReceiptError("PPO checkpoint %s does not exist" % checkpoint)
+    digest = sha256_file(checkpoint)
+    receipt_path = checkpoint.parent / RECEIPT_NAME
+    record = {"checkpoint": str(checkpoint), "checkpoint_sha256": digest,
+              "receipt": str(receipt_path)}
+    if not receipt_path.is_file():
+        if not allow_legacy:
+            raise CheckpointReceiptError(
+                "PPO checkpoint %s has no training receipt %s; pass --allow-legacy-checkpoints "
+                "to evaluate it as a legacy checkpoint" % (checkpoint, receipt_path))
+        return dict(record, status="legacy", receipt=None, missing_fields=list(POLICY_SETTING_KEYS))
+    receipt = json.loads(receipt_path.read_text(encoding="utf-8"))
+    record["receipt_sha256"] = sha256_file(receipt_path)
+    if receipt.get("checkpoint_sha256") != digest:
+        raise CheckpointReceiptError(
+            "training receipt %s states checkpoint_sha256 %s, but %s hashes to %s"
+            % (receipt_path, receipt.get("checkpoint_sha256"), checkpoint, digest))
+    mismatched = sorted(key for key in POLICY_SETTING_KEYS
+                        if key in receipt and receipt[key] != expected[key])
+    if mismatched:
+        raise CheckpointReceiptError(
+            "PPO checkpoint %s was trained under different settings: %s"
+            % (checkpoint, "; ".join("%s: receipt %r, benchmark %r"
+                                     % (key, receipt[key], expected[key]) for key in mismatched)))
+    missing = [key for key in POLICY_SETTING_KEYS if key not in receipt]
+    if missing:
+        if not allow_legacy:
+            raise CheckpointReceiptError(
+                "training receipt %s predates required fields %s; pass "
+                "--allow-legacy-checkpoints to evaluate it as a legacy checkpoint"
+                % (receipt_path, ", ".join(missing)))
+        return dict(record, status="legacy", missing_fields=missing)
+    return dict(record, status="verified", missing_fields=[])
+
+
 def _run_job(job):
     os.environ.setdefault("OMP_NUM_THREADS", "1")
     from wildfire_rl.feds_simfire_env import FedsSimFireEnv
     from wildfire_rl.feds_simfire_setup import SimFireParams
 
-    scenario_id, budgets, policies, params, split, placement, seed = job
+    scenario_id, budgets, policies, params, split, placement, seed, weather_observation, freeze = job
     env = FedsSimFireEnv(
         sim_params=SimFireParams(**params),
         budgets=tuple(sorted(set(budgets) | {0})),
@@ -61,6 +122,8 @@ def _run_job(job):
         split=split,
         line_placement=placement,
         max_budget=4,
+        weather_observation=weather_observation,
+        freeze_record=freeze,
     )
     rows = []
     for name, spec in policies.items():
@@ -145,6 +208,11 @@ def main(argv=None) -> int:
     parser.add_argument("--policy", action="append", default=[],
                         help="name=heuristic:<name> or name=ppo:<checkpoint>; repeatable")
     parser.add_argument("--line-placement", choices=("centroid", "front_edge"), default="front_edge")
+    parser.add_argument("--perfect-forecast-ablation", action="store_true",
+                        help="ABLATION ONLY (ADR-030): observe the upcoming 12h forcing instead of the previous one")
+    parser.add_argument("--allow-legacy-checkpoints", action="store_true",
+                        help="evaluate PPO checkpoints without a complete training receipt; "
+                             "the report records them as legacy")
     parser.add_argument("--scenario-limit", type=int)
     parser.add_argument("--workers", type=int, default=1)
     parser.add_argument("--seed", type=int, default=0)
@@ -153,12 +221,25 @@ def main(argv=None) -> int:
     if args.out.exists():
         parser.error("output exists; choose a new path")
 
-    from wildfire_rl.feds_simfire_setup import load_split_cases, sha256_file
+    from wildfire_rl.feds_simfire_setup import (
+        SimFireParams,
+        check_split_access,
+        load_split_cases,
+        policy_settings,
+        sha256_file,
+    )
 
     freeze = json.loads(args.params.read_text(encoding="utf-8"))
     params = freeze["frozen_params"]
-    if args.split == "validation" and freeze.get("selected_on_split") != "train":
-        parser.error("VALIDATION benchmarks require parameters selected on TRAIN.")
+    sim_params = SimFireParams(**params)
+    if sim_params.internal_update_minutes != 5:
+        parser.error("ADR-030 fixes the SimFire internal step at 5 minutes.")
+    weather_observation = "upcoming_perfect_forecast" if args.perfect_forecast_ablation else "previous"
+    try:
+        freeze_sha256 = check_split_access(args.split, sim_params, args.params)
+    except ValueError as exc:
+        parser.error(str(exc))
+    freeze_path = str(args.params) if args.split == "validation" else None
     budgets = [int(value) for value in args.budgets.split(",")]
     policies = dict(item.split("=", 1) for item in args.policy) or {
         "noop": "heuristic:noop",
@@ -168,10 +249,25 @@ def main(argv=None) -> int:
     }
     if "noop" not in policies:
         policies["noop"] = "heuristic:noop"
+    # Every PPO checkpoint must have been trained under these settings (checked before
+    # anything is loaded or any job runs).
+    expected_settings = policy_settings(sim_params, weather_observation=weather_observation,
+                                        line_placement=args.line_placement, observation_max_budget=4)
+    checkpoint_receipts = {}
+    for name, spec in policies.items():
+        kind, _, value = spec.partition(":")
+        if kind == "ppo":
+            try:
+                checkpoint_receipts[name] = check_checkpoint_receipt(
+                    Path(value), expected_settings, allow_legacy=args.allow_legacy_checkpoints)
+            except CheckpointReceiptError as exc:
+                parser.error(str(exc))
+    legacy = sorted(name for name, item in checkpoint_receipts.items() if item["status"] == "legacy")
     scenarios = sorted(load_split_cases(args.split))
     if args.scenario_limit:
         scenarios = scenarios[: args.scenario_limit]
-    jobs = [(scenario, budgets, policies, params, args.split, args.line_placement, args.seed)
+    jobs = [(scenario, budgets, policies, params, args.split, args.line_placement, args.seed,
+             weather_observation, freeze_path)
             for scenario in scenarios]
 
     started = time.monotonic()
@@ -198,15 +294,23 @@ def main(argv=None) -> int:
     payload = {
         "schema_version": "feds-simfire-policy-benchmark/1.0",
         "created_utc": datetime.now(timezone.utc).isoformat(),
-        "label": "SIMULATOR BENCHMARK; NOT PHYSICAL VALIDATION OF SUPPRESSION",
+        "label": "SIMULATOR BENCHMARK; NOT PHYSICAL VALIDATION OF SUPPRESSION"
+                 + ("; LEGACY CHECKPOINTS WITHOUT A COMPLETE TRAINING RECEIPT: %s" % ", ".join(legacy)
+                    if legacy else ""),
         "split": args.split,
         "test_cases_loaded": False,
         "params_file_sha256": sha256_file(args.params),
-        "sim_params": params,
+        "validation_freeze_sha256": freeze_sha256,
+        "sim_params": sim_params.as_dict(),
         "params_gate_status": freeze.get("gate_status"),
         "line_placement": args.line_placement,
+        "weather_observation": weather_observation,
         "budgets": budgets,
         "policies": policies,
+        "policy_settings": expected_settings,
+        "allow_legacy_checkpoints": bool(args.allow_legacy_checkpoints),
+        "checkpoint_receipts": checkpoint_receipts,
+        "legacy_checkpoints": legacy,
         "seed": args.seed,
         "scenario_count": len(scenarios),
         "errors": errors,
