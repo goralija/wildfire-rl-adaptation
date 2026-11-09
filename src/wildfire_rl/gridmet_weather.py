@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
+import math
 from typing import Any
 
 
@@ -72,6 +73,47 @@ def select_gridmet_nearest_cell(
     column = int(np.argmin(np.abs(longitudes - float(longitude))))
     row = int(np.argmin(np.abs(latitudes - float(latitude))))
     return row, column, float(longitudes[column]), float(latitudes[row])
+
+
+def great_circle_distance_km(
+    longitude_a: float, latitude_a: float, longitude_b: float, latitude_b: float
+) -> float:
+    """Haversine distance between two WGS84 points, in kilometres."""
+    lon_a, lat_a, lon_b, lat_b = (
+        math.radians(float(value)) for value in (longitude_a, latitude_a, longitude_b, latitude_b)
+    )
+    half_chord = (
+        math.sin((lat_b - lat_a) / 2) ** 2
+        + math.cos(lat_a) * math.cos(lat_b) * math.sin((lon_b - lon_a) / 2) ** 2
+    )
+    return 2 * 6371.0088 * math.asin(math.sqrt(min(1.0, half_chord)))
+
+
+def select_case_gridmet_cell(
+    longitude_values: Any,
+    latitude_values: Any,
+    longitude: float,
+    latitude: float,
+    *,
+    max_distance_km: float = 5.0,
+) -> dict[str, float | int]:
+    """Select one case's own gridMET cell and refuse a cell far from the case location."""
+    row, column, cell_longitude, cell_latitude = select_gridmet_nearest_cell(
+        longitude_values, latitude_values, longitude, latitude
+    )
+    distance_km = great_circle_distance_km(longitude, latitude, cell_longitude, cell_latitude)
+    if not distance_km <= max_distance_km:
+        raise ValueError(
+            "Nearest gridMET cell is %.1f km from the case location (limit %.1f km)."
+            % (distance_km, max_distance_km)
+        )
+    return {
+        "row": row,
+        "column": column,
+        "longitude": cell_longitude,
+        "latitude": cell_latitude,
+        "distance_km": distance_km,
+    }
 
 
 def episode_weather_midpoints(initial_state_time: str) -> list[dict[str, str]]:

@@ -24,11 +24,11 @@ GRIDMET_DIR = ROOT / ".local/gridmet"
 
 try:
     from scripts.fetch_gridmet_archives import find_gridmet_variable, validate_gridmet_archive
-    from wildfire_rl.gridmet_weather import episode_weather_midpoints, select_gridmet_nearest_cell
+    from wildfire_rl.gridmet_weather import episode_weather_midpoints, select_case_gridmet_cell
 except ModuleNotFoundError:
     sys.path.insert(0, str(ROOT / "scripts"))
     from fetch_gridmet_archives import find_gridmet_variable, validate_gridmet_archive
-    from wildfire_rl.gridmet_weather import episode_weather_midpoints, select_gridmet_nearest_cell
+    from wildfire_rl.gridmet_weather import episode_weather_midpoints, select_case_gridmet_cell
 
 
 def sha256_file(path: Path) -> str:
@@ -78,7 +78,9 @@ def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path) -> dict:
                         "which is outside the approved train/validation archive set."
                     )
                 data = {}
+                cells = {}
                 for abbreviation in ("th", "vs", "fm100"):
+                    # Archives are cached per year/variable; the cell is chosen per case.
                     cache_key = (date_year, abbreviation)
                     if cache_key not in open_files:
                         path = gridmet_dir / f"{abbreviation}_{date_year}.nc"
@@ -96,11 +98,6 @@ def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path) -> dict:
                             value.strftime("%Y-%m-%d"): index
                             for index, value in enumerate(day_values)
                         }
-                        longitudes = dataset.variables["lon"][:]
-                        latitudes = dataset.variables["lat"][:]
-                        row, column, actual_lon, actual_lat = select_gridmet_nearest_cell(
-                            longitudes, latitudes, centroid["longitude"], centroid["latitude"]
-                        )
                         units = str(getattr(variable, "units", "unknown"))
                         expected_units = {
                             "th": {"degrees clockwise from north"},
@@ -114,19 +111,22 @@ def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path) -> dict:
                             "variable": variable,
                             "native_name": native_name,
                             "day_index": day_index,
-                            "row": row,
-                            "column": column,
-                            "cell_lon": actual_lon,
-                            "cell_lat": actual_lat,
+                            "longitudes": np.asarray(dataset.variables["lon"][:], dtype=float),
+                            "latitudes": np.asarray(dataset.variables["lat"][:], dtype=float),
                             "units": units,
                             "sha256": checksum,
                             "path": path.name,
                         }
                     sample = open_files[cache_key]
+                    cell = select_case_gridmet_cell(
+                        sample["longitudes"], sample["latitudes"],
+                        centroid["longitude"], centroid["latitude"],
+                    )
+                    cells[abbreviation] = cell
                     index = sample["day_index"].get(date_label)
                     if index is None:
                         raise ValueError(f"gridMET daily record {date_label} is absent from {sample['path']}.")
-                    value = sample["variable"][index, sample["row"], sample["column"]]
+                    value = sample["variable"][index, cell["row"], cell["column"]]
                     if np.ma.is_masked(value) or not np.isfinite(float(value)):
                         raise ValueError(f"Missing/non-finite {abbreviation} at {date_label} for {case['scenario_id']}.")
                     data[abbreviation] = {
@@ -139,12 +139,7 @@ def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path) -> dict:
                 segment_records.append({
                     **segment,
                     "gridmet_values": data,
-                    "nearest_gridmet_cell": {
-                        "longitude": open_files[(date_year, "vs")]["cell_lon"],
-                        "latitude": open_files[(date_year, "vs")]["cell_lat"],
-                        "row": open_files[(date_year, "vs")]["row"],
-                        "column": open_files[(date_year, "vs")]["column"],
-                    },
+                    "nearest_gridmet_cell": cells["vs"],
                 })
             records.append({
                 "scenario_id": case["scenario_id"],
@@ -240,6 +235,22 @@ def main(argv: list[str] | None = None) -> int:
             }
             for split in ("train", "validation")
         }
+        cell_selection = {
+            split: {
+                "distinct_cells": len({
+                    (segment["nearest_gridmet_cell"]["row"], segment["nearest_gridmet_cell"]["column"])
+                    for case in result["cases"] if case["split"] == split
+                    for segment in case["segments"]
+                }),
+                "maximum_distance_km": max(
+                    (segment["nearest_gridmet_cell"]["distance_km"]
+                     for case in result["cases"] if case["split"] == split
+                     for segment in case["segments"]),
+                    default=None,
+                ),
+            }
+            for split in ("train", "validation")
+        }
         coverage = {
             "schema_version": "feds-gridmet-weather-coverage/1.0",
             "kind": "weather_input_coverage_and_provenance_not_simulation_or_physical_validation",
@@ -251,6 +262,7 @@ def main(argv: list[str] | None = None) -> int:
             "temporal_mapping": result["temporal_mapping"],
             "mapping_status": result["mapping_status"],
             "by_split": by_split,
+            "cell_selection": cell_selection,
             "sampled_value_ranges": value_ranges,
             "limitations": result["limitations"],
             "case_level_values": "ignored local cache: .local/gridmet/feds-episode-weather-v1.json",
