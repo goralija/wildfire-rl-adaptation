@@ -25,14 +25,18 @@ se ne ponove. Detalji i potpun spisak grešaka: [ADR-029](specs/DECISION_RECORDS
 4. **TASK-024 — sintetički CA.** Napredak gradnje vezan za ćeliju, ćelije linije u no-op
    otisku se ne računaju kao spašene, sigurnost (bliski susreti, gubici) prijavljena
    odvojeno od spašene površine, svi CI-jevi iz koda, ispravna komanda u HANDOFF-u.
-5. **TASK-025 — odluke prije ponovnog pokretanja (novi ADR, tim/korisnik).** Šta agent vidi
-   od vremena; fiksni korak ili skalirana linija; novo gate pravilo na IoU rasta i šta s
-   požarima koji u FEDS-u ne rastu; benchmark plan (PPO prema nasumičnoj liniji i najboljoj
-   heuristici, tačni testovi za heuristike, broj seedova).
-6. **TASK-026 — ponovno pokretanje (tek nakon 1–5 i izričitog naloga, uključuje dugi
-   trening).** Nove gridMET vrijednosti s upisanim hashom → TRAIN gate → zamrzavanje i jedna
-   VALIDATION ocjena → benchmark i studija budžeta → ponovni trening i zaključavanje CA
-   politika → test na 119 požara i kalibracija.
+5. **TASK-025 — odluke: urađeno u [ADR-030](specs/DECISION_RECORDS.md).** Agent vidi
+   vrijeme prethodnog segmenta; umanjenje linije se skalira s korakom, a korak je fiksno
+   5 minuta; gate se mjeri IoU-om rasta na požarima koji rastu (≥1.10× površine za 48h)
+   prema downwind elipsi, bez dodira s rubom; benchmark ima 10 seedova i glavna poređenja
+   PPO prema nasumičnoj liniji i najboljoj TRAIN heuristici (tačni test, Holm); u CA je
+   glavni ishod spašena površina, a sigurnost uslov neinferiornosti; sugar-pine ostaje,
+   columbus ispada (98 TRAIN).
+6. **TASK-026 — ponovno pokretanje u tri faze, svaka uz izričit nalog (ADR-030 §7).**
+   Faza 1 bez treninga (manifest bez duplikata, nove gridMET vrijednosti s hashom, gate,
+   zamrzavanje, jedna VALIDATION ocjena) tek kad su TASK-021–024 spojeni i FEDS vremenska
+   zona provjerena. Faza 2: SimFire benchmark i studija budžeta. Faza 3: ponovni trening CA
+   politika, tek nakon odluke koji je simulator glavni za poster.
 7. **TASK-027 — provjere.** Da li je FEDS `t` UTC (00:00/12:00 liče na poludnevne
    intervale); dva FPA zapisa (sugar-pine, columbus) dijele isti FEDS požar u TRAIN-u;
    resetovanje globalnog NumPy RNG-a pri svakom `reset()`.

@@ -15,9 +15,9 @@ Rezultati ADR-022–028 su nevažeći zbog gridMET greške; redoslijed i prihvat
 | TASK-022 | otvoreno | IoU rasta, downwind elipsa |
 | TASK-023 | otvoreno | linije bez dijagonalnih rupa, jačina linije, VALIDATION zaštita, testovi statistike |
 | TASK-024 | otvoreno | CA: napredak gradnje, ćelije linije, sigurnost odvojeno |
-| TASK-025 | čeka odluku | novi ADR: vrijeme u observationu, korak, gate pravilo, benchmark plan |
-| TASK-026 | čeka 021–025 i nalog | ponovno pokretanje gatea, benchmarka i treninga |
-| TASK-027 | otvoreno | FEDS UTC, dupli FEDS požar, RNG reset |
+| TASK-025 | završeno (ADR-030) | odluke zapisane; implementacija opcija u TASK-023/024 |
+| TASK-026 | čeka 021–024 i nalog po fazi | faza 1 gate → faza 2 benchmark → faza 3 CA trening (ADR-030 §7) |
+| TASK-027 | otvoreno | FEDS UTC; ukloniti columbus iz manifesta (ADR-030 §6); RNG reset |
 
 
 ## Aktivni prioritet — 2026-11-04 (noćni rad, koraci 5–8)
