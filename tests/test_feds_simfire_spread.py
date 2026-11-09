@@ -79,7 +79,8 @@ class DiagonalBarrierTests(unittest.TestCase):
 
 
 class FirelineAttenuationStepTests(unittest.TestCase):
-    """Pinned SimFire subtracts a fixed 980 ft per update from R * update_rate."""
+    """Pinned SimFire subtracts a fixed 980 ft per update from R * update_rate; ADR-030
+    makes the per-minute scaling the default so line strength does not depend on the step."""
 
     def setUp(self):
         # Fuel 1 with a 5 m/s west wind gives about 558 ft/min eastward: below 980
@@ -89,18 +90,20 @@ class FirelineAttenuationStepTests(unittest.TestCase):
         rows, columns = np.indices((SIZE, SIZE))
         self.beyond = columns > 10
 
-    def _beyond(self, minutes, attenuation):
+    def _beyond(self, minutes, attenuation=None):
+        options = {} if attenuation is None else {"fireline_attenuation": attenuation}
         params = SimFireParams(wind_adjustment_factor=1.0, internal_update_minutes=minutes,
-                               active_cell_lifetime_minutes=90, fireline_attenuation=attenuation)
+                               active_cell_lifetime_minutes=90, **options)
         return int((_burn(self.inputs, self.line, params, duration="2h") & self.beyond).sum())
 
-    def test_default_line_strength_depends_on_the_internal_step(self):
+    def test_pinned_simfire_line_strength_depends_on_the_internal_step(self):
         self.assertEqual(self._beyond(1, "per_update"), 0)
         self.assertGreater(self._beyond(5, "per_update"), 0)
 
-    def test_per_minute_attenuation_removes_the_step_dependency(self):
-        self.assertEqual(self._beyond(1, "per_minute"), 0)
-        self.assertEqual(self._beyond(5, "per_minute"), 0)
+    def test_default_attenuation_gives_the_same_outcome_at_one_and_five_minutes(self):
+        self.assertEqual(SimFireParams(wind_adjustment_factor=0.0).fireline_attenuation, "per_minute")
+        self.assertEqual(self._beyond(1), 0)
+        self.assertEqual(self._beyond(5), 0)
 
     def test_per_minute_attenuation_matches_default_at_one_minute(self):
         params = [SimFireParams(wind_adjustment_factor=1.0, internal_update_minutes=1,
@@ -132,6 +135,32 @@ class SpreadAggregationTests(unittest.TestCase):
     def test_max_aggregation_is_order_invariant(self):
         forward, reverse = self._maps("max")
         np.testing.assert_array_equal(forward, reverse)
+
+
+class GlobalRandomStateTests(unittest.TestCase):
+    """Building an episode must not reseed the process-wide RNGs that SB3 uses."""
+
+    def test_build_simulation_leaves_global_random_streams_untouched(self):
+        import random
+
+        inputs = _inputs([(5, 5)], wind_m_s=1.0)
+        params = SimFireParams(wind_adjustment_factor=1.0)
+        random.seed(123)
+        np.random.seed(123)
+        expected = (random.random(), float(np.random.rand()))
+        random.seed(123)
+        np.random.seed(123)
+        build_simulation(inputs, params, seed=0)
+        self.assertEqual((random.random(), float(np.random.rand())), expected)
+
+    def test_build_simulation_is_still_deterministic(self):
+        inputs = _inputs([(5, y) for y in range(10, 20)], wind_m_s=3.0)
+        params = SimFireParams(wind_adjustment_factor=1.0)
+        np.random.seed(1)
+        first = _burn(inputs, (), params, duration="2h")
+        np.random.seed(2)
+        second = _burn(inputs, (), params, duration="2h")
+        np.testing.assert_array_equal(first, second)
 
 
 if __name__ == "__main__":

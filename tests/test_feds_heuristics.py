@@ -81,9 +81,9 @@ class FedsHeuristicTests(unittest.TestCase):
                         "wind_direction_degrees_clockwise_north_to": heading,
                         "fuel_moisture_fraction_proxy": 0.05} for heading in (90.0, 0.0, 0.0, 0.0)]
         mask = np.ones(9, dtype=bool)
-        self.assertEqual(downwind_policy(env._observation(), mask), 7)   # upcoming: north
-        env.weather_observation = "previous"
-        self.assertEqual(downwind_policy(env._observation(), mask), 1)   # previous: east
+        self.assertEqual(downwind_policy(env._observation(), mask), 1)   # default, previous: east
+        env.weather_observation = "upcoming_perfect_forecast"
+        self.assertEqual(downwind_policy(env._observation(), mask), 7)   # ablation, upcoming: north
 
 
 if __name__ == "__main__":

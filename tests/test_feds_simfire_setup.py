@@ -62,7 +62,8 @@ class FedsSimFireSetupTests(unittest.TestCase):
 
 class ValidationFreezeGuardTests(unittest.TestCase):
     LEGACY = {"wind_adjustment_factor": 0.01, "internal_update_minutes": 5,
-              "active_cell_lifetime_minutes": 90, "ros_multiplier": 1.0}
+              "active_cell_lifetime_minutes": 90, "ros_multiplier": 1.0,
+              "fireline_attenuation": "per_minute", "spread_aggregation": "last_write"}
 
     def _files(self, directory, *, record=None, allowlisted=True):
         directory = Path(directory)
@@ -91,8 +92,12 @@ class ValidationFreezeGuardTests(unittest.TestCase):
             ("allowlist", dict(allowlisted=False), legacy),
             ("TRAIN", dict(record={"selected_on_split": "validation"}), legacy),
             ("gridMET", dict(record={"weather_sha256": "0" * 64}), legacy),
-            ("parameters", {}, SimFireParams(**self.LEGACY, spread_aggregation="max")),
+            ("parameters", {}, SimFireParams(**dict(self.LEGACY, spread_aggregation="max"))),
             ("parameters", {}, SimFireParams(**dict(self.LEGACY, wind_adjustment_factor=0.05))),
+            # A record that predates a field may not inherit today's default for it.
+            ("every simulator field",
+             dict(record={"frozen_params": {key: value for key, value in self.LEGACY.items()
+                                            if key != "fireline_attenuation"}}), legacy),
         )
         for message, options, params in cases:
             with self.subTest(message=message), tempfile.TemporaryDirectory() as directory:

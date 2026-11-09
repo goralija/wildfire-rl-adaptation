@@ -225,14 +225,10 @@ def _expected_weather(segment):
 
 
 class WeatherObservationTests(unittest.TestCase):
-    def test_default_observes_the_upcoming_segment(self):
-        env = _bare_env()
-        for decision in range(4):
-            env.decision_index = decision
-            np.testing.assert_allclose(env._observation()["weather"], _expected_weather(decision))
+    """ADR-030: policies observe the previous 12h segment, never the upcoming one."""
 
-    def test_previous_option_never_shows_the_segment_about_to_run(self):
-        env = _bare_env("previous")
+    def test_default_never_shows_the_segment_about_to_run(self):
+        env = _bare_env()
         env.decision_index = 0
         # Decision 0 sees the initial condition the simulation was built with.
         np.testing.assert_allclose(env._observation()["weather"], _expected_weather(0))
@@ -242,6 +238,17 @@ class WeatherObservationTests(unittest.TestCase):
             with self.subTest(decision=decision):
                 np.testing.assert_allclose(observed, _expected_weather(decision - 1))
                 self.assertFalse(np.allclose(observed, _expected_weather(decision)))
+
+    def test_perfect_forecast_ablation_shows_the_upcoming_segment(self):
+        env = _bare_env("upcoming_perfect_forecast")
+        for decision in range(4):
+            env.decision_index = decision
+            np.testing.assert_allclose(env._observation()["weather"], _expected_weather(decision))
+
+    def test_old_upcoming_label_is_not_accepted(self):
+        with self.assertRaisesRegex(ValueError, "weather observation"):
+            FedsSimFireEnv(sim_params=SimFireParams(wind_adjustment_factor=0.01),
+                           weather_observation="upcoming")
 
 
 class SplitGuardTests(unittest.TestCase):
