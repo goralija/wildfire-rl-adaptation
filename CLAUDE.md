@@ -14,7 +14,9 @@ into main as history; do not cite their numbers as findings. The fix tasks
 TASK-021–024 and TASK-027 are merged (PR #15: 98 TRAIN, FEDS `t` read as the local-solar
 overpass, regenerated gridMET file); decisions are in ADR-030 and its addenda. Stages 1 and 2
 of the TASK-026 rerun may run without a further go-ahead (stage 2 only if stage 1 passes);
-merges and stage 3 stay with the user (see docs/HANDOFF_STAGE_1_2.md). TEST 2024 stays closed.
+merges and stage 3 stay with the user (see docs/HANDOFF_STAGE_1_2.md). Stage 1 passed
+(ADR-031: WAF 0.10 / ROS 1.0 frozen, VALIDATION scored once; a pre-set gate, not a physical
+validation) and stage 2 is in progress. TEST 2024 stays closed.
 Keep decisions and evidence in the
 repository, following [maintenance](knowledge/maintenance.md). This file is a routing
 shim; shared rules live in AGENTS.md.
