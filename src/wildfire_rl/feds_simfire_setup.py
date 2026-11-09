@@ -16,7 +16,7 @@ import random
 from types import SimpleNamespace
 from typing import Any, Dict, List, Optional
 
-from .gridmet_weather import gridmet_proxy_to_simfire
+from .gridmet_weather import FEDS_TIME_REFERENCE, gridmet_proxy_to_simfire
 from .simfire_initial_state import compose_initial_fire_map, update_cumulative_burned
 from .simfire_timebase import updates_for_duration
 
@@ -213,6 +213,12 @@ def load_weather_records(
         raise ValueError("Refusing gridMET records that include TEST cases")
     if weather.get("episode_manifest_sha256") != sha256_file(manifest_path):
         raise ValueError("gridMET file was built from a different episode manifest")
+    reference = weather.get("temporal_mapping", {}).get("feds_time_reference")
+    if reference != FEDS_TIME_REFERENCE:
+        raise ValueError(
+            "gridMET file %s states FEDS time reference %r, not %r (TASK-027: FEDS `t` is a "
+            "local-solar overpass label); regenerate it: %s."
+            % (weather_path, reference, FEDS_TIME_REFERENCE, WEATHER_REGENERATION_HINT))
     return {item["scenario_id"]: item for item in weather["cases"] if item.get("split") == split}
 
 

@@ -417,3 +417,20 @@ Evidence: [reports/synthetic](../../reports/synthetic/index.md).
 - Calibration gap at 48h: median sim/obs area 1.60 (ex-train) and 1.24 (ex-val), median
   IoU 0.27 and 0.30.
 Simulator-only; not evidence about real suppression.
+
+## EXP-018 — TASK-027 checks and regenerated gridMET forcing, 2026-11-09
+Input provenance only, no simulation result.
+- The manifest generator keeps one record per FEDS fire. Columbus (fireID 58826, the same
+  fire as sugar-pine) is excluded, leaving 98 TRAIN and 20 VALIDATION cases. Manifest
+  sha256 `013be9a1…`.
+- FEDS `t` is the AM/PM VIIRS overpass label in local solar time (fireatlas v1.4.1). It is
+  now mapped as 01:30/13:30 local solar time, converted to UTC by longitude / 15. Read as
+  UTC, it would have moved 236 of 472 segment days and 66 pre-start days.
+- Regenerated weather, sha256 `7a51aadd…`, built with the fixed sampler:
+  - all 118 cases have a pre-start record;
+  - each case has its own cell (118 distinct, at most 2.80 km away);
+  - against the defective file `7b0aa405…` (3 distinct cells for 119 records), 115 of 118
+    cases moved to another cell.
+- One TRAIN no-op smoke run (sugar-pine, WAF .05) loads the new file and completes 4
+  decisions. It is a load check, not a gate.
+Receipt: [weather coverage report](../../reports/real-fire-data/feds-gridmet-weather-coverage-v1.json).

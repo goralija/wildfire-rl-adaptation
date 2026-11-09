@@ -23,6 +23,13 @@ sources:
 - **Ispravke spojene (2026-11-09).** TASK-021–024 su nezavisno revidirani, popravljeni i
   spojeni (PR #8, #9, #11, #12); 223 testa prolaze lokalno, CI `numeric` provjerava tačan
   spisak preskočenih. Faza 1 čeka TASK-027, novi gridMET fajl i nalog.
+- **TASK-027 (2026-11-09, grana `f/task-027-feds-utc-dedup`).** Manifest ima jedan zapis po
+  FEDS požaru: 98 TRAIN i 20 VALIDATION (columbus isključen). FEDS `t` nije UTC nego oznaka
+  VIIRS prolaza u lokalnom sunčevom vremenu; korisnik je izabrao preračun 01:30/13:30 lokalno
+  → UTC po dužini (dopuna ADR-030). Novi gridMET fajl je napravljen lokalno (sha256
+  `7a51aadd…`, 118 ćelija za 118 slučajeva, svi s `pre_start`); hash je u
+  [coverage reportu](../reports/real-fire-data/feds-gridmet-weather-coverage-v1.json).
+  Faza 1 čeka merge i nalog.
 - **Odluke za ponovno pokretanje (ADR-030).** Gate na IoU rasta prema downwind elipsi,
   vrijeme prethodnog segmenta u observationu, linija neovisna o koraku, 10 seedova i
   poređenje s nasumičnom linijom; ponovno pokretanje ide u tri faze uz nalog za svaku.

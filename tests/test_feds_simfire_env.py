@@ -25,7 +25,7 @@ try:
         SimFireParams,
         observed_weather_records,
     )
-    from wildfire_rl.gridmet_weather import gridmet_proxy_to_simfire
+    from wildfire_rl.gridmet_weather import FEDS_TIME_REFERENCE, gridmet_proxy_to_simfire
 except ImportError as exc:
     raise unittest.SkipTest("optional SimFire/Gymnasium dependencies are not installed: %s" % exc)
 
@@ -343,6 +343,31 @@ class WeatherObservationTests(unittest.TestCase):
             FedsSimFireEnv(sim_params=SimFireParams(wind_adjustment_factor=0.01),
                            weather_observation="upcoming")
 
+    def test_weather_file_with_another_feds_time_reading_is_refused(self):
+        # TASK-027: a file sampled under the old "FEDS t is UTC" reading (no stated
+        # reference) must not load, even with a matching manifest hash.
+        import hashlib
+        import json
+
+        for reference in (None, "naive_feds_t_as_utc"):
+            with self.subTest(reference=reference), tempfile.TemporaryDirectory() as directory:
+                manifest = Path(directory) / "manifest.json"
+                manifest.write_text(json.dumps({"test_cases_loaded": False, "cases": [
+                    {"scenario_id": "a", "split": "train"}]}), encoding="utf-8")
+                record = dict(_weather(SHARED_DAYS), scenario_id="a", split="train")
+                payload = {
+                    "test_cases_loaded": False,
+                    "episode_manifest_sha256": hashlib.sha256(manifest.read_bytes()).hexdigest(),
+                    "cases": [record],
+                }
+                if reference is not None:
+                    payload["temporal_mapping"] = {"feds_time_reference": reference}
+                weather = Path(directory) / "weather.json"
+                weather.write_text(json.dumps(payload), encoding="utf-8")
+                with self.assertRaisesRegex(ValueError, "FEDS time reference"):
+                    FedsSimFireEnv(sim_params=SimFireParams(wind_adjustment_factor=0.01),
+                                   manifest_path=manifest, weather_path=weather)
+
     def test_weather_file_without_pre_start_record_is_refused(self):
         import hashlib
         import json
@@ -357,6 +382,7 @@ class WeatherObservationTests(unittest.TestCase):
                 weather.write_text(json.dumps({
                     "test_cases_loaded": False,
                     "episode_manifest_sha256": hashlib.sha256(manifest.read_bytes()).hexdigest(),
+                    "temporal_mapping": {"feds_time_reference": FEDS_TIME_REFERENCE},
                     "cases": [old],
                 }), encoding="utf-8")
                 with self.assertRaisesRegex(ValueError, "pre_start.*stage 1"):

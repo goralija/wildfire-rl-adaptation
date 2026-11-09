@@ -184,6 +184,105 @@ class FedsCrosswalkTests(unittest.TestCase):
         date_only = dict(case, discovery_time_hhmm="")
         self.assertEqual(_discovery_time_text(date_only), case["discovery_date"])
 
+    def _two_records_one_fire(self, splits=("train", "train"), starts=("2018-07-01", "2018-07-01")):
+        frame_cases, crosswalk_cases = [], []
+        for fod_id, split, start in zip((20, 10), splits, starts):
+            frame_cases.append({**_case(fod_id, split), "discovery_date": "2018-07-01"})
+            crosswalk_cases.append({
+                "scenario_id": f"case-{fod_id}",
+                "split": split,
+                "feds": {
+                    "status": "unique_spatiotemporal_candidate",
+                    "selected": {
+                        "fire_id": "58826",
+                        "t_start": f"{start}T00:00:00",
+                        "episode_start_state": "2018-07-01T00:00:00",
+                        "episode_48h_state_timestamps": [
+                            f"2018-07-{day:02}T{hour:02}:00:00"
+                            for day, hour in [(1, 0), (1, 12), (2, 0), (2, 12), (3, 0)]
+                        ],
+                        "minimum_start_window_distance_m": 900,
+                        "two_consecutive_12h_states": True,
+                        "five_states_cover_48h": True,
+                    },
+                },
+            })
+        frame = {
+            "schema_version": "fpa-feds-candidate-frame/1.0",
+            "cohort_id": "test-frame",
+            "case_count": 2,
+            "cases": frame_cases,
+            "candidate_frame": {"test_year_not_loaded": True, "filter": {}},
+        }
+        crosswalk = {
+            "schema_version": "fpa-feds-fle-crosswalk/1.0",
+            "test_cases_loaded": False,
+            "audited_splits": ["train", "validation"],
+            "spatial_search_radius_m": 3000,
+            "feds_start_date_window_days": {"before": 1, "after": 2},
+            "pre_agent_data_gate": {
+                "pass": True,
+                "threshold": {"train_two_state_minimum": 1, "validation_two_state_minimum": 0},
+            },
+            "cases": crosswalk_cases,
+        }
+        return frame, crosswalk
+
+    def test_episode_manifest_keeps_one_record_per_feds_fire_lowest_fod_id(self):
+        # ADR-030 §6: two FPA records joining one FEDS fire become one episode.
+        frame, crosswalk = self._two_records_one_fire()
+        result = build_episode_manifest(
+            frame, crosswalk, frame_sha256="a" * 64, crosswalk_sha256="b" * 64
+        )
+        self.assertEqual([case["scenario_id"] for case in result["cases"]], ["case-10"])
+        self.assertEqual(result["case_count"], 1)
+        self.assertEqual(result["case_counts_by_split"], {"train": 1, "validation": 0})
+        excluded = result["deduplication"]["excluded_records"]
+        self.assertEqual(len(excluded), 1)
+        self.assertEqual(excluded[0]["scenario_id"], "case-20")
+        self.assertEqual(excluded[0]["kept_scenario_id"], "case-10")
+        self.assertEqual(excluded[0]["source_fire_id"], "58826")
+
+    def test_same_fire_id_with_another_start_is_another_fire(self):
+        # FEDS-CONUS numbers fires per yearly file; the crosswalk keys a fire by
+        # (fireID, start), so the same ID in another year is a different fire.
+        frame, crosswalk = self._two_records_one_fire(starts=("2018-07-01", "2019-07-01"))
+        result = build_episode_manifest(
+            frame, crosswalk, frame_sha256="a" * 64, crosswalk_sha256="b" * 64
+        )
+        self.assertEqual(sorted(case["scenario_id"] for case in result["cases"]),
+                         ["case-10", "case-20"])
+        self.assertEqual(result["deduplication"]["excluded_records"], [])
+        frame, crosswalk = self._two_records_one_fire(
+            splits=("train", "validation"), starts=("2018-07-01", "2023-07-01"))
+        result = build_episode_manifest(
+            frame, crosswalk, frame_sha256="a" * 64, crosswalk_sha256="b" * 64
+        )
+        self.assertEqual(result["case_counts_by_split"], {"train": 1, "validation": 1})
+
+    def test_episode_manifest_refuses_one_feds_fire_in_two_splits(self):
+        frame, crosswalk = self._two_records_one_fire(splits=("train", "validation"))
+        with self.assertRaisesRegex(ValueError, "both TRAIN and VALIDATION"):
+            build_episode_manifest(
+                frame, crosswalk, frame_sha256="a" * 64, crosswalk_sha256="b" * 64
+            )
+
+    def test_committed_episode_manifest_has_one_record_per_feds_fire(self):
+        root = Path(__file__).resolve().parents[1]
+        manifest = json.loads(
+            (root / "data/manifests/feds-episode-cohort-v1.json").read_text(encoding="utf-8")
+        )
+        fire_ids = [case["evaluation_reference"]["source_fire_id"] for case in manifest["cases"]]
+        self.assertEqual(len(fire_ids), len(set(fire_ids)))
+        counts = {split: sum(case["split"] == split for case in manifest["cases"])
+                  for split in ("train", "validation")}
+        self.assertEqual(counts, {"train": 98, "validation": 20})
+        self.assertEqual(manifest["case_counts_by_split"], counts)
+        self.assertEqual(manifest["case_count"], 118)
+        scenario_ids = {case["scenario_id"] for case in manifest["cases"]}
+        self.assertIn("fpa-fod-400305302-sugar-pine", scenario_ids)
+        self.assertNotIn("fpa-fod-400389825-columbus", scenario_ids)
+
     def test_timestamps_normalize_timezone_and_halfday_runs(self):
         first = parse_timestamp("2023-07-01T00:00:00Z")
         second = parse_timestamp("2023-07-01T12:00:00")
