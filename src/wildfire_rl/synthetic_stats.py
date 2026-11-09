@@ -5,6 +5,10 @@ Safety (close calls, units lost, retreats) is reported in its own block. Return 
 training objective, saved fraction minus the safety penalties, and is reported as such.
 Every contrast and interval in the evaluation reports is computed here, from per-episode
 rows of ``SyntheticSuppressionEnv.summary()`` plus ``return``.
+
+Acceptance follows ADR-030 section 5: a learned policy passes against the comparator
+heuristic when its paired saved-fraction difference has a 95% CI above 0 and it has no more
+close calls and no more lost units in total. Return is reported but does not decide.
 """
 
 from __future__ import annotations
@@ -19,6 +23,7 @@ HEURISTIC_NAMES = ("direct_flank", "protect_urban", "downwind_indirect")
 REFERENCES = ("noop", "random")
 CONTRAST_METRICS = ("saved_fraction", "return", "close_calls")
 BOOTSTRAP_DRAWS = 4000
+ACCEPTANCE_RULE = "ADR-030 section 5"
 RETURN_DEFINITION = "saved_fraction - unit_loss_penalty * units_lost - close_call_penalty * close_calls"
 
 
@@ -90,6 +95,33 @@ def best_heuristic_of(rows_by_policy: Mapping[str, Sequence[dict]]) -> Optional[
     return max(present, key=lambda name: _column(rows_by_policy[name], "saved_fraction").mean())
 
 
+def acceptance_block(rows: Sequence[dict], comparator_rows: Sequence[dict], comparator: str,
+                     label: str, name: str) -> dict:
+    """Pass/fail of one learned policy against the comparator heuristic (ADR-030 section 5)."""
+    primary = paired_bootstrap(_column(rows, "saved_fraction"),
+                               _column(comparator_rows, "saved_fraction"),
+                               _contrast_seed(label, name, comparator, "saved_fraction"))
+    safety = {}
+    for metric in ("close_calls", "units_lost"):
+        mine, theirs = int(_column(rows, metric).sum()), int(_column(comparator_rows, metric).sum())
+        safety[metric] = {"policy": mine, "comparator": theirs, "non_inferior": mine <= theirs}
+    ret = paired_bootstrap(_column(rows, "return"), _column(comparator_rows, "return"),
+                           _contrast_seed(label, name, comparator, "return"))
+    primary_pass = bool(primary is not None and primary["ci95"][0] > 0)
+    safety_pass = all(value["non_inferior"] for value in safety.values())
+    return {
+        "rule": ACCEPTANCE_RULE,
+        "comparator": comparator,
+        "primary_outcome": "saved_fraction",
+        "primary": primary,
+        "primary_pass": primary_pass,
+        "safety": safety,
+        "safety_pass": safety_pass,
+        "return": dict(ret or {}, decides_acceptance=False),
+        "pass": primary_pass and safety_pass,
+    }
+
+
 def summarize_policies(rows_by_policy: Mapping[str, Sequence[dict]],
                        best_heuristic: Optional[str] = None, label: str = "") -> dict:
     """Per-policy blocks and paired contrasts against no-op, random and the best heuristic.
@@ -119,7 +151,13 @@ def summarize_policies(rows_by_policy: Mapping[str, Sequence[dict]],
                     _contrast_seed(label, name, other, metric))
             block["contrasts"][key] = contrast
         table[name] = block
-    return {"primary_outcome": "saved_fraction", "best_heuristic": best, "policies": table}
+    candidates = [name for name in rows_by_policy
+                  if name not in REFERENCES and name not in HEURISTIC_NAMES]
+    acceptance = {} if best is None else {
+        name: acceptance_block(rows_by_policy[name], rows_by_policy[best], best, label, name)
+        for name in candidates}
+    return {"primary_outcome": "saved_fraction", "best_heuristic": best, "policies": table,
+            "acceptance": acceptance}
 
 
 def summarize_groups(rows_by_policy: Mapping[str, Sequence[dict]], groups: Mapping[str, List[int]],
@@ -174,4 +212,15 @@ def format_table(summary: dict) -> List[str]:
                 if value is not None:
                     parts.append("%s %+.4f [%+.4f, %+.4f]" % (metric, value["mean"], *value["ci95"]))
             lines.append("%-22s %s (%s): %s" % ("", key, contrast["reference"], "; ".join(parts)))
+    for name, block in summary.get("acceptance", {}).items():
+        primary, safety = block["primary"], block["safety"]
+        lines.append("ACCEPTANCE %s vs %s (%s): %s | saved %+.4f [%+.4f, %+.4f] %s | "
+                     "close calls %d vs %d, units lost %d vs %d %s | return %+.4f (not deciding)"
+                     % (name, block["comparator"], block["rule"],
+                        "PASS" if block["pass"] else "FAIL", primary["mean"], *primary["ci95"],
+                        "pass" if block["primary_pass"] else "fail",
+                        safety["close_calls"]["policy"], safety["close_calls"]["comparator"],
+                        safety["units_lost"]["policy"], safety["units_lost"]["comparator"],
+                        "pass" if block["safety_pass"] else "fail",
+                        block["return"].get("mean", float("nan"))))
     return lines

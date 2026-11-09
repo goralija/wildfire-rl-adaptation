@@ -103,6 +103,54 @@ class SummaryTest(unittest.TestCase):
         self.assertEqual(forced["best_heuristic"], "protect_urban")
 
 
+class AcceptanceTest(unittest.TestCase):
+    """ADR-030 section 5: saved fraction decides, safety is non-inferiority, return does not."""
+
+    def _rows(self, ppo_saved, ppo_calls=0, ppo_lost=0, n=40):
+        flank = [row(0.10 + 0.01 * (i % 5), calls=1 if i < 4 else 0) for i in range(n)]
+        ppo = [row(ppo_saved + 0.01 * (i % 5), calls=1 if i < ppo_calls else 0,
+                   lost=1 if i < ppo_lost else 0) for i in range(n)]
+        return {"noop": [row(0.0)] * n, "random": [row(0.01)] * n,
+                "direct_flank": flank, "ppo=x.zip": ppo}
+
+    def _block(self, rows):
+        return summarize_policies(rows)["acceptance"]["ppo=x.zip"]
+
+    def test_better_saved_and_no_worse_safety_passes(self):
+        block = self._block(self._rows(0.15, ppo_calls=4))
+        self.assertEqual(block["comparator"], "direct_flank")
+        self.assertEqual(block["rule"], "ADR-030 section 5")
+        self.assertGreater(block["primary"]["ci95"][0], 0)
+        self.assertTrue(block["primary_pass"])
+        self.assertEqual(block["safety"]["close_calls"], {"policy": 4, "comparator": 4,
+                                                          "non_inferior": True})
+        self.assertTrue(block["safety_pass"])
+        self.assertTrue(block["pass"])
+        self.assertFalse(block["return"]["decides_acceptance"])
+
+    def test_more_close_calls_or_losses_fail_safety(self):
+        for calls, lost in ((5, 0), (0, 1)):
+            block = self._block(self._rows(0.15, ppo_calls=calls, ppo_lost=lost))
+            self.assertTrue(block["primary_pass"])
+            self.assertFalse(block["safety_pass"])
+            self.assertFalse(block["pass"])
+
+    def test_tied_saved_fails_even_with_a_higher_return(self):
+        rows = self._rows(0.10)
+        rows["direct_flank"] = [dict(r, **{"return": r["return"] - 0.3}) for r in rows["direct_flank"]]
+        block = self._block(rows)
+        self.assertGreater(block["return"]["mean"], 0.2)
+        self.assertLessEqual(block["primary"]["ci95"][0], 0)
+        self.assertFalse(block["primary_pass"])
+        self.assertFalse(block["pass"])
+
+    def test_only_learned_policies_are_candidates(self):
+        summary = summarize_policies(self._rows(0.15))
+        self.assertEqual(set(summary["acceptance"]), {"ppo=x.zip"})
+        heuristics_only = {k: v for k, v in self._rows(0.15).items() if k != "ppo=x.zip"}
+        self.assertEqual(summarize_policies(heuristics_only)["acceptance"], {})
+
+
 class RealCaseGroupTest(unittest.TestCase):
     def test_no_edge_group_uses_noop_edge_and_crop(self):
         results = [
