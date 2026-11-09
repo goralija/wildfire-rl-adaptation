@@ -13,12 +13,15 @@ import gymnasium as gym
 import numpy as np
 
 from .feds_simfire_setup import (
+    CELL_SIZE_M,
+    FREEZE_ALLOWLIST,
     INPUT_ROOT,
     MANIFEST,
     WEATHER,
     SimFireParams,
     apply_forcing,
     build_simulation,
+    check_split_access,
     load_case_inputs,
     load_split_cases,
     load_weather_records,
@@ -40,6 +43,78 @@ SECTOR_DIRECTIONS = (
     (0.0, -1.0),
     (1.0, -1.0),
 )
+# "upcoming" shows the forcing of the 12h segment about to run (legacy; it is ex-post
+# gridMET, so the policy sees the exact next-12h weather). "previous" shows the segment
+# that just ran; at decision 0 that is the initial condition the simulation was built
+# with, i.e. segment 0, whose daily gridMET label is the start day.
+WEATHER_OBSERVATIONS = ("upcoming", "previous")
+
+
+# One budget unit is one 20-person crew shift building about 1.26 km of line (ADR-025).
+LINE_LENGTH_M = 1260.0
+
+
+def _sector_vectors(sector: int) -> Tuple[Tuple[int, int], Tuple[int, int]]:
+    if type(sector) is not int or not 0 <= sector < len(SECTOR_DIRECTIONS):
+        raise ValueError("sector must be an integer in [0, 7]")
+    dx, dy = (int(value) for value in SECTOR_DIRECTIONS[sector])
+    return (dx, dy), (-dy, dx)
+
+
+def line_half_steps(sector: int) -> int:
+    """Steps either side of the centre so every sector's line is about 1.26 km long."""
+    _direction, tangent = _sector_vectors(sector)
+    step_m = CELL_SIZE_M * float(np.hypot(*tangent))
+    return int(round((LINE_LENGTH_M / step_m - 1.0) / 2.0))
+
+
+def line_length_m(sector: int, half_steps: Optional[int] = None) -> float:
+    """Extent of a sector line along its own direction, end cells included.
+
+    A straight line of 7 cells spans 7 x 180 m = 1,260 m. A diagonal line of 5
+    diagonal cells spans 5 x 254.6 m = 1,273 m; its 4 corner cells lie inside that
+    extent. This is the front width the line blocks, which is what a crew-shift buys.
+    """
+    _direction, tangent = _sector_vectors(sector)
+    steps = line_half_steps(sector) if half_steps is None else half_steps
+    return (2 * steps + 1) * CELL_SIZE_M * float(np.hypot(*tangent))
+
+
+def sector_line_cells(center_x: int, center_y: int, sector: int,
+                      half_steps: Optional[int] = None) -> Tuple[Tuple[int, int], ...]:
+    """Ordered (x, y) cells of a 4-connected line through an integer centre cell.
+
+    The line runs perpendicular to the sector direction. On diagonal sectors each
+    corner-only link gets one extra cell on the side away from the fire (positive
+    projection on the sector direction), so SimFire's 8-connected spread cannot pass
+    between consecutive cells and the standoff never shrinks.
+    """
+    (dx, dy), (tx, ty) = _sector_vectors(sector)
+    steps = line_half_steps(sector) if half_steps is None else half_steps
+    if type(steps) is not int or steps < 0:
+        raise ValueError("line half-steps must be a nonnegative integer")
+    fill = (tx, 0) if tx * dx > 0 else (0, ty)
+    cells = []
+    for offset in range(-steps, steps + 1):
+        x, y = center_x + offset * tx, center_y + offset * ty
+        cells.append((x, y))
+        if tx and ty and offset < steps:
+            cells.append((x + fill[0], y + fill[1]))
+    return tuple(cells)
+
+
+def _placeable(state: np.ndarray, cells: Sequence[Tuple[int, int]]) -> Tuple[Tuple[int, int], ...]:
+    rows, columns = state.shape
+    return tuple((x, y) for x, y in cells
+                 if 0 <= y < rows and 0 <= x < columns and int(state[y, x]) == SIMFIRE_UNBURNED)
+
+
+def _validated(fire_map: Any, active_front: Any) -> Tuple[np.ndarray, np.ndarray]:
+    state = np.asarray(fire_map)
+    front = np.asarray(active_front, dtype=bool)
+    if state.ndim != 2 or front.shape != state.shape:
+        raise ValueError("fire map and active front must have the same 2-D shape")
+    return state, front
 
 
 def fireline_points(
@@ -48,40 +123,21 @@ def fireline_points(
     sector: int,
     *,
     radius: float = 6.0,
-    half_length: int = 3,
+    half_length: Optional[int] = None,
 ) -> Tuple[Tuple[int, int], ...]:
-    """Place a short, fixed-length line ahead of the current front centroid."""
-    state = np.asarray(fire_map)
-    front = np.asarray(active_front, dtype=bool)
-    if state.ndim != 2 or front.shape != state.shape:
-        raise ValueError("fire map and active front must have the same 2-D shape")
-    if type(sector) is not int or not 0 <= sector < len(SECTOR_DIRECTIONS):
-        raise ValueError("sector must be an integer in [0, 7]")
-    if not np.isfinite(radius) or radius < 0 or type(half_length) is not int or half_length < 0:
-        raise ValueError("line radius and half-length must be nonnegative")
+    """Place one unit of line ahead of the current front centroid."""
+    state, front = _validated(fire_map, active_front)
+    _sector_vectors(sector)
+    if not np.isfinite(radius) or radius < 0:
+        raise ValueError("line radius must be nonnegative")
     rows, columns = np.nonzero(front)
     if rows.size == 0:
         return ()
-
     dx, dy = SECTOR_DIRECTIONS[sector]
     norm = float(np.hypot(dx, dy))
-    dx, dy = dx / norm, dy / norm
-    center_x = float(columns.mean()) + radius * dx
-    center_y = float(rows.mean()) + radius * dy
-    tangent_x, tangent_y = -dy, dx
-    points = []
-    seen = set()
-    for offset in range(-half_length, half_length + 1):
-        x = int(round(center_x + offset * tangent_x))
-        y = int(round(center_y + offset * tangent_y))
-        point = (x, y)
-        if point in seen:
-            continue
-        seen.add(point)
-        if 0 <= y < state.shape[0] and 0 <= x < state.shape[1]:
-            if int(state[y, x]) == SIMFIRE_UNBURNED:
-                points.append(point)
-    return tuple(points)
+    center_x = int(np.floor(columns.mean() + radius * dx / norm + 0.5))
+    center_y = int(np.floor(rows.mean() + radius * dy / norm + 0.5))
+    return _placeable(state, sector_line_cells(center_x, center_y, sector, half_length))
 
 
 def front_edge_line_points(
@@ -90,45 +146,26 @@ def front_edge_line_points(
     sector: int,
     *,
     standoff: int = 2,
-    half_length: int = 3,
+    half_length: Optional[int] = None,
 ) -> Tuple[Tuple[int, int], ...]:
-    """Place a short line just beyond the front's leading edge in one sector.
+    """Place one unit of line just beyond the front's leading edge in one sector.
 
     The anchor is the active-front cell that lies furthest along the sector
-    direction; the line centre sits ``standoff`` cells beyond it and runs
+    direction; the line centre sits ``standoff`` cell steps beyond it (diagonal steps
+    on diagonal sectors, so fire needs the same number of 8-connected hops) and runs
     perpendicular to the sector. Only unburned cells receive line.
     """
-    state = np.asarray(fire_map)
-    front = np.asarray(active_front, dtype=bool)
-    if state.ndim != 2 or front.shape != state.shape:
-        raise ValueError("fire map and active front must have the same 2-D shape")
-    if type(sector) is not int or not 0 <= sector < len(SECTOR_DIRECTIONS):
-        raise ValueError("sector must be an integer in [0, 7]")
-    if type(standoff) is not int or standoff < 0 or type(half_length) is not int or half_length < 0:
-        raise ValueError("line standoff and half-length must be nonnegative integers")
+    state, front = _validated(fire_map, active_front)
+    (dx, dy), _tangent = _sector_vectors(sector)
+    if type(standoff) is not int or standoff < 0:
+        raise ValueError("line standoff must be a nonnegative integer")
     rows, columns = np.nonzero(front)
     if rows.size == 0:
         return ()
-    dx, dy = SECTOR_DIRECTIONS[sector]
-    norm = float(np.hypot(dx, dy))
-    dx, dy = dx / norm, dy / norm
-    projection = columns * dx + rows * dy
-    lead = int(np.argmax(projection))
-    center_x = float(columns[lead]) + standoff * dx
-    center_y = float(rows[lead]) + standoff * dy
-    tangent_x, tangent_y = -dy, dx
-    points = []
-    seen = set()
-    for offset in range(-half_length, half_length + 1):
-        x = int(round(center_x + offset * tangent_x))
-        y = int(round(center_y + offset * tangent_y))
-        if (x, y) in seen:
-            continue
-        seen.add((x, y))
-        if 0 <= y < state.shape[0] and 0 <= x < state.shape[1]:
-            if int(state[y, x]) == SIMFIRE_UNBURNED:
-                points.append((x, y))
-    return tuple(points)
+    lead = int(np.argmax(columns * dx + rows * dy))
+    center_x = int(columns[lead]) + standoff * dx
+    center_y = int(rows[lead]) + standoff * dy
+    return _placeable(state, sector_line_cells(center_x, center_y, sector, half_length))
 
 
 LINE_PLACEMENTS = {
@@ -173,10 +210,12 @@ def cumulative_burn_mask(previous: Any, fire_map: Any) -> np.ndarray:
 class FedsSimFireEnv(gym.Env):
     """A 48h episode with four shared 12h decisions and a discrete crew budget.
 
-    Actions are no-op plus eight sector directions. Each non-no-op action places at
-    most seven SimFire fireline cells (one budget unit). This deliberately simple
+    Actions are no-op plus eight sector directions. Each non-no-op action spends one
+    budget unit on one ~1.26 km line: 7 cells on an axis, or 5 diagonal cells plus 4
+    corner cells on a diagonal, so every line is 4-connected. This deliberately simple
     action mapping is not a field-validated line-construction model. TRAIN is the
-    default split; VALIDATION requires ``split="validation"``; TEST is refused.
+    default split; VALIDATION requires ``split="validation"`` and an allowlisted TRAIN
+    freeze record matching ``sim_params``; TEST is refused.
     """
 
     metadata = {"render_modes": []}
@@ -192,6 +231,9 @@ class FedsSimFireEnv(gym.Env):
         split: str = "train",
         line_placement: str = "centroid",
         max_budget: Optional[int] = None,
+        weather_observation: str = "upcoming",
+        freeze_record: Optional[Path] = None,
+        freeze_allowlist: Path = FREEZE_ALLOWLIST,
         manifest_path: Path = MANIFEST,
         weather_path: Path = WEATHER,
         input_root: Path = INPUT_ROOT,
@@ -203,10 +245,16 @@ class FedsSimFireEnv(gym.Env):
                 wind_adjustment_factor=float(wind_adjustment_factor),
                 internal_update_minutes=internal_update_minutes,
             )
+        self.freeze_record_sha256 = check_split_access(
+            split, sim_params, freeze_record, weather_path=weather_path, allowlist_path=freeze_allowlist
+        )
         if not budgets or any(type(value) is not int or value < 0 for value in budgets):
             raise ValueError("budgets must be nonempty nonnegative integers")
         if line_placement not in LINE_PLACEMENTS:
             raise ValueError("unknown line placement %r" % line_placement)
+        if weather_observation not in WEATHER_OBSERVATIONS:
+            raise ValueError("weather observation must be one of %s" % (WEATHER_OBSERVATIONS,))
+        self.weather_observation = weather_observation
 
         self.sim_params = sim_params
         self.wind_adjustment_factor = sim_params.wind_adjustment_factor
@@ -298,7 +346,10 @@ class FedsSimFireEnv(gym.Env):
             self._pool(np.isin(fire_map, (3, 4, 5)).astype(np.float32)),
             self._pool(np.clip(self.fuel.astype(np.float32) / 13.0, 0.0, 1.0)),
         )).astype(np.float32)
-        current = self.forcing[min(self.decision_index, self.horizon_steps - 1)]
+        segment = self.decision_index
+        if getattr(self, "weather_observation", "upcoming") == "previous":
+            segment = max(0, segment - 1)
+        current = self.forcing[min(segment, self.horizon_steps - 1)]
         direction = np.deg2rad(current["wind_direction_degrees_clockwise_north_to"])
         weather = np.asarray((
             np.clip(current["wind_speed_midflame_ft_per_min_proxy"] / 3000.0, 0.0, 1.0),
@@ -355,6 +406,7 @@ class FedsSimFireEnv(gym.Env):
         invalid = not bool(mask[action])
         action = 0 if invalid else action
         applied_points = ()
+        applied_length_m = 0.0
         if action and self.remaining_budget > 0:
             front = self.simulation.fire_map == SIMFIRE_BURNING
             applied_points = line_points_for(
@@ -365,6 +417,7 @@ class FedsSimFireEnv(gym.Env):
                     (x, y, SIMFIRE_FIRELINE) for x, y in applied_points
                 ])
                 self.remaining_budget -= 1
+                applied_length_m = line_length_m(action - 1)
 
         previous = self.cumulative_burned.copy()
         if self.simulation_active:
@@ -391,6 +444,7 @@ class FedsSimFireEnv(gym.Env):
             "fire_active": bool(self.simulation_active),
             "action_applied": bool(applied_points),
             "line_cells_applied": len(applied_points),
+            "line_length_m": applied_length_m,
             "invalid_action": invalid,
             "feds_future_perimeters_used": False,
         }

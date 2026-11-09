@@ -12,7 +12,7 @@ try:
         make_heuristic,
         sector_for_vector,
     )
-    from wildfire_rl.feds_simfire_env import build_action_mask, front_edge_line_points
+    from wildfire_rl.feds_simfire_env import FedsSimFireEnv, build_action_mask, front_edge_line_points
 except ImportError as exc:
     raise unittest.SkipTest("optional SimFire/Gymnasium dependencies are not installed: %s" % exc)
 
@@ -66,6 +66,24 @@ class FedsHeuristicTests(unittest.TestCase):
         self.assertTrue(mask.all())
         empty = build_action_mask(fire_map, front, 0, placement="front_edge")
         self.assertEqual(np.flatnonzero(empty).tolist(), [0])
+
+    def test_downwind_uses_the_weather_the_environment_chooses_to_show(self):
+        from types import SimpleNamespace
+
+        env = object.__new__(FedsSimFireEnv)
+        env.simulation = SimpleNamespace(fire_map=np.zeros((16, 16), dtype=np.uint8))
+        env.cumulative_burned = np.zeros((16, 16), dtype=bool)
+        env.fuel = np.zeros((16, 16), dtype=np.uint8)
+        env.block_count, env.horizon_steps, env.max_budget = 16, 4, 4
+        env.initial_budget = env.remaining_budget = 1
+        env.decision_index = 1
+        env.forcing = [{"wind_speed_midflame_ft_per_min_proxy": 10.0,
+                        "wind_direction_degrees_clockwise_north_to": heading,
+                        "fuel_moisture_fraction_proxy": 0.05} for heading in (90.0, 0.0, 0.0, 0.0)]
+        mask = np.ones(9, dtype=bool)
+        self.assertEqual(downwind_policy(env._observation(), mask), 7)   # upcoming: north
+        env.weather_observation = "previous"
+        self.assertEqual(downwind_policy(env._observation(), mask), 1)   # previous: east
 
 
 if __name__ == "__main__":

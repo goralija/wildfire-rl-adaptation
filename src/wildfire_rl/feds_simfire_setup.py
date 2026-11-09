@@ -26,7 +26,16 @@ MANIFEST = ROOT / "data/manifests/feds-episode-cohort-v1.json"
 WEATHER = ROOT / ".local/gridmet/feds-episode-weather-v1.json"
 INPUT_ROOT = ROOT / ".local/feds-simfire-cases"
 CONFIG_TEMPLATE = ROOT / "configs/simfire_feds_base.yml"
+FREEZE_ALLOWLIST = ROOT / "configs/frozen/validation-freeze-allowlist.json"
 ALLOWED_SPLITS = ("train", "validation")
+# "per_update" is pinned SimFire: a fixed 980 ft subtracted per update from R * update_rate,
+# so a line holds up to 980 ft/min at 1 min but only 196 ft/min at 5 min. "per_minute"
+# subtracts 980 ft per simulated minute, which makes line strength step-independent.
+FIRELINE_ATTENUATIONS = ("per_update", "per_minute")
+# "last_write" is pinned SimFire: when several burning cells reach one target, the last
+# sprite in list order sets its rate of spread. "max" uses the fastest approach instead,
+# which does not depend on sprite order.
+SPREAD_AGGREGATIONS = ("last_write", "max")
 CELL_SIZE_M = 180.0
 FEET_PER_METER = 3.280839895
 SIMFIRE_COMMIT = "04905b19fe8c10dc08d64faddd00303e0561bb66"
@@ -40,6 +49,8 @@ class SimFireParams:
     internal_update_minutes: int = 5
     active_cell_lifetime_minutes: int = 90
     ros_multiplier: float = 1.0
+    fireline_attenuation: str = "per_update"
+    spread_aggregation: str = "last_write"
 
     def __post_init__(self) -> None:
         import math
@@ -52,6 +63,10 @@ class SimFireParams:
             raise ValueError("active-cell lifetime must be a positive integer number of minutes")
         if not math.isfinite(self.ros_multiplier) or not 0.0 < self.ros_multiplier <= 10.0:
             raise ValueError("rate-of-spread multiplier must be in (0, 10]")
+        if self.fireline_attenuation not in FIRELINE_ATTENUATIONS:
+            raise ValueError("fireline attenuation must be one of %s" % (FIRELINE_ATTENUATIONS,))
+        if self.spread_aggregation not in SPREAD_AGGREGATIONS:
+            raise ValueError("spread aggregation must be one of %s" % (SPREAD_AGGREGATIONS,))
 
     def as_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -76,6 +91,54 @@ def load_split_cases(split: str, manifest_path: Path = MANIFEST) -> Dict[str, di
     if not cases:
         raise ValueError("The FEDS manifest has no %s episodes" % split.upper())
     return cases
+
+
+def require_validation_freeze(
+    params: SimFireParams,
+    freeze_record: Optional[Path],
+    *,
+    weather_path: Path = WEATHER,
+    allowlist_path: Path = FREEZE_ALLOWLIST,
+) -> str:
+    """Accept VALIDATION only under a committed, allowlisted TRAIN freeze record.
+
+    The record's sha256 must appear in the committed allowlist, it must have been
+    selected on TRAIN, its ``frozen_params`` must equal ``params`` (absent keys take
+    the legacy defaults) and it must name the gridMET file in use. Returns the hash.
+    """
+    if freeze_record is None:
+        raise ValueError("VALIDATION requires a committed TRAIN freeze record.")
+    digest = sha256_file(Path(freeze_record))
+    allowlist = json.loads(Path(allowlist_path).read_text(encoding="utf-8"))
+    if digest not in {item["sha256"] for item in allowlist.get("records", [])}:
+        raise ValueError("Freeze record %s (sha256 %s) is not in the committed allowlist %s"
+                         % (freeze_record, digest, allowlist_path))
+    record = json.loads(Path(freeze_record).read_text(encoding="utf-8"))
+    if record.get("selected_on_split") != "train":
+        raise ValueError("VALIDATION requires parameters selected on TRAIN.")
+    if SimFireParams(**record["frozen_params"]) != params:
+        raise ValueError("Simulator parameters do not match the TRAIN freeze record.")
+    if record.get("weather_sha256") != sha256_file(Path(weather_path)):
+        raise ValueError("The freeze record was not selected with this gridMET file.")
+    return digest
+
+
+def check_split_access(
+    split: str,
+    params: SimFireParams,
+    freeze_record: Optional[Path] = None,
+    *,
+    weather_path: Path = WEATHER,
+    allowlist_path: Path = FREEZE_ALLOWLIST,
+) -> Optional[str]:
+    """Refuse TEST always, VALIDATION without a matching freeze; return its hash."""
+    if split not in ALLOWED_SPLITS:
+        raise ValueError("Only TRAIN or VALIDATION cases can be loaded; TEST stays closed.")
+    if split == "validation":
+        return require_validation_freeze(
+            params, freeze_record, weather_path=weather_path, allowlist_path=allowlist_path
+        )
+    return None
 
 
 def load_weather_records(
@@ -241,6 +304,7 @@ def build_simulation(inputs: Dict[str, Any], params: SimFireParams, *, seed: int
     if params.ros_multiplier != 1.0:
         simulation.fire_manager.pixel_scale = pixel_scale_ft / params.ros_multiplier
     simulation.fire_map = compose_initial_fire_map(scar, front).astype(np.int64)
+    install_spread_options(simulation.fire_manager, params)
     simulation.fire_manager.sprites = [
         Fire((int(column), int(row)), config.display.fire_size, headless=True)
         for row, column in zip(front_rows, front_columns)
@@ -258,3 +322,72 @@ def apply_forcing(simulation: Any, segment: Dict[str, float]) -> None:
     simulation.fire_manager.U[:] = segment["wind_speed_midflame_ft_per_min_proxy"]
     simulation.fire_manager.U_dir[:] = segment["wind_direction_degrees_clockwise_north_to"]
     simulation.fire_manager.environment.M_f = segment["fuel_moisture_fraction_proxy"]
+
+
+def _per_minute_line_attenuation(fire_manager: Any, rate_of_spread: Any, fire_map: Any) -> Any:
+    """SimFire's control-line attenuation, scaled by the internal update length."""
+    import numpy as np
+    from simfire.enums import BurnStatus, RoSAttenuation
+
+    if not fire_manager.attenuate_line_ros:
+        return type(fire_manager)._update_rate_of_spread(fire_manager, rate_of_spread, fire_map)
+    factor = np.zeros_like(rate_of_spread)
+    factor[fire_map == BurnStatus.FIRELINE] = RoSAttenuation.FIRELINE * fire_manager.update_rate
+    factor[fire_map == BurnStatus.SCRATCHLINE] = RoSAttenuation.SCRATCHLINE * fire_manager.update_rate
+    factor[fire_map == BurnStatus.WETLINE] = RoSAttenuation.WETLINE * fire_manager.update_rate
+    return rate_of_spread - factor
+
+
+def _max_ros_update(fire_manager: Any, fire_map: Any) -> Any:
+    """``RothermelFireManager.update`` of the pinned SimFire commit, except that each
+    target cell takes the maximum rate of spread over its burning neighbours instead
+    of the last one written in sprite order."""
+    import numpy as np
+    from simfire.enums import GameStatus
+    from simfire.game.managers import fire as simfire_fire
+
+    fire_manager._prune_sprites(fire_map)
+    fire_manager.durations = [duration + 1 for duration in fire_manager.durations]
+    if not fire_manager.sprites:
+        return fire_map, GameStatus.QUIT
+    if fire_manager.max_time is not None and (
+            fire_manager.update_rate > fire_manager.max_time
+            or fire_manager.elapsed_time > fire_manager.max_time):
+        return fire_map, GameStatus.QUIT
+    all_params = [fire_manager._accrue_sprites(index, fire_map)
+                  for index in range(len(fire_manager.sprites))]
+    all_params = [item for item in all_params if item is not None]
+    if not all_params:
+        return fire_map, GameStatus.RUNNING
+    flat = fire_manager._flatten_params(all_params)
+    rate = simfire_fire.compute_rate_of_spread(*flat) * fire_manager.update_rate
+    x_coords = flat[2].astype(int)
+    y_coords = flat[3].astype(int)
+    fastest = np.full(fire_manager.burn_amounts.shape, -np.inf)
+    np.maximum.at(fastest, (y_coords, x_coords), rate)
+    rate_of_spread = np.zeros_like(fire_manager.burn_amounts)
+    reached = np.isfinite(fastest)
+    rate_of_spread[reached] = fastest[reached]
+    fire_manager.rate_of_spread = fire_manager._update_rate_of_spread(rate_of_spread, fire_map)
+    fire_manager.burn_amounts += fire_manager.rate_of_spread
+    fire_map = fire_manager._update_with_new_locs(y_coords, x_coords, fire_map)
+    fire_manager.elapsed_time += fire_manager.update_rate
+    return fire_map, GameStatus.RUNNING
+
+
+def install_spread_options(fire_manager: Any, params: SimFireParams) -> None:
+    """Bind the non-default spread options to one fire manager instance.
+
+    Both defaults leave the pinned SimFire behaviour untouched; nothing is patched at
+    class or module level, so other simulations in the process are unaffected.
+    """
+    from types import MethodType
+
+    if params.fireline_attenuation == "per_minute":
+        fire_manager._update_rate_of_spread = MethodType(_per_minute_line_attenuation, fire_manager)
+    if params.spread_aggregation == "max":
+        import importlib.metadata
+
+        if importlib.metadata.version("simfire") != "2.0.1":
+            raise RuntimeError("max spread aggregation mirrors SimFire 2.0.1 (%s)" % SIMFIRE_COMMIT)
+        fire_manager.update = MethodType(_max_ros_update, fire_manager)

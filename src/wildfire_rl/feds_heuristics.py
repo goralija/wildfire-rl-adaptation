@@ -1,8 +1,11 @@
 """Matched heuristic policies for the budgeted FEDS/SimFire environment.
 
 Every heuristic decides from the same observation dictionary and action mask that a
-PPO policy receives, so no baseline sees the full-resolution map, future weather or
-FEDS outlines. Each one spends a budget unit at the first legal opportunity.
+PPO policy receives, so no baseline sees the full-resolution map or FEDS outlines,
+and every baseline sees exactly the weather the policy sees. With the environment's
+default ``weather_observation="upcoming"`` that is the ex-post forcing of the next
+12h; with ``"previous"`` it is the segment that just ran. Each heuristic spends a
+budget unit at the first legal opportunity.
 """
 
 from __future__ import annotations
