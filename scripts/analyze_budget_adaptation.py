@@ -91,8 +91,10 @@ def sign_flip_test(deltas, exact_limit=22, draws=200000, seed=20261109):
         method = "exact"
     else:
         generator = np.random.default_rng(seed)
-        signs = generator.choice((-1.0, 1.0), size=(draws, changed.size))
-        hits = int(np.count_nonzero(np.abs(signs @ changed) >= observed - tolerance))
+        hits = 0
+        for start in range(0, draws, 10000):
+            signs = generator.choice((-1.0, 1.0), size=(min(10000, draws - start), changed.size))
+            hits += int(np.count_nonzero(np.abs(signs @ changed) >= observed - tolerance))
         p_value = (1 + hits) / float(1 + draws)
         method = "monte_carlo"
     return {"scenarios_changed": int(changed.size), "sign_flip_p_two_sided": p_value,
