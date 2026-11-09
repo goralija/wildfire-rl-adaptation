@@ -27,9 +27,14 @@ def feds_overpass_utc(value: str, longitude: float) -> datetime:
     if not -180.0 <= float(longitude) <= 180.0:
         raise ValueError("longitude must be in [-180, 180].")
     midnight = datetime(parsed.year, parsed.month, parsed.day, tzinfo=timezone.utc)
-    return midnight + timedelta(
+    overpass = midnight + timedelta(
         hours=VIIRS_OVERPASS_LOCAL_SOLAR_HOUR[parsed.hour] - float(longitude) / 15.0
     )
+    # fireatlas v1.4.1 dates `t` by the UTC acquisition date (CONUS longitudes satisfy it).
+    if overpass.date() != parsed.date():
+        raise ValueError("Overpass of %r at longitude %.2f falls on another UTC date."
+                         % (value, float(longitude)))
+    return overpass
 
 
 def gridmet_day_for_utc(value: datetime) -> str:

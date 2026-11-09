@@ -7,7 +7,7 @@
 - FEDS `t` nije UTC: to je AM/PM oznaka VIIRS prolaza po lokalnom sunčevom vremenu, upisana
   kao 00:00/12:00 ([dokazi](docs/research/SIMFIRE_ENVIRONMENT.md)). Korisnik je izabrao
   preračun 01:30/13:30 lokalno → UTC po dužini ([dopuna ADR-030](docs/specs/DECISION_RECORDS.md)).
-- Novi gridMET fajl (sha256 `8e0e70a5…`) ima `pre_start` i vlastitu ćeliju za svih 118
+- Novi gridMET fajl (sha256 `7a51aadd…`) ima `pre_start` i vlastitu ćeliju za svih 118
   slučajeva; hash i poređenje sa starim fajlom su u coverage reportu. Sljedeće: PR, revizija,
   pa nalog za fazu 1.
 

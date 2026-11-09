@@ -6,6 +6,7 @@ import unittest
 
 from wildfire_rl.gridmet_weather import (
     FEDS_TIME_REFERENCE,
+    pre_start_weather_day,
     GRIDMET_MST,
     direction_from_to_simfire_direction,
     episode_weather_midpoints,
@@ -50,6 +51,12 @@ class GridmetWeatherTests(unittest.TestCase):
                 feds_overpass_utc(value, -120.0)
         with self.assertRaises(ValueError):
             feds_overpass_utc("2018-07-24T00:00:00", 200.0)
+        # fireatlas v1.4.1 dates `t` by the UTC acquisition date, so an overpass whose
+        # UTC date differs from the label's date contradicts the label.
+        with self.assertRaises(ValueError):
+            feds_overpass_utc("2018-07-24T00:00:00", 120.0)
+        with self.assertRaises(ValueError):
+            feds_overpass_utc("2018-07-24T12:00:00", -170.0)
 
     def test_four_12_hour_segments_cover_48_hours(self):
         segments = episode_weather_midpoints("2018-07-24T00:00:00", longitude=-120.0)
@@ -146,6 +153,27 @@ class GridmetWeatherTests(unittest.TestCase):
         cells = np.array([[1, 2], [11, 12]], dtype="f4")
         variable[:] = cells[None, :, :] + 1000.0 * np.arange(365, dtype="f4")[:, None, None]
         dataset.close()
+
+    def test_observed_day_has_ended_before_each_decision(self):
+        # ADR-030 observation rule: the record a decision observes is a complete gridMET
+        # day before that segment starts, across the cohort's longitudes and both labels.
+        from datetime import datetime, timedelta
+        from wildfire_rl.feds_simfire_setup import observed_weather_records
+
+        for longitude in (-125.0, -120.0, -110.0, -102.0):
+            for start in ("2018-07-24T00:00:00", "2018-07-24T12:00:00"):
+                segments = episode_weather_midpoints(start, longitude=longitude)
+                weather = {
+                    "segments": [{**segment, "gridmet_values": {"th": {}, "vs": {}, "fm100": {}}}
+                                 for segment in segments],
+                    "pre_start": {**pre_start_weather_day(start, longitude=longitude),
+                                  "gridmet_values": {"th": {}, "vs": {}, "fm100": {}}},
+                }
+                for segment, record in zip(segments, observed_weather_records(weather)):
+                    label = datetime.fromisoformat(record["gridmet_daily_label_mst"])
+                    day_end = (label + timedelta(days=1)).replace(tzinfo=GRIDMET_MST)
+                    with self.subTest(longitude=longitude, start=start, segment=segment["segment"]):
+                        self.assertLessEqual(day_end, datetime.fromisoformat(segment["start_utc"]))
 
     def test_comparison_with_previous_file_counts_cells_and_labels(self):
         import sys
@@ -248,6 +276,12 @@ class GridmetWeatherTests(unittest.TestCase):
             for case in weather["cases"]
         }
         self.assertEqual(cells, {"first": (0, 0), "second": (1, 1)})
+        # Segments start at the PM overpass at each case's own centroid longitude
+        # (13:30 local solar at -120 is 21:30 UTC; at -119.96 it is 9.6 s earlier).
+        self.assertEqual(
+            {case["scenario_id"]: case["segments"][0]["start_utc"] for case in weather["cases"]},
+            {"first": "2018-07-01T21:30:00+00:00", "second": "2018-07-01T21:29:50.400000+00:00"},
+        )
 
         # ADR-030: one observation-only record for the gridMET day before segment 0,
         # read at the same per-case cell, with the same fields as a segment.

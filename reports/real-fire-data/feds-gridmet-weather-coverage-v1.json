@@ -155,15 +155,15 @@
     "segments_compared": 472,
     "segments_with_changed_daily_label": 236
   },
-  "created_utc": "2026-11-09T18:57:02.117954+00:00",
+  "created_utc": "2026-11-09T19:17:09.055700+00:00",
   "distinct_cells_all_splits": 118,
   "episode_manifest": "data/manifests/feds-episode-cohort-v1.json",
-  "episode_manifest_sha256": "d30508c94578d3034b677a7d4226190fd6f767c300b6ef79e362252f293cb400",
+  "episode_manifest_sha256": "013be9a1632abcbc29d86f4bc16af89d3c074503f5899d1e39903d76ec2c28d5",
   "kind": "weather_input_coverage_and_provenance_not_simulation_or_physical_validation",
   "limitations": [
     "gridMET is daily and approximately 4 km; each 12-hour interval uses one sampled daily cell.",
     "10 m wind and NFDRS 100-hour fuel moisture are proxies, not measured SimFire midflame wind or FBFM13 fine-fuel moisture.",
-    "FEDS `t` has no timezone; it is read as the nominal 01:30/13:30 local solar overpass (TASK-027). Lon/15 ignores the equation of time and swath-edge time spread; segment midpoints stay at least 3 h from the MST day boundary, so daily labels do not depend on it.",
+    "FEDS `t` has no timezone; it is read as the nominal 01:30/13:30 local solar overpass (TASK-027). Lon/15 ignores the equation of time and swath-edge time spread; segment midpoints stay at least 3.2 h from the MST day boundary over the cohort, so daily labels do not depend on it.",
     "Raw weather presence does not validate SimFire spread or any suppression counterfactual."
   ],
   "mapping_status": "raw_values_only_no_wind_adjustment_factor_selected",
@@ -260,5 +260,5 @@
     "segment_weather_sample": "six-hour midpoint of each 12-hour interval mapped to the fixed MST daily label"
   },
   "test_cases_loaded": false,
-  "weather_file_sha256": "8e0e70a5f49552930ccc08fbf14e5bdccc5394b234012f228bd3e986a34043fb"
+  "weather_file_sha256": "7a51aadd46b894d9cd80835d7953107271b3182c776d7bb464d7abae826afac1"
 }

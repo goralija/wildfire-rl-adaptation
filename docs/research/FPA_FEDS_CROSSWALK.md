@@ -91,7 +91,8 @@ python scripts/build_feds_episode_manifest.py
 **Jedan zapis po FEDS požaru (ADR-030 §6, TASK-027, 2026-11-09).** Crosswalk je za FPA
 zapise `fpa-fod-400305302-sugar-pine` i `fpa-fod-400389825-columbus` izabrao isti FEDS požar
 (fireID 58826, isti start), pa bi ista epizoda ušla dvaput u TRAIN. Generator manifesta sada
-zadržava zapis s najnižim `fod_id` po FEDS požaru i isključene zapise upisuje u
+zadržava zapis s najnižim `fod_id` po FEDS požaru (fireID i start, kao ključ crosswalka,
+jer FEDS-CONUS numeriše požare po godišnjem fajlu) i isključene zapise upisuje u
 `deduplication.excluded_records`; FEDS požar spojen sa zapisima iz dva splita zaustavlja
 generator. Pravilo je u generatoru, a ne ručna izmjena manifesta, da bi se manifest mogao
 ponovo izgraditi iz candidate-framea i crosswalka (provjereno: prije izmjene generator je

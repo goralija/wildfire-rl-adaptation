@@ -27,7 +27,7 @@ sources:
   FEDS požaru: 98 TRAIN i 20 VALIDATION (columbus isključen). FEDS `t` nije UTC nego oznaka
   VIIRS prolaza u lokalnom sunčevom vremenu; korisnik je izabrao preračun 01:30/13:30 lokalno
   → UTC po dužini (dopuna ADR-030). Novi gridMET fajl je napravljen lokalno (sha256
-  `8e0e70a5…`, 118 ćelija za 118 slučajeva, svi s `pre_start`); hash je u
+  `7a51aadd…`, 118 ćelija za 118 slučajeva, svi s `pre_start`); hash je u
   [coverage reportu](../reports/real-fire-data/feds-gridmet-weather-coverage-v1.json).
   Faza 1 čeka merge i nalog.
 - **Odluke za ponovno pokretanje (ADR-030).** Gate na IoU rasta prema downwind elipsi,
