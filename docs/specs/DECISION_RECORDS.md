@@ -1050,3 +1050,15 @@ new metrics; no result exists that could have informed them.
   cases.
 - The ADR-022/023 `strict_screen` stays in reports for comparison only and is marked as
   superseded by `growth_gate`.
+
+### ADR-030 addendum — synthetic CA comparator and the real-case test, recorded 2026-11-09
+
+From the review of PR #11 (TASK-024), fixed before any rerun of locked or new policies.
+- **Comparator.** "The comparator heuristic" in §5 is the scripted heuristic with the highest
+  mean saved fraction on the synthetic acceptance seeds. Safety non-inferiority is measured
+  against that same heuristic, so the primary and the safety comparison stay paired. This is
+  the bar with the most suppression, not the safest one; the safety block reports every
+  heuristic so a reader can see the difference.
+- **Real-case test.** The one-time test on the 119 FEDS starts is descriptive, as ADR-028
+  intended: the comparator is fixed before the run (`--comparator-heuristic`, the synthetic
+  acceptance comparator) and no pass/fail is produced per group.
