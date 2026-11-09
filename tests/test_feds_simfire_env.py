@@ -100,6 +100,38 @@ class FedsSimFireEnvironmentTests(unittest.TestCase):
         self.assertEqual(env.simulation.run_calls, 1)
         self.assertTrue(env.cumulative_burned[7, 7])
 
+    def test_reset_options_pin_scenario_and_budget_for_paired_evaluation(self):
+        env = object.__new__(FedsSimFireEnv)
+        env.cases = {"a": {}, "b": {}}
+        env.scenario_ids = ("a", "b")
+        env.budgets = (2,)
+        env.max_budget = 4
+        env.split = "validation"
+        env.horizon_steps = 4
+        loaded = []
+
+        def fake_load(scenario_id):
+            loaded.append(scenario_id)
+            env.simulation = SimpleNamespace(fire_map=np.zeros((16, 16), dtype=np.uint8))
+            env.cumulative_burned = np.zeros((16, 16), dtype=bool)
+            env.fuel = np.zeros((16, 16), dtype=np.uint8)
+            env.forcing = [{"wind_speed_midflame_ft_per_min_proxy": 0.0,
+                            "wind_direction_degrees_clockwise_north_to": 0.0,
+                            "fuel_moisture_fraction_proxy": 0.1}] * 4
+
+        env._load_episode = fake_load
+        env.block_count = 16
+        observation, info = env.reset(seed=1, options={"scenario_id": "b", "budget": 4})
+
+        self.assertEqual(loaded, ["b"])
+        self.assertEqual((info["scenario_id"], info["budget"], info["split"]), ("b", 4, "validation"))
+        self.assertEqual(env.remaining_budget, 4)
+        self.assertAlmostEqual(float(observation["budget"][0]), 1.0)
+        with self.assertRaises(ValueError):
+            env.reset(options={"budget": 5})
+        with self.assertRaises(ValueError):
+            env.reset(options={"scenario_id": "test-case"})
+
 
 if __name__ == "__main__":
     unittest.main()

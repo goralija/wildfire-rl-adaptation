@@ -10,14 +10,15 @@ Repo je OKF 0.2 knowledge bundle. Na početku sesije pročitaj [index.md](index.
 Zatim koristi [mapu zadataka/koda](knowledge/code-map.md) za relevantne izvore i testove.
 Korisnikove direktne upute imaju prednost; kasniji ADR može zamijeniti raniji.
 
-**Aktivni pravac je SimFire + FPA-FOD/FEDS-CONUS; najnoviji status je ADR-022.** Data
-coverage gate za prošireni, unaprijed spremljeni okvir prolazi (99 TRAIN, 20 validation),
-ali TRAIN no-op gate je završio **FAIL**: nijedan od osam WAF kandidata nije nadmašio
-persistence i elipsnu referencu po oba kriterija uz nula rubnih kontakata. Prvi posao je
-dijagnostika i novi zajednički TRAIN-only no-op screen; validation rastere ostaviti
-zatvorene dok TRAIN kandidat ne prođe, a TEST 2024 ne otvarati do završne evaluacije.
-TASK-012/CFSDS/Cell2Fire je historijski odvojeni pravac; Firehose TASK-004c nije trenutni
-SimFire blocker. PPO putanja radi samo kao tehnički smoke, ne kao validiran benchmark.
+**Aktivni pravac je SimFire + FPA-FOD/FEDS-CONUS; najnoviji status je ADR-023–026.**
+TRAIN no-op gate je ponovljen nakon dijagnoze i opet je **FAIL**: deficit dolazi iz požara
+koji u FEDS-u ne rastu (vjerovatno gašenje), pa slobodno-goreći no-op teško pobjeđuje
+persistence. Zamrznuti gate zapis (`configs/frozen/feds-simfire-gate-freeze-v1.json`) je
+`FAIL_exploratory`; koraci 7–8 (intervencije, heuristike, PPO fine-tuning po budžetu) rade
+na zasebno označenom free-burn stress zapisu (`...-stress-scenario-v1.json`). Svi takvi
+rezultati su simulatorski i eksploratorni, ne kalibrisani niti fizički validirani. VALIDATION
+je skoriran jednom po zapisu; TEST 2024 ostaje zatvoren do završne evaluacije.
+TASK-012/CFSDS/Cell2Fire je historijski odvojeni pravac.
 Runtime PASS nije dokaz fizičke validacije ili RL prednosti. Čuvaj ovu razliku u sažecima.
 
 Održavanje znanja: [maintenance](knowledge/maintenance.md), format:

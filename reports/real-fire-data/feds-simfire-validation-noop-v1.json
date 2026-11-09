@@ -1,0 +1,101 @@
+{
+  "schema_version": "feds-simfire-validation-noop/1.0",
+  "created_date": "2026-11-04",
+  "split": "validation",
+  "test_cases_loaded": false,
+  "physical_validation": false,
+  "scientific_result": false,
+  "protocol": "Each committed TRAIN freeze record scored once on the 20 manifest VALIDATION cases (80 case-timepoints); no re-selection afterwards (ADR-024).",
+  "results": {
+    "gate_freeze": {
+      "freeze_record": "configs/frozen/feds-simfire-gate-freeze-v1.json",
+      "freeze_record_sha256": "96a4ba943db6817d90edf1c6d363ac90c1dc5ac3e892e6b7fe4cb6d9bcb48412",
+      "sim_params": {
+        "wind_adjustment_factor": 0.05,
+        "internal_update_minutes": 5,
+        "active_cell_lifetime_minutes": 90,
+        "ros_multiplier": 0.35
+      },
+      "successful_scenarios": 20,
+      "errors": 0,
+      "methods": {
+        "ellipse_reference": {
+          "edge_contact_cases": null,
+          "edge_contact_timepoints": 0,
+          "mean_absolute_area_error_ha": 1493.559,
+          "mean_iou": 0.5363,
+          "median_absolute_area_error_ha": 596.16,
+          "median_iou": 0.6092,
+          "scored_case_timepoints": 80
+        },
+        "persistence": {
+          "edge_contact_cases": null,
+          "edge_contact_timepoints": 0,
+          "mean_absolute_area_error_ha": 1501.902,
+          "mean_iou": 0.5432,
+          "median_absolute_area_error_ha": 601.02,
+          "median_iou": 0.6092,
+          "scored_case_timepoints": 80
+        },
+        "simfire_noop": {
+          "edge_contact_cases": 0,
+          "edge_contact_timepoints": 0,
+          "mean_absolute_area_error_ha": 1496.637,
+          "mean_iou": 0.5419,
+          "median_absolute_area_error_ha": 594.54,
+          "median_iou": 0.6111,
+          "scored_case_timepoints": 80
+        }
+      },
+      "strict_rule_pass": false,
+      "local_full_report": ".local/gate/validation-gate-freeze.json",
+      "local_full_report_sha256": "281518cbe2266775874a404224feb22eda9369d18e74f8be401b4b4cb7d2b9e9"
+    },
+    "stress_scenario": {
+      "freeze_record": "configs/frozen/feds-simfire-stress-scenario-v1.json",
+      "freeze_record_sha256": "141bc656ccfdb2571cc6c0f87b40b2be7835c48ff48d38e793ac90370b185095",
+      "sim_params": {
+        "wind_adjustment_factor": 0.01,
+        "internal_update_minutes": 5,
+        "active_cell_lifetime_minutes": 90,
+        "ros_multiplier": 1.0
+      },
+      "successful_scenarios": 20,
+      "errors": 0,
+      "methods": {
+        "ellipse_reference": {
+          "edge_contact_cases": null,
+          "edge_contact_timepoints": 0,
+          "mean_absolute_area_error_ha": 1493.559,
+          "mean_iou": 0.5363,
+          "median_absolute_area_error_ha": 596.16,
+          "median_iou": 0.6092,
+          "scored_case_timepoints": 80
+        },
+        "persistence": {
+          "edge_contact_cases": null,
+          "edge_contact_timepoints": 0,
+          "mean_absolute_area_error_ha": 1501.902,
+          "mean_iou": 0.5432,
+          "median_absolute_area_error_ha": 601.02,
+          "median_iou": 0.6092,
+          "scored_case_timepoints": 80
+        },
+        "simfire_noop": {
+          "edge_contact_cases": 0,
+          "edge_contact_timepoints": 0,
+          "mean_absolute_area_error_ha": 1275.264,
+          "mean_iou": 0.5452,
+          "median_absolute_area_error_ha": 411.48,
+          "median_iou": 0.6067,
+          "scored_case_timepoints": 80
+        }
+      },
+      "strict_rule_pass": true,
+      "local_full_report": ".local/gate/validation-stress.json",
+      "local_full_report_sha256": "88f51958bc38a6265de759e1a92d2ba347517b56aa53c73c6cc1f71f88a865ae"
+    }
+  },
+  "interpretation": "The TRAIN-selected gate setting stays just below persistence on VALIDATION mean IoU (.5419 vs .5432) and fails. The free-burn stress setting, which failed TRAIN on IoU, meets the strict rule on these 20 VALIDATION cases (IoU .5452, area error 1,275.3ha, no edge). With 20 fires, a TRAIN failure and satellite-derived references, this does not establish calibration; it is recorded, not used for re-selection.",
+  "validation_use": "Produced after the TRAIN gate failed; not used for candidate selection, parameter tuning, or any gate-pass decision (ADR-024 addendum)."
+}

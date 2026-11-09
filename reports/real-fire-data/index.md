@@ -15,6 +15,10 @@
 - [SimFire TRAIN inputs](feds-simfire-input-train-coverage-v1.json) - 99/99 početnih scar/front + LANDFIRE fuel/terrain pairs; hashes i validation status.
 - [SimFire no-op pilot](feds-simfire-noop-pilot-v1.json) - jedan TRAIN Plateau slučaj; ne zaključava WAF ili timestep i nije fizička validacija.
 - [TRAIN-only SimFire no-op screen](feds-simfire-train-noop-screen-v1.json) - osam WAF kandidata × 99 TRAIN slučajeva; 0/8 je prošlo persistence/elipsa gate.
+- [TRAIN no-op diagnosis](feds-simfire-train-noop-diagnosis-v1.json) - reproducirani WAF .01 run; deficit IoU dolazi iz požara koji u FEDS-u gotovo ne rastu (ADR-023).
+- [SimFire VALIDATION inputs](feds-simfire-input-validation-coverage-v1.json) - 20/20 validation scar/front + LANDFIRE pairs; preuzimanje je krenulo minutu prije freeze commita, bez skoriranja prije njega (ADR-024).
+- [VALIDATION no-op, jednom po zapisu](feds-simfire-validation-noop-v1.json) - gate freeze pada blizu persistence; free-burn stress scenarij prolazi strogo pravilo na 20 slučajeva (ADR-024).
+- [Policy benchmark i budget adaptation](feds-simfire-policy-benchmark-v1.json) - upareni heuristike/PPO na VALIDATION stress scenariju; simulatorski, ne fizički rezultat (ADR-025/026).
 - [SimFire/FEDS environment](../../docs/research/SIMFIRE_ENVIRONMENT.md) - reproducibilan Python 3.9 runtime, LANDFIRE/weather setup i naredni gate.
 - [Crosswalk method and data gate](../../docs/research/FPA_FEDS_CROSSWALK.md) - metod, odluke i ograničenja.
 
