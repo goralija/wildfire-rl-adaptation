@@ -1030,6 +1030,27 @@ evaluation numbers, are identical; under PPO discounting early line inside the f
 pays a small extra cost. This is accepted as is and recorded here; charging at the no-op
 burn time would need a per-cell burn index and is not planned.
 
+### ADR-030 addendum — gate reference and case score made exact, recorded 2026-11-09
+
+The review of PR #9 (TASK-022) found that the ADR-030 §3 text could not be computed as
+written. These clarifications were fixed before any gate run on the corrected weather or the
+new metrics; no result exists that could have informed them.
+- **Ellipse size.** "180 m per 12h" is the semi-major axis growth, as in ADR-022. With the
+  ignition point at the rear focus the head reaches about 336 m per 12h downwind and the back
+  about 24 m upwind. (Read as a 180 m head advance, the 12h ellipse would be under one cell
+  wide.)
+- **Ignition point.** The leading edge of the initial active front along the heading (mean of
+  the front cells within half a cell of the most downwind one), not the front centroid, which
+  can lie inside the scar so that the ellipse adds no cell. This makes the reference stronger,
+  not weaker. The report counts cases where the ellipse still adds no cell.
+- **Case score.** A case's growth IoU is pooled over its four timepoints (sum of overlaps /
+  sum of unions). A plain mean over timepoints is undefined when neither mask has grown yet,
+  and dropping undefined timepoints per method would unpair SimFire and the ellipse. Persistence
+  scores 0 on every growing case. The gate statistic is the mean case growth IoU over growing
+  cases.
+- The ADR-022/023 `strict_screen` stays in reports for comparison only and is marked as
+  superseded by `growth_gate`.
+
 ### ADR-030 addendum — synthetic CA comparator and the real-case test, recorded 2026-11-09
 
 From the review of PR #11 (TASK-024), fixed before any rerun of locked or new policies.
