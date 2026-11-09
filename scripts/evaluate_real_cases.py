@@ -6,6 +6,11 @@ initial FEDS perimeter; spread is computed by the synthetic CA. Every policy see
 case, units (``DEFAULT_UNITS``), horizon (48h) and random numbers. Ex-train and
 ex-validation cases are reported separately. The outcome is simulated, not observed:
 the real fires had no agent in them. Refuses to run without ``--policy-locked``.
+
+Saved fraction is the primary outcome; close calls and units lost are a separate safety
+block; return (saved minus safety penalties) is the training objective. Every policy is
+contrasted with no-op, random and the best heuristic (paired bootstrap, 95% CI) by
+``wildfire_rl.synthetic_stats``, for each group including the no-edge, in-crop subset.
 """
 
 from __future__ import annotations
@@ -23,11 +28,10 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 os.environ.setdefault("OMP_NUM_THREADS", "1")
 
-import numpy as np  # noqa: E402
-
 from wildfire_rl.synthetic_env import SyntheticSuppressionEnv  # noqa: E402
 from wildfire_rl.synthetic_heuristics import HEURISTICS, make_random_policy, run_episode  # noqa: E402
 from wildfire_rl.synthetic_real_cases import load_real_episode_specs  # noqa: E402
+from wildfire_rl.synthetic_stats import format_table, real_case_groups, summarize_groups  # noqa: E402
 
 _CASES = {}
 
@@ -54,14 +58,6 @@ def _job(args):
     return scenario_id, meta, rows
 
 
-def _paired(a, b, rng, draws=4000):
-    diff = np.asarray(a, dtype=float) - np.asarray(b, dtype=float)
-    if not diff.size:
-        return None
-    boots = [rng.choice(diff, diff.size).mean() for _ in range(draws)]
-    return [float(diff.mean()), float(np.quantile(boots, 0.025)), float(np.quantile(boots, 0.975))]
-
-
 def _sha256(path: str) -> str:
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
@@ -71,6 +67,8 @@ def main() -> None:
     parser.add_argument("--policies", required=True,
                         help="comma list, e.g. noop,random,direct_flank,ppo=path/best_model.zip")
     parser.add_argument("--policy-locked", action="store_true")
+    parser.add_argument("--best-heuristic", default=None,
+                        help="fix the reference tactic instead of the highest mean saved (all cases)")
     parser.add_argument("--workers", type=int, default=7)
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args()
@@ -81,49 +79,23 @@ def main() -> None:
     with ProcessPoolExecutor(args.workers) as pool:
         results = list(pool.map(_job, [(i, policies) for i in ids]))
 
-    rng = np.random.default_rng(0)
-    groups = {"ex_train": [r for r in results if r[1]["split"] == "train"],
-              "ex_validation": [r for r in results if r[1]["split"] == "validation"]}
-    groups["all"] = results
-    groups["all_in_crop"] = [r for r in results if not r[1].get("initial_cells_outside_crop")]
-    summary = {}
-    for group, rows in groups.items():
-        table = {}
-        for name in policies:
-            saved = [r[2][name]["saved_fraction"] for r in rows]
-            table[name] = {
-                "cases": len(rows),
-                "mean_saved_fraction": float(np.mean(saved)),
-                "median_saved_fraction": float(np.median(saved)),
-                "mean_return": float(np.mean([r[2][name]["return"] for r in rows])),
-                "units_lost": int(sum(r[2][name]["units_lost"] for r in rows)),
-                "close_calls": int(sum(r[2][name].get("close_calls", 0) for r in rows)),
-                "new_cells_burned": int(sum(r[2][name]["agent_new_cells"] for r in rows)),
-                "noop_new_cells_burned": int(sum(r[2][name]["noop_new_cells"] for r in rows)),
-                "urban_cells_burned": float(sum(r[2][name]["agent_urban_cells"] for r in rows)),
-                "noop_urban_cells_burned": float(sum(r[2][name]["noop_urban_cells"] for r in rows)),
-                "edge_contact_cases": int(sum(r[2][name]["edge_contact"] for r in rows)),
-            }
-            for other in policies:
-                if other != name and (name.startswith("ppo=") or other == "noop"):
-                    table[name]["saved_minus_%s_ci95" % other] = _paired(
-                        saved, [r[2][other]["saved_fraction"] for r in rows], rng)
-        summary[group] = table
+    by_policy = {name: [r[2][name] for r in results] for name in policies}
+    summary = summarize_groups(by_policy, real_case_groups(results), main="all",
+                               best_heuristic=args.best_heuristic)
     receipt = {
         "environment": "synthetic CA ADR-028 on real FEDS/LANDFIRE/gridMET starts (simulated outcome)",
         "policies": policies,
         "checkpoints": {p: _sha256(p[4:]) for p in policies if p.startswith("ppo=")},
         "test_2024_loaded": False,
-        "summary": summary,
+        **summary,
         "per_case": {sid: {"metadata": meta, "results": rows} for sid, meta, rows in results},
     }
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(receipt, indent=1, default=str))
-    for group in ("ex_train", "ex_validation"):
-        print(group)
-        for name, row in summary[group].items():
-            print("  ", name, {k: (round(v, 4) if isinstance(v, float) else v)
-                               for k, v in row.items() if not k.endswith("ci95")})
+    for group, table in summary["groups"].items():
+        cases = table["policies"][policies[0]]["episodes"]
+        print("== %s (%d cases, best heuristic: %s)" % (group, cases, table["best_heuristic"]))
+        print("\n".join(format_table(table)))
 
 
 if __name__ == "__main__":
