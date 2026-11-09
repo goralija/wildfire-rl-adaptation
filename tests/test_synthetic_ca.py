@@ -308,13 +308,32 @@ class EnvironmentTest(unittest.TestCase):
     def test_return_equals_saved_minus_safety_penalties(self):
         se = self.se
         from wildfire_rl.synthetic_heuristics import make_random_policy, run_episode
+        rows = []
         env = se.SyntheticSuppressionEnv()
-        for seed in range(3):
+        for seed in range(2):
             spec = self._spec([(se.HAND_CREW, 0.0), (se.DOZER, 30.0)], fuel_code=2)
             row = run_episode(env, make_random_policy(seed), {"episode_spec": spec})
+            rows.append((env, row))
+        # Forced safety events: a close call (open neighbour) and a loss (surrounded).
+        for ring_open in (False, True):
+            env, unit = self._unit_at(30, 30)
+            ring = np.zeros(env.land.shape, dtype=bool)
+            if ring_open:
+                ring[30, 29] = True
+            else:
+                ring[29:32, 29:32] = True
+                ring[30, 30] = False
+            env.fire.ignite(ring)
+            env.fire.line[64, 75] = True  # a charged line cell inside the no-op footprint
+            total, summary = self._run_to_end(env)
+            rows.append((env, dict(summary, **{"return": total})))
+        for env, row in rows:
             expected = (row["saved_fraction"] - env.unit_loss_penalty * row["units_lost"]
                         - env.close_call_penalty * row["close_calls"])
             self.assertAlmostEqual(row["return"], expected, places=9)
+        self.assertGreater(sum(row["close_calls"] for _, row in rows), 0)
+        self.assertGreater(sum(row["units_lost"] for _, row in rows), 0)
+        self.assertGreater(sum(row["line_cells_in_noop_footprint"] for _, row in rows), 0)
 
     def test_units_arrive_late_and_away_from_fire(self):
         se = self.se
