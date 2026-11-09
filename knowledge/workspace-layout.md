@@ -13,7 +13,7 @@ sources:
 mpvi/                          glavni Git klon i koordinacija (main)
   .git/                        zajednička Git historija i refs
   .worktrees/
-    project-bootstrap/         feature/project-bootstrap, otvoreni PR #1
+    <task>/                    jedan worktree po zadatku/grani (npr. ispravke TASK-021–024)
   .local/                      lokalno, ne objavljuje se u Git
     backups/                   sačuvani bundle-i i lokalne kopije
     scratch/                   radni CSV-ovi, testni grafovi i privremene analize
@@ -37,23 +37,22 @@ sa svojim ignorisanim podacima/okruženjem; nije ponovo kreiran iz praznog check
 - `.local` i `.worktrees` nisu backup sami po sebi. Ne koristiti `git clean -fdx`
   nad njima: takva komanda briše ignorisani rad.
 
-## Dok PR #1 nije spojen
+## Stanje nakon spajanja PR-ova #1–#5 (2026-11-09)
 
-Remote/local main još imaju samo početni commit. Zato je projektni sadržaj trenutno
-u `.worktrees/project-bootstrap/`; to je očekivano i ne znači da je projekt izgubljen.
-Selidba foldera ne mergea PR. Nakon odobrenog mergea glavni main može preuzeti sadržaj
-standardnim `git pull --ff-only` postupkom.
-
-Dok je main prazan, lokalni `.git/info/exclude` štiti `.worktrees/` i `.local/` na
-glavnom checkoutu. Verziona politika istih foldera je u feature `.gitignore` i dolazi
-na main zajedno s PR-om. Na ovom računaru privremeni ignorisani root `AGENTS.md`
-samo upućuje na kanonski AGENTS/index u PR worktreeu; nije druga baza znanja.
+PR #1 (bootstrap) i PR-ovi #3–#5 (SimFire/FEDS i sintetički CA) su spojeni u `main`
+merge commitima; njihove grane su sačuvane na remoteu kao historija. Glavni klon na `main`
+sada sadrži cijeli projekat i kanonski [AGENTS](../AGENTS.md); privremeni ignorisani
+root pointer više nije potreban. Novi rad počinje iz ažuriranog `main`
+(`git pull --ff-only` na glavnom klonu), u novom worktreeu pod `.worktrees/`.
+Stariji worktree-i (`project-bootstrap`, `overnight-steps-5-8`, `synthetic-ca-training`)
+ostaju dok njihovi vlasnici ne sačuvaju lokalne, nepraćene fajlove; ne brisati ih
+automatski.
 
 ## Novi klon i nastavak
 
 Prenosive komande su u [HANDOFF](../HANDOFF.md). Za novi zadatak prvo pročitaj
 [AGENTS](../AGENTS.md), provjeri postojeće worktree-e i odaberi ispravnu baznu granu:
-dok PR nije spojen, njegova grana sadrži projektni kod; kasnije to postaje main.
+projektni kod je na `main`, pa nova grana kreće iz ažuriranog `main`.
 Prije kreiranja provjeri da Git ignoriše odredišni `.worktrees/` folder.
 
 Za stvarno preseljenje koristi `git worktree move`; pri pomjeranju glavnog klona
