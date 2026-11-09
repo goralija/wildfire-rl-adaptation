@@ -1,0 +1,245 @@
+{
+  "schema_version": "feds-simfire-parameter-freeze/1.1",
+  "created_date": "2026-11-09",
+  "decision": "ADR-030 section 3 selection rule (growth-aware gate); recorded in ADR-031",
+  "selected_on_split": "train",
+  "gate_status": "PASS",
+  "frozen_params": {
+    "wind_adjustment_factor": 0.1,
+    "internal_update_minutes": 5,
+    "active_cell_lifetime_minutes": 90,
+    "ros_multiplier": 1.0,
+    "fireline_attenuation": "per_minute",
+    "spread_aggregation": "last_write"
+  },
+  "weather_sha256": "7a51aadd46b894d9cd80835d7953107271b3182c776d7bb464d7abae826afac1",
+  "manifest_sha256": "013be9a1632abcbc29d86f4bc16af89d3c074503f5899d1e39903d76ec2c28d5",
+  "gate_report": "reports/real-fire-data/feds-simfire-train-growth-gate-v1.json",
+  "gate_report_sha256": "92d89f541619d95fa509889abcc9f785f1524a7f508fdea8e79dc2f4d1ccdd77",
+  "selection": "8 of 17 fixed candidates passed the ADR-030 section 3 rule on 98 TRAIN cases; this one has the highest mean growth IoU on the 82 growing cases. No tie-break was needed.",
+  "selected_candidate": {
+    "train_cases": 98,
+    "growing_cases": 82,
+    "non_growing_cases": 16,
+    "simfire_mean_case_growth_iou": 0.0958,
+    "ellipse_mean_case_growth_iou": 0.0258,
+    "simfire_minus_ellipse": 0.07,
+    "simfire_edge_contact_cases": 0,
+    "errors": 0,
+    "growing_cases_without_simfire_growth": 10,
+    "mean_absolute_area_error_ha": 4119.5,
+    "non_growing_mean_overgrowth_cells_48h": 2770.4,
+    "non_growing_mean_overgrowth_ha_48h": 8976.2,
+    "local_full_report": ".local/gate/adr030/waf-0.1-ros-1.json",
+    "local_full_report_sha256": "ba7e91aab375ff818d42a736cf29a5f4d8e80caad48d461fb90ded7fb3758542"
+  },
+  "candidates": [
+    {
+      "wind_adjustment_factor": 0.0,
+      "ros_multiplier": 1.0,
+      "growth_gate_pass": true,
+      "fail_reasons": [],
+      "simfire_mean_case_growth_iou": 0.0545,
+      "simfire_edge_contact_cases": 0,
+      "errors": 0,
+      "mean_absolute_area_error_ha": 2344.8,
+      "local_full_report_sha256": "672c6d96cf25e40f5a4c8e30cd98b7129e262604268ebd2c8e90d2371e2a097f"
+    },
+    {
+      "wind_adjustment_factor": 0.0025,
+      "ros_multiplier": 1.0,
+      "growth_gate_pass": true,
+      "fail_reasons": [],
+      "simfire_mean_case_growth_iou": 0.0548,
+      "simfire_edge_contact_cases": 0,
+      "errors": 0,
+      "mean_absolute_area_error_ha": 2347.6,
+      "local_full_report_sha256": "f2f4cda97e775a3f0c97c8aa883da5598415647f1a0defbcfb3fae0b2a28d0b3"
+    },
+    {
+      "wind_adjustment_factor": 0.01,
+      "ros_multiplier": 1.0,
+      "growth_gate_pass": true,
+      "fail_reasons": [],
+      "simfire_mean_case_growth_iou": 0.057,
+      "simfire_edge_contact_cases": 0,
+      "errors": 0,
+      "mean_absolute_area_error_ha": 2342.9,
+      "local_full_report_sha256": "3163e0d0afee5b6dc7b7b0e09c1fbcd2c7a1b2355956cbbc0fc223c1cdb7ffcc"
+    },
+    {
+      "wind_adjustment_factor": 0.025,
+      "ros_multiplier": 1.0,
+      "growth_gate_pass": true,
+      "fail_reasons": [],
+      "simfire_mean_case_growth_iou": 0.0602,
+      "simfire_edge_contact_cases": 0,
+      "errors": 0,
+      "mean_absolute_area_error_ha": 2448.3,
+      "local_full_report_sha256": "c9615843ce2766b88e7b4b2bb909f353a132e914ecc1b59bacb2a5706c7a89b3"
+    },
+    {
+      "wind_adjustment_factor": 0.05,
+      "ros_multiplier": 1.0,
+      "growth_gate_pass": true,
+      "fail_reasons": [],
+      "simfire_mean_case_growth_iou": 0.0706,
+      "simfire_edge_contact_cases": 0,
+      "errors": 0,
+      "mean_absolute_area_error_ha": 2725.8,
+      "local_full_report_sha256": "bd01c474c13a7a1b1a0de19cb76aaaf4c249a06e0b204db007e3b214df17d2c5"
+    },
+    {
+      "wind_adjustment_factor": 0.1,
+      "ros_multiplier": 1.0,
+      "growth_gate_pass": true,
+      "fail_reasons": [],
+      "simfire_mean_case_growth_iou": 0.0958,
+      "simfire_edge_contact_cases": 0,
+      "errors": 0,
+      "mean_absolute_area_error_ha": 4119.5,
+      "local_full_report_sha256": "ba7e91aab375ff818d42a736cf29a5f4d8e80caad48d461fb90ded7fb3758542"
+    },
+    {
+      "wind_adjustment_factor": 0.2,
+      "ros_multiplier": 1.0,
+      "growth_gate_pass": false,
+      "fail_reasons": [
+        "map_edge_contact"
+      ],
+      "simfire_mean_case_growth_iou": 0.0992,
+      "simfire_edge_contact_cases": 14,
+      "errors": 0,
+      "mean_absolute_area_error_ha": 8388.9,
+      "local_full_report_sha256": "4d639d8b4a473b90cf334d2a580d397f6c503893495a38b569d2214cf19603e3"
+    },
+    {
+      "wind_adjustment_factor": 0.605,
+      "ros_multiplier": 1.0,
+      "growth_gate_pass": false,
+      "fail_reasons": [
+        "map_edge_contact"
+      ],
+      "simfire_mean_case_growth_iou": 0.0483,
+      "simfire_edge_contact_cases": 76,
+      "errors": 0,
+      "mean_absolute_area_error_ha": 34578.1,
+      "local_full_report_sha256": "694407ca5408c5b345ffed1fe2dbe83190d748ab4e99d760b019d1cb228d65d6"
+    },
+    {
+      "wind_adjustment_factor": 0.05,
+      "ros_multiplier": 0.35,
+      "growth_gate_pass": false,
+      "fail_reasons": [
+        "growth_iou_not_above_ellipse"
+      ],
+      "simfire_mean_case_growth_iou": 0.0071,
+      "simfire_edge_contact_cases": 0,
+      "errors": 0,
+      "mean_absolute_area_error_ha": 2367.1,
+      "local_full_report_sha256": "b97fe9203706351cb23fbd5742ed8ca7459d70010e55a5902a2849dee660f44b"
+    },
+    {
+      "wind_adjustment_factor": 0.2,
+      "ros_multiplier": 0.35,
+      "growth_gate_pass": true,
+      "fail_reasons": [],
+      "simfire_mean_case_growth_iou": 0.0317,
+      "simfire_edge_contact_cases": 0,
+      "errors": 0,
+      "mean_absolute_area_error_ha": 2387.4,
+      "local_full_report_sha256": "cb463411a5cf479be705b74a331158caeb01decc6ef273314e6a315899d8f26f"
+    },
+    {
+      "wind_adjustment_factor": 0.4,
+      "ros_multiplier": 0.35,
+      "growth_gate_pass": false,
+      "fail_reasons": [
+        "map_edge_contact"
+      ],
+      "simfire_mean_case_growth_iou": 0.0684,
+      "simfire_edge_contact_cases": 8,
+      "errors": 0,
+      "mean_absolute_area_error_ha": 3618.7,
+      "local_full_report_sha256": "81cbf2918ed3ddc68d2ff50a72422671021efb7960de76ecadb3655ecd33d22b"
+    },
+    {
+      "wind_adjustment_factor": 0.05,
+      "ros_multiplier": 0.5,
+      "growth_gate_pass": false,
+      "fail_reasons": [
+        "growth_iou_not_above_ellipse"
+      ],
+      "simfire_mean_case_growth_iou": 0.012,
+      "simfire_edge_contact_cases": 0,
+      "errors": 0,
+      "mean_absolute_area_error_ha": 2356.4,
+      "local_full_report_sha256": "c791dd523018358734511d89812705dda38ae1c645be849756becee6776a73a3"
+    },
+    {
+      "wind_adjustment_factor": 0.2,
+      "ros_multiplier": 0.5,
+      "growth_gate_pass": false,
+      "fail_reasons": [
+        "map_edge_contact"
+      ],
+      "simfire_mean_case_growth_iou": 0.0649,
+      "simfire_edge_contact_cases": 1,
+      "errors": 0,
+      "mean_absolute_area_error_ha": 2781.1,
+      "local_full_report_sha256": "df1536a06771d334fc2bc95c7aeea97602e7510a92307a58440037e1e41cde3d"
+    },
+    {
+      "wind_adjustment_factor": 0.4,
+      "ros_multiplier": 0.5,
+      "growth_gate_pass": false,
+      "fail_reasons": [
+        "map_edge_contact"
+      ],
+      "simfire_mean_case_growth_iou": 0.0818,
+      "simfire_edge_contact_cases": 21,
+      "errors": 0,
+      "mean_absolute_area_error_ha": 6440.0,
+      "local_full_report_sha256": "a3f920ec7f801a80153b62259912388a0ac974bd308c621a26ef5c636e8b058b"
+    },
+    {
+      "wind_adjustment_factor": 0.05,
+      "ros_multiplier": 0.7,
+      "growth_gate_pass": true,
+      "fail_reasons": [],
+      "simfire_mean_case_growth_iou": 0.0306,
+      "simfire_edge_contact_cases": 0,
+      "errors": 0,
+      "mean_absolute_area_error_ha": 2417.3,
+      "local_full_report_sha256": "d6a2d65a4cc80e9783c4e8052ed96615ce32e40e70733696466027cd278c7ef0"
+    },
+    {
+      "wind_adjustment_factor": 0.2,
+      "ros_multiplier": 0.7,
+      "growth_gate_pass": false,
+      "fail_reasons": [
+        "map_edge_contact"
+      ],
+      "simfire_mean_case_growth_iou": 0.0932,
+      "simfire_edge_contact_cases": 6,
+      "errors": 0,
+      "mean_absolute_area_error_ha": 4353.3,
+      "local_full_report_sha256": "9215a5a9f69c5205ec1bda265577daa68ace7e53654eed810ccb9944d0fe6f93"
+    },
+    {
+      "wind_adjustment_factor": 0.4,
+      "ros_multiplier": 0.7,
+      "growth_gate_pass": false,
+      "fail_reasons": [
+        "map_edge_contact"
+      ],
+      "simfire_mean_case_growth_iou": 0.0796,
+      "simfire_edge_contact_cases": 34,
+      "errors": 0,
+      "mean_absolute_area_error_ha": 11858.1,
+      "local_full_report_sha256": "1bebcafb8e024d9130b98ada9562f6801c33b05345d517266c12423c33d098c6"
+    }
+  ],
+  "warning": "PASS means SimFire places new growth better than a fixed downwind ellipse on growing TRAIN fires; both growth IoUs are below 0.10. It is not a calibrated or physically validated spread model: on the 16 non-growing fires the free-burning no-op adds about 9,000 ha more than FEDS observed by +48h.",
+  "test_cases_loaded": false
+}
