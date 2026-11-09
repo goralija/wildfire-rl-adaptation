@@ -1,5 +1,13 @@
 # Promjene baze znanja
 
+## 2026-11-09: TASK-027, duplikat i FEDS vremenska zona
+
+- Generator manifesta zadržava jedan zapis po FEDS požaru (najniži `fod_id`); columbus je
+  isključen, manifest ima 98 TRAIN i 20 VALIDATION ([crosswalk](docs/research/FPA_FEDS_CROSSWALK.md)).
+- FEDS `t` nije UTC: to je AM/PM oznaka VIIRS prolaza po lokalnom sunčevom vremenu, upisana
+  kao 00:00/12:00 ([dokazi](docs/research/SIMFIRE_ENVIRONMENT.md)). Mapiranje gridMET dana
+  još nije promijenjeno; čeka odluku, pa novi gridMET fajl.
+
 ## 2026-11-09: ispravke TASK-021–024 revidirane i spojene
 
 - Svaki PR je pregledao zaseban recenzent s ograničenim kontekstom; nalazi su popravljeni

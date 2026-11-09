@@ -7,7 +7,7 @@
 - [Validation split crosswalk](fpa-feds-fle-crosswalk-validation-v1.json) - 7 od 20 slučajeva prolazi strogi vremenski uslov; izvještaj je izveden determinističkim postfilterom sačuvanih kandidata.
 - [Prvobitna kohorta, lokalno ponovljen crosswalk](fpa-feds-original-cohort-crosswalk-local-v1.json) - 19/40 train i 7/20 validation; gate i dalje FAIL.
 - [Prošireni candidate-frame crosswalk](fpa-feds-candidate-frame-crosswalk-v1.json) - 99/208 train i 20/56 validation; checksum-verifikovane lokalne FEDS arhive; gate PASS.
-- [Episode cohort derivation](../../data/manifests/feds-episode-cohort-v1.json) - 119 epizoda s pet poludnevnih stanja kroz 48 h.
+- [Episode cohort derivation](../../data/manifests/feds-episode-cohort-v1.json) - 118 epizoda (98 train, 20 validation) s pet poludnevnih stanja kroz 48 h; duplikat FEDS požara 58826 isključen po ADR-030 §6 (TASK-027). Coverage i preflight izvještaji ispod su izrađeni na ranijih 119 i sadrže i isključeni zapis.
 - [FEDS active-front coverage](feds-active-front-coverage-v1.json) - isti timestamp front/perimeter pronađen za 119/119 epizoda.
 - [180m map preflight](feds-simfire-grid-preflight-v1.json) - početni obod i front stanu u 256×256 mrežu za 99 train i 20 validation požara.
 - [gridMET archive/weather coverage](feds-gridmet-weather-coverage-v1.json) - devet arhiva s SHA-256; 396 train i 80 validation segmenta, raw-only forcing.
