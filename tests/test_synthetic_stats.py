@@ -169,3 +169,45 @@ class RealCaseGroupTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ComparatorAndReportingTest(unittest.TestCase):
+    def _rows(self, n=8):
+        rng = np.random.default_rng(5)
+        base = rng.random(n) * 0.2
+        return {
+            "noop": [row(0.0) for _ in range(n)],
+            "random": [row(float(v) * 0.2) for v in base],
+            "direct_flank": [row(float(v)) for v in base],
+            "ppo=a.zip": [row(float(v) + 0.05) for v in base],
+        }
+
+    def test_comparator_must_be_an_evaluated_scripted_heuristic(self):
+        from wildfire_rl.synthetic_stats import validate_comparator
+
+        validate_comparator(None, ["noop"])
+        validate_comparator("direct_flank", ["noop", "direct_flank"])
+        with self.assertRaises(ValueError):
+            validate_comparator("noop", ["noop", "direct_flank"])
+        with self.assertRaises(ValueError):
+            validate_comparator("protect_urban", ["noop", "direct_flank"])
+        with self.assertRaises(ValueError):
+            summarize_policies(self._rows(), best_heuristic="noop")
+
+    def test_descriptive_mode_reports_contrasts_without_acceptance(self):
+        summary = summarize_policies(self._rows(), best_heuristic="direct_flank", acceptance=False)
+        self.assertEqual(summary["acceptance"], {})
+        self.assertIn("descriptive", summary["acceptance_note"])
+        self.assertIn("vs_best_heuristic", summary["policies"]["ppo=a.zip"]["contrasts"])
+        self.assertIn("ppo=a.zip", summarize_policies(self._rows(), best_heuristic="direct_flank")["acceptance"])
+
+    def test_empty_group_is_marked_and_strict_json_serialisable(self):
+        import json
+        from wildfire_rl.synthetic_stats import format_table
+
+        summary = summarize_groups(self._rows(), {"all": list(range(8)), "late": []}, main="all")
+        late = summary["groups"]["late"]
+        self.assertTrue(late["empty"])
+        self.assertEqual(late["episodes"], 0)
+        json.dumps(summary, allow_nan=False)
+        self.assertEqual(format_table(late), ["(no episodes in this group)"])

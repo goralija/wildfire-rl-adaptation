@@ -95,6 +95,20 @@ def best_heuristic_of(rows_by_policy: Mapping[str, Sequence[dict]]) -> Optional[
     return max(present, key=lambda name: _column(rows_by_policy[name], "saved_fraction").mean())
 
 
+def validate_comparator(name: Optional[str], policies: Sequence[str]) -> None:
+    """Refuse a comparator that is not a scripted tactic or will not be evaluated.
+
+    Called before any episode runs, so a typo cannot waste (or repeat) an evaluation.
+    """
+    if name is None:
+        return
+    if name not in HEURISTIC_NAMES:
+        raise ValueError("comparator %r is not one of the scripted heuristics %s"
+                         % (name, ", ".join(HEURISTIC_NAMES)))
+    if name not in policies:
+        raise ValueError("comparator %r is not in the evaluated policies" % name)
+
+
 def acceptance_block(rows: Sequence[dict], comparator_rows: Sequence[dict], comparator: str,
                      label: str, name: str) -> dict:
     """Pass/fail of one learned policy against the comparator heuristic (ADR-030 section 5)."""
@@ -123,14 +137,22 @@ def acceptance_block(rows: Sequence[dict], comparator_rows: Sequence[dict], comp
 
 
 def summarize_policies(rows_by_policy: Mapping[str, Sequence[dict]],
-                       best_heuristic: Optional[str] = None, label: str = "") -> dict:
+                       best_heuristic: Optional[str] = None, label: str = "",
+                       acceptance: bool = True) -> dict:
     """Per-policy blocks and paired contrasts against no-op, random and the best heuristic.
 
     ``rows_by_policy[name][i]`` must be the same episode (seed or case) for every policy.
+    With ``acceptance=False`` (the one-time real-case test) no pass/fail is produced;
+    the contrasts are descriptive.
     """
     sizes = {len(rows) for rows in rows_by_policy.values()}
     if len(sizes) > 1:
         raise ValueError("every policy needs the same paired episodes")
+    if sizes == {0}:
+        return {"episodes": 0, "empty": True, "best_heuristic": best_heuristic,
+                "policies": {}, "acceptance": {}}
+    if best_heuristic is not None and best_heuristic not in HEURISTIC_NAMES:
+        raise ValueError("best heuristic %r is not a scripted heuristic" % best_heuristic)
     best = best_heuristic or best_heuristic_of(rows_by_policy)
     if best is not None and best not in rows_by_policy:
         raise ValueError("best heuristic %r was not evaluated" % best)
@@ -153,22 +175,31 @@ def summarize_policies(rows_by_policy: Mapping[str, Sequence[dict]],
         table[name] = block
     candidates = [name for name in rows_by_policy
                   if name not in REFERENCES and name not in HEURISTIC_NAMES]
-    acceptance = {} if best is None else {
+    accepted = {} if best is None or not acceptance else {
         name: acceptance_block(rows_by_policy[name], rows_by_policy[best], best, label, name)
         for name in candidates}
-    return {"primary_outcome": "saved_fraction", "best_heuristic": best, "policies": table,
-            "acceptance": acceptance}
+    result = {"primary_outcome": "saved_fraction", "best_heuristic": best, "policies": table,
+              "acceptance": accepted}
+    if not acceptance:
+        result["acceptance_note"] = ("descriptive only: acceptance is decided on the synthetic "
+                                     "acceptance seeds (ADR-028, ADR-030 section 5)")
+    return result
 
 
 def summarize_groups(rows_by_policy: Mapping[str, Sequence[dict]], groups: Mapping[str, List[int]],
-                     main: str, best_heuristic: Optional[str] = None) -> dict:
-    """Summaries for episode subsets; the best heuristic is fixed once on the ``main`` group."""
+                     main: str, best_heuristic: Optional[str] = None,
+                     acceptance: bool = True) -> dict:
+    """Summaries for episode subsets; the best heuristic is fixed once on the ``main`` group.
+
+    Empty groups are reported as ``{"episodes": 0, "empty": True}`` instead of NaN.
+    """
     def subset(indices):
         return {name: [rows[i] for i in indices] for name, rows in rows_by_policy.items()}
 
     best = best_heuristic or best_heuristic_of(subset(groups[main]))
     return {"primary_outcome": "saved_fraction", "best_heuristic": best,
-            "groups": {group: summarize_policies(subset(indices), best, label=group)
+            "groups": {group: summarize_policies(subset(indices), best, label=group,
+                                                 acceptance=acceptance)
                        for group, indices in groups.items()}}
 
 
@@ -197,6 +228,8 @@ def real_case_groups(results: Sequence[tuple]) -> Dict[str, List[int]]:
 def format_table(summary: dict) -> List[str]:
     """Plain-text lines: suppression first, then safety, then return and contrasts."""
     lines = []
+    if summary.get("empty"):
+        return ["(no episodes in this group)"]
     for name, block in summary["policies"].items():
         sup, safe = block["suppression"], block["safety"]
         lines.append("%-22s saved mean %.4f median %.4f | line %d cells (%d in no-op footprint)"
