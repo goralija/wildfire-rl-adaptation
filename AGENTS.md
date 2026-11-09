@@ -14,8 +14,8 @@ Korisnikove direktne upute imaju prednost; kasniji ADR može zamijeniti raniji.
 ponove.** gridMET uzorkovanje je davalo svim požarima jedne godine vrijeme prvog požara
 (ispravljeno). PR-ovi #3–#5 (SimFire/FEDS gate, koraci 5–8, sintetički CA) su u `main`
 kao historija; njihovi brojevi se ne citiraju kao nalazi. Prvi posao su ispravke
-TASK-021–024 kao zasebni PR-ovi, pa odluke (TASK-025) i tek onda ponovno pokretanje
-(TASK-026) — redoslijed i prihvat su u [NEXT_SESSION](docs/NEXT_SESSION.md). TEST 2024
+TASK-021–024 kao zasebni PR-ovi; odluke su u ADR-030 (TASK-025), a ponovno pokretanje
+(TASK-026) ide u fazama uz nalog za svaku — redoslijed i prihvat su u [NEXT_SESSION](docs/NEXT_SESSION.md). TEST 2024
 ostaje zatvoren. TASK-012/CFSDS/Cell2Fire je historijski odvojeni pravac.
 Runtime PASS nije dokaz fizičke validacije ili RL prednosti. Čuvaj ovu razliku u sažecima.
 

@@ -19,6 +19,29 @@ jobs:
       - run: python -m wildfire_rl.cli --config configs/smoke.json --out runs/ci-smoke
         env:
           PYTHONPATH: src
+  numeric:
+    # NumPy/geo/Gymnasium tests that skip in `core`. SimFire (Python 3.9 runtime) and
+    # sb3/torch stay out; the tests allowed to skip are listed by id in
+    # tests/ci_expected_skips.txt and any other skip fails the job.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: requirements/ci-numeric.txt
+      - run: python -m pip install --only-binary ':all:' -r requirements/ci-numeric.txt
+      - run: python -m pip list
+      - name: Unit tests with exact skip allowlist
+        run: python scripts/run_ci_tests.py --expected-skips tests/ci_expected_skips.txt
+        env:
+          PYTHONPATH: src
+          MPLBACKEND: Agg
+          SDL_VIDEODRIVER: dummy
+      - run: python -m wildfire_rl.cli --config configs/smoke.json --out runs/ci-smoke
+        env:
+          PYTHONPATH: src
   knowledge:
     runs-on: ubuntu-latest
     steps:
