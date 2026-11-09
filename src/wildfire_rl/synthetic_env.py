@@ -47,6 +47,7 @@ RETREAT_RADIUS = 2
 SAFE_DISTANCE = 5
 PATCH = 7  # half-width of the full-resolution crop around each unit (15x15)
 MAP_POOL = 2
+CELL_AREA_HA = CELL_SIZE_M * CELL_SIZE_M / 10_000.0
 
 HAND_CREW, DOZER = 0, 1
 
@@ -225,6 +226,10 @@ def order_units(units: Sequence[Tuple[int, float]]) -> List[Tuple[int, float]]:
     return sorted(units, key=lambda item: (item[0] != DOZER, item[1]))[:MAX_UNITS]
 
 
+def _touches_edge(burned: np.ndarray) -> bool:
+    return bool(burned[0].any() or burned[-1].any() or burned[:, 0].any() or burned[:, -1].any())
+
+
 class SyntheticSuppressionEnv(gym.Env):
     metadata = {"render_modes": []}
 
@@ -325,8 +330,12 @@ class SyntheticSuppressionEnv(gym.Env):
         self.noop_total = float(sum(self.noop_damage))
         self.norm = max(self.noop_total, 20.0)
         self.noop_final = noop
+        # Line cells never ignite, so a line cell the no-op fire burns is consumed by the
+        # line, not saved: it is charged as agent damage (same rule for every policy).
+        self.noop_footprint = noop.ever_burned & ~self.prior_damage
+        self.line_charged = np.zeros(self.land.shape, dtype=bool)
         self.stats = {"agent_damage": 0.0, "units_lost": 0, "retreats": 0, "line_cells": 0,
-                      "edge_contact": False}
+                      "edge_contact": False, "line_damage": 0.0}
         return self._observation(), self._info()
 
     def _staging_cell(self, slot: int, unit: Unit) -> Tuple[int, int]:
@@ -546,6 +555,16 @@ class SyntheticSuppressionEnv(gym.Env):
                         self._overrun(unit)
         return damage
 
+    def _charge_line(self) -> float:
+        """Weighted damage of line cells inside the no-op footprint not yet charged."""
+        cells = self.fire.line & self.noop_footprint & ~self.line_charged
+        if not cells.any():
+            return 0.0
+        self.line_charged |= cells
+        charge = float(self.weights[cells].sum())
+        self.stats["line_damage"] += charge
+        return charge
+
     # ------------------------------------------------------------------ gym API
     def step(self, action):
         action = np.asarray(action, dtype=int).reshape(-1)
@@ -562,6 +581,7 @@ class SyntheticSuppressionEnv(gym.Env):
         lost_before = sum(unit.lost for unit in self.units)
         calls_before = sum(unit.close_calls for unit in self.units)
         damage = self._advance(self.fire, self.decision, self.units)
+        damage += self._charge_line()
         reward = (self.noop_damage[self.decision] - damage) / self.norm
         self.stats["agent_damage"] += damage
         self.decision += 1
@@ -586,9 +606,7 @@ class SyntheticSuppressionEnv(gym.Env):
         self.stats["units_lost"] += lost_now
         self.stats["retreats"] = sum(unit.retreats for unit in self.units)
         self.stats["line_cells"] = int(self.fire.line.sum())
-        edge = self.fire.ever_burned
-        self.stats["edge_contact"] = bool(edge[0].any() or edge[-1].any() or edge[:, 0].any()
-                                          or edge[:, -1].any())
+        self.stats["edge_contact"] = _touches_edge(self.fire.ever_burned)
         info = self._info()
         info["invalid_actions"] = invalid
         if terminated:
@@ -613,7 +631,11 @@ class SyntheticSuppressionEnv(gym.Env):
             "retreats": int(self.stats["retreats"]),
             "close_calls": int(self.stats.get("close_calls", 0)),
             "line_cells": int(self.stats["line_cells"]),
+            "line_area_ha": int(self.stats["line_cells"]) * CELL_AREA_HA,
+            "line_cells_in_noop_footprint": int(self.line_charged.sum()),
+            "line_damage": float(self.stats["line_damage"]),
             "edge_contact": self.stats["edge_contact"],
+            "noop_edge_contact": _touches_edge(self.noop_final.ever_burned),
         }
 
     def _info(self) -> dict:
