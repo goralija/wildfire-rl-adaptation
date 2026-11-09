@@ -84,6 +84,9 @@ def diagnose_case(inputs: dict, verify_env: bool = False) -> dict:
             obs_new = int((observed & ~initial).sum())
             row.update({
                 "iou": score["iou"],
+                "growth_iou": score["growth_iou"],
+                "growth_precision": score["growth_precision"],
+                "growth_recall": score["growth_recall"],
                 "sim_cells": score["predicted_burned_cells"],
                 "obs_cells": score["observed_burned_cells"],
                 "area_ratio_sim_over_obs": score["predicted_burned_cells"] / score["observed_burned_cells"],
@@ -114,10 +117,16 @@ def aggregate(results: List[dict]) -> dict:
                     if row["hours_since_start"] == hours and "iou" in row]
             ratios = [row["area_ratio_sim_over_obs"] for row in rows]
             ious = [row["iou"] for row in rows]
+            # Growth IoU is defined on every case where FEDS grew; stalled cases are counted.
+            growth_ious = [row["growth_iou"] for row in rows if row["obs_new_cells"] > 0]
             per_hour[str(hours)] = {
                 "scored_cases": len(rows),
                 "median_area_ratio_sim_over_obs": statistics.median(ratios) if ratios else None,
                 "median_iou": statistics.median(ious) if ious else None,
+                "growing_cases": len(growth_ious),
+                "median_growth_iou": statistics.median(growth_ious) if growth_ious else None,
+                "stalled_cases_sim_grows": sum(
+                    row["obs_new_cells"] == 0 and row["sim_new_cells"] > 0 for row in rows),
                 "share_sim_grows_less": (sum(r["growth_vs_observed"] == "less" for r in rows)
                                          / len(rows)) if rows else None,
                 "share_sim_grows_more": (sum(r["growth_vs_observed"] == "more" for r in rows)
@@ -181,6 +190,8 @@ def main(argv: Optional[List[str]] = None) -> int:
             "predicted_mask": "simulated ever-burned | initial scar/front, inside the crop",
             "observed_mask": "FEDS lf_perimeter rasterized all_touched on the 180 m grid, cropped",
             "growth_vs_observed": "new cells beyond the initial mask, sim vs observed",
+            "growth_iou": "IoU/precision/recall on cells outside the initial mask; None where "
+                          "the denominator is empty; medians only over cases where FEDS grew",
         },
         "summary": aggregate(results),
         "cases": results,

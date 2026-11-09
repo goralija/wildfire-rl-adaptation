@@ -4,7 +4,9 @@
 Reads one local full evaluator report (with per-case trajectories) and writes a
 compact JSON summary. Growth-attribution uses only scored metrics: cells that
 SimFire adds beyond the initial mask and that the later FEDS outline also covers
-are ``new_hit`` cells; the rest of the added cells are ``new_false``.
+are ``new_hit`` cells; the rest of the added cells are ``new_false``. Growth IoU
+is derived from the same counts, so older reports without ``growth_*`` fields
+are scored identically to new ones. Needs ``PYTHONPATH=src``.
 """
 
 from __future__ import annotations
@@ -13,6 +15,8 @@ import argparse
 import json
 from pathlib import Path
 import statistics
+
+from wildfire_rl.feds_spread_metrics import growth_overlap_metrics
 
 
 def _tercile_edges(values):
@@ -36,6 +40,8 @@ def case_rows(report: dict) -> list:
             observed_growth = max(0, observed - persist_hit)
             new_cells = row["new_burned_cells_since_initial"]
             new_hit = max(0, row["intersection_cells"] - persist_hit)
+            growth = growth_overlap_metrics(new_hit, new_cells, observed_growth)
+            persistence_growth = growth_overlap_metrics(0, 0, observed_growth)
             rows.append({
                 "scenario_id": case["scenario_id"],
                 "hours": row["hours_since_start"],
@@ -50,6 +56,8 @@ def case_rows(report: dict) -> list:
                 "iou": row["iou"],
                 "persistence_iou": persist["iou"],
                 "iou_delta": row["iou"] - persist["iou"],
+                "growth_iou": growth["growth_iou"],
+                "persistence_growth_iou": persistence_growth["growth_iou"],
                 "area_error_ha": abs(row["predicted_area_ha"] - row["observed_area_ha"]),
                 "persistence_area_error_ha": abs(persist["predicted_area_ha"] - persist["observed_area_ha"]),
                 "fire_active": row["fire_active_after_segment"],
@@ -67,6 +75,8 @@ def summarize(rows: list) -> dict:
         added = sum(r["sim_new_cells"] for r in items)
         hit = sum(r["sim_new_hit_cells"] for r in items)
         growth = sum(r["observed_growth_cells"] for r in items)
+        growing = [r for r in items if r["observed_growth_cells"] > 0]
+        growth_union = added + growth - hit
         return {
             "timepoints": len(items),
             "mean_iou_delta_vs_persistence": statistics.fmean(r["iou_delta"] for r in items),
@@ -75,6 +85,12 @@ def summarize(rows: list) -> dict:
             "mean_observed_growth_cells": statistics.fmean(r["observed_growth_cells"] for r in items),
             "new_cell_precision": hit / added if added else None,
             "observed_growth_recall": hit / growth if growth else None,
+            "growing_timepoints": len(growing),
+            "mean_growth_iou_when_observed_grows": (
+                statistics.fmean(r["growth_iou"] for r in growing) if growing else None),
+            "mean_persistence_growth_iou_when_observed_grows": (
+                statistics.fmean(r["persistence_growth_iou"] for r in growing) if growing else None),
+            "pooled_growth_iou": hit / growth_union if growth_union else None,
             "share_timepoints_sim_grows": sum(r["sim_new_cells"] > 0 for r in items) / len(items),
             "share_timepoints_observed_grows": sum(r["observed_growth_cells"] > 0 for r in items) / len(items),
         }
@@ -96,7 +112,8 @@ def summarize(rows: list) -> dict:
     worst = sorted(rows, key=lambda r: r["iou_delta"])[:10]
     output["worst_timepoints"] = [
         {k: r[k] for k in ("scenario_id", "hours", "initial_cells", "observed_cells", "sim_new_cells",
-                           "sim_new_hit_cells", "iou", "persistence_iou", "wind_ft_min", "moisture")}
+                           "sim_new_hit_cells", "iou", "persistence_iou", "growth_iou",
+                           "wind_ft_min", "moisture")}
         for r in worst
     ]
     return output
