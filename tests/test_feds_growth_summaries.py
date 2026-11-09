@@ -66,7 +66,9 @@ class EvaluatorGrowthSummaryTests(unittest.TestCase):
         self.assertEqual(noop["growth"]["mean_growth_iou"], 1.0)
         self.assertEqual(noop["growth"]["median_growth_iou"], 1.0)
         self.assertEqual(noop["growth"]["mean_growth_recall"], 1.0)
-        self.assertEqual(noop["growth"]["pooled_growth_precision"], 1.0)
+        # Pooled over all timepoints, so false growth on the stalled one counts.
+        self.assertAlmostEqual(noop["growth"]["pooled_growth_precision"], 3 / 4)
+        self.assertEqual(noop["growth"]["pooled_growth_recall"], 1.0)
         self.assertEqual(noop["growth"]["stalled_timepoints"], 1)
         self.assertEqual(noop["growth"]["stalled_timepoints_with_predicted_growth"], 1)
         self.assertEqual(noop["growth"]["mean_false_growth_cells_when_stalled"], 1.0)
@@ -125,7 +127,8 @@ class GateDiagnosisGrowthTests(unittest.TestCase):
             self.assertEqual(row["persistence_growth_iou"],
                              scored["persistence_reference"]["growth_iou"])
         self.assertEqual(rows[0]["growth_iou"], 1.0)
-        self.assertIsNone(rows[1]["growth_iou"])
+        self.assertEqual(rows[1]["growth_iou"], 0.0)  # false growth while FEDS stalled
+        self.assertIsNone(rows[1]["persistence_growth_iou"])
 
     def test_summary_reports_growth_iou_only_where_feds_grows(self):
         summary = gate_diagnosis.summarize(gate_diagnosis.case_rows({"results": [_case()]}))

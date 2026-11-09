@@ -22,6 +22,19 @@ Zato se ovaj v1 draft ne smatra odobrenjem za benchmark PPO. Prvo treba dijagnos
 no-op neslaganje i ponoviti unaprijed dokumentovan zajednički TRAIN gate. Validation
 rasteri i test split ostaju zatvoreni do propisanih narednih koraka.
 
+## Draft — FEDS metrike rasta i elipsa (TASK-022, 2026-11-09)
+
+Draft dok TASK-025 ne odluči gate pravilo; gate pravilo se ovdje ne mijenja.
+`binary_burn_metrics` uz stare metrike cijele maske prijavljuje `growth_iou`,
+`growth_precision` i `growth_recall`, računate samo na ćelijama izvan početne maske
+(ožiljak + front). Kad imenilac nema ćelija vrijednost je `None`, ne 0 ni 1: inače bi
+persistence dobijala besplatan pogodak na svakom požaru koji u FEDS-u ne raste. Sažeci
+prosjek rasta računaju samo na vremenskim tačkama gdje FEDS raste, a stagnirajuće tačke
+prijavljuju kao broj lažnog rasta. Elipsa sada ima početnu vatru (centroid fronta) na
+zadnjem žarištu: poluosa ostaje 180 m/12h, omjer 2:1, glava doseže oko 336 m/12h niz
+vjetar, a pozadina oko 24 m/12h uz vjetar. Izvještaji nose `metrics_version`, pa se
+stari djelimični izvještaj ne može nastaviti s novim metrikama.
+
 ## Pitanje i hipoteze
 
 RQ-001: Može li prilagodba unaprijed treniranog MaskablePPO agenta različitim
