@@ -1014,3 +1014,18 @@ regeneration.
    for the poster, informed by stages 1–2.
 
 Context: ADR-029 above; plan and status in [NEXT_SESSION](../NEXT_SESSION.md).
+
+### ADR-030 addendum — line charge stays in the training reward, accepted 2026-11-09
+
+Raised by the TASK-024 fix (PR #11). A line cell that the paired no-op fire burns is
+charged as agent damage (it is consumed, not saved). The user decided that this charge is
+part of the **training reward**, not only of evaluation: training and evaluation use one
+damage rule, and an evaluation-only charge would keep rewarding line placed on cells that
+burn anyway, which is the bias ADR-029 removed. The safety penalty weights (1.0 per lost
+unit, 0.1 per close call) are unchanged.
+
+The charge is applied in the decision where the line cell appears inside the no-op
+footprint, not when the no-op fire would reach it. Undiscounted totals, and therefore all
+evaluation numbers, are identical; under PPO discounting early line inside the footprint
+pays a small extra cost. This is accepted as is and recorded here; charging at the no-op
+burn time would need a per-cell burn index and is not planned.
