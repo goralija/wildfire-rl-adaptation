@@ -43,11 +43,11 @@ SECTOR_DIRECTIONS = (
     (0.0, -1.0),
     (1.0, -1.0),
 )
-# "upcoming" shows the forcing of the 12h segment about to run (legacy; it is ex-post
-# gridMET, so the policy sees the exact next-12h weather). "previous" shows the segment
-# that just ran; at decision 0 that is the initial condition the simulation was built
-# with, i.e. segment 0, whose daily gridMET label is the start day.
-WEATHER_OBSERVATIONS = ("upcoming", "previous")
+# ADR-030: policies and heuristics observe the forcing of the 12h segment that just ran;
+# at decision 0 that is the initial condition the simulation was built with (segment 0,
+# whose daily gridMET label is the start day). "upcoming_perfect_forecast" shows the
+# ex-post forcing of the segment about to run and exists only as a labelled ablation.
+WEATHER_OBSERVATIONS = ("previous", "upcoming_perfect_forecast")
 
 
 # One budget unit is one 20-person crew shift building about 1.26 km of line (ADR-025).
@@ -231,7 +231,7 @@ class FedsSimFireEnv(gym.Env):
         split: str = "train",
         line_placement: str = "centroid",
         max_budget: Optional[int] = None,
-        weather_observation: str = "upcoming",
+        weather_observation: str = "previous",
         freeze_record: Optional[Path] = None,
         freeze_allowlist: Path = FREEZE_ALLOWLIST,
         manifest_path: Path = MANIFEST,
@@ -347,7 +347,7 @@ class FedsSimFireEnv(gym.Env):
             self._pool(np.clip(self.fuel.astype(np.float32) / 13.0, 0.0, 1.0)),
         )).astype(np.float32)
         segment = self.decision_index
-        if getattr(self, "weather_observation", "upcoming") == "previous":
+        if getattr(self, "weather_observation", "previous") == "previous":
             segment = max(0, segment - 1)
         current = self.forcing[min(segment, self.horizon_steps - 1)]
         direction = np.deg2rad(current["wind_direction_degrees_clockwise_north_to"])

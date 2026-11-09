@@ -31,7 +31,7 @@ def _parse_budgets(value: str) -> tuple:
 
 
 def _make_env_factory(params: dict, budgets: tuple, placement: str, rank: int,
-                      weather_observation: str = "upcoming"):
+                      weather_observation: str = "previous"):
     def factory():
         import os
 
@@ -62,8 +62,8 @@ def main(argv=None) -> int:
     parser.add_argument("--n-steps", type=int, default=16, help="rollout length per env")
     parser.add_argument("--learning-rate", type=float, default=3e-4)
     parser.add_argument("--line-placement", choices=("centroid", "front_edge"), default="front_edge")
-    parser.add_argument("--weather-observation", choices=("upcoming", "previous"), default="upcoming",
-                        help="forcing in the observation: the next 12h segment or the one that just ran")
+    parser.add_argument("--perfect-forecast-ablation", action="store_true",
+                        help="ABLATION ONLY (ADR-030): observe the upcoming 12h forcing instead of the previous one")
     parser.add_argument("--seed", type=int, required=True)
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args(argv)
@@ -81,8 +81,12 @@ def main(argv=None) -> int:
     torch.set_num_threads(1)
     freeze = json.loads(args.params.read_text(encoding="utf-8"))
     params = freeze["frozen_params"]
+    sim_params = SimFireParams(**params)
+    if sim_params.internal_update_minutes != 5:
+        parser.error("ADR-030 fixes the SimFire internal step at 5 minutes.")
+    weather_observation = "upcoming_perfect_forecast" if args.perfect_forecast_ablation else "previous"
     env = VecMonitor(SubprocVecEnv([
-        _make_env_factory(params, args.budgets, args.line_placement, rank, args.weather_observation)
+        _make_env_factory(params, args.budgets, args.line_placement, rank, weather_observation)
         for rank in range(args.n_envs)
     ], start_method="spawn"))
     env.seed(args.seed)
@@ -123,8 +127,8 @@ def main(argv=None) -> int:
         "budgets": list(args.budgets),
         "observation_max_budget": 4,
         "line_placement": args.line_placement,
-        "weather_observation": args.weather_observation,
-        "sim_params": SimFireParams(**params).as_dict(),
+        "weather_observation": weather_observation,
+        "sim_params": sim_params.as_dict(),
         "params_file_sha256": sha256_file(args.params),
         "params_gate_status": freeze.get("gate_status"),
         "split": "train",

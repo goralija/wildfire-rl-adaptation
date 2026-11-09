@@ -28,9 +28,9 @@ INPUT_ROOT = ROOT / ".local/feds-simfire-cases"
 CONFIG_TEMPLATE = ROOT / "configs/simfire_feds_base.yml"
 FREEZE_ALLOWLIST = ROOT / "configs/frozen/validation-freeze-allowlist.json"
 ALLOWED_SPLITS = ("train", "validation")
-# "per_update" is pinned SimFire: a fixed 980 ft subtracted per update from R * update_rate,
-# so a line holds up to 980 ft/min at 1 min but only 196 ft/min at 5 min. "per_minute"
-# subtracts 980 ft per simulated minute, which makes line strength step-independent.
+# "per_minute" (ADR-030 default) subtracts 980 ft per simulated minute, so a line holds up
+# to 980 ft/min at any internal step. "per_update" is pinned SimFire: a fixed 980 ft per
+# update from R * update_rate, so a line holds 980 ft/min at 1 min but only 196 at 5 min.
 FIRELINE_ATTENUATIONS = ("per_update", "per_minute")
 # "last_write" is pinned SimFire: when several burning cells reach one target, the last
 # sprite in list order sets its rate of spread. "max" uses the fastest approach instead,
@@ -49,7 +49,7 @@ class SimFireParams:
     internal_update_minutes: int = 5
     active_cell_lifetime_minutes: int = 90
     ros_multiplier: float = 1.0
-    fireline_attenuation: str = "per_update"
+    fireline_attenuation: str = "per_minute"
     spread_aggregation: str = "last_write"
 
     def __post_init__(self) -> None:
@@ -103,8 +103,9 @@ def require_validation_freeze(
     """Accept VALIDATION only under a committed, allowlisted TRAIN freeze record.
 
     The record's sha256 must appear in the committed allowlist, it must have been
-    selected on TRAIN, its ``frozen_params`` must equal ``params`` (absent keys take
-    the legacy defaults) and it must name the gridMET file in use. Returns the hash.
+    selected on TRAIN, its ``frozen_params`` must state every simulator field and equal
+    ``params`` (so a record cannot inherit a default it was not selected with) and it
+    must name the gridMET file in use. Returns the hash.
     """
     if freeze_record is None:
         raise ValueError("VALIDATION requires a committed TRAIN freeze record.")
@@ -116,7 +117,11 @@ def require_validation_freeze(
     record = json.loads(Path(freeze_record).read_text(encoding="utf-8"))
     if record.get("selected_on_split") != "train":
         raise ValueError("VALIDATION requires parameters selected on TRAIN.")
-    if SimFireParams(**record["frozen_params"]) != params:
+    frozen = record.get("frozen_params", {})
+    if set(frozen) != set(SimFireParams.__dataclass_fields__):
+        raise ValueError("The freeze record must state every simulator field: %s"
+                         % sorted(SimFireParams.__dataclass_fields__))
+    if SimFireParams(**frozen) != params:
         raise ValueError("Simulator parameters do not match the TRAIN freeze record.")
     if record.get("weather_sha256") != sha256_file(Path(weather_path)):
         raise ValueError("The freeze record was not selected with this gridMET file.")
@@ -260,9 +265,6 @@ def build_simulation(inputs: Dict[str, Any], params: SimFireParams, *, seed: int
 
     from simfire.enums import FuelModelRGB13, FuelModelToFuel
     from simfire.game.sprites import Fire
-    from simfire.sim.simulation import FireSimulation
-    from simfire.utils.config import Config
-    from simfire.utils.layers import OperationalFuelLayer, OperationalTopographyLayer
 
     fuel = inputs["fuel"]
     scar = inputs["scar"]
@@ -278,15 +280,50 @@ def build_simulation(inputs: Dict[str, Any], params: SimFireParams, *, seed: int
     base_config["fire"]["max_fire_duration"] = updates_for_duration(
         params.active_cell_lifetime_minutes, params.internal_update_minutes
     )
-    rows, columns = fuel.shape
     front_rows, front_columns = np.where(front)
     base_config["fire"]["fire_initial_position"]["static"]["position"] = [
         int(front_columns[0]), int(front_rows[0])
     ]
+    # SimFire draws from the global ``random``/``np.random`` streams while it builds,
+    # so they are seeded for a reproducible build and then restored: an episode reset
+    # must not rewind the streams other code (e.g. SB3 minibatch shuffling) relies on.
+    saved_random_state = random.getstate()
+    saved_numpy_state = np.random.get_state()
+    try:
+        simulation = _construct_simulation(base_config, inputs, forcing, seed)
+    finally:
+        random.setstate(saved_random_state)
+        np.random.set_state(saved_numpy_state)
+    pixel_scale_ft = CELL_SIZE_M * FEET_PER_METER
+    if params.ros_multiplier != 1.0:
+        simulation.fire_manager.pixel_scale = pixel_scale_ft / params.ros_multiplier
+    simulation.fire_map = compose_initial_fire_map(scar, front).astype(np.int64)
+    install_spread_options(simulation.fire_manager, params)
+    simulation.fire_manager.sprites = [
+        Fire((int(column), int(row)), simulation.config.display.fire_size, headless=True)
+        for row, column in zip(front_rows, front_columns)
+    ]
+    simulation.fire_manager.durations = [0] * len(simulation.fire_manager.sprites)
+    simulation.fire_sprites = simulation.fire_manager.sprites
+    cumulative = update_cumulative_burned(scar, simulation.fire_map)
+    if not np.array_equal(cumulative, scar | front):
+        raise AssertionError("The cumulative initial scar/front masks were not preserved.")
+    return simulation, forcing, cumulative
+
+
+def _construct_simulation(base_config: dict, inputs: Dict[str, Any], forcing: List[Dict[str, float]],
+                          seed: int) -> Any:
+    import numpy as np
+
+    from simfire.sim.simulation import FireSimulation
+    from simfire.utils.config import Config
+    from simfire.utils.layers import OperationalFuelLayer, OperationalTopographyLayer
+
+    fuel = inputs["fuel"]
+    rows, columns = fuel.shape
     config = Config(config_dict=base_config)
     config.area.screen_size = (rows, columns)
-    pixel_scale_ft = CELL_SIZE_M * FEET_PER_METER
-    config.area.pixel_scale = pixel_scale_ft
+    config.area.pixel_scale = CELL_SIZE_M * FEET_PER_METER
     layers = SimpleNamespace(layers=["fuel"], fuel=fuel, topography=inputs["elevation"])
     config.terrain.fuel_layer = OperationalFuelLayer(layers)
     config.terrain.topography_layer = OperationalTopographyLayer(layers)
@@ -297,24 +334,9 @@ def build_simulation(inputs: Dict[str, Any], params: SimFireParams, *, seed: int
         (rows, columns), forcing[0]["wind_direction_degrees_clockwise_north_to"], dtype=np.float64
     )
     config.environment.moisture = forcing[0]["fuel_moisture_fraction_proxy"]
-
     random.seed(seed)
     np.random.seed(seed % (2 ** 32))
-    simulation = FireSimulation(config)
-    if params.ros_multiplier != 1.0:
-        simulation.fire_manager.pixel_scale = pixel_scale_ft / params.ros_multiplier
-    simulation.fire_map = compose_initial_fire_map(scar, front).astype(np.int64)
-    install_spread_options(simulation.fire_manager, params)
-    simulation.fire_manager.sprites = [
-        Fire((int(column), int(row)), config.display.fire_size, headless=True)
-        for row, column in zip(front_rows, front_columns)
-    ]
-    simulation.fire_manager.durations = [0] * len(simulation.fire_manager.sprites)
-    simulation.fire_sprites = simulation.fire_manager.sprites
-    cumulative = update_cumulative_burned(scar, simulation.fire_map)
-    if not np.array_equal(cumulative, scar | front):
-        raise AssertionError("The cumulative initial scar/front masks were not preserved.")
-    return simulation, forcing, cumulative
+    return FireSimulation(config)
 
 
 def apply_forcing(simulation: Any, segment: Dict[str, float]) -> None:

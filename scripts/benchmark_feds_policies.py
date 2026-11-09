@@ -149,8 +149,8 @@ def main(argv=None) -> int:
     parser.add_argument("--policy", action="append", default=[],
                         help="name=heuristic:<name> or name=ppo:<checkpoint>; repeatable")
     parser.add_argument("--line-placement", choices=("centroid", "front_edge"), default="front_edge")
-    parser.add_argument("--weather-observation", choices=("upcoming", "previous"), default="upcoming",
-                        help="forcing shown to every policy: the next 12h segment or the one that just ran")
+    parser.add_argument("--perfect-forecast-ablation", action="store_true",
+                        help="ABLATION ONLY (ADR-030): observe the upcoming 12h forcing instead of the previous one")
     parser.add_argument("--scenario-limit", type=int)
     parser.add_argument("--workers", type=int, default=1)
     parser.add_argument("--seed", type=int, default=0)
@@ -164,6 +164,9 @@ def main(argv=None) -> int:
     freeze = json.loads(args.params.read_text(encoding="utf-8"))
     params = freeze["frozen_params"]
     sim_params = SimFireParams(**params)
+    if sim_params.internal_update_minutes != 5:
+        parser.error("ADR-030 fixes the SimFire internal step at 5 minutes.")
+    weather_observation = "upcoming_perfect_forecast" if args.perfect_forecast_ablation else "previous"
     try:
         freeze_sha256 = check_split_access(args.split, sim_params, args.params)
     except ValueError as exc:
@@ -182,7 +185,7 @@ def main(argv=None) -> int:
     if args.scenario_limit:
         scenarios = scenarios[: args.scenario_limit]
     jobs = [(scenario, budgets, policies, params, args.split, args.line_placement, args.seed,
-             args.weather_observation, freeze_path)
+             weather_observation, freeze_path)
             for scenario in scenarios]
 
     started = time.monotonic()
@@ -217,7 +220,7 @@ def main(argv=None) -> int:
         "sim_params": sim_params.as_dict(),
         "params_gate_status": freeze.get("gate_status"),
         "line_placement": args.line_placement,
-        "weather_observation": args.weather_observation,
+        "weather_observation": weather_observation,
         "budgets": budgets,
         "policies": policies,
         "seed": args.seed,

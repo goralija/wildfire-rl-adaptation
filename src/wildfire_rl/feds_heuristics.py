@@ -2,10 +2,10 @@
 
 Every heuristic decides from the same observation dictionary and action mask that a
 PPO policy receives, so no baseline sees the full-resolution map or FEDS outlines,
-and every baseline sees exactly the weather the policy sees. With the environment's
-default ``weather_observation="upcoming"`` that is the ex-post forcing of the next
-12h; with ``"previous"`` it is the segment that just ran. Each heuristic spends a
-budget unit at the first legal opportunity.
+and every baseline sees exactly the weather the policy sees: by default (ADR-030) the
+forcing of the 12h segment that just ran, or under the labelled
+``"upcoming_perfect_forecast"`` ablation the ex-post forcing of the next 12h. Each
+heuristic spends a budget unit at the first legal opportunity.
 """
 
 from __future__ import annotations
