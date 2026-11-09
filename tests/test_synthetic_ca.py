@@ -1,3 +1,4 @@
+from dataclasses import replace as dataclasses_replace
 import unittest
 
 try:
@@ -204,6 +205,135 @@ class EnvironmentTest(unittest.TestCase):
         rate = se.UNIT_TYPES[se.HAND_CREW].line_m_per_min(8, 0.0)
         self.assertGreater(built_m, 0)
         self.assertLessEqual(built_m, rate * 3 * se.DECISION_MINUTES + CELL_SIZE_M)
+
+    def _cells_built_in_12h(self, headings):
+        """Hand crew in FM8 on flat ground, far from the fire, building for 12 decisions."""
+        se = self.se
+        env = se.SyntheticSuppressionEnv(auto_retreat=False)
+        env.reset(options={"episode_spec": self._spec([(se.HAND_CREW, 0.0)], fuel_code=8,
+                                                       horizon=14)})
+        unit = env.units[0]
+        unit.active = True
+        unit.row, unit.col = 64, 10
+        action = np.zeros(se.MAX_UNITS, dtype=int)
+        for hour in range(12):
+            action[0] = 9 + headings[hour % len(headings)]
+            _, _, done, _, _ = env.step(action)
+            self.assertFalse(done)
+        return int(env.fire.line.sum())
+
+    def test_changing_heading_keeps_build_progress_in_the_same_cell(self):
+        # FM8 hand crew: 5 ch/h = 1.68 m/min, so one 180 m cell takes ~107 min. Alternating
+        # two build headings every hour must not reset the cell's progress (ADR-029, item 4).
+        holding = self._cells_built_in_12h([2])
+        alternating = self._cells_built_in_12h([2, 4])
+        self.assertGreaterEqual(holding, 5)
+        self.assertEqual(alternating, holding)
+
+    def test_stay_keeps_build_progress(self):
+        se = self.se
+        env = se.SyntheticSuppressionEnv(auto_retreat=False)
+        env.reset(options={"episode_spec": self._spec([(se.HAND_CREW, 0.0)], fuel_code=8,
+                                                       horizon=14)})
+        unit = env.units[0]
+        unit.active = True
+        unit.row, unit.col = 64, 10
+        build, stay = np.zeros(se.MAX_UNITS, dtype=int), np.zeros(se.MAX_UNITS, dtype=int)
+        build[0] = 9 + 2
+        env.step(build)  # ~60 of the ~107 minutes the cell needs
+        env.step(stay)
+        env.step(build)
+        self.assertTrue(env.fire.line[64, 10])
+
+    def _corridor_spec(self, horizon=6):
+        """One grass row (cols 50-70) in barren ground; the no-op fire burns it end to end."""
+        se = self.se
+        from wildfire_rl.synthetic_ca import BARREN, WeatherSeries
+        shape = (128, 128)
+        fuel = np.full(shape, BARREN)
+        fuel[64, 50:71] = 1
+        land = Landscape(fuel=fuel, elevation=np.zeros(shape))
+        front = np.zeros(shape, dtype=bool)
+        front[64, 50] = True
+        weather = WeatherSeries([Weather(2.0, 90.0, 0.08, 13.0)] * (horizon + se.TAIL_DECISIONS))
+        return se.EpisodeSpec(landscape=land, weather=weather, scar=np.zeros(shape, bool),
+                              front=front, units=[], horizon=horizon, seed=3,
+                              params=SpreadParams(spot_rate=0.0))
+
+    def _run_to_end(self, env):
+        se = self.se
+        total, done = 0.0, False
+        while not done:
+            _, reward, done, _, info = env.step(np.zeros(se.MAX_UNITS, dtype=int))
+            total += reward
+        return total, info["episode_summary"]
+
+    def test_line_on_a_cell_the_noop_burns_is_not_saved(self):
+        se = self.se
+        env = se.SyntheticSuppressionEnv()
+        env.reset(options={"episode_spec": self._corridor_spec()})
+        self.assertTrue(env.noop_final.ever_burned[64, 70])
+        self.assertEqual(env.noop_total, 20.0)
+        env.fire.line[64, 70] = True  # dead end of the corridor: the line protects nothing else
+        total, summary = self._run_to_end(env)
+        self.assertEqual(summary["saved_fraction"], 0.0)
+        self.assertAlmostEqual(total, 0.0, places=9)
+        self.assertEqual(summary["line_cells"], 1)
+        self.assertEqual(summary["line_cells_in_noop_footprint"], 1)
+        self.assertAlmostEqual(summary["line_area_ha"], 3.24)
+
+    def test_line_outside_the_noop_footprint_is_not_charged(self):
+        se = self.se
+        env = se.SyntheticSuppressionEnv()
+        spec = self._corridor_spec()
+        spec.landscape.fuel[10, 10] = 1
+        spec = dataclasses_replace(spec, landscape=Landscape(fuel=spec.landscape.fuel,
+                                                             elevation=spec.landscape.elevation))
+        env.reset(options={"episode_spec": spec})
+        self.assertFalse(env.noop_final.ever_burned[10, 10])
+        env.fire.line[10, 10] = True
+        _, summary = self._run_to_end(env)
+        self.assertEqual(summary["saved_fraction"], 0.0)
+        self.assertEqual(summary["line_cells"], 1)
+        self.assertEqual(summary["line_cells_in_noop_footprint"], 0)
+
+    def test_line_that_stops_the_fire_saves_only_the_cells_beyond_it(self):
+        se = self.se
+        env = se.SyntheticSuppressionEnv()
+        env.reset(options={"episode_spec": self._corridor_spec()})
+        env.fire.line[64, 60] = True  # cols 61-70 (10 cells) are protected; col 60 is consumed
+        _, summary = self._run_to_end(env)
+        self.assertAlmostEqual(summary["saved_fraction"], 10 / 20)
+
+    def test_return_equals_saved_minus_safety_penalties(self):
+        se = self.se
+        from wildfire_rl.synthetic_heuristics import make_random_policy, run_episode
+        rows = []
+        env = se.SyntheticSuppressionEnv()
+        for seed in range(2):
+            spec = self._spec([(se.HAND_CREW, 0.0), (se.DOZER, 30.0)], fuel_code=2)
+            row = run_episode(env, make_random_policy(seed), {"episode_spec": spec})
+            rows.append((env, row))
+        # Forced safety events: a close call (open neighbour) and a loss (surrounded).
+        for ring_open in (False, True):
+            env, unit = self._unit_at(30, 30)
+            ring = np.zeros(env.land.shape, dtype=bool)
+            if ring_open:
+                ring[30, 29] = True
+            else:
+                ring[29:32, 29:32] = True
+                ring[30, 30] = False
+            env.fire.ignite(ring)
+            env.fire.line[64, 75] = True  # a charged line cell inside the no-op footprint
+            total, summary = self._run_to_end(env)
+            rows.append((env, dict(summary, **{"return": total})))
+        for env, row in rows:
+            expected = (row["saved_fraction"] - env.unit_loss_penalty * row["units_lost"]
+                        - env.close_call_penalty * row["close_calls"])
+            self.assertAlmostEqual(row["return"], expected, places=9)
+        self.assertGreater(sum(row["close_calls"] for _, row in rows), 0)
+        self.assertGreater(sum(row["units_lost"] for _, row in rows), 0)
+        self.assertGreater(sum(row["line_cells_in_noop_footprint"] for _, row in rows), 0)
 
     def test_units_arrive_late_and_away_from_fire(self):
         se = self.se
