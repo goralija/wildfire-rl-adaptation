@@ -22,6 +22,29 @@ Zato se ovaj v1 draft ne smatra odobrenjem za benchmark PPO. Prvo treba dijagnos
 no-op neslaganje i ponoviti unaprijed dokumentovan zajednički TRAIN gate. Validation
 rasteri i test split ostaju zatvoreni do propisanih narednih koraka.
 
+## FEDS metrike rasta, elipsa i gate (TASK-022, ADR-030, 2026-11-09)
+
+`binary_burn_metrics` uz stare metrike cijele maske prijavljuje `growth_iou`,
+`growth_precision` i `growth_recall`, računate samo na ćelijama izvan početne maske
+(ožiljak + front). Kad imenilac nema ćelija vrijednost je `None`, ne 0 ni 1: inače bi
+persistence dobijala besplatan pogodak na svakom požaru koji u FEDS-u ne raste.
+
+**Gate (ADR-030 §3 i dopuna).** Požar je *rastući* ako je FEDS površina na +48h najmanje
+1.10× početne. IoU rasta po požaru se računa zbirno kroz četiri vremenske tačke (zbir
+pogodaka / zbir unija), pa je definisan za svaki rastući požar i za svaku metodu na istim
+požarima; persistence tu ima 0. Gate prolazi ako je kohorta kompletna bez grešaka, SimFire
+nigdje ne dodiruje rub mape, i srednji IoU rasta SimFire-a na rastućim požarima je veći od
+elipse. Nerastući požari se prijavljuju odvojeno (prerastanje) i ne odlučuju gate. Stari
+`strict_screen` ostaje u izvještaju samo radi poređenja i označen je kao zamijenjen.
+
+**Elipsa.** Omjer 2:1, poluosa raste 180 m/12h (kao u ADR-022), početna vatra je na
+zadnjem žarištu, pa glava doseže oko 336 m/12h niz vjetar, a pozadina oko 24 m/12h uz
+vjetar. Početna tačka je vodeća ivica aktivnog fronta u smjeru vjetra (srednja ćelija
+fronta unutar pola ćelije od najdalje niz vjetar), ne centroid fronta: centroid prstenastog
+fronta leži u ožiljku i mala elipsa tada ne dodaje nijednu ćeliju. Izvještaj broji požare u
+kojima elipsa ne dodaje ćelije. Izvještaji nose `metrics_version`, pa se stari djelimični
+izvještaj ne može nastaviti s novim metrikama.
+
 ## Pitanje i hipoteze
 
 RQ-001: Može li prilagodba unaprijed treniranog MaskablePPO agenta različitim
