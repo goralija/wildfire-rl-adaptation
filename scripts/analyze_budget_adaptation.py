@@ -76,6 +76,13 @@ def _signed_sums(values):
     return sums
 
 
+def _zero_tolerance(values) -> float:
+    """Seed-averaged hectare deltas that cancel exactly in cells can leave float residue
+    of about 1e-15; a delta within this tolerance counts as no change."""
+    values = np.asarray(values, dtype=float)
+    return 1e-9 * max(1.0, float(np.abs(values).max())) if values.size else 0.0
+
+
 def sign_flip_test(deltas, exact_limit=22, draws=200000, seed=20261109):
     """Two-sided paired sign-flip test of a zero mean delta.
 
@@ -85,9 +92,7 @@ def sign_flip_test(deltas, exact_limit=22, draws=200000, seed=20261109):
     seeded Monte Carlo estimate (1 + hits) / (1 + draws) is returned.
     """
     values = np.asarray(deltas, dtype=float)
-    # Seed-averaged hectare deltas that cancel exactly in cells can leave float residue
-    # of about 1e-15; those scenarios did not change.
-    zero = 1e-9 * max(1.0, float(np.abs(values).max())) if values.size else 0.0
+    zero = _zero_tolerance(values)
     changed = values[np.abs(values) > zero]
     if changed.size == 0:
         return {"scenarios_changed": 0, "sign_flip_p_two_sided": 1.0, "sign_flip_method": "exact"}
@@ -211,6 +216,7 @@ def contrasts(report: dict, base_budget: int = 2, best_heuristic=None) -> dict:
         if not stacked:
             return None
         scenario_means = np.mean(np.asarray(stacked), axis=0)
+        zero = _zero_tolerance(scenario_means)
         return {
             "role": role,
             "per_seed_mean_delta_ha": per_seed,
@@ -218,8 +224,8 @@ def contrasts(report: dict, base_budget: int = 2, best_heuristic=None) -> dict:
             "scenario_bootstrap_95ci_ha": _bootstrap(scenario_means),
             "seed_t95ci_ha": _seed_t_interval(list(per_seed.values())),
             "two_level_bootstrap_95ci_ha": _two_level_bootstrap(stacked),
-            "scenarios_better": int((scenario_means < 0).sum()),
-            "scenarios_worse": int((scenario_means > 0).sum()),
+            "scenarios_better": int((scenario_means < -zero).sum()),
+            "scenarios_worse": int((scenario_means > zero).sum()),
             "scenarios": len(scenarios),
             **sign_flip_test(scenario_means),
             **leave_largest_out(scenario_means, scenarios),
@@ -307,15 +313,26 @@ def main(argv=None) -> int:
         selection = select_best_train_heuristic(train_report)
     except ValueError as exc:
         parser.error(str(exc))
-    for key in ("sim_params", "line_placement", "weather_observation"):
-        if train_report.get(key) != report.get(key):
-            parser.error("the TRAIN selection report differs from the analysed report in %s" % key)
+    # policy_settings (benchmark reports since TASK-023) carries the observation rule and
+    # the line banking floor; the older top-level keys alone cannot tell a pre-fix report
+    # from a current one.
+    for name, item in (("analysed", report), ("TRAIN selection", train_report)):
+        if not isinstance(item.get("policy_settings"), dict):
+            parser.error("the %s report has no policy_settings; it predates TASK-023 and "
+                         "must be regenerated" % name)
+    if train_report["policy_settings"] != report["policy_settings"]:
+        differing = sorted(key for key in set(train_report["policy_settings"]) | set(report["policy_settings"])
+                           if train_report["policy_settings"].get(key) != report["policy_settings"].get(key))
+        parser.error("the TRAIN selection report differs from the analysed report in "
+                     "policy_settings: %s" % ", ".join(differing))
     selection["source_report"] = str(args.train_report)
     selection["source_report_sha256"] = hashlib.sha256(args.train_report.read_bytes()).hexdigest()
     result = {
         "source_split": report["split"],
         "sim_params": report["sim_params"],
         "params_gate_status": report.get("params_gate_status"),
+        "policy_settings": report["policy_settings"],
+        "legacy_checkpoints": report.get("legacy_checkpoints"),
         "best_heuristic_selection": selection,
         "contrast_roles": {
             "primary": "contrasts.primary (ADR-030 section 4, Holm across six tests)",
