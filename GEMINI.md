@@ -7,10 +7,12 @@ title: Gemini project entry point
 Follow [AGENTS.md](AGENTS.md). Read [index.md](index.md) and
 [knowledge/project-context.md](knowledge/project-context.md), then the current
 [STATUS](docs/STATUS.md), [NEXT_SESSION](docs/NEXT_SESSION.md) and task-specific links.
-The TRAIN-only SimFire/FEDS no-op gate was diagnosed and rerun (ADR-023/024) and still
-fails. Steps 7–8 ran as exploratory work on a separately labelled free-burn stress
-scenario (ADR-024–026). Every policy result is simulator-only, not calibrated or physically
-validated. Validation was scored once per frozen record; keep 2024 TEST closed.
+Current state (2026-11-09, ADR-029): the results of ADR-022 to ADR-028 are invalid
+until rerun. The gridMET sampler gave every fire in a year the weather of that year's
+first fire (fixed). PRs #3–#5 (SimFire/FEDS gate, steps 5–8, synthetic CA) are merged
+into main as history; do not cite their numbers as findings. Work next on the fix
+tasks TASK-021–024 as separate PRs, then the decisions in TASK-025, and only then the
+reruns in TASK-026 (order and acceptance in NEXT_SESSION.md). TEST 2024 stays closed.
 See NEXT_SESSION.md
 and the latest ADR for the current state.
 Preserve the shared rules and knowledge maintenance workflow in AGENTS.md;

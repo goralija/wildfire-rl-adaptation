@@ -9,7 +9,7 @@ okf_version: "0.2"
 - [Sažeti projektni kontekst](knowledge/project-context.md) - Aktivni SimFire/FEDS pravac i crosswalk gate.
 - [Handoff za kolegu](HANDOFF.md) - Prenosiv nastavak bez chat historije.
 - [Trenutno stanje](docs/STATUS.md) - Šta radi, dokazi i ograničenja.
-- [Naredna sesija](docs/NEXT_SESSION.md) - Redoslijed nastavka.
+- [Naredna sesija](docs/NEXT_SESSION.md) - Ispravke nakon revizije (ADR-029) i redoslijed nastavka.
 - [Prioriteti i prihvat](docs/BACKLOG.md) - Dataset refinement prvi; adapter je tehnički nastavak.
 
 ## Pronađi detalje i dokaze
@@ -20,7 +20,7 @@ okf_version: "0.2"
 - [Real-case pipeline](docs/research/REAL_CASE_PIPELINE.md) - Jednostavan opis šta stvarni podaci daju (Y), šta simulator prima (X), te jaz početnog fronta.
 - [FPA-FOD/FEDS crosswalk i data gate](docs/research/FPA_FEDS_CROSSWALK.md) - Aktivni SimFire benchmark pravac, pokrivenost i stop-uslov.
 - [SimFire/FEDS runtime i trening](docs/research/SIMFIRE_ENVIRONMENT.md) - pinovani Python 3.9 runtime, TRAIN-only PPO putanja i no-op gate status.
-- [SimFire TRAIN no-op screen](reports/real-fire-data/feds-simfire-train-noop-screen-v1.json) - 99 TRAIN požara, persistence/elipsa poređenje; gate FAIL.
+- [SimFire TRAIN no-op screen](reports/real-fire-data/feds-simfire-train-noop-screen-v1.json) - 99 TRAIN požara; rezultat nevažeći zbog gridMET greške (ADR-029), čeka ponovno pokretanje.
 - [Izvještaji](reports/index.md) - Sintetički pilot, runtime dokazi, FEDS crosswalk i historijski CFSDS replay.
 - [Runtime okruženja](docker/index.md) - Pinovani legacy setup i inference bez treniranja.
 - [Promjene baze znanja](log.md) - Najnovije promjene prve i veze na detaljnu historiju.

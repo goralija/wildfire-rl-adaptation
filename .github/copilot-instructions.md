@@ -7,10 +7,12 @@ title: GitHub Copilot project entry point
 Read and follow [AGENTS.md](../AGENTS.md), then [index.md](../index.md),
 [project context](../knowledge/project-context.md), [STATUS](../docs/STATUS.md)
 and [NEXT_SESSION](../docs/NEXT_SESSION.md). Follow task-specific links before edits.
-The TRAIN-only SimFire/FEDS no-op gate was diagnosed and rerun (ADR-023/024) and still
-fails. Steps 7–8 ran as exploratory work on a separately labelled free-burn stress
-scenario (ADR-024–026). Every policy result is simulator-only, not calibrated or physically
-validated. Validation was scored once per frozen record; keep 2024 TEST closed.
+Current state (2026-11-09, ADR-029): the results of ADR-022 to ADR-028 are invalid
+until rerun. The gridMET sampler gave every fire in a year the weather of that year's
+first fire (fixed). PRs #3–#5 (SimFire/FEDS gate, steps 5–8, synthetic CA) are merged
+into main as history; do not cite their numbers as findings. Work next on the fix
+tasks TASK-021–024 as separate PRs, then the decisions in TASK-025, and only then the
+reruns in TASK-026 (order and acceptance in NEXT_SESSION.md). TEST 2024 stays closed.
 The synthetic pilot and legacy runtime verification
 are not evidence of RL advantage or physical validation. Save decisions/evidence using
 the shared AGENTS rules and [maintenance workflow](../knowledge/maintenance.md).

@@ -1,5 +1,22 @@
 # Promjene baze znanja
 
+## 2026-11-09: revizija PR-ova #3–#5, gridMET ispravka i ADR-029
+
+- gridMET uzorkovanje je koristilo ćeliju prvog požara u godini za sve ostale (97/99
+  TRAIN, 19/20 VALIDATION pogrešno); ispravljeno u PR #3.
+- Rezultati ADR-022–028 su nevažeći do ponovnog pokretanja; PR-ovi spojeni kao historija.
+- Plan ispravki TASK-021–027: [NEXT_SESSION](docs/NEXT_SESSION.md),
+  [odluka](docs/specs/DECISION_RECORDS.md).
+
+## 2026-11-05: sintetički CA trening i jednokratni test (ADR-028)
+
+- Novi CA simulator, okruženje s fizički ograničenim jedinicama i kontrafaktualna nagrada.
+- PPO od nule nije prošao; imitacija + PPO je dala policy-v1, izjednačenu s heuristikom
+  i jasno bolju od no-op. Na 119 stvarnih startova čuva 12% više od no-op (simulirani
+  ishod). Jaz kalibracije: medijan IoU 0.27–0.30 na 48h.
+- [STATUS](docs/STATUS.md), [NEXT_SESSION](docs/NEXT_SESSION.md),
+  [spec](docs/research/SYNTHETIC_CA_ENV.md), [izvještaji](reports/synthetic/index.md).
+
 ## 2026-11-04: koraci 5–8 (noćni samostalni rad)
 
 - Ulazi ponovo izgrađeni i reproducirani (isti hashovi, isti WAF .01 IoU). Dijagnoza
