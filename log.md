@@ -1,5 +1,17 @@
 # Promjene baze znanja
 
+## 2026-11-09: dopuna ADR-030, ćelije linije i nagrada
+
+- Ćelija linije koju no-op vatra zahvati računa se kao šteta i u nagradi za trening, ne
+  samo u evaluaciji (odluka korisnika uz PR #11). [Odluke](docs/specs/DECISION_RECORDS.md).
+
+## 2026-11-09: ADR-030, odluke prije ponovnog pokretanja
+
+- Gate na IoU rasta prema downwind elipsi na požarima koji rastu; vrijeme prethodnog
+  segmenta u observationu; linija neovisna o koraku; 10 seedova i poređenje s nasumičnom
+  linijom; CA: spašena površina primarno, sigurnost kao uslov; 98 TRAIN (bez duplikata).
+- [odluke](docs/specs/DECISION_RECORDS.md), [NEXT_SESSION](docs/NEXT_SESSION.md).
+
 ## 2026-11-09: revizija PR-ova #3–#5, gridMET ispravka i ADR-029
 
 - gridMET uzorkovanje je koristilo ćeliju prvog požara u godini za sve ostale (97/99
