@@ -278,8 +278,10 @@ centroida fronta i troši jednu budžetsku jedinicu. Ovo je diskretni prototip p
 ne provjeren model operativne gradnje linije.
 
 Observation sadrži samo sažeto trenutno stanje (16×16 agregati burn/front/linija/gorivo),
-budžet, vrijeme epizode i **trenutni** weather segment. Budući gridMET segmenti ostaju
-skriveni policy-ju. Reward je negativan broj dodatnih kumulativno opožarenih ćelija
+budžet, vrijeme epizode i vrijeme **posljednjeg gridMET dana strogo prije** dana sljedećeg
+12h segmenta; za prvu odluku to je dan prije početka (ADR-030 §1 i dopuna, TASK-023). Vrijeme
+koje pokreće sljedeći segment agent nikad ne vidi, osim u označenoj ablaciji sa savršenom
+prognozom. Reward je negativan broj dodatnih kumulativno opožarenih ćelija
 skaliran sa 100; FEDS budući obodi se ne koriste ni u observation ni u reward. Kumulativni
 scar ostaje zabilježen i kad SimFire na ćeliju postavi liniju. Pražnjenje budžeta ili
 gašenje vatre ne prekida epizodu: sva četiri 12h koraka se završe, uz no-op kada nema
