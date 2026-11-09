@@ -940,3 +940,77 @@ then fix in separate PRs (TASK-021–024), record the open choices in a new ADR 
 rerun (TASK-025), and only then rerun (TASK-026). No result may be cited from ADR-022–028
 until TASK-026 replaces it. TEST 2024 stays closed. Plan and acceptance:
 [NEXT_SESSION](../NEXT_SESSION.md), [BACKLOG](../BACKLOG.md).
+
+## ADR-030 — rerun decisions: observation, line strength, growth-aware gate, statistics, staged rerun, accepted 2026-11-09
+
+Closes TASK-025 from ADR-029. Accepted by the user (Harun) on 2026-11-09 from the options
+proposed after the PR #3–#5 review. Fixed before any rerun; nothing below was chosen after
+seeing a new result. Supersedes the corresponding parts of ADR-019 (weather visibility),
+ADR-022/023 (gate rule and references) and ADR-026 (seed count and contrasts).
+
+**1. Weather in the observation.** Policies and heuristics observe the forcing of the
+*previous* 12h segment; at decision 0 they observe the initial conditions. The upcoming
+segment's forcing is never observed. A perfect-forecast variant may be run later only as
+a labelled ablation.
+
+**2. Line strength and internal step.** The fireline rate-of-spread attenuation is scaled
+with the internal update interval (implemented in our wrapper, not by patching SimFire), and
+the internal step is fixed at 5 minutes for every SimFire experiment. A test must show the
+same fire and line give the same outcome at 1 and 5 minutes within tolerance.
+
+**3. Growth-aware no-op gate (replaces the ADR-022/023 strict rule).**
+- *Metric.* Growth-only IoU: cells outside the initial FEDS mask, as implemented in TASK-022.
+  Persistence has growth IoU 0 by construction, so the reference is the downwind 2:1 ellipse
+  (initial fire at the rear focus, 180 m per 12h head advance), as implemented in TASK-022.
+- *Strata, outcome-blind to SimFire.* A TRAIN case is *growing* when its observed FEDS
+  burned area at +48h is at least 1.10 × its initial area (same 180 m rasterization);
+  otherwise *non-growing*.
+- *Pass rule.* All TRAIN cases complete without errors; zero SimFire map-edge contacts in
+  any case; on growing cases, SimFire mean growth IoU over the four timepoints is higher
+  than the ellipse's.
+- *Non-growing cases* are reported separately (overgrowth in ha and cells) as the known
+  limitation of a free-burning no-op against contained fires; they do not decide the gate.
+- *Candidates, fixed now.* The ADR-022 WAF list {0, .0025, .01, .025, .05, .10, .20, .605}
+  at ROS multiplier 1.0, plus the ADR-023 grid ROS {0.35, 0.5, 0.7} × WAF {0.05, 0.2, 0.4};
+  active-cell lifetime 90 min, 5-min step, seed 0.
+- *Selection.* If any candidate passes, freeze the passing candidate with the highest
+  growing-case growth IoU (tie: lower mean absolute area error). If none passes, record
+  FAIL, freeze nothing, and stop before stage 2 for a user decision.
+- VALIDATION is scored once with the frozen record and never used for selection; TEST 2024
+  stays closed.
+
+**4. Benchmark statistics (replaces the ADR-026 plan).**
+- 10 seeds per trained configuration.
+- Primary contrasts: base PPO − random legal line and base PPO − best heuristic, at
+  B = 1, 2, 4 (six tests). The best heuristic is the one with the largest mean reduction
+  versus no-op at B = 2 on TRAIN; it is chosen before any VALIDATION run.
+- Inference: paired by scenario on seed-averaged deltas; exact sign-flip test, Holm
+  correction across the six primary tests at α = .05; two-level (seed × scenario) bootstrap
+  95% CIs. Every contrast also reports the number of scenarios that changed and the result
+  without the largest scenario. Contrasts against no-op are reported as sanity checks only.
+- Budget fine-tuning contrasts (fine-tuned − frozen base, fine-tuned − matched control)
+  follow the same inference and are secondary.
+
+**5. Synthetic CA evaluation.** The training reward keeps its safety penalties. For
+acceptance, the primary outcome is saved fraction with the TASK-024 line-credit rule (a
+line cell that burns under no-op is not saved). Safety is a non-inferiority condition: the
+policy may not have more close calls or more lost units than the comparator heuristic.
+Return is reported but does not decide acceptance.
+
+**6. Cohort duplicate.** FPA records `fpa-fod-400305302-sugar-pine` and
+`fpa-fod-400389825-columbus` join the same FEDS fire (fireID 58826, same start). Rule: keep
+one record per FEDS fire, the one with the lower FPA `fod_id` (sugar-pine), giving 98 TRAIN
+cases. The manifest change and its new hash land in stage 1, before the weather
+regeneration.
+
+**7. Staged rerun (TASK-026); each stage needs the user's explicit go-ahead.**
+1. *Stage 1 — no training.* Prerequisites: TASK-021–024 merged; FEDS timestamp timezone
+   checked (TASK-027); duplicate removed. Then regenerate gridMET with the fixed sampler and
+   record its hash in the reports, run the gate above on TRAIN, freeze, score VALIDATION once.
+2. *Stage 2 — SimFire benchmark and budget study* with the frozen record, 10 seeds, the
+   ADR-030 statistics plan. Only if stage 1 passes, or the user labels it exploratory.
+3. *Stage 3 — synthetic CA retraining and locking*, then the one-time real-case test and
+   calibration with growth metrics. Only after the user decides which simulator is primary
+   for the poster, informed by stages 1–2.
+
+Context: ADR-029 above; plan and status in [NEXT_SESSION](../NEXT_SESSION.md).
