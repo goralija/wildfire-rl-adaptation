@@ -187,6 +187,33 @@ class FirelineBankingTests(unittest.TestCase):
                 self.assertEqual(self._approach_then_push(minutes, 6.0)[1], 0)
 
 
+class FirelineRosMultiplierTests(unittest.TestCase):
+    """The line threshold is the effective spread (after ros_multiplier), for every m."""
+
+    def _increment(self, raw_rate_ft_per_min, multiplier):
+        from types import SimpleNamespace
+
+        from simfire.enums import BurnStatus
+        from wildfire_rl.feds_simfire_setup import _per_minute_line_attenuation
+
+        manager = SimpleNamespace(
+            attenuate_line_ros=True, update_rate=5,
+            _line_attenuation_scale=1.0 / multiplier,
+            burn_amounts=np.zeros((1, 1)),
+        )
+        fire_map = np.full((1, 1), BurnStatus.FIRELINE)
+        rate = np.full((1, 1), raw_rate_ft_per_min * manager.update_rate)
+        return float(_per_minute_line_attenuation(manager, rate, fire_map)[0, 0])
+
+    def test_effective_threshold_is_980_ft_per_min_at_any_multiplier(self):
+        for multiplier in (0.35, 0.5, 1.0):
+            # Effective spread m * R just below / above 980 ft/min.
+            below = 970.0 / multiplier
+            above = 990.0 / multiplier
+            self.assertEqual(self._increment(below, multiplier), 0.0, multiplier)
+            self.assertGreater(self._increment(above, multiplier), 0.0, multiplier)
+
+
 class SpreadAggregationTests(unittest.TestCase):
     """SimFire's last-write ROS assignment depends on sprite order; max does not."""
 

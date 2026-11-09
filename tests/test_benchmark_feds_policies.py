@@ -176,6 +176,16 @@ class TrainingReceiptTests(unittest.TestCase):
             with self.subTest(script=script):
                 self.assertEqual(len(spreads), 1)
 
+    def test_finetune_checks_the_base_receipt_before_loading_it(self):
+        # Fine-tuning must refuse a base checkpoint trained under other settings before
+        # MaskablePPO.load unpickles it.
+        root = Path(__file__).resolve().parents[1]
+        source = (root / "scripts" / "train_feds_budget_adaptation.py").read_text(encoding="utf-8")
+        check = source.index("check_checkpoint_receipt(args.init")
+        load = source.index("MaskablePPO.load(args.init")
+        self.assertLess(check, load)
+        self.assertIn("allow_legacy=False", source[check:load])
+
 
 if __name__ == "__main__":
     unittest.main()

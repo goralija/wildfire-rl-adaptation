@@ -29,9 +29,10 @@ CONFIG_TEMPLATE = ROOT / "configs/simfire_feds_base.yml"
 FREEZE_ALLOWLIST = ROOT / "configs/frozen/validation-freeze-allowlist.json"
 ALLOWED_SPLITS = ("train", "validation")
 # "per_minute" (ADR-030 default) subtracts 980 ft per simulated minute and floors line
-# burn amounts at zero, so a line holds iff the raw rate of spread reaching it stays
-# below 980 ft/min, at any internal step and however long the line has waited (raw R is
-# before ros_multiplier, so the effective threshold is 980 * ros_multiplier). "per_update" is
+# burn amounts at zero, so a line holds iff the effective rate of spread reaching it (after
+# ros_multiplier) stays below 980 ft/min, at any internal step and however long the line
+# has waited. ros_multiplier works through the ignition threshold (pixel_scale / m), so the
+# attenuation is scaled by 1 / m in the same units. "per_update" is
 # pinned SimFire: a fixed 980 ft per update from R * update_rate (a line holds 980 ft/min
 # at 1 min but only 196 at 5 min), with no floor, so an idle line banks negative burn.
 FIRELINE_ATTENUATIONS = ("per_update", "per_minute")
@@ -460,19 +461,21 @@ def _per_minute_line_attenuation(fire_manager: Any, rate_of_spread: Any, fire_ma
     long enough to accumulate one cell width, independent of the internal step and of
     how long ago the line was placed.
 
-    The comparison uses raw Rothermel R, before ``ros_multiplier``: the multiplier acts
-    on the ignition threshold (``pixel_scale / m``), so with m != 1 a line holds up to an
-    effective spread of 980 * m ft/min (e.g. 343 at m = 0.35), not 980.
+    ``ros_multiplier`` m acts on the ignition threshold (``pixel_scale / m``), so burn
+    amounts are in units inflated by 1 / m. The attenuation is scaled by the same 1 / m
+    (``_line_attenuation_scale``), so a line holds up to an *effective* spread of 980 ft/min
+    for every m, not 980 * m.
     """
     import numpy as np
     from simfire.enums import BurnStatus, RoSAttenuation
 
     if not fire_manager.attenuate_line_ros:
         return type(fire_manager)._update_rate_of_spread(fire_manager, rate_of_spread, fire_map)
+    scale = fire_manager.update_rate * getattr(fire_manager, "_line_attenuation_scale", 1.0)
     factor = np.zeros_like(rate_of_spread)
-    factor[fire_map == BurnStatus.FIRELINE] = RoSAttenuation.FIRELINE * fire_manager.update_rate
-    factor[fire_map == BurnStatus.SCRATCHLINE] = RoSAttenuation.SCRATCHLINE * fire_manager.update_rate
-    factor[fire_map == BurnStatus.WETLINE] = RoSAttenuation.WETLINE * fire_manager.update_rate
+    factor[fire_map == BurnStatus.FIRELINE] = RoSAttenuation.FIRELINE * scale
+    factor[fire_map == BurnStatus.SCRATCHLINE] = RoSAttenuation.SCRATCHLINE * scale
+    factor[fire_map == BurnStatus.WETLINE] = RoSAttenuation.WETLINE * scale
     increment = rate_of_spread - factor
     line = np.isin(fire_map, (BurnStatus.FIRELINE, BurnStatus.SCRATCHLINE, BurnStatus.WETLINE))
     increment[line] = np.maximum(increment[line], -fire_manager.burn_amounts[line])
@@ -525,6 +528,7 @@ def install_spread_options(fire_manager: Any, params: SimFireParams) -> None:
     from types import MethodType
 
     if params.fireline_attenuation == "per_minute":
+        fire_manager._line_attenuation_scale = 1.0 / params.ros_multiplier
         fire_manager._update_rate_of_spread = MethodType(_per_minute_line_attenuation, fire_manager)
     if params.spread_aggregation == "max":
         import importlib.metadata

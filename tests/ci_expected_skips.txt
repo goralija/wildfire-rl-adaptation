@@ -5,6 +5,9 @@
 # sb3_contrib/torch (RL extra) is not installed in CI.
 test_gym_env.GymTests.test_masks_save_load_and_short_learning
 
+# Needs the pinned SimFire runtime (Python 3.9 venv); runs locally, not in CI.
+unittest.loader.ModuleSkipped.test_feds_simfire_spread
+
 # Needs ignored local FEDS/gridMET inputs under .local/.
 test_synthetic_real_cases.LocalCaseTest.test_case_from_the_other_split_is_not_found
 test_synthetic_real_cases.LocalCaseTest.test_one_train_case_builds_a_valid_spec
