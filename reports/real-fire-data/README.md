@@ -4,6 +4,17 @@ title: 'Stvarni požari: pregled kandidata i mali uzorci'
 ---
 # Stvarni požari: kandidati, CFSDS pilot i mali uzorci
 
+## Aktivni SimFire/FEDS data gate — 2026-11-03
+
+Odvojeno od historijskih CFSDS/Cell2Fire replaya, novi korisnički usmjereni put koristi
+FPA-FOD početne podatke i FEDS-CONUS 12-satne tokove. U test-excluded kohorti 13/40
+train i 7/20 validation slučajeva imaju jedinstveni FEDS match s najmanje dva
+uzastopna stanja prema strogom 24h startnom pravilu. Pošto su minimumi 20/8,
+pre-agent data gate **ne prolazi u oba splita**; ne pokretati SimFire agent/no-op rad.
+FLE incidentni sažetak je prisutan za 0/40 train i 13/20 validation, ali to nije
+line-level geometrija. [Audit i protokol](../../docs/research/FPA_FEDS_CROSSWALK.md),
+[combined JSON](fpa-feds-fle-crosswalk-v1.json) i [sačuvanu validation pretragu kandidata](fpa-feds-fle-crosswalk-validation-candidate-search-v1.json).
+
 Prikladnost izvora za naš projekat, ne rezultat fizičke validacije simulatora.
 Primarni nalazi i preporuka: docs/research/REAL_FIRE_DATASETS.md.
 Candidate manifest: data/manifests/real-fire-candidates.json.

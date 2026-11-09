@@ -1,0 +1,2576 @@
+{
+  "audited_splits": [
+    "train",
+    "validation"
+  ],
+  "cases": [
+    {
+      "discovery_date": "2018-07-22",
+      "feds": {
+        "candidate_count": 1,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [
+          {
+            "area_range_km2_in_spatial_window": [
+              0.221,
+              89.628
+            ],
+            "discovery_date_offset_days": 2,
+            "fire_id": "60225",
+            "first_observed_state": "2018-07-24T00:00:00",
+            "five_states_cover_48h": true,
+            "last_observed_state": "2018-08-24T00:00:00",
+            "longest_12h_run": 63,
+            "minimum_start_window_distance_m": 1416.3,
+            "observed_states_in_spatial_window": 63,
+            "t_start": "2018-07-24T00:00:00",
+            "two_consecutive_12h_states": true
+          }
+        ],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "FS-6905284",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400300427-plateau",
+        "selected": {
+          "area_range_km2_in_spatial_window": [
+            0.221,
+            89.628
+          ],
+          "discovery_date_offset_days": 2,
+          "fire_id": "60225",
+          "first_observed_state": "2018-07-24T00:00:00",
+          "five_states_cover_48h": true,
+          "last_observed_state": "2018-08-24T00:00:00",
+          "longest_12h_run": 63,
+          "minimum_start_window_distance_m": 1416.3,
+          "observed_states_in_spatial_window": 63,
+          "t_start": "2018-07-24T00:00:00",
+          "two_consecutive_12h_states": true
+        },
+        "selection_used_final_area_or_perimeter": false,
+        "status": "unique_spatiotemporal_candidate"
+      },
+      "fod_id": 400300427,
+      "fpa_unique_fire_id": "FS-6905284",
+      "name": "PLATEAU",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "split": "train",
+      "state": "CO",
+      "year": 2018
+    },
+    {
+      "discovery_date": "2018-09-25",
+      "feds": {
+        "candidate_count": 1,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [
+          {
+            "area_range_km2_in_spatial_window": [
+              0.932,
+              35.203
+            ],
+            "discovery_date_offset_days": 1,
+            "fire_id": "72680",
+            "first_observed_state": "2018-09-26T00:00:00",
+            "five_states_cover_48h": true,
+            "last_observed_state": "2018-10-07T12:00:00",
+            "longest_12h_run": 24,
+            "minimum_start_window_distance_m": 1772.1,
+            "observed_states_in_spatial_window": 24,
+            "t_start": "2018-09-26T00:00:00",
+            "two_consecutive_12h_states": true
+          }
+        ],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "FS-6898773",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400301084-prospect",
+        "selected": {
+          "area_range_km2_in_spatial_window": [
+            0.932,
+            35.203
+          ],
+          "discovery_date_offset_days": 1,
+          "fire_id": "72680",
+          "first_observed_state": "2018-09-26T00:00:00",
+          "five_states_cover_48h": true,
+          "last_observed_state": "2018-10-07T12:00:00",
+          "longest_12h_run": 24,
+          "minimum_start_window_distance_m": 1772.1,
+          "observed_states_in_spatial_window": 24,
+          "t_start": "2018-09-26T00:00:00",
+          "two_consecutive_12h_states": true
+        },
+        "selection_used_final_area_or_perimeter": false,
+        "status": "unique_spatiotemporal_candidate"
+      },
+      "fod_id": 400301084,
+      "fpa_unique_fire_id": "FS-6898773",
+      "name": "PROSPECT",
+      "scenario_id": "fpa-fod-400301084-prospect",
+      "split": "train",
+      "state": "ID",
+      "year": 2018
+    },
+    {
+      "discovery_date": "2018-07-26",
+      "feds": {
+        "candidate_count": 1,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [
+          {
+            "area_range_km2_in_spatial_window": [
+              0.221,
+              31.33
+            ],
+            "discovery_date_offset_days": 1,
+            "fire_id": "61068",
+            "first_observed_state": "2018-07-27T12:00:00",
+            "five_states_cover_48h": true,
+            "last_observed_state": "2018-08-13T00:00:00",
+            "longest_12h_run": 34,
+            "minimum_start_window_distance_m": 2133.5,
+            "observed_states_in_spatial_window": 34,
+            "t_start": "2018-07-27T12:00:00",
+            "two_consecutive_12h_states": true
+          }
+        ],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "FS-6907681",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400302636-bears",
+        "selected": {
+          "area_range_km2_in_spatial_window": [
+            0.221,
+            31.33
+          ],
+          "discovery_date_offset_days": 1,
+          "fire_id": "61068",
+          "first_observed_state": "2018-07-27T12:00:00",
+          "five_states_cover_48h": true,
+          "last_observed_state": "2018-08-13T00:00:00",
+          "longest_12h_run": 34,
+          "minimum_start_window_distance_m": 2133.5,
+          "observed_states_in_spatial_window": 34,
+          "t_start": "2018-07-27T12:00:00",
+          "two_consecutive_12h_states": true
+        },
+        "selection_used_final_area_or_perimeter": false,
+        "status": "unique_spatiotemporal_candidate"
+      },
+      "fod_id": 400302636,
+      "fpa_unique_fire_id": "FS-6907681",
+      "name": "BEARS",
+      "scenario_id": "fpa-fod-400302636-bears",
+      "split": "train",
+      "state": "AZ",
+      "year": 2018
+    },
+    {
+      "discovery_date": "2018-07-05",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "FS-6912699",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400302872-klamathon",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400302872,
+      "fpa_unique_fire_id": "FS-6912699",
+      "name": "KLAMATHON",
+      "scenario_id": "fpa-fod-400302872-klamathon",
+      "split": "train",
+      "state": "CA",
+      "year": 2018
+    },
+    {
+      "discovery_date": "2018-08-06",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "FS-6905729",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400303610-monument",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400303610,
+      "fpa_unique_fire_id": "FS-6905729",
+      "name": "MONUMENT",
+      "scenario_id": "fpa-fod-400303610-monument",
+      "split": "train",
+      "state": "MT",
+      "year": 2018
+    },
+    {
+      "discovery_date": "2018-07-25",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "FS-6887331",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400304776-keithly",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400304776,
+      "fpa_unique_fire_id": "FS-6887331",
+      "name": "KEITHLY",
+      "scenario_id": "fpa-fod-400304776-keithly",
+      "split": "train",
+      "state": "ID",
+      "year": 2018
+    },
+    {
+      "discovery_date": "2018-08-01",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "FS-6884802",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400305203-donnell",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400305203,
+      "fpa_unique_fire_id": "FS-6884802",
+      "name": "DONNELL",
+      "scenario_id": "fpa-fod-400305203-donnell",
+      "split": "train",
+      "state": "CA",
+      "year": 2018
+    },
+    {
+      "discovery_date": "2018-07-27",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "W-723599",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400307064-river",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400307064,
+      "fpa_unique_fire_id": "W-723599",
+      "name": "RIVER",
+      "scenario_id": "fpa-fod-400307064-river",
+      "split": "train",
+      "state": "CA",
+      "year": 2018
+    },
+    {
+      "discovery_date": "2018-09-13",
+      "feds": {
+        "candidate_count": 1,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [
+          {
+            "area_range_km2_in_spatial_window": [
+              29.724,
+              44.446
+            ],
+            "discovery_date_offset_days": 0,
+            "fire_id": "69948",
+            "first_observed_state": "2018-09-13T12:00:00",
+            "five_states_cover_48h": true,
+            "last_observed_state": "2018-09-20T00:00:00",
+            "longest_12h_run": 14,
+            "minimum_start_window_distance_m": 777.2,
+            "observed_states_in_spatial_window": 14,
+            "t_start": "2018-09-13T12:00:00",
+            "two_consecutive_12h_states": true
+          }
+        ],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "W-725861",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400307548-boone-draw",
+        "selected": {
+          "area_range_km2_in_spatial_window": [
+            29.724,
+            44.446
+          ],
+          "discovery_date_offset_days": 0,
+          "fire_id": "69948",
+          "first_observed_state": "2018-09-13T12:00:00",
+          "five_states_cover_48h": true,
+          "last_observed_state": "2018-09-20T00:00:00",
+          "longest_12h_run": 14,
+          "minimum_start_window_distance_m": 777.2,
+          "observed_states_in_spatial_window": 14,
+          "t_start": "2018-09-13T12:00:00",
+          "two_consecutive_12h_states": true
+        },
+        "selection_used_final_area_or_perimeter": false,
+        "status": "unique_spatiotemporal_candidate"
+      },
+      "fod_id": 400307548,
+      "fpa_unique_fire_id": "W-725861",
+      "name": "BOONE DRAW",
+      "scenario_id": "fpa-fod-400307548-boone-draw",
+      "split": "train",
+      "state": "CO",
+      "year": 2018
+    },
+    {
+      "discovery_date": "2018-06-24",
+      "feds": {
+        "candidate_count": 1,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [
+          {
+            "area_range_km2_in_spatial_window": [
+              2.598,
+              15.468
+            ],
+            "discovery_date_offset_days": 1,
+            "fire_id": "54339",
+            "first_observed_state": "2018-06-25T00:00:00",
+            "five_states_cover_48h": true,
+            "last_observed_state": "2018-07-03T12:00:00",
+            "longest_12h_run": 18,
+            "minimum_start_window_distance_m": 1524.6,
+            "observed_states_in_spatial_window": 18,
+            "t_start": "2018-06-25T00:00:00",
+            "two_consecutive_12h_states": true
+          }
+        ],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "W-724657",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400310583-organ",
+        "selected": {
+          "area_range_km2_in_spatial_window": [
+            2.598,
+            15.468
+          ],
+          "discovery_date_offset_days": 1,
+          "fire_id": "54339",
+          "first_observed_state": "2018-06-25T00:00:00",
+          "five_states_cover_48h": true,
+          "last_observed_state": "2018-07-03T12:00:00",
+          "longest_12h_run": 18,
+          "minimum_start_window_distance_m": 1524.6,
+          "observed_states_in_spatial_window": 18,
+          "t_start": "2018-06-25T00:00:00",
+          "two_consecutive_12h_states": true
+        },
+        "selection_used_final_area_or_perimeter": false,
+        "status": "unique_spatiotemporal_candidate"
+      },
+      "fod_id": 400310583,
+      "fpa_unique_fire_id": "W-724657",
+      "name": "ORGAN",
+      "scenario_id": "fpa-fod-400310583-organ",
+      "split": "train",
+      "state": "NM",
+      "year": 2018
+    },
+    {
+      "discovery_date": "2018-04-12",
+      "feds": {
+        "candidate_count": 1,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [
+          {
+            "area_range_km2_in_spatial_window": [
+              4.934,
+              4.934
+            ],
+            "discovery_date_offset_days": 0,
+            "fire_id": "30459",
+            "first_observed_state": "2018-04-12T12:00:00",
+            "five_states_cover_48h": true,
+            "last_observed_state": "2018-04-17T00:00:00",
+            "longest_12h_run": 10,
+            "minimum_start_window_distance_m": 1503.9,
+            "observed_states_in_spatial_window": 10,
+            "t_start": "2018-04-12T12:00:00",
+            "two_consecutive_12h_states": true
+          }
+        ],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "W-725355",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400310659-206",
+        "selected": {
+          "area_range_km2_in_spatial_window": [
+            4.934,
+            4.934
+          ],
+          "discovery_date_offset_days": 0,
+          "fire_id": "30459",
+          "first_observed_state": "2018-04-12T12:00:00",
+          "five_states_cover_48h": true,
+          "last_observed_state": "2018-04-17T00:00:00",
+          "longest_12h_run": 10,
+          "minimum_start_window_distance_m": 1503.9,
+          "observed_states_in_spatial_window": 10,
+          "t_start": "2018-04-12T12:00:00",
+          "two_consecutive_12h_states": true
+        },
+        "selection_used_final_area_or_perimeter": false,
+        "status": "unique_spatiotemporal_candidate"
+      },
+      "fod_id": 400310659,
+      "fpa_unique_fire_id": "W-725355",
+      "name": "206",
+      "scenario_id": "fpa-fod-400310659-206",
+      "split": "train",
+      "state": "NM",
+      "year": 2018
+    },
+    {
+      "discovery_date": "2018-07-01",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "W-720398",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400310911-hogan",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400310911,
+      "fpa_unique_fire_id": "W-720398",
+      "name": "HOGAN",
+      "scenario_id": "fpa-fod-400310911-hogan",
+      "split": "train",
+      "state": "NV",
+      "year": 2018
+    },
+    {
+      "discovery_date": "2018-07-21",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "W-722132",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400310930-owyhee",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400310930,
+      "fpa_unique_fire_id": "W-722132",
+      "name": "OWYHEE",
+      "scenario_id": "fpa-fod-400310930-owyhee",
+      "split": "train",
+      "state": "NV",
+      "year": 2018
+    },
+    {
+      "discovery_date": "2018-08-18",
+      "feds": {
+        "candidate_count": 1,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [
+          {
+            "area_range_km2_in_spatial_window": [
+              16.533,
+              108.82
+            ],
+            "discovery_date_offset_days": 1,
+            "fire_id": "65196",
+            "first_observed_state": "2018-08-19T00:00:00",
+            "five_states_cover_48h": true,
+            "last_observed_state": "2018-08-25T12:00:00",
+            "longest_12h_run": 14,
+            "minimum_start_window_distance_m": 584.1,
+            "observed_states_in_spatial_window": 14,
+            "t_start": "2018-08-19T00:00:00",
+            "two_consecutive_12h_states": true
+          }
+        ],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "W-725156",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400310977-sheep-creek",
+        "selected": {
+          "area_range_km2_in_spatial_window": [
+            16.533,
+            108.82
+          ],
+          "discovery_date_offset_days": 1,
+          "fire_id": "65196",
+          "first_observed_state": "2018-08-19T00:00:00",
+          "five_states_cover_48h": true,
+          "last_observed_state": "2018-08-25T12:00:00",
+          "longest_12h_run": 14,
+          "minimum_start_window_distance_m": 584.1,
+          "observed_states_in_spatial_window": 14,
+          "t_start": "2018-08-19T00:00:00",
+          "two_consecutive_12h_states": true
+        },
+        "selection_used_final_area_or_perimeter": false,
+        "status": "unique_spatiotemporal_candidate"
+      },
+      "fod_id": 400310977,
+      "fpa_unique_fire_id": "W-725156",
+      "name": "SHEEP CREEK",
+      "scenario_id": "fpa-fod-400310977-sheep-creek",
+      "split": "train",
+      "state": "NV",
+      "year": 2018
+    },
+    {
+      "discovery_date": "2018-08-17",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "W-726073",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400312300-lone-rock",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400312300,
+      "fpa_unique_fire_id": "W-726073",
+      "name": "LONE ROCK",
+      "scenario_id": "fpa-fod-400312300-lone-rock",
+      "split": "train",
+      "state": "OR",
+      "year": 2018
+    },
+    {
+      "discovery_date": "2018-06-28",
+      "feds": {
+        "candidate_count": 1,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [
+          {
+            "area_range_km2_in_spatial_window": [
+              16.396,
+              20.942
+            ],
+            "discovery_date_offset_days": 0,
+            "fire_id": "55076",
+            "first_observed_state": "2018-06-28T12:00:00",
+            "five_states_cover_48h": true,
+            "last_observed_state": "2018-07-03T12:00:00",
+            "longest_12h_run": 11,
+            "minimum_start_window_distance_m": 2097.3,
+            "observed_states_in_spatial_window": 11,
+            "t_start": "2018-06-28T12:00:00",
+            "two_consecutive_12h_states": true
+          }
+        ],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "W-721493",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400312787-black-mountain",
+        "selected": {
+          "area_range_km2_in_spatial_window": [
+            16.396,
+            20.942
+          ],
+          "discovery_date_offset_days": 0,
+          "fire_id": "55076",
+          "first_observed_state": "2018-06-28T12:00:00",
+          "five_states_cover_48h": true,
+          "last_observed_state": "2018-07-03T12:00:00",
+          "longest_12h_run": 11,
+          "minimum_start_window_distance_m": 2097.3,
+          "observed_states_in_spatial_window": 11,
+          "t_start": "2018-06-28T12:00:00",
+          "two_consecutive_12h_states": true
+        },
+        "selection_used_final_area_or_perimeter": false,
+        "status": "unique_spatiotemporal_candidate"
+      },
+      "fod_id": 400312787,
+      "fpa_unique_fire_id": "W-721493",
+      "name": "BLACK MOUNTAIN",
+      "scenario_id": "fpa-fod-400312787-black-mountain",
+      "split": "train",
+      "state": "UT",
+      "year": 2018
+    },
+    {
+      "discovery_date": "2018-07-20",
+      "feds": {
+        "candidate_count": 1,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [
+          {
+            "area_range_km2_in_spatial_window": [
+              0.141,
+              49.73
+            ],
+            "discovery_date_offset_days": 2,
+            "fire_id": "59984",
+            "first_observed_state": "2018-07-22T12:00:00",
+            "five_states_cover_48h": true,
+            "last_observed_state": "2018-08-23T12:00:00",
+            "longest_12h_run": 65,
+            "minimum_start_window_distance_m": 1342.0,
+            "observed_states_in_spatial_window": 65,
+            "t_start": "2018-07-22T12:00:00",
+            "two_consecutive_12h_states": true
+          }
+        ],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "W-720342",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400313301-bear-trap",
+        "selected": {
+          "area_range_km2_in_spatial_window": [
+            0.141,
+            49.73
+          ],
+          "discovery_date_offset_days": 2,
+          "fire_id": "59984",
+          "first_observed_state": "2018-07-22T12:00:00",
+          "five_states_cover_48h": true,
+          "last_observed_state": "2018-08-23T12:00:00",
+          "longest_12h_run": 65,
+          "minimum_start_window_distance_m": 1342.0,
+          "observed_states_in_spatial_window": 65,
+          "t_start": "2018-07-22T12:00:00",
+          "two_consecutive_12h_states": true
+        },
+        "selection_used_final_area_or_perimeter": false,
+        "status": "unique_spatiotemporal_candidate"
+      },
+      "fod_id": 400313301,
+      "fpa_unique_fire_id": "W-720342",
+      "name": "BEAR TRAP",
+      "scenario_id": "fpa-fod-400313301-bear-trap",
+      "split": "train",
+      "state": "UT",
+      "year": 2018
+    },
+    {
+      "discovery_date": "2018-08-16",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "W-723702",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400313679-meninick-pass",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400313679,
+      "fpa_unique_fire_id": "W-723702",
+      "name": "MENINICK PASS",
+      "scenario_id": "fpa-fod-400313679-meninick-pass",
+      "split": "train",
+      "state": "WA",
+      "year": 2018
+    },
+    {
+      "discovery_date": "2018-06-11",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "ICS209_2018_9073354",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400389761-lions",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400389761,
+      "fpa_unique_fire_id": "ICS209_2018_9073354",
+      "name": "LIONS",
+      "scenario_id": "fpa-fod-400389761-lions",
+      "split": "train",
+      "state": "CA",
+      "year": 2018
+    },
+    {
+      "discovery_date": "2018-07-15",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "ICS209_2018_9059104",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400389771-natchez",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400389771,
+      "fpa_unique_fire_id": "ICS209_2018_9059104",
+      "name": "NATCHEZ",
+      "scenario_id": "fpa-fod-400389771-natchez",
+      "split": "train",
+      "state": "CA",
+      "year": 2018
+    },
+    {
+      "discovery_date": "2019-08-05",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "FS-6948109",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400500160-sheridan",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400500160,
+      "fpa_unique_fire_id": "FS-6948109",
+      "name": "SHERIDAN",
+      "scenario_id": "fpa-fod-400500160-sheridan",
+      "split": "train",
+      "state": "AZ",
+      "year": 2019
+    },
+    {
+      "discovery_date": "2019-09-08",
+      "feds": {
+        "candidate_count": 1,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [
+          {
+            "area_range_km2_in_spatial_window": [
+              0.141,
+              53.716
+            ],
+            "discovery_date_offset_days": 1,
+            "fire_id": "61143",
+            "first_observed_state": "2019-09-09T12:00:00",
+            "five_states_cover_48h": true,
+            "last_observed_state": "2019-10-24T12:00:00",
+            "longest_12h_run": 91,
+            "minimum_start_window_distance_m": 987.6,
+            "observed_states_in_spatial_window": 91,
+            "t_start": "2019-09-09T12:00:00",
+            "two_consecutive_12h_states": true
+          }
+        ],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "FS-6983738",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400501480-decker",
+        "selected": {
+          "area_range_km2_in_spatial_window": [
+            0.141,
+            53.716
+          ],
+          "discovery_date_offset_days": 1,
+          "fire_id": "61143",
+          "first_observed_state": "2019-09-09T12:00:00",
+          "five_states_cover_48h": true,
+          "last_observed_state": "2019-10-24T12:00:00",
+          "longest_12h_run": 91,
+          "minimum_start_window_distance_m": 987.6,
+          "observed_states_in_spatial_window": 91,
+          "t_start": "2019-09-09T12:00:00",
+          "two_consecutive_12h_states": true
+        },
+        "selection_used_final_area_or_perimeter": false,
+        "status": "unique_spatiotemporal_candidate"
+      },
+      "fod_id": 400501480,
+      "fpa_unique_fire_id": "FS-6983738",
+      "name": "DECKER",
+      "scenario_id": "fpa-fod-400501480-decker",
+      "split": "train",
+      "state": "CO",
+      "year": 2019
+    },
+    {
+      "discovery_date": "2019-07-10",
+      "feds": {
+        "candidate_count": 1,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [
+          {
+            "area_range_km2_in_spatial_window": [
+              0.487,
+              22.311
+            ],
+            "discovery_date_offset_days": 1,
+            "fire_id": "47816",
+            "first_observed_state": "2019-07-11T00:00:00",
+            "five_states_cover_48h": true,
+            "last_observed_state": "2019-08-06T12:00:00",
+            "longest_12h_run": 54,
+            "minimum_start_window_distance_m": 2580.2,
+            "observed_states_in_spatial_window": 54,
+            "t_start": "2019-07-11T00:00:00",
+            "two_consecutive_12h_states": true
+          }
+        ],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "FS-6940208",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400504417-shady",
+        "selected": {
+          "area_range_km2_in_spatial_window": [
+            0.487,
+            22.311
+          ],
+          "discovery_date_offset_days": 1,
+          "fire_id": "47816",
+          "first_observed_state": "2019-07-11T00:00:00",
+          "five_states_cover_48h": true,
+          "last_observed_state": "2019-08-06T12:00:00",
+          "longest_12h_run": 54,
+          "minimum_start_window_distance_m": 2580.2,
+          "observed_states_in_spatial_window": 54,
+          "t_start": "2019-07-11T00:00:00",
+          "two_consecutive_12h_states": true
+        },
+        "selection_used_final_area_or_perimeter": false,
+        "status": "unique_spatiotemporal_candidate"
+      },
+      "fod_id": 400504417,
+      "fpa_unique_fire_id": "FS-6940208",
+      "name": "SHADY",
+      "scenario_id": "fpa-fod-400504417-shady",
+      "split": "train",
+      "state": "ID",
+      "year": 2019
+    },
+    {
+      "discovery_date": "2019-09-04",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "FS-6968402",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400504463-taboose",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400504463,
+      "fpa_unique_fire_id": "FS-6968402",
+      "name": "TABOOSE",
+      "scenario_id": "fpa-fod-400504463-taboose",
+      "split": "train",
+      "state": "CA",
+      "year": 2019
+    },
+    {
+      "discovery_date": "2019-06-19",
+      "feds": {
+        "candidate_count": 1,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [
+          {
+            "area_range_km2_in_spatial_window": [
+              0.22,
+              68.17
+            ],
+            "discovery_date_offset_days": 0,
+            "fire_id": "42756",
+            "first_observed_state": "2019-06-19T12:00:00",
+            "five_states_cover_48h": true,
+            "last_observed_state": "2019-07-05T12:00:00",
+            "longest_12h_run": 33,
+            "minimum_start_window_distance_m": 1349.4,
+            "observed_states_in_spatial_window": 33,
+            "t_start": "2019-06-19T12:00:00",
+            "two_consecutive_12h_states": true
+          }
+        ],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "FS-6965087",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400505027-pine-lodge",
+        "selected": {
+          "area_range_km2_in_spatial_window": [
+            0.22,
+            68.17
+          ],
+          "discovery_date_offset_days": 0,
+          "fire_id": "42756",
+          "first_observed_state": "2019-06-19T12:00:00",
+          "five_states_cover_48h": true,
+          "last_observed_state": "2019-07-05T12:00:00",
+          "longest_12h_run": 33,
+          "minimum_start_window_distance_m": 1349.4,
+          "observed_states_in_spatial_window": 33,
+          "t_start": "2019-06-19T12:00:00",
+          "two_consecutive_12h_states": true
+        },
+        "selection_used_final_area_or_perimeter": false,
+        "status": "unique_spatiotemporal_candidate"
+      },
+      "fod_id": 400505027,
+      "fpa_unique_fire_id": "FS-6965087",
+      "name": "PINE LODGE",
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "split": "train",
+      "state": "NM",
+      "year": 2019
+    },
+    {
+      "discovery_date": "2019-10-06",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "W-735086",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400506448-briceburg",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400506448,
+      "fpa_unique_fire_id": "W-735086",
+      "name": "BRICEBURG",
+      "scenario_id": "fpa-fod-400506448-briceburg",
+      "split": "train",
+      "state": "CA",
+      "year": 2019
+    },
+    {
+      "discovery_date": "2019-10-23",
+      "feds": {
+        "candidate_count": 1,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [
+          {
+            "area_range_km2_in_spatial_window": [
+              70.165,
+              339.602
+            ],
+            "discovery_date_offset_days": 1,
+            "fire_id": "72868",
+            "first_observed_state": "2019-10-24T00:00:00",
+            "five_states_cover_48h": true,
+            "last_observed_state": "2019-11-02T12:00:00",
+            "longest_12h_run": 8,
+            "minimum_start_window_distance_m": 0.0,
+            "observed_states_in_spatial_window": 11,
+            "t_start": "2019-10-24T00:00:00",
+            "two_consecutive_12h_states": true
+          }
+        ],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "W-735880",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400506459-kincade",
+        "selected": {
+          "area_range_km2_in_spatial_window": [
+            70.165,
+            339.602
+          ],
+          "discovery_date_offset_days": 1,
+          "fire_id": "72868",
+          "first_observed_state": "2019-10-24T00:00:00",
+          "five_states_cover_48h": true,
+          "last_observed_state": "2019-11-02T12:00:00",
+          "longest_12h_run": 8,
+          "minimum_start_window_distance_m": 0.0,
+          "observed_states_in_spatial_window": 11,
+          "t_start": "2019-10-24T00:00:00",
+          "two_consecutive_12h_states": true
+        },
+        "selection_used_final_area_or_perimeter": false,
+        "status": "unique_spatiotemporal_candidate"
+      },
+      "fod_id": 400506459,
+      "fpa_unique_fire_id": "W-735880",
+      "name": "KINCADE",
+      "scenario_id": "fpa-fod-400506459-kincade",
+      "split": "train",
+      "state": "CA",
+      "year": 2019
+    },
+    {
+      "discovery_date": "2019-07-23",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "W-735517",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400506885-huck",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400506885,
+      "fpa_unique_fire_id": "W-735517",
+      "name": "HUCK",
+      "scenario_id": "fpa-fod-400506885-huck",
+      "split": "train",
+      "state": "AZ",
+      "year": 2019
+    },
+    {
+      "discovery_date": "2019-07-22",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "W-732062",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400508285-sheep",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400508285,
+      "fpa_unique_fire_id": "W-732062",
+      "name": "SHEEP",
+      "scenario_id": "fpa-fod-400508285-sheep",
+      "split": "train",
+      "state": "ID",
+      "year": 2019
+    },
+    {
+      "discovery_date": "2019-07-23",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "W-731363",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400508306-lookout-point",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400508306,
+      "fpa_unique_fire_id": "W-731363",
+      "name": "LOOKOUT POINT",
+      "scenario_id": "fpa-fod-400508306-lookout-point",
+      "split": "train",
+      "state": "ID",
+      "year": 2019
+    },
+    {
+      "discovery_date": "2019-08-01",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "W-733239",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400509143-ridgetop",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400509143,
+      "fpa_unique_fire_id": "W-733239",
+      "name": "RIDGETOP",
+      "scenario_id": "fpa-fod-400509143-ridgetop",
+      "split": "train",
+      "state": "MT",
+      "year": 2019
+    },
+    {
+      "discovery_date": "2019-08-04",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "W-732847",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400510308-shafter",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400510308,
+      "fpa_unique_fire_id": "W-732847",
+      "name": "SHAFTER",
+      "scenario_id": "fpa-fod-400510308-shafter",
+      "split": "train",
+      "state": "NV",
+      "year": 2019
+    },
+    {
+      "discovery_date": "2019-07-22",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "W-730884",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400510515-summit",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400510515,
+      "fpa_unique_fire_id": "W-730884",
+      "name": "SUMMIT",
+      "scenario_id": "fpa-fod-400510515-summit",
+      "split": "train",
+      "state": "NV",
+      "year": 2019
+    },
+    {
+      "discovery_date": "2019-08-05",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "W-731909",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400512411-russell",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400512411,
+      "fpa_unique_fire_id": "W-731909",
+      "name": "RUSSELL",
+      "scenario_id": "fpa-fod-400512411-russell",
+      "split": "train",
+      "state": "UT",
+      "year": 2019
+    },
+    {
+      "discovery_date": "2019-06-03",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "FWS-2019USWACBRL9ZL",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400513361-243-command",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400513361,
+      "fpa_unique_fire_id": "FWS-2019USWACBRL9ZL",
+      "name": "243 COMMAND",
+      "scenario_id": "fpa-fod-400513361-243-command",
+      "split": "train",
+      "state": "WA",
+      "year": 2019
+    },
+    {
+      "discovery_date": "2019-07-18",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "FWS-2019USWAHFRMF5B",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400513433-cold-creek",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400513433,
+      "fpa_unique_fire_id": "FWS-2019USWAHFRMF5B",
+      "name": "COLD CREEK",
+      "scenario_id": "fpa-fod-400513433-cold-creek",
+      "split": "train",
+      "state": "WA",
+      "year": 2019
+    },
+    {
+      "discovery_date": "2019-09-15",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "FWS-2019USORHMRMS0T",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400513550-poker",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400513550,
+      "fpa_unique_fire_id": "FWS-2019USORHMRMS0T",
+      "name": "POKER",
+      "scenario_id": "fpa-fod-400513550-poker",
+      "split": "train",
+      "state": "OR",
+      "year": 2019
+    },
+    {
+      "discovery_date": "2019-10-31",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "ICS209_2019_10757785",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400732952-maria",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400732952,
+      "fpa_unique_fire_id": "ICS209_2019_10757785",
+      "name": "MARIA",
+      "scenario_id": "fpa-fod-400732952-maria",
+      "split": "train",
+      "state": "CA",
+      "year": 2019
+    },
+    {
+      "discovery_date": "2019-09-04",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "ICS209_2019_10802166",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400732973-walker",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400732973,
+      "fpa_unique_fire_id": "ICS209_2019_10802166",
+      "name": "WALKER",
+      "scenario_id": "fpa-fod-400732973-walker",
+      "split": "train",
+      "state": "CA",
+      "year": 2019
+    },
+    {
+      "discovery_date": "2019-08-09",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "ICS209_2019_10805427",
+          "irwin_ids": [],
+          "wfigs_irwin_match_count": 0
+        },
+        "scenario_id": "fpa-fod-400732975-204-cow",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 400732975,
+      "fpa_unique_fire_id": "ICS209_2019_10805427",
+      "name": "204 COW",
+      "scenario_id": "fpa-fod-400732975-204-cow",
+      "split": "train",
+      "state": "OR",
+      "year": 2019
+    },
+    {
+      "discovery_date": "2023-05-18",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [
+            "Burned Over",
+            "Held",
+            "Not Engaged"
+          ],
+          "fle_rows_returned": 3,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": true,
+          "fle_total_line_meters": 61009.15285250179,
+          "fpa_unique_fire_id": "2023-NMGNF-000191",
+          "irwin_ids": [
+            "{07B20491-EC64-4AD5-973C-64237FBB3838}"
+          ],
+          "wfigs_irwin_match_count": 1
+        },
+        "scenario_id": "fpa-fod-401308187-pass",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 401308187,
+      "fpa_unique_fire_id": "2023-NMGNF-000191",
+      "name": "PASS",
+      "scenario_id": "fpa-fod-401308187-pass",
+      "split": "validation",
+      "state": "NM",
+      "year": 2023
+    },
+    {
+      "discovery_date": "2023-06-13",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [
+            "Burned Over",
+            "Held",
+            "Not Engaged"
+          ],
+          "fle_rows_returned": 3,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": true,
+          "fle_total_line_meters": 3992.8922365582007,
+          "fpa_unique_fire_id": "2023-WASPD-000224",
+          "irwin_ids": [
+            "{D6EECDC5-9951-4D2E-80D5-6CD5F2141C1C}"
+          ],
+          "wfigs_irwin_match_count": 1
+        },
+        "scenario_id": "fpa-fod-401310829-hansen-road",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 401310829,
+      "fpa_unique_fire_id": "2023-WASPD-000224",
+      "name": "HANSEN ROAD",
+      "scenario_id": "fpa-fod-401310829-hansen-road",
+      "split": "validation",
+      "state": "WA",
+      "year": 2023
+    },
+    {
+      "discovery_date": "2023-06-30",
+      "feds": {
+        "candidate_count": 1,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [
+          {
+            "area_range_km2_in_spatial_window": [
+              0.892,
+              44.586
+            ],
+            "discovery_date_offset_days": 0,
+            "fire_id": "55555",
+            "first_observed_state": "2023-07-01T00:00:00",
+            "five_states_cover_48h": true,
+            "last_observed_state": "2023-07-12T00:00:00",
+            "longest_12h_run": 23,
+            "minimum_start_window_distance_m": 219.2,
+            "observed_states_in_spatial_window": 23,
+            "t_start": "2023-06-30T12:00:00",
+            "two_consecutive_12h_states": true
+          }
+        ],
+        "fle": {
+          "fle_engagement_categories": [
+            "Burned Over",
+            "Held",
+            "Not Engaged"
+          ],
+          "fle_rows_returned": 3,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": true,
+          "fle_total_line_meters": 28180.23179221339,
+          "fpa_unique_fire_id": "2023-AZCNF-000554",
+          "irwin_ids": [
+            "{C2CFBFA6-615F-46BF-83E9-011488F68C6E}"
+          ],
+          "wfigs_irwin_match_count": 1
+        },
+        "scenario_id": "fpa-fod-401312856-beehive",
+        "selected": {
+          "area_range_km2_in_spatial_window": [
+            0.892,
+            44.586
+          ],
+          "discovery_date_offset_days": 0,
+          "fire_id": "55555",
+          "first_observed_state": "2023-07-01T00:00:00",
+          "five_states_cover_48h": true,
+          "last_observed_state": "2023-07-12T00:00:00",
+          "longest_12h_run": 23,
+          "minimum_start_window_distance_m": 219.2,
+          "observed_states_in_spatial_window": 23,
+          "t_start": "2023-06-30T12:00:00",
+          "two_consecutive_12h_states": true
+        },
+        "selection_used_final_area_or_perimeter": false,
+        "status": "unique_spatiotemporal_candidate"
+      },
+      "fod_id": 401312856,
+      "fpa_unique_fire_id": "2023-AZCNF-000554",
+      "name": "BEEHIVE",
+      "scenario_id": "fpa-fod-401312856-beehive",
+      "split": "validation",
+      "state": "AZ",
+      "year": 2023
+    },
+    {
+      "discovery_date": "2023-07-03",
+      "feds": {
+        "candidate_count": 1,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [
+          {
+            "area_range_km2_in_spatial_window": [
+              10.596,
+              17.772
+            ],
+            "discovery_date_offset_days": 0,
+            "fire_id": "56108",
+            "first_observed_state": "2023-07-04T00:00:00",
+            "five_states_cover_48h": true,
+            "last_observed_state": "2023-07-09T12:00:00",
+            "longest_12h_run": 12,
+            "minimum_start_window_distance_m": 2250.0,
+            "observed_states_in_spatial_window": 12,
+            "t_start": "2023-07-03T12:00:00",
+            "two_consecutive_12h_states": true
+          }
+        ],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "2023-NMN3S-000324",
+          "irwin_ids": [
+            "{C61D4537-0F13-49E7-B9DA-4D0A78679B1D}"
+          ],
+          "wfigs_irwin_match_count": 1
+        },
+        "scenario_id": "fpa-fod-401313289-brushy",
+        "selected": {
+          "area_range_km2_in_spatial_window": [
+            10.596,
+            17.772
+          ],
+          "discovery_date_offset_days": 0,
+          "fire_id": "56108",
+          "first_observed_state": "2023-07-04T00:00:00",
+          "five_states_cover_48h": true,
+          "last_observed_state": "2023-07-09T12:00:00",
+          "longest_12h_run": 12,
+          "minimum_start_window_distance_m": 2250.0,
+          "observed_states_in_spatial_window": 12,
+          "t_start": "2023-07-03T12:00:00",
+          "two_consecutive_12h_states": true
+        },
+        "selection_used_final_area_or_perimeter": false,
+        "status": "unique_spatiotemporal_candidate"
+      },
+      "fod_id": 401313289,
+      "fpa_unique_fire_id": "2023-NMN3S-000324",
+      "name": "BRUSHY",
+      "scenario_id": "fpa-fod-401313289-brushy",
+      "split": "validation",
+      "state": "NM",
+      "year": 2023
+    },
+    {
+      "discovery_date": "2023-07-14",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [
+            "Burned Over",
+            "Held",
+            "Not Engaged"
+          ],
+          "fle_rows_returned": 3,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": true,
+          "fle_total_line_meters": 24036.202271035374,
+          "fpa_unique_fire_id": "2023-CARRU-102458",
+          "irwin_ids": [
+            "{04F24B12-E13F-4C7E-80AF-C8AA1A4C8FAB}"
+          ],
+          "wfigs_irwin_match_count": 1
+        },
+        "scenario_id": "fpa-fod-401315421-rabbit",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 401315421,
+      "fpa_unique_fire_id": "2023-CARRU-102458",
+      "name": "RABBIT",
+      "scenario_id": "fpa-fod-401315421-rabbit",
+      "split": "validation",
+      "state": "CA",
+      "year": 2023
+    },
+    {
+      "discovery_date": "2023-07-17",
+      "feds": {
+        "candidate_count": 1,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [
+          {
+            "area_range_km2_in_spatial_window": [
+              10.716,
+              12.305
+            ],
+            "discovery_date_offset_days": 1,
+            "fire_id": "58891",
+            "first_observed_state": "2023-07-18T00:00:00",
+            "five_states_cover_48h": true,
+            "last_observed_state": "2023-07-23T00:00:00",
+            "longest_12h_run": 11,
+            "minimum_start_window_distance_m": 807.3,
+            "observed_states_in_spatial_window": 11,
+            "t_start": "2023-07-18T00:00:00",
+            "two_consecutive_12h_states": true
+          }
+        ],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "2023-AZSCA-000983",
+          "irwin_ids": [
+            "{ADFFA002-6341-4007-922E-B827532E3F4D}"
+          ],
+          "wfigs_irwin_match_count": 1
+        },
+        "scenario_id": "fpa-fod-401315922-red-point-tank",
+        "selected": {
+          "area_range_km2_in_spatial_window": [
+            10.716,
+            12.305
+          ],
+          "discovery_date_offset_days": 1,
+          "fire_id": "58891",
+          "first_observed_state": "2023-07-18T00:00:00",
+          "five_states_cover_48h": true,
+          "last_observed_state": "2023-07-23T00:00:00",
+          "longest_12h_run": 11,
+          "minimum_start_window_distance_m": 807.3,
+          "observed_states_in_spatial_window": 11,
+          "t_start": "2023-07-18T00:00:00",
+          "two_consecutive_12h_states": true
+        },
+        "selection_used_final_area_or_perimeter": false,
+        "status": "unique_spatiotemporal_candidate"
+      },
+      "fod_id": 401315922,
+      "fpa_unique_fire_id": "2023-AZSCA-000983",
+      "name": "RED POINT TANK",
+      "scenario_id": "fpa-fod-401315922-red-point-tank",
+      "split": "validation",
+      "state": "AZ",
+      "year": 2023
+    },
+    {
+      "discovery_date": "2023-07-19",
+      "feds": {
+        "candidate_count": 1,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [
+          {
+            "area_range_km2_in_spatial_window": [
+              1.705,
+              151.561
+            ],
+            "discovery_date_offset_days": 0,
+            "fire_id": "59310",
+            "first_observed_state": "2023-07-19T12:00:00",
+            "five_states_cover_48h": true,
+            "last_observed_state": "2023-08-22T00:00:00",
+            "longest_12h_run": 68,
+            "minimum_start_window_distance_m": 0.0,
+            "observed_states_in_spatial_window": 68,
+            "t_start": "2023-07-19T12:00:00",
+            "two_consecutive_12h_states": true
+          }
+        ],
+        "fle": {
+          "fle_engagement_categories": [
+            "Burned Over",
+            "Held",
+            "Not Engaged"
+          ],
+          "fle_rows_returned": 3,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": true,
+          "fle_total_line_meters": 93709.98444931625,
+          "fpa_unique_fire_id": "2023-IDSCF-023084",
+          "irwin_ids": [
+            "{3B96070F-23BB-4B83-A2CB-5FA4C2E741E2}"
+          ],
+          "wfigs_irwin_match_count": 1
+        },
+        "scenario_id": "fpa-fod-401316132-hayden",
+        "selected": {
+          "area_range_km2_in_spatial_window": [
+            1.705,
+            151.561
+          ],
+          "discovery_date_offset_days": 0,
+          "fire_id": "59310",
+          "first_observed_state": "2023-07-19T12:00:00",
+          "five_states_cover_48h": true,
+          "last_observed_state": "2023-08-22T00:00:00",
+          "longest_12h_run": 68,
+          "minimum_start_window_distance_m": 0.0,
+          "observed_states_in_spatial_window": 68,
+          "t_start": "2023-07-19T12:00:00",
+          "two_consecutive_12h_states": true
+        },
+        "selection_used_final_area_or_perimeter": false,
+        "status": "unique_spatiotemporal_candidate"
+      },
+      "fod_id": 401316132,
+      "fpa_unique_fire_id": "2023-IDSCF-023084",
+      "name": "HAYDEN",
+      "scenario_id": "fpa-fod-401316132-hayden",
+      "split": "validation",
+      "state": "ID",
+      "year": 2023
+    },
+    {
+      "discovery_date": "2023-07-22",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [
+            "Burned Over",
+            "Held",
+            "Not Engaged"
+          ],
+          "fle_rows_returned": 3,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": true,
+          "fle_total_line_meters": 321232.46936231,
+          "fpa_unique_fire_id": "2023-ORWIF-230266",
+          "irwin_ids": [
+            "{A07D9467-CE0F-46B8-ACA1-209FE8A4A9B4}"
+          ],
+          "wfigs_irwin_match_count": 1
+        },
+        "scenario_id": "fpa-fod-401316681-bedrock",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 401316681,
+      "fpa_unique_fire_id": "2023-ORWIF-230266",
+      "name": "BEDROCK",
+      "scenario_id": "fpa-fod-401316681-bedrock",
+      "split": "validation",
+      "state": "OR",
+      "year": 2023
+    },
+    {
+      "discovery_date": "2023-07-22",
+      "feds": {
+        "candidate_count": 1,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [
+          {
+            "area_range_km2_in_spatial_window": [
+              0.221,
+              23.008
+            ],
+            "discovery_date_offset_days": 2,
+            "fire_id": "60405",
+            "first_observed_state": "2023-07-25T12:00:00",
+            "five_states_cover_48h": true,
+            "last_observed_state": "2023-08-26T00:00:00",
+            "longest_12h_run": 64,
+            "minimum_start_window_distance_m": 394.6,
+            "observed_states_in_spatial_window": 64,
+            "t_start": "2023-07-24T12:00:00",
+            "two_consecutive_12h_states": true
+          }
+        ],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "2023-NMGNF-000419",
+          "irwin_ids": [
+            "{B377E3AC-524C-466F-A4EC-88264EFE7E43}"
+          ],
+          "wfigs_irwin_match_count": 1
+        },
+        "scenario_id": "fpa-fod-401316696-turkey",
+        "selected": {
+          "area_range_km2_in_spatial_window": [
+            0.221,
+            23.008
+          ],
+          "discovery_date_offset_days": 2,
+          "fire_id": "60405",
+          "first_observed_state": "2023-07-25T12:00:00",
+          "five_states_cover_48h": true,
+          "last_observed_state": "2023-08-26T00:00:00",
+          "longest_12h_run": 64,
+          "minimum_start_window_distance_m": 394.6,
+          "observed_states_in_spatial_window": 64,
+          "t_start": "2023-07-24T12:00:00",
+          "two_consecutive_12h_states": true
+        },
+        "selection_used_final_area_or_perimeter": false,
+        "status": "unique_spatiotemporal_candidate"
+      },
+      "fod_id": 401316696,
+      "fpa_unique_fire_id": "2023-NMGNF-000419",
+      "name": "TURKEY",
+      "scenario_id": "fpa-fod-401316696-turkey",
+      "split": "validation",
+      "state": "NM",
+      "year": 2023
+    },
+    {
+      "discovery_date": "2023-07-26",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "2023-NMGNF-000447",
+          "irwin_ids": [
+            "{5334C10F-0705-4670-A1BB-3AE18CA4B228}"
+          ],
+          "wfigs_irwin_match_count": 1
+        },
+        "scenario_id": "fpa-fod-401317844-prior",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 401317844,
+      "fpa_unique_fire_id": "2023-NMGNF-000447",
+      "name": "PRIOR",
+      "scenario_id": "fpa-fod-401317844-prior",
+      "split": "validation",
+      "state": "NM",
+      "year": 2023
+    },
+    {
+      "discovery_date": "2023-07-29",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [
+            "Burned Over",
+            "Held",
+            "Not Engaged"
+          ],
+          "fle_rows_returned": 3,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": true,
+          "fle_total_line_meters": 13767.323077226782,
+          "fpa_unique_fire_id": "2023-WANCP-000262",
+          "irwin_ids": [
+            "{66E04EDE-BB28-4FC0-9255-77582BE4FFA9}"
+          ],
+          "wfigs_irwin_match_count": 1
+        },
+        "scenario_id": "fpa-fod-401317993-sourdough",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 401317993,
+      "fpa_unique_fire_id": "2023-WANCP-000262",
+      "name": "SOURDOUGH",
+      "scenario_id": "fpa-fod-401317993-sourdough",
+      "split": "validation",
+      "state": "WA",
+      "year": 2023
+    },
+    {
+      "discovery_date": "2023-08-04",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [
+            "Burned Over",
+            "Held",
+            "Not Engaged"
+          ],
+          "fle_rows_returned": 3,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": true,
+          "fle_total_line_meters": 21374.757046018432,
+          "fpa_unique_fire_id": "2023-UTFIF-230252",
+          "irwin_ids": [
+            "{55CBDD51-9B53-40C7-B274-7F273A35F575}"
+          ],
+          "wfigs_irwin_match_count": 1
+        },
+        "scenario_id": "fpa-fod-401319337-thompson-ridge",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 401319337,
+      "fpa_unique_fire_id": "2023-UTFIF-230252",
+      "name": "THOMPSON RIDGE",
+      "scenario_id": "fpa-fod-401319337-thompson-ridge",
+      "split": "validation",
+      "state": "UT",
+      "year": 2023
+    },
+    {
+      "discovery_date": "2023-08-15",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [
+            "Burned Over",
+            "Held",
+            "Not Engaged"
+          ],
+          "fle_rows_returned": 3,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": true,
+          "fle_total_line_meters": 477003.8926601206,
+          "fpa_unique_fire_id": "2023-CASRF-000939",
+          "irwin_ids": [
+            "{531B9F1B-1B36-4B91-8E63-2AADA4881DEB}"
+          ],
+          "wfigs_irwin_match_count": 1
+        },
+        "scenario_id": "fpa-fod-401321023-kelly",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 401321023,
+      "fpa_unique_fire_id": "2023-CASRF-000939",
+      "name": "KELLY",
+      "scenario_id": "fpa-fod-401321023-kelly",
+      "split": "validation",
+      "state": "CA",
+      "year": 2023
+    },
+    {
+      "discovery_date": "2023-08-15",
+      "feds": {
+        "candidate_count": 1,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [
+          {
+            "area_range_km2_in_spatial_window": [
+              24.56,
+              39.232
+            ],
+            "discovery_date_offset_days": 1,
+            "fire_id": "65109",
+            "first_observed_state": "2023-08-17T00:00:00",
+            "five_states_cover_48h": true,
+            "last_observed_state": "2023-09-02T12:00:00",
+            "longest_12h_run": 34,
+            "minimum_start_window_distance_m": 2458.3,
+            "observed_states_in_spatial_window": 34,
+            "t_start": "2023-08-16T00:00:00",
+            "two_consecutive_12h_states": true
+          }
+        ],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "2023-CAKNF-006988",
+          "irwin_ids": [
+            "{22C55899-C613-43FD-9ED3-5830DECD9073}"
+          ],
+          "wfigs_irwin_match_count": 1
+        },
+        "scenario_id": "fpa-fod-401321046-head",
+        "selected": {
+          "area_range_km2_in_spatial_window": [
+            24.56,
+            39.232
+          ],
+          "discovery_date_offset_days": 1,
+          "fire_id": "65109",
+          "first_observed_state": "2023-08-17T00:00:00",
+          "five_states_cover_48h": true,
+          "last_observed_state": "2023-09-02T12:00:00",
+          "longest_12h_run": 34,
+          "minimum_start_window_distance_m": 2458.3,
+          "observed_states_in_spatial_window": 34,
+          "t_start": "2023-08-16T00:00:00",
+          "two_consecutive_12h_states": true
+        },
+        "selection_used_final_area_or_perimeter": false,
+        "status": "unique_spatiotemporal_candidate"
+      },
+      "fod_id": 401321046,
+      "fpa_unique_fire_id": "2023-CAKNF-006988",
+      "name": "HEAD",
+      "scenario_id": "fpa-fod-401321046-head",
+      "split": "validation",
+      "state": "CA",
+      "year": 2023
+    },
+    {
+      "discovery_date": "2023-08-16",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "2023-CAKNF-007029",
+          "irwin_ids": [
+            "{7B4B2AE1-444D-4E86-B4F8-170D81D16D10}"
+          ],
+          "wfigs_irwin_match_count": 1
+        },
+        "scenario_id": "fpa-fod-401321294-ufish",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 401321294,
+      "fpa_unique_fire_id": "2023-CAKNF-007029",
+      "name": "UFISH",
+      "scenario_id": "fpa-fod-401321294-ufish",
+      "split": "validation",
+      "state": "CA",
+      "year": 2023
+    },
+    {
+      "discovery_date": "2023-08-16",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [],
+          "fle_rows_returned": 0,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": false,
+          "fle_total_line_meters": null,
+          "fpa_unique_fire_id": "2023-CASRF-000983",
+          "irwin_ids": [
+            "{F40CFFB2-4238-4FED-A04A-5224984C82E5}"
+          ],
+          "wfigs_irwin_match_count": 1
+        },
+        "scenario_id": "fpa-fod-401321340-pearch",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 401321340,
+      "fpa_unique_fire_id": "2023-CASRF-000983",
+      "name": "PEARCH",
+      "scenario_id": "fpa-fod-401321340-pearch",
+      "split": "validation",
+      "state": "CA",
+      "year": 2023
+    },
+    {
+      "discovery_date": "2023-08-18",
+      "feds": {
+        "candidate_count": 1,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [
+          {
+            "area_range_km2_in_spatial_window": [
+              11.526,
+              110.573
+            ],
+            "discovery_date_offset_days": 0,
+            "fire_id": "65949",
+            "first_observed_state": "2023-08-18T12:00:00",
+            "five_states_cover_48h": true,
+            "last_observed_state": "2023-09-03T00:00:00",
+            "longest_12h_run": 32,
+            "minimum_start_window_distance_m": 0.0,
+            "observed_states_in_spatial_window": 32,
+            "t_start": "2023-08-18T12:00:00",
+            "two_consecutive_12h_states": true
+          }
+        ],
+        "fle": {
+          "fle_engagement_categories": [
+            "Burned Over",
+            "Held",
+            "Not Engaged"
+          ],
+          "fle_rows_returned": 3,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": true,
+          "fle_total_line_meters": 118119.94461347823,
+          "fpa_unique_fire_id": "2023-MTLNF-200730",
+          "irwin_ids": [
+            "{7A672439-4870-478D-A981-B5497D7204AB}"
+          ],
+          "wfigs_irwin_match_count": 1
+        },
+        "scenario_id": "fpa-fod-401321600-river-road-east",
+        "selected": {
+          "area_range_km2_in_spatial_window": [
+            11.526,
+            110.573
+          ],
+          "discovery_date_offset_days": 0,
+          "fire_id": "65949",
+          "first_observed_state": "2023-08-18T12:00:00",
+          "five_states_cover_48h": true,
+          "last_observed_state": "2023-09-03T00:00:00",
+          "longest_12h_run": 32,
+          "minimum_start_window_distance_m": 0.0,
+          "observed_states_in_spatial_window": 32,
+          "t_start": "2023-08-18T12:00:00",
+          "two_consecutive_12h_states": true
+        },
+        "selection_used_final_area_or_perimeter": false,
+        "status": "unique_spatiotemporal_candidate"
+      },
+      "fod_id": 401321600,
+      "fpa_unique_fire_id": "2023-MTLNF-200730",
+      "name": "RIVER ROAD EAST",
+      "scenario_id": "fpa-fod-401321600-river-road-east",
+      "split": "validation",
+      "state": "MT",
+      "year": 2023
+    },
+    {
+      "discovery_date": "2023-08-18",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [
+            "Burned Over",
+            "Held",
+            "Not Engaged"
+          ],
+          "fle_rows_returned": 3,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": true,
+          "fle_total_line_meters": 39745.013235457925,
+          "fpa_unique_fire_id": "2023-WANES-001974",
+          "irwin_ids": [
+            "{E2315128-D646-4BAF-BCEC-BE97E8859A39}"
+          ],
+          "wfigs_irwin_match_count": 1
+        },
+        "scenario_id": "fpa-fod-401321611-gray",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 401321611,
+      "fpa_unique_fire_id": "2023-WANES-001974",
+      "name": "GRAY",
+      "scenario_id": "fpa-fod-401321611-gray",
+      "split": "validation",
+      "state": "WA",
+      "year": 2023
+    },
+    {
+      "discovery_date": "2023-08-18",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [
+            "Burned Over",
+            "Held",
+            "Not Engaged"
+          ],
+          "fle_rows_returned": 3,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": true,
+          "fle_total_line_meters": 106615.09935093658,
+          "fpa_unique_fire_id": "2023-WANES-001979",
+          "irwin_ids": [
+            "{EFDFD0A6-BCC7-4038-8047-111E4C72D87C}"
+          ],
+          "wfigs_irwin_match_count": 1
+        },
+        "scenario_id": "fpa-fod-401321674-oregon",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 401321674,
+      "fpa_unique_fire_id": "2023-WANES-001979",
+      "name": "OREGON",
+      "scenario_id": "fpa-fod-401321674-oregon",
+      "split": "validation",
+      "state": "WA",
+      "year": 2023
+    },
+    {
+      "discovery_date": "2023-09-29",
+      "feds": {
+        "candidate_count": 0,
+        "candidate_rule": "FEDS t_st date within -1/+2 days of FPA-FOD discovery date and at least one perimeter observed during the first 24 hours after t_st within the fixed search radius of the FPA-FOD reference point; a match is counted only when unique.",
+        "candidates": [],
+        "fle": {
+          "fle_engagement_categories": [
+            "Burned Over",
+            "Held",
+            "Not Engaged"
+          ],
+          "fle_rows_returned": 3,
+          "fle_source_is_grouped_summary_not_line_geometry": true,
+          "fle_summary_present": true,
+          "fle_total_line_meters": 17924.303759532326,
+          "fpa_unique_fire_id": "2023-COLSD-000197",
+          "irwin_ids": [
+            "{782742D8-FE02-4E06-B42C-9C662E5911FE}"
+          ],
+          "wfigs_irwin_match_count": 1
+        },
+        "scenario_id": "fpa-fod-401326006-iron",
+        "selected": null,
+        "selection_used_final_area_or_perimeter": false,
+        "status": "no_candidate"
+      },
+      "fod_id": 401326006,
+      "fpa_unique_fire_id": "2023-COLSD-000197",
+      "name": "IRON",
+      "scenario_id": "fpa-fod-401326006-iron",
+      "split": "validation",
+      "state": "CO",
+      "year": 2023
+    }
+  ],
+  "cohort_case_count": 60,
+  "cohort_manifest": "data/manifests/fireline-benchmark-cohort-v1.json",
+  "cohort_source_commit": "610bc65076f907fffca2076b4e72f405b4c082a9",
+  "created_utc": "2026-11-02T23:24:31.974013+00:00",
+  "feds_start_date_window_days": {
+    "after": 2,
+    "before": 1
+  },
+  "feds_zenodo_metadata": {
+    "license": "cc-by-4.0",
+    "perimeter_files": {
+      "2018": {
+        "checksum": "md5:c205abae4b12544e6cfb2d754a21981c",
+        "download_url": "https://zenodo.org/api/records/22921773/files/feds_2018_lf_perimeter.fgb/content",
+        "filename": "feds_2018_lf_perimeter.fgb",
+        "size_bytes": 384323744
+      },
+      "2019": {
+        "checksum": "md5:3b921e9a28d045ffcf3015f893ed5831",
+        "download_url": "https://zenodo.org/api/records/22921773/files/feds_2019_lf_perimeter.fgb/content",
+        "filename": "feds_2019_lf_perimeter.fgb",
+        "size_bytes": 445386296
+      },
+      "2023": {
+        "checksum": "md5:ad32170e694e42127f3b865d93e1a81a",
+        "download_url": "https://zenodo.org/api/records/22921773/files/feds_2023_lf_perimeter.fgb/content",
+        "filename": "feds_2023_lf_perimeter.fgb",
+        "size_bytes": 425858840
+      }
+    },
+    "published": "2026-10-02",
+    "record_id": "22921773",
+    "record_url": "https://zenodo.org/records/22921773",
+    "version": "v1"
+  },
+  "method_limits": [
+    "FEDS-CONUS exposes its own fireID, not the FPA-FOD identifier. The event match is provisional and uses only FPA-FOD discovery date, reported point, FEDS t_st, and the fixed spatial tolerance.",
+    "The FPA-FOD point has unreported event-specific uncertainty and its date has no timezone in this adapter; the date window is intentionally recorded.",
+    "The FLE feature service queried here is an incident-level grouped summary. It is not the line-level GIS used for post-hoc spatial comparisons.",
+    "No final area, final perimeter, FLE outcome, or test case is used to choose a FEDS fireID."
+  ],
+  "pre_agent_data_gate": {
+    "instruction": "Stop before agent training if false; a split-only audit is incomplete; do not replace the cohort silently.",
+    "pass": false,
+    "status": "fail",
+    "threshold": {
+      "train_two_state_minimum": 20,
+      "validation_two_state_minimum": 8
+    }
+  },
+  "schema_version": "fpa-feds-fle-crosswalk/1.0",
+  "sources": {
+    "feds_conus": "https://zenodo.org/records/22921773",
+    "fle_grouped_summary": "https://services1.arcgis.com/KNdRU5cN6ENqCTjk/ArcGIS/rest/services/Fireline_Engagement_Grouped_Line_Polygons/FeatureServer/2",
+    "fle_rda_record": "https://doi.org/10.2737/RDS-2025-0011",
+    "fpa_fod": "https://www.fs.usda.gov/rds/archive/products/RDS-2013-0009.7",
+    "wfigs": "https://services3.arcgis.com/T4QMspbfLg3qTGWY/ArcGIS/rest/services/WFIGS_Interagency_Perimeters/FeatureServer/0"
+  },
+  "spatial_search_radius_m": 3000.0,
+  "split_report_provenance": {
+    "train": {
+      "derivation": null,
+      "report": "reports/real-fire-data/fpa-feds-fle-crosswalk-train-v1.json"
+    },
+    "validation": {
+      "derivation": {
+        "method": "deterministic_early_window_postfilter",
+        "note": "A fresh validation-year archive read was attempted but failed because Zenodo DNS could not resolve; the saved earliest-in-radius timestamps were sufficient for this exact post-filter.",
+        "rule": "Keep a candidate only when its earliest recorded in-radius perimeter timestamp is between t_st and t_st + 24 hours inclusive. The candidate report records that earliest timestamp and complete temporal run summaries, so this reproduces the strict time predicate without an additional archive read.",
+        "source_created_utc": "2026-11-02T23:20:37.300629+00:00",
+        "source_report": "reports/real-fire-data/fpa-feds-fle-crosswalk-validation-candidate-search-v1.json"
+      },
+      "report": "reports/real-fire-data/fpa-feds-fle-crosswalk-validation-v1.json"
+    }
+  },
+  "split_report_sources": {
+    "train": "reports/real-fire-data/fpa-feds-fle-crosswalk-train-v1.json",
+    "validation": "reports/real-fire-data/fpa-feds-fle-crosswalk-validation-v1.json"
+  },
+  "summary": {
+    "train": {
+      "cases": 40,
+      "fle_summary_present": 0,
+      "full_48h_feds_reference": 13,
+      "two_consecutive_feds_states": 13,
+      "unique_feds_matches": 13
+    },
+    "validation": {
+      "cases": 20,
+      "fle_summary_present": 13,
+      "full_48h_feds_reference": 7,
+      "two_consecutive_feds_states": 7,
+      "unique_feds_matches": 7
+    }
+  },
+  "test_cases_loaded": false
+}

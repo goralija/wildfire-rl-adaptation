@@ -32,7 +32,26 @@ U Git idu ti mali manifesti, a sirovi dataset ostaje u external/firehose/data/Su
 
 ## Dataset opaženih požara
 
-Glavna putanja je odabrana: **CFSDS v1.1 + Canadian FBP/Cell2Fire**. 23 godišnja ZIP
+### Aktivna SimFire/FEDS putanja — 2026-11-03
+
+Korisnik je usmjerio novi benchmark na SimFire, FPA-FOD početne uslove i FEDS-CONUS
+12-satna stanja. Originalna 60-case kohorta ima 19/40 train i 7/20 validation
+poklapanja i ne prolazi pragove. Prošireni, unaprijed spremljeni okvir ima 99/208 train
+i 20/56 validation match-eva; svih 119 odabranih slučajeva ima 48h stanja, pa taj
+data-coverage gate prolazi. Detalji su u
+[`FPA-FEDS crosswalk`](../docs/research/FPA_FEDS_CROSSWALK.md) i
+[`feds-episode-cohort-v1.json`](manifests/feds-episode-cohort-v1.json).
+
+TRAIN-only SimFire no-op screen je nakon toga završen na svih 99 train slučajeva, ali
+je **pao** prema persistence/elipsa referencama. Adapter/PPO CLI postoje kao tehnička
+putanja; benchmark trening čeka dijagnostiku i prolaz ponovljenog train gatea. Validation
+rasteri nisu preuzeti, a TEST 2024 nije učitan. Stariji 13/40 i 7/20 rezultat je iz
+ranijeg remote audit-a; vidi istoriju u crosswalk dokumentu. FLE incidentni sažetak je
+0/40 train i 13/20 validation, bez line-level geometrije.
+
+### Historijska Cell2Fire putanja
+
+Ranija putanja je **CFSDS v1.1 + Canadian FBP/Cell2Fire**. 23 godišnja ZIP
 para iz 2002–2024 (102,405,239 bajtova) i svi veći sirovi slojevi su lokalno u
 Git-ignorisanom `data/raw/`. Candidate manifest je
 [`cfsds-v1_1-pilot-cohort.json`](manifests/cfsds-v1_1-pilot-cohort.json); njegov trenutni

@@ -8,12 +8,22 @@ sources:
 ---
 # Stvarni požari: izbor podataka i granica zaključaka
 
-Provjereno 2026-10-30. CFSDS v1.1 + Canadian FBP/Cell2Fire je odabrana glavna
-putanja jer se najbolje uklapa u već postojeći simulator i kontroler. Tri train slučaja
+## Aktivna odluka — 2026-11-03
+
+Raniji CFSDS/Cell2Fire izbor ispod je historijska procjena i više nije aktivni glavni
+pravac. Korisnik je odobrio SimFire + FPA-FOD/FEDS-CONUS benchmark. Prošireni unaprijed
+sačuvani candidate frame prolazi [FPA↔FEDS data-coverage gate](FPA_FEDS_CROSSWALK.md)
+sa 99 train i 20 validation epizoda. Nakon toga je TRAIN-only no-op simulacija testirana
+na cijeloj train kohorti i gate je **pao** prema persistence/elipsa referencama. Sljedeće
+je dijagnostika i ponovljeni TRAIN gate; do tada ne koristiti benchmark PPO. Ne prenositi
+Cell2Fire zaključke na SimFire.
+
+U ranijoj odluci od 2026-10-30, CFSDS v1.1 + Canadian FBP/Cell2Fire izabrani su kao
+glavna putanja jer su odgovarali tadašnjem simulatoru i kontroleru. Tri train slučaja
 su pretvorena i izvršena bez intervencija; za jedan slučaj urađeno je šest seedova.
 Fizika simulatora nije time validirana i politika nije trenirana na historijskim podacima.
 
-## Status: Canada + CFSDS odabrani; pilot konverzija/replay izvršeni
+## Historijski status — Canada + CFSDS odabrani; pilot konverzija/replay izvršeni
 
 Korisnik je odobrio da se izabere najbolja kompatibilna putanja bez geografskih
 ograničenja. Odabrali smo kanadski CFSDS jer njegov FBP model odgovara postojećem

@@ -1,0 +1,70 @@
+{
+  "schema_version": "feds-simfire-input-smoke/1.0",
+  "kind": "one_case_input_and_runtime_integration_smoke_not_noop_gate_or_physical_validation",
+  "created_utc": "2026-11-03T00:21:12.367793+00:00",
+  "test_cases_loaded": false,
+  "scientific_result": false,
+  "physical_validation": false,
+  "agent_training": false,
+  "scenario": {
+    "scenario_id": "fpa-fod-400300427-plateau",
+    "split": "train",
+    "feds_fire_id": "60225",
+    "initial_state_time": "2018-07-24T00:00:00"
+  },
+  "simfire": {
+    "version": "2.0.1",
+    "commit": "04905b19fe8c10dc08d64faddd00303e0561bb66",
+    "update_rate_minutes": 1,
+    "grid": {
+      "shape": [256, 256],
+      "resolution_m": 180,
+      "crs": "EPSG:32612",
+      "bounds_m": [701599.8334262886, 4147004.673288538, 747679.8334262886, 4193084.673288538]
+    },
+    "max_fire_duration_updates": 90,
+    "duration_note": "15-minute-update base scaled by 180m/30m cell width; common map-resolution setting, not fitted to this incident's observed future perimeter"
+  },
+  "initial_state": {
+    "burn_scar_cells": 16,
+    "active_front_cells": 16,
+    "active_front_fuel_codes": [1, 9],
+    "active_front_cells_burnable_by_simfire": 16,
+    "mask_sha256": "6b8b8a718c3cdc5838b204ae430248337d3755fb2761c1d19621da5eb97745da"
+  },
+  "inputs": {
+    "fuel": {
+      "source": "LANDFIRE LF2016 FBFM13 CONUS ImageServer",
+      "interpolation": "RSP_Majority",
+      "sha256": "e863e7832a3808db211edb7501e85db137f02f1bd826849e186a11c53bf62434",
+      "codes": [1, 2, 4, 5, 6, 8, 9, 10, 91, 93, 98, 99],
+      "note": "pre-event fuel product, not a field-verified 2018 vegetation survey"
+    },
+    "terrain": {
+      "source": "LANDFIRE LF2020 Elevation CONUS ImageServer",
+      "interpolation": "RSP_BilinearInterpolation",
+      "units": "meters in source; SimFire adapter converts to feet",
+      "sha256": "d3948a3157a65b88a4630fe557cedc6d4c77aff114d3bdb71f1232bcdb95aefd"
+    }
+  },
+  "smoke": {
+    "action": "no-op",
+    "duration_minutes": 60,
+    "random_seed": 0,
+    "demo_wind_mph": 7.0,
+    "demo_wind_direction_degrees_clockwise_north": 90.0,
+    "demo_fuel_moisture_fraction": 0.03,
+    "historical_weather_used": false,
+    "cumulative_burned_cells": 27,
+    "cumulative_burned_area_ha": 87.48,
+    "fire_active_at_60_minutes": true
+  },
+  "limitations": [
+    "Demonstration wind and moisture are placeholders; no common gridMET-to-SimFire wind adjustment has been selected.",
+    "This one-hour input/runtime check is not the train/validation historical no-op comparison against persistence and ellipse baselines.",
+    "The observed FEDS start is a satellite-derived estimate; this receipt does not validate spread physics or estimate real hectares saved.",
+    "No suppression actions, line construction, PPO training or test data were used."
+  ],
+  "full_case_input_receipt": "ignored local file: .local/feds-simfire-cases/fpa-fod-400300427-plateau/input-receipt.json",
+  "full_smoke_receipt": "ignored local file: .local/simfire-noop-smoke/fpa-fod-400300427-plateau/smoke-result.json"
+}
