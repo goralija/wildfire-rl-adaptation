@@ -88,6 +88,17 @@ python scripts/audit_feds_fpa_fle_crosswalk.py --combine-split-reports reports/r
 python scripts/build_feds_episode_manifest.py
 ```
 
+**Jedan zapis po FEDS požaru (ADR-030 §6, TASK-027, 2026-11-09).** Crosswalk je za FPA
+zapise `fpa-fod-400305302-sugar-pine` i `fpa-fod-400389825-columbus` izabrao isti FEDS požar
+(fireID 58826, isti start), pa bi ista epizoda ušla dvaput u TRAIN. Generator manifesta sada
+zadržava zapis s najnižim `fod_id` po FEDS požaru i isključene zapise upisuje u
+`deduplication.excluded_records`; FEDS požar spojen sa zapisima iz dva splita zaustavlja
+generator. Pravilo je u generatoru, a ne ručna izmjena manifesta, da bi se manifest mogao
+ponovo izgraditi iz candidate-framea i crosswalka (provjereno: prije izmjene generator je
+reprodukovao stari manifest bajt po bajt osim `created_utc`). Rezultat: 118 epizoda,
+98 TRAIN i 20 VALIDATION. Coverage, preflight i input izvještaji izrađeni ranije i dalje
+navode 119 zapisa; skripte uzimaju slučajeve iz manifesta, pa višak zapisa ne ulazi u run.
+
 ## Izvori i šta oni podržavaju
 
 - FEDS-CONUS arhiva je verzija v1 objavljena 2026-10-02, 2012–2025; `lf_perimeter`
