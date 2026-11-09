@@ -4,7 +4,7 @@ title: Ispravke nakon revizije PR-ova #3–#5 (ADR-029, 2026-11-09)
 ---
 # Naredni korak
 
-## Najnovije — 2026-11-09: faza 1 PASS (ADR-031); faza 2 u toku
+## Najnovije — 2026-11-09: faza 1 PASS (ADR-031); slijedi faza 2
 
 Gate na TRAIN-u je prošao po ADR-030 §3: zamrznut je WAF 0.10 / ROS 1.0
 (`configs/frozen/feds-simfire-growth-gate-freeze-v1.json`, sha256 `7639e3a9…`), a VALIDATION
@@ -12,7 +12,7 @@ je ocijenjen jednom. Brojevi i granice su u [ADR-031](specs/DECISION_RECORDS.md)
 [STATUS](STATUS.md).
 
 1. **Korisnik:** pregled i merge PR-a faze 1 (grana `f/task-026-stage-1`).
-2. **Faza 2 (autonomno, u toku):** grana `f/task-026-stage-2`, izvedena iz grane faze 1.
+2. **Faza 2 (autonomno):** grana `f/task-026-stage-2`, izvedena iz grane faze 1.
    Trening po ADR-026 sa 10 seedova, TRAIN benchmark za izbor heuristike, jedan VALIDATION
    benchmark, analiza po ADR-030 §4 i broj epizoda u kojima linija spali više od no-op-a.
    Komande su u [HANDOFF_STAGE_1_2](HANDOFF_STAGE_1_2.md), §6. Rezultat ide u novi ADR i EXP-020.

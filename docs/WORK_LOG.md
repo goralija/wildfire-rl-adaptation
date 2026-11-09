@@ -505,3 +505,11 @@ prije pokretanja (e988493). Svih 17 kandidata je završilo 98/98 slučajeva za o
 Freeze zapis i allowlist su u commitu de0e42f, a VALIDATION je ocijenjen jednom nakon njega
 (0.0983 prema 0.0278). Rezultat i granice su u ADR-031 i EXP-019. Faza 2 je pokrenuta u
 worktreeu `task-026-stage-2`.
+
+2026-11-09 — Nezavisni recenzent sa suženim kontekstom pregledao je PR #17: svi brojevi i
+hashovi se reprodukuju iz lokalnih punih izvještaja, bez blokera. Popravljeno na grani:
+ADR-031 navodi koliko je elipsa mala i da prolazi i WAF 0; VALIDATION sažetak sada piše
+commitovana skripta s testom; selektor odbija drugu verziju metrika i slučaj bez četiri
+tačke; testovi pokrivaju sve provjere konfiguracije i tie-break. Freeze zapis i TRAIN sažetak
+nisu mijenjani. Granica 1.10 u float aritmetici je zabilježena i ostavljena (nijedan požar
+nije na granici).

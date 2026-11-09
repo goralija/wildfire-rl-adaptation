@@ -11,7 +11,9 @@
 - Granica: oba IoU su ispod 0.10 i simulator prerasta nerastuće požare (oko 9,000 ha po
   požaru na TRAIN-u). PASS nije fizička validacija ([ADR-031](docs/specs/DECISION_RECORDS.md)).
 - Pravilo izbora je u `scripts/select_feds_growth_gate.py`, commitovano s testom prije
-  pokretanja. Faza 2 je pokrenuta na grani `f/task-026-stage-2`.
+  pokretanja. Faza 2 se radi na grani `f/task-026-stage-2`.
+- Nezavisna revizija PR-a #17 nije našla blokere; dopune su u ADR-031 (koliko je elipsa
+  niska letvica, skripta za VALIDATION sažetak, dodatni testovi).
 
 ## 2026-11-09: TASK-027 spojen; faze 1 i 2 autonomno
 

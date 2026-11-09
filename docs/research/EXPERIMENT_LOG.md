@@ -439,6 +439,7 @@ Receipt: [weather coverage report](../../reports/real-fire-data/feds-gridmet-wea
 First gate run on the corrected inputs. No-op runs only; no training.
 - **Inputs.** Weather sha256 `7a51aadd…`, manifest `013be9a1…`, pinned SimFire, 5-min
   step, lifetime 90 min, seed 0, 7 workers. Hashes were checked before and after the runs.
+- **Code.** TRAIN runs from commit e988493, the VALIDATION run from de0e42f, clean tree.
 - **Runs.** 17 fixed candidates × 98 TRAIN cases, 25 s to 5.6 min per candidate, about
   23 min in total. All 17 completed 98/98 without errors.
 - **Selection.** `scripts/select_feds_growth_gate.py` (committed with its tests before the
@@ -449,7 +450,10 @@ First gate run on the corrected inputs. No-op runs only; no training.
 - **Freeze.** `configs/frozen/feds-simfire-growth-gate-freeze-v1.json`, sha256 `7639e3a9…`,
   allowlisted in the same commit, before VALIDATION.
 - **VALIDATION, once.** 20/20 cases, 18 growing: growth IoU 0.0983 against 0.0278, no edge
-  contact. Not used for selection or for the decision to continue.
+  contact. Not used for selection or for the decision to continue. The committed summary is
+  written by `scripts/summarize_feds_validation_gate.py` from the one full report.
+- **Reading.** The ellipse adds about 23 cells by +48h where growing fires gained a mean of
+  1,219, so the reference is a low bar; SimFire grows 1.8× the observed growth on those fires.
 - **Local full reports** (ignored): `.local/gate/adr030/waf-<W>-ros-<R>.json` and
   `validation-frozen.json`; their sha256 values are in the two committed summaries.
 A simulator screening result, not a physical validation.

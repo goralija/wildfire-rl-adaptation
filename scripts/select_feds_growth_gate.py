@@ -39,6 +39,9 @@ CANDIDATES = tuple(
 ACTIVE_CELL_LIFETIME_MINUTES = 90
 INTERNAL_UPDATE_MINUTES = 5
 SEED = 0
+# The metrics the ADR-030 gate is defined on (feds_spread_metrics.METRICS_VERSION).
+METRICS_VERSION = "feds-spread-metrics/3"
+SCORED_HOURS = [12, 24, 36, 48]
 HECTARES_PER_CELL = 180.0 * 180.0 / 10000.0
 
 PASS_RULE = (
@@ -98,6 +101,7 @@ def evaluate_candidate(
         "manifest_sha256": manifest_sha256,
         "expected_scenarios": len(expected_scenario_ids),
         "frozen_params_sha256": None,
+        "metrics_version": METRICS_VERSION,
     }
     configuration = payload.get("configuration", {})
     differing = sorted(key for key, value in expected_configuration.items()
@@ -118,6 +122,9 @@ def evaluate_candidate(
                                  % (label, case["scenario_id"]))
         if case["simfire_params"] != params:
             raise GateInputError("%s case %s ran with other simulator parameters."
+                                 % (label, case["scenario_id"]))
+        if sorted(row["hours_since_start"] for row in case["trajectory"]) != SCORED_HOURS:
+            raise GateInputError("%s case %s is not scored at +12/24/36/48h."
                                  % (label, case["scenario_id"]))
 
     gate = growth_gate(payload)
@@ -157,7 +164,7 @@ def evaluate_candidate(
         "active_cell_lifetime_minutes": ACTIVE_CELL_LIFETIME_MINUTES,
         "internal_update_minutes": INTERNAL_UPDATE_MINUTES,
         "seed": SEED,
-        "metrics_version": configuration.get("metrics_version"),
+        "metrics_version": METRICS_VERSION,
         "successful_scenarios": len(results),
         "errors": len(errors),
         "simfire_edge_contact_cases": gate["simfire_edge_contact_cases"],
@@ -235,8 +242,6 @@ def build_summary(
         record["local_full_report_sha256"] = sha256_file(path)
         records.append(record)
 
-    if len({record["metrics_version"] for record in records}) > 1:
-        raise GateInputError("Candidate reports were scored with different metrics versions.")
     # The strata and the ellipse use FEDS and the first-segment wind only, so they cannot
     # differ between candidates that completed every case.
     complete = [record for record in records if not record["errors"]]

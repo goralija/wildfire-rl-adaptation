@@ -1167,6 +1167,8 @@ was changed after a result was seen.
 candidate ran (commit e988493). Two details that §3 leaves open were fixed there: the
 tie-break "mean absolute area error" is taken over all TRAIN case-timepoints, as in ADR-022,
 and a tie on both criteria stops the selection for a user decision. Neither was needed.
+The 17 TRAIN runs were made from that commit and the VALIDATION run from de0e42f, both with
+a clean tree; `src/`, the evaluator and the runner are the same as on `main` at 7be6b56.
 
 **TRAIN gate (17 candidates × 98 cases, seed 0, 5-min step, lifetime 90 min).**
 - Every candidate completed 98/98 cases without errors. The strata are the same for all:
@@ -1178,8 +1180,9 @@ and a tie on both criteria stops the selection for a user decision. Neither was 
 - **Selected: WAF 0.10 / ROS 1.0**, growth IoU 0.0958 on growing cases against 0.0258
   (+0.0700), no edge contact. Next passing candidate: WAF .05 / ROS 1.0 at 0.0706. WAF .20 /
   ROS 1.0 scores 0.0992 but touches the map edge in 14 cases, so the rule excludes it.
-- SimFire beats the ellipse in 59 of the 82 growing cases; in 10 of them it adds no cell
-  by +48h. Median case growth IoU is 0.072 against 0.007.
+- Of the 82 growing cases, SimFire is ahead of the ellipse in 59, behind in 19 and tied in
+  4. In 10 of the 82 it adds no cell by +48h; none of those is among the 59. Median case
+  growth IoU is 0.072 against 0.007.
 
 | WAF | ROS | Growth IoU (growing) | Edge-contact cases | Mean abs. area error (ha) | Non-growing overgrowth (ha) | Gate |
 |---:|---:|---:|---:|---:|---:|---|
@@ -1217,6 +1220,13 @@ on the two non-growing cases is 823 ha.
 **What the PASS does and does not show.**
 - It shows that, under the rule fixed in ADR-030, SimFire places new growth better than a
   fixed geometric ellipse on fires that grew, on TRAIN and again on VALIDATION.
+- The ellipse is a low bar. By +48h it adds a mean of 23 cells on the growing TRAIN cases,
+  where FEDS observed 1,219 (median 404); on VALIDATION 24 against 700. The no-wind candidate
+  (WAF 0) also passes, at 0.0545. At ROS 1.0 growth IoU rises with WAF up to .20, so the
+  selected WAF .10 is the highest one in the list that keeps every fire off the map edge.
+- On growing fires the selected setting also grows too much: a mean of 2,193 cells by +48h
+  against 1,219 observed (1.8×). Pooled over the four timepoints, 18% of its new cells are
+  inside observed growth and it covers 26% of observed growth (VALIDATION: 18% and 24%).
 - Both growth IoUs are below 0.10. The selected setting overgrows contained fires: on the 16
   non-growing TRAIN cases the no-op run adds about 2,770 cells (8,976 ha) more than FEDS
   observed by +48h. Mean absolute area error is 4,120 ha against 2,371 ha for persistence;
@@ -1232,3 +1242,24 @@ Evidence: [TRAIN gate summary](../../reports/real-fire-data/feds-simfire-train-g
 [VALIDATION score](../../reports/real-fire-data/feds-simfire-validation-growth-gate-v1.json),
 [freeze record](../../configs/frozen/feds-simfire-growth-gate-freeze-v1.json), EXP-019 in the
 [experiment log](../research/EXPERIMENT_LOG.md).
+
+**Review follow-up (2026-11-09, PR #17).** An independent reviewer with narrow context
+recomputed every number and hash from the local full reports and found no blocker. Changed
+after the review, without touching the rule, the candidates, the TRAIN summary or the freeze
+record (their hashes are unchanged):
+- The reading above now states how small the ellipse is, the WAF 0 pass, the 59/19/4 split
+  and the overgrowth on growing fires.
+- The VALIDATION summary is now written by a committed, tested script
+  (`scripts/summarize_feds_validation_gate.py`). It restates the existing full report and
+  scores nothing again; `scored_utc` is the run time and `code_commit` the run's commit.
+- The selector also refuses a report with another metrics version or without the four
+  timepoints per case, and tests pin every configuration check, the tie-break over all
+  timepoints and the consistency of the committed freeze record with the gate summary.
+- Known and left as is: the strata test `observed >= 1.10 × initial` is evaluated in floating
+  point (`scripts/evaluate_feds_train_noop.py`), so a fire at exactly 1.10× would count as
+  non-growing. No TRAIN or VALIDATION case sits on that boundary, so no stratum or result
+  depends on it. The gate code was not edited after the result; an integer comparison is a
+  later fix.
+- Stage 2 training was started from the freeze commit while this PR was being written and
+  reviewed. The autonomy addendum ties stage 2 to the gate result, not to the review; the
+  stage-2 branch is brought up to date with this branch before its PR.

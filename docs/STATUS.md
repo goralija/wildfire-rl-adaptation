@@ -7,7 +7,7 @@ sources:
 ---
 # Trenutno stanje — 2026-11-09
 
-## Najnovije — 2026-11-09: faza 1 je prošla (ADR-031), faza 2 u toku
+## Najnovije — 2026-11-09: faza 1 je prošla (ADR-031)
 
 Prvi gate na ispravljenim ulazima (vrijeme `7a51aadd…`, manifest `013be9a1…`), po pravilu
 iz ADR-030 §3 koje nije mijenjano nakon rezultata. Grana `f/task-026-stage-1`, PR čeka
@@ -21,12 +21,16 @@ korisnikov merge.
   dodan u allowlist u istom commitu, prije VALIDATION-a.
 - **VALIDATION, jednom.** 20/20 bez grešaka i bez dodira s rubom; na 18 rastućih IoU rasta
   0.0983 prema 0.0278. Nije korišten za izbor.
+- **Elipsa je niska letvica.** Do +48h dodaje u prosjeku 23 ćelije, a rastući požari su
+  u FEDS-u dobili 1,219. Prolazi i kandidat bez vjetra (WAF 0, 0.0545). Na rastućim požarima
+  izabrana postavka raste 1.8× više od opaženog.
 - **Granice.** Oba IoU rasta su ispod 0.10. Na 16 nerastućih TRAIN požara no-op dodaje u
   prosjeku 8,976 ha više nego što je FEDS opazio do +48h, a srednja apsolutna greška
   površine je 4,120 ha (persistence 2,371 ha). PASS znači da SimFire smješta rast bolje od
   fiksne elipse; nije fizička validacija ni kalibracija simulatora.
-- **Dalje.** Faza 2 (benchmark i studija budžeta, 10 seedova) je pokrenuta na grani
-  `f/task-026-stage-2` s ovim zapisom. Merge i faza 3 ostaju korisnikovi; TEST 2024 je zatvoren.
+- **Dalje.** Faza 2 (benchmark i studija budžeta, 10 seedova) radi se na grani
+  `f/task-026-stage-2` s ovim zapisom i izvještava u vlastitom PR-u i ADR-u. Merge i faza 3
+  ostaju korisnikovi; TEST 2024 je zatvoren.
 - **Dokazi.** [ADR-031](specs/DECISION_RECORDS.md), EXP-019,
   [TRAIN gate](../reports/real-fire-data/feds-simfire-train-growth-gate-v1.json),
   [VALIDATION](../reports/real-fire-data/feds-simfire-validation-growth-gate-v1.json).
