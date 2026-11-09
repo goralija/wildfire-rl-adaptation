@@ -5,7 +5,10 @@ synthetic validation seeds of the ADR-028 environment. Simulator-only results.
 Saved fraction is the primary outcome; close calls and units lost are a separate safety
 block; return (saved minus safety penalties) is the training objective. Every policy is
 contrasted with no-op, random and the best heuristic (paired bootstrap, 95% CI) by
-``wildfire_rl.synthetic_stats``. ``--subset-from-seed 64`` adds the selection-free seeds."""
+``wildfire_rl.synthetic_stats``. ``--subset-from-seed 64`` adds the selection-free seeds.
+Each learned (``ppo=``) policy gets an ADR-030 section 5 acceptance block per group:
+saved-fraction contrast with the best heuristic (CI above 0), safety non-inferiority
+(close calls and units lost no higher), return reported but not deciding."""
 
 from __future__ import annotations
 
