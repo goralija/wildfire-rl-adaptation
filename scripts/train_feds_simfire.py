@@ -93,6 +93,7 @@ def main(argv=None) -> int:
         done = bool(terminated or truncated)
 
     from wildfire_rl.feds_simfire_env import MANIFEST, WEATHER
+    from wildfire_rl.feds_simfire_setup import policy_settings
 
     receipt = {
         "schema_version": "feds-simfire-ppo-smoke/1.0",
@@ -105,6 +106,9 @@ def main(argv=None) -> int:
         "feds_future_perimeters_used_for_observation_or_reward": False,
         "physical_validation": False,
         "rl_benefit_claim": False,
+        # Settings the benchmark checks before it loads this checkpoint.
+        **policy_settings(env.sim_params, weather_observation=env.weather_observation,
+                          line_placement=env.line_placement, observation_max_budget=env.max_budget),
         "wind_adjustment_factor": args.wind_adjustment_factor,
         "wind_adjustment_factor_locked": False,
         "internal_update_minutes": args.internal_update_minutes,

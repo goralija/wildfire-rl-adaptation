@@ -76,7 +76,7 @@ def main(argv=None) -> int:
     from sb3_contrib import MaskablePPO
     from stable_baselines3.common.vec_env import SubprocVecEnv, VecMonitor
 
-    from wildfire_rl.feds_simfire_setup import MANIFEST, WEATHER, SimFireParams, sha256_file
+    from wildfire_rl.feds_simfire_setup import MANIFEST, WEATHER, SimFireParams, policy_settings, sha256_file
 
     torch.set_num_threads(1)
     freeze = json.loads(args.params.read_text(encoding="utf-8"))
@@ -125,10 +125,9 @@ def main(argv=None) -> int:
         "init_checkpoint": str(args.init) if args.init else None,
         "init_checkpoint_sha256": sha256_file(args.init) if args.init else None,
         "budgets": list(args.budgets),
-        "observation_max_budget": 4,
-        "line_placement": args.line_placement,
-        "weather_observation": weather_observation,
-        "sim_params": sim_params.as_dict(),
+        # Settings the benchmark checks before it loads this checkpoint.
+        **policy_settings(sim_params, weather_observation=weather_observation,
+                          line_placement=args.line_placement, observation_max_budget=4),
         "params_file_sha256": sha256_file(args.params),
         "params_gate_status": freeze.get("gate_status"),
         "split": "train",
