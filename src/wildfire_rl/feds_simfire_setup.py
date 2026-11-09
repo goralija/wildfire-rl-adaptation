@@ -84,6 +84,46 @@ class SimFireParams:
         return asdict(self)
 
 
+# Exact rule behind each observation mode. "previous" changed meaning in TASK-023, so a
+# receipt must state the rule, not only the mode name.
+WEATHER_OBSERVATION_RULES = {
+    "previous": "latest_daily_record_strictly_before_upcoming_segment_with_pre_start/v1",
+    "upcoming_perfect_forecast": "upcoming_segment_forcing_perfect_forecast_ablation/v1",
+}
+# Settings a trained policy depends on; a training receipt states them and a benchmark
+# refuses a checkpoint whose receipt differs (scripts/benchmark_feds_policies.py).
+POLICY_SETTING_KEYS = (
+    "weather_observation",
+    "weather_observation_rule",
+    "sim_params",
+    "fireline_attenuation",
+    "line_banking_floor",
+    "line_placement",
+    "observation_max_budget",
+)
+
+
+def line_banking_floor(params: "SimFireParams") -> str:
+    """Whether line burn amounts are floored at zero (ADR-030 wrapper) or bank freely."""
+    return "zero" if params.fireline_attenuation == "per_minute" else "none_pinned_simfire"
+
+
+def policy_settings(params: "SimFireParams", *, weather_observation: str, line_placement: str,
+                    observation_max_budget: int) -> Dict[str, Any]:
+    """The receipt fields that bind a PPO checkpoint to its environment settings."""
+    if weather_observation not in WEATHER_OBSERVATIONS:
+        raise ValueError("weather observation must be one of %s" % (WEATHER_OBSERVATIONS,))
+    return {
+        "weather_observation": weather_observation,
+        "weather_observation_rule": WEATHER_OBSERVATION_RULES[weather_observation],
+        "sim_params": params.as_dict(),
+        "fireline_attenuation": params.fireline_attenuation,
+        "line_banking_floor": line_banking_floor(params),
+        "line_placement": line_placement,
+        "observation_max_budget": int(observation_max_budget),
+    }
+
+
 def sha256_file(path: Path) -> str:
     digest = hashlib.sha256()
     with Path(path).open("rb") as stream:
