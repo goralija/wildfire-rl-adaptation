@@ -28,9 +28,11 @@ INPUT_ROOT = ROOT / ".local/feds-simfire-cases"
 CONFIG_TEMPLATE = ROOT / "configs/simfire_feds_base.yml"
 FREEZE_ALLOWLIST = ROOT / "configs/frozen/validation-freeze-allowlist.json"
 ALLOWED_SPLITS = ("train", "validation")
-# "per_minute" (ADR-030 default) subtracts 980 ft per simulated minute, so a line holds up
-# to 980 ft/min at any internal step. "per_update" is pinned SimFire: a fixed 980 ft per
-# update from R * update_rate, so a line holds 980 ft/min at 1 min but only 196 at 5 min.
+# "per_minute" (ADR-030 default) subtracts 980 ft per simulated minute and floors line
+# burn amounts at zero, so a line holds iff the rate of spread reaching it stays below
+# 980 ft/min, at any internal step and however long the line has waited. "per_update" is
+# pinned SimFire: a fixed 980 ft per update from R * update_rate (a line holds 980 ft/min
+# at 1 min but only 196 at 5 min), with no floor, so an idle line banks negative burn.
 FIRELINE_ATTENUATIONS = ("per_update", "per_minute")
 # "last_write" is pinned SimFire: when several burning cells reach one target, the last
 # sprite in list order sets its rate of spread. "max" uses the fastest approach instead,
@@ -406,7 +408,17 @@ def apply_forcing(simulation: Any, segment: Dict[str, float]) -> None:
 
 
 def _per_minute_line_attenuation(fire_manager: Any, rate_of_spread: Any, fire_map: Any) -> Any:
-    """SimFire's control-line attenuation, scaled by the internal update length."""
+    """SimFire's control-line attenuation, scaled by the internal update length, with
+    line burn amounts floored at zero.
+
+    Pinned SimFire subtracts the attenuation from every line cell on every update, even
+    with no fire next to it, so an idle line "banks" a large negative burn amount and
+    becomes a near-absolute barrier. Here the returned increment never takes a line
+    cell's burn amount below zero, so an idle line stays at zero and a line cell ignites
+    iff the rate of spread reaching it exceeds the attenuation (980 ft/min for fireline)
+    long enough to accumulate one cell width, independent of the internal step and of
+    how long ago the line was placed.
+    """
     import numpy as np
     from simfire.enums import BurnStatus, RoSAttenuation
 
@@ -416,7 +428,10 @@ def _per_minute_line_attenuation(fire_manager: Any, rate_of_spread: Any, fire_ma
     factor[fire_map == BurnStatus.FIRELINE] = RoSAttenuation.FIRELINE * fire_manager.update_rate
     factor[fire_map == BurnStatus.SCRATCHLINE] = RoSAttenuation.SCRATCHLINE * fire_manager.update_rate
     factor[fire_map == BurnStatus.WETLINE] = RoSAttenuation.WETLINE * fire_manager.update_rate
-    return rate_of_spread - factor
+    increment = rate_of_spread - factor
+    line = np.isin(fire_map, (BurnStatus.FIRELINE, BurnStatus.SCRATCHLINE, BurnStatus.WETLINE))
+    increment[line] = np.maximum(increment[line], -fire_manager.burn_amounts[line])
+    return increment
 
 
 def _max_ros_update(fire_manager: Any, fire_map: Any) -> Any:
