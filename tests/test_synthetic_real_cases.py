@@ -92,14 +92,33 @@ class WeatherConversionTest(unittest.TestCase):
         hours = [s.local_hour for s in steps[36:]]
         self.assertEqual(len(set(np.round(hours, 6))), 24)
 
-    def test_naive_start_time_is_utc_and_unordered_segments_are_sorted(self) -> None:
+    def test_naive_time_is_refused_and_unordered_segments_are_sorted(self) -> None:
+        # TASK-027: a naive FEDS `t` is an overpass label, not a UTC instant, so it is
+        # never parsed as one here.
         from wildfire_rl.synthetic_real_cases import parse_utc
 
-        start = parse_utc("2018-07-24T00:00:00")
+        with self.assertRaises(ValueError):
+            parse_utc("2018-07-24T00:00:00")
+        start = parse_utc("2018-07-24T00:00:00+00:00")
         series = weather_from_segments(list(reversed(SEGMENTS)), start, -120.0)
         self.assertAlmostEqual(series.steps[0].wind_to_deg, 3.0)
         with self.assertRaises(ValueError):
-            weather_from_segments(SEGMENTS, parse_utc("2018-07-23T00:00:00"), -120.0)
+            weather_from_segments(SEGMENTS, parse_utc("2018-07-23T00:00:00+00:00"), -120.0)
+
+    def test_real_case_starts_at_the_feds_overpass_local_hour(self) -> None:
+        # An AM FEDS state at 120 W is the ~01:30 local solar overpass, not 16:00.
+        from wildfire_rl.gridmet_weather import episode_weather_midpoints
+        from wildfire_rl.synthetic_real_cases import episode_start_utc
+
+        record = {"segments": [
+            {**segment, "gridmet_values": {"vs": {"value": 2.0}, "th": {"value": 0.0},
+                                           "fm100": {"value": 8.0}}}
+            for segment in episode_weather_midpoints("2018-07-24T00:00:00", longitude=-120.0)
+        ]}
+        start = episode_start_utc(record)
+        series = weather_from_segments(record["segments"], start, -120.0)
+        self.assertAlmostEqual(series.steps[0].local_hour, 1.5)
+        self.assertAlmostEqual(series.steps[12].local_hour, 13.5)
 
 
 class CropTest(unittest.TestCase):
@@ -179,7 +198,16 @@ class LocalCaseTest(unittest.TestCase):
         self.assertEqual(meta["split"], "train")
         self.assertEqual(meta["initial_cells_outside_crop"], 0)
         self.assertEqual(sum(meta["fuel_code_histogram"].values()), CROP * CROP)
-        self.assertEqual(meta["start_time_utc"], "2018-07-24T00:00:00+00:00")
+        # TASK-027: the FEDS AM label 2018-07-24T00:00 is the ~01:30 local solar overpass at
+        # the weather sample point, not 00:00 UTC; the first decision is at that local hour.
+        from wildfire_rl.gridmet_weather import feds_overpass_utc
+        from wildfire_rl.feds_simfire_setup import load_weather_records
+
+        record = load_weather_records("train")["fpa-fod-400300427-plateau"]
+        expected = feds_overpass_utc("2018-07-24T00:00:00",
+                                     record["weather_sample_location"]["longitude"])
+        self.assertEqual(meta["start_time_utc"], expected.isoformat())
+        self.assertAlmostEqual(spec.weather.steps[0].local_hour, 1.5, delta=0.25)
 
     def test_case_from_the_other_split_is_not_found(self) -> None:
         with self.assertRaises(ValueError):

@@ -16,8 +16,8 @@ Rezultati ADR-022–028 su nevažeći zbog gridMET greške; redoslijed i prihvat
 | TASK-023 | završeno (PR #12) | linije, observation bez prognoze, statistika §4, zaštite |
 | TASK-024 | završeno (PR #11) | CA: napredak, ćelije linije, prihvat §5, opisni real-case test |
 | TASK-025 | završeno (ADR-030) | odluke zapisane; implementacija opcija u TASK-023/024 |
-| TASK-026 | čeka TASK-027, novi gridMET i nalog po fazi | faza 1 gate → faza 2 benchmark → faza 3 CA trening (ADR-030 §7) |
-| TASK-027 | u toku (grana `f/task-027-feds-utc-dedup`) | duplikat uklonjen (98 TRAIN, ADR-030 §6); FEDS `t` nije UTC nego AM/PM oznaka prolaza ([dokazi](research/SIMFIRE_ENVIRONMENT.md)); mapiranje čeka korisnikovu odluku; RNG reset riješen |
+| TASK-026 | čeka merge TASK-027 i nalog po fazi | faza 1 gate → faza 2 benchmark → faza 3 CA trening (ADR-030 §7) |
+| TASK-027 | urađeno na grani `f/task-027-feds-utc-dedup`, čeka PR | duplikat uklonjen (98 TRAIN, ADR-030 §6); FEDS `t` = prolaz u lokalnom sunčevom vremenu → UTC po dužini (dopuna ADR-030, [dokazi](research/SIMFIRE_ENVIRONMENT.md)); novi gridMET sha256 `8e0e70a5…`; RNG reset riješen |
 
 
 ## Aktivni prioritet — 2026-11-04 (noćni rad, koraci 5–8)

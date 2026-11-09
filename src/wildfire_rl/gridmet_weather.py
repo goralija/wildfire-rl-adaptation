@@ -9,14 +9,27 @@ from typing import Any
 
 GRIDMET_MST = timezone(timedelta(hours=-7), name="MST")
 METERS_PER_SECOND_TO_FEET_PER_MINUTE = 196.8503937007874
+# TASK-027 / ADR-030 addendum: FEDS (fireatlas v1.4.1) assigns each VIIRS detection to
+# AM or PM by local solar hour (UTC + Lon/15) and writes the label as hour 0 or 12; the
+# SNPP overpasses are near 01:30 and 13:30 local solar time.
+FEDS_TIME_REFERENCE = "feds_t_viirs_overpass_local_solar/v1"
+VIIRS_OVERPASS_LOCAL_SOLAR_HOUR = {0: 1.5, 12: 13.5}
 
 
-def feds_timestamp_to_utc(value: str) -> datetime:
-    """Parse FEDS timestamps, preserving the declared assumption that naive `t` is UTC."""
-    parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
-    if parsed.tzinfo is None:
-        parsed = parsed.replace(tzinfo=timezone.utc)
-    return parsed.astimezone(timezone.utc)
+def feds_overpass_utc(value: str, longitude: float) -> datetime:
+    """UTC instant of the VIIRS overpass that a naive FEDS `t` label (00:00/12:00) names."""
+    parsed = datetime.fromisoformat(value)
+    if parsed.tzinfo is not None:
+        raise ValueError("FEDS `t` is a naive AM/PM label; a zoned time is not a FEDS label.")
+    if parsed.minute or parsed.second or parsed.microsecond or (
+            parsed.hour not in VIIRS_OVERPASS_LOCAL_SOLAR_HOUR):
+        raise ValueError("FEDS `t` must be 00:00 (AM) or 12:00 (PM), got %r." % value)
+    if not -180.0 <= float(longitude) <= 180.0:
+        raise ValueError("longitude must be in [-180, 180].")
+    midnight = datetime(parsed.year, parsed.month, parsed.day, tzinfo=timezone.utc)
+    return midnight + timedelta(
+        hours=VIIRS_OVERPASS_LOCAL_SOLAR_HOUR[parsed.hour] - float(longitude) / 15.0
+    )
 
 
 def gridmet_day_for_utc(value: datetime) -> str:
@@ -116,9 +129,9 @@ def select_case_gridmet_cell(
     }
 
 
-def episode_weather_midpoints(initial_state_time: str) -> list[dict[str, str]]:
-    """Create the four 12-hour segment midpoints for a fixed 48-hour episode."""
-    start = feds_timestamp_to_utc(initial_state_time)
+def episode_weather_midpoints(initial_state_time: str, *, longitude: float) -> list[dict[str, str]]:
+    """Four 12-hour segments from the FEDS start overpass at ``longitude`` (48h episode)."""
+    start = feds_overpass_utc(initial_state_time, longitude)
     segments = []
     for index in range(4):
         begin = start + timedelta(hours=12 * index)
@@ -134,7 +147,7 @@ def episode_weather_midpoints(initial_state_time: str) -> list[dict[str, str]]:
     return segments
 
 
-def pre_start_weather_day(initial_state_time: str) -> dict[str, str]:
+def pre_start_weather_day(initial_state_time: str, *, longitude: float) -> dict[str, str]:
     """The gridMET day before segment 0's daily label, as an observation-only record.
 
     ADR-030: at decision 0 policies observe initial conditions, never the forcing of
@@ -142,7 +155,7 @@ def pre_start_weather_day(initial_state_time: str) -> dict[str, str]:
     initial condition is the previous gridMET day. Its fields mirror a segment's: the
     interval is that MST day expressed in UTC and the midpoint is MST noon.
     """
-    first = episode_weather_midpoints(initial_state_time)[0]
+    first = episode_weather_midpoints(initial_state_time, longitude=longitude)[0]
     label = date.fromisoformat(first["gridmet_daily_label_mst"]) - timedelta(days=1)
     begin = datetime(label.year, label.month, label.day, tzinfo=GRIDMET_MST)
     return {

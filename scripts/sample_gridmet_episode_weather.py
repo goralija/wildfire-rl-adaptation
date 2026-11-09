@@ -26,13 +26,15 @@ GRIDMET_DIR = ROOT / ".local/gridmet"
 try:
     from scripts.fetch_gridmet_archives import find_gridmet_variable, validate_gridmet_archive
     from wildfire_rl.gridmet_weather import (
-        episode_weather_midpoints, pre_start_weather_day, select_case_gridmet_cell,
+        FEDS_TIME_REFERENCE, episode_weather_midpoints, pre_start_weather_day,
+        select_case_gridmet_cell,
     )
 except ModuleNotFoundError:
     sys.path.insert(0, str(ROOT / "scripts"))
     from fetch_gridmet_archives import find_gridmet_variable, validate_gridmet_archive
     from wildfire_rl.gridmet_weather import (
-        episode_weather_midpoints, pre_start_weather_day, select_case_gridmet_cell,
+        FEDS_TIME_REFERENCE, episode_weather_midpoints, pre_start_weather_day,
+        select_case_gridmet_cell,
     )
 
 
@@ -112,7 +114,11 @@ def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path) -> dict:
                 raise ValueError(f"Missing or failed geometry preflight for {case['scenario_id']}.")
             centroid = preflight_case["initial_perimeter_centroid_wgs84"]
             initial_time = case["evaluation_reference"]["initial_state_time"]
-            weather_segments = episode_weather_midpoints(initial_time)
+            # FEDS `t` names an overpass in local solar time; convert at the same point
+            # that selects the gridMET cell (TASK-027).
+            weather_segments = episode_weather_midpoints(
+                initial_time, longitude=centroid["longitude"]
+            )
 
             def sample_day(segment: dict) -> dict:
                 date_label = segment["gridmet_daily_label_mst"]
@@ -156,7 +162,9 @@ def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path) -> dict:
 
             segment_records = [sample_day(segment) for segment in weather_segments]
             # ADR-030: observation-only initial condition, the gridMET day before segment 0.
-            pre_start = sample_day(pre_start_weather_day(initial_time))
+            pre_start = sample_day(
+                pre_start_weather_day(initial_time, longitude=centroid["longitude"])
+            )
             records.append({
                 "scenario_id": case["scenario_id"],
                 "split": case["split"],
@@ -186,7 +194,7 @@ def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path) -> dict:
                 "source_url": f"https://www.northwestknowledge.net/metdata/data/{path.name}",
             })
     return {
-        "schema_version": "feds-gridmet-episode-weather/1.1",
+        "schema_version": "feds-gridmet-episode-weather/1.2",
         "kind": "retrospective_daily_environment_forcing_not_weather_forecast",
         "created_utc": datetime.now(timezone.utc).isoformat(),
         "test_cases_loaded": False,
@@ -201,9 +209,11 @@ def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path) -> dict:
                 "vs": "10 m wind speed, m/s",
                 "fm100": "100-hour dead fuel moisture, percent",
             },
-            "source_note": "gridMET daily labels correspond approximately to MST day boundaries; FEDS naive timestamps are treated as UTC by explicit assumption.",
+            "source_note": "gridMET daily labels correspond approximately to MST day boundaries; FEDS naive `t` (00:00/12:00) is the AM/PM VIIRS overpass label in local solar time (fireatlas v1.4.1), converted to UTC as 01:30/13:30 local solar time minus longitude / 15 h.",
         },
         "temporal_mapping": {
+            "feds_time_reference": FEDS_TIME_REFERENCE,
+            "segment_start": "UTC instant of the start-state VIIRS overpass (01:30 AM / 13:30 PM local solar time at the weather sample longitude), then 12-hour steps",
             "decision_step_hours": 12,
             "horizon_hours": 48,
             "segment_weather_sample": "six-hour midpoint of each 12-hour interval mapped to the fixed MST daily label",
@@ -216,9 +226,40 @@ def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path) -> dict:
         "limitations": [
             "gridMET is daily and approximately 4 km; each 12-hour interval uses one sampled daily cell.",
             "10 m wind and NFDRS 100-hour fuel moisture are proxies, not measured SimFire midflame wind or FBFM13 fine-fuel moisture.",
-            "FEDS timestamps omit timezone metadata in the selected FlatGeobuf fields; UTC interpretation is recorded as an assumption.",
+            "FEDS `t` has no timezone; it is read as the nominal 01:30/13:30 local solar overpass (TASK-027). Lon/15 ignores the equation of time and swath-edge time spread; segment midpoints stay at least 3 h from the MST day boundary, so daily labels do not depend on it.",
             "Raw weather presence does not validate SimFire spread or any suppression counterfactual.",
         ],
+    }
+
+
+def cell_key(record: dict) -> tuple[int, int]:
+    cell = record["nearest_gridmet_cell"]
+    return int(cell["row"]), int(cell["column"])
+
+
+def compare_with_previous(result: dict, previous: dict, previous_sha256: str) -> dict:
+    """Summarize how a regenerated file differs from an earlier one (TASK-027 receipt)."""
+    earlier = {case["scenario_id"]: case for case in previous["cases"]}
+    shared = [case for case in result["cases"] if case["scenario_id"] in earlier]
+    return {
+        "previous_sha256": previous_sha256,
+        "previous_schema_version": previous.get("schema_version"),
+        "previous_episode_manifest_sha256": previous.get("episode_manifest_sha256"),
+        "previous_case_count": len(previous["cases"]),
+        "previous_distinct_cells": len({cell_key(case["segments"][0]) for case in previous["cases"]}),
+        "previous_cases_with_pre_start": sum("pre_start" in case for case in previous["cases"]),
+        "cases_only_in_previous": sorted(set(earlier) - {case["scenario_id"] for case in result["cases"]}),
+        "cases_compared": len(shared),
+        "cases_with_changed_cell": sum(
+            cell_key(case["segments"][0]) != cell_key(earlier[case["scenario_id"]]["segments"][0])
+            for case in shared
+        ),
+        "segments_with_changed_daily_label": sum(
+            new["gridmet_daily_label_mst"] != old["gridmet_daily_label_mst"]
+            for case in shared
+            for new, old in zip(case["segments"], earlier[case["scenario_id"]]["segments"])
+        ),
+        "segments_compared": sum(len(case["segments"]) for case in shared),
     }
 
 
@@ -229,11 +270,22 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--gridmet-dir", type=Path, default=GRIDMET_DIR)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--coverage-report", type=Path, default=DEFAULT_COVERAGE_REPORT)
+    parser.add_argument("--previous-weather", type=Path, default=None,
+                        help="earlier weather file to compare with; it is only read")
     args = parser.parse_args(argv)
     try:
         manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
         preflight = json.loads(args.preflight.read_text(encoding="utf-8"))
         result = _read_weather(manifest, preflight, args.gridmet_dir)
+        previous = None
+        if args.previous_weather is not None:
+            if args.previous_weather.resolve() == args.out.resolve():
+                raise ValueError("--previous-weather must not be the output file.")
+            previous = compare_with_previous(
+                result,
+                json.loads(args.previous_weather.read_text(encoding="utf-8")),
+                sha256_file(args.previous_weather),
+            )
         args.out.parent.mkdir(parents=True, exist_ok=True)
         args.out.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         value_ranges = {}
@@ -284,7 +336,16 @@ def main(argv: list[str] | None = None) -> int:
             "sampled_value_ranges": value_ranges,
             "limitations": result["limitations"],
             "case_level_values": "ignored local cache: .local/gridmet/feds-episode-weather-v1.json",
+            "weather_file_sha256": sha256_file(args.out),
+            "pre_start_records": sum(bool(case.get("pre_start")) for case in result["cases"]),
+            "cell_distance_km_by_case": {
+                case["scenario_id"]: round(case["segments"][0]["nearest_gridmet_cell"]["distance_km"], 3)
+                for case in result["cases"]
+            },
+            "distinct_cells_all_splits": len({cell_key(case["segments"][0]) for case in result["cases"]}),
         }
+        if previous is not None:
+            coverage["comparison_with_previous_file"] = previous
         args.coverage_report.parent.mkdir(parents=True, exist_ok=True)
         args.coverage_report.write_text(json.dumps(coverage, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         print(json.dumps({
