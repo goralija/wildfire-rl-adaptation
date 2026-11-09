@@ -496,3 +496,12 @@ segmenta (pre-start zapis, pa faza 1 mora regenerisati vrijeme); linija bez nega
 "štednje" i s pragom na efektivnoj brzini; statistika §4 i receipt provjera checkpointa;
 fiksna heuristika i opisni real-case test u CA. Odluke su u tri dopune ADR-030. Svi PR-ovi
 su spojeni nakon zelenog CI-ja; 223 testa prolaze na mainu.
+
+2026-11-09 — TASK-026, faza 1 (autonomno, dopuna ADR-030). Worktree `task-026-stage-1` iz
+`main`-a; fajl s vremenom kopiran iz `.local/backups/gridmet/` (sha256 `7a51aadd…`), manifest
+`013be9a1…`; 234 testa prolaze bez preskočenih. Skripta za izbor i 19 testova commitovani su
+prije pokretanja (e988493). Svih 17 kandidata je završilo 98/98 slučajeva za oko 23 minute sa
+7 procesa. Gate je PASS: izabran je WAF 0.10 / ROS 1.0 (IoU rasta 0.0958 prema 0.0258).
+Freeze zapis i allowlist su u commitu de0e42f, a VALIDATION je ocijenjen jednom nakon njega
+(0.0983 prema 0.0278). Rezultat i granice su u ADR-031 i EXP-019. Faza 2 je pokrenuta u
+worktreeu `task-026-stage-2`.

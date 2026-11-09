@@ -1155,3 +1155,80 @@ stages 1 and 2 only.
   rule, candidate, metric or statistic may change after a result is seen.
 
 The agent prompt is [HANDOFF_STAGE_1_2](../HANDOFF_STAGE_1_2.md).
+
+## ADR-031 — stage 1 result: growth gate PASS on TRAIN, WAF 0.10 / ROS 1.0 frozen, VALIDATION scored once, recorded 2026-11-09
+
+Stage 1 of TASK-026, run under the autonomy addendum above. This is the first gate result on
+the corrected inputs (weather `7a51aadd…`, manifest `013be9a1…`, metrics
+`feds-spread-metrics/3`). It replaces the gate results of ADR-022–024. Nothing in ADR-030 §3
+was changed after a result was seen.
+
+**Fixed before the runs.** The selection script and its tests were committed before any
+candidate ran (commit e988493). Two details that §3 leaves open were fixed there: the
+tie-break "mean absolute area error" is taken over all TRAIN case-timepoints, as in ADR-022,
+and a tie on both criteria stops the selection for a user decision. Neither was needed.
+
+**TRAIN gate (17 candidates × 98 cases, seed 0, 5-min step, lifetime 90 min).**
+- Every candidate completed 98/98 cases without errors. The strata are the same for all:
+  82 growing and 16 non-growing cases. The ellipse scores a mean case growth IoU of 0.0258
+  and adds cells in every case.
+- 8 of 17 pass. 7 fail on map-edge contact (WAF .20 and .605 at ROS 1.0; WAF .40 at every
+  ROS; WAF .20 at ROS .5 and .7). 2 fail on growth IoU below the ellipse (WAF .05 at ROS .35
+  and .5).
+- **Selected: WAF 0.10 / ROS 1.0**, growth IoU 0.0958 on growing cases against 0.0258
+  (+0.0700), no edge contact. Next passing candidate: WAF .05 / ROS 1.0 at 0.0706. WAF .20 /
+  ROS 1.0 scores 0.0992 but touches the map edge in 14 cases, so the rule excludes it.
+- SimFire beats the ellipse in 59 of the 82 growing cases; in 10 of them it adds no cell
+  by +48h. Median case growth IoU is 0.072 against 0.007.
+
+| WAF | ROS | Growth IoU (growing) | Edge-contact cases | Mean abs. area error (ha) | Non-growing overgrowth (ha) | Gate |
+|---:|---:|---:|---:|---:|---:|---|
+| 0 | 1.0 | 0.0545 | 0 | 2,345 | 1,513 | pass |
+| .0025 | 1.0 | 0.0548 | 0 | 2,348 | 1,533 | pass |
+| .01 | 1.0 | 0.0570 | 0 | 2,343 | 1,567 | pass |
+| .025 | 1.0 | 0.0602 | 0 | 2,448 | 2,578 | pass |
+| .05 | 1.0 | 0.0706 | 0 | 2,726 | 4,005 | pass |
+| **.10** | **1.0** | **0.0958** | **0** | **4,120** | **8,976** | **pass, selected** |
+| .20 | 1.0 | 0.0992 | 14 | 8,389 | 18,487 | edge |
+| .605 | 1.0 | 0.0483 | 76 | 34,578 | 40,100 | edge |
+| .05 | .35 | 0.0071 | 0 | 2,367 | −31 | below ellipse |
+| .20 | .35 | 0.0317 | 0 | 2,387 | 1,564 | pass |
+| .40 | .35 | 0.0684 | 8 | 3,619 | 5,273 | edge |
+| .05 | .5 | 0.0120 | 0 | 2,356 | 108 | below ellipse |
+| .20 | .5 | 0.0649 | 1 | 2,781 | 4,123 | edge |
+| .40 | .5 | 0.0818 | 21 | 6,440 | 10,978 | edge |
+| .05 | .7 | 0.0306 | 0 | 2,417 | 900 | pass |
+| .20 | .7 | 0.0932 | 6 | 4,353 | 9,625 | edge |
+| .40 | .7 | 0.0796 | 34 | 11,858 | 17,921 | edge |
+
+Non-growing overgrowth is the mean SimFire growth beyond observed growth at +48h per
+non-growing case.
+
+**Freeze.** `configs/frozen/feds-simfire-growth-gate-freeze-v1.json` (sha256 `7639e3a9…`)
+states all six simulator fields, the weather and manifest hashes and the gate report hash.
+It was added to the VALIDATION allowlist in the same commit (de0e42f), before any VALIDATION
+scoring.
+
+**VALIDATION, scored once (20 cases, not used for selection).** 20/20 without errors, no edge
+contact, 18 growing and 2 non-growing. Growth IoU 0.0983 against the ellipse's 0.0278
+(+0.0705); SimFire is ahead in 13 of 18 growing cases and adds no cell in 2. Mean overgrowth
+on the two non-growing cases is 823 ha.
+
+**What the PASS does and does not show.**
+- It shows that, under the rule fixed in ADR-030, SimFire places new growth better than a
+  fixed geometric ellipse on fires that grew, on TRAIN and again on VALIDATION.
+- Both growth IoUs are below 0.10. The selected setting overgrows contained fires: on the 16
+  non-growing TRAIN cases the no-op run adds about 2,770 cells (8,976 ha) more than FEDS
+  observed by +48h. Mean absolute area error is 4,120 ha against 2,371 ha for persistence;
+  full-mask IoU is 0.355 against 0.532 on TRAIN and 0.406 against 0.543 on VALIDATION. The
+  superseded ADR-022 strict screen would still fail.
+- The frozen record is therefore a free-burning scenario that passes the pre-set gate, not a
+  calibrated or physically validated spread model. Stage 2 results inherit this limit.
+
+**Consequence.** Stage 2 (SimFire benchmark and budget study, ADR-030 §4) proceeds with this
+record. Merges and stage 3 stay with the user; TEST 2024 stays closed.
+
+Evidence: [TRAIN gate summary](../../reports/real-fire-data/feds-simfire-train-growth-gate-v1.json),
+[VALIDATION score](../../reports/real-fire-data/feds-simfire-validation-growth-gate-v1.json),
+[freeze record](../../configs/frozen/feds-simfire-growth-gate-freeze-v1.json), EXP-019 in the
+[experiment log](../research/EXPERIMENT_LOG.md).

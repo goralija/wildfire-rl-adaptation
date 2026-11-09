@@ -35,7 +35,11 @@ reprezentativan za sve požare. FEDS/FPA veza ostaje provisionalna.
 - **Druge potvrđene greške.** IoU uključuje početnu površinu; dijagonalne linije
   propuštaju vatru; PPO nije bolji od nasumične linije; u CA se napredak linije briše pri
   promjeni smjera, a ćelije linije se računaju kao spašene.
-- **Dalje.** TASK-021–027 u [NEXT_SESSION](../docs/NEXT_SESSION.md); odluka u ADR-029.
+- **Ispravke.** TASK-021–027 su spojeni; odluke su u ADR-029 i ADR-030.
+- **Faza 1 (ADR-031, 2026-11-09).** Gate po IoU rasta je prošao na 98 TRAIN požara; zamrznut
+  je WAF 0.10 / ROS 1.0 (0.0958 prema 0.0258 za elipsu), VALIDATION ocijenjen jednom (0.0983
+  prema 0.0278). Oba IoU su ispod 0.10 i simulator prerasta nerastuće požare, pa PASS nije
+  fizička validacija. Faza 2 je u toku; redoslijed je u [NEXT_SESSION](../docs/NEXT_SESSION.md).
 
 ## Ranije — sintetički CA trening (ADR-028), 2026-11-05
 
