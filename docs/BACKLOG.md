@@ -11,13 +11,13 @@ Rezultati ADR-022–028 su nevažeći zbog gridMET greške; redoslijed i prihvat
 
 | ID | Stanje | Sljedeće |
 | --- | --- | --- |
-| TASK-021 | otvoreno | CI posao s NumPy/geo paketima |
-| TASK-022 | otvoreno | IoU rasta, downwind elipsa |
-| TASK-023 | otvoreno | linije bez dijagonalnih rupa, jačina linije, VALIDATION zaštita, testovi statistike |
-| TASK-024 | otvoreno | CA: napredak gradnje, ćelije linije, sigurnost odvojeno |
+| TASK-021 | završeno (PR #8) | CI posao `numeric` s tačnim spiskom preskočenih testova |
+| TASK-022 | završeno (PR #9) | IoU rasta, downwind elipsa, `growth_gate` |
+| TASK-023 | završeno (PR #12) | linije, observation bez prognoze, statistika §4, zaštite |
+| TASK-024 | završeno (PR #11) | CA: napredak, ćelije linije, prihvat §5, opisni real-case test |
 | TASK-025 | završeno (ADR-030) | odluke zapisane; implementacija opcija u TASK-023/024 |
-| TASK-026 | čeka 021–024 i nalog po fazi | faza 1 gate → faza 2 benchmark → faza 3 CA trening (ADR-030 §7) |
-| TASK-027 | otvoreno | FEDS UTC; ukloniti columbus iz manifesta (ADR-030 §6); RNG reset |
+| TASK-026 | čeka TASK-027, novi gridMET i nalog po fazi | faza 1 gate → faza 2 benchmark → faza 3 CA trening (ADR-030 §7) |
+| TASK-027 | otvoreno | FEDS UTC; ukloniti columbus iz manifesta (ADR-030 §6); RNG reset riješen |
 
 
 ## Aktivni prioritet — 2026-11-04 (noćni rad, koraci 5–8)

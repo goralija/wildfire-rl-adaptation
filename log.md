@@ -1,5 +1,13 @@
 # Promjene baze znanja
 
+## 2026-11-09: ispravke TASK-021–024 revidirane i spojene
+
+- Svaki PR je pregledao zaseban recenzent s ograničenim kontekstom; nalazi su popravljeni
+  prije merge-a: tačan spisak preskočenih testova u CI-ju, gate po ADR-030 §3, elipsa od
+  vodeće ivice fronta, observation bez buduće prognoze (pre-start dan), linija bez
+  "štednje", fiksna heuristika i opisni real-case test u CA. Dopune ADR-030 to bilježe.
+- Sljedeće: TASK-027 i novi gridMET fajl, pa faza 1 uz nalog ([NEXT_SESSION](docs/NEXT_SESSION.md)).
+
 ## 2026-11-09: dopuna ADR-030, ćelije linije i nagrada
 
 - Ćelija linije koju no-op vatra zahvati računa se kao šteta i u nagradi za trening, ne

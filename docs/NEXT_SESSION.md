@@ -11,20 +11,23 @@ VALIDATION požara dobili su vrijeme drugog požara. Greška je ispravljena (PR 
 #3–#5 su spojeni u `main` kao historija, a **brojevi iz ADR-022–028 se ne citiraju** dok
 se ne ponove. Detalji i potpun spisak grešaka: [ADR-029](specs/DECISION_RECORDS.md).
 
-**Redoslijed** (svaka ispravka = zaseban PR iz `main`, test prije promjene ponašanja):
-1. **TASK-021 — CI.** Drugi CI posao s NumPy i geo paketima; SimFire testovi mogu ostati
-   lokalni. Prihvat: u CI-ju se preskaču samo SimFire testovi.
-2. **TASK-022 — metrike.** IoU samo novog rasta (bez početne površine) uz preciznost i
-   odziv rasta; elipsa sa početnom vatrom na zadnjem žarištu. Prihvat: predviđanje jednako
-   početnoj maski daje IoU rasta 0; smjer i suprotni smjer daju različite elipse.
-3. **TASK-023 — SimFire okruženje i linije.** Linija bez dijagonalnih rupa za svih 8
-   smjerova, budžet po dužini (1,26 km), jačina linije neovisna o internom koraku, zaštita
-   VALIDATION-a u okruženju i benchmarku (hash zamrznutog zapisa), testovi za dvonivovski
-   bootstrap i t-interval, objašnjenje epizoda gdje linija poveća požar. Opcija za vrijeme
-   koje agent vidi (prethodni segment) ide iza zastavice dok TASK-025 ne odluči.
-4. **TASK-024 — sintetički CA.** Napredak gradnje vezan za ćeliju, ćelije linije u no-op
-   otisku se ne računaju kao spašene, sigurnost (bliski susreti, gubici) prijavljena
-   odvojeno od spašene površine, svi CI-jevi iz koda, ispravna komanda u HANDOFF-u.
+**Redoslijed.** Ispravke TASK-021–024 su urađene, nezavisno revidirane, popravljene i
+spojene 2026-11-09 (PR-ovi #8, #9, #12, #11); pravila koja su pritom precizirana su u
+dopunama ADR-030.
+1. **TASK-021 — CI: urađeno (PR #8).** Posao `numeric` pokreće sve testove osim
+   SimFire/sb3/lokalnih podataka; preskočeni testovi moraju tačno odgovarati
+   `tests/ci_expected_skips.txt`.
+2. **TASK-022 — metrike i gate: urađeno (PR #9).** IoU samo rasta, downwind elipsa od vodeće
+   ivice fronta, `growth_gate` po ADR-030 §3 (rastući požari, IoU po požaru zbirno kroz
+   četiri tačke).
+3. **TASK-023 — SimFire okruženje: urađeno (PR #12).** Linije bez dijagonalnih rupa, budžet po
+   dužini, linija ne "štedi" kad čeka i drži do efektivnih 980 ft/min, agent vidi gridMET
+   dan strogo prije sljedećeg segmenta (novi pre-start zapis), statistika ADR-030 §4,
+   checkpointi vezani za postavke, ista zaštita VALIDATION-a i fiksni korak od 5 min u
+   no-op putanji, lokalni RNG.
+4. **TASK-024 — sintetički CA: urađeno (PR #11).** Napredak vezan za ćeliju, ćelije linije
+   u no-op otisku se plaćaju i u nagradi, prihvat po ADR-030 §5, test na stvarnim
+   slučajevima je opisni s unaprijed zadanom heuristikom.
 5. **TASK-025 — odluke: urađeno u [ADR-030](specs/DECISION_RECORDS.md).** Agent vidi
    vrijeme prethodnog segmenta; umanjenje linije se skalira s korakom, a korak je fiksno
    5 minuta; gate se mjeri IoU-om rasta na požarima koji rastu (≥1.10× površine za 48h)
@@ -37,9 +40,13 @@ se ne ponove. Detalji i potpun spisak grešaka: [ADR-029](specs/DECISION_RECORDS
    zamrzavanje, jedna VALIDATION ocjena) tek kad su TASK-021–024 spojeni i FEDS vremenska
    zona provjerena. Faza 2: SimFire benchmark i studija budžeta. Faza 3: ponovni trening CA
    politika, tek nakon odluke koji je simulator glavni za poster.
-7. **TASK-027 — provjere.** Da li je FEDS `t` UTC (00:00/12:00 liče na poludnevne
-   intervale); dva FPA zapisa (sugar-pine, columbus) dijele isti FEDS požar u TRAIN-u;
-   resetovanje globalnog NumPy RNG-a pri svakom `reset()`.
+7. **TASK-027 — provjere prije faze 1.** Da li je FEDS `t` UTC (00:00/12:00 liče na
+   poludnevne intervale); ukloniti `fpa-fod-400389825-columbus` iz manifesta (ADR-030 §6,
+   98 TRAIN). RNG reset je riješen u TASK-023.
+
+**Šta faza 1 još traži:** TASK-027 provjere; ponovo napraviti gridMET fajl ispravljenim
+uzorkovačem (s `pre_start` zapisom, koji okruženje sada zahtijeva) i upisati njegov hash u
+izvještaje; zatim izričit nalog korisnika.
 
 Paralelni PR-ovi (TASK-021–024) ne mijenjaju zajedničke fajlove znanja (STATUS,
 NEXT_SESSION, BACKLOG, log, agent ulazi); promjene opisuju u PR-u, a znanje se ažurira pri
