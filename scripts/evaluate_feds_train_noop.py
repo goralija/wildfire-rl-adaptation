@@ -29,6 +29,37 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _growth_summary(rows: list[dict]) -> dict:
+    """Growth-only scores, stratified on whether FEDS grew beyond the initial mask.
+
+    Growth IoU and recall are averaged only over growing timepoints, where every
+    method is defined, so the rows stay paired across methods. Stalled timepoints
+    are reported as counts of false growth instead of a ratio.
+    """
+    growing = [row for row in rows if row["observed_growth_cells"] > 0]
+    stalled = [row for row in rows if row["observed_growth_cells"] == 0]
+    growth_ious = [float(row["growth_iou"]) for row in growing]
+    recalls = [float(row["growth_recall"]) for row in growing]
+    hits = sum(row["growth_intersection_cells"] for row in rows)
+    predicted = sum(row["predicted_growth_cells"] for row in rows)
+    observed = sum(row["observed_growth_cells"] for row in rows)
+    return {
+        "growing_timepoints": len(growing),
+        "mean_growth_iou": statistics.fmean(growth_ious) if growth_ious else None,
+        "median_growth_iou": statistics.median(growth_ious) if growth_ious else None,
+        "mean_growth_recall": statistics.fmean(recalls) if recalls else None,
+        "pooled_growth_precision": hits / predicted if predicted else None,
+        "pooled_growth_recall": hits / observed if observed else None,
+        "growing_timepoints_without_predicted_growth": sum(
+            row["predicted_growth_cells"] == 0 for row in growing),
+        "stalled_timepoints": len(stalled),
+        "stalled_timepoints_with_predicted_growth": sum(
+            row["predicted_growth_cells"] > 0 for row in stalled),
+        "mean_false_growth_cells_when_stalled": (
+            statistics.fmean(row["predicted_growth_cells"] for row in stalled) if stalled else None),
+    }
+
+
 def summarize(results: list[dict]) -> dict:
     """Summarize paired no-op, persistence, and ellipse scores at all horizons."""
     metric_rows = {
@@ -60,6 +91,7 @@ def summarize(results: list[dict]) -> dict:
                 any(bool(row["touches_map_edge"]) for row in case.get("trajectory", []))
                 for case in results
             ) if name == "simfire_noop" else None,
+            "growth": _growth_summary(rows),
         }
 
     noop = summary["simfire_noop"]
@@ -75,6 +107,11 @@ def summarize(results: list[dict]) -> dict:
                 noop["mean_absolute_area_error_ha"] - reference["mean_absolute_area_error_ha"]
                 if noop["mean_absolute_area_error_ha"] is not None
                 and reference["mean_absolute_area_error_ha"] is not None else None
+            ),
+            "mean_growth_iou_delta_noop_minus_reference": (
+                noop["growth"]["mean_growth_iou"] - reference["growth"]["mean_growth_iou"]
+                if noop["growth"]["mean_growth_iou"] is not None
+                and reference["growth"]["mean_growth_iou"] is not None else None
             ),
         }
     return {"methods": summary, "paired_comparisons": comparisons}
@@ -121,6 +158,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
     if not 0.0 <= args.wind_adjustment_factor <= 1.0:
         parser.error("wind-adjustment-factor must be in [0,1].")
+    from wildfire_rl.feds_spread_metrics import ELLIPSE_REFERENCE_PROTOCOL, METRICS_VERSION
 
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     if manifest.get("test_cases_loaded") is not False:
@@ -157,6 +195,7 @@ def main(argv: list[str] | None = None) -> int:
         "split": args.split,
         "expected_scenarios": len(train_cases),
         "frozen_params_sha256": freeze_sha256,
+        "metrics_version": METRICS_VERSION,
     }
     if out.exists():
         if not args.resume:
@@ -170,7 +209,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.resume:
             parser.error("Cannot --resume because the output report does not exist.")
         payload = {
-            "schema_version": "feds-simfire-train-noop-gate/1.0",
+            "schema_version": "feds-simfire-train-noop-gate/1.1",
             "created_utc": datetime.now(timezone.utc).isoformat(),
             "status": "running",
             "configuration": configuration,
@@ -179,15 +218,9 @@ def main(argv: list[str] | None = None) -> int:
             "scientific_result": False,
             "reference_protocol": {
                 "persistence": "Hold the exact initial FEDS scar/front mask unchanged.",
-                "ellipse": {
-                    "shape": "2:1 downwind ellipse, unioned with the initial FEDS scar/front",
-                    "center": "centroid of the initial active-front cells",
-                    "heading": "first 12-hour gridMET wind-to direction",
-                    "semi_major_growth": "180 m per 12 hours (one 180 m study-grid cell)",
-                    "semi_minor_growth": "semi-major axis divided by 2",
-                    "future_feds_used": False,
-                    "purpose": "simple predeclared geometric reference, not a physical spread model",
-                },
+                "ellipse": ELLIPSE_REFERENCE_PROTOCOL,
+                "growth_metrics": "growth_* fields score only cells outside the initial mask; "
+                                  "None where the denominator is empty",
             },
             "results": [],
             "errors": [],

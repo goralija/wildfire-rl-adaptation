@@ -127,6 +127,8 @@ def run_episode(
         load_case_inputs,
     )
     from wildfire_rl.feds_spread_metrics import (
+        ELLIPSE_REFERENCE_PROTOCOL,
+        METRICS_VERSION,
         binary_burn_metrics,
         elliptical_growth_reference,
     )
@@ -210,7 +212,7 @@ def run_episode(
         metrics.append(score)
 
     return {
-        "schema_version": "feds-simfire-noop-episode/1.0",
+        "schema_version": "feds-simfire-noop-episode/1.1",
         "kind": "historical_weather_noop_model_diagnostic_not_physical_validation",
         "created_utc": datetime.now(timezone.utc).isoformat(),
         "scenario_id": scenario_id,
@@ -231,16 +233,10 @@ def run_episode(
         "wind_adjustment_factor_locked": False,
         "baseline_protocol": {
             "persistence": "The initial FEDS burn-scar plus active-front mask is held unchanged through each horizon.",
-            "ellipse": {
-                "shape": "fixed 2:1 downwind ellipse unioned with the initial burn mask",
-                "center": "centroid of the initial FEDS active-front cells",
-                "heading": "first 12-hour gridMET wind-to direction",
-                "semi_major_growth": "180 m per 12 hours (one study-grid cell)",
-                "semi_minor_growth": "semi-major axis divided by 2",
-                "future_feds_used": False,
-                "calibrated_from_future_feds": False,
-            },
+            "ellipse": ELLIPSE_REFERENCE_PROTOCOL,
+            "growth_metrics": "growth_* fields score only cells outside the initial mask; None where the denominator is empty",
         },
+        "metrics_version": METRICS_VERSION,
         "initial_feds_state": {
             "time": expected_time,
             "burn_scar_cells": int(scar.sum()),
@@ -300,6 +296,9 @@ def main(argv: list[str] | None = None) -> int:
         "trajectory": [{
             "hours_since_start": row["hours_since_start"],
             "iou": round(row["iou"], 4),
+            "growth_iou": None if row["growth_iou"] is None else round(row["growth_iou"], 4),
+            "observed_growth_cells": row["observed_growth_cells"],
+            "predicted_growth_cells": row["predicted_growth_cells"],
             "predicted_area_ha": round(row["predicted_area_ha"], 2),
             "observed_area_ha": round(row["observed_area_ha"], 2),
             "touches_map_edge": row["touches_map_edge"],
