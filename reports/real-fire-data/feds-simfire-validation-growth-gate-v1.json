@@ -121,7 +121,8 @@
       "simfire_growth_iou": 0.0
     }
   ],
-  "created_utc": "2026-11-09T20:14:32.081093+00:00",
+  "code_commit": "de0e42f",
+  "created_utc": "2026-11-09T20:33:31.503995+00:00",
   "decision": "ADR-030 section 3: VALIDATION scored once with the TRAIN freeze; never used for selection (ADR-031)",
   "errors": 0,
   "freeze_record": "configs/frozen/feds-simfire-growth-gate-freeze-v1.json",
@@ -180,8 +181,9 @@
     "mean_overgrowth_ha_48h": 822.96
   },
   "physical_validation": false,
-  "schema_version": "feds-simfire-validation-growth-gate/1.0",
+  "schema_version": "feds-simfire-validation-growth-gate/1.1",
   "scored_once": true,
+  "scored_utc": "2026-11-09T20:14:32.081093+00:00",
   "seed": 0,
   "simfire_params": {
     "active_cell_lifetime_minutes": 90,
