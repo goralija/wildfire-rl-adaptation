@@ -3,8 +3,10 @@
 
 Every policy is run on the same scenarios, budgets, 48h horizon, simulator
 parameters and observations. Damage is cumulative SimFire-burned area added after
-the observed FEDS start (cells, then hectares). VALIDATION requires a committed
-TRAIN parameter freeze record; TEST is never loaded. This is a simulator benchmark,
+the observed FEDS start (cells, then hectares). VALIDATION requires a TRAIN freeze
+record whose sha256 is in the committed allowlist and whose parameters and gridMET
+hash match this run; the environment checks the same record again. TEST is never
+loaded. This is a simulator benchmark,
 not physical validation of suppression effectiveness.
 """
 
@@ -53,7 +55,7 @@ def _run_job(job):
     from wildfire_rl.feds_simfire_env import FedsSimFireEnv
     from wildfire_rl.feds_simfire_setup import SimFireParams
 
-    scenario_id, budgets, policies, params, split, placement, seed = job
+    scenario_id, budgets, policies, params, split, placement, seed, weather_observation, freeze = job
     env = FedsSimFireEnv(
         sim_params=SimFireParams(**params),
         budgets=tuple(sorted(set(budgets) | {0})),
@@ -61,6 +63,8 @@ def _run_job(job):
         split=split,
         line_placement=placement,
         max_budget=4,
+        weather_observation=weather_observation,
+        freeze_record=freeze,
     )
     rows = []
     for name, spec in policies.items():
@@ -145,6 +149,8 @@ def main(argv=None) -> int:
     parser.add_argument("--policy", action="append", default=[],
                         help="name=heuristic:<name> or name=ppo:<checkpoint>; repeatable")
     parser.add_argument("--line-placement", choices=("centroid", "front_edge"), default="front_edge")
+    parser.add_argument("--weather-observation", choices=("upcoming", "previous"), default="upcoming",
+                        help="forcing shown to every policy: the next 12h segment or the one that just ran")
     parser.add_argument("--scenario-limit", type=int)
     parser.add_argument("--workers", type=int, default=1)
     parser.add_argument("--seed", type=int, default=0)
@@ -153,12 +159,16 @@ def main(argv=None) -> int:
     if args.out.exists():
         parser.error("output exists; choose a new path")
 
-    from wildfire_rl.feds_simfire_setup import load_split_cases, sha256_file
+    from wildfire_rl.feds_simfire_setup import SimFireParams, check_split_access, load_split_cases, sha256_file
 
     freeze = json.loads(args.params.read_text(encoding="utf-8"))
     params = freeze["frozen_params"]
-    if args.split == "validation" and freeze.get("selected_on_split") != "train":
-        parser.error("VALIDATION benchmarks require parameters selected on TRAIN.")
+    sim_params = SimFireParams(**params)
+    try:
+        freeze_sha256 = check_split_access(args.split, sim_params, args.params)
+    except ValueError as exc:
+        parser.error(str(exc))
+    freeze_path = str(args.params) if args.split == "validation" else None
     budgets = [int(value) for value in args.budgets.split(",")]
     policies = dict(item.split("=", 1) for item in args.policy) or {
         "noop": "heuristic:noop",
@@ -171,7 +181,8 @@ def main(argv=None) -> int:
     scenarios = sorted(load_split_cases(args.split))
     if args.scenario_limit:
         scenarios = scenarios[: args.scenario_limit]
-    jobs = [(scenario, budgets, policies, params, args.split, args.line_placement, args.seed)
+    jobs = [(scenario, budgets, policies, params, args.split, args.line_placement, args.seed,
+             args.weather_observation, freeze_path)
             for scenario in scenarios]
 
     started = time.monotonic()
@@ -202,9 +213,11 @@ def main(argv=None) -> int:
         "split": args.split,
         "test_cases_loaded": False,
         "params_file_sha256": sha256_file(args.params),
-        "sim_params": params,
+        "validation_freeze_sha256": freeze_sha256,
+        "sim_params": sim_params.as_dict(),
         "params_gate_status": freeze.get("gate_status"),
         "line_placement": args.line_placement,
+        "weather_observation": args.weather_observation,
         "budgets": budgets,
         "policies": policies,
         "seed": args.seed,

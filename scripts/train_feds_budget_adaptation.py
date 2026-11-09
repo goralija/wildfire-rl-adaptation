@@ -30,7 +30,8 @@ def _parse_budgets(value: str) -> tuple:
     return budgets
 
 
-def _make_env_factory(params: dict, budgets: tuple, placement: str, rank: int):
+def _make_env_factory(params: dict, budgets: tuple, placement: str, rank: int,
+                      weather_observation: str = "upcoming"):
     def factory():
         import os
 
@@ -44,6 +45,7 @@ def _make_env_factory(params: dict, budgets: tuple, placement: str, rank: int):
             split="train",
             line_placement=placement,
             max_budget=4,
+            weather_observation=weather_observation,
         )
 
     return factory
@@ -60,6 +62,8 @@ def main(argv=None) -> int:
     parser.add_argument("--n-steps", type=int, default=16, help="rollout length per env")
     parser.add_argument("--learning-rate", type=float, default=3e-4)
     parser.add_argument("--line-placement", choices=("centroid", "front_edge"), default="front_edge")
+    parser.add_argument("--weather-observation", choices=("upcoming", "previous"), default="upcoming",
+                        help="forcing in the observation: the next 12h segment or the one that just ran")
     parser.add_argument("--seed", type=int, required=True)
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args(argv)
@@ -72,13 +76,13 @@ def main(argv=None) -> int:
     from sb3_contrib import MaskablePPO
     from stable_baselines3.common.vec_env import SubprocVecEnv, VecMonitor
 
-    from wildfire_rl.feds_simfire_setup import MANIFEST, WEATHER, sha256_file
+    from wildfire_rl.feds_simfire_setup import MANIFEST, WEATHER, SimFireParams, sha256_file
 
     torch.set_num_threads(1)
     freeze = json.loads(args.params.read_text(encoding="utf-8"))
     params = freeze["frozen_params"]
     env = VecMonitor(SubprocVecEnv([
-        _make_env_factory(params, args.budgets, args.line_placement, rank)
+        _make_env_factory(params, args.budgets, args.line_placement, rank, args.weather_observation)
         for rank in range(args.n_envs)
     ], start_method="spawn"))
     env.seed(args.seed)
@@ -119,7 +123,8 @@ def main(argv=None) -> int:
         "budgets": list(args.budgets),
         "observation_max_budget": 4,
         "line_placement": args.line_placement,
-        "sim_params": params,
+        "weather_observation": args.weather_observation,
+        "sim_params": SimFireParams(**params).as_dict(),
         "params_file_sha256": sha256_file(args.params),
         "params_gate_status": freeze.get("gate_status"),
         "split": "train",
