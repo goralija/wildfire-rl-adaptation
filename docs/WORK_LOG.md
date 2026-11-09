@@ -478,3 +478,12 @@ Na korisnikov nalog PR-ovi #3–#5 su spojeni u `main` merge commitima, grane su
 (observation bez buduće prognoze, skalirana linija i fiksni korak od 5 min, gate na IoU
 rasta, plan statistike s 10 seedova, CA prihvat po spašenoj površini uz sigurnosni uslov,
 uklanjanje duplog FEDS požara, ponovno pokretanje u tri faze uz nalog po fazi).
+
+2026-11-09 — PR-ove #8, #9, #11 i #12 (TASK-021–024) pregledala su četiri recenzenta s
+ograničenim kontekstom. Potvrđeni nalazi su popravljeni na samim granama: CI provjera
+preskočenih testova po tačnim ID-jevima; `growth_gate` po ADR-030 §3 sa zbirnim IoU-om po
+požaru i elipsom od vodeće ivice fronta; observation koji nikad ne vidi gridMET dan sljedećeg
+segmenta (pre-start zapis, pa faza 1 mora regenerisati vrijeme); linija bez negativne
+"štednje" i s pragom na efektivnoj brzini; statistika §4 i receipt provjera checkpointa;
+fiksna heuristika i opisni real-case test u CA. Odluke su u tri dopune ADR-030. Svi PR-ovi
+su spojeni nakon zelenog CI-ja; 223 testa prolaze na mainu.
