@@ -96,8 +96,10 @@ class GridmetWeatherTests(unittest.TestCase):
         dataset.createVariable("lat", "f8", ("lat",))[:] = latitudes
         variable = dataset.createVariable(name, "f4", ("day", "lat", "lon"))
         variable.units = units
-        # value = 10 * row + column + 1, so every cell is distinguishable
-        variable[:] = np.broadcast_to(np.array([[1, 2], [11, 12]], dtype="f4"), (365, 2, 2))
+        # value = 1000 * day index + 10 * row + column + 1, so every cell and day is
+        # distinguishable
+        cells = np.array([[1, 2], [11, 12]], dtype="f4")
+        variable[:] = cells[None, :, :] + 1000.0 * np.arange(365, dtype="f4")[:, None, None]
         dataset.close()
 
     def test_sampler_reads_each_case_at_its_own_cell(self):
@@ -156,17 +158,52 @@ class GridmetWeatherTests(unittest.TestCase):
                     mock.patch.object(sampler, "sha256_file", return_value="test"):
                 weather = sampler._read_weather(manifest, preflight, Path(directory))
 
+        # 2018-07-01 is day index 181 of 2018; the pre-start day 2018-06-30 is 180.
         values = {
             case["scenario_id"]: case["segments"][0]["gridmet_values"]["vs"]["value"]
             for case in weather["cases"]
         }
-        self.assertEqual(values, {"first": 1.0, "second": 12.0})
+        self.assertEqual(values, {"first": 181001.0, "second": 181012.0})
         cells = {
             case["scenario_id"]: (case["segments"][0]["nearest_gridmet_cell"]["row"],
                                   case["segments"][0]["nearest_gridmet_cell"]["column"])
             for case in weather["cases"]
         }
         self.assertEqual(cells, {"first": (0, 0), "second": (1, 1)})
+
+        # ADR-030: one observation-only record for the gridMET day before segment 0,
+        # read at the same per-case cell, with the same fields as a segment.
+        for case in weather["cases"]:
+            pre_start = case["pre_start"]
+            with self.subTest(case=case["scenario_id"]):
+                self.assertEqual(case["segments"][0]["gridmet_daily_label_mst"], "2018-07-01")
+                self.assertEqual(pre_start["gridmet_daily_label_mst"], "2018-06-30")
+                self.assertEqual(pre_start["segment"], "pre_start")
+                self.assertEqual(set(pre_start), set(case["segments"][0]))
+                self.assertEqual(pre_start["nearest_gridmet_cell"],
+                                 case["segments"][0]["nearest_gridmet_cell"])
+                self.assertEqual(set(pre_start["gridmet_values"]), {"th", "vs", "fm100"})
+        self.assertEqual(
+            {case["scenario_id"]: case["pre_start"]["gridmet_values"]["vs"]["value"]
+             for case in weather["cases"]},
+            {"first": 180001.0, "second": 180012.0},
+        )
+        self.assertIn("pre_start", weather["temporal_mapping"]["agent_visibility"])
+
+    def test_pre_start_record_is_the_gridmet_day_before_segment_zero(self):
+        from wildfire_rl.gridmet_weather import pre_start_weather_day
+
+        for start in ("2018-07-24T00:00:00", "2018-07-24T12:00:00", "2019-01-02T03:00:00"):
+            segments = episode_weather_midpoints(start)
+            record = pre_start_weather_day(start)
+            with self.subTest(start=start):
+                self.assertLess(record["gridmet_daily_label_mst"],
+                                segments[0]["gridmet_daily_label_mst"])
+                self.assertEqual(set(record), set(segments[0]))
+                self.assertEqual(record["segment"], "pre_start")
+        # 2018-07-24T00:00 UTC is 2018-07-23 in MST, so the pre-start day is the 22nd.
+        self.assertEqual(pre_start_weather_day("2018-07-24T00:00:00")["gridmet_daily_label_mst"],
+                         "2018-07-22")
 
 
 if __name__ == "__main__":
