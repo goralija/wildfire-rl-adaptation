@@ -1111,10 +1111,12 @@ From TASK-027, before any stage-1 run. Evidence and links:
   `feds_t_viirs_overpass_local_solar/v1`, or loading is refused. Real-case CA episodes start
   at segment 0's UTC start, and a naive FEDS time is never parsed as UTC.
 - **Effect on the §1 observation addendum.** Under this mapping each daily record covers two
-  consecutive segments. On the 98 TRAIN cases the previous segment shares the upcoming day
-  in 150 of 392 decisions; the stale figure was 244 of 396. With the strictly-earlier rule,
-  the observed record changes at 144 of 294 later decisions. In AM-start cases, decisions 0
-  and 1 both observe the pre-start day. This is the intended information lag, not a new rule.
+  consecutive segments. That addendum's "244 of 396" was 99 decision-0 cases plus 145 of 297
+  later decisions where the previous segment shared the upcoming day, under the UTC reading.
+  On the 98 TRAIN cases it is now 150 of 294 later decisions; decision 0 shows the pre-start
+  day, so it never shows forcing. With the strictly-earlier rule, the observed record changes
+  at 144 of 294 later decisions, and in AM-start cases decisions 0 and 1 both observe the
+  pre-start day. This is the intended information lag, not a new rule.
 - **Duplicate (§6).** It is implemented in the manifest generator as a rule (lowest
   `fod_id` per FEDS fireID), with excluded records listed in the manifest; columbus is
   dropped and TRAIN has 98 cases. The generator also refuses a FEDS fire joined from both

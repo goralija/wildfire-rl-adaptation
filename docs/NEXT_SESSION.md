@@ -115,7 +115,7 @@ puni izvještaji su u ignorisanom `.local/` na Harunovom računaru; obnova je op
 | Prag paljenja / vijek ćelije | ROS × WAF mreža (ADR-023) | smanjuje lažni rast, ali do persistence se dolazi tek gašenjem skoro svega; FAIL |
 | Trening samo na TRAIN | env odbija ne-TRAIN bez eksplicitnog `split`; trening skripta fiksira `split="train"` | OK |
 
-Neprovjereno: vremenska zona FEDS `t` (pretpostavka UTC), finija vlaga goriva od `fm100`,
+Neprovjereno: vremenska zona FEDS `t` (pretpostavka UTC; TASK-027 je kasnije pokazao da nije UTC), finija vlaga goriva od `fm100`,
 model zaustavljanja/gašenja. **Svi rezultati koraka 7–8 su "gate FAIL, nije mjerodavno"**
 u smislu kalibracije; validation je preuzet i skoriran po korisnikovom odobrenju za
 eksploratorni nastavak (ADR-024).
