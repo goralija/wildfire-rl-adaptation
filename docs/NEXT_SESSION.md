@@ -1,8 +1,46 @@
 ---
 type: Handoff
-title: Nastavak nakon koraka 5–8 (SimFire/FEDS, 2026-11-04)
+title: Ispravke nakon revizije PR-ova #3–#5 (ADR-029, 2026-11-09)
 ---
 # Naredni korak
+
+## Najnovije — 2026-11-09: rezultati ADR-022–028 su nevažeći, prvo ispravke (ADR-029)
+
+Revizija PR-ova #3–#5 našla je grešku u gridMET uzorkovanju: 97/99 TRAIN i 19/20
+VALIDATION požara dobili su vrijeme drugog požara. Greška je ispravljena (PR #3), PR-ovi
+#3–#5 su spojeni u `main` kao historija, a **brojevi iz ADR-022–028 se ne citiraju** dok
+se ne ponove. Detalji i potpun spisak grešaka: [ADR-029](specs/DECISION_RECORDS.md).
+
+**Redoslijed** (svaka ispravka = zaseban PR iz `main`, test prije promjene ponašanja):
+1. **TASK-021 — CI.** Drugi CI posao s NumPy i geo paketima; SimFire testovi mogu ostati
+   lokalni. Prihvat: u CI-ju se preskaču samo SimFire testovi.
+2. **TASK-022 — metrike.** IoU samo novog rasta (bez početne površine) uz preciznost i
+   odziv rasta; elipsa sa početnom vatrom na zadnjem žarištu. Prihvat: predviđanje jednako
+   početnoj maski daje IoU rasta 0; smjer i suprotni smjer daju različite elipse.
+3. **TASK-023 — SimFire okruženje i linije.** Linija bez dijagonalnih rupa za svih 8
+   smjerova, budžet po dužini (1,26 km), jačina linije neovisna o internom koraku, zaštita
+   VALIDATION-a u okruženju i benchmarku (hash zamrznutog zapisa), testovi za dvonivovski
+   bootstrap i t-interval, objašnjenje epizoda gdje linija poveća požar. Opcija za vrijeme
+   koje agent vidi (prethodni segment) ide iza zastavice dok TASK-025 ne odluči.
+4. **TASK-024 — sintetički CA.** Napredak gradnje vezan za ćeliju, ćelije linije u no-op
+   otisku se ne računaju kao spašene, sigurnost (bliski susreti, gubici) prijavljena
+   odvojeno od spašene površine, svi CI-jevi iz koda, ispravna komanda u HANDOFF-u.
+5. **TASK-025 — odluke prije ponovnog pokretanja (novi ADR, tim/korisnik).** Šta agent vidi
+   od vremena; fiksni korak ili skalirana linija; novo gate pravilo na IoU rasta i šta s
+   požarima koji u FEDS-u ne rastu; benchmark plan (PPO prema nasumičnoj liniji i najboljoj
+   heuristici, tačni testovi za heuristike, broj seedova).
+6. **TASK-026 — ponovno pokretanje (tek nakon 1–5 i izričitog naloga, uključuje dugi
+   trening).** Nove gridMET vrijednosti s upisanim hashom → TRAIN gate → zamrzavanje i jedna
+   VALIDATION ocjena → benchmark i studija budžeta → ponovni trening i zaključavanje CA
+   politika → test na 119 požara i kalibracija.
+7. **TASK-027 — provjere.** Da li je FEDS `t` UTC (00:00/12:00 liče na poludnevne
+   intervale); dva FPA zapisa (sugar-pine, columbus) dijele isti FEDS požar u TRAIN-u;
+   resetovanje globalnog NumPy RNG-a pri svakom `reset()`.
+
+Paralelni PR-ovi (TASK-021–024) ne mijenjaju zajedničke fajlove znanja (STATUS,
+NEXT_SESSION, BACKLOG, log, agent ulazi); promjene opisuju u PR-u, a znanje se ažurira pri
+merge-u.
+
 
 ## Najnovije — 2026-11-05: sintetički CA (ADR-028), grana `codex/synthetic-ca-training`
 

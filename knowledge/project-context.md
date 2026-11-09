@@ -1,7 +1,7 @@
 ---
 type: Project Context
 title: Projektni kontekst i stanje istraživanja
-description: Sažetak aktivnog SimFire/FEDS benchmarka, koraka 5–8 i otvorenih odluka.
+description: Sažetak aktivnog SimFire/FEDS benchmarka, ADR-029 ispravki i otvorenih odluka.
 status: stable
 generated: {by: "process:claude-code", at: "2026-11-04T03:45:00Z"}
 sources:
@@ -26,7 +26,18 @@ ograničeni post-hoc kontekst. Split je po godini: train 2018/2019 (99 požara),
 2023 (20), test 2024 (zatvoren). Okvir obuhvata veće požare u deset zapadnih država i nije
 reprezentativan za sve požare. FEDS/FPA veza ostaje provisionalna.
 
-## Aktuelno — sintetički CA trening (ADR-028), 2026-11-05
+## Aktuelno — ADR-029, 2026-11-09: rezultati nevažeći, prvo ispravke
+
+- **Greška.** gridMET uzorkovanje je svim požarima jedne godine davalo vrijeme prvog
+  požara te godine (97/99 TRAIN, 19/20 VALIDATION). Ispravljeno u PR #3.
+- **Posljedica.** SimFire gate, validacija, benchmark, studija budžeta i test CA politika
+  na stvarnim požarima (ADR-022–028) nisu važeći zaključci; sekcije ispod su historija.
+- **Druge potvrđene greške.** IoU uključuje početnu površinu; dijagonalne linije
+  propuštaju vatru; PPO nije bolji od nasumične linije; u CA se napredak linije briše pri
+  promjeni smjera, a ćelije linije se računaju kao spašene.
+- **Dalje.** TASK-021–027 u [NEXT_SESSION](../docs/NEXT_SESSION.md); odluka u ADR-029.
+
+## Ranije — sintetički CA trening (ADR-028), 2026-11-05
 
 - **Trening.** Agent se trenira samo na proceduralno generisanim sintetičkim požarima,
   u vlastitom CA simulatoru ([spec](../docs/research/SYNTHETIC_CA_ENV.md)):
