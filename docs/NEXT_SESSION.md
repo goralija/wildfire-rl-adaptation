@@ -4,7 +4,25 @@ title: Ispravke nakon revizije PR-ova #3–#5 (ADR-029, 2026-11-09)
 ---
 # Naredni korak
 
-## Najnovije — 2026-11-09: rezultati ADR-022–028 su nevažeći, prvo ispravke (ADR-029)
+## Najnovije — 2026-11-09: faza 1 PASS (ADR-031); slijedi faza 2
+
+Gate na TRAIN-u je prošao po ADR-030 §3: zamrznut je WAF 0.10 / ROS 1.0
+(`configs/frozen/feds-simfire-growth-gate-freeze-v1.json`, sha256 `7639e3a9…`), a VALIDATION
+je ocijenjen jednom. Brojevi i granice su u [ADR-031](specs/DECISION_RECORDS.md) i
+[STATUS](STATUS.md).
+
+1. **Korisnik:** pregled i merge PR-a faze 1 (grana `f/task-026-stage-1`).
+2. **Faza 2 (autonomno):** grana `f/task-026-stage-2`, izvedena iz grane faze 1.
+   Trening po ADR-026 sa 10 seedova, TRAIN benchmark za izbor heuristike, jedan VALIDATION
+   benchmark, analiza po ADR-030 §4 i broj epizoda u kojima linija spali više od no-op-a.
+   Komande su u [HANDOFF_STAGE_1_2](HANDOFF_STAGE_1_2.md), §6. Rezultat ide u novi ADR i EXP-020.
+3. **Faza 3 ne kreće** bez korisnikove odluke o glavnom simulatoru i o observationu u
+   sintetičkom CA (HANDOFF_STAGE_1_2, §8).
+
+Zamrznuti zapis je free-burning scenarij koji prolazi unaprijed zadano pravilo, ne kalibrisan
+model: na nerastućim požarima znatno prerasta opaženo. To ograničenje važi i za fazu 2.
+
+## 2026-11-09: rezultati ADR-022–028 su nevažeći, prvo ispravke (ADR-029)
 
 Revizija PR-ova #3–#5 našla je grešku u gridMET uzorkovanju: 97/99 TRAIN i 19/20
 VALIDATION požara dobili su vrijeme drugog požara. Greška je ispravljena (PR #3), PR-ovi
@@ -48,7 +66,7 @@ dopunama ADR-030.
    `7a51aadd46b894d9cd80835d7953107271b3182c776d7bb464d7abae826afac1`, manifest
    `013be9a1…`. RNG reset je riješen u TASK-023.
 
-**Sljedeće: faze 1 i 2, autonomno (dopuna ADR-030 o autonomiji).** Agent smije sam
+**Faze 1 i 2, autonomno (dopuna ADR-030 o autonomiji); faza 1 je izvedena, vidi vrh.** Agent smije sam
 pokrenuti gate, zamrzavanje i jednu VALIDATION ocjenu, a fazu 2 samo ako gate prođe; merge
 i faza 3 ostaju korisnikovi. Prompt s komandama, uslovima zaustavljanja i izvještajem:
 [HANDOFF_STAGE_1_2](HANDOFF_STAGE_1_2.md). Fajl s vremenom (`7a51aadd…`) je u

@@ -1,0 +1,201 @@
+{
+  "case_growth_iou": [
+    {
+      "ellipse_growth_iou": 0.014680778422669852,
+      "growing": true,
+      "scenario_id": "fpa-fod-401312856-beehive",
+      "simfire_growth_iou": 0.18279827503593676
+    },
+    {
+      "ellipse_growth_iou": 0.003393665158371041,
+      "growing": true,
+      "scenario_id": "fpa-fod-401313289-brushy",
+      "simfire_growth_iou": 0.233502538071066
+    },
+    {
+      "ellipse_growth_iou": 0.0647887323943662,
+      "growing": true,
+      "scenario_id": "fpa-fod-401315078-divide",
+      "simfire_growth_iou": 0.06128133704735376
+    },
+    {
+      "ellipse_growth_iou": 0.0,
+      "growing": true,
+      "scenario_id": "fpa-fod-401315590-flat",
+      "simfire_growth_iou": 0.06542056074766354
+    },
+    {
+      "ellipse_growth_iou": 0.0,
+      "growing": true,
+      "scenario_id": "fpa-fod-401315922-red-point-tank",
+      "simfire_growth_iou": 0.024387269845140835
+    },
+    {
+      "ellipse_growth_iou": 0.022813688212927757,
+      "growing": true,
+      "scenario_id": "fpa-fod-401316132-hayden",
+      "simfire_growth_iou": 0.08462774504552759
+    },
+    {
+      "ellipse_growth_iou": 0.0037128712871287127,
+      "growing": true,
+      "scenario_id": "fpa-fod-401316438-bowles-creek",
+      "simfire_growth_iou": 0.0
+    },
+    {
+      "ellipse_growth_iou": 0.0,
+      "growing": true,
+      "scenario_id": "fpa-fod-401316520-newell-road",
+      "simfire_growth_iou": 0.18509055047516587
+    },
+    {
+      "ellipse_growth_iou": 0.08006814310051108,
+      "growing": true,
+      "scenario_id": "fpa-fod-401316682-diamond",
+      "simfire_growth_iou": 0.1440777843252799
+    },
+    {
+      "ellipse_growth_iou": 0.04794520547945205,
+      "growing": true,
+      "scenario_id": "fpa-fod-401317023-elkhorn",
+      "simfire_growth_iou": 0.0
+    },
+    {
+      "ellipse_growth_iou": 0.0,
+      "growing": true,
+      "scenario_id": "fpa-fod-401318129-middle-ridge",
+      "simfire_growth_iou": 0.0
+    },
+    {
+      "ellipse_growth_iou": 0.00368052999631947,
+      "growing": true,
+      "scenario_id": "fpa-fod-401318133-niarada",
+      "simfire_growth_iou": 0.09130680214507479
+    },
+    {
+      "ellipse_growth_iou": 0.020942408376963352,
+      "growing": true,
+      "scenario_id": "fpa-fod-401318180-treadway",
+      "simfire_growth_iou": 0.13690777271960883
+    },
+    {
+      "ellipse_growth_iou": 0.09803921568627451,
+      "growing": true,
+      "scenario_id": "fpa-fod-401318190-east-fork",
+      "simfire_growth_iou": 0.20491803278688525
+    },
+    {
+      "ellipse_growth_iou": 0.008910212474297465,
+      "growing": true,
+      "scenario_id": "fpa-fod-401320960-elliot",
+      "simfire_growth_iou": 0.15488353085410708
+    },
+    {
+      "ellipse_growth_iou": 0.06792452830188679,
+      "growing": true,
+      "scenario_id": "fpa-fod-401321046-head",
+      "simfire_growth_iou": 0.045563549160671464
+    },
+    {
+      "ellipse_growth_iou": 0.004301280825845919,
+      "growing": true,
+      "scenario_id": "fpa-fod-401321600-river-road-east",
+      "simfire_growth_iou": 0.025998852991779776
+    },
+    {
+      "ellipse_growth_iou": 0.05927342256214149,
+      "growing": true,
+      "scenario_id": "fpa-fod-401321698-ant",
+      "simfire_growth_iou": 0.12784265519360788
+    },
+    {
+      "ellipse_growth_iou": 0.0,
+      "growing": false,
+      "scenario_id": "fpa-fod-401316696-turkey",
+      "simfire_growth_iou": 0.0
+    },
+    {
+      "ellipse_growth_iou": 0.0,
+      "growing": false,
+      "scenario_id": "fpa-fod-401317799-gold-hill",
+      "simfire_growth_iou": 0.0
+    }
+  ],
+  "code_commit": "de0e42f",
+  "created_utc": "2026-11-09T20:33:31.503995+00:00",
+  "decision": "ADR-030 section 3: VALIDATION scored once with the TRAIN freeze; never used for selection (ADR-031)",
+  "errors": 0,
+  "freeze_record": "configs/frozen/feds-simfire-growth-gate-freeze-v1.json",
+  "freeze_record_sha256": "7639e3a95e5d8cc1b0ebc09030885643fa89904039f390812624a6cd93fb100e",
+  "full_mask_metrics_for_context": {
+    "ellipse_reference": {
+      "mean_absolute_area_error_ha": 1470.6765,
+      "mean_iou": 0.5241303486078401
+    },
+    "note": "Full-mask IoU includes the initial burn shared by every method; the ADR-022/023 strict screen built on it is superseded by the growth gate.",
+    "persistence": {
+      "mean_absolute_area_error_ha": 1501.902,
+      "mean_iou": 0.5431794394194389
+    },
+    "simfire_noop": {
+      "mean_absolute_area_error_ha": 2043.1035000000004,
+      "mean_iou": 0.4060788519652673
+    },
+    "strict_screen_pass": false
+  },
+  "growth_gate": {
+    "ellipse_cases_without_new_cells": 0,
+    "ellipse_mean_case_growth_iou": 0.02780414901550865,
+    "growing_cases": 18,
+    "growing_cases_without_simfire_growth": 2,
+    "non_growing_cases": 2,
+    "pass": true,
+    "rule": "ADR-030 section 3: all cases complete without errors; zero SimFire map-edge contacts in any case; on growing cases (observed +48h area >= 1.10 x initial) SimFire mean case growth IoU (pooled over the four timepoints) is higher than the downwind ellipse's.",
+    "simfire_edge_contact_cases": 0,
+    "simfire_mean_case_growth_iou": 0.09825595869138164,
+    "simfire_minus_ellipse": 0.07045180967587299
+  },
+  "limitations": [
+    "20 VALIDATION cases (18 growing); a single no-op run with seed 0. Not a physical validation of the simulator.",
+    "Stage 2 follows from the TRAIN gate result alone; this score did not decide it."
+  ],
+  "local_full_report": ".local/gate/adr030/validation-frozen.json",
+  "local_full_report_sha256": "6552aec78a6e275de3665c83ee774c6f8dc1aa9b2f21bea4d70c943a99c0e82b",
+  "manifest_sha256": "013be9a1632abcbc29d86f4bc16af89d3c074503f5899d1e39903d76ec2c28d5",
+  "metrics_version": "feds-spread-metrics/3",
+  "non_growing_overgrowth": {
+    "cases": [
+      {
+        "observed_growth_cells_48h": 0,
+        "scenario_id": "fpa-fod-401316696-turkey",
+        "simfire_growth_cells_48h": 505
+      },
+      {
+        "observed_growth_cells_48h": 40,
+        "scenario_id": "fpa-fod-401317799-gold-hill",
+        "simfire_growth_cells_48h": 43
+      }
+    ],
+    "description": "SimFire growth beyond observed growth at +48h on non-growing cases; known limitation, not part of the rule",
+    "mean_overgrowth_cells_48h": 254.0,
+    "mean_overgrowth_ha_48h": 822.96
+  },
+  "physical_validation": false,
+  "schema_version": "feds-simfire-validation-growth-gate/1.1",
+  "scored_once": true,
+  "scored_utc": "2026-11-09T20:14:32.081093+00:00",
+  "seed": 0,
+  "simfire_params": {
+    "active_cell_lifetime_minutes": 90,
+    "fireline_attenuation": "per_minute",
+    "internal_update_minutes": 5,
+    "ros_multiplier": 1.0,
+    "spread_aggregation": "last_write",
+    "wind_adjustment_factor": 0.1
+  },
+  "split": "validation",
+  "successful_scenarios": 20,
+  "test_cases_loaded": false,
+  "used_for_selection": false,
+  "weather_sha256": "7a51aadd46b894d9cd80835d7953107271b3182c776d7bb464d7abae826afac1"
+}

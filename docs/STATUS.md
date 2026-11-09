@@ -7,7 +7,35 @@ sources:
 ---
 # Trenutno stanje — 2026-11-09
 
-## Najnovije — 2026-11-09: rezultati ADR-022–028 nevažeći do ponovnog pokretanja (ADR-029)
+## Najnovije — 2026-11-09: faza 1 je prošla (ADR-031)
+
+Prvi gate na ispravljenim ulazima (vrijeme `7a51aadd…`, manifest `013be9a1…`), po pravilu
+iz ADR-030 §3 koje nije mijenjano nakon rezultata. Grana `f/task-026-stage-1`, PR čeka
+korisnikov merge.
+
+- **TRAIN gate: PASS.** 17 fiksnih kandidata × 98 požara, svi bez grešaka. Prolazi 8 od 17;
+  7 pada zbog dodira s rubom mape, 2 zbog IoU rasta ispod elipse.
+- **Izabrano i zamrznuto: WAF 0.10 / ROS 1.0.** Na 82 rastuća požara srednji IoU rasta je
+  0.0958 prema 0.0258 za elipsu, bez dodira s rubom. SimFire je bolji od elipse na 59 od 82.
+  Zapis: `configs/frozen/feds-simfire-growth-gate-freeze-v1.json` (sha256 `7639e3a9…`),
+  dodan u allowlist u istom commitu, prije VALIDATION-a.
+- **VALIDATION, jednom.** 20/20 bez grešaka i bez dodira s rubom; na 18 rastućih IoU rasta
+  0.0983 prema 0.0278. Nije korišten za izbor.
+- **Elipsa je niska letvica.** Do +48h dodaje u prosjeku 23 ćelije, a rastući požari su
+  u FEDS-u dobili 1,219. Prolazi i kandidat bez vjetra (WAF 0, 0.0545). Na rastućim požarima
+  izabrana postavka raste 1.8× više od opaženog.
+- **Granice.** Oba IoU rasta su ispod 0.10. Na 16 nerastućih TRAIN požara no-op dodaje u
+  prosjeku 8,976 ha više nego što je FEDS opazio do +48h, a srednja apsolutna greška
+  površine je 4,120 ha (persistence 2,371 ha). PASS znači da SimFire smješta rast bolje od
+  fiksne elipse; nije fizička validacija ni kalibracija simulatora.
+- **Dalje.** Faza 2 (benchmark i studija budžeta, 10 seedova) radi se na grani
+  `f/task-026-stage-2` s ovim zapisom i izvještava u vlastitom PR-u i ADR-u. Merge i faza 3
+  ostaju korisnikovi; TEST 2024 je zatvoren.
+- **Dokazi.** [ADR-031](specs/DECISION_RECORDS.md), EXP-019,
+  [TRAIN gate](../reports/real-fire-data/feds-simfire-train-growth-gate-v1.json),
+  [VALIDATION](../reports/real-fire-data/feds-simfire-validation-growth-gate-v1.json).
+
+## 2026-11-09: rezultati ADR-022–028 nevažeći do ponovnog pokretanja (ADR-029)
 
 - **Greška u podacima.** gridMET uzorkovanje je za svaki požar u godini koristilo ćeliju
   prvog požara te godine: 97/99 TRAIN i 19/20 VALIDATION požara imalo je tuđe vrijeme
@@ -30,7 +58,7 @@ sources:
   `7a51aadd…`, 118 ćelija za 118 slučajeva, svi s `pre_start`); hash je u
   [coverage reportu](../reports/real-fire-data/feds-gridmet-weather-coverage-v1.json).
   Spojeno kao PR #15. Faze 1 i 2 agent smije pokrenuti sam (faza 2 samo ako faza 1 prođe;
-  dopuna ADR-030, [handoff](HANDOFF_STAGE_1_2.md)); nijedna još nije pokrenuta.
+  dopuna ADR-030, [handoff](HANDOFF_STAGE_1_2.md)). Faza 1 je izvedena (gore, ADR-031).
 - **Odluke za ponovno pokretanje (ADR-030).** Gate na IoU rasta prema downwind elipsi,
   vrijeme prethodnog segmenta u observationu, linija neovisna o koraku, 10 seedova i
   poređenje s nasumičnom linijom; ponovno pokretanje ide u tri faze uz nalog za svaku.
