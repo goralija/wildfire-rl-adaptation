@@ -147,7 +147,7 @@ class FedsSpreadMetricTests(unittest.TestCase):
         )
 
     def test_ellipse_heading_and_its_reverse_give_different_masks(self):
-        for heading in (0.0, 45.0, 90.0, 137.0):
+        for heading in (0.0, 90.0, 137.0, 250.0):
             with self.subTest(heading=heading):
                 forward = self._single_cell_ellipse(heading)
                 reverse = self._single_cell_ellipse(heading + 180.0)
