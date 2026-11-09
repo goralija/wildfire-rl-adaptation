@@ -1,8 +1,12 @@
 """Matched heuristic policies for the budgeted FEDS/SimFire environment.
 
 Every heuristic decides from the same observation dictionary and action mask that a
-PPO policy receives, so no baseline sees the full-resolution map, future weather or
-FEDS outlines. Each one spends a budget unit at the first legal opportunity.
+PPO policy receives, so no baseline sees the full-resolution map or FEDS outlines,
+and every baseline sees exactly the weather the policy sees: by default (ADR-030) the
+latest daily gridMET record strictly earlier than the upcoming 12h segment's day (the
+pre-start day at decision 0), or under the labelled ``"upcoming_perfect_forecast"``
+ablation the ex-post forcing of the next 12h. Each heuristic spends a budget unit at
+the first legal opportunity.
 """
 
 from __future__ import annotations
@@ -44,7 +48,7 @@ def noop_policy(_observation: Dict[str, np.ndarray], _mask: np.ndarray) -> int:
 
 
 def downwind_policy(observation: Dict[str, np.ndarray], mask: np.ndarray) -> int:
-    """Build line ahead of the front in the current 12h downwind direction."""
+    """Build line ahead of the front in the observed downwind direction."""
     weather = np.asarray(observation["weather"], dtype=float)
     dx, dy = heading_vector(weather[1], weather[2])
     if dx == 0 and dy == 0:

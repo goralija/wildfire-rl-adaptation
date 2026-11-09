@@ -30,7 +30,8 @@ def _parse_budgets(value: str) -> tuple:
     return budgets
 
 
-def _make_env_factory(params: dict, budgets: tuple, placement: str, rank: int):
+def _make_env_factory(params: dict, budgets: tuple, placement: str, rank: int,
+                      weather_observation: str = "previous"):
     def factory():
         import os
 
@@ -44,6 +45,7 @@ def _make_env_factory(params: dict, budgets: tuple, placement: str, rank: int):
             split="train",
             line_placement=placement,
             max_budget=4,
+            weather_observation=weather_observation,
         )
 
     return factory
@@ -60,6 +62,8 @@ def main(argv=None) -> int:
     parser.add_argument("--n-steps", type=int, default=16, help="rollout length per env")
     parser.add_argument("--learning-rate", type=float, default=3e-4)
     parser.add_argument("--line-placement", choices=("centroid", "front_edge"), default="front_edge")
+    parser.add_argument("--perfect-forecast-ablation", action="store_true",
+                        help="ABLATION ONLY (ADR-030): observe the upcoming 12h forcing instead of the previous one")
     parser.add_argument("--seed", type=int, required=True)
     parser.add_argument("--out", type=Path, required=True)
     args = parser.parse_args(argv)
@@ -72,13 +76,20 @@ def main(argv=None) -> int:
     from sb3_contrib import MaskablePPO
     from stable_baselines3.common.vec_env import SubprocVecEnv, VecMonitor
 
-    from wildfire_rl.feds_simfire_setup import MANIFEST, WEATHER, sha256_file
+    from wildfire_rl.feds_simfire_setup import MANIFEST, WEATHER, SimFireParams, policy_settings, sha256_file
 
     torch.set_num_threads(1)
     freeze = json.loads(args.params.read_text(encoding="utf-8"))
     params = freeze["frozen_params"]
+    sim_params = SimFireParams(**params)
+    if sim_params.internal_update_minutes != 5:
+        parser.error("ADR-030 fixes the SimFire internal step at 5 minutes.")
+    weather_observation = "upcoming_perfect_forecast" if args.perfect_forecast_ablation else "previous"
+    expected_settings = policy_settings(sim_params, weather_observation=weather_observation,
+                                        line_placement=args.line_placement,
+                                        observation_max_budget=4)
     env = VecMonitor(SubprocVecEnv([
-        _make_env_factory(params, args.budgets, args.line_placement, rank)
+        _make_env_factory(params, args.budgets, args.line_placement, rank, weather_observation)
         for rank in range(args.n_envs)
     ], start_method="spawn"))
     env.seed(args.seed)
@@ -99,6 +110,15 @@ def main(argv=None) -> int:
             policy_kwargs={"net_arch": [64, 64]},
         )
     else:
+        # The base checkpoint must have been trained under the same settings (receipt check
+        # before unpickling, as in the benchmark); legacy checkpoints are not fine-tuned.
+        sys.path.insert(0, str(ROOT / "scripts"))
+        from benchmark_feds_policies import CheckpointReceiptError, check_checkpoint_receipt
+
+        try:
+            check_checkpoint_receipt(args.init, expected_settings, allow_legacy=False)
+        except CheckpointReceiptError as exc:
+            parser.error(str(exc))
         # The restored learning-rate schedule is kept; fine-tuning uses the base rate.
         model = MaskablePPO.load(args.init, env=env, device="cpu")
         model.set_random_seed(args.seed)
@@ -117,9 +137,9 @@ def main(argv=None) -> int:
         "init_checkpoint": str(args.init) if args.init else None,
         "init_checkpoint_sha256": sha256_file(args.init) if args.init else None,
         "budgets": list(args.budgets),
-        "observation_max_budget": 4,
-        "line_placement": args.line_placement,
-        "sim_params": params,
+        # Settings the benchmark checks before it loads this checkpoint.
+        **policy_settings(sim_params, weather_observation=weather_observation,
+                          line_placement=args.line_placement, observation_max_budget=4),
         "params_file_sha256": sha256_file(args.params),
         "params_gate_status": freeze.get("gate_status"),
         "split": "train",

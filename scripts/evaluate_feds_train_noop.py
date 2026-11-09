@@ -202,9 +202,10 @@ def _run_one(job):
     os.environ.setdefault("OMP_NUM_THREADS", "1")
     from run_feds_noop_episode import run_episode
 
-    scenario_id, params, seed, split = job
+    scenario_id, params, seed, split, freeze_record = job
     try:
-        return scenario_id, run_episode(scenario_id, seed=seed, split=split, **params), None
+        return scenario_id, run_episode(scenario_id, seed=seed, split=split,
+                                        freeze_record=freeze_record, **params), None
     except Exception as exc:  # retain cohort coverage and all failure detail
         return scenario_id, None, {
             "scenario_id": scenario_id,
@@ -223,7 +224,8 @@ def atomic_write(path: Path, payload: dict) -> None:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--wind-adjustment-factor", type=float, required=True)
-    parser.add_argument("--internal-update-minutes", type=int, choices=(1, 3, 5, 10, 15), default=5)
+    parser.add_argument("--internal-update-minutes", type=int, choices=(5,), default=5,
+                        help="fixed at 5 minutes (ADR-030 section 2)")
     parser.add_argument("--active-cell-lifetime-minutes", type=int, default=90)
     parser.add_argument("--ros-multiplier", type=float, default=1.0)
     parser.add_argument("--seed", type=int, default=0)
@@ -247,14 +249,14 @@ def main(argv: list[str] | None = None) -> int:
         "active_cell_lifetime_minutes": args.active_cell_lifetime_minutes,
         "ros_multiplier": args.ros_multiplier,
     }
-    freeze_sha256 = None
-    if args.split == "validation":
-        if args.frozen_params is None:
-            parser.error("VALIDATION requires --frozen-params from a committed TRAIN freeze.")
-        freeze = json.loads(args.frozen_params.read_text(encoding="utf-8"))
-        if freeze.get("frozen_params") != params or freeze.get("selected_on_split") != "train":
-            parser.error("Requested parameters do not match the TRAIN freeze record.")
-        freeze_sha256 = sha256_file(args.frozen_params)
+    from wildfire_rl.feds_simfire_setup import SimFireParams, check_split_access
+
+    # Same guard as the environment and benchmark: TEST refused; VALIDATION only with an
+    # allowlisted TRAIN freeze record whose every simulator field matches this run.
+    try:
+        freeze_sha256 = check_split_access(args.split, SimFireParams(**params), args.frozen_params)
+    except ValueError as exc:
+        parser.error(str(exc))
     train_cases = [case for case in manifest["cases"] if case.get("split") == args.split]
     if len(train_cases) != manifest.get("case_counts_by_split", {}).get(args.split):
         parser.error("Manifest %s count is inconsistent." % args.split.upper())
@@ -310,7 +312,7 @@ def main(argv: list[str] | None = None) -> int:
     started = time.monotonic()
     pending = [case["scenario_id"] for case in train_cases
                if case["scenario_id"] not in done and case["scenario_id"] not in failed]
-    jobs = [(scenario_id, params, args.seed, args.split) for scenario_id in pending]
+    jobs = [(scenario_id, params, args.seed, args.split, args.frozen_params) for scenario_id in pending]
     if args.workers > 1:
         from concurrent.futures import ProcessPoolExecutor
 

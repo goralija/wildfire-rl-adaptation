@@ -1062,3 +1062,28 @@ From the review of PR #11 (TASK-024), fixed before any rerun of locked or new po
 - **Real-case test.** The one-time test on the 119 FEDS starts is descriptive, as ADR-028
   intended: the comparator is fixed before the run (`--comparator-heuristic`, the synthetic
   acceptance comparator) and no pass/fail is produced per group.
+
+### ADR-030 addendum — SimFire observation, line strength and benchmark details, recorded 2026-11-09
+
+From the review of PR #12 (TASK-023), fixed before any rerun.
+- **Observation (§1).** gridMET is daily, so two 12h segments often share one daily record;
+  "the previous segment" still showed the upcoming forcing in 244 of 396 TRAIN decisions.
+  At decision k the policy and the heuristics now see the latest gridMET day strictly before
+  segment k's day; decision 0 sees a pre-start record (the day before segment 0), which the
+  weather sampler now writes. Weather files without it are refused, so stage 1 must
+  regenerate the weather.
+- **Line strength (§2).** Pinned SimFire subtracts the line attenuation on every update even
+  with no fire nearby, so an idle line banks negative burn and becomes a near-absolute
+  barrier. Line burn amounts are now floored at zero, and the attenuation is scaled by the
+  internal step and by 1 / ros_multiplier, so a line holds iff the effective spread reaching
+  it stays below 980 ft/min, independent of the step, the multiplier and the time since
+  placement.
+- **Benchmark (§4).** The best heuristic is chosen among the scripted heuristics only; the
+  random legal line already has its own primary contrast. The six primary tests use exact
+  sign-flip p-values (Monte Carlo above 22 changed scenarios) with Holm correction. PPO
+  checkpoints, including fine-tuning bases, are loaded only when their training receipt
+  matches the run's settings; legacy checkpoints need an explicit, recorded flag in the
+  benchmark and are refused for fine-tuning.
+- **Split guard.** The SimFire no-op runner and evaluator use the same freeze guard as the
+  environment and benchmark (allowlisted record, every simulator field, weather hash) and
+  accept only the 5-minute step.
