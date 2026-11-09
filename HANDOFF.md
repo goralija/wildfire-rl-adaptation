@@ -4,7 +4,7 @@ title: Handoff za nastavak projekta
 ---
 # Handoff za nastavak projekta
 
-Stanje **2026-11-03**. Ovaj dokument i linkovani izvještaji daju kolegi ili agentu
+Stanje **2026-11-04**. Ovaj dokument i linkovani izvještaji daju kolegi ili agentu
 potreban kontekst bez prethodne chat historije.
 
 ## Aktivni cilj i status
@@ -18,28 +18,24 @@ je samo mogući post-hoc operativni kontekst.
 ograničenje da je okvir većih požara u deset zapadnih saveznih država i nije
 reprezentativan. Originalna kohorta od 60 slučajeva daje 19/40 i 7/20 pa ne prolazi.
 
-**SimFire no-op provjera na svih 99 TRAIN slučajeva je završena, ali gate je pao.** Osam
-WAF kandidata nije nadmašilo obje reference (persistence i 2:1 elipsu) istovremeno po
-mean IoU i grešci površine uz nula rubnih kontakata. Persistence IoU=.5343, elipsa
-IoU=.5308, najbolji SimFire IoU=.4769. WAF i interni korak nisu izabrani. Pogledaj
-[TRAIN no-op screen](reports/real-fire-data/feds-simfire-train-noop-screen-v1.json),
-[STATUS](docs/STATUS.md), [NEXT_SESSION](docs/NEXT_SESSION.md) i [ADR-022](docs/specs/DECISION_RECORDS.md).
-
-Okruženje i TRAIN-only MaskablePPO putanja mogu se tehnički pokrenuti. 64-step PPO
-smoke samo provjerava izvršavanje, save/load i rollout; nije benchmark, fizička
-validacija niti dokaz RL koristi. Duži benchmark trening čeka dijagnostiku i prolaz
-novog TRAIN-only no-op gatea. Validation rasteri nisu preuzeti; test 2024 nije učitan.
+**Koraci 5–8 su izvedeni 2026-11-04 (ADR-023–027).** TRAIN no-op gate je nakon dijagnoze
+i preregistrovane mreže ponovo **FAIL**: persistence je jaka jer mnogi FEDS požari ne
+rastu, dok slobodno-goreći SimFire raste. Gate zapis je zamrznut kao `FAIL_exploratory`,
+a validation je skoriran jednom po zapisu. Intervencije, heuristike i PPO prilagodba
+budžetu rađene su na zasebno označenom free-burn stress zapisu. Osnovni PPO smanjuje
+štetu u odnosu na no-op, fine-tuning po budžetu nema mjerljive koristi, a downwind
+heuristika je jednako dobra ili bolja. Sve je simulatorski i eksploratorno. Pogledaj
+[STATUS](docs/STATUS.md), [NEXT_SESSION](docs/NEXT_SESSION.md),
+[benchmark sažetak](reports/real-fire-data/feds-simfire-policy-benchmark-v1.json) i
+[ADR-027](docs/specs/DECISION_RECORDS.md). TEST 2024 nije učitan.
 
 ## Sljedeći posao
 
-1. Pregledati po-požar izvještaje i dijagnosticirati ulazne/prostorne razloge nesklada:
-   gridMET proxy, wind/moisture konverziju, rasterizaciju, LANDFIRE i dimenzije mreže.
-2. Prije pokretanja zapisati mali skup zajedničkih TRAIN parametara. Ne podešavati po
-   požaru i ne mijenjati persistence/elipsa pravila nakon gledanja rezultata.
-3. Ponoviti no-op gate na istoj kohorti i kriterijima. Validation mape koristiti tek
-   nakon prolaza TRAIN kandidata i zamrzavanja parametara.
-4. Prije policy poređenja definisati akciju i osigurati iste scenarije, budžete,
-   horizonte, informacije i seedove za sve politike. TEST otvoriti tek na kraju.
+1. Timska odluka: growth-aware gate ili model zaustavljanja prije tvrdnje o kalibraciji;
+   da li stress scenarij ostaje radni simulator za predaju.
+2. Ako se nastavlja: nova preregistracija s jačim signalom budžeta i više seedova;
+   TASK-007 (prioritetna područja); TASK-009 (poster).
+3. TEST 2024 otvoriti tek na kraju, sa zaključanim politikama i istim protokolom.
 
 **IoU** mjeri preklapanje simulirane i FEDS opožarene površine (1 je potpuno
 preklapanje, 0 je bez preklapanja; nije procenat tačnosti). **WAF** je Wind Adjustment
@@ -58,11 +54,11 @@ procjena, a gridMET je grubi vremenski proxy, pa gate ne predstavlja fizičku va
 
 ## Klon i lokalni environment
 
-PR/grana `codex/fireline-simfire-benchmark` sadrži aktivni rad; PR je draft i nije
-mergovan. Za novi klon:
+Grana `codex/overnight-steps-5-8` (izvedena iz PR #3 grane
+`codex/fireline-simfire-benchmark`) sadrži korake 5–8; nijedna nije spojena. Za novi klon:
 
 ```sh
-git clone --branch codex/fireline-simfire-benchmark https://github.com/goralija/wildfire-rl-adaptation.git
+git clone --branch codex/overnight-steps-5-8 https://github.com/goralija/wildfire-rl-adaptation.git
 cd wildfire-rl-adaptation
 ```
 
@@ -70,12 +66,11 @@ Prvo pročitaj [index](index.md), [AGENTS](AGENTS.md),
 [projektni kontekst](knowledge/project-context.md), [STATUS](docs/STATUS.md),
 [NEXT_SESSION](docs/NEXT_SESSION.md) i najnoviji ADR. FEDS/SimFire venv i veliki
 inputi su lokalni u ignorisanom `.local/`; novi klon ih nema. Tačne pinove i obnovu
-okruženja prati u `docs/research/SIMFIRE_ENVIRONMENT.md`. U ovom računaru SimFire
-`bin/python` trenutno koristi kompatibilni Python 3.9.25 iz susjednog
-`cfsds-train-qc` worktreea; ne uklanjati taj worktree dok se runtime ne zamijeni
-samostalnom kopijom.
+okruženja prati u `docs/research/SIMFIRE_ENVIRONMENT.md`. Na Harunovom računaru je venv samostalan
+(`.local/uv-python` + `.local/simfire-venv`); obnova iz javnih izvora traje oko 30 min
+i daje iste hashove ulaza.
 
-Validation rasteri i test split nisu dio setup preuzimanja. Ne commitovati `.local/`,
+Validation rasteri se preuzimaju s `--fetch-split validation` tek uz commitan freeze zapis; test split se ne preuzima. Ne commitovati `.local/`,
 raw arhive, virtualna okruženja ili model težine. Izlazni run folderi trebaju imati
 nov ID i ostati lokalni, osim ako mali manifest/report izričito pripada repo-u.
 

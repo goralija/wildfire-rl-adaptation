@@ -1,13 +1,57 @@
 ---
 type: Project Status
-title: Trenutno stanje — 2026-11-03
+title: Trenutno stanje — 2026-11-04
 sources:
 - resource: /reports/firehose-verification/verification.json
 - resource: /docs/WORK_LOG.md
 ---
-# Trenutno stanje — 2026-11-03
+# Trenutno stanje — 2026-11-04
 
-## Najnovije: SimFire/FEDS data i runtime setup
+## Najnovije — 2026-11-04: koraci 5–8 izvedeni (noćni samostalni rad)
+
+Korisnik je 2026-11-03 tražio samostalan rad kroz korake 5–8 bez pitanja, uz nastavak
+kao eksploratorni rad ako gate ponovo padne. Rad je na grani `codex/overnight-steps-5-8`,
+izvedenoj iz `codex/fireline-simfire-benchmark` (PR #3); ništa nije spojeno.
+
+**Korak 5 — kalibracija (FAIL).** Ulazi su ponovo izgrađeni na drugom računaru i
+bajt-identični su commitanim hashovima; WAF .01 run reproducira ADR-022 tačno.
+[Dijagnoza](../reports/real-fire-data/feds-simfire-train-noop-diagnosis-v1.json): IoU
+deficit dolazi iz požara koji u FEDS-u gotovo ne rastu; na brzo rastućim SimFire već
+pobjeđuje persistence. Preregistrovana 3×3 mreža (ROS × WAF, ADR-023) nije prošla; najbolji
+kandidat ROS .35 / WAF .05 (IoU .5266 prema .5343) je zamrznut kao `FAIL_exploratory`, ali
+praktično ne širi vatru (medijan 0 novih ćelija za 48h).
+
+**Korak 6 — validation.** Validation rasteri (20/20) su preuzeti; preuzimanje je krenulo oko minutu prije freeze commita, ali ništa nije simulirano ni skorirano prije njega (ADR-024). Validation rezultati su dobijeni poslije pada gatea i nisu korišteni za izbor kandidata, parametara ni odluku o gateu. Svaki
+zamrznuti zapis skoriran jednom ([izvještaj](../reports/real-fire-data/feds-simfire-validation-noop-v1.json)):
+gate freeze IoU .5419 prema persistence .5432 (FAIL); free-burn stress zapis (WAF .01 /
+ROS 1.0, ADR-024) IoU .5452 i 1,275 ha prema 1,502 ha, pa prolazi strogo pravilo samo na
+VALIDATION-u. Zbog pada na TRAIN-u i 20 slučajeva to nije dokaz kalibracije.
+
+**Korak 7 — intervencije i benchmark (ADR-025).** Jedinica budžeta = smjena ekipe od 20
+ljudi = linija od 7 ćelija (~1.26 km), uz NWCG raspon učinka. Linija se postavlja 360 m
+ispred vodećeg dijela fronta u izabranom sektoru. Četiri heuristike (no-op, random,
+downwind, advancing-front) dobijaju istu opservaciju i masku kao PPO. Upareni benchmark
+provjerava determinizam na B=0.
+
+**Korak 8 — prilagodba budžetu (ADR-026/027), na stress zapisu.** 5 seedova × (osnovni PPO
+na B=2 + fine-tune na B=1, B=4 i kontrola B=2) = 20 modela; 1,920 uparenih VALIDATION
+epizoda. No-op dodaje 324 ha po požaru. Zamrznuti osnovni PPO smanjuje štetu kod B=2 i
+B=4 (−16.6 i −19.7 ha, dvoslojni 95% CI ispod nule); kod B=1 je efekat (−5.1 ha) granični.
+**Fine-tuning po budžetu nema mjerljive koristi** (−0.4 i +0.6 ha prema osnovnom; +0.9 i
+−1.6 ha prema kontroli), ali s 5 seedova se efekti od oko ±12–20 ha ne mogu isključiti
+(ADR-027 dopuna). Ni na 99 TRAIN požara fine-tuning ne pomaže, pa to nije overfitting nego
+slab signal budžeta. Downwind heuristika (−28 ha za B=2/4) je jednako dobra ili bolja.
+[Sažetak](../reports/real-fire-data/feds-simfire-policy-benchmark-v1.json),
+[grafikon](../reports/real-fire-data/feds-simfire-policy-benchmark-v1.png).
+
+**Granice.** Sve su to simulatorski rezultati na nekalibrisanom free-burn scenariju, ne
+fizička validacija niti dokaz stvarne koristi gašenja. Većina simuliranih požara se ugasi
+u prvih 12h, pa veći budžet rijetko ima gdje da se potroši. Prioritetna područja (TASK-007)
+nisu rađena. TEST 2024 je i dalje zatvoren.
+
+## 2026-11-03: SimFire/FEDS data i runtime setup
+
+
 
 Korisnikov benchmark pravac ostaje SimFire + FPA-FOD/FEDS-CONUS, uz FLE/ICS-209 kao
 ograničeni post-hoc kontekst. Originalna 60-case FPA-FOD kohorta, ponovljena nad

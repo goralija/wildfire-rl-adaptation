@@ -475,3 +475,196 @@ at 5 minutes. The supported 3/10/15-minute steps were not run; no timebase is se
 Evidence: [cohort screen report](../../reports/real-fire-data/feds-simfire-train-noop-screen-v1.json),
 [environment record](../research/SIMFIRE_ENVIRONMENT.md),
 [TRAIN evaluator](../../scripts/evaluate_feds_train_noop.py).
+
+## ADR-023 — diagnosed no-op deficit and preregistered spread-threshold candidates, accepted 2026-11-04
+
+Under the user's overnight mandate (2026-11-03: work through roadmap steps 5–8 without
+questions; if the gate fails again, continue clearly labelled as exploratory), the
+TRAIN inputs were rebuilt on a second machine. All 99 LANDFIRE fuel/elevation/start-mask
+hashes and all nine gridMET archive hashes equal the committed reports, and the WAF .01
+cohort rerun reproduces ADR-022 exactly (mean IoU .476852, area error 2,262.1ha).
+
+[Diagnosis](../../reports/real-fire-data/feds-simfire-train-noop-diagnosis-v1.json):
+the entire mean-IoU deficit sits in the third of timepoints where FEDS barely grows
+(observed/initial ≤1.36). There SimFire adds ~262 cells against ~59 observed, with 2.9%
+precision. In the fastest-growing third SimFire already beats persistence (+.035).
+Even at WAF .01 SimFire grows in 63% of timepoints regardless of observed growth. The
+failure is discrimination of *which* fires grow, not heading. Many static FEDS fires were
+probably contained or suppressed, which a free-burning no-op cannot represent.
+
+SimFire ignites a neighbour only when accumulated spread exceeds the 180 m cell within
+the active-cell lifetime (90 min), i.e. R ≥ ~6.6 ft/min. A shared rate-of-spread
+multiplier below one therefore acts as a spread threshold: weak no-wind/slope spread
+stops, while windier or drier segments still grow. The preregistered set, fixed before
+any run, is the 3×3 grid `ros_multiplier ∈ {0.35, 0.5, 0.7}` × `WAF ∈ {0.05, 0.2,
+0.4}`, with lifetime 90 min, 5-min internal step and seed 0, scored with the unchanged
+strict rule and unchanged persistence/ellipse references.
+
+**Selection rule:** if any candidate passes, freeze the passing candidate with the highest
+mean IoU (tie: lower area error). If none passes, freeze the zero-edge candidate with the
+highest mean IoU among these nine plus the reproduced WAF .01/ROS 1.0 run, labelled
+`gate_status: FAIL_exploratory`; steps 6–8 then proceed as exploratory only. Validation
+is scored once with the frozen record and is not used for re-selection. 2024 TEST stays
+closed.
+
+Evidence: [diagnosis tool](../../scripts/diagnose_feds_noop_gate.py),
+[shared setup](../../src/wildfire_rl/feds_simfire_setup.py),
+[evaluator](../../scripts/evaluate_feds_train_noop.py).
+
+## ADR-024 — gate result frozen as FAIL; separate free-burn stress scenario for steps 7–8, accepted 2026-11-04
+
+None of the nine ADR-023 candidates passed. The best zero-edge candidate, ROS 0.35 /
+WAF 0.05, reaches mean IoU .5266 and area error 2,350.5ha against persistence .5343 /
+2,351.7ha and the ellipse .5308 / 2,346.6ha. By the preregistered rule it is frozen in
+[the gate freeze record](../../configs/frozen/feds-simfire-gate-freeze-v1.json) as
+`FAIL_exploratory`. Higher WAF or ROS created map-edge contacts and lower IoU.
+
+That frozen setting approaches persistence by suppressing spread: on TRAIN the median
+fire adds 0 cells in 48h, only 30/99 fires grow at all and 2/99 add ≥50 cells. A fireline
+benchmark on it cannot discriminate policies, because there is almost nothing to stop.
+The gate itself is structurally biased toward persistence: many FEDS fires were
+evidently contained, while a no-op simulator burns freely.
+
+So steps 7–8 use a second, separately labelled **free-burn stress scenario**, chosen from
+no-op statistics only and before any policy run: the zero-edge TRAIN candidate with the
+lowest mean absolute area error across ADR-022/023 and the reproduction, i.e. WAF .01 /
+ROS 1.0 / 90-min lifetime / 5-min step (2,262.1ha, below both references; IoU .4769,
+below both). [Stress record](../../configs/frozen/feds-simfire-stress-scenario-v1.json),
+`gate_status: FAIL_stress_scenario`. Results on it are simulator policy comparisons, not
+calibrated or physically validated suppression effects.
+
+Both records are scored once on VALIDATION no-op and are not re-selected afterwards. Note
+for the audit trail: the validation LANDFIRE fetch was started about one minute before the
+gate freeze commit; no validation case was simulated or scored before either record was
+committed. 2024 TEST remains closed.
+
+**Consequence / recommendation for the team (not adopted here):** consider a growth-aware
+gate (e.g. scored only on fires that FEDS shows growing, or with a containment model)
+before treating any no-op setting as calibrated.
+
+## ADR-025 — step-7 intervention unit, matched heuristics and paired benchmark, accepted 2026-11-04
+
+**Budget unit.** One unit is one 20-person handcrew shift. It builds one straight fireline
+segment of seven 180 m cells: about 1.26 km on an axis, up to about 1.8 km diagonally.
+NWCG sustained production tables for 20-person crews list roughly 2–15 chains/h
+(about 40–300 m/h) depending on fuel and crew type, i.e. about 0.3–2.4 km per 8h shift
+([NWCG Firefighter Math 9.8 / PMS 410-1 Appendix A](https://www.nwcg.gov/course/ffm/math-terms-and-statistics/98-production-rates),
+consulted 2026-11-04 through search excerpts; the tables are based on pre-1980 sources
+and real rates vary widely). The segment length sits inside that range. Line is placed
+instantly at the 12h decision; travel time, build-over-time, holding, burnout and line
+failure are not modelled. This simplifies TASK-020 (16 sectors, crew-hours over time).
+That remains future work.
+
+**Action and placement.** Discrete(9): no-op or one of eight sectors. The new
+`front_edge` placement anchors the segment two cells (360 m) beyond the active-front cell
+that leads in the chosen sector, perpendicular to it. Only unburned cells receive line.
+The older centroid placement is kept for the earlier smoke. Budgets per 48h episode are
+0, 1, 2 and 4; at most one line per 12h decision; no-op always legal; the episode always
+runs four decisions. Damage is SimFire cumulative burned area added after the FEDS start;
+the reward is its negative (cells/100). Future FEDS outlines are never used.
+
+**Matched heuristics** decide from the same observation dictionary and action mask as
+PPO, never the full-resolution map: no-op, uniformly random legal line, downwind (current
+12h wind-to heading) and advancing-front (pooled burned-area centroid → active-front
+centroid). Each spends a unit at the first legal opportunity.
+
+**Benchmark** ([script](../../scripts/benchmark_feds_policies.py)): every policy runs on the
+same scenarios, budgets, horizon, simulator record and seed, paired by scenario. At B=0
+every policy must reproduce no-op exactly (determinism check). VALIDATION requires a
+TRAIN freeze record. A smoke on seven TRAIN cases passed the B=0 check.
+
+## ADR-026 — step-8 budget-adaptation protocol, accepted 2026-11-04 (before any policy result)
+
+Simulator: the ADR-024 free-burn stress record only. Training uses the 99 TRAIN cases;
+evaluation uses the 20 VALIDATION cases once; TEST stays closed.
+
+- **Base ("pretrained") policy:** MaskablePPO from scratch at reference budget B=2, 8,064
+  decisions (7 parallel envs × 16-step rollouts, batch 56, 4 epochs, γ=1, lr 3e-4,
+  entropy 0.01, MLP 64×64, observation budget scale fixed at 4).
+- **Adaptation:** each base is fine-tuned for 3,024 decisions at B=1 and at B=4. The
+  **matched control** is the same-length fine-tune at B=2, which separates "more training"
+  from "budget-specific adaptation".
+- **Seeds:** 11, 12 and 13 in the first round. Measured throughput (16.7 min per base) leaves
+  room for seeds 14 and 15; they are added now, before any evaluation, and run
+  unconditionally if time allows. The report states how many seeds finished.
+- **Evaluation:** paired by VALIDATION scenario at B ∈ {0,1,2,4} for no-op, the ADR-025
+  heuristics, every frozen base and every fine-tune (deterministic actions). Primary
+  contrasts: fine-tuned-at-B minus frozen base at B, and fine-tuned-at-B minus matched
+  control at B, for B ∈ {1,4}. Seed-averaged scenario bootstrap 95% intervals; per-seed means
+  reported too. B=0 must reproduce no-op exactly.
+- Compute: local CPU only, about 6–8k decisions/h per process group. This is a small,
+  underpowered study; null or negative results are reported as such.
+
+## ADR-027 — step-8 result: base PPO helps, budget fine-tuning shows no gain, recorded 2026-11-04
+
+The ADR-026 protocol ran to completion: five seeds (11–15), each with a base PPO at B=2
+(8,064 decisions) and three 3,024-decision fine-tunes (B=1, B=4, matched control B=2),
+for 20 policies. With no-op and the three ADR-025 heuristics, that is 24 policies × 20
+VALIDATION fires × 4 budgets = 1,920 paired episodes, with no errors. At B=0 every policy
+equals no-op; the 1,280 episodes shared with an earlier three-seed pass are bit-identical.
+
+On the free-burn stress scenario, no-op adds 324.3ha per fire on average. Seed-averaged
+deltas (scenario bootstrap 95% CI):
+
+| Contrast | B=1 | B=2 | B=4 |
+|---|---|---|---|
+| frozen base − no-op | −5.1 [−10.9, −0.4] | −16.6 [−35.4, −3.7] | −19.7 [−42.0, −4.1] |
+| fine-tuned − frozen base | −0.4 [−1.2, 0.4] | +1.3 [−3.0, 6.8] (control) | +0.6 [−1.5, 2.3] |
+| fine-tuned − matched control | +0.9 [−1.3, 3.6] | — | −1.6 [−8.7, 4.1] |
+| downwind heuristic − no-op | −9.1 [−21.7, 0.0] | −28.0 [−69.7, −0.2] | −28.0 [−69.7, −0.2] |
+
+**Reading:** a learned policy beats doing nothing in this simulator, but budget-specific
+fine-tuning gives no measurable benefit over the frozen base or over equal extra training.
+A simple downwind rule is at least as good as PPO. Per-seed results differ widely, and
+several seeds converge on downwind-like behaviour. Most simulated fires stop within 12h
+(90-min active cells), so extra budget rarely finds a legal placement. That, the
+single-segment action and 20 scenarios bound this null result. It is a simulator
+finding, not evidence about real suppression.
+
+Evidence: [benchmark summary and training receipts](../../reports/real-fire-data/feds-simfire-policy-benchmark-v1.json),
+[figure](../../reports/real-fire-data/feds-simfire-policy-benchmark-v1.png),
+[analysis](../../scripts/analyze_budget_adaptation.py).
+
+### ADR-027 addendum — seed-level intervals, recorded 2026-11-04
+
+The ADR-027 table intervals resample scenarios after averaging seeds, so they omit
+seed-to-seed variation, which dominates here. Recomputed on the same 1,920 episodes
+(no new simulation), with a two-level bootstrap over seeds then scenarios (95%):
+
+| Contrast | B=1 | B=2 | B=4 |
+|---|---|---|---|
+| frozen base − no-op | −5.1 [−13.2, +0.5] | −16.6 [−43.0, −2.8] | −19.7 [−46.7, −3.1] |
+| fine-tuned − frozen base | −0.4 [−5.4, +3.8] | +1.3 [−17.9, +20.9] (control) | +0.6 [−14.5, +15.6] |
+| fine-tuned − matched control | +0.9 [−4.8, +8.3] | — | −1.6 [−17.8, +15.2] |
+
+Corrected reading: the base policy's benefit over no-op holds at B=2 and B=4 and is
+marginal at B=1. Budget fine-tuning shows no measurable gain, but with five seeds effects
+of roughly ±12–20ha at B=2/4 cannot be excluded. These intervals, and the per-seed t-intervals in the
+[summary](../../reports/real-fire-data/feds-simfire-policy-benchmark-v1.json), are the ones to quote.
+
+In-sample supplement (same day, after the VALIDATION result, TRAIN only): on all 99 TRAIN
+fires (9,504 episodes) the frozen base again beats no-op (−35.9/−71.3/−99.8ha at B=1/2/4
+against 1,343.6ha). Fine-tuning again shows no gain (two-level CIs span zero), and downwind
+is at least as good. Budget fine-tuning does not help even on the fires it was trained on,
+so the null is not an overfitting artefact. It points to a weak budget signal in this action
+and simulator design.
+
+### ADR-024 addendum — verbatim approval and validation-use rule, recorded 2026-11-04
+
+The user's words in the session, verbatim (2026-11-03, about 23:50 CET):
+
+- Request: "da do 6 ujutro pokusas uraditi do (i ukljucujuci) 8. zadatka da li mislis da
+  bi to mogao da uradis, koristeci internet resurse, lokalne resurse koje imas, i
+  pokusavajuci da napredujes ka tome da uradis to najbolje sto mozes" and "da mene ne
+  pitas nista jer necu biti tu da odgovorim".
+- The option proposed to them, including the starred defaults: "Ako gate ponovo padne: ★
+  nastavljam korake 6–8 sa najboljim TRAIN kandidatom, jasno označeno kao *eksploratorno,
+  gate FAIL*." Downloads: "★ dozvoljeni validation LANDFIRE/FEDS rasteri, ako gate prođe ili
+  po tački 1".
+- Reply: "potvrdjujem sve sto si rekao".
+
+**Validation-use rule:** every VALIDATION result was produced after the TRAIN gate failed
+and was **not** used to choose candidates, tune parameters, or decide that the gate
+passes. The stress record was chosen from TRAIN no-op statistics before any validation
+scoring. If a later TASK-019 fix makes the TRAIN gate pass, rerun the gate on TRAIN first,
+then validation, and mark the exploratory step 6–8 results superseded.

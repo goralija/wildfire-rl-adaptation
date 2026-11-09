@@ -1,0 +1,305 @@
+{
+  "schema_version": "feds-simfire-train-noop-diagnosis/1.0",
+  "created_date": "2026-11-04",
+  "split": "train",
+  "test_cases_loaded": false,
+  "physical_validation": false,
+  "scientific_result": false,
+  "source": "Reproduced TRAIN no-op run, WAF 0.01, 5-min step, 90-min active-cell lifetime, seed 0 (local .local/gate/repro-waf0.01.json).",
+  "reproduction": {
+    "mean_iou": 0.4769,
+    "mean_absolute_area_error_ha": 2262.1091,
+    "matches_committed_screen": true,
+    "inputs": "99/99 rebuilt LANDFIRE fuel, elevation and FEDS start-mask SHA-256 values equal the committed train coverage report; all nine gridMET archive SHA-256 values equal the committed weather report."
+  },
+  "method": "Per case-timepoint attribution from scored metrics only: new_hit = SimFire intersection minus persistence intersection; precision = new_hit / SimFire-added cells; recall = new_hit / observed growth cells. Terciles by initial burned cells and by observed area ratio (observed / initial).",
+  "diagnosis": {
+    "all": {
+      "timepoints": 396,
+      "mean_iou_delta_vs_persistence": -0.0575,
+      "sum_iou_delta": -22.7673,
+      "mean_sim_new_cells": 247.8207,
+      "mean_observed_growth_cells": 725.8359,
+      "new_cell_precision": 0.2486,
+      "observed_growth_recall": 0.0849,
+      "share_timepoints_sim_grows": 0.6263,
+      "share_timepoints_observed_grows": 0.8232
+    },
+    "by_hours": {
+      "12": {
+        "timepoints": 99,
+        "mean_iou_delta_vs_persistence": -0.0743,
+        "sum_iou_delta": -7.3548,
+        "mean_sim_new_cells": 96.1414,
+        "mean_observed_growth_cells": 357.1616,
+        "new_cell_precision": 0.214,
+        "observed_growth_recall": 0.0576,
+        "share_timepoints_sim_grows": 0.6263,
+        "share_timepoints_observed_grows": 0.7172
+      },
+      "24": {
+        "timepoints": 99,
+        "mean_iou_delta_vs_persistence": -0.0559,
+        "sum_iou_delta": -5.5343,
+        "mean_sim_new_cells": 185.8586,
+        "mean_observed_growth_cells": 680.6364,
+        "new_cell_precision": 0.2604,
+        "observed_growth_recall": 0.0711,
+        "share_timepoints_sim_grows": 0.6263,
+        "share_timepoints_observed_grows": 0.8283
+      },
+      "36": {
+        "timepoints": 99,
+        "mean_iou_delta_vs_persistence": -0.0474,
+        "sum_iou_delta": -4.6972,
+        "mean_sim_new_cells": 294.5859,
+        "mean_observed_growth_cells": 851.8586,
+        "new_cell_precision": 0.2548,
+        "observed_growth_recall": 0.0881,
+        "share_timepoints_sim_grows": 0.6263,
+        "share_timepoints_observed_grows": 0.8687
+      },
+      "48": {
+        "timepoints": 99,
+        "mean_iou_delta_vs_persistence": -0.0523,
+        "sum_iou_delta": -5.181,
+        "mean_sim_new_cells": 414.697,
+        "mean_observed_growth_cells": 1013.6869,
+        "new_cell_precision": 0.2469,
+        "observed_growth_recall": 0.101,
+        "share_timepoints_sim_grows": 0.6263,
+        "share_timepoints_observed_grows": 0.8788
+      }
+    },
+    "by_initial_size": {
+      "low": {
+        "timepoints": 136,
+        "mean_iou_delta_vs_persistence": -0.0513,
+        "sum_iou_delta": -6.9777,
+        "mean_sim_new_cells": 38.2279,
+        "mean_observed_growth_cells": 196.9706,
+        "new_cell_precision": 0.1346,
+        "observed_growth_recall": 0.0261,
+        "share_timepoints_sim_grows": 0.5882,
+        "share_timepoints_observed_grows": 0.8162
+      },
+      "mid": {
+        "timepoints": 132,
+        "mean_iou_delta_vs_persistence": -0.0702,
+        "sum_iou_delta": -9.2726,
+        "mean_sim_new_cells": 149.5682,
+        "mean_observed_growth_cells": 363.9697,
+        "new_cell_precision": 0.1709,
+        "observed_growth_recall": 0.0702,
+        "share_timepoints_sim_grows": 0.5455,
+        "share_timepoints_observed_grows": 0.7576
+      },
+      "high": {
+        "timepoints": 128,
+        "mean_iou_delta_vs_persistence": -0.0509,
+        "sum_iou_delta": -6.5169,
+        "mean_sim_new_cells": 571.8359,
+        "mean_observed_growth_cells": 1660.9297,
+        "new_cell_precision": 0.2776,
+        "observed_growth_recall": 0.0956,
+        "share_timepoints_sim_grows": 0.75,
+        "share_timepoints_observed_grows": 0.8984
+      }
+    },
+    "by_observed_growth": {
+      "low": {
+        "timepoints": 133,
+        "mean_iou_delta_vs_persistence": -0.191,
+        "sum_iou_delta": -25.4096,
+        "mean_sim_new_cells": 261.8647,
+        "mean_observed_growth_cells": 58.8571,
+        "new_cell_precision": 0.0287,
+        "observed_growth_recall": 0.1277,
+        "share_timepoints_sim_grows": 0.5865,
+        "share_timepoints_observed_grows": 0.4737
+      },
+      "mid": {
+        "timepoints": 133,
+        "mean_iou_delta_vs_persistence": -0.0147,
+        "sum_iou_delta": -1.959,
+        "mean_sim_new_cells": 265.3835,
+        "mean_observed_growth_cells": 848.015,
+        "new_cell_precision": 0.2841,
+        "observed_growth_recall": 0.0889,
+        "share_timepoints_sim_grows": 0.6015,
+        "share_timepoints_observed_grows": 1.0
+      },
+      "high": {
+        "timepoints": 130,
+        "mean_iou_delta_vs_persistence": 0.0354,
+        "sum_iou_delta": 4.6013,
+        "mean_sim_new_cells": 215.4846,
+        "mean_observed_growth_cells": 1283.2077,
+        "new_cell_precision": 0.4772,
+        "observed_growth_recall": 0.0801,
+        "share_timepoints_sim_grows": 0.6923,
+        "share_timepoints_observed_grows": 1.0
+      }
+    },
+    "tercile_edges": {
+      "initial_cells": [
+        78,
+        471
+      ],
+      "observed_growth_ratio": [
+        1.357,
+        3.5122
+      ]
+    },
+    "sim_grows": {
+      "timepoints": 248,
+      "mean_iou_delta_vs_persistence": -0.0918,
+      "sum_iou_delta": -22.7673,
+      "mean_sim_new_cells": 395.7137,
+      "mean_observed_growth_cells": 1028.2339,
+      "new_cell_precision": 0.2486,
+      "observed_growth_recall": 0.0957,
+      "share_timepoints_sim_grows": 1.0,
+      "share_timepoints_observed_grows": 0.8548
+    },
+    "sim_static": {
+      "timepoints": 148,
+      "mean_iou_delta_vs_persistence": 0.0,
+      "sum_iou_delta": 0.0,
+      "mean_sim_new_cells": 0.0,
+      "mean_observed_growth_cells": 219.1149,
+      "new_cell_precision": null,
+      "observed_growth_recall": 0.0,
+      "share_timepoints_sim_grows": 0.0,
+      "share_timepoints_observed_grows": 0.7703
+    },
+    "worst_timepoints": [
+      {
+        "scenario_id": "fpa-fod-400512651-powerline",
+        "hours": 48,
+        "initial_cells": 192,
+        "observed_cells": 192,
+        "sim_new_cells": 1469,
+        "sim_new_hit_cells": 0,
+        "iou": 0.1156,
+        "persistence_iou": 1.0,
+        "wind_ft_min": 6.1024,
+        "moisture": 0.094
+      },
+      {
+        "scenario_id": "fpa-fod-400300963-coal-hollow",
+        "hours": 12,
+        "initial_cells": 12,
+        "observed_cells": 12,
+        "sim_new_cells": 73,
+        "sim_new_hit_cells": 0,
+        "iou": 0.1412,
+        "persistence_iou": 1.0,
+        "wind_ft_min": 6.1024,
+        "moisture": 0.072
+      },
+      {
+        "scenario_id": "fpa-fod-400512651-powerline",
+        "hours": 36,
+        "initial_cells": 192,
+        "observed_cells": 192,
+        "sim_new_cells": 1029,
+        "sim_new_hit_cells": 0,
+        "iou": 0.1572,
+        "persistence_iou": 1.0,
+        "wind_ft_min": 6.1024,
+        "moisture": 0.092
+      },
+      {
+        "scenario_id": "fpa-fod-400512420-shelter-pass",
+        "hours": 48,
+        "initial_cells": 228,
+        "observed_cells": 228,
+        "sim_new_cells": 924,
+        "sim_new_hit_cells": 0,
+        "iou": 0.1979,
+        "persistence_iou": 1.0,
+        "wind_ft_min": 3.937,
+        "moisture": 0.087
+      },
+      {
+        "scenario_id": "fpa-fod-400301199-murdock",
+        "hours": 12,
+        "initial_cells": 16,
+        "observed_cells": 16,
+        "sim_new_cells": 53,
+        "sim_new_hit_cells": 0,
+        "iou": 0.2319,
+        "persistence_iou": 1.0,
+        "wind_ft_min": 7.6772,
+        "moisture": 0.088
+      },
+      {
+        "scenario_id": "fpa-fod-400301199-murdock",
+        "hours": 24,
+        "initial_cells": 16,
+        "observed_cells": 16,
+        "sim_new_cells": 53,
+        "sim_new_hit_cells": 0,
+        "iou": 0.2319,
+        "persistence_iou": 1.0,
+        "wind_ft_min": 7.6772,
+        "moisture": 0.088
+      },
+      {
+        "scenario_id": "fpa-fod-400301199-murdock",
+        "hours": 36,
+        "initial_cells": 16,
+        "observed_cells": 16,
+        "sim_new_cells": 53,
+        "sim_new_hit_cells": 0,
+        "iou": 0.2319,
+        "persistence_iou": 1.0,
+        "wind_ft_min": 10.0394,
+        "moisture": 0.079
+      },
+      {
+        "scenario_id": "fpa-fod-400301199-murdock",
+        "hours": 48,
+        "initial_cells": 16,
+        "observed_cells": 16,
+        "sim_new_cells": 53,
+        "sim_new_hit_cells": 0,
+        "iou": 0.2319,
+        "persistence_iou": 1.0,
+        "wind_ft_min": 10.0394,
+        "moisture": 0.079
+      },
+      {
+        "scenario_id": "fpa-fod-400500346-south",
+        "hours": 48,
+        "initial_cells": 641,
+        "observed_cells": 729,
+        "sim_new_cells": 5170,
+        "sim_new_hit_cells": 57,
+        "iou": 0.1195,
+        "persistence_iou": 0.8793,
+        "wind_ft_min": 4.5276,
+        "moisture": 0.079
+      },
+      {
+        "scenario_id": "fpa-fod-400512420-shelter-pass",
+        "hours": 36,
+        "initial_cells": 228,
+        "observed_cells": 228,
+        "sim_new_cells": 705,
+        "sim_new_hit_cells": 0,
+        "iou": 0.2444,
+        "persistence_iou": 1.0,
+        "wind_ft_min": 3.1496,
+        "moisture": 0.083
+      }
+    ]
+  },
+  "findings": [
+    "The whole mean-IoU deficit sits in the low-observed-growth tercile (ratio <= 1.36): SimFire adds about 262 cells where FEDS adds about 59, with 2.9% precision; that tercile sums to -25.4 IoU against a cohort total of -22.8.",
+    "In the high-growth tercile SimFire already beats persistence by +0.035 mean IoU (new-cell precision 0.48).",
+    "Even at WAF 0.01, SimFire grows in 63% of timepoints, nearly independent of whether FEDS grows (82%); growth recall is 8.5%. The failure is weak discrimination of which fires grow, not wind direction.",
+    "Many low-growth FEDS fires are likely contained or suppressed in reality; a free-burning no-op cannot represent that, so persistence is a structurally strong reference."
+  ]
+}
