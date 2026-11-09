@@ -11,8 +11,8 @@ Current state (2026-11-09, ADR-029): the results of ADR-022 to ADR-028 are inval
 until rerun. The gridMET sampler gave every fire in a year the weather of that year's
 first fire (fixed). PRs #3–#5 (SimFire/FEDS gate, steps 5–8, synthetic CA) are merged
 into main as history; do not cite their numbers as findings. Work next on the fix
-tasks TASK-021–024 as separate PRs, then the decisions in TASK-025, and only then the
-reruns in TASK-026 (order and acceptance in NEXT_SESSION.md). TEST 2024 stays closed.
+tasks TASK-021–024 as separate PRs; the TASK-025 decisions are in ADR-030, and the
+reruns in TASK-026 run in stages, each with the user's go-ahead (order and acceptance in NEXT_SESSION.md). TEST 2024 stays closed.
 The synthetic pilot and legacy runtime verification
 are not evidence of RL advantage or physical validation. Save decisions/evidence using
 the shared AGENTS rules and [maintenance workflow](../knowledge/maintenance.md).

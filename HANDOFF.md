@@ -108,9 +108,9 @@ $P scripts/train_synthetic_ppo.py --steps 1500000 --eval-every 100000 --eval-see
 $P scripts/bc_warm_start.py --init .local/synthetic/runs/main-1/final_model.zip --teacher direct_flank --rounds 40 --episodes-per-round 42 --epochs 8 --keep-rounds 3 --workers 7 --out .local/synthetic/runs/bc-2/bc_model.zip
 $P scripts/train_synthetic_ppo.py --resume .local/synthetic/runs/bc-2/bc_model.zip --steps 600000 --eval-every 100000 --eval-seeds 64 --learning-rate 1e-4 --ent-coef 0.001 --clip-range 0.1 --start-stage B --out .local/synthetic/runs/ft-1
 # Prihvatanje na sjemenima 0-255 (pravilo iz ADR-028)
-$P scripts/evaluate_synthetic_policies.py --seeds 256 --first-seed 0 --workers 7 --policies noop,random,direct_flank,protect_urban,downwind_indirect,ppo=.local/synthetic/locked/policy-v1.zip --out .local/synthetic/acceptance.json
+$P scripts/evaluate_synthetic_policies.py --seeds 256 --first-seed 0 --workers 7 --subset-from-seed 64 --policies noop,random,direct_flank,protect_urban,downwind_indirect,ppo=.local/synthetic/locked/policy-v1.zip --out .local/synthetic/acceptance.json
 # Jednokratni test zaključanih politika na stvarnim startovima
-$P scripts/evaluate_real_cases.py --policy-locked --workers 7 --policies noop,direct_flank,ppo=.local/synthetic/locked/policy-v1.zip --out .local/synthetic/real-cases.json
+$P scripts/evaluate_real_cases.py --policy-locked --comparator-heuristic direct_flank --workers 7 --policies noop,random,direct_flank,protect_urban,downwind_indirect,ppo=.local/synthetic/locked/main1-best.zip,ppo=.local/synthetic/locked/bc2.zip,ppo=.local/synthetic/locked/policy-v1.zip --out .local/synthetic/real-cases.json
 $P scripts/diagnose_synthetic_calibration_gap.py --all --policy-locked --out .local/synthetic/calibration-gap.json
 # Viewer: http://127.0.0.1:8766, politika protiv no-op na jednom stvarnom startu
 $P scripts/synthetic_case_viewer.py --port 8766
