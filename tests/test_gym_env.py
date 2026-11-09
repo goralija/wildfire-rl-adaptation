@@ -4,7 +4,8 @@ from pathlib import Path
 import unittest
 
 
-@unittest.skipUnless(importlib.util.find_spec('sb3_contrib'), 'optional RL extra not installed')
+@unittest.skipUnless(importlib.util.find_spec('gymnasium') and importlib.util.find_spec('numpy'),
+                     'optional Gymnasium/NumPy dependencies not installed')
 class GymTests(unittest.TestCase):
     def make_env(self, **kwargs):
         from wildfire_rl.gym_env import GridFireEnv
@@ -34,6 +35,7 @@ class GymTests(unittest.TestCase):
         self.assertEqual(info['burned_cells'], 5)
         self.assertFalse(terminated or truncated)
 
+    @unittest.skipUnless(importlib.util.find_spec('sb3_contrib'), 'optional RL extra not installed')
     def test_masks_save_load_and_short_learning(self):
         from sb3_contrib import MaskablePPO
         env = self.make_env(budgets=(1,))

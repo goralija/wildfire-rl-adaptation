@@ -1,0 +1,10 @@
+# Exact test ids allowed to skip in the CI `numeric` job (checked by scripts/run_ci_tests.py).
+# Every other test must run; an id listed here that runs also fails the check, so the list
+# stays exact. Add an id only with its reason.
+
+# sb3_contrib/torch (RL extra) is not installed in CI.
+test_gym_env.GymTests.test_masks_save_load_and_short_learning
+
+# Needs ignored local FEDS/gridMET inputs under .local/.
+test_synthetic_real_cases.LocalCaseTest.test_case_from_the_other_split_is_not_found
+test_synthetic_real_cases.LocalCaseTest.test_one_train_case_builds_a_valid_spec
