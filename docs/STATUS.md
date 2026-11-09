@@ -20,6 +20,9 @@ sources:
 - **Stanje grana.** PR-ovi #3–#5 su spojeni u `main` merge commitima kao historija; grane
   ostaju. Ispravke idu kao novi PR-ovi (TASK-021–024), zatim odluke (TASK-025) i ponovno
   pokretanje (TASK-026). Plan: [NEXT_SESSION](NEXT_SESSION.md), odluka: ADR-029.
+- **Ispravke spojene (2026-11-09).** TASK-021–024 su nezavisno revidirani, popravljeni i
+  spojeni (PR #8, #9, #11, #12); 223 testa prolaze lokalno, CI `numeric` provjerava tačan
+  spisak preskočenih. Faza 1 čeka TASK-027, novi gridMET fajl i nalog.
 - **Odluke za ponovno pokretanje (ADR-030).** Gate na IoU rasta prema downwind elipsi,
   vrijeme prethodnog segmenta u observationu, linija neovisna o koraku, 10 seedova i
   poređenje s nasumičnom linijom; ponovno pokretanje ide u tri faze uz nalog za svaku.
