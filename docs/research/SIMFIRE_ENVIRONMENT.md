@@ -9,6 +9,9 @@ sources:
   - resource: /scripts/sample_gridmet_episode_weather.py
   - resource: https://github.com/mitrefireline/simfire
   - resource: https://zenodo.org/records/22921773
+  - resource: https://github.com/Earth-Information-System/fireatlas/tree/1.4.1
+  - resource: https://github.com/Earth-Information-System/fireatlas/issues/230
+  - resource: https://doi.org/10.1038/s41597-022-01343-0
   - resource: https://www.climatologylab.org/gridmet.html
   - resource: https://landfire.gov/data
 ---
@@ -114,19 +117,24 @@ Službene godišnje NetCDF arhive za `th`, `vs` i `fm100` preuzete su samo za do
 Skripta ih je validirala kroz dnevnu dimenziju, gridMET oznaku varijable, zadnji vremenski
 uzorak, jedinice i checksum.
 
-Za svih 119 epizoda uzimaju se sirovi gridMET uzorci u najbližoj 4 km ćeliji centroidu
-početnog FEDS poligona, za sredinu svakog od četiri 12h segmenta. Pošto FEDS polje
-`t` nema vremensku zonu, skripta bilježi pretpostavku da je UTC; gridMET datumi se
-mapiraju preko fiksne MST granice iz metadata. Rezultat ima 396 train i 80 validation
-segmenta. Svi izabrani zapisi imaju vrijednosti; uzorci se kreću od 1.1 do 11.6 m/s za
-`vs`, od 21° do 347° za `th` i od 3.5% do 15.2% za `fm100`.
+Za svih 118 epizoda (nakon uklanjanja duplikata, ADR-030 §6) uzimaju se sirovi gridMET
+uzorci u najbližoj 4 km ćeliji centroidu početnog FEDS poligona, za sredinu svakog od četiri
+12h segmenta, plus `pre_start` dan za observation. FEDS `t` je oznaka VIIRS prolaza u
+lokalnom sunčevom vremenu, ne UTC (TASK-027, odjeljak ispod): segmenti počinju u 01:30 (AM)
+ili 13:30 (PM) lokalnog sunčevog vremena u tački uzorka, preračunato u UTC preko
+dužina/15, a gridMET datumi se mapiraju preko fiksne MST granice iz metadata. Rezultat ima
+392 train i 80 validation segmenta. Svi izabrani zapisi imaju vrijednosti; uzorci (sa
+`pre_start`) se kreću od 1.1 do 12.1 m/s za `vs`, od 5° do 359° za `th` i od 3.1% do 17.5%
+za `fm100`. Svaki slučaj ima svoju ćeliju (118 različitih, najviše 2.80 km); hash fajla,
+hash manifesta i poređenje sa starim, neispravnim fajlom su u
+[coverage reportu](../../reports/real-fire-data/feds-gridmet-weather-coverage-v1.json).
 
 Kompletni case-level uzorci ostaju ignorisani u
 `.local/gridmet/feds-episode-weather-v1.json`; ponavljanje:
 
 ```sh
 PYTHONPATH=src MPLCONFIGDIR=.local/mpl-cache XDG_CACHE_HOME=.local/cache .local/simfire-venv/bin/python scripts/fetch_gridmet_archives.py --year 2018 2019 2023 --variable th vs fm100
-PYTHONPATH=src MPLCONFIGDIR=.local/mpl-cache XDG_CACHE_HOME=.local/cache .local/simfire-venv/bin/python scripts/sample_gridmet_episode_weather.py
+PYTHONPATH=src MPLCONFIGDIR=.local/mpl-cache XDG_CACHE_HOME=.local/cache .local/simfire-venv/bin/python scripts/sample_gridmet_episode_weather.py [--previous-weather <stari fajl>]
 ```
 
 `th` je u NetCDF-u označen kao `wind_from_direction`; SimFire koristi smjer vjetra
@@ -140,6 +148,53 @@ gridMET je dnevni proizvod približno 4 km; `fm100` je NFDRS 100-hour fuel moist
 ne direktno SimFireova ili FBFM13 fina gorivna vlaga. Zato je to kandidat proxy. Izbor
 faktora i drugi zajednički parametri moraju se kalibrisati samo na trainu i zaključati
 prije validation provjere. 2024 test ni njegovi zapisi nisu učitani.
+
+## FEDS `t` nije UTC trenutak (TASK-027, provjereno 2026-11-09)
+
+**Činjenice iz izvora.**
+- Zenodo FEDS-CONUS zapis ([22921773](https://zenodo.org/records/22921773)) navodi da je
+  arhiva napravljena s FEDS/fireatlas v1.4.1 iz SNPP VIIRS detekcija, u 12-satnim koracima;
+  polje `t` ni vremensku zonu ne definiše.
+- U fireatlas v1.4.1 detekcija dobija AM ili PM po **lokalnom sunčevom satu** izračunatom iz
+  geografske dužine (UTC vrijeme akvizicije + `Lon/15` h; PM ako je sat između 7 i 17,
+  inače AM): [`FireIO.AFP_setampm`](https://github.com/Earth-Information-System/fireatlas/blob/1.4.1/fireatlas/FireIO.py#L541-L562).
+  Datum je datum akvizicije u UTC ([`preprocess.py`](https://github.com/Earth-Information-System/fireatlas/blob/1.4.1/fireatlas/preprocess.py#L251-L280)).
+- Oznaka `(godina, mjesec, dan, 'AM'|'PM')` pretvara se u sat 0 ili 12
+  ([`FireTime.t2dt`](https://github.com/Earth-Information-System/fireatlas/blob/1.4.1/fireatlas/FireTime.py#L123-L140)),
+  a u slojeve se upisuje kao string bez zone
+  ([`postprocess.py` L186](https://github.com/Earth-Information-System/fireatlas/blob/1.4.1/fireatlas/postprocess.py#L186)).
+- Autor koda u [issue #230](https://github.com/Earth-Information-System/fireatlas/issues/230)
+  piše da `t` bilježi "UTC date and Local time (converted to 0:00 and 12:00)".
+- [Chen i sar. 2022, Scientific Data 9:249](https://doi.org/10.1038/s41597-022-01343-0)
+  opisuju poludnevne korake vezane za VIIRS prolaze oko 01:30 i 13:30 lokalnog vremena.
+- Lokalne arhive: svih 171 485 zapisa `t` u `feds_{2018,2019,2023}_lf_perimeter.fgb` imaju
+  sat 00:00 ili 12:00 (otprilike pola-pola). Fireline sloj nema vremena piksela, pa se iz
+  samih podataka UTC i AM/PM ne mogu razlikovati.
+
+**Zaključak.** `t` je oznaka poludnevnog prolaza (00:00 = AM, oko 01:30 lokalnog sunčevog
+vremena; 12:00 = PM, oko 13:30), a ne UTC trenutak. Za kohortu (dužine −124° do −102°) stvarni
+prolaz je oko 8–10 h kasnije u UTC nego što ga je čitao raniji kod. Nesigurno: da je ulazno
+`HHMM` u UTC slijedi iz logike koda, ne iz dokumentacije proizvoda; to ne mijenja zaključak,
+jer 00:00 i 12:00 ni u jednom čitanju nisu trenuci akvizicije.
+
+**Posljedice UTC čitanja (izmjereno na manifestu sa 118 slučajeva, prije izmjene).**
+- gridMET: tumačenje kao prolaz (01:30/13:30 lokalnog sunčevog minus `Lon/15`), kao lokalno
+  sunčevo 00:00/12:00 i kao fiksni MST daju iste dnevne oznake za 118/118 slučajeva; sredine
+  segmenata su najmanje 3.2 h od MST ponoći (najmanje 3.235 h, kod najzapadnijeg slučaja). U odnosu na UTC čitanje mijenja se 236/472
+  segmenta (svaki slučaj, jedan dan, naizmjenično) i `pre_start` za 66 slučajeva s AM startom.
+- Sintetički CA na stvarnim startovima (`synthetic_real_cases.py`) iz `initial_state_time`
+  računa lokalni sat za dnevni ciklus; pod UTC čitanjem AM start na −120° dobija oko 16 h
+  umjesto oko 01:30.
+- Crosswalk i FEDS referentna stanja koriste datume i relativne 12h razmake, pa ih tumačenje
+  ne mijenja.
+
+**Odluka (korisnik, 2026-11-09, opcija 2).** `t` se čita kao prolaz u 01:30/13:30 lokalnog
+sunčevog vremena u tački gridMET uzorka, preračunat u UTC preko dužina/15
+(`feds_overpass_utc` u `src/wildfire_rl/gridmet_weather.py`); segmenti i `pre_start` se grade
+iz tog trenutka u jednoj funkciji. Fajl s vremenom mora navesti
+`feds_time_reference = feds_t_viirs_overpass_local_solar/v1`, inače ga okruženje odbija.
+CA epizode na stvarnim startovima počinju u UTC početku segmenta 0. Zapis odluke:
+[ADR-030 dopuna](../specs/DECISION_RECORDS.md).
 
 ## Šta smoke dokazuje i ne dokazuje
 

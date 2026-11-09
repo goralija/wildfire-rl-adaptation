@@ -1,7 +1,7 @@
 """Real FEDS/LANDFIRE/gridMET cases as episodes of the synthetic CA (ADR-028).
 
-The 119 local FEDS cases (99 ex-TRAIN, 20 ex-VALIDATION) supply the landscape, the
-observed initial state and the historical forcing. Spread is computed by the synthetic
+The manifest's FEDS cases (118 after ADR-030 §6: 98 ex-TRAIN, 20 ex-VALIDATION) supply
+the landscape, the observed initial state and the historical forcing. Spread is computed by the synthetic
 CA, so these episodes are the final test of locked policies and the input of the
 calibration-gap diagnostic, never a training or tuning set. TEST cases are refused
 before any file is opened.
@@ -94,11 +94,17 @@ def fill_elevation_nodata(elevation: np.ndarray) -> Tuple[np.ndarray, np.ndarray
 
 
 def parse_utc(value: str) -> datetime:
-    """ISO time as aware UTC; naive FEDS times are UTC by the gridMET record's assumption."""
+    """Zoned ISO time as aware UTC. A naive FEDS `t` is an overpass label, not UTC (TASK-027)."""
     moment = datetime.fromisoformat(value)
     if moment.tzinfo is None:
-        return moment.replace(tzinfo=timezone.utc)
+        raise ValueError("A zoned time is required; naive FEDS `t` is not a UTC instant: %r"
+                         % value)
     return moment.astimezone(timezone.utc)
+
+
+def episode_start_utc(weather_record: dict) -> datetime:
+    """The episode start: segment 0's start, the FEDS start overpass in UTC."""
+    return parse_utc(weather_record["segments"][0]["start_utc"])
 
 
 def local_solar_hour(moment: datetime, longitude: float) -> float:
@@ -179,8 +185,8 @@ def build_real_episode(inputs: Dict[str, Any],
     # Local hour from the crop centre, not the FPA-FOD discovery point (evaluation-only).
     grid = inputs["receipt"]["grid"]
     longitude, latitude = crop_centre_lonlat(grid, r0, c0)
-    start_text = inputs["case"]["evaluation_reference"]["initial_state_time"]
-    start = parse_utc(start_text)
+    # load_case_inputs has matched the record to initial_state_time.
+    start = episode_start_utc(inputs["weather"])
     weather = weather_from_segments(inputs["weather"]["segments"], start, longitude,
                                     horizon + TAIL_DECISIONS)
 

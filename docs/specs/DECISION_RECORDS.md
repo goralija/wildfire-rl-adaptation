@@ -1087,3 +1087,50 @@ From the review of PR #12 (TASK-023), fixed before any rerun.
 - **Split guard.** The SimFire no-op runner and evaluator use the same freeze guard as the
   environment and benchmark (allowlisted record, every simulator field, weather hash) and
   accept only the 5-minute step.
+
+### ADR-030 addendum — FEDS `t` is a local-solar overpass label; duplicate removed, accepted 2026-11-09
+
+From TASK-027, before any stage-1 run. Evidence and links:
+[SimFire environment record](../research/SIMFIRE_ENVIRONMENT.md).
+- **Finding.** FEDS-CONUS was built with fireatlas v1.4.1, which assigns each VIIRS detection
+  to AM or PM by local solar hour (UTC + longitude / 15) and writes the label as hour 0 or 12
+  without a zone. `t` is therefore the AM/PM overpass label (SNPP near 01:30 and 13:30 local
+  solar time), not a UTC instant. The earlier mapping read it as UTC, which put every 00:00
+  state about 8–10 h too early and moved 236 of 472 segment days and 66 pre-start days by one
+  day.
+- **Decision (user, option 2 of three proposed).** A FEDS state at `t` is the overpass at
+  01:30 (AM) or 13:30 (PM) local solar time at the case's weather sample point, converted to
+  UTC with longitude / 15 (`feds_overpass_utc`). Segments and the pre-start record are built
+  from that instant in one function. Keeping UTC (option 1) was rejected as contradicted by
+  the source; a fixed MST reading (option 3) gives the same daily labels on this cohort, but
+  only because of its longitude range.
+- **Robustness.** Segment midpoints stay at least 3.2 h from the MST day boundary across
+  the cohort (minimum 3.235 h, at the westernmost case), so the daily labels do not depend
+  on the equation of time or swath-edge spread that longitude / 15 ignores. The observed
+  daily record always ends before its decision's segment starts (at least 1.3 h). An
+  overpass that falls on another UTC date than the label is refused, because fireatlas
+  dates `t` by the UTC acquisition date.
+- **Guards.** Weather files must state `temporal_mapping.feds_time_reference` =
+  `feds_t_viirs_overpass_local_solar/v1`, or loading is refused. Real-case CA episodes start
+  at segment 0's UTC start, and a naive FEDS time is never parsed as UTC.
+- **Effect on the §1 observation addendum.** Under this mapping each daily record covers two
+  consecutive segments. That addendum's "244 of 396" was 99 decision-0 cases plus 145 of 297
+  later decisions where the previous segment shared the upcoming day, under the UTC reading.
+  On the 98 TRAIN cases it is now 150 of 294 later decisions; decision 0 shows the pre-start
+  day, so it never shows forcing. With the strictly-earlier rule, the observed record changes
+  at 144 of 294 later decisions, and in AM-start cases decisions 0 and 1 both observe the
+  pre-start day. This is the intended information lag, not a new rule.
+- **Duplicate (§6).** It is implemented in the manifest generator as a rule (lowest
+  `fod_id` per FEDS fire, keyed like the crosswalk by fireID and start time, because
+  FEDS-CONUS numbers fires per yearly file), with excluded records listed in the manifest; columbus is
+  dropped and TRAIN has 98 cases. The generator also refuses a FEDS fire joined from both
+  TRAIN and VALIDATION. §6 did not ask for this; it is a leakage guard, and no such case
+  exists.
+- **Regenerated weather.** sha256 `7a51aadd46b894d9cd80835d7953107271b3182c776d7bb464d7abae826afac1`
+  from manifest `013be9a1632abcbc29d86f4bc16af89d3c074503f5899d1e39903d76ec2c28d5`. All
+  118 cases have a pre-start record and one cell each (118 distinct, at most 2.80 km). The
+  receipt is the [weather coverage report](../../reports/real-fire-data/feds-gridmet-weather-coverage-v1.json),
+  which compares the file with the defective file `7b0aa405…`: 3 distinct cells for 119
+  records, no pre-start, and 115 of 118 cases on another cell.
+- **Real-case test count.** "The 119 FEDS starts" in the synthetic CA addendum above now
+  means the manifest's 118 starts; the stage-3 run has not happened.

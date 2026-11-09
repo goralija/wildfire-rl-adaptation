@@ -19,6 +19,42 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _one_record_per_feds_fire(
+    cases: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Keep the lowest-fod_id record per FEDS fire (ADR-030 §6); return kept and excluded.
+
+    A FEDS fire is (fireID, start), the crosswalk's key: FEDS-CONUS numbers fires per
+    yearly file, so the same fireID in another year is another fire.
+    """
+    by_fire: dict[tuple[str, str], list[dict[str, Any]]] = {}
+    for case in cases:
+        reference = case["evaluation_reference"]
+        key = (reference["source_fire_id"], reference["event_start_time"])
+        by_fire.setdefault(key, []).append(case)
+    kept_ids = set()
+    excluded = []
+    for (fire_id, _start), group in by_fire.items():
+        if len({case["split"] for case in group}) > 1:
+            raise ValueError(
+                f"FEDS fire {fire_id} is joined by records in both TRAIN and VALIDATION."
+            )
+        kept = min(group, key=lambda case: case["event"]["fod_id"])
+        kept_ids.add(kept["scenario_id"])
+        excluded.extend(
+            {
+                "scenario_id": case["scenario_id"],
+                "split": case["split"],
+                "fod_id": case["event"]["fod_id"],
+                "source_fire_id": fire_id,
+                "kept_scenario_id": kept["scenario_id"],
+            }
+            for case in group
+            if case is not kept
+        )
+    return [case for case in cases if case["scenario_id"] in kept_ids], excluded
+
+
 def build_episode_manifest(
     frame: dict[str, Any],
     crosswalk: dict[str, Any],
@@ -94,6 +130,7 @@ def build_episode_manifest(
             }
         )
 
+    selected_cases, excluded_duplicates = _one_record_per_feds_fire(selected_cases)
     counts = {
         split: sum(case["split"] == split for case in selected_cases)
         for split in ("train", "validation")
@@ -130,6 +167,14 @@ def build_episode_manifest(
                 "episode has five consecutive 12-hour FEDS states from its initial "
                 "observed state through +48 hours."
             ),
+        },
+        "deduplication": {
+            "rule": (
+                "ADR-030 §6: one record per FEDS fire (fireID and start time); when "
+                "several FPA-FOD records join the same FEDS fire, keep the one with the "
+                "lowest fod_id."
+            ),
+            "excluded_records": excluded_duplicates,
         },
         "information_boundary": {
             "agent_inputs": [

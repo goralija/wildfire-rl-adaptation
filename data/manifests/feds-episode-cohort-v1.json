@@ -20,9 +20,9 @@
     },
     "sha256": "373256cdcbde4f876d064f25a5fc53e0f7b21af0a337fcbf42a011242caf0adb"
   },
-  "case_count": 119,
+  "case_count": 118,
   "case_counts_by_split": {
-    "train": 99,
+    "train": 98,
     "validation": 20
   },
   "cases": [
@@ -1891,33 +1891,6 @@
     },
     {
       "evaluation_reference": {
-        "event_start_time": "2018-07-17T00:00:00",
-        "initial_state_time": "2018-07-18T00:00:00",
-        "observed_state_times_0_to_48h": [
-          "2018-07-18T00:00:00",
-          "2018-07-18T12:00:00",
-          "2018-07-19T00:00:00",
-          "2018-07-19T12:00:00",
-          "2018-07-20T00:00:00"
-        ],
-        "source_fire_id": "58826",
-        "start_point_distance_m": 2831.2
-      },
-      "event": {
-        "discovery_date": "2018-07-15",
-        "fod_id": 400389825,
-        "fpa_unique_fire_id": "ICS209_2018_9159692",
-        "latitude": 42.93758,
-        "longitude": -122.6611,
-        "name": "COLUMBUS",
-        "state": "OR",
-        "year": 2018
-      },
-      "scenario_id": "fpa-fod-400389825-columbus",
-      "split": "train"
-    },
-    {
-      "evaluation_reference": {
         "event_start_time": "2018-09-08T00:00:00",
         "initial_state_time": "2018-09-08T12:00:00",
         "observed_state_times_0_to_48h": [
@@ -3241,7 +3214,7 @@
     }
   ],
   "cohort_id": "fpa-fod-western-us-feds-frame-2018-2019-2023-v1",
-  "created_utc": "2026-11-02T23:56:26.667398+00:00",
+  "created_utc": "2026-11-09T19:17:07.025349+00:00",
   "crosswalk": {
     "feds_start_date_window_days": {
       "after": 2,
@@ -3251,6 +3224,18 @@
     "report": "reports/real-fire-data/fpa-feds-candidate-frame-crosswalk-v1.json",
     "sha256": "d24e5a600ddf461776de377ead37e389befb9b9912fd5202e7292150fe6d039d",
     "spatial_search_radius_m": 3000.0
+  },
+  "deduplication": {
+    "excluded_records": [
+      {
+        "fod_id": 400389825,
+        "kept_scenario_id": "fpa-fod-400305302-sugar-pine",
+        "scenario_id": "fpa-fod-400389825-columbus",
+        "source_fire_id": "58826",
+        "split": "train"
+      }
+    ],
+    "rule": "ADR-030 \u00a76: one record per FEDS fire (fireID and start time); when several FPA-FOD records join the same FEDS fire, keep the one with the lowest fod_id."
   },
   "information_boundary": {
     "agent_inputs": [
