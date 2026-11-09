@@ -466,3 +466,10 @@ Dodatna WAF .01 / 1-min timebase osjetljivost takođe je završila 99/99: mean I
 bez rubnih kontakata, naspram .4769 na 5-min koraku. Rezultat ne mijenja gate; 3/10/15-
 min koraci nisu pokretani i interni korak ostaje neizabran. Strict knowledge validator
 prošao je 69 Markdown fajlova, a `git diff --check` je čist.
+
+2026-11-09 — Revizija PR-ova #3–#5 (sa nezavisnim recenzentima) našla je da gridMET
+uzorkovanje daje svim požarima jedne godine vrijeme prvog požara te godine. Ispravka sa
+testom je u PR #3 (commit e18a265); lokalna regeneracija iz verifikovanih arhiva daje 118
+ćelija za 119 požara, najviše 2,8 km od požara (nije commitovana; ponovno pokretanje je
+TASK-026). Ostale potvrđene greške i plan ispravki zapisani su u ADR-029 i NEXT_SESSION.
+Na korisnikov nalog PR-ovi #3–#5 su spojeni u `main` merge commitima, grane su sačuvane.

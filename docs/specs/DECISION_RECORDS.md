@@ -895,3 +895,48 @@ Evidence: [real-case test](../../reports/synthetic/real-cases-test-v1.json),
   - Close calls: 26 against 49. Units lost: 0 against 0.
   - Saved area: 35,400 ha against 32,900 ha, out of 223,200 ha of no-op damage.
 - **Conclusion.** The headline holds without the edge cases.
+
+## ADR-029 — results of ADR-022 to ADR-028 invalid pending rerun; remediation plan, recorded 2026-11-09
+
+A review of PRs #3–#5 (2026-11-09) found a data bug that affects every SimFire and CA
+result built on real FEDS starts. This ADR supersedes the *results* of ADR-022 through
+ADR-028 (including all ADR-028 addenda). Their protocols, code and preregistrations stay
+as history; their numbers must not be cited as findings until rerun.
+
+**The bug (fixed).** `scripts/sample_gridmet_episode_weather.py` cached the nearest gridMET
+cell per (year, variable) and reused the first case's cell for every later case of that
+year. The committed-era weather file had one cell per year: 97/99 TRAIN and 19/20
+VALIDATION episodes got weather from another fire (median 782 km, max 1,774 km away). The
+fix (commit e18a265, merged with PR #3) selects the cell per case, records its distance and
+refuses cells beyond 5 km; a local regeneration gives 118 distinct cells for 119 cases
+(two FPA records share one FEDS fire) and a maximum distance of 2.8 km. The old ignored
+`.local/gridmet/feds-episode-weather-v1.json` (sha256 `7b0aa405…`) is the defective file.
+
+**What this invalidates.**
+- ADR-022 and ADR-023/024: SimFire gate numbers for all WAF/ROS candidates and the ellipse
+  reference (its heading uses the first-segment wind). Persistence numbers are unaffected.
+- ADR-024 validation scoring, ADR-025–027 benchmark and budget study: comparisons remain
+  internally paired, but the inputs are not the fires' historical weather.
+- ADR-028 real-case test and calibration gap (116/119 cases had foreign weather).
+
+**Other confirmed defects** (each gets its own fix PR before any rerun):
+1. Metrics: IoU includes the shared initial burn (growth-only IoU is ~0.1, not 0.27–0.5);
+   the "downwind" ellipse is symmetric about the front centroid.
+2. SimFire environment: diagonal lines touch only at corners (4 of 6 links) and SimFire
+   spreads 8-connected, so fire leaks through; line strength depends on the internal step
+   (fixed ROS attenuation after `R *= update_rate`); the policy observes the exact
+   weather of the next 12h; the VALIDATION freeze guard exists only in CLI scripts; the
+   two-level bootstrap/t-interval have no tests; some line episodes burn more than no-op.
+3. Benchmark reading: base PPO is not distinguishable from a random legal line
+   (B=2: −15.1 ha, 95% CI [−41.1, 1.8]); the downwind −28 ha rests on 4/20 fires.
+4. Synthetic CA: build progress resets whenever the action changes, even in the same cell;
+   line cells inside the no-op footprint count as saved; real-case return is dominated
+   by the close-call penalty, so "+0.048 return vs direct_flank" is a safety-standoff
+   difference, not better suppression.
+5. CI installs no NumPy, so 14–18 numeric tests skip; green CI does not cover them.
+
+**Decision.** Merge PRs #3–#5 as history (merge commits, branches kept) with this notice,
+then fix in separate PRs (TASK-021–024), record the open choices in a new ADR before any
+rerun (TASK-025), and only then rerun (TASK-026). No result may be cited from ADR-022–028
+until TASK-026 replaces it. TEST 2024 stays closed. Plan and acceptance:
+[NEXT_SESSION](../NEXT_SESSION.md), [BACKLOG](../BACKLOG.md).

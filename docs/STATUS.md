@@ -1,11 +1,26 @@
 ---
 type: Project Status
-title: Trenutno stanje — 2026-11-05
+title: Trenutno stanje — 2026-11-09
 sources:
 - resource: /reports/firehose-verification/verification.json
 - resource: /docs/WORK_LOG.md
 ---
-# Trenutno stanje — 2026-11-05
+# Trenutno stanje — 2026-11-09
+
+## Najnovije — 2026-11-09: rezultati ADR-022–028 nevažeći do ponovnog pokretanja (ADR-029)
+
+- **Greška u podacima.** gridMET uzorkovanje je za svaki požar u godini koristilo ćeliju
+  prvog požara te godine: 97/99 TRAIN i 19/20 VALIDATION požara imalo je tuđe vrijeme
+  (medijan 782 km). Ispravka je u PR #3 (lokalna regeneracija: 118 ćelija za 119 požara,
+  najviše 2,8 km).
+- **Posljedica.** SimFire gate (ADR-022–024), validacija, benchmark i studija budžeta
+  (ADR-024–027) i test CA politika na 119 požara (ADR-028) nisu važeći zaključci.
+  Sintetička provjera na proceduralnim požarima (ADR-028, seedovi 0–255) ne koristi gridMET,
+  ali ima druge greške (napredak linije, ćelije linije kao "spašene").
+- **Stanje grana.** PR-ovi #3–#5 su spojeni u `main` merge commitima kao historija; grane
+  ostaju. Ispravke idu kao novi PR-ovi (TASK-021–024), zatim odluke (TASK-025) i ponovno
+  pokretanje (TASK-026). Plan: [NEXT_SESSION](NEXT_SESSION.md), odluka: ADR-029.
+
 
 ## Najnovije — 2026-11-05: sintetički CA trening (ADR-028)
 
