@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Sample checksum-verified daily gridMET records at FEDS start centroids.
 
-This creates four 12-hour environment-forcing records per episode. It retains raw
-gridMET values and does not choose a wind-adjustment factor or expose future daily
-weather as a policy observation.
+This creates four 12-hour environment-forcing records per episode plus one
+observation-only ``pre_start`` record (the gridMET day before segment 0, ADR-030). It
+retains raw gridMET values and does not choose a wind-adjustment factor or expose
+future daily weather as a policy observation.
 """
 
 from __future__ import annotations
@@ -24,11 +25,15 @@ GRIDMET_DIR = ROOT / ".local/gridmet"
 
 try:
     from scripts.fetch_gridmet_archives import find_gridmet_variable, validate_gridmet_archive
-    from wildfire_rl.gridmet_weather import episode_weather_midpoints, select_case_gridmet_cell
+    from wildfire_rl.gridmet_weather import (
+        episode_weather_midpoints, pre_start_weather_day, select_case_gridmet_cell,
+    )
 except ModuleNotFoundError:
     sys.path.insert(0, str(ROOT / "scripts"))
     from fetch_gridmet_archives import find_gridmet_variable, validate_gridmet_archive
-    from wildfire_rl.gridmet_weather import episode_weather_midpoints, select_case_gridmet_cell
+    from wildfire_rl.gridmet_weather import (
+        episode_weather_midpoints, pre_start_weather_day, select_case_gridmet_cell,
+    )
 
 
 def sha256_file(path: Path) -> str:
@@ -50,9 +55,49 @@ def verified_hash(path: Path) -> str:
     return actual
 
 
-def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path) -> dict:
+def _open_archive(gridmet_dir: Path, date_year: int, abbreviation: str) -> dict:
     import numpy as np
     from netCDF4 import Dataset, num2date
+
+    path = gridmet_dir / f"{abbreviation}_{date_year}.nc"
+    checksum = verified_hash(path)
+    validate_gridmet_archive(path, date_year, abbreviation)
+    dataset = Dataset(path)
+    native_name, variable = find_gridmet_variable(dataset, abbreviation)
+    day_values = num2date(
+        dataset.variables["day"][:],
+        units=dataset.variables["day"].units,
+        calendar=getattr(dataset.variables["day"], "calendar", "gregorian"),
+        only_use_cftime_datetimes=False,
+    )
+    day_index = {
+        value.strftime("%Y-%m-%d"): index
+        for index, value in enumerate(day_values)
+    }
+    units = str(getattr(variable, "units", "unknown"))
+    expected_units = {
+        "th": {"degrees clockwise from north"},
+        "vs": {"m/s"},
+        "fm100": {"%", "percent"},
+    }[abbreviation]
+    if units.lower() not in expected_units:
+        dataset.close()
+        raise ValueError(f"Unexpected gridMET units for {abbreviation}: {units!r}.")
+    return {
+        "dataset": dataset,
+        "variable": variable,
+        "native_name": native_name,
+        "day_index": day_index,
+        "longitudes": np.asarray(dataset.variables["lon"][:], dtype=float),
+        "latitudes": np.asarray(dataset.variables["lat"][:], dtype=float),
+        "units": units,
+        "sha256": checksum,
+        "path": path.name,
+    }
+
+
+def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path) -> dict:
+    import numpy as np
 
     if manifest.get("test_cases_loaded") is not False or preflight.get("test_cases_loaded") is not False:
         raise ValueError("Refusing to open weather for a manifest/preflight that includes test cases.")
@@ -68,8 +113,8 @@ def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path) -> dict:
             centroid = preflight_case["initial_perimeter_centroid_wgs84"]
             initial_time = case["evaluation_reference"]["initial_state_time"]
             weather_segments = episode_weather_midpoints(initial_time)
-            segment_records = []
-            for segment in weather_segments:
+
+            def sample_day(segment: dict) -> dict:
                 date_label = segment["gridmet_daily_label_mst"]
                 date_year = int(date_label[:4])
                 if date_year not in (2018, 2019, 2023):
@@ -83,40 +128,7 @@ def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path) -> dict:
                     # Archives are cached per year/variable; the cell is chosen per case.
                     cache_key = (date_year, abbreviation)
                     if cache_key not in open_files:
-                        path = gridmet_dir / f"{abbreviation}_{date_year}.nc"
-                        checksum = verified_hash(path)
-                        validate_gridmet_archive(path, date_year, abbreviation)
-                        dataset = Dataset(path)
-                        native_name, variable = find_gridmet_variable(dataset, abbreviation)
-                        day_values = num2date(
-                            dataset.variables["day"][:],
-                            units=dataset.variables["day"].units,
-                            calendar=getattr(dataset.variables["day"], "calendar", "gregorian"),
-                            only_use_cftime_datetimes=False,
-                        )
-                        day_index = {
-                            value.strftime("%Y-%m-%d"): index
-                            for index, value in enumerate(day_values)
-                        }
-                        units = str(getattr(variable, "units", "unknown"))
-                        expected_units = {
-                            "th": {"degrees clockwise from north"},
-                            "vs": {"m/s"},
-                            "fm100": {"%", "percent"},
-                        }[abbreviation]
-                        if units.lower() not in expected_units:
-                            raise ValueError(f"Unexpected gridMET units for {abbreviation}: {units!r}.")
-                        open_files[cache_key] = {
-                            "dataset": dataset,
-                            "variable": variable,
-                            "native_name": native_name,
-                            "day_index": day_index,
-                            "longitudes": np.asarray(dataset.variables["lon"][:], dtype=float),
-                            "latitudes": np.asarray(dataset.variables["lat"][:], dtype=float),
-                            "units": units,
-                            "sha256": checksum,
-                            "path": path.name,
-                        }
+                        open_files[cache_key] = _open_archive(gridmet_dir, date_year, abbreviation)
                     sample = open_files[cache_key]
                     cell = select_case_gridmet_cell(
                         sample["longitudes"], sample["latitudes"],
@@ -136,11 +148,15 @@ def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path) -> dict:
                         "archive": sample["path"],
                         "archive_sha256": sample["sha256"],
                     }
-                segment_records.append({
+                return {
                     **segment,
                     "gridmet_values": data,
                     "nearest_gridmet_cell": cells["vs"],
-                })
+                }
+
+            segment_records = [sample_day(segment) for segment in weather_segments]
+            # ADR-030: observation-only initial condition, the gridMET day before segment 0.
+            pre_start = sample_day(pre_start_weather_day(initial_time))
             records.append({
                 "scenario_id": case["scenario_id"],
                 "split": case["split"],
@@ -153,6 +169,7 @@ def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path) -> dict:
                     "latitude": centroid["latitude"],
                 },
                 "segments": segment_records,
+                "pre_start": pre_start,
             })
     finally:
         for item in open_files.values():
@@ -169,7 +186,7 @@ def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path) -> dict:
                 "source_url": f"https://www.northwestknowledge.net/metdata/data/{path.name}",
             })
     return {
-        "schema_version": "feds-gridmet-episode-weather/1.0",
+        "schema_version": "feds-gridmet-episode-weather/1.1",
         "kind": "retrospective_daily_environment_forcing_not_weather_forecast",
         "created_utc": datetime.now(timezone.utc).isoformat(),
         "test_cases_loaded": False,
@@ -190,7 +207,8 @@ def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path) -> dict:
             "decision_step_hours": 12,
             "horizon_hours": 48,
             "segment_weather_sample": "six-hour midpoint of each 12-hour interval mapped to the fixed MST daily label",
-            "agent_visibility": "daily records are simulator forcing only; future segment weather is not included in policy observations",
+            "pre_start_record": "the gridMET day before segment 0's daily label, same per-case cell; observation only, never simulator forcing",
+            "agent_visibility": "ADR-030: at decision k a policy observes the latest daily record (pre_start or an earlier segment) whose label is strictly earlier than segment k's label; the upcoming segment's record is simulator forcing only",
             "interpretation": "ex-post historical forcing, not a forecast available to crews at decision time",
         },
         "mapping_status": "raw_values_only_no_wind_adjustment_factor_selected",
@@ -223,7 +241,7 @@ def main(argv: list[str] | None = None) -> int:
             samples = [
                 segment["gridmet_values"][abbreviation]["value"]
                 for case in result["cases"]
-                for segment in case["segments"]
+                for segment in [case["pre_start"], *case["segments"]]
             ]
             value_ranges[abbreviation] = {"minimum": min(samples), "maximum": max(samples)}
         by_split = {
@@ -240,12 +258,12 @@ def main(argv: list[str] | None = None) -> int:
                 "distinct_cells": len({
                     (segment["nearest_gridmet_cell"]["row"], segment["nearest_gridmet_cell"]["column"])
                     for case in result["cases"] if case["split"] == split
-                    for segment in case["segments"]
+                    for segment in [case["pre_start"], *case["segments"]]
                 }),
                 "maximum_distance_km": max(
                     (segment["nearest_gridmet_cell"]["distance_km"]
                      for case in result["cases"] if case["split"] == split
-                     for segment in case["segments"]),
+                     for segment in [case["pre_start"], *case["segments"]]),
                     default=None,
                 ),
             }
@@ -275,6 +293,7 @@ def main(argv: list[str] | None = None) -> int:
             "cases": len(result["cases"]),
             "by_split": by_split,
             "segments_per_case": 4,
+            "pre_start_records_per_case": 1,
             "mapping_status": result["mapping_status"],
             "test_cases_loaded": result["test_cases_loaded"],
         }, indent=2))

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 import math
 from typing import Any
 
@@ -132,3 +132,23 @@ def episode_weather_midpoints(initial_state_time: str) -> list[dict[str, str]]:
             "gridmet_daily_label_mst": gridmet_day_for_utc(midpoint),
         })
     return segments
+
+
+def pre_start_weather_day(initial_state_time: str) -> dict[str, str]:
+    """The gridMET day before segment 0's daily label, as an observation-only record.
+
+    ADR-030: at decision 0 policies observe initial conditions, never the forcing of
+    the segment about to run. Segment 0's daily label usually covers the start, so the
+    initial condition is the previous gridMET day. Its fields mirror a segment's: the
+    interval is that MST day expressed in UTC and the midpoint is MST noon.
+    """
+    first = episode_weather_midpoints(initial_state_time)[0]
+    label = date.fromisoformat(first["gridmet_daily_label_mst"]) - timedelta(days=1)
+    begin = datetime(label.year, label.month, label.day, tzinfo=GRIDMET_MST)
+    return {
+        "segment": "pre_start",
+        "start_utc": begin.astimezone(timezone.utc).isoformat(),
+        "end_utc": (begin + timedelta(days=1)).astimezone(timezone.utc).isoformat(),
+        "midpoint_utc": (begin + timedelta(hours=12)).astimezone(timezone.utc).isoformat(),
+        "gridmet_daily_label_mst": label.isoformat(),
+    }
