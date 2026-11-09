@@ -473,3 +473,8 @@ testom je u PR #3 (commit e18a265); lokalna regeneracija iz verifikovanih arhiva
 ćelija za 119 požara, najviše 2,8 km od požara (nije commitovana; ponovno pokretanje je
 TASK-026). Ostale potvrđene greške i plan ispravki zapisani su u ADR-029 i NEXT_SESSION.
 Na korisnikov nalog PR-ovi #3–#5 su spojeni u `main` merge commitima, grane su sačuvane.
+
+2026-11-09 — Korisnik je prihvatio predložene opcije za TASK-025; zapisane su u ADR-030
+(observation bez buduće prognoze, skalirana linija i fiksni korak od 5 min, gate na IoU
+rasta, plan statistike s 10 seedova, CA prihvat po spašenoj površini uz sigurnosni uslov,
+uklanjanje duplog FEDS požara, ponovno pokretanje u tri faze uz nalog po fazi).
