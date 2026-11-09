@@ -85,6 +85,9 @@ def main(argv=None) -> int:
     if sim_params.internal_update_minutes != 5:
         parser.error("ADR-030 fixes the SimFire internal step at 5 minutes.")
     weather_observation = "upcoming_perfect_forecast" if args.perfect_forecast_ablation else "previous"
+    expected_settings = policy_settings(sim_params, weather_observation=weather_observation,
+                                        line_placement=args.line_placement,
+                                        observation_max_budget=4)
     env = VecMonitor(SubprocVecEnv([
         _make_env_factory(params, args.budgets, args.line_placement, rank, weather_observation)
         for rank in range(args.n_envs)
@@ -107,6 +110,15 @@ def main(argv=None) -> int:
             policy_kwargs={"net_arch": [64, 64]},
         )
     else:
+        # The base checkpoint must have been trained under the same settings (receipt check
+        # before unpickling, as in the benchmark); legacy checkpoints are not fine-tuned.
+        sys.path.insert(0, str(ROOT / "scripts"))
+        from benchmark_feds_policies import CheckpointReceiptError, check_checkpoint_receipt
+
+        try:
+            check_checkpoint_receipt(args.init, expected_settings, allow_legacy=False)
+        except CheckpointReceiptError as exc:
+            parser.error(str(exc))
         # The restored learning-rate schedule is kept; fine-tuning uses the base rate.
         model = MaskablePPO.load(args.init, env=env, device="cpu")
         model.set_random_seed(args.seed)
