@@ -513,3 +513,24 @@ commitovana skripta s testom; selektor odbija drugu verziju metrika i slučaj be
 tačke; testovi pokrivaju sve provjere konfiguracije i tie-break. Freeze zapis i TRAIN sažetak
 nisu mijenjani. Granica 1.10 u float aritmetici je zabilježena i ostavljena (nijedan požar
 nije na granici).
+
+2026-11-09/10 — TASK-026, faza 2 (autonomno, dopuna ADR-030). Worktree `task-026-stage-2` iz
+grane faze 1. Brojač epizoda u kojima linija spali više od no-opa dodan je u analizu šest
+minuta nakon početka treninga seeda 11, prije ijednog gotovog modela i benchmarka (f51d96d). Seed 11 je trajao 95 min umjesto očekivanih 35–40, pa je projekcija prešla
+12 h; stao sam i nastavio bez izmjena tek na korisnikovo odobrenje. Korisnik je jednom
+prekinuo trening (izgubljen jedan fine-tune u toku, ponovljen) i tražio manje opterećenje:
+benchmarci su radili s niskim prioritetom, dio procesa je pauziran i nastavljen
+(SIGSTOP/SIGCONT), a VALIDATION je išao s 4 procesa i bio pauziran 74 min. Najbolja TRAIN
+heuristika (`advancing_front`) i hashovi 40 modela su commitovani prije VALIDATION-a (c014cf1).
+Rezultat: nijedan od šest primarnih testova ne odbacuje; PPO se ne razlikuje od nasumične
+linije ni od heuristike; većina politika nauči jedan fiksan smjer (ADR-032, EXP-020). Naslov grafikona je
+ispravljen da prati status gatea. Faza 3 nije pokrenuta.
+
+2026-11-10 — Nezavisni recenzent sa suženim kontekstom pregledao je PR #18: svih šest
+primarnih testova, ostali kontrasti, izbor heuristike, brojači i hashovi se reprodukuju
+njegovim kodom, bez blokera. Popravljeno na grani: naslovi kažu „ne razlikuje se“ umjesto
+„nije bolji“; opis leave-one-out (scenarij s najvećom apsolutnom razlikom, ne najveći požar);
+kada je brojač commitovan; lock commit je tokom pokretanja bio samo lokalni; tri fine-tune
+politike nikad ne postave liniju; stvarno trajanje VALIDATION-a. Skripta za zapis o pokretanju
+sada poredi lock s početkom VALIDATION-a i veže analizu za izvještaj po vrijednosti. Analiza,
+lock i rezultati nisu mijenjani.

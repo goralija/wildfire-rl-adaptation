@@ -14,6 +14,7 @@ from scripts.analyze_budget_adaptation import (
     contrasts,
     holm_correction,
     leave_largest_out,
+    line_burns_more_than_noop,
     main,
     select_best_train_heuristic,
     sign_flip_test,
@@ -350,6 +351,58 @@ class FineTuneInferenceTests(unittest.TestCase):
         entry = contrasts(_report(rows))["by_budget"]["2"]["frozen_base_minus_noop"]
         self.assertEqual((entry["scenarios_changed"], entry["scenarios_better"],
                           entry["scenarios_worse"]), (1, 1, 0))
+
+
+def _line_row(policy, budget, scenario, cells, lines):
+    return {"policy": policy, "budget": budget, "scenario_id": scenario,
+            "added_burned_cells": cells, "added_burned_ha": cells * 3.24, "lines_applied": lines}
+
+
+class LineBurnsMoreThanNoopTests(unittest.TestCase):
+    """ADR-030 autonomy addendum: count line episodes that burn more than no-op."""
+
+    def _rows(self):
+        rows = []
+        for scenario in ("a", "b"):
+            for budget in (0, 1, 2):
+                rows.append(_line_row("noop", budget, scenario, 100, 0))
+        rows += [
+            _line_row("base-s1", 0, "a", 100, 0),   # no budget: same as no-op, not a line episode
+            _line_row("base-s1", 1, "a", 90, 1),    # line helps
+            _line_row("base-s1", 2, "a", 130, 2),   # line burns 30 cells more
+            _line_row("base-s1", 1, "b", 100, 1),   # line changes nothing
+            _line_row("base-s1", 2, "b", 100, 0),   # budget left unused: not a line episode
+            _line_row("base-s2", 2, "a", 105, 1),   # another seed, 5 cells more
+            _line_row("downwind", 2, "b", 101, 2),  # heuristic, 1 cell more
+            _line_row("random_legal", 1, "a", 70, 1),
+        ]
+        return rows
+
+    def test_counts_only_line_episodes_paired_with_noop_on_scenario_and_budget(self):
+        result = line_burns_more_than_noop({"episodes": self._rows()})
+        self.assertEqual(result["line_episodes"], 6)
+        self.assertEqual(result["line_burns_more"], 3)
+        self.assertEqual(result["line_burns_less"], 2)
+        self.assertEqual(result["line_equal_to_noop"], 1)
+        self.assertEqual(result["scenarios_with_line_burning_more"], 2)
+        self.assertAlmostEqual(result["mean_excess_ha_when_more"], (30 + 5 + 1) * 3.24 / 3)
+        self.assertAlmostEqual(result["max_excess_ha"], 30 * 3.24)
+        self.assertEqual(result["no_line_episodes_differing_from_noop"], 0)
+
+    def test_groups_ppo_seeds_into_families_by_budget(self):
+        result = line_burns_more_than_noop({"episodes": self._rows()})
+        base = result["by_family"]["base"]
+        self.assertEqual((base["2"]["line_episodes"], base["2"]["line_burns_more"]), (2, 2))
+        self.assertEqual((base["1"]["line_episodes"], base["1"]["line_burns_more"]), (2, 0))
+        self.assertEqual(result["by_family"]["downwind"]["2"]["line_burns_more"], 1)
+        self.assertEqual(result["by_family"]["random_legal"]["1"]["line_burns_more"], 0)
+        self.assertNotIn("noop", result["by_family"])
+
+    def test_episode_without_a_line_that_differs_from_noop_is_flagged(self):
+        rows = self._rows() + [_line_row("advancing_front", 2, "a", 99, 0)]
+        result = line_burns_more_than_noop({"episodes": rows})
+        self.assertEqual(result["no_line_episodes_differing_from_noop"], 1)
+        self.assertEqual(result["line_episodes"], 6)
 
 
 if __name__ == "__main__":

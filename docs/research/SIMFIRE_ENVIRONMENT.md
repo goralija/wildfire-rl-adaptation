@@ -336,6 +336,33 @@ Komande (sve iz worktree roota, uz `PYTHONPATH=src`, `SDL_VIDEODRIVER=dummy`,
 `reports/real-fire-data/`; pri ponovnoj izgradnji uporedi ga s commitanom verzijom prije
 commita.
 
+## Benchmark i studija budžeta na ispravljenim ulazima — 2026-11-10 (ADR-032)
+
+Ovo je važeći benchmark; sekcija ispod (ADR-025–027) je historija na neispravnom gridMET
+fajlu i njeni brojevi se ne citiraju.
+
+- **Postavka.** Zamrznuti zapis WAF 0.10 / ROS 1.0, 10 seedova, statistika iz ADR-030 §4.
+- **Trajanje.** Oko 3 odluke/s na 7 procesa: osnovni model od 8,064 odluke traje oko 40 min,
+  fine-tune od 3,024 oko 15 min, 10 seedova oko 14.5 h. TRAIN benchmark (98 požara × 44
+  politike × 4 budžeta) je trajao 247 min, od toga oko 160 min sa 3 umjesto 7 procesa.
+  VALIDATION benchmark je trajao oko 30 min rada na 4 procesa (104 min s pauzom od 74 min).
+- **Rezultat.** Nijedan od šest primarnih testova ne odbacuje; PPO se ne razlikuje od
+  nasumične legalne linije ni od `advancing_front`. Detalji i granice: [ADR-032](../specs/DECISION_RECORDS.md).
+- **Redoslijed.** Trening, TRAIN benchmark, commit locka s izborom heuristike, jedan VALIDATION
+  benchmark, analiza i zapis o pokretanju:
+
+```sh
+scripts/run_budget_adaptation_experiment.sh      # PARAMS, OUT, SEEDS; preskače gotove modele
+SPLIT=train OUT=.local/bench/adr030-train.json scripts/run_budget_adaptation_benchmark.sh
+SPLIT=validation OUT=.local/bench/adr030-validation.json scripts/run_budget_adaptation_benchmark.sh
+.local/simfire-venv/bin/python scripts/analyze_budget_adaptation.py .local/bench/adr030-validation.json \
+  --train-report .local/bench/adr030-train.json --out reports/real-fire-data/feds-simfire-budget-benchmark-adr030-v1.json
+python3 scripts/summarize_budget_adaptation_run.py --code-commit validation_benchmark=<commit>
+```
+
+Benchmark se ne može nastaviti od pola; procesi se mogu pauzirati sa SIGSTOP i nastaviti sa
+SIGCONT bez gubitka.
+
 ## Intervencije i prilagodba budžetu — 2026-11-04 (ADR-025–027)
 
 `FedsSimFireEnv` sada prima `sim_params`, `split` (TRAIN zadano, VALIDATION eksplicitno),
