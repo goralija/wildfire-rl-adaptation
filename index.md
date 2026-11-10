@@ -21,6 +21,7 @@ okf_version: "0.2"
 - [FPA-FOD/FEDS crosswalk i data gate](docs/research/FPA_FEDS_CROSSWALK.md) - Aktivni SimFire benchmark pravac, pokrivenost i stop-uslov.
 - [SimFire/FEDS runtime i trening](docs/research/SIMFIRE_ENVIRONMENT.md) - pinovani Python 3.9 runtime, TRAIN-only PPO putanja i no-op gate status.
 - [SimFire TRAIN growth gate](reports/real-fire-data/feds-simfire-train-growth-gate-v1.json) - 98 TRAIN požara na ispravljenim ulazima; gate PASS, zamrznut WAF 0.10 / ROS 1.0 (ADR-031); nije fizička validacija.
+- [SimFire benchmark i studija budžeta](reports/real-fire-data/feds-simfire-budget-benchmark-adr030-v1.json) - 10 seedova na zamrznutom zapisu; nijedan od šest primarnih testova ne odbacuje, PPO nije bolji od jednostavnih pravila (ADR-032); simulatorski rezultat.
 - [SimFire TRAIN no-op screen](reports/real-fire-data/feds-simfire-train-noop-screen-v1.json) - 99 TRAIN požara; rezultat nevažeći zbog gridMET greške (ADR-029), zamijenjen growth gateom.
 - [Izvještaji](reports/index.md) - Sintetički pilot, runtime dokazi, FEDS crosswalk i historijski CFSDS replay.
 - [Runtime okruženja](docker/index.md) - Pinovani legacy setup i inference bez treniranja.

@@ -1,13 +1,42 @@
 ---
 type: Project Status
-title: Trenutno stanje — 2026-11-09
+title: Trenutno stanje — 2026-11-10
 sources:
 - resource: /reports/firehose-verification/verification.json
 - resource: /docs/WORK_LOG.md
 ---
-# Trenutno stanje — 2026-11-09
+# Trenutno stanje — 2026-11-10
 
-## Najnovije — 2026-11-09: faza 1 je prošla (ADR-031)
+## Najnovije — 2026-11-10: faza 2 je završena, PPO nije bolji od jednostavnih pravila (ADR-032)
+
+Benchmark i studija budžeta u SimFire-u na zamrznutom zapisu iz faze 1, po ADR-030 §4, bez
+izmjena nakon rezultata. Grana `f/task-026-stage-2`, PR čeka korisnikov merge.
+
+- **Trening.** 10 seedova (11–20): osnovni PPO na B=2 i tri fine-tunea po seedu, ukupno 40
+  politika i 171,360 odluka na 98 TRAIN požara.
+- **Zaključano prije VALIDATION-a.** Najbolja TRAIN heuristika na B=2 je `advancing_front`
+  (−194.4 ha prema no-opu; `downwind` −187.7). Izbor i hashovi 40 modela su commitovani prije
+  jedinog VALIDATION benchmarka.
+- **Šest primarnih testova: nijedan ne odbacuje nultu hipotezu.** Osnovni PPO minus nasumična
+  legalna linija: −5.5 / +13.6 / +40.4 ha na B=1/2/4. Osnovni PPO minus `advancing_front`:
+  −14.9 / −2.1 / −36.8 ha. Svi intervali uključuju nulu; najmanji Holm p je 0.145.
+- **Fine-tuning po budžetu** ne daje mjerljiv dobitak.
+- **Prema no-opu** (samo provjera): svaka politika s linijom spali manje, 0.3–8% od prosjeka
+  no-opa (3,464 ha po požaru). `downwind` je najbolji na svakom budžetu.
+- **Linija spali više od no-opa** u 48 od 2,379 epizoda s linijom (2.0%), na 3 od 20 požara.
+- **Šta su politike naučile.** Sedam od deset osnovnih politika u svakoj epizodi kreće istim
+  smjerom, bez obzira na požar; 40 politika daje 10 različitih ponašanja.
+- **Granice.** 20 VALIDATION požara; tri od šest procjena mijenjaju predznak kad se izostavi
+  najveći požar. Rezultat važi za free-burning zapis iz ADR-031 i nije dokaz o stvarnom
+  gašenju.
+- **Dalje.** Faza 3 ne kreće bez korisnikove odluke o glavnom simulatoru i o observationu u
+  sintetičkom CA. TEST 2024 je zatvoren.
+- **Dokazi.** [ADR-032](specs/DECISION_RECORDS.md), EXP-020,
+  [analiza](../reports/real-fire-data/feds-simfire-budget-benchmark-adr030-v1.json),
+  [zapis o pokretanju](../reports/real-fire-data/feds-simfire-budget-run-record-adr030-v1.json),
+  [grafikon](../reports/real-fire-data/feds-simfire-budget-benchmark-adr030-v1.png).
+
+## 2026-11-09: faza 1 je prošla (ADR-031)
 
 Prvi gate na ispravljenim ulazima (vrijeme `7a51aadd…`, manifest `013be9a1…`), po pravilu
 iz ADR-030 §3 koje nije mijenjano nakon rezultata. Grana `f/task-026-stage-1`, PR čeka
@@ -28,9 +57,8 @@ korisnikov merge.
   prosjeku 8,976 ha više nego što je FEDS opazio do +48h, a srednja apsolutna greška
   površine je 4,120 ha (persistence 2,371 ha). PASS znači da SimFire smješta rast bolje od
   fiksne elipse; nije fizička validacija ni kalibracija simulatora.
-- **Dalje.** Faza 2 (benchmark i studija budžeta, 10 seedova) radi se na grani
-  `f/task-026-stage-2` s ovim zapisom i izvještava u vlastitom PR-u i ADR-u. Merge i faza 3
-  ostaju korisnikovi; TEST 2024 je zatvoren.
+- **Dalje.** Faza 2 je izvedena s ovim zapisom (gore, ADR-032). Merge i faza 3 ostaju
+  korisnikovi; TEST 2024 je zatvoren.
 - **Dokazi.** [ADR-031](specs/DECISION_RECORDS.md), EXP-019,
   [TRAIN gate](../reports/real-fire-data/feds-simfire-train-growth-gate-v1.json),
   [VALIDATION](../reports/real-fire-data/feds-simfire-validation-growth-gate-v1.json).

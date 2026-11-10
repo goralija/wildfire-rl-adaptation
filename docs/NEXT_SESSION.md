@@ -4,7 +4,28 @@ title: Ispravke nakon revizije PR-ova #3–#5 (ADR-029, 2026-11-09)
 ---
 # Naredni korak
 
-## Najnovije — 2026-11-09: faza 1 PASS (ADR-031); slijedi faza 2
+## Najnovije — 2026-11-10: faze 1 i 2 su gotove; čekaju se korisnikove odluke
+
+Faza 2 je izvedena po ADR-030 §4 na zamrznutom zapisu: nijedan od šest primarnih testova ne
+odbacuje nultu hipotezu, a osnovni PPO se ne razlikuje od nasumične legalne linije ni od
+najbolje TRAIN heuristike. Brojevi su u [ADR-032](specs/DECISION_RECORDS.md) i
+[STATUS](STATUS.md).
+
+1. **Korisnik:** pregled i merge PR-a faze 1 (`f/task-026-stage-1`), zatim PR-a faze 2
+   (`f/task-026-stage-2`, otvoren prema grani faze 1).
+2. **Korisnik odlučuje prije faze 3:** koji je simulator glavni za poster, i da li sintetički
+   CA smije posmatrati forcing tekućeg koraka (`src/wildfire_rl/synthetic_env.py`;
+   HANDOFF_STAGE_1_2, §8).
+3. **Pitanja koja je faza 2 otvorila** (nisu odlučena, ne mijenjaju ADR-030 §4):
+   - Većina politika nauči jedan fiksan smjer. Da li vrijedi duži trening ili drugačiji
+     observation, ili se nalaz prijavljuje kakav jeste.
+   - Nasumična legalna linija je jedna realizacija (isti seed u svakom scenariju). Prosjek
+     preko više nasumičnih seedova bio bi pošteniji komparator, ali to je nova odluka.
+   - `downwind` je na VALIDATION-u bolji od `advancing_front`, koji je izabran na TRAIN-u s
+     razlikom od 6.7 ha.
+4. Zaostali worktreeji se uklanjaju samo uz korisnikovo „da“.
+
+## 2026-11-09: faza 1 PASS (ADR-031)
 
 Gate na TRAIN-u je prošao po ADR-030 §3: zamrznut je WAF 0.10 / ROS 1.0
 (`configs/frozen/feds-simfire-growth-gate-freeze-v1.json`, sha256 `7639e3a9…`), a VALIDATION

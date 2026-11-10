@@ -39,7 +39,12 @@ reprezentativan za sve požare. FEDS/FPA veza ostaje provisionalna.
 - **Faza 1 (ADR-031, 2026-11-09).** Gate po IoU rasta je prošao na 98 TRAIN požara; zamrznut
   je WAF 0.10 / ROS 1.0 (0.0958 prema 0.0258 za elipsu), VALIDATION ocijenjen jednom (0.0983
   prema 0.0278). Oba IoU su ispod 0.10 i simulator prerasta nerastuće požare, pa PASS nije
-  fizička validacija. Slijedi faza 2; redoslijed je u [NEXT_SESSION](../docs/NEXT_SESSION.md).
+  fizička validacija.
+- **Faza 2 (ADR-032, 2026-11-10).** Benchmark s 10 seedova na tom zapisu: nijedan od šest
+  primarnih testova ne odbacuje nultu hipotezu; osnovni PPO nije bolji od nasumične legalne
+  linije ni od najbolje TRAIN heuristike, a fine-tuning po budžetu ne daje mjerljiv dobitak.
+  Većina politika nauči jedan fiksan smjer. Simulatorski rezultat, ne dokaz o gašenju. Faza 3
+  čeka korisnikovu odluku; redoslijed je u [NEXT_SESSION](../docs/NEXT_SESSION.md).
 
 ## Ranije — sintetički CA trening (ADR-028), 2026-11-05
 
