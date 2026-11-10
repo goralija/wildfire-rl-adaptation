@@ -1264,7 +1264,7 @@ record (their hashes are unchanged):
   reviewed. The autonomy addendum ties stage 2 to the gate result, not to the review; the
   stage-2 branch is brought up to date with this branch before its PR.
 
-## ADR-032 — stage 2 result: no primary test rejects; base PPO is not better than a random legal line or the best TRAIN heuristic, recorded 2026-11-10
+## ADR-032 — stage 2 result: no primary test rejects; base PPO is not distinguishable from a random legal line or the best TRAIN heuristic, recorded 2026-11-10
 
 Stage 2 of TASK-026 (ADR-030 §4), run under the autonomy addendum with the ADR-031 freeze
 record (WAF 0.10 / ROS 1.0, sha256 `7639e3a9…`). It replaces the results of ADR-025–027.
@@ -1272,10 +1272,14 @@ Nothing in ADR-030 §4 was changed after a result was seen: seeds, steps, budget
 tests and the heuristic rule are as written there.
 
 **Fixed before VALIDATION.** The analysis, including the count of line episodes that burn
-more than no-op, was committed before training (f51d96d). After the TRAIN benchmark, the
+more than no-op, was committed before any policy finished training and before any benchmark
+(f51d96d, six minutes after seed 11 started from de0e42f). After the TRAIN benchmark, the
 best TRAIN heuristic, the TRAIN report hash and the 40 checkpoint hashes were committed as a
 [lock](../../reports/real-fire-data/feds-simfire-budget-validation-lock-adr030-v1.json)
-(c014cf1). VALIDATION was benchmarked once, from that commit with a clean tree.
+(c014cf1). VALIDATION was benchmarked once, from that commit with a clean tree. The commit
+was local until the branch was pushed after the run (17:42 UTC), so its time is not attested
+by GitHub. Its content can be checked without the timestamp: the heuristic follows
+mechanically from the TRAIN report and every checkpoint file predates both benchmarks.
 
 **Training.** Seeds 11–20, as in ADR-026: a base MaskablePPO at B=2 (8,064 decisions) and
 three 3,024-decision fine-tunes per seed (B=1, B=4, matched control B=2), 40 policies and
@@ -1293,7 +1297,7 @@ At B=0 every policy equals no-op. No-op adds a mean of 3,464 ha per fire (median
 Primary family, seed-averaged deltas in ha (negative = less burned), two-level bootstrap 95%
 CI, exact two-sided sign-flip p, Holm across the six tests at α = .05:
 
-| Test | Delta (ha) | 95% CI | p | Holm p | Scenarios better / worse | Without largest scenario |
+| Test | Delta (ha) | 95% CI | p | Holm p | Scenarios better / worse | Without the scenario with the largest absolute delta |
 |---|---:|---|---:|---:|---:|---:|
 | B=1 base − random legal line | −5.5 | [−26.1, +19.1] | .514 | 1.000 | 10 / 5 | −11.6 |
 | B=1 base − `advancing_front` | −14.9 | [−37.6, +1.2] | .024 | .145 | 10 / 5 | −11.6 |
@@ -1302,10 +1306,18 @@ CI, exact two-sided sign-flip p, Holm across the six tests at α = .05:
 | B=4 base − random legal line | +40.4 | [−121.8, +242.0] | .778 | 1.000 | 9 / 6 | −39.9 |
 | B=4 base − `advancing_front` | −36.8 | [−153.4, +51.4] | .478 | 1.000 | 6 / 9 | −2.7 |
 
-**No test rejects.** Every interval includes zero, and three of the six estimates change
-sign when the single largest scenario is left out. The smallest raw p (.024, B=1 against
+**No test rejects.** Every two-level interval includes zero. Four of the six point estimates
+favour PPO and two favour the random line. The smallest raw p (.024, B=1 against
 `advancing_front`) does not survive the correction. In each test 15 of the 20 scenarios
 change.
+- *Leave-one-out.* ADR-030's "largest scenario" is implemented as the scenario with the
+  largest absolute delta in that contrast (turkey, niarada, ant or beehive here), not the
+  largest fire. Three of the six estimates change sign without it. Without the largest fire
+  (newell-road, 23,811 ha under no-op) the estimates are −6.7, −14.0, +17.5, −8.1, +55.4 and
+  −36.5 ha, in table order, and none changes sign.
+- *Seed-only interval.* The t-interval over the ten per-seed means, which ignores scenario
+  variation and is not the pre-set interval, excludes zero once: B=4 base − random legal line,
+  [+1.6, +79.1] ha, against PPO.
 
 Secondary, budget fine-tuning (same inference, no correction):
 
@@ -1326,8 +1338,10 @@ Sanity checks against no-op (not part of the family):
 | `downwind` | −45.7 | −142.6 | −280.4 |
 | random legal line | −19.3 | −115.7 | −234.3 |
 
-Any line policy burns less than no-op, by 0.3–8% of the no-op mean. Base PPO is in the same
-range as the scripted rules and is never the best: `downwind` is ahead at every budget.
+Every policy family burns less than no-op on average, by 0.3–8% of the no-op mean. Single
+policies do not always: `base-s18` and its three fine-tunes burn 7.3 ha more than no-op at
+B=1. Base PPO is in the same range as the scripted rules and is never the best: `downwind` is
+ahead at every budget.
 
 **Line episodes that burn more than no-op.** 48 of 2,379 episodes with at least one line
 (2.0%), in 3 of the 20 scenarios; mean excess 64 ha, largest 476 ha. For base PPO: 7 of 194
@@ -1337,22 +1351,26 @@ This is the known effect of `spread_aggregation="last_write"` in pinned SimFire,
 as it is.
 
 **What the trained policies do (descriptive, looked at after the result).**
-- Seven of the ten base policies open with the same sector in every VALIDATION episode
-  (sector 7 for seeds 12, 14 and 20; sector 6 for 16 and 19; 4 for 13; 3 for 18). The 40 PPO
-  policies show 10 distinct behaviours on VALIDATION and 15 on TRAIN; many fine-tunes act
-  exactly like a base policy.
+- Seven of the ten base policies open with the same action in every VALIDATION episode
+  (action 7 for seeds 12, 14 and 20; action 6 for 16 and 19; 4 for 13; 3 for 18; action k is
+  sector k−1 in the code). The 40 PPO policies show 10 distinct behaviours on VALIDATION and
+  15 on TRAIN; many fine-tunes act exactly like a base policy.
+- Three fine-tunes (`ft-b1-s11`, `ft-b2-s13`, `ft-b4-s11`) never place a line, on VALIDATION
+  or on TRAIN, and `base-s11` places none in 21 of its 60 VALIDATION episodes. They are part
+  of the fine-tuning contrasts and of the upper edge of the bands in the figure.
 - So after 8,064 decisions most seeds have learned one fixed direction, not a response to the
   fire or the weather. Seed variation here is mostly variation in which direction was picked.
 - The random legal line is a single realization: the benchmark seed restarts its stream in
-  each scenario, so it places sector 6 and then 5 almost everywhere. The contrast against it
-  compares PPO with one arbitrary fixed pair of directions, not with an average over random
-  placements.
+  each scenario and the stream continues across budgets. It therefore repeats the same
+  actions in most scenarios: action 7 in all 20 at B=1; 6 then 5 in 12 and only 6 in 8 at
+  B=2; 3, 3, 1, 1 in 8 and a single 5 in 8 at B=4. The contrast against it compares PPO with
+  one arbitrary set of directions, not with an average over random placements.
 - On TRAIN, the fires it was trained on, base PPO (−175.1 ha at B=2) is also behind
   `advancing_front` (−194.4), `downwind` (−187.7) and the random line (−205.6).
 
-**Reading.** In this simulator a line helps a little, and a policy trained for 8,064
-decisions is not distinguishable from a random legal line or from the best TRAIN heuristic
-at any budget. Budget fine-tuning adds nothing measurable. With 20 scenarios and
+**Reading.** In this simulator a line helps a little on average, and a policy trained for
+8,064 decisions is not distinguishable from a random legal line or from the best TRAIN
+heuristic at any budget. That is weaker than "PPO is not better": the intervals are wide. Budget fine-tuning adds nothing measurable. With 20 scenarios and
 scenario-level effects that one fire can reverse, differences of the order of ±100 ha at B=2
 cannot be excluded. This is a simulator result on the ADR-031 free-burning record (which
 overgrows contained fires); it is not evidence about real suppression.
@@ -1368,10 +1386,16 @@ overgrows contained fires); it is not evidence about real suppression.
   retrained; finished checkpoints were kept, as the experiment script skips them.
 - At the user's request, benchmark workers ran at low priority and some were suspended and
   resumed with SIGSTOP/SIGCONT, in the TRAIN benchmark and for 74 min in the VALIDATION
-  benchmark. Each benchmark is still one process and one report; `runtime_minutes`
-  (247 and 93) includes the pauses. VALIDATION used 4 workers instead of 7.
+  benchmark. Each benchmark is still one process and one report. The TRAIN report's
+  `runtime_minutes` is 247. VALIDATION took 104 min of wall clock, about 30 min of it
+  working; its `runtime_minutes` (93) is a monotonic clock that missed about 11 min.
+  VALIDATION used 4 workers instead of 7.
 - The figure script printed "gate FAIL, nije mjerodavno" for every record. Its title now
-  follows the record's gate status; the data in the figure did not change.
+  follows the record's gate status; the data in the figure did not change. The y-axis of the
+  figure starts near 3,180 ha, not at zero, and each band is the range of per-seed means.
+- The lock file was written by ad hoc code that calls the committed selection function; no
+  committed script writes it. The run record script checks it against the analysis, the TRAIN
+  report and the receipts.
 
 **Consequence.** Stage 2 is complete. Stage 3 (synthetic CA) does not start without the
 user's decision on the primary simulator and on the CA observation (ADR-030 §7, handoff §8).
@@ -1382,3 +1406,19 @@ Evidence: [analysis](../../reports/real-fire-data/feds-simfire-budget-benchmark-
 [lock](../../reports/real-fire-data/feds-simfire-budget-validation-lock-adr030-v1.json),
 [figure](../../reports/real-fire-data/feds-simfire-budget-benchmark-adr030-v1.png), EXP-020 in the
 [experiment log](../research/EXPERIMENT_LOG.md).
+
+**Review follow-up (2026-11-10, PR #18).** An independent reviewer with narrow context
+recomputed the six primary tests, the secondary and no-op contrasts, the heuristic choice,
+the line-burns-more counts, the behaviour counts and every hash with their own code, and
+found no blocker and no sign of a second VALIDATION run or a protocol change. Changed after
+the review, without touching the analysis, the lock or any result:
+- Wording: "not distinguishable from" in headings where the text said "not better than";
+  the leave-one-out description; when the counter was committed; that the lock commit was
+  local during the run; the random line's actions per budget; action indices instead of
+  "sectors"; the VALIDATION wall time.
+- Added: the three fine-tunes that never place a line, single policies above no-op, the
+  result without the largest fire and the seed-only interval at B=4.
+- The run record script now compares the lock with the start of the VALIDATION benchmark,
+  ties the analysis to the VALIDATION report by value, lists policies that never place a
+  line and names the figure's commit separately. The record was regenerated (schema 1.1).
+- Left as is: no test pins the bootstrap percentile level or the figure title.

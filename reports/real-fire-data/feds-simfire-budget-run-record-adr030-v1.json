@@ -111,6 +111,11 @@
             "ft-b4-s14"
           ]
         ],
+        "policies_that_never_place_a_line": [
+          "ft-b1-s11",
+          "ft-b2-s13",
+          "ft-b4-s11"
+        ],
         "ppo_policies": 40
       },
       "budget0_all_policies_equal_noop": true,
@@ -280,6 +285,11 @@
             "ft-b4-s17"
           ]
         ],
+        "policies_that_never_place_a_line": [
+          "ft-b1-s11",
+          "ft-b2-s13",
+          "ft-b4-s11"
+        ],
         "ppo_policies": 40
       },
       "budget0_all_policies_equal_noop": true,
@@ -345,14 +355,15 @@
     }
   },
   "code_commits": {
-    "analysis_and_plot": "c014cf1",
+    "analysis": "c014cf1",
+    "figure": "916eee4",
     "train_benchmark": "e82a1ee",
     "training_seed_11": "de0e42f",
     "training_seeds_12_to_20": "e82a1ee",
     "validation_benchmark": "c014cf1",
     "validation_lock": "c014cf1"
   },
-  "created_utc": "2026-11-10T17:37:17.858256+00:00",
+  "created_utc": "2026-11-10T17:57:04.769994+00:00",
   "decision": "ADR-030 section 4, stage 2 of TASK-026; result in ADR-032",
   "freeze_record_sha256": "7639e3a95e5d8cc1b0ebc09030885643fa89904039f390812624a6cd93fb100e",
   "label": "SIMULATOR BENCHMARK; NOT PHYSICAL VALIDATION OF SUPPRESSION",
@@ -378,7 +389,7 @@
     "weather_observation": "previous",
     "weather_observation_rule": "latest_daily_record_strictly_before_upcoming_segment_with_pre_start/v1"
   },
-  "schema_version": "feds-simfire-budget-run-record/1.0",
+  "schema_version": "feds-simfire-budget-run-record/1.1",
   "sim_params": {
     "active_cell_lifetime_minutes": 90,
     "fireline_attenuation": "per_minute",

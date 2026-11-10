@@ -345,9 +345,9 @@ fajlu i njeni brojevi se ne citiraju.
 - **Trajanje.** Oko 3 odluke/s na 7 procesa: osnovni model od 8,064 odluke traje oko 40 min,
   fine-tune od 3,024 oko 15 min, 10 seedova oko 14.5 h. TRAIN benchmark (98 požara × 44
   politike × 4 budžeta) je trajao 247 min, od toga oko 160 min sa 3 umjesto 7 procesa.
-  VALIDATION benchmark je trajao oko 19 min rada na 4 procesa (93 min s pauzom od 74 min).
-- **Rezultat.** Nijedan od šest primarnih testova ne odbacuje; PPO nije bolji od nasumične
-  legalne linije ni od `advancing_front`. Detalji i granice: [ADR-032](../specs/DECISION_RECORDS.md).
+  VALIDATION benchmark je trajao oko 30 min rada na 4 procesa (104 min s pauzom od 74 min).
+- **Rezultat.** Nijedan od šest primarnih testova ne odbacuje; PPO se ne razlikuje od
+  nasumične legalne linije ni od `advancing_front`. Detalji i granice: [ADR-032](../specs/DECISION_RECORDS.md).
 - **Redoslijed.** Trening, TRAIN benchmark, commit locka s izborom heuristike, jedan VALIDATION
   benchmark, analiza i zapis o pokretanju:
 

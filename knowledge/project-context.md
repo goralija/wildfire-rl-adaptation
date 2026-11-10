@@ -41,7 +41,7 @@ reprezentativan za sve požare. FEDS/FPA veza ostaje provisionalna.
   prema 0.0278). Oba IoU su ispod 0.10 i simulator prerasta nerastuće požare, pa PASS nije
   fizička validacija.
 - **Faza 2 (ADR-032, 2026-11-10).** Benchmark s 10 seedova na tom zapisu: nijedan od šest
-  primarnih testova ne odbacuje nultu hipotezu; osnovni PPO nije bolji od nasumične legalne
+  primarnih testova ne odbacuje nultu hipotezu; osnovni PPO se ne razlikuje od nasumične legalne
   linije ni od najbolje TRAIN heuristike, a fine-tuning po budžetu ne daje mjerljiv dobitak.
   Većina politika nauči jedan fiksan smjer. Simulatorski rezultat, ne dokaz o gašenju. Faza 3
   čeka korisnikovu odluku; redoslijed je u [NEXT_SESSION](../docs/NEXT_SESSION.md).
