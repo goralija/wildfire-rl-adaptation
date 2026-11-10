@@ -513,3 +513,15 @@ commitovana skripta s testom; selektor odbija drugu verziju metrika i slučaj be
 tačke; testovi pokrivaju sve provjere konfiguracije i tie-break. Freeze zapis i TRAIN sažetak
 nisu mijenjani. Granica 1.10 u float aritmetici je zabilježena i ostavljena (nijedan požar
 nije na granici).
+
+2026-11-09/10 — TASK-026, faza 2 (autonomno, dopuna ADR-030). Worktree `task-026-stage-2` iz
+grane faze 1. Prije treninga je u analizu dodan brojač epizoda u kojima linija spali više od
+no-opa (f51d96d). Seed 11 je trajao 95 min umjesto očekivanih 35–40, pa je projekcija prešla
+12 h; stao sam i nastavio bez izmjena tek na korisnikovo odobrenje. Korisnik je jednom
+prekinuo trening (izgubljen jedan fine-tune u toku, ponovljen) i tražio manje opterećenje:
+benchmarci su radili s niskim prioritetom, dio procesa je pauziran i nastavljen
+(SIGSTOP/SIGCONT), a VALIDATION je išao s 4 procesa i bio pauziran 74 min. Najbolja TRAIN
+heuristika (`advancing_front`) i hashovi 40 modela su commitovani prije VALIDATION-a (c014cf1).
+Rezultat: nijedan od šest primarnih testova ne odbacuje; PPO nije bolji od nasumične linije ni
+od heuristike; većina politika nauči jedan fiksan smjer (ADR-032, EXP-020). Naslov grafikona je
+ispravljen da prati status gatea. Faza 3 nije pokrenuta.

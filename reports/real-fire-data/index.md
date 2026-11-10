@@ -17,10 +17,13 @@
 - [TRAIN-only SimFire no-op screen](feds-simfire-train-noop-screen-v1.json) - osam WAF kandidata × 99 TRAIN slučajeva; 0/8 je prošlo persistence/elipsa gate. Nevažeće (ADR-029); zamijenjeno growth gateom ispod.
 - [TRAIN growth gate, ADR-030 §3](feds-simfire-train-growth-gate-v1.json) - 17 fiksnih kandidata × 98 TRAIN požara na ispravljenim ulazima; 8 prolazi, izabran WAF 0.10 / ROS 1.0 (IoU rasta 0.0958 prema 0.0258 za elipsu); prerastanje nerastućih požara prijavljeno po kandidatu (ADR-031).
 - [VALIDATION growth gate, jednom](feds-simfire-validation-growth-gate-v1.json) - zamrznuti zapis na 20 VALIDATION požara: IoU rasta 0.0983 prema 0.0278; nije korišten za izbor (ADR-031).
+- [Benchmark i studija budžeta, ADR-030 §4](feds-simfire-budget-benchmark-adr030-v1.json) - 10 seedova, 20 VALIDATION požara, jednom: nijedan od šest primarnih testova ne odbacuje; PPO nije bolji od nasumične linije ni od `advancing_front`; uključuje broj epizoda gdje linija spali više od no-opa (ADR-032). [Grafikon](feds-simfire-budget-benchmark-adr030-v1.png).
+- [Zapis o pokretanju faze 2](feds-simfire-budget-run-record-adr030-v1.json) - potvrde treninga za 40 politika, hashovi i sažeci TRAIN i VALIDATION benchmarka, opis ponašanja politika (ADR-032).
+- [Lock prije VALIDATION-a](feds-simfire-budget-validation-lock-adr030-v1.json) - najbolja TRAIN heuristika, hash TRAIN izvještaja i hashovi 40 modela, commitovano prije VALIDATION benchmarka (ADR-032).
 - [TRAIN no-op diagnosis](feds-simfire-train-noop-diagnosis-v1.json) - reproducirani WAF .01 run; deficit IoU dolazi iz požara koji u FEDS-u gotovo ne rastu (ADR-023).
 - [SimFire VALIDATION inputs](feds-simfire-input-validation-coverage-v1.json) - 20/20 validation scar/front + LANDFIRE pairs; preuzimanje je krenulo minutu prije freeze commita, bez skoriranja prije njega (ADR-024).
 - [VALIDATION no-op, jednom po zapisu](feds-simfire-validation-noop-v1.json) - gate freeze pada blizu persistence; free-burn stress scenarij prolazi strogo pravilo na 20 slučajeva (ADR-024).
-- [Policy benchmark i budget adaptation](feds-simfire-policy-benchmark-v1.json) - upareni heuristike/PPO na VALIDATION stress scenariju; simulatorski, ne fizički rezultat (ADR-025/026).
+- [Policy benchmark i budget adaptation](feds-simfire-policy-benchmark-v1.json) - upareni heuristike/PPO na VALIDATION stress scenariju; simulatorski, ne fizički rezultat (ADR-025/026). Nevažeće (ADR-029); zamijenjeno benchmarkom iz ADR-032.
 - [SimFire/FEDS environment](../../docs/research/SIMFIRE_ENVIRONMENT.md) - reproducibilan Python 3.9 runtime, LANDFIRE/weather setup i naredni gate.
 - [Crosswalk method and data gate](../../docs/research/FPA_FEDS_CROSSWALK.md) - metod, odluke i ograničenja.
 

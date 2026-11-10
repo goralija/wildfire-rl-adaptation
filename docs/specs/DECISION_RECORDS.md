@@ -1263,3 +1263,122 @@ record (their hashes are unchanged):
 - Stage 2 training was started from the freeze commit while this PR was being written and
   reviewed. The autonomy addendum ties stage 2 to the gate result, not to the review; the
   stage-2 branch is brought up to date with this branch before its PR.
+
+## ADR-032 — stage 2 result: no primary test rejects; base PPO is not better than a random legal line or the best TRAIN heuristic, recorded 2026-11-10
+
+Stage 2 of TASK-026 (ADR-030 §4), run under the autonomy addendum with the ADR-031 freeze
+record (WAF 0.10 / ROS 1.0, sha256 `7639e3a9…`). It replaces the results of ADR-025–027.
+Nothing in ADR-030 §4 was changed after a result was seen: seeds, steps, budgets, contrasts,
+tests and the heuristic rule are as written there.
+
+**Fixed before VALIDATION.** The analysis, including the count of line episodes that burn
+more than no-op, was committed before training (f51d96d). After the TRAIN benchmark, the
+best TRAIN heuristic, the TRAIN report hash and the 40 checkpoint hashes were committed as a
+[lock](../../reports/real-fire-data/feds-simfire-budget-validation-lock-adr030-v1.json)
+(c014cf1). VALIDATION was benchmarked once, from that commit with a clean tree.
+
+**Training.** Seeds 11–20, as in ADR-026: a base MaskablePPO at B=2 (8,064 decisions) and
+three 3,024-decision fine-tunes per seed (B=1, B=4, matched control B=2), 40 policies and
+171,360 decisions on the 98 TRAIN cases. Every checkpoint has a verified training receipt;
+no legacy checkpoint was used.
+
+**Best TRAIN heuristic.** At B=2 on TRAIN (98 fires, 17,248 episodes, no errors)
+`advancing_front` lowers added burned area by 194.4 ha against no-op and `downwind` by
+187.7 ha, so `advancing_front` is the comparator. The margin is 6.7 ha on a no-op mean of
+7,416 ha.
+
+**VALIDATION, once (20 fires × 44 policies × B ∈ {0,1,2,4} = 3,520 episodes, no errors).**
+At B=0 every policy equals no-op. No-op adds a mean of 3,464 ha per fire (median 685 ha).
+
+Primary family, seed-averaged deltas in ha (negative = less burned), two-level bootstrap 95%
+CI, exact two-sided sign-flip p, Holm across the six tests at α = .05:
+
+| Test | Delta (ha) | 95% CI | p | Holm p | Scenarios better / worse | Without largest scenario |
+|---|---:|---|---:|---:|---:|---:|
+| B=1 base − random legal line | −5.5 | [−26.1, +19.1] | .514 | 1.000 | 10 / 5 | −11.6 |
+| B=1 base − `advancing_front` | −14.9 | [−37.6, +1.2] | .024 | .145 | 10 / 5 | −11.6 |
+| B=2 base − random legal line | +13.6 | [−83.1, +128.7] | .785 | 1.000 | 9 / 6 | −27.9 |
+| B=2 base − `advancing_front` | −2.1 | [−89.5, +75.8] | .981 | 1.000 | 6 / 9 | +24.7 |
+| B=4 base − random legal line | +40.4 | [−121.8, +242.0] | .778 | 1.000 | 9 / 6 | −39.9 |
+| B=4 base − `advancing_front` | −36.8 | [−153.4, +51.4] | .478 | 1.000 | 6 / 9 | −2.7 |
+
+**No test rejects.** Every interval includes zero, and three of the six estimates change
+sign when the single largest scenario is left out. The smallest raw p (.024, B=1 against
+`advancing_front`) does not survive the correction. In each test 15 of the 20 scenarios
+change.
+
+Secondary, budget fine-tuning (same inference, no correction):
+
+| Contrast | B=1 | B=2 | B=4 |
+|---|---|---|---|
+| fine-tuned − frozen base | −5.2 [−19.8, +2.1], p .053 | +8.4 [−24.2, +63.2], p .378 (control) | +5.2 [−13.8, +30.7], p .367 |
+| fine-tuned − matched control | −8.0 [−29.4, +6.3], p .028 | — | −0.1 [−79.3, +73.5], p .992 |
+
+Fine-tuning shows no measurable gain. The B=1 estimates are a few hectares with intervals
+that include zero.
+
+Sanity checks against no-op (not part of the family):
+
+| Policy | B=1 | B=2 | B=4 |
+|---|---:|---:|---:|
+| frozen base PPO (10 seeds) | −24.8 [−47.7, −7.0] | −102.0 [−184.6, −37.2] | −193.9 [−331.2, −85.0] |
+| `advancing_front` | −9.9 | −100.0 | −157.1 |
+| `downwind` | −45.7 | −142.6 | −280.4 |
+| random legal line | −19.3 | −115.7 | −234.3 |
+
+Any line policy burns less than no-op, by 0.3–8% of the no-op mean. Base PPO is in the same
+range as the scripted rules and is never the best: `downwind` is ahead at every budget.
+
+**Line episodes that burn more than no-op.** 48 of 2,379 episodes with at least one line
+(2.0%), in 3 of the 20 scenarios; mean excess 64 ha, largest 476 ha. For base PPO: 7 of 194
+at B=1, 5 of 193 at B=2, 0 of 192 at B=4. The heuristics have such episodes too (`downwind`
+5, `advancing_front` 2, random legal line 1). No episode without a line differs from no-op.
+This is the known effect of `spread_aggregation="last_write"` in pinned SimFire, which stays
+as it is.
+
+**What the trained policies do (descriptive, looked at after the result).**
+- Seven of the ten base policies open with the same sector in every VALIDATION episode
+  (sector 7 for seeds 12, 14 and 20; sector 6 for 16 and 19; 4 for 13; 3 for 18). The 40 PPO
+  policies show 10 distinct behaviours on VALIDATION and 15 on TRAIN; many fine-tunes act
+  exactly like a base policy.
+- So after 8,064 decisions most seeds have learned one fixed direction, not a response to the
+  fire or the weather. Seed variation here is mostly variation in which direction was picked.
+- The random legal line is a single realization: the benchmark seed restarts its stream in
+  each scenario, so it places sector 6 and then 5 almost everywhere. The contrast against it
+  compares PPO with one arbitrary fixed pair of directions, not with an average over random
+  placements.
+- On TRAIN, the fires it was trained on, base PPO (−175.1 ha at B=2) is also behind
+  `advancing_front` (−194.4), `downwind` (−187.7) and the random line (−205.6).
+
+**Reading.** In this simulator a line helps a little, and a policy trained for 8,064
+decisions is not distinguishable from a random legal line or from the best TRAIN heuristic
+at any budget. Budget fine-tuning adds nothing measurable. With 20 scenarios and
+scenario-level effects that one fire can reverse, differences of the order of ±100 ha at B=2
+cannot be excluded. This is a simulator result on the ADR-031 free-burning record (which
+overgrows contained fires); it is not evidence about real suppression.
+
+**Deviations and operations.**
+- Time. The handoff expected 35–40 min per seed; the first seed took 95 min (about 3
+  decisions/s at WAF 0.10). The projection exceeded the 12 h stop rule, so the run stopped
+  after seed 11 and continued unchanged on the user's go-ahead (2026-11-09). Training took
+  870.6 min of wall clock in total.
+- Seed 11 was trained from the freeze commit (de0e42f), seeds 12–20 and the TRAIN benchmark
+  from e82a1ee; the training and benchmark code is identical between the two.
+- The user stopped the training once (2026-11-10). One fine-tune in progress was lost and
+  retrained; finished checkpoints were kept, as the experiment script skips them.
+- At the user's request, benchmark workers ran at low priority and some were suspended and
+  resumed with SIGSTOP/SIGCONT, in the TRAIN benchmark and for 74 min in the VALIDATION
+  benchmark. Each benchmark is still one process and one report; `runtime_minutes`
+  (247 and 93) includes the pauses. VALIDATION used 4 workers instead of 7.
+- The figure script printed "gate FAIL, nije mjerodavno" for every record. Its title now
+  follows the record's gate status; the data in the figure did not change.
+
+**Consequence.** Stage 2 is complete. Stage 3 (synthetic CA) does not start without the
+user's decision on the primary simulator and on the CA observation (ADR-030 §7, handoff §8).
+TEST 2024 stays closed.
+
+Evidence: [analysis](../../reports/real-fire-data/feds-simfire-budget-benchmark-adr030-v1.json),
+[run record with training receipts](../../reports/real-fire-data/feds-simfire-budget-run-record-adr030-v1.json),
+[lock](../../reports/real-fire-data/feds-simfire-budget-validation-lock-adr030-v1.json),
+[figure](../../reports/real-fire-data/feds-simfire-budget-benchmark-adr030-v1.png), EXP-020 in the
+[experiment log](../research/EXPERIMENT_LOG.md).
