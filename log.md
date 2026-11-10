@@ -9,7 +9,9 @@
   ([analiza](reports/real-fire-data/feds-simfire-budget-benchmark-adr030-v1.json),
   [ADR-032](docs/specs/DECISION_RECORDS.md)). Fine-tuning po budžetu ne daje mjerljiv dobitak.
 - Linija spali više od no-opa u 48 od 2,379 epizoda s linijom. Sedam od deset osnovnih
-  politika uvijek kreće istim smjerom.
+  politika uvijek kreće istim smjerom, a tri fine-tune politike nikad ne postave liniju.
+- Nezavisna revizija PR-a #18 nije našla blokere; dopune su u ADR-032 (preciznije
+  formulacije, rezultat bez najvećeg požara, provjere u skripti za zapis o pokretanju).
 - Izbor heuristike i hashovi modela su zaključani commitom prije VALIDATION-a
   ([lock](reports/real-fire-data/feds-simfire-budget-validation-lock-adr030-v1.json)); trening
   i oba benchmarka su sažeti u

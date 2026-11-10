@@ -19,7 +19,7 @@ lokalni prolaz, novi gridMET fajl). Faze 1 i 2 ponovnog pokretanja (TASK-026) ag
 pokrenuti sam, fazu 2 samo ako faza 1 prođe; merge i faza 3 ostaju korisnikovi (dopuna ADR-030,
 [handoff](docs/HANDOFF_STAGE_1_2.md)). Faza 1 je prošla (ADR-031: zamrznut WAF 0.10 / ROS 1.0,
 VALIDATION ocijenjen jednom; unaprijed zadano pravilo, ne fizička validacija). Faza 2 je
-završena (ADR-032: nijedan od šest primarnih testova ne odbacuje; PPO nije bolji od nasumične
+završena (ADR-032: nijedan od šest primarnih testova ne odbacuje; PPO se ne razlikuje od nasumične
 linije ni od najbolje heuristike; simulatorski rezultat). Faza 3 čeka korisnikovu odluku.
 TEST 2024 ostaje zatvoren. TASK-012/CFSDS/Cell2Fire je historijski odvojeni pravac.
 Runtime PASS nije dokaz fizičke validacije ili RL prednosti. Čuvaj ovu razliku u sažecima.

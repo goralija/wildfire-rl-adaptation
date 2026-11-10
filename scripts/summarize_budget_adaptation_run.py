@@ -14,7 +14,7 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter, defaultdict
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 import hashlib
 import json
 from pathlib import Path
@@ -100,10 +100,11 @@ def benchmark_block(report: dict, *, split: str, freeze_sha256: str, checkpoints
 
 def behaviour_block(report: dict) -> dict:
     """How many different action sequences each PPO policy uses (descriptive, post hoc)."""
-    by_policy = defaultdict(dict)
+    by_policy, lines = defaultdict(dict), defaultdict(int)
     for row in report["episodes"]:
         if PPO_NAME.fullmatch(row["policy"]) and row["budget"] > 0:
             by_policy[row["policy"]][(row["scenario_id"], row["budget"])] = tuple(row["actions"])
+            lines[row["policy"]] += row["lines_applied"]
     groups = defaultdict(list)
     for policy in sorted(by_policy):
         groups[tuple(sorted(by_policy[policy].items()))].append(policy)
@@ -124,6 +125,7 @@ def behaviour_block(report: dict) -> dict:
         "identical_behaviour_groups": sorted(names for names in groups.values() if len(names) > 1),
         "distinct_base_behaviours": len({key for key, names in groups.items()
                                          if any(family(name) == "base" for name in names)}),
+        "policies_that_never_place_a_line": sorted(name for name in by_policy if not lines[name]),
         "base_policies": base,
     }
 
@@ -159,8 +161,10 @@ def build_record(*, runs_dir: Path, train_path: Path, validation_path: Path, loc
         raise RunRecordError("The lock, the analysis and the TRAIN report name different TRAIN hashes.")
     if lock["best_heuristic_selection"]["best_heuristic"] != selection["best_heuristic"]:
         raise RunRecordError("The analysis used another best heuristic than the lock.")
-    if analysis["source_split"] != "validation" or lock["created_utc"] >= validation["created_utc"]:
-        raise RunRecordError("The lock must predate the analysed VALIDATION report.")
+    started = (datetime.fromisoformat(validation["created_utc"])
+               - timedelta(minutes=validation["runtime_minutes"]))
+    if analysis["source_split"] != "validation" or datetime.fromisoformat(lock["created_utc"]) >= started:
+        raise RunRecordError("The lock must predate the start of the analysed VALIDATION benchmark.")
     blocks = {}
     for split, report, path in (("train", train, train_path), ("validation", validation, validation_path)):
         blocks[split] = {"local_full_report": _relative(path),
@@ -168,8 +172,15 @@ def build_record(*, runs_dir: Path, train_path: Path, validation_path: Path, loc
                                            checkpoints=checkpoints),
                          "local_full_report_sha256": sha256_file(path),
                          "behaviour_descriptive_post_hoc": behaviour_block(report)}
+    # The analysis report names no input file, so tie it to this VALIDATION report by value.
+    means = blocks["validation"]["family_mean_delta_ha_vs_noop"]["base"]
+    for budget, item in analysis["contrasts"]["by_budget"].items():
+        stated = item["frozen_base_minus_noop"]["seed_averaged_mean_delta_ha"]
+        if abs(stated - means[budget]) > 1e-6:
+            raise RunRecordError("The analysis was not computed from this VALIDATION report "
+                                 "(base minus no-op at B=%s)." % budget)
     return {
-        "schema_version": "feds-simfire-budget-run-record/1.0",
+        "schema_version": "feds-simfire-budget-run-record/1.1",
         "decision": "ADR-030 section 4, stage 2 of TASK-026; result in ADR-032",
         "label": "SIMULATOR BENCHMARK; NOT PHYSICAL VALIDATION OF SUPPRESSION",
         "created_utc": datetime.now(timezone.utc).isoformat(),

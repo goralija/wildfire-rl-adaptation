@@ -472,17 +472,18 @@ Rerun of the ADR-026 study on the ADR-031 freeze record with the ADR-030 §4 sta
 - **TRAIN benchmark** (e82a1ee): 98 fires × 44 policies × B ∈ {0,1,2,4} = 17,248 episodes, no
   errors, 247 min including paused workers. Best heuristic at B=2: `advancing_front`
   (−194.4 ha against no-op; `downwind` −187.7).
-- **Lock** (c014cf1, before VALIDATION): best heuristic, TRAIN report hash, 40 checkpoint
-  hashes.
+- **Lock** (c014cf1, before VALIDATION; local until the push after the run): best heuristic,
+  TRAIN report hash, 40 checkpoint hashes.
 - **VALIDATION benchmark, once** (c014cf1, 4 workers): 20 fires, 3,520 episodes, no errors;
-  93 min including a 74-min pause. No-op adds 3,464 ha per fire on average.
+  104 min of wall clock including a 74-min pause. No-op adds 3,464 ha per fire on average.
 - **Result.** None of the six primary tests rejects after Holm; every two-level interval
   includes zero. Base PPO − random legal line: −5.5 / +13.6 / +40.4 ha at B=1/2/4; base PPO −
   `advancing_front`: −14.9 / −2.1 / −36.8 ha. Fine-tuning shows no measurable gain.
 - **Line burns more than no-op.** 48 of 2,379 line episodes (2.0%) in 3 scenarios; base PPO
   12 of 579.
 - **Behaviour (descriptive).** Seven of ten base policies open with one fixed sector in every
-  VALIDATION episode; the 40 policies show 10 distinct behaviours.
+  VALIDATION episode; the 40 policies show 10 distinct behaviours and three fine-tunes never
+  place a line.
 - **Local files** (ignored): `.local/ppo/adr030/`, `.local/bench/adr030-train.json` (sha256
   `709050e6…`), `.local/bench/adr030-validation.json` (`e8068e6b…`).
 A simulator benchmark, not evidence about real suppression.

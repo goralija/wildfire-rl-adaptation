@@ -8,7 +8,7 @@ title: Ispravke nakon revizije PR-ova #3–#5 (ADR-029, 2026-11-09)
 
 Faza 2 je izvedena po ADR-030 §4 na zamrznutom zapisu: nijedan od šest primarnih testova ne
 odbacuje nultu hipotezu, a osnovni PPO se ne razlikuje od nasumične legalne linije ni od
-najbolje TRAIN heuristike. Brojevi su u [ADR-032](specs/DECISION_RECORDS.md) i
+najbolje TRAIN heuristike (intervali su široki). Brojevi su u [ADR-032](specs/DECISION_RECORDS.md) i
 [STATUS](STATUS.md).
 
 1. **Korisnik:** pregled i merge PR-a faze 1 (`f/task-026-stage-1`), zatim PR-a faze 2

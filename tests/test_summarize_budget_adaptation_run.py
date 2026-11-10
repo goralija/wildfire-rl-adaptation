@@ -26,7 +26,8 @@ def _report(split, created="2026-11-10T12:00:00+00:00"):
     episodes = [
         {"policy": policy, "budget": budget, "scenario_id": scenario,
          "added_burned_ha": ADDED[policy][index] if budget else ADDED["noop"][index],
-         "actions": list(ACTIONS[policy]) if budget else [0, 0]}
+         "actions": list(ACTIONS[policy]) if budget else [0, 0],
+         "lines_applied": sum(action > 0 for action in ACTIONS[policy]) if budget else 0}
         for policy in ADDED for budget in BUDGETS for index, scenario in enumerate(SCENARIOS)]
     return {
         "split": split, "test_cases_loaded": False, "params_file_sha256": FREEZE_SHA,
@@ -85,9 +86,18 @@ class BehaviourBlockTests(unittest.TestCase):
         self.assertEqual(block["distinct_ppo_behaviours"], 2)
         self.assertEqual(block["identical_behaviour_groups"], [["base-s11", "base-s12"]])
         self.assertEqual(block["distinct_base_behaviours"], 1)
+        self.assertEqual(block["policies_that_never_place_a_line"], [])
         self.assertEqual(block["base_policies"]["base-s11"], {
             "distinct_action_sequences": 1, "most_common_first_action": 7,
             "share_of_episodes_with_that_first_action": 1.0})
+
+    def test_lists_policies_that_never_place_a_line(self):
+        report = _report("validation")
+        for row in report["episodes"]:
+            if row["policy"] == "ft-b1-s11":
+                row["lines_applied"] = 0
+        self.assertEqual(record.behaviour_block(report)["policies_that_never_place_a_line"],
+                         ["ft-b1-s11"])
 
     def test_budget_zero_episodes_are_ignored(self):
         report = _report("validation")
@@ -114,8 +124,13 @@ class BuildRecordTests(unittest.TestCase):
                      "checkpoint_sha256": CHECKPOINTS,
                      "train_benchmark": {"sha256": record.sha256_file(self.train)},
                      "best_heuristic_selection": {"best_heuristic": "downwind"}}
-        self.analysis = {"source_split": "validation", "best_heuristic_selection": {
-            "best_heuristic": "downwind", "source_report_sha256": record.sha256_file(self.train)}}
+        self.analysis = {
+            "source_split": "validation",
+            "best_heuristic_selection": {"best_heuristic": "downwind",
+                                         "source_report_sha256": record.sha256_file(self.train)},
+            "contrasts": {"by_budget": {
+                "0": {"frozen_base_minus_noop": {"seed_averaged_mean_delta_ha": 0.0}},
+                "2": {"frozen_base_minus_noop": {"seed_averaged_mean_delta_ha": -10.0}}}}}
 
     def _write(self, name, payload):
         path = self.root / name
@@ -155,6 +170,10 @@ class BuildRecordTests(unittest.TestCase):
             "best heuristic": {"lock": changed(self.lock, best_heuristic_selection={
                 "best_heuristic": "advancing_front"})},
             "lock after validation": {"lock": changed(self.lock, created_utc="2026-11-10T13:00:00+00:00")},
+            # the report was written at 12:00 after a 1.5-minute run
+            "lock during validation": {"lock": changed(self.lock, created_utc="2026-11-10T11:59:00+00:00")},
+            "analysis of another report": {"analysis": changed(self.analysis, contrasts={"by_budget": {
+                "2": {"frozen_base_minus_noop": {"seed_averaged_mean_delta_ha": -11.0}}}})},
             "analysis of train": {"analysis": changed(self.analysis, source_split="train")},
         }
         for name, arguments in cases.items():
@@ -196,6 +215,8 @@ class CommittedStageTwoRecordTests(unittest.TestCase):
         self.assertIs(self.lock["validation_benchmark_run"], False)
         self.assertLess(self.lock["created_utc"],
                         self.record["benchmarks"]["validation"]["created_utc"])
+        self.assertEqual(self.record["code_commits"]["validation_benchmark"],
+                         self.record["code_commits"]["validation_lock"])
         self.assertEqual(self.lock["best_heuristic_selection"]["best_heuristic"],
                          selection["best_heuristic"])
         self.assertEqual(selection["source_split"], "train")
