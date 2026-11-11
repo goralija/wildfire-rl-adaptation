@@ -1,6 +1,11 @@
 {
   "schema_version": "feds-simfire-validation-freeze-allowlist/1.0",
   "purpose": "FedsSimFireEnv(split='validation') and scripts/benchmark_feds_policies.py accept VALIDATION only under a TRAIN freeze record whose sha256 is listed here, whose frozen_params equal the run's SimFireParams and whose weather_sha256 names the gridMET file in use. TEST is always refused.",
-  "note": "Empty on purpose (TASK-023, 2026-11-09). The two existing records were selected on the defective gridMET file (ADR-029) and carry no weather_sha256. TASK-026 adds the new TRAIN freeze here in the same commit that creates it.",
-  "records": []
+  "note": "The two ADR-023/024 records were selected on the defective gridMET file (ADR-029), carry no weather_sha256 and stay out. TASK-026 stage 1 (2026-11-09) adds the ADR-030 growth-gate TRAIN freeze in the commit that creates it, before any VALIDATION scoring.",
+  "records": [
+    {
+      "file": "configs/frozen/feds-simfire-growth-gate-freeze-v1.json",
+      "sha256": "7639e3a95e5d8cc1b0ebc09030885643fa89904039f390812624a6cd93fb100e"
+    }
+  ]
 }

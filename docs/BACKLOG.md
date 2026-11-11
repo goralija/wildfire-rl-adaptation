@@ -16,7 +16,7 @@ Rezultati ADR-022–028 su nevažeći zbog gridMET greške; redoslijed i prihvat
 | TASK-023 | završeno (PR #12) | linije, observation bez prognoze, statistika §4, zaštite |
 | TASK-024 | završeno (PR #11) | CA: napredak, ćelije linije, prihvat §5, opisni real-case test |
 | TASK-025 | završeno (ADR-030) | odluke zapisane; implementacija opcija u TASK-023/024 |
-| TASK-026 | spremno: faze 1–2 autonomno ([handoff](HANDOFF_STAGE_1_2.md)), faza 3 uz nalog | faza 1 gate → faza 2 benchmark → faza 3 CA trening (ADR-030 §7) |
+| TASK-026 | faza 1 završena: gate PASS, WAF 0.10 / ROS 1.0 zamrznut, VALIDATION jednom (ADR-031, PR #17 čeka merge); faza 2 završena: nijedan od šest primarnih testova ne odbacuje, PPO se ne razlikuje od nasumične linije ni od najbolje heuristike (ADR-032, grana `f/task-026-stage-2`, PR čeka merge); faza 3 uz nalog | korisnikove odluke (glavni simulator, CA observation) → faza 3 CA trening (ADR-030 §7) |
 | TASK-027 | završeno (PR #15) | duplikat uklonjen (98 TRAIN, ADR-030 §6); FEDS `t` = prolaz u lokalnom sunčevom vremenu → UTC po dužini (dopuna ADR-030, [dokazi](research/SIMFIRE_ENVIRONMENT.md)); novi gridMET sha256 `7a51aadd…`; RNG reset riješen |
 
 

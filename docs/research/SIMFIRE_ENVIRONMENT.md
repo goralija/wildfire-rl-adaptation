@@ -224,7 +224,34 @@ Testni 5-min unutrašnji korak čuva 90-min nominalni aktivni vijek ćelije kao 
 WAF-1.0 pilot na tom koraku trajao je oko 40 s za 48h. Ovo je kandidat numeričke
 postavke, nije konačna kalibracija. Agentove odluke ostaju na 12h.
 
-## TRAIN-only no-op screen — završen, nije prošao
+## Growth gate na ispravljenim ulazima — 2026-11-09 (ADR-031)
+
+Ovo je važeći gate. Sekcije ispod o no-op screenu i mreži ADR-023/024 su historija na
+neispravnom gridMET fajlu (ADR-029) i njihovi brojevi se ne citiraju.
+
+- **Pravilo (ADR-030 §3).** IoU samo rasta na požarima koji u FEDS-u rastu (≥1.10× površine
+  za 48h), prema downwind elipsi; svi slučajevi bez greške i bez dodira s rubom mape.
+- **Rezultat.** 17 fiksnih kandidata × 98 TRAIN požara; prolazi 8. Zamrznut je WAF 0.10 /
+  ROS 1.0: IoU rasta 0.0958 prema 0.0258 za elipsu na 82 rastuća požara. VALIDATION jednom:
+  0.0983 prema 0.0278 na 18 rastućih.
+- **Granice.** Elipsa je niska letvica (oko 23 ćelije do +48h prema 1,219 opaženih), oba IoU
+  su ispod 0.10, a simulator prerasta: 1.8× na rastućim i oko 9,000 ha po požaru na 16
+  nerastućih. Nije kalibracija ni fizička validacija.
+- **Dokazi.** [TRAIN gate](../../reports/real-fire-data/feds-simfire-train-growth-gate-v1.json),
+  [VALIDATION](../../reports/real-fire-data/feds-simfire-validation-growth-gate-v1.json),
+  [freeze zapis](../../configs/frozen/feds-simfire-growth-gate-freeze-v1.json),
+  [ADR-031](../specs/DECISION_RECORDS.md).
+
+```sh
+# jedan kandidat na TRAIN-u, zatim izbor nad svih 17 punih izvještaja
+.local/simfire-venv/bin/python scripts/evaluate_feds_train_noop.py --wind-adjustment-factor W \
+  --ros-multiplier R --workers 7 --out .local/gate/adr030/waf-W-ros-R.json
+.local/simfire-venv/bin/python scripts/select_feds_growth_gate.py
+# sažetak postojećeg VALIDATION izvještaja; ne ocjenjuje ponovo
+.local/simfire-venv/bin/python scripts/summarize_feds_validation_gate.py --code-commit <commit>
+```
+
+## TRAIN-only no-op screen — završen, nije prošao (historija, nevažeće po ADR-029)
 
 Osam WAF kandidata (`0, 0.0025, 0.01, 0.025, 0.05, 0.10, 0.20, 0.605`) pokrenuto je
 na svih 99 TRAIN slučajeva, uz seed 0, 5-min SimFire korak i isti 48h horizont. Svaki
@@ -309,6 +336,33 @@ Komande (sve iz worktree roota, uz `PYTHONPATH=src`, `SDL_VIDEODRIVER=dummy`,
 `reports/real-fire-data/`; pri ponovnoj izgradnji uporedi ga s commitanom verzijom prije
 commita.
 
+## Benchmark i studija budžeta na ispravljenim ulazima — 2026-11-10 (ADR-032)
+
+Ovo je važeći benchmark; sekcija ispod (ADR-025–027) je historija na neispravnom gridMET
+fajlu i njeni brojevi se ne citiraju.
+
+- **Postavka.** Zamrznuti zapis WAF 0.10 / ROS 1.0, 10 seedova, statistika iz ADR-030 §4.
+- **Trajanje.** Oko 3 odluke/s na 7 procesa: osnovni model od 8,064 odluke traje oko 40 min,
+  fine-tune od 3,024 oko 15 min, 10 seedova oko 14.5 h. TRAIN benchmark (98 požara × 44
+  politike × 4 budžeta) je trajao 247 min, od toga oko 160 min sa 3 umjesto 7 procesa.
+  VALIDATION benchmark je trajao oko 30 min rada na 4 procesa (104 min s pauzom od 74 min).
+- **Rezultat.** Nijedan od šest primarnih testova ne odbacuje; PPO se ne razlikuje od
+  nasumične legalne linije ni od `advancing_front`. Detalji i granice: [ADR-032](../specs/DECISION_RECORDS.md).
+- **Redoslijed.** Trening, TRAIN benchmark, commit locka s izborom heuristike, jedan VALIDATION
+  benchmark, analiza i zapis o pokretanju:
+
+```sh
+scripts/run_budget_adaptation_experiment.sh      # PARAMS, OUT, SEEDS; preskače gotove modele
+SPLIT=train OUT=.local/bench/adr030-train.json scripts/run_budget_adaptation_benchmark.sh
+SPLIT=validation OUT=.local/bench/adr030-validation.json scripts/run_budget_adaptation_benchmark.sh
+.local/simfire-venv/bin/python scripts/analyze_budget_adaptation.py .local/bench/adr030-validation.json \
+  --train-report .local/bench/adr030-train.json --out reports/real-fire-data/feds-simfire-budget-benchmark-adr030-v1.json
+python3 scripts/summarize_budget_adaptation_run.py --code-commit validation_benchmark=<commit>
+```
+
+Benchmark se ne može nastaviti od pola; procesi se mogu pauzirati sa SIGSTOP i nastaviti sa
+SIGCONT bez gubitka.
+
 ## Intervencije i prilagodba budžetu — 2026-11-04 (ADR-025–027)
 
 `FedsSimFireEnv` sada prima `sim_params`, `split` (TRAIN zadano, VALIDATION eksplicitno),
@@ -362,7 +416,7 @@ Odvojeni Plateau TRAIN action smoke s budžetom 1 potrošio je tačno jednu jedi
 legalnu fireline akciju, a zatim završio preostala tri 12h koraka. To potvrđuje samo
 API/budget plumbing; ne potvrđuje učinkovitost ili realističnost linije.
 
-## Sljedeće provjere
+## Sljedeće provjere (historijski spisak iz 2026-11-03; aktuelni redoslijed je u NEXT_SESSION)
 
 1. Dijagnosticirati zašto SimFire no-op mean IoU zaostaje za obije reference; provjeriti
    gridMET proxy, vjetar, fuel/moisture mapping, FEDS rasterizaciju i zajednički grid.

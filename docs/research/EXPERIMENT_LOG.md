@@ -434,3 +434,60 @@ Input provenance only, no simulation result.
 - One TRAIN no-op smoke run (sugar-pine, WAF .05) loads the new file and completes 4
   decisions. It is a load check, not a gate.
 Receipt: [weather coverage report](../../reports/real-fire-data/feds-gridmet-weather-coverage-v1.json).
+
+## EXP-019 — TASK-026 stage 1: growth gate on TRAIN, freeze, one VALIDATION score, 2026-11-09 (ADR-031)
+First gate run on the corrected inputs. No-op runs only; no training.
+- **Inputs.** Weather sha256 `7a51aadd…`, manifest `013be9a1…`, pinned SimFire, 5-min
+  step, lifetime 90 min, seed 0, 7 workers. Hashes were checked before and after the runs.
+- **Code.** TRAIN runs from commit e988493, the VALIDATION run from de0e42f, clean tree.
+- **Runs.** 17 fixed candidates × 98 TRAIN cases, 25 s to 5.6 min per candidate, about
+  23 min in total. All 17 completed 98/98 without errors.
+- **Selection.** `scripts/select_feds_growth_gate.py` (committed with its tests before the
+  runs) applies ADR-030 §3: 8 of 17 pass; WAF 0.10 / ROS 1.0 is selected with growth IoU
+  0.0958 on the 82 growing cases against the ellipse's 0.0258, without edge contact.
+- **Known limitation.** On the 16 non-growing cases the selected setting adds a mean of
+  8,976 ha beyond observed growth by +48h.
+- **Freeze.** `configs/frozen/feds-simfire-growth-gate-freeze-v1.json`, sha256 `7639e3a9…`,
+  allowlisted in the same commit, before VALIDATION.
+- **VALIDATION, once.** 20/20 cases, 18 growing: growth IoU 0.0983 against 0.0278, no edge
+  contact. Not used for selection or for the decision to continue. The committed summary is
+  written by `scripts/summarize_feds_validation_gate.py` from the one full report.
+- **Reading.** The ellipse adds about 23 cells by +48h where growing fires gained a mean of
+  1,219, so the reference is a low bar; SimFire grows 1.8× the observed growth on those fires.
+- **Local full reports** (ignored): `.local/gate/adr030/waf-<W>-ros-<R>.json` and
+  `validation-frozen.json`; their sha256 values are in the two committed summaries.
+A simulator screening result, not a physical validation.
+Receipts: [TRAIN gate](../../reports/real-fire-data/feds-simfire-train-growth-gate-v1.json),
+[VALIDATION](../../reports/real-fire-data/feds-simfire-validation-growth-gate-v1.json).
+
+## EXP-020 — TASK-026 stage 2: SimFire benchmark and budget study, 10 seeds, 2026-11-09/10 (ADR-032)
+Rerun of the ADR-026 study on the ADR-031 freeze record with the ADR-030 §4 statistics.
+- **Inputs.** Freeze record sha256 `7639e3a9…` (WAF 0.10 / ROS 1.0), weather `7a51aadd…`,
+  manifest `013be9a1…`, pinned SimFire, 5-min step, `last_write`, front-edge lines, previous
+  12h forcing in the observation. Hashes were checked before each run.
+- **Training.** Seeds 11–20: base MaskablePPO at B=2 (8,064 decisions) and fine-tunes at
+  B=1, B=2 (control) and B=4 (3,024 each); 40 policies, 171,360 decisions, 870.6 min of wall
+  clock on 7 processes (about 40 min per base, 15 min per fine-tune). Seed 11 from commit
+  de0e42f, the rest from e82a1ee (same training code).
+- **TRAIN benchmark** (e82a1ee): 98 fires × 44 policies × B ∈ {0,1,2,4} = 17,248 episodes, no
+  errors, 247 min including paused workers. Best heuristic at B=2: `advancing_front`
+  (−194.4 ha against no-op; `downwind` −187.7).
+- **Lock** (c014cf1, before VALIDATION; local until the push after the run): best heuristic,
+  TRAIN report hash, 40 checkpoint hashes.
+- **VALIDATION benchmark, once** (c014cf1, 4 workers): 20 fires, 3,520 episodes, no errors;
+  104 min of wall clock including a 74-min pause. No-op adds 3,464 ha per fire on average.
+- **Result.** None of the six primary tests rejects after Holm; every two-level interval
+  includes zero. Base PPO − random legal line: −5.5 / +13.6 / +40.4 ha at B=1/2/4; base PPO −
+  `advancing_front`: −14.9 / −2.1 / −36.8 ha. Fine-tuning shows no measurable gain.
+- **Line burns more than no-op.** 48 of 2,379 line episodes (2.0%) in 3 scenarios; base PPO
+  12 of 579.
+- **Behaviour (descriptive).** Seven of ten base policies open with one fixed sector in every
+  VALIDATION episode; the 40 policies show 10 distinct behaviours and three fine-tunes never
+  place a line.
+- **Local files** (ignored): `.local/ppo/adr030/`, `.local/bench/adr030-train.json` (sha256
+  `709050e6…`), `.local/bench/adr030-validation.json` (`e8068e6b…`).
+A simulator benchmark, not evidence about real suppression.
+Receipts: [analysis](../../reports/real-fire-data/feds-simfire-budget-benchmark-adr030-v1.json),
+[run record](../../reports/real-fire-data/feds-simfire-budget-run-record-adr030-v1.json),
+[lock](../../reports/real-fire-data/feds-simfire-budget-validation-lock-adr030-v1.json),
+[figure](../../reports/real-fire-data/feds-simfire-budget-benchmark-adr030-v1.png).

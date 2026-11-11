@@ -296,6 +296,60 @@ def _primary_family(seed_averaged, seeds, policies, selection) -> dict:
     }
 
 
+HECTARES_PER_CELL = 180.0 * 180.0 / 10000.0  # as in benchmark_feds_policies.py
+
+
+def line_burns_more_than_noop(report: dict) -> dict:
+    """Count episodes in which a policy placed line and still burned more than no-op.
+
+    Paired with the no-op episode of the same scenario and budget; the benchmark runs
+    every policy with one environment seed, and a PPO policy's name carries its training
+    seed. With ``spread_aggregation="last_write"`` (pinned SimFire) a line can redirect
+    spread so that more burns; the count is reported as a known limitation (ADR-030
+    autonomy addendum). An episode without a line must equal no-op, so any that differs
+    is flagged separately.
+    """
+    rows = report["episodes"]
+    noop = {(row["scenario_id"], row["budget"]): row["added_burned_cells"]
+            for row in rows if row["policy"] == "noop"}
+
+    def empty():
+        return {"line_episodes": 0, "line_burns_more": 0, "line_burns_less": 0,
+                "line_equal_to_noop": 0}
+
+    total, by_family = empty(), {}
+    excess_ha, scenarios, no_line_differs = [], set(), 0
+    for row in rows:
+        key = (row["scenario_id"], row["budget"])
+        if row["policy"] == "noop" or key not in noop:
+            continue
+        delta = row["added_burned_cells"] - noop[key]
+        if not row["lines_applied"]:
+            no_line_differs += delta != 0
+            continue
+        match = re.fullmatch(r"(base|ft-b\d+)-s\d+", row["policy"])
+        family = match.group(1) if match else row["policy"]
+        outcome = ("line_burns_more" if delta > 0 else
+                   "line_burns_less" if delta < 0 else "line_equal_to_noop")
+        for counts in (total, by_family.setdefault(family, {}).setdefault(str(row["budget"]), empty())):
+            counts["line_episodes"] += 1
+            counts[outcome] += 1
+        if delta > 0:
+            excess_ha.append(delta * HECTARES_PER_CELL)
+            scenarios.add(row["scenario_id"])
+    return {
+        "description": "episodes with at least one line applied, compared with the no-op "
+                       "episode of the same scenario and budget; known limitation of "
+                       "last_write spread ordering, not a statistic of the primary family",
+        **total,
+        "scenarios_with_line_burning_more": len(scenarios),
+        "mean_excess_ha_when_more": statistics.fmean(excess_ha) if excess_ha else None,
+        "max_excess_ha": max(excess_ha) if excess_ha else None,
+        "no_line_episodes_differing_from_noop": int(no_line_differs),
+        "by_family": by_family,
+    }
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("report", type=Path)
@@ -340,6 +394,12 @@ def main(argv=None) -> int:
             "sanity_check": "every contrast against no-op",
         },
         "contrasts": contrasts(report, best_heuristic=selection),
+        # Reports without per-episode line counts (not written by the current benchmark)
+        # cannot be counted.
+        "line_burns_more_than_noop": (
+            line_burns_more_than_noop(report)
+            if all("lines_applied" in row and "added_burned_cells" in row
+                   for row in report["episodes"]) else None),
     }
     text = json.dumps(result, indent=2)
     if args.out:

@@ -1,5 +1,40 @@
 # Promjene baze znanja
 
+## 2026-11-10: TASK-026 faza 2, benchmark i studija budžeta (ADR-032)
+
+- 10 seedova, 40 PPO politika, TRAIN benchmark (98 požara) za izbor heuristike i jedan
+  VALIDATION benchmark (20 požara, 3,520 epizoda) na zamrznutom zapisu WAF 0.10 / ROS 1.0.
+- Nijedan od šest primarnih testova ne odbacuje nultu hipotezu nakon Holmove korekcije:
+  osnovni PPO se ne razlikuje od nasumične legalne linije ni od `advancing_front`
+  ([analiza](reports/real-fire-data/feds-simfire-budget-benchmark-adr030-v1.json),
+  [ADR-032](docs/specs/DECISION_RECORDS.md)). Fine-tuning po budžetu ne daje mjerljiv dobitak.
+- Linija spali više od no-opa u 48 od 2,379 epizoda s linijom. Sedam od deset osnovnih
+  politika uvijek kreće istim smjerom, a tri fine-tune politike nikad ne postave liniju.
+- Nezavisna revizija PR-a #18 nije našla blokere; dopune su u ADR-032 (preciznije
+  formulacije, rezultat bez najvećeg požara, provjere u skripti za zapis o pokretanju).
+- Izbor heuristike i hashovi modela su zaključani commitom prije VALIDATION-a
+  ([lock](reports/real-fire-data/feds-simfire-budget-validation-lock-adr030-v1.json)); trening
+  i oba benchmarka su sažeti u
+  [zapisu o pokretanju](reports/real-fire-data/feds-simfire-budget-run-record-adr030-v1.json),
+  koji piše `scripts/summarize_budget_adaptation_run.py`.
+- Simulatorski rezultat na free-burning zapisu; nije dokaz o stvarnom gašenju. Faza 3 čeka
+  korisnikovu odluku.
+
+## 2026-11-09: TASK-026 faza 1, gate PASS i zamrzavanje (ADR-031)
+
+- Gate po ADR-030 §3 na 98 TRAIN požara: 8 od 17 kandidata prolazi; zamrznut je WAF 0.10 /
+  ROS 1.0 (IoU rasta 0.0958 prema 0.0258 za elipsu na 82 rastuća požara, bez dodira s rubom).
+  [Sažetak gatea](reports/real-fire-data/feds-simfire-train-growth-gate-v1.json),
+  [freeze zapis](configs/frozen/feds-simfire-growth-gate-freeze-v1.json).
+- VALIDATION je ocijenjen jednom: 0.0983 prema 0.0278 na 18 rastućih požara
+  ([izvještaj](reports/real-fire-data/feds-simfire-validation-growth-gate-v1.json)).
+- Granica: oba IoU su ispod 0.10 i simulator prerasta nerastuće požare (oko 9,000 ha po
+  požaru na TRAIN-u). PASS nije fizička validacija ([ADR-031](docs/specs/DECISION_RECORDS.md)).
+- Pravilo izbora je u `scripts/select_feds_growth_gate.py`, commitovano s testom prije
+  pokretanja. Faza 2 se radi na grani `f/task-026-stage-2`.
+- Nezavisna revizija PR-a #17 nije našla blokere; dopune su u ADR-031 (koliko je elipsa
+  niska letvica, skripta za VALIDATION sažetak, dodatni testovi).
+
 ## 2026-11-09: TASK-027 spojen; faze 1 i 2 autonomno
 
 - PR #15 je spojen nakon nezavisne revizije. Korisnik je odobrio da agent sam pokrene fazu 1
