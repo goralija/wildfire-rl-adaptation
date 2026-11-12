@@ -491,3 +491,17 @@ Receipts: [analysis](../../reports/real-fire-data/feds-simfire-budget-benchmark-
 [run record](../../reports/real-fire-data/feds-simfire-budget-run-record-adr030-v1.json),
 [lock](../../reports/real-fire-data/feds-simfire-budget-validation-lock-adr030-v1.json),
 [figure](../../reports/real-fire-data/feds-simfire-budget-benchmark-adr030-v1.png).
+
+## EXP-021 — post-stage-2 review: TRAIN-only analyses and one line probe, 2026-11-11 (exploratory)
+Descriptive checks for the [review](review-2026-11-11/SUMMARY.md); no training, no decision, no
+VALIDATION reuse (its numbers are only quoted from ADR-032), TEST untouched.
+- **Code state.** Commit `61f0ebf`. Inputs: TRAIN benchmark `.local/bench/adr030-train.json`
+  (`709050e6…`), weather `7a51aadd…` filtered to `split == "train"`, TRAIN gate run
+  `waf-0.1-ros-1.json` (`ba7e91aa…`), manifest `013be9a1…`, freeze record `7639e3a9…`.
+- **TRAIN analyses** (no simulation): scripts and outputs in
+  [analysis/](review-2026-11-11/analysis/README.md); the independent PR #19 review reran the four
+  scripts and reproduced their outputs byte for byte.
+- **Line probe** (`analysis/probe_lines.py`): SimFire, `advancing_front`, B=4, 98 TRAIN fires,
+  seed 0, front-edge lines. 2,179 line cells placed, none burned; peak spread rate at a line cell
+  58.5 ft/min against the 980 ft/min threshold. Output was not saved to a file; numbers are in
+  [INTERVENTIONS §1.9](review-2026-11-11/INTERVENTIONS.md).

@@ -209,7 +209,7 @@ seed at the measured 3 decisions/s.
 ### (c) Low leverage of the action
 
 **Facts.**
-- One budget unit is one 7-cell line (about 1.26 km), placed 2 cells (360 m) beyond the
+- One budget unit is one 7-cell line (about 1.26 km), placed 2 cells (360 m; 509 m on a diagonal) beyond the
   leading front cell of the chosen sector (`feds_simfire_env.py:157-182`, ADR-025).
 - The initial active front has median 68 cells (p10 16, p90 206); 69% of fires have more
   than 28 front cells [new, TRAIN, gate report `initial_feds_state`].

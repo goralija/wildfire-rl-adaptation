@@ -34,15 +34,15 @@ reference na kod (`fajl:linija`) i ključeve izvještaja.
 
 | Pitanje | Kratak odgovor | Izvještaj |
 | --- | --- | --- |
-| 1. Rad arXiv 2512.06102 i srodna literatura: šta smo propustili? | Rad je o brzom GPU simulatoru (JaxWildfire); RL je samo primjer bez heuristika. U 22 pregledana rada RL pobijedi dobru heuristiku samo kad ga ona prvo nauči, i to tijesno. Uspješni radovi imaju 5–50× više epizoda i uglavnom jedan teren. Naš rezultat bez razlike je očekivan. | [LITERATURE](LITERATURE.md) |
+| 1. Rad arXiv 2512.06102 i srodna literatura: šta smo propustili? | Rad je o brzom GPU simulatoru (JaxWildfire); RL je samo primjer bez heuristika. U 22 pregledana rada RL pobijedi dobru heuristiku samo kad ga ona prvo nauči, i to tijesno. Uspješni radovi imaju 5–50× više epizoda i uglavnom jedan teren. Naš rezultat (bez dokazane razlike) je očekivan. | [LITERATURE](LITERATURE.md) |
 | 2. Da li kratke epizode (48 h) koče učenje; pomažu li duže sintetičke simulacije? | Vjerovatno ne (75–80%). Pretpostavka nije tačna: FEDS je svaki TRAIN požar pratio najmanje 108 h (medijan ~11 dana), a 48 h je naš izbor zbog gatea. Vjerovatniji uzroci: slab signal (razlike između požara ~50× veće od efekta linije), premalo treninga (72 PPO ažuriranja), mali prostor za dobitak jedne linije, i agent možda ne vidi ono što određuje najbolji smjer. | [SHORT_EPISODES](SHORT_EPISODES.md) |
-| 3. Šta se u simulacijama zapravo radi (avioni, ekipe…)? | Nema aviona, vode, retardanta, vozila ni kontrolisanog paljenja. U SimFire-u je jedini alat jedna trenutna linija ručne ekipe (~1,26 km) po odluci od 12 h, u jednom od 8 smjerova. Linija je u praksi neprobojna; vatra ide oko krajeva. Sintetički CA ima jedinice (ekipe, dozere) koje putuju i grade liniju. | [INTERVENTIONS](INTERVENTIONS.md) |
-| 4. Da li iz stvarnih požara izvodimo logiku širenja? | Djelimično tačno. Iz stvarnih požara dolaze početno stanje, gorivo, reljef i vrijeme. Logika širenja je SimFire-ov Rothermel model; iz podataka je izabran samo jedan faktor vjetra (WAF 0,10) od 17 ponuđenih. Simulacija slabo prati stvarni rast, a agent se nikad ne ocjenjuje prema stvarnom požaru. | [WHAT_IS_REAL](WHAT_IS_REAL.md) |
+| 3. Šta se u simulacijama zapravo radi (avioni, ekipe…)? | Nema aviona, vode, retardanta, vozila ni kontrolisanog paljenja. U SimFire-u je jedini alat jedna trenutna linija ručne ekipe (~1,26 km) po odluci od 12 h, u jednom od 8 smjerova. U probi na TRAIN-u (`advancing_front`, B=4) nijedna ćelija linije nije izgorjela; vatra ide oko krajeva. Sintetički CA ima jedinice (ekipe, dozere) koje putuju i grade liniju. | [INTERVENTIONS](INTERVENTIONS.md) |
+| 4. Da li iz stvarnih požara izvodimo logiku širenja? | Djelimično tačno. Iz stvarnih požara dolaze početno stanje, gorivo, reljef i vrijeme. Logika širenja je SimFire-ov Rothermel model; iz podataka je unaprijed zadanim pravilom gatea izabran samo jedan par WAF/ROS od 17 kandidata (WAF 0,10 / ROS 1,0). Simulacija slabo prati stvarni rast, a agent se nikad ne ocjenjuje prema stvarnom požaru. | [WHAT_IS_REAL](WHAT_IS_REAL.md) |
 | 5. Da li je bolje optimizovati heuristike treningom? | To je prava vrsta pristupa, ali za sada bez dokaza o dobitku. Prostor za dobitak je u izboru smjera za konkretan požar, ne u izboru heuristike. Jednostavan selektor heuristika ne pomaže na požarima izvan podešavanja. Odluku treba donijeti jednom jeftinom offline analizom. | [TUNED_HEURISTICS](TUNED_HEURISTICS.md) |
 
 ## Zajednički zaključak
 
-1. **Bez razlike je očekivan ishod**, s obzirom na literaturu, količinu treninga i to što
+1. **Rezultat bez dokazane razlike je očekivan**, s obzirom na literaturu, količinu treninga i to što
    je 98 različitih požara s po ~20 epizoda najteži zabilježeni slučaj.
 2. **Ključno otvoreno pitanje je da li se najbolja linija može predvidjeti iz onoga što
    politika vidi.** Ako ne može, ne pomažu ni duži trening, ni duže epizode, ni heuristike.
@@ -52,9 +52,11 @@ reference na kod (`fajl:linija`) i ključeve izvještaja.
    od pravila (ti brojevi su poništeni ADR-029, pa je to samo indicija).
 4. **Tačno u ideji o dužim epizodama:** rez na 48 h ne broji efekat linije poslije 48 h.
    To se jeftino rješava ako se ista simulacija pusti dalje bez odluka („rep“).
-5. **20 VALIDATION požara može otkriti samo veliku razliku:** oko 28 ha na B=1, ali
-   120–180 ha na B=2 i B=4 ([TUNED_HEURISTICS §2](TUNED_HEURISTICS.md)). Svaki novi pokušaj
-   treba imati B=1 kao glavni test.
+5. **20 VALIDATION požara može otkriti samo veliku razliku.** Iz širine intervala ADR-032:
+   oko 28 ha na B=1, ali 120–180 ha na B=2 i B=4. Iz rasipanja razlika između heuristika na
+   TRAIN-u prag je veći, 117–168 ha već na B=1; stvarni prag za podešeno pravilo je vjerovatno
+   između ([TUNED_HEURISTICS §1.5](TUNED_HEURISTICS.md)). Svaki novi pokušaj treba imati B=1
+   kao glavni test.
 
 ## Nalazi koji traže odluku
 
@@ -86,8 +88,8 @@ računati 1,5–2× duže. Zadaci su upisani u [BACKLOG](../../BACKLOG.md) kao T
 2. **TASK-029: iscrpna tablica za B=1 na TRAIN-u.** Svih 33 niza akcija po požaru; čuva
    ishod, opservaciju u svakoj odluci, dozvoljene sektore, ćelije linije i no-op otisak.
    Probni prolaz na 20 požara (~15 min) mora dati iste ishode kao TRAIN benchmark; zatim
-   svih 98 (50–75 min). Simulator je deterministički (0 konflikata u TRAIN benchmarku), pa je
-   to tačna gornja granica za B=1.
+   svih 98 (50–75 min). Simulator se ponaša deterministički (0 konflikata među nizovima
+   opaženim u TRAIN benchmarku), pa bi to bila tačna gornja granica za B=1; pilot to provjerava.
 3. **TASK-030: offline ocjena na toj tablici.** Fiksni sektor, podešeno pravilo, selektor,
    tabelarni RL i kloniranje heuristike; svaki požar se ocjenjuje izvan podešavanja (LOO po
    požaru); sa i bez naplate linije. Minute do sat CPU-a. **Nastaviti samo ako je dobitak
@@ -101,9 +103,10 @@ računati 1,5–2× duže. Zadaci su upisani u [BACKLOG](../../BACKLOG.md) kao T
 6. **TASK-033: B=2 i B=4**, novo korištenje VALIDATION-a (unaprijed registrovano, B=1
    glavni test), pa tek onda BC+PPO ili čisti RL. Sve traži ADR.
 
-Bez novog ADR-a smiju se raditi samo koraci 2 i 3 (i B=2/B=4 tablice), označeni kao
-eksploratorni, bez promjene zaključanog koda ili metrike. Korak 1 kao zvanična metrika,
-koraci 4–6 i svaka izmjena `advancing_front` traže ADR ili dopunu.
+Ne traže ADR, ali traže Harunovo „da“: TASK-028 kao eksploratorna pomoćna funkcija, TASK-029 i
+TASK-030, označeni kao eksploratorni, bez promjene zaključanog koda ili metrike. TASK-028 kao
+zvanična metrika, TASK-031–033 (uključujući B=2/B=4) i svaka izmjena `advancing_front` traže
+ADR ili dopunu.
 
 ## Granice ovog pregleda
 

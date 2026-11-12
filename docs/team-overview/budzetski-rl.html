@@ -193,7 +193,7 @@ html { scroll-behavior: smooth; }
     <p><strong>Odgovor za sada.</strong> Nema dokaza ni za jedno. U ponovljenom eksperimentu (10 nezavisnih treninga, 20 požara koje agent nije vidio tokom treninga) izmjerene razlike su male i mogle su nastati slučajno. Simulator je prije toga prošao unaprijed zadanu provjeru. Ta provjera je slaba i ne znači da simulator vjerno prati stvarne požare. Brojevi su u odjeljku <a href="#rezultati">Novi rezultati</a>.</p>
     <p><strong>Zašto ponovljeni eksperiment.</strong> Raniji rezultati su poništeni 9. 11., jer je simulator svakom požaru davao meteorološke podatke nekog drugog požara.</p>
     <p><strong>Šta je novo (11.–12. 11.).</strong> Pregled literature i dijagnoza bez novih treninga. Rezultat je očekivan, a duže epizode vjerovatno nisu rješenje. Prvo treba izmjeriti koliko je bolje uopšte moguće. Detalji su u odjeljku <a href="#pregled">Pregled nakon faze 2</a>.</p>
-    <p><strong>Šta čeka.</strong> Novi rezultati i pregled još nisu prihvaćeni u glavnu verziju koda (PR #17, #18, #19); to odlučuje Harun. Trening na drugom, sintetičkom simulatoru (faza 3) nije pokrenut. Kako preuzeti rad: <a href="#nastavak">Kako nastaviti rad</a>.</p>
+    <p><strong>Šta čeka.</strong> Faze 1 i 2 su prihvaćene u glavnu verziju koda (PR #17, #18). Pregled nakon faze 2 (PR #19) čeka Harunov merge. Trening na drugom, sintetičkom simulatoru (faza 3) nije pokrenut. Kako preuzeti rad: <a href="#nastavak">Kako nastaviti rad</a>.</p>
   </div>
 </header>
 
@@ -303,7 +303,7 @@ html { scroll-behavior: smooth; }
 </table></div>
 <ul class="tight">
   <li><strong>Šta linija jeste.</strong> Jedna budžetska jedinica je jedna smjena ekipe od 20 ljudi. Okruženje, a ne politika, postavlja ćelije: 7 u ravnom smjeru (1,26 km), 9 u dijagonalnom (1,27 km), okomito na sektor, 360 m ispred vodeće ćelije fronta. Linija se pojavi odmah i samo na negorućim ćelijama; najviše jedna po odluci. Neiskorišten budžet ne vrijedi ništa.</li>
-  <li><strong>Linija u praksi ne propušta.</strong> Vatra je prelazi tek pri brzini širenja iznad oko 18 km/h. U probnom pokretanju na 98 TRAIN požara (<span class="mono">advancing_front</span>, B=4) od 2.179 ćelija linije nijedna nije izgorjela. Vatra prolazi oko krajeva.</li>
+  <li><strong>Linija u provjeri nije propustila.</strong> Vatra je prelazi tek pri brzini širenja iznad oko 18 km/h. U probnom pokretanju na 98 TRAIN požara (<span class="mono">advancing_front</span>, B=4) od 2.179 ćelija linije nijedna nije izgorjela. Vatra prolazi oko krajeva.</li>
   <li><strong>Kad željeni sektor nije dozvoljen</strong>, obje heuristike ne rade ništa umjesto da probaju sljedeći najbolji. Efekat je mali, oko 10 od 1.000 odluka.</li>
   <li><strong>Šteta se ovako računa:</strong> ćelija linije nikad ne izgori, pa se ne broji kao šteta ni kad bi je vatra bez linije spalila. Jedna linija tako dobije do oko 26 ha zasluge za svoju površinu. U sintetičkom CA-u se ta ćelija naplaćuje. Odluka kako računati u SimFire-u je otvorena.</li>
   <li><strong>Sintetički CA</strong> jedini ima jedinice na terenu: 2–4 ekipe od 20 ljudi (3 km/h) ili dozera (2,5 km/h). Stižu u prva 3 h, putuju do vatre, grade liniju ćeliju po ćeliju brzinama iz priručnika NWCG i povlače se kad im se vatra približi na dvije ćelije. Ni tu nema aviona.</li>
@@ -357,7 +357,7 @@ html { scroll-behavior: smooth; }
 </figure>
 <p>Uzorak nije reprezentativan. Uključuje samo velike požare u zapadnim državama SAD-a, jer samo oni imaju dovoljno satelitskih obrisa svakih 12 sati. Konačna površina požara koristi se samo za izbor požara koji ulaze u okvir. Ne ulazi u spajanje, opservaciju ni nagradu.</p>
 <div class="callout">
-  <p><strong>Šta je stvarno, a šta simulirano.</strong> Iz stvarnih požara dolaze početna izgorjela površina i aktivni front, gorivo, reljef i dnevni vjetar i vlaga (jedna vrijednost za cijelu mapu od 46 km). Logika širenja ne dolazi iz stvarnih požara: to su standardne Rothermelove jednačine u SimFire-u. Iz podataka je izabran samo faktor vjetra, i to najjači od 17 ponuđenih pri kojem nijedan požar ne dodirne rub mape.</p>
+  <p><strong>Šta je stvarno, a šta simulirano.</strong> Iz stvarnih požara dolaze početna izgorjela površina i aktivni front, gorivo, reljef i dnevni vjetar i vlaga (jedna vrijednost za cijelu mapu od 46 km). Logika širenja ne dolazi iz stvarnih požara: to su standardne Rothermelove jednačine u SimFire-u. Iz podataka je unaprijed zadanim pravilom izabran samo jedan par postavki (faktor vjetra i množilac brzine) od 17 kandidata: WAF 0,10 / ROS 1,0. To je ujedno najjači vjetar pri kojem nijedan požar ne dodirne rub mape.</p>
   <p>Zato agent ne uči da gasi stvarni požar, nego da smanji izgorjelu površinu u SimFire simulaciji koja kreće iz stvarnog početnog stanja. Stvarni obodi poslije starta služe samo da se ocijeni simulator, i on ih slabo prati: preklapanje novog rasta je oko 10%, a na požarima koji su u stvarnosti stali simulator nastavlja goriti.</p>
 </div>
 </section>
@@ -554,13 +554,13 @@ html { scroll-behavior: smooth; }
     </div>
   </div></li>
   <li><div>
-    <div class="tl-head"><h3>Faza 1: gate na ispravljenim podacima</h3><span class="tl-date">9. 11.</span><span class="chip ok">PASS</span><span class="chip warn">PR #17 čeka merge</span></div>
+    <div class="tl-head"><h3>Faza 1: gate na ispravljenim podacima</h3><span class="tl-date">9. 11.</span><span class="chip ok">PASS</span><span class="chip ok">PR #17 spojen</span></div>
     <div class="tl-body">
       <p>Pravilo izbora je commitovano s testovima prije ijednog pokretanja. Svih 17 unaprijed zadanih postavki simulatora završilo je 98 TRAIN požara bez grešaka, a prošlo ih je 8. Zamrznut je WAF 0,10 / ROS 1,0, pa je VALIDATION ocijenjen jednom (ADR-031). Nezavisni recenzent je ponovio sve brojeve i tražio da se jasnije napiše koliko je elipsa niska letvica.</p>
     </div>
   </div></li>
   <li><div>
-    <div class="tl-head"><h3>Faza 2: benchmark i studija budžeta</h3><span class="tl-date">9.–10. 11.</span><span class="chip ok">izvedeno</span><span class="chip warn">PR #18 čeka merge</span></div>
+    <div class="tl-head"><h3>Faza 2: benchmark i studija budžeta</h3><span class="tl-date">9.–10. 11.</span><span class="chip ok">izvedeno</span><span class="chip ok">PR #18 spojen</span></div>
     <div class="tl-body">
       <p>Trening 10 seedova trajao je 14,5 h, više nego dvostruko duže od procjene, pa je coding agent stao i nastavio tek na Harunovo odobrenje. Heuristika izabrana na TRAIN-u i otisci svih 40 modela zapisani su prije jedinog VALIDATION benchmarka, da se poslije ne mogu mijenjati. Rezultat: ni u jednom od šest glavnih poređenja nije pokazana razlika (ADR-032).</p>
     </div>
@@ -719,7 +719,7 @@ html { scroll-behavior: smooth; }
 
 <section id="rezultati">
 <h2>Novi rezultati (faze 1 i 2)</h2>
-<p>Obje faze su izvedene 9. i 10. 11. na ispravljenim podacima, po pravilima iz ADR-030. Nijedno pravilo nije mijenjano nakon što je viđen rezultat. Svaku fazu je pregledao nezavisni recenzent koji je svojim kodom ponovio sve brojeve. Rezultati su u pull requestima #17 i #18, koji još nisu spojeni.</p>
+<p>Obje faze su izvedene 9. i 10. 11. na ispravljenim podacima, po pravilima iz ADR-030. Nijedno pravilo nije mijenjano nakon što je viđen rezultat. Svaku fazu je pregledao nezavisni recenzent koji je svojim kodom ponovio sve brojeve. Rezultati su u pull requestima #17 i #18, spojenim u glavnu verziju koda 10. i 11. 11.</p>
 
 <h3>Faza 1: gate simulatora (ADR-031)</h3>
 <div class="tablewrap"><table>
@@ -1252,7 +1252,7 @@ html { scroll-behavior: smooth; }
 <ul class="tight">
   <li><strong>Ključno pitanje</strong> je da li se najbolja linija može predvidjeti iz opservacije. Ako ne može, ne pomažu ni duži trening, ni duže epizode, ni heuristike.</li>
   <li><strong>Prvi korak, samo TRAIN:</strong> za B=1 isprobati svih 33 niza akcija na svakom od 98 požara (oko 1,5 h na 4 procesa). Simulator je deterministički, pa je to tačna gornja granica. Zatim offline provjeriti da li pravilo, selektor ili jednostavan RL taj dobitak dostižu na požarima na kojima nisu podešavani. Nastaviti samo ako je dobitak bar 30 ha i 25% jaza; inače je i to rezultat.</li>
-  <li><strong>Šta 20 VALIDATION požara može otkriti:</strong> oko 28 ha razlike na B=1, ali 120–180 ha na B=2 i B=4. Zato bi B=1 bio glavni test svakog novog pokušaja.</li>
+  <li><strong>Šta 20 VALIDATION požara može otkriti:</strong> prema širini intervala iz faze 2 oko 28 ha razlike na B=1, ali 120–180 ha na B=2 i B=4; prema rasipanju razlika na TRAIN-u prag je veći, 117–168 ha već na B=1. Zato bi B=1 bio glavni test svakog novog pokušaja.</li>
   <li><strong>Odluke koje čekaju:</strong> kako računati ćelije linije u šteti; da li pokrenuti prvi korak; koji je simulator glavni za poster; faza 3.</li>
 </ul>
 </section>
@@ -1270,8 +1270,8 @@ html { scroll-behavior: smooth; }
     <tr><td>Sintetički CA trening i prihvatanje (ADR-028)</td><td><span class="chip bad">poništeno</span></td><td>Ne koristi gridMET, ali ima greške u napretku gradnje i u obračunu spašenih ćelija.</td></tr>
     <tr><td>Test CA politike na 119 stvarnih požara (TRAIN i VALIDATION, ne TEST 2024)</td><td><span class="chip bad">poništeno</span></td><td>116/119 slučajeva imalo je tuđe meteorološke podatke, uz greške CA-a.</td></tr>
     <tr><td>Ispravljeni kod i pravila iz ADR-030</td><td><span class="chip ok">na snazi</span></td><td>Faze 1 i 2 su izvedene po ovim pravilima.</td></tr>
-    <tr><td>Novi gate i zamrznuta postavka (ADR-031)</td><td><span class="chip ok">važi</span> <span class="chip warn">čeka merge</span></td><td>PASS po unaprijed zadanom pravilu, WAF 0,10 / ROS 1,0. Niska letvica; nije kalibracija ni fizička validacija.</td></tr>
-    <tr><td>Novi benchmark i studija budžeta (ADR-032)</td><td><span class="chip ok">važi</span> <span class="chip warn">čeka merge</span></td><td>Ni u jednom od šest glavnih poređenja nije pokazana razlika. Simulatorski rezultat na 20 VALIDATION požara.</td></tr>
+    <tr><td>Novi gate i zamrznuta postavka (ADR-031)</td><td><span class="chip ok">važi</span></td><td>PASS po unaprijed zadanom pravilu, WAF 0,10 / ROS 1,0. Niska letvica; nije kalibracija ni fizička validacija.</td></tr>
+    <tr><td>Novi benchmark i studija budžeta (ADR-032)</td><td><span class="chip ok">važi</span></td><td>Ni u jednom od šest glavnih poređenja nije pokazana razlika. Simulatorski rezultat na 20 VALIDATION požara.</td></tr>
   </tbody>
 </table></div>
 <p>Poništeni rezultati se ne brišu. Ostaju u repozitoriju kao historija s oznakom da se ne citiraju. Sugerisali su da je signal budžeta slab: većina simuliranih požara se smirivala u prvih 12 h, a dozvoljena je samo jedna linija po odluci. Ponovno pokretanje se slaže s tim u jednom: fine-tuning po budžetu opet ne daje mjerljiv dobitak. Zašto je taj signal slab, novi rezultati ne objašnjavaju.</p>
@@ -1280,7 +1280,7 @@ html { scroll-behavior: smooth; }
 <section id="dalje">
 <h2>Šta slijedi</h2>
 <div class="callout"><p><strong>Najnovije (12. 11.).</strong> Predloženi redoslijed je iz <a href="#pregled">pregleda nakon faze 2</a>: naplata linije u ocjeni (TASK-028), iscrpna B=1 tablica na TRAIN-u (TASK-029) i offline ocjena pravila, selektora i jednostavnog RL-a (TASK-030). Sve čeka Harunovo „da“. Planer, B=2 i B=4, novo korištenje VALIDATION-a i novi trening traže novu odluku (ADR) prije pokretanja.</p></div>
-<p>Poslije pripreme, ponovno pokretanje ide u tri faze. Pripremu i faze 1 i 2 izveo je coding agent, po nalogu koji je Harun dao 9. 11. Da li se pull requestovi #17 i #18 prihvataju u glavnu verziju koda odlučuje Harun. Faza 3 se pokreće tek kad se odluči koji je simulator glavni za poster, kojim se projekat predaje na predmetu. I to pokretanje odobrava Harun.</p>
+<p>Poslije pripreme, ponovno pokretanje ide u tri faze. Pripremu i faze 1 i 2 izveo je coding agent, po nalogu koji je Harun dao 9. 11. Pull requestove #17 i #18 Harun je spojio 10. i 11. 11. Faza 3 se pokreće tek kad se odluči koji je simulator glavni za poster, kojim se projekat predaje na predmetu. I to pokretanje odobrava Harun.</p>
 <ul class="tight">
   <li><strong>Priprema:</strong> <span class="chip ok">urađeno</span> Vremenska oznaka u FEDS-u je provjerena (nije UTC) i duplikat je uklonjen. Novi meteorološki fajl je napravljen, a okruženje odbija stari.</li>
   <li><strong>Faza 1, bez treninga:</strong> <span class="chip ok">urađeno</span> Gate na TRAIN skupu je prošao, postavka je zamrznuta, a VALIDATION je ocijenjen jednom (PR #17).</li>
@@ -1303,7 +1303,7 @@ html { scroll-behavior: smooth; }
 <h2>Kako nastaviti rad</h2>
 <p>Ovaj pregled je sažetak za čitanje. Kanonski izvor je repozitorij <span class="mono">goralija/wildfire-rl-adaptation</span>; kad se razilaze, važi repozitorij. Ko preuzima posao, čovjek ili AI agent, ne treba ništa iz ranijih razgovora.</p>
 <ol class="stages">
-  <li><strong>Stanje koda.</strong> Grana <span class="mono">main</span> još nema faze 1 i 2. Tri pull requesta čekaju merge, ovim redom: #17 (faza 1), #18 (faza 2), #19 (pregled i novi HANDOFF). Dok nisu spojeni, radi se iz grane <span class="mono">docs/research-review</span>.</li>
+  <li><strong>Stanje koda.</strong> Faze 1 i 2 su u grani <span class="mono">main</span> (PR #17 i #18). Otvoren je još PR #19 (pregled nakon faze 2 i novi HANDOFF); dok nije spojen, najnovija dokumentacija je u grani <span class="mono">docs/research-review</span>. Prije rada: <span class="mono">git fetch origin</span>, nove grane iz <span class="mono">origin/main</span>.</li>
   <li><strong>Prvo pročitati <span class="mono">HANDOFF.md</span></strong> u korijenu repozitorija. On navodi šta čitati i kojim redom: <span class="mono">AGENTS.md</span> (pravila), <span class="mono">docs/STATUS.md</span>, <span class="mono">docs/NEXT_SESSION.md</span>, <span class="mono">docs/research/review-2026-11-11/SUMMARY.md</span> i odluke ADR-029 do ADR-032.</li>
   <li><strong>Sljedeći zadaci</strong> su u <span class="mono">docs/BACKLOG.md</span> (TASK-028 do TASK-033), s procjenom trajanja i oznakom šta traži novu odluku.</li>
   <li><strong>Okruženje.</strong> SimFire okruženje (Python 3.9) i ulazni podaci se obnavljaju iz javnih izvora po <span class="mono">docs/research/SIMFIRE_ENVIRONMENT.md</span>. Teški fajlovi (podaci, modeli) nisu u gitu. Za poređenje s fazama 1 i 2 treba Harunova kopija vremenskog fajla, jer novo generisanje daje novi otisak.</li>
@@ -1459,7 +1459,7 @@ html { scroll-behavior: smooth; }
 </section>
 
 <footer>
-  <p>Izvori: repozitorij <span class="mono">goralija/wildfire-rl-adaptation</span>, posebno <span class="mono">docs/specs/DECISION_RECORDS.md</span> (ADR-001 do ADR-032 s dopunama), <span class="mono">docs/STATUS.md</span>, <span class="mono">docs/NEXT_SESSION.md</span> i istraživački dokumenti u <span class="mono">docs/research/</span>. Stanje 10. 11. 2026.: grana <span class="mono">main</span> na commitu <span class="mono">7be6b56</span> (nakon PR #16), faza 1 na grani <span class="mono">f/task-026-stage-1</span> (<span class="mono">1fb0cda</span>, PR #17), faza 2 na grani <span class="mono">f/task-026-stage-2</span> (<span class="mono">61f0ebf</span>, PR #18), pregled nakon faze 2 na grani <span class="mono">docs/research-review</span> (PR #19, <span class="mono">docs/research/review-2026-11-11/</span>). Sva tri PR-a su otvorena i nisu spojena. Stanje 12. 11. 2026.</p>
+  <p>Izvori: repozitorij <span class="mono">goralija/wildfire-rl-adaptation</span>, posebno <span class="mono">docs/specs/DECISION_RECORDS.md</span> (ADR-001 do ADR-032 s dopunama), <span class="mono">docs/STATUS.md</span>, <span class="mono">docs/NEXT_SESSION.md</span> i istraživački dokumenti u <span class="mono">docs/research/</span>. Stanje 12. 11. 2026.: grana <span class="mono">main</span> na commitu <span class="mono">a1c3dfc</span> sadrži faze 1 i 2 (PR #17, #18). Pregled nakon faze 2 je u grani <span class="mono">docs/research-review</span> (PR #19, <span class="mono">docs/research/review-2026-11-11/</span>), otvoren. Kopija ove stranice je u <span class="mono">docs/team-overview/</span>.</p>
 </footer>
 </main>
 </div>

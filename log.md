@@ -11,6 +11,8 @@
   redoslijed čitanja, odluke, pravila, okruženje); STATUS, NEXT_SESSION, BACKLOG, kontekst i
   agent ulazi upućuju na njega. Napomene o zastarjelim opisima dodane su u
   `SIMFIRE_ENVIRONMENT.md` i `SYNTHETIC_CA_ENV.md`.
+- EXP-021 bilježi TRAIN-only analize i probni run. Nezavisna revizija PR-a #19 je našla da su
+  PR #17 i #18 već bili spojeni; HANDOFF, STATUS i NEXT_SESSION su ispravljeni, PR #19 cilja `main`.
 
 ## 2026-11-10: TASK-026 faza 2, benchmark i studija budžeta (ADR-032)
 

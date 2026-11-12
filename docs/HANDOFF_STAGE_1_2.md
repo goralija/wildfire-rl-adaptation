@@ -9,6 +9,10 @@ sources:
 ---
 # Handoff: autonomne faze 1 i 2 (stanje 2026-11-09, `main` nakon PR #15)
 
+> **Stanje 2026-11-12:** faze 1 i 2 su završene i spojene (ADR-031, ADR-032). Dozvola iz §2 je
+> iskorištena: ne pokretati ponovo faze 1 i 2 i ne ocjenjivati ponovo VALIDATION. §4–§6 služe
+> samo kao referenca komandi. Ulaz za nastavak je [HANDOFF](../HANDOFF.md).
+
 Ovaj tekst je prompt za sljedećeg agenta. Zalijepi ga cijelog na početak nove sesije.
 
 ---

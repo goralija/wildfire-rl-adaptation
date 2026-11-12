@@ -41,7 +41,7 @@ Code checked at worktree `task-026-stage-2` (HEAD 61f0ebf). SimFire 2.0.1 checke
   - 8 of 17 passed (`reports/real-fire-data/feds-simfire-train-growth-gate-v1.json` `passing_candidates`).
   - The selected candidate was **WAF 0.10, ROS 1.0** (`configs/frozen/feds-simfire-growth-gate-freeze-v1.json` `frozen_params`). Because ROS = 1.0, Rothermel runs unscaled, so **the only tuned value in use is the WAF**.
   - The other settings were fixed by hand, not fitted: 5-minute step (ADR-030 §2, `DECISION_RECORDS.md:956-959`), 90-minute lifetime (`configs/simfire_feds_base.yml:68-70`), and the project's per-minute fireline correction (`feds_simfire_setup.py:458-488`).
-  - WAF 0.10 was not the best fit. Growth IoU keeps rising with WAF up to .20 at ROS 1.0. **.10 was chosen because it is the highest value that keeps every fire off the map edge** (`DECISION_RECORDS.md:1225-1226`).
+  - WAF 0.10 was not the best fit. Growth IoU keeps rising with WAF up to .20 at ROS 1.0. **.10 was selected by the pre-set rule (highest growth IoU among passing candidates); it is also the highest WAF at ROS 1.0 without map-edge contact** (`DECISION_RECORDS.md:1225-1226`).
   - Among the 8 passing candidates, WAF 0.10 has the **largest** area error: 4,119.5 ha, against 2,343–2,726 ha for the others (gate report `candidates[].mean_absolute_area_error_ha`).
   - The no-wind candidate (WAF 0) also passes (`DECISION_RECORDS.md:1224-1225`).
 

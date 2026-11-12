@@ -92,7 +92,7 @@ The stage-2 setup is the ADR-031 freeze record
 
 **Physical meaning (ADR-025) [doc].**
 - One budget unit is one 20-person hand-crew shift building one straight fireline segment.
-  This is stated in `feds_simfire_env.py:52` (`LINE_LENGTH_M = 1260.0`) and ADR-025.
+  This is stated in `feds_simfire_env.py:53` (`LINE_LENGTH_M = 1260.0`) and ADR-025.
 - ADR-025 cites NWCG production of about 2–15 chains/h, or 0.3–2.4 km per 8h shift, and places
   1.26 km inside that range.
 - It is a modelling convention, "not a field-validated line-construction model"
@@ -186,7 +186,8 @@ The stage-2 setup is the ADR-031 freeze record
   alone. That is up to about 117 ha at B=4.
 - **Comparison with ADR-032.** Base PPO minus random line is −5.5 ha at B=1, and the random
   line's own delta against no-op is −19.3, −115.7 and −234.3 ha at B=1, 2 and 4. ADR-032 does
-  not separate how much of these deltas is footprint credit [inferred; not computed].
+  not separate how much of these deltas is footprint credit [inferred]. An upper bound is
+  computed in [TUNED_HEURISTICS §1.7](TUNED_HEURISTICS.md) (about 26 ha per line, 21–26% of heuristic gains).
 
 ### 1.4 What the action mask forbids [code]
 
@@ -340,7 +341,8 @@ Common to all: one integer action per 12h decision, taken from `(observation, ma
     later decisions were no-ops although budget remained.
     - The cause is either a dead fire, where every line is masked, or a preferred sector that
       was illegal, since `_first_legal` has no fallback.
-    - I did not separate the two causes.
+    - I did not separate the two causes; [TUNED_HEURISTICS §1.6](TUNED_HEURISTICS.md) later
+      estimates the missing fallback at no more than about 10 of about 1,000 decisions.
   - 2,179 line cells were placed and 2,179 were still unburned at the end.
   - The peak rate at a line cell was 58.5 ft/min, about 17× below the threshold. The peak rate
     anywhere was 207 ft/min.
@@ -499,7 +501,7 @@ burned cells, water, rock or agricultural land (`:372-374`).
   - `env.spec_now.weather.at(env.decision)` (`synthetic_heuristics.py:47-57,142`).
 - The agent sees the same weather. Spatially, however, it sees the map only 2×2-pooled,
   plus 15×15 crops around each unit.
-- The module docstring (`synthetic_heuristics.py:1-5`) and `SYNTHETIC_CA_ENV.md:164-166` say
+- The module docstring (`synthetic_heuristics.py:1-5`) and (before 2026-11-12) `SYNTHETIC_CA_ENV.md:164-166` say
   the heuristics "read only what the agent's observation also encodes". That holds for the
   *kind* of information but **not for its resolution**.
 - Neither side sees the no-op rollout or later weather.
@@ -661,8 +663,8 @@ ever-burned flag and priority-cell flag, plus budget and time.
    mention that line cells count as saved (§1.3).
 5. **Synthetic heuristics' information claim.** `synthetic_heuristics.py:1-5` and
    `SYNTHETIC_CA_ENV.md:164-166` say the heuristics see only what the agent sees. They read
-   full-resolution state (§2.6).
+   full-resolution state (§2.6). *Status 2026-11-12: the doc is corrected; the docstring is not.*
 6. **`SYNTHETIC_CA_ENV.md:27`, real-case count.** It says 119 FEDS cases; the count is now 118
-   (ADR-030 TASK-027 addendum).
+   (ADR-030 TASK-027 addendum). *Status 2026-11-12: corrected in the doc.*
 7. **Head-rate calibration error.** `SYNTHETIC_CA_ENV.md:61` says "at most 12%";
    `synthetic_ca.py:42` says "within about 20%".
