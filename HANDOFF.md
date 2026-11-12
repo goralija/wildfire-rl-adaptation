@@ -103,7 +103,8 @@ Provjera: `gh pr list --state all --limit 5`. Dok nisu spojeni, radi iz najnovij
 Pregled za čitaoca koji ne zna projekat, s dijagramima i grafikonima:
 https://claude.ai/artifact/EFi7EXKkvehgTt1GYtoi5Q. Privatan je; Harun ga dijeli kroz meni
 Share. Prati stanje repozitorija; kad se razilaze, važi repozitorij. Ko ga ažurira prvo ga
-pročita preko linka, pa objavi na isti link.
+pročita preko linka, pa objavi na isti link. Kopija HTML-a je u
+[docs/team-overview](docs/team-overview/README.md), za otvaranje bez pristupa linku.
 
 ## Historija
 
