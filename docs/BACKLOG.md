@@ -4,6 +4,20 @@ title: Naredni zadaci
 ---
 # Naredni zadaci
 
+## Aktivni prioritet — 2026-11-12 (pregled nakon faze 2)
+
+Plan i razlozi: [pregled 2026-11-11](research/review-2026-11-11/SUMMARY.md). Sve stavke čekaju
+Harunovo „da“; ništa nije pokrenuto.
+
+| ID | Stanje | Sljedeće |
+| --- | --- | --- |
+| TASK-028 | predloženo | ocjena s naplatom linije (ćelija linije koju bi no-op vatra spalila je šteta); test prije koda; kao zvanična metrika traži ADR |
+| TASK-029 | predloženo, bez ADR-a (TRAIN, eksploratorno) | iscrpna B=1 tablica: 33 niza po požaru, ishod, opservacije, legalni sektori, ćelije linije, no-op otisak; pilot 20 požara = TRAIN benchmark, pa 98 |
+| TASK-030 | predloženo, bez ADR-a (TRAIN, eksploratorno) | offline ocjena: fiksni sektor, podešeno pravilo, selektor, tabelarni RL, BC; LOO po požaru; prag ≥30 ha i ≥25% jaza |
+| TASK-031 | opcionalno, ADR ako se usvoji | B=1 tablica s „repom“ od 48 h bez odluka |
+| TASK-032 | ADR prije | planer sa zadnjim viđenim vremenom; „vidovita“ gornja granica odvojeno |
+| TASK-033 | ADR prije | B=2/B=4, novo VALIDATION korištenje (B=1 glavni test), BC+PPO ili čisti RL |
+
 ## Aktivni prioritet — 2026-11-09 (ADR-029, ispravke prije ponovnog pokretanja)
 
 Rezultati ADR-022–028 su nevažeći zbog gridMET greške; redoslijed i prihvat su u

@@ -1,5 +1,17 @@
 # Promjene baze znanja
 
+## 2026-11-12: pregled nakon faze 2 i novi HANDOFF
+
+- Pet analiza nakon ADR-032 (literatura, kratke epizode, intervencije, šta je stvarno,
+  optimizovane heuristike) je u [docs/research/review-2026-11-11](docs/research/review-2026-11-11/SUMMARY.md),
+  sa skriptama i izlazima TRAIN-only analiza. Bez treninga; VALIDATION nije ponovo korišten.
+- Glavni nalazi: rezultat ADR-032 je očekivan; 48 h nije ograničenje podataka; linija se u
+  SimFire-u računa kao spašena površina (odluka otvorena); predložen TASK-028–033.
+- [HANDOFF](HANDOFF.md) je prepisan kao jedini ulaz za nastavak (stanje grana i PR-ova,
+  redoslijed čitanja, odluke, pravila, okruženje); STATUS, NEXT_SESSION, BACKLOG, kontekst i
+  agent ulazi upućuju na njega. Napomene o zastarjelim opisima dodane su u
+  `SIMFIRE_ENVIRONMENT.md` i `SYNTHETIC_CA_ENV.md`.
+
 ## 2026-11-10: TASK-026 faza 2, benchmark i studija budžeta (ADR-032)
 
 - 10 seedova, 40 PPO politika, TRAIN benchmark (98 požara) za izbor heuristike i jedan

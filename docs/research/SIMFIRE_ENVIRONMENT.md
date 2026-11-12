@@ -386,6 +386,11 @@ jedan od osam smjerova koji polaže najviše sedam `FIRELINE` ćelija ispred tre
 centroida fronta i troši jednu budžetsku jedinicu. Ovo je diskretni prototip politike,
 ne provjeren model operativne gradnje linije.
 
+> **Napomena 2026-11-12.** Ovaj odlomak opisuje prvu verziju (ADR-021). Od ADR-030 TRAIN ima
+> 98 slučajeva, a linija se postavlja okomito na sektor, 2 ćelije (360 m) ispred vodeće ćelije
+> fronta: 7 ćelija u ravnom smjeru (1,26 km), 9 u dijagonalnom (1,27 km). Tačan opis s
+> referencama na kod je u [šta politika smije raditi](review-2026-11-11/INTERVENTIONS.md).
+
 Observation sadrži samo sažeto trenutno stanje (16×16 agregati burn/front/linija/gorivo),
 budžet, vrijeme epizode i vrijeme **posljednjeg gridMET dana strogo prije** dana sljedećeg
 12h segmenta; za prvu odluku to je dan prije početka (ADR-030 §1 i dopuna, TASK-023). Vrijeme

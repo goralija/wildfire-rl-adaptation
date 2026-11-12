@@ -1,5 +1,9 @@
 # Istraživanje i podaci
 
+## Podgrupe
+
+- [Pregled 2026-11-11: literatura i dijagnoza](review-2026-11-11/index.md) - Research Review, odgovori na pet pitanja nakon ADR-032 i plan
+
 ## Dokumenti
 
 - [Dataset: šta imamo i šta ćemo koristiti](DATASET.md) - Dataset Review

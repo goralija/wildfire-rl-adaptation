@@ -46,6 +46,11 @@ reprezentativan za sve požare. FEDS/FPA veza ostaje provisionalna.
   Većina politika nauči jedan fiksan smjer. Simulatorski rezultat, ne dokaz o gašenju. Faza 3
   čeka korisnikovu odluku; redoslijed je u [NEXT_SESSION](../docs/NEXT_SESSION.md).
 
+- **Pregled 2026-11-11.** Literatura i dijagnoza nakon faze 2, bez treninga: rezultat je
+  očekivan; kratke epizode vjerovatno nisu uzrok; ključno je da li se najbolja linija može
+  predvidjeti iz opservacije. Plan TASK-028–033 i odluke koje čekaju:
+  [sažetak](../docs/research/review-2026-11-11/SUMMARY.md).
+
 ## Ranije — sintetički CA trening (ADR-028), 2026-11-05
 
 - **Trening.** Agent se trenira samo na proceduralno generisanim sintetičkim požarima,
@@ -90,6 +95,10 @@ reprezentativan za sve požare. FEDS/FPA veza ostaje provisionalna.
 - Prioritetna područja (TASK-007), gradnja linije kroz vrijeme i TEST evaluacija nisu rađeni.
 
 ## Šta prvo raditi
+
+Aktuelni redoslijed je u [NEXT_SESSION](../docs/NEXT_SESSION.md) i
+[pregledu 2026-11-11](../docs/research/review-2026-11-11/SUMMARY.md); lista ispod je iz
+2026-11-04 i historijska.
 
 1. Timski odlučiti o growth-aware gateu ili modelu zaustavljanja prije tvrdnje o
    kalibraciji, i o tome da li stress scenarij ostaje radni simulator.

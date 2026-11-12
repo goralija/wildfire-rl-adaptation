@@ -4,7 +4,26 @@ title: Ispravke nakon revizije PR-ova #3–#5 (ADR-029, 2026-11-09)
 ---
 # Naredni korak
 
-## Najnovije — 2026-11-10: faze 1 i 2 su gotove; čekaju se korisnikove odluke
+## Najnovije — 2026-11-12: pregled završen; prvo provjera gornje granice na TRAIN-u
+
+Faze 1 i 2 su gotove, a [pregled 2026-11-11](research/review-2026-11-11/SUMMARY.md) je
+odgovorio na pet pitanja nakon ADR-032. Polazna tačka za novu osobu ili agenta je
+[HANDOFF](../HANDOFF.md).
+
+1. **Harun:** merge redom PR #17 (faza 1), PR #18 (faza 2), PR #19 (pregled i HANDOFF).
+2. **Harun odlučuje:**
+   - kako se računa šteta kad linija zauzme ćelije koje bi izgorjele (sada „spašene“);
+   - da li se pokreću TASK-029 i TASK-030 (samo TRAIN, eksploratorno, bez ADR-a);
+   - ranije otvoreno: glavni simulator za poster, CA observation, faza 3.
+3. **Sljedeći posao uz „da“** ([BACKLOG](BACKLOG.md)):
+   - TASK-028: pomoćna funkcija za ocjenu s naplatom linije (test prije koda);
+   - TASK-029: iscrpna B=1 tablica (33 niza po požaru), pilot na 20 TRAIN požara mora dati
+     iste ishode kao TRAIN benchmark, pa svih 98 (ukupno ~1,5 h na 4 procesa);
+   - TASK-030: offline ocjena pravila, selektora i tabelarnog RL-a uz LOO po požaru; nastaviti
+     samo ako je dobitak izvan podešavanja ≥30 ha i ≥25% jaza.
+4. Planer, B=2/B=4, novo korištenje VALIDATION-a i novi trening traže ADR prije pokretanja.
+
+## 2026-11-10: faze 1 i 2 su gotove; čekaju se korisnikove odluke
 
 Faza 2 je izvedena po ADR-030 §4 na zamrznutom zapisu: nijedan od šest primarnih testova ne
 odbacuje nultu hipotezu, a osnovni PPO se ne razlikuje od nasumične legalne linije ni od
