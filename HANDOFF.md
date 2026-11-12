@@ -4,62 +4,114 @@ title: Handoff za nastavak projekta
 ---
 # Handoff za nastavak projekta
 
-Stanje **2026-11-07**. Ovaj dokument i linkovani izvještaji daju kolegi ili agentu
-potreban kontekst bez prethodne chat historije.
+Stanje **2026-11-12**. Ovaj dokument je ulaz za kolegu ili agenta koji preuzima projekat bez
+chat historije. Repozitorij je kanonski izvor; artifact za tim (link ispod) je sažetak za
+čitanje.
 
-## Aktivni cilj i status
+## Gdje je projekat (jedan pasus)
 
-**Najnovije (2026-11-05, ADR-028, grana `codex/synthetic-ca-training`):**
-- Trening je prebačen na sintetičke požare u vlastitom CA simulatoru, s fizički
-  ograničenim jedinicama ([spec](docs/research/SYNTHETIC_CA_ENV.md)).
-- `policy-v1` je zaključan i testiran jednom na 119 stvarnih startova (simulirani ishod).
-- Rezultati: [STATUS](docs/STATUS.md), [izvještaji](reports/synthetic/index.md).
-- Tekst ispod opisuje prethodni SimFire put.
+Pitanje: može li RL agent s budžetom od B vatrogasnih linija smanjiti izgorjelu površinu
+više od jednostavnih pravila, i pomaže li fine-tuning za zadani B. Glavni simulator je SimFire
+pokrenut od stvarnih početnih stanja 118 američkih požara (98 TRAIN 2018/19, 20 VALIDATION
+2023; TEST 2024 zatvoren). Raniji rezultati su poništeni (ADR-029, greška u vremenskim
+podacima), greške su ispravljene, a ponovno pokretanje je dalo: **faza 1** gate PASS, zamrznut
+WAF 0.10 / ROS 1.0 (ADR-031); **faza 2** nijedan od šest primarnih testova ne odbacuje, PPO
+se ne razlikuje od nasumične linije ni od najbolje TRAIN heuristike, fine-tuning po budžetu
+ne daje dobitak (ADR-032). **Pregled 2026-11-11** (literatura i dijagnoza, bez novih
+treninga) kaže da je to očekivano i predlaže jeftinu TRAIN-only provjeru gornje granice
+prije bilo kakvog novog treninga: [sažetak i plan](docs/research/review-2026-11-11/SUMMARY.md).
 
-Aktivna putanja je **SimFire + FPA-FOD početni uslovi + FEDS-CONUS opaženi obodi**.
-Godine požara određuju split: train 2018/2019, validation 2023, test 2024. FLE/ICS-209
-je samo mogući post-hoc operativni kontekst.
+## Grane i pull requestovi
 
-Širi unaprijed spremljeni FPA-FOD okvir daje 99 train i 20 validation slučajeva od
-208/56 kandidata; svih 119 ima 48h FEDS niz. Taj data-coverage gate prolazi, uz
-ograničenje da je okvir većih požara u deset zapadnih saveznih država i nije
-reprezentativan. Originalna kohorta od 60 slučajeva daje 19/40 i 7/20 pa ne prolazi.
+`main` je na `7be6b56` i **još ne sadrži faze 1 i 2**. Otvoreni PR-ovi idu redom, svaki na
+prethodni; spaja ih samo Harun:
 
-**Koraci 5–8 su izvedeni 2026-11-04 (ADR-023–027).** TRAIN no-op gate je nakon dijagnoze
-i preregistrovane mreže ponovo **FAIL**: persistence je jaka jer mnogi FEDS požari ne
-rastu, dok slobodno-goreći SimFire raste. Gate zapis je zamrznut kao `FAIL_exploratory`,
-a validation je skoriran jednom po zapisu. Intervencije, heuristike i PPO prilagodba
-budžetu rađene su na zasebno označenom free-burn stress zapisu. Osnovni PPO smanjuje
-štetu u odnosu na no-op, fine-tuning po budžetu nema mjerljive koristi, a downwind
-heuristika je jednako dobra ili bolja. Sve je simulatorski i eksploratorno. Pogledaj
-[STATUS](docs/STATUS.md), [NEXT_SESSION](docs/NEXT_SESSION.md),
-[benchmark sažetak](reports/real-fire-data/feds-simfire-policy-benchmark-v1.json) i
-[ADR-027](docs/specs/DECISION_RECORDS.md). TEST 2024 nije učitan.
+1. PR #17 `f/task-026-stage-1` → `main` — faza 1 (ADR-031).
+2. PR #18 `f/task-026-stage-2` → `f/task-026-stage-1` — faza 2 (ADR-032).
+3. PR #19 `docs/research-review` → `f/task-026-stage-2` — pregled 2026-11-11, ovaj HANDOFF.
 
-## Sljedeći posao
+Provjera: `gh pr list --state all --limit 5`. Dok nisu spojeni, radi iz najnovije grane
+(`docs/research-review`) ili iz worktreea `.worktrees/research-review`. Kad se spoje,
+`main` je aktuelan i nove grane se prave iz njega.
 
-1. Timska odluka: growth-aware gate ili model zaustavljanja prije tvrdnje o kalibraciji;
-   da li stress scenarij ostaje radni simulator za predaju.
-2. Ako se nastavlja: nova preregistracija s jačim signalom budžeta i više seedova;
-   TASK-007 (prioritetna područja); TASK-009 (poster).
-3. TEST 2024 otvoriti tek na kraju, sa zaključanim politikama i istim protokolom.
+## Šta pročitati, redom
 
-**IoU** mjeri preklapanje simulirane i FEDS opožarene površine (1 je potpuno
-preklapanje, 0 je bez preklapanja; nije procenat tačnosti). **WAF** je Wind Adjustment
-Factor, SimFireov faktor koji podešava uticaj vjetra na širenje. FEDS je satelitska
-procjena, a gridMET je grubi vremenski proxy, pa gate ne predstavlja fizičku validaciju.
+1. [AGENTS](AGENTS.md) (pravila), [index](index.md), [projektni kontekst](knowledge/project-context.md).
+2. [STATUS](docs/STATUS.md) i [NEXT_SESSION](docs/NEXT_SESSION.md): najnovije sekcije su na vrhu.
+3. [Pregled 2026-11-11](docs/research/review-2026-11-11/SUMMARY.md): odgovori na pet pitanja,
+   odluke koje čekaju, redoslijed TASK-028–033.
+4. ADR-029 do ADR-032 s dopunama u [odlukama](docs/specs/DECISION_RECORDS.md).
+5. [Šta politika smije raditi](docs/research/review-2026-11-11/INTERVENTIONS.md): tačan opis
+   okruženja, akcija i heuristika (dokumentacija na nekoliko mjesta zaostaje za kodom).
+6. Za pokretanje: [HANDOFF_STAGE_1_2](docs/HANDOFF_STAGE_1_2.md) §4–§6 (okruženje, komande
+   faza 1 i 2) i [mapa koda](knowledge/code-map.md).
 
-## Gdje naći izvorne dokaze
+## Šta čeka odluku (Harun)
 
-- [SimFire/FEDS environment record](docs/research/SIMFIRE_ENVIRONMENT.md): runtime,
-  setup, komande, inputi, no-op rezultati i PPO ograničenja.
-- [FPA-FOD/FEDS crosswalk](docs/research/FPA_FEDS_CROSSWALK.md): cohort izbor,
-  join pravilo, data gate i kasnije izmjene.
-- [Experiment log](docs/research/EXPERIMENT_LOG.md): redoslijed i granice runova.
-- [Mapa koda](knowledge/code-map.md): skripte, paketi i testovi.
-- [Backlog](docs/BACKLOG.md): sljedeći taskovi; posljednja odluka ima prednost.
+- Merge PR-ova #17, #18, #19.
+- Kako se računa šteta kad linija zauzme ćelije koje bi izgorjele (sada se računaju kao spašene).
+- Da li pokrenuti TASK-029/030 (iscrpna B=1 tablica i offline ocjena, samo TRAIN).
+- Koji je simulator glavni za poster; da li sintetički CA smije vidjeti vrijeme tekućeg
+  koraka; faza 3 (trening CA). Detalji: [NEXT_SESSION](docs/NEXT_SESSION.md), [BACKLOG](docs/BACKLOG.md).
 
-## Nastavak sintetičkog CA rada (ADR-028)
+## Pravila koja važe za svakog ko nastavlja
+
+- Agent smije push i PR uz nezavisnu reviziju; **merge u `main` radi samo Harun**.
+- TEST 2024 se ne preuzima ni ne otvara. VALIDATION se koristi samo unaprijed registrovano.
+- Ne mijenjati gate, kandidate, metrike, statistiku ni pravilo izbora nakon rezultata;
+  nova pravila idu u novi ADR prije pokretanja.
+- Bez plaćenog ili cloud computea. Dugi poslovi: najviše 4 procesa, `nice -n 19`, i unaprijed
+  reći koliko traje (trening ~95 min po seedu).
+- Ne commitovati `.local/`, težine modela, sirove podatke, venv. Nikad `git clean -fdx`.
+- `spread_aggregation` ostaje `"last_write"`; bez starih checkpointa i bez
+  `--allow-legacy-checkpoints`.
+- Simulatorski rezultat nije dokaz o stvarnom gašenju; gate PASS nije fizička validacija.
+
+## Okruženje i podaci
+
+**Novi računar.** Sve se obnavlja iz javnih izvora; ništa iz `.local/` nije u gitu.
+
+1. SimFire okruženje (Python 3.9, pinovano):
+   [SIMFIRE_ENVIRONMENT](docs/research/SIMFIRE_ENVIRONMENT.md), komande `uv venv` i
+   `uv pip install -r requirements/simfire-macos-arm64-py39.freeze.txt`.
+2. Ulazi: `scripts/build_feds_simfire_inputs.py --fetch-split train`, zatim
+   `--fetch-split validation`; `scripts/fetch_gridmet_archives.py --year 2018 2019 2023`;
+   `scripts/sample_gridmet_episode_weather.py`. Tačne komande su u SIMFIRE_ENVIRONMENT.
+3. Ponovno generisan vremenski fajl dobija **novi sha256** (sampler upisuje `created_utc`).
+   Zamrznuti zapis faze 1 navodi `7a51aadd…`. Za VALIDATION okruženje i benchmark odbijaju
+   fajl čiji se hash ne slaže sa zamrznutim zapisom; na TRAIN-u se hash samo bilježi u
+   izvještaj. Za poređenje s fazama 1 i 2 treba kopija tog fajla od Haruna; novi hash traži
+   novi ADR prije korištenja VALIDATION-a. Manifest epizoda je u gitu (sha256 `013be9a1…`).
+4. Provjera: `$P -m unittest discover -s tests` (282 prolaze s lokalnim podacima),
+   `python3 scripts/validate_knowledge.py --strict`, `git diff --check`.
+
+**Harunov računar** (`/Users/harungoralija/Desktop/mpvi`):
+
+- Python: `.worktrees/overnight-steps-5-8/.local/simfire-venv/bin/python`.
+- Vremenski fajl `7a51aadd…`: `.local/backups/gridmet/feds-episode-weather-v1-7a51aadd.json`.
+- Faza 1, puni gate izvještaji: `.worktrees/task-026-stage-1/.local/gate/adr030/`.
+- Faza 2: `.worktrees/task-026-stage-2/.local/ppo/adr030/` (40 modela),
+  `.local/bench/adr030-train.json` (`709050e6…`), `.local/bench/adr030-validation.json` (`e8068e6b…`).
+- Stari, neispravni vremenski fajl `7b0aa405…` u `.worktrees/overnight-steps-5-8/.local/gridmet/`
+  je dokaz greške: ne dirati. Ne dirati ni necommitovane fajlove u tom worktreeu.
+- Zaostali worktreeji (`.claude/worktrees/task-021…024`, `.worktrees/task-027-feds-utc-dedup`)
+  i 8 neaktivnih Python procesa u `.worktrees/synthetic-ca-training` (od 5. 11.) uklanjaju se
+  samo uz Harunovo „da“.
+
+## Artifact za tim
+
+Pregled za čitaoca koji ne zna projekat, s dijagramima i grafikonima:
+https://claude.ai/artifact/EFi7EXKkvehgTt1GYtoi5Q. Privatan je; Harun ga dijeli kroz meni
+Share. Prati stanje repozitorija; kad se razilaze, važi repozitorij. Ko ga ažurira prvo ga
+pročita preko linka, pa objavi na isti link.
+
+## Historija
+
+Canada + CFSDS/Cell2Fire, Firehose i noćni SimFire koraci 5–8 su raniji pravci; njihovi
+brojevi se ne citiraju kao nalazi (ADR-029). Trag je u
+[experiment logu](docs/research/EXPERIMENT_LOG.md) i [odlukama](docs/specs/DECISION_RECORDS.md).
+
+### Sintetički CA (ADR-028; brojevi poništeni ADR-029)
 
 Grana `codex/synthetic-ca-training` nastavlja `codex/overnight-steps-5-8` (PR #4), koja
 nastavlja `codex/fireline-simfire-benchmark` (PR #3). Nijedna nije spojena u `main`.
@@ -125,28 +177,3 @@ a jasno je bolji od no-op. Treba odlučiti da li se ide dalje (DAgger, duži fin
 oracle osnova za plafon) ili se rad zaključuje sa sadašnjim rezultatom. Za novi pokušaj
 predlažemo novu preregistraciju i prihvatanje na novim sjemenima, jer su sjemena 0–255
 već korištena za izbor checkpointa (napomena o selekciji u ADR-028). Detalji su u [NEXT_SESSION](docs/NEXT_SESSION.md) i ADR-028.
-
-## Klon i lokalni environment (raniji SimFire put)
-
-Grana `codex/overnight-steps-5-8` (izvedena iz PR #3 grane
-`codex/fireline-simfire-benchmark`) sadrži korake 5–8. Sve je uključeno i u granu
-`codex/synthetic-ca-training` iznad.
-
-Prvo pročitaj [index](index.md), [AGENTS](AGENTS.md),
-[projektni kontekst](knowledge/project-context.md), [STATUS](docs/STATUS.md),
-[NEXT_SESSION](docs/NEXT_SESSION.md) i najnoviji ADR. FEDS/SimFire venv i veliki
-inputi su lokalni u ignorisanom `.local/`; novi klon ih nema. Tačne pinove i obnovu
-okruženja prati u `docs/research/SIMFIRE_ENVIRONMENT.md`. Na Harunovom računaru je venv samostalan
-(`.local/uv-python` + `.local/simfire-venv`); obnova iz javnih izvora traje oko 30 min
-i daje iste hashove ulaza.
-
-Validation rasteri se preuzimaju s `--fetch-split validation` tek uz commitan freeze zapis; test split se ne preuzima. Ne commitovati `.local/`,
-raw arhive, virtualna okruženja ili model težine. Izlazni run folderi trebaju imati
-nov ID i ostati lokalni, osim ako mali manifest/report izričito pripada repo-u.
-
-## Historijski rad
-
-Canada + CFSDS v1.1 + Canadian FBP/Cell2Fire i Firehose TASK-004c su raniji, odvojeni
-trackovi. Njihovi runtime/no-action nalazi nisu SimFire validacija i ne određuju
-trenutni naredni korak. Zadržani su u [experiment logu](docs/research/EXPERIMENT_LOG.md)
-i pripadajućim historijskim dokumentima.

@@ -21,6 +21,8 @@ pokrenuti sam, fazu 2 samo ako faza 1 prođe; merge i faza 3 ostaju korisnikovi 
 VALIDATION ocijenjen jednom; unaprijed zadano pravilo, ne fizička validacija). Faza 2 je
 završena (ADR-032: nijedan od šest primarnih testova ne odbacuje; PPO se ne razlikuje od nasumične
 linije ni od najbolje heuristike; simulatorski rezultat). Faza 3 čeka korisnikovu odluku.
+Pregled nakon faze 2 ([sažetak](docs/research/review-2026-11-11/SUMMARY.md), 2026-11-11) predlaže
+TASK-028–030 (samo TRAIN, eksploratorno), također uz korisnikovo „da“. Ulaz za nastavak je [HANDOFF](HANDOFF.md).
 TEST 2024 ostaje zatvoren. TASK-012/CFSDS/Cell2Fire je historijski odvojeni pravac.
 Runtime PASS nije dokaz fizičke validacije ili RL prednosti. Čuvaj ovu razliku u sažecima.
 

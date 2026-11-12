@@ -1,11 +1,37 @@
 ---
 type: Project Status
-title: Trenutno stanje — 2026-11-10
+title: Trenutno stanje — 2026-11-12
 sources:
 - resource: /reports/firehose-verification/verification.json
 - resource: /docs/WORK_LOG.md
 ---
-# Trenutno stanje — 2026-11-10
+# Trenutno stanje — 2026-11-12
+
+## Najnovije — 2026-11-12: pregled nakon faze 2, bez novih treninga
+
+Harun je nakon ADR-032 postavio pet pitanja; odgovori su u
+[pregledu 2026-11-11](research/review-2026-11-11/SUMMARY.md). Nijedan trening nije pokrenut,
+VALIDATION nije ponovo korišten, TEST 2024 nije otvoren. Nove brojke su samo iz TRAIN fajlova,
+plus jedan probni SimFire run na TRAIN-u (da li vatra prelazi liniju).
+
+- **Literatura** (22 rada, uz arXiv 2512.06102): RL pobijedi dobru heuristiku samo kad ga ona
+  prvo nauči, i to tijesno; uspješni radovi imaju 5–50× više epizoda i uglavnom jedan teren.
+  Rezultat ADR-032 je očekivan.
+- **Kratke epizode nisu vjerovatni uzrok.** FEDS je svaki TRAIN požar pratio najmanje 108 h;
+  48 h je izbor zbog gatea. Vjerovatniji uzroci: slab signal, premalo treninga (72 PPO
+  ažuriranja), mali prostor za dobitak jedne linije, i opservacija koja možda ne određuje
+  najbolji smjer.
+- **Šta se modeluje.** U SimFire-u samo jedna trenutna linija ručne ekipe (~1,26 km) po odluci;
+  nema aviona, vode ni vozila. Linija u praksi ne propušta; vatra ide oko krajeva.
+- **Šta je stvarno.** Iz stvarnih požara dolaze početno stanje, gorivo, reljef i vrijeme;
+  logika širenja je SimFire-ov Rothermel model s jednim izabranim faktorom vjetra.
+- **Optimizovane heuristike** su prava vrsta pristupa, ali bez dokaza o dobitku; prostor je u
+  izboru smjera za konkretan požar.
+- **Otvoreno:** linija se u SimFire-u računa kao spašena površina (do ~26 ha po liniji na B=1);
+  odluka prije bilo kakve optimizacije. Dokumentacija na sedam mjesta zaostaje za kodom
+  ([INTERVENTIONS §5](research/review-2026-11-11/INTERVENTIONS.md)).
+- **Dalje:** TASK-028–030 (naplata linije, iscrpna B=1 tablica na TRAIN-u, offline ocjena), uz
+  Harunovo „da“. PR-ovi #17, #18 i #19 čekaju merge.
 
 ## Najnovije — 2026-11-10: faza 2 je završena, PPO se ne razlikuje od jednostavnih pravila (ADR-032)
 

@@ -1,0 +1,111 @@
+== 0. pooled outcome table (sequence -> outcome), all budgets
+sequence/outcome conflicts across policies and budgets: 0
+distinct sequences per fire: median 23, min 6, max 29
+B=1 tree coverage (of 33 legal-or-not sequences): median 7, min 6, max 9
+single-line sequences observed by decision of the line: {0: 619, 1: 1, 2: 1}
+
+== 1. per-fire hindsight selection among menus (mean delta vs no-op, ha) and share of the best-of-44 gap
+B=1  best-of-44 -377.8 | best single policy in-sample base-s15 -147.0 | adv -112.2
+     adv                     -112.2 ha  share of (best-of-44 - adv) gap: -0.00
+     downwind                -113.2 ha  share of (best-of-44 - adv) gap: 0.00
+     {adv,dw}                -159.0 ha  share of (best-of-44 - adv) gap: 0.18
+     {adv,dw,random}         -222.6 ha  share of (best-of-44 - adv) gap: 0.42
+     {adv,dw,noop}           -159.1 ha  share of (best-of-44 - adv) gap: 0.18
+     {adv,dw,random,noop}    -222.6 ha  share of (best-of-44 - adv) gap: 0.42
+     10 base PPO             -321.8 ha  share of (best-of-44 - adv) gap: 0.79
+     all 44                  -377.8 ha  share of (best-of-44 - adv) gap: 1.00
+B=2  best-of-44 -576.5 | best single policy in-sample base-s17 -222.3 | adv -194.4
+     adv                     -194.4 ha  share of (best-of-44 - adv) gap: -0.00
+     downwind                -187.7 ha  share of (best-of-44 - adv) gap: -0.02
+     {adv,dw}                -277.5 ha  share of (best-of-44 - adv) gap: 0.22
+     {adv,dw,random}         -372.0 ha  share of (best-of-44 - adv) gap: 0.46
+     {adv,dw,noop}           -278.1 ha  share of (best-of-44 - adv) gap: 0.22
+     {adv,dw,random,noop}    -372.0 ha  share of (best-of-44 - adv) gap: 0.46
+     10 base PPO             -510.2 ha  share of (best-of-44 - adv) gap: 0.83
+     all 44                  -576.5 ha  share of (best-of-44 - adv) gap: 1.00
+B=4  best-of-44 -686.0 | best single policy in-sample downwind -308.1 | adv -289.9
+     adv                     -289.9 ha  share of (best-of-44 - adv) gap: -0.00
+     downwind                -308.1 ha  share of (best-of-44 - adv) gap: 0.05
+     {adv,dw}                -392.1 ha  share of (best-of-44 - adv) gap: 0.26
+     {adv,dw,random}         -470.6 ha  share of (best-of-44 - adv) gap: 0.46
+     {adv,dw,noop}           -392.3 ha  share of (best-of-44 - adv) gap: 0.26
+     {adv,dw,random,noop}    -470.8 ha  share of (best-of-44 - adv) gap: 0.46
+     10 base PPO             -608.0 ha  share of (best-of-44 - adv) gap: 0.80
+     all 44                  -686.0 ha  share of (best-of-44 - adv) gap: 1.00
+
+   adv vs downwind first action at B=1 (equal / differ): 31 / 67
+   B=1: identical outcome adv vs dw on 48 fires; dw-adv mean -1.0 ha, sd 268.1, fires dw better 24, adv better 26
+   B=2: identical outcome adv vs dw on 37 fires; dw-adv mean 6.7 ha, sd 431.3, fires dw better 25, adv better 36
+   B=4: identical outcome adv vs dw on 28 fires; dw-adv mean -18.2 ha, sd 422.1, fires dw better 32, adv better 38
+
+== 2. LOFO selector between adv and downwind from decision-0 observables
+B=1 LOFO stump selector -83.5 ha | always adv -112.2 | always dw -113.2 | oracle{adv,dw} -159.0 | in-sample stump -137.4 (rule ('scar_cells', 569, 'gt'))
+     LOFO selector - adv: 28.7 ha, 95% bootstrap CI [-0.7, 70.3]; rule features chosen across folds {'scar_cells': 91, 'sector_angle': 4, 'wind_obs': 1, 'front_cells': 1, 'fm100_obs': 1}
+B=2 LOFO stump selector -209.8 ha | always adv -194.4 | always dw -187.7 | oracle{adv,dw} -277.5 | in-sample stump -233.4 (rule ('fm100_obs', 4.9, 'le'))
+     LOFO selector - adv: -15.4 ha, 95% bootstrap CI [-57.6, 17.6]; rule features chosen across folds {'fm100_obs': 95, 'sector_angle': 1, 'scar_cells': 2}
+B=4 LOFO stump selector -234.5 ha | always adv -289.9 | always dw -308.1 | oracle{adv,dw} -392.1 | in-sample stump -338.0 (rule ('sector_angle', 135, 'le'))
+     LOFO selector - adv: 55.4 ha, 95% bootstrap CI [-6.0, 124.7]; rule features chosen across folds {'sector_angle': 85, 'wind_obs': 8, 'fm100_obs': 5}
+
+== 2b. LOFO 'tune one discrete parameter' = pick best of 44 policies on 97 fires, score held-out fire
+B=1 in-sample best base-s15 -147.0 | LOFO tuned-at-B -147.0 | LOFO tuned-at-B=2 then used at B -50.1 | per-budget minus B=2-tuned -96.9 [-177.9, -28.5] | choices {'base-s15': 98}
+B=2 in-sample best base-s17 -222.3 | LOFO tuned-at-B -132.0 | LOFO tuned-at-B=2 then used at B -132.0 | per-budget minus B=2-tuned 0.0 [0.0, 0.0] | choices {'base-s17': 90, 'base-s15': 7, 'ft-b1-s12': 1}
+B=4 in-sample best downwind -308.1 | LOFO tuned-at-B -183.6 | LOFO tuned-at-B=2 then used at B -222.2 | per-budget minus B=2-tuned 38.6 [-4.4, 92.7] | choices {'downwind': 83, 'base-s17': 15}
+
+== 3. minimum detectable effect at n = 20 from TRAIN paired-delta SDs (normal approx, 80% power)
+B=1 downwind - adv         mean    -1.0 sd  268.1 | MDE n=20: 168 ha (Holm/6: 209) | 20-fire subsample mean 2.5-97.5%: [-105, 113] | top-2 fires share of |delta| 0.31
+B=1 random - adv           mean     5.8 sd  380.6 | MDE n=20: 238 ha (Holm/6: 296) | 20-fire subsample mean 2.5-97.5%: [-141, 163] | top-2 fires share of |delta| 0.21
+B=1 best-of-44 - adv       mean  -265.5 sd  510.5 | MDE n=20: 320 ha (Holm/6: 397) | 20-fire subsample mean 2.5-97.5%: [-480, -90] | top-2 fires share of |delta| 0.18
+B=1 oracle{adv,dw} - adv   mean   -46.7 sd  186.3 | MDE n=20: 117 ha (Holm/6: 145) | 20-fire subsample mean 2.5-97.5%: [-129, -2] | top-2 fires share of |delta| 0.48
+B=2 downwind - adv         mean     6.7 sd  431.3 | MDE n=20: 270 ha (Holm/6: 336) | 20-fire subsample mean 2.5-97.5%: [-144, 196] | top-2 fires share of |delta| 0.25
+B=2 random - adv           mean   -11.2 sd  470.0 | MDE n=20: 294 ha (Holm/6: 366) | 20-fire subsample mean 2.5-97.5%: [-191, 171] | top-2 fires share of |delta| 0.15
+B=2 best-of-44 - adv       mean  -382.1 sd  665.2 | MDE n=20: 416 ha (Holm/6: 518) | 20-fire subsample mean 2.5-97.5%: [-664, -152] | top-2 fires share of |delta| 0.17
+B=2 oracle{adv,dw} - adv   mean   -83.1 sd  259.0 | MDE n=20: 162 ha (Holm/6: 202) | 20-fire subsample mean 2.5-97.5%: [-197, -4] | top-2 fires share of |delta| 0.30
+B=4 downwind - adv         mean   -18.2 sd  422.1 | MDE n=20: 264 ha (Holm/6: 328) | 20-fire subsample mean 2.5-97.5%: [-172, 159] | top-2 fires share of |delta| 0.22
+B=4 random - adv           mean    41.6 sd  582.3 | MDE n=20: 365 ha (Holm/6: 453) | 20-fire subsample mean 2.5-97.5%: [-175, 297] | top-2 fires share of |delta| 0.22
+B=4 best-of-44 - adv       mean  -396.1 sd  641.0 | MDE n=20: 401 ha (Holm/6: 499) | 20-fire subsample mean 2.5-97.5%: [-665, -176] | top-2 fires share of |delta| 0.15
+B=4 oracle{adv,dw} - adv   mean  -102.2 sd  285.0 | MDE n=20: 178 ha (Holm/6: 222) | 20-fire subsample mean 2.5-97.5%: [-231, -12] | top-2 fires share of |delta| 0.28
+
+== 4. heuristic decisions with action 0 while budget remained and the no-op fire was still active
+gate no-op vs bench no-op final added cells mismatches: 0
+  advancing_front  B=1 idle decisions with budget left   0, of which no-op fire still burning   0
+  advancing_front  B=2 idle decisions with budget left  96, of which no-op fire still burning   2
+  advancing_front  B=4 idle decisions with budget left 119, of which no-op fire still burning   8
+  downwind         B=1 idle decisions with budget left   0, of which no-op fire still burning   0
+  downwind         B=2 idle decisions with budget left  93, of which no-op fire still burning   0
+  downwind         B=4 idle decisions with budget left 113, of which no-op fire still burning   3
+
+== 5. hindsight structure across budgets (pooled observed sequences; lower bound on the tree)
+fires where best observed B=1 line is not at decision 0: 0
+fires (with gains at both) where best observed B=2 sequence starts with the best B=1 line: 48 / 79
+B=1 pooled best observed sequence with <= B lines: -377.8 ha
+B=2 pooled best observed sequence with <= B lines: -577.6 ha
+B=4 pooled best observed sequence with <= B lines: -687.2 ha
+
+== 6. upper bound on footprint credit (7 cells axis, 9 diagonal, x 3.24 ha) vs mean delta
+  advancing_front  B=1 footprint upper bound 26.3 ha vs mean delta -112.2 ha (23%)
+  advancing_front  B=2 footprint upper bound 43.5 ha vs mean delta -194.4 ha (22%)
+  advancing_front  B=4 footprint upper bound 72.2 ha vs mean delta -289.9 ha (25%)
+  downwind         B=1 footprint upper bound 25.9 ha vs mean delta -113.2 ha (23%)
+  downwind         B=2 footprint upper bound 43.9 ha vs mean delta -187.7 ha (23%)
+  downwind         B=4 footprint upper bound 74.2 ha vs mean delta -308.1 ha (24%)
+  random_legal     B=1 footprint upper bound 22.7 ha vs mean delta -106.5 ha (21%)
+  random_legal     B=2 footprint upper bound 44.6 ha vs mean delta -205.6 ha (22%)
+  random_legal     B=4 footprint upper bound 64.3 ha vs mean delta -248.3 ha (26%)
+
+== 7. B=1 single line at decision 0: mean delta by action over fires where observed; axis vs diagonal
+axis mean -90.8 (n=326), diagonal mean -89.1 (n=293)
+  action 1 observed on 32 fires, mean -100.2 ha
+  action 2 observed on 20 fires, mean -50.7 ha
+  action 3 observed on 98 fires, mean -68.1 ha
+  action 4 observed on 98 fires, mean -46.6 ha
+  action 5 observed on 98 fires, mean -94.8 ha
+  action 6 observed on 98 fires, mean -128.7 ha
+  action 7 observed on 98 fires, mean -106.5 ha
+  action 8 observed on 77 fires, mean -102.6 ha
+  base-s15 B=1 sequences: [((6, 0, 0, 0), 70), ((4, 0, 0, 0), 28)]
+  base-s17 B=2 sequences: [((5, 5, 0, 0), 56), ((5, 0, 0, 0), 29), ((6, 6, 0, 0), 8), ((5, 6, 0, 0), 3)]
+
+== 8. fixed decision-0 sector at B=1 (actions 3-7, observed on all fires): LOFO pick and bootstrap CI vs adv
+candidates [3, 4, 5, 6, 7] LOFO picks {6: 98}
+LOFO fixed sector - adv: -16.4 ha, 95% CI [-94.7, 57.8]
+fixed NW (action 6) - adv, in-sample choice: -16.4 ha, 95% CI [-93.5, 57.9]; fires better 27 worse 31
