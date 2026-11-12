@@ -44,6 +44,8 @@ CI checker provjerava strukturu/linkove, ne istinitost naučnih nalaza.
 - Čuvaj kumulativnu štetu; tretirana prethodno zapaljena ćelija ostaje opožarena.
 - Ne učitavaj neprovjerene pickle/torch checkpointove izvan izolovanog environmenta.
 - Ne commituj privatnu prepisku, emailove, `.venv`, vanjski repo, velike mape ili težine.
+- Dugi poslovi na Harunovom računaru: najviše 4 procesa uz `nice -n 19`, uz najavu trajanja
+  (Harunova uputa, 2026-11-10; sa 7 procesa računar se preoptereti).
 - Ne pokreći plaćeni compute, dugo treniranje, globalne instalacije, push/merge ili cloud deploy
   bez odgovarajućeg korisničkog naloga. Kratki lokalni testovi su normalni dio rada.
 - Prije predaje pokreni `PYTHONPATH=src python3 -m unittest discover -s tests -v` i smoke CLI.

@@ -1,6 +1,6 @@
 ---
 type: Handoff
-title: Ispravke nakon revizije PR-ova #3–#5 (ADR-029, 2026-11-09)
+title: Naredni korak — pregled nakon faze 2 (2026-11-12)
 ---
 # Naredni korak
 
@@ -10,7 +10,7 @@ Faze 1 i 2 su gotove, a [pregled 2026-11-11](research/review-2026-11-11/SUMMARY.
 odgovorio na pet pitanja nakon ADR-032. Polazna tačka za novu osobu ili agenta je
 [HANDOFF](../HANDOFF.md).
 
-1. **Harun:** merge redom PR #17 (faza 1), PR #18 (faza 2), PR #19 (pregled i HANDOFF).
+1. **Harun:** merge PR #19 (pregled i HANDOFF). Faze 1 i 2 su već u `main`-u (PR #17, #18).
 2. **Harun odlučuje:**
    - kako se računa šteta kad linija zauzme ćelije koje bi izgorjele (sada „spašene“);
    - da li se pokreću TASK-029 i TASK-030 (samo TRAIN, eksploratorno, bez ADR-a);

@@ -10,8 +10,7 @@ sources:
 ---
 # A — Literature review: RL for wildfire suppression under an intervention budget
 
-Prepared 2026-11-11 for the MPVI project (`/Users/harungoralija/Desktop/mpvi`, worktree
-`.worktrees/task-026-stage-2`). The work was read-only: no repository file was changed, no training was run
+Prepared 2026-11-11 for the MPVI project (repository state: commit `61f0ebf`). The work was read-only: no repository file was changed, no training was run
 and no paid compute was used. The downloaded PDFs are not kept in the repository; every paper is listed with its public link.
 
 ## 0. How to read this report

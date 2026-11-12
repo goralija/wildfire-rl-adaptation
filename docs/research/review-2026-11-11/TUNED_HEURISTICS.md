@@ -103,8 +103,8 @@ Residual RL collapses into the selector. Details are in §5 and §6.
   pooled table here: across all policies and budgets, **0 conflicts** between an action
   sequence and its outcome on any fire [new, TRAIN §0].
 - The legal action sequences per fire number 33 at B=1, 417 at B=2 and 6,561 at B=4 [B §3].
-- The heuristics see the same observation as PPO: 16×16 pooled grid, lagged weather, no
-  budget and no time (`feds_heuristics.py:1-10`) [C §1.6].
+- The heuristics receive the same observation dict as PPO (16×16 pooled grid, lagged weather,
+  budget, time) but ignore budget and time (`feds_heuristics.py:1-10`) [C §1.6].
 - The heuristics spend at the first legal opportunity and have no fallback sector
   (`feds_heuristics.py:41-43`).
 
@@ -177,7 +177,8 @@ all 44 policies.
 
 **Reading [interpretation, medium-high].**
 - The in-sample stump finds a rule worth 25–50 ha at every budget, and each rule disappears
-  out of sample. At B=1 and B=4 the selected rule is actively harmful.
+  out of sample. At B=1 and B=4 the point estimates are worse than `advancing_front`; both
+  intervals include 0.
 - The features chosen across folds are scar size at B=1, fm100 at B=2 and sector
   disagreement at B=4. That instability is a fingerprint of noise.
 - This does **not** prove that no observable predicts the right sector. The features are

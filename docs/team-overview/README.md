@@ -11,7 +11,7 @@ sources:
 # Pregled za tim
 
 [`budzetski-rl.html`](budzetski-rl.html) je kopija stranice objavljene kao privatni Claude
-artifact (https://claude.ai/artifact/EFi7EXKkvehgTt1GYtoi5Q, verzija 8, 2026-11-12). Stranica
+artifact (https://claude.ai/artifact/EFi7EXKkvehgTt1GYtoi5Q, verzija 9, 2026-11-12). Stranica
 objašnjava projekat čitaocu koji ga ne poznaje: MDP, podatke, kod, gate, hronologiju, grešku
 ADR-029, ispravke, rezultate faza 1 i 2, pregled nakon faze 2 i kako nastaviti, s dijagramima
 i grafikonima. Sadržaj prati repozitorij; kad se razilaze, važi repozitorij.

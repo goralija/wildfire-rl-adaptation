@@ -26,11 +26,14 @@ dobijeni 2026-11-11 na commitu `61f0ebf`.
 
 ## Kako pokrenuti
 
-Iz korijena worktreea faze 2 (gdje su `.local/bench/` i `.local/gridmet/`), sa SimFire
-Python 3.9 okruženjem (`P`, vidi HANDOFF). Putanja do gate izvještaja je worktree faze 1.
+Iz korijena checkouta koji ima `.local/bench/` i `.local/gridmet/` (na Harunovom računaru
+worktree faze 2), sa SimFire Python 3.9 okruženjem (`P`, vidi HANDOFF). `A` mora biti apsolutna
+putanja do ovog foldera u checkoutu koji ga sadrži (poslije merge-a: `main`). Putanja do gate
+izvještaja je worktree faze 1. Probni run nije sačuvao izlazni fajl; njegove brojke su samo u
+[INTERVENTIONS §1.9](../INTERVENTIONS.md).
 
 ```sh
-A=docs/research/review-2026-11-11/analysis
+A=/apsolutna/putanja/do/docs/research/review-2026-11-11/analysis
 GATE=../task-026-stage-1/.local/gate/adr030/waf-0.1-ros-1.json
 nice -n 19 $P -B $A/train_bench_analysis.py .local/bench/adr030-train.json .local/gridmet/feds-episode-weather-v1.json
 nice -n 19 $P -B $A/extra.py $GATE .local/bench/adr030-train.json
