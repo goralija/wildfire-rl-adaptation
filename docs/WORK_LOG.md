@@ -4,6 +4,16 @@ title: Work log
 ---
 # Work log
 
+2026-11-12 — Na Harunov zahtjev pet analiza nakon ADR-032 (subagenti, samo čitanje i TRAIN-only
+izračuni nad postojećim izlazima; jedan probni SimFire run `advancing_front` B=4 na 98 TRAIN
+požara) prenio sam u `docs/research/review-2026-11-11/` sa sažetkom na bosanskom. Root HANDOFF
+je bio iz 7. 11. i opisivao poništene rezultate; prepisao sam ga kao ulaz za nastavak. Dodao
+sam TASK-028–033 u backlog i napomene na mjesta gdje dokumentacija zaostaje za kodom. ADR-ovi
+nisu mijenjani. Ništa nije trenirano; merge i odluke ostaju Harunovi. Lokalno stanje 2026-11-12: u
+`.worktrees/synthetic-ca-training` stoji 8 neaktivnih Python procesa od 5. 11. (nisu dirani).
+Revizija PR-a #19 je pokazala da sam pisao kao da PR #17 i #18 nisu spojeni (lokalni `main` je
+zaostajao); ispravljeno, a PR #19 je preusmjeren na `main`.
+
 2026-11-09 — TASK-027 u worktreeu `.worktrees/task-027-feds-utc-dedup`. Generator manifesta
 zadržava jedan zapis po FEDS požaru (columbus ispada, 98 TRAIN); prije izmjene je reprodukovao
 stari manifest osim `created_utc`. Provjera izvora (fireatlas v1.4.1, Zenodo, Chen 2022) je

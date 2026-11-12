@@ -24,7 +24,7 @@ dozvoljava tvrdnju da je agent naučio nešto prenosivo.
 |---|---|---|
 | Trening | proceduralno generisani pejzaži i vrijeme | seed ≥ 1 000 000 |
 | Validacija tokom treninga | isti generator, fiksni skup | seed 0–255 |
-| Završni test | 119 lokalnih FEDS slučajeva (99 bivši TRAIN + 20 bivši VALIDATION) | samo nakon zaključavanja politike |
+| Završni test | 119 lokalnih FEDS slučajeva (99 bivši TRAIN + 20 bivši VALIDATION); od TASK-027 118 (98 + 20) | samo nakon zaključavanja politike |
 
 Stvarni rasteri se nikad ne koriste kao predlošci za trening. Generator koristi vlastite,
 dokumentovane priore za udio goriva, ne histogram stvarnih slučajeva. TEST 2024 ostaje
@@ -59,6 +59,8 @@ brojevima. Zasebna dijagnostika poredi no-op rast u simulatoru s opaženim FEDS 
     su pretpostavke, ne fitovane vrijednosti.
 - Kalibracija `k` je mjerena na ravnim linijskim požarima pri referentnom vjetru. Nakon nje
   emergentna brzina čela za FBFM 1, 2, 4, 5, 8 i 10 odstupa od tabele najviše 12%.
+  (Komentar u `synthetic_ca.py` kaže „oko 20%“; neslaganje nije razriješeno, vidi
+  [pregled 2026-11-11](review-2026-11-11/INTERVENTIONS.md).)
 - Vrijeme gorenja ćelije: minimalno trajanje po grupi (trava 30, grmlje 60, šuma 180,
   otpad 240 min; pretpostavka) plus vrijeme prelaska ćelije bez vjetra, najviše 12h.
 - Rijetko paljenje iskrama niz vjetar, tako da linija nije apsolutno neprobojna.
@@ -161,9 +163,10 @@ slučajevima je opisni: heuristika za poređenje zadaje se unaprijed
 
 ## Heurističke politike (osnova za poređenje)
 
-Kod je u `src/wildfire_rl/synthetic_heuristics.py`. Heuristike vide samo ono što je i u
-opažanju agenta: trenutnu vatru, liniju, gorivo, jedinice i trenutni vjetar. Ne vide
-no-op rollout niti buduće vrijeme.
+Kod je u `src/wildfire_rl/synthetic_heuristics.py`. Heuristike vide iste vrste podataka kao
+agent: trenutnu vatru, liniju, gorivo, jedinice i trenutni vjetar. Ne vide no-op rollout niti
+buduće vrijeme. Ali ih čitaju u punoj rezoluciji, dok agent vidi kartu sažetu 2×2 i prozor
+15×15 oko svake jedinice (ispravka 2026-11-12, [pregled](review-2026-11-11/INTERVENTIONS.md)).
 
 | Politika | Šta radi (svaki sat, za svaku jedinicu) |
 |---|---|

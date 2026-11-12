@@ -1,0 +1,4 @@
+initial active-front cells: median 68 p10 16 p90 206; scar cells median 193
+share of fires whose initial front has > 7 cells: 1.00, > 28 cells: 0.69
+fires with >=3 distinct decision-0 sectors observed at B=1: 98; best-worst range median 118 ha mean 440 ha; best-vs-average-sector mean 288 ha
+sectors observed per fire (B=1, decision 0): median 6.0

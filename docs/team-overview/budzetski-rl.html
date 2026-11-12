@@ -1,0 +1,1465 @@
+<title>Budžetski RL za požare</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400&display=swap">
+<style>
+/* Layout: istraživački dnevnik — uska kolona za čitanje, sadržaj sa strane na širokom ekranu, dijagrami i tabele u punoj širini kolone. */
+:root {
+  --paper: #f3f5f2;
+  --panel: #ffffff;
+  --ink: #1b221f;
+  --muted: #59655f;
+  --rule: #d3dad4;
+  --wash: #e7ece7;
+  --ember: #b23c14;
+  --ok: #2c6a47;
+  --bad: #a3271f;
+  --warn: #8a5f00;
+  --map-fuel: #c9d6bf;
+  --map-burn: #3a2f2a;
+  --map-front: #e0601f;
+  --map-line: #2457a6;
+  --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121614; --panel: #1a201d; --ink: #e3e9e4; --muted: #9ba7a0; --rule: #2d3631;
+    --wash: #1f2724; --ember: #f07a47; --ok: #6cc391; --bad: #f2796d; --warn: #e2b54c;
+    --map-fuel: #34442f; --map-burn: #0b0d0c; --map-front: #ff8a4c; --map-line: #79a7f2;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121614; --panel: #1a201d; --ink: #e3e9e4; --muted: #9ba7a0; --rule: #2d3631;
+  --wash: #1f2724; --ember: #f07a47; --ok: #6cc391; --bad: #f2796d; --warn: #e2b54c;
+  --map-fuel: #34442f; --map-burn: #0b0d0c; --map-front: #ff8a4c; --map-line: #79a7f2;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink);
+  font-family: var(--f-body); font-size: 1.0625rem; line-height: 1.62;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.shell { max-width: 72rem; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr); gap: 3rem; padding-block: 3rem 5rem; }
+@media (min-width: 1080px) { .shell { grid-template-columns: 14rem minmax(0, 46rem); justify-content: center; } }
+main { min-width: 0; }
+nav.toc { font-family: var(--f-display); font-size: .86rem; }
+@media (min-width: 1080px) { nav.toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 2rem); align-self: start; } }
+nav.toc p { font-weight: 700; letter-spacing: .08em; text-transform: uppercase; font-size: .72rem; color: var(--muted); margin: 0 0 .6rem; }
+nav.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: .35rem; }
+nav.toc a { color: var(--ink); text-decoration: none; border-bottom: 1px solid transparent; }
+nav.toc a:hover, nav.toc a:focus-visible { border-bottom-color: var(--ember); outline: none; }
+@media (max-width: 1079px) { nav.toc ol { grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); } nav.toc { border-bottom: 1px solid var(--rule); padding-bottom: 1.2rem; order: 1; } main { order: 2; } }
+
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; line-height: 1.12; margin: 0; }
+h1 { font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 760; font-stretch: 88%; letter-spacing: -.01em; }
+h2 { font-size: 1.6rem; font-weight: 720; font-stretch: 92%; margin-top: 3.6rem; padding-top: 1.2rem; border-top: 2px solid var(--ink); }
+h3 { font-size: 1.12rem; font-weight: 700; margin-top: 2rem; }
+p { margin: .9rem 0; }
+a { color: var(--ember); }
+.eyebrow { font-family: var(--f-display); font-size: .74rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.lede { font-size: 1.22rem; line-height: 1.5; color: var(--ink); margin-top: 1.2rem; }
+code, .mono { font-family: var(--f-mono); font-size: .86em; }
+.num { font-variant-numeric: tabular-nums; }
+
+.status { margin-top: 2rem; background: var(--panel); border: 1px solid var(--rule); border-left: 4px solid var(--ember); padding: 1.1rem 1.3rem; }
+.status h3 { margin: 0 0 .5rem; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ember); }
+.status p { margin: .4rem 0; }
+
+.chip { display: inline-block; font-family: var(--f-display); font-size: .7rem; font-weight: 650; letter-spacing: .05em; text-transform: uppercase; padding: .12rem .5rem; border-radius: 3px; border: 1px solid currentColor; white-space: nowrap; vertical-align: .12em; }
+.chip.ok { color: var(--ok); }
+.chip.bad { color: var(--bad); }
+.chip.warn { color: var(--warn); }
+.chip.hist { color: var(--muted); }
+
+ul.tight { padding-left: 1.2rem; margin: .8rem 0; }
+ul.tight li { margin: .45rem 0; }
+
+ol.timeline { list-style: none; margin: 1.6rem 0 0; padding: 0; counter-reset: ph; display: grid; gap: 0; }
+ol.timeline > li { counter-increment: ph; display: grid; grid-template-columns: 3.2rem minmax(0, 1fr); gap: 0 1rem; position: relative; padding-bottom: 1.8rem; }
+ol.timeline > li::before { content: counter(ph); font-family: var(--f-display); font-weight: 760; font-size: 1.05rem; width: 2.4rem; height: 2.4rem; border-radius: 50%; border: 2px solid var(--ink); display: grid; place-items: center; background: var(--paper); position: relative; z-index: 1; }
+ol.timeline > li::after { content: ""; position: absolute; left: 1.2rem; top: 2.4rem; bottom: 0; border-left: 2px solid var(--rule); }
+ol.timeline > li:last-child::after { display: none; }
+.tl-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .3rem .7rem; }
+.tl-head h3 { margin: 0; }
+.tl-date { font-family: var(--f-mono); font-size: .8rem; color: var(--muted); }
+.tl-body p { margin: .5rem 0; }
+
+.tablewrap { overflow-x: auto; margin: 1.4rem 0; border: 1px solid var(--rule); background: var(--panel); }
+table { border-collapse: collapse; width: 100%; font-size: .9rem; line-height: 1.45; }
+th, td { text-align: left; vertical-align: top; padding: .6rem .75rem; border-bottom: 1px solid var(--rule); }
+thead th { font-family: var(--f-display); font-size: .74rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--wash); }
+tbody th { font-family: var(--f-display); font-weight: 650; font-size: .84rem; white-space: nowrap; }
+tr:last-child td, tr:last-child th { border-bottom: 0; }
+table.env { min-width: 54rem; }
+
+figure { margin: 1.8rem 0; }
+figure .fig { background: var(--panel); border: 1px solid var(--rule); padding: 1rem; overflow-x: auto; }
+figcaption { font-size: .88rem; color: var(--muted); margin-top: .6rem; line-height: 1.5; }
+svg text { font-family: var(--f-display); }
+.s-ink { fill: var(--ink); } .s-muted { fill: var(--muted); } .s-panel { fill: var(--panel); }
+.s-fuel { fill: var(--map-fuel); } .s-burn { fill: var(--map-burn); } .s-front { fill: var(--map-front); } .s-line { fill: var(--map-line); }
+.s-bad { fill: var(--bad); } .s-ok { fill: var(--ok); }
+.k-rule { stroke: var(--rule); } .k-ink { stroke: var(--ink); } .k-bad { stroke: var(--bad); } .k-ok { stroke: var(--ok); } .k-muted { stroke: var(--muted); } .k-front { stroke: var(--map-front); }
+
+.flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: .6rem; counter-reset: fl; }
+.flow > div { background: var(--wash); border: 1px solid var(--rule); padding: .7rem .8rem; font-size: .86rem; line-height: 1.4; position: relative; }
+.flow b { display: block; font-family: var(--f-display); font-size: .82rem; letter-spacing: .02em; margin-bottom: .25rem; }
+.flow .hot { background: var(--panel); border-color: var(--ember); }
+.flow .closed { border-style: dashed; color: var(--muted); }
+
+.pr { border-top: 1px solid var(--rule); padding-top: 1rem; margin-top: 1.2rem; }
+.pr h3 { margin-top: 0; display: flex; flex-wrap: wrap; gap: .4rem .7rem; align-items: baseline; }
+.pr h3 span.mono { font-weight: 400; color: var(--muted); font-size: .8rem; }
+.pr dl { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: .35rem 1rem; margin: .6rem 0 0; font-size: .95rem; }
+.pr dt { font-family: var(--f-display); font-size: .74rem; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding-top: .2rem; }
+.pr dd { margin: 0; }
+@media (max-width: 560px) { .pr dl { grid-template-columns: minmax(0, 1fr); } .pr dt { padding-top: .5rem; } }
+
+.callout { background: var(--wash); padding: 1rem 1.2rem; margin: 1.4rem 0; border-left: 3px solid var(--muted); }
+.callout p { margin: .35rem 0; }
+
+dl.gloss { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: .55rem 1.2rem; font-size: .95rem; }
+dl.gloss dt { font-family: var(--f-display); font-weight: 700; font-size: .88rem; }
+dl.gloss dd { margin: 0; }
+@media (max-width: 560px) { dl.gloss { grid-template-columns: minmax(0, 1fr); } dl.gloss dd { margin-bottom: .5rem; } }
+
+ol.stages { padding-left: 1.3rem; }
+ol.stages li { margin: .7rem 0; }
+footer { margin-top: 4rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-size: .85rem; color: var(--muted); }
+/* Grafikoni: tri porodice politika (PPO, heuristike, nasumična linija), provjereno validatorom za oba režima. */
+:root { --c-ppo: #2457a6; --c-heur: #b23c14; --c-rand: #1f8a5c; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --c-ppo: #5f8dd6; --c-heur: #e0683a; --c-rand: #4fa883; } }
+:root[data-theme="dark"] { --c-ppo: #5f8dd6; --c-heur: #e0683a; --c-rand: #4fa883; }
+.f-ppo { fill: var(--c-ppo); } .f-heur { fill: var(--c-heur); } .f-rand { fill: var(--c-rand); }
+.k-ppo { stroke: var(--c-ppo); } .s-wash { fill: var(--wash); } .s-warn { fill: var(--warn); } .k-warn { stroke: var(--warn); }
+svg .t-mono { font-family: var(--f-mono); }
+svg .halo { paint-order: stroke; stroke: var(--panel); stroke-width: 5px; stroke-linejoin: round; }
+svg .mark { transition: opacity .12s; }
+svg .mark:hover { opacity: .72; }
+.fig svg { display: block; max-width: 100%; height: auto; }
+.fig.wide svg { min-width: 40rem; }
+.legend { display: flex; flex-wrap: wrap; gap: .3rem 1.1rem; font-family: var(--f-display); font-size: .78rem; color: var(--muted); margin: 0 0 .6rem; }
+.legend span { display: inline-flex; align-items: center; gap: .4rem; }
+.legend i { width: .8rem; height: .8rem; border-radius: 2px; display: inline-block; }
+.modlist { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: .8rem; margin: 1rem 0; }
+.modlist > div { background: var(--panel); border: 1px solid var(--rule); padding: .8rem 1rem; font-size: .9rem; min-width: 0; }
+.modlist b { font-family: var(--f-display); display: block; margin-bottom: .3rem; }
+.modlist code { display: inline-block; margin: .1rem .3rem .1rem 0; overflow-wrap: anywhere; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+html { scroll-behavior: smooth; }
+</style>
+
+<div class="shell">
+<nav class="toc" aria-label="Sadržaj">
+  <p>Sadržaj</p>
+  <ol>
+    <li><a href="#ukratko">Ukratko</a></li>
+    <li><a href="#problem">Problem kao MDP</a></li>
+    <li><a href="#alati">Šta agent smije raditi</a></li>
+    <li><a href="#podaci">Od stvarnog požara do epizode</a></li>
+    <li><a href="#kod">Kako je kod složen</a></li>
+    <li><a href="#gate">Zašto simulator mora proći gate</a></li>
+    <li><a href="#hronologija">Hronologija</a></li>
+    <li><a href="#okruzenja">Četiri okruženja</a></li>
+    <li><a href="#greska">Greška koja je sve poništila</a></li>
+    <li><a href="#ispravke">Ispravke i revizija</a></li>
+    <li><a href="#protokol">Novi protokol</a></li>
+    <li><a href="#rezultati">Novi rezultati</a></li>
+    <li><a href="#pregled">Pregled nakon faze 2</a></li>
+    <li><a href="#vazi">Šta važi, a šta ne</a></li>
+    <li><a href="#dalje">Šta slijedi</a></li>
+    <li><a href="#nastavak">Kako nastaviti rad</a></li>
+    <li><a href="#nacin">Kako je rad vođen</a></li>
+    <li><a href="#dodatak">Dodatak: detalji</a></li>
+    <li><a href="#rjecnik">Rječnik</a></li>
+  </ol>
+</nav>
+
+<main>
+<header>
+  <div class="eyebrow">Predmet MPVI · Amar Hodžić, Belmin Durmo, Harun Goralija · stanje 12. 11. 2026.</div>
+  <h1>Može li RL agent naučiti kako da rasporedi ograničen broj vatrogasnih linija?</h1>
+  <p class="lede">Pregled rada od 28. 10. do 12. 11. 2026.: koja su okruženja napravljena, šta je trenirano, šta je pošlo po zlu i kako je ispravljeno. Tekst je pisan za čitaoca koji poznaje reinforcement learning, a ne poznaje ovaj projekat.</p>
+  <p>Dvije napomene za čitanje. Stručni pojmovi i skraćenice objašnjeni su u <a href="#rjecnik">Rječniku</a> na kraju. Kod su najvećim dijelom pisali AI asistenti za programiranje (dalje: coding agent), po nalogu Haruna Goralije. Riječ „agent“ bez dodatka uvijek znači RL agenta.</p>
+  <div class="status">
+    <h3>Gdje smo sada</h3>
+    <p><strong>Pitanje.</strong> Može li RL agent, koji smije postaviti najviše B vatrogasnih linija po požaru, u simulatoru smanjiti izgorjelu površinu više nego jednostavna pravila? I pomaže li mu dodatni trening za tačno zadani B?</p>
+    <p><strong>Odgovor za sada.</strong> Nema dokaza ni za jedno. U ponovljenom eksperimentu (10 nezavisnih treninga, 20 požara koje agent nije vidio tokom treninga) izmjerene razlike su male i mogle su nastati slučajno. Simulator je prije toga prošao unaprijed zadanu provjeru. Ta provjera je slaba i ne znači da simulator vjerno prati stvarne požare. Brojevi su u odjeljku <a href="#rezultati">Novi rezultati</a>.</p>
+    <p><strong>Zašto ponovljeni eksperiment.</strong> Raniji rezultati su poništeni 9. 11., jer je simulator svakom požaru davao meteorološke podatke nekog drugog požara.</p>
+    <p><strong>Šta je novo (11.–12. 11.).</strong> Pregled literature i dijagnoza bez novih treninga. Rezultat je očekivan, a duže epizode vjerovatno nisu rješenje. Prvo treba izmjeriti koliko je bolje uopšte moguće. Detalji su u odjeljku <a href="#pregled">Pregled nakon faze 2</a>.</p>
+    <p><strong>Šta čeka.</strong> Faze 1 i 2 su prihvaćene u glavnu verziju koda (PR #17, #18). Pregled nakon faze 2 (PR #19) čeka Harunov merge. Trening na drugom, sintetičkom simulatoru (faza 3) nije pokrenut. Kako preuzeti rad: <a href="#nastavak">Kako nastaviti rad</a>.</p>
+  </div>
+</header>
+
+<section id="ukratko">
+<h2>Ukratko</h2>
+<ul class="tight">
+  <li><strong>Pitanje.</strong> Da li fine-tuning prethodno treniranog RL agenta za tačno zadani budžet intervencija smanjuje opožarenu površinu? Poređenje je sa istim agentom bez prilagodbe i s jednostavnim pravilima (heuristikama). Prije toga se mora pokazati da osnovni agent išta nauči, tj. da je bolji od nasumično postavljene linije i od tih pravila.</li>
+  <li><strong>Okruženja.</strong> Prvo je napravljen simulator SimFire, pokrenut od stvarnih početnih stanja 118 američkih požara (98 TRAIN, 20 VALIDATION). Podaci su satelitski obodi požara (FEDS), karta goriva (LANDFIRE) i dnevni meteorološki podaci (gridMET). Kasnije je napravljen i vlastiti sintetički celularni automat (CA) s fizički ograničenim ekipama. Koji je od njih glavni za poster još nije odlučeno.</li>
+  <li><strong>Provjera simulatora.</strong> Bez ijedne intervencije, simulator mora predvidjeti rast stvarnog požara bolje od trivijalne reference. Ta provjera se ovdje zove gate. Dok je simulator ne prođe, RL rezultat se smatra samo eksploratornim.</li>
+  <li><strong>Prvi, eksploratorni rezultati (poništeni).</strong> PPO je bio bolji od nečinjenja, ali se nije mogao razlikovati od nasumično postavljene linije ni od jednostavne heuristike. Fine-tuning po budžetu nije pomogao. U sintetičkom okruženju agent je, nakon imitacije heuristike i PPO-a, ostao izjednačen sa svojim učiteljem.</li>
+  <li><strong>Revizija 9. 11.</strong> Gotovo svi požari su dobili meteorološke podatke nekog drugog požara, u prosjeku (medijan) 782 km daljeg. Agent je uz to vidio meteorološke podatke iz budućnosti. Pronađen je i niz drugih grešaka u mjeri, okruženju, statistici i automatskim testovima. Svi dotadašnji rezultati glavnih eksperimenata proglašeni su nevažećim.</li>
+  <li><strong>Ispravke.</strong> Greške su ispravljene u pet pull requestova, tj. izmjena koda koje se pregledaju prije prihvatanja. Svaki je pregledao nezavisni recenzent s namjerno suženim kontekstom. Pravila za ponovno pokretanje zapisana su unaprijed, da rezultati ne bi uticali na izbor mjere. Ostaje neriješeno: u rijetkim epizodama linija spali više nego nečinjenje, zbog redoslijeda širenja u SimFire-u.</li>
+  <li><strong>Novi gate (9. 11.).</strong> Simulator je prošao. Njegov rast se sa stvarnim poklapa bolje nego rast elipse: IoU rasta 0,096 prema 0,026, na skali od 0 do 1. To je slab dokaz, jer je elipsa vrlo mala, a simulator širi vatru i tamo gdje je stvarni požar stao.</li>
+  <li><strong>Novi benchmark (10. 11.).</strong> Deset nezavisnih treninga (seedova), 40 politika i jedno ocjenjivanje na 20 VALIDATION požara. Ni u jednom od šest glavnih poređenja nije pokazano da se PPO razlikuje od nasumične linije ili od heuristike izabrane na TRAIN-u. Fine-tuning po budžetu ne daje mjerljiv dobitak. Sedam od deset osnovnih politika u svakoj epizodi kreće istim smjerom na mapi, bez obzira na požar.</li>
+</ul>
+</section>
+
+<section id="problem">
+<h2>Problem kao MDP</h2>
+<p>Profesor je tražio dvije stvari: preciznu definiciju intervencije i jasnu odluku o tome šta se mijenja prilagodbom. Odgovor projekta je epizodni MDP (Markovljev proces odlučivanja: stanje, akcija, nagrada) sa budžetom kao dijelom stanja.</p>
+<p>Nekoliko pojmova o požaru. Vatrogasna linija je pojas s kojeg je uklonjena vegetacija, da vatra nema šta gorjeti. U simulatoru je to niz ćelija koje zaustavljaju širenje, osim kad vatra naiđe vrlo brzo. Front je dio požara koji trenutno gori, a obod je granica svega što je izgorjelo. No-op znači ne uraditi ništa. Jedna ćelija mape je 180 × 180 m, tj. 3,24 ha.</p>
+<div class="tablewrap"><table>
+  <tbody>
+    <tr><th>Epizoda</th><td>48 sati od stvarnog početnog stanja požara: 4 odluke, po jedna na svakih 12 h. Simulator unutra radi s korakom od 5 minuta. Epizoda ne završava kad se potroši budžet ni kad se vatra ugasi, pa su sve epizode iste dužine.</td></tr>
+    <tr><th>Stanje / opservacija</th><td>Karta 16×16, sažeta iz mreže 256×256 ćelija od 180 m, s 4 kanala: izgorjelo, gori, linija, gorivo. Uz kartu: početni i preostali budžet, vjetar (brzina, sin/cos smjera), vlaga goriva, vrijeme epizode.</td></tr>
+    <tr><th>Akcija</th><td><span class="mono">Discrete(9)</span>: ne radi ništa (no-op) ili postavi jednu liniju u jednom od 8 sektora oko vatre. Linija se postavlja 2 ćelije (360 m) ispred vodeće ćelije fronta u tom sektoru, okomito na smjer sektora. Sektori su vezani za strane svijeta, a ne za smjer vjetra. Na dijagonalnim sektorima razmak su 2 dijagonalna koraka, oko 509 m. Nedozvoljene akcije su maskirane, pa se koristi <span class="mono">MaskablePPO</span>.</td></tr>
+    <tr><th>Budžet</th><td>B ∈ {0, 1, 2, 4} jedinica po epizodi. Jedna jedinica je jedna smjena ekipe od 20 ljudi, modelovana kao oko 1,26 km linije (7 ćelija u ravnom smjeru, 9 u dijagonalnom). To je unutar NWCG raspona od oko 0,3–2,4 km po smjeni. Najviše jedna linija po odluci.</td></tr>
+    <tr><th>Nagrada</th><td>−(novoizgorjele ćelije)/100. Budući stvarni obodi požara se nikad ne koriste u nagradi ni u opservaciji. Služe samo za kasniju ocjenu simulatora.</td></tr>
+    <tr><th>Prilagodba</th><td>Osnovna politika se trenira na B=2, pa se fine-tunea na B=1 i B=4. <strong>Kontrola:</strong> fine-tuning iste dužine na B=2. Bez kontrole bi se svaki dobitak mogao pripisati samo dodatnom treningu, a ne prilagodbi budžetu.</td></tr>
+    <tr><th>Poređenja</th><td>Osnovna politika bez dodatnog treninga („zamrznuta“), fine-tuned politika i heuristike: no-op, nasumična dozvoljena linija, linija niz vjetar (<span class="mono">downwind</span>) i linija ispred napredujućeg fronta (<span class="mono">advancing_front</span>). Sve politike dobijaju iste scenarije, budžete, opservacije i seed, a razlike se mjere upareno po scenariju.</td></tr>
+  </tbody>
+</table></div>
+<figure>
+  <div class="fig">
+<svg viewBox="0 0 680 330" role="img" aria-label="Petlja agent–okruženje i vremenska osa jedne epizode: četiri odluke u 0, 12, 24 i 36 h, između njih SimFire radi 144 koraka po 5 minuta; stvarni FEDS obodi koriste se samo za ocjenu simulatora.">
+<defs><marker id="ea" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="s-ink"/></marker></defs>
+<defs><marker id="eb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="s-muted"/></marker></defs>
+<rect x="20" y="40" width="150" height="58" rx="3" class="s-panel k-ink" stroke-width="1.5"/>
+<text x="95" y="64" text-anchor="middle" font-size="13" font-weight="700" class="s-ink">Politika</text>
+<text x="95" y="83" text-anchor="middle" font-size="11" class="s-muted">PPO ili heuristika</text>
+<rect x="265" y="40" width="150" height="58" rx="3" class="s-panel k-ink" stroke-width="1.5"/>
+<text x="340" y="64" text-anchor="middle" font-size="13" font-weight="700" class="s-ink">Okruženje</text>
+<text x="340" y="83" text-anchor="middle" font-size="11" class="s-muted">maska akcija, budžet B</text>
+<rect x="510" y="40" width="150" height="58" rx="3" class="s-panel k-ink" stroke-width="1.5"/>
+<text x="585" y="64" text-anchor="middle" font-size="13" font-weight="700" class="s-ink">SimFire</text>
+<text x="585" y="83" text-anchor="middle" font-size="11" class="s-muted">širi vatru, 8 susjeda</text>
+<text x="10" y="20" font-size="12" font-weight="700" class="s-ink">Jedna odluka (ponavlja se 4 puta)</text>
+<line x1="170" y1="62" x2="263" y2="62" class="k-ink" stroke-width="1.5" marker-end="url(#ea)"/>
+<text x="217" y="54" text-anchor="middle" font-size="10.5" class="s-ink">akcija 0–8</text>
+<line x1="415" y1="62" x2="508" y2="62" class="k-ink" stroke-width="1.5" marker-end="url(#ea)"/>
+<text x="462" y="54" text-anchor="middle" font-size="10.5" class="s-ink">linija ≈1,26 km</text>
+<path d="M585 98 V128 H95 V100" fill="none" class="k-ink" stroke-width="1.5" marker-end="url(#ea)"/>
+<text x="340" y="146" text-anchor="middle" font-size="11" class="s-ink">nagrada = −(nove izgorjele ćelije) / 100</text>
+<text x="340" y="162" text-anchor="middle" font-size="11" class="s-muted">opservacija: karta 4×16×16, preostali budžet, vjetar i vlaga iz zadnjeg završenog dana, vrijeme</text>
+<text x="10" y="200" font-size="12" font-weight="700" class="s-ink">Epizoda: 48 h od stvarnog početnog stanja</text>
+<rect x="60.0" y="228" width="145.0" height="22" class="s-wash k-rule" stroke-width="1"/>
+<text x="132.5" y="243" text-anchor="middle" font-size="10.5" class="s-muted">144 koraka × 5 min</text>
+<path d="M60.0 222 l-6 -9 h12 z" class="s-front"/>
+<text x="69.0" y="218" font-size="10.5" class="s-ink">odluka 1</text>
+<rect x="205.0" y="228" width="145.0" height="22" class="s-panel k-rule" stroke-width="1"/>
+<text x="277.5" y="243" text-anchor="middle" font-size="10.5" class="s-muted">144 koraka × 5 min</text>
+<path d="M205.0 222 l-6 -9 h12 z" class="s-front"/>
+<text x="214.0" y="218" font-size="10.5" class="s-ink">odluka 2</text>
+<rect x="350.0" y="228" width="145.0" height="22" class="s-wash k-rule" stroke-width="1"/>
+<text x="422.5" y="243" text-anchor="middle" font-size="10.5" class="s-muted">144 koraka × 5 min</text>
+<path d="M350.0 222 l-6 -9 h12 z" class="s-front"/>
+<text x="359.0" y="218" font-size="10.5" class="s-ink">odluka 3</text>
+<rect x="495.0" y="228" width="145.0" height="22" class="s-panel k-rule" stroke-width="1"/>
+<text x="567.5" y="243" text-anchor="middle" font-size="10.5" class="s-muted">144 koraka × 5 min</text>
+<path d="M495.0 222 l-6 -9 h12 z" class="s-front"/>
+<text x="504.0" y="218" font-size="10.5" class="s-ink">odluka 4</text>
+<line x1="60.0" y1="250" x2="60.0" y2="256" class="k-ink" stroke-width="1"/>
+<text x="60.0" y="268" text-anchor="middle" font-size="10.5" class="s-ink">0 h</text>
+<line x1="205.0" y1="250" x2="205.0" y2="256" class="k-ink" stroke-width="1"/>
+<text x="205.0" y="268" text-anchor="middle" font-size="10.5" class="s-ink">12 h</text>
+<line x1="350.0" y1="250" x2="350.0" y2="256" class="k-ink" stroke-width="1"/>
+<text x="350.0" y="268" text-anchor="middle" font-size="10.5" class="s-ink">24 h</text>
+<line x1="495.0" y1="250" x2="495.0" y2="256" class="k-ink" stroke-width="1"/>
+<text x="495.0" y="268" text-anchor="middle" font-size="10.5" class="s-ink">36 h</text>
+<line x1="640.0" y1="250" x2="640.0" y2="256" class="k-ink" stroke-width="1"/>
+<text x="640.0" y="268" text-anchor="middle" font-size="10.5" class="s-ink">48 h</text>
+<circle cx="205.0" cy="290" r="4.5" fill="none" class="k-muted" stroke-width="1.5"/>
+<circle cx="350.0" cy="290" r="4.5" fill="none" class="k-muted" stroke-width="1.5"/>
+<circle cx="495.0" cy="290" r="4.5" fill="none" class="k-muted" stroke-width="1.5"/>
+<circle cx="640.0" cy="290" r="4.5" fill="none" class="k-muted" stroke-width="1.5"/>
+<text x="60" y="294" font-size="10.5" class="s-muted">stvarni FEDS obod →</text>
+<text x="60" y="316" font-size="10.5" class="s-muted">obodi na +12…+48 h nikad ne ulaze u opservaciju ni nagradu; služe samo za ocjenu simulatora (gate)</text>
+</svg>
+  </div>
+  <figcaption>Gore: šta se dešava u jednoj odluci. Politika dobije opservaciju i masku dozvoljenih akcija, izabere no-op ili sektor, okruženje postavi liniju i skine budžet, a SimFire zatim simulira narednih 12 h. Dole: cijela epizoda. Ima uvijek 4 odluke i 576 koraka simulatora, bez obzira na to koliko je budžeta ostalo. U fazi 2 to je dalo 4 × 3.520 = 14.080 odluka na VALIDATION-u.</figcaption>
+</figure>
+<p>Ovo je namjerno grub model intervencije: linija se pojavi trenutno, a putovanje ekipe, gradnja kroz vrijeme i probijanje linije nisu modelovani. Sintetički CA (opisan niže) nastao je upravo da bi se to modelovalo.</p>
+</section>
+
+<section id="alati">
+<h2>Šta agent i heuristike smiju raditi</h2>
+<p>Ni u jednom simulatoru nema aviona, helikoptera, vode, retardanta, vatrogasnih vozila ni kontrolisanog paljenja. SimFire kao paket ima tablice za dozere, avione i helikoptere, ali ih sam nikad ne koristi, a projekat koristi samo običnu liniju. Sve politike dobijaju istu opservaciju i iste akcije; razlikuju se samo po tome kako biraju.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Politika</th><th>Kako bira akciju u SimFire okruženju</th></tr></thead>
+  <tbody>
+    <tr><th>PPO agent</th><td>Neuronska mreža bira no-op ili jedan od 8 sektora iz opservacije: karta 16×16 (izgorjelo, gori, linija, gorivo; bez nagiba), budžet, vrijeme i vrijeme od prethodnog dana. Nedozvoljeni sektori su maskirani.</td></tr>
+    <tr><th class="mono">downwind</th><td>Sektor najbliži smjeru niz vjetar, po vjetru koji vidi i agent (prethodni dan).</td></tr>
+    <tr><th class="mono">advancing_front</th><td>Sektor u kojem front najviše napreduje. Izabran na TRAIN-u prije VALIDATION-a.</td></tr>
+    <tr><th>Nasumična linija</th><td>Nasumičan dozvoljen sektor. Isti seed kreće ispočetka na svakom požaru, pa ponavlja iste smjerove.</td></tr>
+    <tr><th>No-op</th><td>Nikad ne postavi liniju. Mjera koliko bi izgorjelo bez intervencije.</td></tr>
+  </tbody>
+</table></div>
+<ul class="tight">
+  <li><strong>Šta linija jeste.</strong> Jedna budžetska jedinica je jedna smjena ekipe od 20 ljudi. Okruženje, a ne politika, postavlja ćelije: 7 u ravnom smjeru (1,26 km), 9 u dijagonalnom (1,27 km), okomito na sektor, 360 m ispred vodeće ćelije fronta. Linija se pojavi odmah i samo na negorućim ćelijama; najviše jedna po odluci. Neiskorišten budžet ne vrijedi ništa.</li>
+  <li><strong>Linija u provjeri nije propustila.</strong> Vatra je prelazi tek pri brzini širenja iznad oko 18 km/h. U probnom pokretanju na 98 TRAIN požara (<span class="mono">advancing_front</span>, B=4) od 2.179 ćelija linije nijedna nije izgorjela. Vatra prolazi oko krajeva.</li>
+  <li><strong>Kad željeni sektor nije dozvoljen</strong>, obje heuristike ne rade ništa umjesto da probaju sljedeći najbolji. Efekat je mali, oko 10 od 1.000 odluka.</li>
+  <li><strong>Šteta se ovako računa:</strong> ćelija linije nikad ne izgori, pa se ne broji kao šteta ni kad bi je vatra bez linije spalila. Jedna linija tako dobije do oko 26 ha zasluge za svoju površinu. U sintetičkom CA-u se ta ćelija naplaćuje. Odluka kako računati u SimFire-u je otvorena.</li>
+  <li><strong>Sintetički CA</strong> jedini ima jedinice na terenu: 2–4 ekipe od 20 ljudi (3 km/h) ili dozera (2,5 km/h). Stižu u prva 3 h, putuju do vatre, grade liniju ćeliju po ćeliju brzinama iz priručnika NWCG i povlače se kad im se vatra približi na dvije ćelije. Ni tu nema aviona.</li>
+</ul>
+</section>
+
+<section id="podaci">
+<h2>Od stvarnog požara do epizode</h2>
+<p>Agent nikad ne uči iz zapisa stvarnog gašenja. Iz stvarnih podataka uzimaju se samo <em>početni uslovi</em> i <em>okolina</em>. Iskustvo za RL generiše simulator, a stvarni kasniji obodi služe samo kao referenca za provjeru simulatora.</p>
+<figure>
+  <div class="fig">
+    <div class="flow">
+      <div><b>1 · FPA-FOD</b>Američki registar požara. Okvir: požari od najmanje 5.000 acres (oko 2.000 ha) u deset zapadnih država; 208 TRAIN + 56 VALIDATION požara.</div>
+      <div><b>2 · Spajanje s FEDS</b>Požar iz registra mora se poklopiti s tačno jednim satelitskim požarom: po datumu (dan prije do dva dana poslije otkrića) i po mjestu (obod unutar 3 km u prva 24 h). Taj mora imati bar dva uzastopna 12-satna stanja.</div>
+      <div class="hot"><b>3 · Početno stanje</b>FEDS obod postaje izgorjela površina, a FEDS aktivni front postaje ćelije koje gore. Mreža 256×256 × 180 m.</div>
+      <div><b>4 · Okolina</b>LANDFIRE gorivo (vrsta vegetacije) i reljef. gridMET vjetar i vlaga za svakih 12 h, iz ćelije samog požara, za dan stvarnog satelitskog prolaza.</div>
+      <div class="hot"><b>5 · SimFire epizoda</b>4 odluke × 12 h. Politika bira liniju ili no-op.</div>
+      <div><b>6 · Provjera</b>Stvarni FEDS obodi na +12, +24, +36 i +48 h, učitani tek nakon simulacije.</div>
+    </div>
+  </div>
+  <figcaption>Tok podataka za SimFire okruženje, redom od 1 do 6. Istaknuta su dva koraka koja čine RL epizodu. Podjela je po godini: TRAIN 2018/2019 (98 požara nakon uklanjanja duplikata), VALIDATION 2023 (20), TEST 2024 je zatvoren i nikad nije preuzet.</figcaption>
+</figure>
+<figure>
+  <div class="fig">
+<svg viewBox="0 0 680 222" role="img" aria-label="Od 208 TRAIN i 56 VALIDATION kandidata, 99 i 20 se jednoznačno spajaju s FEDS-om; nakon uklanjanja duplikata ostaje 98 i 20.">
+<text x="10" y="16" font-size="11" class="s-muted">broj požara</text>
+<text x="10" y="42" font-size="12" font-weight="700" class="s-ink">1 · kandidati iz FPA-FOD</text>
+<text x="10" y="58" font-size="10.5" class="s-muted">≥5.000 acres, 10 zapadnih država</text>
+<rect class="mark s-ink" x="230" y="30" width="380.0" height="16" rx="2"><title>TRAIN: 208</title></rect>
+<text x="616.0" y="42" font-size="11" class="s-ink">208 TRAIN</text>
+<rect class="mark s-muted" x="230" y="50" width="102.3" height="16" rx="2"><title>VALIDATION: 56</title></rect>
+<text x="338.3" y="62" font-size="11" class="s-muted">56 VALIDATION</text>
+<text x="10" y="100" font-size="12" font-weight="700" class="s-ink">2 · tačno jedan FEDS požar</text>
+<text x="10" y="116" font-size="10.5" class="s-muted">≥2 uzastopna stanja, puna 48 h</text>
+<rect class="mark s-ink" x="230" y="88" width="180.9" height="16" rx="2"><title>TRAIN: 99</title></rect>
+<text x="416.9" y="100" font-size="11" class="s-ink">99 TRAIN</text>
+<rect class="mark s-muted" x="230" y="108" width="36.5" height="16" rx="2"><title>VALIDATION: 20</title></rect>
+<text x="272.5" y="120" font-size="11" class="s-muted">20 VALIDATION</text>
+<text x="10" y="158" font-size="12" font-weight="700" class="s-ink">3 · bez duplikata</text>
+<text x="10" y="174" font-size="10.5" class="s-muted">columbus i sugar-pine su isti požar</text>
+<rect class="mark s-ink" x="230" y="146" width="179.0" height="16" rx="2"><title>TRAIN: 98</title></rect>
+<text x="415.0" y="158" font-size="11" class="s-ink">98 TRAIN</text>
+<rect class="mark s-muted" x="230" y="166" width="36.5" height="16" rx="2"><title>VALIDATION: 20</title></rect>
+<text x="272.5" y="178" font-size="11" class="s-muted">20 VALIDATION</text>
+<text x="10" y="218" font-size="12" font-weight="700" class="s-muted">TEST 2024</text>
+<rect x="230" y="206" width="160" height="16" fill="none" class="k-muted" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="400" y="218" font-size="11" class="s-muted">zatvoren, nikad preuzet</text>
+</svg>
+  </div>
+  <figcaption>Koliko požara preživi svaki korak. Pravila spajanja su zadana prije prebrojavanja i nisu mijenjana. Kad je prvi okvir dao premalo požara, proširen je okvir kandidata, a pravila nisu dirana (ADR-018). Svaki od 118 požara je jedan scenarij, tj. jedno početno stanje za epizodu.</figcaption>
+</figure>
+<p>Uzorak nije reprezentativan. Uključuje samo velike požare u zapadnim državama SAD-a, jer samo oni imaju dovoljno satelitskih obrisa svakih 12 sati. Konačna površina požara koristi se samo za izbor požara koji ulaze u okvir. Ne ulazi u spajanje, opservaciju ni nagradu.</p>
+<div class="callout">
+  <p><strong>Šta je stvarno, a šta simulirano.</strong> Iz stvarnih požara dolaze početna izgorjela površina i aktivni front, gorivo, reljef i dnevni vjetar i vlaga (jedna vrijednost za cijelu mapu od 46 km). Logika širenja ne dolazi iz stvarnih požara: to su standardne Rothermelove jednačine u SimFire-u. Iz podataka je unaprijed zadanim pravilom izabran samo jedan par postavki (faktor vjetra i množilac brzine) od 17 kandidata: WAF 0,10 / ROS 1,0. To je ujedno najjači vjetar pri kojem nijedan požar ne dodirne rub mape.</p>
+  <p>Zato agent ne uči da gasi stvarni požar, nego da smanji izgorjelu površinu u SimFire simulaciji koja kreće iz stvarnog početnog stanja. Stvarni obodi poslije starta služe samo da se ocijeni simulator, i on ih slabo prati: preklapanje novog rasta je oko 10%, a na požarima koji su u stvarnosti stali simulator nastavlja goriti.</p>
+</div>
+</section>
+
+<section id="kod">
+<h2>Kako je kod složen</h2>
+<p>Repozitorij ima jedan glavni put kroz kod, od javnih podataka do brojeva u ADR-u. Svaka strelica ispod znači „ovo se koristi u sljedećem koraku“. Teški fajlovi (podaci, rasteri, modeli) ostaju lokalno u <span class="mono">.local/</span>. U git ide samo ono što drugi treba da provjeri: kod, zamrznute postavke s otiscima (sha256) i mali izvještaji.</p>
+<figure>
+  <div class="fig wide">
+<svg viewBox="0 0 680 540" role="img" aria-label="Mapa repozitorija za SimFire put: javni podaci, skripte za pripremu, jezgro u src/wildfire_rl, skripte faza 1 i 2, te dokazi u configs, reports i ADR-ovima.">
+<defs><marker id="ma" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="s-ink"/></marker></defs>
+<rect x="10" y="24" width="156" height="42" rx="3" class="s-wash k-ink" stroke-width="1.2"/>
+<text x="88.0" y="42.0" text-anchor="middle" font-size="11.5" font-weight="700" class="s-ink">FPA-FOD</text>
+<text x="88.0" y="56.0" text-anchor="middle" font-size="10" class="s-muted">registar požara</text>
+<rect x="178" y="24" width="156" height="42" rx="3" class="s-wash k-ink" stroke-width="1.2"/>
+<text x="256.0" y="42.0" text-anchor="middle" font-size="11.5" font-weight="700" class="s-ink">FEDS-CONUS</text>
+<text x="256.0" y="56.0" text-anchor="middle" font-size="10" class="s-muted">satelitski obodi, 12 h</text>
+<rect x="346" y="24" width="156" height="42" rx="3" class="s-wash k-ink" stroke-width="1.2"/>
+<text x="424.0" y="42.0" text-anchor="middle" font-size="11.5" font-weight="700" class="s-ink">LANDFIRE</text>
+<text x="424.0" y="56.0" text-anchor="middle" font-size="10" class="s-muted">gorivo i reljef</text>
+<rect x="514" y="24" width="156" height="42" rx="3" class="s-wash k-ink" stroke-width="1.2"/>
+<text x="592.0" y="42.0" text-anchor="middle" font-size="11.5" font-weight="700" class="s-ink">gridMET</text>
+<text x="592.0" y="56.0" text-anchor="middle" font-size="10" class="s-muted">dnevni vjetar i vlaga</text>
+<rect x="10" y="106" width="214" height="44" rx="3" class="s-panel k-ink" stroke-width="1.2"/>
+<text x="117.0" y="125.0" text-anchor="middle" font-size="10" class="t-mono s-ink">build_feds_episode_manifest.py</text>
+<text x="117.0" y="139.0" text-anchor="middle" font-size="10" class="s-muted">spisak epizoda 98 + 20</text>
+<rect x="233" y="106" width="214" height="44" rx="3" class="s-panel k-ink" stroke-width="1.2"/>
+<text x="340.0" y="125.0" text-anchor="middle" font-size="10" class="t-mono s-ink">build_feds_simfire_inputs.py</text>
+<text x="340.0" y="139.0" text-anchor="middle" font-size="10" class="s-muted">rasteri 256×256 × 180 m</text>
+<rect x="456" y="106" width="214" height="44" rx="3" class="s-panel k-ink" stroke-width="1.2"/>
+<text x="563.0" y="125.0" text-anchor="middle" font-size="10" class="t-mono s-ink">sample_gridmet_episode_weather.py</text>
+<text x="563.0" y="139.0" text-anchor="middle" font-size="10" class="s-muted">vrijeme po požaru, sha 7a51…</text>
+<line x1="88" y1="66" x2="88" y2="104" class="k-ink" stroke-width="1.2" marker-end="url(#ma)"/>
+<line x1="240" y1="66" x2="190" y2="104" class="k-ink" stroke-width="1.2" marker-end="url(#ma)"/>
+<line x1="272" y1="66" x2="300" y2="104" class="k-ink" stroke-width="1.2" marker-end="url(#ma)"/>
+<line x1="424" y1="66" x2="424" y2="104" class="k-ink" stroke-width="1.2" marker-end="url(#ma)"/>
+<line x1="592" y1="66" x2="592" y2="104" class="k-ink" stroke-width="1.2" marker-end="url(#ma)"/>
+<path d="M117 150 V170 H563 M340 150 V170 M563 150 V170" fill="none" class="k-ink" stroke-width="1.2"/>
+<line x1="340" y1="170" x2="340" y2="224" class="k-ink" stroke-width="1.2" marker-end="url(#ma)"/>
+<text x="348" y="190" font-size="10" class="s-muted">fajlovi u .local/, provjereni po sha256</text>
+<rect x="10" y="206" width="190" height="28" rx="3" class="s-panel k-ink" stroke-width="1.2"/>
+<text x="105.0" y="224.0" text-anchor="middle" font-size="10" class="t-mono s-ink">gridmet_weather.py</text>
+<rect x="10" y="242" width="190" height="28" rx="3" class="s-panel k-ink" stroke-width="1.2"/>
+<text x="105.0" y="260.0" text-anchor="middle" font-size="10" class="t-mono s-ink">simfire_initial_state.py</text>
+<rect x="10" y="278" width="190" height="28" rx="3" class="s-panel k-ink" stroke-width="1.2"/>
+<text x="105.0" y="296.0" text-anchor="middle" font-size="10" class="t-mono s-ink">simfire_timebase.py</text>
+<rect x="240" y="224" width="200" height="48" rx="3" class="s-panel k-ink" stroke-width="1.2"/>
+<text x="340.0" y="245.0" text-anchor="middle" font-size="10" class="t-mono s-ink">feds_simfire_setup.py</text>
+<text x="340.0" y="259.0" text-anchor="middle" font-size="10" class="s-muted">sastavlja SimFire scenarij</text>
+<rect x="240" y="288" width="200" height="30" rx="3" class="s-panel k-ink" stroke-width="1.2"/>
+<text x="340.0" y="307.0" text-anchor="middle" font-size="10" class="t-mono s-ink">feds_spread_metrics.py</text>
+<rect x="480" y="206" width="190" height="48" rx="3" class="s-panel k-ink" stroke-width="1.2"/>
+<text x="575.0" y="227.0" text-anchor="middle" font-size="10" class="t-mono s-ink">feds_simfire_env.py</text>
+<text x="575.0" y="241.0" text-anchor="middle" font-size="10" class="s-muted">Gymnasium: obs, maska, nagrada</text>
+<rect x="480" y="270" width="190" height="48" rx="3" class="s-panel k-ink" stroke-width="1.2"/>
+<text x="575.0" y="291.0" text-anchor="middle" font-size="10" class="t-mono s-ink">feds_heuristics.py</text>
+<text x="575.0" y="305.0" text-anchor="middle" font-size="10" class="s-muted">no-op, nasumična, 2 pravila</text>
+<line x1="200" y1="220" x2="238" y2="248" class="k-ink" stroke-width="1.2" marker-end="url(#ma)"/>
+<line x1="200" y1="256" x2="238" y2="248" class="k-ink" stroke-width="1.2" marker-end="url(#ma)"/>
+<line x1="200" y1="292" x2="238" y2="248" class="k-ink" stroke-width="1.2" marker-end="url(#ma)"/>
+<line x1="440" y1="248" x2="478" y2="232" class="k-ink" stroke-width="1.2" marker-end="url(#ma)"/>
+<line x1="575" y1="254" x2="575" y2="268" class="k-ink" stroke-width="1.2" marker-end="url(#ma)"/>
+<rect x="10" y="360" width="320" height="92" rx="3" fill="none" class="k-rule" stroke-width="1.2"/>
+<text x="20" y="377" font-size="11" font-weight="700" class="s-ink">Faza 1 · gate (bez agenta)</text>
+<rect x="20" y="384" width="300" height="24" rx="2" class="s-panel k-rule" stroke-width="1"/>
+<text x="28" y="399.5" font-size="10" class="t-mono s-ink">evaluate_feds_train_noop.py</text>
+<text x="312" y="399.5" text-anchor="end" font-size="10" class="s-muted">17 × 98 no-op</text>
+<rect x="20" y="414" width="300" height="24" rx="2" class="s-panel k-rule" stroke-width="1"/>
+<text x="28" y="429.5" font-size="10" class="t-mono s-ink">select_feds_growth_gate.py</text>
+<text x="312" y="429.5" text-anchor="end" font-size="10" class="s-muted">izbor, zamrzavanje</text>
+<rect x="350" y="360" width="320" height="92" rx="3" fill="none" class="k-rule" stroke-width="1.2"/>
+<text x="360" y="377" font-size="11" font-weight="700" class="s-ink">Faza 2 · trening i benchmark</text>
+<rect x="360" y="382" width="300" height="20" rx="2" class="s-panel k-rule" stroke-width="1"/>
+<text x="368" y="395.5" font-size="10" class="t-mono s-ink">train_feds_budget_adaptation.py</text>
+<text x="652" y="395.5" text-anchor="end" font-size="10" class="s-muted">40 modela</text>
+<rect x="360" y="405" width="300" height="20" rx="2" class="s-panel k-rule" stroke-width="1"/>
+<text x="368" y="418.5" font-size="10" class="t-mono s-ink">benchmark_feds_policies.py</text>
+<text x="652" y="418.5" text-anchor="end" font-size="10" class="s-muted">44 politike × 4 B</text>
+<rect x="360" y="428" width="300" height="20" rx="2" class="s-panel k-rule" stroke-width="1"/>
+<text x="368" y="441.5" font-size="10" class="t-mono s-ink">analyze_budget_adaptation.py</text>
+<text x="652" y="441.5" text-anchor="end" font-size="10" class="s-muted">6 testova, Holm</text>
+<line x1="330" y1="406" x2="348" y2="406" class="k-ink" stroke-width="1.2" marker-end="url(#ma)"/>
+<line x1="300" y1="318" x2="200" y2="358" class="k-ink" stroke-width="1.2" marker-end="url(#ma)"/>
+<line x1="575" y1="318" x2="520" y2="358" class="k-ink" stroke-width="1.2" marker-end="url(#ma)"/>
+<rect x="10" y="480" width="156" height="44" rx="3" class="s-panel k-ink" stroke-width="1.2"/>
+<text x="88.0" y="499.0" text-anchor="middle" font-size="10" class="t-mono s-ink">configs/frozen/</text>
+<text x="88.0" y="513.0" text-anchor="middle" font-size="10" class="s-muted">zamrznute postavke</text>
+<rect x="178" y="480" width="156" height="44" rx="3" class="s-panel k-ink" stroke-width="1.2"/>
+<text x="256.0" y="499.0" text-anchor="middle" font-size="10" class="t-mono s-ink">reports/real-fire-data/</text>
+<text x="256.0" y="513.0" text-anchor="middle" font-size="10" class="s-muted">gate, analiza, zapis</text>
+<rect x="346" y="480" width="156" height="44" rx="3" class="s-panel k-ink" stroke-width="1.2"/>
+<text x="424.0" y="499.0" text-anchor="middle" font-size="10" class="t-mono s-ink">DECISION_RECORDS.md</text>
+<text x="424.0" y="513.0" text-anchor="middle" font-size="10" class="s-muted">ADR-029 do ADR-032</text>
+<rect x="514" y="480" width="156" height="44" rx="3" class="s-panel k-ink" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="592.0" y="499.0" text-anchor="middle" font-size="10" class="t-mono s-ink">.local/</text>
+<text x="592.0" y="513.0" text-anchor="middle" font-size="10" class="s-muted">40 modela; nije u gitu</text>
+<line x1="120" y1="452" x2="90" y2="478" class="k-ink" stroke-width="1.2" marker-end="url(#ma)"/>
+<line x1="210" y1="452" x2="240" y2="478" class="k-ink" stroke-width="1.2" marker-end="url(#ma)"/>
+<line x1="440" y1="452" x2="290" y2="478" class="k-ink" stroke-width="1.2" marker-end="url(#ma)"/>
+<line x1="600" y1="452" x2="592" y2="478" class="k-ink" stroke-width="1.2" marker-end="url(#ma)"/>
+<text x="10" y="16" font-size="10.5" font-weight="700" letter-spacing=".06em" class="s-muted halo">JAVNI IZVORI PODATAKA</text>
+<text x="10" y="98" font-size="10.5" font-weight="700" letter-spacing=".06em" class="s-muted halo">PRIPREMA PODATAKA · scripts/</text>
+<text x="10" y="198" font-size="10.5" font-weight="700" letter-spacing=".06em" class="s-muted halo">JEZGRO · src/wildfire_rl/</text>
+<text x="10" y="352" font-size="10.5" font-weight="700" letter-spacing=".06em" class="s-muted halo">EKSPERIMENTI · scripts/</text>
+<text x="10" y="472" font-size="10.5" font-weight="700" letter-spacing=".06em" class="s-muted halo">DOKAZI</text>
+</svg>
+  </div>
+  <figcaption>SimFire put kroz repozitorij. Jezgro su tri modula: <span class="mono">feds_simfire_setup.py</span> od fajlova pravi SimFire scenarij za jedan požar, <span class="mono">feds_simfire_env.py</span> ga pretvara u Gymnasium okruženje s budžetom, a <span class="mono">feds_spread_metrics.py</span> računa IoU rasta i elipsu za gate. Faza 2 koristi samo postavku koju je faza 1 zamrznula. Za VALIDATION okruženje odbija meteorološki fajl koji se ne slaže sa zamrznutim zapisom, a PPO checkpoint se učitava samo ako su mu postavke treninga iste.</figcaption>
+</figure>
+<div class="modlist">
+  <div><b>Sintetički CA</b><code>synthetic_ca.py</code><code>synthetic_env.py</code><code>synthetic_heuristics.py</code><code>synthetic_real_cases.py</code><code>synthetic_stats.py</code><br>Vlastiti simulator s jedinicama na terenu. Za test na stvarnim počecima koristi isti <span class="mono">feds_simfire_setup.py</span>.</div>
+  <div><b>Pilot i historija</b><code>simulator.py</code><code>gym_env.py</code><code>policies.py</code><code>evaluation.py</code><code>train.py</code><code>cli.py</code><code>firehose_probe.py</code><br>Mali pilot CA s 300 epizoda i provjera agenta Firehose. Ne koriste se za glavno pitanje.</div>
+  <div><b>Provjere</b>26 test fajlova u <span class="mono">tests/</span>, 282 testa u SimFire okruženju. CI pada ako se preskoči test koji nije na spisku <span class="mono">tests/ci_expected_skips.txt</span>. Zaseban posao provjerava bazu znanja.</div>
+</div>
+</section>
+
+<section id="gate">
+<h2>Zašto simulator mora proći gate</h2>
+<p>RL agent optimizuje ono što simulator nagrađuje. Ako simulator širi vatru drugačije od stvarnosti, agent uči da gasi simulator, a ne požar. To je sim-to-real problem, ovdje u najoštrijem obliku: ne postoji stvarni zapis o tome šta bi se desilo s drugom linijom, pa se politike mogu porediti samo unutar simulatora.</p>
+<p>Zato postoji minimalni uslov. Bez ijedne intervencije, simulator mora predvidjeti rast stvarnog požara (FEDS obode na +12 do +48 h) bolje od trivijalnih referenci:</p>
+<ul class="tight">
+  <li><strong>Persistence:</strong> požar se ne mijenja.</li>
+  <li><strong>Elipsa 2:1 niz vjetar:</strong> geometrijski oblik koji raste fiksnom brzinom u smjeru vjetra.</li>
+</ul>
+<h3>Zašto je stari gate bio pristrasan</h3>
+<p>Stari kriterij je bio IoU cijele izgorjele maske. Ta maska uključuje početnu površinu koju dijele sve metode, što je napuhavalo IoU svih metoda. Pored toga, mnogi stvarni požari su vjerovatno zaustavljeni gašenjem, pa „ništa ne raste“ izgleda kao odlična prognoza. Slobodno-goreći simulator tu nije mogao pobijediti, osim ako potpuno prestane širiti vatru. Takav simulator onda nije koristan za RL, jer nema šta da se zaustavi.</p>
+<h3>Novi gate (ADR-030)</h3>
+<ul class="tight">
+  <li><strong>Mjera:</strong> IoU samo novog rasta, tj. ćelija izvan početne maske. IoU (presjek kroz uniju) ide od 0, kad se dvije površine ne preklapaju, do 1, kad se potpuno poklapaju. Persistence time po definiciji ima 0, pa stvarna referenca postaje elipsa.</li>
+  <li><strong>Koji se požari računaju:</strong> samo požari koji u FEDS-u stvarno rastu, tj. imaju ≥1,10× početne površine na +48 h. Ova podjela ne zavisi od izlaza simulatora.</li>
+  <li><strong>Elipsa:</strong> kreće od vodeće ivice fronta niz vjetar. Njena veličina je zadana unaprijed i mala je: duža poluosa raste 180 m, tj. jednu ćeliju, na 12 h.</li>
+  <li><strong>Prolaz:</strong> svi TRAIN požari moraju završiti, nijedan ne smije dodirnuti rub mape, a prosječni IoU rasta simulatora na rastućim požarima mora biti veći od elipsinog.</li>
+  <li><strong>Ako ništa ne prođe:</strong> ništa se ne zamrzava i rad staje do odluke korisnika.</li>
+</ul>
+<p>Postavke simulatora koje se isprobavaju fiksirane su unaprijed, ukupno 17. Mijenjaju se dva parametra: WAF određuje koliko vjetra stiže do plamena, a ROS je množilac brzine širenja (1,0 znači bez promjene). Time se izbjegava pretraživanje parametara dok gate ne prođe slučajno. Gate je pokrenut 9. 11. i prošao je. Brojevi i granice su u odjeljku <a href="#rezultati">Novi rezultati</a>.</p>
+</section>
+
+<section id="hronologija">
+<h2>Hronologija</h2>
+<p>Projekat je dva puta promijenio simulator. Oba puta razlog je bio isti: simulator nije reprodukovao stvarne požare dovoljno dobro da bi RL rezultat na njemu išta značio.</p>
+<ol class="timeline">
+  <li><div>
+    <div class="tl-head"><h3>Postavljanje i provjera alata</h3><span class="tl-date">28. 10.</span><span class="chip ok">važi, tehnički</span></div>
+    <div class="tl-body">
+      <p>Prvo je napravljen mali sintetički pilot: celularni automat 20×20, 5 politika × 5 budžeta × 12 seedova = 300 epizoda. Uz njega je urađen kratki MaskablePPO smoke test od 1.024 koraka. Svrha je bila provjeriti cjevovod i obračun budžeta, a ne odgovoriti na pitanje.</p>
+      <p>Postojeći istraživački agent Firehose (PPO na C++ simulatoru Cell2Fire, mapa 20×20) ponovo je izgrađen u Dockeru iz zaključanih izvornih commitova. Uspjelo je svih 12 kratkih rollouta: oba pretrenirana checkpointa i tri jednostavne bazne politike. Rađen je samo inference, bez treninga, a isti seed je dao tačno isti niz.</p>
+    </div>
+  </div></li>
+  <li><div>
+    <div class="tl-head"><h3>Kanada: CFSDS i Cell2Fire</h3><span class="tl-date">30. 10.</span><span class="chip hist">historijski</span></div>
+    <div class="tl-body">
+      <p>Cilj je bio graditi scenarije iz stvarnih požara. Izabran je kanadski skup CFSDS (5.435 požara, dnevne satelitske karte gorenja), jer koristi isti sistem goriva kao Cell2Fire. Napisan je uvoz višećelijskog početnog stanja (opožareno + aktivni front).</p>
+      <p>Prvi replay bez intervencija dao je 66 ha prema 15,4 ha opaženih (IoU 0,22). Druga dva slučaja dala su IoU 0,04 i 0,14, a vatra je udarala u rub isječka od 2×2 km. Odluka (ADR-015): <strong>nema fine-tuninga ni poređenja politika dok se ne razjasni zašto se simulator bez intervencija razlikuje od stvarnosti</strong>. Iz toga je nastao no-op gate. Kasnije je trening ipak rađen uz pad gatea, ali samo kao jasno označen eksploratorni rad.</p>
+    </div>
+  </div></li>
+  <li><div>
+    <div class="tl-head"><h3>Prelaz na SimFire + FEDS</h3><span class="tl-date">3. 11.</span><span class="chip ok">podaci važe</span><span class="chip bad">gate poništen</span></div>
+    <div class="tl-body">
+      <p>Tim je izabrao SimFire (MITRE, Python) i američke podatke s obodima svakih 12 h, koji daju više vremenskih tačaka za provjeru od dnevnih kanadskih karata. Od prvih 60 požara (40 TRAIN, 20 VALIDATION) spajanje s FEDS-om preživjelo je samo 19 i 7, ispod unaprijed zadanog praga od 20 i 8. Pragovi i pravilo spajanja nisu mijenjani. Umjesto toga je proširen okvir kandidata, pa se dobilo 99/20 (ADR-018).</p>
+      <p>Pregled osam vrijednosti faktora vjetra (WAF) na svih 99 TRAIN požara: nijedna nije prošla tadašnji gate (ADR-022). Uz to je napravljen tehnički put za trening, Gymnasium okruženje s MaskablePPO, da tim ne čeka.</p>
+    </div>
+  </div></li>
+  <li><div>
+    <div class="tl-head"><h3>Noćni eksploratorni rad</h3><span class="tl-date">4. 11.</span><span class="chip bad">poništeno</span></div>
+    <div class="tl-body">
+      <p>Harun je dao nalog coding agentu da preko noći samostalno odradi kalibraciju, validaciju, intervencije i studiju budžeta, uz jasnu oznaku „eksploratorno“ ako gate opet padne.</p>
+      <p>Dijagnoza je pokazala da je problem u tome <em>koji</em> požari rastu, a ne u smjeru širenja. Mnogi stvarni požari u FEDS-u stoje, vjerovatno jer su ugašeni, a slobodno-goreći simulator ih širi. Preregistrovana mreža 3×3 (množilac brzine × WAF) nije prošla. Studija budžeta urađena je na zasebnom „stress“ zapisu, sa 5 seedova i 1.920 uparenih epizoda. Zaključak tada: PPO pomaže u odnosu na no-op, fine-tuning ne, a heuristika niz vjetar je jednako dobra.</p>
+    </div>
+  </div></li>
+  <li><div>
+    <div class="tl-head"><h3>Drugi zaokret: sintetički CA</h3><span class="tl-date">4.–7. 11.</span><span class="chip bad">poništeno</span></div>
+    <div class="tl-body">
+      <p>Pošto SimFire nije kalibrisan, a linije se pojavljuju trenutno, Harun je tražio trening samo na proceduralno generisanim požarima, s fizički ograničenim jedinicama. Stvarni požari su ostavljeni samo za jednokratni završni test.</p>
+      <p>PPO od nule (1,5 M koraka) izgubio je od heuristike <span class="mono">direct_flank</span>. Dijagnoza je bila credit assignment: agent je gradio puno linije, ali daleko od vatre. Plan B je bio behaviour cloning heuristike pa PPO fine-tuning. Rezultat, politika <span class="mono">policy-v1</span>, bio je statistički izjednačen sa svojim učiteljem, što je po preregistrovanom kriteriju FAIL.</p>
+    </div>
+  </div></li>
+  <li><div>
+    <div class="tl-head"><h3>Revizija i poništavanje</h3><span class="tl-date">9. 11.</span><span class="chip warn">ADR-029</span></div>
+    <div class="tl-body">
+      <p>Pregled ranijih pull requestova (#3–#5) otkrio je grešku u uzorkovanju meteoroloških podataka, curenje budućih meteoroloških podataka u opservaciju i niz drugih grešaka, u pet grupa: mjera, SimFire okruženje, tumačenje benchmarka, sintetički CA i automatski testovi (detalji niže). Ti pull requestovi su spojeni u <span class="mono">main</span> kao historija, uz pravilo da se njihovi brojevi ne citiraju dok se ne ponove.</p>
+    </div>
+  </div></li>
+  <li><div>
+    <div class="tl-head"><h3>Ispravke, nova pravila, nezavisna revizija</h3><span class="tl-date">9. 11.</span><span class="chip ok">spojeno</span></div>
+    <div class="tl-body">
+      <p>Četiri ispravke urađene su u odvojenim granama. Pravila za ponovno pokretanje zapisana su (ADR-030) prije ijednog novog pokretanja. Svaki pull request je zatim pregledao zaseban recenzent, nalazi su provjereni i popravljeni, i sve je spojeno nakon što su prošle automatske provjere.</p>
+      <p>Ponovno pokretanje počinje od SimFire-a, jer se na njemu provjeravaju gate i glavno pitanje. Sintetički CA dolazi tek u fazi 3.</p>
+    </div>
+  </div></li>
+  <li><div>
+    <div class="tl-head"><h3>Vremenska oznaka u FEDS-u, duplikat, novi meteorološki fajl</h3><span class="tl-date">9. 11.</span><span class="chip ok">spojeno, PR #15</span></div>
+    <div class="tl-body">
+      <p>Provjera izvornog koda FEDS-a (fireatlas v1.4.1) pokazala je da vremenska oznaka 00:00/12:00 nije UTC. To je oznaka jutarnjeg ili popodnevnog prolaza satelita VIIRS, oko 01:30 i 13:30 po lokalnom sunčevom vremenu. Harun je izabrao da se ta oznaka preračuna u UTC po geografskoj dužini. Pod starim UTC čitanjem pola segmenata dobijalo je meteorološke podatke dan ranije. Uklonjen je i duplikat (dva zapisa u registru, columbus i sugar-pine, vodila su na isti požar), a novi gridMET fajl je napravljen s ispravljenim uzorkovanjem.</p>
+    </div>
+  </div></li>
+  <li><div>
+    <div class="tl-head"><h3>Faza 1: gate na ispravljenim podacima</h3><span class="tl-date">9. 11.</span><span class="chip ok">PASS</span><span class="chip ok">PR #17 spojen</span></div>
+    <div class="tl-body">
+      <p>Pravilo izbora je commitovano s testovima prije ijednog pokretanja. Svih 17 unaprijed zadanih postavki simulatora završilo je 98 TRAIN požara bez grešaka, a prošlo ih je 8. Zamrznut je WAF 0,10 / ROS 1,0, pa je VALIDATION ocijenjen jednom (ADR-031). Nezavisni recenzent je ponovio sve brojeve i tražio da se jasnije napiše koliko je elipsa niska letvica.</p>
+    </div>
+  </div></li>
+  <li><div>
+    <div class="tl-head"><h3>Faza 2: benchmark i studija budžeta</h3><span class="tl-date">9.–10. 11.</span><span class="chip ok">izvedeno</span><span class="chip ok">PR #18 spojen</span></div>
+    <div class="tl-body">
+      <p>Trening 10 seedova trajao je 14,5 h, više nego dvostruko duže od procjene, pa je coding agent stao i nastavio tek na Harunovo odobrenje. Heuristika izabrana na TRAIN-u i otisci svih 40 modela zapisani su prije jedinog VALIDATION benchmarka, da se poslije ne mogu mijenjati. Rezultat: ni u jednom od šest glavnih poređenja nije pokazana razlika (ADR-032).</p>
+    </div>
+  </div></li>
+</ol>
+</section>
+
+<section id="okruzenja">
+<h2>Četiri okruženja</h2>
+<p>Za istraživačko pitanje se koriste dva: SimFire na stvarnim počecima i sintetički CA. Prva dva su služila za provjeru alata. Njihovi rezultati važe, ali ne odgovaraju na pitanje.</p>
+<div class="tablewrap"><table class="env">
+  <thead><tr><th></th><th>Pilot CA</th><th>Firehose / Cell2Fire</th><th>SimFire na FEDS</th><th>Sintetički CA</th></tr></thead>
+  <tbody>
+    <tr><th>Uloga</th><td>test cjevovoda i budžeta</td><td>reprodukcija postojećeg agenta</td><td>glavni benchmark i studija budžeta</td><td>trening s realnim ograničenjima jedinica</td></tr>
+    <tr><th>Mapa</th><td>20×20, vlastiti CA</td><td>20×20 × 100 m, kanadska goriva</td><td>256×256 × 180 m (46 km), LANDFIRE</td><td>128×128 × 180 m, proceduralni teren i gorivo</td></tr>
+    <tr><th>Opservacija</th><td>Dict: mreža 4×400, budžet, vrijeme</td><td>RGB 3×20×20</td><td>Dict: karta 4×16×16, budžet, vjetar, vlaga, vrijeme</td><td>karta 64×64×13 + prozor 15×15 po jedinici + globalni vektor</td></tr>
+    <tr><th>Akcije</th><td>Discrete(401): ćelija ili ništa</td><td>Discrete(400): jedna ćelija</td><td>Discrete(9): no-op ili linija u sektoru</td><td>MultiDiscrete([17]×4): po jedinici stani, kreni ili gradi u 8 smjerova</td></tr>
+    <tr><th>Nagrada</th><td>−izgorjela površina</td><td>−zahvaćena površina</td><td>−nove izgorjele ćelije / 100</td><td>kontrafaktualna: ušteda prema no-op rolloutu s istim slučajnim brojevima, minus kazne za sigurnost</td></tr>
+    <tr><th>Odluke</th><td>do 240 koraka</td><td>58 odluka</td><td>4 odluke × 12 h</td><td>svakih 60 min, 12–48 h</td></tr>
+    <tr><th>Budžet</th><td>0, 2, 4, 8, 16 ćelija</td><td>B=8, nametnut omotačem</td><td>0, 1, 2, 4 linije</td><td>2–4 jedinice koje stižu tokom prva 3 h</td></tr>
+    <tr><th>Stanje</th><td><span class="chip ok">važi</span></td><td><span class="chip hist">historijski</span></td><td><span class="chip ok">gate PASS</span> <span class="chip warn">benchmark bez razlike</span></td><td><span class="chip warn">ispravljeno, čeka trening</span></td></tr>
+  </tbody>
+</table></div>
+<p>Detalji sintetičkog CA su u <a href="#dodatak">Dodatku</a>.</p>
+</section>
+
+<section id="greska">
+<h2>Greška koja je sve poništila</h2>
+<p>Funkcija koja je za svaki požar uzimala dnevne meteorološke podatke iz gridMET-a pamtila je najbližu ćeliju po paru (godina, varijabla). Prvi požar u godini je odredio ćeliju, a svi kasniji požari te godine dobili su njegove meteorološke podatke. Pogođeno je 97/99 TRAIN i 19/20 VALIDATION požara. Medijan udaljenosti između stvarne i korištene ćelije bio je 782 km, a maksimum 1.774 km.</p>
+<figure>
+  <div class="fig">
+    <svg viewBox="0 0 680 260" width="100%" role="img" aria-label="Prije ispravke svi požari jedne godine čitaju meteorološke podatke iz jedne ćelije; poslije ispravke svaki požar čita svoju ćeliju.">
+      <text x="10" y="22" font-size="13" font-weight="700" class="s-ink">Prije: jedna ćelija za cijelu godinu</text>
+      <text x="360" y="22" font-size="13" font-weight="700" class="s-ink">Poslije: najbliža ćelija po požaru (≤ 5 km)</text>
+      <rect x="10" y="34" width="310" height="210" fill="none" class="k-rule" stroke-width="1"/>
+      <rect x="360" y="34" width="310" height="210" fill="none" class="k-rule" stroke-width="1"/>
+      <!-- before -->
+      <rect x="56" y="70" width="16" height="16" class="s-bad"/>
+      <text x="80" y="62" font-size="11" class="s-muted">ćelija prvog požara</text>
+      <g class="k-bad" stroke-width="1.2" stroke-dasharray="4 3">
+        <line x1="64" y1="78" x2="70" y2="110"/><line x1="64" y1="78" x2="250" y2="100"/><line x1="64" y1="78" x2="190" y2="190"/><line x1="64" y1="78" x2="280" y2="215"/><line x1="64" y1="78" x2="120" y2="160"/>
+      </g>
+      <g class="s-front"><circle cx="64" cy="78" r="5"/><circle cx="70" cy="110" r="5"/><circle cx="250" cy="100" r="5"/><circle cx="190" cy="190" r="5"/><circle cx="280" cy="215" r="5"/><circle cx="120" cy="160" r="5"/></g>
+      <text x="20" y="236" font-size="11" class="s-muted">medijan 782 km do korištene ćelije</text>
+      <!-- after -->
+      <g class="s-ok">
+        <rect x="404" y="68" width="20" height="20"/><rect x="410" y="102" width="20" height="20"/><rect x="590" y="92" width="20" height="20"/><rect x="530" y="182" width="20" height="20"/><rect x="620" y="207" width="20" height="20"/><rect x="460" y="152" width="20" height="20"/>
+      </g>
+      <g class="s-front"><circle cx="414" cy="78" r="5"/><circle cx="420" cy="112" r="5"/><circle cx="600" cy="102" r="5"/><circle cx="540" cy="192" r="5"/><circle cx="630" cy="217" r="5"/><circle cx="470" cy="162" r="5"/></g>
+      <text x="370" y="236" font-size="11" class="s-muted">118 ćelija za 118 požara, najviše 2,8 km</text>
+    </svg>
+  </div>
+  <figcaption>Shematski prikaz (nije u razmjeri). Narandžasti krugovi su požari, kvadrati su ćelije gridMET-a iz kojih su se čitali meteorološki podaci. Ispravka bira ćeliju za svaki požar posebno, bilježi udaljenost i odbija ćelije dalje od 5 km. Novi fajl ima 118 različitih ćelija za 118 požara. Stari fajl je imao samo 3 ćelije za 119 zapisa, po jednu za svaku godinu.</figcaption>
+</figure>
+<p>Poređenja politika su i dalje bila uparena: sve politike su dobijale iste, pogrešne meteorološke podatke. Problem je što to više nisu bili historijski požari. Zato se ne može reći šta bi rezultati značili za stvarne uslove, pa su proglašeni nevažećim.</p>
+
+<h3>Ostale greške nađene u istoj reviziji</h3>
+<div class="tablewrap"><table>
+  <thead><tr><th>Greška</th><th>Zašto je bitna za RL</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Curenje budućnosti u opservaciju.</strong> Agent je vidio meteorološke podatke narednih 12 h, a ne prošlih.</td><td>Politika je mogla koristiti informaciju koju u stvarnosti nema (savršenu prognozu), pa se njen učinak ne bi prenio.</td></tr>
+    <tr><td><strong>Dijagonalne linije propuštaju.</strong> Stara dijagonalna linija od 7 ćelija imala je 4 od 6 spojeva samo preko uglova, a SimFire širi vatru na svih 8 susjeda.</td><td>Ista akcija je imala različitu djelotvornost zavisno od smjera, što je proizvoljan artefakt okruženja koji politika može naučiti.</td></tr>
+    <tr><td><strong>Jačina linije zavisi od koraka simulatora.</strong> (Revizija PR #12 je kasnije našla i da linija koja čeka vatru „štedi“ i postaje gotovo neprobojna.)</td><td>Djelotvornost akcije zavisila je od tehničkog parametra, a ne od fizike.</td></tr>
+    <tr><td><strong>Neke epizode s linijom spale više nego no-op.</strong></td><td>Akcija koja bi trebala samo pomoći ponekad šteti, zbog redoslijeda širenja u SimFire-u. Ovo je još otvoreno. U novom benchmarku to se desilo u 48 od 2.379 epizoda s linijom.</td></tr>
+    <tr><td><strong>Zaštita VALIDATION skupa postojala je samo u skriptama,</strong> a kod za bootstrap nije imao testove.</td><td>Okruženje je moglo pokrenuti validacione požare mimo pravila, a intervali pouzdanosti nisu bili provjereni.</td></tr>
+    <tr><td><strong>IoU uključuje početnu površinu,</strong> a „downwind“ elipsa je bila simetrična oko centroida fronta.</td><td>Napuhavao je slaganje simulatora sa stvarnošću. IoU samo rasta je oko 0,1, a ne 0,27–0,5.</td></tr>
+    <tr><td><strong>CA: napredak gradnje se brisao</strong> pri svakoj promjeni akcije, čak i u istoj ćeliji.</td><td>Kazni istraživanje i zamagljuje credit assignment.</td></tr>
+    <tr><td><strong>CA: ćelije linije su se računale kao „spašene“,</strong> iako bi izgorjele bez agenta.</td><td>Reward hacking: nagrada je plaćala gradnju linije na mjestima koja bi ionako izgorjela.</td></tr>
+    <tr><td><strong>Automatska provjera (CI) nije instalirala NumPy</strong>, pa se 14–18 numeričkih testova tiho preskakalo.</td><td>Testovi koji provjeravaju budžet, štetu i statistiku nisu se zapravo izvršavali.</td></tr>
+  </tbody>
+</table></div>
+<figure>
+  <div class="fig">
+    <svg viewBox="0 0 680 246" width="100%" role="img" aria-label="Dijagonalna linija od ćelija koje se dodiruju samo uglovima propušta vatru; linija sa ćelijama na uglovima je zatvorena.">
+      <defs>
+        <pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse"><rect width="24" height="24" class="s-fuel"/><path d="M24 0H0V24" fill="none" class="k-rule" stroke-width="1"/></pattern>
+        <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="s-bad"/></marker>
+      </defs>
+      <text x="20" y="20" font-size="13" font-weight="700" class="s-ink">Prije: 7 dijagonalnih ćelija</text>
+      <text x="340" y="20" font-size="13" font-weight="700" class="s-ink">Poslije: 4-povezana linija</text>
+      <rect x="20" y="32" width="168" height="168" fill="url(#g)"/>
+      <rect x="340" y="32" width="168" height="168" fill="url(#g)"/>
+      <!-- before diagonal -->
+      <g class="s-line">
+        <rect x="20" y="176" width="24" height="24"/><rect x="44" y="152" width="24" height="24"/><rect x="68" y="128" width="24" height="24"/><rect x="92" y="104" width="24" height="24"/><rect x="116" y="80" width="24" height="24"/><rect x="140" y="56" width="24" height="24"/><rect x="164" y="32" width="24" height="24"/>
+      </g>
+      <rect x="68" y="152" width="24" height="24" class="s-front"/>
+      <rect x="44" y="176" width="24" height="24" class="s-burn"/>
+      <path d="M80 164 L 62 146" class="k-bad" stroke-width="2.5" fill="none" marker-end="url(#ah)"/>
+      <rect x="44" y="128" width="24" height="24" fill="none" class="k-bad" stroke-width="2" stroke-dasharray="3 2"/>
+      <text x="200" y="120" font-size="11" class="s-muted">vatra prelazi</text>
+      <text x="200" y="134" font-size="11" class="s-muted">između uglova</text>
+      <!-- after staircase -->
+      <g class="s-line">
+        <rect x="340" y="176" width="24" height="24"/><rect x="364" y="152" width="24" height="24"/><rect x="388" y="128" width="24" height="24"/><rect x="412" y="104" width="24" height="24"/><rect x="436" y="80" width="24" height="24"/>
+        <rect x="364" y="176" width="24" height="24" opacity=".65"/><rect x="388" y="152" width="24" height="24" opacity=".65"/><rect x="412" y="128" width="24" height="24" opacity=".65"/><rect x="436" y="104" width="24" height="24" opacity=".65"/>
+      </g>
+      <rect x="388" y="176" width="24" height="24" class="s-front"/>
+      <text x="520" y="120" font-size="11" class="s-muted">5 dijagonalnih +</text>
+      <text x="520" y="134" font-size="11" class="s-muted">4 ugaone ćelije</text>
+      <text x="520" y="148" font-size="11" class="s-muted">oko 1,27 km, ista cijena</text>
+      <g font-size="10.5" class="s-muted">
+        <rect x="20" y="210" width="10" height="10" class="s-line"/><text x="34" y="219">linija</text>
+        <rect x="80" y="210" width="10" height="10" class="s-front"/><text x="94" y="219">gori</text>
+        <rect x="134" y="210" width="10" height="10" class="s-burn"/><text x="148" y="219">izgorjelo</text>
+        <rect x="20" y="228" width="10" height="10" fill="none" class="k-bad" stroke-width="1.5" stroke-dasharray="3 2"/><text x="34" y="237">ćelija u koju vatra prelazi</text>
+      </g>
+    </svg>
+  </div>
+  <figcaption>Shematski prikaz. SimFire širi vatru na 8 susjeda. Gdje se ćelije stare dijagonalne linije dodiruju samo uglom, vatra prolazi između njih. Crtež je pojednostavljen na čistu dijagonalu; stvarna stara linija imala je 4 takva spoja od 6. Nova linija ima i ugaone ćelije, pa vatra ne može proći. Ima 9 ćelija umjesto 7, ali je iste dužine i iste cijene.</figcaption>
+</figure>
+<p>Revizija je dodala i jedan nalaz koji nije greška u kodu, ali mijenja tumačenje. Osnovni PPO se na B=2 nije mogao statistički razlikovati od politike koja postavlja <em>nasumičnu</em> dozvoljenu liniju. Prednost heuristike niz vjetar oslanjala se na samo 4 od 20 požara. Zato prednost nad no-op-om nije pokazivala da je agent naučio gdje postaviti liniju. I ti brojevi su, naravno, poništeni. Zbog toga je nasumična linija postala jedno od glavnih poređenja u novom protokolu.</p>
+</section>
+
+<section id="ispravke">
+<h2>Ispravke i revizija</h2>
+<p>Svaka grupa grešaka ispravljena je u svom pull requestu. Potom je svaki pregledao zaseban recenzent, takođe coding agent, koji je dobio samo broj pull requesta, mjesto koda i pravila repozitorija, bez rasprave koja je dovela do ispravke. Cilj je bio izbjeći anchoring: recenzent kojem se kaže šta je popravljeno sklon je to i potvrditi. Svaki nalaz je zatim provjeren u kodu prije ispravke.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Greška</th><th>Šta sada važi</th></tr></thead>
+  <tbody>
+    <tr><td>Požar dobija meteorološke podatke drugog požara</td><td>Svaki požar čita svoju ćeliju, najdalje 2,8 km. Ćelija dalja od 5 km se odbija.</td></tr>
+    <tr><td>Agent vidi buduće meteorološke podatke</td><td>Agent vidi posljednji dan koji je završen prije odluke.</td></tr>
+    <tr><td>Dijagonalne linije propuštaju vatru</td><td>Linije nemaju spojeve preko uglova, a budžet se troši po dužini linije.</td></tr>
+    <tr><td>Jačina linije zavisi od koraka simulatora</td><td>Linija drži dok je brzina širenja ispod fiksnog praga, nezavisno od koraka i od toga koliko dugo čeka vatru.</td></tr>
+    <tr><td>Mjera uključuje početnu površinu</td><td>Mjeri se samo novi rast, prema elipsi niz vjetar.</td></tr>
+    <tr><td>Vremenska oznaka u FEDS-u čitana kao UTC</td><td>Čita se kao satelitski prolaz u 01:30 ili 13:30 po lokalnom sunčevom vremenu.</td></tr>
+    <tr><td>Isti požar dva puta u spisku</td><td>Jedan zapis po požaru: 98 TRAIN i 20 VALIDATION.</td></tr>
+    <tr><td>Sintetički CA: napredak gradnje se brisao, a ćelije linije su se računale kao spašene</td><td>Napredak je vezan za ćeliju. Linija koju bi vatra ionako spalila računa se kao šteta.</td></tr>
+    <tr><td>Automatski testovi su se tiho preskakali</td><td>Provjera pada čim se preskoči test koji nije na odobrenom spisku.</td></tr>
+    <tr><td>Linija ponekad spali više od no-opa</td><td><span class="chip warn">nije ispravljeno</span> Broji se i prijavljuje: 48 od 2.379 epizoda s linijom u novom benchmarku.</td></tr>
+  </tbody>
+</table></div>
+<p>Šta je recenzent našao u svakoj ispravci i kako je to popravljeno opisano je u <a href="#dodatak">Dodatku</a>.</p>
+<div class="callout">
+  <p><strong>Pravila koja su pritom precizirana.</strong> Tokom revizija su pravila ponovnog pokretanja (ADR-030) dobila nekoliko dopuna. Najvažnija precizira gate: veličinu elipse, njenu početnu tačku i zbirni rezultat po požaru kroz vremenske tačke. Napravljene su prije ijednog pokretanja s ispravnim podacima, pa nijedan rezultat nije mogao uticati na njih. Doslovno tumačenje prvobitnog teksta dalo bi elipsu užu od jedne ćelije i nedefinisan prosjek dok požar ne naraste.</p>
+</div>
+</section>
+
+<section id="protokol">
+<h2>Novi protokol (ADR-030)</h2>
+<p>Pravila su zapisana prije ponovnog pokretanja, po uzoru na preregistraciju u empirijskim naukama. Kad se pravila mijenjaju poslije rezultata, otvara se prostor za p-hacking i izbor metrike koja „uspijeva“.</p>
+<h3>Statistika benchmarka</h3>
+<p>Prvo se mora pokazati da osnovni agent išta nauči, tj. da je bolji od nasumične linije i od jednostavnog pravila. Tek tada prilagodba budžetu ima smisla. Zato su to glavna poređenja, a fine-tuning je sporedan.</p>
+<ul class="tight">
+  <li><strong>Seedovi</strong> (nezavisna ponavljanja treninga s drugim slučajnim brojevima): 10 po konfiguraciji, umjesto ranijih 5. Ranija dvoslojna analiza pokazala je da varijansa između seedova dominira, pa se efekti od ±12–20 ha nisu mogli isključiti.</li>
+  <li><strong>Šest glavnih poređenja:</strong> PPO protiv nasumične linije i PPO protiv heuristike, za B = 1, 2 i 4. Heuristika za poređenje je ona koja je najbolja na TRAIN skupu. Bira se prije VALIDATION-a i samo među skriptovanim pravilima.</li>
+  <li><strong>Test:</strong> sign-flip (permutacijski) test, egzaktan do 22 promijenjena scenarija, a iznad toga Monte Carlo, na razlikama uparenim po scenariju i usrednjenim po seedu, s Holmovom korekcijom za šest testova (α = 0,05). Intervali su iz dvoslojnog bootstrapa: prvo seedovi, pa scenariji.</li>
+  <li><strong>Robusnost:</strong> uz svako poređenje prijavljuje se broj scenarija u kojima se išta promijenilo i rezultat bez scenarija koji najviše doprinosi razlici.</li>
+  <li><strong>Šta je sporedno:</strong> poređenje s no-op-om je samo provjera zdravog razuma. Fine-tuning poređenja su sekundarna.</li>
+</ul>
+<h3>Prihvatanje u sintetičkom CA</h3>
+<p>Glavni ishod je udio spašene površine, uz novo pravilo naplate linije. Sigurnost je uslov neinferiornosti: agent ne smije imati više bliskih susreta ni izgubljenih jedinica od heuristike s kojom se poredi. Ta heuristika je ona s najvećom spašenom površinom na sintetičkim seedovima. Povrat se prijavljuje, ali ne odlučuje. Ranije je, naime, prednost u povratu dolazila od manje kazne za bliske susrete, a ne od boljeg gašenja.</p>
+<h3>Podaci</h3>
+<p>Dva FPA-FOD zapisa (sugar-pine i columbus) vode na isti FEDS požar. Ostaje jedan, pa TRAIN ima 98 požara. Fajl s meteorološkim podacima ima zapisan otisak (hash), a svaki zamrznuti zapis postavki mora navesti isti. Tako se stari fajl ne može neprimjetno ponovo upotrijebiti. TEST 2024 ostaje zatvoren do završnog obračuna sa zaključanim politikama.</p>
+</section>
+
+<section id="rezultati">
+<h2>Novi rezultati (faze 1 i 2)</h2>
+<p>Obje faze su izvedene 9. i 10. 11. na ispravljenim podacima, po pravilima iz ADR-030. Nijedno pravilo nije mijenjano nakon što je viđen rezultat. Svaku fazu je pregledao nezavisni recenzent koji je svojim kodom ponovio sve brojeve. Rezultati su u pull requestima #17 i #18, spojenim u glavnu verziju koda 10. i 11. 11.</p>
+
+<h3>Faza 1: gate simulatora (ADR-031)</h3>
+<div class="tablewrap"><table>
+  <tbody>
+    <tr><th>Postavke</th><td>17 unaprijed zadanih postavki simulatora × 98 TRAIN požara, sve bez grešaka. Prolazi 8. Sedam pada jer vatra dodirne rub mape, a dva jer im je IoU rasta ispod elipse.</td></tr>
+    <tr><th>Izabrano</th><td>WAF 0,10 / ROS 1,0, postavka s najvećim IoU rasta među onima koje prolaze. Zapis je zamrznut prije VALIDATION-a.</td></tr>
+    <tr><th>TRAIN</th><td class="num">IoU rasta 0,096 prema 0,026 za elipsu, na skali od 0 do 1, na 82 rastuća požara (16 je nerastućih). Simulirani i stvarni rast se dakle preklapaju na manje od desetine površine koju zajedno pokrivaju. SimFire je bolji od elipse na 59 požara, lošiji na 19, a izjednačen na 4.</td></tr>
+    <tr><th>VALIDATION, jednom</th><td class="num">IoU rasta 0,098 prema 0,028, na 18 rastućih požara (2 nerastuća), bez grešaka i bez dodira s rubom. Nije korišten za izbor.</td></tr>
+  </tbody>
+</table></div>
+<figure>
+  <div class="fig wide">
+    <div class="legend"><span><i style="background:var(--ok)"></i>prolazi</span><span><i style="border:1.5px solid var(--bad)"></i>pada: vatra dodirne rub mape</span><span><i style="border:1.5px dashed var(--bad)"></i>pada: ispod elipse</span></div>
+<svg viewBox="0 0 680 420" role="img" aria-label="IoU rasta za 17 unaprijed zadanih postavki SimFire-a na 82 rastuća TRAIN požara. Prolazi 8; sedam pada zbog dodira s rubom mape, dva jer su ispod elipse. Izabrana je WAF 0,10 / ROS 1,0.">
+<line x1="170.0" y1="30" x2="170.0" y2="412" class="k-rule" stroke-width="1"/>
+<text x="170.0" y="428" text-anchor="middle" font-size="10.5" class="s-muted">0,00</text>
+<line x1="244.0" y1="30" x2="244.0" y2="412" class="k-rule" stroke-width="1"/>
+<text x="244.0" y="428" text-anchor="middle" font-size="10.5" class="s-muted">0,02</text>
+<line x1="318.0" y1="30" x2="318.0" y2="412" class="k-rule" stroke-width="1"/>
+<text x="318.0" y="428" text-anchor="middle" font-size="10.5" class="s-muted">0,04</text>
+<line x1="392.0" y1="30" x2="392.0" y2="412" class="k-rule" stroke-width="1"/>
+<text x="392.0" y="428" text-anchor="middle" font-size="10.5" class="s-muted">0,06</text>
+<line x1="466.0" y1="30" x2="466.0" y2="412" class="k-rule" stroke-width="1"/>
+<text x="466.0" y="428" text-anchor="middle" font-size="10.5" class="s-muted">0,08</text>
+<line x1="540.0" y1="30" x2="540.0" y2="412" class="k-rule" stroke-width="1"/>
+<text x="540.0" y="428" text-anchor="middle" font-size="10.5" class="s-muted">0,10</text>
+<text x="170" y="446" font-size="10.5" class="s-muted">srednji IoU rasta na 82 rastuća TRAIN požara (0 = nema preklapanja, 1 = potpuno)</text>
+<text x="10" y="18" font-size="11" class="s-muted">postavka</text>
+<text x="550" y="18" font-size="11" class="s-muted">ishod</text>
+<text x="10" y="51" font-size="11" class="s-ink">ROS 1,0 · WAF 0</text>
+<rect class="mark s-ok" x="170" y="40" width="201.6" height="14" rx="2"><title>ROS 1,0 · WAF 0: IoU 0,0545, prolazi</title></rect>
+<text x="550" y="51" font-size="11" class="s-ok">prolazi</text>
+<text x="10" y="71" font-size="11" class="s-ink">ROS 1,0 · WAF 0,0025</text>
+<rect class="mark s-ok" x="170" y="60" width="202.8" height="14" rx="2"><title>ROS 1,0 · WAF 0,0025: IoU 0,0548, prolazi</title></rect>
+<text x="550" y="71" font-size="11" class="s-ok">prolazi</text>
+<text x="10" y="91" font-size="11" class="s-ink">ROS 1,0 · WAF 0,01</text>
+<rect class="mark s-ok" x="170" y="80" width="210.9" height="14" rx="2"><title>ROS 1,0 · WAF 0,01: IoU 0,0570, prolazi</title></rect>
+<text x="550" y="91" font-size="11" class="s-ok">prolazi</text>
+<text x="10" y="111" font-size="11" class="s-ink">ROS 1,0 · WAF 0,025</text>
+<rect class="mark s-ok" x="170" y="100" width="222.7" height="14" rx="2"><title>ROS 1,0 · WAF 0,025: IoU 0,0602, prolazi</title></rect>
+<text x="550" y="111" font-size="11" class="s-ok">prolazi</text>
+<text x="10" y="131" font-size="11" class="s-ink">ROS 1,0 · WAF 0,05</text>
+<rect class="mark s-ok" x="170" y="120" width="261.2" height="14" rx="2"><title>ROS 1,0 · WAF 0,05: IoU 0,0706, prolazi</title></rect>
+<text x="550" y="131" font-size="11" class="s-ok">prolazi</text>
+<text x="10" y="151" font-size="11" font-weight="700" class="s-ink">ROS 1,0 · WAF 0,10</text>
+<rect class="mark s-ok" x="170" y="140" width="354.5" height="14" rx="2"><title>ROS 1,0 · WAF 0,10: IoU 0,0958, prolazi</title></rect>
+<text x="550" y="151" font-size="11" font-weight="700" class="s-ok">izabrano</text>
+<text x="10" y="171" font-size="11" class="s-ink">ROS 1,0 · WAF 0,20</text>
+<rect x="170" y="160.75" width="367.0" height="12.5" rx="2" fill="none" class="mark k-bad" stroke-width="1.5"><title>ROS 1,0 · WAF 0,20: IoU 0,0992, pada: rub mape na 14 požara</title></rect>
+<text x="550" y="171" font-size="11" class="s-bad">rub mape · 14 požara</text>
+<text x="10" y="191" font-size="11" class="s-ink">ROS 1,0 · WAF 0,605</text>
+<rect x="170" y="180.75" width="178.7" height="12.5" rx="2" fill="none" class="mark k-bad" stroke-width="1.5"><title>ROS 1,0 · WAF 0,605: IoU 0,0483, pada: rub mape na 76 požara</title></rect>
+<text x="550" y="191" font-size="11" class="s-bad">rub mape · 76 požara</text>
+<text x="10" y="221" font-size="11" class="s-ink">ROS 0,7 · WAF 0,05</text>
+<rect class="mark s-ok" x="170" y="210" width="113.2" height="14" rx="2"><title>ROS 0,7 · WAF 0,05: IoU 0,0306, prolazi</title></rect>
+<text x="550" y="221" font-size="11" class="s-ok">prolazi</text>
+<text x="10" y="241" font-size="11" class="s-ink">ROS 0,7 · WAF 0,20</text>
+<rect x="170" y="230.75" width="344.8" height="12.5" rx="2" fill="none" class="mark k-bad" stroke-width="1.5"><title>ROS 0,7 · WAF 0,20: IoU 0,0932, pada: rub mape na 6 požara</title></rect>
+<text x="550" y="241" font-size="11" class="s-bad">rub mape · 6 požara</text>
+<text x="10" y="261" font-size="11" class="s-ink">ROS 0,7 · WAF 0,40</text>
+<rect x="170" y="250.75" width="294.5" height="12.5" rx="2" fill="none" class="mark k-bad" stroke-width="1.5"><title>ROS 0,7 · WAF 0,40: IoU 0,0796, pada: rub mape na 34 požara</title></rect>
+<text x="550" y="261" font-size="11" class="s-bad">rub mape · 34 požara</text>
+<text x="10" y="291" font-size="11" class="s-ink">ROS 0,5 · WAF 0,05</text>
+<rect x="170" y="280.75" width="44.4" height="12.5" rx="2" fill="none" class="mark k-bad" stroke-width="1.5" stroke-dasharray="3 2"><title>ROS 0,5 · WAF 0,05: IoU 0,0120, pada: ispod elipse</title></rect>
+<text x="550" y="291" font-size="11" class="s-bad">ispod elipse</text>
+<text x="10" y="311" font-size="11" class="s-ink">ROS 0,5 · WAF 0,20</text>
+<rect x="170" y="300.75" width="240.1" height="12.5" rx="2" fill="none" class="mark k-bad" stroke-width="1.5"><title>ROS 0,5 · WAF 0,20: IoU 0,0649, pada: rub mape na 1 požara</title></rect>
+<text x="550" y="311" font-size="11" class="s-bad">rub mape · 1 požar</text>
+<text x="10" y="331" font-size="11" class="s-ink">ROS 0,5 · WAF 0,40</text>
+<rect x="170" y="320.75" width="302.7" height="12.5" rx="2" fill="none" class="mark k-bad" stroke-width="1.5"><title>ROS 0,5 · WAF 0,40: IoU 0,0818, pada: rub mape na 21 požara</title></rect>
+<text x="550" y="331" font-size="11" class="s-bad">rub mape · 21 požara</text>
+<text x="10" y="361" font-size="11" class="s-ink">ROS 0,35 · WAF 0,05</text>
+<rect x="170" y="350.75" width="26.3" height="12.5" rx="2" fill="none" class="mark k-bad" stroke-width="1.5" stroke-dasharray="3 2"><title>ROS 0,35 · WAF 0,05: IoU 0,0071, pada: ispod elipse</title></rect>
+<text x="550" y="361" font-size="11" class="s-bad">ispod elipse</text>
+<text x="10" y="381" font-size="11" class="s-ink">ROS 0,35 · WAF 0,20</text>
+<rect class="mark s-ok" x="170" y="370" width="117.3" height="14" rx="2"><title>ROS 0,35 · WAF 0,20: IoU 0,0317, prolazi</title></rect>
+<text x="550" y="381" font-size="11" class="s-ok">prolazi</text>
+<text x="10" y="401" font-size="11" class="s-ink">ROS 0,35 · WAF 0,40</text>
+<rect x="170" y="390.75" width="253.1" height="12.5" rx="2" fill="none" class="mark k-bad" stroke-width="1.5"><title>ROS 0,35 · WAF 0,40: IoU 0,0684, pada: rub mape na 8 požara</title></rect>
+<text x="550" y="401" font-size="11" class="s-bad">rub mape · 8 požara</text>
+<line x1="265.5" y1="26" x2="265.5" y2="412" class="k-ink" stroke-width="1.5" stroke-dasharray="5 3"/>
+<text x="269.5" y="32" font-size="10.5" class="s-ink">elipsa 0,026</text>
+</svg>
+  </div>
+  <figcaption>Svih 17 postavki koje su zadane prije pokretanja, grupisane po množiocu brzine (ROS). Isprekidana linija je elipsa, letvica koju treba preći. Postavka s najvećim IoU (ROS 1,0 · WAF 0,20) pada jer vatra na 14 požara dođe do ruba mape od 46 km, pa se tu više ne može mjeriti. Pravilo bira najveći IoU <em>među onima koje prolaze</em>, a to je WAF 0,10. Svaka postavka je 98 no-op epizoda, ukupno 1.666.</figcaption>
+</figure>
+<div class="callout">
+  <p><strong>Šta PASS znači, a šta ne.</strong> SimFire smješta novi rast bolje od fiksne elipse. Elipsa je niska letvica: do +48 h dodaje oko 23 ćelije, a rastući požari su u FEDS-u dobili u prosjeku 1.219. Prolazi i postavka bez vjetra (WAF 0, IoU 0,055).</p>
+  <p>Izabrana postavka raste previše. Na rastućim požarima daje 1,8 puta više rasta od opaženog, a na 16 nerastućih dodaje u prosjeku 8.976 ha po požaru. Oba IoU rasta su ispod 0,10. Zamrznuta postavka je zato slobodno-goreći scenarij koji prolazi unaprijed zadano pravilo, a ne kalibrisan ni fizički validiran model.</p>
+  <p>Po starom pravilu (IoU cijele površine prema referenci „požar se ne mijenja“) simulator bi i dalje pao. Ne može se razdvojiti koliko je prolazu doprinijela nova mjera, a koliko ispravljeni meteorološki podaci, jer su se promijenili zajedno.</p>
+</div>
+
+<h3>Faza 2: benchmark i studija budžeta (ADR-032)</h3>
+<figure>
+  <div class="fig wide">
+<svg viewBox="0 0 680 340" role="img" aria-label="Redoslijed faza 1 i 2 s brojem epizoda i trajanjem; postavka simulatora zamrznuta je prije VALIDATION-a, a heuristika i otisci modela zaključani su prije VALIDATION benchmarka.">
+<text x="10" y="18" font-size="11" class="s-muted">korak</text>
+<text x="262" y="18" font-size="11" class="s-muted">epizode po 48 h (4 odluke)</text>
+<text x="670" y="18" text-anchor="end" font-size="11" class="s-muted">trajanje</text>
+<text x="10" y="40" font-size="12" font-weight="700" class="s-ink">Gate na TRAIN</text>
+<text x="10" y="55" font-size="10.5" class="s-muted">17 postavki × 98 požara, no-op</text>
+<rect class="mark s-ink" x="262" y="30" width="11.3" height="16" rx="2"><title>Gate na TRAIN: 1.666 epizoda</title></rect>
+<text x="279.3" y="42" font-size="11" class="s-ink">1.666</text>
+<text x="670" y="42" text-anchor="end" font-size="11" class="s-ink">—</text>
+<line x1="10" y1="76" x2="670" y2="76" class="k-warn" stroke-width="1.5" stroke-dasharray="6 4"/>
+<rect x="10" y="67" width="16" height="18" class="s-panel"/>
+<rect x="14" y="71" width="9" height="8" rx="1" class="s-warn"/><path d="M15.5 71 v-2.5 a3 3 0 0 1 6 0 v2.5" fill="none" class="k-warn" stroke-width="1.4"/>
+<text x="28" y="80" font-size="10.5" font-weight="600" class="s-warn halo">Zamrznuto: WAF 0,10 / ROS 1,0 · sha256 7639e3a9…</text>
+<text x="10" y="100" font-size="12" font-weight="700" class="s-ink">Gate na VALIDATION</text>
+<text x="10" y="115" font-size="10.5" class="s-muted">zamrznuta postavka × 20, jednom</text>
+<rect class="mark s-ink" x="262" y="90" width="2.0" height="16" rx="2"><title>Gate na VALIDATION: 20 epizoda</title></rect>
+<text x="270.0" y="102" font-size="11" class="s-ink">20</text>
+<text x="670" y="102" text-anchor="end" font-size="11" class="s-ink">—</text>
+<text x="10" y="140" font-size="12" font-weight="700" class="s-ink">Trening PPO (TRAIN)</text>
+<text x="10" y="155" font-size="10.5" class="s-muted">10 osnovnih + 30 fine-tunea</text>
+<rect class="mark s-ink" x="262" y="130" width="290.0" height="16" rx="2"><title>Trening PPO (TRAIN): 42.840 epizoda</title></rect>
+<text x="558.0" y="142" font-size="11" class="s-ink">42.840</text>
+<text x="670" y="142" text-anchor="end" font-size="11" class="s-ink">14,5 h</text>
+<text x="10" y="180" font-size="12" font-weight="700" class="s-ink">Benchmark na TRAIN</text>
+<text x="10" y="195" font-size="10.5" class="s-muted">44 politike × 4 budžeta × 98</text>
+<rect class="mark s-ink" x="262" y="170" width="116.8" height="16" rx="2"><title>Benchmark na TRAIN: 17.248 epizoda</title></rect>
+<text x="384.8" y="182" font-size="11" class="s-ink">17.248</text>
+<text x="670" y="182" text-anchor="end" font-size="11" class="s-ink">4,1 h</text>
+<line x1="10" y1="216" x2="670" y2="216" class="k-warn" stroke-width="1.5" stroke-dasharray="6 4"/>
+<rect x="10" y="207" width="16" height="18" class="s-panel"/>
+<rect x="14" y="211" width="9" height="8" rx="1" class="s-warn"/><path d="M15.5 211 v-2.5 a3 3 0 0 1 6 0 v2.5" fill="none" class="k-warn" stroke-width="1.4"/>
+<text x="28" y="220" font-size="10.5" font-weight="600" class="s-warn halo">Zaključano: advancing_front i otisci 40 modela · commit c014cf1</text>
+<text x="10" y="240" font-size="12" font-weight="700" class="s-ink">Benchmark na VALIDATION</text>
+<text x="10" y="255" font-size="10.5" class="s-muted">44 × 4 × 20, jednom</text>
+<rect class="mark s-ink" x="262" y="230" width="23.8" height="16" rx="2"><title>Benchmark na VALIDATION: 3.520 epizoda</title></rect>
+<text x="291.8" y="242" font-size="11" class="s-ink">3.520</text>
+<text x="670" y="242" text-anchor="end" font-size="11" class="s-ink">1,6 h</text>
+<text x="10" y="280" font-size="12" font-weight="700" class="s-ink">Analiza</text>
+<text x="10" y="295" font-size="10.5" class="s-muted">6 primarnih testova, Holm</text>
+<text x="670" y="282" text-anchor="end" font-size="11" class="s-ink"></text>
+<text x="10" y="326" font-size="10.5" class="s-muted">Trening: 10 × 8.064 + 30 × 3.024 = 171.360 odluka. Trajanje gatea nije zapisano u izvještaju.</text>
+</svg>
+  </div>
+  <figcaption>Faze 1 i 2 redom, s brojem simuliranih epizoda. Isprekidane linije su tačke u kojima se odluka zapiše u repozitorij prije sljedećeg koraka, pa je rezultat ne može promijeniti. VALIDATION je pokrenut dva puta, svaki put jednom: prvo za gate, pa za benchmark. Sve je rađeno lokalno, na procesoru.</figcaption>
+</figure>
+<ul class="tight">
+  <li><strong>Trening.</strong> Seedovi 11–20. Za svaki seed osnovni PPO na B=2 (8.064 odluke) i tri fine-tunea od 3.024 odluke (B=1, B=4 i kontrola na B=2). Ukupno 40 politika, 171.360 odluka i 14,5 h rada na lokalnom procesoru. To je kratak trening: oko 2.000 epizoda po osnovnoj politici, dvadesetak po požaru.</li>
+  <li><strong>Izbor heuristike na TRAIN-u.</strong> Na 98 TRAIN požara <span class="mono">advancing_front</span> smanjuje izgorjelu površinu za 194,4 ha prema no-opu na B=2, a <span class="mono">downwind</span> za 187,7 ha. Izabran je <span class="mono">advancing_front</span>. Taj izbor i otisci svih 40 modela zapisani su prije VALIDATION-a, da se poslije ne mogu mijenjati.</li>
+  <li><strong>VALIDATION, jednom.</strong> 20 požara × 44 politike × 4 budžeta = 3.520 epizoda, bez grešaka. Bez intervencije simulator dodaje u prosjeku 3.464 ha po požaru (medijan 685 ha).</li>
+</ul>
+<figure>
+  <div class="fig">
+    <svg viewBox="0 0 680 270" width="100%" role="img" aria-label="Šest glavnih poređenja: procjena razlike i 95-postotni interval. Svi intervali prelaze nulu.">
+      <g class="k-rule" stroke-width="1">
+        <line x1="211.2" y1="36" x2="211.2" y2="225"/><line x1="267.3" y1="36" x2="267.3" y2="225"/><line x1="323.4" y1="36" x2="323.4" y2="225"/><line x1="435.6" y1="36" x2="435.6" y2="225"/><line x1="491.7" y1="36" x2="491.7" y2="225"/><line x1="547.8" y1="36" x2="547.8" y2="225"/><line x1="603.9" y1="36" x2="603.9" y2="225"/><line x1="660" y1="36" x2="660" y2="225"/>
+      </g>
+      <line x1="379.5" y1="30" x2="379.5" y2="225" class="k-muted" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <line x1="200" y1="225" x2="664" y2="225" class="k-ink" stroke-width="1"/>
+      <g font-size="11" class="s-muted" text-anchor="middle">
+        <text x="211.2" y="241">−150</text><text x="267.3" y="241">−100</text><text x="323.4" y="241">−50</text><text x="379.5" y="241">0</text><text x="435.6" y="241">+50</text><text x="491.7" y="241">+100</text><text x="547.8" y="241">+150</text><text x="603.9" y="241">+200</text><text x="660" y="241">+250</text>
+      </g>
+      <text x="200" y="262" font-size="11" class="s-muted">razlika u izgorjeloj površini (ha); lijevo od nule PPO spali manje</text>
+      <text x="10" y="22" font-size="12" font-weight="700" class="s-ink">Osnovni PPO minus…</text>
+      <g font-size="11.5" class="s-ink">
+        <text x="10" y="54">B=1 · nasumična linija</text>
+        <text x="10" y="84">B=1 · heuristika</text>
+        <text x="10" y="114">B=2 · nasumična linija</text>
+        <text x="10" y="144">B=2 · heuristika</text>
+        <text x="10" y="174">B=4 · nasumična linija</text>
+        <text x="10" y="204">B=4 · heuristika</text>
+      </g>
+      <g class="k-ink" stroke-width="2.5" stroke-linecap="round">
+        <line x1="350.2" y1="50" x2="400.9" y2="50"/>
+        <line x1="337.3" y1="80" x2="380.9" y2="80"/>
+        <line x1="286.3" y1="110" x2="523.9" y2="110"/>
+        <line x1="279.1" y1="140" x2="464.6" y2="140"/>
+        <line x1="242.9" y1="170" x2="651" y2="170"/>
+        <line x1="207.4" y1="200" x2="437.2" y2="200"/>
+      </g>
+      <g class="s-front">
+        <circle cx="373.3" cy="50" r="5"/><circle cx="362.8" cy="80" r="5"/><circle cx="394.8" cy="110" r="5"/><circle cx="377.1" cy="140" r="5"/><circle cx="424.8" cy="170" r="5"/><circle cx="338.2" cy="200" r="5"/>
+      </g>
+    </svg>
+  </div>
+  <figcaption>Šest glavnih poređenja na 20 VALIDATION požara. Tačka je razlika usrednjena po 10 seedova, a linija je 95% interval iz dvoslojnog bootstrapa. „Heuristika“ je <span class="mono">advancing_front</span>, izabrana na TRAIN-u. Svaki interval prelazi nulu.</figcaption>
+</figure>
+<div class="tablewrap"><table>
+  <thead><tr><th>Osnovni PPO minus…</th><th>Razlika (ha)</th><th>95% interval</th><th>p</th><th>Holm p</th><th>Požari gdje je PPO bolji / lošiji</th></tr></thead>
+  <tbody class="num">
+    <tr><td>B=1 · nasumična linija</td><td>−5,5</td><td>[−26,1; +19,1]</td><td>0,514</td><td>1,000</td><td>10 / 5</td></tr>
+    <tr><td>B=1 · heuristika</td><td>−14,9</td><td>[−37,6; +1,2]</td><td>0,024</td><td>0,145</td><td>10 / 5</td></tr>
+    <tr><td>B=2 · nasumična linija</td><td>+13,6</td><td>[−83,1; +128,7]</td><td>0,785</td><td>1,000</td><td>9 / 6</td></tr>
+    <tr><td>B=2 · heuristika</td><td>−2,1</td><td>[−89,5; +75,8]</td><td>0,981</td><td>1,000</td><td>6 / 9</td></tr>
+    <tr><td>B=4 · nasumična linija</td><td>+40,4</td><td>[−121,8; +242,0]</td><td>0,778</td><td>1,000</td><td>9 / 6</td></tr>
+    <tr><td>B=4 · heuristika</td><td>−36,8</td><td>[−153,4; +51,4]</td><td>0,478</td><td>1,000</td><td>6 / 9</td></tr>
+  </tbody>
+</table></div>
+<div class="callout">
+  <p><strong>Kako čitati tabelu.</strong> Negativna razlika znači da PPO spali manje. Nulta hipoteza svakog testa je da je prosječna razlika između dvije politike nula. p je vjerovatnoća da se ovolika ili veća razlika dobije slučajno, kad stvarne razlike nema. Holm p je isti broj, korigovan zato što se radi šest testova. „Ne odbacuje nultu hipotezu“ znači da je izmjerena razlika mogla nastati i slučajno.</p>
+  <p><strong>Šta se smije zaključiti.</strong> Smije se reći da nema dokaza da je PPO bolji ili lošiji. Ne smije se reći da je jednako dobar, jer intervali dopuštaju i prednost i zaostatak od oko 100 ha na B=2.</p>
+  <p>Test i interval se računaju različito: interval uključuje i razlike među seedovima. Zato u redu B=1 prema heuristici p može biti mali, a interval ipak prelazi nulu. U svakom poređenju rezultat se mijenja na 15 od 20 požara; na ostalih pet su sve politike iste.</p>
+</div>
+<ul class="tight">
+  <li><strong>Nijedan test ne odbacuje nultu hipotezu.</strong> Najmanji p (0,024, B=1 prema heuristici) ne preživljava korekciju.</li>
+  <li><strong>Robusnost, dvije provjere.</strong> Prva: izbaci se požar koji u tom poređenju najviše doprinosi razlici. Tada tri od šest procjena promijene predznak, pa smjer razlike zavisi od jednog požara. Druga: izbaci se površinom najveći požar (newell-road, 23.811 ha bez intervencije). Tada nijedna procjena ne promijeni predznak.</li>
+  <li><strong>Prema no-opu</strong> (samo provjera): svaka porodica politika u prosjeku spali manje, 0,3–8% od prosjeka no-opa. Osnovni PPO: −24,8 / −102,0 / −193,9 ha na B=1/2/4.</li>
+  <li><strong>Druga heuristika je bolja.</strong> Na VALIDATION-u je <span class="mono">downwind</span> (−45,7 / −142,6 / −280,4 ha prema no-opu) bolja i od heuristike izabrane na TRAIN-u i od PPO-a, na svakom budžetu. To poređenje nije bilo među šest unaprijed zadanih, pa se navodi samo opisno.</li>
+  <li><strong>Linija spali više od no-opa</strong> u 48 od 2.379 epizoda s linijom (2,0%), na 3 od 20 požara. Prosječan višak je 64 ha, a najveći 476 ha. Za osnovni PPO to je 12 od 579 epizoda.</li>
+</ul>
+<figure>
+  <div class="fig wide">
+    <div class="legend"><span><i style="background:var(--c-ppo)"></i>PPO politike (prosjek 10 seedova)</span><span><i style="background:var(--c-rand)"></i>nasumična dozvoljena linija</span><span><i style="background:var(--c-heur)"></i>heuristike</span></div>
+<svg viewBox="0 0 680 286" role="img" aria-label="Prosječno smanjenje izgorjele površine prema no-opu na 20 VALIDATION požara, za B=1, 2 i 4. downwind je najbolji na svakom budžetu; PPO porodice su blizu nasumične linije.">
+<text x="180" y="20" font-size="12" font-weight="700" class="s-ink">B = 1</text>
+<line x1="180.0" y1="34" x2="180.0" y2="236" class="k-rule" stroke-width="1"/>
+<text x="180.0" y="250" text-anchor="middle" font-size="10" class="s-muted">0</text>
+<line x1="223.8" y1="34" x2="223.8" y2="236" class="k-rule" stroke-width="1"/>
+<text x="223.8" y="250" text-anchor="middle" font-size="10" class="s-muted">100</text>
+<line x1="267.5" y1="34" x2="267.5" y2="236" class="k-rule" stroke-width="1"/>
+<text x="267.5" y="250" text-anchor="middle" font-size="10" class="s-muted">200</text>
+<line x1="311.2" y1="34" x2="311.2" y2="236" class="k-rule" stroke-width="1"/>
+<text x="311.2" y="250" text-anchor="middle" font-size="10" class="s-muted">300</text>
+<rect class="mark f-ppo" x="180" y="46" width="10.8" height="15" rx="2"><title>osnovni PPO, B=1: −24,8 ha prema no-opu</title></rect>
+<text x="194.8" y="57.5" font-size="10" class="s-muted">25</text>
+<rect class="mark f-ppo" x="180" y="74" width="13.1" height="15" rx="2"><title>PPO fine-tune B=1, B=1: −30,0 ha prema no-opu</title></rect>
+<text x="197.1" y="85.5" font-size="10" class="s-muted">30</text>
+<rect class="mark f-ppo" x="180" y="102" width="11.1" height="15" rx="2"><title>PPO fine-tune B=4, B=1: −25,4 ha prema no-opu</title></rect>
+<text x="195.1" y="113.5" font-size="10" class="s-muted">25</text>
+<rect class="mark f-ppo" x="180" y="130" width="9.6" height="15" rx="2"><title>PPO kontrola (B=2), B=1: −22,0 ha prema no-opu</title></rect>
+<text x="193.6" y="141.5" font-size="10" class="s-muted">22</text>
+<rect class="mark f-rand" x="180" y="158" width="8.4" height="15" rx="2"><title>nasumična linija, B=1: −19,3 ha prema no-opu</title></rect>
+<text x="192.4" y="169.5" font-size="10" class="s-muted">19</text>
+<rect class="mark f-heur" x="180" y="186" width="4.3" height="15" rx="2"><title>advancing_front, B=1: −9,9 ha prema no-opu</title></rect>
+<text x="188.3" y="197.5" font-size="10" class="s-muted">10</text>
+<rect class="mark f-heur" x="180" y="214" width="20.0" height="15" rx="2"><title>downwind, B=1: −45,7 ha prema no-opu</title></rect>
+<text x="204.0" y="225.5" font-size="10" class="s-muted">46</text>
+<text x="345" y="20" font-size="12" font-weight="700" class="s-ink">B = 2</text>
+<line x1="345.0" y1="34" x2="345.0" y2="236" class="k-rule" stroke-width="1"/>
+<text x="345.0" y="250" text-anchor="middle" font-size="10" class="s-muted">0</text>
+<line x1="388.8" y1="34" x2="388.8" y2="236" class="k-rule" stroke-width="1"/>
+<text x="388.8" y="250" text-anchor="middle" font-size="10" class="s-muted">100</text>
+<line x1="432.5" y1="34" x2="432.5" y2="236" class="k-rule" stroke-width="1"/>
+<text x="432.5" y="250" text-anchor="middle" font-size="10" class="s-muted">200</text>
+<line x1="476.2" y1="34" x2="476.2" y2="236" class="k-rule" stroke-width="1"/>
+<text x="476.2" y="250" text-anchor="middle" font-size="10" class="s-muted">300</text>
+<rect class="mark f-ppo" x="345" y="46" width="44.6" height="15" rx="2"><title>osnovni PPO, B=2: −102,0 ha prema no-opu</title></rect>
+<text x="393.6" y="57.5" font-size="10" class="s-muted">102</text>
+<rect class="mark f-ppo" x="345" y="74" width="48.3" height="15" rx="2"><title>PPO fine-tune B=1, B=2: −110,3 ha prema no-opu</title></rect>
+<text x="397.3" y="85.5" font-size="10" class="s-muted">110</text>
+<rect class="mark f-ppo" x="345" y="102" width="43.4" height="15" rx="2"><title>PPO fine-tune B=4, B=2: −99,2 ha prema no-opu</title></rect>
+<text x="392.4" y="113.5" font-size="10" class="s-muted">99</text>
+<rect class="mark f-ppo" x="345" y="130" width="41.0" height="15" rx="2"><title>PPO kontrola (B=2), B=2: −93,7 ha prema no-opu</title></rect>
+<text x="390.0" y="141.5" font-size="10" class="s-muted">94</text>
+<rect class="mark f-rand" x="345" y="158" width="50.6" height="15" rx="2"><title>nasumična linija, B=2: −115,7 ha prema no-opu</title></rect>
+<text x="399.6" y="169.5" font-size="10" class="s-muted">116</text>
+<rect class="mark f-heur" x="345" y="186" width="43.8" height="15" rx="2"><title>advancing_front, B=2: −100,0 ha prema no-opu</title></rect>
+<text x="392.8" y="197.5" font-size="10" class="s-muted">100</text>
+<rect class="mark f-heur" x="345" y="214" width="62.4" height="15" rx="2"><title>downwind, B=2: −142,6 ha prema no-opu</title></rect>
+<text x="411.4" y="225.5" font-size="10" class="s-muted">143</text>
+<text x="510" y="20" font-size="12" font-weight="700" class="s-ink">B = 4</text>
+<line x1="510.0" y1="34" x2="510.0" y2="236" class="k-rule" stroke-width="1"/>
+<text x="510.0" y="250" text-anchor="middle" font-size="10" class="s-muted">0</text>
+<line x1="553.8" y1="34" x2="553.8" y2="236" class="k-rule" stroke-width="1"/>
+<text x="553.8" y="250" text-anchor="middle" font-size="10" class="s-muted">100</text>
+<line x1="597.5" y1="34" x2="597.5" y2="236" class="k-rule" stroke-width="1"/>
+<text x="597.5" y="250" text-anchor="middle" font-size="10" class="s-muted">200</text>
+<line x1="641.2" y1="34" x2="641.2" y2="236" class="k-rule" stroke-width="1"/>
+<text x="641.2" y="250" text-anchor="middle" font-size="10" class="s-muted">300</text>
+<rect class="mark f-ppo" x="510" y="46" width="84.8" height="15" rx="2"><title>osnovni PPO, B=4: −193,9 ha prema no-opu</title></rect>
+<text x="598.8" y="57.5" font-size="10" class="s-muted">194</text>
+<rect class="mark f-ppo" x="510" y="74" width="84.7" height="15" rx="2"><title>PPO fine-tune B=1, B=4: −193,6 ha prema no-opu</title></rect>
+<text x="598.7" y="85.5" font-size="10" class="s-muted">194</text>
+<rect class="mark f-ppo" x="510" y="102" width="82.6" height="15" rx="2"><title>PPO fine-tune B=4, B=4: −188,7 ha prema no-opu</title></rect>
+<text x="596.6" y="113.5" font-size="10" class="s-muted">189</text>
+<rect class="mark f-ppo" x="510" y="130" width="82.5" height="15" rx="2"><title>PPO kontrola (B=2), B=4: −188,6 ha prema no-opu</title></rect>
+<text x="596.5" y="141.5" font-size="10" class="s-muted">189</text>
+<rect class="mark f-rand" x="510" y="158" width="102.5" height="15" rx="2"><title>nasumična linija, B=4: −234,3 ha prema no-opu</title></rect>
+<text x="616.5" y="169.5" font-size="10" class="s-muted">234</text>
+<rect class="mark f-heur" x="510" y="186" width="68.7" height="15" rx="2"><title>advancing_front, B=4: −157,1 ha prema no-opu</title></rect>
+<text x="582.7" y="197.5" font-size="10" class="s-muted">157</text>
+<rect class="mark f-heur" x="510" y="214" width="122.7" height="15" rx="2"><title>downwind, B=4: −280,4 ha prema no-opu</title></rect>
+<text x="636.7" y="225.5" font-size="10" class="s-muted">280</text>
+<text x="10" y="58" font-size="11" class="s-ink">osnovni PPO</text>
+<text x="10" y="86" font-size="11" class="s-ink">PPO fine-tune B=1</text>
+<text x="10" y="114" font-size="11" class="s-ink">PPO fine-tune B=4</text>
+<text x="10" y="142" font-size="11" class="s-ink">PPO kontrola (B=2)</text>
+<text x="10" y="170" font-size="11" class="s-ink">nasumična linija</text>
+<text x="10" y="198" font-size="11" class="t-mono s-ink">advancing_front</text>
+<text x="10" y="226" font-size="11" class="t-mono s-ink">downwind</text>
+<text x="180" y="270" font-size="10.5" class="s-muted">ha manje izgorjelo nego bez intervencije, prosjek po požaru (no-op: 3.464 ha)</text>
+</svg>
+  </div>
+  <figcaption>Provjera prema no-opu na 20 VALIDATION požara (samo opisno, nije među šest glavnih testova). Duža traka znači da je izgorjelo manje. Svaka porodica u prosjeku spali manje od no-opa, i to više što je budžet veći. PPO porodice su na B=1 i B=2 blizu nasumične linije, a na B=4 iza nje; nijedna od tih razlika nije statistički pokazana. <span class="mono">downwind</span> je najduži na svakom budžetu, iako je na TRAIN-u izabran <span class="mono">advancing_front</span>. Skala je ista za sva tri budžeta.</figcaption>
+</figure>
+<figure>
+  <div class="fig">
+<svg viewBox="0 0 680 64" role="img" aria-label="Od 2.379 VALIDATION epizoda s bar jednom linijom: 1.172 spale manje od no-opa, 1.159 isto, 48 više.">
+<rect class="mark s-ok" x="10.0" y="10" width="323.1" height="22" rx="2"><title>manje od no-opa: 1.172 epizoda</title></rect>
+<rect class="mark s-muted" x="335.1" y="10" width="319.5" height="22" rx="2"><title>isto kao no-op: 1.159 epizoda</title></rect>
+<rect class="mark s-bad" x="656.7" y="10" width="13.3" height="22" rx="2"><title>više od no-opa: 48 epizoda</title></rect>
+<text x="10" y="52" font-size="11.5" class="s-ink"><tspan font-weight="700">1.172</tspan> spali manje (49%)</text>
+<text x="337.1" y="52" font-size="11.5" class="s-ink"><tspan font-weight="700">1.159</tspan> isto (49%)</text>
+<text x="670" y="52" text-anchor="end" font-size="11.5" class="s-bad"><tspan font-weight="700">48</tspan> spali više (2%)</text>
+</svg>
+  </div>
+  <figcaption>Sve VALIDATION epizode u kojima je postavljena bar jedna linija (2.379 od 2.640 epizoda s B &gt; 0), upoređene s no-op epizodom istog požara. Polovina linija ne promijeni ishod. 48 epizoda na 3 požara spali više, u prosjeku za 64 ha; uzrok je redoslijed širenja u SimFire-u, a nije ispravljen.</figcaption>
+</figure>
+<h3>Fine-tuning po budžetu</h3>
+<p>Ovo je pitanje od kojeg je projekat krenuo. Po protokolu je sporedno, jer osnovni agent nije pokazao prednost. Mjerljivog dobitka nema: svaki interval uključuje nulu.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Poređenje</th><th>B=1</th><th>B=4</th></tr></thead>
+  <tbody class="num">
+    <tr><td>Fine-tuned minus osnovna politika</td><td>−5,2 ha [−19,8; +2,1]</td><td>+5,2 ha [−13,8; +30,7]</td></tr>
+    <tr><td>Fine-tuned minus kontrola (isti dodatni trening na B=2)</td><td>−8,0 ha [−29,4; +6,3]</td><td>−0,1 ha [−79,3; +73,5]</td></tr>
+  </tbody>
+</table></div>
+<p style="font-size:.9rem;color:var(--muted)">Negativno znači da fine-tuned politika spali manje. Sama kontrola, tj. dodatni trening bez promjene budžeta, mijenja rezultat osnovne politike na B=2 za +8,4 ha [−24,2; +63,2].</p>
+
+<h3>Šta su politike zapravo naučile</h3>
+<p>Ovo je opisni pregled, urađen nakon što je rezultat viđen.</p>
+<ul class="tight">
+  <li>Sedam od deset osnovnih politika u svakoj VALIDATION epizodi bira istu prvu akciju, svaka svoju. Sektori su vezani za strane svijeta, a ne za vjetar. To dakle nije pravilo „niz vjetar“, nego isti smjer na mapi bez obzira na požar i meteorološke uslove. Seedovi 12, 14 i 20 se ponašaju potpuno isto, kao i seedovi 16 i 19.</li>
+  <li>Četrdeset PPO politika daje samo 10 različitih ponašanja na VALIDATION-u. Mnogi fine-tunei se ponašaju tačno kao neka osnovna politika, a tri nikad ne postave liniju.</li>
+  <li>Nasumična linija je jedna realizacija: isti seed kreće ispočetka u svakom scenariju, pa i ona u većini požara ponavlja iste smjerove. Poređenje s njom je poređenje s jednim proizvoljnim skupom smjerova, a ne s prosjekom nasumičnih postavljanja.</li>
+  <li>Na TRAIN požarima, na kojima je treniran, osnovni PPO je na B=2 takođe iza obje heuristike i nasumične linije (−175,1 ha prema −194,4, −187,7 i −205,6 ha).</li>
+</ul>
+<figure>
+  <div class="fig wide">
+<svg viewBox="0 0 680 150" role="img" aria-label="Najčešća prva akcija svake od deset osnovnih PPO politika na VALIDATION-u. Sedam politika u svakoj epizodi kreće istim smjerom na mapi.">
+<defs><marker id="ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="3" markerHeight="3" orient="auto"><path d="M0 0L10 5L0 10z" class="f-ppo"/></marker></defs>
+<circle cx="40" cy="62" r="26" fill="none" class="k-rule" stroke-width="1"/>
+<text x="40" y="48" text-anchor="middle" font-size="10.5" font-weight="700" class="s-muted">S</text>
+<text x="40" y="84" text-anchor="middle" font-size="10.5" font-weight="700" class="s-muted">J</text>
+<text x="58" y="66" text-anchor="middle" font-size="10.5" font-weight="700" class="s-muted">I</text>
+<text x="22" y="66" text-anchor="middle" font-size="10.5" font-weight="700" class="s-muted">Z</text>
+<text x="40" y="108" text-anchor="middle" font-size="10.5" class="s-muted">strane</text>
+<text x="40" y="122" text-anchor="middle" font-size="10.5" class="s-muted">svijeta</text>
+<circle cx="118" cy="62" r="26" class="s-wash k-rule" stroke-width="1"/>
+<line x1="118" y1="62" x2="144.0" y2="62.0" class="k-rule" stroke-width="1"/>
+<line x1="118" y1="62" x2="136.4" y2="80.4" class="k-rule" stroke-width="1"/>
+<line x1="118" y1="62" x2="118.0" y2="88.0" class="k-rule" stroke-width="1"/>
+<line x1="118" y1="62" x2="99.6" y2="80.4" class="k-rule" stroke-width="1"/>
+<line x1="118" y1="62" x2="92.0" y2="62.0" class="k-rule" stroke-width="1"/>
+<line x1="118" y1="62" x2="99.6" y2="43.6" class="k-rule" stroke-width="1"/>
+<line x1="118" y1="62" x2="118.0" y2="36.0" class="k-rule" stroke-width="1"/>
+<line x1="118" y1="62" x2="136.4" y2="43.6" class="k-rule" stroke-width="1"/>
+<line class="mark k-ppo" x1="118" y1="62" x2="102.4" y2="46.4" stroke-width="3" marker-end="url(#ca)"><title>seed 11: 65% epizoda kreće ovim smjerom</title></line>
+<circle cx="118" cy="62" r="2.5" class="s-ink"/>
+<text x="118" y="108" text-anchor="middle" font-size="11" font-weight="700" class="s-ink">s11</text>
+<text x="118" y="122" text-anchor="middle" font-size="10.5" class="s-muted">65%</text>
+<circle cx="176" cy="62" r="26" class="s-wash k-rule" stroke-width="1"/>
+<line x1="176" y1="62" x2="202.0" y2="62.0" class="k-rule" stroke-width="1"/>
+<line x1="176" y1="62" x2="194.4" y2="80.4" class="k-rule" stroke-width="1"/>
+<line x1="176" y1="62" x2="176.0" y2="88.0" class="k-rule" stroke-width="1"/>
+<line x1="176" y1="62" x2="157.6" y2="80.4" class="k-rule" stroke-width="1"/>
+<line x1="176" y1="62" x2="150.0" y2="62.0" class="k-rule" stroke-width="1"/>
+<line x1="176" y1="62" x2="157.6" y2="43.6" class="k-rule" stroke-width="1"/>
+<line x1="176" y1="62" x2="176.0" y2="36.0" class="k-rule" stroke-width="1"/>
+<line x1="176" y1="62" x2="194.4" y2="43.6" class="k-rule" stroke-width="1"/>
+<line class="mark k-ppo" x1="176" y1="62" x2="176.0" y2="40.0" stroke-width="3" marker-end="url(#ca)"><title>seed 12: 100% epizoda kreće ovim smjerom</title></line>
+<circle cx="176" cy="62" r="2.5" class="s-ink"/>
+<text x="176" y="108" text-anchor="middle" font-size="11" font-weight="700" class="s-ink">s12</text>
+<text x="176" y="122" text-anchor="middle" font-size="10.5" class="s-ink">100%</text>
+<circle cx="234" cy="62" r="26" class="s-wash k-rule" stroke-width="1"/>
+<line x1="234" y1="62" x2="260.0" y2="62.0" class="k-rule" stroke-width="1"/>
+<line x1="234" y1="62" x2="252.4" y2="80.4" class="k-rule" stroke-width="1"/>
+<line x1="234" y1="62" x2="234.0" y2="88.0" class="k-rule" stroke-width="1"/>
+<line x1="234" y1="62" x2="215.6" y2="80.4" class="k-rule" stroke-width="1"/>
+<line x1="234" y1="62" x2="208.0" y2="62.0" class="k-rule" stroke-width="1"/>
+<line x1="234" y1="62" x2="215.6" y2="43.6" class="k-rule" stroke-width="1"/>
+<line x1="234" y1="62" x2="234.0" y2="36.0" class="k-rule" stroke-width="1"/>
+<line x1="234" y1="62" x2="252.4" y2="43.6" class="k-rule" stroke-width="1"/>
+<line class="mark k-ppo" x1="234" y1="62" x2="218.4" y2="77.6" stroke-width="3" marker-end="url(#ca)"><title>seed 13: 100% epizoda kreće ovim smjerom</title></line>
+<circle cx="234" cy="62" r="2.5" class="s-ink"/>
+<text x="234" y="108" text-anchor="middle" font-size="11" font-weight="700" class="s-ink">s13</text>
+<text x="234" y="122" text-anchor="middle" font-size="10.5" class="s-ink">100%</text>
+<circle cx="292" cy="62" r="26" class="s-wash k-rule" stroke-width="1"/>
+<line x1="292" y1="62" x2="318.0" y2="62.0" class="k-rule" stroke-width="1"/>
+<line x1="292" y1="62" x2="310.4" y2="80.4" class="k-rule" stroke-width="1"/>
+<line x1="292" y1="62" x2="292.0" y2="88.0" class="k-rule" stroke-width="1"/>
+<line x1="292" y1="62" x2="273.6" y2="80.4" class="k-rule" stroke-width="1"/>
+<line x1="292" y1="62" x2="266.0" y2="62.0" class="k-rule" stroke-width="1"/>
+<line x1="292" y1="62" x2="273.6" y2="43.6" class="k-rule" stroke-width="1"/>
+<line x1="292" y1="62" x2="292.0" y2="36.0" class="k-rule" stroke-width="1"/>
+<line x1="292" y1="62" x2="310.4" y2="43.6" class="k-rule" stroke-width="1"/>
+<line class="mark k-ppo" x1="292" y1="62" x2="292.0" y2="40.0" stroke-width="3" marker-end="url(#ca)"><title>seed 14: 100% epizoda kreće ovim smjerom</title></line>
+<circle cx="292" cy="62" r="2.5" class="s-ink"/>
+<text x="292" y="108" text-anchor="middle" font-size="11" font-weight="700" class="s-ink">s14</text>
+<text x="292" y="122" text-anchor="middle" font-size="10.5" class="s-ink">100%</text>
+<circle cx="350" cy="62" r="26" class="s-wash k-rule" stroke-width="1"/>
+<line x1="350" y1="62" x2="376.0" y2="62.0" class="k-rule" stroke-width="1"/>
+<line x1="350" y1="62" x2="368.4" y2="80.4" class="k-rule" stroke-width="1"/>
+<line x1="350" y1="62" x2="350.0" y2="88.0" class="k-rule" stroke-width="1"/>
+<line x1="350" y1="62" x2="331.6" y2="80.4" class="k-rule" stroke-width="1"/>
+<line x1="350" y1="62" x2="324.0" y2="62.0" class="k-rule" stroke-width="1"/>
+<line x1="350" y1="62" x2="331.6" y2="43.6" class="k-rule" stroke-width="1"/>
+<line x1="350" y1="62" x2="350.0" y2="36.0" class="k-rule" stroke-width="1"/>
+<line x1="350" y1="62" x2="368.4" y2="43.6" class="k-rule" stroke-width="1"/>
+<line class="mark k-ppo" x1="350" y1="62" x2="334.4" y2="46.4" stroke-width="3" marker-end="url(#ca)"><title>seed 15: 57% epizoda kreće ovim smjerom</title></line>
+<circle cx="350" cy="62" r="2.5" class="s-ink"/>
+<text x="350" y="108" text-anchor="middle" font-size="11" font-weight="700" class="s-ink">s15</text>
+<text x="350" y="122" text-anchor="middle" font-size="10.5" class="s-muted">57%</text>
+<circle cx="408" cy="62" r="26" class="s-wash k-rule" stroke-width="1"/>
+<line x1="408" y1="62" x2="434.0" y2="62.0" class="k-rule" stroke-width="1"/>
+<line x1="408" y1="62" x2="426.4" y2="80.4" class="k-rule" stroke-width="1"/>
+<line x1="408" y1="62" x2="408.0" y2="88.0" class="k-rule" stroke-width="1"/>
+<line x1="408" y1="62" x2="389.6" y2="80.4" class="k-rule" stroke-width="1"/>
+<line x1="408" y1="62" x2="382.0" y2="62.0" class="k-rule" stroke-width="1"/>
+<line x1="408" y1="62" x2="389.6" y2="43.6" class="k-rule" stroke-width="1"/>
+<line x1="408" y1="62" x2="408.0" y2="36.0" class="k-rule" stroke-width="1"/>
+<line x1="408" y1="62" x2="426.4" y2="43.6" class="k-rule" stroke-width="1"/>
+<line class="mark k-ppo" x1="408" y1="62" x2="392.4" y2="46.4" stroke-width="3" marker-end="url(#ca)"><title>seed 16: 100% epizoda kreće ovim smjerom</title></line>
+<circle cx="408" cy="62" r="2.5" class="s-ink"/>
+<text x="408" y="108" text-anchor="middle" font-size="11" font-weight="700" class="s-ink">s16</text>
+<text x="408" y="122" text-anchor="middle" font-size="10.5" class="s-ink">100%</text>
+<circle cx="466" cy="62" r="26" class="s-wash k-rule" stroke-width="1"/>
+<line x1="466" y1="62" x2="492.0" y2="62.0" class="k-rule" stroke-width="1"/>
+<line x1="466" y1="62" x2="484.4" y2="80.4" class="k-rule" stroke-width="1"/>
+<line x1="466" y1="62" x2="466.0" y2="88.0" class="k-rule" stroke-width="1"/>
+<line x1="466" y1="62" x2="447.6" y2="80.4" class="k-rule" stroke-width="1"/>
+<line x1="466" y1="62" x2="440.0" y2="62.0" class="k-rule" stroke-width="1"/>
+<line x1="466" y1="62" x2="447.6" y2="43.6" class="k-rule" stroke-width="1"/>
+<line x1="466" y1="62" x2="466.0" y2="36.0" class="k-rule" stroke-width="1"/>
+<line x1="466" y1="62" x2="484.4" y2="43.6" class="k-rule" stroke-width="1"/>
+<line class="mark k-ppo" x1="466" y1="62" x2="444.0" y2="62.0" stroke-width="3" marker-end="url(#ca)"><title>seed 17: 90% epizoda kreće ovim smjerom</title></line>
+<circle cx="466" cy="62" r="2.5" class="s-ink"/>
+<text x="466" y="108" text-anchor="middle" font-size="11" font-weight="700" class="s-ink">s17</text>
+<text x="466" y="122" text-anchor="middle" font-size="10.5" class="s-muted">90%</text>
+<circle cx="524" cy="62" r="26" class="s-wash k-rule" stroke-width="1"/>
+<line x1="524" y1="62" x2="550.0" y2="62.0" class="k-rule" stroke-width="1"/>
+<line x1="524" y1="62" x2="542.4" y2="80.4" class="k-rule" stroke-width="1"/>
+<line x1="524" y1="62" x2="524.0" y2="88.0" class="k-rule" stroke-width="1"/>
+<line x1="524" y1="62" x2="505.6" y2="80.4" class="k-rule" stroke-width="1"/>
+<line x1="524" y1="62" x2="498.0" y2="62.0" class="k-rule" stroke-width="1"/>
+<line x1="524" y1="62" x2="505.6" y2="43.6" class="k-rule" stroke-width="1"/>
+<line x1="524" y1="62" x2="524.0" y2="36.0" class="k-rule" stroke-width="1"/>
+<line x1="524" y1="62" x2="542.4" y2="43.6" class="k-rule" stroke-width="1"/>
+<line class="mark k-ppo" x1="524" y1="62" x2="524.0" y2="84.0" stroke-width="3" marker-end="url(#ca)"><title>seed 18: 100% epizoda kreće ovim smjerom</title></line>
+<circle cx="524" cy="62" r="2.5" class="s-ink"/>
+<text x="524" y="108" text-anchor="middle" font-size="11" font-weight="700" class="s-ink">s18</text>
+<text x="524" y="122" text-anchor="middle" font-size="10.5" class="s-ink">100%</text>
+<circle cx="582" cy="62" r="26" class="s-wash k-rule" stroke-width="1"/>
+<line x1="582" y1="62" x2="608.0" y2="62.0" class="k-rule" stroke-width="1"/>
+<line x1="582" y1="62" x2="600.4" y2="80.4" class="k-rule" stroke-width="1"/>
+<line x1="582" y1="62" x2="582.0" y2="88.0" class="k-rule" stroke-width="1"/>
+<line x1="582" y1="62" x2="563.6" y2="80.4" class="k-rule" stroke-width="1"/>
+<line x1="582" y1="62" x2="556.0" y2="62.0" class="k-rule" stroke-width="1"/>
+<line x1="582" y1="62" x2="563.6" y2="43.6" class="k-rule" stroke-width="1"/>
+<line x1="582" y1="62" x2="582.0" y2="36.0" class="k-rule" stroke-width="1"/>
+<line x1="582" y1="62" x2="600.4" y2="43.6" class="k-rule" stroke-width="1"/>
+<line class="mark k-ppo" x1="582" y1="62" x2="566.4" y2="46.4" stroke-width="3" marker-end="url(#ca)"><title>seed 19: 100% epizoda kreće ovim smjerom</title></line>
+<circle cx="582" cy="62" r="2.5" class="s-ink"/>
+<text x="582" y="108" text-anchor="middle" font-size="11" font-weight="700" class="s-ink">s19</text>
+<text x="582" y="122" text-anchor="middle" font-size="10.5" class="s-ink">100%</text>
+<circle cx="640" cy="62" r="26" class="s-wash k-rule" stroke-width="1"/>
+<line x1="640" y1="62" x2="666.0" y2="62.0" class="k-rule" stroke-width="1"/>
+<line x1="640" y1="62" x2="658.4" y2="80.4" class="k-rule" stroke-width="1"/>
+<line x1="640" y1="62" x2="640.0" y2="88.0" class="k-rule" stroke-width="1"/>
+<line x1="640" y1="62" x2="621.6" y2="80.4" class="k-rule" stroke-width="1"/>
+<line x1="640" y1="62" x2="614.0" y2="62.0" class="k-rule" stroke-width="1"/>
+<line x1="640" y1="62" x2="621.6" y2="43.6" class="k-rule" stroke-width="1"/>
+<line x1="640" y1="62" x2="640.0" y2="36.0" class="k-rule" stroke-width="1"/>
+<line x1="640" y1="62" x2="658.4" y2="43.6" class="k-rule" stroke-width="1"/>
+<line class="mark k-ppo" x1="640" y1="62" x2="640.0" y2="40.0" stroke-width="3" marker-end="url(#ca)"><title>seed 20: 100% epizoda kreće ovim smjerom</title></line>
+<circle cx="640" cy="62" r="2.5" class="s-ink"/>
+<text x="640" y="108" text-anchor="middle" font-size="11" font-weight="700" class="s-ink">s20</text>
+<text x="640" y="122" text-anchor="middle" font-size="10.5" class="s-ink">100%</text>
+<text x="10" y="16" font-size="11" class="s-muted">osnovna politika po seedu: smjer prve linije u većini VALIDATION epizoda i koliki je to udio</text>
+</svg>
+  </div>
+  <figcaption>Deset osnovnih politika, deset seedova. Strelica je sektor koji politika najčešće bira za prvu liniju, a broj je udio epizoda u kojima to radi. Sedam politika (100%) uvijek kreće istim smjerom na mapi, bez obzira na požar, vjetar i budžet. Smjerovi su različiti od seeda do seeda, pa svaki trening nađe svoj fiksni smjer umjesto pravila. Sjever je gore, po konvenciji koda (red 0 mape je na sjeveru).</figcaption>
+</figure>
+<p>Zaključak je da nakon 8.064 odluke većina seedova nauči jedan fiksan smjer, a ne odgovor na stanje požara. Ovo je rezultat u simulatoru koji prerasta stvarne požare, pa ne govori ništa o stvarnom gašenju.</p>
+</section>
+
+<section id="pregled">
+<h2>Pregled nakon faze 2 (11.–12. 11.)</h2>
+<p>Nakon rezultata faze 2 Harun je postavio pet pitanja. Na svako je odgovorila zasebna analiza: čitanje koda, odluka, izvještaja i literature. Nove brojke su izračunate samo iz postojećih TRAIN rezultata, uz jedno probno pokretanje SimFire-a na TRAIN-u. Nije bilo treninga, VALIDATION nije ponovo korišten, a TEST 2024 nije otvoren. Sve je zapisano u repozitoriju, u <span class="mono">docs/research/review-2026-11-11/</span>.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Pitanje</th><th>Odgovor</th></tr></thead>
+  <tbody>
+    <tr><td>Šta kaže rad arXiv 2512.06102 i srodna literatura?</td><td>Rad (JaxWildfire) je o brzom GPU simulatoru; RL je samo primjer bez poređenja s heuristikama. U 22 pregledana rada RL pobijedi dobru heuristiku samo kad ga ona prvo nauči, i to tijesno (npr. 1,6–1,7 procentnih poena). Uspješni radovi imaju 5–50 puta više epizoda i uglavnom jedan teren. Naš rezultat je dakle očekivan.</td></tr>
+    <tr><td>Da li kratke epizode (48 h) koče učenje?</td><td>Vjerovatno ne. FEDS je svaki TRAIN požar pratio najmanje 108 h (medijan oko 11 dana); 48 h je naš izbor zbog provjere simulatora. Vjerovatniji uzroci su slab signal (razlike između požara su oko 50 puta veće od efekta linije), premalo treninga (72 PPO ažuriranja) i mali učinak jedne linije od 7 ćelija naspram fronta od oko 68.</td></tr>
+    <tr><td>Da li pomažu duže sintetičke simulacije sa zakonitostima iz stvarnih požara?</td><td>Ne kao prvi korak. SimFire ne uzima logiku širenja iz stvarnih požara, pa bi to bio nov rad, a postojeći sintetički CA već ima duge požare i agent je i tamo izgubio od pravila. Tačno je da rez na 48 h ne broji efekat linije poslije 48 h; to se jeftinije rješava ako se simulacija pusti dalje bez odluka.</td></tr>
+    <tr><td>Šta se u simulacijama zapravo radi?</td><td>Samo vatrogasne linije ručnih ekipa (odjeljak <a href="#alati">Šta agent smije raditi</a>).</td></tr>
+    <tr><td>Da li je bolje optimizovati heuristike treningom?</td><td>To je prava vrsta pristupa, ali za sada nema dokaza o dobitku. Pravilo koje bira između dvije heuristike po požaru ne pomaže na požarima izvan podešavanja.</td></tr>
+  </tbody>
+</table></div>
+<figure>
+  <div class="fig wide">
+    <div class="legend"><span><i style="background:var(--c-ppo)"></i>PPO</span><span><i style="background:var(--c-heur)"></i>heuristike</span><span><i style="background:var(--c-rand)"></i>nasumična linija</span><span><i style="background:var(--ink);opacity:.45"></i>izbor unazad, poznat tek poslije</span></div>
+<svg viewBox="0 0 680 262" role="img" aria-label="Smanjenje izgorjele površine prema no-opu na TRAIN-u pri B=2: pojedinačne politike daju 175 do 206 ha; kad se za svaki požar unazad izabere najbolja od 44 politike, 576 ha.">
+<line x1="200.0" y1="18" x2="200.0" y2="226" class="k-rule" stroke-width="1"/>
+<text x="200.0" y="242" text-anchor="middle" font-size="10" class="s-muted">0</text>
+<line x1="263.3" y1="18" x2="263.3" y2="226" class="k-rule" stroke-width="1"/>
+<text x="263.3" y="242" text-anchor="middle" font-size="10" class="s-muted">100</text>
+<line x1="326.7" y1="18" x2="326.7" y2="226" class="k-rule" stroke-width="1"/>
+<text x="326.7" y="242" text-anchor="middle" font-size="10" class="s-muted">200</text>
+<line x1="390.0" y1="18" x2="390.0" y2="226" class="k-rule" stroke-width="1"/>
+<text x="390.0" y="242" text-anchor="middle" font-size="10" class="s-muted">300</text>
+<line x1="453.3" y1="18" x2="453.3" y2="226" class="k-rule" stroke-width="1"/>
+<text x="453.3" y="242" text-anchor="middle" font-size="10" class="s-muted">400</text>
+<line x1="516.7" y1="18" x2="516.7" y2="226" class="k-rule" stroke-width="1"/>
+<text x="516.7" y="242" text-anchor="middle" font-size="10" class="s-muted">500</text>
+<line x1="580.0" y1="18" x2="580.0" y2="226" class="k-rule" stroke-width="1"/>
+<text x="580.0" y="242" text-anchor="middle" font-size="10" class="s-muted">600</text>
+<text x="10" y="33" font-size="11" class="s-ink">osnovni PPO, prosjek</text>
+<rect class="mark f-ppo" x="200" y="22" width="110.9" height="15" rx="2"><title>osnovni PPO, prosjek: −175.1 ha</title></rect>
+<text x="315.9" y="33.5" font-size="10.5" class="s-ink">175</text>
+<text x="10" y="57" font-size="11" class="s-ink t-mono">downwind</text>
+<rect class="mark f-heur" x="200" y="46" width="118.9" height="15" rx="2"><title>downwind: −187.7 ha</title></rect>
+<text x="323.9" y="57.5" font-size="10.5" class="s-ink">188</text>
+<text x="10" y="81" font-size="11" class="s-ink t-mono">advancing_front</text>
+<rect class="mark f-heur" x="200" y="70" width="123.1" height="15" rx="2"><title>advancing_front: −194.4 ha</title></rect>
+<text x="328.1" y="81.5" font-size="10.5" class="s-ink">194</text>
+<text x="10" y="105" font-size="11" class="s-ink">nasumična linija</text>
+<rect class="mark f-rand" x="200" y="94" width="130.2" height="15" rx="2"><title>nasumična linija: −205.6 ha</title></rect>
+<text x="335.2" y="105.5" font-size="10.5" class="s-ink">206</text>
+<text x="10" y="126" font-size="10.5" font-weight="700" class="s-muted">unazad, po požaru (nije politika):</text>
+<text x="10" y="145" font-size="11" class="s-ink">bolja od 2 heuristike</text>
+<rect class="mark f-heur" x="200" y="134" width="175.8" height="15" rx="2" opacity=".45"><title>bolja od 2 heuristike: −277.5 ha (unazad)</title></rect>
+<text x="380.8" y="145.5" font-size="10.5" class="s-ink">278</text>
+<text x="10" y="169" font-size="11" class="s-ink">najbolja od 10 PPO</text>
+<rect class="mark f-ppo" x="200" y="158" width="323.1" height="15" rx="2" opacity=".45"><title>najbolja od 10 PPO: −510.2 ha (unazad)</title></rect>
+<text x="528.1" y="169.5" font-size="10.5" class="s-ink">510</text>
+<text x="10" y="193" font-size="11" class="s-ink">najbolja od 44 politike</text>
+<rect class="mark s-ink" x="200" y="182" width="365.1" height="15" rx="2" opacity=".45"><title>najbolja od 44 politike: −576.5 ha (unazad)</title></rect>
+<text x="570.1" y="193.5" font-size="10.5" class="s-ink">576</text>
+<text x="200" y="258" font-size="10.5" class="s-muted">ha manje izgorjelo nego bez linije, prosjek po TRAIN požaru, B=2</text>
+</svg>
+  </div>
+  <figcaption>Gdje je prostor za dobitak, na TRAIN požarima pri B=2 (iz TRAIN benchmarka faze 2). Gornje četiri trake su stvarne politike. Donje tri su izbor unazad: za svaki požar se uzme politika koja je na njemu ispala najbolja. To nije politika, jer niko ne zna unaprijed koja će biti najbolja, ali pokazuje koliko je bolje moguće. Izbor između dvije heuristike donosi malo; izbor smjera po požaru (PPO politike su uglavnom „uvijek isti smjer“) donosi mnogo više. Pitanje je može li se taj smjer predvidjeti iz onoga što politika vidi.</figcaption>
+</figure>
+<h3>Zaključak i plan</h3>
+<ul class="tight">
+  <li><strong>Ključno pitanje</strong> je da li se najbolja linija može predvidjeti iz opservacije. Ako ne može, ne pomažu ni duži trening, ni duže epizode, ni heuristike.</li>
+  <li><strong>Prvi korak, samo TRAIN:</strong> za B=1 isprobati svih 33 niza akcija na svakom od 98 požara (oko 1,5 h na 4 procesa). Simulator je deterministički, pa je to tačna gornja granica. Zatim offline provjeriti da li pravilo, selektor ili jednostavan RL taj dobitak dostižu na požarima na kojima nisu podešavani. Nastaviti samo ako je dobitak bar 30 ha i 25% jaza; inače je i to rezultat.</li>
+  <li><strong>Šta 20 VALIDATION požara može otkriti:</strong> prema širini intervala iz faze 2 oko 28 ha razlike na B=1, ali 120–180 ha na B=2 i B=4; prema rasipanju razlika na TRAIN-u prag je veći, 117–168 ha već na B=1. Zato bi B=1 bio glavni test svakog novog pokušaja.</li>
+  <li><strong>Odluke koje čekaju:</strong> kako računati ćelije linije u šteti; da li pokrenuti prvi korak; koji je simulator glavni za poster; faza 3.</li>
+</ul>
+</section>
+
+<section id="vazi">
+<h2>Šta važi, a šta ne</h2>
+<div class="tablewrap"><table>
+  <thead><tr><th>Dio rada</th><th>Stanje</th><th>Napomena</th></tr></thead>
+  <tbody>
+    <tr><td>Kohorta 98/20, spajanje FPA-FOD i FEDS, LANDFIRE rasteri</td><td><span class="chip ok">važi</span></td><td>Hashovi zapisani. Ulazi su na drugom računaru izgrađeni bajt-identično. Duplikat je uklonjen pravilom u generatoru.</td></tr>
+    <tr><td>Novi meteorološki fajl (gridMET) i čitanje vremenske oznake u FEDS-u</td><td><span class="chip ok">spremno</span></td><td>Svaki požar ima svoju ćeliju (najviše 2,8 km) i <span class="mono">pre_start</span> dan. Vremenska oznaka se čita kao satelitski prolaz.</td></tr>
+    <tr><td>Sintetički pilot, Firehose provjera, CFSDS replay</td><td><span class="chip ok">važi</span></td><td>Tehnički i historijski. Ne odgovaraju na istraživačko pitanje.</td></tr>
+    <tr><td>SimFire gate i kalibracija (ADR-022–024)</td><td><span class="chip bad">poništeno</span></td><td>Pogrešni meteorološki podaci i pristrasna mjera.</td></tr>
+    <tr><td>Benchmark i studija budžeta (ADR-025–027)</td><td><span class="chip bad">poništeno</span></td><td>Pogrešni meteorološki podaci, curenje budućnosti, linije koje propuštaju.</td></tr>
+    <tr><td>Sintetički CA trening i prihvatanje (ADR-028)</td><td><span class="chip bad">poništeno</span></td><td>Ne koristi gridMET, ali ima greške u napretku gradnje i u obračunu spašenih ćelija.</td></tr>
+    <tr><td>Test CA politike na 119 stvarnih požara (TRAIN i VALIDATION, ne TEST 2024)</td><td><span class="chip bad">poništeno</span></td><td>116/119 slučajeva imalo je tuđe meteorološke podatke, uz greške CA-a.</td></tr>
+    <tr><td>Ispravljeni kod i pravila iz ADR-030</td><td><span class="chip ok">na snazi</span></td><td>Faze 1 i 2 su izvedene po ovim pravilima.</td></tr>
+    <tr><td>Novi gate i zamrznuta postavka (ADR-031)</td><td><span class="chip ok">važi</span></td><td>PASS po unaprijed zadanom pravilu, WAF 0,10 / ROS 1,0. Niska letvica; nije kalibracija ni fizička validacija.</td></tr>
+    <tr><td>Novi benchmark i studija budžeta (ADR-032)</td><td><span class="chip ok">važi</span></td><td>Ni u jednom od šest glavnih poređenja nije pokazana razlika. Simulatorski rezultat na 20 VALIDATION požara.</td></tr>
+  </tbody>
+</table></div>
+<p>Poništeni rezultati se ne brišu. Ostaju u repozitoriju kao historija s oznakom da se ne citiraju. Sugerisali su da je signal budžeta slab: većina simuliranih požara se smirivala u prvih 12 h, a dozvoljena je samo jedna linija po odluci. Ponovno pokretanje se slaže s tim u jednom: fine-tuning po budžetu opet ne daje mjerljiv dobitak. Zašto je taj signal slab, novi rezultati ne objašnjavaju.</p>
+</section>
+
+<section id="dalje">
+<h2>Šta slijedi</h2>
+<div class="callout"><p><strong>Najnovije (12. 11.).</strong> Predloženi redoslijed je iz <a href="#pregled">pregleda nakon faze 2</a>: naplata linije u ocjeni (TASK-028), iscrpna B=1 tablica na TRAIN-u (TASK-029) i offline ocjena pravila, selektora i jednostavnog RL-a (TASK-030). Sve čeka Harunovo „da“. Planer, B=2 i B=4, novo korištenje VALIDATION-a i novi trening traže novu odluku (ADR) prije pokretanja.</p></div>
+<p>Poslije pripreme, ponovno pokretanje ide u tri faze. Pripremu i faze 1 i 2 izveo je coding agent, po nalogu koji je Harun dao 9. 11. Pull requestove #17 i #18 Harun je spojio 10. i 11. 11. Faza 3 se pokreće tek kad se odluči koji je simulator glavni za poster, kojim se projekat predaje na predmetu. I to pokretanje odobrava Harun.</p>
+<ul class="tight">
+  <li><strong>Priprema:</strong> <span class="chip ok">urađeno</span> Vremenska oznaka u FEDS-u je provjerena (nije UTC) i duplikat je uklonjen. Novi meteorološki fajl je napravljen, a okruženje odbija stari.</li>
+  <li><strong>Faza 1, bez treninga:</strong> <span class="chip ok">urađeno</span> Gate na TRAIN skupu je prošao, postavka je zamrznuta, a VALIDATION je ocijenjen jednom (PR #17).</li>
+  <li><strong>Faza 2:</strong> <span class="chip ok">urađeno</span> SimFire benchmark i studija budžeta sa 10 seedova, lokalno. Ni u jednom glavnom poređenju nije pokazana razlika (PR #18).</li>
+  <li><strong>Faza 3:</strong> ponovni trening CA politika, zaključavanje i opisni test na stvarnim požarima s metrikom rasta. Nije pokrenuta.</li>
+</ul>
+<p>Otvorena pitanja za tim:</p>
+<ul class="tight">
+  <li>Većina SimFire politika nauči jedan fiksan smjer. Da li probati duži trening ili drugačiju opservaciju, ili prijaviti nalaz kakav jeste?</li>
+  <li>Nasumična linija je jedna realizacija s istim seedom u svakom scenariju. Prosjek preko više seedova bio bi pošteniji komparator, ali to je nova odluka koja mijenja ADR-030.</li>
+  <li>Heuristika <span class="mono">downwind</span> je na VALIDATION-u bolja od <span class="mono">advancing_front</span>, koja je izabrana na TRAIN-u s razlikom od 6,7 ha.</li>
+  <li>Da li je izjednačenje s heuristikom dovoljno, ili tražimo agenta koji je pobjeđuje (DAgger, duži fine-tuning, više jedinica)?</li>
+  <li>Da li uvesti model zaustavljanja požara, koji bi riješio pristrasnost gatea u korijenu?</li>
+  <li>Sintetički CA u opservaciji daje meteorološke podatke trenutnog koraka, a to su isti podaci koji pokreću simulaciju. Za SimFire je to zabranjeno pravilima (ADR-030). Odluka je potrebna prije faze 3.</li>
+  <li>Šta od zaštite prioritetnih područja i gradnje linije kroz vrijeme ulazi u obim prije postera?</li>
+</ul>
+</section>
+
+<section id="nastavak">
+<h2>Kako nastaviti rad</h2>
+<p>Ovaj pregled je sažetak za čitanje. Kanonski izvor je repozitorij <span class="mono">goralija/wildfire-rl-adaptation</span>; kad se razilaze, važi repozitorij. Ko preuzima posao, čovjek ili AI agent, ne treba ništa iz ranijih razgovora.</p>
+<ol class="stages">
+  <li><strong>Stanje koda.</strong> Faze 1 i 2 su u grani <span class="mono">main</span> (PR #17 i #18). Otvoren je još PR #19 (pregled nakon faze 2 i novi HANDOFF); dok nije spojen, najnovija dokumentacija je u grani <span class="mono">docs/research-review</span>. Prije rada: <span class="mono">git fetch origin</span>, nove grane iz <span class="mono">origin/main</span>.</li>
+  <li><strong>Prvo pročitati <span class="mono">HANDOFF.md</span></strong> u korijenu repozitorija. On navodi šta čitati i kojim redom: <span class="mono">AGENTS.md</span> (pravila), <span class="mono">docs/STATUS.md</span>, <span class="mono">docs/NEXT_SESSION.md</span>, <span class="mono">docs/research/review-2026-11-11/SUMMARY.md</span> i odluke ADR-029 do ADR-032.</li>
+  <li><strong>Sljedeći zadaci</strong> su u <span class="mono">docs/BACKLOG.md</span> (TASK-028 do TASK-033), s procjenom trajanja i oznakom šta traži novu odluku.</li>
+  <li><strong>Okruženje.</strong> SimFire okruženje (Python 3.9) i ulazni podaci se obnavljaju iz javnih izvora po <span class="mono">docs/research/SIMFIRE_ENVIRONMENT.md</span>. Teški fajlovi (podaci, modeli) nisu u gitu. Za poređenje s fazama 1 i 2 treba Harunova kopija vremenskog fajla, jer novo generisanje daje novi otisak.</li>
+  <li><strong>Pravila.</strong> Merge u <span class="mono">main</span> radi samo Harun. TEST 2024 se ne otvara. Bez plaćenog računanja. Pravila ocjene se ne mijenjaju nakon rezultata; nova pravila idu u novi ADR prije pokretanja.</li>
+</ol>
+</section>
+
+<section id="nacin">
+<h2>Kako je rad vođen</h2>
+<p>Najveći dio implementacije uradili su AI coding agenti. Svaku odluku sa posljedicama donosio je čovjek. Nekoliko praksi se pokazalo bitnim:</p>
+<ul class="tight">
+  <li><strong>Odluke se zapisuju kao ADR</strong>, kratak zapis s razlogom i statusom. Kad nešto prestane važiti, ne briše se, nego se označi i poveže s odlukom koja ga zamjenjuje.</li>
+  <li><strong>Izolovani radni prostori:</strong> svaki zadatak radi se u svojoj kopiji koda i spaja se kroz pull request, pa je historija čitljiva.</li>
+  <li><strong>Unaprijed zadani kriteriji:</strong> pragovi, postavke koje se isprobavaju i statistički testovi zapisuju se prije pokretanja. VALIDATION se ocjenjuje jednom, a TEST se ne otvara.</li>
+  <li><strong>Revizija sa suženim kontekstom:</strong> recenzent ne zna šta autor misli da je popravio, pa traži greške, a ne potvrdu.</li>
+  <li><strong>Testovi prije promjene ponašanja:</strong> svaka izmjena budžeta, štete, maske ili statistike dobija test prije koda. Automatska provjera pada kad se test tiho preskoči.</li>
+  <li><strong>Nema skupog compute-a bez naloga:</strong> trening, plaćeni resursi i merge idu samo uz izričito odobrenje. Nalog za faze 1 i 2 zapisan je kao dopuna ADR-030, s uslovima zaustavljanja. Coding agent i tada sam otvara pull requestove, ali ih ne spaja.</li>
+</ul>
+</section>
+
+<section id="dodatak">
+<h2>Dodatak: detalji</h2>
+<p>Ovaj dio nije potreban za razumijevanje rezultata. Navodi šta je nezavisni recenzent našao u svakoj ispravci i kako radi sintetički CA.</p>
+<h3>Ispravke po pull requestu</h3>
+<div class="pr">
+  <h3>PR #8 · Automatski testovi (CI)</h3>
+  <dl>
+    <dt>Ispravka</dt><dd>Automatska provjera sada instalira NumPy i geo biblioteke i pokreće sve testove osim onih koji traže SimFire, sb3/torch ili lokalne podatke.</dd>
+    <dt>Nalaz revizije</dt><dd>Provjera preskočenih testova čitala je log, a upozorenje koje razbije liniju moglo je sakriti preskočeni test. To se već dešavalo.</dd>
+    <dt>Popravljeno</dt><dd>Preskočeni testovi se porede s tačnim spiskom ID-jeva. Svaki višak ili zastarjeli unos obara provjeru. Tri testa okruženja koja su se nepotrebno preskakala sada se izvršavaju.</dd>
+  </dl>
+</div>
+<div class="pr">
+  <h3>PR #9 · Mjera i gate</h3>
+  <dl>
+    <dt>Ispravka</dt><dd>IoU samo rasta i elipsa niz vjetar.</dd>
+    <dt>Nalaz revizije</dt><dd>Gate iz ADR-030 nije bio implementiran, a kako je bio napisan nije se mogao ni izračunati. Elipsa sa centroidom u prstenastom frontu stoji u već izgorjeloj površini i ne doda nijednu ćeliju.</dd>
+    <dt>Popravljeno</dt><dd>Izvještaj ima <span class="mono">growth_gate</span>. Elipsa kreće od vodeće ivice fronta. Rezultat po požaru se računa zbirno (ΣI/ΣU) kroz četiri vremenske tačke. Staro pravilo ostaje samo radi poređenja.</dd>
+  </dl>
+</div>
+<div class="pr">
+  <h3>PR #11 · Sintetički CA</h3>
+  <dl>
+    <dt>Ispravka</dt><dd>Napredak gradnje vezan je za ćeliju. Ćelija linije koju bi no-op vatra spalila naplaćuje se kao šteta i u nagradi za trening, ne samo u evaluaciji.</dd>
+    <dt>Nalaz revizije</dt><dd>Test na 119 stvarnih požara (TRAIN i VALIDATION, ne zatvoreni TEST 2024) birao je heuristiku za poređenje na samim test podacima i davao ocjene prolaz/pad za pet grupa.</dd>
+    <dt>Popravljeno</dt><dd>Heuristika za poređenje mora biti zadana prije pokretanja. Test na stvarnim požarima je samo opisni. Pogrešan argument se odbija prije početka.</dd>
+  </dl>
+</div>
+<div class="pr">
+  <h3>PR #12 · SimFire okruženje</h3>
+  <dl>
+    <dt>Ispravka</dt><dd>4-povezane linije, budžet po dužini, opservacija meteoroloških podataka iz prethodnog segmenta, statistika iz novog protokola, zaštita VALIDATION skupa, fiksni korak od 5 minuta.</dd>
+    <dt>Nalaz revizije</dt><dd>Agent je i dalje vidio buduće meteorološke podatke u 244 od 396 TRAIN odluka (objašnjenje u tabeli ispod). Linija je i dalje „štedjela“ dok čeka vatru.</dd>
+    <dt>Popravljeno</dt><dd>Agent vidi posljednji gridMET dan <em>strogo prije</em> narednog segmenta, a za prvu odluku dan prije početka (novi <span class="mono">pre_start</span> zapis). Linija drži samo dok je efektivna brzina širenja ispod 980 ft/min (oko 300 m/min), nezavisno od koraka, množioca brzine i vremena čekanja. Checkpoint se učitava samo ako se postavke treninga poklapaju. Stari checkpointi u benchmarku traže izričitu, zabilježenu oznaku, a za fine-tuning se odbijaju. Ostaje otvoreno samo to da linija u rijetkim slučajevima spali više od no-op-a (75 od 6.831 epizode s linijom u tadašnjoj provjeri).</dd>
+  </dl>
+</div>
+<p style="font-size:.9rem;color:var(--muted)">Kako čitati narednu tabelu: gridMET daje jednu vrijednost po danu, a segmenti traju 12 h, pa dva uzastopna segmenta često padaju na isti dan. Tada meteorološki podaci „prethodnog segmenta“ sadrže i sate koji tek dolaze. D je dan u kojem je segment, a kolone pokazuju koji dan agent vidi. Raspored dana je ilustracija.</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Odluka k</th><th>Dan segmenta (primjer)</th><th>Prvobitno</th><th>„Prethodni segment“</th><th>Konačno pravilo</th></tr></thead>
+  <tbody class="num">
+    <tr><td>0</td><td>D</td><td>D <span class="chip bad">budućnost</span></td><td>D <span class="chip bad">isti dan</span></td><td>D−1 (<span class="mono">pre_start</span>)</td></tr>
+    <tr><td>1</td><td>D</td><td>D <span class="chip bad">budućnost</span></td><td>D <span class="chip bad">isti dan</span></td><td>D−1</td></tr>
+    <tr><td>2</td><td>D+1</td><td>D+1 <span class="chip bad">budućnost</span></td><td>D</td><td>D</td></tr>
+    <tr><td>3</td><td>D+1</td><td>D+1 <span class="chip bad">budućnost</span></td><td>D+1 <span class="chip bad">isti dan</span></td><td>D</td></tr>
+  </tbody>
+</table></div>
+<div class="pr">
+  <h3>PR #15 · Vremenska oznaka u FEDS-u i duplikat</h3>
+  <dl>
+    <dt>Nalaz</dt><dd>FEDS gradi oznaku <span class="mono">t</span> tako da svaku satelitsku detekciju svrsta u jutarnji (AM) ili popodnevni (PM) prolaz po lokalnom sunčevom satu, pa je zapiše kao 00:00 ili 12:00, bez vremenske zone. Kod je oznaku čitao kao UTC.</dd>
+    <dt>Odluka</dt><dd>Od tri ponuđene opcije Harun je izabrao ovu: stanje u <span class="mono">t</span> je prolaz u 01:30 (AM) ili 13:30 (PM) po lokalnom sunčevom vremenu, preračunat u UTC po geografskoj dužini. Okruženje odbija fajl s meteorološkim podacima koji ne navodi ovo tumačenje.</dd>
+    <dt>Duplikat</dt><dd>Generator manifesta zadržava jedan zapis po FEDS požaru, onaj s najnižim <span class="mono">fod_id</span>. Columbus ispada, pa TRAIN ima 98 požara.</dd>
+    <dt>Nalaz revizije</dt><dd>Požar se prepoznavao samo po broju (fireID). FEDS numeriše požare posebno za svaku godinu, pa bi isti broj u dvije godine spojio dva različita požara. Test samplera nije provjeravao geografsku dužinu.</dd>
+    <dt>Popravljeno</dt><dd>Požar se prepoznaje po paru (fireID, početak). Dodani su testovi za trenutak početka segmenata i za to da je dan koji agent vidi završen prije odluke. Spisak požara i fajl s meteorološkim podacima ponovo su napravljeni, a brojke su ostale iste.</dd>
+  </dl>
+</div>
+<div class="tablewrap"><table>
+  <thead><tr><th>Primjer: požar na −120°, oznaka <span class="mono">2018-07-24 00:00</span> (AM)</th><th>Staro čitanje (UTC)</th><th>Novo čitanje (prolaz)</th></tr></thead>
+  <tbody class="num">
+    <tr><td>Početak epizode u UTC</td><td>24. 7. 00:00</td><td>24. 7. 09:30</td></tr>
+    <tr><td>Lokalno sunčevo vrijeme</td><td>23. 7. oko 16:00</td><td>24. 7. oko 01:30</td></tr>
+    <tr><td>gridMET dan prvog segmenta</td><td>23. 7. <span class="chip bad">dan ranije</span></td><td>24. 7.</td></tr>
+    <tr><td>Dan koji agent vidi na početku (<span class="mono">pre_start</span>)</td><td>22. 7.</td><td>23. 7.</td></tr>
+  </tbody>
+</table></div>
+<p style="font-size:.9rem;color:var(--muted)">Svaki požar je pogođen na isti način: 236 od 472 segmenta i 66 <span class="mono">pre_start</span> dana bili su pomjereni za jedan dan. Sredine segmenata su sada najmanje 3,2 h udaljene od granice gridMET dana, pa grube aproksimacije lokalnog vremena ne mijenjaju dan.</p>
+<h3>Sintetički CA detaljnije</h3>
+<p>Vjerovatnoća da susjedna ćelija plane raste s brzinom širenja i s dužinom vremenskog koraka. Brzina širenja je iz Andersonovih (1982) modela goriva, s članom za vjetar u Rothermelovom stilu, članom za nagib, prigušenjem po vlazi i dnevnim ciklusom. Kalibrisano je tako da brzina čela na ravnom terenu odgovara tablici unutar oko 15%. To je simulator za trening, ne validirani model požara.</p>
+<figure>
+  <div class="fig">
+<svg viewBox="0 0 680 190" role="img" aria-label="Kontrafaktualna nagrada u sintetičkom CA: isti požar se simulira dva puta s istim slučajnim brojevima, s agentom i bez njega, oba 12 h poslije horizonta; nagrada je razlika u šteti minus kazne za sigurnost.">
+<defs><marker id="ka" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="s-ink"/></marker></defs>
+<rect x="10" y="70" width="130" height="50" rx="3" class="s-wash k-ink" stroke-width="1.2"/>
+<text x="75.0" y="92.0" text-anchor="middle" font-size="11.5" font-weight="700" class="s-ink">isti početak</text>
+<text x="75.0" y="106.0" text-anchor="middle" font-size="10" class="s-muted">isti slučajni brojevi</text>
+<rect x="190" y="20" width="210" height="50" rx="3" class="s-panel k-ink" stroke-width="1.2"/>
+<text x="295.0" y="42.0" text-anchor="middle" font-size="11.5" font-weight="700" class="s-ink">rollout s agentom</text>
+<text x="295.0" y="56.0" text-anchor="middle" font-size="10" class="s-muted">jedinice grade liniju</text>
+<rect x="190" y="120" width="210" height="50" rx="3" class="s-panel k-ink" stroke-width="1.2"/>
+<text x="295.0" y="142.0" text-anchor="middle" font-size="11.5" font-weight="700" class="s-ink">no-op rollout</text>
+<text x="295.0" y="156.0" text-anchor="middle" font-size="10" class="s-muted">nijedna jedinica ne radi</text>
+<line x1="140" y1="88" x2="188" y2="48" class="k-ink" stroke-width="1.2" marker-end="url(#ka)"/>
+<line x1="140" y1="102" x2="188" y2="142" class="k-ink" stroke-width="1.2" marker-end="url(#ka)"/>
+<text x="295" y="88" text-anchor="middle" font-size="10.5" class="s-muted">oba traju horizont + 12 h</text>
+<rect x="450" y="70" width="220" height="50" rx="3" class="s-panel k-ink" stroke-width="1.2"/>
+<text x="560.0" y="92.0" text-anchor="middle" font-size="11.5" font-weight="700" class="s-ink">nagrada = ušteda − kazne</text>
+<text x="560.0" y="106.0" text-anchor="middle" font-size="10" class="s-muted">šteta težinska: urbano ×50</text>
+<line x1="400" y1="45" x2="448" y2="85" class="k-ink" stroke-width="1.2" marker-end="url(#ka)"/>
+<line x1="400" y1="145" x2="448" y2="105" class="k-ink" stroke-width="1.2" marker-end="url(#ka)"/>
+<text x="560" y="140" text-anchor="middle" font-size="10.5" class="s-muted">bliski susret −0,1</text>
+<text x="560" y="155" text-anchor="middle" font-size="10.5" class="s-muted">izgubljena jedinica −1,0</text>
+</svg>
+  </div>
+  <figcaption>Kako sintetički CA računa nagradu. Isti požar se pusti dva puta sa istim slučajnim brojevima, pa se razlika u šteti može pripisati samo jedinicama. Dodatnih 12 h poslije horizonta sprečava da agent bude nagrađen samo zato što je vatru odgodio.</figcaption>
+</figure>
+<p>Ručne ekipe i dozeri grade liniju brzinom iz priručnika PMS 410-1. Brzine kretanja su iz Sullivana i saradnika (2020) ili su navedene kao pretpostavka. Nema teleportacije. Jedinica se sama povlači kad je vatra na dvije ćelije. Bliski susret košta −0,1, a izgubljena jedinica −1,0. Nagrada je ušteda u odnosu na no-op rollout istog požara s istim slučajnim brojevima. Oba rollouta traju još 12 h poslije horizonta, pa samo odgađanje vatre ne donosi nagradu. Šteta je težinska: urbane ćelije vrijede 50 puta više od vegetacije. Povrat epizode je udio spašene težinske štete minus kazne za sigurnost. U CA se ne radi fine-tuning po budžetu, a broj jedinica (2–4) mijenja se od epizode do epizode.</p>
+</section>
+
+<section id="rjecnik">
+<h2>Rječnik</h2>
+<dl class="gloss">
+  <dt>Vatrogasna linija</dt><dd>Pojas s kojeg je uklonjena vegetacija, da vatra nema šta gorjeti. U SimFire-u niz ćelija koje zaustavljaju širenje dok vatra ne naiđe prebrzo.</dd>
+  <dt>Front, obod</dt><dd>Front je dio požara koji trenutno gori. Obod je granica svega što je do tada izgorjelo.</dd>
+  <dt>Gorivo</dt><dd>Vegetacija koja može gorjeti. Karta goriva kaže koja je vrsta vegetacije u kojoj ćeliji.</dd>
+  <dt>No-op</dt><dd>Akcija „ne radi ništa“. Politika no-op nikad ne postavi liniju, pa pokazuje koliko bi izgorjelo bez intervencije.</dd>
+  <dt>Heuristika</dt><dd>Jednostavno ručno napisano pravilo. <span class="mono">downwind</span> stavlja liniju niz vjetar, a <span class="mono">advancing_front</span> ispred dijela fronta koji napreduje.</dd>
+  <dt>PPO</dt><dd>Proximal Policy Optimization, uobičajen RL algoritam. Ovdje se koristi varijanta MaskablePPO.</dd>
+  <dt>Seed</dt><dd>Početna vrijednost generatora slučajnih brojeva. Trening s drugim seedom je nezavisno ponavljanje istog eksperimenta.</dd>
+  <dt>TRAIN, VALIDATION, TEST</dt><dd>Tri odvojena skupa požara. Na TRAIN se trenira i bira, na VALIDATION se ocjenjuje jednom, a TEST 2024 je zatvoren i nije ni preuzet.</dd>
+  <dt>FEDS (FEDS-CONUS)</dt><dd>Satelitske (VIIRS) procjene oboda i aktivnog fronta požara u SAD-u, svakih 12 h, nominalno 375 m.</dd>
+  <dt>FPA-FOD</dt><dd>Američka baza prijavljenih požara: datum otkrića, tačka nastanka i konačna površina.</dd>
+  <dt>gridMET</dt><dd>Dnevni meteorološki podaci na mreži od oko 4 km: smjer i brzina vjetra, vlaga mrtvog goriva (<span class="mono">fm100</span>).</dd>
+  <dt>LANDFIRE</dt><dd>Američke karte goriva (13 Andersonovih modela, FBFM13) i reljefa.</dd>
+  <dt>SimFire</dt><dd>Python simulator širenja požara (MITRE) zasnovan na Rothermelovoj jednačini. Vatru širi na 8 susjeda, a ćelija gori ograničeno vrijeme.</dd>
+  <dt>CA</dt><dd>Celularni automat: mreža ćelija čije se stanje mijenja po lokalnim, ovdje vjerovatnosnim, pravilima.</dd>
+  <dt>WAF</dt><dd>Faktor prilagodbe vjetra: koliko vjetra s visine 10 m stiže do plamena. Zajednički je za sve požare i ne smije se podešavati po požaru.</dd>
+  <dt>ROS</dt><dd>Množilac brzine širenja vatre u simulatoru. 1,0 znači bez promjene.</dd>
+  <dt>No-op gate</dt><dd>Provjera da simulator bez intervencija prati stvarni rast požara bolje od trivijalnih referenci. Bez nje se RL rezultat smatra samo eksploratornim.</dd>
+  <dt>IoU rasta</dt><dd>Presjek kroz uniju samo novih izgorjelih ćelija, izvan početne maske. Ide od 0 (nema preklapanja) do 1 (potpuno poklapanje).</dd>
+  <dt>MaskablePPO</dt><dd>PPO iz biblioteke sb3-contrib, kod kojeg se nedozvoljene akcije maskiraju prije uzorkovanja.</dd>
+  <dt>Kontrafaktualna nagrada</dt><dd>Nagrada mjerena kao razlika u odnosu na paralelni no-op rollout istog scenarija sa istim slučajnim brojevima (common random numbers).</dd>
+  <dt>Behaviour cloning</dt><dd>Nadzirano učenje politike tako da imitira akcije heuristike. Ovdje je služilo kao topli start prije PPO-a.</dd>
+  <dt>Sign-flip test</dt><dd>Permutacijski test za uparene razlike: nasumično se okreću predznaci i gleda se koliko je stvarni prosjek ekstreman.</dd>
+  <dt>Nulta hipoteza, p</dt><dd>Nulta hipoteza kaže da razlike nema. p je vjerovatnoća da se izmjerena ili veća razlika dobije slučajno, ako je nulta hipoteza tačna.</dd>
+  <dt>Holm</dt><dd>Postupna (step-down) Bonferroni korekcija za više istovremenih testova.</dd>
+  <dt>Dvoslojni bootstrap</dt><dd>Interval pouzdanosti iz ponovnog uzorkovanja prvo seedova treninga, pa scenarija, tako da uključi obje vrste varijanse.</dd>
+  <dt>ADR</dt><dd>Architecture/Decision Record: kratak zapis odluke, razloga i statusa.</dd>
+  <dt>Pull request, merge</dt><dd>Pull request (PR) je prijedlog izmjene koda koji se pregleda prije prihvatanja. Merge je prihvatanje te izmjene u glavnu verziju koda.</dd>
+  <dt>CI</dt><dd>Automatske provjere i testovi koji se pokrenu pri svakoj izmjeni koda.</dd>
+  <dt>Poster</dt><dd>Završni prikaz projekta kojim se rad predaje na predmetu.</dd>
+  <dt>Neinferiornost</dt><dd>Uslov da nova metoda nije lošija od poređenja po nekoj mjeri, ovdje sigurnosti, iako nije nužno bolja.</dd>
+</dl>
+</section>
+
+<footer>
+  <p>Izvori: repozitorij <span class="mono">goralija/wildfire-rl-adaptation</span>, posebno <span class="mono">docs/specs/DECISION_RECORDS.md</span> (ADR-001 do ADR-032 s dopunama), <span class="mono">docs/STATUS.md</span>, <span class="mono">docs/NEXT_SESSION.md</span> i istraživački dokumenti u <span class="mono">docs/research/</span>. Stanje 12. 11. 2026.: grana <span class="mono">main</span> na commitu <span class="mono">a1c3dfc</span> sadrži faze 1 i 2 (PR #17, #18). Pregled nakon faze 2 je u grani <span class="mono">docs/research-review</span> (PR #19, <span class="mono">docs/research/review-2026-11-11/</span>), otvoren. Kopija ove stranice je u <span class="mono">docs/team-overview/</span>.</p>
+</footer>
+</main>
+</div>

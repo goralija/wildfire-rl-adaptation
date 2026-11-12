@@ -1,0 +1,4 @@
+TRAIN decisions: 392
+observed downwind sector == forcing downwind sector: 0.40
+wind direction difference observed vs forcing: median 28 deg, share > 45 deg 0.33, > 90 deg 0.15
+forcing 10 m wind speed m/s: median 3.5, p90 5.8; midflame proxy at WAF 0.10: median 0.35 m/s

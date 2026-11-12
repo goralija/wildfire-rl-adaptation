@@ -15,5 +15,6 @@
 - [Handoff za autonomne faze 1 i 2](HANDOFF_STAGE_1_2.md) - Handoff
 - [OKF 0.2 knowledge migration](OKF_MIGRATION_PLAN.md) - Implementation Plan
 - [Nezavisan pregled bootstrap koda — 2026-10-28](REVIEW.md) - Review Record
-- [Trenutno stanje — 2026-11-03](STATUS.md) - Project Status
+- [Trenutno stanje — 2026-11-12](STATUS.md) - Project Status
 - [Work log](WORK_LOG.md) - History
+- [Pregled za tim (kopija artifacta)](team-overview/README.md) - Reference, HTML stranica s dijagramima i kako je ažurirati

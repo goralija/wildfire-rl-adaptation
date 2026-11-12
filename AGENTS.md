@@ -21,6 +21,8 @@ pokrenuti sam, fazu 2 samo ako faza 1 prođe; merge i faza 3 ostaju korisnikovi 
 VALIDATION ocijenjen jednom; unaprijed zadano pravilo, ne fizička validacija). Faza 2 je
 završena (ADR-032: nijedan od šest primarnih testova ne odbacuje; PPO se ne razlikuje od nasumične
 linije ni od najbolje heuristike; simulatorski rezultat). Faza 3 čeka korisnikovu odluku.
+Pregled nakon faze 2 ([sažetak](docs/research/review-2026-11-11/SUMMARY.md), 2026-11-11) predlaže
+TASK-028–030 (samo TRAIN, eksploratorno), također uz korisnikovo „da“. Ulaz za nastavak je [HANDOFF](HANDOFF.md).
 TEST 2024 ostaje zatvoren. TASK-012/CFSDS/Cell2Fire je historijski odvojeni pravac.
 Runtime PASS nije dokaz fizičke validacije ili RL prednosti. Čuvaj ovu razliku u sažecima.
 
@@ -42,6 +44,8 @@ CI checker provjerava strukturu/linkove, ne istinitost naučnih nalaza.
 - Čuvaj kumulativnu štetu; tretirana prethodno zapaljena ćelija ostaje opožarena.
 - Ne učitavaj neprovjerene pickle/torch checkpointove izvan izolovanog environmenta.
 - Ne commituj privatnu prepisku, emailove, `.venv`, vanjski repo, velike mape ili težine.
+- Dugi poslovi na Harunovom računaru: najviše 4 procesa uz `nice -n 19`, uz najavu trajanja
+  (Harunova uputa, 2026-11-10; sa 7 procesa računar se preoptereti).
 - Ne pokreći plaćeni compute, dugo treniranje, globalne instalacije, push/merge ili cloud deploy
   bez odgovarajućeg korisničkog naloga. Kratki lokalni testovi su normalni dio rada.
 - Prije predaje pokreni `PYTHONPATH=src python3 -m unittest discover -s tests -v` i smoke CLI.

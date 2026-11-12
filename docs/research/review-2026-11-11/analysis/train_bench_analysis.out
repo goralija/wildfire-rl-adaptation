@@ -1,0 +1,68 @@
+fires 98 policies 44
+no-op added cells: mean 2289 median 1117 std 3374 min 0 max 17709
+no-op return (-cells/100): mean -22.89 std 33.74
+fires with zero no-op growth: 11
+
+== per family x budget: mean delta ha, share of line-episodes identical to no-op, worse than no-op
+advancing_front  B=1 n=  98 mean -112.2 ha | line eps   98, unchanged 0.45, worse 0.061, mean lines 1.00
+advancing_front  B=2 n=  98 mean -194.4 ha | line eps   98, unchanged 0.29, worse 0.041, mean lines 1.67
+advancing_front  B=4 n=  98 mean -289.9 ha | line eps   98, unchanged 0.28, worse 0.031, mean lines 2.79
+base             B=1 n= 980 mean -97.8 ha | line eps  934, unchanged 0.47, worse 0.052, mean lines 0.95
+base             B=2 n= 980 mean -175.1 ha | line eps  932, unchanged 0.35, worse 0.057, mean lines 1.58
+base             B=4 n= 980 mean -246.7 ha | line eps  930, unchanged 0.33, worse 0.037, mean lines 2.64
+downwind         B=1 n=  98 mean -113.2 ha | line eps   98, unchanged 0.38, worse 0.082, mean lines 1.00
+downwind         B=2 n=  98 mean -187.7 ha | line eps   98, unchanged 0.30, worse 0.061, mean lines 1.68
+downwind         B=4 n=  98 mean -308.1 ha | line eps   98, unchanged 0.29, worse 0.020, mean lines 2.85
+ft-b1            B=1 n= 980 mean -88.4 ha | line eps  882, unchanged 0.47, worse 0.061, mean lines 0.90
+ft-b1            B=2 n= 980 mean -168.9 ha | line eps  882, unchanged 0.36, worse 0.051, mean lines 1.51
+ft-b1            B=4 n= 980 mean -243.6 ha | line eps  882, unchanged 0.34, worse 0.027, mean lines 2.55
+ft-b2            B=1 n= 980 mean -99.7 ha | line eps  882, unchanged 0.46, worse 0.052, mean lines 0.90
+ft-b2            B=2 n= 980 mean -173.3 ha | line eps  882, unchanged 0.34, worse 0.054, mean lines 1.51
+ft-b2            B=4 n= 980 mean -242.4 ha | line eps  882, unchanged 0.33, worse 0.034, mean lines 2.54
+ft-b4            B=1 n= 980 mean -92.0 ha | line eps  882, unchanged 0.46, worse 0.053, mean lines 0.90
+ft-b4            B=2 n= 980 mean -167.0 ha | line eps  882, unchanged 0.34, worse 0.056, mean lines 1.51
+ft-b4            B=4 n= 980 mean -238.0 ha | line eps  882, unchanged 0.32, worse 0.035, mean lines 2.54
+noop             B=1 n=  98 mean 0.0 ha | line eps    0, unchanged nan, worse nan, mean lines 0.00
+noop             B=2 n=  98 mean 0.0 ha | line eps    0, unchanged nan, worse nan, mean lines 0.00
+noop             B=4 n=  98 mean 0.0 ha | line eps    0, unchanged nan, worse nan, mean lines 0.00
+random_legal     B=1 n=  98 mean -106.5 ha | line eps   98, unchanged 0.39, worse 0.041, mean lines 1.00
+random_legal     B=2 n=  98 mean -205.6 ha | line eps   98, unchanged 0.36, worse 0.051, mean lines 1.67
+random_legal     B=4 n=  98 mean -248.3 ha | line eps   98, unchanged 0.31, worse 0.041, mean lines 2.83
+
+== headroom from existing episodes (best of 44 observed policies per fire, oracle selection)
+B=1 best-of-44 -377.8 ha | best-of(adv,downwind) per fire -159.0 | adv -112.2 | downwind -113.2 | random -106.5 | base PPO mean -97.8 | distinct seqs/fire median 7
+     fires where no observed policy changes outcome: 19 / 98; fires where best-of-44 < -100 cells: 33
+     oracle gain share from top 5 fires: 0.28, top 10: 0.46
+     oracle gain as fraction of fire's no-op growth: median -0.042, mean -0.150 (fires with no-op>0)
+B=2 best-of-44 -576.5 ha | best-of(adv,downwind) per fire -277.5 | adv -194.4 | downwind -187.7 | random -205.6 | base PPO mean -175.1 | distinct seqs/fire median 9
+     fires where no observed policy changes outcome: 17 / 98; fires where best-of-44 < -100 cells: 46
+     oracle gain share from top 5 fires: 0.25, top 10: 0.40
+     oracle gain as fraction of fire's no-op growth: median -0.098, mean -0.184 (fires with no-op>0)
+B=4 best-of-44 -686.0 ha | best-of(adv,downwind) per fire -392.1 | adv -289.9 | downwind -308.1 | random -248.3 | base PPO mean -246.7 | distinct seqs/fire median 10
+     fires where no observed policy changes outcome: 17 / 98; fires where best-of-44 < -100 cells: 51
+     oracle gain share from top 5 fires: 0.22, top 10: 0.36
+     oracle gain as fraction of fire's no-op growth: median -0.113, mean -0.200 (fires with no-op>0)
+
+== scale: per-fire no-op return std 33.7 vs mean |delta| of advancing_front at B=2 0.70 (reward units)
+
+== first action of base policies on TRAIN B=2
+base-s11 {0: 49, 6: 49}
+base-s12 {7: 98}
+base-s13 {4: 98}
+base-s14 {7: 98}
+base-s15 {6: 71, 4: 27}
+base-s16 {6: 98}
+base-s17 {5: 88, 6: 10}
+base-s18 {3: 98}
+base-s19 {6: 98}
+base-s20 {7: 98}
+
+weather record keys: ['event_year', 'initial_state_time', 'pre_start', 'scenario_id', 'segments', 'source_fire_id', 'split', 'weather_sample_location'] ['end_utc', 'gridmet_daily_label_mst', 'gridmet_values', 'midpoint_utc', 'nearest_gridmet_cell', 'segment', 'start_utc'] {'fm100': {'archive': 'fm100_2018.nc', 'archive_sha256': '81445396bd3e8530869a4416acfefd9b76f154b4abb4685d93083f0cd5e49c92', 'native_netcdf_variable': 'dead_fuel_moisture_100hr', 'units': 'Percent', 'value': 7.6000000000000005}, 'th': {'archive': 'th_2018.nc', 'archive_sha256': '01e2a33c84ad65cf19be933b757c813c9ef9452e99487d8ade06ac014e699478', 'native_netcdf_variable': 'wind_from_direction', 'units': 'Degrees Clockwise from north', 'value': 171.0}, 'vs': {'archive': 'vs_2018.nc', 'archive_sha256': '892533970770c1a925904ebcc87bb7e2b79088b607a7841c2126361abdcb695d', 'native_netcdf_variable': 'wind_speed', 'units': 'm/s', 'value': 3.2}}
+== B=1 single-line episodes: delta (ha) by angle between line sector and actual segment wind-to (45 deg bins)
+    0- 45 deg n= 854 mean -153.0 ha, unchanged 0.41
+   45- 90 deg n=1066 mean -96.1 ha, unchanged 0.45
+   90-135 deg n=1126 mean -86.6 ha, unchanged 0.51
+  135-180 deg n= 825 mean -87.7 ha, unchanged 0.46
+  180-225 deg n=   3 mean 48.6 ha, unchanged 0.00
+
+line actions by decision index (all policies, all budgets): {0: 11613, 1: 5214, 2: 2269, 3: 2147}
