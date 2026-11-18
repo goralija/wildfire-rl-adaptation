@@ -1,10 +1,12 @@
 import json
+import importlib.util
 from pathlib import Path
 import tempfile
 import unittest
 from unittest import mock
 
 from scripts import analyze_feds_b1 as analysis
+from scripts import enumerate_feds_b1 as enumeration
 from wildfire_rl.feds_simfire_setup import sha256_file
 
 
@@ -78,3 +80,48 @@ class B1ReportGuardTests(unittest.TestCase):
         self.write_case()
         with self.assertRaises(ValueError):
             self.load()
+
+
+@unittest.skipUnless(importlib.util.find_spec("gymnasium") and importlib.util.find_spec("numpy"),
+                     "resume path requires optional Gymnasium/NumPy")
+class B1ResumeTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+        self.settings = {"weather_path": "weather.json", "input_root": "inputs",
+                         "weather_sha256": "weather-hash"}
+        self.mask = self.root / "train-a.npz"
+        self.mask.write_bytes(b"generated binary artifact, never deserialized in this test")
+        self.previous = {"settings": self.settings, "mask_file_sha256": sha256_file(self.mask),
+                         "input_receipt_sha256": "receipt", "seconds": 1.}
+        self.path = self.root / "train-a.json"
+        self.path.write_text(json.dumps(self.previous))
+
+    def tearDown(self):
+        self.temp.cleanup()
+
+    def test_matching_cache_skips_simulation_after_validating_inputs(self):
+        with mock.patch("wildfire_rl.feds_simfire_setup.load_case_inputs",
+                        return_value={"receipt_sha256": "receipt"}) as load, \
+                mock.patch("wildfire_rl.feds_simfire_env.FedsSimFireEnv") as env:
+            result = enumeration.run_case(("train-a", self.settings, str(self.root)))
+        self.assertTrue(result["resumed"])
+        load.assert_called_once()
+        env.assert_not_called()
+
+    def test_changed_weather_identity_is_not_resumed(self):
+        changed = {**self.settings, "weather_sha256": "new-weather"}
+        with mock.patch("wildfire_rl.feds_simfire_setup.load_case_inputs") as load, \
+                self.assertRaises(ValueError):
+            enumeration.run_case(("train-a", changed, str(self.root)))
+        load.assert_not_called()
+
+    def test_changed_mask_is_not_resumed(self):
+        self.mask.write_bytes(b"modified")
+        with self.assertRaises(ValueError):
+            enumeration.run_case(("train-a", self.settings, str(self.root)))
+
+    def test_changed_verified_input_receipt_is_not_resumed(self):
+        with mock.patch("wildfire_rl.feds_simfire_setup.load_case_inputs",
+                        return_value={"receipt_sha256": "changed"}), self.assertRaises(ValueError):
+            enumeration.run_case(("train-a", self.settings, str(self.root)))
