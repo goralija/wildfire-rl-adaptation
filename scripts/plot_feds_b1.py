@@ -33,7 +33,9 @@ def main():
         ax.hlines(positions, intervals[:, 0], intervals[:, 1], color="#172554", linewidth=1.5)
         ax.scatter(means, positions, color="#172554", s=18, zorder=3)
         ax.axvline(0, color="#475569", linewidth=1)
-        threshold = max(30., .25 * block["oracle_gap_vs_advancing_front_ha"])
+        rule = report["continuation_threshold"]
+        threshold = max(rule["mean_gain_ha_vs_advancing_front"],
+                        rule["fraction_of_oracle_gap"] * block["oracle_gap_vs_advancing_front_ha"])
         ax.axvline(threshold, color="#d97706", linestyle="--", label="Continuation threshold")
         ax.set_title(title + "\nOracle gap: %.1f ha" % block["oracle_gap_vs_advancing_front_ha"])
         ax.set_xlabel("Mean gain over advancing_front (ha); positive = better")

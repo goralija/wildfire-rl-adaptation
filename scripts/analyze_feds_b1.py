@@ -16,7 +16,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
-from wildfire_rl.feds_simfire_setup import load_split_cases, sha256_file
+from wildfire_rl.feds_simfire_setup import MANIFEST, load_split_cases, sha256_file
 
 
 def load_table(path):
@@ -27,6 +27,11 @@ def load_table(path):
     plan = ROOT / "configs/frozen/feds-b1-exploration-v1.json"
     if record["settings"]["plan_sha256"] != sha256_file(plan):
         raise ValueError("table does not match the registered exploration plan")
+    if record["settings"]["manifest_sha256"] != sha256_file(MANIFEST):
+        raise ValueError("table does not match the current TRAIN cohort manifest")
+    frozen_path = ROOT / json.loads(plan.read_text())["params_file"]
+    if record["settings"]["params"] != json.loads(frozen_path.read_text())["frozen_params"]:
+        raise ValueError("table does not use the registered frozen simulator parameters")
     allowed = set(load_split_cases("train"))
     cases = []
     for item in record["cases"]:
@@ -47,7 +52,7 @@ def load_table(path):
     return record, cases
 
 
-def analyze(cases):
+def analyze(cases, *, gain_threshold=30., gap_fraction=.25):
     import numpy as np
     from wildfire_rl.feds_b1_learning import METHOD_NAMES, evaluate_fold, paired_interval
     from wildfire_rl.line_damage import HECTARES_PER_CELL
@@ -73,8 +78,8 @@ def analyze(cases):
                           "worse_fires": int((deltas < -1e-8).sum()),
                           "without_largest_absolute_delta_ha": float(np.delete(deltas, largest).mean()),
                           "fraction_of_oracle_gap": gain / oracle_gap if oracle_gap > 0 else None,
-                          "continuation_threshold_met": bool(gain >= 30 and oracle_gap > 0 and
-                                                              gain / oracle_gap >= .25)})
+                          "continuation_threshold_met": bool(gain >= gain_threshold and oracle_gap > 0 and
+                                                              gain / oracle_gap >= gap_fraction)})
         result[mode] = {"oracle_mean_saved_ha": float(oracle.mean()),
                         "oracle_gap_vs_advancing_front_ha": oracle_gap, "methods": methods}
     return result
@@ -92,6 +97,8 @@ def main(argv=None):
         parser.error("the registered offline analysis requires all 98 TRAIN fires")
     source_files = [Path(__file__), ROOT / "src/wildfire_rl/feds_b1_learning.py",
                     ROOT / "src/wildfire_rl/feds_b1.py", ROOT / "src/wildfire_rl/line_damage.py"]
+    plan = json.loads((ROOT / "configs/frozen/feds-b1-exploration-v1.json").read_text())
+    threshold = plan["continuation_threshold"]
     report = {"schema_version": "feds-b1-offline-analysis/1.0",
               "created_utc": datetime.now(timezone.utc).isoformat(),
               "label": "EXPLORATORY TRAIN LOO; NO FINAL VALIDATION OR PHYSICAL VALIDATION",
@@ -106,7 +113,9 @@ def main(argv=None):
               "runtime": {"python": sys.version, "numpy": importlib.metadata.version("numpy")},
               "uncertainty": "paired percentile bootstrap of fixed OOF fire effects, 10000 resamples, seed 0; no model refit; folds share fit fires; descriptive only",
               "selection_warning": "all methods reported; choosing a method from these same LOO results is exploratory selection, not an independent performance estimate",
-              "results": analyze(cases)}
+              "continuation_threshold": threshold,
+              "results": analyze(cases, gain_threshold=threshold["mean_gain_ha_vs_advancing_front"],
+                                 gap_fraction=threshold["fraction_of_oracle_gap"])}
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(report, indent=2, sort_keys=True, allow_nan=False) + "\n")
     for mode, values in report["results"].items():

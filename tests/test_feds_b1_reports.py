@@ -15,7 +15,11 @@ class B1ReportGuardTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.root = Path(self.temp.name)
         plan = analysis.ROOT / "configs/frozen/feds-b1-exploration-v1.json"
-        self.settings = {"plan_sha256": sha256_file(plan)}
+        frozen = analysis.ROOT / "configs/frozen/feds-simfire-growth-gate-freeze-v1.json"
+        manifest = analysis.ROOT / "data/manifests/feds-episode-cohort-v1.json"
+        self.settings = {"plan_sha256": sha256_file(plan),
+                         "manifest_sha256": sha256_file(manifest),
+                         "params": json.loads(frozen.read_text())["frozen_params"]}
         self.mask = self.root / "train-a.npz"
         self.mask.write_bytes(b"test masks; not loaded or unpickled")
         self.case = {"scenario_id": "train-a", "split": "train", "settings": self.settings,
@@ -77,6 +81,18 @@ class B1ReportGuardTests(unittest.TestCase):
 
     def test_weather_or_simulator_setting_difference_is_refused(self):
         self.case["settings"] = {**self.settings, "weather_sha256": "different"}
+        self.write_case()
+        with self.assertRaises(ValueError):
+            self.load()
+
+    def test_stale_manifest_or_different_frozen_params_are_refused(self):
+        self.settings["manifest_sha256"] = "another-manifest"
+        self.write_case()
+        with self.assertRaises(ValueError):
+            self.load()
+        manifest = analysis.ROOT / "data/manifests/feds-episode-cohort-v1.json"
+        self.settings["manifest_sha256"] = sha256_file(manifest)
+        self.settings["params"]["wind_adjustment_factor"] = .605
         self.write_case()
         with self.assertRaises(ValueError):
             self.load()
