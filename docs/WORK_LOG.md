@@ -4,6 +4,18 @@ title: Work log
 ---
 # Work log
 
+2026-11-19 — Korisnik je odobrio SimFire nastavak kroz dokumentovane iteracije na novoj
+lokalnoj grani. Kreiran je worktree `.worktrees/simfire-policy-iterations/` iz maina
+`f96f744f`; glavni checkout i prethodni stash/grane nisu dirani. ADR-033 i plan su
+commitovani prije novih simulacija. Testovi su prvo pali, pa prošli za obračun linije,
+TRAIN-only weather, B=1 sekvence, LOO bez curenja, maske, čekanje/no-op i report guardove.
+Obnovljen je samo TRAIN weather iz šest postojećih checksum-verifikovanih arhiva;
+98 ćelija, svi pre-start zapisi. Pilot 20/20 ima iste završne maske kao nezavisni
+scripted runovi; puna tabela je u toku, s četiri nice-19 radnika. Originalni puni
+ADR-032 TRAIN izlaz nije na ovom računaru: ta razlika i zamjenski reference check su
+zapisani prije pokretanja. Nema VALIDATION/TEST pristupa, novih PPO/CA treninga,
+vanjskih instalacija ili remote objave.
+
 2026-11-12 — Na Harunov zahtjev pet analiza nakon ADR-032 (subagenti, samo čitanje i TRAIN-only
 izračuni nad postojećim izlazima; jedan probni SimFire run `advancing_front` B=4 na 98 TRAIN
 požara) prenio sam u `docs/research/review-2026-11-11/` sa sažetkom na bosanskom. Root HANDOFF

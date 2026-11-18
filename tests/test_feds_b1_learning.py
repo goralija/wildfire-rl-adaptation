@@ -77,7 +77,34 @@ class B1LearningTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             evaluate_fold([case], case, "raw", "fixed_sequence")
 
+    def test_learned_policies_can_wait_and_can_choose_no_intervention(self):
+        training = [fixture(1, str(i)) for i in range(8)]
+        held = fixture(1, "held")
+        for case in training + [held]:
+            for row in case["outcomes"]:
+                row["raw_saved_cells"] = 20 if row["requested_actions"][2] == 1 else 0
+        learned = [method for method in METHOD_NAMES if method not in ("advancing_front", "downwind")]
+        for method in learned:
+            with self.subTest(method=method, task="wait"):
+                self.assertEqual(evaluate_fold(training, held, "raw", method)["actions"],
+                                 [0, 0, 1, 0])
+        for case in training + [held]:
+            for row in case["outcomes"]:
+                row["raw_saved_cells"] = -10 if any(row["requested_actions"]) else 0
+        for method in learned:
+            with self.subTest(method=method, task="no intervention"):
+                self.assertEqual(evaluate_fold(training, held, "raw", method)["actions"],
+                                 [0, 0, 0, 0])
+
     def test_paired_interval_is_reproducible_and_keeps_known_shifts(self):
         a = paired_interval([5.] * 8)
         self.assertEqual(a, paired_interval([5.] * 8))
         self.assertEqual(a, [5., 5.])
+
+    def test_percentile_band_has_the_registered_95_percent_level(self):
+        # For twenty discrete-uniform observations 0..19, the bootstrap mean has
+        # mean 9.5 and SD sqrt(33.25/20) ~= 1.289; its central 95% band is ~[7,12].
+        # A 90% or 99% level falls outside these tolerances.
+        lower, upper = paired_interval(list(range(20)), samples=100000)
+        self.assertAlmostEqual(lower, 7., delta=.15)
+        self.assertAlmostEqual(upper, 12., delta=.15)

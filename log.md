@@ -1,5 +1,13 @@
 # Promjene baze znanja
 
+## 2026-11-19: SimFire TRAIN-only iteracije su odobrene (ADR-033)
+
+- Nova grana `codex/simfire-policy-iterations`, baza `f96f744f`; glavni checkout i tuđi rad sačuvani.
+- Testiran TASK-028 helper, TRAIN-only weather regeneracija i B=1 runner; pilot 20/20 prolazi.
+- Puna tabela i LOO analiza su u toku. [Izvještaj](docs/research/SIMFIRE_B1_EXPLORATION.md)
+  čuva pretpostavke, razliku u dostupnim lokalnim artefaktima i reprodukciju.
+- VALIDATION/TEST i CA nisu pokrenuti. Raniji rezultati nisu retroaktivno mijenjani.
+
 ## 2026-11-12: pregled nakon faze 2 i novi HANDOFF
 
 - Pet analiza nakon ADR-032 (literatura, kratke epizode, intervencije, šta je stvarno,

@@ -6,6 +6,8 @@
 
 ## Dokumenti
 
+- [SimFire B=1: iscrpna tabela i offline učenje](SIMFIRE_B1_EXPLORATION.md) - TASK-028–030, ADR-033, oba obračuna štete i TRAIN-only iteracije
+
 - [Dataset: šta imamo i šta ćemo koristiti](DATASET.md) - Dataset Review
 - [Experiment log](EXPERIMENT_LOG.md) - Experiment Log
 - [FPA-FOD/FEDS crosswalk i benchmark gate](FPA_FEDS_CROSSWALK.md) - Data Quality Audit

@@ -4,6 +4,14 @@ title: Naredni zadaci
 ---
 # Naredni zadaci
 
+## Aktivni nastavak — 2026-11-19 (ADR-033)
+
+Korisnik je odobrio SimFire TASK-028–030 na novoj grani. Implementacija i dokazi:
+[SimFire B=1](research/SIMFIRE_B1_EXPLORATION.md). TASK-028 helper/testovi su završeni;
+TASK-029 pilot 20/20 prolazi, puna kohorta je u toku; TASK-030 kod i zaštite su
+implementirani, analiza čeka punu tabelu. Nove odluke o VALIDATION-u, TEST-u,
+budžetima B=2/B=4 i zvaničnoj metrici nisu time automatski donesene.
+
 ## Aktivni prioritet — 2026-11-12 (pregled nakon faze 2)
 
 Plan i razlozi: [pregled 2026-11-11](research/review-2026-11-11/SUMMARY.md). Sve stavke čekaju

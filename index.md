@@ -5,6 +5,8 @@ okf_version: "0.2"
 
 ## Počni ovdje
 
+- [Aktivni nastavak: SimFire B=1](docs/research/SIMFIRE_B1_EXPLORATION.md) - Odobrene TRAIN-only iteracije TASK-028–030 na novoj grani, ADR-033.
+
 - [Projekt i pokretanje](README.md) - Cilj istraživanja i minimalni setup.
 - [Sažeti projektni kontekst](knowledge/project-context.md) - Aktivni SimFire/FEDS pravac i crosswalk gate.
 - [Handoff za kolegu](HANDOFF.md) - Prenosiv nastavak bez chat historije.

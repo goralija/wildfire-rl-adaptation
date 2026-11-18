@@ -19,10 +19,17 @@ su sažeti u [rubrici](../docs/research/REQUIREMENTS_AND_RUBRIC.md). Aktivni ben
 koristi SimFire, FPA-FOD početne uslove i FEDS-CONUS vremenske obode; stariji
 CFSDS/Cell2Fire rad ostaje odvojen i historijski.
 
+## Nastavak 2026-11-19 — ADR-033
+
+Korisnik je odabrao SimFire i odobrio dokumentovane TRAIN iteracije TASK-028–030 na
+novoj grani. [SimFire B=1 izvještaj](../docs/research/SIMFIRE_B1_EXPLORATION.md) razdvaja
+oba obračuna štete, gornju granicu i učinak izvan fita. Puna analiza je u toku;
+VALIDATION/TEST nisu ponovo korišteni, CA faza 3 nije pokrenuta.
+
 ## Aktivni pravac
 
 Korisnik je odabrao **SimFire + FPA-FOD + FEDS-CONUS**, uz FLE/ICS-209 samo kao
-ograničeni post-hoc kontekst. Split je po godini: train 2018/2019 (99 požara), validation
+ograničeni post-hoc kontekst. Split je po godini: train 2018/2019 (98 požara nakon deduplikacije), validation
 2023 (20), test 2024 (zatvoren). Okvir obuhvata veće požare u deset zapadnih država i nije
 reprezentativan za sve požare. FEDS/FPA veza ostaje provisionalna.
 

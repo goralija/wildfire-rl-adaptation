@@ -4,9 +4,17 @@ title: Handoff za nastavak projekta
 ---
 # Handoff za nastavak projekta
 
-Stanje **2026-11-12**. Ovaj dokument je ulaz za kolegu ili agenta koji preuzima projekat bez
+Stanje **2026-11-19**. Ovaj dokument je ulaz za kolegu ili agenta koji preuzima projekat bez
 chat historije. Repozitorij je kanonski izvor; artifact za tim (link ispod) je sažetak za
 čitanje.
+
+## Aktivan nastavak — SimFire B=1 (ADR-033)
+
+Korisnik je odabrao SimFire i odobrio TASK-028–030 na novoj grani
+`codex/simfire-policy-iterations`. [Izvještaj](docs/research/SIMFIRE_B1_EXPLORATION.md)
+čuva tačan obim i komande. TASK-028 i pilot 20/20 su provjereni; puna tabela i LOO
+analiza su u toku. Provjeri postojeći run prije novog pokretanja. VALIDATION/TEST i
+CA faza 3 ostaju zatvoreni. Nema novog PPO treninga ili remote objave u ovoj fazi.
 
 ## Gdje je projekat (jedan pasus)
 
@@ -23,9 +31,9 @@ prije bilo kakvog novog treninga: [sažetak i plan](docs/research/review-2026-11
 
 ## Grane i pull requestovi
 
-Faze 1 i 2 su u `main`-u: PR #18 je spojen 10. 11., a PR #17 11. 11. (merge commit `a1c3dfc`).
-Otvoren je samo PR #19 (`docs/research-review` → `main`): pregled 2026-11-11 i ovaj HANDOFF.
-Dok nije spojen, najnovije stanje dokumentacije je na toj grani; kod je isti kao u `main`-u.
+Faze 1 i 2 i pregled PR #19 su u `main`-u (`f96f744f`). Novi rad je lokalno na grani
+`codex/simfire-policy-iterations`, u `.worktrees/simfire-policy-iterations/`. Nije pushan
+niti spojen u `main`; glavni klon ostaje čist. Ranije grane i lokalni artefakti su sačuvani.
 
 Provjera prije rada: `git fetch origin` pa `gh pr list --state all --limit 5`. Lokalni `main`
 na Harunovom računaru može zaostajati za `origin/main`; nove grane praviti iz `origin/main`.
@@ -44,13 +52,11 @@ na Harunovom računaru može zaostajati za `origin/main`; nove grane praviti iz 
 
 ## Šta čeka odluku (Harun)
 
-- Merge PR-a #19.
 - Arhiviranje lokalnih rezultata faza 1 i 2 (vidi „Šta postoji samo lokalno“ ispod), npr. kao
   privatni GitHub release kakav je `synthetic-policy-v1`.
 - Kako se računa šteta kad linija zauzme ćelije koje bi izgorjele (sada se računaju kao spašene).
-- Da li pokrenuti TASK-029/030 (iscrpna B=1 tablica i offline ocjena, samo TRAIN).
-- Koji je simulator glavni za poster; da li sintetički CA smije vidjeti vrijeme tekućeg
-  koraka; faza 3 (trening CA). Detalji: [NEXT_SESSION](docs/NEXT_SESSION.md), [BACKLOG](docs/BACKLOG.md).
+- TASK-028–030 su odobreni i u toku; novi budžeti, nova VALIDATION upotreba i novi trening traže unaprijed zapisan nastavak.
+- Korisnik je odabrao SimFire nastavak. CA observation i faza 3 ostaju odgođeni. Detalji: [NEXT_SESSION](docs/NEXT_SESSION.md), [BACKLOG](docs/BACKLOG.md).
 
 ## Pravila koja važe za svakog ko nastavlja
 

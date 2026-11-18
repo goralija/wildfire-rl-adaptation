@@ -1,11 +1,20 @@
 ---
 type: Project Status
-title: Trenutno stanje — 2026-11-12
+title: Trenutno stanje — 2026-11-19
 sources:
 - resource: /reports/firehose-verification/verification.json
 - resource: /docs/WORK_LOG.md
 ---
-# Trenutno stanje — 2026-11-12
+# Trenutno stanje — 2026-11-19
+
+## 2026-11-19 — SimFire nastavak je odobren i u toku (ADR-033)
+
+Korisnik je odabrao SimFire nastavak na grani `codex/simfire-policy-iterations`.
+[Plan i postupak](research/SIMFIRE_B1_EXPLORATION.md) prate TASK-028–030:
+obračun linije je testiran, obnovljeno je vrijeme samo za 98 TRAIN slučajeva,
+pilot 20/20 prolazi reference i mask provjere; puna tabela i offline LOO su u toku.
+Nema novog PPO ili CA treninga, ponovnog VALIDATION-a ili TEST 2024 pristupa.
+ADR-031/032 ostaju raniji važeći simulatorski rezultat; ADR-022–028 ostaju poništeni.
 
 ## Najnovije — 2026-11-12: pregled nakon faze 2, bez novih treninga
 

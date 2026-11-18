@@ -4,6 +4,14 @@ title: Naredni korak — pregled nakon faze 2 (2026-11-12)
 ---
 # Naredni korak
 
+## 2026-11-19 — aktivan SimFire nastavak (ADR-033)
+
+TASK-028–030 su odobreni korisnikovim nalogom i u toku na grani
+`codex/simfire-policy-iterations`. [Izvještaj i komande](research/SIMFIRE_B1_EXPLORATION.md)
+su ulaz za nastavak. Ne vraćati se na stari zahtjev za odobrenje ovih TRAIN koraka.
+Prvo provjeriti lokalne runove i hashove; ne pokretati duplikat eksperimenta.
+PR #19 je već spojen na `main` (`f96f744f`). VALIDATION/TEST i CA ostaju zatvoreni.
+
 ## Najnovije — 2026-11-12: pregled završen; prvo provjera gornje granice na TRAIN-u
 
 Faze 1 i 2 su gotove, a [pregled 2026-11-11](research/review-2026-11-11/SUMMARY.md) je
