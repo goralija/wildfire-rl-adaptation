@@ -1422,3 +1422,34 @@ the review, without touching the analysis, the lock or any result:
   ties the analysis to the VALIDATION report by value, lists policies that never place a
   line and names the figure's commit separately. The record was regenerated (schema 1.1).
 - Left as is: no test pins the bootstrap percentile level or the figure title.
+
+## ADR-033 — nastavak SimFire istraživanja kroz TASK-028–030, accepted 2026-11-18
+
+Korisnik je izričito odabrao nastavak SimFire pravca na novoj grani, kroz dokumentovane
+iteracije, uz jasno razdvajanje riješenog i otvorenog. Ovo odobrava TASK-028–030 iz
+pregleda nakon faze 2; CA faza 3 ostaje odvojena i ne pokreće se. Rad je na grani
+`codex/simfire-policy-iterations`, u izdvojenom worktreeu. Nema remote objave ili mergea.
+
+**Provjerljivi cilj.** Izgraditi oba obračuna štete, iscrpnu B=1 TRAIN tablicu i provjeriti
+može li se bolja odluka predvidjeti iz dozvoljenog opažanja izvan požara korištenih za fit.
+Plan prije novih simulacija: `configs/frozen/feds-b1-exploration-v1.json`.
+
+**Granice.** 98 TRAIN požara, postojeći WAF 0.10 / ROS 1.0, korak 5 min, horizont 48 h,
+`last_write`, `front_edge`, isto opažanje i maska za sve politike. TASK-028 dodaje pomoćni
+obračun sa i bez naplate linije; ne mijenja zaključanu nagradu, checkpointove ili ADR-032.
+VALIDATION nije ponovo dostupan; TEST 2024 ostaje zatvoren. Nema novog PPO treninga u ovoj
+fazi. Najviše 4 procesa uz `nice -n 19`. Novi eksperimenti i promjene protokola prvo se
+bilježe, prije rezultata; ovaj zapis ne dozvoljava proizvoljno korištenje holdout skupova.
+
+**Lokalna razlika i provjera.** Postoje svih 98 TRAIN mapa i godišnje gridMET arhive, ali
+lokalni vremenski fajl je stari, neispravljeni. Regeneriše se samo TRAIN, s postojećim
+ispravljenim samplerom i novim hashom. Izvorni ADR-032 puni TRAIN izvještaj nije dostupan
+na ovom računaru. Pilot od prvih 20 sortiranih TRAIN ID-jeva zato se poredi s nezavisno
+izvršenim svježim scripted benchmarkom na istim ulazima, uz ponovljeni no-op. Na punoj
+kohorti porede se i agregati s commitovanim ADR-032 sažetkom. Ovo je eksplicitna zamjena
+lokalnog reference-checka iz TASK-029, ne tvrdnja da je originalni izvještaj reprodukovan.
+
+**Tumačenje.** LOO po cijelom požaru; preprocessing i fit bez izostavljenog požara. Izbor
+među metodama na istom TRAIN skupu ostaje eksploratoran. Prag ≥30 ha i ≥25% oracle jaza
+služi odluci o nastavku. Neuspjeh konačnog skupa metoda ne dokazuje da optimalna odluka
+uopće nije predvidiva. Fizička validacija i potvrđena RL prednost ostaju otvorene.
