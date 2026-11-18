@@ -1453,3 +1453,16 @@ lokalnog reference-checka iz TASK-029, ne tvrdnja da je originalni izvještaj re
 među metodama na istom TRAIN skupu ostaje eksploratoran. Prag ≥30 ha i ≥25% oracle jaza
 služi odluci o nastavku. Neuspjeh konačnog skupa metoda ne dokazuje da optimalna odluka
 uopće nije predvidiva. Fizička validacija i potvrđena RL prednost ostaju otvorene.
+
+**Implementacija offline menija, prije analize rezultata.** Trenutno opažanje daje 28
+determinističkih obilježja: opaženo vrijeme, korak, udjeli scar/front/line/fuel, centroidi
+scar/fronta, njihov pomak, gorivo uz front i po smjerovima te budžet. Nema elevacije,
+identiteta požara, budućeg vremena ili budućih opažanja u odluci. Fiksni niz bira se na
+fit požarima. Ridge fitted-Q (alpha 1/10/100) i tabelarni fitted-Q računaju unazad kroz
+četiri odluke: linija dobija konačni simulirani dobitak, čekanje vrijednost sljedećeg
+stanja procijenjenu sljedećim modelom. Tabelarni ključ: sektor opaženog vjetra, sektor
+pomaka fronta, četiri fiksna razreda početne/trenutne opožarene površine. Neviđeni ključ
+koristi fit prosjek. BC bira većinski potez pet najbližih fit požara u istom koraku;
+učitelj je najbolji preostali niz na fit požaru. Sva skaliranja fituju se unutar folda.
+Svi kandidati i oba obračuna se prijavljuju; opisni paired bootstrap ima 10.000 uzoraka,
+seed 0 i percentile 2.5/97.5. Ne refituje modele, pa nije nezavisan potvrdni interval.
