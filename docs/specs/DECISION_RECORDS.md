@@ -1429,6 +1429,8 @@ Korisnik je izričito odabrao nastavak SimFire pravca na novoj grani, kroz dokum
 iteracije, uz jasno razdvajanje riješenog i otvorenog. Ovo odobrava TASK-028–030 iz
 pregleda nakon faze 2; CA faza 3 ostaje odvojena i ne pokreće se. Rad je na grani
 `codex/simfire-policy-iterations`, u izdvojenom worktreeu. Nema remote objave ili mergea.
+Korisnikov nalog odobrava smjer i rad; precizni plan i zamjena nedostupne reference su
+operativni izbor agenta u tom obimu, ne zasebna ljudska potvrda metodologije.
 
 **Provjerljivi cilj.** Izgraditi oba obračuna štete, iscrpnu B=1 TRAIN tablicu i provjeriti
 može li se bolja odluka predvidjeti iz dozvoljenog opažanja izvan požara korištenih za fit.
@@ -1437,6 +1439,8 @@ Plan prije novih simulacija: `configs/frozen/feds-b1-exploration-v1.json`.
 **Granice.** 98 TRAIN požara, postojeći WAF 0.10 / ROS 1.0, korak 5 min, horizont 48 h,
 `last_write`, `front_edge`, isto opažanje i maska za sve politike. TASK-028 dodaje pomoćni
 obračun sa i bez naplate linije; ne mijenja zaključanu nagradu, checkpointove ili ADR-032.
+Naplata cijele ćelije je konzervativna modelna konvencija, ne izmjerena stvarna širina
+izgrađene linije ili dokaz fizički tačnijeg obračuna. Zato se prijavljuju oba načina.
 VALIDATION nije ponovo dostupan; TEST 2024 ostaje zatvoren. Nema novog PPO treninga u ovoj
 fazi. Najviše 4 procesa uz `nice -n 19`. Novi eksperimenti i promjene protokola prvo se
 bilježe, prije rezultata; ovaj zapis ne dozvoljava proizvoljno korištenje holdout skupova.

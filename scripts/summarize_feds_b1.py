@@ -30,11 +30,12 @@ def summarize(table_path, input_root):
             ("initial_feds_state", "mask_sha256", "mask_sha256"))):
             raise ValueError("inputs differ from committed cohort for " + key)
         with np.load(table_path.parent / (key + ".npz"), allow_pickle=False) as masks:
-            if len(masks["agent_burned"]) != 33 or len(masks["line_cells"]) != 33:
+            initial, noop = masks["initial"], masks["noop"]
+            agent, line = masks["agent_burned"], masks["line_cells"]
+            if len(agent) != 33 or len(line) != 33:
                 raise ValueError("incomplete mask table")
             for i, row in enumerate(case["outcomes"]):
-                actual = score_line_damage(masks["initial"], masks["agent_burned"][i],
-                                           masks["noop"], masks["line_cells"][i])
+                actual = score_line_damage(initial, agent[i], noop, line[i])
                 if any(row[k] != v for k, v in actual.items()):
                     raise ValueError("mask/metric mismatch for " + key)
     modes = {}
@@ -65,6 +66,7 @@ def summarize(table_path, input_root):
         "case_count": len(cases), "outcome_count": outcome_count,
         "validation_used": False, "test_cases_loaded": False,
         "table_sha256": sha256_file(table_path),
+        "summary_script_sha256": sha256_file(Path(__file__)),
         "settings": {k: v for k, v in table["settings"].items() if k not in ("weather_path", "input_root")},
         "checks": {"all_independent_references": "PASS", "all_mask_metrics_recomputed": "PASS",
                    "all_input_hashes_match_committed_cohort": "PASS",
