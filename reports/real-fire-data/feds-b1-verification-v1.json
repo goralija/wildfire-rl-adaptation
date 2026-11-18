@@ -1,0 +1,81 @@
+{
+  "cli_smoke": {
+    "kind": "synthetic pipeline smoke only",
+    "local_output": ".local/b1/cli-smoke",
+    "result": "PASS"
+  },
+  "code_commit": "cd19d5d142bc485edf6df4bc24bc584708f7c3b8",
+  "created_utc": "2026-11-18T23:42:44.991239+00:00",
+  "label": "LOCAL TECHNICAL CHECKS; NOT PHYSICAL VALIDATION OR POLICY ADVANTAGE",
+  "remote_ci_run": false,
+  "schema_version": "feds-b1-local-verification/1.0",
+  "simfire_runtime": {
+    "packages": {
+      "gymnasium": "1.1.1",
+      "netCDF4": "1.7.2",
+      "numpy": "1.26.4",
+      "rasterio": "1.4.3",
+      "scipy": "1.13.1",
+      "shapely": "2.0.7",
+      "simfire": "2.0.1"
+    },
+    "platform": "macOS-14.2-arm64-arm-64bit",
+    "python": "3.9.25 (main, Oct 31 2025, 23:01:59) \n[Clang 21.1.4 ]",
+    "simfire_direct_url": {
+      "url": "https://github.com/mitrefireline/simfire.git",
+      "vcs_info": {
+        "commit_id": "04905b19fe8c10dc08d64faddd00303e0561bb66",
+        "requested_revision": "04905b19fe8c10dc08d64faddd00303e0561bb66",
+        "vcs": "git"
+      }
+    }
+  },
+  "source_hashes": {
+    "configs/frozen/feds-b1-exploration-v1.json": "5401b0d764b1df86389a4dd7f2fcde1257114d777b3800a509ef0c178be68539",
+    "scripts/analyze_feds_b1.py": "805eaa012089709839d86cbff04f268c272b5e54ef9359250d3f777252871e29",
+    "scripts/enumerate_feds_b1.py": "6f720f5ec3f51738462ac5c79a279b8b7ca9a36d523502d63b20cf770c21a401",
+    "scripts/plot_feds_b1.py": "a213cc758e8ef56b7a2ebb45ca704f91a94dc943828bae1c4b27ad5659b2b5a3",
+    "scripts/sample_gridmet_episode_weather.py": "c6140fb748cba3422472dee00608564fdf54e492bef54591b172fcff3090ef40",
+    "scripts/summarize_feds_b1.py": "898207d04097aa2795500503e00f3951c0a5c40f24ffe7f05fa861928a94e489",
+    "src/wildfire_rl/feds_b1.py": "e2ea9af4ef7d55103cd94fb8b5f8528f9e2fec2d900f231a68cdee06541f3e02",
+    "src/wildfire_rl/feds_b1_learning.py": "77cad96d00e812d41e059a2b827f32e273ac347402b236e9a7fc18426dc8a560",
+    "src/wildfire_rl/line_damage.py": "cab7e146e769edff04e2364c8d9874036ab154fa68f05af1c739d6b55f995ea6",
+    "tests/test_feds_b1_learning.py": "fc2cd47bd3d9c79f1118379237d9f459b534d81c1dc065aabd42d50386c354f5",
+    "tests/test_feds_b1_reports.py": "250e7c103d9d77d74bfcecc76610e4244ec17df625eae414369b99b283e6c3db",
+    "tests/test_feds_b1_table.py": "9bb291e598c58de9489b5ffd46d55e13ac1a95e40ce8b21cea4a691ff1155e54",
+    "tests/test_line_damage.py": "ed1a3aebaa2add5b88c4d7c9aa6e6e7133842679a2e1156eacac407891f9d720",
+    "tests/test_train_weather_sampling.py": "23ee2b8aa8b0a63861c26d37075fe72e9c724df0ac1b7297a768bf1ff996f3ae"
+  },
+  "suites": [
+    {
+      "local_log": ".local/b1/core-final.log",
+      "log_sha256": "fc9577bd1be4adc941865507dfe17f5b69953efb4a5bde88b6c170783db89da8",
+      "name": "core-final",
+      "result": "PASS",
+      "seconds": 15.248,
+      "skipped": 34,
+      "tests_run": 261
+    },
+    {
+      "local_log": ".local/b1/modern-final.log",
+      "log_sha256": "1731a32ba9d35345ff067eedca6e69847d01b445fd008aced1728b9d360a3242",
+      "name": "modern-final",
+      "result": "PASS",
+      "seconds": 32.611,
+      "skipped": 3,
+      "tests_run": 299
+    },
+    {
+      "local_log": ".local/b1/simfire-final.log",
+      "log_sha256": "cf1222ca25d58622dbdf1695923e6861c8385016f9e98cb89a46ac939e2121cc",
+      "name": "simfire-final",
+      "result": "PASS",
+      "seconds": 151.604,
+      "skipped": 0,
+      "tests_run": 312
+    }
+  ],
+  "test_2024_access": false,
+  "validation_simulations": 0,
+  "worker_pause_for_tests_seconds": 211.4053244169918
+}

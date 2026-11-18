@@ -1,5 +1,7 @@
 # real-fire-data
 
+- [SimFire B=1 tehnička provjera](feds-b1-verification-v1.json) - 312/312 u pinovanom runtimeu, verzije i hashovi; [postupak TASK-028–030](../../docs/research/SIMFIRE_B1_EXPLORATION.md).
+
 - [FPA-FOD ↔ FEDS-CONUS ↔ FLE crosswalk](fpa-feds-fle-crosswalk-v1.json) - combined 40/20 train/validation gate; FAIL u oba splita, test nije učitan.
 - [FPA-FOD/FEDS metoda i odluka](../../docs/research/FPA_FEDS_CROSSWALK.md) - izvori, metod i nastavak.
 - [Train split crosswalk](fpa-feds-fle-crosswalk-train-v1.json) - 13 od 40 slučajeva prolazi strogi vremenski uslov.

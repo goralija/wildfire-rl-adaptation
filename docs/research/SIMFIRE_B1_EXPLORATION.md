@@ -115,6 +115,23 @@ fajl i identične source hashove; za novi input ili izmijenjeni runner koristi n
 output folder. Objavljeni sažeci sadrže hashove lokalnih potpunih izlaza. Git klon
 ne sadrži same velike tabele, raw rastere ili environment.
 
+## Tehničke provjere
+
+[Lokalni verification receipt](../../reports/real-fire-data/feds-b1-verification-v1.json)
+čuva verzije, source hashove i hashove logova. Pinovani SimFire 2.0.1 je na izvornom
+commitu `04905b19fe8c10dc08d64faddd00303e0561bb66`, Python 3.9.25 / NumPy 1.26.4.
+
+- Pinovani runtime: **312 testova, 0 preskočenih, PASS**.
+- Moderni venv: **299 testova, 3 preskočena, PASS** (nedostupne dodatne zavisnosti).
+- Osnovni Python: **261 test, 34 preskočena, PASS** (opcionalni paketi).
+- Knowledge unit testovi: **15/15 PASS**; strogi checker: **83 Markdown fajla PASS**.
+- Synthetic CLI smoke: PASS, samo tehnička provjera pipelinea.
+
+Dugi runovi koriste četiri nice-19 radnika. Tokom tri test suite-a jedan radnik je
+pauziran 211.4 s i potom nastavljen; vrijeme slučaja uključuje pauzu. Raw podaci i
+tuđi worktree nisu mijenjani. GitHub CI i nezavisna revizija ove grane nisu izvršeni.
+Nijedna od ovih provjera ne potvrđuje fizičku tačnost ili prednost politike.
+
 ## Otvoreno
 
 SimFire nije fizički validiran ovim radom. LOO na TRAIN-u nije završni test, a studija
