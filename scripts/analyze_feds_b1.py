@@ -97,7 +97,9 @@ def main(argv=None):
               "label": "EXPLORATORY TRAIN LOO; NO FINAL VALIDATION OR PHYSICAL VALIDATION",
               "case_count": len(cases), "split": "train", "validation_used": False,
               "test_cases_loaded": False, "table_sha256": sha256_file(args.table),
-              "table_settings": record["settings"],
+              "table_settings": {k: v for k, v in record["settings"].items()
+                                 if k not in ("weather_path", "input_root")},
+              "local_artifact_paths_omitted": True,
               "source_hashes": {str(p.relative_to(ROOT)): sha256_file(p) for p in source_files},
               "code_commit": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT,
                                                        text=True).strip(),
