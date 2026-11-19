@@ -540,3 +540,10 @@ je `d818b2f9`, prvi offline meni `807c374b`, dodatni report guardovi `cd19d5d1`.
 WAF 0.10 / ROS 1.0, 5 min, 90 min, `last_write`, `front_edge`; 48h / četiri odluke.
 VALIDATION nije ponovo korišten, TEST 2024 nije otvoren, CA nije treniran. GitHub CI,
 nezavisna revizija, push i merge nisu rađeni. Runtime i table PASS nisu fizička validacija.
+
+EXP-022 — dopuna prije prve offline analize, 2026-11-19: dva sintetička testa su prvo
+pala jer regresijski Q može čekanje procijeniti na −10, potez na −1 i izabrati predviđeni
+gubitak. Poznata opcija trajnog no-op-a vrijedi 0 u dobitku prema no-opu, pa backup i
+izbor akcije sada imaju tu donju granicu. Deset model testova prolazi u pinovanom
+runtimeu. Meni, alpha, prag, podaci i simulator nisu mijenjani; stvarni LOO rezultati
+još nisu izračunati. Puna tabela je u toku i nije pogođena ovom modelskom izmjenom.

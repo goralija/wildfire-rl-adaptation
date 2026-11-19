@@ -4,6 +4,12 @@ title: Podaci, porijeklo i Git politika
 ---
 # Podaci, porijeklo i Git politika
 
+Aktivni nastavak 2026-11-19 je [SimFire B=1, TASK-028–030](../docs/research/SIMFIRE_B1_EXPLORATION.md).
+Koristi postojećih 98 TRAIN početnih slučajeva, uz [ponovo generisan TRAIN-only weather
+profil](../reports/real-fire-data/feds-b1-train-weather-v1.json). Stari CFSDS/Firehose nalazi
+ispod su historija. Sirovi rasteri, NetCDF, potpuna tabela i modeli ostaju izvan Gita;
+VALIDATION i TEST nisu ponovo korišteni u ovoj iteraciji.
+
 `manifests/upstream.json` pinova Firehose izvor i dostupne modele. `configs/pilot.json`
 je cijeli mali sintetički landscape: 20×20 ćelija, ignition, negorive ćelije i prioriteti.
 Pilot nema satelitskih snimaka, stvarnih kuća ili labelovanja ljudi. Maska prioriteta je naš

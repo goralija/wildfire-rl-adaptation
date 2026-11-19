@@ -1470,3 +1470,12 @@ koristi fit prosjek. BC bira većinski potez pet najbližih fit požara u istom 
 učitelj je najbolji preostali niz na fit požaru. Sva skaliranja fituju se unutar folda.
 Svi kandidati i oba obračuna se prijavljuju; opisni paired bootstrap ima 10.000 uzoraka,
 seed 0 i percentile 2.5/97.5. Ne refituje modele, pa nije nezavisan potvrdni interval.
+
+**Provjera vrijednosti no-op opcije, 2026-11-19, prije prve offline analize.** Dva
+sintetička regresijska testa pokazuju da linearni aproksimator može čekanju dati
+vrijednost −10, potezu −1 i zato izabrati predviđeni gubitak. U jedinicama dobitka prema
+no-opu politika koja nikad ne interveniše ima poznatu vrijednost 0, bez pristupa bilo
+kojem budućem ishodu. U Bellman backupu i izboru poteza vrijednost čekanja zato ima
+donju granicu 0. Pozitivna procjena buduće prilike ostaje. To je operativno pojašnjenje
+fitted-Q implementacije, bez promjene menija, alpha vrijednosti, praga, simulatora ili
+metrike. Nije zasnovano na performansama stvarnih LOO foldova: nijedan još nije ocijenjen.

@@ -1,6 +1,7 @@
 import copy
 import importlib.util
 import unittest
+from unittest import mock
 
 try:
     import numpy as np
@@ -9,7 +10,7 @@ except ImportError:
 
 from wildfire_rl.feds_b1 import action_sequences
 from wildfire_rl.feds_b1_learning import (
-    METHOD_NAMES, evaluate_fold, observation_features, paired_interval,
+    METHOD_NAMES, evaluate_fold, fit_q, observation_features, paired_interval,
 )
 
 
@@ -108,3 +109,29 @@ class B1LearningTests(unittest.TestCase):
         lower, upper = paired_interval(list(range(20)), samples=100000)
         self.assertAlmostEqual(lower, 7., delta=.15)
         self.assertAlmostEqual(upper, 12., delta=.15)
+
+    def test_pessimistic_q_predictions_keep_the_known_zero_noop_option(self):
+        class PessimisticModel:
+            def predict(self, x):
+                return np.tile([-10.] + [-1.] * 8, (len(np.atleast_2d(x)), 1))
+
+        training = [fixture(1, str(i)) for i in range(8)]
+        with mock.patch("wildfire_rl.feds_b1_learning.fit_q",
+                        return_value=[PessimisticModel()] * 4):
+            result = evaluate_fold(training, fixture(1, "held"), "raw", "ridge_q_alpha_1")
+        self.assertEqual(result["actions"], [0, 0, 0, 0])
+
+    def test_bellman_backup_cannot_value_optional_intervention_below_noop(self):
+        targets = []
+
+        class PessimisticModel:
+            def __init__(self, x, y, alpha):
+                targets.append(y[:, 0].copy())
+
+            def predict(self, x):
+                return np.tile([-10.] + [-1.] * 8, (len(np.atleast_2d(x)), 1))
+
+        with mock.patch("wildfire_rl.feds_b1_learning.RidgeModel", PessimisticModel):
+            fit_q(np.zeros((3, 4, 28)), np.zeros((3, 4, 9)),
+                  np.ones((3, 4, 9), dtype=bool), "ridge_q_alpha_1")
+        self.assertTrue(all(np.all(value >= 0) for value in targets))

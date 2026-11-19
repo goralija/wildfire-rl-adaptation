@@ -51,6 +51,8 @@ nikad ne otvara validation arhivu ili njenu geometriju. Ponovo su uzorkovani sam
 Svih šest izvornih arhiva ima iste SHA-256 kao commitovani ADR-032 izvori. Novi weather
 hash je `76332f3da26fe02812ca6439fee5dec9f131793227335e0380267d12c0ab937e`;
 98 različitih ćelija, najveća udaljenost 2.8025 km.
+[Weather profil i hashovi](../../reports/real-fire-data/feds-b1-train-weather-v1.json) su u Gitu;
+same vrijednosti i NetCDF ostaju lokalni.
 
 Originalni puni ADR-032 TRAIN benchmark nije dostupan na ovom računaru. Zato pilot
 koristi nezavisne svježe scripted runove na istim ulazima. Cijela kohorta se dodatno
@@ -68,7 +70,11 @@ Prijavljeni meni: postojeći `advancing_front` i `downwind`; najbolje fiksno vri
 smjer izabrano na fit požarima; linearni ridge fitted-Q s alpha 1/10/100; tabelarni
 fitted-Q; imitacija učitelja pomoću pet najbližih fit požara. Fitted-Q uči unazad kroz
 četiri odluke: linija dobija konačni dobitak, čekanje vrijednost sljedećeg stanja.
-Učitelj imitacije bira najbolji preostali niz na fit požaru. Oracle vidi sve buduće
+Učitelj imitacije bira najbolji preostali niz koristeći buduće simulirane ishode
+samo na fit požarima. Fitted-Q vrijednost čekanja ima donju granicu 0: uvijek
+postoji poznata opcija da se nikad ne interveniše. To sprečava biranje predviđenog
+gubitka zbog još lošije ekstrapolirane vrijednosti čekanja; ne garantuje stvarni dobitak.
+Oracle na izostavljenom požaru vidi sve buduće
 ishode i služi samo kao gornja granica, nikad kao dozvoljena politika.
 
 Oba obračuna imaju zaseban fit. Prikazuju se svi kandidati, ne samo najbolji. Opisni

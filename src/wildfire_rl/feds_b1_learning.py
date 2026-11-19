@@ -100,6 +100,17 @@ class TabularModel:
         return np.asarray([self.values.get(_key(row), self.fallback) for row in np.atleast_2d(x)])
 
 
+def _with_noop_lower_bound(values):
+    """Never intervening is a known zero-gain option at every decision time.
+
+    A linear approximator can extrapolate a negative value for waiting. Keep the
+    known outside option without seeing any held-out counterfactual outcome.
+    """
+    result = np.array(values, copy=True)
+    result[..., 0] = np.maximum(result[..., 0], 0.)
+    return result
+
+
 def fit_q(x, gains, masks, method):
     models = [None] * 4
     future = np.zeros(len(x))
@@ -111,7 +122,7 @@ def fit_q(x, gains, masks, method):
         else:
             model = RidgeModel(x[:, k], targets, float(method.rsplit("_", 1)[1]))
         models[k] = model
-        q = model.predict(x[:, k])
+        q = _with_noop_lower_bound(model.predict(x[:, k]))
         future = np.max(np.where(masks[:, k], q, -np.inf), axis=1)
     return models
 
@@ -163,7 +174,7 @@ def evaluate_fold(training_cases, heldout, mode, method):
 
             def policy(o, m):
                 k = int(round(float(o["time"][0]) * 4))
-                q = models[k].predict(observation_features(o))[0]
+                q = _with_noop_lower_bound(models[k].predict(observation_features(o)))[0]
                 return int(np.argmax(np.where(m, q, -np.inf)))
     actions = policy_sequence(policy, heldout["observations"], heldout["action_masks"])
     return {"scenario_id": heldout["scenario_id"], "actions": list(actions),
