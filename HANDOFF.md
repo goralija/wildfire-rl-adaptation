@@ -18,7 +18,7 @@ bez najveće OOF razlike; nema potvrđene prednosti. Oracle jaz ostaje velik.
 [Manifest lokalnog paketa](reports/real-fire-data/feds-b1-artifact-manifest-v1.json)
 veže tačan weather, pune ishode, TRAIN ulaze i source snapshot. Nema aktivnog runa.
 Predloženi TASK-034 prvo dijagnosticira prostorni signal u istom opažanju; nije pokrenut.
-VALIDATION/TEST i CA faza 3 ostaju zatvoreni. Nema novog PPO ili remote objave.
+VALIDATION/TEST i CA faza 3 ostaju zatvoreni. Nema novog PPO treninga. Grana je naknadno pushana na origin po korisnikovom nalogu; PR i merge nisu urađeni.
 
 ## Gdje je projekat (jedan pasus)
 
@@ -36,8 +36,7 @@ prije bilo kakvog novog treninga: [sažetak i plan](docs/research/review-2026-11
 ## Grane i pull requestovi
 
 Faze 1 i 2 i pregled PR #19 su u `main`-u (`f96f744f`). Novi rad je lokalno na grani
-`codex/simfire-policy-iterations`, u `.worktrees/simfire-policy-iterations/`. Nije pushan
-niti spojen u `main`; glavni klon ostaje čist. Ranije grane i lokalni artefakti su sačuvani.
+`codex/simfire-policy-iterations`, u `.worktrees/simfire-policy-iterations/`. Pushan je na origin po korisnikovom nalogu 2026-11-19; nije spojen u `main`. Glavni klon ostaje čist. Ranije grane i lokalni artefakti su sačuvani.
 
 Provjera prije rada: `git fetch origin` pa `gh pr list --state all --limit 5`. Lokalni `main`
 na Harunovom računaru može zaostajati za `origin/main`; nove grane praviti iz `origin/main`.

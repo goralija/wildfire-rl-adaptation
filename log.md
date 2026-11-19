@@ -1,5 +1,11 @@
 # Promjene baze znanja
 
+## 2026-11-19: korisnik je zatražio push SimFire grane
+
+- `codex/simfire-policy-iterations` je pushana na origin i prati istoimenu remote granu.
+- HANDOFF, STATUS, NEXT_SESSION i README odražavaju objavu; PR i merge nisu urađeni.
+- Veliki TRAIN artefakti ostaju lokalni; nije bilo novog eksperimenta.
+
 ## 2026-11-19: SimFire TASK-028–030 završeni (ADR-034)
 
 - Lokalna grana `codex/simfire-policy-iterations`, baza `f96f744f`; tuđi rad i glavni checkout sačuvani.

@@ -4,6 +4,11 @@ title: Work log
 ---
 # Work log
 
+2026-11-19 — Po izričitom korisnikovom nalogu pushana je grana
+`codex/simfire-policy-iterations` na origin (prvi push do `ed13b782`, upstream postavljen).
+Trenutni handoff/status/README usklađeni su s objavom. PR i merge nisu rađeni;
+veliki artefakti ostaju lokalni, bez novih eksperimenata ili holdout pristupa.
+
 2026-11-19 — Završen SimFire ciklus TASK-028–030 na `codex/simfire-policy-iterations`.
 98×33 ishoda i sve nezavisne reference/input/mask provjere prolaze; ADR-032 agregati se
 poklapaju, nema rubnih kontakata. Puna komanda 93.21 min. Osam LOO metoda ×98 požara

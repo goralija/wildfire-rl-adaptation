@@ -10,7 +10,8 @@ TASK-028–030 su završeni na lokalnoj grani `codex/simfire-policy-iterations`.
 [Izvještaj i komande](research/SIMFIRE_B1_EXPLORATION.md) su ulaz za nastavak.
 Puna tabela 98 požara i svih osam LOO metoda su provjereni; nijedna metoda nije
 prešla prag iz ADR-033. Po tom stop-uslovu nisu pokretani novi PPO, holdout ili
-CA eksperimenti. PR #19 je već u `main`-u; novi rad nije pushan ni spojen.
+CA eksperimenti. PR #19 je već u `main`-u; nova grana je pushana na origin
+po korisnikovom nalogu 2026-11-19, bez PR-a ili mergea.
 
 1. Pročitati ADR-034, izvještaj i [manifest lokalnog paketa](../reports/real-fire-data/feds-b1-artifact-manifest-v1.json).
    Ne ponavljati 93-minutnu enumeraciju ako su sačuvani artefakti i hashovi ispravni.
@@ -19,8 +20,8 @@ CA eksperimenti. PR #19 je već u `main`-u; novi rad nije pushan ni spojen.
    postojećim OOF rezultatima pa ih predstavljati kao nezavisnu potvrdu.
 3. Zvanični obračun linije, novi observation kanali, B=2/B=4 i novo VALIDATION korištenje
    ostaju otvorene odluke. TEST 2024 ostaje zatvoren; CA nije aktivni pravac.
-4. Push/PR i merge nisu urađeni. Sačuvati lokalni paket iz `.local/b1/artifacts/`;
-   za remote arhiviranje potreban je korisnikov nalog.
+4. Push grane je urađen; PR i merge nisu. Sačuvati lokalni paket iz `.local/b1/artifacts/`;
+   veliki artefakti nisu uploadovani. Njihovo remote arhiviranje ostaje zaseban nalog.
 
 Starije sekcije ispod su historija; njihovo čekanje odobrenja TASK-028–030 je razriješeno.
 

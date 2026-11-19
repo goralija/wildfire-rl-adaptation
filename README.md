@@ -19,7 +19,8 @@ korist fine-tuninga budžetu (ADR-032; intervali su široki).
 oba obračuna štete, 98×33 provjerena ishoda i osam TRAIN LOO metoda. Nijedna metoda
 ne prelazi unaprijed zadani prag za nastavak. [Izvještaj](docs/research/SIMFIRE_B1_EXPLORATION.md)
 objašnjava podatke, rezultate i granice; [NEXT_SESSION](docs/NEXT_SESSION.md) čuva
-predloženi TASK-034. Rad je lokalni, bez novog PPO/CA, VALIDATION/TEST ili remote objave.
+predloženi TASK-034. Grana je pushana na origin po korisnikovom nalogu 2026-11-19, bez PR-a ili mergea.
+Nema novog PPO/CA treninga ili VALIDATION/TEST korištenja; veliki artefakti ostaju lokalni.
 Cell2Fire/Firehose su odvojeni historijski pravci; simulatorski učinak nije dokaz
 stvarnog učinka gašenja.
 

@@ -21,7 +21,8 @@ kad se izbaci najveća OOF razlika.
 [rezultati](../reports/real-fire-data/feds-b1-offline-v1.json),
 [manifest lokalnih potpunih artefakata](../reports/real-fire-data/feds-b1-artifact-manifest-v1.json).
 Pinovani runtime: 314/314 testova, 0 skip; CLI i knowledge provjere prolaze.
-Nema novog PPO/CA treninga, VALIDATION korištenja, TEST 2024 pristupa, push-a ili mergea.
+Nema novog PPO/CA treninga, VALIDATION korištenja ili TEST 2024 pristupa.
+Grana je naknadno pushana na origin po korisnikovom nalogu 2026-11-19; PR i merge nisu urađeni.
 Predložen je TASK-034: dijagnoza prostornog signala iz istog opažanja prije novog
 treninga; nije pokrenut. ADR-031/032 ostaju važeći simulatorski rezultati, bez tvrdnje
 o fizičkoj validaciji; ADR-022–028 ostaju poništeni.
