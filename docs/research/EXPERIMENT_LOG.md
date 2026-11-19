@@ -505,3 +505,38 @@ VALIDATION reuse (its numbers are only quoted from ADR-032), TEST untouched.
   seed 0, front-edge lines. 2,179 line cells placed, none burned; peak spread rate at a line cell
   58.5 ft/min against the 980 ft/min threshold. Output was not saved to a file; numbers are in
   [INTERVENTIONS §1.9](review-2026-11-11/INTERVENTIONS.md).
+
+## EXP-022 — SimFire B=1 TRAIN-only iteracije, 2026-11-18/19 (ADR-033)
+
+**Status: u toku.** Korisnik je odabrao SimFire nastavak kroz TASK-028–030 na novoj
+lokalnoj grani. Plan `configs/frozen/feds-b1-exploration-v1.json` i implementacija
+obračuna su commitovani kao `540d724b` prije prvih novih simulator rollouta; runner
+je `d818b2f9`, prvi offline meni `807c374b`, dodatni report guardovi `cd19d5d1`.
+
+- TASK-028: oba obračuna štete, unija s line/no-op otiskom, bez naplate početnog
+  scar-a ili dvostrukog brojanja. Zaključana env nagrada nije promijenjena.
+- TRAIN-only weather regeneracija: 98 slučajeva, 392 segmenta i 98 pre-start zapisa;
+  šest arhiva 2018/2019 ima iste hashove kao ADR-032 izvori. Novi weather sha256
+  `76332f3da26fe02812ca6439fee5dec9f131793227335e0380267d12c0ab937e`;
+  98 različitih ćelija, najviše 2.8025 km od centra početnog požara. Stari fajl ostaje.
+- TASK-029 pilot: prvih 20 sortiranih TRAIN ID-jeva, 20/20 PASS. Svih 33 niza po
+  požaru, ponovljeni no-op i nezavisne četiri scripted politike odgovaraju po punoj
+  burn maski i broju ćelija. Pilot je trajao 3.82 minute na četiri nice-19 radnika.
+  Puna kohorta je sporija zbog nekoliko velikih simuliranih požara.
+- Izvorni puni ADR-032 TRAIN report nije lokalno dostupan; reference-check zamjena je
+  zapisana unaprijed u ADR-033. GitHub releases pregled 2026-11-19 (`gh release list`
+  i `gh release view synthetic-policy-v1 --json assets`, repo
+  [goralija/wildfire-rl-adaptation](https://github.com/goralija/wildfire-rl-adaptation/releases))
+  nalazi samo CA draft s `bc2.zip`, `main1-best.zip`, `policy-v1.zip`; nema TRAIN reporta.
+  Ti checkpointovi nisu preuzimani niti učitani.
+- TASK-030: osam fiksnih metoda, LOO po požaru, raw i charged obračun. Metode i prag
+  su zapisani prije analize; puna analiza čeka završetak tabele. Nema novog PPO treninga.
+- Tehničke provjere: [receipt](../../reports/real-fire-data/feds-b1-verification-v1.json):
+  312/312 u pinovanom runtimeu (0 skip), moderni 299 (3 skip), core 261 (34 skip),
+  knowledge 15/15; CLI smoke i strict checker 83 Markdown fajla prolaze.
+  Jedan radnik je tokom testova pauziran 211.4 s i nastavljen.
+
+[Izvještaj i reprodukcija](SIMFIRE_B1_EXPLORATION.md). Parametri ostaju ADR-031:
+WAF 0.10 / ROS 1.0, 5 min, 90 min, `last_write`, `front_edge`; 48h / četiri odluke.
+VALIDATION nije ponovo korišten, TEST 2024 nije otvoren, CA nije treniran. GitHub CI,
+nezavisna revizija, push i merge nisu rađeni. Runtime i table PASS nisu fizička validacija.

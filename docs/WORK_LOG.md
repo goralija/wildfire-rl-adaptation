@@ -4,6 +4,13 @@ title: Work log
 ---
 # Work log
 
+2026-11-19 — Završena su tri puna lokalna test suite-a i knowledge provjere: 312/312 u
+pinovanom SimFire okruženju (0 skip), moderni 299 (3 skip), core 261 (34 skip),
+knowledge 15/15. Receipt `reports/real-fire-data/feds-b1-verification-v1.json` sadrži
+verzije i hashove logova/koda. Puna enumeracija je još u toku; tokom provjera jedan
+od četiri radnika je pauziran i zatim nastavljen. GitHub release pregled nije našao
+originalni TRAIN report. Nema novih holdout runova ili checkpoint učitavanja.
+
 2026-11-19 — Korisnik je odobrio SimFire nastavak kroz dokumentovane iteracije na novoj
 lokalnoj grani. Kreiran je worktree `.worktrees/simfire-policy-iterations/` iz maina
 `f96f744f`; glavni checkout i prethodni stash/grane nisu dirani. ADR-033 i plan su

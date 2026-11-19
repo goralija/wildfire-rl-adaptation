@@ -4,6 +4,7 @@
 
 - Nova grana `codex/simfire-policy-iterations`, baza `f96f744f`; glavni checkout i tuđi rad sačuvani.
 - Testiran TASK-028 helper, TRAIN-only weather regeneracija i B=1 runner; pilot 20/20 prolazi.
+- [EXP-022](docs/research/EXPERIMENT_LOG.md) bilježi plan i izvršene korake; [verification receipt](reports/real-fire-data/feds-b1-verification-v1.json) potvrđuje 312/312 lokalnih testova u pinovanom runtimeu.
 - Puna tabela i LOO analiza su u toku. [Izvještaj](docs/research/SIMFIRE_B1_EXPLORATION.md)
   čuva pretpostavke, razliku u dostupnim lokalnim artefaktima i reprodukciju.
 - VALIDATION/TEST i CA nisu pokrenuti. Raniji rezultati nisu retroaktivno mijenjani.
