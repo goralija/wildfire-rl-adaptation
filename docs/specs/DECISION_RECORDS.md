@@ -1479,3 +1479,56 @@ kojem budućem ishodu. U Bellman backupu i izboru poteza vrijednost čekanja zat
 donju granicu 0. Pozitivna procjena buduće prilike ostaje. To je operativno pojašnjenje
 fitted-Q implementacije, bez promjene menija, alpha vrijednosti, praga, simulatora ili
 metrike. Nije zasnovano na performansama stvarnih LOO foldova: nijedan još nije ocijenjen.
+
+## ADR-034 — SimFire B=1 ciklus završen, nijedan kandidat ne prelazi prag, recorded 2026-11-19
+
+**Osnova.** Odobreni TRAIN-only nastavak iz ADR-033, bez naknadne promjene plana,
+menija ili praga. Ovo je zapis rezultata i operativnog stop-uslova, ne nova ljudska
+potvrda metode, zvanične metrike ili fizičke validacije. Rad je na lokalnoj grani
+`codex/simfire-policy-iterations`; nema push-a ili mergea.
+
+**TASK-028.** Testiran pomoćni obračun: unija nove agent štete i ćelija linije unutar
+novog no-op otiska, bez dvostrukog brojanja i početnog scar-a. `advancing_front`
+prelazi sa 112,24 na 101,04 spašenih ha u prosjeku. Naplata cijele 180m ćelije ostaje
+konzervativna modelna konvencija; zaključana env nagrada i ADR-032 nisu mijenjani.
+
+**TASK-029.** Svih 98 TRAIN požara ×33 niza =3.234 ishoda. Sa ponovljenim no-opom i
+četiri nezavisne reference po požaru: 3.724 epizode. Pilot 20 traje 3.82 min; puna
+komanda s reuseom pilota 93.21 min, uključujući 391.0 s pauze jednog radnika za testove.
+Najviše četiri nice-19 radnika. Sve reference odgovaraju po cijeloj burn maski; svi
+mask obračuni i input SHA-256 ponovo provjereni. Raw no-op i sva tri heuristička
+prosjeka odgovaraju ADR-032 do <3×10⁻¹⁴ ha. Originalni puni per-fire report nije
+pronađen, pa se ne tvrdi jednakost pojedinačnih slučajeva tom nedostupnom izvještaju.
+Nijedan od 3.234 ishoda ne dodiruje rub. U 141 ishodu na 53 požara raw šteta je veća
+od no-op-a; to nije nalaz o stvarnom učinku gašenja.
+
+**TASK-030.** Osam metoda, LOO po cijelom požaru, zasebni raw/charged fitovi. Raw
+`advancing_front` štedi 112,24 ha, oracle 546,44 ha (jaz 434,19); charged 101,04 i
+529,84 ha (jaz 428,80). Oracle koristi buduće ishode, pa nije dozvoljena politika.
+Prag ≥30 ha i ≥25% jaza znači ≥108,55/107,20 dodatnih ha. **Nijedna metoda ne prolazi.**
+Najbolji raw naučeni kandidat, tabelarni Q: −3,27 ha prema pravilu. Najbolji charged
+kandidat, ridge alpha 10: +6,98 ha, 1,63% jaza, opisni 95% interval [−69,70; +92,04].
+Bolji/lošiji/isti na 28/31/39 požara. Bez najveće apsolutne fiksne OOF razlike:
+−13,63 ha (bez refita). Bootstrap ne refituje modele, foldovi dijele fit podatke,
+a izbor najbolje metode iz istih LOO rezultata je eksploratoran.
+
+**Zaključak i stop.** Postoji prostor za bolji izbor linije u ovom simulatoru, ali
+ovaj konačni meni ga nije prenio na izostavljeni požar. To ne dokazuje nemogućnost
+učenja iz opažanja, niti fizičku tačnost oracle dobitka. Po stop-uslovu ADR-033 nisu
+pokretani novi PPO, dodatni budžeti ili holdout. Predložen je TASK-034: prvo novi mali
+TRAIN protokol za dijagnozu prostornog signala u istom opažanju i stabilnosti izbora,
+prije nove optimizacije. Nije pokrenut. Zvanični obračun, novi kanali, B=2/B=4 i nova
+VALIDATION upotreba ostaju zasebne odluke. TEST 2024 je zatvoren; CA faza 3 nije rađena.
+
+**Tehnički dokaz.** Pinovani runtime 314/314 (0 skip), moderni 301 (3 skip), core 263
+(34 skip), knowledge 15/15, CLI i strict checker PASS. Sve 1.568 OOF putanje dodatno
+provjerene prema legalnim sekvencama i ishodima. Ovo nije potvrda naučne prednosti.
+Lokalni paket 24.397.671 B sadrži ulaze, tačno vrijeme, punu tabelu, izvještaje i source
+snapshot; ponovo pročitani svi hashovi. Nije uploadovan i nema checkpointova.
+
+Dokazi: [detaljan izvještaj](../research/SIMFIRE_B1_EXPLORATION.md),
+[provjera tabele](../../reports/real-fire-data/feds-b1-table-check-v1.json),
+[svih osam metoda](../../reports/real-fire-data/feds-b1-offline-v1.json),
+[tehnički receipt](../../reports/real-fire-data/feds-b1-verification-v1.json),
+[manifest lokalnog paketa](../../reports/real-fire-data/feds-b1-artifact-manifest-v1.json),
+EXP-022 u [experiment logu](../research/EXPERIMENT_LOG.md).

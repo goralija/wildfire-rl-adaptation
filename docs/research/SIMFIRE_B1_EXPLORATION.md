@@ -60,6 +60,28 @@ koristi nezavisne svježe scripted runove na istim ulazima. Cijela kohorta se do
 poredi s commitovanim no-op i B=1 heurističkim prosjecima. Ni savršeno slaganje agregata
 ne bi dokazalo jednakost svakog pojedinačnog požara s nedostupnim starim izvještajem.
 
+## Kako su podaci postavljeni i iskorišteni
+
+Jedinica je cijeli požar, ne pojedinačna ćelija: 98 TRAIN požara iz 2018/2019.
+Za svaki slučaj koriste se već pripremljene mape 256×256 ćelija po 180 m
+(prozor 46.08×46.08 km), početni FEDS scar i aktivni front, LANDFIRE gorivo i reljef.
+FPA-FOD i FEDS veza određuju slučaj i početak; budući historijski obodi nisu cilj
+učenja ovih politika. GridMET daje četiri segmenta forcinga i zapis prije početka.
+Simulator dobija forcing segmenta, a politika samo dopušteno prethodno vrijeme.
+
+SimFire iz tih ulaza računa šta bi se desilo bez linije i za svaki dozvoljeni izbor
+jedne linije. Upravo ti simulirani kontrafaktualni ishodi daju oznake za offline fit.
+Stvarni podaci postavljaju okolinu i početno stanje; ne daju stvarne odluke vatrogasaca
+ili dokaz učinka gašenja. Pravila i naučene politike dobijaju isti budžet i opažanje
+sažeto na 4×16×16 mrežu, vrijeme, budžet i korak; reljef utiče na simulaciju, ali nije
+dodat kao novi kanal politike u ovoj iteraciji.
+
+Lokalno su odvojeni `inputs/<scenario_id>/` (dva rastera, početne maske, receipt),
+`weather/` (tačno uzorkovani TRAIN fajl) i `cases/` (33 ishoda, opažanja, maske,
+reference, hashovi). Mali sažeci ostaju u `reports/real-fire-data/`; veliki ulazi i
+puni izlazi ostaju u `.local/`. Takav raspored omogućava ponovnu analizu bez ponovnog
+pokretanja svih simulatora, uz provjeru porijekla svakog ulaza.
+
 ## Offline učenje i zaštita od curenja
 
 Svaki od 98 foldova izostavlja cijeli jedan požar. Skaliranje i model koriste samo
@@ -94,15 +116,104 @@ Prag za nastavak iz ranijeg pregleda: najmanje 30 ha i 25% oracle jaza iznad
 `advancing_front`. Neuspjeh ovog konačnog menija ne dokazuje da dobra odluka uopće
 nije predvidiva iz opažanja.
 
-## Rezultati
+## Rezultati — završeno 2026-11-19 (ADR-034)
 
-U toku: završen je pilot 20/20; puna tabela i offline analiza slijede. Brojevi se
-upisuju nakon završetka i provjera, bez promjene unaprijed zadatih metoda ili praga.
+**Nijedna od osam metoda ne prelazi unaprijed zadani prag, ni u jednom obračunu.**
+Ovime se završavaju odobreni TASK-028–030. Nema osnove iz ovog eksperimenta da se
+pokrene novi dugi PPO trening ili da se troši novi holdout.
+
+### TASK-029: provjerena tabela
+
+- **98/98 požara, 3.234 reda ishoda** (98×33 tražena niza; neki daju isti efektivni
+  potez i ishod). Uz ponovljeni no-op i
+  četiri nezavisna scripted rollouta to je 3.724 simulator epizode.
+- Pilot 20 slučajeva traje 3.82 min; puna komanda zatim traje **93.21 min**, uključujući
+  provjere i pauze testiranja, uz reuse prvih 20. Prvobitna kratka procjena potcijenila
+  je velike slučajeve; tokom rada je ispravljena. Sve po nice 19, najviše četiri radnika.
+- Cijele reference i sve ponovo izračunate mask metrike prolaze. SHA-256 svih TRAIN
+  ulaza odgovara commitovanoj kohorti. No-op i sva tri raw B=1 heuristička prosjeka
+  odgovaraju ADR-032 do numeričkog zaokruživanja (<3×10⁻¹⁴ ha).
+- Nema dodira ruba u svih **3.234 ishoda**. U 141 ishoda, na 53 požara, vatra dodaje
+  više štete nego no-op; to je svojstvo ovih simuliranih ishoda, ne nalaz o stvarnom gašenju.
+
+[Provjera i sažeci tabele](../../reports/real-fire-data/feds-b1-table-check-v1.json).
+Originalni puni ADR-032 report i dalje nedostaje; slaganje agregata ga ne zamjenjuje.
+
+### TASK-028: koliko naplata linije mijenja nalaz
+
+No-op dodaje u prosjeku **7.415,70 ha**. `advancing_front` štedi **112,24 ha** u
+originalnom obračunu, odnosno **101,04 ha** uz naplatu linije: razlika **11,21 ha**.
+`downwind` prelazi sa 113,20 na 100,34 ha, nasumična legalna linija sa 106,49 na
+96,08 ha. To je isti seed-0 comparator kao u originalnom B=1 benchmarku, ne prosjek
+preko mnogo nasumičnih politika. Naplata je osjetljivost modelne konvencije; zvanična
+nagrada i stari rezultati nisu prepisani.
+
+Najbolji naknadni izbor iz svih 33 ishoda štedi **546,44 / 529,84 ha** (raw/charged).
+Jaz iznad `advancing_front` je **434,19 / 428,80 ha**. Prostor za bolju odluku zato
+postoji u simulatoru i ostaje velik uz naplatu linije; dostupnost tog dobitka politici
+iz opažanja nije dokazana.
+
+### TASK-030: učinak na požaru izostavljenom iz fita
+
+Brojevi su prosječne spašene ha prema istom no-opu. Delta je razlika prema
+`advancing_front`; pozitivna je bolja. Svi naučeni i podešeni izbori su LOO po požaru.
+
+| Metoda | Raw: spašeno ha | Raw: delta ha | Charged: spašeno ha | Charged: delta ha |
+| --- | ---: | ---: | ---: | ---: |
+| Postojeće pravilo `advancing_front` | 112.24 | +0.00 | 101.04 | +0.00 |
+| Pravilo `downwind` | 113.20 | +0.96 | 100.34 | -0.69 |
+| Fiksno vrijeme/smjer iz fit skupa | 48.86 | -63.38 | 37.92 | -63.11 |
+| Ridge fitted-Q, alpha 1 | 93.03 | -19.21 | 84.47 | -16.56 |
+| Ridge fitted-Q, alpha 10 | 105.04 | -7.21 | 108.01 | +6.98 |
+| Ridge fitted-Q, alpha 100 | 83.18 | -29.06 | 75.08 | -25.95 |
+| Tabelarni fitted-Q | 108.97 | -3.27 | 94.89 | -6.15 |
+| Imitacija, 5 najbližih požara | 57.43 | -54.82 | 57.86 | -43.18 |
+
+Prag traži oba uslova: ≥30 ha i ≥25% jaza. Na ovoj tabeli to znači najmanje
+**108,55 ha raw / 107,20 ha charged** dodatno prema pravilu. Niko nije blizu tog praga.
+Najbolji raw naučeni kandidat je tabelarni Q, **−3,27 ha** prema pravilu.
+Najbolji charged kandidat je ridge alpha 10: **+6,98 ha**, samo **1,63% jaza**;
+opisni 95% bootstrap je **[−69,70; +92,04] ha**. Na 28 požara je bolji, na 31 lošiji,
+a na 39 isti. Kad se samo izbaci njegova najveća apsolutna OOF razlika, prosjek je
+**−13,63 ha**. Nema refita u tom dijagnostičkom izbacivanju.
+
+[Potpuni rezultati svih metoda i svih požara](../../reports/real-fire-data/feds-b1-offline-v1.json).
+Dodatno su provjerene sve **1.568 OOF putanja**: legalnost, najviše jedna linija,
+odgovarajući ishod iz tabele i ponovni obračun prosjeka prolaze.
+
+![OOF dobitak svih kandidata prema pravilu, raw i charged](../../reports/real-fire-data/feds-b1-offline-v1.png)
+
+### Šta smo saznali, a šta još ne znamo
+
+**Činjenice:** postoji velik simulirani oracle jaz; ovaj meni politika ga nije prenio
+na izostavljeni požar; naplata linije nije uklonila taj jaz. Prosjeci su osjetljivi na
+pojedinačne požare. **Post-hoc opis, bez novog fita:** najviše pozitivnoj charged ridge-10
+razlici doprinosi Bears (+2.005,56 ha prema pravilu). Najbolji fiksni niz odabran i
+ocijenjen na svih 98 bio bi `(1,0,0,0)` i 134,00/122,52 spašenih ha; pošteni LOO izbor
+fiksnog niza daje samo 48,86/37,92 ha. To pokazuje koliko je optimističan izbor i
+ocjena na istim požarima. Ne koristimo taj full-TRAIN izbor kao novi rezultat politike.
+
+**Hipoteza:** trenutnih 28 agregatnih obilježja gubi koristan prostorni signal, a
+fiksne jednostavne aproksimacije i mala, heterogena kohorta otežavaju prenos.
+Ovo nije dokaz da signal ne postoji u zaključanom opažanju ili da RL ne može uspjeti.
+Također nismo testirali sve nelinearne metode, duži PPO, nove observation kanale ili
+B=2/B=4. Ništa od toga se ne zaključuje iz ovog konačnog menija.
+
+**Prijedlog nastavka (TASK-034, nije pokrenut):** prije novog dugog treninga zapisati
+mali TRAIN protokol koji ispituje koliko informacije gubi ovo sažimanje iste 4×16×16
+opservacije, uz jače prostorne baseline-e i izbor metoda unutar fit dijela. Zadržati
+no-op, `advancing_front`, oba obračuna i potpuno razdvojene požare. Kandidati, selekcija
+i kriterij se pišu prije novog scoringa. Novi kanal, budžeti ili VALIDATION traže
+zasebnu odluku/protokol. Ne prilagođavati postojeći prag poslije ovog neuspjeha.
 
 ## Reprodukcija
 
 Koristi pinovani Python 3.9 SimFire venv iz [environment runbooka](SIMFIRE_ENVIRONMENT.md).
-Podaci i puni izlazi su ignorisani. `P` ispod je putanja do tog interpretera; nije
+Podaci i puni izlazi su ignorisani. [Manifest lokalnog paketa](../../reports/real-fire-data/feds-b1-artifact-manifest-v1.json)
+čuva hash arhive s 98 TRAIN ulaza, tačnim weather fajlom, punom tabelom, izvještajima
+i kopijom izvornog koda. Poslije izdvojenog raspakivanja ponovljena je provjera
+punog sažetka; dobijen je bajt-po-bajt isti izvještaj. Environment nije reinstaliran
+i nova native simulacija nije dio te provjere. Paket nije uploadovan. `P` ispod je putanja do tog interpretera; nije
 potrebna ista lična putanja ili stari checkout. Obnovi TRAIN mape i gridMET arhive
 2018/2019 iz javnih izvora; validation se ovdje ne preuzima.
 

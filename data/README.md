@@ -8,7 +8,8 @@ Aktivni nastavak 2026-11-19 je [SimFire B=1, TASK-028–030](../docs/research/SI
 Koristi postojećih 98 TRAIN početnih slučajeva, uz [ponovo generisan TRAIN-only weather
 profil](../reports/real-fire-data/feds-b1-train-weather-v1.json). Stari CFSDS/Firehose nalazi
 ispod su historija. Sirovi rasteri, NetCDF, potpuna tabela i modeli ostaju izvan Gita;
-VALIDATION i TEST nisu ponovo korišteni u ovoj iteraciji.
+VALIDATION i TEST nisu ponovo korišteni u ovoj iteraciji. [Manifest lokalnog paketa](../reports/real-fire-data/feds-b1-artifact-manifest-v1.json)
+veže tačne TRAIN ulaze, vrijeme i punu završenu tabelu; arhiva ostaje lokalna.
 
 `manifests/upstream.json` pinova Firehose izvor i dostupne modele. `configs/pilot.json`
 je cijeli mali sintetički landscape: 20×20 ćelija, ignition, negorive ćelije i prioriteti.

@@ -1,16 +1,28 @@
 ---
 type: Handoff
-title: Naredni korak — pregled nakon faze 2 (2026-11-12)
+title: Naredni korak — nakon SimFire B=1 ciklusa (2026-11-19)
 ---
 # Naredni korak
 
-## 2026-11-19 — aktivan SimFire nastavak (ADR-033)
+## 2026-11-19 — završen odobreni SimFire ciklus (ADR-034)
 
-TASK-028–030 su odobreni korisnikovim nalogom i u toku na grani
-`codex/simfire-policy-iterations`. [Izvještaj i komande](research/SIMFIRE_B1_EXPLORATION.md)
-su ulaz za nastavak. Ne vraćati se na stari zahtjev za odobrenje ovih TRAIN koraka.
-Prvo provjeriti lokalne runove i hashove; ne pokretati duplikat eksperimenta.
-PR #19 je već spojen na `main` (`f96f744f`). VALIDATION/TEST i CA ostaju zatvoreni.
+TASK-028–030 su završeni na lokalnoj grani `codex/simfire-policy-iterations`.
+[Izvještaj i komande](research/SIMFIRE_B1_EXPLORATION.md) su ulaz za nastavak.
+Puna tabela 98 požara i svih osam LOO metoda su provjereni; nijedna metoda nije
+prešla prag iz ADR-033. Po tom stop-uslovu nisu pokretani novi PPO, holdout ili
+CA eksperimenti. PR #19 je već u `main`-u; novi rad nije pushan ni spojen.
+
+1. Pročitati ADR-034, izvještaj i [manifest lokalnog paketa](../reports/real-fire-data/feds-b1-artifact-manifest-v1.json).
+   Ne ponavljati 93-minutnu enumeraciju ako su sačuvani artefakti i hashovi ispravni.
+2. Predloženi TASK-034: zapisati mali TRAIN-only protokol za prostorni signal u istom
+   opažanju i stabilnost izbora kroz požare. Ne birati nove metode ili pragove na
+   postojećim OOF rezultatima pa ih predstavljati kao nezavisnu potvrdu.
+3. Zvanični obračun linije, novi observation kanali, B=2/B=4 i novo VALIDATION korištenje
+   ostaju otvorene odluke. TEST 2024 ostaje zatvoren; CA nije aktivni pravac.
+4. Push/PR i merge nisu urađeni. Sačuvati lokalni paket iz `.local/b1/artifacts/`;
+   za remote arhiviranje potreban je korisnikov nalog.
+
+Starije sekcije ispod su historija; njihovo čekanje odobrenja TASK-028–030 je razriješeno.
 
 ## Najnovije — 2026-11-12: pregled završen; prvo provjera gornje granice na TRAIN-u
 

@@ -508,7 +508,8 @@ VALIDATION reuse (its numbers are only quoted from ADR-032), TEST untouched.
 
 ## EXP-022 — SimFire B=1 TRAIN-only iteracije, 2026-11-18/19 (ADR-033)
 
-**Status: u toku.** Korisnik je odabrao SimFire nastavak kroz TASK-028–030 na novoj
+**Status: završeno (rezultati i završna dopuna ispod, ADR-034).** Korisnik je odabrao
+SimFire nastavak kroz TASK-028–030 na novoj
 lokalnoj grani. Plan `configs/frozen/feds-b1-exploration-v1.json` i implementacija
 obračuna su commitovani kao `540d724b` prije prvih novih simulator rollouta; runner
 je `d818b2f9`, prvi offline meni `807c374b`, dodatni report guardovi `cd19d5d1`.
@@ -552,3 +553,33 @@ EXP-022 — ponovljena provjera nakon no-op korekcije: pinovani runtime **314/31
 moderni **301, 3 skip**, core **263, 34 skip**. Receipt revizija 2 čuva i prethodni krug.
 Dodatna pauza jednog radnika 179.6 s, ukupno 391.0 s. Numerički kod metoda je ponovo
 provjeren prije prvog LOO scoringa; ne tvrdi se bolji rezultat politike na osnovu testova.
+
+EXP-022 — **završeno 2026-11-19, ADR-034.** Puna tabela: 98 požara, 3.234 ishoda;
+3.724 native epizode uključujući ponovljene i nezavisne reference. Puna komanda je
+trajala 93.21 min (reuse pilota, četiri nice-19 procesa, test pauze uključene).
+Svi input/mask/reference checkovi PASS; no-op i tri raw heuristička prosjeka
+odgovaraju ADR-032 do numeričkog zaokruživanja. Rubnih kontakata 0/3.234; 141 raw
+ishod na 53 požara dodaje više štete od no-op-a. No-op mean 7.415,70 ha.
+
+Osam fiksnih metoda je ocijenjeno na svih 98 LOO foldova, u oba obračuna; numerički
+kod iz `d1592ed7`, plan nepromijenjen. `advancing_front`: 112,24/101,04 spašenih ha
+(raw/charged), oracle 546,44/529,84. Prag je ≥30 ha i ≥25% jaza (ovdje ≥108,55/107,20).
+**Niko ne prolazi.** Najbolji raw naučeni kandidat je tabular Q (−3,27 ha prema pravilu);
+charged ridge-10 daje +6,98 ha, opisni 95% [−69,70;92,04], 28/31/39 boljih/lošijih/istih
+požara. Bez najveće OOF razlike −13,63 ha; nema refita. Nisu pokretani dodatni modeli
+nakon rezultata. Dodatni audit svih 1.568 OOF putanja potvrđuje legalnost, jednu liniju,
+lookup tačnog ishoda i prosjeke. Grafikon je vizuelno pregledan.
+
+Post-hoc opis bez novog fita: charged ridge-10 dobija +2.005,56 ha prema pravilu na
+Bears-u. Odabir fiksnog `(1,0,0,0)` na cijelom TRAIN-u daje optimističnih 134,00/122,52 ha,
+dok LOO selekcija daje 48,86/37,92 ha. To nije novi kandidat niti nezavisni dokaz.
+Sve metode ostaju u [punoj analizi](../../reports/real-fire-data/feds-b1-offline-v1.json).
+
+Lokalni prenosivi paket je 24.397.671 B, 719 članova plus interni manifest; svih 720
+članova je ponovo pročitano i provjereno. Sadrži samo TRAIN rasterske ulaze, weather,
+punu tabelu, sažetke i source snapshot; nema venv-a, NetCDF arhiva, checkpointova ili
+validation/test rastera. [Manifest](../../reports/real-fire-data/feds-b1-artifact-manifest-v1.json)
+čuva SHA-256 i upute. Nema uploada, push-a, PR-a ili mergea. Stop-uslov iz ADR-033 je
+primijenjen; TASK-034 je predložena dijagnoza opažanja prije novog treninga, nije pokrenuta.
+[Izvještaj i sljedeći razlozi](SIMFIRE_B1_EXPLORATION.md). Simulatorski, TRAIN eksploratorno;
+nema fizičke validacije ili potvrđene RL prednosti.

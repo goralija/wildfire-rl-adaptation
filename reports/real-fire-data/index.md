@@ -1,5 +1,9 @@
 # real-fire-data
 
+- [SimFire B=1 provjerena tabela](feds-b1-table-check-v1.json) - 98×33 ishoda, svi input/mask/reference checkovi PASS, ADR-032 agregati se poklapaju, bez ruba.
+- [SimFire B=1 sve offline metode](feds-b1-offline-v1.json) - osam metoda, LOO po požaru, raw/charged; nijedna ne prelazi prag; [grafikon](feds-b1-offline-v1.png), [tumačenje](../../docs/research/SIMFIRE_B1_EXPLORATION.md).
+- [SimFire B=1 lokalni paket artefakata](feds-b1-artifact-manifest-v1.json) - hash prenosive lokalne arhive: 98 TRAIN ulaza, tačan weather, puna tabela i izvorni kod; nije uploadovana.
+
 - [SimFire B=1 TRAIN-only weather](feds-b1-train-weather-v1.json) - 98 slučajeva, 392 segmenta + 98 pre-start zapisa, šest izvornih arhiva s hashovima; bez validation/test vrijednosti.
 - [SimFire B=1 tehnička provjera](feds-b1-verification-v1.json) - 314/314 u pinovanom runtimeu, verzije i hashovi; [postupak TASK-028–030](../../docs/research/SIMFIRE_B1_EXPLORATION.md).
 

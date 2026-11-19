@@ -4,13 +4,20 @@ title: Naredni zadaci
 ---
 # Naredni zadaci
 
-## Aktivni nastavak — 2026-11-19 (ADR-033)
+## Aktivni nastavak — 2026-11-19 (ADR-034)
 
-Korisnik je odobrio SimFire TASK-028–030 na novoj grani. Implementacija i dokazi:
-[SimFire B=1](research/SIMFIRE_B1_EXPLORATION.md). TASK-028 helper/testovi su završeni;
-TASK-029 pilot 20/20 prolazi, puna kohorta je u toku; TASK-030 kod i zaštite su
-implementirani, analiza čeka punu tabelu. Nove odluke o VALIDATION-u, TEST-u,
-budžetima B=2/B=4 i zvaničnoj metrici nisu time automatski donesene.
+[SimFire B=1 izvještaj](research/SIMFIRE_B1_EXPLORATION.md) sadrži dokaze i komande.
+Ovaj dio zamjenjuje ranije statuse TASK-028–030; stariji prioriteti ispod su historija.
+
+| ID | Stanje | Ishod / sljedeće |
+| --- | --- | --- |
+| TASK-028 | završeno kao pomoćni obračun | testirana unija linije i no-op otiska; raw i charged prijavljeni; zvanična env nagrada ostaje otvorena odluka |
+| TASK-029 | završeno | 98 požara ×33=3.234 ishoda; reference/mask/input hash PASS; ADR-032 agregati se poklapaju; bez ruba |
+| TASK-030 | završeno | osam fiksnih metoda, LOO po požaru; nijedna ne prelazi prag u oba zasebna obračuna; novi PPO nije pokrenut |
+| TASK-034 | predloženo, nije pokrenuto | TRAIN-only dijagnoza prostornog signala u istom opažanju i stabilnosti selekcije; novi protokol prije scoringa |
+
+Novi kanali, VALIDATION, B=2/B=4, zvanična metrika i remote objava ostaju zasebne odluke.
+TEST 2024 ostaje zatvoren; CA faza 3 nije pokrenuta.
 
 ## Aktivni prioritet — 2026-11-12 (pregled nakon faze 2)
 

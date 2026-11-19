@@ -7,14 +7,24 @@ sources:
 ---
 # Trenutno stanje — 2026-11-19
 
-## 2026-11-19 — SimFire nastavak je odobren i u toku (ADR-033)
+## 2026-11-19 — SimFire TASK-028–030 završeni; nijedna metoda ne prelazi prag (ADR-034)
 
-Korisnik je odabrao SimFire nastavak na grani `codex/simfire-policy-iterations`.
-[Plan i postupak](research/SIMFIRE_B1_EXPLORATION.md) prate TASK-028–030:
-obračun linije je testiran, obnovljeno je vrijeme samo za 98 TRAIN slučajeva,
-pilot 20/20 prolazi reference i mask provjere; puna tabela i offline LOO su u toku.
-Nema novog PPO ili CA treninga, ponovnog VALIDATION-a ili TEST 2024 pristupa.
-ADR-031/032 ostaju raniji važeći simulatorski rezultat; ADR-022–028 ostaju poništeni.
+Na lokalnoj grani `codex/simfire-policy-iterations` završeni su pomoćni obračun linije,
+98×33=3.234 provjerena ishoda i osam metoda uz LOO po požaru. TRAIN-only weather je
+obnovljen; originalni no-op i heuristički prosjeci ADR-032 se poklapaju. Nema rubnih
+kontakata. `advancing_front` štedi 112,24 ha raw / 101,04 ha charged; oracle 546,44 /
+529,84 ha. Nijedna metoda ne dostiže unaprijed zadani prag. Najbolji charged naučeni
+kandidat daje +6,98 ha prema pravilu, uz širok opisni interval i promjenu predznaka
+kad se izbaci najveća OOF razlika.
+
+[Izvještaj, sve metode i razlozi nastavka](research/SIMFIRE_B1_EXPLORATION.md),
+[rezultati](../reports/real-fire-data/feds-b1-offline-v1.json),
+[manifest lokalnih potpunih artefakata](../reports/real-fire-data/feds-b1-artifact-manifest-v1.json).
+Pinovani runtime: 314/314 testova, 0 skip; CLI i knowledge provjere prolaze.
+Nema novog PPO/CA treninga, VALIDATION korištenja, TEST 2024 pristupa, push-a ili mergea.
+Predložen je TASK-034: dijagnoza prostornog signala iz istog opažanja prije novog
+treninga; nije pokrenut. ADR-031/032 ostaju važeći simulatorski rezultati, bez tvrdnje
+o fizičkoj validaciji; ADR-022–028 ostaju poništeni.
 
 ## Najnovije — 2026-11-12: pregled nakon faze 2, bez novih treninga
 

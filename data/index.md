@@ -1,6 +1,6 @@
 # Podaci i provenance
 
-- [Aktivni SimFire B=1 nastavak](../docs/research/SIMFIRE_B1_EXPLORATION.md) - TASK-028–030 / ADR-033, samo TRAIN; [novi weather profil](../reports/real-fire-data/feds-b1-train-weather-v1.json) s 98 slučajeva, šest arhiva i novim hashom.
+- [Aktivni SimFire B=1 nastavak](../docs/research/SIMFIRE_B1_EXPLORATION.md) - TASK-028–030 završeni / ADR-034, samo TRAIN; [novi weather profil](../reports/real-fire-data/feds-b1-train-weather-v1.json) s 98 slučajeva, šest arhiva i novim hashom.
 - [Originalna FPA-FOD train/validation kohorta](manifests/fireline-benchmark-cohort-v1.json) - lokalni FEDS audit za staru 60-case kohortu: 19/40 train, 7/20 validation (pada); aktivni širi okvir je sljedeća stavka.
 - [FPA-FOD kandidat-frame](manifests/fpa-feds-candidate-frame-v1.json) - svi spremljeni train 2018/2019 i validation 2023 screen zapisi; bez test 2024.
 - [FEDS epizode za no-op poređenje](manifests/feds-episode-cohort-v1.json) - 98 train i 20 validation požara (jedan zapis po FEDS požaru, ADR-030 §6; columbus isključen kao duplikat sugar-pine) s punim FEDS 48h referentnim tokom; data coverage prolazi; raniji screen je zamijenjen ADR-031 growth gateom (PASS prema slaboj elipsi, bez fizičke validacije).

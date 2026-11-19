@@ -1,0 +1,70 @@
+{
+  "adr032_actual_minus_reference_ha": {
+    "advancing_front": -2.842170943040401e-14,
+    "downwind": 1.4210854715202004e-14,
+    "noop_mean_added_ha": 0.0,
+    "random_legal": 2.842170943040401e-14
+  },
+  "adr032_train_reference_sha256": "1e657e351ab6ea1d5c22483ae6da8a1f33f5849c6488b2606c576e7734517a81",
+  "case_count": 98,
+  "checks": {
+    "adr032_aggregate_match": "PASS",
+    "all_independent_references": "PASS",
+    "all_input_hashes_match_committed_cohort": "PASS",
+    "all_mask_metrics_recomputed": "PASS",
+    "original_full_train_report_available": false
+  },
+  "decision": "ADR-033",
+  "edge_contact_outcomes": 0,
+  "label": "TRAIN EXPLORATION; NOT PHYSICAL VALIDATION",
+  "limits": [
+    "The oracle sees all future rollout outcomes: a privileged hindsight upper bound, not a deployable policy. Whether available observations suffice to match it is unknown.",
+    "Aggregate agreement does not establish per-fire equality with the unavailable ADR-032 full report.",
+    "Line charge is an exploratory alternative; the locked reward and ADR-032 numbers are unchanged."
+  ],
+  "mean_saved_ha": {
+    "charged": {
+      "advancing_front": 101.03510204081633,
+      "downwind": 100.34081632653061,
+      "oracle": 529.8391836734694,
+      "random_legal": 96.07591836734696
+    },
+    "raw": {
+      "advancing_front": 112.24285714285715,
+      "downwind": 113.20163265306124,
+      "oracle": 546.435918367347,
+      "random_legal": 106.4902040816327
+    }
+  },
+  "noop_mean_added_ha": 7415.698775510205,
+  "outcome_count": 3234,
+  "outcomes_burning_more_than_noop": 141,
+  "schema_version": "feds-b1-table-check/1.0",
+  "settings": {
+    "manifest_sha256": "013be9a1632abcbc29d86f4bc16af89d3c074503f5899d1e39903d76ec2c28d5",
+    "params": {
+      "active_cell_lifetime_minutes": 90,
+      "fireline_attenuation": "per_minute",
+      "internal_update_minutes": 5,
+      "ros_multiplier": 1.0,
+      "spread_aggregation": "last_write",
+      "wind_adjustment_factor": 0.1
+    },
+    "plan_sha256": "5401b0d764b1df86389a4dd7f2fcde1257114d777b3800a509ef0c178be68539",
+    "source_hashes": {
+      "scripts/enumerate_feds_b1.py": "6f720f5ec3f51738462ac5c79a279b8b7ca9a36d523502d63b20cf770c21a401",
+      "src/wildfire_rl/feds_b1.py": "e2ea9af4ef7d55103cd94fb8b5f8528f9e2fec2d900f231a68cdee06541f3e02",
+      "src/wildfire_rl/feds_heuristics.py": "1f6f38ac8dfd6e6e3e822f85c3fbb6547b0c001fd11ff0d962921e6c70eb77b5",
+      "src/wildfire_rl/feds_simfire_env.py": "261cb0b6565b72711aa56964a068f6749b6c49ceaa32b2b70a54c959cdb235ed",
+      "src/wildfire_rl/feds_simfire_setup.py": "d8be02c6b45965a78323c1b04b20565c07bc6c15bb7ac0a6943f1db256f7044a",
+      "src/wildfire_rl/gridmet_weather.py": "d3da280ee45b71692ce4492551be0fe73405ac71e83d1690add1a8a8dd9a4fd7",
+      "src/wildfire_rl/line_damage.py": "cab7e146e769edff04e2364c8d9874036ab154fa68f05af1c739d6b55f995ea6"
+    },
+    "weather_sha256": "76332f3da26fe02812ca6439fee5dec9f131793227335e0380267d12c0ab937e"
+  },
+  "split": "train",
+  "summary_script_sha256": "9b7359018887a6d10d1a95cbb9e61321cb5315d749654febb33e28ed88f53a9f",
+  "table_sha256": "28627fa98b60f8dae4ac4f9246887ecd3488b541c2a9dbd5e82620811effbddc",
+  "test_cases_loaded": false,
+  "validation_used": false
+}

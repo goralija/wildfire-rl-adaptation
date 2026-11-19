@@ -4,6 +4,19 @@ title: Work log
 ---
 # Work log
 
+2026-11-19 — Završen SimFire ciklus TASK-028–030 na `codex/simfire-policy-iterations`.
+98×33 ishoda i sve nezavisne reference/input/mask provjere prolaze; ADR-032 agregati se
+poklapaju, nema rubnih kontakata. Puna komanda 93.21 min. Osam LOO metoda ×98 požara
+u oba obračuna: niko ne dostiže prag. Charged ridge-10 +6,98 ha prema pravilu postaje
+−13,63 ha bez najveće OOF razlike. Provjerene sve 1.568 OOF sekvence i vizuelno grafikon.
+ADR-034, EXP-022, izvještaj, STATUS/NEXT_SESSION/BACKLOG i svi ulazi znanja usklađeni.
+Root README više ne predstavlja poništene ADR-023/027 rezultate kao aktivno stanje.
+Paket 24.397.671 B s TRAIN ulazima, tačnim weather fajlom, punim ishodima i source
+snapshotom je lokalno sačuvan; svi hashovi ponovo pročitani. Izdvojeno raspakivanje
+i ponovljeni mask/input sažetak daju bajt-po-bajt isti javni izvještaj. Nijedan novi PPO ili
+holdout nije pokrenut poslije negativnog rezultata. TASK-034 je sljedeći prijedlog,
+ne pokrenuti run. Nema push-a, mergea, CA ili TEST pristupa.
+
 2026-11-19 — Prije prve offline ocjene dodata je poznata donja granica vrijednosti
 čekanja (0 prema no-opu), nakon dva prvo padajuća sintetička regresijska testa.
 Puna ponovljena provjera: 314/314 pinovani runtime, moderni 301 (3 skip), core 263

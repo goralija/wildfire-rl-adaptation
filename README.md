@@ -8,14 +8,20 @@ Istražujemo može li prilagodba unaprijed treniranog RL agenta **različitim bu
 intervencija** smanjiti opožarenu površinu u odnosu na početni agent i heuristike,
 uz posebno ispitivanje zaštite prioritetnih područja.
 
-**Stanje (2026-11-04):** aktivni plan je SimFire + FPA-FOD/FEDS-CONUS (99 train / 20
-validation požara). TRAIN no-op gate je i nakon dijagnoze **FAIL** (ADR-023/024).
-Intervencije, heuristike i PPO prilagodba budžetu izvedeni su eksploratorno na zasebnom
-free-burn stress zapisu: osnovni PPO smanjuje štetu u odnosu na no-op, a fine-tuning po
-budžetu nema mjerljive koristi (ADR-027). Validation je skoriran jednom po zapisu, TEST
-2024 je zatvoren. Raniji
-Cell2Fire/Firehose nalazi su odvojeni historijski rad. Sintetički pilot ne predviđa
-stvarne požare i nije dokaz uspješnosti RL pristupa.
+**Stanje (2026-11-19):** glavni pravac je SimFire + FPA-FOD/FEDS-CONUS: 98 TRAIN
+požara 2018/19, 20 VALIDATION 2023; TEST 2024 zatvoren. Raniji ADR-022–028 rezultati
+su poništeni zbog greške u vremenskim podacima. Na ispravljenim ulazima growth gate
+prolazi prema slaboj elipsi, uz WAF 0.10 / ROS 1.0 (ADR-031); to nije fizička validacija.
+Studija s 10 PPO seedova ne nalazi razliku prema jednostavnim pravilima ni mjerljivu
+korist fine-tuninga budžetu (ADR-032; intervali su široki).
+
+**Novi rad na grani `codex/simfire-policy-iterations`:** TASK-028–030 su završeni:
+oba obračuna štete, 98×33 provjerena ishoda i osam TRAIN LOO metoda. Nijedna metoda
+ne prelazi unaprijed zadani prag za nastavak. [Izvještaj](docs/research/SIMFIRE_B1_EXPLORATION.md)
+objašnjava podatke, rezultate i granice; [NEXT_SESSION](docs/NEXT_SESSION.md) čuva
+predloženi TASK-034. Rad je lokalni, bez novog PPO/CA, VALIDATION/TEST ili remote objave.
+Cell2Fire/Firehose su odvojeni historijski pravci; simulatorski učinak nije dokaz
+stvarnog učinka gašenja.
 
 Tim: Amar Hodžić, Belmin Durmo, Harun Goralija. Predmet MPVI.
 
@@ -34,12 +40,12 @@ prijedloge i otvorene odluke. [Pravila održavanja](knowledge/maintenance.md) i
    [trenutno stanje](docs/STATUS.md) i [upute za narednu sesiju](docs/NEXT_SESSION.md).
 2. Pogledaj [istraživački protokol](docs/research/PROTOCOL.md),
    [provjeru simulatora](docs/research/SIMULATOR_AUDIT.md) i [odluke](docs/specs/DECISION_RECORDS.md).
-3. Za aktivni FPA-FOD/FEDS-CONUS pravac vidi
-   [crosswalk i cohort no-op gate](docs/research/FPA_FEDS_CROSSWALK.md), zatim
-   [TRAIN no-op rezultat](reports/real-fire-data/feds-simfire-train-noop-screen-v1.json)
-   i [sljedeći korak](docs/NEXT_SESSION.md). Data coverage je prošla, ali no-op
-   screening nije; ne tretirati PPO smoke kao benchmark. CFSDS/Cell2Fire replayi su
-   historijski nalazi opisani u [starom X/Y pipelineu](docs/research/REAL_CASE_PIPELINE.md).
+3. Za aktivni pravac vidi [crosswalk](docs/research/FPA_FEDS_CROSSWALK.md),
+   [growth gate ADR-031](reports/real-fire-data/feds-simfire-train-growth-gate-v1.json),
+   [benchmark ADR-032](reports/real-fire-data/feds-simfire-budget-benchmark-adr030-v1.json)
+   i [novi B=1 ciklus ADR-034](docs/research/SIMFIRE_B1_EXPLORATION.md).
+   Stari TRAIN no-op screen nije važeći nalaz (ADR-029). CFSDS/Cell2Fire replayi su
+   historija u [starom X/Y pipelineu](docs/research/REAL_CASE_PIPELINE.md).
 
 ## Pokretanje bez dodatnih biblioteka
 
@@ -91,7 +97,7 @@ rollouta, ponovljiv seed, budžetski no-op i nepromijenjene težine. [Docker run
 
 [Dataset data card](docs/research/DATASET.md): postojeća mapa 400 ćelija, terrain/fuel
 inputi i 130 weather fajlova; zadani test koristi samo bazni Weather.csv. RL iskustvo
-nastaje interakcijom, a train/validation/test scenariji tek trebaju biti zamrznuti.
+nastaje interakcijom. Taj legacy pilot nije aktivna zamrznuta FEDS kohorta opisana iznad.
 
 ## Šta se računa kao intervencija
 
@@ -100,8 +106,10 @@ Ovaj legacy/synthetic ugovor tretira jednu gorivu ili aktivno zapaljenu ćeliju:
 probabilističkog neuspjeha ni realističnog utroška vode. No-op je besplatan i uvijek
 dostupan. Nakon potrošnje budžeta simulacija nastavlja do gašenja ili horizonta.
 Sva ikad zapaljena površina ostaje u šteti, čak i kada se kasnije ugasi.
-To nije nova SimFire operativna akcija. Predloženi sektor-front/ekipa/linija ugovor
-čeka prolaz data gatea i opisan je u [FEDS crosswalk protokolu](docs/research/FPA_FEDS_CROSSWALK.md).
+Aktivni SimFire koristi odvojenu akciju linije uz front, u osam smjerova, sa istim
+48h horizontom i nastavkom nakon trošenja budžeta. Implementacija i oba obračuna su u
+[SimFire B=1 izvještaju](docs/research/SIMFIRE_B1_EXPLORATION.md); gate je ADR-031,
+a opis u starom [FEDS crosswalk protokolu](docs/research/FPA_FEDS_CROSSWALK.md) je historijski.
 Legacy detalji: [pravila](docs/specs/BUSINESS_RULES.md).
 
 ## Sadržaj repozitorija

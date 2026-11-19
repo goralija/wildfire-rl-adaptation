@@ -5,7 +5,7 @@ okf_version: "0.2"
 
 ## Počni ovdje
 
-- [Aktivni nastavak: SimFire B=1](docs/research/SIMFIRE_B1_EXPLORATION.md) - Odobrene TRAIN-only iteracije TASK-028–030 na novoj grani, ADR-033.
+- [Aktivni nastavak: SimFire B=1](docs/research/SIMFIRE_B1_EXPLORATION.md) - TASK-028–030 završeni: 98×33 ishoda, osam LOO metoda bez prolaza praga, ADR-034; predložen TASK-034.
 
 - [Projekt i pokretanje](README.md) - Cilj istraživanja i minimalni setup.
 - [Sažeti projektni kontekst](knowledge/project-context.md) - Aktivni SimFire/FEDS pravac i crosswalk gate.

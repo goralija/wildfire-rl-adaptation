@@ -1,13 +1,17 @@
 # Promjene baze znanja
 
-## 2026-11-19: SimFire TRAIN-only iteracije su odobrene (ADR-033)
+## 2026-11-19: SimFire TASK-028–030 završeni (ADR-034)
 
-- Nova grana `codex/simfire-policy-iterations`, baza `f96f744f`; glavni checkout i tuđi rad sačuvani.
-- Testiran TASK-028 helper, TRAIN-only weather regeneracija i B=1 runner; pilot 20/20 prolazi.
-- [EXP-022](docs/research/EXPERIMENT_LOG.md) bilježi plan i izvršene korake; [verification receipt](reports/real-fire-data/feds-b1-verification-v1.json) potvrđuje 314/314 lokalnih testova u pinovanom runtimeu.
-- Puna tabela i LOO analiza su u toku. [Izvještaj](docs/research/SIMFIRE_B1_EXPLORATION.md)
-  čuva pretpostavke, razliku u dostupnim lokalnim artefaktima i reprodukciju.
-- VALIDATION/TEST i CA nisu pokrenuti. Raniji rezultati nisu retroaktivno mijenjani.
+- Lokalna grana `codex/simfire-policy-iterations`, baza `f96f744f`; tuđi rad i glavni checkout sačuvani.
+- TRAIN weather obnovljen; oba obračuna testirana; svih 98×33 ishoda provjereno, bez ruba;
+  nezavisne reference i ADR-032 no-op/heuristički agregati se poklapaju.
+- Osam LOO metoda ocijenjeno zasebno za raw/charged. Nijedna ne prelazi prag. Charged
+  ridge-10: +6,98 ha prema pravilu, −13,63 ha bez najveće OOF razlike; nema potvrđene prednosti.
+- [Izvještaj](docs/research/SIMFIRE_B1_EXPLORATION.md), [EXP-022](docs/research/EXPERIMENT_LOG.md),
+  [rezultati](reports/real-fire-data/feds-b1-offline-v1.json) i [manifest lokalnog paketa](reports/real-fire-data/feds-b1-artifact-manifest-v1.json).
+- Root README usklađen s ADR-029/031/032/034 umjesto poništenih nalaza.
+- Pinovani runtime 314/314 testova (0 skip), CLI i knowledge PASS. Nema novih PPO/CA,
+  VALIDATION/TEST, push/merge ili fizičke validacije. TASK-034 je prijedlog sljedeće dijagnoze.
 
 ## 2026-11-12: pregled nakon faze 2 i novi HANDOFF
 

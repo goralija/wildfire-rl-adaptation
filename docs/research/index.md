@@ -6,7 +6,7 @@
 
 ## Dokumenti
 
-- [SimFire B=1: iscrpna tabela i offline učenje](SIMFIRE_B1_EXPLORATION.md) - TASK-028–030, ADR-033, oba obračuna štete i TRAIN-only iteracije
+- [SimFire B=1: iscrpna tabela i offline učenje](SIMFIRE_B1_EXPLORATION.md) - TASK-028–030 završeni, ADR-034, oba obračuna i osam TRAIN LOO metoda bez prolaza praga
 
 - [Dataset: šta imamo i šta ćemo koristiti](DATASET.md) - Dataset Review
 - [Experiment log](EXPERIMENT_LOG.md) - Experiment Log

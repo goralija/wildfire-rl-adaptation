@@ -19,12 +19,14 @@ su sažeti u [rubrici](../docs/research/REQUIREMENTS_AND_RUBRIC.md). Aktivni ben
 koristi SimFire, FPA-FOD početne uslove i FEDS-CONUS vremenske obode; stariji
 CFSDS/Cell2Fire rad ostaje odvojen i historijski.
 
-## Nastavak 2026-11-19 — ADR-033
+## Nastavak 2026-11-19 — ADR-034
 
 Korisnik je odabrao SimFire i odobrio dokumentovane TRAIN iteracije TASK-028–030 na
-novoj grani. [SimFire B=1 izvještaj](../docs/research/SIMFIRE_B1_EXPLORATION.md) razdvaja
-oba obračuna štete, gornju granicu i učinak izvan fita. Puna analiza je u toku;
-VALIDATION/TEST nisu ponovo korišteni, CA faza 3 nije pokrenuta.
+novoj grani. [SimFire B=1 izvještaj](../docs/research/SIMFIRE_B1_EXPLORATION.md) bilježi
+završenu tabelu 98×33 i osam LOO metoda u oba obračuna. Nijedna ne dostiže prag za
+nastavak: velik oracle jaz nije prenesen na izostavljene požare. Sljedeći prijedlog
+je TASK-034, dijagnoza prostornog signala iz istog opažanja; nije pokrenut.
+VALIDATION/TEST nisu ponovo korišteni, CA faza 3 nije pokrenuta, novi rad je lokalni.
 
 ## Aktivni pravac
 
