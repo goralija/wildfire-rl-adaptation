@@ -547,3 +547,8 @@ gubitak. Poznata opcija trajnog no-op-a vrijedi 0 u dobitku prema no-opu, pa bac
 izbor akcije sada imaju tu donju granicu. Deset model testova prolazi u pinovanom
 runtimeu. Meni, alpha, prag, podaci i simulator nisu mijenjani; stvarni LOO rezultati
 još nisu izračunati. Puna tabela je u toku i nije pogođena ovom modelskom izmjenom.
+
+EXP-022 — ponovljena provjera nakon no-op korekcije: pinovani runtime **314/314, 0 skip**,
+moderni **301, 3 skip**, core **263, 34 skip**. Receipt revizija 2 čuva i prethodni krug.
+Dodatna pauza jednog radnika 179.6 s, ukupno 391.0 s. Numerički kod metoda je ponovo
+provjeren prije prvog LOO scoringa; ne tvrdi se bolji rezultat politike na osnovu testova.

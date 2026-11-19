@@ -4,11 +4,45 @@
     "local_output": ".local/b1/cli-smoke",
     "result": "PASS"
   },
-  "code_commit": "cd19d5d142bc485edf6df4bc24bc584708f7c3b8",
-  "created_utc": "2026-11-18T23:42:44.991239+00:00",
+  "code_commit": "4fcce9293ba52fc90f204b38788cc84b2097bd8c",
+  "created_utc": "2026-11-19T00:25:51.436685+00:00",
   "label": "LOCAL TECHNICAL CHECKS; NOT PHYSICAL VALIDATION OR POLICY ADVANTAGE",
+  "previous_full_verification": {
+    "code_commit": "cd19d5d142bc485edf6df4bc24bc584708f7c3b8",
+    "suites": [
+      {
+        "local_log": ".local/b1/core-final.log",
+        "log_sha256": "fc9577bd1be4adc941865507dfe17f5b69953efb4a5bde88b6c170783db89da8",
+        "name": "core-final",
+        "result": "PASS",
+        "seconds": 15.248,
+        "skipped": 34,
+        "tests_run": 261
+      },
+      {
+        "local_log": ".local/b1/modern-final.log",
+        "log_sha256": "1731a32ba9d35345ff067eedca6e69847d01b445fd008aced1728b9d360a3242",
+        "name": "modern-final",
+        "result": "PASS",
+        "seconds": 32.611,
+        "skipped": 3,
+        "tests_run": 299
+      },
+      {
+        "local_log": ".local/b1/simfire-final.log",
+        "log_sha256": "cf1222ca25d58622dbdf1695923e6861c8385016f9e98cb89a46ac939e2121cc",
+        "name": "simfire-final",
+        "result": "PASS",
+        "seconds": 151.604,
+        "skipped": 0,
+        "tests_run": 312
+      }
+    ]
+  },
   "remote_ci_run": false,
-  "schema_version": "feds-b1-local-verification/1.0",
+  "revision": 2,
+  "revision_reason": "Two new regression tests and a known-zero no-op value bound, before the first offline cohort scoring.",
+  "schema_version": "feds-b1-local-verification/1.1",
   "simfire_runtime": {
     "packages": {
       "gymnasium": "1.1.1",
@@ -36,11 +70,11 @@
     "scripts/enumerate_feds_b1.py": "6f720f5ec3f51738462ac5c79a279b8b7ca9a36d523502d63b20cf770c21a401",
     "scripts/plot_feds_b1.py": "a213cc758e8ef56b7a2ebb45ca704f91a94dc943828bae1c4b27ad5659b2b5a3",
     "scripts/sample_gridmet_episode_weather.py": "c6140fb748cba3422472dee00608564fdf54e492bef54591b172fcff3090ef40",
-    "scripts/summarize_feds_b1.py": "898207d04097aa2795500503e00f3951c0a5c40f24ffe7f05fa861928a94e489",
+    "scripts/summarize_feds_b1.py": "9b7359018887a6d10d1a95cbb9e61321cb5315d749654febb33e28ed88f53a9f",
     "src/wildfire_rl/feds_b1.py": "e2ea9af4ef7d55103cd94fb8b5f8528f9e2fec2d900f231a68cdee06541f3e02",
-    "src/wildfire_rl/feds_b1_learning.py": "77cad96d00e812d41e059a2b827f32e273ac347402b236e9a7fc18426dc8a560",
+    "src/wildfire_rl/feds_b1_learning.py": "3562ae7d15a58fac46ffca374b28cd1f9673a181c2943b0e4bdc8a8a32774606",
     "src/wildfire_rl/line_damage.py": "cab7e146e769edff04e2364c8d9874036ab154fa68f05af1c739d6b55f995ea6",
-    "tests/test_feds_b1_learning.py": "fc2cd47bd3d9c79f1118379237d9f459b534d81c1dc065aabd42d50386c354f5",
+    "tests/test_feds_b1_learning.py": "30844d08aad7af47e4230b0b792ac2ad8e560b3a2349f84c56e8b8682dad2136",
     "tests/test_feds_b1_reports.py": "250e7c103d9d77d74bfcecc76610e4244ec17df625eae414369b99b283e6c3db",
     "tests/test_feds_b1_table.py": "9bb291e598c58de9489b5ffd46d55e13ac1a95e40ce8b21cea4a691ff1155e54",
     "tests/test_line_damage.py": "ed1a3aebaa2add5b88c4d7c9aa6e6e7133842679a2e1156eacac407891f9d720",
@@ -48,34 +82,34 @@
   },
   "suites": [
     {
-      "local_log": ".local/b1/core-final.log",
-      "log_sha256": "fc9577bd1be4adc941865507dfe17f5b69953efb4a5bde88b6c170783db89da8",
-      "name": "core-final",
+      "local_log": ".local/b1/core-final-v2.log",
+      "log_sha256": "7b803c0959f3b011a7c5b64fcd2b38707c32402a5b569331f89e67d2f7015a94",
+      "name": "core-final-v2",
       "result": "PASS",
-      "seconds": 15.248,
+      "seconds": 14.532,
       "skipped": 34,
-      "tests_run": 261
+      "tests_run": 263
     },
     {
-      "local_log": ".local/b1/modern-final.log",
-      "log_sha256": "1731a32ba9d35345ff067eedca6e69847d01b445fd008aced1728b9d360a3242",
-      "name": "modern-final",
+      "local_log": ".local/b1/modern-final-v2.log",
+      "log_sha256": "5b60cf2654770a556a30273d5c7a95fd50d934b8c9101353074f9b47f82b5af1",
+      "name": "modern-final-v2",
       "result": "PASS",
-      "seconds": 32.611,
+      "seconds": 33.653,
       "skipped": 3,
-      "tests_run": 299
+      "tests_run": 301
     },
     {
-      "local_log": ".local/b1/simfire-final.log",
-      "log_sha256": "cf1222ca25d58622dbdf1695923e6861c8385016f9e98cb89a46ac939e2121cc",
-      "name": "simfire-final",
+      "local_log": ".local/b1/simfire-final-v2.log",
+      "log_sha256": "e6dc9c5fa97b5dc846a1f7dc87ed916dbedd151d02c1fef9747d6a8fbcfe47ed",
+      "name": "simfire-final-v2",
       "result": "PASS",
-      "seconds": 151.604,
+      "seconds": 120.712,
       "skipped": 0,
-      "tests_run": 312
+      "tests_run": 314
     }
   ],
   "test_2024_access": false,
   "validation_simulations": 0,
-  "worker_pause_for_tests_seconds": 211.4053244169918
+  "worker_pause_for_tests_seconds": 391.00724966700363
 }

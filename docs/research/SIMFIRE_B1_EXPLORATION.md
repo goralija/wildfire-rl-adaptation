@@ -4,6 +4,7 @@ title: SimFire B=1 — obračun linije, iscrpna tabela i offline učenje
 sources:
   - resource: /configs/frozen/feds-b1-exploration-v1.json
   - resource: /src/wildfire_rl/line_damage.py
+  - resource: /src/wildfire_rl/feds_b1_learning.py
   - resource: /scripts/enumerate_feds_b1.py
   - resource: /scripts/analyze_feds_b1.py
 ---
@@ -77,10 +78,17 @@ gubitka zbog još lošije ekstrapolirane vrijednosti čekanja; ne garantuje stva
 Oracle na izostavljenom požaru vidi sve buduće
 ishode i služi samo kao gornja granica, nikad kao dozvoljena politika.
 
+Model uči simulirani dobitak konkretne odluke prema istom no-op slučaju, ne historijsku
+akciju vatrogasaca. U raw obračunu oduzimanje tog konstantnog no-op ishoda ne mijenja
+najbolju odluku za dati požar; uklanja velik dio razlike u veličini požara iz cilja fita.
+Charged obračun je zaseban cilj i zato ima zasebne fitove.
+
 Oba obračuna imaju zaseban fit. Prikazuju se svi kandidati, ne samo najbolji. Opisni
 95% intervali su paired percentile bootstrap fiksnih OOF razlika (10.000 uzoraka,
 seed 0), bez ponovnog fita modela. Foldovi dijele fit požare, pa ovo nije nezavisan
 potvrdni interval. Izbor metode na istim LOO rezultatima je istraživačka selekcija.
+Rezultat bez najveće apsolutne OOF razlike samo izbacuje jednu već ocijenjenu razliku;
+ne refituje modele bez tog požara i ne uklanja njegov uticaj iz drugih fit foldova.
 
 Prag za nastavak iz ranijeg pregleda: najmanje 30 ha i 25% oracle jaza iznad
 `advancing_front`. Neuspjeh ovog konačnog menija ne dokazuje da dobra odluka uopće
@@ -127,14 +135,14 @@ ne sadrži same velike tabele, raw rastere ili environment.
 čuva verzije, source hashove i hashove logova. Pinovani SimFire 2.0.1 je na izvornom
 commitu `04905b19fe8c10dc08d64faddd00303e0561bb66`, Python 3.9.25 / NumPy 1.26.4.
 
-- Pinovani runtime: **312 testova, 0 preskočenih, PASS**.
-- Moderni venv: **299 testova, 3 preskočena, PASS** (nedostupne dodatne zavisnosti).
-- Osnovni Python: **261 test, 34 preskočena, PASS** (opcionalni paketi).
+- Pinovani runtime: **314 testova, 0 preskočenih, PASS**.
+- Moderni venv: **301 test, 3 preskočena, PASS** (nedostupne dodatne zavisnosti).
+- Osnovni Python: **263 testa, 34 preskočena, PASS** (opcionalni paketi).
 - Knowledge unit testovi: **15/15 PASS**; strogi checker: **83 Markdown fajla PASS**.
 - Synthetic CLI smoke: PASS, samo tehnička provjera pipelinea.
 
-Dugi runovi koriste četiri nice-19 radnika. Tokom tri test suite-a jedan radnik je
-pauziran 211.4 s i potom nastavljen; vrijeme slučaja uključuje pauzu. Raw podaci i
+Dugi runovi koriste četiri nice-19 radnika. Tokom dva kruga testiranja jedan radnik je
+pauziran ukupno 391.0 s i potom nastavljen; vrijeme slučaja uključuje pauzu. Raw podaci i
 tuđi worktree nisu mijenjani. GitHub CI i nezavisna revizija ove grane nisu izvršeni.
 Nijedna od ovih provjera ne potvrđuje fizičku tačnost ili prednost politike.
 

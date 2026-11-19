@@ -77,7 +77,7 @@ def summarize(table_path, input_root):
         "adr032_actual_minus_reference_ha": differences,
         "edge_contact_outcomes": sum(r["edge_contact"] for c in cases for r in c["outcomes"]),
         "outcomes_burning_more_than_noop": sum(r["raw_saved_cells"] < 0 for c in cases for r in c["outcomes"]),
-        "limits": ["The oracle sees all future rollout outcomes and is an unattainable upper bound for a policy without that information.",
+        "limits": ["The oracle sees all future rollout outcomes: a privileged hindsight upper bound, not a deployable policy. Whether available observations suffice to match it is unknown.",
                    "Aggregate agreement does not establish per-fire equality with the unavailable ADR-032 full report.",
                    "Line charge is an exploratory alternative; the locked reward and ADR-032 numbers are unchanged."],
     }

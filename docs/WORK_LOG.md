@@ -4,6 +4,12 @@ title: Work log
 ---
 # Work log
 
+2026-11-19 — Prije prve offline ocjene dodata je poznata donja granica vrijednosti
+čekanja (0 prema no-opu), nakon dva prvo padajuća sintetička regresijska testa.
+Puna ponovljena provjera: 314/314 pinovani runtime, moderni 301 (3 skip), core 263
+(34 skip). Receipt revizija 2 zadržava i prvi krug. Simulator i native tabela nisu
+mijenjani; preostali TRAIN slučajevi još računaju. Nema promjene menija ili praga.
+
 2026-11-19 — Završena su tri puna lokalna test suite-a i knowledge provjere: 312/312 u
 pinovanom SimFire okruženju (0 skip), moderni 299 (3 skip), core 261 (34 skip),
 knowledge 15/15. Receipt `reports/real-fire-data/feds-b1-verification-v1.json` sadrži
