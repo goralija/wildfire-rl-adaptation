@@ -1742,3 +1742,38 @@ Dokazi: [završni izvještaj](../research/SIMFIRE_OBSERVATION_REPAIR.md),
 [heuristike](../../reports/real-fire-data/feds-observation-repair-heuristics-v2.json),
 [native provjera](../../reports/real-fire-data/feds-observation-repair-native-v2.json),
 [verification](../../reports/real-fire-data/feds-observation-repair-verification-v2.json).
+
+
+## ADR-039 — CA nastavak iz popravljene SimFire grane: tehnički pilot, 2026-11-21
+
+**Nalog i obim.** Korisnik odobrava prelazak na CA i novu granu iz postojeće.
+`codex/ca-controlled-pilot` polazi iz `664d890d`. To ne znači da su naučene SimFire
+politike nadmašile heuristike ili da je SimFire iscrpljen. TASK-035 je odobren tehnički
+pilot; duži trening i stvarni holdout nisu dio prvog koraka. Plan prethodi mjerenjima.
+
+**Pretpostavke i cilj.** Postojeći ispravljeni CA ostaje osnova. Provjeriti isti scenario,
+resurse, informacije, štetu i sigurnost pa izmjeriti fiksne heuristike na 16 proceduralnih
+development požara i tri ugniježđena rostera. Vlastiti CA nije Cell2Fire, fizička
+validacija ili dokaz RL prednosti. Raniji ADR-028 rezultati ostaju poništeni.
+
+**Informacije.** Opt-in `ca-native-current-v2` daje native kategorijsku mapu i pune položaje
+jedinica svima. Heuristike dobijaju samo opažanje i masku kroz adapter, nikad živi env,
+buduće vrijeme ili no-op otisak. Trenutna satna forcing vrijednost eksplicitno je savršeno
+poznata prije tog sata. To je pretpostavka, ne opservirani meteorološki proizvod.
+Legacy env ostaje nepromijenjen. CA urbano 91 je gorivo težine 50: SimFire nonfuel
+masku ne prenositi na njega. Stari checkpointovi ne odgovaraju novoj verziji.
+
+**Plan.** [Zamrznuti protokol](../../configs/frozen/ca-controlled-pilot-v2.json) navodi
+konkretne disjunktne train/development/test liste, 12h odluka +12h tail, B2/B3/B4 rostere,
+no-op/random i tri heuristike. Zbog širokog ranijeg nasumičnog trening raspona ne tvrditi
+dokazanu historijsku neizloženost. Samo development se generiše/skorira: prvo dva pa 16
+slučajeva ako tehnički ugovor prođe. Iste slučajne struje, pejzaž i početak po politikama
+i rosterima. CA jedinica nije SimFire crew-shift; hektari ne rangiraju dva simulatora.
+
+**Prihvat i stop.** Testovi kretanja, gradnje/progresa, maski/no-opa, štete/chargea,
+gubitka jedinice i zajedničke slučajnosti prethode novom ponašanju. Tehnički pad zaustavlja
+pilot. Glavna metrika je spašeni udio, sigurnost odvojeno. Intervali su opisni, resamplira
+se cijeli požar sa svim rosterima. Nema policy prihvata iz malog pilota. Najviše četiri
+procesa nice19, najavljeno nekoliko minuta. Bez plaćenog computea, starog modela,
+proceduralnog testa, stvarnog VALIDATION/TEST, dugog treninga ili mergea. Kratki BC/PPO
+slijedi kroz zaseban unaprijed zapisan protokol i v2 provenance adapter.

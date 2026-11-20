@@ -1,0 +1,282 @@
+{
+  "schema_version": "ca-controlled-pilot/2.0",
+  "date": "2026-11-21",
+  "task": "TASK-035",
+  "decision": "ADR-039",
+  "base_commit": "664d890d2f3404a11ff69b31bce602e286867717",
+  "purpose": "Technical and heuristic development pilot; no physical validation or learned-policy acceptance",
+  "observation_version": "ca-native-current-v2",
+  "weather_contract": "perfect-current-forcing: current hourly forcing visible before that hour; no future series",
+  "information_contract": "Every policy consumes only identical native categorical observation and legal mask, never live environment",
+  "native_channels": [
+    "burning",
+    "ever_burned",
+    "line",
+    "urban",
+    "water",
+    "fuel_1",
+    "fuel_2",
+    "fuel_3",
+    "fuel_4",
+    "fuel_5",
+    "fuel_6",
+    "fuel_7",
+    "fuel_8",
+    "fuel_9",
+    "fuel_10",
+    "fuel_11",
+    "fuel_12",
+    "fuel_13",
+    "nonburnable",
+    "elevation_scaled",
+    "slope_scaled"
+  ],
+  "unit_state": [
+    "present",
+    "active",
+    "lost",
+    "dozer",
+    "arrival_minute",
+    "row",
+    "col",
+    "progress_m",
+    "previous_action"
+  ],
+  "rosters": {
+    "B2": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        60
+      ]
+    ],
+    "B3": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        60
+      ],
+      [
+        0,
+        120
+      ]
+    ],
+    "B4": [
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        60
+      ],
+      [
+        0,
+        120
+      ],
+      [
+        0,
+        180
+      ]
+    ]
+  },
+  "budget_note": "One CA budget unit is one available unit, not a SimFire crew shift",
+  "generator": {
+    "shape": [
+      128,
+      128
+    ],
+    "horizons": [
+      12
+    ],
+    "unit_counts": [
+      4
+    ],
+    "min_noop_growth_cells": 30,
+    "max_attempts": 16,
+    "other_fields": "Curriculum defaults pinned by source hash"
+  },
+  "tail_hours": 12,
+  "cell_size_m": 180,
+  "decision_minutes": 60,
+  "substep_minutes": 2,
+  "case_seeds": {
+    "train": [
+      31000000,
+      31000001,
+      31000002,
+      31000003,
+      31000004,
+      31000005,
+      31000006,
+      31000007,
+      31000008,
+      31000009,
+      31000010,
+      31000011,
+      31000012,
+      31000013,
+      31000014,
+      31000015,
+      31000016,
+      31000017,
+      31000018,
+      31000019,
+      31000020,
+      31000021,
+      31000022,
+      31000023,
+      31000024,
+      31000025,
+      31000026,
+      31000027,
+      31000028,
+      31000029,
+      31000030,
+      31000031
+    ],
+    "development": [
+      21110000,
+      21110001,
+      21110002,
+      21110003,
+      21110004,
+      21110005,
+      21110006,
+      21110007,
+      21110008,
+      21110009,
+      21110010,
+      21110011,
+      21110012,
+      21110013,
+      21110014,
+      21110015
+    ],
+    "test": [
+      41110000,
+      41110001,
+      41110002,
+      41110003,
+      41110004,
+      41110005,
+      41110006,
+      41110007,
+      41110008,
+      41110009,
+      41110010,
+      41110011,
+      41110012,
+      41110013,
+      41110014,
+      41110015,
+      41110016,
+      41110017,
+      41110018,
+      41110019,
+      41110020,
+      41110021,
+      41110022,
+      41110023,
+      41110024,
+      41110025,
+      41110026,
+      41110027,
+      41110028,
+      41110029,
+      41110030,
+      41110031,
+      41110032,
+      41110033,
+      41110034,
+      41110035,
+      41110036,
+      41110037,
+      41110038,
+      41110039,
+      41110040,
+      41110041,
+      41110042,
+      41110043,
+      41110044,
+      41110045,
+      41110046,
+      41110047,
+      41110048,
+      41110049,
+      41110050,
+      41110051,
+      41110052,
+      41110053,
+      41110054,
+      41110055,
+      41110056,
+      41110057,
+      41110058,
+      41110059,
+      41110060,
+      41110061,
+      41110062,
+      41110063
+    ]
+  },
+  "exposure_note": "New explicit namespaces; no tracked prior match. Previous random training range is wide, so historical non-exposure is not proven. Development only.",
+  "policies": [
+    "noop",
+    "random",
+    "direct_flank",
+    "downwind_indirect",
+    "protect_urban"
+  ],
+  "random_policy_seed": "base seed + 771, shared across rosters",
+  "metrics": {
+    "primary": "saved_fraction with line-charged weighted damage; urban weight 50",
+    "secondary": [
+      "saved_ha_unweighted_line_charged",
+      "units_lost",
+      "close_calls",
+      "line_area_ha",
+      "edge_contact"
+    ],
+    "uncertainty": "Descriptive paired bootstrap, whole case cluster with all rosters; 10000 draws seed 0; no acceptance"
+  },
+  "checks": [
+    "observation-space/finiteness",
+    "same scenario/no-op hashes",
+    "legal actions/no-op",
+    "monotone damage",
+    "line charged once",
+    "return equals saved fraction minus safety penalties",
+    "unit loss alone does not terminate",
+    "no future forcing/no-op data for policies"
+  ],
+  "execution": {
+    "pilot_development_cases": 2,
+    "full_development_cases": 16,
+    "max_workers": 4,
+    "nice": 19,
+    "expected_minutes": "2-10; refine after pilot"
+  },
+  "stop": [
+    "technical invariant failure",
+    "information mismatch",
+    "no intervention effect in deterministic fixture",
+    "unregistered source/plan change on resume"
+  ],
+  "closed": [
+    "real VALIDATION",
+    "TEST 2024",
+    "procedural test generation/scoring",
+    "old checkpoints",
+    "long training",
+    "paid compute",
+    "merge"
+  ],
+  "next": "Fix strong reference on development and preregister short BC/PPO with v2 provenance; legacy training CLI is not this contract."
+}
