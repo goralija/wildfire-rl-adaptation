@@ -10,6 +10,7 @@ import torch
 from torch import nn
 from sb3_contrib import MaskablePPO
 from stable_baselines3.common.torch_layers import BaseFeaturesExtractor
+from stable_baselines3.common.vec_env import DummyVecEnv
 
 from .ca_learning import TOKEN_DIM, GLOBAL_DIM, encoded_space
 
@@ -44,7 +45,8 @@ def create_model(env=None, seed=0, overrides=None):
                   gamma=.99,gae_lambda=.95,clip_range=.1,ent_coef=.001,
                   vf_coef=.5,max_grad_norm=.5,target_kl=.03)
     kwargs.update(overrides or {})
-    return MaskablePPO('MultiInputPolicy', env if env is not None else ShapeOnlyEnv(),
+    default_env = DummyVecEnv([ShapeOnlyEnv,ShapeOnlyEnv]) if env is None else env
+    return MaskablePPO('MultiInputPolicy', default_env,
                        policy_kwargs=dict(features_extractor_class=UnitExtractor,
                                           net_arch=dict(pi=[64],vf=[64])),
                        seed=seed,device='cpu',verbose=0,**kwargs)

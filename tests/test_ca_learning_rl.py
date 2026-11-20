@@ -16,6 +16,20 @@ from wildfire_rl.ca_learning_rl import create_model, save_policy_arrays, load_po
 
 
 class SafeLearningSmokeTest(unittest.TestCase):
+    def test_default_bc_model_has_the_registered_two_rollout_slots(self):
+        torch.set_num_threads(1)
+        from stable_baselines3.common.vec_env import DummyVecEnv
+        root = Path(__file__).resolve().parents[1]
+        plan = json.loads((root/'configs/frozen/ca-controlled-pilot-v2.json').read_text())
+        model = create_model(overrides={'n_steps':4,'batch_size':4,'n_epochs':1})
+        self.assertEqual(model.n_envs,2)
+        vec = DummyVecEnv([lambda:CATrainingEnv(plan,rank=0,stride=2),
+                           lambda:CATrainingEnv(plan,rank=1,stride=2)])
+        model.set_env(vec)
+        model.learn(8)
+        self.assertEqual(model.num_timesteps,8)
+        vec.close()
+
     def test_positive_saved_damage_cannot_hide_worse_safety_in_one_seed(self):
         import sys
         sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
