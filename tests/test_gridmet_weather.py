@@ -231,7 +231,7 @@ class GridmetWeatherTests(unittest.TestCase):
         longitudes = np.array([-120.0, -119.96])
         latitudes = np.array([45.0, 44.96])
         with tempfile.TemporaryDirectory() as directory:
-            # The sampler records an archive manifest for every approved year.
+            # Provide approved archives; the sampler reports only years it actually opens.
             for year in (2018, 2019, 2023):
                 for abbreviation, (name, units) in names.items():
                     self._write_gridmet_archive(

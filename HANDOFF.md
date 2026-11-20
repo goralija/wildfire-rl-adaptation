@@ -4,9 +4,45 @@ title: Handoff za nastavak projekta
 ---
 # Handoff za nastavak projekta
 
-Stanje **2026-11-12**. Ovaj dokument je ulaz za kolegu ili agenta koji preuzima projekat bez
+Stanje **2026-11-20**. Ovaj dokument je ulaz za kolegu ili agenta koji preuzima projekat bez
 chat historije. Repozitorij je kanonski izvor; artifact za tim (link ispod) je sažetak za
 čitanje.
+
+## Korisnikov nastavak — popravak opažanja prije CA (2026-11-20)
+
+Završeni rad je pushan i otvoren kao [PR #20](https://github.com/goralija/wildfire-rl-adaptation/pull/20)
+prema `main`, za pregled kolega. PR ostaje otvoren. Korisnik je odobrio još jedan
+SimFire pokušaj: TASK-036 sada ima prioritet pred CA pilotom TASK-035.
+Nastavak ide iz ove grane u `codex/simfire-observation-repair`, u izdvojenom worktreeu;
+novi PR nije potreban po posljednjoj korisnikovoj poruci. Precizni plan ide prije
+novih mjerenja. VALIDATION/TEST i novi CA trening ostaju zatvoreni.
+
+## Najnovije — TASK-034 završen (ADR-036)
+
+[Završni SimFire audit](docs/research/SIMFIRE_OBSERVATION_AUDIT.md) je ulaz za nastavak:
+98 input/observation provjera PASS, četiri nested metode bez prolaza praga, potvrđeni
+pooling/fuel aliasing, startup race popravljen i native numerička osjetljivost izmjerena.
+327/327 pinovanih testova prolazi. Native probe su dva namjerno odabrana slučaja;
+nije dokazana fizička validacija niti iscrpljenost svih SimFire mogućnosti.
+
+Nova grana `codex/simfire-observation-audit` iz `58feac72` je lokalna, bez novog push-a
+ili mergea. Prethodna `codex/simfire-policy-iterations` je na originu. Nema aktivnog runa.
+Preporučen je TASK-035: [CA ugovor i tehnički pilot](configs/drafts/ca-controlled-pilot-v1.json),
+bez automatskog treninga; opcionalni TASK-036 opisuje SimFire v2. TEST i novo VALIDATION
+korištenje ostaju zatvoreni. Brojevi ADR-028 ne vraćaju se u upotrebu. Detalji su u
+NEXT_SESSION/BACKLOG; veliki artefakti su u lokalnom paketu s manifestom.
+
+## Prethodni ciklus — SimFire B=1 završen (ADR-034)
+
+Korisnikov SimFire nastavak TASK-028–030 je završen na lokalnoj grani
+`codex/simfire-policy-iterations`. [Izvještaj](docs/research/SIMFIRE_B1_EXPLORATION.md)
+čuva oba obračuna, provjerenu tabelu 98×33 i osam LOO metoda. Nijedna ne prelazi
+unaprijed zadani prag. Charged ridge-10 daje +6,98 ha prema pravilu, ali −13,63 ha
+bez najveće OOF razlike; nema potvrđene prednosti. Oracle jaz ostaje velik.
+[Manifest lokalnog paketa](reports/real-fire-data/feds-b1-artifact-manifest-v1.json)
+veže tačan weather, pune ishode, TRAIN ulaze i source snapshot. Nema aktivnog runa.
+TASK-034 je zatim završen; njegov nalaz i predloženi TASK-035 su u najnovijoj sekciji iznad.
+VALIDATION/TEST i CA faza 3 ostaju zatvoreni. Nema novog PPO treninga. Grana je naknadno pushana na origin po korisnikovom nalogu; PR i merge nisu urađeni.
 
 ## Gdje je projekat (jedan pasus)
 
@@ -23,9 +59,10 @@ prije bilo kakvog novog treninga: [sažetak i plan](docs/research/review-2026-11
 
 ## Grane i pull requestovi
 
-Faze 1 i 2 su u `main`-u: PR #18 je spojen 10. 11., a PR #17 11. 11. (merge commit `a1c3dfc`).
-Otvoren je samo PR #19 (`docs/research-review` → `main`): pregled 2026-11-11 i ovaj HANDOFF.
-Dok nije spojen, najnovije stanje dokumentacije je na toj grani; kod je isti kao u `main`-u.
+Faze 1 i 2 i pregled PR #19 su u `main`-u (`f96f744f`). Prethodna grana
+`codex/simfire-policy-iterations` je na originu od 2026-11-19. Novi TASK-034 je lokalno
+na `codex/simfire-observation-audit`, u istoimenom `.worktrees/` folderu. Nijedna nova
+grana nije spojena u main; glavni klon i raniji artefakti su sačuvani.
 
 Provjera prije rada: `git fetch origin` pa `gh pr list --state all --limit 5`. Lokalni `main`
 na Harunovom računaru može zaostajati za `origin/main`; nove grane praviti iz `origin/main`.
@@ -36,7 +73,7 @@ na Harunovom računaru može zaostajati za `origin/main`; nove grane praviti iz 
 2. [STATUS](docs/STATUS.md) i [NEXT_SESSION](docs/NEXT_SESSION.md): najnovije sekcije su na vrhu.
 3. [Pregled 2026-11-11](docs/research/review-2026-11-11/SUMMARY.md): odgovori na pet pitanja,
    odluke koje čekaju, redoslijed TASK-028–033.
-4. ADR-029 do ADR-032 s dopunama u [odlukama](docs/specs/DECISION_RECORDS.md).
+4. ADR-029 do ADR-034 s dopunama u [odlukama](docs/specs/DECISION_RECORDS.md).
 5. [Šta politika smije raditi](docs/research/review-2026-11-11/INTERVENTIONS.md): tačan opis
    okruženja, akcija i heuristika (dokumentacija na nekoliko mjesta zaostaje za kodom).
 6. Za pokretanje: [HANDOFF_STAGE_1_2](docs/HANDOFF_STAGE_1_2.md) §4–§6 samo kao referenca
@@ -44,13 +81,11 @@ na Harunovom računaru može zaostajati za `origin/main`; nove grane praviti iz 
 
 ## Šta čeka odluku (Harun)
 
-- Merge PR-a #19.
 - Arhiviranje lokalnih rezultata faza 1 i 2 (vidi „Šta postoji samo lokalno“ ispod), npr. kao
   privatni GitHub release kakav je `synthetic-policy-v1`.
 - Kako se računa šteta kad linija zauzme ćelije koje bi izgorjele (sada se računaju kao spašene).
-- Da li pokrenuti TASK-029/030 (iscrpna B=1 tablica i offline ocjena, samo TRAIN).
-- Koji je simulator glavni za poster; da li sintetički CA smije vidjeti vrijeme tekućeg
-  koraka; faza 3 (trening CA). Detalji: [NEXT_SESSION](docs/NEXT_SESSION.md), [BACKLOG](docs/BACKLOG.md).
+- TASK-028–030 i TASK-034 su završeni; TASK-035 CA pilot je novi draft, TASK-036 SimFire v2 je opcionalan. Novi budžeti, nova VALIDATION upotreba i novi trening traže unaprijed zapisan nastavak.
+- Korisnik je odabrao SimFire nastavak. CA observation i faza 3 ostaju odgođeni. Detalji: [NEXT_SESSION](docs/NEXT_SESSION.md), [BACKLOG](docs/BACKLOG.md).
 
 ## Pravila koja važe za svakog ko nastavlja
 
@@ -84,8 +119,8 @@ gitu. Rezultati faza 1 i 2 se ne mogu obnoviti bez ponovnog pokretanja (vidi isp
    fajl čiji se hash ne slaže sa zamrznutim zapisom; na TRAIN-u se hash samo bilježi u
    izvještaj. Za poređenje s fazama 1 i 2 treba kopija tog fajla od Haruna; novi hash traži
    novi ADR prije korištenja VALIDATION-a. Manifest epizoda je u gitu (sha256 `013be9a1…`).
-4. Provjera: `$P -m unittest discover -s tests` (282 testa; u čistom checkoutu bez `.local/` dva
-   testa lokalnih podataka se preskaču),
+4. Provjera: `$P -m unittest discover -s tests` (314 testova u ovom lokalnom pinovanom
+   runtimeu; u čistom checkoutu bez `.local/` testovi lokalnih podataka se preskaču),
    `python3 scripts/validate_knowledge.py --strict`, `git diff --check`.
 
 **Šta postoji samo lokalno, na Harunovom računaru** (lokacije za orijentaciju, nisu preduslov

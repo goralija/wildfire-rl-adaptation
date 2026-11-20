@@ -1422,3 +1422,223 @@ the review, without touching the analysis, the lock or any result:
   ties the analysis to the VALIDATION report by value, lists policies that never place a
   line and names the figure's commit separately. The record was regenerated (schema 1.1).
 - Left as is: no test pins the bootstrap percentile level or the figure title.
+
+## ADR-033 — nastavak SimFire istraživanja kroz TASK-028–030, accepted 2026-11-18
+
+Korisnik je izričito odabrao nastavak SimFire pravca na novoj grani, kroz dokumentovane
+iteracije, uz jasno razdvajanje riješenog i otvorenog. Ovo odobrava TASK-028–030 iz
+pregleda nakon faze 2; CA faza 3 ostaje odvojena i ne pokreće se. Rad je na grani
+`codex/simfire-policy-iterations`, u izdvojenom worktreeu. Nema remote objave ili mergea.
+Korisnikov nalog odobrava smjer i rad; precizni plan i zamjena nedostupne reference su
+operativni izbor agenta u tom obimu, ne zasebna ljudska potvrda metodologije.
+
+**Provjerljivi cilj.** Izgraditi oba obračuna štete, iscrpnu B=1 TRAIN tablicu i provjeriti
+može li se bolja odluka predvidjeti iz dozvoljenog opažanja izvan požara korištenih za fit.
+Plan prije novih simulacija: `configs/frozen/feds-b1-exploration-v1.json`.
+
+**Granice.** 98 TRAIN požara, postojeći WAF 0.10 / ROS 1.0, korak 5 min, horizont 48 h,
+`last_write`, `front_edge`, isto opažanje i maska za sve politike. TASK-028 dodaje pomoćni
+obračun sa i bez naplate linije; ne mijenja zaključanu nagradu, checkpointove ili ADR-032.
+Naplata cijele ćelije je konzervativna modelna konvencija, ne izmjerena stvarna širina
+izgrađene linije ili dokaz fizički tačnijeg obračuna. Zato se prijavljuju oba načina.
+VALIDATION nije ponovo dostupan; TEST 2024 ostaje zatvoren. Nema novog PPO treninga u ovoj
+fazi. Najviše 4 procesa uz `nice -n 19`. Novi eksperimenti i promjene protokola prvo se
+bilježe, prije rezultata; ovaj zapis ne dozvoljava proizvoljno korištenje holdout skupova.
+
+**Lokalna razlika i provjera.** Postoje svih 98 TRAIN mapa i godišnje gridMET arhive, ali
+lokalni vremenski fajl je stari, neispravljeni. Regeneriše se samo TRAIN, s postojećim
+ispravljenim samplerom i novim hashom. Izvorni ADR-032 puni TRAIN izvještaj nije dostupan
+na ovom računaru. Pilot od prvih 20 sortiranih TRAIN ID-jeva zato se poredi s nezavisno
+izvršenim svježim scripted benchmarkom na istim ulazima, uz ponovljeni no-op. Na punoj
+kohorti porede se i agregati s commitovanim ADR-032 sažetkom. Ovo je eksplicitna zamjena
+lokalnog reference-checka iz TASK-029, ne tvrdnja da je originalni izvještaj reprodukovan.
+
+**Tumačenje.** LOO po cijelom požaru; preprocessing i fit bez izostavljenog požara. Izbor
+među metodama na istom TRAIN skupu ostaje eksploratoran. Prag ≥30 ha i ≥25% oracle jaza
+služi odluci o nastavku. Neuspjeh konačnog skupa metoda ne dokazuje da optimalna odluka
+uopće nije predvidiva. Fizička validacija i potvrđena RL prednost ostaju otvorene.
+
+**Implementacija offline menija, prije analize rezultata.** Trenutno opažanje daje 28
+determinističkih obilježja: opaženo vrijeme, korak, udjeli scar/front/line/fuel, centroidi
+scar/fronta, njihov pomak, gorivo uz front i po smjerovima te budžet. Nema elevacije,
+identiteta požara, budućeg vremena ili budućih opažanja u odluci. Fiksni niz bira se na
+fit požarima. Ridge fitted-Q (alpha 1/10/100) i tabelarni fitted-Q računaju unazad kroz
+četiri odluke: linija dobija konačni simulirani dobitak, čekanje vrijednost sljedećeg
+stanja procijenjenu sljedećim modelom. Tabelarni ključ: sektor opaženog vjetra, sektor
+pomaka fronta, četiri fiksna razreda početne/trenutne opožarene površine. Neviđeni ključ
+koristi fit prosjek. BC bira većinski potez pet najbližih fit požara u istom koraku;
+učitelj je najbolji preostali niz na fit požaru. Sva skaliranja fituju se unutar folda.
+Svi kandidati i oba obračuna se prijavljuju; opisni paired bootstrap ima 10.000 uzoraka,
+seed 0 i percentile 2.5/97.5. Ne refituje modele, pa nije nezavisan potvrdni interval.
+
+**Provjera vrijednosti no-op opcije, 2026-11-19, prije prve offline analize.** Dva
+sintetička regresijska testa pokazuju da linearni aproksimator može čekanju dati
+vrijednost −10, potezu −1 i zato izabrati predviđeni gubitak. U jedinicama dobitka prema
+no-opu politika koja nikad ne interveniše ima poznatu vrijednost 0, bez pristupa bilo
+kojem budućem ishodu. U Bellman backupu i izboru poteza vrijednost čekanja zato ima
+donju granicu 0. Pozitivna procjena buduće prilike ostaje. To je operativno pojašnjenje
+fitted-Q implementacije, bez promjene menija, alpha vrijednosti, praga, simulatora ili
+metrike. Nije zasnovano na performansama stvarnih LOO foldova: nijedan još nije ocijenjen.
+
+## ADR-034 — SimFire B=1 ciklus završen, nijedan kandidat ne prelazi prag, recorded 2026-11-19
+
+**Osnova.** Odobreni TRAIN-only nastavak iz ADR-033, bez naknadne promjene plana,
+menija ili praga. Ovo je zapis rezultata i operativnog stop-uslova, ne nova ljudska
+potvrda metode, zvanične metrike ili fizičke validacije. Rad je na lokalnoj grani
+`codex/simfire-policy-iterations`; nema push-a ili mergea.
+
+**TASK-028.** Testiran pomoćni obračun: unija nove agent štete i ćelija linije unutar
+novog no-op otiska, bez dvostrukog brojanja i početnog scar-a. `advancing_front`
+prelazi sa 112,24 na 101,04 spašenih ha u prosjeku. Naplata cijele 180m ćelije ostaje
+konzervativna modelna konvencija; zaključana env nagrada i ADR-032 nisu mijenjani.
+
+**TASK-029.** Svih 98 TRAIN požara ×33 niza =3.234 ishoda. Sa ponovljenim no-opom i
+četiri nezavisne reference po požaru: 3.724 epizode. Pilot 20 traje 3.82 min; puna
+komanda s reuseom pilota 93.21 min, uključujući 391.0 s pauze jednog radnika za testove.
+Najviše četiri nice-19 radnika. Sve reference odgovaraju po cijeloj burn maski; svi
+mask obračuni i input SHA-256 ponovo provjereni. Raw no-op i sva tri heuristička
+prosjeka odgovaraju ADR-032 do <3×10⁻¹⁴ ha. Originalni puni per-fire report nije
+pronađen, pa se ne tvrdi jednakost pojedinačnih slučajeva tom nedostupnom izvještaju.
+Nijedan od 3.234 ishoda ne dodiruje rub. U 141 ishodu na 53 požara raw šteta je veća
+od no-op-a; to nije nalaz o stvarnom učinku gašenja.
+
+**TASK-030.** Osam metoda, LOO po cijelom požaru, zasebni raw/charged fitovi. Raw
+`advancing_front` štedi 112,24 ha, oracle 546,44 ha (jaz 434,19); charged 101,04 i
+529,84 ha (jaz 428,80). Oracle koristi buduće ishode, pa nije dozvoljena politika.
+Prag ≥30 ha i ≥25% jaza znači ≥108,55/107,20 dodatnih ha. **Nijedna metoda ne prolazi.**
+Najbolji raw naučeni kandidat, tabelarni Q: −3,27 ha prema pravilu. Najbolji charged
+kandidat, ridge alpha 10: +6,98 ha, 1,63% jaza, opisni 95% interval [−69,70; +92,04].
+Bolji/lošiji/isti na 28/31/39 požara. Bez najveće apsolutne fiksne OOF razlike:
+−13,63 ha (bez refita). Bootstrap ne refituje modele, foldovi dijele fit podatke,
+a izbor najbolje metode iz istih LOO rezultata je eksploratoran.
+
+**Zaključak i stop.** Postoji prostor za bolji izbor linije u ovom simulatoru, ali
+ovaj konačni meni ga nije prenio na izostavljeni požar. To ne dokazuje nemogućnost
+učenja iz opažanja, niti fizičku tačnost oracle dobitka. Po stop-uslovu ADR-033 nisu
+pokretani novi PPO, dodatni budžeti ili holdout. Predložen je TASK-034: prvo novi mali
+TRAIN protokol za dijagnozu prostornog signala u istom opažanju i stabilnosti izbora,
+prije nove optimizacije. Nije pokrenut. Zvanični obračun, novi kanali, B=2/B=4 i nova
+VALIDATION upotreba ostaju zasebne odluke. TEST 2024 je zatvoren; CA faza 3 nije rađena.
+
+**Tehnički dokaz.** Pinovani runtime 314/314 (0 skip), moderni 301 (3 skip), core 263
+(34 skip), knowledge 15/15, CLI i strict checker PASS. Sve 1.568 OOF putanje dodatno
+provjerene prema legalnim sekvencama i ishodima. Ovo nije potvrda naučne prednosti.
+Lokalni paket 24.397.671 B sadrži ulaze, tačno vrijeme, punu tabelu, izvještaje i source
+snapshot; ponovo pročitani svi hashovi. Nije uploadovan i nema checkpointova.
+
+Dokazi: [detaljan izvještaj](../research/SIMFIRE_B1_EXPLORATION.md),
+[provjera tabele](../../reports/real-fire-data/feds-b1-table-check-v1.json),
+[svih osam metoda](../../reports/real-fire-data/feds-b1-offline-v1.json),
+[tehnički receipt](../../reports/real-fire-data/feds-b1-verification-v1.json),
+[manifest lokalnog paketa](../../reports/real-fire-data/feds-b1-artifact-manifest-v1.json),
+EXP-022 u [experiment logu](../research/EXPERIMENT_LOG.md).
+
+## ADR-035 — TASK-034 i pregled opravdanosti SimFire nastavka, accepted scope 2026-11-20
+
+Korisnik je odobrio narednu SimFire iteraciju i tražio da eventualni prelazak na CA bude
+obrazložen provjerama mogućih grešaka. Rad je na `codex/simfire-observation-audit`, iz
+`58feac72`, u izdvojenom worktreeu. Ovo odobrava lokalni TRAIN-only rad, ne automatski
+CA trening, VALIDATION/TEST, merge ili novu remote objavu.
+
+**Pretpostavke i cilj.** ADR-034 tabela je tačna pod zapisanim simulatorom. Provjeriti
+ulaze/opažanje, poznate numeričke osjetljivosti i da li prostorni prikaz iste opservacije
+pomaže izboru linije izvan fit požara. Ne može se dokazati odsustvo svih mogućih grešaka;
+izvještaj mora razdvojiti provjerene greške, testirane invariants, modelna ograničenja i
+neispitane mogućnosti. Sintetički kontrolni primjeri provjeravaju implementaciju, ne
+fizičku validaciju. Native probe alternativnih postavki je dijagnostika, ne novi gate.
+
+**Plan prije mjerenja:** `configs/frozen/feds-observation-audit-v1.json`. Ista B=1 tabela,
+98 TRAIN požara, 48h i ista dozvoljena opservacija. Četiri unaprijed zadate porodice:
+nested ridge sa originalnih 28 obilježja, RBF Q sa 28, sa dodatnih 48 prostornih obilježja
+i sa svim 1.031 vrijednostima opservacije. Outer LOO, izbor alpha/bandwidth u četiri
+unutrašnja folda bez izostavljenog požara; fit-only skaliranje i kernel bandwidth.
+Raw i charged fitovi odvojeni; sve porodice se prijavljuju. Prag iz ADR-033 ostaje.
+TRAIN je već korišten za razvoj: ovo nije nova nezavisna potvrda.
+
+**Audit.** Svih 98 početnih inputa i sačuvanih opažanja; kontrolni dokazi aliasinga i
+smjerova. Dva unaprijed određena TRAIN slučaja za osjetljivost na redoslijed spriteova,
+`max` agregaciju i 1min korak, uz no-op i istu heuristiku. Najviše četiri nice-19 procesa.
+Procjena računa je 15–30 min uz postojeći runtime, bez novih instalacija ili PPO treninga;
+prvo kratki testovi. Novi kvar koji utiče na staru tabelu zaustavlja novo policy scoring.
+
+**Ishod za odluku.** Nema unaprijed pretpostavljenog pobjednika niti obaveznog prelaska
+na CA. Na kraju navesti šta SimFire još može odgovoriti i šta bi CA morao ponuditi,
+uz poštene komparatore i zatvoren TEST. Plan i tehnički izbori su operativne odluke
+agenta u korisnikovom obimu, ne tvrdnja da je korisnik zasebno odobrio svaku metodu.
+
+ADR-035 — tehnička dopuna tokom probe, 2026-11-20: prvi paralelni run je pao jer
+SimFire 2.0.1 radi `is_dir` pa `mkdir` bez `exist_ok` na zajedničkom novom `sf_home`.
+18 pojedinačnih mask fajlova je ostalo iz tog nepotpunog runa; nisu korišteni kao
+završeni rezultat. Prvo padajući test zatim provjerava 16 istovremenih inicijalizacija,
+idempotentnost i čuvanje postojećeg rezultata. Produkcijski setup sada atomarno
+priprema izlazni direktorij prije konstrukcije simulatora. Dinamika i ulazi se ne
+mijenjaju; nedostatak uticaja na zaključane probe dodatno se provjerava cijelim maskama.
+Novi izvorni hash je zabilježen; ovo nije promjena alpha/menija nakon policy nalaza.
+Offline fitovi ne konstruišu simulator i nisu pogođeni. Native run se ponavlja u
+novom output folderu; stari parcijalni fajlovi su sačuvani.
+
+## ADR-036 — TASK-034 završen; CA pilot je obrazložen prijedlog, recorded 2026-11-20
+
+**Status i autorstvo.** Zapis rezultata korisnikovog odobrenog SimFire audita (ADR-035).
+Preporuka o CA je zaključak agenta iz tih provjera, ne zasebna ljudska potvrda novog CA
+protokola. Nova grana `codex/simfire-observation-audit` je lokalna, iz `58feac72`; nema
+novog push-a/mergea. CA trening i novi holdout nisu pokrenuti.
+
+**Input i informacije.** Svih 98 TRAIN ulaza odgovara hashovima; stvarni fuel/DEM
+CRS i transform se slažu s receiptom, vrijednosti su konačne. Početna pooled mreža i
+kumulativna maska su identične. Svih 392 observed weather zapisa je očekivani prethodni
+dan, bez look-ahead-a. Budžet, vremena i no-op prolaze. 37 požara ima neke početne
+front ćelije na negorivom (731/9.926); 1.094/17.518 planiranih ćelija linije, brojanih
+po traženom nizu, pada na negorivo. To je nesigurnost kompatibilnosti satelitskog fronta
+i fuel karte, ne automatski dokaz programskog kvara ili razlog za naknadno čišćenje.
+
+**Potvrđeni nedostaci opažanja.** Jedan observed piksel pokriva 2.88 km. Različit native
+front unutar istog bloka daje isti observation, a drugu native liniju. Fuel 13 i
+nonfuel 91..99 su izjednačeni prije poolinga (`clip(code/13,0,1)`), iako native fuel load
+nije isti. Skriven reljef i grubo opažanje su dio zaključanog ugovora; nisu popravljeni
+retroaktivnom promjenom checkpointa ili starih benchmarka. Nije izolovan njihov
+kauzalni udio u ukupnom neuspjehu PPO-a.
+
+**Offline rezultat.** Četiri fiksne porodice, outer LOO i četiri inner folda za izbor
+postavki, odvojeni raw/charged fitovi. Niko ne prolazi ≥30 ha i ≥25% oracle jaza.
+Charged spašene ha: summary ridge 83,58; summary RBF 88,17; directional RBF 79,55;
+full-grid RBF 85,76; pravilo 101,04. Najbolji novi kandidat je −12,86 ha prema pravilu,
+opisni 95% interval [−64,80;34,85]. Svih 784 OOF putanja ponovo je provjereno prema
+tabeli. Analiza traje 17,17 s uz reuse podataka. Nested selekcija ne čini već korišteni
+TRAIN nezavisnim završnim testom. Nijedna porodica nije dodana nakon rezultata.
+
+**Native rezultat.** Dva unaprijed izabrana slučaja (prvi ID i najveći stari no-op),
+20 uspješnih rollouta,2,18 min. Plateau nema novog rasta u svim varijantama, pa je negativna
+kontrola. Na Martin-u no-op je 57.377 ha; promjena samo početnog poretka spriteova daje
+53.742 ha, razliku 3.635 ha (6,34%). Raw učinak pravila prelazi sa+3,24 na−252,72 ha.
+Max i max+reverse daju iste maske u ovoj probi, ali no-op 71.322 ha, +24,30% prema locked.
+Korak 1 min daje no-op 57.896 ha i raw dobitak 61,56 ha. Ovo je osjetljivost dva odabrana
+slučaja, ne novi gate ili zaključak o svih 98. Alternative traže novi TRAIN gate prije
+policy tvrdnje. Locked maske odgovaraju ADR-034, nema rubnih kontakata u 20 uspješnih.
+
+**Popravka i provjere.** Prvi run je prekinuo potvrđeni SimFire startup mkdir race;
+18 parcijalnih maski je sačuvano i nije proglašeno završenim rezultatom. Test prije
+koda, atomarno kreiranje foldera i puna ponovljena proba popravljaju operativni kvar
+bez izmjene širenja. Test poznatog 10% nagiba potvrđuje m→ft konverziju; kardinalni
+wind-from/to i raster sektori se slažu. Pinovani runtime 327/327,0 skip; moderni 312,3 skip;
+core 272,35 skip; CLI PASS. Nezavisna revizija i GitHub CI ove grane nisu izvršeni.
+
+**Projektna preporuka.** Kontrolisani CA ugovor/pilot (TASK-035) je opravdan glavni
+sljedeći pravac za odluke jedinica/budžeta; [draft](../../configs/drafts/ca-controlled-pilot-v1.json)
+je pripremljen, nije izveden. CA nije fizički validiran, Cell 2 Fire niti obećanje RL
+prednosti. Prvo riješiti šta CA opaža (postojeći `weather.at(decision)`), nove verzije
+checkpointa/opservacije, razdvojene proceduralne slučajeve, iste resurse/informacije
+za sve politike i no-op/jake heuristike. Stari ADR-028 nalazi ostaju poništeni.
+
+**Šta nije iscrpljeno.** SimFire v 2 (opcionalni TASK-036) bi popravio kategorijski
+fuel/nonfuel prikaz, reljef/rezoluciju, proveo max/korak kroz novi TRAIN gate i tek zatim
+ponovio tabelu i policy studiju. Duži PPO/BC i više budžeta nisu isključeni. Nema tvrdnje
+da su sve moguće greške ili algoritmi ispitani. Preporuka CA je obrazložen izbor opsega,
+a ne proglašenje SimFire-a neupotrebljivim. TEST 2024 i novo VALIDATION korištenje ostaju
+zatvoreni; ADR-031/032/034 ostaju istorijski važeći pod svojim zapisanim uslovima.
+
+Dokazi: [završni izvještaj i matrica](../research/SIMFIRE_OBSERVATION_AUDIT.md),
+[input audit](../../reports/real-fire-data/feds-observation-input-audit-v1.json),
+[nested metode](../../reports/real-fire-data/feds-observation-offline-v1.json),
+[native probe](../../reports/real-fire-data/feds-native-sensitivity-v1.json),
+[verification](../../reports/real-fire-data/feds-observation-verification-v1.json).

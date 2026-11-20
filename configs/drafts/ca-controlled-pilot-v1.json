@@ -1,0 +1,25 @@
+{
+  "schema_version": "ca-controlled-pilot-proposal/1.0",
+  "status": "DRAFT; no CA training started or human acceptance inferred",
+  "date": "2026-11-20",
+  "task": "TASK-035 proposed after TASK-034",
+  "basis": "ADR-036 and docs/research/SIMFIRE_OBSERVATION_AUDIT.md",
+  "purpose": "Controlled study of resource decisions and adaptation to unit budgets, retaining SimFire as a conditional reference rather than claiming its potential exhausted",
+  "simulator": "existing project synthetic_ca/SyntheticSuppressionEnv; not Cell2Fire or physical validation",
+  "first_work": [
+    "Audit the current weather observation, which uses weather.at(decision); choose and record a lagged-observation or explicit perfect-current-forcing contract before new results.",
+    "Version observation/checkpoint provenance; do not load old policy-v1 or other invalidated checkpoints.",
+    "Run bounded technical fixtures for movement, construction rates, accumulated progress, no-op, cumulative damage, line charge, lost units and common random numbers.",
+    "Freeze fresh procedural episode namespaces and disjoint train/development/test case lists before any new scoring; verify earlier exposure before calling them untouched.",
+    "Define fixed resource rosters, arrivals, decision horizon and observation availability shared by every policy; CA unit budgets are not numerically interchangeable with SimFire crew-shift budgets.",
+    "Benchmark no-op, random legal, direct_flank and other declared strong heuristics before deciding whether short BC/PPO training is warranted."
+  ],
+  "reporting": [
+    "Primary simulated saved area and safety outcomes separately; no positive overall reward claim can hide worse safety.",
+    "Paired cases and common random streams; scenario-level uncertainty; seeds are not independent replications of the same underlying case.",
+    "No direct causal ranking of CA versus SimFire hectare scores across different dynamics."
+  ],
+  "closed": ["TEST 2024", "new real VALIDATION use", "automatic CA training", "paid compute", "merge"],
+  "resources": {"maximum_processes": 4, "nice": 19},
+  "stop": ["budget/damage/mask contract failure", "information mismatch", "unverifiable checkpoint", "no intervention effect in technical pilot", "unregistered evaluation change"]
+}

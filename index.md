@@ -5,6 +5,10 @@ okf_version: "0.2"
 
 ## Počni ovdje
 
+- [Aktivni TASK-034: SimFire pregled](docs/research/SIMFIRE_OBSERVATION_AUDIT.md) - Završen audit i preporuka kontrolisanog CA pilota, ADR-036; preostali SimFire v2 put je eksplicitan.
+
+- [Aktivni nastavak: SimFire B=1](docs/research/SIMFIRE_B1_EXPLORATION.md) - TASK-028–030 završeni: 98×33 ishoda, osam LOO metoda bez prolaza praga, ADR-034; predložen TASK-034.
+
 - [Projekt i pokretanje](README.md) - Cilj istraživanja i minimalni setup.
 - [Sažeti projektni kontekst](knowledge/project-context.md) - Aktivni SimFire/FEDS pravac i crosswalk gate.
 - [Handoff za kolegu](HANDOFF.md) - Prenosiv nastavak bez chat historije.

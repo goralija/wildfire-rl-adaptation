@@ -1,8 +1,60 @@
 ---
 type: Handoff
-title: Naredni korak — pregled nakon faze 2 (2026-11-12)
+title: Naredni korak — nakon SimFire audita (2026-11-20)
 ---
 # Naredni korak
+
+## Korisnikov nastavak — popravak opažanja prije CA (2026-11-20)
+
+Završeni rad je pushan i otvoren kao [PR #20](https://github.com/goralija/wildfire-rl-adaptation/pull/20)
+prema `main`, za pregled kolega. PR ostaje otvoren. Korisnik je odobrio još jedan
+SimFire pokušaj: TASK-036 sada ima prioritet pred CA pilotom TASK-035.
+Nastavak ide iz ove grane u `codex/simfire-observation-repair`, u izdvojenom worktreeu;
+novi PR nije potreban po posljednjoj korisnikovoj poruci. Precizni plan ide prije
+novih mjerenja. VALIDATION/TEST i novi CA trening ostaju zatvoreni.
+
+## 2026-11-20 — završen TASK-034 (ADR-036)
+
+Ulaz je [završni pregled](research/SIMFIRE_OBSERVATION_AUDIT.md): četiri nested porodice
+bez prolaza praga, svi input/observation checkovi, potvrđeni startup fix i mala native
+sensitivity studija. Nema aktivnog runa; ne ponavljati eksperimente bez provjere artefakata.
+
+1. Predloženi glavni nastavak: **TASK-035 — CA ugovor informacija i tehnički pilot**,
+   [pripremljen draft](../configs/drafts/ca-controlled-pilot-v1.json). Prvo zapisati šta
+   CA opaža (sada koristi weather.at(decision)), verziju opservacije i checkpointa,
+   razdvojene proceduralne slučajeve, jedinice i budžete. Ne učitavati stare poništene politike.
+2. Potom no-op i jake heuristike uz isti scenario, informacije i common random numbers;
+   kratki BC/PPO tek po novom protokolu i unaprijed zadanom kriteriju. Sada nije pokrenuto.
+3. Opcionalni **TASK-036 — SimFire v2**: kategorijski fuel/nonfuel, reljef/finija opservacija,
+   max/korak kroz novi TRAIN growth gate, pa nova tabela i komparatori. To je preostali
+   smisleni pravac, ne dokaz da je svaka SimFire mogućnost iscrpljena.
+4. TEST 2024 ostaje zatvoren; nema novog VALIDATION odobrenja. Stari CA ADR-028 nalazi
+   ostaju poništeni. Novi rad je na lokalnoj grani `codex/simfire-observation-audit`;
+   prethodna grana je na originu, ova nije pushana/mergeana. Lokalni paket treba sačuvati.
+
+Preporuka CA pilota je obrazloženi projektni izbor, ne fizička validacija CA ili dokaz
+RL prednosti. Precizni CA protokol još nije prihvaćen niti izvršen.
+
+## 2026-11-19 — završen odobreni SimFire ciklus (ADR-034)
+
+TASK-028–030 su završeni na lokalnoj grani `codex/simfire-policy-iterations`.
+[Izvještaj i komande](research/SIMFIRE_B1_EXPLORATION.md) su ulaz za nastavak.
+Puna tabela 98 požara i svih osam LOO metoda su provjereni; nijedna metoda nije
+prešla prag iz ADR-033. Po tom stop-uslovu nisu pokretani novi PPO, holdout ili
+CA eksperimenti. PR #19 je već u `main`-u; nova grana je pushana na origin
+po korisnikovom nalogu 2026-11-19, bez PR-a ili mergea.
+
+1. Pročitati ADR-034, izvještaj i [manifest lokalnog paketa](../reports/real-fire-data/feds-b1-artifact-manifest-v1.json).
+   Ne ponavljati 93-minutnu enumeraciju ako su sačuvani artefakti i hashovi ispravni.
+2. Predloženi TASK-034: zapisati mali TRAIN-only protokol za prostorni signal u istom
+   opažanju i stabilnost izbora kroz požare. Ne birati nove metode ili pragove na
+   postojećim OOF rezultatima pa ih predstavljati kao nezavisnu potvrdu.
+3. Zvanični obračun linije, novi observation kanali, B=2/B=4 i novo VALIDATION korištenje
+   ostaju otvorene odluke. TEST 2024 ostaje zatvoren; CA nije aktivni pravac.
+4. Push grane je urađen; PR i merge nisu. Sačuvati lokalni paket iz `.local/b1/artifacts/`;
+   veliki artefakti nisu uploadovani. Njihovo remote arhiviranje ostaje zaseban nalog.
+
+Starije sekcije ispod su historija; njihovo čekanje odobrenja TASK-028–030 je razriješeno.
 
 ## Najnovije — 2026-11-12: pregled završen; prvo provjera gornje granice na TRAIN-u
 

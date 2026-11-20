@@ -4,6 +4,72 @@ title: Work log
 ---
 # Work log
 
+2026-11-20 — Grana `codex/simfire-observation-audit` je pushana i otvoren je
+[PR #20](https://github.com/goralija/wildfire-rl-adaptation/pull/20). GitHub konektor je
+vratio403 za kreiranje; postojeći gh CLI je uspješno otvorio isti odobreni PR.
+Korisnik daje još jedan pokušaj SimFire-u: popravak kategorijskog goriva i prostornog
+opažanja na novoj izvedenoj grani, prije CA. Razlog prethodnog stopa i redoslijed su
+dokumentovani. Nema mergea ili novih mjerenja u ovoj publikacijskoj dopuni.
+
+2026-11-20 — TASK-034 završen na `codex/simfire-observation-audit`, iz `58feac72`.
+Plan `1e9a263c` prije mjerenja, modeli `855e0fc0`. Svih98 input/observation provjera i 392
+weather opažanja prolaze; četiri nested porodice ne prelaze prag. Potvrđen pooling/fuel
+aliasing; metri/stopa i kardinalni smjerovi prolaze kontrolu. Prvi native run je prekinuo
+mkdir race,18 parcijalnih maski sačuvano. Test prije fix-a, c40d1e02 atomarno priprema
+folder bez promjene širenja. Ponovljeno 20 rollouta za dva unaprijed odabrana slučaja:
+locked maske odgovaraju staroj tabeli, Martin pokazuje veliku last_write osjetljivost.
+327/327 pinovani testovi, moderni312(3skip), core272(35skip); CLI i784OOF audit PASS.
+ADR-036, EXP-023 i završni izvještaj razlikuju greške/konvencije/neispitano. Predložen
+TASK-035 CA ugovor/pilot, draft pripremljen bez treninga; SimFirev2 je opcionalni TASK-036.
+Nema novih holdout, PPO/CA treninga, globalnih instalacija, push-a ili mergea.
+Lokalni paket 24.569.284 B ima 773 fajla plus manifest; svi hashovi ponovo provjereni.
+Raspakovani source/table smoke ponavlja osam nested fitova prvog outer folda s istim
+akcijama, izabranim postavkama i inner score-om; nije cijeli novi 98-fold run.
+Knowledge 15/15 i strict 84 Markdown fajla prolaze.
+
+2026-11-19 — Po izričitom korisnikovom nalogu pushana je grana
+`codex/simfire-policy-iterations` na origin (prvi push do `ed13b782`, upstream postavljen).
+Trenutni handoff/status/README usklađeni su s objavom. PR i merge nisu rađeni;
+veliki artefakti ostaju lokalni, bez novih eksperimenata ili holdout pristupa.
+
+2026-11-19 — Završen SimFire ciklus TASK-028–030 na `codex/simfire-policy-iterations`.
+98×33 ishoda i sve nezavisne reference/input/mask provjere prolaze; ADR-032 agregati se
+poklapaju, nema rubnih kontakata. Puna komanda 93.21 min. Osam LOO metoda ×98 požara
+u oba obračuna: niko ne dostiže prag. Charged ridge-10 +6,98 ha prema pravilu postaje
+−13,63 ha bez najveće OOF razlike. Provjerene sve 1.568 OOF sekvence i vizuelno grafikon.
+ADR-034, EXP-022, izvještaj, STATUS/NEXT_SESSION/BACKLOG i svi ulazi znanja usklađeni.
+Root README više ne predstavlja poništene ADR-023/027 rezultate kao aktivno stanje.
+Paket 24.397.671 B s TRAIN ulazima, tačnim weather fajlom, punim ishodima i source
+snapshotom je lokalno sačuvan; svi hashovi ponovo pročitani. Izdvojeno raspakivanje
+i ponovljeni mask/input sažetak daju bajt-po-bajt isti javni izvještaj. Nijedan novi PPO ili
+holdout nije pokrenut poslije negativnog rezultata. TASK-034 je sljedeći prijedlog,
+ne pokrenuti run. Nema push-a, mergea, CA ili TEST pristupa.
+
+2026-11-19 — Prije prve offline ocjene dodata je poznata donja granica vrijednosti
+čekanja (0 prema no-opu), nakon dva prvo padajuća sintetička regresijska testa.
+Puna ponovljena provjera: 314/314 pinovani runtime, moderni 301 (3 skip), core 263
+(34 skip). Receipt revizija 2 zadržava i prvi krug. Simulator i native tabela nisu
+mijenjani; preostali TRAIN slučajevi još računaju. Nema promjene menija ili praga.
+
+2026-11-19 — Završena su tri puna lokalna test suite-a i knowledge provjere: 312/312 u
+pinovanom SimFire okruženju (0 skip), moderni 299 (3 skip), core 261 (34 skip),
+knowledge 15/15. Receipt `reports/real-fire-data/feds-b1-verification-v1.json` sadrži
+verzije i hashove logova/koda. Puna enumeracija je još u toku; tokom provjera jedan
+od četiri radnika je pauziran i zatim nastavljen. GitHub release pregled nije našao
+originalni TRAIN report. Nema novih holdout runova ili checkpoint učitavanja.
+
+2026-11-19 — Korisnik je odobrio SimFire nastavak kroz dokumentovane iteracije na novoj
+lokalnoj grani. Kreiran je worktree `.worktrees/simfire-policy-iterations/` iz maina
+`f96f744f`; glavni checkout i prethodni stash/grane nisu dirani. ADR-033 i plan su
+commitovani prije novih simulacija. Testovi su prvo pali, pa prošli za obračun linije,
+TRAIN-only weather, B=1 sekvence, LOO bez curenja, maske, čekanje/no-op i report guardove.
+Obnovljen je samo TRAIN weather iz šest postojećih checksum-verifikovanih arhiva;
+98 ćelija, svi pre-start zapisi. Pilot 20/20 ima iste završne maske kao nezavisni
+scripted runovi; puna tabela je u toku, s četiri nice-19 radnika. Originalni puni
+ADR-032 TRAIN izlaz nije na ovom računaru: ta razlika i zamjenski reference check su
+zapisani prije pokretanja. Nema VALIDATION/TEST pristupa, novih PPO/CA treninga,
+vanjskih instalacija ili remote objave.
+
 2026-11-12 — Na Harunov zahtjev pet analiza nakon ADR-032 (subagenti, samo čitanje i TRAIN-only
 izračuni nad postojećim izlazima; jedan probni SimFire run `advancing_front` B=4 na 98 TRAIN
 požara) prenio sam u `docs/research/review-2026-11-11/` sa sažetkom na bosanskom. Root HANDOFF

@@ -420,6 +420,17 @@ def build_simulation(inputs: Dict[str, Any], params: SimFireParams, *, seed: int
     return simulation, forcing, cumulative
 
 
+def prepare_output_directory(base_config: dict) -> Path:
+    """Create the shared output folder atomically before SimFire's racy mkdir.
+
+    SimFire 2.0.1 checks is_dir then mkdir without exist_ok. Concurrent fresh
+    workers can race there. This changes output initialization only, not dynamics.
+    """
+    output = Path(base_config["simulation"]["sf_home"]).expanduser()
+    output.mkdir(parents=True, exist_ok=True)
+    return output
+
+
 def _construct_simulation(base_config: dict, inputs: Dict[str, Any], forcing: List[Dict[str, float]],
                           seed: int) -> Any:
     import numpy as np
@@ -445,6 +456,7 @@ def _construct_simulation(base_config: dict, inputs: Dict[str, Any], forcing: Li
     config.environment.moisture = forcing[0]["fuel_moisture_fraction_proxy"]
     random.seed(seed)
     np.random.seed(seed % (2 ** 32))
+    prepare_output_directory(base_config)
     return FireSimulation(config)
 
 

@@ -1,11 +1,61 @@
 ---
 type: Project Status
-title: Trenutno stanje — 2026-11-12
+title: Trenutno stanje — 2026-11-20
 sources:
 - resource: /reports/firehose-verification/verification.json
 - resource: /docs/WORK_LOG.md
 ---
-# Trenutno stanje — 2026-11-12
+# Trenutno stanje — 2026-11-20
+
+## Korisnikov nastavak — popravak opažanja prije CA (2026-11-20)
+
+Završeni rad je pushan i otvoren kao [PR #20](https://github.com/goralija/wildfire-rl-adaptation/pull/20)
+prema `main`, za pregled kolega. PR ostaje otvoren. Korisnik je odobrio još jedan
+SimFire pokušaj: TASK-036 sada ima prioritet pred CA pilotom TASK-035.
+Nastavak ide iz ove grane u `codex/simfire-observation-repair`, u izdvojenom worktreeu;
+novi PR nije potreban po posljednjoj korisnikovoj poruci. Precizni plan ide prije
+novih mjerenja. VALIDATION/TEST i novi CA trening ostaju zatvoreni.
+
+## 2026-11-20 — TASK-034 završen, obrazložena preporuka CA pilota (ADR-036)
+
+Grana `codex/simfire-observation-audit`, iz prethodne `58feac72`; novi rad je lokalno
+commitovan, bez novog push-a/mergea. Svih 98 input/observation auditova prolazi, uključujući
+stvarne raster koordinate i 392 dozvoljena weather zapisa. Potvrđeni su pooling/fuel
+aliasing i native `last_write` osjetljivost. Potvrđeni startup mkdir race je ispravljen
+uz test prije koda; parametri širenja nisu promijenjeni, locked probe maske se poklapaju.
+
+Četiri nove nested porodice iz iste opservacije ne prelaze prag. Najbolji charged
+kandidat: 88,17 ha prema no-opu, −12,86 ha prema pravilu. Na Martin-u samo obrtanje
+početnog poretka mijenja no-op za 3.635 ha i predznak učinka linije. Dva slučaja su
+dijagnostika, ne cohort validacija. Pinovani suite: 327/327, 0 skip; CLI PASS.
+
+[Detaljan izvještaj i matrica provjera](research/SIMFIRE_OBSERVATION_AUDIT.md),
+[rezultati](../reports/real-fire-data/feds-observation-offline-v1.json),
+[native osjetljivost](../reports/real-fire-data/feds-native-sensitivity-v1.json).
+Preporuka je TASK-035, kontrolisani CA ugovor/pilot; [prijedlog](../configs/drafts/ca-controlled-pilot-v1.json)
+je pripremljen, nije pokrenut. Ne tvrdi se da je SimFire iscrpljen: njegov v2 bi tražio
+novu opservaciju, provjeru max agregacije i novi TRAIN gate. Nema novog PPO/CA treninga,
+VALIDATION ili TEST pristupa. Raniji ADR-031/032/034 ostaju uslovni simulatorski nalazi.
+
+## 2026-11-19 — SimFire TASK-028–030 završeni; nijedna metoda ne prelazi prag (ADR-034)
+
+Na lokalnoj grani `codex/simfire-policy-iterations` završeni su pomoćni obračun linije,
+98×33=3.234 provjerena ishoda i osam metoda uz LOO po požaru. TRAIN-only weather je
+obnovljen; originalni no-op i heuristički prosjeci ADR-032 se poklapaju. Nema rubnih
+kontakata. `advancing_front` štedi 112,24 ha raw / 101,04 ha charged; oracle 546,44 /
+529,84 ha. Nijedna metoda ne dostiže unaprijed zadani prag. Najbolji charged naučeni
+kandidat daje +6,98 ha prema pravilu, uz širok opisni interval i promjenu predznaka
+kad se izbaci najveća OOF razlika.
+
+[Izvještaj, sve metode i razlozi nastavka](research/SIMFIRE_B1_EXPLORATION.md),
+[rezultati](../reports/real-fire-data/feds-b1-offline-v1.json),
+[manifest lokalnih potpunih artefakata](../reports/real-fire-data/feds-b1-artifact-manifest-v1.json).
+Pinovani runtime: 314/314 testova, 0 skip; CLI i knowledge provjere prolaze.
+Nema novog PPO/CA treninga, VALIDATION korištenja ili TEST 2024 pristupa.
+Grana je naknadno pushana na origin po korisnikovom nalogu 2026-11-19; PR i merge nisu urađeni.
+Predložen je TASK-034: dijagnoza prostornog signala iz istog opažanja prije novog
+treninga; nije pokrenut. ADR-031/032 ostaju važeći simulatorski rezultati, bez tvrdnje
+o fizičkoj validaciji; ADR-022–028 ostaju poništeni.
 
 ## Najnovije — 2026-11-12: pregled nakon faze 2, bez novih treninga
 

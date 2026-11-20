@@ -19,10 +19,29 @@ su sažeti u [rubrici](../docs/research/REQUIREMENTS_AND_RUBRIC.md). Aktivni ben
 koristi SimFire, FPA-FOD početne uslove i FEDS-CONUS vremenske obode; stariji
 CFSDS/Cell2Fire rad ostaje odvojen i historijski.
 
+## Nastavak 2026-11-20 — ADR-036
+
+TASK-034 je završen na lokalnoj `codex/simfire-observation-audit`.
+[Izvještaj](../docs/research/SIMFIRE_OBSERVATION_AUDIT.md) bilježi provjerene ulaze,
+fuel/front aliasing, četiri nested metode bez prolaza i native numeričke osjetljivosti.
+Startup race je ispravljen bez promjene dinamike. Postoji obrazložena preporuka za
+TASK-035, kontrolisani CA ugovor/pilot; nije pokrenut. SimFire v2 ostaje smislen, ali
+novi protokol, ne samo još jedan trening. Nema tvrdnje da su sve moguće greške isključene,
+fizičke validacije, novih VALIDATION/TEST ili CA treninga.
+
+## Nastavak 2026-11-19 — ADR-034
+
+Korisnik je odabrao SimFire i odobrio dokumentovane TRAIN iteracije TASK-028–030 na
+novoj grani. [SimFire B=1 izvještaj](../docs/research/SIMFIRE_B1_EXPLORATION.md) bilježi
+završenu tabelu 98×33 i osam LOO metoda u oba obračuna. Nijedna ne dostiže prag za
+nastavak: velik oracle jaz nije prenesen na izostavljene požare. Sljedeći prijedlog
+je TASK-034, dijagnoza prostornog signala iz istog opažanja; nije pokrenut.
+VALIDATION/TEST nisu ponovo korišteni, CA faza 3 nije pokrenuta, novi rad je lokalni.
+
 ## Aktivni pravac
 
 Korisnik je odabrao **SimFire + FPA-FOD + FEDS-CONUS**, uz FLE/ICS-209 samo kao
-ograničeni post-hoc kontekst. Split je po godini: train 2018/2019 (99 požara), validation
+ograničeni post-hoc kontekst. Split je po godini: train 2018/2019 (98 požara nakon deduplikacije), validation
 2023 (20), test 2024 (zatvoren). Okvir obuhvata veće požare u deset zapadnih država i nije
 reprezentativan za sve požare. FEDS/FPA veza ostaje provisionalna.
 

@@ -10,7 +10,31 @@ Repo je OKF 0.2 knowledge bundle. Na početku sesije pročitaj [index.md](index.
 Zatim koristi [mapu zadataka/koda](knowledge/code-map.md) za relevantne izvore i testove.
 Korisnikove direktne upute imaju prednost; kasniji ADR može zamijeniti raniji.
 
-**Aktivno stanje je ADR-029 (2026-11-09): rezultati ADR-022–028 su nevažeći dok se ne
+**Najnoviji nalog (2026-11-20): još jedan SimFire pokušaj kroz TASK-036, popravak
+opažanja prije CA.** PR #20 prethodnog audita je otvoren za pregled. Nastavak iz ove
+grane ide u `codex/simfire-observation-repair`; precizni plan se piše prije mjerenja.
+Novi PR nije obavezan po korisniku. CA pilot TASK-035 se odgađa. TEST i novo VALIDATION
+korištenje ostaju zatvoreni. Korisnik je odobrio push/PR i opciju mergea, ali se ovdje
+bira nova izvedena grana i otvoren pregled prethodnog rada, bez mergea.
+
+**Aktuelan je ADR-036 (2026-11-20): TASK-034 je završen na
+`codex/simfire-observation-audit`.** [Izvještaj](docs/research/SIMFIRE_OBSERVATION_AUDIT.md)
+razdvaja provjerene greške, modelna ograničenja i otvoreno. Startup mkdir race je
+ispravljen; četiri nested porodice ne prelaze prag. Preporučen je TASK-035, CA ugovor i
+tehnički pilot; draft nije izvršen/odobren kao gotov protokol. SimFire v2 je mogući
+TASK-036. Nema aktivnog runa. TEST/novo VALIDATION korištenje i automatski CA trening
+ostaju zatvoreni; ne prikazivati ranije poništene CA brojeve kao rezultate.
+
+
+**Prethodni ciklus je ADR-034 (2026-11-19): TASK-028–030 su završeni na grani
+`codex/simfire-policy-iterations`.** Puna TRAIN B=1 tabela 98×33 i osam LOO metoda
+su provjereni; nijedna metoda ne prelazi prag. Novi PPO nije pokrenut. TASK-034 je
+prijedlog dijagnoze prostornog signala, ne pokrenuti eksperiment. Koristi
+[izvještaj](docs/research/SIMFIRE_B1_EXPLORATION.md),
+STATUS i NEXT_SESSION. Stari tekst o čekanju odobrenja tih TRAIN koraka je historijski;
+VALIDATION, TEST, CA faza 3 i remote objava nisu automatski odobreni.
+
+**Temelj ispravki je ADR-029 (2026-11-09): rezultati ADR-022–028 su nevažeći dok se ne
 ponove.** gridMET uzorkovanje je davalo svim požarima jedne godine vrijeme prvog požara
 (ispravljeno). PR-ovi #3–#5 (SimFire/FEDS gate, koraci 5–8, sintetički CA) su u `main`
 kao historija; njihovi brojevi se ne citiraju kao nalazi. Ispravke TASK-021–024 su

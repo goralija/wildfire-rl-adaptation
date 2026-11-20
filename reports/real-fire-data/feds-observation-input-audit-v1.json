@@ -1,0 +1,1016 @@
+{
+  "case_count": 98,
+  "cases": [
+    {
+      "initial_front_cells": 16,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0526885986328125,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400300427-plateau"
+    },
+    {
+      "initial_front_cells": 16,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0129241943359375,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 1,
+      "scenario_id": "fpa-fod-400300631-ranch"
+    },
+    {
+      "initial_front_cells": 12,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0417022705078125,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400300764-buzzard"
+    },
+    {
+      "initial_front_cells": 12,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0399169921875,
+      "planned_line_cells_counted_per_sequence": 254,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400300963-coal-hollow"
+    },
+    {
+      "initial_front_cells": 24,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0808563232421875,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 2,
+      "scenario_id": "fpa-fod-400301084-prospect"
+    },
+    {
+      "initial_front_cells": 33,
+      "initial_front_nonfuel_cells": 1,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.07244873046875,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 3,
+      "scenario_id": "fpa-fod-400301086-kiwah"
+    },
+    {
+      "initial_front_cells": 19,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.1255340576171875,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400301104-stewart-creek"
+    },
+    {
+      "initial_front_cells": 16,
+      "initial_front_nonfuel_cells": 2,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.1521453857421875,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 12,
+      "scenario_id": "fpa-fod-400301199-murdock"
+    },
+    {
+      "initial_front_cells": 12,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0100250244140625,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400302402-silver-creek"
+    },
+    {
+      "initial_front_cells": 122,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 8,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0577850341796875,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400302444-spring-creek"
+    },
+    {
+      "initial_front_cells": 48,
+      "initial_front_nonfuel_cells": 1,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0634307861328125,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400302446-416"
+    },
+    {
+      "initial_front_cells": 44,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0083770751953125,
+      "planned_line_cells_counted_per_sequence": 233,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400302533-tinder"
+    },
+    {
+      "initial_front_cells": 16,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0276641845703125,
+      "planned_line_cells_counted_per_sequence": 246,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400302636-bears"
+    },
+    {
+      "initial_front_cells": 102,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.103485107421875,
+      "planned_line_cells_counted_per_sequence": 240,
+      "planned_line_nonfuel_cells_counted_per_sequence": 2,
+      "scenario_id": "fpa-fod-400302686-boot"
+    },
+    {
+      "initial_front_cells": 218,
+      "initial_front_nonfuel_cells": 103,
+      "initial_front_occupied_pooled_pixels": 14,
+      "nonempty_sequences_entirely_on_nonfuel": 2,
+      "nonfuel_map_fraction": 0.0629730224609375,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 26,
+      "scenario_id": "fpa-fod-400302877-whaleback"
+    },
+    {
+      "initial_front_cells": 105,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 6,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.105560302734375,
+      "planned_line_cells_counted_per_sequence": 243,
+      "planned_line_nonfuel_cells_counted_per_sequence": 13,
+      "scenario_id": "fpa-fod-400302943-cranston"
+    },
+    {
+      "initial_front_cells": 19,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.044219970703125,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400303584-goldstone"
+    },
+    {
+      "initial_front_cells": 20,
+      "initial_front_nonfuel_cells": 2,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.076416015625,
+      "planned_line_cells_counted_per_sequence": 165,
+      "planned_line_nonfuel_cells_counted_per_sequence": 5,
+      "scenario_id": "fpa-fod-400303631-bacon-rind"
+    },
+    {
+      "initial_front_cells": 25,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.042694091796875,
+      "planned_line_cells_counted_per_sequence": 122,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400303711-gold-hill"
+    },
+    {
+      "initial_front_cells": 44,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.03155517578125,
+      "planned_line_cells_counted_per_sequence": 184,
+      "planned_line_nonfuel_cells_counted_per_sequence": 9,
+      "scenario_id": "fpa-fod-400303744-rattlesnake-creek"
+    },
+    {
+      "initial_front_cells": 48,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0216064453125,
+      "planned_line_cells_counted_per_sequence": 126,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400303807-ryan"
+    },
+    {
+      "initial_front_cells": 17,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.01531982421875,
+      "planned_line_cells_counted_per_sequence": 112,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400303966-cabin-lake"
+    },
+    {
+      "initial_front_cells": 140,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 8,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.030731201171875,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400304718-west-valley"
+    },
+    {
+      "initial_front_cells": 34,
+      "initial_front_nonfuel_cells": 7,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0294647216796875,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 17,
+      "scenario_id": "fpa-fod-400304799-rabbit-foot"
+    },
+    {
+      "initial_front_cells": 153,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 9,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.000640869140625,
+      "planned_line_cells_counted_per_sequence": 238,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400305302-sugar-pine"
+    },
+    {
+      "initial_front_cells": 16,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.001708984375,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400306102-rattlesnake"
+    },
+    {
+      "initial_front_cells": 28,
+      "initial_front_nonfuel_cells": 19,
+      "initial_front_occupied_pooled_pixels": 2,
+      "nonempty_sequences_entirely_on_nonfuel": 2,
+      "nonfuel_map_fraction": 0.2996063232421875,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 39,
+      "scenario_id": "fpa-fod-400306199-obi"
+    },
+    {
+      "initial_front_cells": 373,
+      "initial_front_nonfuel_cells": 18,
+      "initial_front_occupied_pooled_pixels": 21,
+      "nonempty_sequences_entirely_on_nonfuel": 3,
+      "nonfuel_map_fraction": 0.1490936279296875,
+      "planned_line_cells_counted_per_sequence": 233,
+      "planned_line_nonfuel_cells_counted_per_sequence": 13,
+      "scenario_id": "fpa-fod-400307067-county"
+    },
+    {
+      "initial_front_cells": 446,
+      "initial_front_nonfuel_cells": 31,
+      "initial_front_occupied_pooled_pixels": 27,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.041778564453125,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 3,
+      "scenario_id": "fpa-fod-400307281-camp"
+    },
+    {
+      "initial_front_cells": 283,
+      "initial_front_nonfuel_cells": 82,
+      "initial_front_occupied_pooled_pixels": 16,
+      "nonempty_sequences_entirely_on_nonfuel": 1,
+      "nonfuel_map_fraction": 0.38421630859375,
+      "planned_line_cells_counted_per_sequence": 239,
+      "planned_line_nonfuel_cells_counted_per_sequence": 80,
+      "scenario_id": "fpa-fod-400307326-woolsey"
+    },
+    {
+      "initial_front_cells": 126,
+      "initial_front_nonfuel_cells": 5,
+      "initial_front_occupied_pooled_pixels": 8,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0185089111328125,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 3,
+      "scenario_id": "fpa-fod-400307342-ferguson"
+    },
+    {
+      "initial_front_cells": 56,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0574798583984375,
+      "planned_line_cells_counted_per_sequence": 240,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400307379-weston-pass"
+    },
+    {
+      "initial_front_cells": 24,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0229339599609375,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400307462-indian-valley"
+    },
+    {
+      "initial_front_cells": 80,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0191497802734375,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400307488-red-canyon"
+    },
+    {
+      "initial_front_cells": 184,
+      "initial_front_nonfuel_cells": 2,
+      "initial_front_occupied_pooled_pixels": 11,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0406951904296875,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 3,
+      "scenario_id": "fpa-fod-400307548-boone-draw"
+    },
+    {
+      "initial_front_cells": 64,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0184173583984375,
+      "planned_line_cells_counted_per_sequence": 240,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400307776-bull-draw"
+    },
+    {
+      "initial_front_cells": 199,
+      "initial_front_nonfuel_cells": 85,
+      "initial_front_occupied_pooled_pixels": 11,
+      "nonempty_sequences_entirely_on_nonfuel": 4,
+      "nonfuel_map_fraction": 0.1378631591796875,
+      "planned_line_cells_counted_per_sequence": 254,
+      "planned_line_nonfuel_cells_counted_per_sequence": 61,
+      "scenario_id": "fpa-fod-400308380-conner"
+    },
+    {
+      "initial_front_cells": 84,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 6,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0003509521484375,
+      "planned_line_cells_counted_per_sequence": 240,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400308544-winter-camp"
+    },
+    {
+      "initial_front_cells": 56,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.1634368896484375,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 2,
+      "scenario_id": "fpa-fod-400308652-dog-creek"
+    },
+    {
+      "initial_front_cells": 99,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.1346588134765625,
+      "planned_line_cells_counted_per_sequence": 245,
+      "planned_line_nonfuel_cells_counted_per_sequence": 4,
+      "scenario_id": "fpa-fod-400308656-sharps"
+    },
+    {
+      "initial_front_cells": 77,
+      "initial_front_nonfuel_cells": 6,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.4107513427734375,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 7,
+      "scenario_id": "fpa-fod-400309598-buffalo-pasture"
+    },
+    {
+      "initial_front_cells": 12,
+      "initial_front_nonfuel_cells": 5,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 1,
+      "nonfuel_map_fraction": 0.2041015625,
+      "planned_line_cells_counted_per_sequence": 186,
+      "planned_line_nonfuel_cells_counted_per_sequence": 19,
+      "scenario_id": "fpa-fod-400309614-howe-ridge"
+    },
+    {
+      "initial_front_cells": 80,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0106048583984375,
+      "planned_line_cells_counted_per_sequence": 243,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400310578-ok-bar"
+    },
+    {
+      "initial_front_cells": 52,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0467529296875,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400310583-organ"
+    },
+    {
+      "initial_front_cells": 77,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.01275634765625,
+      "planned_line_cells_counted_per_sequence": 248,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400310659-206"
+    },
+    {
+      "initial_front_cells": 60,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0367279052734375,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400310914-echo"
+    },
+    {
+      "initial_front_cells": 109,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 7,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0048675537109375,
+      "planned_line_cells_counted_per_sequence": 253,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400310945-goose-creek"
+    },
+    {
+      "initial_front_cells": 202,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 14,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.035369873046875,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400310977-sheep-creek"
+    },
+    {
+      "initial_front_cells": 12,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.044952392578125,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400311017-goshute-cave"
+    },
+    {
+      "initial_front_cells": 761,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 37,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.016815185546875,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400311253-martin"
+    },
+    {
+      "initial_front_cells": 110,
+      "initial_front_nonfuel_cells": 8,
+      "initial_front_occupied_pooled_pixels": 5,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.029327392578125,
+      "planned_line_cells_counted_per_sequence": 254,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400311268-gregg"
+    },
+    {
+      "initial_front_cells": 397,
+      "initial_front_nonfuel_cells": 13,
+      "initial_front_occupied_pooled_pixels": 20,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.074005126953125,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 4,
+      "scenario_id": "fpa-fod-400312226-boxcar"
+    },
+    {
+      "initial_front_cells": 130,
+      "initial_front_nonfuel_cells": 42,
+      "initial_front_occupied_pooled_pixels": 10,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.1783905029296875,
+      "planned_line_cells_counted_per_sequence": 106,
+      "planned_line_nonfuel_cells_counted_per_sequence": 10,
+      "scenario_id": "fpa-fod-400312231-jack-knife"
+    },
+    {
+      "initial_front_cells": 169,
+      "initial_front_nonfuel_cells": 15,
+      "initial_front_occupied_pooled_pixels": 10,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.1645050048828125,
+      "planned_line_cells_counted_per_sequence": 244,
+      "planned_line_nonfuel_cells_counted_per_sequence": 23,
+      "scenario_id": "fpa-fod-400312290-stubblefield"
+    },
+    {
+      "initial_front_cells": 173,
+      "initial_front_nonfuel_cells": 1,
+      "initial_front_occupied_pooled_pixels": 8,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.1059112548828125,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 16,
+      "scenario_id": "fpa-fod-400312444-tenino-fire"
+    },
+    {
+      "initial_front_cells": 125,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 8,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0544281005859375,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400312787-black-mountain"
+    },
+    {
+      "initial_front_cells": 12,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.1606903076171875,
+      "planned_line_cells_counted_per_sequence": 255,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400313239-cedar-mountain-one"
+    },
+    {
+      "initial_front_cells": 16,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 2,
+      "nonfuel_map_fraction": 0.478759765625,
+      "planned_line_cells_counted_per_sequence": 254,
+      "planned_line_nonfuel_cells_counted_per_sequence": 21,
+      "scenario_id": "fpa-fod-400313254-lakeside"
+    },
+    {
+      "initial_front_cells": 153,
+      "initial_front_nonfuel_cells": 4,
+      "initial_front_occupied_pooled_pixels": 8,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0989532470703125,
+      "planned_line_cells_counted_per_sequence": 139,
+      "planned_line_nonfuel_cells_counted_per_sequence": 9,
+      "scenario_id": "fpa-fod-400313293-dollar-ridge"
+    },
+    {
+      "initial_front_cells": 12,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0365447998046875,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400313301-bear-trap"
+    },
+    {
+      "initial_front_cells": 37,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.1580810546875,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400313842-north-eden"
+    },
+    {
+      "initial_front_cells": 217,
+      "initial_front_nonfuel_cells": 3,
+      "initial_front_occupied_pooled_pixels": 13,
+      "nonempty_sequences_entirely_on_nonfuel": 2,
+      "nonfuel_map_fraction": 0.2965850830078125,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 41,
+      "scenario_id": "fpa-fod-400314155-wahluke-slope"
+    },
+    {
+      "initial_front_cells": 158,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 8,
+      "nonempty_sequences_entirely_on_nonfuel": 2,
+      "nonfuel_map_fraction": 0.414398193359375,
+      "planned_line_cells_counted_per_sequence": 252,
+      "planned_line_nonfuel_cells_counted_per_sequence": 37,
+      "scenario_id": "fpa-fod-400314399-lake-wallula"
+    },
+    {
+      "initial_front_cells": 202,
+      "initial_front_nonfuel_cells": 4,
+      "initial_front_occupied_pooled_pixels": 12,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.2402496337890625,
+      "planned_line_cells_counted_per_sequence": 253,
+      "planned_line_nonfuel_cells_counted_per_sequence": 11,
+      "scenario_id": "fpa-fod-400318794-goring"
+    },
+    {
+      "initial_front_cells": 184,
+      "initial_front_nonfuel_cells": 19,
+      "initial_front_occupied_pooled_pixels": 7,
+      "nonempty_sequences_entirely_on_nonfuel": 2,
+      "nonfuel_map_fraction": 0.0693511962890625,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 35,
+      "scenario_id": "fpa-fod-400367632-viewpoint"
+    },
+    {
+      "initial_front_cells": 151,
+      "initial_front_nonfuel_cells": 61,
+      "initial_front_occupied_pooled_pixels": 7,
+      "nonempty_sequences_entirely_on_nonfuel": 2,
+      "nonfuel_map_fraction": 0.2801971435546875,
+      "planned_line_cells_counted_per_sequence": 251,
+      "planned_line_nonfuel_cells_counted_per_sequence": 73,
+      "scenario_id": "fpa-fod-400370314-mile-post-twenty-two"
+    },
+    {
+      "initial_front_cells": 252,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 16,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0112457275390625,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 6,
+      "scenario_id": "fpa-fod-400376589-ute-park"
+    },
+    {
+      "initial_front_cells": 93,
+      "initial_front_nonfuel_cells": 5,
+      "initial_front_occupied_pooled_pixels": 5,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.078033447265625,
+      "planned_line_cells_counted_per_sequence": 114,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400389704-hwy-94"
+    },
+    {
+      "initial_front_cells": 242,
+      "initial_front_nonfuel_cells": 42,
+      "initial_front_occupied_pooled_pixels": 12,
+      "nonempty_sequences_entirely_on_nonfuel": 6,
+      "nonfuel_map_fraction": 0.454071044921875,
+      "planned_line_cells_counted_per_sequence": 246,
+      "planned_line_nonfuel_cells_counted_per_sequence": 106,
+      "scenario_id": "fpa-fod-400389746-badger-hole"
+    },
+    {
+      "initial_front_cells": 169,
+      "initial_front_nonfuel_cells": 22,
+      "initial_front_occupied_pooled_pixels": 10,
+      "nonempty_sequences_entirely_on_nonfuel": 6,
+      "nonfuel_map_fraction": 0.40826416015625,
+      "planned_line_cells_counted_per_sequence": 253,
+      "planned_line_nonfuel_cells_counted_per_sequence": 78,
+      "scenario_id": "fpa-fod-400389848-glade-creek"
+    },
+    {
+      "initial_front_cells": 110,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 7,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0043792724609375,
+      "planned_line_cells_counted_per_sequence": 249,
+      "planned_line_nonfuel_cells_counted_per_sequence": 1,
+      "scenario_id": "fpa-fod-400500346-south"
+    },
+    {
+      "initial_front_cells": 16,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0210418701171875,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 6,
+      "scenario_id": "fpa-fod-400500878-cellar"
+    },
+    {
+      "initial_front_cells": 12,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0536346435546875,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400501480-decker"
+    },
+    {
+      "initial_front_cells": 76,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0602874755859375,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 1,
+      "scenario_id": "fpa-fod-400501641-mountain"
+    },
+    {
+      "initial_front_cells": 20,
+      "initial_front_nonfuel_cells": 4,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0229339599609375,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 20,
+      "scenario_id": "fpa-fod-400502172-roberts"
+    },
+    {
+      "initial_front_cells": 16,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0081939697265625,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400503581-coldwater"
+    },
+    {
+      "initial_front_cells": 18,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.1253509521484375,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 7,
+      "scenario_id": "fpa-fod-400504417-shady"
+    },
+    {
+      "initial_front_cells": 16,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.00054931640625,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400505027-pine-lodge"
+    },
+    {
+      "initial_front_cells": 38,
+      "initial_front_nonfuel_cells": 11,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0660247802734375,
+      "planned_line_cells_counted_per_sequence": 255,
+      "planned_line_nonfuel_cells_counted_per_sequence": 10,
+      "scenario_id": "fpa-fod-400505059-river"
+    },
+    {
+      "initial_front_cells": 46,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0400848388671875,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400505118-cove-creek"
+    },
+    {
+      "initial_front_cells": 247,
+      "initial_front_nonfuel_cells": 16,
+      "initial_front_occupied_pooled_pixels": 14,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.134521484375,
+      "planned_line_cells_counted_per_sequence": 248,
+      "planned_line_nonfuel_cells_counted_per_sequence": 31,
+      "scenario_id": "fpa-fod-400506459-kincade"
+    },
+    {
+      "initial_front_cells": 48,
+      "initial_front_nonfuel_cells": 2,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.01519775390625,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 2,
+      "scenario_id": "fpa-fod-400506867-bronco-gulch"
+    },
+    {
+      "initial_front_cells": 167,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 10,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0041351318359375,
+      "planned_line_cells_counted_per_sequence": 236,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400507579-red-bank"
+    },
+    {
+      "initial_front_cells": 28,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0005340576171875,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400508306-lookout-point"
+    },
+    {
+      "initial_front_cells": 69,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.104248046875,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400508308-pot-hole"
+    },
+    {
+      "initial_front_cells": 24,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.119476318359375,
+      "planned_line_cells_counted_per_sequence": 120,
+      "planned_line_nonfuel_cells_counted_per_sequence": 3,
+      "scenario_id": "fpa-fod-400508892-north-hills"
+    },
+    {
+      "initial_front_cells": 24,
+      "initial_front_nonfuel_cells": 19,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 4,
+      "nonfuel_map_fraction": 0.239898681640625,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 38,
+      "scenario_id": "fpa-fod-400509040-moss-ranch"
+    },
+    {
+      "initial_front_cells": 36,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0348663330078125,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400509143-ridgetop"
+    },
+    {
+      "initial_front_cells": 105,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 5,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0005035400390625,
+      "planned_line_cells_counted_per_sequence": 254,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400510304-goose"
+    },
+    {
+      "initial_front_cells": 86,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.04547119140625,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400510515-summit"
+    },
+    {
+      "initial_front_cells": 144,
+      "initial_front_nonfuel_cells": 3,
+      "initial_front_occupied_pooled_pixels": 7,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.340606689453125,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 1,
+      "scenario_id": "fpa-fod-400512411-russell"
+    },
+    {
+      "initial_front_cells": 72,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.578094482421875,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 4,
+      "scenario_id": "fpa-fod-400512420-shelter-pass"
+    },
+    {
+      "initial_front_cells": 129,
+      "initial_front_nonfuel_cells": 20,
+      "initial_front_occupied_pooled_pixels": 7,
+      "nonempty_sequences_entirely_on_nonfuel": 7,
+      "nonfuel_map_fraction": 0.30718994140625,
+      "planned_line_cells_counted_per_sequence": 244,
+      "planned_line_nonfuel_cells_counted_per_sequence": 93,
+      "scenario_id": "fpa-fod-400512424-goose-point"
+    },
+    {
+      "initial_front_cells": 68,
+      "initial_front_nonfuel_cells": 6,
+      "initial_front_occupied_pooled_pixels": 8,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.2775421142578125,
+      "planned_line_cells_counted_per_sequence": 256,
+      "planned_line_nonfuel_cells_counted_per_sequence": 20,
+      "scenario_id": "fpa-fod-400512651-powerline"
+    },
+    {
+      "initial_front_cells": 152,
+      "initial_front_nonfuel_cells": 42,
+      "initial_front_occupied_pooled_pixels": 7,
+      "nonempty_sequences_entirely_on_nonfuel": 1,
+      "nonfuel_map_fraction": 0.3279571533203125,
+      "planned_line_cells_counted_per_sequence": 251,
+      "planned_line_nonfuel_cells_counted_per_sequence": 63,
+      "scenario_id": "fpa-fod-400513361-243-command"
+    },
+    {
+      "initial_front_cells": 62,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.0349578857421875,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400513488-sage"
+    },
+    {
+      "initial_front_cells": 156,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 9,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.01617431640625,
+      "planned_line_cells_counted_per_sequence": 128,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400541373-mp-97"
+    },
+    {
+      "initial_front_cells": 64,
+      "initial_front_nonfuel_cells": 0,
+      "initial_front_occupied_pooled_pixels": 4,
+      "nonempty_sequences_entirely_on_nonfuel": 0,
+      "nonfuel_map_fraction": 0.043121337890625,
+      "planned_line_cells_counted_per_sequence": 64,
+      "planned_line_nonfuel_cells_counted_per_sequence": 0,
+      "scenario_id": "fpa-fod-400732973-walker"
+    }
+  ],
+  "checks": {
+    "actual_raster_crs_transform_alignment_and_finite_values": "PASS",
+    "all392_observed_weather_records_and_day_lag": "PASS",
+    "initial_cumulative_mask": "PASS",
+    "input_hashes_and_initial_grid": "PASS",
+    "time_budget_noop": "PASS"
+  },
+  "created_utc": "2026-11-20T17:10:53.977183+00:00",
+  "known_contract_limits": [
+    "Mean pooling maps a 16x16 native block (2.88km) to one observed pixel; different front positions can give identical observations but different native line anchors.",
+    "Fuel coding clip(code/13,0,1) aliases fuel13 and nonfuel91..99 before pooling. The policy cannot recover their distinction from this channel.",
+    "Elevation affects Rothermel spread but is absent from the locked observation. Historical FEDS fronts overlapping nonfuel are satellite/raster compatibility uncertainty, not proof of a program defect.",
+    "Nonfuel line cells are currently legal and spend budget; this is a known placement convention. No semantics are changed in this audit."
+  ],
+  "label": "TRAIN INPUT/OBSERVATION CONTRACT AUDIT; NOT PHYSICAL VALIDATION",
+  "plan_sha256": "4052358378c57c2383d75d3f590014dda7cce5ac62f84455a6a90727818c95bf",
+  "schema_version": "feds-observation-input-audit/1.0",
+  "source_sha256": "9e9e18a5acb249518f760f96efe4696a9090e6bc5e6412dc11e300e369da0c5b",
+  "split": "train",
+  "summary": {
+    "initial_front_cells": 9926,
+    "initial_front_nonfuel_cases": 37,
+    "initial_front_nonfuel_cells": 731,
+    "nonempty_sequences_entirely_on_nonfuel": 47,
+    "planned_line_cells_counted_per_sequence": 17518,
+    "planned_line_nonfuel_cells_counted_per_sequence": 1094
+  },
+  "table_sha256": "28627fa98b60f8dae4ac4f9246887ecd3488b541c2a9dbd5e82620811effbddc",
+  "test_cases_loaded": false,
+  "validation_used": false,
+  "weather_sha256": "76332f3da26fe02812ca6439fee5dec9f131793227335e0380267d12c0ab937e"
+}

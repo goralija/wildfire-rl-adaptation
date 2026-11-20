@@ -1,5 +1,45 @@
 # Promjene baze znanja
 
+## 2026-11-20: Korisnik je odobrio SimFire popravak i pregled PR-a
+
+Grana `codex/simfire-observation-audit` je pushana i otvoren je
+[PR #20](https://github.com/goralija/wildfire-rl-adaptation/pull/20). GitHub konektor je
+vratio403 za kreiranje; postojeći gh CLI je uspješno otvorio isti odobreni PR.
+Korisnik daje još jedan pokušaj SimFire-u: popravak kategorijskog goriva i prostornog
+opažanja na novoj izvedenoj grani, prije CA. Razlog prethodnog stopa i redoslijed su
+dokumentovani. Nema mergea ili novih mjerenja u ovoj publikacijskoj dopuni.
+
+## 2026-11-20: TASK-034 završen, ADR-036
+
+- [SimFire audit](docs/research/SIMFIRE_OBSERVATION_AUDIT.md): 98 input/observation provjera,
+  četiri nested porodice bez prolaza praga i dvije namjerno odabrane native probe.
+- Potvrđeni startup mkdir race je ispravljen testom prije koda. Fuel/front aliasing i
+  last_write osjetljivost su izmjereni; metri/stopa i smjerovi nisu pokazali kvar.
+- Pinovani suite 327/327, moderni 312 (3 skip), core 272 (35 skip); CLI PASS.
+- Preporuka TASK-035 je kontrolisani CA ugovor/pilot, draft nije izvršen. SimFire v2 je
+  opcionalni TASK-036; ne tvrdi se da su svi potencijali ili greške iscrpljeni.
+- Novi rad je lokalni na `codex/simfire-observation-audit`; nema novih PPO/CA treninga,
+  holdout pristupa ili remote objave. Handoff i ulazi znanja su usklađeni.
+
+## 2026-11-19: korisnik je zatražio push SimFire grane
+
+- `codex/simfire-policy-iterations` je pushana na origin i prati istoimenu remote granu.
+- HANDOFF, STATUS, NEXT_SESSION i README odražavaju objavu; PR i merge nisu urađeni.
+- Veliki TRAIN artefakti ostaju lokalni; nije bilo novog eksperimenta.
+
+## 2026-11-19: SimFire TASK-028–030 završeni (ADR-034)
+
+- Lokalna grana `codex/simfire-policy-iterations`, baza `f96f744f`; tuđi rad i glavni checkout sačuvani.
+- TRAIN weather obnovljen; oba obračuna testirana; svih 98×33 ishoda provjereno, bez ruba;
+  nezavisne reference i ADR-032 no-op/heuristički agregati se poklapaju.
+- Osam LOO metoda ocijenjeno zasebno za raw/charged. Nijedna ne prelazi prag. Charged
+  ridge-10: +6,98 ha prema pravilu, −13,63 ha bez najveće OOF razlike; nema potvrđene prednosti.
+- [Izvještaj](docs/research/SIMFIRE_B1_EXPLORATION.md), [EXP-022](docs/research/EXPERIMENT_LOG.md),
+  [rezultati](reports/real-fire-data/feds-b1-offline-v1.json) i [manifest lokalnog paketa](reports/real-fire-data/feds-b1-artifact-manifest-v1.json).
+- Root README usklađen s ADR-029/031/032/034 umjesto poništenih nalaza.
+- Pinovani runtime 314/314 testova (0 skip), CLI i knowledge PASS. Nema novih PPO/CA,
+  VALIDATION/TEST, push/merge ili fizičke validacije. TASK-034 je prijedlog sljedeće dijagnoze.
+
 ## 2026-11-12: pregled nakon faze 2 i novi HANDOFF
 
 - Pet analiza nakon ADR-032 (literatura, kratke epizode, intervencije, šta je stvarno,

@@ -95,19 +95,24 @@ def _open_archive(gridmet_dir: Path, date_year: int, abbreviation: str) -> dict:
         "units": units,
         "sha256": checksum,
         "path": path.name,
+        "size_bytes": path.stat().st_size,
     }
 
 
-def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path) -> dict:
+def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path, *, split=None) -> dict:
     import numpy as np
 
     if manifest.get("test_cases_loaded") is not False or preflight.get("test_cases_loaded") is not False:
         raise ValueError("Refusing to open weather for a manifest/preflight that includes test cases.")
+    if split not in (None, "train", "validation"):
+        raise ValueError("Only train or validation weather can be sampled")
     preflight_cases = {case["scenario_id"]: case for case in preflight["cases"]}
     open_files = {}
     records = []
     try:
         for case in manifest["cases"]:
+            if split is not None and case["split"] != split:
+                continue
             year = int(case["event"]["year"])
             preflight_case = preflight_cases.get(case["scenario_id"])
             if preflight_case is None or not preflight_case["fits_grid"]:
@@ -184,14 +189,14 @@ def _read_weather(manifest: dict, preflight: dict, gridmet_dir: Path) -> dict:
             item["dataset"].close()
 
     archive_manifest = []
-    for year in (2018, 2019, 2023):
+    for year in sorted({key[0] for key in open_files}):
         for abbreviation in ("th", "vs", "fm100"):
-            path = gridmet_dir / f"{abbreviation}_{year}.nc"
+            sample = open_files[(year, abbreviation)]
             archive_manifest.append({
-                "file": path.name,
-                "size_bytes": path.stat().st_size,
-                "sha256": verified_hash(path),
-                "source_url": f"https://www.northwestknowledge.net/metdata/data/{path.name}",
+                "file": f"{abbreviation}_{year}.nc",
+                "size_bytes": sample["size_bytes"],
+                "sha256": sample["sha256"],
+                "source_url": f"https://www.northwestknowledge.net/metdata/data/{abbreviation}_{year}.nc",
             })
     return {
         "schema_version": "feds-gridmet-episode-weather/1.2",
@@ -268,6 +273,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--manifest", type=Path, default=MANIFEST)
     parser.add_argument("--preflight", type=Path, default=PREFLIGHT)
     parser.add_argument("--gridmet-dir", type=Path, default=GRIDMET_DIR)
+    parser.add_argument("--split", choices=("train", "validation"), default=None,
+                        help="sample only this split; other raw weather archives are never opened")
     parser.add_argument("--out", type=Path, default=DEFAULT_OUTPUT)
     parser.add_argument("--coverage-report", type=Path, default=DEFAULT_COVERAGE_REPORT)
     parser.add_argument("--previous-weather", type=Path, default=None,
@@ -276,7 +283,7 @@ def main(argv: list[str] | None = None) -> int:
     try:
         manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
         preflight = json.loads(args.preflight.read_text(encoding="utf-8"))
-        result = _read_weather(manifest, preflight, args.gridmet_dir)
+        result = _read_weather(manifest, preflight, args.gridmet_dir, split=args.split)
         previous = None
         if args.previous_weather is not None:
             if args.previous_weather.resolve() == args.out.resolve():

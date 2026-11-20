@@ -19,8 +19,12 @@ merges and stage 3 stay with the user (see docs/HANDOFF_STAGE_1_2.md). Stage 1 p
 validation). Stage 2 is complete (ADR-032: none of the six primary tests rejects; base PPO is
 not distinguishable from a random legal line or the best TRAIN heuristic; a simulator result). Stage 3
 waits for the user's decision.
-The post-stage-2 review (docs/research/review-2026-11-11/SUMMARY.md, 2026-11-11) proposes
-TASK-028–030 (TRAIN only, exploratory), also only with the user's go-ahead. Start from HANDOFF.md. TEST 2024 stays closed.
+The SimFire TRAIN-only TASK-028–030 iterations are complete on codex/simfire-policy-iterations (ADR-034, 2026-11-19): 98x33 outcomes, eight LOO methods, no candidate meets the registered continuation threshold. TASK-034 has since been completed; see ADR-036 below. Follow STATUS, NEXT_SESSION and docs/research/SIMFIRE_B1_EXPLORATION.md. VALIDATION, TEST 2024 and CA stage 3 stay closed.
 Keep decisions and evidence in the
 repository, following [maintenance](knowledge/maintenance.md). This file is a routing
 shim; shared rules live in AGENTS.md.
+
+Latest 2026-11-20 (ADR-036): TASK-034 is complete on codex/simfire-observation-audit.
+Read docs/research/SIMFIRE_OBSERVATION_AUDIT.md. A startup race is fixed, four nested
+families do not meet the threshold, and numerical/observation limitations are explicit.
+TASK-035 CA contract/pilot is a draft, not training approval; TEST and new VALIDATION stay closed.

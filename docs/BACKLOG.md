@@ -4,6 +4,35 @@ title: Naredni zadaci
 ---
 # Naredni zadaci
 
+## Aktivni nastavak — 2026-11-20 (ADR-036)
+
+[Završni audit](research/SIMFIRE_OBSERVATION_AUDIT.md) čuva dokaze i ograničenja.
+
+| ID | Stanje | Ishod / sljedeće |
+| --- | --- | --- |
+| TASK-034 | završeno | input/observation audit 98, četiri nested porodice bez prolaza, startup race popravljen, dvije native sensitivity probe; ne dokazuje da su sve mogućnosti iscrpljene |
+| TASK-035 | draft pripremljen, nije pokrenut | CA ugovor informacija i tehnički pilot; prije treninga zamrznuti opažanje/checkpoint, slučajeve, jedinice i komparatore; [draft](../configs/drafts/ca-controlled-pilot-v1.json) |
+| TASK-036 | opcionalni SimFire v2, nije pokrenut | nova fuel/nonfuel/terrain opservacija i rezolucija; max/korak kroz novi TRAIN gate, zatim nova tabela/politike |
+
+Preporuka CA pilota nije tvrdnja da je CA validiran ili da će RL pobijediti. TEST 2024
+ostaje zatvoren; novi VALIDATION i dug trening nisu izvedeni. Stariji task statusi ispod
+su historija; TASK-034 više nije samo prijedlog.
+
+## Aktivni nastavak — 2026-11-19 (ADR-034)
+
+[SimFire B=1 izvještaj](research/SIMFIRE_B1_EXPLORATION.md) sadrži dokaze i komande.
+Ovaj dio zamjenjuje ranije statuse TASK-028–030; stariji prioriteti ispod su historija.
+
+| ID | Stanje | Ishod / sljedeće |
+| --- | --- | --- |
+| TASK-028 | završeno kao pomoćni obračun | testirana unija linije i no-op otiska; raw i charged prijavljeni; zvanična env nagrada ostaje otvorena odluka |
+| TASK-029 | završeno | 98 požara ×33=3.234 ishoda; reference/mask/input hash PASS; ADR-032 agregati se poklapaju; bez ruba |
+| TASK-030 | završeno | osam fiksnih metoda, LOO po požaru; nijedna ne prelazi prag u oba zasebna obračuna; novi PPO nije pokrenut |
+| TASK-034 | predloženo, nije pokrenuto | TRAIN-only dijagnoza prostornog signala u istom opažanju i stabilnosti selekcije; novi protokol prije scoringa |
+
+Novi kanali, VALIDATION, B=2/B=4, zvanična metrika i remote objava ostaju zasebne odluke.
+TEST 2024 ostaje zatvoren; CA faza 3 nije pokrenuta.
+
 ## Aktivni prioritet — 2026-11-12 (pregled nakon faze 2)
 
 Plan i razlozi: [pregled 2026-11-11](research/review-2026-11-11/SUMMARY.md). Sve stavke čekaju

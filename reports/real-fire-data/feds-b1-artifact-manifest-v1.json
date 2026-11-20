@@ -1,0 +1,53 @@
+{
+  "archive_reread_all_member_hashes": "PASS",
+  "bundle_sha256": "8214247a213d103e07c612e52852afd7543bf4a7068b3ab60569c65432c8f131",
+  "bundle_size_bytes": 24397671,
+  "case_count": 98,
+  "code_commit": "d1592ed79325733da3600ff889995e3560add319",
+  "created_utc": "2026-11-19T00:43:40.776848+00:00",
+  "file_count_without_internal_manifest": 719,
+  "file_role_counts": {
+    "elevation_raster": 98,
+    "finite_table_case": 98,
+    "finite_table_masks": 98,
+    "fuel_raster": 98,
+    "input_receipt": 98,
+    "local_run_receipt": 8,
+    "observed_initial_masks": 98,
+    "public_report": 5,
+    "repository_source_snapshot": 113,
+    "sampled_train_weather": 1,
+    "source_configuration": 3,
+    "table_index": 1
+  },
+  "internal_manifest_sha256": "e64a0d7db46bceb43ad4d2a7a2fe046b417e6d18fddbd76e0a7438d25a336a61",
+  "interpretation": "Exploratory TRAIN simulator artifacts, not physical validation or an independent final test.",
+  "local_bundle": ".local/b1/artifacts/simfire-b1-train-v1.tar.gz",
+  "outcome_count": 3234,
+  "restore": [
+    "Use repository base f96f744f plus the bundled source/ overlay (or local branch code_commit) and the pinned SimFire runtime; the environment and Git history are not bundled.",
+    "Extract into a new directory; recompute every listed SHA-256. Never load pickle: all masks are non-pickle NPZ.",
+    "Use cases/table-98.json with scripts/analyze_feds_b1.py to refit the registered LOO menu.",
+    "Use inputs as --input-root for scripts/summarize_feds_b1.py; the checked-out cohort manifest and frozen plan must match.",
+    "For fresh native replay, use bundled inputs and exact weather with scripts/enumerate_feds_b1.py and a NEW output folder.",
+    "Original absolute paths remain in case provenance; moved caches are not promised to pass guarded native resume.",
+    "This bundle excludes NetCDF archives, validation/test rasters, virtualenvs, external repos, and policy checkpoints.",
+    "The original ADR-032 full TRAIN report is unavailable and is not included."
+  ],
+  "restore_smoke": {
+    "environment_reinstalled": false,
+    "fresh_native_replay_performed": false,
+    "isolated_archive_extraction": true,
+    "mask_metrics_and_input_receipts_rechecked": true,
+    "restored_summary_byte_identical_to_public_report": true,
+    "result": "PASS",
+    "summary_sha256": "7d9bed2418a62edd6b22b9c37a1966ae34d206d73940347a36c5c20b0f9c32fd"
+  },
+  "schema_version": "feds-b1-portable-artifacts/1.0",
+  "split": "train",
+  "table_sha256": "28627fa98b60f8dae4ac4f9246887ecd3488b541c2a9dbd5e82620811effbddc",
+  "test_cases_loaded": false,
+  "uploaded": false,
+  "validation_used": false,
+  "weather_sha256": "76332f3da26fe02812ca6439fee5dec9f131793227335e0380267d12c0ab937e"
+}
