@@ -1,6 +1,7 @@
 """Small SB3 policy architecture and pickle-free inference checkpoints."""
 import hashlib
 import json
+import random
 from pathlib import Path
 
 import gymnasium as gym
@@ -72,7 +73,14 @@ def load_policy_arrays(path, expected_contract):
         raise ValueError("checkpoint contract mismatch")
     if hashlib.sha256(path.read_bytes()).hexdigest()!=receipt['sha256']:
         raise ValueError("checkpoint hash mismatch")
-    model = create_model()
+    # Inference reconstruction must not reset the caller's training random stream.
+    rng = random.getstate(), np.random.get_state(), torch.random.get_rng_state()
+    try:
+        model = create_model()
+    finally:
+        random.setstate(rng[0])
+        np.random.set_state(rng[1])
+        torch.random.set_rng_state(rng[2])
     state = model.policy.state_dict()
     with np.load(path,allow_pickle=False) as arrays:
         if set(arrays.files)!=set(state) or set(receipt['tensors'])!=set(state):

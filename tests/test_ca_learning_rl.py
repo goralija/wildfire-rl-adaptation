@@ -52,7 +52,11 @@ class SafeLearningSmokeTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp)/'weights.npz'
             save_policy_arrays(model, path, contract)
+            torch_state = torch.random.get_rng_state().clone()
+            numpy_state = np.random.get_state()
             loaded = load_policy_arrays(path, contract)
+            self.assertTrue(torch.equal(torch_state,torch.random.get_rng_state()))
+            np.testing.assert_array_equal(numpy_state[1],np.random.get_state()[1])
             np.testing.assert_array_equal(action, loaded.predict(obs, action_masks=mask,
                                                                 deterministic=True)[0])
             with patch('numpy.load', side_effect=AssertionError('must reject before reading')):
