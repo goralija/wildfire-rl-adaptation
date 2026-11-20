@@ -1,0 +1,89 @@
+{
+  "schema_version": "ca-learning-pilot/1.0",
+  "task": "TASK-038",
+  "decision": "ADR-041",
+  "date": "2026-11-21",
+  "base_commit": "3b7b56a2d03925781f5f7a3c089ed66f4aaec6a8",
+  "scenario_plan": "configs/frozen/ca-controlled-pilot-v2.json",
+  "scenario_plan_sha256": "41322dd7ef90d44d6da60af71c3e9351948b40b136e3af7b224ec9625eb01ccf",
+  "observation_version": "ca-native-current-v2",
+  "encoder_version": "ca-geometric-local-v1",
+  "reward_version": "ca-line-charged-safety-v1",
+  "model_seeds": [
+    17,
+    29,
+    43
+  ],
+  "teacher": "direct_flank",
+  "training_cases": "all 32 fixed train seeds, all B2/B3/B4; no procedural test",
+  "encoder": "native 7x7x21 crop per unit plus exact geometry, unit state, slot, current forcing and global fuel/time/roster summaries; deterministic policy preprocessing from v2 only",
+  "architecture": {
+    "shared_unit_mlp": [
+      64,
+      64
+    ],
+    "global_mlp": 32,
+    "pi": [
+      64
+    ],
+    "vf": [
+      64
+    ]
+  },
+  "bc": {
+    "epochs": 60,
+    "batch_size": 64,
+    "learning_rate": 0.001,
+    "loss": "masked negative joint log probability plus 0.1 MSE teacher discounted returns",
+    "gamma": 0.99,
+    "choice_agreement": "only active slots with >1 legal action; teacher-distribution training diagnostic"
+  },
+  "ppo": {
+    "steps": 4096,
+    "envs": 2,
+    "n_steps": 32,
+    "batch_size": 32,
+    "n_epochs": 4,
+    "learning_rate": 0.0001,
+    "gamma": 0.99,
+    "gae_lambda": 0.95,
+    "clip_range": 0.1,
+    "ent_coef": 0.001,
+    "vf_coef": 0.5,
+    "max_grad_norm": 0.5,
+    "target_kl": 0.03
+  },
+  "candidates": [
+    "bc-final",
+    "bc-ppo-final"
+  ],
+  "selection": "fixed final epochs/steps; no best development checkpoint or seed, no retuning after scores",
+  "checkpoint_format": "numeric policy arrays NPZ allow_pickle=False + SHA256/contract receipt; never old zip/torch checkpoints",
+  "evaluation": "all 16 fixed development fires and three rosters for every candidate and every model seed; reuse locked fixed-rule outcomes only after source/runtime/world checks",
+  "statistics": "mean three model seeds within each case/roster, then paired whole-case cluster bootstrap 10000 draws seed0; report all individual seeds and budgets, BC-PPO minus BC secondary; descriptive reused development",
+  "continuation_rule": {
+    "saved": "mean seed-averaged saved-fraction difference vs fixed direct_flank has descriptive CI95 lower > 0",
+    "safety": "every model seed has no more losses AND no more close calls than direct_flank across same 48 episodes",
+    "scope": "exploratory continuation signal only; no final acceptance or multiple-comparison correction"
+  },
+  "execution": {
+    "max_processes": 4,
+    "nice": 19,
+    "threads_per_process": 1,
+    "expected_minutes": "5-15; no automatic extension beyond fixed epochs/steps"
+  },
+  "closed": [
+    "procedural test",
+    "real VALIDATION",
+    "TEST 2024",
+    "old checkpoints",
+    "long/paid training",
+    "merge"
+  ],
+  "stop": [
+    "information/budget/damage/serialization failure",
+    "source or plan hash change",
+    "nonfinite loss or weights",
+    "unregistered candidate change"
+  ]
+}

@@ -1812,3 +1812,43 @@ protokol uz development referencu direct_flank. Spašena šteta ne smije sakriti
 nesigurnost; kriteriji sigurnosti i izbor checkpointa idu unaprijed. TASK-037 SimFire
 ostaje odgođen. Merge i novi PR nisu urađeni. [Izvještaj](../research/CA_CONTROLLED_PILOT.md)
 i [rezultati](../../reports/synthetic/ca-controlled-development-v2.json) su kanonski.
+
+
+## ADR-041 — TASK-038 odobren: kratki CA v2 BC/PPO, plan prije treninga, 2026-11-21
+
+Korisnik traži sljedeći zadatak poslije završenog TASK-035. Izolovana grana
+`codex/ca-learning-pilot` polazi iz3b7b56a2. [Zamrznuti plan](../../configs/frozen/ca-learning-pilot-v1.json)
+prethodi podacima/treningu. Cilj je stvarno provjeriti imitaciju i kratki PPO na v2,
+ne dokazati fizičku tačnost CA ili obećati RL prednost.
+
+**Fiksni obim.** Tri model sjemena17/29/43, isti32 proceduralna TRAIN požara i tri
+rostera kao ADR-039. Učitelj direct_flank. BC60 epoha pa4.096 PPO koraka po modelu,
+dva rollout procesa i jedna nit po procesu, najviše4 procesa nice19. Najavljeno5–15min.
+Kandidati su finalni BC i finalni BC-PPO; nema development izbora epohe, najboljeg seeda
+ili automatskog produženja. Dev16 je ranije viđen, test ostaje zatvoren. Duga obuka nije nalog.
+
+**Ugovor.** Nova verzija deterministic encoder-a čita samo v2 native opažanje/masku:
+7x7 native patch21 kanala oko jedinice, geometrija fronta, sadašnje vrijeme, stanje/slot
+jedinice i globalni sažeci. To je arhitektonska kompresija dostupne informacije, ne
+privilegovani ulaz ili potpuna Markov reprezentacija. Shared unit MLP64/64 i globalni
+MLP32, zatim actor/value64. Fizika, perfect-current forcing, rostere i line-charged
+nagrada sa sigurnosnim kaznama ostaju ADR-039. No-op uvijek dostupan, gubitak jedinica
+ne završava aktivni požar. BC koristi samo učiteljeve TRAIN akcije i diskontovane povrate.
+
+**Provenance.** Nema starog policy-v1 ili SB3 zip učitavanja. Nova težina se sprema kao
+numerički NPZ plus hash/ugovor i učitava sa allow_pickle=False tek nakon provjere plana,
+izvora, verzije/opisa modela i arhitekture. Izvještaj čuva sve težinske hashove, ali
+težine i rollout podaci ostaju lokalni. Isti scenariji i informacije za poređenja.
+
+**Ocjena.** Sve tri BC i BC-PPO politike na16dev x3rostera, deterministički masked
+potezi; zamrznuti heuristički rezultati tek poslije provjere izvora/runtime/svijeta.
+Svih6 modela se prijavljuje. Glavni kontrast prema ranije izabranom direct_flank;
+BC-PPO naspram BC sekundarno. Resamplira se cijeli požar sa svim rosterima, nakon
+prosječenja tri model seeda unutar slučaja,10.000 drawova seed0. Nisu144 nezavisna požara.
+
+**Nastavak.** Eksploratorni signal traži CI donju granicu spašene štete iznad0 i da
+svaki model seed nema više izgubljenih jedinica ni bliskih susreta od heuristike na
+istih48 epizoda. Sigurnost se ne skriva ukupnim rewardom. To nije završni prihvat,
+interval nije korigovan za dva kandidata ili prethodnu upotrebu developmenta. Na
+tehnički kvar, nefinite vrijednosti ili hash mismatch staje se bez promjene menija.
+Nema proceduralnog testa, stvarnog VALIDATION/TEST, plaćenog computea ili mergea.
