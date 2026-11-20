@@ -1,5 +1,14 @@
 # Promjene baze znanja
 
+## 2026-11-20: Korisnik je odobrio SimFire popravak i pregled PR-a
+
+Grana `codex/simfire-observation-audit` je pushana i otvoren je
+[PR #20](https://github.com/goralija/wildfire-rl-adaptation/pull/20). GitHub konektor je
+vratio403 za kreiranje; postojeći gh CLI je uspješno otvorio isti odobreni PR.
+Korisnik daje još jedan pokušaj SimFire-u: popravak kategorijskog goriva i prostornog
+opažanja na novoj izvedenoj grani, prije CA. Razlog prethodnog stopa i redoslijed su
+dokumentovani. Nema mergea ili novih mjerenja u ovoj publikacijskoj dopuni.
+
 ## 2026-11-20: TASK-034 završen, ADR-036
 
 - [SimFire audit](docs/research/SIMFIRE_OBSERVATION_AUDIT.md): 98 input/observation provjera,

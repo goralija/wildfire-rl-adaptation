@@ -4,6 +4,13 @@ title: Work log
 ---
 # Work log
 
+2026-11-20 — Grana `codex/simfire-observation-audit` je pushana i otvoren je
+[PR #20](https://github.com/goralija/wildfire-rl-adaptation/pull/20). GitHub konektor je
+vratio403 za kreiranje; postojeći gh CLI je uspješno otvorio isti odobreni PR.
+Korisnik daje još jedan pokušaj SimFire-u: popravak kategorijskog goriva i prostornog
+opažanja na novoj izvedenoj grani, prije CA. Razlog prethodnog stopa i redoslijed su
+dokumentovani. Nema mergea ili novih mjerenja u ovoj publikacijskoj dopuni.
+
 2026-11-20 — TASK-034 završen na `codex/simfire-observation-audit`, iz `58feac72`.
 Plan `1e9a263c` prije mjerenja, modeli `855e0fc0`. Svih98 input/observation provjera i 392
 weather opažanja prolaze; četiri nested porodice ne prelaze prag. Potvrđen pooling/fuel

@@ -8,6 +8,15 @@ Stanje **2026-11-20**. Ovaj dokument je ulaz za kolegu ili agenta koji preuzima 
 chat historije. Repozitorij je kanonski izvor; artifact za tim (link ispod) je sažetak za
 čitanje.
 
+## Korisnikov nastavak — popravak opažanja prije CA (2026-11-20)
+
+Završeni rad je pushan i otvoren kao [PR #20](https://github.com/goralija/wildfire-rl-adaptation/pull/20)
+prema `main`, za pregled kolega. PR ostaje otvoren. Korisnik je odobrio još jedan
+SimFire pokušaj: TASK-036 sada ima prioritet pred CA pilotom TASK-035.
+Nastavak ide iz ove grane u `codex/simfire-observation-repair`, u izdvojenom worktreeu;
+novi PR nije potreban po posljednjoj korisnikovoj poruci. Precizni plan ide prije
+novih mjerenja. VALIDATION/TEST i novi CA trening ostaju zatvoreni.
+
 ## Najnovije — TASK-034 završen (ADR-036)
 
 [Završni SimFire audit](docs/research/SIMFIRE_OBSERVATION_AUDIT.md) je ulaz za nastavak:

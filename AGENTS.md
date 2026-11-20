@@ -10,6 +10,13 @@ Repo je OKF 0.2 knowledge bundle. Na početku sesije pročitaj [index.md](index.
 Zatim koristi [mapu zadataka/koda](knowledge/code-map.md) za relevantne izvore i testove.
 Korisnikove direktne upute imaju prednost; kasniji ADR može zamijeniti raniji.
 
+**Najnoviji nalog (2026-11-20): još jedan SimFire pokušaj kroz TASK-036, popravak
+opažanja prije CA.** PR #20 prethodnog audita je otvoren za pregled. Nastavak iz ove
+grane ide u `codex/simfire-observation-repair`; precizni plan se piše prije mjerenja.
+Novi PR nije obavezan po korisniku. CA pilot TASK-035 se odgađa. TEST i novo VALIDATION
+korištenje ostaju zatvoreni. Korisnik je odobrio push/PR i opciju mergea, ali se ovdje
+bira nova izvedena grana i otvoren pregled prethodnog rada, bez mergea.
+
 **Aktuelan je ADR-036 (2026-11-20): TASK-034 je završen na
 `codex/simfire-observation-audit`.** [Izvještaj](docs/research/SIMFIRE_OBSERVATION_AUDIT.md)
 razdvaja provjerene greške, modelna ograničenja i otvoreno. Startup mkdir race je

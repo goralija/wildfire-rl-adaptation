@@ -7,6 +7,15 @@ sources:
 ---
 # Trenutno stanje — 2026-11-20
 
+## Korisnikov nastavak — popravak opažanja prije CA (2026-11-20)
+
+Završeni rad je pushan i otvoren kao [PR #20](https://github.com/goralija/wildfire-rl-adaptation/pull/20)
+prema `main`, za pregled kolega. PR ostaje otvoren. Korisnik je odobrio još jedan
+SimFire pokušaj: TASK-036 sada ima prioritet pred CA pilotom TASK-035.
+Nastavak ide iz ove grane u `codex/simfire-observation-repair`, u izdvojenom worktreeu;
+novi PR nije potreban po posljednjoj korisnikovoj poruci. Precizni plan ide prije
+novih mjerenja. VALIDATION/TEST i novi CA trening ostaju zatvoreni.
+
 ## 2026-11-20 — TASK-034 završen, obrazložena preporuka CA pilota (ADR-036)
 
 Grana `codex/simfire-observation-audit`, iz prethodne `58feac72`; novi rad je lokalno

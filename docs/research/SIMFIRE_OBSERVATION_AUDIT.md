@@ -220,3 +220,34 @@ Svi izlazi moraju biti novi. [Manifest lokalnog paketa](../../reports/real-fire-
 čuva tačne ulaze, staru tabelu, novu analizu, native maske, kod i logove. Nema
 checkpointova, venv-a ili upload-a velikih podataka. Manifest i sourcehashovi dopuštaju
 provjeru zapisa; ne predstavljaju nezavisnu reviziju naučnog zaključka.
+
+## Zašto je prethodni ciklus stao i šta popravak može promijeniti
+
+Prethodni ciklus je ocjenjivao unaprijed zadati meni nad **istim starim opažanjem**.
+Stop-uslov je zatvorio taj eksperiment nakon što kandidati nisu prešli prag. To nije
+bio dokaz da su reprezentacijske greške beznačajne niti da je SimFire iscrpljen.
+Popravak zapisa nije bio izveden: drugačije korištenje već sažetih kanala ne može
+rekonstruisati podatak koji je ranije izbrisan. Preporuka CA bila je preporuka opsega
+projekta; nije rezultat poređenja popravljenog opažanja i CA.
+
+Fuel kod označava kategoriju zapaljivog materijala. SimFire iz originalnog koda dobija
+količinu i dubinu goriva, površinu/volumen čestica i vlagu gašenja. Wind, vlaga i reljef
+zatim utiču na Rothermel širenje. Izjednačavanje nastaje u policy kanalu `clip(code/13)`:
+tip13 i negorivi kodovi daju1. Simulator čuva razliku; politika je ne može vratiti.
+Kategorijski kanali i posebna nonfuel maska bi ovu zabunu uklonili. Ne garantuju da će
+politika postati bolja, jer geometrija, buduće vrijeme, obim podataka i modeli ostaju važni.
+
+Mean pooling takođe čuva prosjek, ne raspored unutar bloka. Svaki piksel je2.88km, a
+linija1.26km. Finija globalna mreža i native izrez oko kandidata pokazuju detalje na
+skali same odluke. Potrebna je uparena provjera: samo kategorije; zatim finiji lokalni
+prikaz; zatim reljef. Posebno se mjeri maska koja odbija liniju potpuno na negorivom.
+Maska ne smije zavisiti od budućeg no-op otiska, mora ostaviti no-op i ne završava
+simulaciju kad nestane budžeta.
+
+Korisnik sada daje prioritet tom popravku (TASK-036), prije CA odluke. Redoslijed:
+testovi i verzionisana implementacija; pilot opažanja; provjera svih98TRAIN no-op
+putanja prema staroj tabeli; fiksni offline kandidati i isti komparatori; objava svih
+rezultata i granica. Ako se mijenja samo opažanje/maska, a cijele no-op maske ostanu
+identične, B=1 ishodi se mogu ponovo koristiti bez svih33 novih simulacija po požaru.
+Promjena fizike/agregacije tražila bi novu tabelu i growth gate. Ne mijenjati oboje
+odjednom i pripisivati eventualni dobitak samo opažanju.

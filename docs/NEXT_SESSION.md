@@ -4,6 +4,15 @@ title: Naredni korak — nakon SimFire audita (2026-11-20)
 ---
 # Naredni korak
 
+## Korisnikov nastavak — popravak opažanja prije CA (2026-11-20)
+
+Završeni rad je pushan i otvoren kao [PR #20](https://github.com/goralija/wildfire-rl-adaptation/pull/20)
+prema `main`, za pregled kolega. PR ostaje otvoren. Korisnik je odobrio još jedan
+SimFire pokušaj: TASK-036 sada ima prioritet pred CA pilotom TASK-035.
+Nastavak ide iz ove grane u `codex/simfire-observation-repair`, u izdvojenom worktreeu;
+novi PR nije potreban po posljednjoj korisnikovoj poruci. Precizni plan ide prije
+novih mjerenja. VALIDATION/TEST i novi CA trening ostaju zatvoreni.
+
 ## 2026-11-20 — završen TASK-034 (ADR-036)
 
 Ulaz je [završni pregled](research/SIMFIRE_OBSERVATION_AUDIT.md): četiri nested porodice
