@@ -8,7 +8,7 @@ Istražujemo može li prilagodba unaprijed treniranog RL agenta **različitim bu
 intervencija** smanjiti opožarenu površinu u odnosu na početni agent i heuristike,
 uz posebno ispitivanje zaštite prioritetnih područja.
 
-**Stanje (2026-11-19):** glavni pravac je SimFire + FPA-FOD/FEDS-CONUS: 98 TRAIN
+**Stanje (2026-11-20):** glavni pravac je SimFire + FPA-FOD/FEDS-CONUS: 98 TRAIN
 požara 2018/19, 20 VALIDATION 2023; TEST 2024 zatvoren. Raniji ADR-022–028 rezultati
 su poništeni zbog greške u vremenskim podacima. Na ispravljenim ulazima growth gate
 prolazi prema slaboj elipsi, uz WAF 0.10 / ROS 1.0 (ADR-031); to nije fizička validacija.
@@ -23,6 +23,14 @@ predloženi TASK-034. Grana je pushana na origin po korisnikovom nalogu 2026-11-
 Nema novog PPO/CA treninga ili VALIDATION/TEST korištenja; veliki artefakti ostaju lokalni.
 Cell2Fire/Firehose su odvojeni historijski pravci; simulatorski učinak nije dokaz
 stvarnog učinka gašenja.
+
+**Naredna iteracija je završena:** [TASK-034 audit](docs/research/SIMFIRE_OBSERVATION_AUDIT.md)
+potvrđuje ograničenja opservacije i numeričke agregacije; startup race je popravljen,
+a četiri nested metode nisu prešle prag. Preporučen je kontrolisani CA pilot kao
+sljedeći projektni korak, uz [draft ugovora](configs/drafts/ca-controlled-pilot-v1.json).
+To ne dokazuje da su sve SimFire mogućnosti iscrpljene ili da je CA fizički validiran.
+Novi rad je lokalno na `codex/simfire-observation-audit`; nema novog PPO/CA treninga,
+VALIDATION/TEST ili nove remote objave.
 
 Tim: Amar Hodžić, Belmin Durmo, Harun Goralija. Predmet MPVI.
 

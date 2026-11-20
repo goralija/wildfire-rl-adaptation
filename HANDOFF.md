@@ -4,11 +4,26 @@ title: Handoff za nastavak projekta
 ---
 # Handoff za nastavak projekta
 
-Stanje **2026-11-19**. Ovaj dokument je ulaz za kolegu ili agenta koji preuzima projekat bez
+Stanje **2026-11-20**. Ovaj dokument je ulaz za kolegu ili agenta koji preuzima projekat bez
 chat historije. Repozitorij je kanonski izvor; artifact za tim (link ispod) je sažetak za
 čitanje.
 
-## Aktivan nastavak — SimFire B=1 završen (ADR-034)
+## Najnovije — TASK-034 završen (ADR-036)
+
+[Završni SimFire audit](docs/research/SIMFIRE_OBSERVATION_AUDIT.md) je ulaz za nastavak:
+98 input/observation provjera PASS, četiri nested metode bez prolaza praga, potvrđeni
+pooling/fuel aliasing, startup race popravljen i native numerička osjetljivost izmjerena.
+327/327 pinovanih testova prolazi. Native probe su dva namjerno odabrana slučaja;
+nije dokazana fizička validacija niti iscrpljenost svih SimFire mogućnosti.
+
+Nova grana `codex/simfire-observation-audit` iz `58feac72` je lokalna, bez novog push-a
+ili mergea. Prethodna `codex/simfire-policy-iterations` je na originu. Nema aktivnog runa.
+Preporučen je TASK-035: [CA ugovor i tehnički pilot](configs/drafts/ca-controlled-pilot-v1.json),
+bez automatskog treninga; opcionalni TASK-036 opisuje SimFire v2. TEST i novo VALIDATION
+korištenje ostaju zatvoreni. Brojevi ADR-028 ne vraćaju se u upotrebu. Detalji su u
+NEXT_SESSION/BACKLOG; veliki artefakti su u lokalnom paketu s manifestom.
+
+## Prethodni ciklus — SimFire B=1 završen (ADR-034)
 
 Korisnikov SimFire nastavak TASK-028–030 je završen na lokalnoj grani
 `codex/simfire-policy-iterations`. [Izvještaj](docs/research/SIMFIRE_B1_EXPLORATION.md)
@@ -17,7 +32,7 @@ unaprijed zadani prag. Charged ridge-10 daje +6,98 ha prema pravilu, ali −13,6
 bez najveće OOF razlike; nema potvrđene prednosti. Oracle jaz ostaje velik.
 [Manifest lokalnog paketa](reports/real-fire-data/feds-b1-artifact-manifest-v1.json)
 veže tačan weather, pune ishode, TRAIN ulaze i source snapshot. Nema aktivnog runa.
-Predloženi TASK-034 prvo dijagnosticira prostorni signal u istom opažanju; nije pokrenut.
+TASK-034 je zatim završen; njegov nalaz i predloženi TASK-035 su u najnovijoj sekciji iznad.
 VALIDATION/TEST i CA faza 3 ostaju zatvoreni. Nema novog PPO treninga. Grana je naknadno pushana na origin po korisnikovom nalogu; PR i merge nisu urađeni.
 
 ## Gdje je projekat (jedan pasus)
@@ -35,8 +50,10 @@ prije bilo kakvog novog treninga: [sažetak i plan](docs/research/review-2026-11
 
 ## Grane i pull requestovi
 
-Faze 1 i 2 i pregled PR #19 su u `main`-u (`f96f744f`). Novi rad je lokalno na grani
-`codex/simfire-policy-iterations`, u `.worktrees/simfire-policy-iterations/`. Pushan je na origin po korisnikovom nalogu 2026-11-19; nije spojen u `main`. Glavni klon ostaje čist. Ranije grane i lokalni artefakti su sačuvani.
+Faze 1 i 2 i pregled PR #19 su u `main`-u (`f96f744f`). Prethodna grana
+`codex/simfire-policy-iterations` je na originu od 2026-11-19. Novi TASK-034 je lokalno
+na `codex/simfire-observation-audit`, u istoimenom `.worktrees/` folderu. Nijedna nova
+grana nije spojena u main; glavni klon i raniji artefakti su sačuvani.
 
 Provjera prije rada: `git fetch origin` pa `gh pr list --state all --limit 5`. Lokalni `main`
 na Harunovom računaru može zaostajati za `origin/main`; nove grane praviti iz `origin/main`.
@@ -58,7 +75,7 @@ na Harunovom računaru može zaostajati za `origin/main`; nove grane praviti iz 
 - Arhiviranje lokalnih rezultata faza 1 i 2 (vidi „Šta postoji samo lokalno“ ispod), npr. kao
   privatni GitHub release kakav je `synthetic-policy-v1`.
 - Kako se računa šteta kad linija zauzme ćelije koje bi izgorjele (sada se računaju kao spašene).
-- TASK-028–030 su završeni; TASK-034 je novi prijedlog. Novi budžeti, nova VALIDATION upotreba i novi trening traže unaprijed zapisan nastavak.
+- TASK-028–030 i TASK-034 su završeni; TASK-035 CA pilot je novi draft, TASK-036 SimFire v2 je opcionalan. Novi budžeti, nova VALIDATION upotreba i novi trening traže unaprijed zapisan nastavak.
 - Korisnik je odabrao SimFire nastavak. CA observation i faza 3 ostaju odgođeni. Detalji: [NEXT_SESSION](docs/NEXT_SESSION.md), [BACKLOG](docs/BACKLOG.md).
 
 ## Pravila koja važe za svakog ko nastavlja

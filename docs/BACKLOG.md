@@ -4,6 +4,20 @@ title: Naredni zadaci
 ---
 # Naredni zadaci
 
+## Aktivni nastavak — 2026-11-20 (ADR-036)
+
+[Završni audit](research/SIMFIRE_OBSERVATION_AUDIT.md) čuva dokaze i ograničenja.
+
+| ID | Stanje | Ishod / sljedeće |
+| --- | --- | --- |
+| TASK-034 | završeno | input/observation audit 98, četiri nested porodice bez prolaza, startup race popravljen, dvije native sensitivity probe; ne dokazuje da su sve mogućnosti iscrpljene |
+| TASK-035 | draft pripremljen, nije pokrenut | CA ugovor informacija i tehnički pilot; prije treninga zamrznuti opažanje/checkpoint, slučajeve, jedinice i komparatore; [draft](../configs/drafts/ca-controlled-pilot-v1.json) |
+| TASK-036 | opcionalni SimFire v2, nije pokrenut | nova fuel/nonfuel/terrain opservacija i rezolucija; max/korak kroz novi TRAIN gate, zatim nova tabela/politike |
+
+Preporuka CA pilota nije tvrdnja da je CA validiran ili da će RL pobijediti. TEST 2024
+ostaje zatvoren; novi VALIDATION i dug trening nisu izvedeni. Stariji task statusi ispod
+su historija; TASK-034 više nije samo prijedlog.
+
 ## Aktivni nastavak — 2026-11-19 (ADR-034)
 
 [SimFire B=1 izvještaj](research/SIMFIRE_B1_EXPLORATION.md) sadrži dokaze i komande.

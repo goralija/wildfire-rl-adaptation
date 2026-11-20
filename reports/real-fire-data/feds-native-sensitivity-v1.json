@@ -1,0 +1,463 @@
+{
+  "code_commit": "c40d1e02f1cd0a09ed628cf4b8ed38cdc007595b",
+  "created_utc": "2026-11-20T17:07:59.834779+00:00",
+  "label": "TWO DIAGNOSTIC TRAIN CASES; ALTERNATIVES NOT CALIBRATED; NOT POLICY OR PHYSICAL VALIDATION",
+  "limits": [
+    "Two purposefully selected fires do not establish cohort-average sensitivity.",
+    "Reversing only initial sprites is a finite perturbation, not a test of every possible traversal order.",
+    "Alternative max/1-minute dynamics require a new gate before any policy claim; old locked results remain as recorded."
+  ],
+  "locked_reference_check": "PASS",
+  "paired_damage_scores": [
+    {
+      "charged_damage_cells": 0,
+      "charged_saved_cells": 0,
+      "extra_line_charge_cells": 0,
+      "line_cells_in_noop_footprint": 0,
+      "noop_damage_cells": 0,
+      "raw_damage_cells": 0,
+      "raw_saved_cells": 0,
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "variant": "locked"
+    },
+    {
+      "charged_damage_cells": 0,
+      "charged_saved_cells": 0,
+      "extra_line_charge_cells": 0,
+      "line_cells_in_noop_footprint": 0,
+      "noop_damage_cells": 0,
+      "raw_damage_cells": 0,
+      "raw_saved_cells": 0,
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "variant": "locked_reverse_initial_sprites"
+    },
+    {
+      "charged_damage_cells": 0,
+      "charged_saved_cells": 0,
+      "extra_line_charge_cells": 0,
+      "line_cells_in_noop_footprint": 0,
+      "noop_damage_cells": 0,
+      "raw_damage_cells": 0,
+      "raw_saved_cells": 0,
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "variant": "max_aggregation"
+    },
+    {
+      "charged_damage_cells": 0,
+      "charged_saved_cells": 0,
+      "extra_line_charge_cells": 0,
+      "line_cells_in_noop_footprint": 0,
+      "noop_damage_cells": 0,
+      "raw_damage_cells": 0,
+      "raw_saved_cells": 0,
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "variant": "max_reverse_initial_sprites"
+    },
+    {
+      "charged_damage_cells": 0,
+      "charged_saved_cells": 0,
+      "extra_line_charge_cells": 0,
+      "line_cells_in_noop_footprint": 0,
+      "noop_damage_cells": 0,
+      "raw_damage_cells": 0,
+      "raw_saved_cells": 0,
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "variant": "one_minute"
+    },
+    {
+      "charged_damage_cells": 17717,
+      "charged_saved_cells": -8,
+      "extra_line_charge_cells": 9,
+      "line_cells_in_noop_footprint": 9,
+      "noop_damage_cells": 17709,
+      "raw_damage_cells": 17708,
+      "raw_saved_cells": 1,
+      "scenario_id": "fpa-fod-400311253-martin",
+      "variant": "locked"
+    },
+    {
+      "charged_damage_cells": 16674,
+      "charged_saved_cells": -87,
+      "extra_line_charge_cells": 9,
+      "line_cells_in_noop_footprint": 9,
+      "noop_damage_cells": 16587,
+      "raw_damage_cells": 16665,
+      "raw_saved_cells": -78,
+      "scenario_id": "fpa-fod-400311253-martin",
+      "variant": "locked_reverse_initial_sprites"
+    },
+    {
+      "charged_damage_cells": 21994,
+      "charged_saved_cells": 19,
+      "extra_line_charge_cells": 9,
+      "line_cells_in_noop_footprint": 9,
+      "noop_damage_cells": 22013,
+      "raw_damage_cells": 21985,
+      "raw_saved_cells": 28,
+      "scenario_id": "fpa-fod-400311253-martin",
+      "variant": "max_aggregation"
+    },
+    {
+      "charged_damage_cells": 21994,
+      "charged_saved_cells": 19,
+      "extra_line_charge_cells": 9,
+      "line_cells_in_noop_footprint": 9,
+      "noop_damage_cells": 22013,
+      "raw_damage_cells": 21985,
+      "raw_saved_cells": 28,
+      "scenario_id": "fpa-fod-400311253-martin",
+      "variant": "max_reverse_initial_sprites"
+    },
+    {
+      "charged_damage_cells": 17859,
+      "charged_saved_cells": 10,
+      "extra_line_charge_cells": 9,
+      "line_cells_in_noop_footprint": 9,
+      "noop_damage_cells": 17869,
+      "raw_damage_cells": 17850,
+      "raw_saved_cells": 19,
+      "scenario_id": "fpa-fod-400311253-martin",
+      "variant": "one_minute"
+    }
+  ],
+  "plan_sha256": "4052358378c57c2383d75d3f590014dda7cce5ac62f84455a6a90727818c95bf",
+  "rows": [
+    {
+      "actions": [
+        7,
+        0,
+        0,
+        0
+      ],
+      "edge_contact": false,
+      "mask_file": "fpa-fod-400300427-plateau--locked_reverse_initial_sprites--advancing_front.npz",
+      "mask_sha256": "9a68f6c907c9e85e2bab0cb10751d33f284996f28d5e1accbdb5776919178eb1",
+      "new_damage_cells": 0,
+      "policy": "advancing_front",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "seconds": 2.301216292,
+      "variant": "locked_reverse_initial_sprites"
+    },
+    {
+      "actions": [
+        7,
+        0,
+        0,
+        0
+      ],
+      "edge_contact": false,
+      "mask_file": "fpa-fod-400300427-plateau--locked--advancing_front.npz",
+      "mask_sha256": "9a68f6c907c9e85e2bab0cb10751d33f284996f28d5e1accbdb5776919178eb1",
+      "new_damage_cells": 0,
+      "policy": "advancing_front",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "seconds": 2.3012108749999998,
+      "variant": "locked"
+    },
+    {
+      "actions": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "edge_contact": false,
+      "mask_file": "fpa-fod-400300427-plateau--locked--noop.npz",
+      "mask_sha256": "241cd5fa1789b25259f726840bf27dc24c192cd132d3c54b08513648e65d3738",
+      "new_damage_cells": 0,
+      "policy": "noop",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "seconds": 2.312593958,
+      "variant": "locked"
+    },
+    {
+      "actions": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "edge_contact": false,
+      "mask_file": "fpa-fod-400300427-plateau--locked_reverse_initial_sprites--noop.npz",
+      "mask_sha256": "241cd5fa1789b25259f726840bf27dc24c192cd132d3c54b08513648e65d3738",
+      "new_damage_cells": 0,
+      "policy": "noop",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "seconds": 2.3133800829999998,
+      "variant": "locked_reverse_initial_sprites"
+    },
+    {
+      "actions": [
+        7,
+        0,
+        0,
+        0
+      ],
+      "edge_contact": false,
+      "mask_file": "fpa-fod-400300427-plateau--max_aggregation--advancing_front.npz",
+      "mask_sha256": "9a68f6c907c9e85e2bab0cb10751d33f284996f28d5e1accbdb5776919178eb1",
+      "new_damage_cells": 0,
+      "policy": "advancing_front",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "seconds": 0.1748384169999997,
+      "variant": "max_aggregation"
+    },
+    {
+      "actions": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "edge_contact": false,
+      "mask_file": "fpa-fod-400300427-plateau--max_aggregation--noop.npz",
+      "mask_sha256": "241cd5fa1789b25259f726840bf27dc24c192cd132d3c54b08513648e65d3738",
+      "new_damage_cells": 0,
+      "policy": "noop",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "seconds": 0.18769508299999993,
+      "variant": "max_aggregation"
+    },
+    {
+      "actions": [
+        7,
+        0,
+        0,
+        0
+      ],
+      "edge_contact": false,
+      "mask_file": "fpa-fod-400300427-plateau--max_reverse_initial_sprites--advancing_front.npz",
+      "mask_sha256": "9a68f6c907c9e85e2bab0cb10751d33f284996f28d5e1accbdb5776919178eb1",
+      "new_damage_cells": 0,
+      "policy": "advancing_front",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "seconds": 0.17565087499999965,
+      "variant": "max_reverse_initial_sprites"
+    },
+    {
+      "actions": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "edge_contact": false,
+      "mask_file": "fpa-fod-400300427-plateau--max_reverse_initial_sprites--noop.npz",
+      "mask_sha256": "241cd5fa1789b25259f726840bf27dc24c192cd132d3c54b08513648e65d3738",
+      "new_damage_cells": 0,
+      "policy": "noop",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "seconds": 0.1888747500000001,
+      "variant": "max_reverse_initial_sprites"
+    },
+    {
+      "actions": [
+        7,
+        0,
+        0,
+        0
+      ],
+      "edge_contact": false,
+      "mask_file": "fpa-fod-400300427-plateau--one_minute--advancing_front.npz",
+      "mask_sha256": "9a68f6c907c9e85e2bab0cb10751d33f284996f28d5e1accbdb5776919178eb1",
+      "new_damage_cells": 0,
+      "policy": "advancing_front",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "seconds": 0.38232149999999976,
+      "variant": "one_minute"
+    },
+    {
+      "actions": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "edge_contact": false,
+      "mask_file": "fpa-fod-400300427-plateau--one_minute--noop.npz",
+      "mask_sha256": "241cd5fa1789b25259f726840bf27dc24c192cd132d3c54b08513648e65d3738",
+      "new_damage_cells": 0,
+      "policy": "noop",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "seconds": 0.40230166700000014,
+      "variant": "one_minute"
+    },
+    {
+      "actions": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "edge_contact": false,
+      "mask_file": "fpa-fod-400311253-martin--locked_reverse_initial_sprites--noop.npz",
+      "mask_sha256": "581a239bd57137ace133491f6ecb1e45b9bf0cea43016a775aca5af0ab7d088c",
+      "new_damage_cells": 16587,
+      "policy": "noop",
+      "scenario_id": "fpa-fod-400311253-martin",
+      "seconds": 17.723949917,
+      "variant": "locked_reverse_initial_sprites"
+    },
+    {
+      "actions": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "edge_contact": false,
+      "mask_file": "fpa-fod-400311253-martin--locked_reverse_initial_sprites--advancing_front.npz",
+      "mask_sha256": "c1ea96f22c6f560cf5715031a41fceb86542308652a7dec05d4bcb77b0c308ad",
+      "new_damage_cells": 16665,
+      "policy": "advancing_front",
+      "scenario_id": "fpa-fod-400311253-martin",
+      "seconds": 17.941718875,
+      "variant": "locked_reverse_initial_sprites"
+    },
+    {
+      "actions": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "edge_contact": false,
+      "mask_file": "fpa-fod-400311253-martin--locked--advancing_front.npz",
+      "mask_sha256": "59945e2dcc184537feb9e4b07559cac9af15175972392d5dfe4e7010773cd3b3",
+      "new_damage_cells": 17708,
+      "policy": "advancing_front",
+      "scenario_id": "fpa-fod-400311253-martin",
+      "seconds": 18.710383957999998,
+      "variant": "locked"
+    },
+    {
+      "actions": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "edge_contact": false,
+      "mask_file": "fpa-fod-400311253-martin--locked--noop.npz",
+      "mask_sha256": "f8126567e39ef719e377452fb33a355195c29548bd1fafa21a648abb380df9d1",
+      "new_damage_cells": 17709,
+      "policy": "noop",
+      "scenario_id": "fpa-fod-400311253-martin",
+      "seconds": 18.749460042,
+      "variant": "locked"
+    },
+    {
+      "actions": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "edge_contact": false,
+      "mask_file": "fpa-fod-400311253-martin--max_aggregation--noop.npz",
+      "mask_sha256": "368652cc9624e382c4d68591b1703df96c5aa0332bb5049d53e7aa311198482f",
+      "new_damage_cells": 22013,
+      "policy": "noop",
+      "scenario_id": "fpa-fod-400311253-martin",
+      "seconds": 22.597003041999997,
+      "variant": "max_aggregation"
+    },
+    {
+      "actions": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "edge_contact": false,
+      "mask_file": "fpa-fod-400311253-martin--max_aggregation--advancing_front.npz",
+      "mask_sha256": "36e024fdf4dbebc6eeead64d0bd2602f4f8fceeae36126d9c19a2fe4d4378ee3",
+      "new_damage_cells": 21985,
+      "policy": "advancing_front",
+      "scenario_id": "fpa-fod-400311253-martin",
+      "seconds": 22.565936708,
+      "variant": "max_aggregation"
+    },
+    {
+      "actions": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "edge_contact": false,
+      "mask_file": "fpa-fod-400311253-martin--max_reverse_initial_sprites--advancing_front.npz",
+      "mask_sha256": "36e024fdf4dbebc6eeead64d0bd2602f4f8fceeae36126d9c19a2fe4d4378ee3",
+      "new_damage_cells": 21985,
+      "policy": "advancing_front",
+      "scenario_id": "fpa-fod-400311253-martin",
+      "seconds": 22.433825458000005,
+      "variant": "max_reverse_initial_sprites"
+    },
+    {
+      "actions": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "edge_contact": false,
+      "mask_file": "fpa-fod-400311253-martin--max_reverse_initial_sprites--noop.npz",
+      "mask_sha256": "368652cc9624e382c4d68591b1703df96c5aa0332bb5049d53e7aa311198482f",
+      "new_damage_cells": 22013,
+      "policy": "noop",
+      "scenario_id": "fpa-fod-400311253-martin",
+      "seconds": 22.581572583000003,
+      "variant": "max_reverse_initial_sprites"
+    },
+    {
+      "actions": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "edge_contact": false,
+      "mask_file": "fpa-fod-400311253-martin--one_minute--noop.npz",
+      "mask_sha256": "a3e8151fd5c9d9729309763c44c478380db65bf66a7b8d3428c5bfff35c14a85",
+      "new_damage_cells": 17869,
+      "policy": "noop",
+      "scenario_id": "fpa-fod-400311253-martin",
+      "seconds": 86.274062292,
+      "variant": "one_minute"
+    },
+    {
+      "actions": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "edge_contact": false,
+      "mask_file": "fpa-fod-400311253-martin--one_minute--advancing_front.npz",
+      "mask_sha256": "578b7e7bf18ad02018d5a9125df11cb26115695a3cede81f11f1513126a7e375",
+      "new_damage_cells": 17850,
+      "policy": "advancing_front",
+      "scenario_id": "fpa-fod-400311253-martin",
+      "seconds": 86.60658699999999,
+      "variant": "one_minute"
+    }
+  ],
+  "schema_version": "feds-native-sensitivity/1.0",
+  "selected_cases": [
+    "fpa-fod-400300427-plateau",
+    "fpa-fod-400311253-martin"
+  ],
+  "selection_rule": "lexicographically first TRAIN fire and TRAIN fire with largest existing ADR034 no-op damage (tie by ID); diagnostic selection, not a representative sample",
+  "source_hashes": {
+    "src/wildfire_rl/feds_heuristics.py": "1f6f38ac8dfd6e6e3e822f85c3fbb6547b0c001fd11ff0d962921e6c70eb77b5",
+    "src/wildfire_rl/feds_simfire_env.py": "261cb0b6565b72711aa56964a068f6749b6c49ceaa32b2b70a54c959cdb235ed",
+    "src/wildfire_rl/feds_simfire_setup.py": "78e7187113a246e9f70a0a88178b3d55345ed84ebce05b8e1c1f0b1b52b3c944"
+  },
+  "source_sha256": "6a82088ef88909aad630c5b0e0d3695643c00883ad5c57ea4856dbe74732f244",
+  "split": "train",
+  "table_sha256": "28627fa98b60f8dae4ac4f9246887ecd3488b541c2a9dbd5e82620811effbddc",
+  "test_cases_loaded": false,
+  "validation_used": false,
+  "wall_minutes": 2.1759233993
+}

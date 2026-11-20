@@ -1,5 +1,17 @@
 # Promjene baze znanja
 
+## 2026-11-20: TASK-034 završen, ADR-036
+
+- [SimFire audit](docs/research/SIMFIRE_OBSERVATION_AUDIT.md): 98 input/observation provjera,
+  četiri nested porodice bez prolaza praga i dvije namjerno odabrane native probe.
+- Potvrđeni startup mkdir race je ispravljen testom prije koda. Fuel/front aliasing i
+  last_write osjetljivost su izmjereni; metri/stopa i smjerovi nisu pokazali kvar.
+- Pinovani suite 327/327, moderni 312 (3 skip), core 272 (35 skip); CLI PASS.
+- Preporuka TASK-035 je kontrolisani CA ugovor/pilot, draft nije izvršen. SimFire v2 je
+  opcionalni TASK-036; ne tvrdi se da su svi potencijali ili greške iscrpljeni.
+- Novi rad je lokalni na `codex/simfire-observation-audit`; nema novih PPO/CA treninga,
+  holdout pristupa ili remote objave. Handoff i ulazi znanja su usklađeni.
+
 ## 2026-11-19: korisnik je zatražio push SimFire grane
 
 - `codex/simfire-policy-iterations` je pushana na origin i prati istoimenu remote granu.

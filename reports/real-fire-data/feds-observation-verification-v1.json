@@ -1,0 +1,103 @@
+{
+  "ca_training": false,
+  "cli_smoke": {
+    "local_out": ".local/audit/cli-smoke",
+    "log_sha256": "85b1ea41ac4693293c386d25fb832a9e01c74c5a12244459e2358a055c2fe1e3",
+    "result": "PASS"
+  },
+  "code_commit": "406e32e9e120c6deff3fdbb5282a8f73e4f739b6",
+  "created_utc": "2026-11-20T17:14:25.857882+00:00",
+  "first_native_attempt": {
+    "log_sha256": "9709c4bc09acc4241432a629c30c353dd26f0c7028b3e888f5907c3efc0b03a9",
+    "partial_mask_files": 18,
+    "reason": "SimFire sf_home check-then-mkdir race on fresh concurrent workers",
+    "result": "FAILED",
+    "used_as_completed_results": false
+  },
+  "independent_oof_lookup_audit": {
+    "note": "Recomputed from saved rows and exact table; not an independent human review.",
+    "path_count": 784,
+    "result": "PASS"
+  },
+  "independent_review_performed": false,
+  "interpretation": "Technical local verification, not physical validation or evidence of policy superiority.",
+  "knowledge": {
+    "log_sha256": "da288b8f5b1271f296bbe4c9f6f50026785e8f5e5033b00cfd3f54189c6988ea",
+    "result": "PASS",
+    "strict_markdown_files": 84,
+    "strict_result": "PASS",
+    "tests_run": 15
+  },
+  "max_reverse_whole_mask_audit": {
+    "pairs_checked": 4,
+    "result": "PASS",
+    "scope": "only the two registered diagnostic cases, both policies"
+  },
+  "native_repeated_probe": {
+    "locked_full_masks_match_adr034": true,
+    "report_sha256": "944f463f395cbbbffe2ecd5dcc618b241ffadef445e297e312723870d6a55bcc",
+    "result": "PASS"
+  },
+  "native_runtime": {
+    "engine_source_hashes": {
+      "game/managers/fire.py": "2c6bbd4edeb4e94af62685dc884e2ec3931ef12cea2dbc813fdef9e95b867e40",
+      "sim/simulation.py": "3c3cce8a6cbaea40e7038879c182930d0adf4e6a0f9fc59f605f83a65fd5cdde",
+      "utils/layers.py": "66f961fee490716137225e504bcee2d5dff48d8a3a7247d4ee4fdb3300c0d75a",
+      "world/rothermel.py": "83450a0721c572d9daeecb8e0de7468eb86d94df17eea96654b98560be79a106"
+    },
+    "python": "Python 3.9.25",
+    "simfire_commit": "04905b19fe8c10dc08d64faddd00303e0561bb66"
+  },
+  "new_ppo_training": false,
+  "output_directory_fix": {
+    "first_red_log_sha256": "5e7edffd51859a1cef6430c78e9a46cd32c1742f01e93133eb59340155576854",
+    "passing_regression_log_sha256": "f2c429dc83be406efa3eea9a85f38e35839b28fe3d37e5ff5966be55d0d7dfec",
+    "simulation_dynamics_changed": false
+  },
+  "remote_ci_run": false,
+  "schema_version": "feds-observation-local-verification/1.0",
+  "source_hashes": {
+    "configs/frozen/feds-observation-audit-v1.json": "4052358378c57c2383d75d3f590014dda7cce5ac62f84455a6a90727818c95bf",
+    "scripts/analyze_feds_observation_audit.py": "28e5759dc4d498351e9fd819ab3d98a6122d9f3cd549fb1204c106a2aad8f992",
+    "scripts/audit_feds_observations.py": "9e9e18a5acb249518f760f96efe4696a9090e6bc5e6412dc11e300e369da0c5b",
+    "scripts/plot_feds_observation_audit.py": "d67a7af3e7cb75a82f4c3193f6a466f48d603eb3272088d3c442db3f3a444345",
+    "scripts/probe_feds_native_sensitivity.py": "6a82088ef88909aad630c5b0e0d3695643c00883ad5c57ea4856dbe74732f244",
+    "src/wildfire_rl/feds_observation_audit.py": "bc7109bb81b41a5e0081d06ab7145252f6ddf1b205924de50f3b9f7dd1a64cf5",
+    "src/wildfire_rl/feds_simfire_setup.py": "78e7187113a246e9f70a0a88178b3d55345ed84ebce05b8e1c1f0b1b52b3c944",
+    "tests/test_feds_observation_audit.py": "b25646b773b23493bd7cfc2556f89d21ccf25438c5df500b8c53f3498bcd306d",
+    "tests/test_feds_observation_invariants.py": "e79a3b2da4f69fe1c49c80538877b0e3c70267b07a6cba00a4dffdb7efbf81c5",
+    "tests/test_feds_simfire_spread.py": "53803f2b0e7f394b4d68525db43e90197da7efbaba676166ffcf73cb135cb367",
+    "tests/test_simfire_output_directory.py": "685b136948e9652af2e7b480c00409502ad0421fced824eec0ac8d1006974934"
+  },
+  "suites": [
+    {
+      "local_log": ".local/audit/core-suite.log",
+      "log_sha256": "8a0a99f8bb78bdec79b0cbc1f3caa7b94228939dca4c0a5dfa4b810efa2f8ad2",
+      "name": "core",
+      "result": "PASS",
+      "seconds": 4.841,
+      "skipped": 35,
+      "tests_run": 272
+    },
+    {
+      "local_log": ".local/audit/modern-suite.log",
+      "log_sha256": "964081a6e75e2d8fc523907f43221821b032fd86a410ea0ef8c010cce012013d",
+      "name": "modern",
+      "result": "PASS",
+      "seconds": 10.517,
+      "skipped": 3,
+      "tests_run": 312
+    },
+    {
+      "local_log": ".local/audit/simfire-suite.log",
+      "log_sha256": "9071fc728e16a0d3edd537e4facae2a41be50dbc16823ba2536c19ac64ee7e29",
+      "name": "simfire",
+      "result": "PASS",
+      "seconds": 41.19,
+      "skipped": 0,
+      "tests_run": 327
+    }
+  ],
+  "test_cases_loaded": false,
+  "validation_used": false
+}

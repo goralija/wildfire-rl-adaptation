@@ -6,6 +6,8 @@
 
 ## Dokumenti
 
+- [TASK-034: SimFire opservacija i odluka o nastavku](SIMFIRE_OBSERVATION_AUDIT.md) - ADR-035/036, završen TRAIN-only audit, nested metode i obrazloženi nastavak.
+
 - [SimFire B=1: iscrpna tabela i offline učenje](SIMFIRE_B1_EXPLORATION.md) - TASK-028–030 završeni, ADR-034, oba obračuna i osam TRAIN LOO metoda bez prolaza praga
 
 - [Dataset: šta imamo i šta ćemo koristiti](DATASET.md) - Dataset Review

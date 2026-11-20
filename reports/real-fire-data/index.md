@@ -1,5 +1,11 @@
 # real-fire-data
 
+- [TASK-034 input/observation audit](feds-observation-input-audit-v1.json) - 98 inputa, raster CRS/transform, 392 opažena weather zapisa; sva provjera PASS, aliasing i nonfuel opisani.
+- [TASK-034 nested politike](feds-observation-offline-v1.json) - četiri porodice, svi OOF izbori; nijedna ne prelazi prag; [grafikon](feds-observation-offline-v1.png).
+- [Native numerička osjetljivost](feds-native-sensitivity-v1.json) - dva dijagnostička TRAIN slučaja, 20 uspješnih rollouta; locked maske PASS, alternative nisu novi gate.
+- [TASK-034 tehnička provjera](feds-observation-verification-v1.json) - 327/327 pinovani suite, startup race i regresija, source/engine hashovi; nije fizička validacija.
+- [TASK-034 lokalni paket](feds-observation-artifact-manifest-v1.json) - puni ulazi/stara tabela plus novi rezultati, native maske i izvorni kod; [tumačenje](../../docs/research/SIMFIRE_OBSERVATION_AUDIT.md).
+
 - [SimFire B=1 provjerena tabela](feds-b1-table-check-v1.json) - 98×33 ishoda, svi input/mask/reference checkovi PASS, ADR-032 agregati se poklapaju, bez ruba.
 - [SimFire B=1 sve offline metode](feds-b1-offline-v1.json) - osam metoda, LOO po požaru, raw/charged; nijedna ne prelazi prag; [grafikon](feds-b1-offline-v1.png), [tumačenje](../../docs/research/SIMFIRE_B1_EXPLORATION.md).
 - [SimFire B=1 lokalni paket artefakata](feds-b1-artifact-manifest-v1.json) - hash prenosive lokalne arhive: 98 TRAIN ulaza, tačan weather, puna tabela i izvorni kod; nije uploadovana.

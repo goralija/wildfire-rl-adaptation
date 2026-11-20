@@ -1,8 +1,30 @@
 ---
 type: Handoff
-title: Naredni korak — nakon SimFire B=1 ciklusa (2026-11-19)
+title: Naredni korak — nakon SimFire audita (2026-11-20)
 ---
 # Naredni korak
+
+## 2026-11-20 — završen TASK-034 (ADR-036)
+
+Ulaz je [završni pregled](research/SIMFIRE_OBSERVATION_AUDIT.md): četiri nested porodice
+bez prolaza praga, svi input/observation checkovi, potvrđeni startup fix i mala native
+sensitivity studija. Nema aktivnog runa; ne ponavljati eksperimente bez provjere artefakata.
+
+1. Predloženi glavni nastavak: **TASK-035 — CA ugovor informacija i tehnički pilot**,
+   [pripremljen draft](../configs/drafts/ca-controlled-pilot-v1.json). Prvo zapisati šta
+   CA opaža (sada koristi weather.at(decision)), verziju opservacije i checkpointa,
+   razdvojene proceduralne slučajeve, jedinice i budžete. Ne učitavati stare poništene politike.
+2. Potom no-op i jake heuristike uz isti scenario, informacije i common random numbers;
+   kratki BC/PPO tek po novom protokolu i unaprijed zadanom kriteriju. Sada nije pokrenuto.
+3. Opcionalni **TASK-036 — SimFire v2**: kategorijski fuel/nonfuel, reljef/finija opservacija,
+   max/korak kroz novi TRAIN growth gate, pa nova tabela i komparatori. To je preostali
+   smisleni pravac, ne dokaz da je svaka SimFire mogućnost iscrpljena.
+4. TEST 2024 ostaje zatvoren; nema novog VALIDATION odobrenja. Stari CA ADR-028 nalazi
+   ostaju poništeni. Novi rad je na lokalnoj grani `codex/simfire-observation-audit`;
+   prethodna grana je na originu, ova nije pushana/mergeana. Lokalni paket treba sačuvati.
+
+Preporuka CA pilota je obrazloženi projektni izbor, ne fizička validacija CA ili dokaz
+RL prednosti. Precizni CA protokol još nije prihvaćen niti izvršen.
 
 ## 2026-11-19 — završen odobreni SimFire ciklus (ADR-034)
 

@@ -19,6 +19,16 @@ su sažeti u [rubrici](../docs/research/REQUIREMENTS_AND_RUBRIC.md). Aktivni ben
 koristi SimFire, FPA-FOD početne uslove i FEDS-CONUS vremenske obode; stariji
 CFSDS/Cell2Fire rad ostaje odvojen i historijski.
 
+## Nastavak 2026-11-20 — ADR-036
+
+TASK-034 je završen na lokalnoj `codex/simfire-observation-audit`.
+[Izvještaj](../docs/research/SIMFIRE_OBSERVATION_AUDIT.md) bilježi provjerene ulaze,
+fuel/front aliasing, četiri nested metode bez prolaza i native numeričke osjetljivosti.
+Startup race je ispravljen bez promjene dinamike. Postoji obrazložena preporuka za
+TASK-035, kontrolisani CA ugovor/pilot; nije pokrenut. SimFire v2 ostaje smislen, ali
+novi protokol, ne samo još jedan trening. Nema tvrdnje da su sve moguće greške isključene,
+fizičke validacije, novih VALIDATION/TEST ili CA treninga.
+
 ## Nastavak 2026-11-19 — ADR-034
 
 Korisnik je odabrao SimFire i odobrio dokumentovane TRAIN iteracije TASK-028–030 na

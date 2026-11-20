@@ -1576,3 +1576,69 @@ mijenjaju; nedostatak uticaja na zaključane probe dodatno se provjerava cijelim
 Novi izvorni hash je zabilježen; ovo nije promjena alpha/menija nakon policy nalaza.
 Offline fitovi ne konstruišu simulator i nisu pogođeni. Native run se ponavlja u
 novom output folderu; stari parcijalni fajlovi su sačuvani.
+
+## ADR-036 — TASK-034 završen; CA pilot je obrazložen prijedlog, recorded 2026-11-20
+
+**Status i autorstvo.** Zapis rezultata korisnikovog odobrenog SimFire audita (ADR-035).
+Preporuka o CA je zaključak agenta iz tih provjera, ne zasebna ljudska potvrda novog CA
+protokola. Nova grana `codex/simfire-observation-audit` je lokalna, iz `58feac72`; nema
+novog push-a/mergea. CA trening i novi holdout nisu pokrenuti.
+
+**Input i informacije.** Svih 98 TRAIN ulaza odgovara hashovima; stvarni fuel/DEM
+CRS i transform se slažu s receiptom, vrijednosti su konačne. Početna pooled mreža i
+kumulativna maska su identične. Svih 392 observed weather zapisa je očekivani prethodni
+dan, bez look-ahead-a. Budžet, vremena i no-op prolaze. 37 požara ima neke početne
+front ćelije na negorivom (731/9.926); 1.094/17.518 planiranih ćelija linije, brojanih
+po traženom nizu, pada na negorivo. To je nesigurnost kompatibilnosti satelitskog fronta
+i fuel karte, ne automatski dokaz programskog kvara ili razlog za naknadno čišćenje.
+
+**Potvrđeni nedostaci opažanja.** Jedan observed piksel pokriva 2.88 km. Različit native
+front unutar istog bloka daje isti observation, a drugu native liniju. Fuel 13 i
+nonfuel 91..99 su izjednačeni prije poolinga (`clip(code/13,0,1)`), iako native fuel load
+nije isti. Skriven reljef i grubo opažanje su dio zaključanog ugovora; nisu popravljeni
+retroaktivnom promjenom checkpointa ili starih benchmarka. Nije izolovan njihov
+kauzalni udio u ukupnom neuspjehu PPO-a.
+
+**Offline rezultat.** Četiri fiksne porodice, outer LOO i četiri inner folda za izbor
+postavki, odvojeni raw/charged fitovi. Niko ne prolazi ≥30 ha i ≥25% oracle jaza.
+Charged spašene ha: summary ridge 83,58; summary RBF 88,17; directional RBF 79,55;
+full-grid RBF 85,76; pravilo 101,04. Najbolji novi kandidat je −12,86 ha prema pravilu,
+opisni 95% interval [−64,80;34,85]. Svih 784 OOF putanja ponovo je provjereno prema
+tabeli. Analiza traje 17,17 s uz reuse podataka. Nested selekcija ne čini već korišteni
+TRAIN nezavisnim završnim testom. Nijedna porodica nije dodana nakon rezultata.
+
+**Native rezultat.** Dva unaprijed izabrana slučaja (prvi ID i najveći stari no-op),
+20 uspješnih rollouta,2,18 min. Plateau nema novog rasta u svim varijantama, pa je negativna
+kontrola. Na Martin-u no-op je 57.377 ha; promjena samo početnog poretka spriteova daje
+53.742 ha, razliku 3.635 ha (6,34%). Raw učinak pravila prelazi sa+3,24 na−252,72 ha.
+Max i max+reverse daju iste maske u ovoj probi, ali no-op 71.322 ha, +24,30% prema locked.
+Korak 1 min daje no-op 57.896 ha i raw dobitak 61,56 ha. Ovo je osjetljivost dva odabrana
+slučaja, ne novi gate ili zaključak o svih 98. Alternative traže novi TRAIN gate prije
+policy tvrdnje. Locked maske odgovaraju ADR-034, nema rubnih kontakata u 20 uspješnih.
+
+**Popravka i provjere.** Prvi run je prekinuo potvrđeni SimFire startup mkdir race;
+18 parcijalnih maski je sačuvano i nije proglašeno završenim rezultatom. Test prije
+koda, atomarno kreiranje foldera i puna ponovljena proba popravljaju operativni kvar
+bez izmjene širenja. Test poznatog 10% nagiba potvrđuje m→ft konverziju; kardinalni
+wind-from/to i raster sektori se slažu. Pinovani runtime 327/327,0 skip; moderni 312,3 skip;
+core 272,35 skip; CLI PASS. Nezavisna revizija i GitHub CI ove grane nisu izvršeni.
+
+**Projektna preporuka.** Kontrolisani CA ugovor/pilot (TASK-035) je opravdan glavni
+sljedeći pravac za odluke jedinica/budžeta; [draft](../../configs/drafts/ca-controlled-pilot-v1.json)
+je pripremljen, nije izveden. CA nije fizički validiran, Cell 2 Fire niti obećanje RL
+prednosti. Prvo riješiti šta CA opaža (postojeći `weather.at(decision)`), nove verzije
+checkpointa/opservacije, razdvojene proceduralne slučajeve, iste resurse/informacije
+za sve politike i no-op/jake heuristike. Stari ADR-028 nalazi ostaju poništeni.
+
+**Šta nije iscrpljeno.** SimFire v 2 (opcionalni TASK-036) bi popravio kategorijski
+fuel/nonfuel prikaz, reljef/rezoluciju, proveo max/korak kroz novi TRAIN gate i tek zatim
+ponovio tabelu i policy studiju. Duži PPO/BC i više budžeta nisu isključeni. Nema tvrdnje
+da su sve moguće greške ili algoritmi ispitani. Preporuka CA je obrazložen izbor opsega,
+a ne proglašenje SimFire-a neupotrebljivim. TEST 2024 i novo VALIDATION korištenje ostaju
+zatvoreni; ADR-031/032/034 ostaju istorijski važeći pod svojim zapisanim uslovima.
+
+Dokazi: [završni izvještaj i matrica](../research/SIMFIRE_OBSERVATION_AUDIT.md),
+[input audit](../../reports/real-fire-data/feds-observation-input-audit-v1.json),
+[nested metode](../../reports/real-fire-data/feds-observation-offline-v1.json),
+[native probe](../../reports/real-fire-data/feds-native-sensitivity-v1.json),
+[verification](../../reports/real-fire-data/feds-observation-verification-v1.json).

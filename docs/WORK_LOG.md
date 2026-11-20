@@ -4,6 +4,22 @@ title: Work log
 ---
 # Work log
 
+2026-11-20 — TASK-034 završen na `codex/simfire-observation-audit`, iz `58feac72`.
+Plan `1e9a263c` prije mjerenja, modeli `855e0fc0`. Svih98 input/observation provjera i 392
+weather opažanja prolaze; četiri nested porodice ne prelaze prag. Potvrđen pooling/fuel
+aliasing; metri/stopa i kardinalni smjerovi prolaze kontrolu. Prvi native run je prekinuo
+mkdir race,18 parcijalnih maski sačuvano. Test prije fix-a, c40d1e02 atomarno priprema
+folder bez promjene širenja. Ponovljeno 20 rollouta za dva unaprijed odabrana slučaja:
+locked maske odgovaraju staroj tabeli, Martin pokazuje veliku last_write osjetljivost.
+327/327 pinovani testovi, moderni312(3skip), core272(35skip); CLI i784OOF audit PASS.
+ADR-036, EXP-023 i završni izvještaj razlikuju greške/konvencije/neispitano. Predložen
+TASK-035 CA ugovor/pilot, draft pripremljen bez treninga; SimFirev2 je opcionalni TASK-036.
+Nema novih holdout, PPO/CA treninga, globalnih instalacija, push-a ili mergea.
+Lokalni paket 24.569.284 B ima 773 fajla plus manifest; svi hashovi ponovo provjereni.
+Raspakovani source/table smoke ponavlja osam nested fitova prvog outer folda s istim
+akcijama, izabranim postavkama i inner score-om; nije cijeli novi 98-fold run.
+Knowledge 15/15 i strict 84 Markdown fajla prolaze.
+
 2026-11-19 — Po izričitom korisnikovom nalogu pushana je grana
 `codex/simfire-policy-iterations` na origin (prvi push do `ed13b782`, upstream postavljen).
 Trenutni handoff/status/README usklađeni su s objavom. PR i merge nisu rađeni;
