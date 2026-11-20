@@ -59,7 +59,9 @@ class SafeLearningSmokeTest(unittest.TestCase):
         model = create_model(env, seed=7, overrides={"n_steps":8,"batch_size":8,"n_epochs":1})
         model.learn(8)
         obs, _ = env.reset()
+        obs, _, _, _, _ = env.step(np.zeros(4,dtype=int))
         mask = env.action_masks()
+        self.assertGreater(int(mask.sum()),4)
         action = model.predict(obs, action_masks=mask, deterministic=True)[0]
         self.assertTrue(mask.reshape(4,17)[np.arange(4),action].all())
         contract = {"observation":"test-v2","encoder":"test","plan_sha":"abc"}
@@ -71,6 +73,8 @@ class SafeLearningSmokeTest(unittest.TestCase):
             loaded = load_policy_arrays(path, contract)
             self.assertTrue(torch.equal(torch_state,torch.random.get_rng_state()))
             np.testing.assert_array_equal(numpy_state[1],np.random.get_state()[1])
+            for key,value in model.policy.state_dict().items():
+                self.assertTrue(torch.equal(value,loaded.policy.state_dict()[key]),key)
             np.testing.assert_array_equal(action, loaded.predict(obs, action_masks=mask,
                                                                 deterministic=True)[0])
             with patch('numpy.load', side_effect=AssertionError('must reject before reading')):
