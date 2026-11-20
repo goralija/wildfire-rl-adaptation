@@ -16,6 +16,7 @@ from wildfire_rl.feds_simfire_setup import (sha256_file,load_case_inputs,load_we
 
 def audit(table_path,input_root,weather_path):
     import numpy as np
+    import rasterio
     from simfire.enums import FuelModelToFuel
     from wildfire_rl.feds_simfire_env import FedsSimFireEnv
     plan=json.loads((ROOT/'configs/frozen/feds-observation-audit-v1.json').read_text())
@@ -32,6 +33,14 @@ def audit(table_path,input_root,weather_path):
         inputs=load_case_inputs(key,weather_path=weather_path,input_root=input_root,weather_records=weather)
         if inputs['receipt_sha256']!=case['input_receipt_sha256']:raise ValueError('changed input receipt')
         fuel=inputs['fuel'];front=inputs['front'];initial=inputs['scar']|front
+        receipt=inputs['receipt'];grid=receipt['grid'];folder=input_root/key
+        with rasterio.open(folder/receipt['fuel']['file']) as f, rasterio.open(folder/receipt['terrain']['file']) as dem:
+            if f.crs!=dem.crs or f.transform!=dem.transform or f.shape!=dem.shape:
+                raise ValueError('misaligned fuel/terrain rasters')
+            if f.crs.to_string()!=grid['crs'] or not np.allclose(tuple(f.transform)[:6],grid['raster_transform'],rtol=0,atol=1e-5):
+                raise ValueError('raster/receipt grid mismatch')
+        if not np.isfinite(fuel).all() or not np.isfinite(inputs['elevation']).all():
+            raise ValueError('nonfinite raster values')
         burnable=np.array([FuelModelToFuel[int(code)].w_0>0 for code in fuel.ravel()]).reshape(fuel.shape)
         expected=np.stack([helper._pool(initial.astype(np.float32)),helper._pool(front.astype(np.float32)),
             np.zeros((16,16),dtype=np.float32),helper._pool(np.clip(fuel.astype(np.float32)/13.,0.,1.))])
@@ -61,6 +70,7 @@ def audit(table_path,input_root,weather_path):
     return {'schema_version':'feds-observation-input-audit/1.0','created_utc':datetime.now(timezone.utc).isoformat(),
         'label':'TRAIN INPUT/OBSERVATION CONTRACT AUDIT; NOT PHYSICAL VALIDATION','split':'train','case_count':98,
         'validation_used':False,'test_cases_loaded':False,'checks':{'input_hashes_and_initial_grid':'PASS',
+        'actual_raster_crs_transform_alignment_and_finite_values':'PASS',
         'all392_observed_weather_records_and_day_lag':'PASS','time_budget_noop':'PASS','initial_cumulative_mask':'PASS'},
         'table_sha256':sha256_file(table_path),'weather_sha256':sha256_file(weather_path),
         'source_sha256':sha256_file(Path(__file__)),'plan_sha256':sha256_file(ROOT/'configs/frozen/feds-observation-audit-v1.json'),
