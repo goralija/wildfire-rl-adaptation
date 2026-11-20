@@ -33,6 +33,15 @@ SOURCES = ["src/wildfire_rl/synthetic_ca.py", "src/wildfire_rl/synthetic_env.py"
            "scripts/run_ca_controlled_pilot.py"]
 
 
+def ensure_worker_nice():
+    # macOS spawn does not reliably retain the parent's nice value.
+    if hasattr(os, "getpriority"):
+        if os.getpriority(os.PRIO_PROCESS, 0) < 19:
+            os.setpriority(os.PRIO_PROCESS, 0, 19)
+        if os.getpriority(os.PRIO_PROCESS, 0) < 19:
+            raise RuntimeError("could not lower worker priority to nice 19")
+
+
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
@@ -153,6 +162,7 @@ def job(task):
             noop_hash = row["noop_final_sha256"]
             rows[roster][name] = row
     data = {"base_seed": seed, "guard": guard, "world_sha256": fingerprint,
+            "worker_nice": os.getpriority(os.PRIO_PROCESS, 0),
             "episode_seed": original.seed, "sample_name": original.name,
             "noop_growth_cells": int(sampler.noop_footprint.sum()),
             "growth_resample_exhausted": int(sampler.noop_footprint.sum()) < 30,
@@ -214,7 +224,7 @@ def main():
     seeds = plan["case_seeds"]["development"][:args.case_limit]
     started = time.monotonic()
     cases = []
-    with ProcessPoolExecutor(args.workers) as pool:
+    with ProcessPoolExecutor(args.workers, initializer=ensure_worker_nice) as pool:
         for case in pool.map(job, [(s, plan, guard, str(folder)) for s in seeds]):
             cases.append(case)
             print("PASS case %s (%d/%d)" % (case["base_seed"], len(cases), len(seeds)), flush=True)
