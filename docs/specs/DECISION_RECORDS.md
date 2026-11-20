@@ -1642,3 +1642,42 @@ Dokazi: [završni izvještaj i matrica](../research/SIMFIRE_OBSERVATION_AUDIT.md
 [nested metode](../../reports/real-fire-data/feds-observation-offline-v1.json),
 [native probe](../../reports/real-fire-data/feds-native-sensitivity-v1.json),
 [verification](../../reports/real-fire-data/feds-observation-verification-v1.json).
+
+## ADR-037 — TASK-036: verzionisani popravak SimFire opažanja, accepted scope 2026-11-20
+
+Korisnik traži još jedan SimFire pokušaj i konkretan popravak izgubljenih informacija,
+prije odluke o CA. Ovo mijenja prioritet preporuke ADR-036: TASK-036 je aktivan,
+TASK-035 CA pilot odgođen. Prethodni rad je na otvorenom PR-u #20; nova grana
+`codex/simfire-observation-repair` izvedena je iz `d3bb5b86`, bez mergea. Push je
+odobren, novi PR nije potreban po posljednjoj poruci. Nema slanja poruka kolegama.
+
+**Provjerljivi cilj.** Ukloniti konkretni fuel/nonfuel alias, dati politici detalje na
+skali linije i provjeriti stvarni dobitak u uparenom TRAIN eksperimentu. Poboljšan zapis
+nije sam po sebi dokaz boljih odluka ili fizičke validacije. Prethodni stop je zatvorio
+meni nad starim opažanjem; nije isprobao ovaj popravak niti dokazao iscrpljenost SimFire-a.
+
+**Plan prije mjerenja:** `configs/frozen/feds-observation-repair-v2.json`. Zadržava se
+ADR-031 dinamika i ista B=1 tabela. Nova eksplicitna wrapper verzija čuva stare ključeve,
+dodaje kategorijsko gorivo/nonfuel, 64×64 globalnu mrežu i 17×17 native izreze osam
+kandidata, njihove maske/centre i statički reljef. Izvorni env i stari checkpointovi
+ne mijenjaju se retroaktivno; novi wrapper nije dopuštena tiha zamjena legacy checkpointa.
+
+**Podaci i integritet.** Pet početnih TRAIN slučajeva u pilotu, zatim svih98. Po jedan
+48h no-op replay daje četiri trenutna opažanja. Stari ključevi i maske moraju biti
+identični spremljenim; svaki kandidat linije i cijela završna no-op burn maska moraju
+odgovarati tabeli. Tada nema potrebe ponoviti svih33 ishoda jer se prije jedine linije
+putanja ne razlikuje. Nova maska uklanja samo potpuno negorive linije na osnovu trenutnog
+goriva, ne budućeg no-op otiska. No-op i horizont ostaju; budžet se ne troši na odbijen potez.
+
+**Ocjena.** Četiri fiksne reprezentacije, legacy i burnable maske, raw/charged odvojeno.
+Isti RBF meni i nested foldovi kao ADR-035. Primarni kandidat je terrain536/burnable;
+referenca je najbolja od tri nenulte heuristike izabrana samo na97 fit požara, pod istom
+maskom i dostupnim v2 informacijama. Prijaviti i staro pravilo radi kontinuiteta.
+Prag≥30ha i≥25% privilegovanog oracle jaza; svi kandidati se čuvaju. Legacy28/legacy
+mora reprodukovati ADR-035 RBF izbor i ishod. Reused TRAIN ostaje eksploratoran.
+
+**Granice.** Nema nove fizike, max agregacije, gatea, VALIDATION/TEST ili PPO/CA treninga.
+Ako replay ili invariants padnu, scoring se zaustavlja i popravka se dokumentuje.
+Precizni tehnički izbori su agentov plan unutar odobrenog rada, ne zasebna ljudska
+potvrda svake postavke. Hipoteza je da dodatna informacija pomaže; rezultat može biti
+nulti ili lošiji i biće prijavljen bez podešavanja menija poslije nalaza.
