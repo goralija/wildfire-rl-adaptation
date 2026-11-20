@@ -4,9 +4,26 @@ title: Handoff za nastavak projekta
 ---
 # Handoff za nastavak projekta
 
-Stanje **2026-11-20**. Ovaj dokument je ulaz za kolegu ili agenta koji preuzima projekat bez
-chat historije. Repozitorij je kanonski izvor; artifact za tim (link ispod) je sažetak za
-čitanje.
+## CA ugovor i pilot završeni — TASK-035 / ADR-040 (2026-11-21)
+
+Korisnikov CA nastavak je izveden na `codex/ca-controlled-pilot`, iz `664d890d` završene
+SimFire repair grane. [Izvještaj](docs/research/CA_CONTROLLED_PILOT.md) i zamrznuti plan čuvaju
+razlog prelaska: naučeni SimFire modeli nisu nadmašili jaču heuristiku; nije proglašena
+iscrpljenost SimFire-a. Plan commit `c8d8563c` prethodi kodu i rezultatima.
+
+CA v2 daje isto native opažanje i current forcing svim politikama; heuristike rade samo
+iz opažanja/maski. Svih16 development požara ×3 rostera ×5 politika =240 epizoda prolazi.
+`direct_flank` čuva7,46% težinske štete prema0,24% randoma; opisna razlika7,23p.p.,
+95% interval[0,44;16,49]. Ima20 bliskih susreta i0 gubitaka kroz48 epizoda. Nema RL modela
+ili potvrđene sigurnosne prednosti. Prvi case replay15/15 je identičan.
+
+352 pinovana testa bez skipa; moderni337/3 skip i core284/38 skip, CLI i knowledge PASS.
+TASK-035 je završen. Naredni TASK-038 je v2 encoder/provenance i kratak preregistrovan
+BC/PPO, uz jaku heuristiku i odvojene sigurnosne kriterije. TASK-037 SimFire je odgođen.
+Train/test proceduralne liste su rezervisane, nisu generisane/skorirane; stvarni
+VALIDATION i TEST 2024 ostaju zatvoreni. Stari checkpointovi i dugi trening nisu korišteni.
+CA je vlastiti pojednostavljeni simulator, ne Cell2Fire ili fizička validacija.
+
 
 ## Objava i pregled (2026-11-20)
 

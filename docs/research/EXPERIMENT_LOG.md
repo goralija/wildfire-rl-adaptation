@@ -664,3 +664,17 @@ svi SHA-256 ponovo provjereni. Izolovano raspakovani source/dataset/table učita
 slučajeva;16 prvih outer fold fitova (sve reprezentacije/maske/obračuni) daje iste
 akcije, postavke, inner score i spašene ha. Nije cijela druga analiza ili novi environment.
 Knowledge15/15 i strict85Markdown fajlova PASS. Veliki paket ostaje lokalni.
+
+
+## EXP-025 — TASK-035 kontrolisani CA pilot v2, 2026-11-21
+
+Plan ADR-039/c8d8563c prije koda i ocjene; grana iz664d890d. Nova zajednička native
+opservacija/current-forcing i observation-only heuristike. Dva pilot slučaja30 epizoda
+pa16 development požara ×3 ugniježđena rostera ×5 politika =240 epizoda PASS. Puna
+komanda50,04s, četiri radnika nice19. Prvi case replay15/15 cijele maske/akcije/reward/
+safety identični. Direct_flank7,46% spašene težinske štete vsrandom0,24%; opisni
+case-cluster interval razlike[0,44;16,49]p.p. Direct ima20 bliskih susreta i0 gubitaka
+kroz48 epizoda; nema RL ili sigurnosne prednosti. Mali development, ne nezavisni test.
+352 pinovana testa, moderni337(3skip), core284(38skip), knowledge15/15/strict86 i CLI PASS.
+ADR-040 i [izvještaj](CA_CONTROLLED_PILOT.md) zatvaraju ugovor/pilot. Nema checkpointa,
+treninga, proceduralnog testa ili stvarnog holdouta. Naredni TASK-038 je v2 BC/PPO protokol.

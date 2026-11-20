@@ -4,6 +4,11 @@ title: Sintetičko CA trening okruženje s fizički ograničenim jedinicama (v1,
 ---
 # Sintetičko CA trening okruženje (v1)
 
+Aktivna dopuna (2026-11-21): [CA pilot v2](CA_CONTROLLED_PILOT.md), ADR-039/040, dodaje
+zajedničko native opažanje i eksplicitni current forcing. V1 ispod je historijska
+specifikacija; njeni ADR-028 brojčani nalazi su poništeni ADR-029. Novi pilot ima240
+heurističkih epizoda, bez modela/treninga ili stvarnog holdouta.
+
 Status: **implementirano i korišteno za policy-v1 (2026-11-05)**, grana
 `codex/synthetic-ca-training`. Rezultati su u ADR-028 dopunama i
 [izvještajima](../../reports/synthetic/index.md).

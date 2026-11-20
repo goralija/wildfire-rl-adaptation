@@ -5,11 +5,13 @@ okf_version: "0.2"
 
 ## Počni ovdje
 
+- [Aktivno: kontrolisani CA pilot](docs/research/CA_CONTROLLED_PILOT.md) — TASK-035/ADR-040 završen:240 epizoda, sljedeći TASK-038.
+
 - [Najnovije: popravljeno SimFire opažanje](docs/research/SIMFIRE_OBSERVATION_REPAIR.md) - TASK-036 fazaA/ADR-038, stvarni popravak, jača heuristika i nesiguran TRAIN dobitak.
 
-- [Aktivni TASK-034: SimFire pregled](docs/research/SIMFIRE_OBSERVATION_AUDIT.md) - Završen audit i preporuka kontrolisanog CA pilota, ADR-036; preostali SimFire v2 put je eksplicitan.
+- [Prethodni TASK-034: SimFire pregled](docs/research/SIMFIRE_OBSERVATION_AUDIT.md) - Završen audit i preporuka kontrolisanog CA pilota, ADR-036; preostali SimFire v2 put je eksplicitan.
 
-- [Aktivni nastavak: SimFire B=1](docs/research/SIMFIRE_B1_EXPLORATION.md) - TASK-028–030 završeni: 98×33 ishoda, osam LOO metoda bez prolaza praga, ADR-034; predložen TASK-034.
+- [Prethodni nastavak: SimFire B=1](docs/research/SIMFIRE_B1_EXPLORATION.md) - TASK-028–030 završeni: 98×33 ishoda, osam LOO metoda bez prolaza praga, ADR-034; predložen TASK-034.
 
 - [Projekt i pokretanje](README.md) - Cilj istraživanja i minimalni setup.
 - [Sažeti projektni kontekst](knowledge/project-context.md) - Aktivni SimFire/FEDS pravac i crosswalk gate.

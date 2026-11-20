@@ -4,6 +4,16 @@ title: Work log
 ---
 # Work log
 
+2026-11-21 — Korisnik je odobrio CA iz SimFire repair grane. Izdvojen worktree/grana
+`codex/ca-controlled-pilot`, baza664d890d. Plan c8d8563c/ADR-039 prije koda7b45ee19 i
+nice19 worker provjere8ba4ced2. Observation-only heuristike dobijaju isto native/current
+forcing kao budući agent.240 development epizoda prolazi; direct7,46% uz20 bliskih
+susreta/0 gubitaka. Prvi slučaj15/15 replay identičan.352 pinovana testa, moderni337/3skip,
+core284/38skip, CLI i knowledge15/15/strict86 PASS. ADR-040/EXP-025 i javni izvještaj
+čuvaju nalaze i granice; nema RL, starog checkpointa ili holdouta. TASK-035 završen,
+TASK-038 je naredni encoder/provenance/kratki BC-PPO protokol. Nema mergea ili novog PR-a.
+
+
 2026-11-20 — `codex/simfire-observation-repair` je pushana, sa kodnim/rezultatskim commitom
 `1cabe778`. GitHub workflow44817109635 prolazi core3.11/3.13, numeric i knowledge.
 Publication receipt čuva commit i potvrđuje iste numeric source hashove kao lokalna

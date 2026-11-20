@@ -4,6 +4,10 @@ title: Gemini project entry point
 ---
 # Project context
 
+Aktivni nalog 2026-11-21 je TASK-035, kontrolisani CA pilot (ADR-039), na
+`codex/ca-controlled-pilot` iz SimFire repair grane. Pročitati [pilot](docs/research/CA_CONTROLLED_PILOT.md)
+i najnovije STATUS/NEXT_SESSION; stariji tekst o odgođenom CA je historija.
+
 Follow [AGENTS.md](AGENTS.md). Read [index.md](index.md) and
 [knowledge/project-context.md](knowledge/project-context.md), then the current
 [STATUS](docs/STATUS.md), [NEXT_SESSION](docs/NEXT_SESSION.md) and task-specific links.

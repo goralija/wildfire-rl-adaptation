@@ -10,6 +10,15 @@ Repo je OKF 0.2 knowledge bundle. Na početku sesije pročitaj [index.md](index.
 Zatim koristi [mapu zadataka/koda](knowledge/code-map.md) za relevantne izvore i testove.
 Korisnikove direktne upute imaju prednost; kasniji ADR može zamijeniti raniji.
 
+**Najnovije je ADR-040 (2026-11-21): TASK-035 CA ugovor/pilot završen** na
+`codex/ca-controlled-pilot`, iz `664d890d` SimFire repair grane po korisnikovom nalogu.
+[CA izvještaj](docs/research/CA_CONTROLLED_PILOT.md):240 razvojnih epizoda i15 replayeva
+PASS; direct_flank7,46% spašeno uz20 bliskih susreta/0 gubitaka, bez naučenog modela.
+352 pinovana testa prolaze. Naredni TASK-038: v2 encoder/provenance i unaprijed zadat
+kratki BC/PPO; dugi trening i proceduralni test nisu pokrenuti. Stvarni VALIDATION/TEST
+ostaju zatvoreni. Native opažanje/current forcing zajednički su za sve politike.
+Stariji tekst o odgođenom CA ispod je historija. CA nije fizički validiran ili Cell2Fire.
+
 **Najnovije je ADR-038 (2026-11-20): TASK-036 faza A je završena na
 `codex/simfire-observation-repair`.** [Izvještaj](docs/research/SIMFIRE_OBSERVATION_REPAIR.md)
 razdvaja potvrđeni popravak informacije i nesiguran policy dobitak. Svih 98 replayeva,

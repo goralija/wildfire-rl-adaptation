@@ -1,5 +1,18 @@
 # Promjene baze znanja
 
+## 2026-11-21: CA ugovor i pilot završeni
+
+2026-11-21 — Korisnik je odobrio CA iz SimFire repair grane. Izdvojen worktree/grana
+`codex/ca-controlled-pilot`, baza664d890d. Plan c8d8563c/ADR-039 prije koda7b45ee19 i
+nice19 worker provjere8ba4ced2. Observation-only heuristike dobijaju isto native/current
+forcing kao budući agent.240 development epizoda prolazi; direct7,46% uz20 bliskih
+susreta/0 gubitaka. Prvi slučaj15/15 replay identičan.352 pinovana testa, moderni337/3skip,
+core284/38skip, CLI i knowledge15/15/strict86 PASS. ADR-040/EXP-025 i javni izvještaj
+čuvaju nalaze i granice; nema RL, starog checkpointa ili holdouta. TASK-035 završen,
+TASK-038 je naredni encoder/provenance/kratki BC-PPO protokol. Nema mergea ili novog PR-a.
+
+[Detaljni izvještaj](docs/research/CA_CONTROLLED_PILOT.md) i [rezultati](reports/synthetic/ca-controlled-development-v2.json).
+
 ## 2026-11-20: v2 grana objavljena, CI zelen
 
 `codex/simfire-observation-repair` je pushana, sa kodnim/rezultatskim commitom

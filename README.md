@@ -4,11 +4,16 @@ title: Wildfire RL adaptation — MPVI
 ---
 # Wildfire RL adaptation — MPVI
 
+Aktivni nastavak (2026-11-21): [kontrolisani CA pilot](docs/research/CA_CONTROLLED_PILOT.md),
+TASK-035/ADR-039, grana `codex/ca-controlled-pilot` iz završene SimFire repair grane.
+Isti proceduralni slučajevi, opažanje i resursi za sve politike. Vlastiti CA nije fizički
+validiran; prethodni SimFire i poništeni historijski CA brojevi nisu tvrdnja RL uspjeha.
+
 Istražujemo može li prilagodba unaprijed treniranog RL agenta **različitim budžetima
 intervencija** smanjiti opožarenu površinu u odnosu na početni agent i heuristike,
 uz posebno ispitivanje zaštite prioritetnih područja.
 
-**Stanje (2026-11-20):** glavni pravac je SimFire + FPA-FOD/FEDS-CONUS: 98 TRAIN
+**SimFire baza (2026-11-20, prije odabira CA):** benchmark je SimFire + FPA-FOD/FEDS-CONUS: 98 TRAIN
 požara 2018/19, 20 VALIDATION 2023; TEST 2024 zatvoren. Raniji ADR-022–028 rezultati
 su poništeni zbog greške u vremenskim podacima. Na ispravljenim ulazima growth gate
 prolazi prema slaboj elipsi, uz WAF 0.10 / ROS 1.0 (ADR-031); to nije fizička validacija.

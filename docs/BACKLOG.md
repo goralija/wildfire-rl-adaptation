@@ -4,6 +4,19 @@ title: Naredni zadaci
 ---
 # Naredni zadaci
 
+## Aktivni CA pravac (2026-11-21)
+
+| Task | Status | Sljedeće |
+| --- | --- | --- |
+| TASK-035 | završeno, ADR-040 | Native/current forcing ugovor, 240 development epizoda i15 replayeva PASS; 352 testa; sigurnost prijavljena zasebno |
+| TASK-036 | faza A završena | SimFire repair ostaje na izvedenoj bazi; nalazi ADR-038 |
+| TASK-037 | predloženo, odgođeno | Preostala SimFire fizika/gate/trening |
+| TASK-038 | predloženo nakon CA pilota | V2 encoder/checkpoint provenance, kratki BC/PPO protokol i isti comparator; bez starih težina ili real holdouta |
+
+Starije oznake TASK-035 kao drafta ispod su historija, zamijenjene korisnikovim nalogom
+2026-11-21 i ADR-039. TEST 2024 i stvarni VALIDATION nisu otvoreni.
+
+
 ## Poslije popravka opažanja — 2026-11-20 (ADR-038)
 
 | ID | Stanje | Dokaz / naredno |

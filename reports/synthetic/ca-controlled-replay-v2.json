@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "base_seed": 21110000,
+  "matched_episodes": 15,
+  "whole_masks_actions_rewards_safety_match": true,
+  "guard": {
+    "plan_sha256": "41322dd7ef90d44d6da60af71c3e9351948b40b136e3af7b224ec9625eb01ccf",
+    "source_sha256": {
+      "src/wildfire_rl/synthetic_ca.py": "855b1d1ba50a1fd0e28f652f19d74607b1b0e485989e5424380bbf0602adb844",
+      "src/wildfire_rl/synthetic_env.py": "69beff35b90800b6ee4e5393b9a420c8170422d67bf7ec8d2633721167c676a2",
+      "src/wildfire_rl/synthetic_heuristics.py": "553803a58d0aa15a625277aff343373b7c1b5e4e00272b26caf1820b5f19c8c3",
+      "src/wildfire_rl/ca_controlled.py": "2046b9ff13846587f2fb8c8b8a91611fc6e55416fc560054f371d24338db9e4b",
+      "scripts/run_ca_controlled_pilot.py": "fbb860f63f8a7df7a9454b3f18b46d03448b86f993f9ef7a996827acae0c79ce"
+    },
+    "runtime": {
+      "python": "3.12.4",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "gymnasium": "1.4.0"
+    }
+  },
+  "seconds": 12.06938841700321
+}

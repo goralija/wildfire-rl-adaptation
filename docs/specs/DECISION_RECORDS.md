@@ -1777,3 +1777,38 @@ se cijeli požar sa svim rosterima. Nema policy prihvata iz malog pilota. Najvi�
 procesa nice19, najavljeno nekoliko minuta. Bez plaćenog computea, starog modela,
 proceduralnog testa, stvarnog VALIDATION/TEST, dugog treninga ili mergea. Kratki BC/PPO
 slijedi kroz zaseban unaprijed zapisan protokol i v2 provenance adapter.
+
+
+## ADR-040 — CA tehnički/heuristički pilot završen, naredni korak v2 učenje, 2026-11-21
+
+Po korisnikovom nalogu izvršen je ADR-039, plan `c8d8563c`, kod `7b45ee19`/`8ba4ced2`.
+TASK-035 je završen. Opt-in opažanje `ca-native-current-v2` daje native kategorijsku
+mapu, položaje jedinica i savršeno poznati forcing narednog sata svima. Heuristike
+koriste samo opažanje/masku; ne vide budući niz ili no-op otisak. Legacy fizika/nagrada
+ostaju. Urbano91 u CA je gorivo težine50, za razliku od SimFire nonfuel semantike.
+
+Prva dva slučaja30 epizoda9,64s; punih16 požara ×3 rostera ×5 politika =240 epizoda,
+50,04s uz reuse prva dva, četiri nice19 radnika. Sva ugovorna provjera prolazi:
+iste mape/vrijeme/no-op mask hashes, legalnost/no-op, kumulativna šteta/charge,
+terminalni union obračun i reward/safety. Prvi slučaj ponovljen bez cachea15/15 identično.
+Sandbox nice ograničenje je prvo zaustavilo run prije podataka; odobren lokalni run
+ima potvrđen prioritet19 u svakom radniku. Nijedan rezultat nije mijenjao plan/metode.
+
+Prosječni spašeni težinski udio: no-op0%, random0,24%, direct_flank7,46%, indirect2,03%,
+protect_urban3,94%. Direct minus random7,23p.p., opisni case-cluster95%[0,44;16,49]p.p.;
+medijan direct1,14%. B2/B3/B4 direct7,29/7,41/7,69%. Najbolje pravilo izabrano je na istom
+development skupu; interval nije korigovan za izbor i nije nezavisni test. Nema naučenog
+modela ili RL accept/reject. Sigurnost zasebno: direct20 bliskih susreta, random1, svi0
+gubitaka kroz48 epizoda po politici. To nije dokaz sigurne ili stvarne taktike.
+
+352 pinovana testa/0 skip, moderni337/3 skip, core284/38 skip; knowledge15/15 i86Markdown
+strict, CLI PASS. Nema proceduralnog train/test scoringa, stvarnog VALIDATION/TEST,
+starog checkpointa ili dugog treninga. Stari ADR-028 nalazi se ne vraćaju. Nova eksplicitna
+sjemena su disjunktna, ali historijska neizloženost zbog ranijeg širokog random raspona
+nije dokazana. CA rezultati ne rangiraju SimFire ili fizičku tačnost.
+
+**Dalje:** TASK-038 priprema v2 encoder/checkpoint provenance i zaseban kratki BC/PPO
+protokol uz development referencu direct_flank. Spašena šteta ne smije sakriti veću
+nesigurnost; kriteriji sigurnosti i izbor checkpointa idu unaprijed. TASK-037 SimFire
+ostaje odgođen. Merge i novi PR nisu urađeni. [Izvještaj](../research/CA_CONTROLLED_PILOT.md)
+i [rezultati](../../reports/synthetic/ca-controlled-development-v2.json) su kanonski.
