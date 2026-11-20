@@ -62,7 +62,8 @@
     ".local/ca-pilot-2-authorized.log": "abc0e6fc0c821f60560f5eabe8201ff8a804af61b0d7456229ba25d59862c5ac",
     ".local/ca-pilot-2-retry.log": "b2fca8af60980604cd3a2465706faea8d32d8a89f3d8f89114dc87e5f33cfd1e",
     ".local/knowledge-final-strict.log": "ddc7fac03a0c75fbef4a7c36f9ad9eb686fb916ca5ae18c7479a825a0afd8100",
-    ".local/knowledge-final.log": "ffe07d92170cf6f422c180fee7fc0f1774857d0a3617d11cde36c77b3c043f44"
+    ".local/knowledge-final.log": "ffe07d92170cf6f422c180fee7fc0f1774857d0a3617d11cde36c77b3c043f44",
+    ".local/ca-ci.json": "10ba924c0950a0975df30440a9b867bef00b00493d4c8ea9444e82f8f61ee745"
   },
   "limits": [
     "No physical validation",
@@ -71,5 +72,20 @@
     "No procedural test or real holdout",
     "No historical non-exposure proof"
   ],
-  "publication": "branch push pending; no PR or merge"
+  "publication": {
+    "branch": "codex/ca-controlled-pilot",
+    "tested_commit": "3ad3f72c5c9ce20bb16f36686c90112257df8254",
+    "workflow_url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44836958711",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": {
+      "numeric": "success",
+      "core (3.11)": "success",
+      "core (3.13)": "success",
+      "knowledge": "success"
+    },
+    "new_pr": false,
+    "merged": false,
+    "note": "Subsequent publication/documentation-only commit does not change numerical code/results."
+  }
 }

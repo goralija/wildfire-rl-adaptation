@@ -4,6 +4,9 @@ title: Work log
 ---
 # Work log
 
+2026-11-21 — CA grana je pushana, CI na3ad3f72c prolazi sva četiri posla. Završni
+publication receipt i handoff su usklađeni; bez novog PR-a/mergea ili aktivnog računanja.
+
 2026-11-21 — Korisnik je odobrio CA iz SimFire repair grane. Izdvojen worktree/grana
 `codex/ca-controlled-pilot`, baza664d890d. Plan c8d8563c/ADR-039 prije koda7b45ee19 i
 nice19 worker provjere8ba4ced2. Observation-only heuristike dobijaju isto native/current

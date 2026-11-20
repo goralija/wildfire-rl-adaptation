@@ -4,7 +4,7 @@ title: GitHub Copilot project entry point
 ---
 # Project context
 
-Aktivni nalog 2026-11-21 je TASK-035, kontrolisani CA pilot (ADR-039), na
+Aktivni nalog 2026-11-21 je TASK-035, završeni kontrolisani CA pilot (ADR-039–040), na
 `codex/ca-controlled-pilot` iz SimFire repair grane. Pročitati [pilot](../docs/research/CA_CONTROLLED_PILOT.md)
 i najnovije STATUS/NEXT_SESSION; stariji tekst o odgođenom CA je historija.
 

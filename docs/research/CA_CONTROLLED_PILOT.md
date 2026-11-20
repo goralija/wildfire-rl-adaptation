@@ -160,3 +160,7 @@ trenutna prednost u spašenoj šteti nije dovoljan kriterij. Legacy training CLI
 usvaja novi ugovor automatski. Train/test liste su rezervisane, nisu iskorištene.
 Dugi trening, proceduralni test i stvarni holdout nisu pokrenuti. TASK-037 SimFire
 physics/gate put ostaje dokumentovan, odgođen izborom CA. Nema mergea ili novog PR-a.
+
+Objava: grana je commitana/pushana. [CI na3ad3f72c](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44836958711)
+prolazi core3.11/core3.13, numeric i knowledge. Verification bilježi tačan testirani commit.
+Kasniji publikacijski commit ne mijenja numerički kod ili rezultate. Nema novog PR-a ili mergea.

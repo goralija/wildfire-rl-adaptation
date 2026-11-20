@@ -25,4 +25,4 @@
 - [Simulator i pretrained feasibility audit](SIMULATOR_AUDIT.md) - Audit
 - [Izvori i literatura](SOURCES.md) - Reference
 
-- [Kontrolisani CA pilot v2](CA_CONTROLLED_PILOT.md) — TASK-035/ADR-039, plan prije mjerenja.
+- [Kontrolisani CA pilot v2](CA_CONTROLLED_PILOT.md) — TASK-035/ADR-040 završen:240 epizoda, ista opažanja, sigurnost i sljedeći korak.

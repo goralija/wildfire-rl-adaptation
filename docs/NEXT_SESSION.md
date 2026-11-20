@@ -29,6 +29,14 @@ ishode, zatim napisati TASK-038 plan prije novih modela ili metrike. Ne ponavlja
 završeni pilot bez razloga. Nijedan dugi posao trenutno ne radi.
 
 
+### Objava CA grane
+
+Grana [codex/ca-controlled-pilot](https://github.com/goralija/wildfire-rl-adaptation/tree/codex/ca-controlled-pilot)
+je commitana i pushana. [CI na kodnom/rezultatskom commitu3ad3f72c](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44836958711)
+prolazi sva četiri posla. Publication zapis je u CA verification JSON-u; kasnija dopuna
+publikacijskih podataka ne mijenja numerički kod. Nema novog PR-a, mergea ili aktivnog runa.
+
+
 ## Objava i pregled (2026-11-20)
 
 Grana [codex/simfire-observation-repair](https://github.com/goralija/wildfire-rl-adaptation/tree/codex/simfire-observation-repair)

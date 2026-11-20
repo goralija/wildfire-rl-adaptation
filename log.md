@@ -1,5 +1,11 @@
 # Promjene baze znanja
 
+## 2026-11-21: CA grana objavljena i CI zelen
+
+`codex/ca-controlled-pilot` je pushana; [CI](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44836958711)
+na3ad3f72c prolazi četiri posla. [CA izvještaj](docs/research/CA_CONTROLLED_PILOT.md)
+i handoff čuvaju završeni TASK-035 i sljedeći TASK-038. Bez PR-a/mergea.
+
 ## 2026-11-21: CA ugovor i pilot završeni
 
 2026-11-21 — Korisnik je odobrio CA iz SimFire repair grane. Izdvojen worktree/grana
