@@ -239,3 +239,8 @@ V2 NPZ podaci zauzimaju 28,47 MB i ostaju lokalni. [Manifest prenosivog paketa](
 veže stare ulaze/tabelu i nove opservacije, native maske, kod i logove. Veliki podaci,
 venv i checkpointovi nisu u Gitu. Izvedena grana se push-a po korisnikovom nalogu;
 PR #20 prethodnog rada ostaje otvoren, novi PR nije potreban.
+
+Objava: grana je pushana i [CI na1cabe778](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44817109635)
+prolazi sva četiri posla. [Publication receipt](../../reports/real-fire-data/feds-observation-repair-publication-v2.json)
+odvojeno bilježi kasniju objavu, jer je lokalni numerički archive napravljen prije push-a.
+Novi PR nije otvoren; PR #20 prethodnog rada ostaje za pregled, bez mergea.

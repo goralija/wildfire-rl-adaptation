@@ -1,0 +1,38 @@
+{
+  "branch": "codex/simfire-observation-repair",
+  "jobs": [
+    {
+      "conclusion": "success",
+      "name": "knowledge",
+      "url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44817109635/job/136568172162"
+    },
+    {
+      "conclusion": "success",
+      "name": "numeric",
+      "url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44817109635/job/136568172549"
+    },
+    {
+      "conclusion": "success",
+      "name": "core (3.11)",
+      "url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44817109635/job/136568172615"
+    },
+    {
+      "conclusion": "success",
+      "name": "core (3.13)",
+      "url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44817109635/job/136568172708"
+    }
+  ],
+  "large_artifacts_uploaded": false,
+  "merged": false,
+  "new_pr_created": false,
+  "numeric_source_hashes_match_local_verification": true,
+  "prior_pr": "https://github.com/goralija/wildfire-rl-adaptation/pull/20",
+  "pushed": true,
+  "recorded_utc": "2026-11-20T21:07:25.007562+00:00",
+  "schema_version": "feds-observation-repair-publication/2.0",
+  "scope": "CI proof for the first published code/results commit. Later publication-documentation commits do not change numeric source; live GitHub checks identify their status.",
+  "tested_commit": "1cabe77898e0023592e114e65efe105b319b402a",
+  "workflow_conclusion": "success",
+  "workflow_id": 44817109635,
+  "workflow_url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44817109635"
+}

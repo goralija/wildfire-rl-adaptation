@@ -4,6 +4,12 @@ title: Work log
 ---
 # Work log
 
+2026-11-20 — `codex/simfire-observation-repair` je pushana, sa kodnim/rezultatskim commitom
+`1cabe778`. GitHub workflow44817109635 prolazi core3.11/3.13, numeric i knowledge.
+Publication receipt čuva commit i potvrđuje iste numeric source hashove kao lokalna
+provjera. Novi PR nije potreban i nije otvoren; PR #20 je ostavljen za kolege. Nema
+mergea, novog computea ili uploada velikog paketa. Status/handoff/raspored su usklađeni.
+
 2026-11-20 — Korisnik je tražio još jedan SimFire pokušaj i pojašnjenje goriva, uz
 commit/push i pregled prethodnog rada. PR #20 je otvoren i CI je zelen. Nova izvedena
 grana `codex/simfire-observation-repair`; plan `81be2e09` prethodi native podacima.

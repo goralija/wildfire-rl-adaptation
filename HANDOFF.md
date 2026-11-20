@@ -8,6 +8,16 @@ Stanje **2026-11-20**. Ovaj dokument je ulaz za kolegu ili agenta koji preuzima 
 chat historije. Repozitorij je kanonski izvor; artifact za tim (link ispod) je sažetak za
 čitanje.
 
+## Objava i pregled (2026-11-20)
+
+Grana [codex/simfire-observation-repair](https://github.com/goralija/wildfire-rl-adaptation/tree/codex/simfire-observation-repair)
+je pushana. [CI kodnog/rezultatskog commita1cabe778](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44817109635)
+prolazi core3.11/core3.13, numeric i knowledge. Nema mergea ili novog PR-a po posljednjoj
+korisnikovoj poruci; [PR #20](https://github.com/goralija/wildfire-rl-adaptation/pull/20)
+prethodnog rada ostaje otvoren. [Publication receipt](reports/real-fire-data/feds-observation-repair-publication-v2.json)
+čuva tačan testirani commit. Kasnija dopuna publikacijskih podataka ne mijenja numerički
+kod. Veliki lokalni paket nije uploadovan.
+
 ## Najnovije — v2 popravak izveden (ADR-038)
 
 [SimFire observation repair](docs/research/SIMFIRE_OBSERVATION_REPAIR.md) je sada prvi

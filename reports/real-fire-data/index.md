@@ -1,5 +1,7 @@
 # real-fire-data
 
+- [V2 objava i CI](feds-observation-repair-publication-v2.json) - push grane, sva četiri CI posla PASS na1cabe778, bez novog PR-a/mergea.
+
 - [V2 repair coverage](feds-observation-repair-coverage-v2.json) -98 replayeva,392 opažanja,3136 candidate geometrija; legacy i whole-noop PASS.
 - [V2 svi nested rezultati](feds-observation-repair-analysis-v2.json) -4 reprezentacije×2 maske×2 obračuna; niko ne prelazi prag; [grafikon](feds-observation-repair-v2.png).
 - [V2 fiksne heuristike](feds-observation-repair-heuristics-v2.json) -fine+gate 123,72 charged ha; +22,68 prema starom pravilu, širok opisni interval.
