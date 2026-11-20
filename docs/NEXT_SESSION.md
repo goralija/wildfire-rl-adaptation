@@ -4,6 +4,27 @@ title: Naredni korak — nakon SimFire audita (2026-11-20)
 ---
 # Naredni korak
 
+## Nakon v2 popravka — redoslijed (ADR-038, 2026-11-20)
+
+1. Pročitati [završni v2 izvještaj](research/SIMFIRE_OBSERVATION_REPAIR.md) i rezultate.
+   FazaA TASK-036 je završena. Ne ponavljati 98 replayeva ili 16 fit kombinacija ako
+   sačuvani manifesti i hashovi prolaze. V2 i jača fine+gate heuristika su referenca
+   za svaki naredni SimFire pokušaj; ne vraćati se na slabiji comparator bez objašnjenja.
+2. Kolege mogu pregledati [PR #20](https://github.com/goralija/wildfire-rl-adaptation/pull/20)
+   prethodnog rada i izvedenu `codex/simfire-observation-repair` granu. Novi PR nije
+   potreban po korisniku; ništa nije mergeano. Pratiti CI objavljene grane.
+3. Predloženi naredni glavni korak je TASK-035: CA ugovor informacija i tehnički pilot
+   iz postojećeg drafta. Ne vraćati stare poništene checkpointove ili automatski trenirati;
+   prvo definisati opaženo vrijeme, verzije, slučajeve, budžete i jake heuristike.
+4. Ako se dalje bira SimFire, TASK-037: max/korak kroz novi TRAIN gate i novu tabelu;
+   zatim custom v2 encoder/checkpoint i unaprijed zadati BC/PPO protokol. Povratak na
+   B=2/B=4 ne može koristiti B=1 tabelu poslije prve linije.
+5. TEST 2024 i nova VALIDATION upotreba ostaju zatvoreni. Raw env nagrada nije promijenjena
+   u charged; taj trening ugovor mora biti eksplicitan prije novog PPO-a.
+
+Popravak informacija je potvrđen. Njegov policy dobitak je preliminaran, nijedan
+naučeni kandidat ne prolazi, a svih mogućih algoritama/SimFire grešaka nije dokazano odsustvo.
+
 ## Korisnikov nastavak — popravak opažanja prije CA (2026-11-20)
 
 Završeni rad je pushan i otvoren kao [PR #20](https://github.com/goralija/wildfire-rl-adaptation/pull/20)

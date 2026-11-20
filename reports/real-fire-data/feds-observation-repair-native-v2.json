@@ -1,0 +1,184 @@
+{
+  "all_checks": "PASS",
+  "analysis_sha256": "32b8ea70d3a8f4ee0005624693155ae43fdc3a003263c0fb6f8292c663f8dc53",
+  "created_utc": "2026-11-20T20:45:16.192159+00:00",
+  "label": "POST-RESULT TECHNICAL REPLAY CHECK; NOT A NEW PERFORMANCE SAMPLE",
+  "results": [
+    {
+      "actions": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "blocked_actions": 0,
+      "kind": "primary_sequence",
+      "mask_file": "fpa-fod-400300427-plateau--primary_sequence.npz",
+      "mask_sha256": "081f7b2880486a686f1fda53c0a093268aac1d460f1a84a7710d65ee067d4916",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "score": {
+        "charged_damage_cells": 0,
+        "charged_saved_cells": 0,
+        "extra_line_charge_cells": 0,
+        "line_cells_in_noop_footprint": 0,
+        "noop_damage_cells": 0,
+        "raw_damage_cells": 0,
+        "raw_saved_cells": 0
+      },
+      "seconds": 2.788812375,
+      "whole_mask_and_score_check": "PASS"
+    },
+    {
+      "actions": [
+        7,
+        0,
+        0,
+        0
+      ],
+      "blocked_actions": 0,
+      "kind": "fine_heuristic",
+      "mask_file": "fpa-fod-400300427-plateau--fine_heuristic.npz",
+      "mask_sha256": "9a68f6c907c9e85e2bab0cb10751d33f284996f28d5e1accbdb5776919178eb1",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "score": {
+        "charged_damage_cells": 0,
+        "charged_saved_cells": 0,
+        "extra_line_charge_cells": 0,
+        "line_cells_in_noop_footprint": 0,
+        "noop_damage_cells": 0,
+        "raw_damage_cells": 0,
+        "raw_saved_cells": 0
+      },
+      "seconds": 2.790494291,
+      "whole_mask_and_score_check": "PASS"
+    },
+    {
+      "actions": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "blocked_actions": 0,
+      "kind": "fine_heuristic",
+      "mask_file": "fpa-fod-400307379-weston-pass--fine_heuristic.npz",
+      "mask_sha256": "7a8f00734c976b845316cacb5d006fc8ac8dce245da0947ad854ba163c2f2520",
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "score": {
+        "charged_damage_cells": 28,
+        "charged_saved_cells": 579,
+        "extra_line_charge_cells": 4,
+        "line_cells_in_noop_footprint": 4,
+        "noop_damage_cells": 607,
+        "raw_damage_cells": 24,
+        "raw_saved_cells": 583
+      },
+      "seconds": 0.3662070830000004,
+      "whole_mask_and_score_check": "PASS"
+    },
+    {
+      "actions": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "blocked_actions": 1,
+      "kind": "blocked_nonfuel",
+      "mask_file": "fpa-fod-400302877-whaleback--blocked_nonfuel.npz",
+      "mask_sha256": "31c78e2b9fe11d3b7d7e419955b92f7bcd3801cf218bece7d63c900ceba806d9",
+      "scenario_id": "fpa-fod-400302877-whaleback",
+      "score": {
+        "charged_damage_cells": 0,
+        "charged_saved_cells": 0,
+        "extra_line_charge_cells": 0,
+        "line_cells_in_noop_footprint": 0,
+        "noop_damage_cells": 0,
+        "raw_damage_cells": 0,
+        "raw_saved_cells": 0
+      },
+      "seconds": 0.39195166699999984,
+      "whole_mask_and_score_check": "PASS"
+    },
+    {
+      "actions": [
+        3,
+        0,
+        0,
+        0
+      ],
+      "blocked_actions": 0,
+      "kind": "primary_sequence",
+      "mask_file": "fpa-fod-400307776-bull-draw--primary_sequence.npz",
+      "mask_sha256": "039fad295e5eef042ab94e651d30fc0ef0527860010f8a95795e05a27c2111d4",
+      "scenario_id": "fpa-fod-400307776-bull-draw",
+      "score": {
+        "charged_damage_cells": 848,
+        "charged_saved_cells": 264,
+        "extra_line_charge_cells": 7,
+        "line_cells_in_noop_footprint": 7,
+        "noop_damage_cells": 1112,
+        "raw_damage_cells": 841,
+        "raw_saved_cells": 271
+      },
+      "seconds": 4.531291749999999,
+      "whole_mask_and_score_check": "PASS"
+    },
+    {
+      "actions": [
+        3,
+        0,
+        0,
+        0
+      ],
+      "blocked_actions": 0,
+      "kind": "primary_sequence",
+      "mask_file": "fpa-fod-400307379-weston-pass--primary_sequence.npz",
+      "mask_sha256": "dcfb7fe5c287c1bb0ef4c2f57924afc988fefc10543b4d8cdb779113956d139f",
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "score": {
+        "charged_damage_cells": 607,
+        "charged_saved_cells": 0,
+        "extra_line_charge_cells": 0,
+        "line_cells_in_noop_footprint": 0,
+        "noop_damage_cells": 607,
+        "raw_damage_cells": 607,
+        "raw_saved_cells": 0
+      },
+      "seconds": 1.7747351660000001,
+      "whole_mask_and_score_check": "PASS"
+    },
+    {
+      "actions": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "blocked_actions": 0,
+      "kind": "fine_heuristic",
+      "mask_file": "fpa-fod-400307776-bull-draw--fine_heuristic.npz",
+      "mask_sha256": "f9a105781b69642bbab5ac3c9026f90e4e54c696eb57299cf961cb57aaf3a951",
+      "scenario_id": "fpa-fod-400307776-bull-draw",
+      "score": {
+        "charged_damage_cells": 1112,
+        "charged_saved_cells": 0,
+        "extra_line_charge_cells": 0,
+        "line_cells_in_noop_footprint": 0,
+        "noop_damage_cells": 1112,
+        "raw_damage_cells": 1112,
+        "raw_saved_cells": 0
+      },
+      "seconds": 4.761648667,
+      "whole_mask_and_score_check": "PASS"
+    }
+  ],
+  "schema_version": "feds-observation-repair-native-check/2.0",
+  "selection": "First ID plus primary largest positive/negative charged differences; one blocked action. These are verification paths, not extra evaluation evidence.",
+  "source_sha256": "f6aa2fdf324b6d05a9f85afebe0a43c4862cb452bfdddc7823dc441e9a05e397",
+  "source_table_sha256": "28627fa98b60f8dae4ac4f9246887ecd3488b541c2a9dbd5e82620811effbddc",
+  "split": "train",
+  "test_cases_loaded": false,
+  "validation_used": false,
+  "wall_minutes": 0.08917689026666667
+}

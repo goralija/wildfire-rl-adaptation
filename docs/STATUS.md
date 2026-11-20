@@ -7,6 +7,23 @@ sources:
 ---
 # Trenutno stanje — 2026-11-20
 
+## TASK-036 faza A završena — popravak opažanja (ADR-038, 2026-11-20)
+
+[Završni v2 izvještaj](research/SIMFIRE_OBSERVATION_REPAIR.md) opisuje stvarno izveden
+popravak: kategorijsko gorivo/nonfuel, 64×64 globalni prikaz, native lokalni izrezi,
+reljef i opciona maska negorivih linija. Pilot 5/5 i svih 98 no-op replayeva prolaze
+legacy/geometry/whole-mask provjere; stara dinamika i ishodi se ne mijenjaju.
+
+Fine pravilo+gate daje 123,72 charged ha prema starom 101,04 (+22,68), ali opisni 95%
+interval razlike je[−32,30;83,61], a bez najveće razlike +3,71 ha. Primarni naučeni
+kandidat daje 71,18 ha prema 123,72 jače reference; niko ne prelazi prag. Svi nalazi su
+reused TRAIN i simulatorski. Native provjera 7/7, pinovani suite 344/344 bez skipa.
+
+Grana je `codex/simfire-observation-repair`, izvedena iz otvorenog PR-a #20. Novi PR
+nije potreban po korisniku; push i CI su dio predaje. Main nije mergean. TASK-035 CA
+ugovor/pilot ostaje sljedeći predloženi glavni pravac; TASK-037 čuva preostali SimFire
+physics/gate i trening put. Nema novih PPO/CA treninga ili VALIDATION/TEST pristupa.
+
 ## Korisnikov nastavak — popravak opažanja prije CA (2026-11-20)
 
 Završeni rad je pushan i otvoren kao [PR #20](https://github.com/goralija/wildfire-rl-adaptation/pull/20)

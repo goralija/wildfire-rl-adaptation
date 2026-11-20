@@ -1681,3 +1681,64 @@ Ako replay ili invariants padnu, scoring se zaustavlja i popravka se dokumentuje
 Precizni tehnički izbori su agentov plan unutar odobrenog rada, ne zasebna ljudska
 potvrda svake postavke. Hipoteza je da dodatna informacija pomaže; rezultat može biti
 nulti ili lošiji i biće prijavljen bez podešavanja menija poslije nalaza.
+
+## ADR-038 — TASK-036 faza A završena: opažanje popravljeno, policy dobitak ostaje nesiguran, recorded 2026-11-20
+
+**Obim.** Izvršen je korisnikov dodatni pokušaj po ADR-037. Ovo zatvara dio opažanja i
+maske TASK-036, ne sve moguće SimFire v2 popravke. Fizika/gate i novi trening ostaju
+poseban predloženi TASK-037. CA TASK-035 je draft, nije pokrenut. Prethodni PR #20
+ostaje otvoren za kolege; izvedena grana je `codex/simfire-observation-repair`, bez mergea.
+Push je odobren; novi PR nije potreban po korisniku.
+
+**Implementacija i integritet.** Plan `81be2e09` prethodi mjerenjima. Wrapper/kolektor
+`c1aa9acc` daje eksplicitni v2: kategorijsko gorivo/nonfuel, global 64 i native 17 izreze,
+centre/kandidate i reljef. Legacy env i njegovi checkpointovi nisu tiho promijenjeni.
+Pilot 5/5 i svih 98 replayeva daju identične legacy ključeve/maske, svih 3.136 kandidata
+u native i lokalnim koordinatama i cijele finalne no-op maske. Dinamika je ista kao
+ADR-031. Puna komanda poslije pilota traje 1,34 min, pilot 0,24 min, četiri nice 19 radnika.
+Od 2.242 legalna line niza uklonjeno je 47 potpuno negorivih, sa nultom uštedom u oba
+obračuna. Maska ne koristi budući no-op otisak; no-op, horizont i kumulativna šteta ostaju.
+
+**Fiksna uparena ocjena.** Četiri reprezentacije×dvije maske×dva obračuna, nested LOO,
+isti RBF meni/foldovi kao ADR-035. Primarni terrain 536/burnable i referenca su unaprijed
+zapisani. Referentna nenulta heuristika bira se samo na 97 fit požara; u svim 98 foldovima
+izabrana je fine advancing_front. Legacy 28/legacy tačno reprodukuje ADR-035 RBF akcije,
+parametre, inner score i ishode. Svih 1.568 OOF lookupova i prosjeci su ponovo provjereni.
+Analiza traje 29,51 s, bez nove fizike ili PPO treninga.
+
+**Koristan, ali nesiguran signal pravila.** Charged mean: coarse 101,04 ha, fine 121,27 ha,
+fine+gate 123,72 ha prema istom no-opu. Ukupna razlika prema originalu je+22,68 ha:
++20,23 iz finije geometrije i+2,45 iz maske. Potonji dobitak dolazi iz jednog požara;
+sekvenca maske mijenja se u tri slučaja. Fine+gate je bolji/lošiji/isti na 13/11/74.
+Opisni 95% bootstrap [−32,30;83,61]; bez najveće apsolutne razlike +3,71 ha, bez refita.
+Weston Pass doprinosi+1.863 ha, Goose Creek−1.542,24 ha. Ovo je reused TRAIN signal,
+ne potvrđena generalizacija ili stvarni učinak gašenja.
+
+**Naučeni kandidati.** Nijedan ne dostiže prag. Primarni charged mean 71,18 ha prema
+123,72 jače reference, razlika−52,53 ha, opisni interval [−126,20;14,05]. Oracle 529,84 ha,
+preostali jaz 406,12 ha, pa bi prag tražio≥101,53 ha dodatno. Primarni raw rezultat 85,96 ha
+prema 135,55 ha. Ispravnija informacija nije dala bolju odluku ovim estimatorima; to ne
+isključuje drugi model, custom encoder, BC/PPO, istoriju ili više treninga. Svi kandidati
+ostaju prijavljeni, meni nije mijenjan poslije rezultata.
+
+**Tehnički dokaz.** Sedam post-result tehničkih replayeva provjerava živo fine pravilo,
+primarne sekvence i jedan odbijeni nonfuel potez: cijele maske, oba obračuna, horizont
+budžet i kumulativna šteta PASS. To nije novi performance uzorak. Standalone fine
+factory `b2304800` reprodukuje unaprijed deklarisano pravilo i sve srednje rezultate.
+Pinovani suite 344/344 bez skipa, moderni 329/3 skip, core 283/37 skip; CLI PASS. Novi v2
+prostor zahtijeva poseban model/checkpoint ugovor. Env reward ostaje raw; charged je
+odvojeni offline cilj, ne nova zvanična PPO nagrada.
+
+**Preporuka i granice.** Zadržati popravljeni v2 i jači fine+gate baseline. Kontrolisani
+CA ugovor/pilot TASK-035 ostaje obrazložen sljedeći projektni pravac, ali nije automatski
+fizički validiran ili RL pobjednik. Ako se nastavlja SimFire, TASK-037 prvo odvojeno
+provjerava max/korak kroz novi TRAIN gate/tabelu, pa verzionisani encoder/reward i
+unaprijed zadati BC/PPO. B=2/B=4 nije ispitano ovim B=1 radom. Nema tvrdnje da su svi
+potencijali ili greške isključeni. TEST 2024, novi VALIDATION, PPO i CA trening nisu korišteni.
+
+Dokazi: [završni izvještaj](../research/SIMFIRE_OBSERVATION_REPAIR.md),
+[coverage](../../reports/real-fire-data/feds-observation-repair-coverage-v2.json),
+[sve ablations](../../reports/real-fire-data/feds-observation-repair-analysis-v2.json),
+[heuristike](../../reports/real-fire-data/feds-observation-repair-heuristics-v2.json),
+[native provjera](../../reports/real-fire-data/feds-observation-repair-native-v2.json),
+[verification](../../reports/real-fire-data/feds-observation-repair-verification-v2.json).

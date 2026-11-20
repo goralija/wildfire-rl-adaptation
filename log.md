@@ -1,5 +1,15 @@
 # Promjene baze znanja
 
+## 2026-11-20: TASK-036 observation v2 izveden (ADR-038)
+
+- [Popravak opažanja](docs/research/SIMFIRE_OBSERVATION_REPAIR.md) je stvarno implementiran:
+  kategorije/nonfuel, fine-global/native-local prikaz i opciona nonfuel maska.
+- 98 replayeva i 3136 kandidata se poklapaju sa starim zapisom; legacy RBF pipeline PASS.
+- Fine+gate 123,72 prema 101,04 charged ha; +22,68 s intervalom[−32,30;83,61]. Nijedan
+  naučeni kandidat ne prelazi prag.344 pinovana testa i 7 native replayeva prolaze.
+- PR #20 ostaje otvoren za kolege; nova izvedena grana se push-a bez novog PR-a po nalogu.
+  CA TASK-035 draft i preostali SimFire TASK-037 su odvojeni; nema novih holdout/treninga.
+
 ## 2026-11-20: Korisnik je odobrio SimFire popravak i pregled PR-a
 
 Grana `codex/simfire-observation-audit` je pushana i otvoren je

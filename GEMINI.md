@@ -29,3 +29,9 @@ Latest 2026-11-20 (ADR-036): TASK-034 is complete on codex/simfire-observation-a
 Read docs/research/SIMFIRE_OBSERVATION_AUDIT.md. A startup race is fixed, four nested
 families do not meet the threshold, and numerical/observation limitations are explicit.
 TASK-035 CA contract/pilot is a draft, not training approval; TEST and new VALIDATION stay closed.
+
+Latest ADR-038 (2026-11-20): the authorized observation-v2 repair is complete on
+codex/simfire-observation-repair. Read docs/research/SIMFIRE_OBSERVATION_REPAIR.md.
+Information aliases are repaired; the fixed fine rule has an uncertain TRAIN gain,
+while no learned candidate meets the threshold. Prior PR20 remains open; new PR optional.
+TASK035 CA is a draft and TASK037 holds remaining SimFire work. No automatic holdout/training.

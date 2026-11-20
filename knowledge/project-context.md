@@ -19,6 +19,16 @@ su sažeti u [rubrici](../docs/research/REQUIREMENTS_AND_RUBRIC.md). Aktivni ben
 koristi SimFire, FPA-FOD početne uslove i FEDS-CONUS vremenske obode; stariji
 CFSDS/Cell2Fire rad ostaje odvojen i historijski.
 
+## Najnovije — observation v2 (ADR-038, 2026-11-20)
+
+Korisnikov dodatni SimFire pokušaj je izveden na `codex/simfire-observation-repair`.
+[Izvještaj](../docs/research/SIMFIRE_OBSERVATION_REPAIR.md) bilježi ispravan kategorijski
+fuel/nonfuel prikaz i lokalnu geometriju,98 identičnih no-op putanja i uparene rezultate.
+Fine+gate daje 123,72 charged ha prema 101,04 starog pravila, uz interval koji uključuje 0.
+Primarni naučeni model daje 71,18 ha prema 123,72 jače reference; niko ne prelazi prag.
+Prethodni PR #20 ostaje otvoren; novi PR nije potreban. Nema mergea, novih holdout ili
+PPO/CA treninga. CA draft TASK-035 i preostali SimFire put TASK-037 su jasno odvojeni.
+
 ## Nastavak 2026-11-20 — ADR-036
 
 TASK-034 je završen na lokalnoj `codex/simfire-observation-audit`.

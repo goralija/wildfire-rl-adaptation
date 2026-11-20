@@ -6,6 +6,8 @@
 
 ## Dokumenti
 
+- [TASK-036: popravljeno SimFire opažanje](SIMFIRE_OBSERVATION_REPAIR.md) - ADR-037/038, kategorije, native izrezi, nonfuel maska i upareni rezultati.
+
 - [TASK-034: SimFire opservacija i odluka o nastavku](SIMFIRE_OBSERVATION_AUDIT.md) - ADR-035/036, završen TRAIN-only audit, nested metode i obrazloženi nastavak.
 
 - [SimFire B=1: iscrpna tabela i offline učenje](SIMFIRE_B1_EXPLORATION.md) - TASK-028–030 završeni, ADR-034, oba obračuna i osam TRAIN LOO metoda bez prolaza praga

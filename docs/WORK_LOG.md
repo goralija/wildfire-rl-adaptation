@@ -4,6 +4,25 @@ title: Work log
 ---
 # Work log
 
+2026-11-20 — Korisnik je tražio još jedan SimFire pokušaj i pojašnjenje goriva, uz
+commit/push i pregled prethodnog rada. PR #20 je otvoren i CI je zelen. Nova izvedena
+grana `codex/simfire-observation-repair`; plan `81be2e09` prethodi native podacima.
+Implementiran opt-in v2 wrapper, categories/nonfuel, fine/global/native/local prikaz,
+reljef i burnable maska, uz prvo padajuće testove. Pilot 5/5 pa 98/98 no-op replayeva
+reprodukuje legacy ključeve/maske,3.136 kandidata i finalne whole maske. RBF kontrola
+reprodukuje staru analizu;16 nested kombinacija daje 1.568 OOF putanja. Fine+gate charged
+mean 123,72 ha, +22,68 prema starom pravilu, ali interval uključuje 0 i outlier-drop daje
++3,71. Primarni naučeni 71,18 prema 123,72 jače reference; niko ne prolazi.7 native
+tehničkih putanja PASS, suite 344/344 bez skipa, moderni 329(3 skip), core 283(37 skip).
+Nema nove fizike ili holdout/PPO/CA. ADR-038/EXP-024 i izvještaj razdvajaju potvrđeni
+popravak, nesiguran dobitak i neispitano. TASK-036 faza A završena; TASK-037 čuva širi
+SimFire ostatak. Novi PR nije potreban po korisniku; grana se push-a radi nastavka.
+Lokalni paket52.855.038B ima1.025 članova plus manifest; svi hashovi ponovo pročitani.
+Raspakovani source i svi98dataset/case zapisi prolaze guardove, a16 prvih outer fold
+fitova reprodukuje akcije, parametre, inner score i spašenu površinu. To nije cijela
+nova98-fold analiza ili reinstaliran environment. Knowledge15/15 i strict85Markdown PASS.
+
+
 2026-11-20 — Grana `codex/simfire-observation-audit` je pushana i otvoren je
 [PR #20](https://github.com/goralija/wildfire-rl-adaptation/pull/20). GitHub konektor je
 vratio403 za kreiranje; postojeći gh CLI je uspješno otvorio isti odobreni PR.

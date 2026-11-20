@@ -4,6 +4,18 @@ title: Naredni zadaci
 ---
 # Naredni zadaci
 
+## Poslije popravka opažanja — 2026-11-20 (ADR-038)
+
+| ID | Stanje | Dokaz / naredno |
+| --- | --- | --- |
+| TASK-036 faza A | završeno | [v2 izvještaj](research/SIMFIRE_OBSERVATION_REPAIR.md); categorical/local/terrain opservacija, nonfuel maska,98 kontrolisanih replayeva i 16 nested kombinacija |
+| TASK-035 | draft, nije pokrenut | CA ugovor informacija i tehnički pilot; poslije ovog dodatnog SimFire pokušaja ostaje preporučeni glavni pravac |
+| TASK-037 | predloženo, nije pokrenuto | preostali SimFire v2: max/korak kroz novi gate i novu tabelu, pa v2 encoder/checkpoint i BC/PPO; B=2/B=4 odvojeno |
+
+Širi SimFire v2 physics/gate iz starog TASK-036 opisa nije proglašen završenim; sada
+je eksplicitno izdvojen u TASK-037. Meni opažanja je završen bez naknadnog tuneovanja.
+Fine+gate je bolji TRAIN prosjek, ali interval uključuje 0; nije potvrđena RL prednost.
+
 ## Aktivni nastavak — 2026-11-20 (ADR-036)
 
 [Završni audit](research/SIMFIRE_OBSERVATION_AUDIT.md) čuva dokaze i ograničenja.

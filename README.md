@@ -32,6 +32,12 @@ To ne dokazuje da su sve SimFire mogućnosti iscrpljene ili da je CA fizički va
 Novi rad je lokalno na `codex/simfire-observation-audit`; nema novog PPO/CA treninga,
 VALIDATION/TEST ili nove remote objave.
 
+**Dodatni SimFire pokušaj je izveden:** [opažanje v2](docs/research/SIMFIRE_OBSERVATION_REPAIR.md)
+razlikuje kategorije goriva/nonfuel i daje native lokalnu geometriju. Fine+gate pravilo
+ima viši, ali nesiguran TRAIN prosjek (123,72 prema 101,04 charged ha); novi naučeni modeli
+nisu prešli prag. Izvedena grana je `codex/simfire-observation-repair`; prethodni PR #20
+ostaje otvoren, novi PR nije potreban. Legacy env i stari nalazi nisu retroaktivno mijenjani.
+
 Tim: Amar Hodžić, Belmin Durmo, Harun Goralija. Predmet MPVI.
 
 ## Nastavak za pet minuta

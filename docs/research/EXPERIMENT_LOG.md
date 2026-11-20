@@ -624,3 +624,43 @@ ADR-034 tabela te novi izvještaji/native maske/source. Izdvojeno raspakovani so
 svih 98 case NPZ prolaze guarded loader; osam ponovljenih nested fitova (prvi outer fold,
 sve porodice/oba obračuna) daje iste akcije, postavke i inner score. Nije reinstall
 venv-a ili cijela druga analiza. Knowledge 15/15 i strict 84 Markdown fajla PASS.
+
+## EXP-024 — TASK-036 faza A: observation v2 i uparena ocjena, 2026-11-20 (ADR-037/038)
+
+**Završeno.** Korisnik je dao još jedan SimFire pokušaj i tražio stvarni popravak
+fuel/nonfuel i prostornog zapisa, prije CA. Novi PR nije potreban; prethodni PR #20
+je otvoren i ima zeleni CI. Nova grana je `codex/simfire-observation-repair`, iz  `d3bb5b86` .
+Plan `81be2e09`  je prije podataka; wrapper/kolektor  `c1aa9acc` ; fiksna analiza `22a03dfb` .
+
+- V2: legacy ključevi plus 20×64×64 global i 8×20×17×17 native patches,14 kategorija,
+  reljef, line maske i centri. Opciono blokira potpuno negorive linije bez budućeg otiska.
+- Testovi su prvo padali, zatim prošli za konkretne aliasing popravke, budžet/maske,
+  granice mape, source/NPZ guardove i izbor reference bez outer oznaka. Nema starih checkpointova.
+- Pilot 5/5 i puna 98 komanda prolaze identične legacy opservacije/maske,3.136 kandidata
+  i whole-noop maske.0,24 min pilot +1,34 min puna komanda uz reuse, najviše 4 nice 19 procesa.
+  Samo 98 no-op epizoda; prethodnih 3.234 counterfactual ishoda ostaje isto. V2 NPZ 28,47 MB lokalno.
+- 16 fiksnih nested kombinacija, dva obračuna;29,51 s. Legacy RBF kontrola reprodukuje
+  ADR-035 u svim 196 fold/mode redovima. Svih 1.568 novih OOF ishoda/prosjeka dodatno PASS.
+- Fine+gate charged 123,72 ha prema originalnih 101,04. Delta+22,68 ha, opisni 95% [−32,30;83,61],
+  bez najveće apsolutne razlike+3,71. Bolji/lošiji/isti 13/11/74. Gate sam dodaje 2,45 ha,
+  dobitak na jednom požaru.47 blokiranih potencijalnih nizova svi imaju 0 raw/charged uštede.
+- Primarni terrain 536/gate 71,18 charged ha prema 123,72 fit-izabrane jače reference;
+  delta−52,53 ha. Niko ne prelazi prag. Sve tabele i ograničenja su zadržani; nije
+  dodat novi kandidat ili podešavanje poslije rezultata.
+- Standalone fine policy factory  `b2304800`  je ista već deklarisana funkcija; svi
+  heuristički prosjeci se poklapaju.7 post-result native replayeva daje 7/7 whole-mask/score,
+  budget/no-op/horizon PASS. Izbor tehničkih ekstremnih slučajeva nije dodatna evaluacija.
+- Pinovani suite 344/344,0 skip; moderni 329/3 skip; core 283/37 skip; CLI PASS. Grafikon je
+  vizuelno pregledan. Nema globalnih instalacija, nove fizike, novih VALIDATION/TEST ili PPO/CA treninga.
+
+Preporuka: zadržati v2 i jači baseline; CA TASK-035 je draft narednog glavnog pravca,
+a preostali SimFire physics/gate/trening je TASK-037. Trenutni raw reward nije promijenjen
+u charged za PPO. [Izvještaj](SIMFIRE_OBSERVATION_REPAIR.md),
+[rezultati](../../reports/real-fire-data/feds-observation-repair-analysis-v2.json),
+[lokalni paket](../../reports/real-fire-data/feds-observation-repair-artifact-manifest-v2.json).
+
+EXP-024 — artefakti: lokalni paket52.855.038B,1.025 članova plus interni manifest,
+svi SHA-256 ponovo provjereni. Izolovano raspakovani source/dataset/table učitava svih98
+slučajeva;16 prvih outer fold fitova (sve reprezentacije/maske/obračuni) daje iste
+akcije, postavke, inner score i spašene ha. Nije cijela druga analiza ili novi environment.
+Knowledge15/15 i strict85Markdown fajlova PASS. Veliki paket ostaje lokalni.

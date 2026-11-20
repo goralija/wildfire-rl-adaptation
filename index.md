@@ -5,6 +5,8 @@ okf_version: "0.2"
 
 ## Počni ovdje
 
+- [Najnovije: popravljeno SimFire opažanje](docs/research/SIMFIRE_OBSERVATION_REPAIR.md) - TASK-036 fazaA/ADR-038, stvarni popravak, jača heuristika i nesiguran TRAIN dobitak.
+
 - [Aktivni TASK-034: SimFire pregled](docs/research/SIMFIRE_OBSERVATION_AUDIT.md) - Završen audit i preporuka kontrolisanog CA pilota, ADR-036; preostali SimFire v2 put je eksplicitan.
 
 - [Aktivni nastavak: SimFire B=1](docs/research/SIMFIRE_B1_EXPLORATION.md) - TASK-028–030 završeni: 98×33 ishoda, osam LOO metoda bez prolaza praga, ADR-034; predložen TASK-034.

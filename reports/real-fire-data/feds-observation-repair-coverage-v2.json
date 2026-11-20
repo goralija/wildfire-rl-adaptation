@@ -1,0 +1,636 @@
+{
+  "all_legacy_observation_mask_and_final_noop_checks": "PASS",
+  "blocked_nonfuel_sequences": 47,
+  "burnable_legal_line_sequences": 2195,
+  "candidate_geometry_checks": 3136,
+  "case_count": 98,
+  "cases": [
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "062d64694907cda426a26dcc3efedffbd62a858cead245841420bf65a400c24c",
+      "scenario_id": "fpa-fod-400300427-plateau"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "43a7e9dd90bede900887f0d7cd68812f611bb4c2be4c76779a25942d597adbc5",
+      "scenario_id": "fpa-fod-400300631-ranch"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "b71995e96ddd90d753d266cde3038e9849be9f2417310cfccc2719adbbb68fd5",
+      "scenario_id": "fpa-fod-400300764-buzzard"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "6f1ccc8836bebc6f3dc0657f4e42ceaf990eb79c7e46f92737c4b623cd9327cc",
+      "scenario_id": "fpa-fod-400300963-coal-hollow"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "be5ab01f53ef06d3c005b005ef6bd7d9b32d10e0719a54be0233c211433c1854",
+      "scenario_id": "fpa-fod-400301084-prospect"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "6ef3af0c1c79c7a47081fbda92a37ae8c7f44d9450abecc2c6c0a2966c143579",
+      "scenario_id": "fpa-fod-400301086-kiwah"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "f6a15ee90a4b9c6495a55a826b8984d3766ae93ae2044d02362e30376343ef30",
+      "scenario_id": "fpa-fod-400301104-stewart-creek"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "a39ce96e0eb306fcaab44e246a9c3149cc4f74c1d0d3fe855ecc2772e66e639e",
+      "scenario_id": "fpa-fod-400301199-murdock"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "2015a5d02dd31a90978c068d942f2d73b85ccaefe08dead893d15810394a1505",
+      "scenario_id": "fpa-fod-400302402-silver-creek"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "a7d251845620ef49612391e7c28c55fc9be5f96264569d8e9f03e62812744caa",
+      "scenario_id": "fpa-fod-400302444-spring-creek"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "c2d2b5393779062c3f3bfd218a330f1b7783ab57e5b4f94e2bdd71f3ee61f1b5",
+      "scenario_id": "fpa-fod-400302446-416"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "9c9fa39f3037806af9689e66b0644f5f9ae8628e9d1d7a89a585c02e285cd733",
+      "scenario_id": "fpa-fod-400302533-tinder"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "075b79d858d1ccf202ad6e91db755541e0727258106895b74444b6fab13cc1c8",
+      "scenario_id": "fpa-fod-400302636-bears"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "5712a7788f0f503f065c5c1b50072979ddb9ef429fc41ba027785614e809a6fc",
+      "scenario_id": "fpa-fod-400302686-boot"
+    },
+    {
+      "blocked_sequence_count": 2,
+      "check": "PASS",
+      "npz_sha256": "bed1ae6a30a21127605bbac35070681f9e92143c11bf22c9e0e805336e44cf00",
+      "scenario_id": "fpa-fod-400302877-whaleback"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "9aa015595c07376d111c8f90cb48bb2544cb9e6c0dae92a5abf27c3168e92798",
+      "scenario_id": "fpa-fod-400302943-cranston"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "b44587534a72d95ef2f3579e24a9ad7d038728190b24433b02f30f2a27a2d7d1",
+      "scenario_id": "fpa-fod-400303584-goldstone"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "95cc7dccb3f672f0afd9f673822d096bee21b85c95236b9cd223faf35bf4212d",
+      "scenario_id": "fpa-fod-400303631-bacon-rind"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "1403cbdb35a217eb1a47f2081b38d2acd3e6b5528bb4c6bc17768c00cb3d99ab",
+      "scenario_id": "fpa-fod-400303711-gold-hill"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "d50a95ae4d49803765bafb0d0b925c145f5a9cf84b40a19168af14c5d6d4c45e",
+      "scenario_id": "fpa-fod-400303744-rattlesnake-creek"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "875a22e5b835057426c7def07dbf813550cfd41d617987b3b5574cb96fdcb3d8",
+      "scenario_id": "fpa-fod-400303807-ryan"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "b02e2bcbf5f0698ccb3b881f32d105b023d057810cce2a5ac50c2f50009839ae",
+      "scenario_id": "fpa-fod-400303966-cabin-lake"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "6338f8e08b451fc9d7d3f5e848e2b5341226a391a1751d54eeef2d70b3abcd02",
+      "scenario_id": "fpa-fod-400304718-west-valley"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "2dc97a9dccf46ef6b48d63144b52842655c9a1009a66cb7ba0a160dce953b993",
+      "scenario_id": "fpa-fod-400304799-rabbit-foot"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "a84fc6d180f022b811c35e031421a7101a116f363ec3f6efebd54f0b42bc6610",
+      "scenario_id": "fpa-fod-400305302-sugar-pine"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "4dab8d119e2dc9aa3e62732706cea5f35e14cd07043299ec9e2848ccde40f570",
+      "scenario_id": "fpa-fod-400306102-rattlesnake"
+    },
+    {
+      "blocked_sequence_count": 2,
+      "check": "PASS",
+      "npz_sha256": "0f25acc109a0aa71f6e720ba6167328c64b61bdf4f2b0cea9d24be601fa496a7",
+      "scenario_id": "fpa-fod-400306199-obi"
+    },
+    {
+      "blocked_sequence_count": 3,
+      "check": "PASS",
+      "npz_sha256": "ad7a6e757f2b39240401fe7c6125d2d564eea6c0c421b074ce48861a04512021",
+      "scenario_id": "fpa-fod-400307067-county"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "0c923141f8c53512281c92c23107fd8e5c82322af04e04e68d32284f5b00cd1d",
+      "scenario_id": "fpa-fod-400307281-camp"
+    },
+    {
+      "blocked_sequence_count": 1,
+      "check": "PASS",
+      "npz_sha256": "49250e3a784cbf712e09376ff96dd41e2364d7f1b6ab826e3ede0f06990d8acf",
+      "scenario_id": "fpa-fod-400307326-woolsey"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "6c41a26d670802de2ae16f6dc2633fb73dfa85b04ec19dfb89d20269c1acb31d",
+      "scenario_id": "fpa-fod-400307342-ferguson"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "ed571bdf32efad2c347c21850e3ce7cb72c8c96099800dedb7e69997ec806e02",
+      "scenario_id": "fpa-fod-400307379-weston-pass"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "372b3e248d169daebcc32d63d8cd95dafacaa48d2475118893a38e7d1987f991",
+      "scenario_id": "fpa-fod-400307462-indian-valley"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "ee1d6ad9ccc45968ea47c9152625451cb2616ab4176bcdad1e8f0116edc7ad44",
+      "scenario_id": "fpa-fod-400307488-red-canyon"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "add6da1cb3d7d0b007ebaf380b731d65a7b425ee7fe1f563bc94a3b77c46ae48",
+      "scenario_id": "fpa-fod-400307548-boone-draw"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "3ca0d9b52f81abfa89120c771e211517b23589f728a1f2197ba676270230a63e",
+      "scenario_id": "fpa-fod-400307776-bull-draw"
+    },
+    {
+      "blocked_sequence_count": 4,
+      "check": "PASS",
+      "npz_sha256": "121713b277a987d5a5bf77476e2f29efc30fe410b581d8cc496b46479e5a4cf1",
+      "scenario_id": "fpa-fod-400308380-conner"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "069c68aed01bd5d78b6bb3312bccfea444f3c47ce32f2f27436281b3fca18110",
+      "scenario_id": "fpa-fod-400308544-winter-camp"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "7a1b3b27f91476de36ca32126824b8102dd4b5596a58a4958574b8e895869ee6",
+      "scenario_id": "fpa-fod-400308652-dog-creek"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "c4cc7531c2ee17ed33d2619fe1e7555eb81f345670d8a31b3d1c4f67a7e9cc50",
+      "scenario_id": "fpa-fod-400308656-sharps"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "89f016c627ae176c53ab57155eb377ce706221f4e285718916e4d112ca14704e",
+      "scenario_id": "fpa-fod-400309598-buffalo-pasture"
+    },
+    {
+      "blocked_sequence_count": 1,
+      "check": "PASS",
+      "npz_sha256": "f91d0e82758e7aba63abf1aa09d0f9c602cf7c40c00aaa032340328b60e6db38",
+      "scenario_id": "fpa-fod-400309614-howe-ridge"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "63e7212b89035c59988a472f6a6ac80d6541d229be273d218328ec96a541637e",
+      "scenario_id": "fpa-fod-400310578-ok-bar"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "1cb7482a527302b53a6edd856acec9477e3d15161bb12ad88e8f417c05b9eb57",
+      "scenario_id": "fpa-fod-400310583-organ"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "4c6f56d4d1b05049c14485244d275065c1c19117988e4a517126455255abcd28",
+      "scenario_id": "fpa-fod-400310659-206"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "54b1874046ed0098822e6dc7395025262ef2c832b5aa1fbfea9a8c9313742fc2",
+      "scenario_id": "fpa-fod-400310914-echo"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "c6ca268e3cdf96192a562193bf4d7bfe0dec514cb02cb3337f68d062f2ceeba7",
+      "scenario_id": "fpa-fod-400310945-goose-creek"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "388510762953eec69f8050cf9db4c0dafaea699a892c33c57f04e36d24f4ca3f",
+      "scenario_id": "fpa-fod-400310977-sheep-creek"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "6902dc201ce20cc364a9994f5d8199d0cfa8b6cb9ca867103c665dabc1936270",
+      "scenario_id": "fpa-fod-400311017-goshute-cave"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "af8a1de458760dabcfcdada4d007de43217a09f922d20a2c113893a1f5bcd74f",
+      "scenario_id": "fpa-fod-400311253-martin"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "89456eba126c659ff39f796aa69bc7b517f690cd6f8107630e64205e783e3b1e",
+      "scenario_id": "fpa-fod-400311268-gregg"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "0e6a29b750b08f5bb4c84b6c5e2b47603e553e1853e5ab48bd00ec609f6b3ec4",
+      "scenario_id": "fpa-fod-400312226-boxcar"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "3d2da8cfcf58be6107e14c96d9f1537f3642d1e8b5379ad7337cd5e7777e76c0",
+      "scenario_id": "fpa-fod-400312231-jack-knife"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "418ddce346c5bd901b7b7a63f03aeeb081459b3769d870604baff26d022bf4a7",
+      "scenario_id": "fpa-fod-400312290-stubblefield"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "a412dffb6b727e68d2d21d08bfdac327ff4554e63816705e2e105b17f896d324",
+      "scenario_id": "fpa-fod-400312444-tenino-fire"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "3db680c0b119f8316af0359a70f8a08ad28dcebd46b1b128afe9680160b6d404",
+      "scenario_id": "fpa-fod-400312787-black-mountain"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "a4ef6c5b0aa01857c25fdccba2d0793a8b3b9d9819f9524579870d5654069b43",
+      "scenario_id": "fpa-fod-400313239-cedar-mountain-one"
+    },
+    {
+      "blocked_sequence_count": 2,
+      "check": "PASS",
+      "npz_sha256": "26542da14193b7affa146167d1f0786bad07507de7be02ca3495918aff6d64cd",
+      "scenario_id": "fpa-fod-400313254-lakeside"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "e7b04c9b73e6a11be1dae538e74c3b543640bb029fd7230eebdd4d25edb85278",
+      "scenario_id": "fpa-fod-400313293-dollar-ridge"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "1591e4110b69099cea6b12c33d24f47d241a22221d6936f257c8412e53545cde",
+      "scenario_id": "fpa-fod-400313301-bear-trap"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "7886d38e19e4b94e1c20bed2daad04ed3cb7c9a76667d8dfcfd171285cd712a6",
+      "scenario_id": "fpa-fod-400313842-north-eden"
+    },
+    {
+      "blocked_sequence_count": 2,
+      "check": "PASS",
+      "npz_sha256": "899b22d93f9214e0d057f5caf4cf172e1407eae7537ded7aa87aa47e1c8f697e",
+      "scenario_id": "fpa-fod-400314155-wahluke-slope"
+    },
+    {
+      "blocked_sequence_count": 2,
+      "check": "PASS",
+      "npz_sha256": "a980cba9dba5f66fad79a4db7553b4eaf2858d528527206283e02a1760ce29c6",
+      "scenario_id": "fpa-fod-400314399-lake-wallula"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "cc531af53b0949e46e76decfa27af321a362eba00dd74b43e7a775e37fc0cebd",
+      "scenario_id": "fpa-fod-400318794-goring"
+    },
+    {
+      "blocked_sequence_count": 2,
+      "check": "PASS",
+      "npz_sha256": "e129b8d747faa9199fb8fb615d0e05dbc9286cd40ab4e777f8bd74b4b1bd7f2a",
+      "scenario_id": "fpa-fod-400367632-viewpoint"
+    },
+    {
+      "blocked_sequence_count": 2,
+      "check": "PASS",
+      "npz_sha256": "f4e65c88719b7f3b2eb0fae68d0c7d9a81c65eb37d59f85e70659d228cc87d50",
+      "scenario_id": "fpa-fod-400370314-mile-post-twenty-two"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "ea553620bf45b29e2d00a9b772c1745b2036efa168f9b5c30651aaff5fc7f6e9",
+      "scenario_id": "fpa-fod-400376589-ute-park"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "9e46923b1e9d406b203d2dc59a9cb0d3c6f90f91f14c6d298cfedf737cf91fb8",
+      "scenario_id": "fpa-fod-400389704-hwy-94"
+    },
+    {
+      "blocked_sequence_count": 6,
+      "check": "PASS",
+      "npz_sha256": "253107b01a8518495c6c2c00c49ebf48cbb0b68b5e0d1b6ab827ae2ad223d8ff",
+      "scenario_id": "fpa-fod-400389746-badger-hole"
+    },
+    {
+      "blocked_sequence_count": 6,
+      "check": "PASS",
+      "npz_sha256": "f39844df52a8abb085a04aba2c2f24b9d5e2164e7d21e2b5885001a16731b8e6",
+      "scenario_id": "fpa-fod-400389848-glade-creek"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "24ca5339d3db2bfe61b76692829dd2ca7d7e0218e734a9c2de4dd3c807ffc918",
+      "scenario_id": "fpa-fod-400500346-south"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "185f24ed3d396f2c4c841d822333215c09f221fa72d5a32894d206e5f5014c18",
+      "scenario_id": "fpa-fod-400500878-cellar"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "562244be587b24e61d189f93f61b879613949ff0c3c75c27700cdb94050b0b02",
+      "scenario_id": "fpa-fod-400501480-decker"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "53ab9c50e21476ab5b9b59c33e5a94c601f2ec8be88d166cb057ada1aeed50dc",
+      "scenario_id": "fpa-fod-400501641-mountain"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "a5423621fb9568de699078134b5416babf7f1af07bd808e3565dfd01bfeec1e1",
+      "scenario_id": "fpa-fod-400502172-roberts"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "677d5c9929c8aa49a44f8e9edc421cbc2cf5606dbd8b8e5e1503dc8d0cf76a1d",
+      "scenario_id": "fpa-fod-400503581-coldwater"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "bf4fcd1f56dfc445810f674015be2d589be37c9da3bc5c59fe9acdc361c18fbd",
+      "scenario_id": "fpa-fod-400504417-shady"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "43c6e2d11bf85fd4db685212da4ad66f3f4f33f225eb18d039cf71a78c2a43c2",
+      "scenario_id": "fpa-fod-400505027-pine-lodge"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "52c977a80902bc1615bcc7e88d7d6ecb01313f735cbaa3a38c0394e044b311e3",
+      "scenario_id": "fpa-fod-400505059-river"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "a779ae15b1e67ac46d401d502be0cf9deff2e3681f85695dd7d36804b983597c",
+      "scenario_id": "fpa-fod-400505118-cove-creek"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "db414648b0d7aa4fa825d3adb676b479c8e629585afec596458699a8fb242822",
+      "scenario_id": "fpa-fod-400506459-kincade"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "3f6f8e305cf8616a3a24d0d5067754970e53a00d82c526ee7dee2ff665f3d5b0",
+      "scenario_id": "fpa-fod-400506867-bronco-gulch"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "e51af6b87651521baca68d542a17f6061ee73cf1a05ca98c958baeeb3615cc9b",
+      "scenario_id": "fpa-fod-400507579-red-bank"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "966c382f5207dbc12fa13f52d798d1995153949ae29127411b956980b5a6befd",
+      "scenario_id": "fpa-fod-400508306-lookout-point"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "dd187c7bdca315ca660919c5cc7499043ddce6d111ab1b61d5f95f2d4a17f8e9",
+      "scenario_id": "fpa-fod-400508308-pot-hole"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "9cb3aec40852b230dc7bd855f424e97ce5d37c046620951e67ef425757f4f5f2",
+      "scenario_id": "fpa-fod-400508892-north-hills"
+    },
+    {
+      "blocked_sequence_count": 4,
+      "check": "PASS",
+      "npz_sha256": "6fb0402f912966af92fbfbae9bee01973e0e44ce95ea82110cc3faeaf9f2d8e5",
+      "scenario_id": "fpa-fod-400509040-moss-ranch"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "74009a80ff170845391505c46b95d9530df47f6381da119cdc11f9f07986b9b3",
+      "scenario_id": "fpa-fod-400509143-ridgetop"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "7e1564783f912a19a14a6d89c26a5e5dfd351ffb3914e6576c8bb617b829cc6b",
+      "scenario_id": "fpa-fod-400510304-goose"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "e9459e432e29e564c44e32f919cb58ebc01911b5b37078026f877064e0919834",
+      "scenario_id": "fpa-fod-400510515-summit"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "d83dd57861b308ebe23ce64141017a187953204220ccd1044cb60a10ad14c272",
+      "scenario_id": "fpa-fod-400512411-russell"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "683933a1809511437460c229b5759a0991bdccf105dbe67236676965a106f972",
+      "scenario_id": "fpa-fod-400512420-shelter-pass"
+    },
+    {
+      "blocked_sequence_count": 7,
+      "check": "PASS",
+      "npz_sha256": "60db7d1dd187aa50a171a075086746c39babe7605f2946d90351b342a7e120b0",
+      "scenario_id": "fpa-fod-400512424-goose-point"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "16db2887f652c1da6b33125afad1eb825dd0746991e1aa2f24b6d061f73de51d",
+      "scenario_id": "fpa-fod-400512651-powerline"
+    },
+    {
+      "blocked_sequence_count": 1,
+      "check": "PASS",
+      "npz_sha256": "6af9d8f286f80202da3a086f0f0ef9dc6d8aaa6b80b62442ebc94b53a1d40c82",
+      "scenario_id": "fpa-fod-400513361-243-command"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "d045fdd828951e0a4d380b7a6b8e43760e2b2c3a34a207dd68ac5067dc54256a",
+      "scenario_id": "fpa-fod-400513488-sage"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "48b77192ad6271b125bc532d775071856c8a5214ca8873877e5749f81f5632db",
+      "scenario_id": "fpa-fod-400541373-mp-97"
+    },
+    {
+      "blocked_sequence_count": 0,
+      "check": "PASS",
+      "npz_sha256": "280be49d83690f9083bc9cb0a6901b3cb97c8c651908e90ee9c5bf4b6bef7157",
+      "scenario_id": "fpa-fod-400732973-walker"
+    }
+  ],
+  "dataset_sha256": "f7b72ef0cc002871127223deb11ea9b0e7546d9ece76378e5b119dd55f4bd87e",
+  "legacy_legal_line_sequences": 2242,
+  "observation_count": 392,
+  "pilot_wall_minutes": 0.24017695833333333,
+  "schema_version": "feds-repair-observation-coverage/2.0",
+  "settings": {
+    "native_source_hashes": {
+      "game/managers/fire.py": "2c6bbd4edeb4e94af62685dc884e2ec3931ef12cea2dbc813fdef9e95b867e40",
+      "sim/simulation.py": "3c3cce8a6cbaea40e7038879c182930d0adf4e6a0f9fc59f605f83a65fd5cdde",
+      "utils/layers.py": "66f961fee490716137225e504bcee2d5dff48d8a3a7247d4ee4fdb3300c0d75a",
+      "world/rothermel.py": "83450a0721c572d9daeecb8e0de7468eb86d94df17eea96654b98560be79a106"
+    },
+    "numpy_version": "1.26.4",
+    "params": {
+      "active_cell_lifetime_minutes": 90,
+      "fireline_attenuation": "per_minute",
+      "internal_update_minutes": 5,
+      "ros_multiplier": 1.0,
+      "spread_aggregation": "last_write",
+      "wind_adjustment_factor": 0.1
+    },
+    "plan_sha256": "dc4d61ea920bf1c7dd66d2de69c865623eef50726771206f28cfacc03a75dba1",
+    "source_hashes": {
+      "scripts/collect_feds_observation_v2.py": "3665958285bdd056fb398962d4cae8e20ee703ba6171419c5acd867f3b6cca32",
+      "src/wildfire_rl/feds_observation_v2.py": "01cef197dfa09924deffa57055cd51b1dc78bc6d9c4a46ed4bc6a41e7854cf81",
+      "src/wildfire_rl/feds_simfire_env.py": "261cb0b6565b72711aa56964a068f6749b6c49ceaa32b2b70a54c959cdb235ed",
+      "src/wildfire_rl/feds_simfire_setup.py": "78e7187113a246e9f70a0a88178b3d55345ed84ebce05b8e1c1f0b1b52b3c944",
+      "src/wildfire_rl/gridmet_weather.py": "d3da280ee45b71692ce4492551be0fe73405ac71e83d1690add1a8a8dd9a4fd7",
+      "src/wildfire_rl/simfire_initial_state.py": "b73c6a7d895b28a2270b47f80897a01ef465370758b08b90fbd6b699b6f3ff22",
+      "src/wildfire_rl/simfire_timebase.py": "f873554b80b884b382fb29271d64ef2da0801b25e3c9f3aec91aa5848a21b722"
+    },
+    "source_table_sha256": "28627fa98b60f8dae4ac4f9246887ecd3488b541c2a9dbd5e82620811effbddc",
+    "weather_sha256": "76332f3da26fe02812ca6439fee5dec9f131793227335e0380267d12c0ab937e"
+  },
+  "source_table_sha256": "28627fa98b60f8dae4ac4f9246887ecd3488b541c2a9dbd5e82620811effbddc",
+  "split": "train",
+  "test_cases_loaded": false,
+  "validation_used": false,
+  "wall_minutes_after_pilot": 1.3406064361
+}

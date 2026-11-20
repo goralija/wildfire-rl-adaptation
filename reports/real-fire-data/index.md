@@ -1,5 +1,12 @@
 # real-fire-data
 
+- [V2 repair coverage](feds-observation-repair-coverage-v2.json) -98 replayeva,392 opažanja,3136 candidate geometrija; legacy i whole-noop PASS.
+- [V2 svi nested rezultati](feds-observation-repair-analysis-v2.json) -4 reprezentacije×2 maske×2 obračuna; niko ne prelazi prag; [grafikon](feds-observation-repair-v2.png).
+- [V2 fiksne heuristike](feds-observation-repair-heuristics-v2.json) -fine+gate 123,72 charged ha; +22,68 prema starom pravilu, širok opisni interval.
+- [V2 native replay provjera](feds-observation-repair-native-v2.json) -7/7 tehničkih putanja po cijeloj maski, nije novi performance uzorak.
+- [V2 verification](feds-observation-repair-verification-v2.json) -344/344 pinovani suite, source/log hashovi; [izvještaj](../../docs/research/SIMFIRE_OBSERVATION_REPAIR.md).
+- [V2 lokalni paket](feds-observation-repair-artifact-manifest-v2.json) -stari ulazi/ishodi i novi v2 podaci/kod, bez velikih podataka u Gitu.
+
 - [TASK-034 input/observation audit](feds-observation-input-audit-v1.json) - 98 inputa, raster CRS/transform, 392 opažena weather zapisa; sva provjera PASS, aliasing i nonfuel opisani.
 - [TASK-034 nested politike](feds-observation-offline-v1.json) - četiri porodice, svi OOF izbori; nijedna ne prelazi prag; [grafikon](feds-observation-offline-v1.png).
 - [Native numerička osjetljivost](feds-native-sensitivity-v1.json) - dva dijagnostička TRAIN slučaja, 20 uspješnih rollouta; locked maske PASS, alternative nisu novi gate.

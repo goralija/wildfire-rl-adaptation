@@ -10,6 +10,15 @@ Repo je OKF 0.2 knowledge bundle. Na početku sesije pročitaj [index.md](index.
 Zatim koristi [mapu zadataka/koda](knowledge/code-map.md) za relevantne izvore i testove.
 Korisnikove direktne upute imaju prednost; kasniji ADR može zamijeniti raniji.
 
+**Najnovije je ADR-038 (2026-11-20): TASK-036 faza A je završena na
+`codex/simfire-observation-repair`.** [Izvještaj](docs/research/SIMFIRE_OBSERVATION_REPAIR.md)
+razdvaja potvrđeni popravak informacije i nesiguran policy dobitak. Svih 98 replayeva,
+1568 OOF lookupova,7 native sekvenci i 344 pinovana testa prolaze. Fine+gate je jači
+TRAIN kandidat, nije nezavisno potvrđena prednost. Prethodni PR #20 je otvoren i zelen;
+novi PR nije potreban po korisniku. Push izvedene grane je odobren, nema mergea.
+TASK-035 CA je pripremljen draft; TASK-037 je opcionalni preostali SimFire physics/gate
+put. Nema automatskog PPO/CA treninga ili novog VALIDATION/TEST pristupa.
+
 **Najnoviji nalog (2026-11-20): još jedan SimFire pokušaj kroz TASK-036, popravak
 opažanja prije CA.** PR #20 prethodnog audita je otvoren za pregled. Nastavak iz ove
 grane ide u `codex/simfire-observation-repair`; precizni plan se piše prije mjerenja.

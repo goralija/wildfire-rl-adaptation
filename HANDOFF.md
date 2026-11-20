@@ -8,6 +8,20 @@ Stanje **2026-11-20**. Ovaj dokument je ulaz za kolegu ili agenta koji preuzima 
 chat historije. Repozitorij je kanonski izvor; artifact za tim (link ispod) je sažetak za
 čitanje.
 
+## Najnovije — v2 popravak izveden (ADR-038)
+
+[SimFire observation repair](docs/research/SIMFIRE_OBSERVATION_REPAIR.md) je sada prvi
+ulaz. V2 vraća razliku fuel/nonfuel i native lokalnu geometriju; svi 98 legacy/no-op
+kontrolni replayevi prolaze, sedam stvarnih v2 sekvenci takođe. Stari benchmark i
+checkpointovi nisu tiho promijenjeni. Fine+gate ima bolji, ali nesiguran TRAIN prosjek
+(123,72 charged ha; +22,68 prema starom pravilu). Nijedan naučeni kandidat ne prelazi prag.
+
+Rad je na `codex/simfire-observation-repair`, iz `d3bb5b86`; prethodni PR #20 ostaje
+za pregled. Push je odobren, novi PR nije potreban, nema mergea. Lokalni paket s
+manifestom sadrži stare ulaze/ishode plus v2 opservacije i tehničke replay maske.
+Nema aktivnog računanja. Sljedeće: TASK-035 CA ugovor/pilot ili eksplicitni SimFire
+TASK-037 za fiziku/gate i novi trening. Detaljan redoslijed je u NEXT_SESSION.
+
 ## Korisnikov nastavak — popravak opažanja prije CA (2026-11-20)
 
 Završeni rad je pushan i otvoren kao [PR #20](https://github.com/goralija/wildfire-rl-adaptation/pull/20)

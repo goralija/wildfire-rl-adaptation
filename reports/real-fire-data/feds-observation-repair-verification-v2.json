@@ -1,0 +1,78 @@
+{
+  "ca_training": false,
+  "cli_smoke": {
+    "log_sha256": "223abd98dd0dca73ed58acd8f880a9f2a0572eee6bb9d89318a81de0ccf648ab",
+    "result": "PASS"
+  },
+  "code_commit": "a1072725a47580cc2e0561eaa3671d46befb2295",
+  "created_utc": "2026-11-20T20:51:49.085437+00:00",
+  "dataset_sha256": "f7b72ef0cc002871127223deb11ea9b0e7546d9ece76378e5b119dd55f4bd87e",
+  "independent_human_review": false,
+  "interpretation": "Local engineering and reused-TRAIN checks, not independent final or physical validation.",
+  "knowledge": {
+    "log_sha256": "ea421a5c7af3223da7db2f1f38f41f91e9d594156107c5adf701467bfbe62d42",
+    "result": "PASS",
+    "strict_markdown_files": 85,
+    "strict_result": "PASS",
+    "tests_run": 15
+  },
+  "legacy_pipeline_control": "PASS",
+  "native_replay_report_sha256": "f0c08d8cd4a68d556db221ff6f7fa4d1e3c4caeb72ae46a058d66fe8d7d4b8f8",
+  "oof_outcome_lookup": {
+    "note": "Separate recomputation of saved outcomes and means, not independent reviewer validation.",
+    "paths": 1568,
+    "result": "PASS"
+  },
+  "ppo_training": false,
+  "prior_pr": {
+    "ci_checked": "PASS; core3.11/3.13, numeric, knowledge via gh pr checks",
+    "number": 20,
+    "url": "https://github.com/goralija/wildfire-rl-adaptation/pull/20"
+  },
+  "remote_ci_at_local_verification_time": false,
+  "schema_version": "feds-observation-repair-verification/2.0",
+  "source_hashes": {
+    "configs/frozen/feds-observation-repair-v2.json": "dc4d61ea920bf1c7dd66d2de69c865623eef50726771206f28cfacc03a75dba1",
+    "scripts/analyze_feds_observation_repair.py": "cad021864c3f188b132d340f94bb9400af41510b15358e64a50b4d97dfeef6eb",
+    "scripts/collect_feds_observation_v2.py": "3665958285bdd056fb398962d4cae8e20ee703ba6171419c5acd867f3b6cca32",
+    "scripts/plot_feds_observation_repair.py": "b0331fc63f7d82376bcae8a410f950b8bc927ff98f30f1f9d772a546dfb19d0f",
+    "scripts/summarize_feds_repair_heuristics.py": "e826762b8c5c2f1db49264b78589385cdc6faf4c751f01e10123bf14500fc74f",
+    "scripts/verify_feds_observation_v2.py": "f6aa2fdf324b6d05a9f85afebe0a43c4862cb452bfdddc7823dc441e9a05e397",
+    "src/wildfire_rl/feds_observation_dataset.py": "662561f33a7a3939ce85b5a8e1b051caf74cbad3cfdf835768c6aea84e9da8e9",
+    "src/wildfire_rl/feds_observation_v2.py": "01cef197dfa09924deffa57055cd51b1dc78bc6d9c4a46ed4bc6a41e7854cf81",
+    "src/wildfire_rl/feds_repaired_learning.py": "bd234e75c65b9dffb8390ff34252139ec1eb7b80f38bb95730230837da66216c",
+    "src/wildfire_rl/feds_repaired_policies.py": "835779759e093f0bd67c6cfe0ba87b8790b5ae607c9f2470fb74f3fd9310c317"
+  },
+  "source_table_sha256": "28627fa98b60f8dae4ac4f9246887ecd3488b541c2a9dbd5e82620811effbddc",
+  "suites": [
+    {
+      "local_log": ".local/repair/core-suite.log",
+      "log_sha256": "ce76e884b2b39d2cbdb9312b2d06984e2596c87b0600f8da3b42645016811b15",
+      "name": "core",
+      "result": "PASS",
+      "seconds": 5.148,
+      "skipped": 37,
+      "tests_run": 283
+    },
+    {
+      "local_log": ".local/repair/modern-suite.log",
+      "log_sha256": "395c1d283023ade0b216424676872f290cf5ebe2414c0598b8ad7e5596f2817b",
+      "name": "modern",
+      "result": "PASS",
+      "seconds": 11.725,
+      "skipped": 3,
+      "tests_run": 329
+    },
+    {
+      "local_log": ".local/repair/simfire-suite.log",
+      "log_sha256": "4b25c9a20250654c5e0cafcf2f30ae162cf36a944074068868010b2ee283c045",
+      "name": "simfire",
+      "result": "PASS",
+      "seconds": 41.735,
+      "skipped": 0,
+      "tests_run": 344
+    }
+  ],
+  "test_cases_loaded": false,
+  "validation_used": false
+}
