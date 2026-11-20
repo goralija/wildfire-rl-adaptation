@@ -57,3 +57,11 @@ def legal_oracle(gains,mask):
     gains=np.asarray(gains,dtype=float);mask=np.asarray(mask,dtype=bool)
     if gains.shape!=(4,9) or mask.shape!=gains.shape or not mask[:,0].all():raise ValueError('invalid B1 gains/mask')
     return float(max(0.,np.max(np.where(mask[:,1:],gains[:,1:],-np.inf))))
+
+
+def select_reference(values,heldout):
+    values=np.asarray(values,dtype=float)
+    if values.ndim!=2 or len(values)<2 or not 0<=heldout<len(values) or not np.isfinite(values).all():
+        raise ValueError('invalid reference scores/index')
+    fitting=np.delete(values,heldout,axis=0)
+    return int(np.argmax(fitting.mean(axis=0)))
