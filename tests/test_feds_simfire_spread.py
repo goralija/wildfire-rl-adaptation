@@ -266,3 +266,17 @@ class GlobalRandomStateTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TerrainAndFuelUnitsAuditTests(unittest.TestCase):
+    def test_lanfire_metre_dem_becomes_unit_consistent_ten_percent_slope(self):
+        inputs = _inputs([(20,20)], wind_m_s=0.)
+        inputs["elevation"] = np.indices((SIZE,SIZE))[1].astype(float) * 18.
+        simulation, _, _ = build_simulation(inputs, SimFireParams(wind_adjustment_factor=.1), seed=0)
+        # 18 m rise for 180 m run is 0.1, after native elevation m->ft conversion.
+        np.testing.assert_allclose(simulation.fire_manager.slope_mag[2:-2,2:-2], .1, rtol=1e-5)
+
+    def test_aliasing_fuel_codes_have_different_physical_fuel_loads(self):
+        from simfire.enums import FuelModelToFuel
+        self.assertGreater(FuelModelToFuel[13].w_0, 0.)
+        self.assertEqual(FuelModelToFuel[91].w_0, 0.)

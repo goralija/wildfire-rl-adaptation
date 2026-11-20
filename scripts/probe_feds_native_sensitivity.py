@@ -96,6 +96,7 @@ def main():
         'split':'train','validation_used':False,'test_cases_loaded':False,'selected_cases':[c['scenario_id'] for c in chosen],
         'selection_rule':plan['native_audit']['cases'],'locked_reference_check':'PASS','rows':rows,'paired_damage_scores':checks,
         'plan_sha256':sha256_file(PLAN),'table_sha256':sha256_file(a.table),'source_sha256':sha256_file(Path(__file__)),
+        'source_hashes':{str(p.relative_to(ROOT)):sha256_file(p) for p in [ROOT/'src/wildfire_rl/feds_simfire_setup.py',ROOT/'src/wildfire_rl/feds_simfire_env.py',ROOT/'src/wildfire_rl/feds_heuristics.py']},
         'code_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
         'wall_minutes':(time.monotonic()-started)/60,'limits':['Two purposefully selected fires do not establish cohort-average sensitivity.',
         'Reversing only initial sprites is a finite perturbation, not a test of every possible traversal order.',

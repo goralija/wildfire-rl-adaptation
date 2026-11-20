@@ -1565,3 +1565,14 @@ prvo kratki testovi. Novi kvar koji utiče na staru tabelu zaustavlja novo polic
 na CA. Na kraju navesti šta SimFire još može odgovoriti i šta bi CA morao ponuditi,
 uz poštene komparatore i zatvoren TEST. Plan i tehnički izbori su operativne odluke
 agenta u korisnikovom obimu, ne tvrdnja da je korisnik zasebno odobrio svaku metodu.
+
+ADR-035 — tehnička dopuna tokom probe, 2026-11-20: prvi paralelni run je pao jer
+SimFire 2.0.1 radi `is_dir` pa `mkdir` bez `exist_ok` na zajedničkom novom `sf_home`.
+18 pojedinačnih mask fajlova je ostalo iz tog nepotpunog runa; nisu korišteni kao
+završeni rezultat. Prvo padajući test zatim provjerava 16 istovremenih inicijalizacija,
+idempotentnost i čuvanje postojećeg rezultata. Produkcijski setup sada atomarno
+priprema izlazni direktorij prije konstrukcije simulatora. Dinamika i ulazi se ne
+mijenjaju; nedostatak uticaja na zaključane probe dodatno se provjerava cijelim maskama.
+Novi izvorni hash je zabilježen; ovo nije promjena alpha/menija nakon policy nalaza.
+Offline fitovi ne konstruišu simulator i nisu pogođeni. Native run se ponavlja u
+novom output folderu; stari parcijalni fajlovi su sačuvani.

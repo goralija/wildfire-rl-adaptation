@@ -58,6 +58,7 @@ class ObservationAuditTests(unittest.TestCase):
         gains=np.zeros((13,4,9));gains[:,0,1]=20*(x[:,0,0]>0);gains[:,0,2]=20*(x[:,0,0]<=0)
         masks=np.ones((13,4,9),dtype=bool);ids=[str(i) for i in range(13)]
         first=nested_actions(x,gains,masks,ids,12,'rbf',[(.01,.5),(.1,2.)])
+        self.assertIn(first['actions'][0], [1,2])
         changed=gains.copy();changed[12]=rng.normal(size=(4,9))*1e8
         second=nested_actions(x,changed,masks,ids,12,'rbf',[(.01,.5),(.1,2.)])
         self.assertEqual(first,second)
