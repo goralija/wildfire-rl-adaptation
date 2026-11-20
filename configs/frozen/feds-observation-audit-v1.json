@@ -1,0 +1,36 @@
+{
+  "schema_version": "feds-observation-audit-plan/1.0",
+  "registered_date": "2026-11-20",
+  "decision": "ADR-035; user authorized TASK-034 and a documented SimFire adequacy audit before considering CA",
+  "base_commit": "58feac721c79c80ee9fd619ca04c5f3796f74905",
+  "split": "train",
+  "budget": 1,
+  "horizon_hours": 48,
+  "table_sha256": "28627fa98b60f8dae4ac4f9246887ecd3488b541c2a9dbd5e82620811effbddc",
+  "weather_sha256": "76332f3da26fe02812ca6439fee5dec9f131793227335e0380267d12c0ab937e",
+  "observation": "unchanged current 4x16x16 grid, previous weather, time, budget and legal action mask; no terrain, ID, future weather or future states as policy features",
+  "methods": {
+    "nested_summary_ridge": {"features": "original28", "alpha": [1.0, 10.0, 100.0]},
+    "nested_summary_rbf": {"features": "original28", "alpha": [0.01, 0.1], "bandwidth": [0.5, 2.0]},
+    "nested_directional_rbf": {"features": "original28 plus per-sector front mass, front extent, fuel mean and front-weighted fuel; near/far fuel in forward cone (48 features)", "alpha": [0.01, 0.1], "bandwidth": [0.5, 2.0]},
+    "nested_full_grid_rbf": {"features": "all current grid pixels flattened plus weather/time/budget (1031 values)", "alpha": [0.01, 0.1], "bandwidth": [0.5, 2.0]}
+  },
+  "fit": "backward fitted Q; four time-specific models; mean-centered targets; fit-only standardization; RBF squared distances divided by fit-only median positive squared distance; exp(-distance/(2*bandwidth^2)); alpha positive; known no-intervention zero-gain floor on wait",
+  "evaluation": "outer leave-one-fire-out; deterministic four inner folds formed by sorted sha256('TASK034:'+fire_id) round robin; inner mean saved hectares selects config; ties choose listed order; then refit outer97. Inner and outer heldout rewards used only after actions. Report all methods and both damage modes.",
+  "continuation_threshold": {"mean_gain_ha_vs_advancing_front": 30.0, "fraction_of_oracle_gap": 0.25},
+  "uncertainty": "descriptive paired bootstrap of fixed OOF effects, 10000 samples seed0, no refit; shared folds and prior TRAIN reuse prevent independent confirmation",
+  "input_audit": "all98: checksums, recomputed initial pooled channels, four observed weather records, masks/time/budget, fuel encoding aliases, initial nonfuel front and planned-line nonfuel coverage; synthetic witnesses for pooled front-position alias and fuel13/nonfuel alias",
+  "native_audit": {
+    "cases": "lexicographically first TRAIN fire and TRAIN fire with largest existing ADR034 no-op damage (tie by ID); diagnostic selection, not a representative sample",
+    "policies": ["noop", "advancing_front"],
+    "variants": ["locked", "locked_reverse_initial_sprites", "max_aggregation", "max_reverse_initial_sprites", "one_minute"],
+    "interpretation": "sensitivity diagnostic only; alternative dynamics are not re-calibrated, not candidate policy findings and do not replace ADR031/032"
+  },
+  "stop_conditions": ["changed artifact/hash", "invalid split or leakage", "failed budget/damage/time invariants", "new correctness defect affecting the finite table: stop scoring and document repair/rerun requirement", "fixed menu exhausted: no tuning until success"],
+  "transition_review": "inventory confirmed bugs, passed checks, known simulator assumptions, untested possibilities and costs; recommend next step from evidence. Do not claim all possible bugs excluded or start CA training automatically.",
+  "resources": {"maximum_processes": 4, "nice": 19, "no_installations": true},
+  "validation_access": false,
+  "test_access": false,
+  "new_ppo_training": false,
+  "ca_training": false
+}

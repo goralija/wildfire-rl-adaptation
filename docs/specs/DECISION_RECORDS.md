@@ -1532,3 +1532,36 @@ Dokazi: [detaljan izvještaj](../research/SIMFIRE_B1_EXPLORATION.md),
 [tehnički receipt](../../reports/real-fire-data/feds-b1-verification-v1.json),
 [manifest lokalnog paketa](../../reports/real-fire-data/feds-b1-artifact-manifest-v1.json),
 EXP-022 u [experiment logu](../research/EXPERIMENT_LOG.md).
+
+## ADR-035 — TASK-034 i pregled opravdanosti SimFire nastavka, accepted scope 2026-11-20
+
+Korisnik je odobrio narednu SimFire iteraciju i tražio da eventualni prelazak na CA bude
+obrazložen provjerama mogućih grešaka. Rad je na `codex/simfire-observation-audit`, iz
+`58feac72`, u izdvojenom worktreeu. Ovo odobrava lokalni TRAIN-only rad, ne automatski
+CA trening, VALIDATION/TEST, merge ili novu remote objavu.
+
+**Pretpostavke i cilj.** ADR-034 tabela je tačna pod zapisanim simulatorom. Provjeriti
+ulaze/opažanje, poznate numeričke osjetljivosti i da li prostorni prikaz iste opservacije
+pomaže izboru linije izvan fit požara. Ne može se dokazati odsustvo svih mogućih grešaka;
+izvještaj mora razdvojiti provjerene greške, testirane invariants, modelna ograničenja i
+neispitane mogućnosti. Sintetički kontrolni primjeri provjeravaju implementaciju, ne
+fizičku validaciju. Native probe alternativnih postavki je dijagnostika, ne novi gate.
+
+**Plan prije mjerenja:** `configs/frozen/feds-observation-audit-v1.json`. Ista B=1 tabela,
+98 TRAIN požara, 48h i ista dozvoljena opservacija. Četiri unaprijed zadate porodice:
+nested ridge sa originalnih 28 obilježja, RBF Q sa 28, sa dodatnih 48 prostornih obilježja
+i sa svim 1.031 vrijednostima opservacije. Outer LOO, izbor alpha/bandwidth u četiri
+unutrašnja folda bez izostavljenog požara; fit-only skaliranje i kernel bandwidth.
+Raw i charged fitovi odvojeni; sve porodice se prijavljuju. Prag iz ADR-033 ostaje.
+TRAIN je već korišten za razvoj: ovo nije nova nezavisna potvrda.
+
+**Audit.** Svih 98 početnih inputa i sačuvanih opažanja; kontrolni dokazi aliasinga i
+smjerova. Dva unaprijed određena TRAIN slučaja za osjetljivost na redoslijed spriteova,
+`max` agregaciju i 1min korak, uz no-op i istu heuristiku. Najviše četiri nice-19 procesa.
+Procjena računa je 15–30 min uz postojeći runtime, bez novih instalacija ili PPO treninga;
+prvo kratki testovi. Novi kvar koji utiče na staru tabelu zaustavlja novo policy scoring.
+
+**Ishod za odluku.** Nema unaprijed pretpostavljenog pobjednika niti obaveznog prelaska
+na CA. Na kraju navesti šta SimFire još može odgovoriti i šta bi CA morao ponuditi,
+uz poštene komparatore i zatvoren TEST. Plan i tehnički izbori su operativne odluke
+agenta u korisnikovom obimu, ne tvrdnja da je korisnik zasebno odobrio svaku metodu.
