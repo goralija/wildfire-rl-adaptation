@@ -23,7 +23,7 @@
     "fpa-fod-400302943-cranston",
     "fpa-fod-400307776-bull-draw"
   ],
-  "selection": "lowest SHA256 TASK040:scenario_id among TRAIN cases with no initial CA-unsupported front; input eligibility only, before CA outcomes",
+  "selection": "lowest SHA256 TASK040:ID among TRAIN with every initial front cell on original fuel1..13; fixed before CA outcomes",
   "input_qc": {
     "cases": [
       {
@@ -32,7 +32,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400300631-ranch",
@@ -40,7 +41,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400300764-buzzard",
@@ -48,7 +50,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400300963-coal-hollow",
@@ -56,7 +59,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400301084-prospect",
@@ -64,7 +68,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400301086-kiwah",
@@ -72,7 +77,8 @@
         "front_unsupported_ca": 1,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 1
       },
       {
         "scenario_id": "fpa-fod-400301104-stewart-creek",
@@ -80,7 +86,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400301199-murdock",
@@ -88,7 +95,8 @@
         "front_unsupported_ca": 2,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 2
       },
       {
         "scenario_id": "fpa-fod-400302402-silver-creek",
@@ -96,7 +104,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400302444-spring-creek",
@@ -104,7 +113,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400302446-416",
@@ -112,7 +122,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": false,
+        "front_unsupported_common_vegetation": 1
       },
       {
         "scenario_id": "fpa-fod-400302533-tinder",
@@ -120,7 +131,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400302636-bears",
@@ -128,7 +140,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400302686-boot",
@@ -136,7 +149,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400302877-whaleback",
@@ -144,7 +158,8 @@
         "front_unsupported_ca": 103,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 103
       },
       {
         "scenario_id": "fpa-fod-400302943-cranston",
@@ -152,7 +167,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400303584-goldstone",
@@ -160,7 +176,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400303631-bacon-rind",
@@ -168,7 +185,8 @@
         "front_unsupported_ca": 2,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 2
       },
       {
         "scenario_id": "fpa-fod-400303711-gold-hill",
@@ -176,7 +194,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400303744-rattlesnake-creek",
@@ -184,7 +203,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400303807-ryan",
@@ -192,7 +212,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400303966-cabin-lake",
@@ -200,7 +221,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400304718-west-valley",
@@ -208,7 +230,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400304799-rabbit-foot",
@@ -216,7 +239,8 @@
         "front_unsupported_ca": 7,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 7
       },
       {
         "scenario_id": "fpa-fod-400305302-sugar-pine",
@@ -224,7 +248,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400306102-rattlesnake",
@@ -232,7 +257,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400306199-obi",
@@ -240,7 +266,8 @@
         "front_unsupported_ca": 19,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 19
       },
       {
         "scenario_id": "fpa-fod-400307067-county",
@@ -248,7 +275,8 @@
         "front_unsupported_ca": 17,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 18
       },
       {
         "scenario_id": "fpa-fod-400307281-camp",
@@ -256,7 +284,8 @@
         "front_unsupported_ca": 2,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 31
       },
       {
         "scenario_id": "fpa-fod-400307326-woolsey",
@@ -264,7 +293,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 223,
         "elevation_filled_cells": 241,
-        "eligible": true
+        "eligible": false,
+        "front_unsupported_common_vegetation": 82
       },
       {
         "scenario_id": "fpa-fod-400307342-ferguson",
@@ -272,7 +302,8 @@
         "front_unsupported_ca": 5,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 5
       },
       {
         "scenario_id": "fpa-fod-400307379-weston-pass",
@@ -280,7 +311,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400307462-indian-valley",
@@ -288,7 +320,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400307488-red-canyon",
@@ -296,7 +329,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400307548-boone-draw",
@@ -304,7 +338,8 @@
         "front_unsupported_ca": 2,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 2
       },
       {
         "scenario_id": "fpa-fod-400307776-bull-draw",
@@ -312,7 +347,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400308380-conner",
@@ -320,7 +356,8 @@
         "front_unsupported_ca": 85,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 85
       },
       {
         "scenario_id": "fpa-fod-400308544-winter-camp",
@@ -328,7 +365,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400308652-dog-creek",
@@ -336,7 +374,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400308656-sharps",
@@ -344,7 +383,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400309598-buffalo-pasture",
@@ -352,7 +392,8 @@
         "front_unsupported_ca": 6,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 6
       },
       {
         "scenario_id": "fpa-fod-400309614-howe-ridge",
@@ -360,7 +401,8 @@
         "front_unsupported_ca": 5,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 5
       },
       {
         "scenario_id": "fpa-fod-400310578-ok-bar",
@@ -368,7 +410,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400310583-organ",
@@ -376,7 +419,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400310659-206",
@@ -384,7 +428,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400310914-echo",
@@ -392,7 +437,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400310945-goose-creek",
@@ -400,7 +446,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400310977-sheep-creek",
@@ -408,7 +455,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400311017-goshute-cave",
@@ -416,7 +464,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400311253-martin",
@@ -424,7 +473,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400311268-gregg",
@@ -432,7 +482,8 @@
         "front_unsupported_ca": 8,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 8
       },
       {
         "scenario_id": "fpa-fod-400312226-boxcar",
@@ -440,7 +491,8 @@
         "front_unsupported_ca": 13,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 13
       },
       {
         "scenario_id": "fpa-fod-400312231-jack-knife",
@@ -448,7 +500,8 @@
         "front_unsupported_ca": 42,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 42
       },
       {
         "scenario_id": "fpa-fod-400312290-stubblefield",
@@ -456,7 +509,8 @@
         "front_unsupported_ca": 15,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 15
       },
       {
         "scenario_id": "fpa-fod-400312444-tenino-fire",
@@ -464,7 +518,8 @@
         "front_unsupported_ca": 1,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 1
       },
       {
         "scenario_id": "fpa-fod-400312787-black-mountain",
@@ -472,7 +527,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400313239-cedar-mountain-one",
@@ -480,7 +536,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400313254-lakeside",
@@ -488,7 +545,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400313293-dollar-ridge",
@@ -496,7 +554,8 @@
         "front_unsupported_ca": 4,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 4
       },
       {
         "scenario_id": "fpa-fod-400313301-bear-trap",
@@ -504,7 +563,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400313842-north-eden",
@@ -512,7 +572,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400314155-wahluke-slope",
@@ -520,7 +581,8 @@
         "front_unsupported_ca": 3,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 3
       },
       {
         "scenario_id": "fpa-fod-400314399-lake-wallula",
@@ -528,7 +590,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400318794-goring",
@@ -536,7 +599,8 @@
         "front_unsupported_ca": 4,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 4
       },
       {
         "scenario_id": "fpa-fod-400367632-viewpoint",
@@ -544,7 +608,8 @@
         "front_unsupported_ca": 2,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 19
       },
       {
         "scenario_id": "fpa-fod-400370314-mile-post-twenty-two",
@@ -552,7 +617,8 @@
         "front_unsupported_ca": 60,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 61
       },
       {
         "scenario_id": "fpa-fod-400376589-ute-park",
@@ -560,7 +626,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400389704-hwy-94",
@@ -568,7 +635,8 @@
         "front_unsupported_ca": 5,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 5
       },
       {
         "scenario_id": "fpa-fod-400389746-badger-hole",
@@ -576,7 +644,8 @@
         "front_unsupported_ca": 42,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 42
       },
       {
         "scenario_id": "fpa-fod-400389848-glade-creek",
@@ -584,7 +653,8 @@
         "front_unsupported_ca": 22,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 22
       },
       {
         "scenario_id": "fpa-fod-400500346-south",
@@ -592,7 +662,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400500878-cellar",
@@ -600,7 +671,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400501480-decker",
@@ -608,7 +680,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400501641-mountain",
@@ -616,7 +689,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400502172-roberts",
@@ -624,7 +698,8 @@
         "front_unsupported_ca": 4,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 4
       },
       {
         "scenario_id": "fpa-fod-400503581-coldwater",
@@ -632,7 +707,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400504417-shady",
@@ -640,7 +716,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400505027-pine-lodge",
@@ -648,7 +725,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400505059-river",
@@ -656,7 +734,8 @@
         "front_unsupported_ca": 11,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 11
       },
       {
         "scenario_id": "fpa-fod-400505118-cove-creek",
@@ -664,7 +743,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400506459-kincade",
@@ -672,7 +752,8 @@
         "front_unsupported_ca": 14,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 16
       },
       {
         "scenario_id": "fpa-fod-400506867-bronco-gulch",
@@ -680,7 +761,8 @@
         "front_unsupported_ca": 2,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 2
       },
       {
         "scenario_id": "fpa-fod-400507579-red-bank",
@@ -688,7 +770,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400508306-lookout-point",
@@ -696,7 +779,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400508308-pot-hole",
@@ -704,7 +788,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400508892-north-hills",
@@ -712,7 +797,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400509040-moss-ranch",
@@ -720,7 +806,8 @@
         "front_unsupported_ca": 19,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 19
       },
       {
         "scenario_id": "fpa-fod-400509143-ridgetop",
@@ -728,7 +815,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400510304-goose",
@@ -736,7 +824,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400510515-summit",
@@ -744,7 +833,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400512411-russell",
@@ -752,7 +842,8 @@
         "front_unsupported_ca": 3,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 3
       },
       {
         "scenario_id": "fpa-fod-400512420-shelter-pass",
@@ -760,7 +851,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400512424-goose-point",
@@ -768,7 +860,8 @@
         "front_unsupported_ca": 18,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 20
       },
       {
         "scenario_id": "fpa-fod-400512651-powerline",
@@ -776,7 +869,8 @@
         "front_unsupported_ca": 6,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 6
       },
       {
         "scenario_id": "fpa-fod-400513361-243-command",
@@ -784,7 +878,8 @@
         "front_unsupported_ca": 42,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": false
+        "eligible": false,
+        "front_unsupported_common_vegetation": 42
       },
       {
         "scenario_id": "fpa-fod-400513488-sage",
@@ -792,7 +887,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400541373-mp-97",
@@ -800,7 +896,8 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       },
       {
         "scenario_id": "fpa-fod-400732973-walker",
@@ -808,10 +905,11 @@
         "front_unsupported_ca": 0,
         "unknown_fuel_count": 0,
         "elevation_filled_cells": 0,
-        "eligible": true
+        "eligible": true,
+        "front_unsupported_common_vegetation": 0
       }
     ],
-    "eligible": 63,
+    "eligible": 61,
     "selected": [
       "fpa-fod-400303584-goldstone",
       "fpa-fod-400307379-weston-pass",

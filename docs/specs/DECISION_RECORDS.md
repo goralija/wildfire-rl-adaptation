@@ -1937,3 +1937,8 @@ osvježava nakon pilota. Bez novih PPO treninga, VALIDATION/TEST, invalidiranih 
 plaćenog computea ili mergea. Tehnički kvar zaustavlja scoring; politika se ne podešava
 prema rezultatima. Rezultati odgovaraju common-control pitanju; za konačan izbor native
 unit CA još treba izjednačiti native resurse/akcije, ne prisvojiti ovaj bridge kao taj dokaz.
+
+Dopuna ADR-043 prije prvog CA ishoda: početni QC je koristio native CA (urbano91 gori).
+Za common-vegetation bridge početni front mora biti samo na1–13, pa je ulazna provjera
+ponovljena s tim eksplicitnim kriterijem. Tačan eligible broj i16ID-jeva su u planu;
+prethodni broj63 se ne koristi za finalnu kohortu. Nema izbora prema simuliranim ishodima.
