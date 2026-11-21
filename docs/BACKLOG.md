@@ -11,7 +11,8 @@ title: Naredni zadaci
 | TASK-035 | završeno, ADR-040 | Native/current forcing ugovor, 240 development epizoda i15 replayeva PASS; 352 testa; sigurnost prijavljena zasebno |
 | TASK-036 | faza A završena | SimFire repair ostaje na izvedenoj bazi; nalazi ADR-038 |
 | TASK-037 | predloženo, odgođeno | Preostala SimFire fizika/gate/trening |
-| TASK-038 | predloženo nakon CA pilota | V2 encoder/checkpoint provenance, kratki BC/PPO protokol i isti comparator; bez starih težina ili real holdouta |
+| TASK-038 | završeno, ADR-042 |3seeda, šest modela, 288development putanja; nijedan kandidat ne prolazi; svi rezultati/sigurnost sačuvani |
+| TASK-039 | predloženo, nije pokrenuto | TRAIN-only dijagnoza vlastitih putanja i pokrivenosti učitelja/encoder-a; unaprijed zadat kratki nastavak tek po nalazu |
 
 Starije oznake TASK-035 kao drafta ispod su historija, zamijenjene korisnikovim nalogom
 2026-11-21 i ADR-039. TEST 2024 i stvarni VALIDATION nisu otvoreni.

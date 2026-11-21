@@ -4,6 +4,10 @@ title: Sintetičko CA trening okruženje s fizički ograničenim jedinicama (v1,
 ---
 # Sintetičko CA trening okruženje (v1)
 
+Najnovije2026-11-21: [TASK-038 BC/PPO](CA_LEARNING_PILOT.md), ADR-042, završio je
+tri nova model seeda i288development putanja. Nijedan kandidat nije prešao prag prema
+heuristici. Naredni zadatak je TRAIN dijagnoza, bez otvaranja testova.
+
 Aktivna dopuna (2026-11-21): [CA pilot v2](CA_CONTROLLED_PILOT.md), ADR-039/040, dodaje
 zajedničko native opažanje i eksplicitni current forcing. V1 ispod je historijska
 specifikacija; njeni ADR-028 brojčani nalazi su poništeni ADR-029. Novi pilot ima240

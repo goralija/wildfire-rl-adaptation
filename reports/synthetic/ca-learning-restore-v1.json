@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "first_registered_development_case": 21110000,
+  "matched_episodes": 18,
+  "all_six_models_loaded_without_pickle": true,
+  "all_source_plan_runtime_hashes_match": true,
+  "whole_masks_actions_rewards_and_safety_identical": true,
+  "seconds": 8.524185875008698,
+  "limits": "One technical case, not a second full evaluation or fresh environment installation"
+}

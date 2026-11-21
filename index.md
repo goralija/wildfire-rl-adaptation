@@ -5,7 +5,9 @@ okf_version: "0.2"
 
 ## Počni ovdje
 
-- [Aktivno: kontrolisani CA pilot](docs/research/CA_CONTROLLED_PILOT.md) — TASK-035/ADR-040 završen:240 epizoda, sljedeći TASK-038.
+- [Završeno: CA v2 BC/PPO](docs/research/CA_LEARNING_PILOT.md) — TASK-038/ADR-042 završen, šest modela bez prolaza; sljedeći prijedlog TASK-039.
+
+- [Prethodni kontrolisani CA pilot](docs/research/CA_CONTROLLED_PILOT.md) — TASK-035/ADR-040 završen:240 epizoda, sljedeći TASK-038.
 
 - [Najnovije: popravljeno SimFire opažanje](docs/research/SIMFIRE_OBSERVATION_REPAIR.md) - TASK-036 fazaA/ADR-038, stvarni popravak, jača heuristika i nesiguran TRAIN dobitak.
 

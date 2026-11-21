@@ -4,6 +4,21 @@ title: Work log
 ---
 # Work log
 
+2026-11-21 — Prenosivi CA learning paket7.175.838B,256članova plus manifest, svi
+hashovi ponovo pročitani. Raspakovani source/šest numeric modela ponavljaju18/18putanja
+prvog dev slučaja identično za8,52s; postojeće biblioteke, ne fresh install. Paket nije
+uploadovan. Javni manifest/restore receipt i verifikacija su povezani iz indeksa.
+
+2026-11-21 — TASK-038 završen na codex/ca-learning-pilot iz3b7b56a2. Plan6f2e4b61,
+kodfca17851; prije dev ocjene RNGfa55b3a3 i2env51bbdff2 regresije.32TRAIN,96demo epizoda,
+1.152stanja.3model seeda,60BC epoha pa4.096PPO koraka svaki; konačni poslovi oko7,5min.
+Svih288devputanja PASS. BC3,08%, PPO2,98%, teacher7,46%; nijedan kandidat ne prelazi
+prag. Sigurnost2–5susreta po modelu prema20, svi0gubitaka.362pinovana testa,347modernih
+(3skip),286core(40skip), aktivni checkpoint roundtrip, CLI i knowledge PASS. ADR-042,
+EXP-026 i izvještaj čuvaju sve modele i granice. TASK-039 prijedlog TRAIN dijagnoze,
+bez novog treninga/testa. Modeli/demonstracije lokalni, no old checkpoint/real holdout.
+
+
 2026-11-21 — CA grana je pushana, CI na3ad3f72c prolazi sva četiri posla. Završni
 publication receipt i handoff su usklađeni; bez novog PR-a/mergea ili aktivnog računanja.
 

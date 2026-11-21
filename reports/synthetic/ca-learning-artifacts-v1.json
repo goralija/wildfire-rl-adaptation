@@ -1,0 +1,23 @@
+{
+  "schema_version": "ca-learning-artifact-manifest/1.0",
+  "date": "2026-11-21",
+  "path": ".local/learning-v1-final/artifacts/ca-learning-pilot-v1.tar.gz",
+  "bytes": 7175838,
+  "sha256": "0c9d086a19eb4b8a2d6be9124bb1edbb097d554eb1a460965e19cdb859993ffa",
+  "members_verified": 256,
+  "internal_manifest": "MANIFEST.json",
+  "all_member_hashes_reread": "PASS",
+  "uploaded": false,
+  "source_scope": "Numerical source, current TRAIN demonstrations, six numeric inference checkpoints, results and logs; no venv/real maps/old checkpoints. Final publication metadata excluded.",
+  "restore": {
+    "status": "PASS",
+    "first_registered_development_case": 21110000,
+    "matched_episodes": 18,
+    "all_six_models_loaded_without_pickle": true,
+    "all_source_plan_runtime_hashes_match": true,
+    "whole_masks_actions_rewards_and_safety_identical": true,
+    "seconds": 8.524185875008698,
+    "limits": "One technical case, not a second full evaluation or fresh environment installation"
+  },
+  "restore_receipt": "reports/synthetic/ca-learning-restore-v1.json"
+}

@@ -1,0 +1,154 @@
+{
+  "schema_version": "ca-learning-verification/1.0",
+  "date": "2026-11-21",
+  "status": "PASS",
+  "contract": {
+    "observation_version": "ca-native-current-v2",
+    "encoder_version": "ca-geometric-local-v1",
+    "reward_version": "ca-line-charged-safety-v1",
+    "plan_sha256": "88fdf83144ef79c1014bca3a53ee19ef6092e5aca3cce02014565ff23bcc9a3d",
+    "source_sha256": {
+      "src/wildfire_rl/synthetic_ca.py": "855b1d1ba50a1fd0e28f652f19d74607b1b0e485989e5424380bbf0602adb844",
+      "src/wildfire_rl/synthetic_env.py": "69beff35b90800b6ee4e5393b9a420c8170422d67bf7ec8d2633721167c676a2",
+      "src/wildfire_rl/synthetic_heuristics.py": "553803a58d0aa15a625277aff343373b7c1b5e4e00272b26caf1820b5f19c8c3",
+      "src/wildfire_rl/ca_controlled.py": "2046b9ff13846587f2fb8c8b8a91611fc6e55416fc560054f371d24338db9e4b",
+      "src/wildfire_rl/ca_learning.py": "28f3df6444abaeb1f2007a0237a83f3e5ca0bd5bd650a8e310cb0493577a19c0",
+      "src/wildfire_rl/ca_learning_rl.py": "514fa8e0136f262aef1058db5da4a47cf8eb9e37c503d64b9ad74bf7155a0457",
+      "scripts/run_ca_controlled_pilot.py": "fbb860f63f8a7df7a9454b3f18b46d03448b86f993f9ef7a996827acae0c79ce",
+      "scripts/run_ca_learning_pilot.py": "8f31f131fee6b8aa85e24772390a9f93a3c7149bcb7c9987bfbd92d2f6f494f4"
+    },
+    "architecture": {
+      "shared_unit_mlp": [
+        64,
+        64
+      ],
+      "global_mlp": 32,
+      "pi": [
+        64
+      ],
+      "vf": [
+        64
+      ]
+    },
+    "runtime": {
+      "python": "3.12.4",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "gymnasium": "1.4.0",
+      "torch": "2.15.0",
+      "sb3": "2.9.2",
+      "sb3_contrib": "2.9.2"
+    }
+  },
+  "all_current_numeric_source_hashes_match": true,
+  "checks": {
+    "pinned": {
+      "run": 362,
+      "seconds": 95.677,
+      "skipped": 0,
+      "status": "PASS"
+    },
+    "modern": {
+      "run": 347,
+      "seconds": 22.892,
+      "skipped": 3,
+      "status": "PASS"
+    },
+    "core": {
+      "run": 286,
+      "seconds": 9.332,
+      "skipped": 40,
+      "status": "PASS"
+    },
+    "checkpoint_targeted_pinned": {
+      "run": 3,
+      "seconds": 3.294,
+      "skipped": 0,
+      "status": "PASS"
+    },
+    "checkpoint_targeted_modern": {
+      "run": 3,
+      "seconds": 2.709,
+      "skipped": 0,
+      "status": "PASS"
+    },
+    "knowledge_tests": {
+      "run": 15,
+      "seconds": 2.662,
+      "skipped": 0,
+      "status": "PASS"
+    },
+    "knowledge_markdown": 87,
+    "cli_smoke": "PASS"
+  },
+  "public_result_audit": {
+    "status": "PASS",
+    "development_episodes": 288,
+    "model_seeds": 3,
+    "train_case_rosters_per_seed": 96,
+    "ppo_steps_per_seed": 4096,
+    "checks": [
+      "all sources/checkpoints",
+      "saved/return/safety identities",
+      "matched worlds/noop",
+      "all means and case-cluster intervals",
+      "all declared TRAIN cases/rosters visited"
+    ],
+    "test_or_real_holdout_used": false
+  },
+  "technical_recollection": {
+    "status": "PASS",
+    "cases": 32,
+    "all_numeric_demonstration_arrays_identical": true,
+    "scope": "Technical two-environment preparation fix changed no teacher data; old output retained, never development-scored."
+  },
+  "restore": {
+    "status": "PASS",
+    "first_registered_development_case": 21110000,
+    "matched_episodes": 18,
+    "all_six_models_loaded_without_pickle": true,
+    "all_source_plan_runtime_hashes_match": true,
+    "whole_masks_actions_rewards_and_safety_identical": true,
+    "seconds": 8.524185875008698,
+    "limits": "One technical case, not a second full evaluation or fresh environment installation"
+  },
+  "public_artifact_sha256": {
+    "configs/frozen/ca-learning-pilot-v1.json": "88fdf83144ef79c1014bca3a53ee19ef6092e5aca3cce02014565ff23bcc9a3d",
+    "reports/synthetic/ca-learning-development-v1.json": "96527fdf83afcc51ab98cbbf57ebafa5ea39fa01469e8666c8b163570bff9ab2",
+    "reports/synthetic/ca-learning-development-v1.png": "805679d008e65d406489acb43fee668a335e1b21e1871a29b8ce5d5dbc83fb8d",
+    "reports/synthetic/ca-learning-restore-v1.json": "72f37759a22a09d5c80b526cf3cdd5b3712be3149407491770ad115c0f9a8b73",
+    "reports/synthetic/ca-learning-artifacts-v1.json": "66ec93d7396f28751aee454096896165a41c3d88f940f4771229e2cf353e3917"
+  },
+  "local_log_sha256": {
+    ".local/collection.log": "d382415b04a270fcf04449d80febd460fab2435bb73f8a5cab30f71c5b11ef6f",
+    ".local/learning-rl-first-red.log": "7831801d26bd02f1eb86343ec6a2e70bef2cb40909a04907817d82492827146f",
+    ".local/training.log": "578ff907de5049640c45b7afc1e3a424d2dbca8303b9954f292b37503fd383c7",
+    ".local/knowledge-strict.log": "c138b45463f432bcbba93f6f08eb0e8f46aad51a6ca45c10eb03278d600e19b4",
+    ".local/native-suite.log": "28a27c285f93f684297cfb20e2295247905581794a8876863c5f6baa44ae61ae",
+    ".local/modern-suite.log": "39ff13541360be0c4fe690057bab7b0d385af9925934a8f935666a8eb6c3f9f2",
+    ".local/collection-final.log": "d382415b04a270fcf04449d80febd460fab2435bb73f8a5cab30f71c5b11ef6f",
+    ".local/checkpoint-rng-red.log": "cd06e3a9be91d99632d3ef38d4dfc140746cf44ce7f19d661403a018f81d212a",
+    ".local/checkpoint-final-native.log": "b4edf96f8006e85dfa17c77a6819ed3c999c71b6213472bea89d7330fd1e75ee",
+    ".local/core-suite.log": "b6c9b89b295b5b595d8b6a49c5da980ca488e214bbf0c6b1d9db6b7b1c0bef1e",
+    ".local/cli-smoke.log": "c0a576916023b057f658a355ce9969f9d642773310dfe6a0c92b472c32c76459",
+    ".local/training-final.log": "3e99a8f9af0bd97e8a926b24161254a800fbd58450c1cc62ad12d25b99a14147",
+    ".local/two-env-red.log": "5ad218a996eb748774782d9474c766e3413ba4a0b6c94d4956c85dba6812f00c",
+    ".local/knowledge-tests.log": "ccc0f2492f823a72bc71dba787d97f58a7f9a068849856f64890d94a53e6fe2e",
+    ".local/learning-first-red.log": "5a4ae9fbf2a90f5f7cec21d83f1239a53e5755ede919834ddf900ede78164f8e",
+    ".local/learning-unit-final.log": "91c4beb1651fd34165ecedd7ca2cc7eb147d0035e7d4f229c9c2a156cc59bff9",
+    ".local/learning-unit.log": "6cd7c5fce977a60211ccfd1229ff9ff7b52404699e6a115039d3945af1df1d4e",
+    ".local/checkpoint-final-modern.log": "54675d01f87616e5032ef6a8f0d63a10b73005a8ab74827682a3f37596b32309",
+    ".local/evaluation.log": "0b511a28925b01238f4860d74be6c7e57487292fac7b80b10b8426eac8128ab1",
+    ".local/native-final-suite.log": "80ee1cb032e75dc30771a92c14b0012f404e851d93b7ee8358eb59dec8ffbbf8",
+    ".local/learning-v1-final/restore-replay.log": "4c3aacbc2c0e151fb1aed08120be33a333149d528a497bde7d73f3468d6adcd8",
+    ".local/knowledge-final-tests.log": "998db3212124c5c29b6277a3328f0c9488dadeaf796a079c43fb9ba0fbc7c544",
+    ".local/knowledge-final-strict.log": "c138b45463f432bcbba93f6f08eb0e8f46aad51a6ca45c10eb03278d600e19b4"
+  },
+  "limits": [
+    "No final/physical validation",
+    "Reused development, only three model seeds",
+    "No procedural test or real holdout",
+    "Inference checkpoints are not optimizer/rollout resume state"
+  ],
+  "publication": "pending commit/push; no new PR or merge"
+}

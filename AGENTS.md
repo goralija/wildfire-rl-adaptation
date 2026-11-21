@@ -10,6 +10,15 @@ Repo je OKF 0.2 knowledge bundle. Na početku sesije pročitaj [index.md](index.
 Zatim koristi [mapu zadataka/koda](knowledge/code-map.md) za relevantne izvore i testove.
 Korisnikove direktne upute imaju prednost; kasniji ADR može zamijeniti raniji.
 
+**Najnovije je ADR-042 (2026-11-21): TASK-038 CA v2 BC/PPO završen** na
+`codex/ca-learning-pilot`, iz3b7b56a2. [Izvještaj](docs/research/CA_LEARNING_PILOT.md):
+3model seeda,60BC epoha i4.096PPO koraka po seedu,288development putanja PASS.
+BC3,08%, PPO2,98% prema7,46% heuristike; nijedan kandidat ne prelazi prag. Modeli imaju
+manje bliskih susreta u uzorku, svi0gubitaka; nema RL/fizičke validacije.362pinovana testa
+prolaze. Numeric NPZ težine su lokalne i provenance-guarded, bez starog checkpointa.
+Naredni TASK-039 je prijedlog TRAIN dijagnoze/pokrivenosti vlastitih putanja. Nema aktivnog
+treninga, proceduralnog testa, stvarnog VALIDATION/TEST ili dugog computea. Max4procesa nice19.
+
 **Najnovije je ADR-040 (2026-11-21): TASK-035 CA ugovor/pilot završen** na
 `codex/ca-controlled-pilot`, iz `664d890d` SimFire repair grane po korisnikovom nalogu.
 [CA izvještaj](docs/research/CA_CONTROLLED_PILOT.md):240 razvojnih epizoda i15 replayeva

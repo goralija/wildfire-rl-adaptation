@@ -4,7 +4,11 @@ title: Wildfire RL adaptation — MPVI
 ---
 # Wildfire RL adaptation — MPVI
 
-Aktivni nastavak (2026-11-21): [kontrolisani CA pilot](docs/research/CA_CONTROLLED_PILOT.md),
+Aktivni zadatak2026-11-21: [CA v2 BC/PPO pilot](docs/research/CA_LEARNING_PILOT.md),
+TASK-038/ADR-042 završen: novi encoder, tri BC/PPO seeda, bez prolaza prema heuristici. Proceduralni test i stvarni
+holdouti ostaju zatvoreni; nema fizički validiranog rezultata.
+
+Prethodni korak (2026-11-21): [kontrolisani CA pilot](docs/research/CA_CONTROLLED_PILOT.md),
 TASK-035/ADR-039, grana `codex/ca-controlled-pilot` iz završene SimFire repair grane.
 Isti proceduralni slučajevi, opažanje i resursi za sve politike. Vlastiti CA nije fizički
 validiran; prethodni SimFire i poništeni historijski CA brojevi nisu tvrdnja RL uspjeha.

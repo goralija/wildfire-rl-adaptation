@@ -4,6 +4,9 @@ title: Claude project entry point
 ---
 # Project context
 
+Najnovije: TASK-038/ADR-042 je završen kratki CA BC/PPO na `codex/ca-learning-pilot`;
+pročitati [learning pilot](docs/research/CA_LEARNING_PILOT.md) i najnoviji STATUS prije rada.
+
 Aktivni nalog 2026-11-21 je TASK-035, završeni kontrolisani CA pilot (ADR-039–040), na
 `codex/ca-controlled-pilot` iz SimFire repair grane. Pročitati [pilot](docs/research/CA_CONTROLLED_PILOT.md)
 i najnovije STATUS/NEXT_SESSION; stariji tekst o odgođenom CA je historija.

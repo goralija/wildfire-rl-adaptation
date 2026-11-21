@@ -1852,3 +1852,43 @@ istih48 epizoda. Sigurnost se ne skriva ukupnim rewardom. To nije završni prihv
 interval nije korigovan za dva kandidata ili prethodnu upotrebu developmenta. Na
 tehnički kvar, nefinite vrijednosti ili hash mismatch staje se bez promjene menija.
 Nema proceduralnog testa, stvarnog VALIDATION/TEST, plaćenog computea ili mergea.
+
+
+## ADR-042 — TASK-038 završen: BC/PPO radi, nijedan kandidat ne prelazi prag, 2026-11-21
+
+Po korisnikovom nalogu izvršen je ADR-041, plan6f2e4b61 prije koda i treninga.
+Encoder/native-local, shared unit MLP i numerički NPZ provenance su implementirani;
+legacy fizika/nagrada i isti v2 current-forcing ugovor ostaju.32TRAIN požara ×3rostera
+daje96demonstracija/1.152stanja/2.846choice slotova. BC60epoha pa4.096PPO koraka za
+seede17/29/43, svi posjetili svih96TRAIN kombinacija. Nema izbora najboljeg checkpointa.
+
+Prije pune ocjene ispravljeni su RNG reset pri provjeri checkpointa (regresija fa55b3a3)
+i SB3 prelaz1→2env (51bbdff2, novi integracijski test). Prvi pokušaj zaustavljen je
+prije PPO koraka; svi32 ponovo prikupljeni demo fajla numerički su identični starima.
+Nije bilo dev scorea prije ispravke i nije mijenjan meni. Stari izlaz je sačuvan.
+
+Konačni BC agreement:100/99,9649/99,9649%. Kolekcija19,82s, tri runa368,42s, dev62,29s,
+oko7,5min ukupno, nice19/max4procesa. Svih6modela ×16dev ×3rostera =288putanja prolazi
+isteworld/no-op/legality/damage/return ugovore. Baseline source/runtime hashovi su isti.
+
+BC spašeni udio po seedu17/29/43:1,57/4,48/3,20%; PPO2,88/4,12/1,94%; referenca7,46%.
+Prosjeci BC3,08%, PPO2,98%. Delta prema heuristici−4,38p.p.95%[−10,67;+0,49] i
+−4,49p.p.[−12,19;+1,19]. PPO−BC−0,105p.p.[−2,08;+1,21]. Bootstrap resamplira16požara,
+sva3rostera zajedno, nakon prosječenja3modelseeda,10k drawova seed0. Reused development,
+bez korekcije za dva kandidata; nisu144nezavisna požara. Nema stabilnog poboljšanja PPO-a.
+
+Sigurnost po istih48epizoda: BC5/4/2 bliska susreta, PPO4/3/3, heuristika20; svi0gubitaka.
+Svi modeli prolaze brojčani safety uslov, ali oba kandidata padaju kriterij spašene štete;
+negativni prosjeci i široki intervali ne dokazuju da je cijela klasa modela inferiorna.
+Manje susreta ne dokazuje stvarnu sigurnost niti objašnjava uzrok slabije uštede.
+
+362pinovana testa bez skipa, moderni347/3skip, core286/40skip i CLI PASS; dodatni
+aktivni checkpoint testovi u oba runtimea, knowledge15/15 i87Markdown strict PASS.
+Svi javni redovi/intervali, checkpoint i source hashovi te TRAIN roster posjete nezavisno
+su rekalkulisani. Numeric NPZ težine ostaju lokalno; nema pickle/zip deserializacije.
+
+TASK-038 završen, nema automatskog produženja. TASK-039 je predložena TRAIN-only
+analiza vlastitih putanja, učiteljske pokrivenosti i geometrije/encoder-a prije novog
+kratkog protokola. To nisu dokazani uzroci. Proceduralni test, stvarni VALIDATION/TEST,
+dugi trening i merge nisu pokrenuti. CA nije fizički validiran. [Izvještaj](../research/CA_LEARNING_PILOT.md)
+i [svi rezultati](../../reports/synthetic/ca-learning-development-v1.json) su kanonski.

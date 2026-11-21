@@ -4,6 +4,30 @@ title: Naredni korak — nakon CA pilota (2026-11-21)
 ---
 # Naredni korak
 
+## TASK-038 završen — CA v2 BC/PPO (ADR-042, 2026-11-21)
+
+Na `codex/ca-learning-pilot` iz3b7b56a2 završen je [kratki CA learning pilot](research/CA_LEARNING_PILOT.md).
+Plan6f2e4b61 prethodi treningu.32TRAIN požara ×3rostera daju96demonstracija/1.152stanja;
+tri seeda17/29/43 uče60BC epoha pa svaki tačno4.096PPO koraka. Svi posjećuju96TRAIN kombinacija.
+
+Svih6 modela ×16development požara ×3rostera =288putanja prolazi tehničke provjere.
+BC prosjek3,08%, BC+PPO2,98%, referenca direct_flank7,46% spašene težinske štete.
+PPO minus BC −0,105p.p., opisni interval[−2,08;+1,21]. Nijedan kandidat ne prolazi
+registrovani kriterij nastavka. Modeli imaju2–5 bliskih susreta po seedu prema20 kod
+heuristike, svi0gubitaka u uzorku; nema dokaza RL prednosti ili stvarne sigurnosti.
+
+362pinovana testa, moderni347/3skip, core286/40skip, dodatni aktivni checkpoint testovi,
+knowledge15/15/strict87 i CLI PASS. Numeric NPZ težine su lokalne s provjerenim hashovima;
+stari checkpointovi nisu korišteni. Završni poslovi traju oko7,5min na nice19, max4procesa.
+Naredni prijedlog TASK-039: TRAIN dijagnoza učiteljskih/modelskih putanja i kodiranja,
+pa kratak unaprijed zadat nastavak ako je opravdan. Dugi trening, proceduralni test i
+stvarni VALIDATION/TEST ostaju zatvoreni; nema aktivnog runa. CA nije fizički validiran.
+
+Redoslijed: provjeriti sačuvane manifeste i rezultate, pročitati ADR-042, potom TASK-039
+plan prije novih poteza/treninga. Ne ponavljati završeni pilot bez razloga i ne otvarati
+testne liste. Stari tekst TASK-038 kao prijedloga ili rada u toku je historija.
+
+
 ## CA ugovor i pilot završeni — TASK-035 / ADR-040 (2026-11-21)
 
 Korisnikov CA nastavak je izveden na `codex/ca-controlled-pilot`, iz `664d890d` završene
