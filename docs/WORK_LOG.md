@@ -4,6 +4,10 @@ title: Work log
 ---
 # Work log
 
+2026-11-21 — TASK-041 grana pushana; CI na21ff12f2 prolazi core3.11/3.13, numeric i
+knowledge. Receipt/status/handoff su usklađeni. Numerički source i rezultati nisu
+promijenjeni; nema novog PR-a/mergea ili uploada velikog lokalnog paketa.
+
 2026-11-21 — TASK-041 završen na codex/ca-feds-growth-audit, baza640a910e, plan46e5371f
 prije koda7d04fca0/scoringa.16TRAIN no-op SF/CA3rep bez podešavanja. Primary CA0 MAE
 manji86,47%, spatial IoU interval prelazi0; Martin observed izlazi iz mape,15covered

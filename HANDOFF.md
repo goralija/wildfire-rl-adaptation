@@ -38,6 +38,14 @@ na svih61ulazno kompatibilnih TRAIN početaka, uz full future-domain QC i posebn
 near-stalled/no-growth slučajeve, prije većeg treninga. Novi plan prije scoringa;
 TASK-040 native faza B ostaje otvorena, TASK-039 odgođen. Bez automatske fizičke validacije.
 
+### Objava TASK-041
+
+Grana [codex/ca-feds-growth-audit](https://github.com/goralija/wildfire-rl-adaptation/tree/codex/ca-feds-growth-audit)
+je commitana i pushana. [CI kodnog/rezultatskog commita21ff12f2](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44850220640)
+prolazi sva četiri posla: core3.11/3.13, numeric s tačnom skip listom i knowledge.
+Verification čuva tačan testirani commit; kasnija dopuna objave ne mijenja numerički
+kod, plan ili ishode. Veliki paket ostaje lokalni, bez novog PR-a ili mergea.
+
 ## TASK-040 faza A završena — upareni simulatori (ADR-044, 2026-11-21)
 
 Na `codex/ca-simfire-paired`, iz `722d5f2d`, završen je [upareni pilot](docs/research/CA_SIMFIRE_PAIRED.md).

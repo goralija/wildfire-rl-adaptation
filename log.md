@@ -1,5 +1,11 @@
 # Promjene baze znanja
 
+## 2026-11-21: audit opaženog rasta objavljen, CI zelen
+
+Grana `codex/ca-feds-growth-audit` je pushana. [CI na21ff12f2](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44850220640)
+prolazi sva četiri posla. [Izvještaj](docs/research/PAIRED_OBSERVED_GROWTH.md) i handoff
+čuvaju nalaze, granice i predloženi TASK-042. Nema novog PR-a ili mergea.
+
 ## 2026-11-21: završen audit rasta prema FEDS-u
 
 [TASK-041/ADR-046](docs/research/PAIRED_OBSERVED_GROWTH.md) na16istih TRAIN početaka:

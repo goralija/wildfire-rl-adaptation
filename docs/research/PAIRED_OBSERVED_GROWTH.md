@@ -201,6 +201,14 @@ near-stalled/no-growth grupe i sva3CA spread seeda. Novi plan prethodi novom sco
 bez podešavanja prema ovih16ishoda. Zatim odlučiti treba li kalibracija ili native
 TASK-040 faza B; ovaj nalaz sam ne opravdava proglašenje simulatora validiranim.
 
+### Objava TASK-041
+
+Grana [codex/ca-feds-growth-audit](https://github.com/goralija/wildfire-rl-adaptation/tree/codex/ca-feds-growth-audit)
+je commitana i pushana. [CI kodnog/rezultatskog commita21ff12f2](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44850220640)
+prolazi sva četiri posla: core3.11/3.13, numeric s tačnom skip listom i knowledge.
+Verification čuva tačan testirani commit; kasnija dopuna objave ne mijenja numerički
+kod, plan ili ishode. Veliki paket ostaje lokalni, bez novog PR-a ili mergea.
+
 Reprodukcija u odgovarajućem checkoutu, uz iste ulazne hashove i postojeće izolovane runtimeove:
 
 ```sh

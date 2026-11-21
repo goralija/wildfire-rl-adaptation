@@ -151,7 +151,8 @@
     ".local/predict-ca-full.log": "1e3c86db81345e7139ef54e35d847f5bad9ff8bc99da32f248fc28468c3f256c",
     ".local/growth-tests-pinned.log": "ec2e41c90904610350f62a084e20662cd240a3168b9e73a815865dd38f76cb82",
     ".local/knowledge-final-tests.log": "667205f495f8dab2f3657e85158c73dc05ffa43b3c2bba0eb6f5f7c2eed0ecfc",
-    ".local/knowledge-final-strict.log": "ad3359b570167575ef3f01a8db4dde5d05fd1ef2bd9d4ad1f40baa3106d3f611"
+    ".local/knowledge-final-strict.log": "ad3359b570167575ef3f01a8db4dde5d05fd1ef2bd9d4ad1f40baa3106d3f611",
+    ".local/growth-ci.json": "4ddf82c69fec513c5b735b9ae1f98cb86d109d45473596a189935b5df6e8c579"
   },
   "limits": [
     "Reused16 input-compatible TRAIN cases, no independent holdout",
@@ -164,5 +165,20 @@
   "figures_visually_inspected": [
     "Metric overview after legend/count correction",
     "All16 maps after Martin coverage label and caption correction"
-  ]
+  ],
+  "publication": {
+    "branch": "codex/ca-feds-growth-audit",
+    "tested_commit": "21ff12f2508ae17c4c71eb34f8b88d4f14186ff4",
+    "workflow_url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44850220640",
+    "conclusion": "success",
+    "jobs": {
+      "core (3.13)": "success",
+      "numeric": "success",
+      "knowledge": "success",
+      "core (3.11)": "success"
+    },
+    "new_pr": false,
+    "merged": false,
+    "note": "Subsequent publication-only commit changes no numerical source, frozen plan or study result; large archive remains local."
+  }
 }
