@@ -4,6 +4,16 @@ title: Work log
 ---
 # Work log
 
+2026-11-21 — TASK-040 faza A završena u izdvojenoj codex/ca-simfire-paired grani,
+baza722d5f2d. Preregistrovani16TRAIN, identični ulazi/opservacije/linije/48h,528CA+
+528arhiviranih SF ishoda i160CArobustness ishoda. Procenti mješoviti: SF/CA3mean
+RBF2,44/5,85%, front11,29/5,30%; pooled front obrće smjer2,89/3,67%. CA no-op rast
+oko5,4puta manji; nema automatskog opravdanja migracije/native PPO ranga.369pinned,
+354modern/3skip,287core/41skip, CLI PASS; SF10/CA33replay,1.056mask-score audit i
+raspakovani33restore PASS. Paket14.888.989B ostaje lokalni. ADR-044/EXP-027 i upareni
+izvještaj čuvaju primarni seed0 i sve3replike. TASK-041 TRAIN FEDS growth audit je
+sljedeći prijedlog; native faza B otvorena, TASK-039 odgođen. Bez novog treninga/holdouta.
+
 2026-11-21 — TASK-038 grana pushana; CI na1d4209be prolazi core3.11/3.13, numeric
 i knowledge. Publication receipt i handoff su usklađeni; nema PR-a/mergea ili uploada
 modela/paketa. Main i prethodna CA grana su sačuvani.

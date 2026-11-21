@@ -29,4 +29,4 @@
 
 - [CA v2 BC/PPO pilot](CA_LEARNING_PILOT.md) — TASK-038/ADR-042 završen, svi modeli i sigurnosni ishodi.
 
-- [Upareno SimFire/CA poređenje](CA_SIMFIRE_PAIRED.md) - TASK-040/ADR-043, common-control plan prije ishoda.
+- [Upareno SimFire/CA poređenje](CA_SIMFIRE_PAIRED.md) - TASK-040 faza A/ADR-044 završena, common-control nalazi i granice; native faza B otvorena.

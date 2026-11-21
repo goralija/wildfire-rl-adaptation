@@ -5,6 +5,8 @@ okf_version: "0.2"
 
 ## Počni ovdje
 
+- [Najnovije: upareno SimFire/CA poređenje](docs/research/CA_SIMFIRE_PAIRED.md) - TASK-040 faza A/ADR-044 završena, mješoviti procentni rezultati; TASK-041 growth audit je sljedeći prijedlog.
+
 - [Završeno: CA v2 BC/PPO](docs/research/CA_LEARNING_PILOT.md) — TASK-038/ADR-042 završen, šest modela bez prolaza; sljedeći prijedlog TASK-039.
 
 - [Prethodni kontrolisani CA pilot](docs/research/CA_CONTROLLED_PILOT.md) — TASK-035/ADR-040 završen:240 epizoda, sljedeći TASK-038.

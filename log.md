@@ -1,5 +1,16 @@
 # Promjene baze znanja
 
+## 2026-11-21: isti početci i linije, mješovit SimFire/CA nalaz
+
+[TASK-040 faza A](docs/research/CA_SIMFIRE_PAIRED.md) / ADR-044 je završena.16stvarnih
+TRAIN početaka sa istim uslovima, primarni CAseed0 i dodatne dvije zaključane spread
+replike. Agent dobija veći sekundarni procentni prosjek, ali nestabilno; heuristike
+mijenjaju poredak i no-op rast je oko5,4puta manji. Pooled ponderisanje mijenja neke
+smjerove poređenja. Nema automatskog opravdanja migracije ili native PPO rangiranja.
+369pinovanih testova i native/replay/restore provjere prolaze. [Verifikacija](reports/synthetic/ca-simfire-paired-verification-v1.json)
+i [lokalni paket](reports/synthetic/ca-simfire-paired-artifacts-v1.json) čuvaju dokaze.
+Sljedeći prijedlog TASK-041 je TRAIN growth audit prema opaženom FEDS-u; faza B otvorena.
+
 ## 2026-11-21: CA learning grana objavljena, CI zelen
 
 `codex/ca-learning-pilot` je pushana. [CI na1d4209be](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44840927699)

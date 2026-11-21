@@ -4,7 +4,12 @@ title: Sintetičko CA trening okruženje s fizički ograničenim jedinicama (v1,
 ---
 # Sintetičko CA trening okruženje (v1)
 
-Najnovije2026-11-21: [TASK-038 BC/PPO](CA_LEARNING_PILOT.md), ADR-042, završio je
+Najnovije 2026-11-21: [upareni TASK-040 pilot](CA_SIMFIRE_PAIRED.md), ADR-044, koristi
+zaseban common-line/vegetation bridge radi istih uslova sa SimFireom. Nije promijenjen
+native unit MDP ispod niti je rangiran njegov PPO. Rast oba modela treba porediti s
+opaženim FEDS-om na TRAIN-u prije odluke o migraciji; to je predloženi TASK-041.
+
+Prethodno2026-11-21: [TASK-038 BC/PPO](CA_LEARNING_PILOT.md), ADR-042, završio je
 tri nova model seeda i288development putanja. Nijedan kandidat nije prešao prag prema
 heuristici. Naredni zadatak je TRAIN dijagnoza, bez otvaranja testova.
 

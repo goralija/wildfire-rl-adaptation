@@ -12,7 +12,9 @@ title: Naredni zadaci
 | TASK-036 | faza A završena | SimFire repair ostaje na izvedenoj bazi; nalazi ADR-038 |
 | TASK-037 | predloženo, odgođeno | Preostala SimFire fizika/gate/trening |
 | TASK-038 | završeno, ADR-042 |3seeda, šest modela, 288development putanja; nijedan kandidat ne prolazi; svi rezultati/sigurnost sačuvani |
-| TASK-039 | predloženo, nije pokrenuto | TRAIN-only dijagnoza vlastitih putanja i pokrivenosti učitelja/encoder-a; unaprijed zadat kratki nastavak tek po nalazu |
+| TASK-040 | faza A završena, ADR-044; faza B otvorena | 16 istih TRAIN, identične linije, procenti/ha/no-op i3 CA spread replike; mješoviti rezultati, native resursi/akcije/PPO još nisu upareni |
+| TASK-041 | predloženo, sljedeći prioritet | TRAIN audit SF/CA no-op rasta prema istim opaženim FEDS promjenama; prvo zamrznuti plan, bez kalibracije/treninga/holdouta |
+| TASK-039 | predloženo, odgođeno iza growth audita | TRAIN-only dijagnoza vlastitih putanja i pokrivenosti učitelja/encoder-a; unaprijed zadat kratki nastavak tek po nalazu |
 
 Starije oznake TASK-035 kao drafta ispod su historija, zamijenjene korisnikovim nalogom
 2026-11-21 i ADR-039. TEST 2024 i stvarni VALIDATION nisu otvoreni.

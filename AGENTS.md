@@ -10,7 +10,18 @@ Repo je OKF 0.2 knowledge bundle. Na početku sesije pročitaj [index.md](index.
 Zatim koristi [mapu zadataka/koda](knowledge/code-map.md) za relevantne izvore i testove.
 Korisnikove direktne upute imaju prednost; kasniji ADR može zamijeniti raniji.
 
-**Najnovije je ADR-042 (2026-11-21): TASK-038 CA v2 BC/PPO završen** na
+**Najnovije je ADR-044 (2026-11-21): TASK-040 faza A završena** na
+`codex/ca-simfire-paired`, iz `722d5f2d`. [Izvještaj](docs/research/CA_SIMFIRE_PAIRED.md)
+čuva16 istih stvarnih TRAIN početaka, identična opažanja/linije,48h i isti obračun.
+CA no-op rast je oko5,4puta manji; procentni poredak heuristika se mijenja, RBF dobitak
+je nestabilan preko3 spread seeda. Ovo nije poređenje starih PPO modela ili fizička
+validacija.369 pinovanih testova prolazi, native replay/restore PASS. Nema automatskog
+opravdanja prelaska na CA. Naredni prijedlog TASK-041 je TRAIN poređenje no-op rasta
+sa opaženim FEDS promjenama; TASK-040 native faza B ostaje otvorena, TASK-039 odgođen.
+Nema aktivnog treninga, stvarnog VALIDATION/TEST ili mergea. Max3 radnika uz koordinaciju,
+nice19. Najnoviji STATUS/NEXT_SESSION imaju prednost nad historijskim sekcijama ispod.
+
+**Prethodno je ADR-042 (2026-11-21): TASK-038 CA v2 BC/PPO završen** na
 `codex/ca-learning-pilot`, iz3b7b56a2. [Izvještaj](docs/research/CA_LEARNING_PILOT.md):
 3model seeda,60BC epoha i4.096PPO koraka po seedu,288development putanja PASS.
 BC3,08%, PPO2,98% prema7,46% heuristike; nijedan kandidat ne prelazi prag. Modeli imaju
@@ -19,7 +30,7 @@ prolaze. Numeric NPZ težine su lokalne i provenance-guarded, bez starog checkpo
 Naredni TASK-039 je prijedlog TRAIN dijagnoze/pokrivenosti vlastitih putanja. Nema aktivnog
 treninga, proceduralnog testa, stvarnog VALIDATION/TEST ili dugog computea. Max4procesa nice19.
 
-**Najnovije je ADR-040 (2026-11-21): TASK-035 CA ugovor/pilot završen** na
+**Prethodno je ADR-040 (2026-11-21): TASK-035 CA ugovor/pilot završen** na
 `codex/ca-controlled-pilot`, iz `664d890d` SimFire repair grane po korisnikovom nalogu.
 [CA izvještaj](docs/research/CA_CONTROLLED_PILOT.md):240 razvojnih epizoda i15 replayeva
 PASS; direct_flank7,46% spašeno uz20 bliskih susreta/0 gubitaka, bez naučenog modela.
@@ -28,7 +39,7 @@ kratki BC/PPO; dugi trening i proceduralni test nisu pokrenuti. Stvarni VALIDATI
 ostaju zatvoreni. Native opažanje/current forcing zajednički su za sve politike.
 Stariji tekst o odgođenom CA ispod je historija. CA nije fizički validiran ili Cell2Fire.
 
-**Najnovije je ADR-038 (2026-11-20): TASK-036 faza A je završena na
+**Prethodno je ADR-038 (2026-11-20): TASK-036 faza A je završena na
 `codex/simfire-observation-repair`.** [Izvještaj](docs/research/SIMFIRE_OBSERVATION_REPAIR.md)
 razdvaja potvrđeni popravak informacije i nesiguran policy dobitak. Svih 98 replayeva,
 1568 OOF lookupova,7 native sekvenci i 344 pinovana testa prolaze. Fine+gate je jači

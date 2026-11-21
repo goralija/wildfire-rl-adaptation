@@ -1,0 +1,20 @@
+{
+  "schema_version": "ca-simfire-paired-artifacts/1.0",
+  "path": ".local/paired-v1-final/artifacts/ca-simfire-paired-v1.tar.gz",
+  "bytes": 14888989,
+  "sha256": "88cd907f1ab3c0132e0c5d685fc7af9b8388521a418ac6a25902c1613c5e3eae",
+  "members_verified": 562,
+  "internal_manifest": "MANIFEST.json",
+  "all_member_hashes_reread": "PASS",
+  "scope": "Numerical source, all98 original SF finite-mask records, selected16 SF v2 observations and real rasters, corrected TRAIN weather, all new CA results; no native PPO weights, venv, real VALIDATION/TEST maps or final publication metadata.",
+  "uploaded": false,
+  "restore": {
+    "status": "PASS",
+    "scenario_id": "fpa-fod-400303584-goldstone",
+    "restored_case_outcomes": 33,
+    "all_observation_burn_and_line_arrays_identical": true,
+    "all_source_plan_input_and_original_sf_cache_guards_pass": true,
+    "seconds": 13.30150837500696,
+    "scope": "Fresh first-case CA execution from unpacked source and bundled selected inputs, all guarded SF cache records; dependencies reused, not a fresh environment install or full second analysis"
+  }
+}

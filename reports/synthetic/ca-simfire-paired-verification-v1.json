@@ -1,0 +1,445 @@
+{
+  "schema_version": "ca-simfire-paired-verification/1.0",
+  "date": "2026-11-21",
+  "status": "PASS",
+  "scope": "Technical checks of TASK-040 common-line-control phase A; not native PPO ranking or physical validation",
+  "contract": {
+    "plan_sha256": "e8c3140a0d83ac9e73dfc2bf984e5d239e00457680956e77c2d4177c376615f2",
+    "table_sha256": "28627fa98b60f8dae4ac4f9246887ecd3488b541c2a9dbd5e82620811effbddc",
+    "observations_sha256": "f7b72ef0cc002871127223deb11ea9b0e7546d9ece76378e5b119dd55f4bd87e",
+    "weather_sha256": "76332f3da26fe02812ca6439fee5dec9f131793227335e0380267d12c0ab937e",
+    "source_sha256": {
+      "scripts/run_paired_simulators.py": "a7394dd8860b4b105e2e83c4f3f826b9ac46f77eaa72ae4be9036de1418ba625",
+      "src/wildfire_rl/paired_simulators.py": "58794b6d1acb6df2f23b5be678e6d6bae0345b13f6676d86cd0d72a4c3d78779",
+      "src/wildfire_rl/synthetic_ca.py": "855b1d1ba50a1fd0e28f652f19d74607b1b0e485989e5424380bbf0602adb844",
+      "src/wildfire_rl/synthetic_real_cases.py": "22b2bb365207e2f5139cbd7c24d835f512a429b423387e8bfe627c9621729db6",
+      "src/wildfire_rl/feds_simfire_env.py": "261cb0b6565b72711aa56964a068f6749b6c49ceaa32b2b70a54c959cdb235ed",
+      "src/wildfire_rl/feds_simfire_setup.py": "78e7187113a246e9f70a0a88178b3d55345ed84ebce05b8e1c1f0b1b52b3c944",
+      "src/wildfire_rl/feds_observation_v2.py": "01cef197dfa09924deffa57055cd51b1dc78bc6d9c4a46ed4bc6a41e7854cf81",
+      "src/wildfire_rl/feds_observation_audit.py": "bc7109bb81b41a5e0081d06ab7145252f6ddf1b205924de50f3b9f7dd1a64cf5",
+      "src/wildfire_rl/feds_repaired_learning.py": "bd234e75c65b9dffb8390ff34252139ec1eb7b80f38bb95730230837da66216c",
+      "src/wildfire_rl/line_damage.py": "cab7e146e769edff04e2364c8d9874036ab154fa68f05af1c739d6b55f995ea6"
+    },
+    "runtime": {
+      "python": "3.12.4",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "gymnasium": "1.4.0"
+    }
+  },
+  "all_current_numeric_source_hashes_match": true,
+  "checks": {
+    "pinned": {
+      "run": 369,
+      "skipped": 0,
+      "seconds": 75.048,
+      "status": "PASS",
+      "log_sha256": "c5cd3d6f1467e091461ae2d29c3739323e8d6401c7a9ec2411a4300465fea8da"
+    },
+    "modern": {
+      "run": 354,
+      "skipped": 3,
+      "seconds": 21.378,
+      "status": "PASS",
+      "log_sha256": "df5f12f598dd847152f207fff81a99aeab11173c7dcf3d4485ebcf33ff19945f"
+    },
+    "core": {
+      "run": 287,
+      "skipped": 41,
+      "seconds": 11.215,
+      "status": "PASS",
+      "log_sha256": "4692cb56c0c0452fcd1bb4f835d879e152b2b2f975f3f3353bd2e2838dd304b6"
+    },
+    "cli_smoke": {
+      "status": "PASS",
+      "log_sha256": "c0a576916023b057f658a355ce9969f9d642773310dfe6a0c92b472c32c76459"
+    },
+    "knowledge_tests": {
+      "run": 15,
+      "skipped": 0,
+      "seconds": 2.14,
+      "status": "PASS",
+      "log_sha256": "4cf9e436834df2f3ead400e0e11d704bfefa4330ea99bdb329daf9b70ab45c40"
+    },
+    "knowledge_markdown": {
+      "files": 88,
+      "strict_status": "PASS",
+      "log_sha256": "53d3deda911fa83afe150838f506091ae626520105e26d67ea0ac0bca84c32cb"
+    }
+  },
+  "independent_audit": {
+    "status": "PASS",
+    "mask_scores_recalculated": 1056,
+    "paired_cases": 16,
+    "ratio_defined_joint_cases": 14,
+    "primary_ca_outcomes": 528,
+    "robustness_ca_outcomes": 160,
+    "checks": [
+      "all raw and charged mask scores",
+      "prior damage retention",
+      "all current source hashes",
+      "three-replicate means and case-bootstrap intervals"
+    ],
+    "test_or_validation_loaded": false
+  },
+  "native_simfire_replay": {
+    "status": "PASS",
+    "selection": "First two preregistered matched case IDs, all five non-oracle policies; technical replay, no new performance sample",
+    "episodes": 10,
+    "seconds": 38.225993834,
+    "results": [
+      {
+        "scenario_id": "fpa-fod-400303584-goldstone",
+        "kind": "noop",
+        "actions": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "score": {
+          "noop_damage_cells": 9,
+          "raw_damage_cells": 9,
+          "line_cells_in_noop_footprint": 0,
+          "extra_line_charge_cells": 0,
+          "charged_damage_cells": 9,
+          "raw_saved_cells": 0,
+          "charged_saved_cells": 0
+        },
+        "blocked_actions": 0,
+        "whole_mask_and_score_check": "PASS",
+        "mask_file": "fpa-fod-400303584-goldstone--noop.npz",
+        "mask_sha256": "498887354a268ce35e57eb8f18560c568cb0bdb5af395de56390b0871feee63d",
+        "seconds": 18.358916875
+      },
+      {
+        "scenario_id": "fpa-fod-400303584-goldstone",
+        "kind": "random_legal",
+        "actions": [
+          7,
+          0,
+          0,
+          0
+        ],
+        "score": {
+          "noop_damage_cells": 9,
+          "raw_damage_cells": 9,
+          "line_cells_in_noop_footprint": 0,
+          "extra_line_charge_cells": 0,
+          "charged_damage_cells": 9,
+          "raw_saved_cells": 0,
+          "charged_saved_cells": 0
+        },
+        "blocked_actions": 0,
+        "whole_mask_and_score_check": "PASS",
+        "mask_file": "fpa-fod-400303584-goldstone--random_legal.npz",
+        "mask_sha256": "ee39ea290684ca7c76c872c4a59c437e2c79a9f7a0b1e2d74ad07660fde1fc9f",
+        "seconds": 0.6950904169999994
+      },
+      {
+        "scenario_id": "fpa-fod-400303584-goldstone",
+        "kind": "downwind",
+        "actions": [
+          8,
+          0,
+          0,
+          0
+        ],
+        "score": {
+          "noop_damage_cells": 9,
+          "raw_damage_cells": 9,
+          "line_cells_in_noop_footprint": 0,
+          "extra_line_charge_cells": 0,
+          "charged_damage_cells": 9,
+          "raw_saved_cells": 0,
+          "charged_saved_cells": 0
+        },
+        "blocked_actions": 0,
+        "whole_mask_and_score_check": "PASS",
+        "mask_file": "fpa-fod-400303584-goldstone--downwind.npz",
+        "mask_sha256": "c8a00b43e38bdb51d8b4fe6bd11e5488784f19de57a986398b53f692f2566a20",
+        "seconds": 0.779026499999997
+      },
+      {
+        "scenario_id": "fpa-fod-400303584-goldstone",
+        "kind": "fine_heuristic",
+        "actions": [
+          8,
+          0,
+          0,
+          0
+        ],
+        "score": {
+          "noop_damage_cells": 9,
+          "raw_damage_cells": 9,
+          "line_cells_in_noop_footprint": 0,
+          "extra_line_charge_cells": 0,
+          "charged_damage_cells": 9,
+          "raw_saved_cells": 0,
+          "charged_saved_cells": 0
+        },
+        "blocked_actions": 0,
+        "whole_mask_and_score_check": "PASS",
+        "mask_file": "fpa-fod-400303584-goldstone--fine_heuristic.npz",
+        "mask_sha256": "c8a00b43e38bdb51d8b4fe6bd11e5488784f19de57a986398b53f692f2566a20",
+        "seconds": 0.5807044159999997
+      },
+      {
+        "scenario_id": "fpa-fod-400303584-goldstone",
+        "kind": "matched_rbf",
+        "actions": [
+          2,
+          0,
+          0,
+          0
+        ],
+        "score": {
+          "noop_damage_cells": 9,
+          "raw_damage_cells": 9,
+          "line_cells_in_noop_footprint": 0,
+          "extra_line_charge_cells": 0,
+          "charged_damage_cells": 9,
+          "raw_saved_cells": 0,
+          "charged_saved_cells": 0
+        },
+        "blocked_actions": 0,
+        "whole_mask_and_score_check": "PASS",
+        "mask_file": "fpa-fod-400303584-goldstone--matched_rbf.npz",
+        "mask_sha256": "4984b91068876cda92da7f2981b210f93260916e82976ec414ba107df97e7e40",
+        "seconds": 0.6728047499999974
+      },
+      {
+        "scenario_id": "fpa-fod-400307379-weston-pass",
+        "kind": "noop",
+        "actions": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "score": {
+          "noop_damage_cells": 607,
+          "raw_damage_cells": 607,
+          "line_cells_in_noop_footprint": 0,
+          "extra_line_charge_cells": 0,
+          "charged_damage_cells": 607,
+          "raw_saved_cells": 0,
+          "charged_saved_cells": 0
+        },
+        "blocked_actions": 0,
+        "whole_mask_and_score_check": "PASS",
+        "mask_file": "fpa-fod-400307379-weston-pass--noop.npz",
+        "mask_sha256": "66affcf711f3661a8fdbb0520881d9d66aace36235bffb5689894105f198ff3c",
+        "seconds": 3.8985780830000003
+      },
+      {
+        "scenario_id": "fpa-fod-400307379-weston-pass",
+        "kind": "random_legal",
+        "actions": [
+          7,
+          0,
+          0,
+          0
+        ],
+        "score": {
+          "noop_damage_cells": 607,
+          "raw_damage_cells": 607,
+          "line_cells_in_noop_footprint": 0,
+          "extra_line_charge_cells": 0,
+          "charged_damage_cells": 607,
+          "raw_saved_cells": 0,
+          "charged_saved_cells": 0
+        },
+        "blocked_actions": 0,
+        "whole_mask_and_score_check": "PASS",
+        "mask_file": "fpa-fod-400307379-weston-pass--random_legal.npz",
+        "mask_sha256": "d614aac9f7a446c70efa37dff31b7d029da2bc339a6c33718b13962c805bfff6",
+        "seconds": 4.202778875
+      },
+      {
+        "scenario_id": "fpa-fod-400307379-weston-pass",
+        "kind": "downwind",
+        "actions": [
+          8,
+          0,
+          0,
+          0
+        ],
+        "score": {
+          "noop_damage_cells": 607,
+          "raw_damage_cells": 600,
+          "line_cells_in_noop_footprint": 3,
+          "extra_line_charge_cells": 3,
+          "charged_damage_cells": 603,
+          "raw_saved_cells": 7,
+          "charged_saved_cells": 4
+        },
+        "blocked_actions": 0,
+        "whole_mask_and_score_check": "PASS",
+        "mask_file": "fpa-fod-400307379-weston-pass--downwind.npz",
+        "mask_sha256": "7719a87f4e0ea006334036428f23dcb5797c073a2ecb10e79312867760060342",
+        "seconds": 3.677164958999999
+      },
+      {
+        "scenario_id": "fpa-fod-400307379-weston-pass",
+        "kind": "fine_heuristic",
+        "actions": [
+          1,
+          0,
+          0,
+          0
+        ],
+        "score": {
+          "noop_damage_cells": 607,
+          "raw_damage_cells": 24,
+          "line_cells_in_noop_footprint": 4,
+          "extra_line_charge_cells": 4,
+          "charged_damage_cells": 28,
+          "raw_saved_cells": 583,
+          "charged_saved_cells": 579
+        },
+        "blocked_actions": 0,
+        "whole_mask_and_score_check": "PASS",
+        "mask_file": "fpa-fod-400307379-weston-pass--fine_heuristic.npz",
+        "mask_sha256": "7a8f00734c976b845316cacb5d006fc8ac8dce245da0947ad854ba163c2f2520",
+        "seconds": 0.7977619580000024
+      },
+      {
+        "scenario_id": "fpa-fod-400307379-weston-pass",
+        "kind": "matched_rbf",
+        "actions": [
+          3,
+          0,
+          0,
+          0
+        ],
+        "score": {
+          "noop_damage_cells": 607,
+          "raw_damage_cells": 607,
+          "line_cells_in_noop_footprint": 0,
+          "extra_line_charge_cells": 0,
+          "charged_damage_cells": 607,
+          "raw_saved_cells": 0,
+          "charged_saved_cells": 0
+        },
+        "blocked_actions": 0,
+        "whole_mask_and_score_check": "PASS",
+        "mask_file": "fpa-fod-400307379-weston-pass--matched_rbf.npz",
+        "mask_sha256": "dcfb7fe5c287c1bb0ef4c2f57924afc988fefc10543b4d8cdb779113956d139f",
+        "seconds": 4.453338124999995
+      }
+    ]
+  },
+  "ca_replay": {
+    "status": "PASS",
+    "scenario_id": "fpa-fod-400303584-goldstone",
+    "outcomes": 33,
+    "all_observations_masks_burned_and_line_arrays_identical": true,
+    "all_scores_identical": true,
+    "seconds": 13.058829250003328,
+    "scope": "First preregistered CA case technical replay; not an extra performance sample"
+  },
+  "same_action_sequences": {
+    "label": "Secondary descriptive sequence agreement, not agreement of later-front geographical positions",
+    "case_count": 16,
+    "equal_action_sequences_sf_vs_ca_replicates_0_1_2": {
+      "noop": [
+        16,
+        16,
+        16
+      ],
+      "random_legal": [
+        16,
+        16,
+        16
+      ],
+      "downwind": [
+        16,
+        16,
+        16
+      ],
+      "advancing_front64": [
+        16,
+        16,
+        16
+      ],
+      "matched_rbf": [
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  "same_fixed_rule_native_line_masks": {
+    "status": "PASS",
+    "scope": "Primary CA seed0 exact native footprint comparison; all active heuristics act at hour0 with seed-independent initial geometry",
+    "results": {
+      "noop": {
+        "same_native_line_mask": 16,
+        "lines_placed_at_hour0": 0,
+        "cases": 16
+      },
+      "random_legal": {
+        "same_native_line_mask": 16,
+        "lines_placed_at_hour0": 16,
+        "cases": 16
+      },
+      "downwind": {
+        "same_native_line_mask": 16,
+        "lines_placed_at_hour0": 16,
+        "cases": 16
+      },
+      "advancing_front64": {
+        "same_native_line_mask": 16,
+        "lines_placed_at_hour0": 16,
+        "cases": 16
+      }
+    }
+  },
+  "restore": {
+    "status": "PASS",
+    "scenario_id": "fpa-fod-400303584-goldstone",
+    "restored_case_outcomes": 33,
+    "all_observation_burn_and_line_arrays_identical": true,
+    "all_source_plan_input_and_original_sf_cache_guards_pass": true,
+    "seconds": 13.30150837500696,
+    "scope": "Fresh first-case CA execution from unpacked source and bundled selected inputs, all guarded SF cache records; dependencies reused, not a fresh environment install or full second analysis"
+  },
+  "public_artifact_sha256": {
+    "configs/frozen/ca-simfire-paired-v1.json": "e8c3140a0d83ac9e73dfc2bf984e5d239e00457680956e77c2d4177c376615f2",
+    "reports/synthetic/ca-simfire-paired-v1.json": "845f8e14a4aa95ea04a10f7d6dd8009a299c53c4b76dba910b3d799e3056a676",
+    "reports/synthetic/ca-simfire-paired-v1.png": "16fa0030518fe2a7d21b640082cd44f37b62e2e0dd3d3aacc67c143648cce72c",
+    "reports/synthetic/ca-simfire-paired-restore-v1.json": "d0f52b9810661d3134c3b2ca8a1aaa891626408677344ef2da3c936c91a41f51",
+    "reports/synthetic/ca-simfire-paired-artifacts-v1.json": "11bd73a795871cfb476617173737bfd22580b5eef7e9bd125cb76fc34319a636",
+    "reports/synthetic/ca-simfire-paired-replicates-v1.json": "ef818a2d467f5103a552372f86022cb055f82c3ef68053c8b4244b19080fec5e",
+    "scripts/summarize_paired_replicates.py": "d5e22bbb3eb53c5da2c4fe94430991a1315ec9812ebe1abab60b67d4fb5a3796",
+    "scripts/plot_paired_simulators.py": "a483d9b95cf7e939d24aeab1c4b47ded81e96a3e8125e7649f1072ca32e7d7eb"
+  },
+  "local_log_sha256": {
+    ".local/analysis.log": "87edf3cc876b715b56a3ba933812ccf27b4fbdd9f7b75265a261394a102df556",
+    ".local/ca-replay-check.log": "53e24dff6e26a6d032eda215e47f78a9c52430ee0c775b97f475e394cdb1b205",
+    ".local/cli-smoke.log": "c0a576916023b057f658a355ce9969f9d642773310dfe6a0c92b472c32c76459",
+    ".local/collection-16.log": "20d9b2408e077e7856245ed073330ee0ab08c68281b6ffd3de111703a752fdfe",
+    ".local/core-suite.log": "4692cb56c0c0452fcd1bb4f835d879e152b2b2f975f3f3353bd2e2838dd304b6",
+    ".local/diagonal-red.log": "39a9ab86c28dec53d9e118686a750854004e5ac1def7eb7a6be70d8306f06a7c",
+    ".local/modern-suite.log": "df5f12f598dd847152f207fff81a99aeab11173c7dcf3d4485ebcf33ff19945f",
+    ".local/native-sf-check.log": "5517f69ba453518cd8ac97e98a4865ae7ad68b7e281cfbde83d884cede4c409d",
+    ".local/native-suite.log": "c5cd3d6f1467e091461ae2d29c3739323e8d6401c7a9ec2411a4300465fea8da",
+    ".local/paired-first-red.log": "5553b5281f8fe4ad326a255555e46d98c4c58657632ab25d3e573186d4f35a20",
+    ".local/paired-tests.log": "10326f0ad68aee39f4b10be27ec99ce5d680a1c43220de4c32c64afa4fb11627",
+    ".local/pilot-2-final.log": "98d9c7bc08f97d9699df4d1dbf56a4a09f7c28ed3477561655ff01bb52f86f11",
+    ".local/pilot-2.log": "bdf9bd2c316d736d9adb40679744117ed2d0118ec7d772c9b5d74462728290ca",
+    ".local/replicate-summary.log": "73b8090243b871d235a6fe0154e9bc4d742ca282b0b9685b8318c2fd51bbd81a",
+    ".local/knowledge-final-tests.log": "4cf9e436834df2f3ead400e0e11d704bfefa4330ea99bdb329daf9b70ab45c40",
+    ".local/knowledge-final-strict.log": "53d3deda911fa83afe150838f506091ae626520105e26d67ea0ac0bca84c32cb"
+  },
+  "limits": [
+    "16 input-compatible TRAIN fires of61 eligible of98",
+    "Primary CA spread seed0, all3-replicate mean secondary",
+    "14 joint-positive denominators, all16 in ha and pooled",
+    "One fixed random-policy seed",
+    "Same new nested RBF procedure, not old PPO models",
+    "No real VALIDATION/TEST accessed",
+    "No physical validation or automatic migration conclusion"
+  ]
+}

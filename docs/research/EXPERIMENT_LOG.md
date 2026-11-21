@@ -695,3 +695,30 @@ bez novog treninga/testa. Modeli/demonstracije lokalni, no old checkpoint/real h
 Intervali su case-cluster poslije model-seed prosječenja; oba primarna kontrasta imaju
 negativan prosjek i interval preko0. PPO−BC−0,105p.p.[−2,08;+1,21]. Nema RL accept ili
 fizičke validacije. Sva tri seeda i sigurnosni ishodi su prijavljeni; nije biran najbolji.
+
+
+## EXP-027 — TASK-040 zajednički SimFire/CA pilot, 2026-11-21
+
+Plan56c460db/ae0d13af prije CA ishoda; numerički kodc69cc5a2/a831d654.16hash-izabranih
+od61kompatibilnog TRAIN početka; ista puna mapa/48h/početne maske/weather/v2/linija i
+charged unweighted obračun. CA bridge harmonizuje1–13goriva; nije native unit MDP.
+Primarni CA0 daje528ishoda,528SF cache ishoda ponovo provjereno; dodatni spread1/2
+daje160ishoda sa zaključanim metodama/agentom. Pilot14,72s, puna kolekcija126,02s,
+analiza/fitting/robustness40,59s, nice19/max3radnika uz koordinatora. Test prvo zaustavlja
+pogrešni dijagonalni guard; prihvaćena postojeća SF1272,79m linija, bez nove geometrije.
+
+14joint pozitivnih nazivnika: SF/CA0 RBF2,44/1,42%; sekundarni CA3mean5,85%,
+CA−SF+3,42p.p.95%[−0,05;+7,05]. Front SF11,29/CA3mean5,30%, ali pooled svih16
+SF2,89/CA3mean3,67%. Sva tri CA agent seeda1,42/10,82/5,32, bez izbora najboljeg.
+No-op novih ha SF11.363,69/CA3mean2.098,78; mean cross-backend new-area IoU0,0691,
+bez rubnog dodira. Fiksne sekvence i primarne linijske maske identične16/16 za svako
+pravilo. Različiti simulatorni učinci; nije utvrđeno koji bolje prati opaženi požar.
+
+369pinovanih/0skip,354modernih/3skip,287core/41skip, CLI PASS. Native SF10/10 iCA33/33
+replay,1.056 mask-score audit i prenosivi restore33/33 PASS. Paket14.888.989B,562fajla
+plus manifest ostaje lokalni. [Izvještaj](CA_SIMFIRE_PAIRED.md),
+[primarni/svi redovi](../../reports/synthetic/ca-simfire-paired-v1.json),
+[sve3replike](../../reports/synthetic/ca-simfire-paired-replicates-v1.json).
+ADR-044 zatvara fazu A; TASK-041 observed-FEDS TRAIN growth audit je sljedeći prijedlog,
+native faza B otvorena. Bez starih PPO težina, novog PPO treninga, stvarnog holdouta ili
+fizičke validacije. Intervali opisni, reused TRAIN, nema multiplicity korekcije.

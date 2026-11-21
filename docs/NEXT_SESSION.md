@@ -4,6 +4,51 @@ title: Naredni korak — nakon CA pilota (2026-11-21)
 ---
 # Naredni korak
 
+## TASK-040 faza A završena — upareni simulatori (ADR-044, 2026-11-21)
+
+Na `codex/ca-simfire-paired`, iz `722d5f2d`, završen je [upareni pilot](research/CA_SIMFIRE_PAIRED.md).
+Plan `56c460db` i ulazna dopuna `ae0d13af` prethode CA ishodima: 98 TRAIN ulaza,
+61 kompatibilan početni front, 16 odabrano hash redoslijedom. Ista puna mapa 256×256,
+48h, početne maske, ispravljeni gridMET, lagged v2 opažanje, jedna identična linija i
+unweighted charged šteta. Fiksne heuristike imaju iste sekvence i cijele linijske
+maske 16/16. Ovo je zajednički kontrolni interfejs, a ne native CA unit/PPO poređenje.
+
+**Nalazi:** na 14 zajedničkih slučajeva s pozitivnim no-op rastom, SimFire / CA prosjek
+tri unaprijed zadata spread seeda: random 1,17 / 8,01%, downwind 4,32 / 2,90%, front
+11,29 / 5,30%, isti novi nested RBF postupak 2,44 / 5,85%. Primarni CA seed0 agent
+je 1,42%; dodatni seed1/2 su 10,82 / 5,32%, bez refita ili izbora najboljeg. Sekundarni
+CA−SF agent interval [−0,05; +7,05] p.p. uključuje nulu. Pooled front udio na svih16
+obrće smjer: SF 2,89%, CA 3,67%; ponderisanje i no-op razmjer su bitni.
+
+No-op novi rast na svih16: SF 11.363,69ha, CA 2.098,78ha (prosjek3), oko5,4puta manje.
+Mean IoU novih maski SF/CA0 je0,0691; nijedan no-op ne dotiče rub. To je neslaganje
+simulatora, nije dokaz koji je bliži stvarnom požaru. Rezultati su mješoviti i ne
+opravdavaju automatski prelazak na CA ili tvrdnju da je SimFire fizički bolji.
+
+369 pinovanih testova/0skip; moderni354/3skip, core287/41skip, CLI PASS. Deset native
+SF replayeva i33 CA ishoda identični; nezavisno rekalkulisano1.056 mask-scoreova.
+Lokalni paket14.888.989B,562 fajla plus manifest, svi hashovi provjereni; iz raspakovanog
+sourcea/podataka prvih33 CA ishoda ponovljeno identično uz postojeće biblioteke.
+Nema novog PPO treninga, stvarnog VALIDATION/TEST ili mergea. CA nije fizički validiran.
+
+**Sljedeći prijedlog TASK-041:** TRAIN no-op rast oba modela prema istim opaženim FEDS
+promjenama, prije daljnjeg treninga. TASK-040 faza B (native resursi/akcije/PPO) ostaje
+otvorena; TASK-039 imitation dijagnoza je odgođena. Nema aktivnog računanja.
+
+
+### Redoslijed predloženog nastavka
+
+1. Prije novog skora zapisati TASK-041 plan: isti16 TRAIN, isto48h poravnanje FEDS
+   opažanja, bez promjene modela, s odvojenim observed/no-growth i missing-data slučajevima.
+2. Uporediti rast i prostorni otisak prema opažanju: new-area IoU bez početne štete,
+   apsolutna/relativna površina i nerast; sačuvati oba simulatora i sve3 CA spread replike.
+3. Prvo provjeriti vremensko poravnanje, gorivost početnog fronta i opažajnu pokrivenost;
+   neslaganje nije automatski greška simulatora ili dokaz da je FEDS potpuna istina.
+4. Tek po tom nalazu predložiti kalibraciju na TRAIN-u ili TASK-040 fazu B. Bez otvaranja
+   VALIDATION/TEST, vraćanja poništenih ADR-022–028 nalaza ili automatskog dugog PPO treninga.
+
+Ovaj redoslijed je prijedlog; TASK-041 još nije pokrenut i parametri nisu podešavani.
+
 ## TASK-038 završen — CA v2 BC/PPO (ADR-042, 2026-11-21)
 
 Na `codex/ca-learning-pilot` iz3b7b56a2 završen je [kratki CA learning pilot](research/CA_LEARNING_PILOT.md).

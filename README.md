@@ -4,9 +4,14 @@ title: Wildfire RL adaptation — MPVI
 ---
 # Wildfire RL adaptation — MPVI
 
-Aktivni zadatak2026-11-21: [CA v2 BC/PPO pilot](docs/research/CA_LEARNING_PILOT.md),
-TASK-038/ADR-042 završen: novi encoder, tri BC/PPO seeda, bez prolaza prema heuristici. Proceduralni test i stvarni
-holdouti ostaju zatvoreni; nema fizički validiranog rezultata.
+Najnovije 2026-11-21: [upareni SimFire/CA pilot](docs/research/CA_SIMFIRE_PAIRED.md),
+TASK-040 faza A / ADR-044 završen. Istih16 stvarnih TRAIN početaka i iste linije daju
+mješovite procente uz oko5,4puta manji CA no-op rast. Novi mali RBF agenti ne rangiraju
+ranije native PPO modele; prelazak na CA nije potvrđen. Sljedeći prijedlog TASK-041:
+TRAIN rast prema opaženom FEDS-u. Stvarni holdouti ostaju zatvoreni.
+
+Prethodni [CA v2 BC/PPO pilot](docs/research/CA_LEARNING_PILOT.md), TASK-038/ADR-042,
+završio je tri model seeda bez prolaza prema heuristici. Nema fizički validiranog rezultata.
 
 Prethodni korak (2026-11-21): [kontrolisani CA pilot](docs/research/CA_CONTROLLED_PILOT.md),
 TASK-035/ADR-039, grana `codex/ca-controlled-pilot` iz završene SimFire repair grane.

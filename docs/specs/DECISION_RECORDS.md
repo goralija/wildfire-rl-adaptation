@@ -1948,3 +1948,65 @@ po osi i1272,792m dijagonalno (5dijagonalnih plus4corner ćelije). Pilot guard j
 zahtijevao<=1260za sve smjerove i zaustavio run. Novi prvo-padajući test prihvata tačan
 postojeći SimFire kapacitet; geometrija/ishodi nisu promijenjeni. Plan precizira obje
 dužine, a novi izlaz čuva novi source/plan hash. Ne radi se o izboru prema CA rezultatu.
+
+
+## ADR-044 — TASK-040 faza A: zajednički zahvati, različita dinamika; native izbor otvoren, 2026-11-21
+
+Po korisnikovom nalogu izveden je ADR-043 na `codex/ca-simfire-paired`, iz722d5f2d.
+Plan56c460db/ulazna dopuna ae0d13af prethode CA ishodima; kod c69cc5a2/a831d654.
+Ovaj zapis zatvara samo **fazu A, common-control pilot**; ne zamjenjuje native unit
+ugovor ADR-039–042 i ne proglašava TASK-040 native fazu B završenom.
+
+**Činjenice o ugovoru.** Od98TRAIN,61ima početni front isključivo na1–13;16najnižih
+hash ID-jeva izabrano je prije CA ishoda. Ista puna256×256 mapa180m,48h, četiri12h
+odluke, isti ispravljeni gridMET i WAF.10, identična početna categorical/local v2
+opažanja/maske. Isti B=1/front-edge kapacitet i charged unweighted obračun. Goriva
+van1–13 su nonfuel za CA fiziku; originalni kodovi ostaju u opažanju. Native CA urban
+težine/mobilne jedinice nisu dio tog mosta. Postojeći PPO checkpointovi nisu učitani.
+Fiksna pravila imaju16/16 iste sekvence u sve3CA replike; u primarnoj replici cijele
+linijske maske su16/16 iste za svako pravilo. Svi djeluju u prvom koraku.
+
+**Izvršenje.** Primarni CA spread0:16×33=528ishoda, upareno s528hash-provjerenih starih
+ispravljenih SF ishoda. U oba backend-a isti terrain536/RBF meni i nested foldovi,
+15fit požara za svaki izostavljeni slučaj. Dodatne CA spread1/2 replike primjenjuju
+iste politike i seed0-fitted agent bez refita:160ishoda. To nisu tri model treninga.
+Primarni seed0 se čuva; sredina sve3replike je sekundarni opis, ne novi kriterij.
+Pilot14,72s, puna kolekcija uz reuse126,02s, analiza/fitting/robustness40,59s;
+nice19, najviše3radnika uz koordinaciju i jednu nit. Raniji dijagonalni guard kvar
+je dokumentovan u ADR-043, testiran prije popravke, bez promjene geometrije ili fizike.
+
+**Procenti.** SF nema novi rast u Coldwater/Organ: zajednički pozitivni nazivnici su
+14/16; svi16 ostaju u hektarima i pooled zapisu. Primarni SF/CA0 case%:
+random1,17/9,49, downwind4,32/1,10, front11,29/3,35, matched RBF2,44/1,42.
+Sekundarni SF/CA prosjek3: random1,17/8,01, downwind4,32/2,90, front11,29/5,30,
+RBF2,44/5,85. CA agent po spread seedu1,42/10,82/5,32%. Case bootstrap nakon
+prosječenja spread replika: CA−SF agent+3,42p.p.95%[−0,05;+7,05], front−5,99p.p.
+[−22,29;+5,82]. Oba intervala prelaze0; nema multiplicity korekcije ili refita u
+bootstrapu. Random koristi jednu zaključanu policy RNG sekvencu, ne prosjek random seedova.
+
+Pooled front udio svih16 je SF2,89%/CA3,67%, dakle smjer se obrće u odnosu na case
+prosjek. Backend-specifični no-op rast daje različite težine požarima; oba unaprijed
+planirana sažetka ostaju vidljiva. Nema izbora povoljnijeg ponderisanja ili najboljeg seeda.
+
+**Razmjer i granice.** Mean novi no-op rast svih16: SF11.363,69ha/CA3mean2.098,78ha,
+oko5,4puta manje u CA. Cross-backend mean new-area IoU primary je0,0691, bez dodira
+ruba u oba. To nije poređenje s opaženim FEDS rastom niti tvrdnja da je SF istina.
+Input filter, mali reused TRAIN subset, simulatorski ishodi i spread varijabilnost
+ograničavaju zaključak. Viši agent procenat ili manji jaz prema heuristici ne dokazuju
+bolju fiziku, native PPO napredak ili stvarni učinak gašenja.
+
+**Provjere.**369pinovanih testova/0skip, moderni354/3skip, core287/41skip i CLI PASS.
+Deset novih native SF replayeva i33CA replay ishoda daju identične cijele maske/scoreove;
+nezavisno1.056 mask-scoreova, svi source/ulazni hashovi i sekundarni intervali PASS.
+Lokalni prenosivi paket14.888.989B,562fajla plus manifest, svi članovi ponovo hashovani.
+Iz raspakovanog sourcea/ulaza prvih33CA ishoda ponovljeno identično uz postojeće
+biblioteke; nije nov environment ili kompletna druga analiza. Paket nije uploadovan.
+
+**Odluka i prijedlog.** Nema automatske migracije na native CA i nema zaključka da je
+CA općenito lošiji ili SF fizički bolji. Faza A je završena s mješovitim nalazom.
+Naredni predloženi **TASK-041** je TRAIN audit oba no-op rasta prema istim opaženim
+FEDS promjenama, s planom prije skora, bez podešavanja modela. **TASK-040 faza B**
+za uparene native resurse/akcije/PPO ostaje otvorena; **TASK-039** je odgođen.
+Nema novog PPO treninga, stvarnog VALIDATION/TEST, plaćenog computea ili mergea.
+[Izvještaj](../research/CA_SIMFIRE_PAIRED.md) i [svi ishodi](../../reports/synthetic/ca-simfire-paired-v1.json)
+čuvaju tačne brojeve i protokol; publikacijske provjere su u verification zapisu.

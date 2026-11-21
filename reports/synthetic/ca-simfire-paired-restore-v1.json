@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "scenario_id": "fpa-fod-400303584-goldstone",
+  "restored_case_outcomes": 33,
+  "all_observation_burn_and_line_arrays_identical": true,
+  "all_source_plan_input_and_original_sf_cache_guards_pass": true,
+  "seconds": 13.30150837500696,
+  "scope": "Fresh first-case CA execution from unpacked source and bundled selected inputs, all guarded SF cache records; dependencies reused, not a fresh environment install or full second analysis"
+}

@@ -1,0 +1,208 @@
+{
+  "schema_version": "paired-replicate-description/1.0",
+  "description": "Secondary descriptive mean of all three predeclared CA spread seeds. Mean fractions within fire, then paired case bootstrap; not a new primary or best-seed selection.",
+  "source_analysis_sha256": "845f8e14a4aa95ea04a10f7d6dd8009a299c53c4b76dba910b3d799e3056a676",
+  "script_sha256": "d5e22bbb3eb53c5da2c4fe94430991a1315ec9812ebe1abab60b67d4fb5a3796",
+  "summary": {
+    "noop": {
+      "joint_cases": 14,
+      "joint_ids": [
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400312787-black-mountain",
+        "fpa-fod-400304718-west-valley",
+        "fpa-fod-400508306-lookout-point",
+        "fpa-fod-400310914-echo",
+        "fpa-fod-400306102-rattlesnake",
+        "fpa-fod-400541373-mp-97",
+        "fpa-fod-400308652-dog-creek",
+        "fpa-fod-400300963-coal-hollow",
+        "fpa-fod-400311253-martin",
+        "fpa-fod-400302943-cranston",
+        "fpa-fod-400307776-bull-draw"
+      ],
+      "sf_mean_fraction": 0.0,
+      "ca_mean_fraction": 0.0,
+      "ca_fraction_each_replicate": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ca_minus_sf": {
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "n_cases": 14
+      },
+      "sf_mean_noop_ha": 11363.692500000001,
+      "ca_mean_noop_ha": 2098.7775,
+      "sf_mean_saved_ha": 0.0,
+      "ca_mean_saved_ha": 0.0,
+      "sf_pooled_fraction_all": 0.0,
+      "ca_pooled_fraction_all": 0.0
+    },
+    "random_legal": {
+      "joint_cases": 14,
+      "joint_ids": [
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400312787-black-mountain",
+        "fpa-fod-400304718-west-valley",
+        "fpa-fod-400508306-lookout-point",
+        "fpa-fod-400310914-echo",
+        "fpa-fod-400306102-rattlesnake",
+        "fpa-fod-400541373-mp-97",
+        "fpa-fod-400308652-dog-creek",
+        "fpa-fod-400300963-coal-hollow",
+        "fpa-fod-400311253-martin",
+        "fpa-fod-400302943-cranston",
+        "fpa-fod-400307776-bull-draw"
+      ],
+      "sf_mean_fraction": 0.01170610381378921,
+      "ca_mean_fraction": 0.08013327993971185,
+      "ca_fraction_each_replicate": [
+        0.09487786158735652,
+        0.07707137856452793,
+        0.0684505996672511
+      ],
+      "ca_minus_sf": {
+        "mean": 0.06842717612592264,
+        "ci95": [
+          0.017924301917725486,
+          0.13330037670138253
+        ],
+        "n_cases": 14
+      },
+      "sf_mean_noop_ha": 11363.692500000001,
+      "ca_mean_noop_ha": 2098.7775,
+      "sf_mean_saved_ha": 151.065,
+      "ca_mean_saved_ha": 99.83250000000001,
+      "sf_pooled_fraction_all": 0.013293654329347614,
+      "ca_pooled_fraction_all": 0.047566976489885185
+    },
+    "downwind": {
+      "joint_cases": 14,
+      "joint_ids": [
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400312787-black-mountain",
+        "fpa-fod-400304718-west-valley",
+        "fpa-fod-400508306-lookout-point",
+        "fpa-fod-400310914-echo",
+        "fpa-fod-400306102-rattlesnake",
+        "fpa-fod-400541373-mp-97",
+        "fpa-fod-400308652-dog-creek",
+        "fpa-fod-400300963-coal-hollow",
+        "fpa-fod-400311253-martin",
+        "fpa-fod-400302943-cranston",
+        "fpa-fod-400307776-bull-draw"
+      ],
+      "sf_mean_fraction": 0.043172150701033994,
+      "ca_mean_fraction": 0.02900484646043201,
+      "ca_fraction_each_replicate": [
+        0.010964426883440768,
+        0.05351881087925629,
+        0.02253130161859897
+      ],
+      "ca_minus_sf": {
+        "mean": -0.014167304240601999,
+        "ci95": [
+          -0.08772030639169186,
+          0.041325103945442664
+        ],
+        "n_cases": 14
+      },
+      "sf_mean_noop_ha": 11363.692500000001,
+      "ca_mean_noop_ha": 2098.7775,
+      "sf_mean_saved_ha": 258.795,
+      "ca_mean_saved_ha": 45.63,
+      "sf_pooled_fraction_all": 0.022773847497193363,
+      "ca_pooled_fraction_all": 0.02174122792911588
+    },
+    "advancing_front64": {
+      "joint_cases": 14,
+      "joint_ids": [
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400312787-black-mountain",
+        "fpa-fod-400304718-west-valley",
+        "fpa-fod-400508306-lookout-point",
+        "fpa-fod-400310914-echo",
+        "fpa-fod-400306102-rattlesnake",
+        "fpa-fod-400541373-mp-97",
+        "fpa-fod-400308652-dog-creek",
+        "fpa-fod-400300963-coal-hollow",
+        "fpa-fod-400311253-martin",
+        "fpa-fod-400302943-cranston",
+        "fpa-fod-400307776-bull-draw"
+      ],
+      "sf_mean_fraction": 0.11286360756347799,
+      "ca_mean_fraction": 0.052962804703466405,
+      "ca_fraction_each_replicate": [
+        0.03349672414878326,
+        0.0720179356013559,
+        0.05337375436026009
+      ],
+      "ca_minus_sf": {
+        "mean": -0.05990080286001157,
+        "ci95": [
+          -0.22289265922912002,
+          0.05823820337156094
+        ],
+        "n_cases": 14
+      },
+      "sf_mean_noop_ha": 11363.692500000001,
+      "ca_mean_noop_ha": 2098.7775,
+      "sf_mean_saved_ha": 328.6575,
+      "ca_mean_saved_ha": 76.95,
+      "sf_pooled_fraction_all": 0.028921717126717393,
+      "ca_pooled_fraction_all": 0.036664200945550444
+    },
+    "matched_rbf": {
+      "joint_cases": 14,
+      "joint_ids": [
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400312787-black-mountain",
+        "fpa-fod-400304718-west-valley",
+        "fpa-fod-400508306-lookout-point",
+        "fpa-fod-400310914-echo",
+        "fpa-fod-400306102-rattlesnake",
+        "fpa-fod-400541373-mp-97",
+        "fpa-fod-400308652-dog-creek",
+        "fpa-fod-400300963-coal-hollow",
+        "fpa-fod-400311253-martin",
+        "fpa-fod-400302943-cranston",
+        "fpa-fod-400307776-bull-draw"
+      ],
+      "sf_mean_fraction": 0.02435315734409227,
+      "ca_mean_fraction": 0.05852665547138366,
+      "ca_fraction_each_replicate": [
+        0.014171783337277677,
+        0.10823435586905654,
+        0.05317382720781677
+      ],
+      "ca_minus_sf": {
+        "mean": 0.0341734981272914,
+        "ci95": [
+          -0.0005096291765857672,
+          0.07048562782265907
+        ],
+        "n_cases": 14
+      },
+      "sf_mean_noop_ha": 11363.692500000001,
+      "ca_mean_noop_ha": 2098.7775,
+      "sf_mean_saved_ha": 218.9025,
+      "ca_mean_saved_ha": 82.8225,
+      "sf_pooled_fraction_all": 0.019263324839175294,
+      "ca_pooled_fraction_all": 0.039462258386131925
+    }
+  }
+}
