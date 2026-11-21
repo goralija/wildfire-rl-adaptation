@@ -142,7 +142,8 @@
     ".local/native-final-suite.log": "80ee1cb032e75dc30771a92c14b0012f404e851d93b7ee8358eb59dec8ffbbf8",
     ".local/learning-v1-final/restore-replay.log": "4c3aacbc2c0e151fb1aed08120be33a333149d528a497bde7d73f3468d6adcd8",
     ".local/knowledge-final-tests.log": "998db3212124c5c29b6277a3328f0c9488dadeaf796a079c43fb9ba0fbc7c544",
-    ".local/knowledge-final-strict.log": "c138b45463f432bcbba93f6f08eb0e8f46aad51a6ca45c10eb03278d600e19b4"
+    ".local/knowledge-final-strict.log": "c138b45463f432bcbba93f6f08eb0e8f46aad51a6ca45c10eb03278d600e19b4",
+    ".local/learning-ci.json": "b2f8e02954f0571ec44f3d0d2e91c75ef9572089675afbfdf890b90bc50360f8"
   },
   "limits": [
     "No final/physical validation",
@@ -150,5 +151,19 @@
     "No procedural test or real holdout",
     "Inference checkpoints are not optimizer/rollout resume state"
   ],
-  "publication": "pending commit/push; no new PR or merge"
+  "publication": {
+    "branch": "codex/ca-learning-pilot",
+    "tested_commit": "1d4209be7361335353ff73a3957a064c9eb8709a",
+    "workflow_url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44840927699",
+    "conclusion": "success",
+    "jobs": {
+      "numeric": "success",
+      "core (3.11)": "success",
+      "core (3.13)": "success",
+      "knowledge": "success"
+    },
+    "new_pr": false,
+    "merged": false,
+    "note": "Subsequent publication-only commit does not change numerical sources or results."
+  }
 }

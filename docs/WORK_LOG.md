@@ -4,6 +4,10 @@ title: Work log
 ---
 # Work log
 
+2026-11-21 — TASK-038 grana pushana; CI na1d4209be prolazi core3.11/3.13, numeric
+i knowledge. Publication receipt i handoff su usklađeni; nema PR-a/mergea ili uploada
+modela/paketa. Main i prethodna CA grana su sačuvani.
+
 2026-11-21 — Prenosivi CA learning paket7.175.838B,256članova plus manifest, svi
 hashovi ponovo pročitani. Raspakovani source/šest numeric modela ponavljaju18/18putanja
 prvog dev slučaja identično za8,52s; postojeće biblioteke, ne fresh install. Paket nije

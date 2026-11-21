@@ -24,6 +24,14 @@ pa kratak unaprijed zadat nastavak ako je opravdan. Dugi trening, proceduralni t
 stvarni VALIDATION/TEST ostaju zatvoreni; nema aktivnog runa. CA nije fizički validiran.
 
 
+### Objava TASK-038
+
+Grana [codex/ca-learning-pilot](https://github.com/goralija/wildfire-rl-adaptation/tree/codex/ca-learning-pilot)
+je commitana i pushana. [CI na kodnom/rezultatskom commitu1d4209be](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44840927699)
+prolazi sva četiri posla. Verification čuva tačan testirani commit; kasnija dopuna
+objave ne mijenja numerički kod. Paket modela ostaje lokalni; nema novog PR-a ili mergea.
+
+
 ## CA ugovor i pilot završeni — TASK-035 / ADR-040 (2026-11-21)
 
 Korisnikov CA nastavak je izveden na `codex/ca-controlled-pilot`, iz `664d890d` završene

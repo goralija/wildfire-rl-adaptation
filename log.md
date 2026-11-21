@@ -1,5 +1,11 @@
 # Promjene baze znanja
 
+## 2026-11-21: CA learning grana objavljena, CI zelen
+
+`codex/ca-learning-pilot` je pushana. [CI na1d4209be](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44840927699)
+prolazi sva četiri posla; [izvještaj](docs/research/CA_LEARNING_PILOT.md) čuva sve modele,
+ograničenja i sljedeći TASK-039. Bez novog PR-a/mergea ili uploada težina.
+
 ## 2026-11-21: CA v2 BC/PPO završen
 
 2026-11-21 — TASK-038 završen na codex/ca-learning-pilot iz3b7b56a2. Plan6f2e4b61,

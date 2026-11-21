@@ -183,3 +183,7 @@ nice -n 19 "$P" scripts/run_ca_learning_pilot.py --stage evaluate --out .local/N
 Runner odbija promjenu source/plana/runtimea pri resumeu, postojeću završnu ocjenu
 ili parcijalni model bez završenog receipt-a. To su inference snapshoti, pa nema tvrdnje
 o nastavku tačnog optimizer/RNG/rollout stanja iz prekinutog PPO treninga.
+
+Objava: grana je pushana; [CI na1d4209be](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44840927699)
+prolazi core3.11/core3.13, numeric i knowledge. Kasniji publikacijski commit ne mijenja
+numerički kod ili rezultate. Težine/paket nisu uploadovani; novi PR i merge nisu urađeni.
