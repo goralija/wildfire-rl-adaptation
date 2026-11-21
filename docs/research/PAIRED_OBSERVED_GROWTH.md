@@ -32,6 +32,9 @@ ne-monotonost oboda i observed growth na nonfuel prijavljuju se zasebno. Sekunda
 fully-covered subset, vremenska putanja i kumulativni opažajni envelope. Persistence i
 postojeća downwind elipsa su reference. Nema naknadnog mijenjanja primarnog cilja.
 
+Plan commit46e5371f prethodi kodu/scoringu. Dvanaest novih pinovanih testova prolazi;
+prvi nedostajući modul/reader red logovi su sačuvani prije implementacije.
+
 Status: plan zamrznut prije koda/scoringa; nema rezultata ili tvrdnje fizičke validacije.
 Native PPO faza B i TASK-039 ostaju otvoreni/odgođeni. Testovi, ponovljivost i naučne
 granice bit će dopunjeni nakon izvršenja; TRAIN nalaz nije nezavisna finalna evaluacija.
