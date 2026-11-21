@@ -4,6 +4,10 @@ title: Work log
 ---
 # Work log
 
+2026-11-21 — TASK-040 grana pushana; CI na042a5c73 prolazi core3.11/3.13, numeric
+sa tačnom skip listom i knowledge. Publication receipt, status i handoff su usklađeni.
+Bez novog PR-a/mergea ili uploada paketa; numerički hashovi nisu promijenjeni.
+
 2026-11-21 — TASK-040 faza A završena u izdvojenoj codex/ca-simfire-paired grani,
 baza722d5f2d. Preregistrovani16TRAIN, identični ulazi/opservacije/linije/48h,528CA+
 528arhiviranih SF ishoda i160CArobustness ishoda. Procenti mješoviti: SF/CA3mean

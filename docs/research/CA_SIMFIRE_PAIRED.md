@@ -198,6 +198,15 @@ resurse/akcije ili zajednički PPO interfejs; sadašnja tabela malih RBF agenata
 se predstaviti kao rangiranje ranijih PPO politika. TASK-039 imitation dijagnoza je odgođena.
 Nema novog PPO treninga, VALIDATION/TEST pristupa, invalidiranih nalaza ili mergea.
 
+### Objava TASK-040 faze A
+
+Grana [codex/ca-simfire-paired](https://github.com/goralija/wildfire-rl-adaptation/tree/codex/ca-simfire-paired)
+je commitana i pushana. [CI kodnog/rezultatskog commita042a5c73](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44846740515)
+prolazi sva četiri posla (core3.11/3.13, numeric, knowledge). Verification čuva tačan
+commit; kasnija dopuna objave ne mijenja numerički kod ili ishode. Nema novog PR-a,
+mergea ili uploada velikog lokalnog paketa. Main i prethodna grana su sačuvani.
+
+
 Reprodukcija uz postojeći odgovarajući izolovani numerički runtime i iste ulazne hashove:
 
 ```sh

@@ -39,6 +39,15 @@ promjenama, prije daljnjeg treninga. TASK-040 faza B (native resursi/akcije/PPO)
 otvorena; TASK-039 imitation dijagnoza je odgođena. Nema aktivnog računanja.
 
 
+### Objava TASK-040 faze A
+
+Grana [codex/ca-simfire-paired](https://github.com/goralija/wildfire-rl-adaptation/tree/codex/ca-simfire-paired)
+je commitana i pushana. [CI kodnog/rezultatskog commita042a5c73](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44846740515)
+prolazi sva četiri posla (core3.11/3.13, numeric, knowledge). Verification čuva tačan
+commit; kasnija dopuna objave ne mijenja numerički kod ili ishode. Nema novog PR-a,
+mergea ili uploada velikog lokalnog paketa. Main i prethodna grana su sačuvani.
+
+
 ## TASK-038 završen — CA v2 BC/PPO (ADR-042, 2026-11-21)
 
 Na `codex/ca-learning-pilot` iz3b7b56a2 završen je [kratki CA learning pilot](research/CA_LEARNING_PILOT.md).

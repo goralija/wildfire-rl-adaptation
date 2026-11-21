@@ -431,7 +431,8 @@
     ".local/pilot-2.log": "bdf9bd2c316d736d9adb40679744117ed2d0118ec7d772c9b5d74462728290ca",
     ".local/replicate-summary.log": "73b8090243b871d235a6fe0154e9bc4d742ca282b0b9685b8318c2fd51bbd81a",
     ".local/knowledge-final-tests.log": "4cf9e436834df2f3ead400e0e11d704bfefa4330ea99bdb329daf9b70ab45c40",
-    ".local/knowledge-final-strict.log": "53d3deda911fa83afe150838f506091ae626520105e26d67ea0ac0bca84c32cb"
+    ".local/knowledge-final-strict.log": "53d3deda911fa83afe150838f506091ae626520105e26d67ea0ac0bca84c32cb",
+    ".local/paired-ci.json": "c60b0dff73604a765fc2784210630eaab7caeba2e5bd47b61127f5855697c5bf"
   },
   "limits": [
     "16 input-compatible TRAIN fires of61 eligible of98",
@@ -441,5 +442,20 @@
     "Same new nested RBF procedure, not old PPO models",
     "No real VALIDATION/TEST accessed",
     "No physical validation or automatic migration conclusion"
-  ]
+  ],
+  "publication": {
+    "branch": "codex/ca-simfire-paired",
+    "tested_commit": "042a5c732cb71ebba5198adb1a7098484d6b016f",
+    "workflow_url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44846740515",
+    "conclusion": "success",
+    "jobs": {
+      "knowledge": "success",
+      "core (3.13)": "success",
+      "numeric": "success",
+      "core (3.11)": "success"
+    },
+    "new_pr": false,
+    "merged": false,
+    "note": "Subsequent publication-only commit changes no numerical source, plan or result. Local archive not uploaded."
+  }
 }

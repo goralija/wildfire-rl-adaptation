@@ -1,5 +1,11 @@
 # Promjene baze znanja
 
+## 2026-11-21: uparena studija objavljena, CI zelen
+
+Grana `codex/ca-simfire-paired` je pushana. [CI na042a5c73](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44846740515)
+prolazi sva četiri posla. [Izvještaj](docs/research/CA_SIMFIRE_PAIRED.md) i handoff
+čuvaju završenu fazu A, mješovit nalaz i predloženi TASK-041. Bez novog PR-a/mergea.
+
 ## 2026-11-21: isti početci i linije, mješovit SimFire/CA nalaz
 
 [TASK-040 faza A](docs/research/CA_SIMFIRE_PAIRED.md) / ADR-044 je završena.16stvarnih
