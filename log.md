@@ -1,5 +1,11 @@
 # Promjene baze znanja
 
+## 2026-11-21: odobren TRAIN audit opaženog rasta
+
+[TASK-041/ADR-045](docs/research/PAIRED_OBSERVED_GROWTH.md) je započet u izdvojenoj
+grani iz640a910e. Plan prethodi scoringu; ista16slučaja i zamrznuti SF/CA parametri,
+provjera vremena i coverage, bez novog treninga ili holdouta.
+
 ## 2026-11-21: uparena studija objavljena, CI zelen
 
 Grana `codex/ca-simfire-paired` je pushana. [CI na042a5c73](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44846740515)

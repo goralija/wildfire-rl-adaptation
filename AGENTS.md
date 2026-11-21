@@ -10,6 +10,13 @@ Repo je OKF 0.2 knowledge bundle. Na početku sesije pročitaj [index.md](index.
 Zatim koristi [mapu zadataka/koda](knowledge/code-map.md) za relevantne izvore i testove.
 Korisnikove direktne upute imaju prednost; kasniji ADR može zamijeniti raniji.
 
+**Aktivni nalog je TASK-041 / ADR-045 (2026-11-21)** na `codex/ca-feds-growth-audit`
+iz640a910e. [Plan/audit](docs/research/PAIRED_OBSERVED_GROWTH.md): isti16TRAIN početaka,
+zamrznuti SF i3CA no-op replike prema exact-time opaženom FEDS rastu. Prije scoringa
+provjeriti local-solar vrijeme/pokrivenost, sačuvati prediction hashove i testirati metrike.
+Nema kalibracije/treninga/holdouta ili native PPO ranga. Najviše3radnika uz koordinaciju,
+nice19/jedna nit. Raniji statusi ispod su historija; najnoviji ADR ima prednost.
+
 **Najnovije je ADR-044 (2026-11-21): TASK-040 faza A završena** na
 `codex/ca-simfire-paired`, iz `722d5f2d`. [Izvještaj](docs/research/CA_SIMFIRE_PAIRED.md)
 čuva16 istih stvarnih TRAIN početaka, identična opažanja/linije,48h i isti obračun.

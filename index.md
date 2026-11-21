@@ -5,6 +5,8 @@ okf_version: "0.2"
 
 ## Počni ovdje
 
+- [Aktivno: rast prema opaženom FEDS-u](docs/research/PAIRED_OBSERVED_GROWTH.md) - TASK-041/ADR-045, zamrznuti TRAIN plan bez podešavanja simulatora.
+
 - [Najnovije: upareno SimFire/CA poređenje](docs/research/CA_SIMFIRE_PAIRED.md) - TASK-040 faza A/ADR-044 završena, mješoviti procentni rezultati; TASK-041 growth audit je sljedeći prijedlog.
 
 - [Završeno: CA v2 BC/PPO](docs/research/CA_LEARNING_PILOT.md) — TASK-038/ADR-042 završen, šest modela bez prolaza; sljedeći prijedlog TASK-039.

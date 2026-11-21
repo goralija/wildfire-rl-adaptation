@@ -2010,3 +2010,38 @@ za uparene native resurse/akcije/PPO ostaje otvorena; **TASK-039** je odgođen.
 Nema novog PPO treninga, stvarnog VALIDATION/TEST, plaćenog computea ili mergea.
 [Izvještaj](../research/CA_SIMFIRE_PAIRED.md) i [svi ishodi](../../reports/synthetic/ca-simfire-paired-v1.json)
 čuvaju tačne brojeve i protokol; publikacijske provjere su u verification zapisu.
+
+
+## ADR-045 — TASK-041: zamrznuti no-op rast prema opaženom FEDS-u, 2026-11-21
+
+Korisnik odobrava sljedeći TASK-041 iz ADR-044. Izdvojena grana/worktree
+`codex/ca-feds-growth-audit`, baza640a910e. [Plan](../../configs/frozen/paired-observed-growth-v1.json)
+prethodi novom scoringu;16slučajeva i sve3CA spread replike iz TASK-040 ostaju iste.
+Nema kalibracije, novih politika, native PPO poređenja ili fizičke validacije.
+
+Pretpostavka: poređenje s opaženim rastom može razjasniti neslaganje dinamika, ali FEDS
+uz nepoznato gašenje/opažajnu grešku nije no-suppression ground truth. Provjerljiv cilj:
+isti početak/256×256×180m/48h, četiri12h segmenta, sve vrijeme ispravljeno mapirano iz
+local-solar AM/PM oznake koristeći postojeći overpass helper i weather longitude.
+Initial FEDS raster mora biti jednak scar-u; početno izuzeće iz rasta je scar|front.
+
+SF i CA0 finalne cijele maske ponavljaju arhive; CA1/2 brojevi ponavljaju TASK-040.
+Samo no-op, puni horizont i nakon gašenja, bez taila. Tri radnika uz koordinaciju,
+nice19/jedna nit, najavljeno3–6min plus testovi. Prediction hash/source/runtime se čuva
+prije učitavanja kasnijih FEDS geometrija. Samo postojeće TRAIN2018/2019 godišnje arhive,
+jedan potpun prolaz svake godine zbog svih dijelova perimeter-a, bez2023/2024 ili mreže.
+
+Primarno48h exact-time raw FEDS: mean growth IoU na zajedničkim potpunim slučajevima
+s observed_new>0, te mean apsolutna greška novih ha na svim potpunim slučajevima.
+Primarni CA spread0; sve3replike pojedinačno i sekundarni scalar-metric prosjek unutar
+požara, bez thresholda prosječne maske ili izbora seeda. Paired case bootstrap10k/seed0,
+opisno i bez multiplicity/refit korekcije. Persistence i ista fixed downwind elipsa su
+reference, ne novi modeli. Svi16zapisi ostaju vidljivi; nedostajuće geometrije su missing,
+ne0. Nulti nazivnik ostaje undefined. Puna vektorska površina izvan mape, observed
+nonfuel rast, rubovi i nestale stare ćelije prijavljuju se; fully-covered subset i
+kumulativni opažajni envelope su unaprijed dodatne osjetljivosti, ne zamjena primarnog.
+
+Tehnički source/input/replay mismatch zaustavlja scoring. Test metrika, split/time i
+missing/coverage pravila prethodi implementaciji. Ovaj audit nije novo proglašenje
+growth gatea ili dozvola za promjenu simulatornih parametara nakon nalaza. Native faza B
+TASK-040 ostaje otvorena, TASK-039 odgođen; TEST/VALIDATION ostaju zatvoreni.

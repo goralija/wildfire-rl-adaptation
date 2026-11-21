@@ -4,6 +4,12 @@ title: Work log
 ---
 # Work log
 
+2026-11-21 — Korisnik odobrava TASK-041. Nova codex/ca-feds-growth-audit grana/worktree
+iz640a910e, main i prethodni rad sačuvani. ADR-045/plan prije koda/scoringa: isti16TRAIN,
+iste no-op dinamike i3CA spread replike, exact-time FEDS, vrijeme/coverage/zero pravila
+unaprijed. Povezani postojeći TRAIN podaci bez downloada ili holdouta. Parametri se ne
+podešavaju; tehnički replay mora proći prije mjerenja. Strict89Markdown PASS na planu.
+
 2026-11-21 — TASK-040 grana pushana; CI na042a5c73 prolazi core3.11/3.13, numeric
 sa tačnom skip listom i knowledge. Publication receipt, status i handoff su usklađeni.
 Bez novog PR-a/mergea ili uploada paketa; numerički hashovi nisu promijenjeni.

@@ -13,6 +13,14 @@ sources:
 ---
 # Projektni kontekst
 
+## TASK-041 u toku — opaženi rast (ADR-045, 2026-11-21)
+
+Korisnik je odobrio nastavak. [Zamrznuti audit](../docs/research/PAIRED_OBSERVED_GROWTH.md) na novoj grani
+`codex/ca-feds-growth-audit`, iz640a910e, poredi iste16TRAIN no-op početke s exact-time
+FEDS promjenama. Prvo plan/testovi i provjera vremena/pokrivenosti, zatim isti zamrznuti
+SF i3CA spread seeda. Bez podešavanja, novog treninga ili stvarnih VALIDATION/TEST.
+TASK-040 faza A ostaje završena, native faza B otvorena. Najviše3radnika, nice19.
+
 ## TASK-040 faza A završena — upareni simulatori (ADR-044, 2026-11-21)
 
 Na `codex/ca-simfire-paired`, iz `722d5f2d`, završen je [upareni pilot](../docs/research/CA_SIMFIRE_PAIRED.md).

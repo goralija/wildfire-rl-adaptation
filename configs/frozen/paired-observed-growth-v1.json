@@ -1,0 +1,98 @@
+{
+  "schema_version": "paired-observed-growth-audit/1.0",
+  "task": "TASK-041",
+  "decision": "ADR-045",
+  "date": "2026-11-21",
+  "base_commit": "640a910e236aed113b9fc372f7162592f10b82d5",
+  "purpose": "TRAIN-only diagnostic of frozen common-control no-op growth against exact-time FEDS observations; no tuning, native PPO ranking or physical validation",
+  "cases": [
+    "fpa-fod-400303584-goldstone",
+    "fpa-fod-400307379-weston-pass",
+    "fpa-fod-400505027-pine-lodge",
+    "fpa-fod-400312787-black-mountain",
+    "fpa-fod-400304718-west-valley",
+    "fpa-fod-400508306-lookout-point",
+    "fpa-fod-400310914-echo",
+    "fpa-fod-400306102-rattlesnake",
+    "fpa-fod-400503581-coldwater",
+    "fpa-fod-400310583-organ",
+    "fpa-fod-400541373-mp-97",
+    "fpa-fod-400308652-dog-creek",
+    "fpa-fod-400300963-coal-hollow",
+    "fpa-fod-400311253-martin",
+    "fpa-fod-400302943-cranston",
+    "fpa-fod-400307776-bull-draw"
+  ],
+  "case_selection": "Exactly the16 preregistered TASK-040 cases, no outcome-based substitutions",
+  "paired_plan_sha256": "e8c3140a0d83ac9e73dfc2bf984e5d239e00457680956e77c2d4177c376615f2",
+  "paired_report_sha256": "845f8e14a4aa95ea04a10f7d6dd8009a299c53c4b76dba910b3d799e3056a676",
+  "manifest_sha256": "013be9a1632abcbc29d86f4bc16af89d3c074503f5899d1e39903d76ec2c28d5",
+  "weather_sha256": "76332f3da26fe02812ca6439fee5dec9f131793227335e0380267d12c0ab937e",
+  "sf_table_sha256": "28627fa98b60f8dae4ac4f9246887ecd3488b541c2a9dbd5e82620811effbddc",
+  "archives": {
+    "2018": {
+      "file": "feds_2018_lf_perimeter.fgb",
+      "bytes": 384323744,
+      "sha256": "912c1dbc3f71a0e7e1347abedf565258b9dc0f6a0c345785c1d19dadc31c72c2"
+    },
+    "2019": {
+      "file": "feds_2019_lf_perimeter.fgb",
+      "bytes": 445386296,
+      "sha256": "db3db1bfe5d68d452d25736c12dc4d5033a7da817ff86677e6976ada2f1051da"
+    }
+  },
+  "simfire_params": {
+    "wind_adjustment_factor": 0.1,
+    "internal_update_minutes": 5,
+    "active_cell_lifetime_minutes": 90,
+    "ros_multiplier": 1.0,
+    "fireline_attenuation": "per_minute",
+    "spread_aggregation": "last_write"
+  },
+  "ca": "Unchanged TASK-040 full256 common-vegetation bridge, SpreadParams defaults, 2min, same seed_for(case,replicate) for0,1,2",
+  "horizons_hours": [
+    0,
+    12,
+    24,
+    36,
+    48
+  ],
+  "cell_resolution_m": 180,
+  "control": "No interventions, four decisions even after extinction, no tail",
+  "time_alignment": "Exactly5 manifest naive local-solar AM/PM labels12h apart; convert using existing feds_overpass_utc and weather_sample_location.longitude; match4 segment starts/ends within1ms; no naive-label-as-UTC",
+  "observation_loading": "After predictions frozen; checksum-verified local2018/2019 archives only; one full annual scan per year, collect only selected exact fireID/time geometries, never2023/2024",
+  "rasterization": "Existing receipt CRS/affine/full256; unary_union full exact-time parts, all_touched=True; require t0 mask identical to imported burn_scar; initial exclusion domain scar|front",
+  "coverage": "Retain all16 records and explicit missing/invalid geometries; do not impute or silently repair. Report full vector area outside grid, lost initial/intermediate observed cells, edge contact and observed growth on nonfuel. Primary complete-five-state cases; always also report fully grid-covered subset, no case replacement.",
+  "primary_endpoint": "48h raw exact-time FEDS growth; mean new-area IoU on common complete cases with observed_new_cells>0, and mean absolute new-area error ha on all common complete cases; CA spread0 primary",
+  "secondary": [
+    "All3 preregistered CA spread replicates, average scalar metrics within case before case aggregation, never threshold a mean mask or select best seed",
+    "12/24/36h trajectories, time-pooled growth IoU then equal case weighting",
+    "Cumulative envelope of all5 observed masks as explicit observation-nonmonotonicity sensitivity, not replacement of primary",
+    "Fully covered subset and existing ADR030 observed48h_area>=1.10*initial_area subgroup, descriptive",
+    "Signed/absolute new-area errors, area ratio only observed growth>0; no-growth false growth separately",
+    "Persistence and unchanged fixed downwind ellipse protocol as references, not calibration targets"
+  ],
+  "zero_rules": "IoU undefined only empty union; primary IoU uses same observed-positive case IDs for all methods; area ratio undefined if observed_new_cells=0; report counts and no-growth false positives without epsilon",
+  "uncertainty": {
+    "method": "paired case bootstrap,10000 draws seed0; equal case weights; CA replicas averaged inside case; endpoint IoU and absolute-area-error differences CA minus SF; descriptive, no refit, no multiplicity correction",
+    "draws": 10000,
+    "seed": 0
+  },
+  "verification": "Test metrics/time/split/missing coverage before implementation; replay final SF/CA0 masks must equal TASK040 archives; CA1/2 final counts must match TASK040, predictions cumulative and full horizon; no scoring until both backends finished",
+  "compute": {
+    "workers_max": 3,
+    "nice": 19,
+    "blas_threads": 1,
+    "estimate": "3\u20136min no-op replays plus tests; no training"
+  },
+  "stop_conditions": [
+    "Input/source/runtime/hash mismatch",
+    "Non-TRAIN selection before any file opens",
+    "Initial raster or archived final replay mismatch",
+    "Nonfinite/invalid simulator state"
+  ],
+  "no_validation_or_test": true,
+  "no_parameter_search": true,
+  "no_policy_training": true,
+  "automatic_migration_acceptance": false
+}
