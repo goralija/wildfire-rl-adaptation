@@ -31,5 +31,8 @@ površine; rast najmanje10%. To je nova eksplicitna grupa prema novim ćelijama,
 od starog total-area ratio gatea ako FEDS izgubi ranije ćelije. Slučaj se ne izbacuje
 po rezultatu, missing nije0, nulti nazivnik nijeepsilon, rubno cenzurisanje ostaje vidljivo.
 
+Plan5d72b974 prethodi implementaciji/scoringu;7novih testova prolazi, prvi red log
+je sačuvan prije modula. Nema duplih selected FEDS fire/time ključeva.
+
 Status: plan prije implementacije/scoringa. Native PPO faza B i TASK-039 nisu riješeni.
 Nema kalibracije, dugačkog treninga, stvarnog VALIDATION/TEST ili tvrdnje fizičke validacije.
