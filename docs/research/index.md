@@ -28,3 +28,5 @@
 - [Kontrolisani CA pilot v2](CA_CONTROLLED_PILOT.md) — TASK-035/ADR-040 završen:240 epizoda, ista opažanja, sigurnost i sljedeći korak.
 
 - [CA v2 BC/PPO pilot](CA_LEARNING_PILOT.md) — TASK-038/ADR-042 završen, svi modeli i sigurnosni ishodi.
+
+- [Upareno SimFire/CA poređenje](CA_SIMFIRE_PAIRED.md) - TASK-040/ADR-043, common-control plan prije ishoda.

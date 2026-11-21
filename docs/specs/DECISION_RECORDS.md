@@ -1892,3 +1892,48 @@ analiza vlastitih putanja, učiteljske pokrivenosti i geometrije/encoder-a prije
 kratkog protokola. To nisu dokazani uzroci. Proceduralni test, stvarni VALIDATION/TEST,
 dugi trening i merge nisu pokrenuti. CA nije fizički validiran. [Izvještaj](../research/CA_LEARNING_PILOT.md)
 i [svi rezultati](../../reports/synthetic/ca-learning-development-v1.json) su kanonski.
+
+
+## ADR-043 — TASK-040: upareno SimFire/CA poređenje prije daljnjeg treninga, 2026-11-21
+
+Korisnik traži iste situacije i procentualni učinak agenata i heuristika, jer manji jaz
+agent–heuristika ne opravdava slabiji simulator. TASK-040 dobija prioritet nad predloženom
+TRAIN dijagnozom TASK-039. Grana codex/ca-simfire-paired iz722d5f2d. Plan prethodi CA ishodima.
+
+**Provjerljiv cilj.** Uskladiti realne TRAIN ulaze, cijelu256x256 mapu180m,48h bez taila,
+četiri12h odluke i isti kapacitet jedne1260m linije. Standardni CA unit MDP i SimFire
+sector MDP nisu isti; zato je ovo eksplicitni common-control bridge, a ne retroaktivno
+poređenje starih PPO-a. Iste heuristike i isti novi mali nested RBF agent u oba backend-a,
+na istih16 požara/15fit slučajeva po foldu. Native PPO politike nisu rangirane.
+
+**Ulazni QC prije ishoda.**98TRAIN ulaza je pregledano bez simulacije:63imaju potpuno
+podržan početni front u CA;35ne. Iz63 uzeti16najnižih SHA256('TASK040:'+ID), svi ID-jevi
+u [zamrznutom planu](../../configs/frozen/ca-simfire-paired-v1.json). Razlog isključenja
+se čuva; nema izbora po rastu ili CA dobitku. Ovo je mali kompatibilni subset, ne svih98.
+
+**Ugovor.** Puna početna scar/front maska mora biti identična SimFire arhivi. CA bridge
+koristi samo vegetativne gorive kodove1–13, ostale tretira kao99; originalna karta ostaje
+u opažanju. To harmonizuje SimFire nonfuel semantiku i uklanja CA urban-weight50, nije
+neprimjetna promjena starog CA unit modela. Fizička dinamika CA (lifetime, diurnal,
+spotting,2min) ostaje vlastita; SimFire90min/5min/last_write nije promijenjen. Isti
+ispravljeni gridMET i WAF.10, isto lagged opažanje. Linija se gradi trenutno u oba;
+placeability/no-op/budžet ne gase aktivnu epizodu. To je dijagnostika jednakog kapaciteta
+linije, bez tvrdnje da su ekipe ili njihove sigurnosne metrike izjednačene.
+
+**Plan mjerenja.** CA seed0 puna B1 tabela33 ishoda za16požara, nakon pilot2; dodatni
+seed1/2 samo za zaključane metode, bez promjene modela. SimFire cijele maske/ishodi i
+v2 opažanja se hash-provjereno ponovo koriste. Isti4-kandidat RBF meni i nested foldovi,
+charged ha cilj u oba modela, oba trenirana na15 istih požara; procenat je mjera ocjene.
+
+**Mjere.** Primarni udio spašene nove površine prema vlastitom no-opu, isti unweighted
+charged obračun, na zajedničkim slučajevima s pozitivnim no-op rastom u oba modela.
+Nulti nazivnik nije0 ili epsilon: udio je undefined, broj takvih slučajeva i svi hektari
+ostaju u izvještaju. Dodatno pooled udio na svih16, raw/charged hektari, no-op rast,
+rubovi, oracle i uparene razlike po istom požaru. Bootstrap16-case cluster10k seed0,
+reused TRAIN, opisno. Ni veći procenat uz manji no-op rast nije sam dokaz bolje fizike.
+
+Najviše3radnika uz koordinaciju, nice19/jedna nit. Najavljeno10–20min, procjena se
+osvježava nakon pilota. Bez novih PPO treninga, VALIDATION/TEST, invalidiranih brojeva,
+plaćenog computea ili mergea. Tehnički kvar zaustavlja scoring; politika se ne podešava
+prema rezultatima. Rezultati odgovaraju common-control pitanju; za konačan izbor native
+unit CA još treba izjednačiti native resurse/akcije, ne prisvojiti ovaj bridge kao taj dokaz.
