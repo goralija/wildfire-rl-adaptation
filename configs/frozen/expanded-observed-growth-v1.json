@@ -1,0 +1,847 @@
+{
+  "schema_version": "expanded-observed-growth-audit/1.0",
+  "task": "TASK-042",
+  "decision": "ADR-047",
+  "date": "2026-11-21",
+  "base_commit": "2de0013682e7666f54f30ada5c32d40e1d37d0e3",
+  "purpose": "Expanded frozen61 input-compatible TRAIN no-op audit; no tuning, training, native PPO ranking or physical validation",
+  "cases": [
+    "fpa-fod-400300427-plateau",
+    "fpa-fod-400300631-ranch",
+    "fpa-fod-400300764-buzzard",
+    "fpa-fod-400300963-coal-hollow",
+    "fpa-fod-400301084-prospect",
+    "fpa-fod-400301104-stewart-creek",
+    "fpa-fod-400302402-silver-creek",
+    "fpa-fod-400302444-spring-creek",
+    "fpa-fod-400302533-tinder",
+    "fpa-fod-400302636-bears",
+    "fpa-fod-400302686-boot",
+    "fpa-fod-400302943-cranston",
+    "fpa-fod-400303584-goldstone",
+    "fpa-fod-400303711-gold-hill",
+    "fpa-fod-400303744-rattlesnake-creek",
+    "fpa-fod-400303807-ryan",
+    "fpa-fod-400303966-cabin-lake",
+    "fpa-fod-400304718-west-valley",
+    "fpa-fod-400305302-sugar-pine",
+    "fpa-fod-400306102-rattlesnake",
+    "fpa-fod-400307379-weston-pass",
+    "fpa-fod-400307462-indian-valley",
+    "fpa-fod-400307488-red-canyon",
+    "fpa-fod-400307776-bull-draw",
+    "fpa-fod-400308544-winter-camp",
+    "fpa-fod-400308652-dog-creek",
+    "fpa-fod-400308656-sharps",
+    "fpa-fod-400310578-ok-bar",
+    "fpa-fod-400310583-organ",
+    "fpa-fod-400310659-206",
+    "fpa-fod-400310914-echo",
+    "fpa-fod-400310945-goose-creek",
+    "fpa-fod-400310977-sheep-creek",
+    "fpa-fod-400311017-goshute-cave",
+    "fpa-fod-400311253-martin",
+    "fpa-fod-400312787-black-mountain",
+    "fpa-fod-400313239-cedar-mountain-one",
+    "fpa-fod-400313254-lakeside",
+    "fpa-fod-400313301-bear-trap",
+    "fpa-fod-400313842-north-eden",
+    "fpa-fod-400314399-lake-wallula",
+    "fpa-fod-400376589-ute-park",
+    "fpa-fod-400500346-south",
+    "fpa-fod-400500878-cellar",
+    "fpa-fod-400501480-decker",
+    "fpa-fod-400501641-mountain",
+    "fpa-fod-400503581-coldwater",
+    "fpa-fod-400504417-shady",
+    "fpa-fod-400505027-pine-lodge",
+    "fpa-fod-400505118-cove-creek",
+    "fpa-fod-400507579-red-bank",
+    "fpa-fod-400508306-lookout-point",
+    "fpa-fod-400508308-pot-hole",
+    "fpa-fod-400508892-north-hills",
+    "fpa-fod-400509143-ridgetop",
+    "fpa-fod-400510304-goose",
+    "fpa-fod-400510515-summit",
+    "fpa-fod-400512420-shelter-pass",
+    "fpa-fod-400513488-sage",
+    "fpa-fod-400541373-mp-97",
+    "fpa-fod-400732973-walker"
+  ],
+  "case_selection": "Every eligible==true case in frozen TASK040 input QC; sorted scenario_id, no outcome-based selection",
+  "paired_plan_sha256": "e8c3140a0d83ac9e73dfc2bf984e5d239e00457680956e77c2d4177c376615f2",
+  "paired_report_sha256": "845f8e14a4aa95ea04a10f7d6dd8009a299c53c4b76dba910b3d799e3056a676",
+  "manifest_sha256": "013be9a1632abcbc29d86f4bc16af89d3c074503f5899d1e39903d76ec2c28d5",
+  "weather_sha256": "76332f3da26fe02812ca6439fee5dec9f131793227335e0380267d12c0ab937e",
+  "sf_table_sha256": "28627fa98b60f8dae4ac4f9246887ecd3488b541c2a9dbd5e82620811effbddc",
+  "archives": {
+    "2018": {
+      "file": "feds_2018_lf_perimeter.fgb",
+      "bytes": 384323744,
+      "sha256": "912c1dbc3f71a0e7e1347abedf565258b9dc0f6a0c345785c1d19dadc31c72c2"
+    },
+    "2019": {
+      "file": "feds_2019_lf_perimeter.fgb",
+      "bytes": 445386296,
+      "sha256": "db3db1bfe5d68d452d25736c12dc4d5033a7da817ff86677e6976ada2f1051da"
+    }
+  },
+  "simfire_params": {
+    "wind_adjustment_factor": 0.1,
+    "internal_update_minutes": 5,
+    "active_cell_lifetime_minutes": 90,
+    "ros_multiplier": 1.0,
+    "fireline_attenuation": "per_minute",
+    "spread_aggregation": "last_write"
+  },
+  "ca": "Unchanged TASK-040 full256 common-vegetation bridge, SpreadParams defaults, 2min, same seed_for(case,replicate) for0,1,2",
+  "horizons_hours": [
+    0,
+    12,
+    24,
+    36,
+    48
+  ],
+  "cell_resolution_m": 180,
+  "control": "No interventions, four decisions even after extinction, no tail",
+  "time_alignment": "Exactly5 manifest naive local-solar AM/PM labels12h apart; convert using existing feds_overpass_utc and weather_sample_location.longitude; match4 segment starts/ends within1ms; no naive-label-as-UTC",
+  "observation_loading": "After predictions frozen; checksum-verified local2018/2019 archives only; one full annual scan per year, collect only selected exact fireID/time geometries, never2023/2024",
+  "rasterization": "Existing receipt CRS/affine/full256; unary_union full exact-time parts, all_touched=True; require t0 mask identical to imported burn_scar; initial exclusion domain scar|front",
+  "coverage": "Retain all61 records and explicit missing/invalid geometries; do not impute or silently repair. Report full vector area outside grid, lost initial/intermediate observed cells, edge contact and observed growth on nonfuel. Primary complete-five-state cases; always also report fully grid-covered subset, no case replacement.",
+  "primary_endpoint": "Same TASK041: raw48h mean new-area IoU on common complete observed-positive cases and mean absolute new-area errorha on all complete cases; CA spread0 primary; in-map score retains all61 with censoring flags",
+  "secondary": [
+    "All3 preregistered CA spread replicates, average scalar metrics within case before case aggregation, never threshold a mean mask or select best seed",
+    "12/24/36h trajectories, time-pooled growth IoU then equal case weighting",
+    "Cumulative envelope of all5 observed masks as explicit observation-nonmonotonicity sensitivity, not replacement of primary",
+    "Fully covered subset and existing ADR030 observed48h_area>=1.10*initial_area subgroup, descriptive",
+    "Signed/absolute new-area errors, area ratio only observed growth>0; no-growth false growth separately",
+    "Persistence and unchanged fixed downwind ellipse protocol as references, not calibration targets"
+  ],
+  "zero_rules": "IoU undefined only empty union; primary IoU uses same observed-positive case IDs for all methods; area ratio undefined if observed_new_cells=0; report counts and no-growth false positives without epsilon",
+  "uncertainty": {
+    "method": "paired case bootstrap,10000 draws seed0; equal case weights; CA replicas averaged inside case; endpoint IoU and absolute-area-error differences CA minus SF; descriptive, no refit, no multiplicity correction",
+    "draws": 10000,
+    "seed": 0
+  },
+  "verification": "All45 new SF endpoints must equal original guarded table; all61 complete full horizon/cumulative paths before future FEDS read; pilot first2 new IDs, repeat first new CA three seeds/all5 masks; reusing previous16 requires explicit provenance. Missing observations remain visible, no imputation.",
+  "compute": {
+    "workers_max": 3,
+    "nice": 19,
+    "blas_threads": 1,
+    "estimate": "5\u201315min predictions plus checks; reuse64 original paths, generate180 new no-op paths; no training"
+  },
+  "stop_conditions": [
+    "Input/source/runtime/hash mismatch",
+    "Non-TRAIN selection before any file opens",
+    "Initial raster or archived final replay mismatch",
+    "Nonfinite/invalid simulator state"
+  ],
+  "no_validation_or_test": true,
+  "no_parameter_search": true,
+  "no_policy_training": true,
+  "automatic_migration_acceptance": false,
+  "previous_cases": [
+    "fpa-fod-400303584-goldstone",
+    "fpa-fod-400307379-weston-pass",
+    "fpa-fod-400505027-pine-lodge",
+    "fpa-fod-400312787-black-mountain",
+    "fpa-fod-400304718-west-valley",
+    "fpa-fod-400508306-lookout-point",
+    "fpa-fod-400310914-echo",
+    "fpa-fod-400306102-rattlesnake",
+    "fpa-fod-400503581-coldwater",
+    "fpa-fod-400310583-organ",
+    "fpa-fod-400541373-mp-97",
+    "fpa-fod-400308652-dog-creek",
+    "fpa-fod-400300963-coal-hollow",
+    "fpa-fod-400311253-martin",
+    "fpa-fod-400302943-cranston",
+    "fpa-fod-400307776-bull-draw"
+  ],
+  "new_cases": [
+    "fpa-fod-400300427-plateau",
+    "fpa-fod-400300631-ranch",
+    "fpa-fod-400300764-buzzard",
+    "fpa-fod-400301084-prospect",
+    "fpa-fod-400301104-stewart-creek",
+    "fpa-fod-400302402-silver-creek",
+    "fpa-fod-400302444-spring-creek",
+    "fpa-fod-400302533-tinder",
+    "fpa-fod-400302636-bears",
+    "fpa-fod-400302686-boot",
+    "fpa-fod-400303711-gold-hill",
+    "fpa-fod-400303744-rattlesnake-creek",
+    "fpa-fod-400303807-ryan",
+    "fpa-fod-400303966-cabin-lake",
+    "fpa-fod-400305302-sugar-pine",
+    "fpa-fod-400307462-indian-valley",
+    "fpa-fod-400307488-red-canyon",
+    "fpa-fod-400308544-winter-camp",
+    "fpa-fod-400308656-sharps",
+    "fpa-fod-400310578-ok-bar",
+    "fpa-fod-400310659-206",
+    "fpa-fod-400310945-goose-creek",
+    "fpa-fod-400310977-sheep-creek",
+    "fpa-fod-400311017-goshute-cave",
+    "fpa-fod-400313239-cedar-mountain-one",
+    "fpa-fod-400313254-lakeside",
+    "fpa-fod-400313301-bear-trap",
+    "fpa-fod-400313842-north-eden",
+    "fpa-fod-400314399-lake-wallula",
+    "fpa-fod-400376589-ute-park",
+    "fpa-fod-400500346-south",
+    "fpa-fod-400500878-cellar",
+    "fpa-fod-400501480-decker",
+    "fpa-fod-400501641-mountain",
+    "fpa-fod-400504417-shady",
+    "fpa-fod-400505118-cove-creek",
+    "fpa-fod-400507579-red-bank",
+    "fpa-fod-400508308-pot-hole",
+    "fpa-fod-400508892-north-hills",
+    "fpa-fod-400509143-ridgetop",
+    "fpa-fod-400510304-goose",
+    "fpa-fod-400510515-summit",
+    "fpa-fod-400512420-shelter-pass",
+    "fpa-fod-400513488-sage",
+    "fpa-fod-400732973-walker"
+  ],
+  "pilot_new_cases": [
+    "fpa-fod-400300427-plateau",
+    "fpa-fod-400300631-ranch"
+  ],
+  "previous_plan_sha256": "617c76eae64e5d64033c2ae115a08b76fa93cac913758fb9b98447acedf2490e",
+  "previous_report_sha256": "7fefabd25c6f416b43112d10e652cebe966dd049a7df6c6da217ec2dee17b54c",
+  "previous_predictions": {
+    "fpa-fod-400303584-goldstone": {
+      "simfire": {
+        "record_sha256": "3ff8723fc395564d9a4e8346094d62edfdede2c068d73ac3a0ef669bbf0f3bac",
+        "npz_sha256": "07aa8aa8039bd06f52cd64f51e65023007b9574cbb59318fb07ca0aea031e4eb",
+        "runtime": {
+          "python": "3.9.25",
+          "packages": {
+            "numpy": "1.26.4",
+            "rasterio": "1.4.3",
+            "pyproj": "3.6.1",
+            "gymnasium": "1.1.1",
+            "scipy": "1.13.1",
+            "simfire": "2.0.1"
+          }
+        }
+      },
+      "ca": {
+        "record_sha256": "aa6559d4fcf7c9773fce255e77cb8f6e6778ebbb694184862a427218185b7f7a",
+        "npz_sha256": "208fb15df0a8598409cc59aaf1557d3d4ca6884ecaca02d34d685a0a99c3cc98",
+        "runtime": {
+          "python": "3.12.4",
+          "packages": {
+            "numpy": "2.5.4",
+            "rasterio": "1.4.4",
+            "pyproj": "3.8.0",
+            "gymnasium": "1.4.0",
+            "scipy": "1.18.1"
+          }
+        }
+      }
+    },
+    "fpa-fod-400307379-weston-pass": {
+      "simfire": {
+        "record_sha256": "1cc94310ab1b7c300d39849510c8f2a339a35d7a83c6ec456016e3930ae59fe5",
+        "npz_sha256": "90c253b5f64607b28ea418922c217acc1e5e8e669f0068f39c09679e29fca502",
+        "runtime": {
+          "python": "3.9.25",
+          "packages": {
+            "numpy": "1.26.4",
+            "rasterio": "1.4.3",
+            "pyproj": "3.6.1",
+            "gymnasium": "1.1.1",
+            "scipy": "1.13.1",
+            "simfire": "2.0.1"
+          }
+        }
+      },
+      "ca": {
+        "record_sha256": "d97276e5ed314606d6463a8631cf6a9db02e072778668a16bd2e5c1707afe3a6",
+        "npz_sha256": "d1064b1ff616bbc20dd2d5efcc4c2e057d85daad7165646f1bffa9a22a4756d2",
+        "runtime": {
+          "python": "3.12.4",
+          "packages": {
+            "numpy": "2.5.4",
+            "rasterio": "1.4.4",
+            "pyproj": "3.8.0",
+            "gymnasium": "1.4.0",
+            "scipy": "1.18.1"
+          }
+        }
+      }
+    },
+    "fpa-fod-400505027-pine-lodge": {
+      "simfire": {
+        "record_sha256": "12a5ca9aaa2a7d58fe79b3259e26273c3cc3629d615df5a67c66c7078b099684",
+        "npz_sha256": "2e0ac9eb6abae83ce926eff6e9dacf83fca88bd20fffdc2bcfd8f19ce593ae54",
+        "runtime": {
+          "python": "3.9.25",
+          "packages": {
+            "numpy": "1.26.4",
+            "rasterio": "1.4.3",
+            "pyproj": "3.6.1",
+            "gymnasium": "1.1.1",
+            "scipy": "1.13.1",
+            "simfire": "2.0.1"
+          }
+        }
+      },
+      "ca": {
+        "record_sha256": "3f1d000dab10a7e2cdcd1152fcd1222339e2b4a9664a0f06ccd856813e99b7d9",
+        "npz_sha256": "7835a43a79dccd240fe0c0df47a6e38d486ef02039bace44d4f4d63236f820d5",
+        "runtime": {
+          "python": "3.12.4",
+          "packages": {
+            "numpy": "2.5.4",
+            "rasterio": "1.4.4",
+            "pyproj": "3.8.0",
+            "gymnasium": "1.4.0",
+            "scipy": "1.18.1"
+          }
+        }
+      }
+    },
+    "fpa-fod-400312787-black-mountain": {
+      "simfire": {
+        "record_sha256": "89e6ba2298e50e951de1743401167e5f753ce3ed5474aa51b8fa288f556495a6",
+        "npz_sha256": "5b0b51865cb02817e7338db0b9496be22a08b0f69e312214242eb90c9c04cd0a",
+        "runtime": {
+          "python": "3.9.25",
+          "packages": {
+            "numpy": "1.26.4",
+            "rasterio": "1.4.3",
+            "pyproj": "3.6.1",
+            "gymnasium": "1.1.1",
+            "scipy": "1.13.1",
+            "simfire": "2.0.1"
+          }
+        }
+      },
+      "ca": {
+        "record_sha256": "d7818744d0f274ae16980976bd275f634fd7336f8981fa77b075aad644893ada",
+        "npz_sha256": "ff26f688d088e06fbc4fb102d5162d5e84570045413c82b04b37f6051e845f0d",
+        "runtime": {
+          "python": "3.12.4",
+          "packages": {
+            "numpy": "2.5.4",
+            "rasterio": "1.4.4",
+            "pyproj": "3.8.0",
+            "gymnasium": "1.4.0",
+            "scipy": "1.18.1"
+          }
+        }
+      }
+    },
+    "fpa-fod-400304718-west-valley": {
+      "simfire": {
+        "record_sha256": "7c079d77411705a216a78c400c8b8832814d8d1f67b22ce5004eada0252bb22d",
+        "npz_sha256": "a40b87d0921209e87024e46afbf75fe4b75aff85cc2782e9747d7671231440a9",
+        "runtime": {
+          "python": "3.9.25",
+          "packages": {
+            "numpy": "1.26.4",
+            "rasterio": "1.4.3",
+            "pyproj": "3.6.1",
+            "gymnasium": "1.1.1",
+            "scipy": "1.13.1",
+            "simfire": "2.0.1"
+          }
+        }
+      },
+      "ca": {
+        "record_sha256": "c404697f7cb730df450bf313ce29f2e10fb946c528196f67ed477cb7e3446042",
+        "npz_sha256": "79dbf766966cca69a235fba8374a6bcc016cd5731eea300355933c2c6d7f8adc",
+        "runtime": {
+          "python": "3.12.4",
+          "packages": {
+            "numpy": "2.5.4",
+            "rasterio": "1.4.4",
+            "pyproj": "3.8.0",
+            "gymnasium": "1.4.0",
+            "scipy": "1.18.1"
+          }
+        }
+      }
+    },
+    "fpa-fod-400508306-lookout-point": {
+      "simfire": {
+        "record_sha256": "a42fb54316edb37c940b6db6e18061a032f8b07dd5fe73b29acd673f81fa549b",
+        "npz_sha256": "4016a507517c2c65041c762bf04a65cedfe4346d235edf2370740e8918ea9348",
+        "runtime": {
+          "python": "3.9.25",
+          "packages": {
+            "numpy": "1.26.4",
+            "rasterio": "1.4.3",
+            "pyproj": "3.6.1",
+            "gymnasium": "1.1.1",
+            "scipy": "1.13.1",
+            "simfire": "2.0.1"
+          }
+        }
+      },
+      "ca": {
+        "record_sha256": "531752903c6fd58d57096ddbbbe8a4d06b4647646518b13aee597ea19ba4ab8c",
+        "npz_sha256": "d58ddbbabb4b9cb2056b7a17cf5631ceaa80169a2bfb5afca819895c0ba873f7",
+        "runtime": {
+          "python": "3.12.4",
+          "packages": {
+            "numpy": "2.5.4",
+            "rasterio": "1.4.4",
+            "pyproj": "3.8.0",
+            "gymnasium": "1.4.0",
+            "scipy": "1.18.1"
+          }
+        }
+      }
+    },
+    "fpa-fod-400310914-echo": {
+      "simfire": {
+        "record_sha256": "1b900a00acde578e405d3819f6a4159ecccc9b93ef1716e7a2166f7d317c726d",
+        "npz_sha256": "0db1fa489fb2c022e3d9d7cc6711760e15866c5c84513d0d8dbd37527c407135",
+        "runtime": {
+          "python": "3.9.25",
+          "packages": {
+            "numpy": "1.26.4",
+            "rasterio": "1.4.3",
+            "pyproj": "3.6.1",
+            "gymnasium": "1.1.1",
+            "scipy": "1.13.1",
+            "simfire": "2.0.1"
+          }
+        }
+      },
+      "ca": {
+        "record_sha256": "d21c0bbc64b2fec99b80d874b8491839a5bf5eedfd58b796605975c1f3d2d451",
+        "npz_sha256": "8fb7ccd9cd05aca6a331209debb5571a913ef0b2dfa32ee2e4c464521b0042e6",
+        "runtime": {
+          "python": "3.12.4",
+          "packages": {
+            "numpy": "2.5.4",
+            "rasterio": "1.4.4",
+            "pyproj": "3.8.0",
+            "gymnasium": "1.4.0",
+            "scipy": "1.18.1"
+          }
+        }
+      }
+    },
+    "fpa-fod-400306102-rattlesnake": {
+      "simfire": {
+        "record_sha256": "02987b5723e87fd87e2240e20e2353249b4bdee178b9ae3da0de047756f0bd78",
+        "npz_sha256": "a19959ec380b7c9f24c04be56c2c612e7a935c44714cfc11a8b897503967755c",
+        "runtime": {
+          "python": "3.9.25",
+          "packages": {
+            "numpy": "1.26.4",
+            "rasterio": "1.4.3",
+            "pyproj": "3.6.1",
+            "gymnasium": "1.1.1",
+            "scipy": "1.13.1",
+            "simfire": "2.0.1"
+          }
+        }
+      },
+      "ca": {
+        "record_sha256": "7004fbb14a4971286a65ecf83169c824e8859d69983e122667e942df80a6ab79",
+        "npz_sha256": "e18e3e8defc314ffa84c3cb0d87bbec5d4cd140830153058aea21bd5c50c81b3",
+        "runtime": {
+          "python": "3.12.4",
+          "packages": {
+            "numpy": "2.5.4",
+            "rasterio": "1.4.4",
+            "pyproj": "3.8.0",
+            "gymnasium": "1.4.0",
+            "scipy": "1.18.1"
+          }
+        }
+      }
+    },
+    "fpa-fod-400503581-coldwater": {
+      "simfire": {
+        "record_sha256": "a652bc967aff62128a6102604a5b10aa05c9d98b547b5e5c098aa598391a77ea",
+        "npz_sha256": "99d2f77caebbe9dea1faa57a4be4f5f23fa2e4015a3b1754325974fa204f995f",
+        "runtime": {
+          "python": "3.9.25",
+          "packages": {
+            "numpy": "1.26.4",
+            "rasterio": "1.4.3",
+            "pyproj": "3.6.1",
+            "gymnasium": "1.1.1",
+            "scipy": "1.13.1",
+            "simfire": "2.0.1"
+          }
+        }
+      },
+      "ca": {
+        "record_sha256": "1280cee84e48fa436554d61272302c8d68e9a1115d799b9b3cbd311c6d8fe561",
+        "npz_sha256": "9d4a9497c6f732414af980f85af1929e27552cae2c6d75c3793b2f68a46fb537",
+        "runtime": {
+          "python": "3.12.4",
+          "packages": {
+            "numpy": "2.5.4",
+            "rasterio": "1.4.4",
+            "pyproj": "3.8.0",
+            "gymnasium": "1.4.0",
+            "scipy": "1.18.1"
+          }
+        }
+      }
+    },
+    "fpa-fod-400310583-organ": {
+      "simfire": {
+        "record_sha256": "2d77aba69774d4b89b917f67b4c0b93d53ce3005d0579e20ea38cb0488c2b0ea",
+        "npz_sha256": "098f942d1998d8d11b34a4a52fc21f9f58df2639b5f77998ecccaf571cc8da54",
+        "runtime": {
+          "python": "3.9.25",
+          "packages": {
+            "numpy": "1.26.4",
+            "rasterio": "1.4.3",
+            "pyproj": "3.6.1",
+            "gymnasium": "1.1.1",
+            "scipy": "1.13.1",
+            "simfire": "2.0.1"
+          }
+        }
+      },
+      "ca": {
+        "record_sha256": "788b6de4b625cb01cdca4016c21dd687f7e29042065071b705ab4c8160ad1dee",
+        "npz_sha256": "7340cf3ef0cc9d6064ec6e1e5d08a6e179a43c815d318be64d869d077eb765a5",
+        "runtime": {
+          "python": "3.12.4",
+          "packages": {
+            "numpy": "2.5.4",
+            "rasterio": "1.4.4",
+            "pyproj": "3.8.0",
+            "gymnasium": "1.4.0",
+            "scipy": "1.18.1"
+          }
+        }
+      }
+    },
+    "fpa-fod-400541373-mp-97": {
+      "simfire": {
+        "record_sha256": "ca26f894938b0637ee7a4b6e4b3c0e0f6d9fa25d0c760e694fc4fca0126b2e4e",
+        "npz_sha256": "c28487ad09047734485ad53d932fcab851cc2ef18f7adb4186d8ee7f0892d3b0",
+        "runtime": {
+          "python": "3.9.25",
+          "packages": {
+            "numpy": "1.26.4",
+            "rasterio": "1.4.3",
+            "pyproj": "3.6.1",
+            "gymnasium": "1.1.1",
+            "scipy": "1.13.1",
+            "simfire": "2.0.1"
+          }
+        }
+      },
+      "ca": {
+        "record_sha256": "4a743d0d3ce9fc5224f416904a3df044b8f0604368effe5f19bdd67dab631628",
+        "npz_sha256": "d125d737370aa52c7b0882f8711102ffabee7715b244040bcf19f14a76282b8c",
+        "runtime": {
+          "python": "3.12.4",
+          "packages": {
+            "numpy": "2.5.4",
+            "rasterio": "1.4.4",
+            "pyproj": "3.8.0",
+            "gymnasium": "1.4.0",
+            "scipy": "1.18.1"
+          }
+        }
+      }
+    },
+    "fpa-fod-400308652-dog-creek": {
+      "simfire": {
+        "record_sha256": "493361db166b0004d12e053bab11aecd8da8e93085c1138d7abff2a10f7c4a61",
+        "npz_sha256": "434ce6a3d253626005897ac5405cf406d355aee33c8048bbc74e143b08015628",
+        "runtime": {
+          "python": "3.9.25",
+          "packages": {
+            "numpy": "1.26.4",
+            "rasterio": "1.4.3",
+            "pyproj": "3.6.1",
+            "gymnasium": "1.1.1",
+            "scipy": "1.13.1",
+            "simfire": "2.0.1"
+          }
+        }
+      },
+      "ca": {
+        "record_sha256": "3f8f9f18427d323fdae53b423c2b93a6301486055471d65b7c95ba3e7b8b4bd8",
+        "npz_sha256": "b3d1d9793e62b5aeee8863fcc35c0be82ded440d3f4139b59831531678a70536",
+        "runtime": {
+          "python": "3.12.4",
+          "packages": {
+            "numpy": "2.5.4",
+            "rasterio": "1.4.4",
+            "pyproj": "3.8.0",
+            "gymnasium": "1.4.0",
+            "scipy": "1.18.1"
+          }
+        }
+      }
+    },
+    "fpa-fod-400300963-coal-hollow": {
+      "simfire": {
+        "record_sha256": "4a2390c316807688744ef6a7d8247590389580b4f3449ed4dadb8b7d3e847cd3",
+        "npz_sha256": "882aafee72c15d5bc17ee97c6e9b562c2b3f2d5e6960f7006f4898f70a91bcd6",
+        "runtime": {
+          "python": "3.9.25",
+          "packages": {
+            "numpy": "1.26.4",
+            "rasterio": "1.4.3",
+            "pyproj": "3.6.1",
+            "gymnasium": "1.1.1",
+            "scipy": "1.13.1",
+            "simfire": "2.0.1"
+          }
+        }
+      },
+      "ca": {
+        "record_sha256": "7468b6deb225308ea06bea805ec6fb83a0b62fb136f5d7400417570f0e534a7f",
+        "npz_sha256": "82ebd6d74f60f43c235526066eb20931664271da1e7cc223e42edd9e241ed309",
+        "runtime": {
+          "python": "3.12.4",
+          "packages": {
+            "numpy": "2.5.4",
+            "rasterio": "1.4.4",
+            "pyproj": "3.8.0",
+            "gymnasium": "1.4.0",
+            "scipy": "1.18.1"
+          }
+        }
+      }
+    },
+    "fpa-fod-400311253-martin": {
+      "simfire": {
+        "record_sha256": "ac1c83dab866f1a4bb46eed7bbc058a342768d914a2eb575a05e2a49b13fe7c4",
+        "npz_sha256": "bc68e5b0bd0585c43f544ecbb37b387e4835f681eb6d66cb097fbd32b0375252",
+        "runtime": {
+          "python": "3.9.25",
+          "packages": {
+            "numpy": "1.26.4",
+            "rasterio": "1.4.3",
+            "pyproj": "3.6.1",
+            "gymnasium": "1.1.1",
+            "scipy": "1.13.1",
+            "simfire": "2.0.1"
+          }
+        }
+      },
+      "ca": {
+        "record_sha256": "69aab0ba61aa5306879a63e6eaade89fe7d7b6e68efced62d5d982285927853b",
+        "npz_sha256": "c1e5edc874cdfc38e5cd2f48cc90d41bbbc11a953a41ecf50203d74be3ec4753",
+        "runtime": {
+          "python": "3.12.4",
+          "packages": {
+            "numpy": "2.5.4",
+            "rasterio": "1.4.4",
+            "pyproj": "3.8.0",
+            "gymnasium": "1.4.0",
+            "scipy": "1.18.1"
+          }
+        }
+      }
+    },
+    "fpa-fod-400302943-cranston": {
+      "simfire": {
+        "record_sha256": "afeb20a47cff3257bda168a917dd3a5960671230de04d8695d82d86b46e5d7c1",
+        "npz_sha256": "9cb658dee692f39757408a80b6681fe2289e27c41d511553ebee82a1ed932d4c",
+        "runtime": {
+          "python": "3.9.25",
+          "packages": {
+            "numpy": "1.26.4",
+            "rasterio": "1.4.3",
+            "pyproj": "3.6.1",
+            "gymnasium": "1.1.1",
+            "scipy": "1.13.1",
+            "simfire": "2.0.1"
+          }
+        }
+      },
+      "ca": {
+        "record_sha256": "9dadc08f536bd36cc4042f3eb5f6161ac91f40762dfe939826b7d55ee5ca41e8",
+        "npz_sha256": "1ebeacb4af78e19d176ea0ad9eea4522c5a6bf2448671e9909de2bbf966cc29a",
+        "runtime": {
+          "python": "3.12.4",
+          "packages": {
+            "numpy": "2.5.4",
+            "rasterio": "1.4.4",
+            "pyproj": "3.8.0",
+            "gymnasium": "1.4.0",
+            "scipy": "1.18.1"
+          }
+        }
+      }
+    },
+    "fpa-fod-400307776-bull-draw": {
+      "simfire": {
+        "record_sha256": "6fc09f7c03eda39891dbb8ff52caa60a98be29ff27b2581ae508bc1e6d9b078c",
+        "npz_sha256": "fe3edff5a7c0e15bf684a34f381df921510c2a37ed10aa304e393d892694d0b4",
+        "runtime": {
+          "python": "3.9.25",
+          "packages": {
+            "numpy": "1.26.4",
+            "rasterio": "1.4.3",
+            "pyproj": "3.6.1",
+            "gymnasium": "1.1.1",
+            "scipy": "1.13.1",
+            "simfire": "2.0.1"
+          }
+        }
+      },
+      "ca": {
+        "record_sha256": "19582bdd901585ff53314042e2704b4aa7b90b5ae5e23f6c82b3b5d4c02df850",
+        "npz_sha256": "d3355b9f1a5406e7a4d2172e300bdc07a332a8ce7aeb7f45ddfeeeaf1799a8ce",
+        "runtime": {
+          "python": "3.12.4",
+          "packages": {
+            "numpy": "2.5.4",
+            "rasterio": "1.4.4",
+            "pyproj": "3.8.0",
+            "gymnasium": "1.4.0",
+            "scipy": "1.18.1"
+          }
+        }
+      }
+    }
+  },
+  "input_receipt_sha256": {
+    "fpa-fod-400300427-plateau": "d348cd7f9aee80ac87390e54b2c29cf187361cf08094e59c5b7a2218e0819f82",
+    "fpa-fod-400300631-ranch": "c35a29c9da8cb5e4c413387f1e30a312d6103c07a32e855d252449c6bf89348e",
+    "fpa-fod-400300764-buzzard": "806d6a88eb0bf890640ce3027e64e139be8c6fce03bbe175f722c3aeb739dc6f",
+    "fpa-fod-400300963-coal-hollow": "cc1ba0ef1a41a3eb79a529f0f13bcfc26e07d71a37e9f40abbddf2feb23aafcf",
+    "fpa-fod-400301084-prospect": "61deb4cf89c6a3167f0abae91acd556dfb79469c86094ffdf107636ad9fc3baa",
+    "fpa-fod-400301104-stewart-creek": "bb34511b85abd9aa6a20767d3ed4aa4e25735885ca82845a5f4f15a45fb7134d",
+    "fpa-fod-400302402-silver-creek": "e6b931db67cb025cbd3c5dfa2f78dcc2f402b0c4bea8048c0f589d7a523606c4",
+    "fpa-fod-400302444-spring-creek": "6ac4e9a54c6ea8459e4c031d0b4f2848edfe772ffd5d75f2f813c73b2615b249",
+    "fpa-fod-400302533-tinder": "fab12972f32a550e8e807512071842e0899ed00aed713094a58eb3f362c31d30",
+    "fpa-fod-400302636-bears": "60555e6045127a72722b3a92a04562405adf48852ce9e37286efc81ec9d93489",
+    "fpa-fod-400302686-boot": "9e6250a4f116b5a23ba53694c0c29282d03fb68537cc1374cea9d9ea0250d481",
+    "fpa-fod-400302943-cranston": "6b4cf299c74c99f9c0bcff3c4e4881241c75bd28210831ba017915cefee80794",
+    "fpa-fod-400303584-goldstone": "837edb11c688ba84090d900abea9669a129e361c25015cbf5c79e9046d900d4b",
+    "fpa-fod-400303711-gold-hill": "18120b0b96f1e4a2bd123c08ffd4cba16a0806d1ef581c75f005d9e10876c282",
+    "fpa-fod-400303744-rattlesnake-creek": "e11b3e9f6ffe4cb33462018f766ebfe1ddebb99ce32a4c8a7de6a087ed9a9a58",
+    "fpa-fod-400303807-ryan": "881f8281211031ff203ca75241c46ce159831307afb488ef971b3451dbfa8bc2",
+    "fpa-fod-400303966-cabin-lake": "83c238f918afc95f75d4d43c547d1b75e1620879dde0effa749921b5ab69b799",
+    "fpa-fod-400304718-west-valley": "d1251c4b9ca5a5b71f641a7b90d2bc5d991bfef6025e5980773788a8712ccb5c",
+    "fpa-fod-400305302-sugar-pine": "0464db43a6541bdd34c2c7efef6aeef7ba9039e3f8a75320427b6991f4aa31de",
+    "fpa-fod-400306102-rattlesnake": "ca128babaa8e83f6567f9d2a23879e3f86b60d067b716ec819ec969abdd73e81",
+    "fpa-fod-400307379-weston-pass": "ca99e45bfc9d7606c9cccfea8f34397a221f82e6706354af08d164314bff89a9",
+    "fpa-fod-400307462-indian-valley": "ef4a1c160b40777b32b3334d52c2f80ccb89e1f000706efc11c7fab02ec89958",
+    "fpa-fod-400307488-red-canyon": "d3b4f9f399eaa94cd0b8a9d6c7a52e48007de9b007de926fb267f94e41f7e346",
+    "fpa-fod-400307776-bull-draw": "36afb8d7d0af339bc85e0765b2830f80eb0ac3addf82bbbfeb5739ebf688e9b7",
+    "fpa-fod-400308544-winter-camp": "fcb441edf268e77534e37ed4e1d31d1a635a1482f8fae1e5fe7b5b5ce8934592",
+    "fpa-fod-400308652-dog-creek": "18205f243626c4104df099992bf000abe6bd761206dbcebdddb3362d32d2b6ec",
+    "fpa-fod-400308656-sharps": "0ac406221b7979c5837ef76188adc005ec0d6f9a8e0691fdc26cc8f29a494446",
+    "fpa-fod-400310578-ok-bar": "ac8ebc6e825b2cb8c38444a503922017839c613bb156f391c74e984064f9d6f6",
+    "fpa-fod-400310583-organ": "26cd62b95a1eeccdeecccb1a816033196280429e8f92b24a1f9f96f548686071",
+    "fpa-fod-400310659-206": "5a12fbf284394148fee6256d351452d3e57daee93f0a4ce2a47ce00683d56cc7",
+    "fpa-fod-400310914-echo": "b5a6930dc8782635e22a57d479bd61841d71d24f0fdb4664ff48db72609db197",
+    "fpa-fod-400310945-goose-creek": "35ae329dd2e663fcc74865ddfc80862a1aea684b4958ed4a733a66643e0a9c97",
+    "fpa-fod-400310977-sheep-creek": "5ebc1a05346748f8f55a4c051a0959df8bee4d9ab0994989f437939c4cc01d8c",
+    "fpa-fod-400311017-goshute-cave": "9ba209d0b2e483546c5f900c313cd3fe46342c66e9ada88dd4483d3199491a36",
+    "fpa-fod-400311253-martin": "dd832bc92601c59f61f8551161a08cb979bd470ee25a82f426936da5d1d72a89",
+    "fpa-fod-400312787-black-mountain": "f45636185064b7bbcd979b01a2e33acdd2147cda3c05891b9cfe7827a33917f4",
+    "fpa-fod-400313239-cedar-mountain-one": "4db2107c8323f56cf95e51ac7a7b95dd2618a4558ae60953a831954eff7538b6",
+    "fpa-fod-400313254-lakeside": "427370831200383354a8e25b2a466ab827c13f0750c753a1a419dcb246c03007",
+    "fpa-fod-400313301-bear-trap": "2c360f83460b9028720641a0ba0414f4e737e271165cdfa7eebab801cdfcf649",
+    "fpa-fod-400313842-north-eden": "0188c425ccae0c10dc1dde739eae71ec9f23ca909d68f7e48764d9ee17b4022a",
+    "fpa-fod-400314399-lake-wallula": "4e6a8d7d23b3930d6642dfa552d5cbd6154bac06fc3347a9ad5ddaf88a7a0b9b",
+    "fpa-fod-400376589-ute-park": "a820bdebedd94cfdf7d0f21754ef2f24c8c766c644d840af3f519c266ee81d14",
+    "fpa-fod-400500346-south": "ae4ca6aa610d1861242ac17b2a08acbc64c02e0033977b9e4aaa7f2affa8b816",
+    "fpa-fod-400500878-cellar": "5b76cb2cb88543082f49237a2ac5beb2c70c531a8943fff5199c7d7162f00929",
+    "fpa-fod-400501480-decker": "686b298cb0a7a6fd7b1dacd8577afb9e467a7d56f17f6aacc2c15707f6969cde",
+    "fpa-fod-400501641-mountain": "59e048602920c142667fcc30f00474c99e28541cbe298f5541e1c5bb1d5b0afe",
+    "fpa-fod-400503581-coldwater": "c26c5f1dfb84580ae1f9cb1ef86ba2b92bed2e866c68e98e7ad6e0acf631e2c7",
+    "fpa-fod-400504417-shady": "4b20271add60474a9c4a6e077eb583b277aed2473a98840b188c05d934d83ea4",
+    "fpa-fod-400505027-pine-lodge": "c6aa4bcc48857b61115fe82a9690037264cefac335dd6a6cce2750fa611dbb35",
+    "fpa-fod-400505118-cove-creek": "b16299da1806218f7ba790628a0ce9b3704c96a9a6eefb8084a49ef529b410f0",
+    "fpa-fod-400507579-red-bank": "7ad1d7389ed73eff1c62a2101e377bd4e96bedee830845ce49180f6c1bfc6b43",
+    "fpa-fod-400508306-lookout-point": "1f8a49a4ffbe754b42404a22a82f405ff0f4336494bf410e181af506c1cb3e25",
+    "fpa-fod-400508308-pot-hole": "2632422ef5341e21081d3f29fd7bb5247a1aba27980c26b0c88b5a5081ae80b9",
+    "fpa-fod-400508892-north-hills": "e329b76796a6d4be336d3fb6a5ede8e72783c97ff4cc894fe42bb8e5259af193",
+    "fpa-fod-400509143-ridgetop": "4c9cd1a4e74a50f474199a6c7b9e63bdc7e7e0540d37edaf1c0bbd32bb9bee58",
+    "fpa-fod-400510304-goose": "beb2eff4ee68c5379bfcc3d9a3331638a98166769e4015be1a3a88cdb9bebe27",
+    "fpa-fod-400510515-summit": "00ea03dbb82082d3c2e9fec8f89501679b509758ba5adff8211e5d489d6d5253",
+    "fpa-fod-400512420-shelter-pass": "baad893055e0c5317eae04bc5a09f70a52ab29ddfd35d1a681a1b9763cd373e5",
+    "fpa-fod-400513488-sage": "0708dd75825498303491b52c8f48dcbe79561311b7f5df114e538f1ab6e695dd",
+    "fpa-fod-400541373-mp-97": "01f38dffa5a9a3935b7f0134bc382abce06f7c56e428c88a2eef2ebd1d165705",
+    "fpa-fod-400732973-walker": "c7f735c28e0ecaad1315dd296af1ab128851c622edd17064e61d047a1fa961c4"
+  },
+  "sf_case_json_sha256": {
+    "fpa-fod-400300427-plateau": "201727af4ead79278ee79bf271031228d8217d8e3eae5510d322c2e55fdb1e27",
+    "fpa-fod-400300631-ranch": "fe810ca0c2d2295fe0620645399c7dcd7fb462a06f4324c137590e35a2f32a63",
+    "fpa-fod-400300764-buzzard": "8437f2f3882b9754474a89cb1b167f7eb4d26279bf974411ed3378d414f3a43c",
+    "fpa-fod-400300963-coal-hollow": "886422bcb99d07cb41364367638229b688e77d7ce247154af8298adfdaedfce0",
+    "fpa-fod-400301084-prospect": "663da88f72ebadc7513edfd9099a25cf11b7ca0001f20bb426e4907567a5ef73",
+    "fpa-fod-400301104-stewart-creek": "e01766a73f7d1b56af1269f5b3a15ac864d509b50705471dad75b732ea55c69a",
+    "fpa-fod-400302402-silver-creek": "6f6e5fa585d06d295f2a84f69e6f001bea24fa98bfb91399c8d09d4ec5162bcb",
+    "fpa-fod-400302444-spring-creek": "990dba24410941dfaf37004da4ea9c932bb1aec9ea6d935e9b3242c6b4fef77e",
+    "fpa-fod-400302533-tinder": "ce69f672555fe18961653cd01217ca86b1eabe30e0cbec3c84678bc0183e7aa1",
+    "fpa-fod-400302636-bears": "f3b9bac6c73de1e1b3bb5377eaaa508d36df2a23bd88611a08e99d58cf8ddfdd",
+    "fpa-fod-400302686-boot": "bd4c9d446cb49ab772387647a85294ec8df0177f655335b8faaa34339d2b9c1f",
+    "fpa-fod-400302943-cranston": "a428ee01962b359a835984817ded18fd596f3bc295075dc917d5dc2291bd9bd2",
+    "fpa-fod-400303584-goldstone": "cb49061f85325d3745a5672289f6910e1c518810aadf7369ab52f0a5df6581a3",
+    "fpa-fod-400303711-gold-hill": "9bda25a21a4f061d8d9f05a8268104186d772c06ae9b597825cd10b8aed28fca",
+    "fpa-fod-400303744-rattlesnake-creek": "eda7bb21c52716368031883fa379661beec00e0c18891e907800d9bec2195ed5",
+    "fpa-fod-400303807-ryan": "0c3b85025d79d46473ff8df633610025018b235a6e36a04b871920afadb31198",
+    "fpa-fod-400303966-cabin-lake": "bcfc118eb89de91f054d1e79e2f5853a920e4a7f1d5eeb4cd382ef4b38fa65f1",
+    "fpa-fod-400304718-west-valley": "51684fb323ffe4a1bb2174a3ae1d3a38a3d137797905065b6692d82685121904",
+    "fpa-fod-400305302-sugar-pine": "d57cee4ff33204c6dec772c159eb4620a81e968ba74c0ab12260e9ff2f612bd2",
+    "fpa-fod-400306102-rattlesnake": "52fb90777496b44eec352f095cd9efe0cbbd1dba5d12689c8ed2430a7dc09b32",
+    "fpa-fod-400307379-weston-pass": "4102a844a9360343d6e80cadb25f9b315a52d9d7346ee8f6baaa15c2d45da9db",
+    "fpa-fod-400307462-indian-valley": "e680362a9348b98d3503f0f950ca59b6150d0af61e06bfa06f217d704b129019",
+    "fpa-fod-400307488-red-canyon": "ce5cda3a622f952bee8f032a784a2acfd753d66ca69614b247e02c98e1118414",
+    "fpa-fod-400307776-bull-draw": "2e4a75d309196c0dec9efbba5018d7251dc8ff59c6bc4a0d8545483c6eb06c91",
+    "fpa-fod-400308544-winter-camp": "78f3841368abf58c7b905ddfe176b9ba9e1fa4e8912a3e1ad9e52376e21adb10",
+    "fpa-fod-400308652-dog-creek": "c3d98d0909af5171845dd80c06ee07da874e9d94b47edaf23141cc89323829c6",
+    "fpa-fod-400308656-sharps": "71f3e8795223de5d045a06eee6d33a32a84269b1cc4bf1a7d3cc3b653a6bba00",
+    "fpa-fod-400310578-ok-bar": "5e5e0bc033cd2a0e24fba453db2dab6b74c84073e19e22126e50783b484c051f",
+    "fpa-fod-400310583-organ": "57723d4c2c55803a1581d2648c8767ac46519ddf8e60bb1cef8758d2b4b7a60c",
+    "fpa-fod-400310659-206": "3cbca71969a9975c22bef447dd312610fa38409ec6867d0d9a74afb5bbdfc6d2",
+    "fpa-fod-400310914-echo": "b8908e4f012a19ee0639c7b789923704294df22896c226183fd4c0d65cd7fa4f",
+    "fpa-fod-400310945-goose-creek": "7a4d2a13c67e694ec8bf8888274b9e7311423f8ee8f122cf5abbcd5a34df5942",
+    "fpa-fod-400310977-sheep-creek": "ce552e219fd32c560d5733a2cf44103be1c9fb7a76d67ffcae9e29b8bd2fa89c",
+    "fpa-fod-400311017-goshute-cave": "ba0dfaf3eec62c4599e32122f8af0525407942bd941271614db6595264cc1668",
+    "fpa-fod-400311253-martin": "a79e2be75c90ec1ddae281b1c5396ba7e2136d0c553a9f5391d9543390a5c466",
+    "fpa-fod-400312787-black-mountain": "7245bca5f3150dac38937706aa4788d7e8754d583fabbe5e793bb3ec6fe99efb",
+    "fpa-fod-400313239-cedar-mountain-one": "eec581b0feda616c693894116fd38fffab9457c1df7d246f59f933abf6281146",
+    "fpa-fod-400313254-lakeside": "f0e58ddb2561d98af2b366e9afdcbd6e53ee7026774b814cc81a0589e543446f",
+    "fpa-fod-400313301-bear-trap": "cccc6138a936f0e4c4eece4bd2e41fda3f405df680c4ed15244535e7bb395d00",
+    "fpa-fod-400313842-north-eden": "cd1f174e092038931c0c0617486888d6f29c5378e179de6f14ed8366dabc71f6",
+    "fpa-fod-400314399-lake-wallula": "bb6236f840eb75b46d97858768a4a5067ee2c13e1b22695500bf75ad903621be",
+    "fpa-fod-400376589-ute-park": "57d4d74f20183c11a9bb30e23e39de1cf5d885195972f206f36c7a96fd665d86",
+    "fpa-fod-400500346-south": "9ba0cc7be06177e9ad1790489d5d3a21d6c94a2c64cc4310aca39627d1a84689",
+    "fpa-fod-400500878-cellar": "bf78208a938d8a0dcfabd2bd6d20eded6eb251e6d06a137af3983af46ffe69f6",
+    "fpa-fod-400501480-decker": "f5963de6e60520dc8d3b8f7492a23b974e7e32835c01d931812a17209e3d08d2",
+    "fpa-fod-400501641-mountain": "c7b8a509c9e3a7b43bf67236f68cbcb0434e55f6d354345c375fb99857881640",
+    "fpa-fod-400503581-coldwater": "24cf6ff47954e2ad6e4144ae9b897053e0b2146e77fdbcbd5e9e3c9e73e2da8f",
+    "fpa-fod-400504417-shady": "943f929f140a41979721e47282275f28fc9d48ff6ef61106bc986d4ada39252f",
+    "fpa-fod-400505027-pine-lodge": "8746d08f2d2338429caf5bee70744f3a57d1b88508a5a3ec08bdad9add318f42",
+    "fpa-fod-400505118-cove-creek": "50f617b26b2e33968d350c70fbb86fea91e05fef4e7bcedc1cd4ebb02a3a34da",
+    "fpa-fod-400507579-red-bank": "eebdfbc4a7bd5722798c5aac92a4b5b978e264177e0df5fc358386f67e3eaa94",
+    "fpa-fod-400508306-lookout-point": "27eca4f4b3e492eadaca71b8837b43cd142537f760e08ba98ac094da24ead8e2",
+    "fpa-fod-400508308-pot-hole": "ba62bd3e70c488c67f0fb8bbefc72eed2dd68aa117bc0f020985ad63036819d8",
+    "fpa-fod-400508892-north-hills": "14fab97bc1927668c4cad38d2e564c2367025afa35f467d17e86ca397b71a1f9",
+    "fpa-fod-400509143-ridgetop": "c698a5a51d0d03ccea91dd0159a4853b863ff60d6354ec9a37e491b8a4bd351d",
+    "fpa-fod-400510304-goose": "7154011cf8caa6ccc6ae622664a87093c1f7ddea5297dfee8d273193ef63a289",
+    "fpa-fod-400510515-summit": "cae75e2c1d38f8e593ad225b518418e1c724eb8db7706501a467ed583c4862b4",
+    "fpa-fod-400512420-shelter-pass": "29cfc2ca06292e2488cfc940910364d5b5edba4b54e7021b3bd7c8c047437b53",
+    "fpa-fod-400513488-sage": "c649fda52cea5706f26251d917ddf5af85a604ab8100878b9ff13740abacd294",
+    "fpa-fod-400541373-mp-97": "0f8cc52bb92d433774a3b5b3844ca934dcc4fee20b5f941904ef4cc2b5f9200e",
+    "fpa-fod-400732973-walker": "91c78739007546e0c7f30cb4919cabf8566da277b664d6b89ccae32e8c7368a3"
+  },
+  "reuse_protocol": "Copy previous16 prediction arrays only after exact record/NPZ/runtime/source/weather/input verification; new receipt includes original guard and record digest, never relabel as a new simulation or independent sample",
+  "cohorts": "All61 primary; fully-covered secondary; previous16 and incremental45 separate; both TRAIN, not independent holdout",
+  "growth_groups": {
+    "zero_growth": "observed_new_cells==0",
+    "near_stalled": "0<observed_new_cells<0.10*initial_union_cells",
+    "growing": "observed_new_cells>=0.10*initial_union_cells",
+    "basis": "Raw48h growth outside scar|front; exclusive complete-case groups. Fraction uses initial damage, not no-op prediction. This is distinct from legacy total-area ratio when a perimeter loses prior cells."
+  },
+  "subgroup_summaries": "All61 and fully-covered, each growth group and its fully-covered subset, previous16 and incremental45. Report primaryCA0 and eachCA1/2/mean3, counts/no-growth false spread/MAE/IoU definedness; no best subgroup/seed selection"
+}

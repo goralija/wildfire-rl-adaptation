@@ -10,6 +10,13 @@ Repo je OKF 0.2 knowledge bundle. Na početku sesije pročitaj [index.md](index.
 Zatim koristi [mapu zadataka/koda](knowledge/code-map.md) za relevantne izvore i testove.
 Korisnikove direktne upute imaju prednost; kasniji ADR može zamijeniti raniji.
 
+**Aktivno je TASK-042 / ADR-047 (2026-11-21)** na `codex/ca-expanded-growth-audit`,
+iz2de00136. [Plan/audit](docs/research/EXPANDED_OBSERVED_GROWTH.md) proširuje iste
+zamrznute no-op dinamike na61compatible TRAIN, uz explicit provenance reuse starih16,
+45novih i no/near-growth/domain grupe. Nema parametarskog tuninga, PPO treninga,
+native migracije ili holdouta. Prvo test/plan, prediction freeze prije opažanja,
+najviše3radnika plus koordinacija,nice19/jedna nit. Kasniji ADR ima prednost nad historijom.
+
 **Najnovije je ADR-046 (2026-11-21): TASK-041 završen** na `codex/ca-feds-growth-audit`
 iz640a910e. [Izvještaj](docs/research/PAIRED_OBSERVED_GROWTH.md): isti16TRAIN, zamrznuti
 SF/CA no-op prema exact-time FEDS-u. CA0 MAE1.317,67ha vsSF9.736,40 (−86,47%), IoU

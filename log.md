@@ -1,5 +1,11 @@
 # Promjene baze znanja
 
+## 2026-11-21: odobren prošireni TRAIN growth audit
+
+[TASK-042/ADR-047](docs/research/EXPANDED_OBSERVED_GROWTH.md) počinje na novoj grani iz
+2de00136. Svih61compatible početaka, isti parametri i3CA seeda; plan prije novih
+ishoda, eksplicitan reuse16 i45novih, near/no-growth/domain provjere bez tuninga.
+
 ## 2026-11-21: audit opaženog rasta objavljen, CI zelen
 
 Grana `codex/ca-feds-growth-audit` je pushana. [CI na21ff12f2](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44850220640)

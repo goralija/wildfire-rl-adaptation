@@ -5,6 +5,8 @@ okf_version: "0.2"
 
 ## Počni ovdje
 
+- [Aktivno: prošireni audit opaženog rasta](docs/research/EXPANDED_OBSERVED_GROWTH.md) - TASK-042/ADR-047, svih61kompatibilnih TRAIN početaka bez podešavanja.
+
 - [Najnovije: rast prema opaženom FEDS-u](docs/research/PAIRED_OBSERVED_GROWTH.md) - TASK-041/ADR-046 završen: CA bliži opaženom razmjeru, spatial neizvjesnost; TASK-042 je sljedeći prijedlog.
 
 - [Najnovije: upareno SimFire/CA poređenje](docs/research/CA_SIMFIRE_PAIRED.md) - TASK-040 faza A/ADR-044 završena, mješoviti procentni rezultati; TASK-041 growth audit je sljedeći prijedlog.

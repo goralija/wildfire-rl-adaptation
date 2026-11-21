@@ -2112,3 +2112,37 @@ planom prije skora i bez kalibracije prema ovih16. Zatim predložiti kalibraciju
 TASK-040 native fazu B; ona ostaje otvorena, TASK-039 odgođen. Bez novog PPO treninga,
 stvarnog VALIDATION/TEST, plaćenog computea ili mergea. [Izvještaj](../research/PAIRED_OBSERVED_GROWTH.md)
 i [svi redovi](../../reports/real-fire-data/paired-observed-growth-v1.json) su kanonski.
+
+
+## ADR-047 — TASK-042: proširiti zamrznuti growth audit na61TRAIN početak, 2026-11-21
+
+Korisnik odobrava TASK-042 iz ADR-046. Izdvojena grana `codex/ca-expanded-growth-audit`,
+baza2de00136. [Plan](../../configs/frozen/expanded-observed-growth-v1.json) prije novog
+scoringa: svi61eligible ID-jeva iz TASK-040 QC-a, bez podskupa po rezultatu. Ulazi61nemaju
+unknown fuel/elevation fill; početni front je na1–13. To je kompatibilni okvir, ne svih98
+ili nezavisan holdout. Isti fizički parametri, puna256×256×180m,48h/četiri12h odluke,
+isti weather iCA seeding; samo no-op, bez taila/treninga/parametarske pretrage.
+
+Starih16prediction putanja ponovo se koristi uz provjeru tačnog receipt/NPZ/source/
+runtime/weather/input hasha, s originalnim guardom u novom provenance zapisu. Nisu
+predstavljene kao nove simulacije. Novih45daje180putanja (SF i3CA), pilot prva2nova ID-ja
+po sortiranom spisku. Svaki novi SF endpoint mora ponoviti arhivu98TRAIN, prvi novi CA
+slučaj sve3replike/5maski; pune kumulativne/no-op/budžet/horizont provjere. Prediction
+freeze prije future FEDS čitanja, max3radnika plus koordinator, nice19/jedna nit,
+najavljeno5–15min plus provjere. Postojeće2018/2019arhive, bez mreže/2023/2024.
+
+Primarno isti raw48h mean growth IoU na zajedničkim kompletnim observed-positive
+slučajevima i mean absolute new-area errorha na svim kompletnim slučajevima, CA0.
+Sve3replike, sredina metrika unutar požara i paired case bootstrap10k/seed0 kao ranije,
+opisno bez refita/multiplicity. Sekundarno fully-covered, stari16/novi45 i po grupama
+prema observed_new/initial_union: zero==0; near-stalled0<ratio<.10; growingratio>=.10.
+Grupe su međusobno isključive; ovaj ratio nije stari total-area ratio ako opažanje
+izgubi prior ćelije. Prijaviti i fully-covered grupne rezove, no-growth false spread,
+MAE i definisanostIoU. Nema izbora povoljnijeg seeda/podgrupe nakon nalaza.
+
+Iste full-vector exact-time/t0/solar UTC/coverage/missing/zero/nonfuel provjere i raw vs
+envelope osjetljivost iz TASK-041. Svi61zapisi vidljivi; mapa se ne pomjera/širi prema
+targetu, Martin i drugi censored slučajevi jasno označeni. Source/runtime/input mismatch
+zaustavlja scoring. Testovi selekcije/reusea/grupnih granica prethode novom ponašanju.
+Nema automatskog migration praga ili fizičke validacije; native faza B otvorena,
+TASK-039 odgođen, stvarni VALIDATION/TEST i dugi trening ostaju zatvoreni.

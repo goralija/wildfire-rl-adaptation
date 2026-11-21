@@ -7,6 +7,14 @@ sources:
 ---
 # Trenutno stanje — 2026-11-21
 
+## TASK-042 u toku — prošireni TRAIN audit (ADR-047, 2026-11-21)
+
+Korisnik odobrava nastavak na svih61kompatibilnih TRAIN početaka. [Plan](research/EXPANDED_OBSERVED_GROWTH.md)
+na `codex/ca-expanded-growth-audit`, iz2de00136, prethodi novim ishodima. Isti zamrznuti
+SF/3CA no-op; starih16uz eksplicitni hash/runtime/provenance reuse, novih45simulirano.
+Posebno no/near-growth, full-domain i previous16/new45 rezovi; bez podešavanja ili
+stvarnih holdouta. Native PPO faza B otvorena. Najviše3radnika plus koordinacija,nice19.
+
 ## TASK-041 završen — opaženi rast (ADR-046, 2026-11-21)
 
 Na `codex/ca-feds-growth-audit`, iz640a910e, završen je [TRAIN audit](research/PAIRED_OBSERVED_GROWTH.md).

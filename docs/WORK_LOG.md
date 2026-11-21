@@ -4,6 +4,11 @@ title: Work log
 ---
 # Work log
 
+2026-11-21 — Korisnik odobrava TASK-042. Izdvojena codex/ca-expanded-growth-audit iz
+2de00136, main/raniji rezultati sačuvani. Preregistrovano61eligible TRAIN ID-jeva,
+reuse16uz originalne hashove/guard i45novih, iste no-op dinamike, zasebni near/zero/
+growing/domain i old/new rezovi. ADR-047/plan prije novih ishoda; bez tuninga/holdouta.
+
 2026-11-21 — TASK-041 grana pushana; CI na21ff12f2 prolazi core3.11/3.13, numeric i
 knowledge. Receipt/status/handoff su usklađeni. Numerički source i rezultati nisu
 promijenjeni; nema novog PR-a/mergea ili uploada velikog lokalnog paketa.
