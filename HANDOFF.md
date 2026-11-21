@@ -4,14 +4,6 @@ title: Handoff za nastavak projekta
 ---
 # Handoff za nastavak projekta
 
-## TASK-040 B.1 u radu — 2026-11-22
-
-Korisnik nastavlja [zajednički PPO ugovor](docs/research/COMMON_PPO_INTERFACE.md) na
-`codex/common-ppo-interface`, iz45d41fcf. ADR-049 i frozen plan prethode implementaciji
-i ishodima: isti v2/terrain536, charged reward,9akcija,B1,4×12h, četiri64-step smokea.
-Native mobilni resursi/veći trening/holdout ostaju zatvoreni.
-
-
 ## TASK-040 B.1 u radu — zajednički PPO ugovor (ADR-049, 2026-11-22)
 
 Korisnik nastavlja [plan zajedničkog interfejsa](docs/research/COMMON_PPO_INTERFACE.md) na
