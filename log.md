@@ -1,5 +1,12 @@
 # Promjene baze znanja
 
+## 2026-11-21: frozen61audit objavljen, CI zelen
+
+`codex/ca-expanded-growth-audit` je pushana. [CI na `aa3335a4`](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44907387597)
+prolazi sva četiri posla. [Izvještaj](docs/research/EXPANDED_OBSERVED_GROWTH.md),
+status i handoff čuvaju nalaze, nerast/domain granice i predloženi TASK-040B.1.
+Bez novog PR-a ili mergea.
+
 ## 2026-11-21: završen frozen61TRAIN growth audit
 
 [TASK-042/ADR-048](docs/research/EXPANDED_OBSERVED_GROWTH.md): cijeli kompatibilni okvir,

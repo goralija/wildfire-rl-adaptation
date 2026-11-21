@@ -40,6 +40,14 @@ budžeti/akcije/informacije/horizont; nije duži trening ili rangiranje starih n
 Mobilni resursi/native parity ostaju zaseban otvoreni dio faze B. TASK-039 odgođen,
 TASK-037 opcionalni SimFire pravac. TEST/VALIDATION i merge nisu rađeni.
 
+### Objava TASK-042
+
+Grana [codex/ca-expanded-growth-audit](https://github.com/goralija/wildfire-rl-adaptation/tree/codex/ca-expanded-growth-audit)
+je commitana i pushana. [CI kodnog/rezultatskog commita `aa3335a4`](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44907387597)
+prolazi core3.11/3.13, numeric s tačnom skip listom i knowledge. Verification čuva
+commit; kasnija dopuna objave ne mijenja numerički source, plan ili rezultate.
+Veliki paket ostaje lokalni. Nema novog PR-a ili mergea; main i prethodni rad su sačuvani.
+
 ## TASK-041 završen — opaženi rast (ADR-046, 2026-11-21)
 
 Na `codex/ca-feds-growth-audit`, iz640a910e, završen je [TRAIN audit](research/PAIRED_OBSERVED_GROWTH.md).

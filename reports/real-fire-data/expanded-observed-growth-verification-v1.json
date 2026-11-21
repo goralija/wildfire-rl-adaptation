@@ -168,7 +168,8 @@
     ".local/plot-final.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     ".local/predict-sf.log": "04e2df5bc6a8d1efb4e571491fcebbb254682bfff3cc3a407e0e76d421b182a7",
     ".local/knowledge-final-tests.log": "e253ba988fa92a5eb754ea8b7adc1775b6bc735979b6201dee5f26516a2d4101",
-    ".local/knowledge-final-strict.log": "5206b0b05b1de1621b8da3c246fa6973f55633cc1e173a51c77577cf29086c6a"
+    ".local/knowledge-final-strict.log": "5206b0b05b1de1621b8da3c246fa6973f55633cc1e173a51c77577cf29086c6a",
+    ".local/expanded-ci.json": "44520ead98d5388c12b06252333262cc4c518990c6d2fe7e96a61ee9717f6daa"
   },
   "figures_visually_inspected": [
     "Overview, all3 predefined groups",
@@ -181,5 +182,20 @@
     "Two observed trajectories outside domain,59fully-covered sensitivity reported",
     "Common-line/vegetation CA bridge, not native unit PPO ranking",
     "No tuning, policy training, real VALIDATION/TEST or physical validation"
-  ]
+  ],
+  "publication": {
+    "branch": "codex/ca-expanded-growth-audit",
+    "tested_commit": "aa3335a49690e9928a6e9b9f68d9052d0b9a42e5",
+    "workflow_url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44907387597",
+    "conclusion": "success",
+    "jobs": {
+      "numeric": "success",
+      "core (3.11)": "success",
+      "core (3.13)": "success",
+      "knowledge": "success"
+    },
+    "new_pr": false,
+    "merged": false,
+    "note": "Subsequent publication-only commit changes no numerical source, frozen plan or result; large portable archive remains local."
+  }
 }

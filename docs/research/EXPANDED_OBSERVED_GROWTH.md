@@ -278,6 +278,14 @@ nema automatskog dugog treniranja ili tvrdnje da se time rangiraju raniji native
 Mobilne ekipe/native unit parity ostaju zaseban dio faze B, ne preimenovati postojeći most.
 Nalaz sada daje razumnu osnovu za takav nastavak CA pravca uz eksplicitne granice.
 
+### Objava TASK-042
+
+Grana [codex/ca-expanded-growth-audit](https://github.com/goralija/wildfire-rl-adaptation/tree/codex/ca-expanded-growth-audit)
+je commitana i pushana. [CI kodnog/rezultatskog commita `aa3335a4`](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44907387597)
+prolazi core3.11/3.13, numeric s tačnom skip listom i knowledge. Verification čuva
+commit; kasnija dopuna objave ne mijenja numerički source, plan ili rezultate.
+Veliki paket ostaje lokalni. Nema novog PR-a ili mergea; main i prethodni rad su sačuvani.
+
 Reprodukcija u odgovarajućem checkoutu s istim input/runtime hashovima:
 
 ```sh

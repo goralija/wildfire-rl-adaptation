@@ -4,6 +4,10 @@ title: Work log
 ---
 # Work log
 
+2026-11-21 — TASK-042 grana pushana; CI na `aa3335a4` prolazi core3.11/3.13, numeric i
+knowledge. Receipt/status/handoff usklađeni; numerički hashovi isti. Bez novog PR-a,
+mergea ili uploada velikog paketa; prethodni rad sačuvan.
+
 2026-11-21 — TASK-042 završen u codex/ca-expanded-growth-audit iz2de00136. Plan5d72b974,
 kod9ab1f70a prije novog scoringa;61eligible TRAIN,64reuse/180novih no-op putanja,
 iste dinamike i3CA spread seeda. CA0MAE−67,90%, IoU0,12568vsSF0,08664; opisni intervali
