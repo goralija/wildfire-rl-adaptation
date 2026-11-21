@@ -10,12 +10,16 @@ Repo je OKF 0.2 knowledge bundle. Na početku sesije pročitaj [index.md](index.
 Zatim koristi [mapu zadataka/koda](knowledge/code-map.md) za relevantne izvore i testove.
 Korisnikove direktne upute imaju prednost; kasniji ADR može zamijeniti raniji.
 
-**Aktivno je TASK-042 / ADR-047 (2026-11-21)** na `codex/ca-expanded-growth-audit`,
-iz2de00136. [Plan/audit](docs/research/EXPANDED_OBSERVED_GROWTH.md) proširuje iste
-zamrznute no-op dinamike na61compatible TRAIN, uz explicit provenance reuse starih16,
-45novih i no/near-growth/domain grupe. Nema parametarskog tuninga, PPO treninga,
-native migracije ili holdouta. Prvo test/plan, prediction freeze prije opažanja,
-najviše3radnika plus koordinacija,nice19/jedna nit. Kasniji ADR ima prednost nad historijom.
+**Najnovije je TASK-042 / ADR-048 (2026-11-21), završen** na
+`codex/ca-expanded-growth-audit`, iz2de00136. [Izvještaj](docs/research/EXPANDED_OBSERVED_GROWTH.md):
+svih61compatible TRAIN, isti zamrznuti no-op SF/3CA. PrimaryCA0 MAE2.132,29vsSF6.642,37ha
+(−67,90%), IoU0,12568vs0,08664 na57observed-positive; oba opisna intervala povoljna.
+Sva4observed-zero slučaja oba modela prerastaju, GoldstoneN1 ostaje problem;59fully-covered
+osjetljivost prijavljena. Nije fizička validacija/native PPO rangiranje.388pinned testova
+prolazi, nezavisna aritmetika/raster/reuse/restore PASS. Naredni prijedlog TASK-040 B.1:
+zajednički PPO input/encoder/akcije/reward ugovor i kratak tehnički smoke, bez automatskog
+velikog treninga. Native unit parity ostaje otvoren, TASK-039 odgođen. Holdouti zatvoreni.
+Najviše3radnika plus koordinacija,nice19/jedna nit; kasniji ADR ima prednost nad historijom.
 
 **Najnovije je ADR-046 (2026-11-21): TASK-041 završen** na `codex/ca-feds-growth-audit`
 iz640a910e. [Izvještaj](docs/research/PAIRED_OBSERVED_GROWTH.md): isti16TRAIN, zamrznuti

@@ -1,5 +1,14 @@
 # Promjene baze znanja
 
+## 2026-11-21: završen frozen61TRAIN growth audit
+
+[TASK-042/ADR-048](docs/research/EXPANDED_OBSERVED_GROWTH.md): cijeli kompatibilni okvir,
+CA0MAE manji67,90%, IoU0,12568vsSF0,08664, uz4observed-zero slučaja koje oba modela
+prerastaju. Svi seedi, novi45/old16 i59covered rezovi su vidljivi.388pinovanih testova,
+nezavisni metric/raster/reuse i restore PASS. [Rezultati](reports/real-fire-data/expanded-observed-growth-v1.json)
+i [verifikacija](reports/real-fire-data/expanded-observed-growth-verification-v1.json) čuvaju dokaze.
+TASK-040B.1 zajednički PPO/reward ugovor je sljedeći prijedlog, bez novog većeg treninga.
+
 ## 2026-11-21: odobren prošireni TRAIN growth audit
 
 [TASK-042/ADR-047](docs/research/EXPANDED_OBSERVED_GROWTH.md) počinje na novoj grani iz

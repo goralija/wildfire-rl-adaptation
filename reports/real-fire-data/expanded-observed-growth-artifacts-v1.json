@@ -1,0 +1,36 @@
+{
+  "schema_version": "expanded-observed-growth-artifacts/1.0",
+  "path": ".local/expanded-v1/artifacts/expanded-observed-growth-v1.tar.gz",
+  "bytes": 18848375,
+  "sha256": "4b00fe6555bc680bfaa995c6a414d433e3b96a611d7b0d07489ac6a2d8095176",
+  "members_verified": 1064,
+  "internal_manifest": "MANIFEST.json",
+  "all_member_hashes_reread": "PASS",
+  "scope": "Frozen numerical source/tests, all61 real inputs, selected original SF records,32 previous prediction files plus receipts, all new predictions and full selected FEDS vectors/rasters. No annual archives, venv, PPO weights or real holdout maps.",
+  "uploaded": false,
+  "restore": {
+    "status": "PASS",
+    "simfire": {
+      "status": "PASS",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "backend": "simfire",
+      "all5_new_case_cumulative_masks_identical": true,
+      "one_previous_case_adoption_provenance_pass": true,
+      "observed_rasters_rebuilt": 305,
+      "source_plan_input_guards": "PASS",
+      "seconds": 16.541676208,
+      "scope": "Unpacked numerical source/selected inputs, existing pinned dependencies; technical replay and all target rasters, no fresh installation or new evaluation sample."
+    },
+    "ca": {
+      "status": "PASS",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "backend": "ca",
+      "all3_replicates_all5_new_case_masks_identical": true,
+      "one_previous_case_adoption_provenance_pass": true,
+      "source_plan_input_guards": "PASS",
+      "seconds": 3.954538624995621,
+      "scope": "Unpacked numerical source/inputs, existing modern dependencies; first new case plus reused-case provenance, not full second evaluation or fresh environment."
+    },
+    "limits": "First new case5SF/3x5CA cumulative masks, one original-case adoption each backend and all305 observed rasters; existing dependencies, not fresh install or full second evaluation."
+  }
+}

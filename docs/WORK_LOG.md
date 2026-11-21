@@ -4,6 +4,16 @@ title: Work log
 ---
 # Work log
 
+2026-11-21 — TASK-042 završen u codex/ca-expanded-growth-audit iz2de00136. Plan5d72b974,
+kod9ab1f70a prije novog scoringa;61eligible TRAIN,64reuse/180novih no-op putanja,
+iste dinamike i3CA spread seeda. CA0MAE−67,90%, IoU0,12568vsSF0,08664; opisni intervali
+povoljni. Sva4observed-zero oba modela prerastaju;1near-stalled,56growing;2censored,
+59covered osjetljivost prijavljena.388pinned/373modern(4skip)/306core(44skip),CLI PASS.
+Nezavisna aritmetika/raster/reuse i prenosivi restore PASS. Paket18.848.375B/1.064fajla
+ostaje lokalni. Internet prekid nije zahtijevao ponavljanje završenih poslova. ADR-048/
+EXP-029, status/handoff/raspored osvježeni; TASK-040B.1 ugovor/smoke sljedeći prijedlog,
+bez automatskog većeg treninga ili stvarnog holdouta.
+
 2026-11-21 — Korisnik odobrava TASK-042. Izdvojena codex/ca-expanded-growth-audit iz
 2de00136, main/raniji rezultati sačuvani. Preregistrovano61eligible TRAIN ID-jeva,
 reuse16uz originalne hashove/guard i45novih, iste no-op dinamike, zasebni near/zero/

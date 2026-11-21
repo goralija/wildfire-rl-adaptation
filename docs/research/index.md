@@ -33,4 +33,4 @@
 
 - [SimFire/CA rast prema opaženom FEDS-u](PAIRED_OBSERVED_GROWTH.md) - TASK-041/ADR-046 završen: surface/IoU rezultati, domain QC i sve3CA replike.
 
-- [Prošireni zamrznuti TRAIN growth audit](EXPANDED_OBSERVED_GROWTH.md) - TASK-042/ADR-047, svih61compatible početaka, plan prije novih ishoda.
+- [Prošireni zamrznuti TRAIN growth audit](EXPANDED_OBSERVED_GROWTH.md) - TASK-042/ADR-048 završen,61compatible početaka, nerast/domain nalazi i svi seedi.

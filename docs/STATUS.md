@@ -7,13 +7,38 @@ sources:
 ---
 # Trenutno stanje — 2026-11-21
 
-## TASK-042 u toku — prošireni TRAIN audit (ADR-047, 2026-11-21)
+## TASK-042 završen — svih 61 kompatibilnih TRAIN početaka (ADR-048, 2026-11-21)
 
-Korisnik odobrava nastavak na svih61kompatibilnih TRAIN početaka. [Plan](research/EXPANDED_OBSERVED_GROWTH.md)
-na `codex/ca-expanded-growth-audit`, iz2de00136, prethodi novim ishodima. Isti zamrznuti
-SF/3CA no-op; starih16uz eksplicitni hash/runtime/provenance reuse, novih45simulirano.
-Posebno no/near-growth, full-domain i previous16/new45 rezovi; bez podešavanja ili
-stvarnih holdouta. Native PPO faza B otvorena. Najviše3radnika plus koordinacija,nice19.
+[Prošireni audit](research/EXPANDED_OBSERVED_GROWTH.md) je završen na `codex/ca-expanded-growth-audit`, iz2de00136.
+Plan5d72b974 prethodi kodu9ab1f70a i novim ishodima. Parametri/metric source su isti.
+Transparentno je ponovo korišteno64putanje starih16slučajeva,180novih putanja za45novih,
+plus3tehnička CA ponavljanja. Svih45novih SF endpoint maski identično arhivi; prediction
+freeze prije novih FEDS geometrija. Nije rađeno podešavanje, novi PPO ili stvarni holdout.
+
+**Primarno:** areaMAE na61: SF6.642,37ha, CA0 2.132,29ha (67,90%manje). GrowthIoU na
+istih57observed-positive: SF0,08664, CA0 0,12568. CA0−SF deltaIoU+0,03904, opisni95%
+[+0,00861;+0,06963]; deltaMAE−4.510,08ha[−6.856,90;−2.414,21]. Sekundarni CA3mean
+IoU0,13020/MAE2.110,41ha. To je povoljniji opisni TRAIN nalaz, ne fizička validacija.
+Na novih45primary IoU0,11215vsSF0,08030; efekat slabiji, CA3mean interval uključuje0.
+
+**Granice:** grupe su4bez opaženog rasta,1near-stalled,56growing. Oba modela prerastaju
+sva4nulta slučaja, CA0u prosjeku3.147,66ha/SF9.455,94ha; na206CA0je i lošiji odSF.
+Goldstone ostaje jedini near-stalled i CA0je lošiji. FEDS uzrok nerasta nije poznat;
+buduće opažanje nije signal za gašenje. Goose Creek/Martin izlaze iz domene;59fully-covered
+zapis ostaje povoljan. Svih305opažanja validno/monotono, početni raster/vrijeme konzistentni.
+CA bridge nije native unit/PPO model; apsolutniIoU ostaje nizak,37TRAIN početaka isključeno
+po ranijem input QC-u, nema nezavisnog fizičkog testa. Nijedna glavna predikcija ne dotiče rub.
+
+388pinovanih/0skip,373modernih/4skip,306core/44skip iCLI PASS. Nezavisno2.928metric redova,
+305rastera,45SF maski,32reuse NPZ-a, svih16starih metric zapisa i primarni intervali PASS.
+Paket18.848.375B/1.064fajla plus manifest, svi hashovi provjereni; restore prvih5SF/3×5CA
+maski, starog reusea i305opažanja identičan uz postojeće biblioteke. Nema aktivnog računanja.
+
+**Sljedeći prijedlog: TASK-040 faza B.1**, zajednički PPO adapter/encoder i reward ugovor
+nad postojećim common-line bridgeom za oba backend-a, pa kratak tehnički smoke. Isti
+budžeti/akcije/informacije/horizont; nije duži trening ili rangiranje starih native PPO-a.
+Mobilni resursi/native parity ostaju zaseban otvoreni dio faze B. TASK-039 odgođen,
+TASK-037 opcionalni SimFire pravac. TEST/VALIDATION i merge nisu rađeni.
 
 ## TASK-041 završen — opaženi rast (ADR-046, 2026-11-21)
 

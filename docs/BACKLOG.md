@@ -12,10 +12,10 @@ title: Naredni zadaci
 | TASK-036 | faza A završena | SimFire repair ostaje na izvedenoj bazi; nalazi ADR-038 |
 | TASK-037 | predloženo, odgođeno | Preostala SimFire fizika/gate/trening |
 | TASK-038 | završeno, ADR-042 |3seeda, šest modela, 288development putanja; nijedan kandidat ne prolazi; svi rezultati/sigurnost sačuvani |
-| TASK-040 | faza A završena, ADR-044; faza B otvorena | 16 istih TRAIN, identične linije, procenti/ha/no-op i3 CA spread replike; mješoviti rezultati, native resursi/akcije/PPO još nisu upareni |
+| TASK-040 | faza A završena; B.1 predloženo sljedeće | Zajednički PPO input/encoder/akcije/reward ugovor nad common-line bridgeom pa tehnički smoke; native mobile-unit parity ostaje zasebno otvoren |
 | TASK-041 | završeno, ADR-046 | Isti16TRAIN prema FEDS-u: CA0 manja area greška86,47%, spatial interval preko0; Martin domain QC i15covered analiza;381test/replay/restore PASS |
-| TASK-042 | u toku po korisniku, ADR-047 | Isti zamrznuti no-op audit na svih61compatible TRAIN, posebno domain/no-growth QC; novi plan prije skora, bez automatske kalibracije ili treninga |
-| TASK-039 | predloženo, odgođeno iza growth audita | TRAIN-only dijagnoza vlastitih putanja i pokrivenosti učitelja/encoder-a; unaprijed zadat kratki nastavak tek po nalazu |
+| TASK-042 | završeno, ADR-048 | Svih61compatible TRAIN: CA0 MAE−67,90%, IoU0,12568vs0,08664;4zero/1near/56grow,59covered,388test/reuse/restore PASS |
+| TASK-039 | predloženo, odgođeno iza zajedničkog PPO ugovora | TRAIN-only dijagnoza vlastitih putanja i pokrivenosti učitelja/encoder-a; unaprijed zadat kratki nastavak tek po nalazu |
 
 Starije oznake TASK-035 kao drafta ispod su historija, zamijenjene korisnikovim nalogom
 2026-11-21 i ADR-039. TEST 2024 i stvarni VALIDATION nisu otvoreni.

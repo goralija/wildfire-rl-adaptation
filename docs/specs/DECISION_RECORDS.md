@@ -2146,3 +2146,70 @@ targetu, Martin i drugi censored slučajevi jasno označeni. Source/runtime/inpu
 zaustavlja scoring. Testovi selekcije/reusea/grupnih granica prethode novom ponašanju.
 Nema automatskog migration praga ili fizičke validacije; native faza B otvorena,
 TASK-039 odgođen, stvarni VALIDATION/TEST i dugi trening ostaju zatvoreni.
+
+
+## ADR-048 — TASK-042 završen: povoljniji CA nalaz na61TRAIN, opaženi nerast ostaje problem, 2026-11-21
+
+Po korisnikovom nalogu izveden ADR-047 na `codex/ca-expanded-growth-audit`, iz2de00136.
+Plan5d72b974 prethodi kodu9ab1f70a i novim ishodima. Svi61eligible ID-jeva iz zamrznutog
+input QC-a, bez izbora po rezultatu ili promjene parametara/metric sourcea. Preostalih
+37 od98TRAIN izvan ovog kompatibilnog okvira. Nije nezavisan holdout ili fizička validacija.
+
+Ponovo korišteno64no-op putanje starih16slučajeva (32NPZ+32receipt), uz provjeren
+originalni hash/guard/runtime/weather/input i eksplicitni `reused_from`. Novih45daje
+180glavnih putanja, plus3tehnička CA ponavljanja prvog novog slučaja. Sva45nova SF
+whole endpointa identično arhivi,4odluke/5maski kumulativno u sve244glavne putanje.
+Prediction freeze prije novih FEDS geometrija; existing2018/2019arhive SHA256/original
+MD5, bez downloada ili2023/2024 mapa. SFpilot15,82s/fullreuse85,24s, CApilot3,98s/
+full34,37s, nice19/max3radnika uz koordinatora i jednu numeričku nit.
+
+**Primarno61/57.** Svih61ima potpune validne FEDS putanje;305stanja, t0 scar61/61isti,
+solar→UTC/forcing konzistentni. Na48h57opaženih novih rastova,4nulta. Mean observed
+novi ha2.627,43, SF7.183,88, CA0 1.648,04, CA1 1.628,60, CA2 1.689,90, CA3mean1.655,52.
+Mean absolute new-area errorha: SF6.642,37/CA0 2.132,29/CA1 2.076,31/CA2 2.122,62/
+CA3mean2.110,41. CA0 smanjujeMAE67,90%. Mean new-area IoU na istih57observed-positive:
+SF0,086635, CA0 0,125679, CA1 0,139358, CA2 0,125569, CA3mean0,130202.
+
+Paired case bootstrap10k/seed0, opisno bez refita/multiplicity: CA0−SF deltaIoU
++0,039044[+0,008606;+0,069630], deltaMAE−4.510,08ha[−6.856,90;−2.414,21].
+Sekundarni CA3mean deltaIoU+0,043567[+0,012341;+0,075837], MAE−4.531,96ha
+[−6.868,50;−2.452,64]. Sva3sjemena prijavljena, scalar prosjek unutar požara, nisu
+183nezavisna požara. PrimaryCA0 bolji po area42/61, lošiji19; poIoU37/57 bolji,18lošiji,2isti.
+ApsolutniIoU ostaje nizak; povoljni opisni intervali nisu potvrda fizičke tačnosti.
+
+**Novi45 i domena.** Novi45TRAIN dajuSF/CA0 MAE5.542,27/2.421,94ha iIoU0,08030/0,11215
+na41observed-positive. Primary deltaIoU CI[+0,00125;+0,06131], deltaMAE
+[−5.057,34;−1.349,87]ha. Efekat slabiji nego prvih16. CA3mean IoU0,11031, njegov
+prostorni interval[−0,00102;+0,05995] uključuje0; nisu proglašeni novim nezavisnim testom.
+Svih16ranijih metric zapisa je identično. Goose Creek/Martin izlaze iz domene, na48h
+28,50%/36,85%full vektora.59fully-covered: SF/CA0 MAE6.059,18/1.939,99ha,
+IoU0,08652/0,12794; primary deltaIoUCI[+0,00967;+0,07329],MAE
+[−6.313,13;−2.153,86]. Nijedna predikcija ne dotiče rub. Raw/envelope identični,
+305stanja monotona.602/49.467opaženih novih ćelija na nonfuel-u (1,22%); target nije maskiran.
+
+**Predeclared grupe4/1/56.** Zero-growth4: SF mean lažni rast9.455,94ha,
+CA0 3.147,66ha, CA3mean2.768,04ha; sva4nulta opažanja prerastaju oba modela i sveCA
+replike. Winter Camp,206,Pot Hole,Shelter Pass; CA0na206gori više odSF. MeanIoUgrupe
+undefined jer nema observed-positive para; nema epsilon/IoU1 nagrade. Near-stalled1
+Goldstone: observed3,24ha, CA0MAE307,80vsSF25,92ha;N1 nije osnova za generalizaciju.
+Growing56: SF/CA0MAE6.559,55/2.092,35 iIoU0,08818/0,12792. Budući FEDS obod nije
+signal za gašenje; nepoznate intervencije, stvarni prekid širenja i opažajni proces
+nisu ovim razdvojeni ili kalibrisani. I povoljniji CA ostaje pogrešan u važnim slučajevima.
+
+**Provjere.**7novih testova prije implementacije. Puni388pinned/0skip,373modern/4skip,
+306core/44skip iCLI PASS. Nezavisno2.928metric redova,305rastera,45SF whole maski,
+32reuse NPZ-a,16starih metric zapisa, svi primarni prosjeci/intervali i podgrupe PASS;
+10legacy-loader maski prvih2nova slučaja identično. Paket18.848.375B,1.064fajla plus
+manifest, svi hashovi ponovo pročitani. Raspakovani source/input ponavlja5SF i3×5CA
+maski prvog novog slučaja, po jedan originalni reuse u oba backend-a i305target rastera.
+Postojeće biblioteke, ne fresh install ili kompletna druga evaluacija; paket nije uploadovan.
+
+**Odluka/prijedlog.** TASK-042 je završen. Nalaz podržava nastavak CA istraživanja
+u odnosu na ovu zamrznutu SF referencu, uz eksplicitne granice. Ne dokazuje RL prednost,
+native unit CA valjanost ili iscrpljenost SimFire-a. Predloženi sljedeći TASK-040 B.1
+je zajednički PPO input/encoder/akcije i reward ugovor nad common-line bridgeom u oba
+backend-a, prvo testovi pa kratak tehnički smoke. Isti budžet/horizont/informacije;
+bez automatskog velikog treninga. Native mobilni resursi ostaju odvojeni otvoreni dio
+faze B; stari PPO-i nisu rangirani. TASK-039 odgođen, TASK-037 optionalSimFire.
+Nema nove kalibracije, stvarnog VALIDATION/TEST, plaćenog computea ili mergea.
+[Izvještaj](../research/EXPANDED_OBSERVED_GROWTH.md) i [sve brojke](../../reports/real-fire-data/expanded-observed-growth-v1.json).

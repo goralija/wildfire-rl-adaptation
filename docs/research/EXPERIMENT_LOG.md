@@ -747,3 +747,27 @@ postojeće biblioteke. Nice19/max3radnika plus koordinator, SFpilot17,86s, fullr
 CA15,60s. [Izvještaj](PAIRED_OBSERVED_GROWTH.md), [rezultati](../../reports/real-fire-data/paired-observed-growth-v1.json).
 ADR-046 zatvara audit, predlaže TASK-042 na61compatible TRAIN bez tuninga; native
 faza B otvorena. Nema RL/native migration prihvata, fizičke validacije ili holdouta.
+
+
+## EXP-029 — TASK-042 frozen61TRAIN proširenje, 2026-11-21
+
+Plan5d72b974/ADR-047 prije koda9ab1f70a/novih ishoda.61eligible početak, ista256mapa/
+180m/48h i no-op SF/3CA. Reuse64stare putanje uz32NPZ i32receipt hasha,180novih glavnih
+putanja+3tehnička CAreplaya.45SF endpointa identično arhivi, fullhorizon/cumulative/no-op
+ugovori PASS. Prediction freeze prije novih FEDS geometrija,305validnih/monotonih stanja,
+solar UTC i t0scar61/61PASS. Existing TRAIN arhive, bez mreže/holdouta ili tuninga.
+
+Primary61area/57IoU: SFMAE6.642,37ha/IoU0,08664, CA0 2.132,29/0,12568 (−67,90%MAE).
+Paired case CI deltaIoU[+0,00861;+0,06963], deltaMAE[−6.856,90;−2.414,21]ha.
+CA3mean2.110,41/0,13020; sva3seeda prijavljena. Novi45primary0,11215vsSF0,08030,
+aliCA3mean spatial interval uključuje0. Dva censored opažanja,59covered osjetljivost
+povoljna. Zero4/near1/growing56: oba modela prerastaju sve4nulte, CA0lažni mean3.147,66ha
+vsSF9.455,94ha; GoldstoneN1 CA0lošiji. Nema fizičke validacije ili RL/native PPO prihvata.
+
+388pinned/0skip,373modern/4skip,306core/44skip iCLI PASS. Nezavisno2.928metric redova,
+305rastera,45SF whole maski,32reuse NPZ-a,16oldcase metrics iCI PASS;10legacy maske isto.
+Paket18.848.375B/1.064fajla plus manifest, sve ponovo hashovano; restoreSF5/CA3×5,
+po jedanoldreuse i305opažanja isto uz postojeće biblioteke. Nice19/max3radnika+koordinator;
+SFpilot15,82s/fullreuse85,24s, CApilot3,98s/full34,37s. [Izvještaj](EXPANDED_OBSERVED_GROWTH.md).
+ADR-048 zatvara61audit i predlaže TASK-040B.1 zajednički PPO/reward ugovor i tehnički smoke,
+bez većeg treninga/testnog holdouta. Native mobilni resursi odvojeno otvoreni.

@@ -1,0 +1,185 @@
+{
+  "schema_version": "expanded-observed-growth-verification/1.0",
+  "date": "2026-11-21",
+  "status": "PASS",
+  "scope": "TASK-042 technical provenance/arithmetic/replay checks, not physical validation",
+  "common": {
+    "plan_sha256": "30ae9dc69dc32f9f45b7f7e3ae8fa5b2d8dfbdabeceb60902df657a630dc5eec",
+    "source_sha256": {
+      "scripts/run_paired_simulators.py": "a7394dd8860b4b105e2e83c4f3f826b9ac46f77eaa72ae4be9036de1418ba625",
+      "src/wildfire_rl/paired_simulators.py": "58794b6d1acb6df2f23b5be678e6d6bae0345b13f6676d86cd0d72a4c3d78779",
+      "src/wildfire_rl/synthetic_ca.py": "855b1d1ba50a1fd0e28f652f19d74607b1b0e485989e5424380bbf0602adb844",
+      "src/wildfire_rl/synthetic_real_cases.py": "22b2bb365207e2f5139cbd7c24d835f512a429b423387e8bfe627c9621729db6",
+      "src/wildfire_rl/feds_simfire_env.py": "261cb0b6565b72711aa56964a068f6749b6c49ceaa32b2b70a54c959cdb235ed",
+      "src/wildfire_rl/feds_simfire_setup.py": "78e7187113a246e9f70a0a88178b3d55345ed84ebce05b8e1c1f0b1b52b3c944",
+      "src/wildfire_rl/feds_observation_v2.py": "01cef197dfa09924deffa57055cd51b1dc78bc6d9c4a46ed4bc6a41e7854cf81",
+      "src/wildfire_rl/feds_observation_audit.py": "bc7109bb81b41a5e0081d06ab7145252f6ddf1b205924de50f3b9f7dd1a64cf5",
+      "src/wildfire_rl/feds_repaired_learning.py": "bd234e75c65b9dffb8390ff34252139ec1eb7b80f38bb95730230837da66216c",
+      "src/wildfire_rl/line_damage.py": "cab7e146e769edff04e2364c8d9874036ab154fa68f05af1c739d6b55f995ea6",
+      "src/wildfire_rl/observed_growth_audit.py": "872557eaec329569e1a382908326ee423ae172922f6535be9959618718734dd1",
+      "scripts/audit_paired_observed_growth.py": "a813345ad30d01528abdbc38751124332449692376d94daac871f7fa865d04d4",
+      "src/wildfire_rl/gridmet_weather.py": "d3da280ee45b71692ce4492551be0fe73405ac71e83d1690add1a8a8dd9a4fd7",
+      "src/wildfire_rl/feds_spread_metrics.py": "2f8afd12932f742f15019b36a30547cd9bf954e4f33b0498c115e0659bc67cc0",
+      "src/wildfire_rl/simfire_initial_state.py": "b73c6a7d895b28a2270b47f80897a01ef465370758b08b90fbd6b699b6f3ff22",
+      "src/wildfire_rl/simfire_timebase.py": "f873554b80b884b382fb29271d64ef2da0801b25e3c9f3aec91aa5848a21b722",
+      "src/wildfire_rl/expanded_growth_audit.py": "e822ddf94629336c11651c6f37a4e53e480e66273c17da05fcc2585808fb975d",
+      "scripts/audit_expanded_observed_growth.py": "8ffa1c18cc341266248ff12ed51d2d209ae1e40fe8597ff09b009f0408fac26e"
+    },
+    "paired_report_sha256": "845f8e14a4aa95ea04a10f7d6dd8009a299c53c4b76dba910b3d799e3056a676",
+    "weather_sha256": "76332f3da26fe02812ca6439fee5dec9f131793227335e0380267d12c0ab937e",
+    "manifest_sha256": "013be9a1632abcbc29d86f4bc16af89d3c074503f5899d1e39903d76ec2c28d5",
+    "previous_report_sha256": "7fefabd25c6f416b43112d10e652cebe966dd049a7df6c6da217ec2dee17b54c"
+  },
+  "scoring_runtime": {
+    "python": "3.9.25",
+    "packages": {
+      "numpy": "1.26.4",
+      "fiona": "1.10.1",
+      "shapely": "2.0.7",
+      "pyproj": "3.6.1",
+      "rasterio": "1.4.3"
+    }
+  },
+  "checks": {
+    "pinned": {
+      "status": "PASS",
+      "run": 388,
+      "skipped": 0,
+      "seconds": 75.746,
+      "log_sha256": "ce65e4ac2a6600edeafa7ee31d4035b07ab83f49edeae164e829fbce0aa52735"
+    },
+    "modern": {
+      "status": "PASS",
+      "run": 373,
+      "skipped": 4,
+      "seconds": 24.079,
+      "log_sha256": "3cf94443a9384794af251e95410f869686160cd12a4bb4c5b22d2903f1c0b714"
+    },
+    "core": {
+      "status": "PASS",
+      "run": 306,
+      "skipped": 44,
+      "seconds": 7.101,
+      "log_sha256": "303d85e738de847b1732cb4c51e04914088753f43e235c35e7850af72945a723"
+    },
+    "cli_smoke": {
+      "status": "PASS",
+      "log_sha256": "c0a576916023b057f658a355ce9969f9d642773310dfe6a0c92b472c32c76459"
+    },
+    "knowledge_tests": {
+      "status": "PASS",
+      "run": 15,
+      "skipped": 0,
+      "log_sha256": "e253ba988fa92a5eb754ea8b7adc1775b6bc735979b6201dee5f26516a2d4101"
+    },
+    "knowledge_markdown": {
+      "strict_status": "PASS",
+      "files": 90,
+      "log_sha256": "5206b0b05b1de1621b8da3c246fa6973f55633cc1e173a51c77577cf29086c6a"
+    }
+  },
+  "prediction_accounting": {
+    "cases": 61,
+    "main_model_seed_paths": 244,
+    "reused_paths": 64,
+    "new_main_paths": 180,
+    "new_case_ca_technical_repeat_paths": 3,
+    "saved_cumulative_times_per_path": 5
+  },
+  "independent_audit": {
+    "status": "PASS",
+    "metric_rows": 2928,
+    "rasters": 305,
+    "sf_new_whole_masks": 45,
+    "reused_prediction_files": 32,
+    "unchanged_old_metric_cases": 16,
+    "legacy_loader_masks_matched": 10,
+    "all_endpoint_means_and_intervals_recalculated": true,
+    "predeclared_classification_and_ids_verified": true,
+    "source_hashes_match": true,
+    "predicted_edge_cases": {
+      "simfire": 0,
+      "ca0": 0,
+      "ca1": 0,
+      "ca2": 0
+    },
+    "zero_predicted_growth_cases": {
+      "simfire": 8,
+      "ca0": 0,
+      "ca1": 1,
+      "ca2": 0
+    },
+    "script_sha256": "a5d73be0928b99c017861eda9220b7c74c60d0f0e2fe53ab886b99a2c4572e2e",
+    "scope": "Technical arithmetic/geometry/reuse verification, not an independent scientific sample",
+    "validation_or_test_used": false
+  },
+  "restore": {
+    "status": "PASS",
+    "simfire": {
+      "status": "PASS",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "backend": "simfire",
+      "all5_new_case_cumulative_masks_identical": true,
+      "one_previous_case_adoption_provenance_pass": true,
+      "observed_rasters_rebuilt": 305,
+      "source_plan_input_guards": "PASS",
+      "seconds": 16.541676208,
+      "scope": "Unpacked numerical source/selected inputs, existing pinned dependencies; technical replay and all target rasters, no fresh installation or new evaluation sample."
+    },
+    "ca": {
+      "status": "PASS",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "backend": "ca",
+      "all3_replicates_all5_new_case_masks_identical": true,
+      "one_previous_case_adoption_provenance_pass": true,
+      "source_plan_input_guards": "PASS",
+      "seconds": 3.954538624995621,
+      "scope": "Unpacked numerical source/inputs, existing modern dependencies; first new case plus reused-case provenance, not full second evaluation or fresh environment."
+    },
+    "limits": "First new case5SF/3x5CA cumulative masks, one original-case adoption each backend and all305 observed rasters; existing dependencies, not fresh install or full second evaluation."
+  },
+  "public_artifact_sha256": {
+    "configs/frozen/expanded-observed-growth-v1.json": "30ae9dc69dc32f9f45b7f7e3ae8fa5b2d8dfbdabeceb60902df657a630dc5eec",
+    "scripts/plot_expanded_growth_audit.py": "2d5b6425ed2e209cde6e758c30eafadb0fa02b3068632b000610817d9d25dfb5",
+    "reports/real-fire-data/expanded-observed-growth-maps-v1-4.png": "87f66b6e2b22dd3940194926cd848a91b00789922c24bafb5c645bbadc4819a9",
+    "reports/real-fire-data/expanded-observed-growth-maps-v1-1.png": "7c17617bff5c483f60eb19f6bb458f0b3643ce73cc519e2c17f50d37aeb445ec",
+    "reports/real-fire-data/expanded-observed-growth-maps-v1-2.png": "4223879d6680df35e71a51ad979e3b4be989285210f2df74da80e0de977f67df",
+    "reports/real-fire-data/expanded-observed-growth-restore-v1.json": "fc9b0be2f4a6b1d7b358823b6a19b414aab2a90090f40c7aeeeca299c288ced8",
+    "reports/real-fire-data/expanded-observed-growth-maps-v1-3.png": "58c4f930cbd5d45ee80833b0407a77b72ca6bd4862413a0a757802992ac795ad",
+    "reports/real-fire-data/expanded-observed-growth-v1.json": "a3db8abe5534e3a03f490197d5e755b3ddd697176ee0998fb464374ae4b05385",
+    "reports/real-fire-data/expanded-observed-growth-groups-v1.json": "4b2f2a7436d5fedb9a24e73b11b7e756ef97a9b5590d057919d114da9080b485",
+    "reports/real-fire-data/expanded-observed-growth-artifacts-v1.json": "79dcd0c8fc858c4bb5329ff836c645ec24ac5eb59d77fb17f44255fe351f01a5",
+    "reports/real-fire-data/expanded-observed-growth-v1.png": "48cb3773baf9653897d3d8f591d1487096d8b5049a43da8dded01541cc10137d"
+  },
+  "local_log_sha256": {
+    ".local/plot.log": "cace1071573ef725e762e8856427937617c8c67e5d0784c45c0e854e56a803a8",
+    ".local/native-suite.log": "ce65e4ac2a6600edeafa7ee31d4035b07ab83f49edeae164e829fbce0aa52735",
+    ".local/expanded-first-red.log": "6e98131eb2c60257a5c63f702de4e8754cb04c079dfa96b3f8f3777173f7f03f",
+    ".local/modern-suite.log": "3cf94443a9384794af251e95410f869686160cd12a4bb4c5b22d2903f1c0b714",
+    ".local/pilot-sf.log": "9a631c2a5f37d39f543860ebb581110690deef261786e40b22a5d311eb2795ce",
+    ".local/expanded-tests.log": "7eb00a9a7ed564b2e7041e8b6d09ba8e0038f9801dcb284398074b716e7a90f3",
+    ".local/independent-check.log": "37d12f181216b4e7db3c2be6c543e90d2751e38eb543478e41f4f060a486c55d",
+    ".local/core-suite.log": "303d85e738de847b1732cb4c51e04914088753f43e235c35e7850af72945a723",
+    ".local/cli-smoke.log": "c0a576916023b057f658a355ce9969f9d642773310dfe6a0c92b472c32c76459",
+    ".local/score.log": "6b6a3267fe03dbd2576c2e66d9869df86190d4bec95c05023237f03f419292dd",
+    ".local/predict-ca.log": "71327f45b3e4f4b3b8263a34c8f6f0a284212451c7762690d6fb566cfbbdf18c",
+    ".local/pilot-ca.log": "80b173b5b04280232f0797c56b54561a7506e703f2230328da49ae7bcf14b980",
+    ".local/expanded-tests-pinned.log": "8d72f23c51b9e6659c33c574248d439a02caa7ed0bd608e0a27750201111bb13",
+    ".local/plot-final.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".local/predict-sf.log": "04e2df5bc6a8d1efb4e571491fcebbb254682bfff3cc3a407e0e76d421b182a7",
+    ".local/knowledge-final-tests.log": "e253ba988fa92a5eb754ea8b7adc1775b6bc735979b6201dee5f26516a2d4101",
+    ".local/knowledge-final-strict.log": "5206b0b05b1de1621b8da3c246fa6973f55633cc1e173a51c77577cf29086c6a"
+  },
+  "figures_visually_inspected": [
+    "Overview, all3 predefined groups",
+    "All4 map pages; wrapped numeric titles and common scale"
+  ],
+  "limits": [
+    "61 input-compatible TRAIN cases, not all98 or an independent holdout",
+    "57 observed-positive cases in primaryIoU;61 in areaMAE",
+    "Four observed-zero cases overgrown by both, near-stalledN1",
+    "Two observed trajectories outside domain,59fully-covered sensitivity reported",
+    "Common-line/vegetation CA bridge, not native unit PPO ranking",
+    "No tuning, policy training, real VALIDATION/TEST or physical validation"
+  ]
+}

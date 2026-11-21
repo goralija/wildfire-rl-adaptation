@@ -4,11 +4,11 @@ title: GitHub Copilot project entry point
 ---
 # Project context
 
-Najnovije TASK-041 / ADR-046: [audit opaženog rasta](../docs/research/PAIRED_OBSERVED_GROWTH.md)
-je završen. CA common-control bridge bliži je površini FEDS rasta na16TRAIN, uz
-prostornu neizvjesnost i Martinov domain problem; nije native PPO ili fizička validacija.
-Sljedeći prijedlog TASK-042 proširuje isti zamrznuti audit na61compatible TRAIN prije
-većeg treninga. Faza B otvorena, holdouti zatvoreni. Pročitati najnoviji STATUS/NEXT_SESSION.
+Najnovije TASK-042 / ADR-048: [prošireni audit](../docs/research/EXPANDED_OBSERVED_GROWTH.md)
+je završen na61compatible TRAIN. PrimaryCA0 area greška manja67,90%, IoU0,12568vs0,08664,
+ali svi4observed-zero slučaja oba modela prerastaju. Native PPO/fizička validacija nije
+urađena. Sljedeći prijedlog TASK-040 B.1 je zajednički PPO/reward ugovor i tehnički smoke,
+ne automatski veći trening ili native unit parity. Holdouti zatvoreni; pročitati STATUS.
 
 Prethodno: TASK-038/ADR-042 je završen kratki CA BC/PPO na `codex/ca-learning-pilot`;
 pročitati [learning pilot](../docs/research/CA_LEARNING_PILOT.md) i najnoviji STATUS prije rada.

@@ -4,7 +4,13 @@ title: Wildfire RL adaptation — MPVI
 ---
 # Wildfire RL adaptation — MPVI
 
-Najnovije 2026-11-21: [rast simulatora prema opaženom FEDS-u](docs/research/PAIRED_OBSERVED_GROWTH.md),
+Najnovije 2026-11-21: [prošireni SimFire/CA growth audit](docs/research/EXPANDED_OBSERVED_GROWTH.md),
+TASK-042/ADR-048 završen na svih61compatible TRAIN. Zamrznuti CA0 daje67,90%manju
+area grešku iIoU0,12568vsSF0,08664, ali oba modela prerastaju sva4slučaja bez opaženog
+rasta. Povoljni opisni intervali nisu fizička validacija ili native PPO prednost.
+Sljedeći prijedlog TASK-040 B.1: zajednički PPO/reward ugovor i tehnički smoke.
+
+Prethodno 2026-11-21: [rast simulatora prema opaženom FEDS-u](docs/research/PAIRED_OBSERVED_GROWTH.md),
 TASK-041/ADR-046 završen na16istih TRAIN početaka. Zamrznuti CA bridge ima86,47%manju
 apsolutnu grešku nove površine odSF; IoU0,160vs0,103, uz interval razlike preko0.
 Martinovo opažanje izlazi iz mape; fully-covered15 provjera prijavljena. Predloženi

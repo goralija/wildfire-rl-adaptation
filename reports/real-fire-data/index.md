@@ -74,3 +74,10 @@
 - [Svi slučajevi/vremena/seedi](paired-observed-growth-v1.json) - [metrike](paired-observed-growth-v1.png), [svih16mapa](paired-observed-growth-maps-v1.png).
 - [Testovi, provenance i nezavisna rekalkulacija](paired-observed-growth-verification-v1.json).
 - [Lokalni paket](paired-observed-growth-artifacts-v1.json) - [raspakovani SF/CA replay i80rastera](paired-observed-growth-restore-v1.json), bez uploada godišnjih arhiva ili raw mapa.
+
+## Prošireni zamrznuti TRAIN audit (2026-11-21)
+
+- [Ljudski izvještaj](../../docs/research/EXPANDED_OBSERVED_GROWTH.md) - TASK-042/ADR-048, svih61compatible početaka.
+- [Svi slučajevi/vremena/seedi](expanded-observed-growth-v1.json) - [unaprijed zadane podgrupe](expanded-observed-growth-groups-v1.json), [metrike](expanded-observed-growth-v1.png).
+- [Mape1–16](expanded-observed-growth-maps-v1-1.png), [17–32](expanded-observed-growth-maps-v1-2.png), [33–48](expanded-observed-growth-maps-v1-3.png), [49–61](expanded-observed-growth-maps-v1-4.png).
+- [Testovi/provenance/rekalkulacija](expanded-observed-growth-verification-v1.json), [lokalni paket](expanded-observed-growth-artifacts-v1.json), [restore](expanded-observed-growth-restore-v1.json).

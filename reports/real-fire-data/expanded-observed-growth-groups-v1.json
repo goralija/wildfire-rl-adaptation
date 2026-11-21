@@ -1,0 +1,2931 @@
+{
+  "schema_version": "expanded-growth-description/1.0",
+  "task": "TASK-042",
+  "source_analysis_sha256": "a3db8abe5534e3a03f490197d5e755b3ddd697176ee0998fb464374ae4b05385",
+  "common": {
+    "plan_sha256": "30ae9dc69dc32f9f45b7f7e3ae8fa5b2d8dfbdabeceb60902df657a630dc5eec",
+    "source_sha256": {
+      "scripts/run_paired_simulators.py": "a7394dd8860b4b105e2e83c4f3f826b9ac46f77eaa72ae4be9036de1418ba625",
+      "src/wildfire_rl/paired_simulators.py": "58794b6d1acb6df2f23b5be678e6d6bae0345b13f6676d86cd0d72a4c3d78779",
+      "src/wildfire_rl/synthetic_ca.py": "855b1d1ba50a1fd0e28f652f19d74607b1b0e485989e5424380bbf0602adb844",
+      "src/wildfire_rl/synthetic_real_cases.py": "22b2bb365207e2f5139cbd7c24d835f512a429b423387e8bfe627c9621729db6",
+      "src/wildfire_rl/feds_simfire_env.py": "261cb0b6565b72711aa56964a068f6749b6c49ceaa32b2b70a54c959cdb235ed",
+      "src/wildfire_rl/feds_simfire_setup.py": "78e7187113a246e9f70a0a88178b3d55345ed84ebce05b8e1c1f0b1b52b3c944",
+      "src/wildfire_rl/feds_observation_v2.py": "01cef197dfa09924deffa57055cd51b1dc78bc6d9c4a46ed4bc6a41e7854cf81",
+      "src/wildfire_rl/feds_observation_audit.py": "bc7109bb81b41a5e0081d06ab7145252f6ddf1b205924de50f3b9f7dd1a64cf5",
+      "src/wildfire_rl/feds_repaired_learning.py": "bd234e75c65b9dffb8390ff34252139ec1eb7b80f38bb95730230837da66216c",
+      "src/wildfire_rl/line_damage.py": "cab7e146e769edff04e2364c8d9874036ab154fa68f05af1c739d6b55f995ea6",
+      "src/wildfire_rl/observed_growth_audit.py": "872557eaec329569e1a382908326ee423ae172922f6535be9959618718734dd1",
+      "scripts/audit_paired_observed_growth.py": "a813345ad30d01528abdbc38751124332449692376d94daac871f7fa865d04d4",
+      "src/wildfire_rl/gridmet_weather.py": "d3da280ee45b71692ce4492551be0fe73405ac71e83d1690add1a8a8dd9a4fd7",
+      "src/wildfire_rl/feds_spread_metrics.py": "2f8afd12932f742f15019b36a30547cd9bf954e4f33b0498c115e0659bc67cc0",
+      "src/wildfire_rl/simfire_initial_state.py": "b73c6a7d895b28a2270b47f80897a01ef465370758b08b90fbd6b699b6f3ff22",
+      "src/wildfire_rl/simfire_timebase.py": "f873554b80b884b382fb29271d64ef2da0801b25e3c9f3aec91aa5848a21b722",
+      "src/wildfire_rl/expanded_growth_audit.py": "e822ddf94629336c11651c6f37a4e53e480e66273c17da05fcc2585808fb975d",
+      "scripts/audit_expanded_observed_growth.py": "8ffa1c18cc341266248ff12ed51d2d209ae1e40fe8597ff09b009f0408fac26e"
+    },
+    "paired_report_sha256": "845f8e14a4aa95ea04a10f7d6dd8009a299c53c4b76dba910b3d799e3056a676",
+    "weather_sha256": "76332f3da26fe02812ca6439fee5dec9f131793227335e0380267d12c0ab937e",
+    "manifest_sha256": "013be9a1632abcbc29d86f4bc16af89d3c074503f5899d1e39903d76ec2c28d5",
+    "previous_report_sha256": "7fefabd25c6f416b43112d10e652cebe966dd049a7df6c6da217ec2dee17b54c"
+  },
+  "scope": "Frozen61 compatible TRAIN starts, primaryCA0, all3 replicas and predeclared strata; no physical validation",
+  "all_cases": {
+    "kind": "raw",
+    "horizon": 48,
+    "fully_covered_only": false,
+    "complete_ids": [
+      "fpa-fod-400300427-plateau",
+      "fpa-fod-400300631-ranch",
+      "fpa-fod-400300764-buzzard",
+      "fpa-fod-400300963-coal-hollow",
+      "fpa-fod-400301084-prospect",
+      "fpa-fod-400301104-stewart-creek",
+      "fpa-fod-400302402-silver-creek",
+      "fpa-fod-400302444-spring-creek",
+      "fpa-fod-400302533-tinder",
+      "fpa-fod-400302636-bears",
+      "fpa-fod-400302686-boot",
+      "fpa-fod-400302943-cranston",
+      "fpa-fod-400303584-goldstone",
+      "fpa-fod-400303711-gold-hill",
+      "fpa-fod-400303744-rattlesnake-creek",
+      "fpa-fod-400303807-ryan",
+      "fpa-fod-400303966-cabin-lake",
+      "fpa-fod-400304718-west-valley",
+      "fpa-fod-400305302-sugar-pine",
+      "fpa-fod-400306102-rattlesnake",
+      "fpa-fod-400307379-weston-pass",
+      "fpa-fod-400307462-indian-valley",
+      "fpa-fod-400307488-red-canyon",
+      "fpa-fod-400307776-bull-draw",
+      "fpa-fod-400308544-winter-camp",
+      "fpa-fod-400308652-dog-creek",
+      "fpa-fod-400308656-sharps",
+      "fpa-fod-400310578-ok-bar",
+      "fpa-fod-400310583-organ",
+      "fpa-fod-400310659-206",
+      "fpa-fod-400310914-echo",
+      "fpa-fod-400310945-goose-creek",
+      "fpa-fod-400310977-sheep-creek",
+      "fpa-fod-400311017-goshute-cave",
+      "fpa-fod-400311253-martin",
+      "fpa-fod-400312787-black-mountain",
+      "fpa-fod-400313239-cedar-mountain-one",
+      "fpa-fod-400313254-lakeside",
+      "fpa-fod-400313301-bear-trap",
+      "fpa-fod-400313842-north-eden",
+      "fpa-fod-400314399-lake-wallula",
+      "fpa-fod-400376589-ute-park",
+      "fpa-fod-400500346-south",
+      "fpa-fod-400500878-cellar",
+      "fpa-fod-400501480-decker",
+      "fpa-fod-400501641-mountain",
+      "fpa-fod-400503581-coldwater",
+      "fpa-fod-400504417-shady",
+      "fpa-fod-400505027-pine-lodge",
+      "fpa-fod-400505118-cove-creek",
+      "fpa-fod-400507579-red-bank",
+      "fpa-fod-400508306-lookout-point",
+      "fpa-fod-400508308-pot-hole",
+      "fpa-fod-400508892-north-hills",
+      "fpa-fod-400509143-ridgetop",
+      "fpa-fod-400510304-goose",
+      "fpa-fod-400510515-summit",
+      "fpa-fod-400512420-shelter-pass",
+      "fpa-fod-400513488-sage",
+      "fpa-fod-400541373-mp-97",
+      "fpa-fod-400732973-walker"
+    ],
+    "observed_positive_ids": [
+      "fpa-fod-400300427-plateau",
+      "fpa-fod-400300631-ranch",
+      "fpa-fod-400300764-buzzard",
+      "fpa-fod-400300963-coal-hollow",
+      "fpa-fod-400301084-prospect",
+      "fpa-fod-400301104-stewart-creek",
+      "fpa-fod-400302402-silver-creek",
+      "fpa-fod-400302444-spring-creek",
+      "fpa-fod-400302533-tinder",
+      "fpa-fod-400302636-bears",
+      "fpa-fod-400302686-boot",
+      "fpa-fod-400302943-cranston",
+      "fpa-fod-400303584-goldstone",
+      "fpa-fod-400303711-gold-hill",
+      "fpa-fod-400303744-rattlesnake-creek",
+      "fpa-fod-400303807-ryan",
+      "fpa-fod-400303966-cabin-lake",
+      "fpa-fod-400304718-west-valley",
+      "fpa-fod-400305302-sugar-pine",
+      "fpa-fod-400306102-rattlesnake",
+      "fpa-fod-400307379-weston-pass",
+      "fpa-fod-400307462-indian-valley",
+      "fpa-fod-400307488-red-canyon",
+      "fpa-fod-400307776-bull-draw",
+      "fpa-fod-400308652-dog-creek",
+      "fpa-fod-400308656-sharps",
+      "fpa-fod-400310578-ok-bar",
+      "fpa-fod-400310583-organ",
+      "fpa-fod-400310914-echo",
+      "fpa-fod-400310945-goose-creek",
+      "fpa-fod-400310977-sheep-creek",
+      "fpa-fod-400311017-goshute-cave",
+      "fpa-fod-400311253-martin",
+      "fpa-fod-400312787-black-mountain",
+      "fpa-fod-400313239-cedar-mountain-one",
+      "fpa-fod-400313254-lakeside",
+      "fpa-fod-400313301-bear-trap",
+      "fpa-fod-400313842-north-eden",
+      "fpa-fod-400314399-lake-wallula",
+      "fpa-fod-400376589-ute-park",
+      "fpa-fod-400500346-south",
+      "fpa-fod-400500878-cellar",
+      "fpa-fod-400501480-decker",
+      "fpa-fod-400501641-mountain",
+      "fpa-fod-400503581-coldwater",
+      "fpa-fod-400504417-shady",
+      "fpa-fod-400505027-pine-lodge",
+      "fpa-fod-400505118-cove-creek",
+      "fpa-fod-400507579-red-bank",
+      "fpa-fod-400508306-lookout-point",
+      "fpa-fod-400508892-north-hills",
+      "fpa-fod-400509143-ridgetop",
+      "fpa-fod-400510304-goose",
+      "fpa-fod-400510515-summit",
+      "fpa-fod-400513488-sage",
+      "fpa-fod-400541373-mp-97",
+      "fpa-fod-400732973-walker"
+    ],
+    "missing_ids": [],
+    "excluded_censored_ids": [],
+    "methods": {
+      "simfire": {
+        "mean_growth_iou": 0.08663510352997311,
+        "mean_absolute_new_area_error_ha": 6642.371803278688,
+        "mean_signed_new_area_error_ha": 4556.449180327869,
+        "mean_predicted_new_area_ha": 7183.876721311476,
+        "mean_observed_new_area_ha": 2627.427540983607,
+        "mean_new_area_ratio_observed_positive": 12.616230210685313,
+        "median_new_area_ratio_observed_positive": 0.646685878962536,
+        "pooled_area_ratio": 2.73418642731518,
+        "pooled_growth_precision": 0.12007216159465295,
+        "pooled_growth_recall": 0.3282996745304951,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 4,
+        "mean_false_new_area_ha_when_stalled": 9455.94
+      },
+      "ca0": {
+        "mean_growth_iou": 0.12567880175125856,
+        "mean_absolute_new_area_error_ha": 2132.2918032786883,
+        "mean_signed_new_area_error_ha": -979.3829508196721,
+        "mean_predicted_new_area_ha": 1648.0445901639343,
+        "mean_observed_new_area_ha": 2627.427540983607,
+        "mean_new_area_ratio_observed_positive": 4.226460383512743,
+        "median_new_area_ratio_observed_positive": 0.5540013012361744,
+        "pooled_area_ratio": 0.6272464471263671,
+        "pooled_growth_precision": 0.25686476730694857,
+        "pooled_growth_recall": 0.1611175126852245,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 4,
+        "mean_false_new_area_ha_when_stalled": 3147.66
+      },
+      "ca1": {
+        "mean_growth_iou": 0.13935827675821266,
+        "mean_absolute_new_area_error_ha": 2076.3088524590166,
+        "mean_signed_new_area_error_ha": -998.8229508196722,
+        "mean_predicted_new_area_ha": 1628.604590163935,
+        "mean_observed_new_area_ha": 2627.427540983607,
+        "mean_new_area_ratio_observed_positive": 2.687453859317703,
+        "median_new_area_ratio_observed_positive": 0.5796316359696642,
+        "pooled_area_ratio": 0.6198475751511109,
+        "pooled_growth_precision": 0.26645359076381187,
+        "pooled_growth_recall": 0.1651606121252552,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 4,
+        "mean_false_new_area_ha_when_stalled": 2700.5400000000004
+      },
+      "ca2": {
+        "mean_growth_iou": 0.12556931986408645,
+        "mean_absolute_new_area_error_ha": 2122.624918032787,
+        "mean_signed_new_area_error_ha": -937.5285245901641,
+        "mean_predicted_new_area_ha": 1689.899016393443,
+        "mean_observed_new_area_ha": 2627.427540983607,
+        "mean_new_area_ratio_observed_positive": 3.5503321852571417,
+        "median_new_area_ratio_observed_positive": 0.6031746031746031,
+        "pooled_area_ratio": 0.6431762589200881,
+        "pooled_growth_precision": 0.24905707819964798,
+        "pooled_growth_recall": 0.16018759981401742,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 4,
+        "mean_false_new_area_ha_when_stalled": 2455.92
+      },
+      "ca_mean3": {
+        "mean_growth_iou": 0.1302021327911859,
+        "mean_absolute_new_area_error_ha": 2110.4085245901642,
+        "mean_signed_new_area_error_ha": -971.9114754098362,
+        "mean_predicted_new_area_ha": 1655.5160655737707,
+        "mean_observed_new_area_ha": 2627.427540983607,
+        "mean_new_area_ratio_observed_positive": 3.4880821426958626,
+        "median_new_area_ratio_observed_positive": 0.4962406015037594,
+        "pooled_area_ratio": 0.630090093732522,
+        "pooled_growth_precision": 0.2573524693602549,
+        "pooled_growth_recall": 0.16215524154149902,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 4.0,
+        "mean_false_new_area_ha_when_stalled": 2768.04
+      },
+      "persistence": {
+        "mean_growth_iou": 0.0,
+        "mean_absolute_new_area_error_ha": 2627.427540983607,
+        "mean_signed_new_area_error_ha": -2627.427540983607,
+        "mean_predicted_new_area_ha": 0.0,
+        "mean_observed_new_area_ha": 2627.427540983607,
+        "mean_new_area_ratio_observed_positive": 0.0,
+        "median_new_area_ratio_observed_positive": 0.0,
+        "pooled_area_ratio": 0.0,
+        "pooled_growth_precision": null,
+        "pooled_growth_recall": 0.0,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 0,
+        "mean_false_new_area_ha_when_stalled": 0.0
+      },
+      "ellipse": {
+        "mean_growth_iou": 0.03907432261607989,
+        "mean_absolute_new_area_error_ha": 2572.4537704918034,
+        "mean_signed_new_area_error_ha": -2552.0577049180324,
+        "mean_predicted_new_area_ha": 75.36983606557379,
+        "mean_observed_new_area_ha": 2627.427540983607,
+        "mean_new_area_ratio_observed_positive": 0.9144909098878988,
+        "median_new_area_ratio_observed_positive": 0.06875,
+        "pooled_area_ratio": 0.028685790527018012,
+        "pooled_growth_precision": 0.4883720930232558,
+        "pooled_growth_recall": 0.014009339559706471,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 4,
+        "mean_false_new_area_ha_when_stalled": 76.14
+      }
+    },
+    "contrasts": {
+      "ca0_minus_simfire": {
+        "growth_iou": {
+          "cases": 57,
+          "mean": 0.039043698221285436,
+          "ci95": [
+            0.008606069036374238,
+            0.06962993215628559
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 61,
+          "mean": -4510.080000000001,
+          "ci95": [
+            -6856.903622950818,
+            -2414.212967213115
+          ]
+        }
+      },
+      "ca1_minus_simfire": {
+        "growth_iou": {
+          "cases": 57,
+          "mean": 0.052723173228239516,
+          "ci95": [
+            0.01779172927804166,
+            0.08921952937010626
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 61,
+          "mean": -4566.062950819672,
+          "ci95": [
+            -6921.043672131149,
+            -2472.473213114755
+          ]
+        }
+      },
+      "ca2_minus_simfire": {
+        "growth_iou": {
+          "cases": 57,
+          "mean": 0.03893421633411335,
+          "ci95": [
+            0.007035521417559645,
+            0.0720283121138329
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 61,
+          "mean": -4519.7468852459015,
+          "ci95": [
+            -6839.39168852459,
+            -2449.057573770495
+          ]
+        }
+      },
+      "ca_mean3_minus_simfire": {
+        "growth_iou": {
+          "cases": 57,
+          "mean": 0.043567029261212774,
+          "ci95": [
+            0.01234079303661263,
+            0.07583670331343756
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 61,
+          "mean": -4531.963278688526,
+          "ci95": [
+            -6868.497688524591,
+            -2452.644590163935
+          ]
+        }
+      },
+      "persistence_minus_simfire": {
+        "growth_iou": {
+          "cases": 57,
+          "mean": -0.08663510352997311,
+          "ci95": [
+            -0.11104201043560573,
+            -0.06415044385965658
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 61,
+          "mean": -4014.9442622950824,
+          "ci95": [
+            -6274.32506557377,
+            -1985.3100000000004
+          ]
+        }
+      },
+      "ellipse_minus_simfire": {
+        "growth_iou": {
+          "cases": 57,
+          "mean": -0.04756078091389322,
+          "ci95": [
+            -0.0771499714995215,
+            -0.018569491637712602
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 61,
+          "mean": -4069.918032786885,
+          "ci95": [
+            -6329.266967213116,
+            -2041.4310491803287
+          ]
+        }
+      }
+    }
+  },
+  "fully_covered": {
+    "kind": "raw",
+    "horizon": 48,
+    "fully_covered_only": true,
+    "complete_ids": [
+      "fpa-fod-400300427-plateau",
+      "fpa-fod-400300631-ranch",
+      "fpa-fod-400300764-buzzard",
+      "fpa-fod-400300963-coal-hollow",
+      "fpa-fod-400301084-prospect",
+      "fpa-fod-400301104-stewart-creek",
+      "fpa-fod-400302402-silver-creek",
+      "fpa-fod-400302444-spring-creek",
+      "fpa-fod-400302533-tinder",
+      "fpa-fod-400302636-bears",
+      "fpa-fod-400302686-boot",
+      "fpa-fod-400302943-cranston",
+      "fpa-fod-400303584-goldstone",
+      "fpa-fod-400303711-gold-hill",
+      "fpa-fod-400303744-rattlesnake-creek",
+      "fpa-fod-400303807-ryan",
+      "fpa-fod-400303966-cabin-lake",
+      "fpa-fod-400304718-west-valley",
+      "fpa-fod-400305302-sugar-pine",
+      "fpa-fod-400306102-rattlesnake",
+      "fpa-fod-400307379-weston-pass",
+      "fpa-fod-400307462-indian-valley",
+      "fpa-fod-400307488-red-canyon",
+      "fpa-fod-400307776-bull-draw",
+      "fpa-fod-400308544-winter-camp",
+      "fpa-fod-400308652-dog-creek",
+      "fpa-fod-400308656-sharps",
+      "fpa-fod-400310578-ok-bar",
+      "fpa-fod-400310583-organ",
+      "fpa-fod-400310659-206",
+      "fpa-fod-400310914-echo",
+      "fpa-fod-400310977-sheep-creek",
+      "fpa-fod-400311017-goshute-cave",
+      "fpa-fod-400312787-black-mountain",
+      "fpa-fod-400313239-cedar-mountain-one",
+      "fpa-fod-400313254-lakeside",
+      "fpa-fod-400313301-bear-trap",
+      "fpa-fod-400313842-north-eden",
+      "fpa-fod-400314399-lake-wallula",
+      "fpa-fod-400376589-ute-park",
+      "fpa-fod-400500346-south",
+      "fpa-fod-400500878-cellar",
+      "fpa-fod-400501480-decker",
+      "fpa-fod-400501641-mountain",
+      "fpa-fod-400503581-coldwater",
+      "fpa-fod-400504417-shady",
+      "fpa-fod-400505027-pine-lodge",
+      "fpa-fod-400505118-cove-creek",
+      "fpa-fod-400507579-red-bank",
+      "fpa-fod-400508306-lookout-point",
+      "fpa-fod-400508308-pot-hole",
+      "fpa-fod-400508892-north-hills",
+      "fpa-fod-400509143-ridgetop",
+      "fpa-fod-400510304-goose",
+      "fpa-fod-400510515-summit",
+      "fpa-fod-400512420-shelter-pass",
+      "fpa-fod-400513488-sage",
+      "fpa-fod-400541373-mp-97",
+      "fpa-fod-400732973-walker"
+    ],
+    "observed_positive_ids": [
+      "fpa-fod-400300427-plateau",
+      "fpa-fod-400300631-ranch",
+      "fpa-fod-400300764-buzzard",
+      "fpa-fod-400300963-coal-hollow",
+      "fpa-fod-400301084-prospect",
+      "fpa-fod-400301104-stewart-creek",
+      "fpa-fod-400302402-silver-creek",
+      "fpa-fod-400302444-spring-creek",
+      "fpa-fod-400302533-tinder",
+      "fpa-fod-400302636-bears",
+      "fpa-fod-400302686-boot",
+      "fpa-fod-400302943-cranston",
+      "fpa-fod-400303584-goldstone",
+      "fpa-fod-400303711-gold-hill",
+      "fpa-fod-400303744-rattlesnake-creek",
+      "fpa-fod-400303807-ryan",
+      "fpa-fod-400303966-cabin-lake",
+      "fpa-fod-400304718-west-valley",
+      "fpa-fod-400305302-sugar-pine",
+      "fpa-fod-400306102-rattlesnake",
+      "fpa-fod-400307379-weston-pass",
+      "fpa-fod-400307462-indian-valley",
+      "fpa-fod-400307488-red-canyon",
+      "fpa-fod-400307776-bull-draw",
+      "fpa-fod-400308652-dog-creek",
+      "fpa-fod-400308656-sharps",
+      "fpa-fod-400310578-ok-bar",
+      "fpa-fod-400310583-organ",
+      "fpa-fod-400310914-echo",
+      "fpa-fod-400310977-sheep-creek",
+      "fpa-fod-400311017-goshute-cave",
+      "fpa-fod-400312787-black-mountain",
+      "fpa-fod-400313239-cedar-mountain-one",
+      "fpa-fod-400313254-lakeside",
+      "fpa-fod-400313301-bear-trap",
+      "fpa-fod-400313842-north-eden",
+      "fpa-fod-400314399-lake-wallula",
+      "fpa-fod-400376589-ute-park",
+      "fpa-fod-400500346-south",
+      "fpa-fod-400500878-cellar",
+      "fpa-fod-400501480-decker",
+      "fpa-fod-400501641-mountain",
+      "fpa-fod-400503581-coldwater",
+      "fpa-fod-400504417-shady",
+      "fpa-fod-400505027-pine-lodge",
+      "fpa-fod-400505118-cove-creek",
+      "fpa-fod-400507579-red-bank",
+      "fpa-fod-400508306-lookout-point",
+      "fpa-fod-400508892-north-hills",
+      "fpa-fod-400509143-ridgetop",
+      "fpa-fod-400510304-goose",
+      "fpa-fod-400510515-summit",
+      "fpa-fod-400513488-sage",
+      "fpa-fod-400541373-mp-97",
+      "fpa-fod-400732973-walker"
+    ],
+    "missing_ids": [],
+    "excluded_censored_ids": [
+      "fpa-fod-400310945-goose-creek",
+      "fpa-fod-400311253-martin"
+    ],
+    "methods": {
+      "simfire": {
+        "mean_growth_iou": 0.08651786941155787,
+        "mean_absolute_new_area_error_ha": 6059.184406779661,
+        "mean_signed_new_area_error_ha": 4227.211525423731,
+        "mean_predicted_new_area_ha": 6377.692881355933,
+        "mean_observed_new_area_ha": 2150.4813559322033,
+        "mean_new_area_ratio_observed_positive": 13.014981583330643,
+        "median_new_area_ratio_observed_positive": 0.646685878962536,
+        "pooled_area_ratio": 2.9657048008171603,
+        "pooled_growth_precision": 0.11775747608427978,
+        "pooled_growth_recall": 0.34923391215526045,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 4,
+        "mean_false_new_area_ha_when_stalled": 9455.94
+      },
+      "ca0": {
+        "mean_growth_iou": 0.12794381680132724,
+        "mean_absolute_new_area_error_ha": 1939.9911864406781,
+        "mean_signed_new_area_error_ha": -748.0006779661019,
+        "mean_predicted_new_area_ha": 1402.4806779661017,
+        "mean_observed_new_area_ha": 2150.4813559322033,
+        "mean_new_area_ratio_observed_positive": 4.362554634509638,
+        "median_new_area_ratio_observed_positive": 0.5540013012361744,
+        "pooled_area_ratio": 0.652170582226762,
+        "pooled_growth_precision": 0.27420807392615215,
+        "pooled_growth_recall": 0.17883043922369765,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 4,
+        "mean_false_new_area_ha_when_stalled": 3147.66
+      },
+      "ca1": {
+        "mean_growth_iou": 0.14199438098989542,
+        "mean_absolute_new_area_error_ha": 1893.477966101695,
+        "mean_signed_new_area_error_ha": -779.4671186440678,
+        "mean_predicted_new_area_ha": 1371.014237288136,
+        "mean_observed_new_area_ha": 2150.4813559322033,
+        "mean_new_area_ratio_observed_positive": 2.766925633269204,
+        "median_new_area_ratio_observed_positive": 0.5796316359696642,
+        "pooled_area_ratio": 0.637538304392237,
+        "pooled_growth_precision": 0.2901946647440519,
+        "pooled_growth_recall": 0.18501021450459654,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 4,
+        "mean_false_new_area_ha_when_stalled": 2700.5400000000004
+      },
+      "ca2": {
+        "mean_growth_iou": 0.12701374579216076,
+        "mean_absolute_new_area_error_ha": 1945.5376271186442,
+        "mean_signed_new_area_error_ha": -720.2684745762713,
+        "mean_predicted_new_area_ha": 1430.2128813559325,
+        "mean_observed_new_area_ha": 2150.4813559322033,
+        "mean_new_area_ratio_observed_positive": 3.6610510292671345,
+        "median_new_area_ratio_observed_positive": 0.6031746031746031,
+        "pooled_area_ratio": 0.6650663942798775,
+        "pooled_growth_precision": 0.2567193979419444,
+        "pooled_growth_recall": 0.17073544433094995,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 4,
+        "mean_false_new_area_ha_when_stalled": 2455.92
+      },
+      "ca_mean3": {
+        "mean_growth_iou": 0.1323173145277945,
+        "mean_absolute_new_area_error_ha": 1926.335593220339,
+        "mean_signed_new_area_error_ha": -749.2454237288138,
+        "mean_predicted_new_area_ha": 1401.23593220339,
+        "mean_observed_new_area_ha": 2150.4813559322033,
+        "mean_new_area_ratio_observed_positive": 3.5968437656819914,
+        "median_new_area_ratio_observed_positive": 0.4962406015037594,
+        "pooled_area_ratio": 0.6515917602996253,
+        "pooled_growth_precision": 0.273471893819645,
+        "pooled_growth_recall": 0.1781920326864147,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 4.0,
+        "mean_false_new_area_ha_when_stalled": 2768.04
+      },
+      "persistence": {
+        "mean_growth_iou": 0.0,
+        "mean_absolute_new_area_error_ha": 2150.4813559322033,
+        "mean_signed_new_area_error_ha": -2150.4813559322033,
+        "mean_predicted_new_area_ha": 0.0,
+        "mean_observed_new_area_ha": 2150.4813559322033,
+        "mean_new_area_ratio_observed_positive": 0.0,
+        "median_new_area_ratio_observed_positive": 0.0,
+        "pooled_area_ratio": 0.0,
+        "pooled_growth_precision": null,
+        "pooled_growth_recall": 0.0,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 0,
+        "mean_false_new_area_ha_when_stalled": 0.0
+      },
+      "ellipse": {
+        "mean_growth_iou": 0.0404035060202843,
+        "mean_absolute_new_area_error_ha": 2096.2250847457626,
+        "mean_signed_new_area_error_ha": -2075.137627118644,
+        "mean_predicted_new_area_ha": 75.34372881355934,
+        "mean_observed_new_area_ha": 2150.4813559322033,
+        "mean_new_area_ratio_observed_positive": 0.947576965293516,
+        "median_new_area_ratio_observed_positive": 0.0718232044198895,
+        "pooled_area_ratio": 0.03503575076608784,
+        "pooled_growth_precision": 0.489067055393586,
+        "pooled_growth_recall": 0.017134831460674158,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 4,
+        "mean_false_new_area_ha_when_stalled": 76.14
+      }
+    },
+    "contrasts": {
+      "ca0_minus_simfire": {
+        "growth_iou": {
+          "cases": 55,
+          "mean": 0.04142594738976938,
+          "ci95": [
+            0.00966665508133266,
+            0.0732913596946386
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 59,
+          "mean": -4119.193220338983,
+          "ci95": [
+            -6313.131762711866,
+            -2153.8572711864413
+          ]
+        }
+      },
+      "ca1_minus_simfire": {
+        "growth_iou": {
+          "cases": 55,
+          "mean": 0.055476511578337565,
+          "ci95": [
+            0.019955795618571647,
+            0.09338990430708886
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 59,
+          "mean": -4165.706440677966,
+          "ci95": [
+            -6336.4336779661035,
+            -2227.2322881355944
+          ]
+        }
+      },
+      "ca2_minus_simfire": {
+        "growth_iou": {
+          "cases": 55,
+          "mean": 0.04049587638060292,
+          "ci95": [
+            0.007097094581193798,
+            0.074716289207602
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 59,
+          "mean": -4113.646779661018,
+          "ci95": [
+            -6261.317847457627,
+            -2206.879322033899
+          ]
+        }
+      },
+      "ca_mean3_minus_simfire": {
+        "growth_iou": {
+          "cases": 55,
+          "mean": 0.04579944511623661,
+          "ci95": [
+            0.013673223986426734,
+            0.07975793943562524
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 59,
+          "mean": -4132.848813559322,
+          "ci95": [
+            -6304.119254237288,
+            -2196.4614406779665
+          ]
+        }
+      },
+      "persistence_minus_simfire": {
+        "growth_iou": {
+          "cases": 55,
+          "mean": -0.08651786941155787,
+          "ci95": [
+            -0.11231726814382859,
+            -0.06273527018232741
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 59,
+          "mean": -3908.703050847458,
+          "ci95": [
+            -6208.496237288136,
+            -1845.0317288135604
+          ]
+        }
+      },
+      "ellipse_minus_simfire": {
+        "growth_iou": {
+          "cases": 55,
+          "mean": -0.04611436339127356,
+          "ci95": [
+            -0.07678173397699349,
+            -0.01660026484513511
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 59,
+          "mean": -3962.9593220338984,
+          "ci95": [
+            -6262.918627118644,
+            -1899.3305593220348
+          ]
+        }
+      }
+    }
+  },
+  "classification": {
+    "fpa-fod-400300427-plateau": "growing",
+    "fpa-fod-400300631-ranch": "growing",
+    "fpa-fod-400300764-buzzard": "growing",
+    "fpa-fod-400300963-coal-hollow": "growing",
+    "fpa-fod-400301084-prospect": "growing",
+    "fpa-fod-400301104-stewart-creek": "growing",
+    "fpa-fod-400302402-silver-creek": "growing",
+    "fpa-fod-400302444-spring-creek": "growing",
+    "fpa-fod-400302533-tinder": "growing",
+    "fpa-fod-400302636-bears": "growing",
+    "fpa-fod-400302686-boot": "growing",
+    "fpa-fod-400302943-cranston": "growing",
+    "fpa-fod-400303584-goldstone": "near_stalled",
+    "fpa-fod-400303711-gold-hill": "growing",
+    "fpa-fod-400303744-rattlesnake-creek": "growing",
+    "fpa-fod-400303807-ryan": "growing",
+    "fpa-fod-400303966-cabin-lake": "growing",
+    "fpa-fod-400304718-west-valley": "growing",
+    "fpa-fod-400305302-sugar-pine": "growing",
+    "fpa-fod-400306102-rattlesnake": "growing",
+    "fpa-fod-400307379-weston-pass": "growing",
+    "fpa-fod-400307462-indian-valley": "growing",
+    "fpa-fod-400307488-red-canyon": "growing",
+    "fpa-fod-400307776-bull-draw": "growing",
+    "fpa-fod-400308544-winter-camp": "zero_growth",
+    "fpa-fod-400308652-dog-creek": "growing",
+    "fpa-fod-400308656-sharps": "growing",
+    "fpa-fod-400310578-ok-bar": "growing",
+    "fpa-fod-400310583-organ": "growing",
+    "fpa-fod-400310659-206": "zero_growth",
+    "fpa-fod-400310914-echo": "growing",
+    "fpa-fod-400310945-goose-creek": "growing",
+    "fpa-fod-400310977-sheep-creek": "growing",
+    "fpa-fod-400311017-goshute-cave": "growing",
+    "fpa-fod-400311253-martin": "growing",
+    "fpa-fod-400312787-black-mountain": "growing",
+    "fpa-fod-400313239-cedar-mountain-one": "growing",
+    "fpa-fod-400313254-lakeside": "growing",
+    "fpa-fod-400313301-bear-trap": "growing",
+    "fpa-fod-400313842-north-eden": "growing",
+    "fpa-fod-400314399-lake-wallula": "growing",
+    "fpa-fod-400376589-ute-park": "growing",
+    "fpa-fod-400500346-south": "growing",
+    "fpa-fod-400500878-cellar": "growing",
+    "fpa-fod-400501480-decker": "growing",
+    "fpa-fod-400501641-mountain": "growing",
+    "fpa-fod-400503581-coldwater": "growing",
+    "fpa-fod-400504417-shady": "growing",
+    "fpa-fod-400505027-pine-lodge": "growing",
+    "fpa-fod-400505118-cove-creek": "growing",
+    "fpa-fod-400507579-red-bank": "growing",
+    "fpa-fod-400508306-lookout-point": "growing",
+    "fpa-fod-400508308-pot-hole": "zero_growth",
+    "fpa-fod-400508892-north-hills": "growing",
+    "fpa-fod-400509143-ridgetop": "growing",
+    "fpa-fod-400510304-goose": "growing",
+    "fpa-fod-400510515-summit": "growing",
+    "fpa-fod-400512420-shelter-pass": "zero_growth",
+    "fpa-fod-400513488-sage": "growing",
+    "fpa-fod-400541373-mp-97": "growing",
+    "fpa-fod-400732973-walker": "growing"
+  },
+  "unclassified_missing_ids": [],
+  "previous_cases": {
+    "kind": "raw",
+    "horizon": 48,
+    "fully_covered_only": false,
+    "complete_ids": [
+      "fpa-fod-400300963-coal-hollow",
+      "fpa-fod-400302943-cranston",
+      "fpa-fod-400303584-goldstone",
+      "fpa-fod-400304718-west-valley",
+      "fpa-fod-400306102-rattlesnake",
+      "fpa-fod-400307379-weston-pass",
+      "fpa-fod-400307776-bull-draw",
+      "fpa-fod-400308652-dog-creek",
+      "fpa-fod-400310583-organ",
+      "fpa-fod-400310914-echo",
+      "fpa-fod-400311253-martin",
+      "fpa-fod-400312787-black-mountain",
+      "fpa-fod-400503581-coldwater",
+      "fpa-fod-400505027-pine-lodge",
+      "fpa-fod-400508306-lookout-point",
+      "fpa-fod-400541373-mp-97"
+    ],
+    "observed_positive_ids": [
+      "fpa-fod-400300963-coal-hollow",
+      "fpa-fod-400302943-cranston",
+      "fpa-fod-400303584-goldstone",
+      "fpa-fod-400304718-west-valley",
+      "fpa-fod-400306102-rattlesnake",
+      "fpa-fod-400307379-weston-pass",
+      "fpa-fod-400307776-bull-draw",
+      "fpa-fod-400308652-dog-creek",
+      "fpa-fod-400310583-organ",
+      "fpa-fod-400310914-echo",
+      "fpa-fod-400311253-martin",
+      "fpa-fod-400312787-black-mountain",
+      "fpa-fod-400503581-coldwater",
+      "fpa-fod-400505027-pine-lodge",
+      "fpa-fod-400508306-lookout-point",
+      "fpa-fod-400541373-mp-97"
+    ],
+    "missing_ids": [],
+    "excluded_censored_ids": [],
+    "methods": {
+      "simfire": {
+        "mean_growth_iou": 0.10286802607681642,
+        "mean_absolute_new_area_error_ha": 9736.4025,
+        "mean_signed_new_area_error_ha": 8637.2325,
+        "mean_predicted_new_area_ha": 11363.692500000001,
+        "mean_observed_new_area_ha": 2726.4600000000005,
+        "mean_new_area_ratio_observed_positive": 10.34428931172476,
+        "median_new_area_ratio_observed_positive": 2.7007318355806955,
+        "pooled_area_ratio": 4.167929292929293,
+        "pooled_growth_precision": 0.09736799900208493,
+        "pooled_growth_recall": 0.4058229352346999,
+        "stalled_cases": 0,
+        "stalled_cases_with_predicted_growth": 0,
+        "mean_false_new_area_ha_when_stalled": null
+      },
+      "ca0": {
+        "mean_growth_iou": 0.1603585261678701,
+        "mean_absolute_new_area_error_ha": 1317.6675,
+        "mean_signed_new_area_error_ha": -859.6125,
+        "mean_predicted_new_area_ha": 1866.8474999999999,
+        "mean_observed_new_area_ha": 2726.4600000000005,
+        "mean_new_area_ratio_observed_positive": 7.011157866508423,
+        "median_new_area_ratio_observed_positive": 0.6508441675695197,
+        "pooled_area_ratio": 0.6847147950089126,
+        "pooled_growth_precision": 0.28137542032758434,
+        "pooled_growth_recall": 0.19266191325014853,
+        "stalled_cases": 0,
+        "stalled_cases_with_predicted_growth": 0,
+        "mean_false_new_area_ha_when_stalled": null
+      },
+      "ca1": {
+        "mean_growth_iou": 0.21407288157380125,
+        "mean_absolute_new_area_error_ha": 1179.765,
+        "mean_signed_new_area_error_ha": -634.23,
+        "mean_predicted_new_area_ha": 2092.23,
+        "mean_observed_new_area_ha": 2726.4600000000005,
+        "mean_new_area_ratio_observed_positive": 1.6587485543354195,
+        "median_new_area_ratio_observed_positive": 0.6145474137931034,
+        "pooled_area_ratio": 0.767379679144385,
+        "pooled_growth_precision": 0.29016647309330235,
+        "pooled_growth_recall": 0.2226678550207962,
+        "stalled_cases": 0,
+        "stalled_cases_with_predicted_growth": 0,
+        "mean_false_new_area_ha_when_stalled": null
+      },
+      "ca2": {
+        "mean_growth_iou": 0.16910283969771772,
+        "mean_absolute_new_area_error_ha": 1198.3950000000002,
+        "mean_signed_new_area_error_ha": -389.20500000000004,
+        "mean_predicted_new_area_ha": 2337.255,
+        "mean_observed_new_area_ha": 2726.4600000000005,
+        "mean_new_area_ratio_observed_positive": 3.9549579287146632,
+        "median_new_area_ratio_observed_positive": 0.9019878481092256,
+        "pooled_area_ratio": 0.8572489601901366,
+        "pooled_growth_precision": 0.25125628140703515,
+        "pooled_growth_recall": 0.21538918597742127,
+        "stalled_cases": 0,
+        "stalled_cases_with_predicted_growth": 0,
+        "mean_false_new_area_ha_when_stalled": null
+      },
+      "ca_mean3": {
+        "mean_growth_iou": 0.18117808247979636,
+        "mean_absolute_new_area_error_ha": 1231.9425,
+        "mean_signed_new_area_error_ha": -627.6825,
+        "mean_predicted_new_area_ha": 2098.7775,
+        "mean_observed_new_area_ha": 2726.4600000000005,
+        "mean_new_area_ratio_observed_positive": 4.208288116519501,
+        "median_new_area_ratio_observed_positive": 0.7549232848528623,
+        "pooled_area_ratio": 0.7697811447811448,
+        "pooled_growth_precision": 0.27311613546457403,
+        "pooled_growth_recall": 0.21023965141612203,
+        "stalled_cases": 0,
+        "stalled_cases_with_predicted_growth": 0,
+        "mean_false_new_area_ha_when_stalled": null
+      },
+      "persistence": {
+        "mean_growth_iou": 0.0,
+        "mean_absolute_new_area_error_ha": 2726.4600000000005,
+        "mean_signed_new_area_error_ha": -2726.4600000000005,
+        "mean_predicted_new_area_ha": 0.0,
+        "mean_observed_new_area_ha": 2726.4600000000005,
+        "mean_new_area_ratio_observed_positive": 0.0,
+        "median_new_area_ratio_observed_positive": 0.0,
+        "pooled_area_ratio": 0.0,
+        "pooled_growth_precision": null,
+        "pooled_growth_recall": 0.0,
+        "stalled_cases": 0,
+        "stalled_cases_with_predicted_growth": 0,
+        "mean_false_new_area_ha_when_stalled": null
+      },
+      "ellipse": {
+        "mean_growth_iou": 0.028822484585140428,
+        "mean_absolute_new_area_error_ha": 2661.0525000000002,
+        "mean_signed_new_area_error_ha": -2651.7375,
+        "mean_predicted_new_area_ha": 74.72250000000001,
+        "mean_observed_new_area_ha": 2726.4600000000005,
+        "mean_new_area_ratio_observed_positive": 1.5721234317155202,
+        "median_new_area_ratio_observed_positive": 0.05764790764790764,
+        "pooled_area_ratio": 0.027406417112299464,
+        "pooled_growth_precision": 0.5474254742547425,
+        "pooled_growth_recall": 0.015002970885323827,
+        "stalled_cases": 0,
+        "stalled_cases_with_predicted_growth": 0,
+        "mean_false_new_area_ha_when_stalled": null
+      }
+    },
+    "contrasts": {
+      "ca0_minus_simfire": {
+        "growth_iou": {
+          "cases": 16,
+          "mean": 0.05749050009105372,
+          "ci95": [
+            -0.020838859203929472,
+            0.13282240215831295
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 16,
+          "mean": -8418.735,
+          "ci95": [
+            -15232.7030625,
+            -2468.9660625000047
+          ]
+        }
+      },
+      "ca1_minus_simfire": {
+        "growth_iou": {
+          "cases": 16,
+          "mean": 0.11120485549698483,
+          "ci95": [
+            0.022010187494398908,
+            0.19822096919821633
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 16,
+          "mean": -8556.6375,
+          "ci95": [
+            -15231.4171875,
+            -2735.461125000002
+          ]
+        }
+      },
+      "ca2_minus_simfire": {
+        "growth_iou": {
+          "cases": 16,
+          "mean": 0.0662348136209013,
+          "ci95": [
+            -0.01812971943866285,
+            0.14922864847454537
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 16,
+          "mean": -8538.0075,
+          "ci95": [
+            -15272.7525,
+            -2637.9523125000037
+          ]
+        }
+      },
+      "ca_mean3_minus_simfire": {
+        "growth_iou": {
+          "cases": 16,
+          "mean": 0.07831005640297996,
+          "ci95": [
+            -0.002200455694313056,
+            0.15836608802273516
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 16,
+          "mean": -8504.460000000001,
+          "ci95": [
+            -15250.6580625,
+            -2627.9184375000013
+          ]
+        }
+      },
+      "persistence_minus_simfire": {
+        "growth_iou": {
+          "cases": 16,
+          "mean": -0.10286802607681642,
+          "ci95": [
+            -0.16465378619667093,
+            -0.05137604028299961
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 16,
+          "mean": -7009.942500000001,
+          "ci95": [
+            -13197.603374999999,
+            -1696.079250000001
+          ]
+        }
+      },
+      "ellipse_minus_simfire": {
+        "growth_iou": {
+          "cases": 16,
+          "mean": -0.07404554149167598,
+          "ci95": [
+            -0.13868995546571772,
+            -0.020307363691105647
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 16,
+          "mean": -7075.349999999999,
+          "ci95": [
+            -13263.507000000001,
+            -1753.4171250000006
+          ]
+        }
+      }
+    }
+  },
+  "new_cases": {
+    "kind": "raw",
+    "horizon": 48,
+    "fully_covered_only": false,
+    "complete_ids": [
+      "fpa-fod-400300427-plateau",
+      "fpa-fod-400300631-ranch",
+      "fpa-fod-400300764-buzzard",
+      "fpa-fod-400301084-prospect",
+      "fpa-fod-400301104-stewart-creek",
+      "fpa-fod-400302402-silver-creek",
+      "fpa-fod-400302444-spring-creek",
+      "fpa-fod-400302533-tinder",
+      "fpa-fod-400302636-bears",
+      "fpa-fod-400302686-boot",
+      "fpa-fod-400303711-gold-hill",
+      "fpa-fod-400303744-rattlesnake-creek",
+      "fpa-fod-400303807-ryan",
+      "fpa-fod-400303966-cabin-lake",
+      "fpa-fod-400305302-sugar-pine",
+      "fpa-fod-400307462-indian-valley",
+      "fpa-fod-400307488-red-canyon",
+      "fpa-fod-400308544-winter-camp",
+      "fpa-fod-400308656-sharps",
+      "fpa-fod-400310578-ok-bar",
+      "fpa-fod-400310659-206",
+      "fpa-fod-400310945-goose-creek",
+      "fpa-fod-400310977-sheep-creek",
+      "fpa-fod-400311017-goshute-cave",
+      "fpa-fod-400313239-cedar-mountain-one",
+      "fpa-fod-400313254-lakeside",
+      "fpa-fod-400313301-bear-trap",
+      "fpa-fod-400313842-north-eden",
+      "fpa-fod-400314399-lake-wallula",
+      "fpa-fod-400376589-ute-park",
+      "fpa-fod-400500346-south",
+      "fpa-fod-400500878-cellar",
+      "fpa-fod-400501480-decker",
+      "fpa-fod-400501641-mountain",
+      "fpa-fod-400504417-shady",
+      "fpa-fod-400505118-cove-creek",
+      "fpa-fod-400507579-red-bank",
+      "fpa-fod-400508308-pot-hole",
+      "fpa-fod-400508892-north-hills",
+      "fpa-fod-400509143-ridgetop",
+      "fpa-fod-400510304-goose",
+      "fpa-fod-400510515-summit",
+      "fpa-fod-400512420-shelter-pass",
+      "fpa-fod-400513488-sage",
+      "fpa-fod-400732973-walker"
+    ],
+    "observed_positive_ids": [
+      "fpa-fod-400300427-plateau",
+      "fpa-fod-400300631-ranch",
+      "fpa-fod-400300764-buzzard",
+      "fpa-fod-400301084-prospect",
+      "fpa-fod-400301104-stewart-creek",
+      "fpa-fod-400302402-silver-creek",
+      "fpa-fod-400302444-spring-creek",
+      "fpa-fod-400302533-tinder",
+      "fpa-fod-400302636-bears",
+      "fpa-fod-400302686-boot",
+      "fpa-fod-400303711-gold-hill",
+      "fpa-fod-400303744-rattlesnake-creek",
+      "fpa-fod-400303807-ryan",
+      "fpa-fod-400303966-cabin-lake",
+      "fpa-fod-400305302-sugar-pine",
+      "fpa-fod-400307462-indian-valley",
+      "fpa-fod-400307488-red-canyon",
+      "fpa-fod-400308656-sharps",
+      "fpa-fod-400310578-ok-bar",
+      "fpa-fod-400310945-goose-creek",
+      "fpa-fod-400310977-sheep-creek",
+      "fpa-fod-400311017-goshute-cave",
+      "fpa-fod-400313239-cedar-mountain-one",
+      "fpa-fod-400313254-lakeside",
+      "fpa-fod-400313301-bear-trap",
+      "fpa-fod-400313842-north-eden",
+      "fpa-fod-400314399-lake-wallula",
+      "fpa-fod-400376589-ute-park",
+      "fpa-fod-400500346-south",
+      "fpa-fod-400500878-cellar",
+      "fpa-fod-400501480-decker",
+      "fpa-fod-400501641-mountain",
+      "fpa-fod-400504417-shady",
+      "fpa-fod-400505118-cove-creek",
+      "fpa-fod-400507579-red-bank",
+      "fpa-fod-400508892-north-hills",
+      "fpa-fod-400509143-ridgetop",
+      "fpa-fod-400510304-goose",
+      "fpa-fod-400510515-summit",
+      "fpa-fod-400513488-sage",
+      "fpa-fod-400732973-walker"
+    ],
+    "missing_ids": [],
+    "excluded_censored_ids": [],
+    "methods": {
+      "simfire": {
+        "mean_growth_iou": 0.08030030448730256,
+        "mean_absolute_new_area_error_ha": 5542.272000000001,
+        "mean_signed_new_area_error_ha": 3105.504,
+        "mean_predicted_new_area_ha": 5697.720000000001,
+        "mean_observed_new_area_ha": 2592.2160000000003,
+        "mean_new_area_ratio_observed_positive": 13.502841293206501,
+        "median_new_area_ratio_observed_positive": 0.4697986577181208,
+        "pooled_area_ratio": 2.198011276838041,
+        "pooled_growth_precision": 0.13617236368231503,
+        "pooled_growth_recall": 0.2993083909674194,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 4,
+        "mean_false_new_area_ha_when_stalled": 9455.94
+      },
+      "ca0": {
+        "mean_growth_iou": 0.11214525075941012,
+        "mean_absolute_new_area_error_ha": 2421.936,
+        "mean_signed_new_area_error_ha": -1021.9680000000001,
+        "mean_predicted_new_area_ha": 1570.248,
+        "mean_observed_new_area_ha": 2592.2160000000003,
+        "mean_new_area_ratio_observed_positive": 3.1397491706363803,
+        "median_new_area_ratio_observed_positive": 0.5338345864661654,
+        "pooled_area_ratio": 0.6057550759658917,
+        "pooled_growth_precision": 0.24650373698931632,
+        "pooled_growth_recall": 0.1493208899258395,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 4,
+        "mean_false_new_area_ha_when_stalled": 3147.66
+      },
+      "ca1": {
+        "mean_growth_iou": 0.11020135780578781,
+        "mean_absolute_new_area_error_ha": 2395.0800000000004,
+        "mean_signed_new_area_error_ha": -1128.4560000000001,
+        "mean_predicted_new_area_ha": 1463.7600000000002,
+        "mean_observed_new_area_ha": 2592.2160000000003,
+        "mean_new_area_ratio_observed_positive": 3.088899831993716,
+        "median_new_area_ratio_observed_positive": 0.46601941747572817,
+        "pooled_area_ratio": 0.5646751659583924,
+        "pooled_growth_precision": 0.2544023610427939,
+        "pooled_growth_recall": 0.1436546954420465,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 4,
+        "mean_false_new_area_ha_when_stalled": 2700.5400000000004
+      },
+      "ca2": {
+        "mean_growth_iou": 0.10858062919730352,
+        "mean_absolute_new_area_error_ha": 2451.2400000000002,
+        "mean_signed_new_area_error_ha": -1132.488,
+        "mean_predicted_new_area_ha": 1459.7280000000003,
+        "mean_observed_new_area_ha": 2592.2160000000003,
+        "mean_new_area_ratio_observed_positive": 3.3924294561029873,
+        "median_new_area_ratio_observed_positive": 0.45596868884540115,
+        "pooled_area_ratio": 0.5631197400216649,
+        "pooled_growth_precision": 0.24780507053368847,
+        "pooled_growth_recall": 0.13954392689498096,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 4,
+        "mean_false_new_area_ha_when_stalled": 2455.92
+      },
+      "ca_mean3": {
+        "mean_growth_iou": 0.11030907925416716,
+        "mean_absolute_new_area_error_ha": 2422.752,
+        "mean_signed_new_area_error_ha": -1094.304,
+        "mean_predicted_new_area_ha": 1497.9120000000003,
+        "mean_observed_new_area_ha": 2592.2160000000003,
+        "mean_new_area_ratio_observed_positive": 3.2070261529110278,
+        "median_new_area_ratio_observed_positive": 0.43320105820105814,
+        "pooled_area_ratio": 0.577849993981983,
+        "pooled_growth_precision": 0.24949930302981757,
+        "pooled_growth_recall": 0.14417317075428904,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 4.0,
+        "mean_false_new_area_ha_when_stalled": 2768.04
+      },
+      "persistence": {
+        "mean_growth_iou": 0.0,
+        "mean_absolute_new_area_error_ha": 2592.2160000000003,
+        "mean_signed_new_area_error_ha": -2592.2160000000003,
+        "mean_predicted_new_area_ha": 0.0,
+        "mean_observed_new_area_ha": 2592.2160000000003,
+        "mean_new_area_ratio_observed_positive": 0.0,
+        "median_new_area_ratio_observed_positive": 0.0,
+        "pooled_area_ratio": 0.0,
+        "pooled_growth_precision": null,
+        "pooled_growth_recall": 0.0,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 0,
+        "mean_false_new_area_ha_when_stalled": 0.0
+      },
+      "ellipse": {
+        "mean_growth_iou": 0.04307503989644651,
+        "mean_absolute_new_area_error_ha": 2540.9519999999998,
+        "mean_signed_new_area_error_ha": -2516.616,
+        "mean_predicted_new_area_ha": 75.60000000000001,
+        "mean_observed_new_area_ha": 2592.2160000000003,
+        "mean_new_area_ratio_observed_positive": 0.6578538281990711,
+        "median_new_area_ratio_observed_positive": 0.0782312925170068,
+        "pooled_area_ratio": 0.02916423631364053,
+        "pooled_growth_precision": 0.4676190476190476,
+        "pooled_growth_recall": 0.013637752409521428,
+        "stalled_cases": 4,
+        "stalled_cases_with_predicted_growth": 4,
+        "mean_false_new_area_ha_when_stalled": 76.14
+      }
+    },
+    "contrasts": {
+      "ca0_minus_simfire": {
+        "growth_iou": {
+          "cases": 41,
+          "mean": 0.031844946272107565,
+          "ci95": [
+            0.0012544824979348066,
+            0.0613063091005863
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 45,
+          "mean": -3120.336,
+          "ci95": [
+            -5057.341200000002,
+            -1349.8686000000014
+          ]
+        }
+      },
+      "ca1_minus_simfire": {
+        "growth_iou": {
+          "cases": 41,
+          "mean": 0.029901053318485252,
+          "ci95": [
+            -0.0031737489648792994,
+            0.062470400101617994
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 45,
+          "mean": -3147.1919999999996,
+          "ci95": [
+            -5083.4952,
+            -1372.3974000000014
+          ]
+        }
+      },
+      "ca2_minus_simfire": {
+        "growth_iou": {
+          "cases": 41,
+          "mean": 0.02828032471000097,
+          "ci95": [
+            -0.0029850710012762995,
+            0.05781070768158481
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 45,
+          "mean": -3091.0320000000006,
+          "ci95": [
+            -4952.750400000001,
+            -1382.9184000000018
+          ]
+        }
+      },
+      "ca_mean3_minus_simfire": {
+        "growth_iou": {
+          "cases": 41,
+          "mean": 0.030008774766864595,
+          "ci95": [
+            -0.001016088328754798,
+            0.05994759065570117
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 45,
+          "mean": -3119.52,
+          "ci95": [
+            -5030.1618,
+            -1367.5914000000002
+          ]
+        }
+      },
+      "persistence_minus_simfire": {
+        "growth_iou": {
+          "cases": 41,
+          "mean": -0.08030030448730256,
+          "ci95": [
+            -0.10602630219851623,
+            -0.05727081741608841
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 45,
+          "mean": -2950.0560000000005,
+          "ci95": [
+            -5043.265200000002,
+            -1056.4452000000006
+          ]
+        }
+      },
+      "ellipse_minus_simfire": {
+        "growth_iou": {
+          "cases": 41,
+          "mean": -0.037225264590856046,
+          "ci95": [
+            -0.07084974531777054,
+            -0.005106439809212814
+          ]
+        },
+        "absolute_new_area_error_ha": {
+          "cases": 45,
+          "mean": -3001.3199999999997,
+          "ci95": [
+            -5095.600200000001,
+            -1114.345800000001
+          ]
+        }
+      }
+    }
+  },
+  "growth_groups": {
+    "zero_growth": {
+      "kind": "raw",
+      "horizon": 48,
+      "fully_covered_only": false,
+      "complete_ids": [
+        "fpa-fod-400308544-winter-camp",
+        "fpa-fod-400310659-206",
+        "fpa-fod-400508308-pot-hole",
+        "fpa-fod-400512420-shelter-pass"
+      ],
+      "observed_positive_ids": [],
+      "missing_ids": [],
+      "excluded_censored_ids": [],
+      "methods": {
+        "simfire": {
+          "mean_growth_iou": null,
+          "mean_absolute_new_area_error_ha": 9455.94,
+          "mean_signed_new_area_error_ha": 9455.94,
+          "mean_predicted_new_area_ha": 9455.94,
+          "mean_observed_new_area_ha": 0.0,
+          "mean_new_area_ratio_observed_positive": null,
+          "median_new_area_ratio_observed_positive": null,
+          "pooled_area_ratio": null,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": null,
+          "stalled_cases": 4,
+          "stalled_cases_with_predicted_growth": 4,
+          "mean_false_new_area_ha_when_stalled": 9455.94
+        },
+        "ca0": {
+          "mean_growth_iou": null,
+          "mean_absolute_new_area_error_ha": 3147.66,
+          "mean_signed_new_area_error_ha": 3147.66,
+          "mean_predicted_new_area_ha": 3147.66,
+          "mean_observed_new_area_ha": 0.0,
+          "mean_new_area_ratio_observed_positive": null,
+          "median_new_area_ratio_observed_positive": null,
+          "pooled_area_ratio": null,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": null,
+          "stalled_cases": 4,
+          "stalled_cases_with_predicted_growth": 4,
+          "mean_false_new_area_ha_when_stalled": 3147.66
+        },
+        "ca1": {
+          "mean_growth_iou": null,
+          "mean_absolute_new_area_error_ha": 2700.5400000000004,
+          "mean_signed_new_area_error_ha": 2700.5400000000004,
+          "mean_predicted_new_area_ha": 2700.5400000000004,
+          "mean_observed_new_area_ha": 0.0,
+          "mean_new_area_ratio_observed_positive": null,
+          "median_new_area_ratio_observed_positive": null,
+          "pooled_area_ratio": null,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": null,
+          "stalled_cases": 4,
+          "stalled_cases_with_predicted_growth": 4,
+          "mean_false_new_area_ha_when_stalled": 2700.5400000000004
+        },
+        "ca2": {
+          "mean_growth_iou": null,
+          "mean_absolute_new_area_error_ha": 2455.92,
+          "mean_signed_new_area_error_ha": 2455.92,
+          "mean_predicted_new_area_ha": 2455.92,
+          "mean_observed_new_area_ha": 0.0,
+          "mean_new_area_ratio_observed_positive": null,
+          "median_new_area_ratio_observed_positive": null,
+          "pooled_area_ratio": null,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": null,
+          "stalled_cases": 4,
+          "stalled_cases_with_predicted_growth": 4,
+          "mean_false_new_area_ha_when_stalled": 2455.92
+        },
+        "ca_mean3": {
+          "mean_growth_iou": null,
+          "mean_absolute_new_area_error_ha": 2768.04,
+          "mean_signed_new_area_error_ha": 2768.04,
+          "mean_predicted_new_area_ha": 2768.04,
+          "mean_observed_new_area_ha": 0.0,
+          "mean_new_area_ratio_observed_positive": null,
+          "median_new_area_ratio_observed_positive": null,
+          "pooled_area_ratio": null,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": null,
+          "stalled_cases": 4,
+          "stalled_cases_with_predicted_growth": 4.0,
+          "mean_false_new_area_ha_when_stalled": 2768.04
+        },
+        "persistence": {
+          "mean_growth_iou": null,
+          "mean_absolute_new_area_error_ha": 0.0,
+          "mean_signed_new_area_error_ha": 0.0,
+          "mean_predicted_new_area_ha": 0.0,
+          "mean_observed_new_area_ha": 0.0,
+          "mean_new_area_ratio_observed_positive": null,
+          "median_new_area_ratio_observed_positive": null,
+          "pooled_area_ratio": null,
+          "pooled_growth_precision": null,
+          "pooled_growth_recall": null,
+          "stalled_cases": 4,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": 0.0
+        },
+        "ellipse": {
+          "mean_growth_iou": null,
+          "mean_absolute_new_area_error_ha": 76.14,
+          "mean_signed_new_area_error_ha": 76.14,
+          "mean_predicted_new_area_ha": 76.14,
+          "mean_observed_new_area_ha": 0.0,
+          "mean_new_area_ratio_observed_positive": null,
+          "median_new_area_ratio_observed_positive": null,
+          "pooled_area_ratio": null,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": null,
+          "stalled_cases": 4,
+          "stalled_cases_with_predicted_growth": 4,
+          "mean_false_new_area_ha_when_stalled": 76.14
+        }
+      },
+      "contrasts": {
+        "ca0_minus_simfire": {
+          "growth_iou": {
+            "cases": 0,
+            "mean": null,
+            "ci95": null
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 4,
+            "mean": -6308.280000000001,
+            "ci95": [
+              -10079.640000000001,
+              -1644.3000000000004
+            ]
+          }
+        },
+        "ca1_minus_simfire": {
+          "growth_iou": {
+            "cases": 0,
+            "mean": null,
+            "ci95": null
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 4,
+            "mean": -6755.4,
+            "ci95": [
+              -10460.34,
+              -2049.2999999999993
+            ]
+          }
+        },
+        "ca2_minus_simfire": {
+          "growth_iou": {
+            "cases": 0,
+            "mean": null,
+            "ci95": null
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 4,
+            "mean": -7000.02,
+            "ci95": [
+              -10590.75,
+              -3143.61
+            ]
+          }
+        },
+        "ca_mean3_minus_simfire": {
+          "growth_iou": {
+            "cases": 0,
+            "mean": null,
+            "ci95": null
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 4,
+            "mean": -6687.900000000001,
+            "ci95": [
+              -10465.740000000002,
+              -2190.2400000000007
+            ]
+          }
+        },
+        "persistence_minus_simfire": {
+          "growth_iou": {
+            "cases": 0,
+            "mean": null,
+            "ci95": null
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 4,
+            "mean": -9455.94,
+            "ci95": [
+              -12098.97,
+              -7151.490000000002
+            ]
+          }
+        },
+        "ellipse_minus_simfire": {
+          "growth_iou": {
+            "cases": 0,
+            "mean": null,
+            "ci95": null
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 4,
+            "mean": -9379.8,
+            "ci95": [
+              -12022.829999999998,
+              -7073.7300000000005
+            ]
+          }
+        }
+      }
+    },
+    "near_stalled": {
+      "kind": "raw",
+      "horizon": 48,
+      "fully_covered_only": false,
+      "complete_ids": [
+        "fpa-fod-400303584-goldstone"
+      ],
+      "observed_positive_ids": [
+        "fpa-fod-400303584-goldstone"
+      ],
+      "missing_ids": [],
+      "excluded_censored_ids": [],
+      "methods": {
+        "simfire": {
+          "mean_growth_iou": 0.0,
+          "mean_absolute_new_area_error_ha": 25.92,
+          "mean_signed_new_area_error_ha": 25.92,
+          "mean_predicted_new_area_ha": 29.160000000000004,
+          "mean_observed_new_area_ha": 3.24,
+          "mean_new_area_ratio_observed_positive": 9.0,
+          "median_new_area_ratio_observed_positive": 9.0,
+          "pooled_area_ratio": 9.0,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": 0.0,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "ca0": {
+          "mean_growth_iou": 0.0,
+          "mean_absolute_new_area_error_ha": 307.8,
+          "mean_signed_new_area_error_ha": 307.8,
+          "mean_predicted_new_area_ha": 311.04,
+          "mean_observed_new_area_ha": 3.24,
+          "mean_new_area_ratio_observed_positive": 96.0,
+          "median_new_area_ratio_observed_positive": 96.0,
+          "pooled_area_ratio": 96.0,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": 0.0,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "ca1": {
+          "mean_growth_iou": 0.0,
+          "mean_absolute_new_area_error_ha": 22.68,
+          "mean_signed_new_area_error_ha": 22.68,
+          "mean_predicted_new_area_ha": 25.92,
+          "mean_observed_new_area_ha": 3.24,
+          "mean_new_area_ratio_observed_positive": 8.0,
+          "median_new_area_ratio_observed_positive": 8.0,
+          "pooled_area_ratio": 8.0,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": 0.0,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "ca2": {
+          "mean_growth_iou": 0.0,
+          "mean_absolute_new_area_error_ha": 129.60000000000002,
+          "mean_signed_new_area_error_ha": 129.60000000000002,
+          "mean_predicted_new_area_ha": 132.84,
+          "mean_observed_new_area_ha": 3.24,
+          "mean_new_area_ratio_observed_positive": 41.0,
+          "median_new_area_ratio_observed_positive": 41.0,
+          "pooled_area_ratio": 41.0,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": 0.0,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "ca_mean3": {
+          "mean_growth_iou": 0.0,
+          "mean_absolute_new_area_error_ha": 153.36,
+          "mean_signed_new_area_error_ha": 153.36,
+          "mean_predicted_new_area_ha": 156.60000000000002,
+          "mean_observed_new_area_ha": 3.24,
+          "mean_new_area_ratio_observed_positive": 48.333333333333336,
+          "median_new_area_ratio_observed_positive": 48.333333333333336,
+          "pooled_area_ratio": 48.333333333333336,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": 0.0,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "persistence": {
+          "mean_growth_iou": 0.0,
+          "mean_absolute_new_area_error_ha": 3.24,
+          "mean_signed_new_area_error_ha": -3.24,
+          "mean_predicted_new_area_ha": 0.0,
+          "mean_observed_new_area_ha": 3.24,
+          "mean_new_area_ratio_observed_positive": 0.0,
+          "median_new_area_ratio_observed_positive": 0.0,
+          "pooled_area_ratio": 0.0,
+          "pooled_growth_precision": null,
+          "pooled_growth_recall": 0.0,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "ellipse": {
+          "mean_growth_iou": 0.0,
+          "mean_absolute_new_area_error_ha": 74.52000000000001,
+          "mean_signed_new_area_error_ha": 74.52000000000001,
+          "mean_predicted_new_area_ha": 77.76,
+          "mean_observed_new_area_ha": 3.24,
+          "mean_new_area_ratio_observed_positive": 24.0,
+          "median_new_area_ratio_observed_positive": 24.0,
+          "pooled_area_ratio": 24.0,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": 0.0,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        }
+      },
+      "contrasts": {
+        "ca0_minus_simfire": {
+          "growth_iou": {
+            "cases": 1,
+            "mean": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 1,
+            "mean": 281.88,
+            "ci95": [
+              281.88,
+              281.88
+            ]
+          }
+        },
+        "ca1_minus_simfire": {
+          "growth_iou": {
+            "cases": 1,
+            "mean": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 1,
+            "mean": -3.240000000000002,
+            "ci95": [
+              -3.240000000000002,
+              -3.240000000000002
+            ]
+          }
+        },
+        "ca2_minus_simfire": {
+          "growth_iou": {
+            "cases": 1,
+            "mean": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 1,
+            "mean": 103.68000000000002,
+            "ci95": [
+              103.68000000000002,
+              103.68000000000002
+            ]
+          }
+        },
+        "ca_mean3_minus_simfire": {
+          "growth_iou": {
+            "cases": 1,
+            "mean": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 1,
+            "mean": 127.44000000000001,
+            "ci95": [
+              127.44000000000001,
+              127.44000000000001
+            ]
+          }
+        },
+        "persistence_minus_simfire": {
+          "growth_iou": {
+            "cases": 1,
+            "mean": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 1,
+            "mean": -22.68,
+            "ci95": [
+              -22.68,
+              -22.68
+            ]
+          }
+        },
+        "ellipse_minus_simfire": {
+          "growth_iou": {
+            "cases": 1,
+            "mean": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 1,
+            "mean": 48.60000000000001,
+            "ci95": [
+              48.60000000000001,
+              48.60000000000001
+            ]
+          }
+        }
+      }
+    },
+    "growing": {
+      "kind": "raw",
+      "horizon": 48,
+      "fully_covered_only": false,
+      "complete_ids": [
+        "fpa-fod-400300427-plateau",
+        "fpa-fod-400300631-ranch",
+        "fpa-fod-400300764-buzzard",
+        "fpa-fod-400300963-coal-hollow",
+        "fpa-fod-400301084-prospect",
+        "fpa-fod-400301104-stewart-creek",
+        "fpa-fod-400302402-silver-creek",
+        "fpa-fod-400302444-spring-creek",
+        "fpa-fod-400302533-tinder",
+        "fpa-fod-400302636-bears",
+        "fpa-fod-400302686-boot",
+        "fpa-fod-400302943-cranston",
+        "fpa-fod-400303711-gold-hill",
+        "fpa-fod-400303744-rattlesnake-creek",
+        "fpa-fod-400303807-ryan",
+        "fpa-fod-400303966-cabin-lake",
+        "fpa-fod-400304718-west-valley",
+        "fpa-fod-400305302-sugar-pine",
+        "fpa-fod-400306102-rattlesnake",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400307462-indian-valley",
+        "fpa-fod-400307488-red-canyon",
+        "fpa-fod-400307776-bull-draw",
+        "fpa-fod-400308652-dog-creek",
+        "fpa-fod-400308656-sharps",
+        "fpa-fod-400310578-ok-bar",
+        "fpa-fod-400310583-organ",
+        "fpa-fod-400310914-echo",
+        "fpa-fod-400310945-goose-creek",
+        "fpa-fod-400310977-sheep-creek",
+        "fpa-fod-400311017-goshute-cave",
+        "fpa-fod-400311253-martin",
+        "fpa-fod-400312787-black-mountain",
+        "fpa-fod-400313239-cedar-mountain-one",
+        "fpa-fod-400313254-lakeside",
+        "fpa-fod-400313301-bear-trap",
+        "fpa-fod-400313842-north-eden",
+        "fpa-fod-400314399-lake-wallula",
+        "fpa-fod-400376589-ute-park",
+        "fpa-fod-400500346-south",
+        "fpa-fod-400500878-cellar",
+        "fpa-fod-400501480-decker",
+        "fpa-fod-400501641-mountain",
+        "fpa-fod-400503581-coldwater",
+        "fpa-fod-400504417-shady",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400505118-cove-creek",
+        "fpa-fod-400507579-red-bank",
+        "fpa-fod-400508306-lookout-point",
+        "fpa-fod-400508892-north-hills",
+        "fpa-fod-400509143-ridgetop",
+        "fpa-fod-400510304-goose",
+        "fpa-fod-400510515-summit",
+        "fpa-fod-400513488-sage",
+        "fpa-fod-400541373-mp-97",
+        "fpa-fod-400732973-walker"
+      ],
+      "observed_positive_ids": [
+        "fpa-fod-400300427-plateau",
+        "fpa-fod-400300631-ranch",
+        "fpa-fod-400300764-buzzard",
+        "fpa-fod-400300963-coal-hollow",
+        "fpa-fod-400301084-prospect",
+        "fpa-fod-400301104-stewart-creek",
+        "fpa-fod-400302402-silver-creek",
+        "fpa-fod-400302444-spring-creek",
+        "fpa-fod-400302533-tinder",
+        "fpa-fod-400302636-bears",
+        "fpa-fod-400302686-boot",
+        "fpa-fod-400302943-cranston",
+        "fpa-fod-400303711-gold-hill",
+        "fpa-fod-400303744-rattlesnake-creek",
+        "fpa-fod-400303807-ryan",
+        "fpa-fod-400303966-cabin-lake",
+        "fpa-fod-400304718-west-valley",
+        "fpa-fod-400305302-sugar-pine",
+        "fpa-fod-400306102-rattlesnake",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400307462-indian-valley",
+        "fpa-fod-400307488-red-canyon",
+        "fpa-fod-400307776-bull-draw",
+        "fpa-fod-400308652-dog-creek",
+        "fpa-fod-400308656-sharps",
+        "fpa-fod-400310578-ok-bar",
+        "fpa-fod-400310583-organ",
+        "fpa-fod-400310914-echo",
+        "fpa-fod-400310945-goose-creek",
+        "fpa-fod-400310977-sheep-creek",
+        "fpa-fod-400311017-goshute-cave",
+        "fpa-fod-400311253-martin",
+        "fpa-fod-400312787-black-mountain",
+        "fpa-fod-400313239-cedar-mountain-one",
+        "fpa-fod-400313254-lakeside",
+        "fpa-fod-400313301-bear-trap",
+        "fpa-fod-400313842-north-eden",
+        "fpa-fod-400314399-lake-wallula",
+        "fpa-fod-400376589-ute-park",
+        "fpa-fod-400500346-south",
+        "fpa-fod-400500878-cellar",
+        "fpa-fod-400501480-decker",
+        "fpa-fod-400501641-mountain",
+        "fpa-fod-400503581-coldwater",
+        "fpa-fod-400504417-shady",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400505118-cove-creek",
+        "fpa-fod-400507579-red-bank",
+        "fpa-fod-400508306-lookout-point",
+        "fpa-fod-400508892-north-hills",
+        "fpa-fod-400509143-ridgetop",
+        "fpa-fod-400510304-goose",
+        "fpa-fod-400510515-summit",
+        "fpa-fod-400513488-sage",
+        "fpa-fod-400541373-mp-97",
+        "fpa-fod-400732973-walker"
+      ],
+      "missing_ids": [],
+      "excluded_censored_ids": [],
+      "methods": {
+        "simfire": {
+          "mean_growth_iou": 0.08818215895015122,
+          "mean_absolute_new_area_error_ha": 6559.5535714285725,
+          "mean_signed_new_area_error_ha": 4287.387857142858,
+          "mean_predicted_new_area_ha": 7149.349285714286,
+          "mean_observed_new_area_ha": 2861.961428571429,
+          "mean_new_area_ratio_observed_positive": 12.680805750161836,
+          "median_new_area_ratio_observed_positive": 0.6294653884608599,
+          "pooled_area_ratio": 2.498059273036025,
+          "pooled_growth_precision": 0.13142454822811547,
+          "pooled_growth_recall": 0.3283063114058141,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "ca0": {
+          "mean_growth_iou": 0.1279230660682453,
+          "mean_absolute_new_area_error_ha": 2092.3457142857146,
+          "mean_signed_new_area_error_ha": -1297.1571428571428,
+          "mean_predicted_new_area_ha": 1564.804285714286,
+          "mean_observed_new_area_ha": 2861.961428571429,
+          "mean_new_area_ratio_observed_positive": 2.5876471760754707,
+          "median_new_area_ratio_observed_positive": 0.548845310812262,
+          "pooled_area_ratio": 0.5467593902882788,
+          "pooled_growth_precision": 0.2946831324410264,
+          "pooled_growth_recall": 0.1611207698216957,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "ca1": {
+          "mean_growth_iou": 0.14184681741460928,
+          "mean_absolute_new_area_error_ha": 2068.3928571428573,
+          "mean_signed_new_area_error_ha": -1281.304285714286,
+          "mean_predicted_new_area_ha": 1580.6571428571428,
+          "mean_observed_new_area_ha": 2861.961428571429,
+          "mean_new_area_ratio_observed_positive": 2.592586963948377,
+          "median_new_area_ratio_observed_positive": 0.5715618497308639,
+          "pooled_area_ratio": 0.5522985484979582,
+          "pooled_growth_precision": 0.29904831625183015,
+          "pooled_growth_recall": 0.16516395099664416,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "ca2": {
+          "mean_growth_iou": 0.12781162914737373,
+          "mean_absolute_new_area_error_ha": 2134.407857142857,
+          "mean_signed_new_area_error_ha": -1198.9735714285714,
+          "mean_predicted_new_area_ha": 1662.9878571428574,
+          "mean_observed_new_area_ha": 2861.961428571429,
+          "mean_new_area_ratio_observed_positive": 2.8815881171367335,
+          "median_new_area_ratio_observed_positive": 0.5695611577964519,
+          "pooled_area_ratio": 0.5810657825577165,
+          "pooled_growth_precision": 0.27568451449048464,
+          "pooled_growth_recall": 0.16019083815145757,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "ca_mean3": {
+          "mean_growth_iou": 0.13252717087674276,
+          "mean_absolute_new_area_error_ha": 2098.382142857143,
+          "mean_signed_new_area_error_ha": -1259.1450000000002,
+          "mean_predicted_new_area_ha": 1602.8164285714286,
+          "mean_observed_new_area_ha": 2861.961428571429,
+          "mean_new_area_ratio_observed_positive": 2.6872740857201936,
+          "median_new_area_ratio_observed_positive": 0.49259004701082576,
+          "pooled_area_ratio": 0.5600412404479844,
+          "pooled_growth_precision": 0.28954746176707696,
+          "pooled_growth_recall": 0.1621585196565991,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "persistence": {
+          "mean_growth_iou": 0.0,
+          "mean_absolute_new_area_error_ha": 2861.961428571429,
+          "mean_signed_new_area_error_ha": -2861.961428571429,
+          "mean_predicted_new_area_ha": 0.0,
+          "mean_observed_new_area_ha": 2861.961428571429,
+          "mean_new_area_ratio_observed_positive": 0.0,
+          "median_new_area_ratio_observed_positive": 0.0,
+          "pooled_area_ratio": 0.0,
+          "pooled_growth_precision": null,
+          "pooled_growth_recall": 0.0,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "ellipse": {
+          "mean_growth_iou": 0.03977207837708131,
+          "mean_absolute_new_area_error_ha": 2795.3678571428572,
+          "mean_signed_new_area_error_ha": -2786.6892857142857,
+          "mean_predicted_new_area_ha": 75.27214285714285,
+          "mean_observed_new_area_ha": 2861.961428571429,
+          "mean_new_area_ratio_observed_positive": 0.5022496761358971,
+          "median_new_area_ratio_observed_positive": 0.06447971204188482,
+          "pooled_area_ratio": 0.026300893543039664,
+          "pooled_growth_precision": 0.5326671790930054,
+          "pooled_growth_recall": 0.014009622771196377,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        }
+      },
+      "contrasts": {
+        "ca0_minus_simfire": {
+          "growth_iou": {
+            "cases": 56,
+            "mean": 0.0397409071180941,
+            "ci95": [
+              0.008410587080179256,
+              0.07076280959562121
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 56,
+            "mean": -4467.207857142857,
+            "ci95": [
+              -7027.775517857143,
+              -2167.8377142857144
+            ]
+          }
+        },
+        "ca1_minus_simfire": {
+          "growth_iou": {
+            "cases": 56,
+            "mean": 0.05366465846445808,
+            "ci95": [
+              0.018098777514285423,
+              0.09085839935967645
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 56,
+            "mean": -4491.160714285715,
+            "ci95": [
+              -7028.193535714286,
+              -2211.499607142858
+            ]
+          }
+        },
+        "ca2_minus_simfire": {
+          "growth_iou": {
+            "cases": 56,
+            "mean": 0.039629470197222516,
+            "ci95": [
+              0.006514241907247859,
+              0.0732827487227988
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 56,
+            "mean": -4425.145714285715,
+            "ci95": [
+              -6933.060482142858,
+              -2168.5782857142863
+            ]
+          }
+        },
+        "ca_mean3_minus_simfire": {
+          "growth_iou": {
+            "cases": 56,
+            "mean": 0.044345011926591564,
+            "ci95": [
+              0.01193928464348623,
+              0.07744123029408792
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 56,
+            "mean": -4461.171428571429,
+            "ci95": [
+              -6996.933321428572,
+              -2187.7063392857153
+            ]
+          }
+        },
+        "persistence_minus_simfire": {
+          "growth_iou": {
+            "cases": 56,
+            "mean": -0.08818215895015122,
+            "ci95": [
+              -0.11279737729851856,
+              -0.06516321762616693
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 56,
+            "mean": -3697.592142857143,
+            "ci95": [
+              -6132.8585892857145,
+              -1500.0925178571458
+            ]
+          }
+        },
+        "ellipse_minus_simfire": {
+          "growth_iou": {
+            "cases": 56,
+            "mean": -0.04841008057306989,
+            "ci95": [
+              -0.07834971595699956,
+              -0.018948268256511223
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 56,
+            "mean": -3764.1857142857148,
+            "ci95": [
+              -6201.64205357143,
+              -1566.9218571428576
+            ]
+          }
+        }
+      }
+    }
+  },
+  "growth_groups_fully_covered": {
+    "zero_growth": {
+      "kind": "raw",
+      "horizon": 48,
+      "fully_covered_only": true,
+      "complete_ids": [
+        "fpa-fod-400308544-winter-camp",
+        "fpa-fod-400310659-206",
+        "fpa-fod-400508308-pot-hole",
+        "fpa-fod-400512420-shelter-pass"
+      ],
+      "observed_positive_ids": [],
+      "missing_ids": [],
+      "excluded_censored_ids": [],
+      "methods": {
+        "simfire": {
+          "mean_growth_iou": null,
+          "mean_absolute_new_area_error_ha": 9455.94,
+          "mean_signed_new_area_error_ha": 9455.94,
+          "mean_predicted_new_area_ha": 9455.94,
+          "mean_observed_new_area_ha": 0.0,
+          "mean_new_area_ratio_observed_positive": null,
+          "median_new_area_ratio_observed_positive": null,
+          "pooled_area_ratio": null,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": null,
+          "stalled_cases": 4,
+          "stalled_cases_with_predicted_growth": 4,
+          "mean_false_new_area_ha_when_stalled": 9455.94
+        },
+        "ca0": {
+          "mean_growth_iou": null,
+          "mean_absolute_new_area_error_ha": 3147.66,
+          "mean_signed_new_area_error_ha": 3147.66,
+          "mean_predicted_new_area_ha": 3147.66,
+          "mean_observed_new_area_ha": 0.0,
+          "mean_new_area_ratio_observed_positive": null,
+          "median_new_area_ratio_observed_positive": null,
+          "pooled_area_ratio": null,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": null,
+          "stalled_cases": 4,
+          "stalled_cases_with_predicted_growth": 4,
+          "mean_false_new_area_ha_when_stalled": 3147.66
+        },
+        "ca1": {
+          "mean_growth_iou": null,
+          "mean_absolute_new_area_error_ha": 2700.5400000000004,
+          "mean_signed_new_area_error_ha": 2700.5400000000004,
+          "mean_predicted_new_area_ha": 2700.5400000000004,
+          "mean_observed_new_area_ha": 0.0,
+          "mean_new_area_ratio_observed_positive": null,
+          "median_new_area_ratio_observed_positive": null,
+          "pooled_area_ratio": null,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": null,
+          "stalled_cases": 4,
+          "stalled_cases_with_predicted_growth": 4,
+          "mean_false_new_area_ha_when_stalled": 2700.5400000000004
+        },
+        "ca2": {
+          "mean_growth_iou": null,
+          "mean_absolute_new_area_error_ha": 2455.92,
+          "mean_signed_new_area_error_ha": 2455.92,
+          "mean_predicted_new_area_ha": 2455.92,
+          "mean_observed_new_area_ha": 0.0,
+          "mean_new_area_ratio_observed_positive": null,
+          "median_new_area_ratio_observed_positive": null,
+          "pooled_area_ratio": null,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": null,
+          "stalled_cases": 4,
+          "stalled_cases_with_predicted_growth": 4,
+          "mean_false_new_area_ha_when_stalled": 2455.92
+        },
+        "ca_mean3": {
+          "mean_growth_iou": null,
+          "mean_absolute_new_area_error_ha": 2768.04,
+          "mean_signed_new_area_error_ha": 2768.04,
+          "mean_predicted_new_area_ha": 2768.04,
+          "mean_observed_new_area_ha": 0.0,
+          "mean_new_area_ratio_observed_positive": null,
+          "median_new_area_ratio_observed_positive": null,
+          "pooled_area_ratio": null,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": null,
+          "stalled_cases": 4,
+          "stalled_cases_with_predicted_growth": 4.0,
+          "mean_false_new_area_ha_when_stalled": 2768.04
+        },
+        "persistence": {
+          "mean_growth_iou": null,
+          "mean_absolute_new_area_error_ha": 0.0,
+          "mean_signed_new_area_error_ha": 0.0,
+          "mean_predicted_new_area_ha": 0.0,
+          "mean_observed_new_area_ha": 0.0,
+          "mean_new_area_ratio_observed_positive": null,
+          "median_new_area_ratio_observed_positive": null,
+          "pooled_area_ratio": null,
+          "pooled_growth_precision": null,
+          "pooled_growth_recall": null,
+          "stalled_cases": 4,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": 0.0
+        },
+        "ellipse": {
+          "mean_growth_iou": null,
+          "mean_absolute_new_area_error_ha": 76.14,
+          "mean_signed_new_area_error_ha": 76.14,
+          "mean_predicted_new_area_ha": 76.14,
+          "mean_observed_new_area_ha": 0.0,
+          "mean_new_area_ratio_observed_positive": null,
+          "median_new_area_ratio_observed_positive": null,
+          "pooled_area_ratio": null,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": null,
+          "stalled_cases": 4,
+          "stalled_cases_with_predicted_growth": 4,
+          "mean_false_new_area_ha_when_stalled": 76.14
+        }
+      },
+      "contrasts": {
+        "ca0_minus_simfire": {
+          "growth_iou": {
+            "cases": 0,
+            "mean": null,
+            "ci95": null
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 4,
+            "mean": -6308.280000000001,
+            "ci95": [
+              -10079.640000000001,
+              -1644.3000000000004
+            ]
+          }
+        },
+        "ca1_minus_simfire": {
+          "growth_iou": {
+            "cases": 0,
+            "mean": null,
+            "ci95": null
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 4,
+            "mean": -6755.4,
+            "ci95": [
+              -10460.34,
+              -2049.2999999999993
+            ]
+          }
+        },
+        "ca2_minus_simfire": {
+          "growth_iou": {
+            "cases": 0,
+            "mean": null,
+            "ci95": null
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 4,
+            "mean": -7000.02,
+            "ci95": [
+              -10590.75,
+              -3143.61
+            ]
+          }
+        },
+        "ca_mean3_minus_simfire": {
+          "growth_iou": {
+            "cases": 0,
+            "mean": null,
+            "ci95": null
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 4,
+            "mean": -6687.900000000001,
+            "ci95": [
+              -10465.740000000002,
+              -2190.2400000000007
+            ]
+          }
+        },
+        "persistence_minus_simfire": {
+          "growth_iou": {
+            "cases": 0,
+            "mean": null,
+            "ci95": null
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 4,
+            "mean": -9455.94,
+            "ci95": [
+              -12098.97,
+              -7151.490000000002
+            ]
+          }
+        },
+        "ellipse_minus_simfire": {
+          "growth_iou": {
+            "cases": 0,
+            "mean": null,
+            "ci95": null
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 4,
+            "mean": -9379.8,
+            "ci95": [
+              -12022.829999999998,
+              -7073.7300000000005
+            ]
+          }
+        }
+      }
+    },
+    "near_stalled": {
+      "kind": "raw",
+      "horizon": 48,
+      "fully_covered_only": true,
+      "complete_ids": [
+        "fpa-fod-400303584-goldstone"
+      ],
+      "observed_positive_ids": [
+        "fpa-fod-400303584-goldstone"
+      ],
+      "missing_ids": [],
+      "excluded_censored_ids": [],
+      "methods": {
+        "simfire": {
+          "mean_growth_iou": 0.0,
+          "mean_absolute_new_area_error_ha": 25.92,
+          "mean_signed_new_area_error_ha": 25.92,
+          "mean_predicted_new_area_ha": 29.160000000000004,
+          "mean_observed_new_area_ha": 3.24,
+          "mean_new_area_ratio_observed_positive": 9.0,
+          "median_new_area_ratio_observed_positive": 9.0,
+          "pooled_area_ratio": 9.0,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": 0.0,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "ca0": {
+          "mean_growth_iou": 0.0,
+          "mean_absolute_new_area_error_ha": 307.8,
+          "mean_signed_new_area_error_ha": 307.8,
+          "mean_predicted_new_area_ha": 311.04,
+          "mean_observed_new_area_ha": 3.24,
+          "mean_new_area_ratio_observed_positive": 96.0,
+          "median_new_area_ratio_observed_positive": 96.0,
+          "pooled_area_ratio": 96.0,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": 0.0,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "ca1": {
+          "mean_growth_iou": 0.0,
+          "mean_absolute_new_area_error_ha": 22.68,
+          "mean_signed_new_area_error_ha": 22.68,
+          "mean_predicted_new_area_ha": 25.92,
+          "mean_observed_new_area_ha": 3.24,
+          "mean_new_area_ratio_observed_positive": 8.0,
+          "median_new_area_ratio_observed_positive": 8.0,
+          "pooled_area_ratio": 8.0,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": 0.0,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "ca2": {
+          "mean_growth_iou": 0.0,
+          "mean_absolute_new_area_error_ha": 129.60000000000002,
+          "mean_signed_new_area_error_ha": 129.60000000000002,
+          "mean_predicted_new_area_ha": 132.84,
+          "mean_observed_new_area_ha": 3.24,
+          "mean_new_area_ratio_observed_positive": 41.0,
+          "median_new_area_ratio_observed_positive": 41.0,
+          "pooled_area_ratio": 41.0,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": 0.0,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "ca_mean3": {
+          "mean_growth_iou": 0.0,
+          "mean_absolute_new_area_error_ha": 153.36,
+          "mean_signed_new_area_error_ha": 153.36,
+          "mean_predicted_new_area_ha": 156.60000000000002,
+          "mean_observed_new_area_ha": 3.24,
+          "mean_new_area_ratio_observed_positive": 48.333333333333336,
+          "median_new_area_ratio_observed_positive": 48.333333333333336,
+          "pooled_area_ratio": 48.333333333333336,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": 0.0,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "persistence": {
+          "mean_growth_iou": 0.0,
+          "mean_absolute_new_area_error_ha": 3.24,
+          "mean_signed_new_area_error_ha": -3.24,
+          "mean_predicted_new_area_ha": 0.0,
+          "mean_observed_new_area_ha": 3.24,
+          "mean_new_area_ratio_observed_positive": 0.0,
+          "median_new_area_ratio_observed_positive": 0.0,
+          "pooled_area_ratio": 0.0,
+          "pooled_growth_precision": null,
+          "pooled_growth_recall": 0.0,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "ellipse": {
+          "mean_growth_iou": 0.0,
+          "mean_absolute_new_area_error_ha": 74.52000000000001,
+          "mean_signed_new_area_error_ha": 74.52000000000001,
+          "mean_predicted_new_area_ha": 77.76,
+          "mean_observed_new_area_ha": 3.24,
+          "mean_new_area_ratio_observed_positive": 24.0,
+          "median_new_area_ratio_observed_positive": 24.0,
+          "pooled_area_ratio": 24.0,
+          "pooled_growth_precision": 0.0,
+          "pooled_growth_recall": 0.0,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        }
+      },
+      "contrasts": {
+        "ca0_minus_simfire": {
+          "growth_iou": {
+            "cases": 1,
+            "mean": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 1,
+            "mean": 281.88,
+            "ci95": [
+              281.88,
+              281.88
+            ]
+          }
+        },
+        "ca1_minus_simfire": {
+          "growth_iou": {
+            "cases": 1,
+            "mean": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 1,
+            "mean": -3.240000000000002,
+            "ci95": [
+              -3.240000000000002,
+              -3.240000000000002
+            ]
+          }
+        },
+        "ca2_minus_simfire": {
+          "growth_iou": {
+            "cases": 1,
+            "mean": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 1,
+            "mean": 103.68000000000002,
+            "ci95": [
+              103.68000000000002,
+              103.68000000000002
+            ]
+          }
+        },
+        "ca_mean3_minus_simfire": {
+          "growth_iou": {
+            "cases": 1,
+            "mean": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 1,
+            "mean": 127.44000000000001,
+            "ci95": [
+              127.44000000000001,
+              127.44000000000001
+            ]
+          }
+        },
+        "persistence_minus_simfire": {
+          "growth_iou": {
+            "cases": 1,
+            "mean": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 1,
+            "mean": -22.68,
+            "ci95": [
+              -22.68,
+              -22.68
+            ]
+          }
+        },
+        "ellipse_minus_simfire": {
+          "growth_iou": {
+            "cases": 1,
+            "mean": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 1,
+            "mean": 48.60000000000001,
+            "ci95": [
+              48.60000000000001,
+              48.60000000000001
+            ]
+          }
+        }
+      }
+    },
+    "growing": {
+      "kind": "raw",
+      "horizon": 48,
+      "fully_covered_only": true,
+      "complete_ids": [
+        "fpa-fod-400300427-plateau",
+        "fpa-fod-400300631-ranch",
+        "fpa-fod-400300764-buzzard",
+        "fpa-fod-400300963-coal-hollow",
+        "fpa-fod-400301084-prospect",
+        "fpa-fod-400301104-stewart-creek",
+        "fpa-fod-400302402-silver-creek",
+        "fpa-fod-400302444-spring-creek",
+        "fpa-fod-400302533-tinder",
+        "fpa-fod-400302636-bears",
+        "fpa-fod-400302686-boot",
+        "fpa-fod-400302943-cranston",
+        "fpa-fod-400303711-gold-hill",
+        "fpa-fod-400303744-rattlesnake-creek",
+        "fpa-fod-400303807-ryan",
+        "fpa-fod-400303966-cabin-lake",
+        "fpa-fod-400304718-west-valley",
+        "fpa-fod-400305302-sugar-pine",
+        "fpa-fod-400306102-rattlesnake",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400307462-indian-valley",
+        "fpa-fod-400307488-red-canyon",
+        "fpa-fod-400307776-bull-draw",
+        "fpa-fod-400308652-dog-creek",
+        "fpa-fod-400308656-sharps",
+        "fpa-fod-400310578-ok-bar",
+        "fpa-fod-400310583-organ",
+        "fpa-fod-400310914-echo",
+        "fpa-fod-400310977-sheep-creek",
+        "fpa-fod-400311017-goshute-cave",
+        "fpa-fod-400312787-black-mountain",
+        "fpa-fod-400313239-cedar-mountain-one",
+        "fpa-fod-400313254-lakeside",
+        "fpa-fod-400313301-bear-trap",
+        "fpa-fod-400313842-north-eden",
+        "fpa-fod-400314399-lake-wallula",
+        "fpa-fod-400376589-ute-park",
+        "fpa-fod-400500346-south",
+        "fpa-fod-400500878-cellar",
+        "fpa-fod-400501480-decker",
+        "fpa-fod-400501641-mountain",
+        "fpa-fod-400503581-coldwater",
+        "fpa-fod-400504417-shady",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400505118-cove-creek",
+        "fpa-fod-400507579-red-bank",
+        "fpa-fod-400508306-lookout-point",
+        "fpa-fod-400508892-north-hills",
+        "fpa-fod-400509143-ridgetop",
+        "fpa-fod-400510304-goose",
+        "fpa-fod-400510515-summit",
+        "fpa-fod-400513488-sage",
+        "fpa-fod-400541373-mp-97",
+        "fpa-fod-400732973-walker"
+      ],
+      "observed_positive_ids": [
+        "fpa-fod-400300427-plateau",
+        "fpa-fod-400300631-ranch",
+        "fpa-fod-400300764-buzzard",
+        "fpa-fod-400300963-coal-hollow",
+        "fpa-fod-400301084-prospect",
+        "fpa-fod-400301104-stewart-creek",
+        "fpa-fod-400302402-silver-creek",
+        "fpa-fod-400302444-spring-creek",
+        "fpa-fod-400302533-tinder",
+        "fpa-fod-400302636-bears",
+        "fpa-fod-400302686-boot",
+        "fpa-fod-400302943-cranston",
+        "fpa-fod-400303711-gold-hill",
+        "fpa-fod-400303744-rattlesnake-creek",
+        "fpa-fod-400303807-ryan",
+        "fpa-fod-400303966-cabin-lake",
+        "fpa-fod-400304718-west-valley",
+        "fpa-fod-400305302-sugar-pine",
+        "fpa-fod-400306102-rattlesnake",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400307462-indian-valley",
+        "fpa-fod-400307488-red-canyon",
+        "fpa-fod-400307776-bull-draw",
+        "fpa-fod-400308652-dog-creek",
+        "fpa-fod-400308656-sharps",
+        "fpa-fod-400310578-ok-bar",
+        "fpa-fod-400310583-organ",
+        "fpa-fod-400310914-echo",
+        "fpa-fod-400310977-sheep-creek",
+        "fpa-fod-400311017-goshute-cave",
+        "fpa-fod-400312787-black-mountain",
+        "fpa-fod-400313239-cedar-mountain-one",
+        "fpa-fod-400313254-lakeside",
+        "fpa-fod-400313301-bear-trap",
+        "fpa-fod-400313842-north-eden",
+        "fpa-fod-400314399-lake-wallula",
+        "fpa-fod-400376589-ute-park",
+        "fpa-fod-400500346-south",
+        "fpa-fod-400500878-cellar",
+        "fpa-fod-400501480-decker",
+        "fpa-fod-400501641-mountain",
+        "fpa-fod-400503581-coldwater",
+        "fpa-fod-400504417-shady",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400505118-cove-creek",
+        "fpa-fod-400507579-red-bank",
+        "fpa-fod-400508306-lookout-point",
+        "fpa-fod-400508892-north-hills",
+        "fpa-fod-400509143-ridgetop",
+        "fpa-fod-400510304-goose",
+        "fpa-fod-400510515-summit",
+        "fpa-fod-400513488-sage",
+        "fpa-fod-400541373-mp-97",
+        "fpa-fod-400732973-walker"
+      ],
+      "missing_ids": [],
+      "excluded_censored_ids": [
+        "fpa-fod-400310945-goose-creek",
+        "fpa-fod-400311253-martin"
+      ],
+      "methods": {
+        "simfire": {
+          "mean_growth_iou": 0.08812005217843856,
+          "mean_absolute_new_area_error_ha": 5919.299999999999,
+          "mean_signed_new_area_error_ha": 3917.7000000000007,
+          "mean_predicted_new_area_ha": 6267.240000000001,
+          "mean_observed_new_area_ha": 2349.5400000000004,
+          "mean_new_area_ratio_observed_positive": 13.089333094133062,
+          "median_new_area_ratio_observed_positive": 0.6294653884608599,
+          "pooled_area_ratio": 2.6674327740749253,
+          "pooled_growth_precision": 0.13092844697187278,
+          "pooled_growth_recall": 0.3492428305115044,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "ca0": {
+          "mean_growth_iou": 0.13031314674209257,
+          "mean_absolute_new_area_error_ha": 1880.7600000000002,
+          "mean_signed_new_area_error_ha": -1056.1200000000001,
+          "mean_predicted_new_area_ha": 1293.4199999999998,
+          "mean_observed_new_area_ha": 2349.5400000000004,
+          "mean_new_area_ratio_observed_positive": 2.6655649055190755,
+          "median_new_area_ratio_observed_positive": 0.548845310812262,
+          "pooled_area_ratio": 0.5504992466610485,
+          "pooled_growth_precision": 0.3248596743517187,
+          "pooled_growth_recall": 0.1788350060011747,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "ca1": {
+          "mean_growth_iou": 0.14462390656378238,
+          "mean_absolute_new_area_error_ha": 1868.3400000000004,
+          "mean_signed_new_area_error_ha": -1052.1000000000001,
+          "mean_predicted_new_area_ha": 1297.4400000000005,
+          "mean_observed_new_area_ha": 2349.5400000000004,
+          "mean_new_area_ratio_observed_positive": 2.670016848700115,
+          "median_new_area_ratio_observed_positive": 0.5715618497308639,
+          "pooled_area_ratio": 0.5522102198728261,
+          "pooled_growth_precision": 0.33504439511653716,
+          "pooled_growth_recall": 0.18501493909446104,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "ca2": {
+          "mean_growth_iou": 0.12936585219571933,
+          "mean_absolute_new_area_error_ha": 1941.3599999999994,
+          "mean_signed_new_area_error_ha": -971.2800000000002,
+          "mean_predicted_new_area_ha": 1378.2600000000002,
+          "mean_observed_new_area_ha": 2349.5400000000004,
+          "mean_new_area_ratio_observed_positive": 2.9695890112905996,
+          "median_new_area_ratio_observed_positive": 0.5695611577964519,
+          "pooled_area_ratio": 0.586608442503639,
+          "pooled_growth_precision": 0.29106264420356104,
+          "pooled_growth_recall": 0.17073980438724176,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "ca_mean3": {
+          "mean_growth_iou": 0.13476763516719809,
+          "mean_absolute_new_area_error_ha": 1896.8200000000002,
+          "mean_signed_new_area_error_ha": -1026.5000000000002,
+          "mean_predicted_new_area_ha": 1323.04,
+          "mean_observed_new_area_ha": 2349.5400000000004,
+          "mean_new_area_ratio_observed_positive": 2.7683902551699298,
+          "median_new_area_ratio_observed_positive": 0.49259004701082576,
+          "pooled_area_ratio": 0.5631059696791713,
+          "pooled_growth_precision": 0.31645301729350583,
+          "pooled_growth_recall": 0.17819658316095915,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "persistence": {
+          "mean_growth_iou": 0.0,
+          "mean_absolute_new_area_error_ha": 2349.5400000000004,
+          "mean_signed_new_area_error_ha": -2349.5400000000004,
+          "mean_predicted_new_area_ha": 0.0,
+          "mean_observed_new_area_ha": 2349.5400000000004,
+          "mean_new_area_ratio_observed_positive": 0.0,
+          "median_new_area_ratio_observed_positive": 0.0,
+          "pooled_area_ratio": 0.0,
+          "pooled_growth_precision": null,
+          "pooled_growth_recall": 0.0,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        },
+        "ellipse": {
+          "mean_growth_iou": 0.041151719094734016,
+          "mean_absolute_new_area_error_ha": 2283.2999999999997,
+          "mean_signed_new_area_error_ha": -2274.2999999999997,
+          "mean_predicted_new_area_ha": 75.24,
+          "mean_observed_new_area_ha": 2349.5400000000004,
+          "mean_new_area_ratio_observed_positive": 0.5206802424285811,
+          "median_new_area_ratio_observed_positive": 0.07028660220994476,
+          "pooled_area_ratio": 0.03202328966521106,
+          "pooled_growth_precision": 0.5350877192982456,
+          "pooled_growth_recall": 0.01713526903138487,
+          "stalled_cases": 0,
+          "stalled_cases_with_predicted_growth": 0,
+          "mean_false_new_area_ha_when_stalled": null
+        }
+      },
+      "contrasts": {
+        "ca0_minus_simfire": {
+          "growth_iou": {
+            "cases": 54,
+            "mean": 0.042193094563654006,
+            "ci95": [
+              0.009662557275377952,
+              0.07391206018631978
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 54,
+            "mean": -4038.5400000000004,
+            "ci95": [
+              -6366.094499999999,
+              -1945.9605000000004
+            ]
+          }
+        },
+        "ca1_minus_simfire": {
+          "growth_iou": {
+            "cases": 54,
+            "mean": 0.05650385438534382,
+            "ci95": [
+              0.019329168063470552,
+              0.09437776589162332
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 54,
+            "mean": -4050.9600000000005,
+            "ci95": [
+              -6348.869999999998,
+              -1976.3535000000013
+            ]
+          }
+        },
+        "ca2_minus_simfire": {
+          "growth_iou": {
+            "cases": 54,
+            "mean": 0.04124580001728075,
+            "ci95": [
+              0.006939511722470025,
+              0.0748451406270505
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 54,
+            "mean": -3977.94,
+            "ci95": [
+              -6251.465999999999,
+              -1945.8990000000015
+            ]
+          }
+        },
+        "ca_mean3_minus_simfire": {
+          "growth_iou": {
+            "cases": 54,
+            "mean": 0.04664758298875952,
+            "ci95": [
+              0.012761008632790212,
+              0.08074606234711341
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 54,
+            "mean": -4022.48,
+            "ci95": [
+              -6318.7225,
+              -1958.2320000000009
+            ]
+          }
+        },
+        "persistence_minus_simfire": {
+          "growth_iou": {
+            "cases": 54,
+            "mean": -0.08812005217843856,
+            "ci95": [
+              -0.11430827575010817,
+              -0.06463944726318199
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 54,
+            "mean": -3569.7599999999998,
+            "ci95": [
+              -5997.324,
+              -1375.212000000001
+            ]
+          }
+        },
+        "ellipse_minus_simfire": {
+          "growth_iou": {
+            "cases": 54,
+            "mean": -0.04696833308370456,
+            "ci95": [
+              -0.07759084453691144,
+              -0.01725012022895012
+            ]
+          },
+          "absolute_new_area_error_ha": {
+            "cases": 54,
+            "mean": -3636.0,
+            "ci95": [
+              -6062.427000000002,
+              -1443.9810000000014
+            ]
+          }
+        }
+      }
+    }
+  }
+}
