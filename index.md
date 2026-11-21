@@ -5,6 +5,9 @@ okf_version: "0.2"
 
 ## Počni ovdje
 
+- [Aktivno: zajednički PPO ugovor](docs/research/COMMON_PPO_INTERFACE.md) - TASK-040 B.1/ADR-049, isti input/charged reward i mali tehnički smoke.
+
+
 - [Najnovije: prošireni audit opaženog rasta](docs/research/EXPANDED_OBSERVED_GROWTH.md) - TASK-042/ADR-048 završen na61TRAIN, grupe nerasta i jasne granice; sljedeći prijedlog TASK-040 B.1.
 
 - [Najnovije: rast prema opaženom FEDS-u](docs/research/PAIRED_OBSERVED_GROWTH.md) - TASK-041/ADR-046 završen: CA bliži opaženom razmjeru, spatial neizvjesnost; TASK-042 je sljedeći prijedlog.

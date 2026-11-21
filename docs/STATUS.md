@@ -7,6 +7,13 @@ sources:
 ---
 # Trenutno stanje — 2026-11-21
 
+## TASK-040 B.1 u radu — zajednički PPO ugovor (ADR-049, 2026-11-22)
+
+Korisnik nastavlja [plan zajedničkog interfejsa](research/COMMON_PPO_INTERFACE.md) na
+`codex/common-ppo-interface`, iz45d41fcf. Prvo testovi charged nagrade/maski/budžeta,
+zatim isti encoder/model i samo četiri tehnička64-step smokea. Plan je zamrznut prije
+implementacije/ishoda. Native unit resursi, veći trening i stvarni holdout ostaju zatvoreni.
+
 ## TASK-042 završen — svih 61 kompatibilnih TRAIN početaka (ADR-048, 2026-11-21)
 
 [Prošireni audit](research/EXPANDED_OBSERVED_GROWTH.md) je završen na `codex/ca-expanded-growth-audit`, iz2de00136.

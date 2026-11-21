@@ -4,6 +4,12 @@ title: Work log
 ---
 # Work log
 
+2026-11-22 — TASK-040 B.1: nova grana iz45d41fcf, ADR-049 i frozen plan prije implementacije/ishoda. Samo zajednički ugovor i4×64koraka.
+
+
+2026-11-22 — TASK-040 B.1: korisnik nastavlja; nova grana iz45d41fcf, ADR-049 i frozen common-PPO plan prije implementacije/ishoda. Samo tehnički ugovor i4×64koraka, bez velikog treninga.
+
+
 2026-11-21 — TASK-042 grana pushana; CI na `aa3335a4` prolazi core3.11/3.13, numeric i
 knowledge. Receipt/status/handoff usklađeni; numerički hashovi isti. Bez novog PR-a,
 mergea ili uploada velikog paketa; prethodni rad sačuvan.

@@ -1,0 +1,121 @@
+{
+  "schema_version": "common-ppo-smoke/1.0",
+  "task": "TASK-040 B.1",
+  "decision": "ADR-049",
+  "date": "2026-11-22",
+  "base_commit": "45d41fcf71233c9102123cf0702c46c085544824",
+  "purpose": "Shared common-line PPO contract and bounded technical smoke; no learning ranking",
+  "cases": [
+    "fpa-fod-400303584-goldstone",
+    "fpa-fod-400307379-weston-pass",
+    "fpa-fod-400505027-pine-lodge"
+  ],
+  "selection": "First three IDs in preregistered TASK040 hash order, already explored TRAIN; not an outcome-selected or heldout sample",
+  "weather_sha256": "76332f3da26fe02812ca6439fee5dec9f131793227335e0380267d12c0ab937e",
+  "table_sha256": "28627fa98b60f8dae4ac4f9246887ecd3488b541c2a9dbd5e82620811effbddc",
+  "observation": "simfire-categorical-local-v2; fixed terrain536 encoder, float32; no counterfactual footprint or future FEDS in features/masks",
+  "action": "Discrete9, no-op0 and eight existing front_edge line sectors; v2 burnable_lines mask",
+  "budget": 1,
+  "horizon_steps": 4,
+  "decision_hours": 12,
+  "physics": "Unchanged ADR043/044 bridge and ADR031 SimFire; CA primary spread replicate0 with stable TASK040 hash seed; SF seed0",
+  "reward": {
+    "version": "common-charged-increment-v1",
+    "formula": "-(C_t-C_previous)/100 - 0.01*invalid; C_t=count((burned_t | (lines_t & own_noop_final)) & ~initial); C_0=0",
+    "units": "cells / 100, each cell3.24ha; gamma1; sum reward = -final charged cells/100 - invalid penalties",
+    "no_op_reference": "same backend/case/forcing/spread seed, full48h; private reward accounting only, never policy input or legality",
+    "prior_damage": "retained in cumulative mask, excluded from new damage; line never erases burning/prior cells",
+    "invalid": "masked requests become no-op, cost0, penalty0.01; out-of-space raises; no-op always legal; full four decisions after budget0"
+  },
+  "model_seeds": [
+    17,
+    29
+  ],
+  "architecture": {
+    "algorithm": "MaskablePPO",
+    "policy": "MlpPolicy",
+    "hidden_pi": [
+      64,
+      64
+    ],
+    "hidden_vf": [
+      64,
+      64
+    ],
+    "activation": "Tanh",
+    "features": 536,
+    "device": "cpu",
+    "n_envs": 1
+  },
+  "ppo": {
+    "n_steps": 16,
+    "batch_size": 16,
+    "n_epochs": 2,
+    "learning_rate": 0.0001,
+    "gamma": 1.0,
+    "gae_lambda": 1.0,
+    "clip_range": 0.1,
+    "ent_coef": 0.001,
+    "vf_coef": 0.5,
+    "max_grad_norm": 0.5,
+    "target_kl": 0.03
+  },
+  "steps_per_run": 64,
+  "schedule": "cycle same three cases starting at index0;16 complete episodes per run (6/5/5); all four runs reported, no selection",
+  "native_checks": {
+    "sequences": [
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0
+      ]
+    ],
+    "requirements": [
+      "native no-op whole masks match TASK042 archives (including CA in pinned runtime)",
+      "initial raw v2 observations, 536 features and masks identical across backends",
+      "four-step horizon, cumulative prior and line union, budget, requested/effective actions",
+      "sum reward matches independent final score_line_damage including explicit invalid penalty",
+      "numeric inference checkpoint roundtrip weights/logits/actions and full deterministic replay masks"
+    ]
+  },
+  "acceptance": "all invariant/guard/replay/finite-training checks pass for both backends; no threshold on reward/improvement; not an agent comparison",
+  "checkpoint": "own numeric NPZ with allow_pickle=False, guarded contract and tensors; inference only, not optimizer resume",
+  "runtime": "same pinned Python3.9/numpy1.26.4/torch2.3.1/SB3+contrib2.7.1 for both; one numerical thread; nice19; sequential single process",
+  "execution_minutes": "5-15 total after implementation; adjust duration only, no outcome-based changes",
+  "closed": [
+    "long training",
+    "hyperparameter search",
+    "real VALIDATION",
+    "TEST2024",
+    "future FEDS loading",
+    "old PPO loading",
+    "native urban/mobile-unit resource parity",
+    "paid compute",
+    "merge"
+  ],
+  "stop": [
+    "native no-op mismatch",
+    "input/source/plan guard mismatch",
+    "mask/budget/damage/horizon violation",
+    "nonfinite training or checkpoint mismatch"
+  ]
+}

@@ -1,5 +1,10 @@
 # Promjene baze znanja
 
+## 2026-11-22: započet zajednički PPO ugovor
+
+[TASK-040 B.1/ADR-049](docs/research/COMMON_PPO_INTERFACE.md): isti encoder/charged reward i mali tehnički smoke.
+
+
 ## 2026-11-21: frozen61audit objavljen, CI zelen
 
 `codex/ca-expanded-growth-audit` je pushana. [CI na `aa3335a4`](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44907387597)

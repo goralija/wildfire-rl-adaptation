@@ -2213,3 +2213,17 @@ bez automatskog velikog treninga. Native mobilni resursi ostaju odvojeni otvoren
 faze B; stari PPO-i nisu rangirani. TASK-039 odgođen, TASK-037 optionalSimFire.
 Nema nove kalibracije, stvarnog VALIDATION/TEST, plaćenog computea ili mergea.
 [Izvještaj](../research/EXPANDED_OBSERVED_GROWTH.md) i [sve brojke](../../reports/real-fire-data/expanded-observed-growth-v1.json).
+
+
+## ADR-049 — zajednički PPO/reward ugovor prije tehničkog smokea (2026-11-22)
+
+Korisnik nastavlja predloženi TASK-040 B.1 iz ADR-048. Nova grana
+`codex/common-ppo-interface` iz45d41fcf. [Plan](../../configs/frozen/common-ppo-smoke-v1.json)
+i [objašnjenje](../research/COMMON_PPO_INTERFACE.md) prethode implementaciji i ishodima.
+Isti v2/terrain536,9akcija,B1,4×12h, fizika nepromijenjena; opt-in incremental charged
+reward sa privatnim vlastitim no-op otiskom, gamma1 i invalid kaznom0.01. Testovi prije
+ponašajne promjene. Native provjere na prva3ranije registrovana TRAIN ID-a, potom
+samo2backend-a×2seeda×64koraka, ista arhitektura/hiperparametri/raspored i numeric
+checkpoint/replay. Prihvat je tehnički, bez reward praga ili tvrdnje o učenju. Bez
+FEDS budućnosti, stvarnog VALIDATION/TEST, starog PPO-a, velikog treninga ili mergea.
+Native mobilni resursi ostaju otvoreni. Nice19, jedna nit, sekvencijalno5–15min.
