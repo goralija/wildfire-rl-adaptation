@@ -1942,3 +1942,9 @@ Dopuna ADR-043 prije prvog CA ishoda: početni QC je koristio native CA (urbano9
 Za common-vegetation bridge početni front mora biti samo na1–13, pa je ulazna provjera
 ponovljena s tim eksplicitnim kriterijem. Tačan eligible broj i16ID-jeva su u planu;
 prethodni broj63 se ne koristi za finalnu kohortu. Nema izbora prema simuliranim ishodima.
+
+Tehnička dopuna ADR-043 prije završene kohorte: naslijeđena rasterska linija je1260m
+po osi i1272,792m dijagonalno (5dijagonalnih plus4corner ćelije). Pilot guard je pogrešno
+zahtijevao<=1260za sve smjerove i zaustavio run. Novi prvo-padajući test prihvata tačan
+postojeći SimFire kapacitet; geometrija/ishodi nisu promijenjeni. Plan precizira obje
+dužine, a novi izlaz čuva novi source/plan hash. Ne radi se o izboru prema CA rezultatu.

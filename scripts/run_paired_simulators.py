@@ -29,6 +29,7 @@ from wildfire_rl.feds_observation_audit import nested_actions,fit_models,predict
 from wildfire_rl.feds_b1_learning import _with_noop_lower_bound
 from wildfire_rl.feds_observation_dataset import load_observation_case
 from wildfire_rl.line_damage import score_line_damage
+from wildfire_rl.feds_simfire_env import line_length_m
 from analyze_feds_b1 import load_table
 
 SOURCES=['scripts/run_paired_simulators.py','src/wildfire_rl/paired_simulators.py',
@@ -88,7 +89,8 @@ def rollout(env,sequence=None,policy=None,capture=False):
         if trunc or done!=(k==3) or info['invalid_action']:raise AssertionError('horizon/legality failure')
         if base.remaining_budget<0:raise AssertionError('negative budget')
         length+=info['line_length_m'];actions.append(action)
-    if sum(a!=0 for a in actions)>1 or length>1260.0001:raise AssertionError('common line capacity exceeded')
+    if sum(a!=0 for a in actions)>1 or length>max(line_length_m(k) for k in range(8))+1e-4:
+        raise AssertionError('common line capacity exceeded')
     return {'initial':initial,'burned':base.cumulative_burned.copy(),'line':base.fire.line.copy(),
             'actions':actions,'line_length_m':length,'observations':observations,'masks':masks,
             'edge_contact':bool(base.cumulative_burned[0].any() or base.cumulative_burned[-1].any()

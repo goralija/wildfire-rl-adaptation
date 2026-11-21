@@ -58,6 +58,15 @@ class BridgeTest(unittest.TestCase):
         for _ in range(4):a.step(0);b.step(0)
         np.testing.assert_array_equal(a.env.cumulative_burned,b.env.cumulative_burned)
 
+    def test_runner_accepts_the_original_simfire_diagonal_capacity(self):
+        import sys
+        from pathlib import Path
+        sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
+        from run_paired_simulators import rollout
+        from wildfire_rl.feds_simfire_env import line_length_m
+        result=rollout(self.env(),sequence=[2,0,0,0])
+        self.assertAlmostEqual(result['line_length_m'],line_length_m(1))
+
 
 class PercentageTest(unittest.TestCase):
     def test_zero_denominator_is_undefined_and_negative_savings_survive(self):

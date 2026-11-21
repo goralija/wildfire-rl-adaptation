@@ -1016,5 +1016,7 @@
     "budget/damage/statistics invariant failure",
     "source/plan hash mismatch",
     "no original SF outcome reproduction"
-  ]
+  ],
+  "diagonal_line_length_m": 1272.7922061357856,
+  "line_budget_note": "Exact original SF raster geometry: axis1260m, diagonal1272.792206m, clipped share when cells unavailable; identical function in both."
 }
