@@ -4,7 +4,14 @@ title: Wildfire RL adaptation — MPVI
 ---
 # Wildfire RL adaptation — MPVI
 
-Najnovije 2026-11-21: [upareni SimFire/CA pilot](docs/research/CA_SIMFIRE_PAIRED.md),
+Najnovije 2026-11-21: [rast simulatora prema opaženom FEDS-u](docs/research/PAIRED_OBSERVED_GROWTH.md),
+TASK-041/ADR-046 završen na16istih TRAIN početaka. Zamrznuti CA bridge ima86,47%manju
+apsolutnu grešku nove površine odSF; IoU0,160vs0,103, uz interval razlike preko0.
+Martinovo opažanje izlazi iz mape; fully-covered15 provjera prijavljena. Predloženi
+TASK-042 širi isti no-op audit na61compatible TRAIN prije većeg treninga. Native PPO
+poređenje/fizička validacija nisu završeni, stvarni holdouti ostaju zatvoreni.
+
+Prethodno 2026-11-21: [upareni SimFire/CA pilot](docs/research/CA_SIMFIRE_PAIRED.md),
 TASK-040 faza A / ADR-044 završen. Istih16 stvarnih TRAIN početaka i iste linije daju
 mješovite procente uz oko5,4puta manji CA no-op rast. Novi mali RBF agenti ne rangiraju
 ranije native PPO modele; prelazak na CA nije potvrđen. Sljedeći prijedlog TASK-041:

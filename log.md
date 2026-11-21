@@ -1,5 +1,14 @@
 # Promjene baze znanja
 
+## 2026-11-21: završen audit rasta prema FEDS-u
+
+[TASK-041/ADR-046](docs/research/PAIRED_OBSERVED_GROWTH.md) na16istih TRAIN početaka:
+CA0 ima86,47%manju area grešku, ali spatial interval uključuje0. Sva3seeda i15fully-covered
+osjetljivost prijavljeni; Martin izlazi iz mape, Goldstone near-stalled ostaje problem.
+381pinovani test i nezavisni replay/raster/restore checkovi prolaze. [Rezultati](reports/real-fire-data/paired-observed-growth-v1.json)
+i [verifikacija](reports/real-fire-data/paired-observed-growth-verification-v1.json) čuvaju sve redove.
+TASK-042 na61compatible TRAIN je sljedeći prijedlog, bez automatskog treninga/holdouta.
+
 ## 2026-11-21: odobren TRAIN audit opaženog rasta
 
 [TASK-041/ADR-045](docs/research/PAIRED_OBSERVED_GROWTH.md) je započet u izdvojenoj

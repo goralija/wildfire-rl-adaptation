@@ -67,3 +67,10 @@
 - [Preuzimanje CFSDS arhive](cfsds-download-manifest.json) - sizes and checksums for ignored raw files.
 - [Stvarni požari: pregled kandidata i mali uzorci](README.md) - Experiment Report
 - [FireSpread_MedEU BiH spatial screen](medeu-spatial-screen.json) - provenance, checksum, candidate EFFIS IDs and crop limits
+
+## Zamrznuti SimFire/CA rast prema FEDS-u (2026-11-21)
+
+- [Ljudski izvještaj](../../docs/research/PAIRED_OBSERVED_GROWTH.md) - TASK-041/ADR-046, nije fizička validacija ili native PPO rangiranje.
+- [Svi slučajevi/vremena/seedi](paired-observed-growth-v1.json) - [metrike](paired-observed-growth-v1.png), [svih16mapa](paired-observed-growth-maps-v1.png).
+- [Testovi, provenance i nezavisna rekalkulacija](paired-observed-growth-verification-v1.json).
+- [Lokalni paket](paired-observed-growth-artifacts-v1.json) - [raspakovani SF/CA replay i80rastera](paired-observed-growth-restore-v1.json), bez uploada godišnjih arhiva ili raw mapa.

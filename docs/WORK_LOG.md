@@ -4,6 +4,15 @@ title: Work log
 ---
 # Work log
 
+2026-11-21 — TASK-041 završen na codex/ca-feds-growth-audit, baza640a910e, plan46e5371f
+prije koda7d04fca0/scoringa.16TRAIN no-op SF/CA3rep bez podešavanja. Primary CA0 MAE
+manji86,47%, spatial IoU interval prelazi0; Martin observed izlazi iz mape,15covered
+analiza zadržana. Goldstone near-stalled problem eksplicitan.381pinned/366modern(4skip)/
+299core(44skip),CLI PASS;768metric/80raster/10legacy check PASS. Lokalni paket10.486.862B,
+436fajlova plus manifest, restore SF5/CA3×5 i80opažanja identičan. ADR-046/EXP-028,
+status/handoff/raspored usklađeni; TASK-042 širi frozen audit na61TRAIN kao prijedlog,
+bez novog treninga/holdouta ili mergea. Veliki artefakti ostaju lokalni.
+
 2026-11-21 — Korisnik odobrava TASK-041. Nova codex/ca-feds-growth-audit grana/worktree
 iz640a910e, main i prethodni rad sačuvani. ADR-045/plan prije koda/scoringa: isti16TRAIN,
 iste no-op dinamike i3CA spread replike, exact-time FEDS, vrijeme/coverage/zero pravila

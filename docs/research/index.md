@@ -31,4 +31,4 @@
 
 - [Upareno SimFire/CA poređenje](CA_SIMFIRE_PAIRED.md) - TASK-040 faza A/ADR-044 završena, common-control nalazi i granice; native faza B otvorena.
 
-- [SimFire/CA rast prema opaženom FEDS-u](PAIRED_OBSERVED_GROWTH.md) - TASK-041/ADR-045, zamrznuti TRAIN audit prije scoringa.
+- [SimFire/CA rast prema opaženom FEDS-u](PAIRED_OBSERVED_GROWTH.md) - TASK-041/ADR-046 završen: surface/IoU rezultati, domain QC i sve3CA replike.

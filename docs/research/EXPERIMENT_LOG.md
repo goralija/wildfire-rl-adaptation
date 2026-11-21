@@ -722,3 +722,28 @@ plus manifest ostaje lokalni. [Izvještaj](CA_SIMFIRE_PAIRED.md),
 ADR-044 zatvara fazu A; TASK-041 observed-FEDS TRAIN growth audit je sljedeći prijedlog,
 native faza B otvorena. Bez starih PPO težina, novog PPO treninga, stvarnog holdouta ili
 fizičke validacije. Intervali opisni, reused TRAIN, nema multiplicity korekcije.
+
+
+## EXP-028 — TASK-041 zamrznuti SimFire/CA no-op prema opaženom FEDS-u, 2026-11-21
+
+Plan46e5371f/ADR-045, kod7d04fca0 prije novog scoringa. Isti16TRAIN početaka,
+SF i3CA spread replike,256×256/180m/48h. SF16/CA0 16whole maske iCA1/2 32broja
+ponovljeni;64putanje×5maski kumulativno. Prediction freeze prije future FEDS-a;
+80exact-time validnih/monotonih stanja, t0/solar-weather alignment16/16PASS.
+Full annual TRAIN2018/2019 scan za kompletnu geometriju; bez mreže/holdouta.
+
+Primary CA0: MAE1.317,67 vsSF9.736,40ha,−86,47%; IoU0,1604vs0,1029. CA0−SF
+IoU CI[−0,0219;+0,1344] prelazi0; MAE CI[−15.211,86;−2.619,71] ne prelazi0.
+Sekundarni3CA meanIoU0,1812/MAE1.231,94ha. Oba zapisa i sve replike prijavljeni.
+Martinova48hgeometrija36,85%izvan mape;15covered SF/CA0 MAE7.844,47/1.149,77 i
+IoU0,1031/0,1665, spatial neizvjesnost ostaje. Goldstone3,24observed novih ha vs
+CA26–311ha kroz3seeda pokazuje near-stalled problem; nijedan48hobserved-zero slučaj.
+Novi rastovi ne uključuju prior, target na nonfuel-u nije uklonjen, raw/envelope isti.
+
+381pinned/0skip,366modern/4skip,299core/44skip iCLI PASS. Nezavisno768metric redova,
+80target rastera iz full vectors, endpoint/CI i10legacy-loader maski PASS. Paket
+10.486.862B/436fajlova plus manifest; restore prvih5SF/3×5CA maski i80rastera identičan,
+postojeće biblioteke. Nice19/max3radnika plus koordinator, SFpilot17,86s, fullreuse58,56s,
+CA15,60s. [Izvještaj](PAIRED_OBSERVED_GROWTH.md), [rezultati](../../reports/real-fire-data/paired-observed-growth-v1.json).
+ADR-046 zatvara audit, predlaže TASK-042 na61compatible TRAIN bez tuninga; native
+faza B otvorena. Nema RL/native migration prihvata, fizičke validacije ili holdouta.

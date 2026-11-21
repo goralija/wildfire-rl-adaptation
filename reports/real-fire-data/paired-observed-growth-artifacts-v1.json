@@ -1,0 +1,34 @@
+{
+  "schema_version": "paired-observed-growth-artifacts/1.0",
+  "path": ".local/growth-v1/artifacts/paired-observed-growth-v1.tar.gz",
+  "bytes": 10486862,
+  "sha256": "208ac97a741f1a210744928c87c9f8c1b88996bea3a367ba30a0aeda23598e80",
+  "members_verified": 436,
+  "internal_manifest": "MANIFEST.json",
+  "all_member_hashes_reread": "PASS",
+  "scope": "Numerical source/tests, selected16 real inputs, original selected SF/CA guards, all new predictions, full selected FEDS vectors and rasters, logs. Annual archives, venv, PPO weights and real holdout maps excluded.",
+  "uploaded": false,
+  "restore": {
+    "status": "PASS",
+    "simfire": {
+      "status": "PASS",
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "backend": "simfire",
+      "all5_cumulative_masks_identical": true,
+      "all80_observed_rasters_rebuilt": 80,
+      "source_plan_input_guards": "PASS",
+      "seconds": 15.036625,
+      "scope": "Unpacked source and selected inputs, existing pinned dependencies; one technical replay, no new evaluation sample or fresh install."
+    },
+    "ca": {
+      "status": "PASS",
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "backend": "ca",
+      "all3_replicates_all5_cumulative_masks_identical": true,
+      "source_plan_input_guards": "PASS",
+      "seconds": 1.9573603750031907,
+      "scope": "Unpacked source and selected inputs, existing modern dependencies; first-case technical replay, no full second evaluation or fresh install."
+    },
+    "limits": "First-case fresh SF plus all3 CA replicas, all5 masks per replay; all80 observations rebuilt. Existing dependencies, not a fresh install or full second simulator evaluation."
+  }
+}

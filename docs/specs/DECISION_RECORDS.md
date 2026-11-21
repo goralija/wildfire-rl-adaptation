@@ -2045,3 +2045,70 @@ Tehnički source/input/replay mismatch zaustavlja scoring. Test metrika, split/t
 missing/coverage pravila prethodi implementaciji. Ovaj audit nije novo proglašenje
 growth gatea ili dozvola za promjenu simulatornih parametara nakon nalaza. Native faza B
 TASK-040 ostaje otvorena, TASK-039 odgođen; TEST/VALIDATION ostaju zatvoreni.
+
+
+## ADR-046 — TASK-041 završen: CA bliži opaženom razmjeru, spatial neizvjesnost ostaje, 2026-11-21
+
+Izveden je korisnikov nastavak ADR-045 na `codex/ca-feds-growth-audit`, iz640a910e.
+Plan46e5371f prethodi numeričkom kodu7d04fca0 i novom FEDS scoringu. Parametri i svih16
+TRAIN početaka ostaju kao u TASK-040, tri postojeća CA spread seeda. Nema pretrage
+WAF/ROS, novih politika ili otvorenog holdouta; ovo nije native unit CA/PPO rangiranje.
+
+SF16finalnih whole maski iCA0 16identično arhivi; CA1/2 brojevi32/32 se poklapaju.
+Sva64no-op trajanja imaju punih4koraka i5kumulativnih maski, bez gubitka prior štete.
+Prediction freeze prethodi future FEDS čitanju. Dvije lokalne TRAIN godišnje arhive
+SHA256/originalMD5 provjerene, jedan puni prolaz po godini radi svih dijelova geometrije.
+Svih80exact-time stanja validno/prisutno, t0 raster scar16/16isti i maksimalna razlika
+usvojenog solar→UTC mapiranja prema weather granicama0s. To nije dokaz tačnog fizičkog
+vremena fronta. Nema observed nestalih starih ćelija: raw i envelope rezultati isti.
+
+Primarni48h zapis, jednaka težina16požara: mean observed novi ha2.726,46;
+SF11.363,69, CA0 1.866,85, CA1 2.092,23, CA2 2.337,26, CA3mean2.098,78.
+MAE novih ha: SF9.736,40, CA0 1.317,67, CA1 1.179,77, CA2 1.198,39, CA3mean1.231,94.
+Primarni CA0 MAE je86,47%manji. New-area IoU: SF0,102868, CA0 0,160359,
+CA1 0,214073, CA2 0,169103, CA3mean0,181178. Elipsa0,028822 iMAE2.661,05ha,
+persistence0 iMAE2.726,46ha. Nema uključivanja početnog opožarenog dijela u growth IoU.
+
+Case bootstrap10k/seed0, opisno bez multiplicity/refit: CA0−SF IoU+0,05749,
+95%[−0,02190;+0,13443] uključuje0; MAE−8.418,735ha[−15.211,861;−2.619,707]
+ne uključuje0 u tom obračunu. CA3mean sekundarno: IoU+0,07831[−0,00384;+0,15956],
+MAE−8.504,46ha[−15.192,633;−2.759,506]. Nije biran najbolji seed ili metrika.
+CA0 ima manju area grešku13/16, veću3/16; bolji/lošiji/isti IoU10/5/1.
+
+**Domena i nerast.** Martinov opaženi vektor ima27,61%izvan mape na36h i36,85%na48h.
+Prvobitna16analiza je in-map mjera; unaprijed registrovani15fully-covered zapis daje
+SF/CA0 IoU0,103115/0,166478, MAE7.844,472/1.149,768ha. Spatial interval opet uključuje0,
+MAE razlika−6.694,704ha95%[−13.180,325;−1.579,381]. Prednost razmjera nije samo Martin,
+ali puni istorijski footprint tog slučaja zahtijeva veću domenu ili cenzurisanu ocjenu.
+Mapa nije naknadno mijenjana niti je slučaj skriven. Nijedna simulirana maska ne dotiče rub.
+
+Na48h svih16opaženih požara ima rast; prethodni policy14nazivnik dolazio je od SF
+nerasta Coldwater/Organ, ne od FEDS-a. Na12h3opažena nerasta oba modela prerastaju;
+SF867,24ha vsCA0 182,52ha/CA3mean203,40ha mean lažnog rasta. Goldstone na48h ima
+samo3,24ha opaženog rasta, SF29,16 iCA0/1/2 311,04/25,92/132,84ha, svi IoU0.
+Near-stalled ponašanje nije riješeno i ovaj16subset ne ocjenjuje potpuno48hnerastuće
+slučajeve.81/13.464observed novih ćelija je na nonfuel-u; target nije maskiran.
+
+**Provjere.** Dvanaest novih regresijskih testova; module/reader red logovi prije njihove
+implementacije. Puni381pinned/
+0skip,366modern/4skip,299core/44skip iCLI PASS. Moderni nema Fionu: reader test prolazi
+pinovano i mora u numeric CI. Nezavisno768metric redova,80vektorskih rasterizacija,
+svi endpoint prosjeci/intervali i10maski starog loader-a PASS. SFpilot17,86s,
+puna komanda uz reuse58,56s, CA3replike15,60s; nice19/max3radnika uz koordinaciju.
+Lokalni paket10.486.862B,436fajlova plus manifest, svi hashovi ponovo pročitani.
+Iz raspakovanog sourcea/inputa prvih5SF i3×5CA maski te80FEDS rastera identični;
+postojeće biblioteke, ne fresh install ili kompletna druga simulatorska evaluacija.
+Godišnje arhive/venv/težine nisu uploadovani.
+
+**Tumačenje i naredno.** CA bridge sada ima bolju empirijsku osnovu za nastavak zbog
+bliže površine u ovim situacijama. Nije fizički validiran, niti je dokazana native CA
+ili RL prednost. Prostorna podudarnost je niska, unknown suppression/opažajna greška,
+reused TRAIN/input filter i mali uzorak ograničavaju nalaz. Pozitivan sekundarni
+vremenski-pooled interval ne zamjenjuje primarni48h IoU interval.
+
+TASK-041 je završen. Predloženi **TASK-042** proširuje isti zamrznuti no-op audit na61
+compatible TRAIN, uz puni future-domain QC i odvojene no/near-growth grupe, s novim
+planom prije skora i bez kalibracije prema ovih16. Zatim predložiti kalibraciju ili
+TASK-040 native fazu B; ona ostaje otvorena, TASK-039 odgođen. Bez novog PPO treninga,
+stvarnog VALIDATION/TEST, plaćenog computea ili mergea. [Izvještaj](../research/PAIRED_OBSERVED_GROWTH.md)
+i [svi redovi](../../reports/real-fire-data/paired-observed-growth-v1.json) su kanonski.

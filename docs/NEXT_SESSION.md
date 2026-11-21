@@ -4,13 +4,53 @@ title: Naredni korak — nakon CA pilota (2026-11-21)
 ---
 # Naredni korak
 
-## TASK-041 u toku — opaženi rast (ADR-045, 2026-11-21)
+## TASK-041 završen — opaženi rast (ADR-046, 2026-11-21)
 
-Korisnik je odobrio nastavak. [Zamrznuti audit](research/PAIRED_OBSERVED_GROWTH.md) na novoj grani
-`codex/ca-feds-growth-audit`, iz640a910e, poredi iste16TRAIN no-op početke s exact-time
-FEDS promjenama. Prvo plan/testovi i provjera vremena/pokrivenosti, zatim isti zamrznuti
-SF i3CA spread seeda. Bez podešavanja, novog treninga ili stvarnih VALIDATION/TEST.
-TASK-040 faza A ostaje završena, native faza B otvorena. Najviše3radnika, nice19.
+Na `codex/ca-feds-growth-audit`, iz640a910e, završen je [TRAIN audit](research/PAIRED_OBSERVED_GROWTH.md).
+Plan46e5371f/ADR-045 i kod7d04fca0 prethode novom scoringu. Isti16početaka i zamrznuti
+SF/CA bridge, bez promjene parametara ili politika. SF16/16 iCA0 16/16 finalne maske
+identične arhivama; CA1/2 brojevi32/32 isti. Predikcije su zaključane prije future FEDS-a.
+
+**Nalaz:** na48h mean new-area IoU SF0,1029/CA0 0,1604; mean apsolutna greška novih
+ha SF9.736,40/CA0 1.317,67,86,47%manja. Sekundarni prosjek3CA spread replike:
+IoU0,1812/MAE1.231,94ha. CA0−SF deltaIoU+0,0575, opisni95%[−0,0219;+0,1344]
+uključuje0; deltaMAE−8.418,74ha[−15.211,86;−2.619,71] ne uključuje0 u ovom obračunu.
+CA0 je bolji po površinskoj grešci13/16, poIoU10/16; nisu svi slučajevi poboljšani.
+Opaženi mean novi rast2.726,46ha; CA je bliži razmjeru, ali nije fizički validiran.
+
+**QC/granice:** svih80exact-time stanja prisutno/validno/monotono, t0 scar i usvojeno
+local-solar vrijeme se poklapaju16/16. Martin ima36,85%vektorske površine izvan domene
+na48h. Fully-covered15 analiza daje SF/CA0 IoU0,1031/0,1665 iMAE7.844,47/1.149,77ha;
+primarni spatial interval i dalje prelazi0. Goldstone ima samo3,24ha opaženog rasta,
+a CA0/1/2 daje311/26/133ha: skoro zaustavljeni požari ostaju problem. Nema observed-zero
+48hslučaja u ovih16. Native unit CA/PPO nije rangiran; nepoznate intervencije/opažajna
+greška, kompatibilni TRAIN subset i15/16pokrivenost ograničavaju zaključak.
+
+381pinovani test/0skip, moderni366/4skip, core299/44skip iCLI PASS. Nezavisno768metric
+redova,80rasterizacija i10maski starog loader-a potvrđeno. Paket10.486.862B,436fajlova
+plus manifest ima sve provjerene hashove; raspakovani source/ulazi ponavljaju prvih5SF
+maski i3×5CA maski, te80FEDS rastera. Postojeće biblioteke, ne fresh install ili novi
+naučni uzorak. Nema aktivnog računanja, novog treninga, stvarnog holdouta ili mergea.
+
+**Preporuka:** CA ima bolju osnovu za nastavak istraživanja zbog manjeg neslaganja
+razmjera u ovom testu. Sljedeći predloženi TASK-042 proširuje isti zamrznuti no-op audit
+na svih61ulazno kompatibilnih TRAIN početaka, uz full future-domain QC i posebno
+near-stalled/no-growth slučajeve, prije većeg treninga. Novi plan prije scoringa;
+TASK-040 native faza B ostaje otvorena, TASK-039 odgođen. Bez automatske fizičke validacije.
+
+### Predloženi TASK-042: redoslijed i prihvat
+
+1. Prije novog skora preregistrovati svih61eligible ID-jeva iz TASK-040 ulaznog QC-a,
+   iste fizičke parametre, tri postojeća CA spread seeda i SF no-op. Bez izbora po rezultatu.
+2. Isti exact-time/whole-vector loader; predikcije zaključati prije opažanja. Izvještaj
+   mora zadržati svaki slučaj, missing/coverage razloge i posebno nerast/slab rast.
+3. Ne tiho širiti ili pomjerati samo Martinovu mapu prema targetu. Veća domena je novi
+   protokol; existing map rezultat ostaje jasno cenzurisan. Ne podešavati WAF/ROS po ovih16.
+4. Ponoviti zajedničke metrike/denominatore i case-level intervale; tek po širem nalazu
+   predložiti kalibraciju ili TASK-040 fazu B za native resurse/akcije/PPO ugovor.
+
+TASK-042 još nije pokrenut. TEST/VALIDATION i dugi trening ostaju zatvoreni. Stariji
+TASK-041 prijedlozi ispod su historija i zamijenjeni završenim ADR-046.
 
 ## TASK-040 faza A završena — upareni simulatori (ADR-044, 2026-11-21)
 

@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "simfire": {
+    "status": "PASS",
+    "scenario_id": "fpa-fod-400303584-goldstone",
+    "backend": "simfire",
+    "all5_cumulative_masks_identical": true,
+    "all80_observed_rasters_rebuilt": 80,
+    "source_plan_input_guards": "PASS",
+    "seconds": 15.036625,
+    "scope": "Unpacked source and selected inputs, existing pinned dependencies; one technical replay, no new evaluation sample or fresh install."
+  },
+  "ca": {
+    "status": "PASS",
+    "scenario_id": "fpa-fod-400303584-goldstone",
+    "backend": "ca",
+    "all3_replicates_all5_cumulative_masks_identical": true,
+    "source_plan_input_guards": "PASS",
+    "seconds": 1.9573603750031907,
+    "scope": "Unpacked source and selected inputs, existing modern dependencies; first-case technical replay, no full second evaluation or fresh install."
+  },
+  "limits": "First-case fresh SF plus all3 CA replicas, all5 masks per replay; all80 observations rebuilt. Existing dependencies, not a fresh install or full second simulator evaluation."
+}

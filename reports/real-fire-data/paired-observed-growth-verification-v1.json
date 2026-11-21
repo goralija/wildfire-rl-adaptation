@@ -1,0 +1,168 @@
+{
+  "schema_version": "paired-observed-growth-verification/1.0",
+  "date": "2026-11-21",
+  "status": "PASS",
+  "scope": "TASK-041 technical provenance and arithmetic checks; not physical validation",
+  "common": {
+    "plan_sha256": "617c76eae64e5d64033c2ae115a08b76fa93cac913758fb9b98447acedf2490e",
+    "source_sha256": {
+      "scripts/run_paired_simulators.py": "a7394dd8860b4b105e2e83c4f3f826b9ac46f77eaa72ae4be9036de1418ba625",
+      "src/wildfire_rl/paired_simulators.py": "58794b6d1acb6df2f23b5be678e6d6bae0345b13f6676d86cd0d72a4c3d78779",
+      "src/wildfire_rl/synthetic_ca.py": "855b1d1ba50a1fd0e28f652f19d74607b1b0e485989e5424380bbf0602adb844",
+      "src/wildfire_rl/synthetic_real_cases.py": "22b2bb365207e2f5139cbd7c24d835f512a429b423387e8bfe627c9621729db6",
+      "src/wildfire_rl/feds_simfire_env.py": "261cb0b6565b72711aa56964a068f6749b6c49ceaa32b2b70a54c959cdb235ed",
+      "src/wildfire_rl/feds_simfire_setup.py": "78e7187113a246e9f70a0a88178b3d55345ed84ebce05b8e1c1f0b1b52b3c944",
+      "src/wildfire_rl/feds_observation_v2.py": "01cef197dfa09924deffa57055cd51b1dc78bc6d9c4a46ed4bc6a41e7854cf81",
+      "src/wildfire_rl/feds_observation_audit.py": "bc7109bb81b41a5e0081d06ab7145252f6ddf1b205924de50f3b9f7dd1a64cf5",
+      "src/wildfire_rl/feds_repaired_learning.py": "bd234e75c65b9dffb8390ff34252139ec1eb7b80f38bb95730230837da66216c",
+      "src/wildfire_rl/line_damage.py": "cab7e146e769edff04e2364c8d9874036ab154fa68f05af1c739d6b55f995ea6",
+      "src/wildfire_rl/observed_growth_audit.py": "872557eaec329569e1a382908326ee423ae172922f6535be9959618718734dd1",
+      "scripts/audit_paired_observed_growth.py": "a813345ad30d01528abdbc38751124332449692376d94daac871f7fa865d04d4",
+      "src/wildfire_rl/gridmet_weather.py": "d3da280ee45b71692ce4492551be0fe73405ac71e83d1690add1a8a8dd9a4fd7",
+      "src/wildfire_rl/feds_spread_metrics.py": "2f8afd12932f742f15019b36a30547cd9bf954e4f33b0498c115e0659bc67cc0",
+      "src/wildfire_rl/simfire_initial_state.py": "b73c6a7d895b28a2270b47f80897a01ef465370758b08b90fbd6b699b6f3ff22",
+      "src/wildfire_rl/simfire_timebase.py": "f873554b80b884b382fb29271d64ef2da0801b25e3c9f3aec91aa5848a21b722"
+    },
+    "paired_report_sha256": "845f8e14a4aa95ea04a10f7d6dd8009a299c53c4b76dba910b3d799e3056a676",
+    "weather_sha256": "76332f3da26fe02812ca6439fee5dec9f131793227335e0380267d12c0ab937e",
+    "manifest_sha256": "013be9a1632abcbc29d86f4bc16af89d3c074503f5899d1e39903d76ec2c28d5"
+  },
+  "scoring_runtime": {
+    "python": "3.9.25",
+    "packages": {
+      "numpy": "1.26.4",
+      "fiona": "1.10.1",
+      "shapely": "2.0.7",
+      "pyproj": "3.6.1",
+      "rasterio": "1.4.3"
+    }
+  },
+  "checks": {
+    "pinned": {
+      "status": "PASS",
+      "run": 381,
+      "skipped": 0,
+      "seconds": 69.997,
+      "log_sha256": "b361e308fd4ede4689f9faf810e48d95e2ef6ef4fe7e3b7401d224634235a29d"
+    },
+    "modern": {
+      "status": "PASS",
+      "run": 366,
+      "skipped": 4,
+      "seconds": 17.776,
+      "log_sha256": "4bcfd656cc43fda7fda0d7534c2f283e2cb8cbf836217d3889a88b5ea705264d"
+    },
+    "core": {
+      "status": "PASS",
+      "run": 299,
+      "skipped": 44,
+      "seconds": 7.203,
+      "log_sha256": "edba33098ec1f1fcc3ef52362a7145f9e1ceaccf99dd81a5214dda35fcc6e4dd"
+    },
+    "cli_smoke": {
+      "status": "PASS",
+      "log_sha256": "c0a576916023b057f658a355ce9969f9d642773310dfe6a0c92b472c32c76459"
+    },
+    "knowledge_tests": {
+      "status": "PASS",
+      "run": 15,
+      "skipped": 0,
+      "seconds": 2.128,
+      "log_sha256": "667205f495f8dab2f3657e85158c73dc05ffa43b3c2bba0eb6f5f7c2eed0ecfc"
+    },
+    "knowledge_markdown": {
+      "strict_status": "PASS",
+      "files": 89,
+      "log_sha256": "ad3359b570167575ef3f01a8db4dde5d05fd1ef2bd9d4ad1f40baa3106d3f611"
+    }
+  },
+  "replays": {
+    "simfire_final_whole_masks": 16,
+    "ca0_final_whole_masks": 16,
+    "ca1_ca2_final_counts": 32,
+    "all_full_horizon_cumulative_paths": 64
+  },
+  "time_alignment": {
+    "cases": 16,
+    "max_boundary_error_seconds": 0.0,
+    "initial_scar_raster_match": 16,
+    "limits": "Internal consistency with adopted overpass mapping, not exact physical front timestamps"
+  },
+  "independent_audit": {
+    "status": "PASS",
+    "mask_metric_rows_independently_recalculated": 768,
+    "full_vector_rasters_rebuilt": 80,
+    "legacy_loader_masks_matched": 10,
+    "source_and_prediction_hashes_match": true,
+    "all_endpoint_means_and_intervals_recalculated": true,
+    "all16_observations_monotone": true,
+    "initial_state_and_48h_growth_positive_cases": 16,
+    "script_sha256": "f00d6f82f5ddc5b155fe4aac1797f1ce8bc1749ef7729e6f97c4a571f29362af",
+    "validation_or_test_used": false,
+    "limits": "Technical arithmetic, rasterization and first2 exact-time loader cross-check; not an independent scientific sample."
+  },
+  "restore": {
+    "status": "PASS",
+    "simfire": {
+      "status": "PASS",
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "backend": "simfire",
+      "all5_cumulative_masks_identical": true,
+      "all80_observed_rasters_rebuilt": 80,
+      "source_plan_input_guards": "PASS",
+      "seconds": 15.036625,
+      "scope": "Unpacked source and selected inputs, existing pinned dependencies; one technical replay, no new evaluation sample or fresh install."
+    },
+    "ca": {
+      "status": "PASS",
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "backend": "ca",
+      "all3_replicates_all5_cumulative_masks_identical": true,
+      "source_plan_input_guards": "PASS",
+      "seconds": 1.9573603750031907,
+      "scope": "Unpacked source and selected inputs, existing modern dependencies; first-case technical replay, no full second evaluation or fresh install."
+    },
+    "limits": "First-case fresh SF plus all3 CA replicas, all5 masks per replay; all80 observations rebuilt. Existing dependencies, not a fresh install or full second simulator evaluation."
+  },
+  "public_artifact_sha256": {
+    "configs/frozen/paired-observed-growth-v1.json": "617c76eae64e5d64033c2ae115a08b76fa93cac913758fb9b98447acedf2490e",
+    "scripts/plot_observed_growth_audit.py": "53c818465ae5c95279491087c5cffd7770f05045250bc5c6460636c8fee268fb",
+    "reports/real-fire-data/paired-observed-growth-v1.json": "7fefabd25c6f416b43112d10e652cebe966dd049a7df6c6da217ec2dee17b54c",
+    "reports/real-fire-data/paired-observed-growth-maps-v1.png": "0d209a5b06316de7af3ead1bef69eb47d59191319b230606b33b3719e53db764",
+    "reports/real-fire-data/paired-observed-growth-v1.png": "9efead804d80c9008508477a81e1d882289ca057be5dde4430cfac53e53a7171",
+    "reports/real-fire-data/paired-observed-growth-artifacts-v1.json": "7882447845d03a417ac537561263638247d98eafc70e1fd1f77cbe8814381482",
+    "reports/real-fire-data/paired-observed-growth-restore-v1.json": "be8831985a6a22c56b4ee83907f9acd0c4e713279aebcb7f2ca50cee21aad1cd"
+  },
+  "local_log_sha256": {
+    ".local/plot.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".local/native-suite.log": "b361e308fd4ede4689f9faf810e48d95e2ef6ef4fe7e3b7401d224634235a29d",
+    ".local/predict-sf-full.log": "d7c1afadc8e41cc6459f3f62320ce71f2ebe0a6a4ff9aea2e13763c9c2f800d7",
+    ".local/modern-suite.log": "4bcfd656cc43fda7fda0d7534c2f283e2cb8cbf836217d3889a88b5ea705264d",
+    ".local/growth-tests-modern.log": "c19251f026a558950a66d9ec9bf9db4d2da89d492a6d7f61a42dc6d31b117916",
+    ".local/growth-first-red.log": "8882311777131f97cbb58b37996f681e090ab203ff46090ca74032ea3af5c7a0",
+    ".local/independent-audit-final.log": "d7dd4a3554c92cbeb8d744639e430c61875c49ec8f97ccf62cc1cb64b358c0dd",
+    ".local/core-suite.log": "edba33098ec1f1fcc3ef52362a7145f9e1ceaccf99dd81a5214dda35fcc6e4dd",
+    ".local/cli-smoke.log": "c0a576916023b057f658a355ce9969f9d642773310dfe6a0c92b472c32c76459",
+    ".local/score.log": "d0ea288d51c9ec10f57b3fab43ce005256e95e0cb2a529ec31078ee0aa0b5d5b",
+    ".local/independent-audit.log": "b5499831395419cd8bcaae6ba725a9888da6bbd591af2bda64ee875c84ab108e",
+    ".local/growth-tests.log": "898f22dfa62960b4cacb00e57df589abd4717129da394a2022e2293f74e91e51",
+    ".local/growth-geometry-red.log": "6f3ccb28b56ad3414250e62edebfc8312041e2957d87afcae0560770d9ed43d5",
+    ".local/predict-sf-pilot.log": "b744f0dbd88ba74621f5043ca973634fd66a43fe579066aed940ca87bcc4c828",
+    ".local/predict-ca-full.log": "1e3c86db81345e7139ef54e35d847f5bad9ff8bc99da32f248fc28468c3f256c",
+    ".local/growth-tests-pinned.log": "ec2e41c90904610350f62a084e20662cd240a3168b9e73a815865dd38f76cb82",
+    ".local/knowledge-final-tests.log": "667205f495f8dab2f3657e85158c73dc05ffa43b3c2bba0eb6f5f7c2eed0ecfc",
+    ".local/knowledge-final-strict.log": "ad3359b570167575ef3f01a8db4dde5d05fd1ef2bd9d4ad1f40baa3106d3f611"
+  },
+  "limits": [
+    "Reused16 input-compatible TRAIN cases, no independent holdout",
+    "CA bridge common vegetation / line control, not native unit PPO",
+    "Martin observed footprint partly outside domain;15 fully-covered sensitivity retained",
+    "No48h observed-zero-growth case in this subset",
+    "Primary48h IoU difference interval includes zero",
+    "No parameter search, policy training, real VALIDATION/TEST or physical validation"
+  ],
+  "figures_visually_inspected": [
+    "Metric overview after legend/count correction",
+    "All16 maps after Martin coverage label and caption correction"
+  ]
+}

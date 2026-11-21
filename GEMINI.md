@@ -4,10 +4,11 @@ title: Gemini project entry point
 ---
 # Project context
 
-Najnovije TASK-040 faza A / ADR-044: [upareni pilot](docs/research/CA_SIMFIRE_PAIRED.md)
-je završen. Mješoviti procentni ishodi i oko5,4puta manji CA no-op rast ne opravdavaju
-automatski prelazak. Isti mali RBF postupak, ne native PPO rangiranje. TASK-041 TRAIN
-FEDS growth audit je sljedeći prijedlog; native faza B ostaje otvorena. Holdouti zatvoreni.
+Najnovije TASK-041 / ADR-046: [audit opaženog rasta](docs/research/PAIRED_OBSERVED_GROWTH.md)
+je završen. CA common-control bridge bliži je površini FEDS rasta na16TRAIN, uz
+prostornu neizvjesnost i Martinov domain problem; nije native PPO ili fizička validacija.
+Sljedeći prijedlog TASK-042 proširuje isti zamrznuti audit na61compatible TRAIN prije
+većeg treninga. Faza B otvorena, holdouti zatvoreni. Pročitati najnoviji STATUS/NEXT_SESSION.
 
 Prethodno: TASK-038/ADR-042 je završen kratki CA BC/PPO na `codex/ca-learning-pilot`;
 pročitati [learning pilot](docs/research/CA_LEARNING_PILOT.md) i najnoviji STATUS prije rada.
