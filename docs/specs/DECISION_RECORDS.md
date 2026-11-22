@@ -2294,3 +2294,55 @@ pariteta i132native full-tree putanje po cijelim finalnim maskama/scoreu. Backgr
 koordinator PID37835, nice19/3radnika/jedna nit, `.local/paired-ppo-v1`, predviđeno45–75min.
 Ovo bilježi start i tehničke provjere, ne learning rezultat. Prije nastavka provjeriti
 aktuelne status/lock/PID, čuvati sve seedove/checkpointove i ne pokretati dupli run.
+
+
+## ADR-052 — upareni PPO pilot završen bez traženog learning signala (2026-11-22)
+
+TASK-043 je završen na `codex/paired-ppo-learning`. Plan d586c1bc/ADR-051 prije
+numeričkog koda13a234ba; frozen source nije mijenjan poslije starta. [Izvještaj](../research/PAIRED_PPO_LEARNING.md)
+i [svi rezultati](../../reports/real-fire-data/paired-ppo-learning-v1.json) su kanonski.
+Svih6treninga×2048koraka,45TRAIN fitting/16ranije istraženih development evaluation,
+3model seeda/backend; isti v2/terrain536,MLP,PPO,charged reward,B1/48h. CAspread0
+fiksiran. Iste početne težine po seedu i raspored512epizoda; svih18checkpointova0/512/2048
+sačuvano, bez izbora najboljeg. Run52,13min,nice19/3radnika+koordinator/jedna nit.
+
+**Primarno14joint-positive.** PPO0→512→2048: SF5,72→6,75→5,13%, CA4,30→6,36→6,03%.
+FixedfrontSF11,29/CA3,35%,downwind4,32/1,10%,fixedrandom1,17/9,49%. SFColdwater/Organ
+no-op0 ostaju undefined u pojedinačnom procentu, hektari svih16prijavljeni. Model
+seedovi prosječeni unutar požara, N14 za10kpaired bootstrapseed0. Final−initial
+SF−0,59pp[−2,69;+0,98],CA+1,73[−1,34;+5,45]. Final−frontSF−6,16pp[−17,83;+2,32],
+CA+2,68[−1,72;+7,07]. CA−SF relativegap+8,84pp[−0,38;+20,02]. Nijedan backend
+ne prolazi oba frozen opisna kriterija; nije potvrđena prednost učenja ili promjene
+simulatora. To ne dokazuje da PPO nikada ne može naučiti.
+
+**Sekundarno16.** Mean no-opha SF11.363,69/CA1.866,85; finalchargedha11.155,79/1.799,21,
+raw11.145,13/1.788,62,saved207,90/67,64ha. Pooledfinal1,83/3,62%,front2,89/2,35%.
+Različit razmjer i ponderisanje su eksplicitni; nema fizičkog rankinga. Pojedinačni
+final seed17/29/43SF3,28/1,17/10,94%,CA2,45/9,49/6,16%.
+
+**Dijagnoza ponašanja iz preregistrovanih action/logit mjera.** Svi finalni modeli
+postavljaju liniju na0. CA3/3 iSF2/3 biraju jedan isti sektor na16/16slučajeva;SF17
+dva sektora13/3. Soft distribucije su ipak skoro uniformne: maksimalna vjerovatnoća
+SF11,66–11,85%,CA12,00–12,28%,uniform9akcija11,11%. Nije utvrđen uzrok ili tvrdi
+probabilistički collapse. `random_legal` ponovo seed0percase ovdje daje isti sektor7
+sve16slučajeva u oba modela; nije prosjek mnogih randompolicyja. Referent nije
+naknadno zamijenjen; potreba boljeg uniformnog referenta je naredna dijagnoza.
+
+**Integritet.** Pet audit testova prije novog helpera.413pinned/0skip,398modern/4skip,
+315core/48skip,15knowledge,CLI/strict92PASS. Nezavisni audit12.288koraka/3.072epizode,
+18checkpointova,288policy/128baseline skorova,96native putanja/480maski,610reference
+maski i132preflight putanje; isti cijeli finalni burned/line maske i score, logits/
+weights i pairedstatistika PASS. Lokalni paket30.563.393B/1.035fajlova plus manifest,
+sha a34d0d0fb2f463a2b3a8cacaa89c1907b9d6678c1663b766f6a5f96967149879, svi hashovi
+pročitani. Restore iz raspakovanog sourcea/61ulaza/18numeric checkpointova ponavlja
+288odluka i svih96nativeputanja/480maski identično. Postojeće biblioteke, ne fresh
+install ili trainingresume. Plot helper dodat kasnije u repo, nije u numeričkom bundleu.
+Paket/težine/rawulazi ostaju lokalni; nema aktivnog treninga.
+
+**Odluka/prijedlog.** Završiti TASK-043 sa negativnim opisnim learning nalazom;
+CA6,03vsSF5,13% se ne koristi kao samostalan razlog za prelazak. Predloženi TASK-044
+je mali TRAIN audit reward/advantage signala i promjene politike, te uniformne/fiksne
+reference, prije dodatnog treninga. Nije pokrenut. Eventualna nova reward skala ili
+optimizacija zahtijeva novi unaprijed zapisan jednak ugovor za oba backend-a. Native
+mobile-unit parity ostaje otvoreni TASK-040B,TASK-039odgođen. Stvarni VALIDATION/TEST,
+budući FEDS za trening, fizička validacija, plaćeni compute, novi PR i merge nisu rađeni.

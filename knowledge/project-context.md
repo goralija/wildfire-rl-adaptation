@@ -13,12 +13,38 @@ sources:
 ---
 # Projektni kontekst
 
-## TASK-043 priprema — 2026-11-22, ADR-051
+## TASK-043 završen — nijedan backend ne prolazi learning kriterij (ADR-052, 2026-11-22)
 
-Korisnik odobrava opsežne testove i duži lokalni upareni PPO pilot. [Plan](../docs/research/PAIRED_PPO_LEARNING.md)
-na `codex/paired-ppo-learning` iz720c914b,45TRAIN fitting/16ranije istraženih development
-evaluation,3seeda×2backend-a×2048koraka. Nema nezavisnog holdouta ili fizičke validacije.
-Nastavak prvo čita NEXT_SESSION i lokalni status da ne pokrene duple procese.
+[Upareni PPO izvještaj](../docs/research/PAIRED_PPO_LEARNING.md), `codex/paired-ppo-learning`,
+plan d586c1bc prije numeričkog koda13a234ba. Svih6treninga završilo bez grešaka za
+52,13min:45TRAIN fit/16ranije istraženih development evaluation,3model seeda po
+backend-u,2.048koraka/model. Isti input/encoder/MLP/hiperparametri,B1,48h i charged
+reward. CA spread0 je fiksiran; model seedovi nisu novi požari ili fizičke replike.
+
+Na istih14joint-positive požara završni PPO mean saved%: **SF5,13 / CA6,03**.
+Fiksni front: **SF11,29 / CA3,35**; fixed random_legal(seed0): **SF1,17 / CA9,49**.
+Final−initial: SF−0,59pp[−2,69;+0,98], CA+1,73[−1,34;+5,45]. Final−front: SF−6,16pp
+[−17,83;+2,32], CA+2,68[−1,72;+7,07]. CA−SF relative gap+8,84pp[−0,38;+20,02].
+**Oba unaprijed zadana opisna learning kriterija su false.** Nema izbora modela/512
+checkpointa ili tvrdnje o pouzdanoj RL prednosti. Sva18checkpointa i svi seedovi sačuvani.
+
+CA greedy bira po jedan isti sektor na16/16slučajeva za sva3modela; SF2/3modela također.
+Soft distribucije ostaju gotovo ravnomjerne (najveća vjerovatnoća SF11,66–11,85%,
+CA12,00–12,28%). To je slab dokaz prilagođavanja, ne dokaz tvrde probabilističke
+kolapsirane politike. Fixed random seed0 na ovom uzorku daje sektor7svuda, nije
+Monte Carlo prosjek svih nasumičnih politika. Hektari/pooled i SFzero-noop2 su prijavljeni.
+
+Nezavisno12.288koraka/3.072epizode,18checkpointova,288policy/128heuristic skorova,
+96native putanja/480maski,610reference maski i132preflight putanje PASS. Restore
+iz raspakovanog sourcea/61ulaza/18modela ponavlja svih96native putanja i288odluka,
+logits/features/maske/akcije identično. Paket30.563.393B/1.035fajlova plus manifest,
+svi hashovi provjereni, lokalno.413pinned/0skip,398modern/4skip,315core/48skip,
+15knowledge,CLI/strict92PASS. Nema aktivnog treninga.
+
+**Sljedeći prijedlog: TASK-044**, mali TRAIN audit signala nagrade/advantagea,
+stvarne promjene politike i adekvatne uniformne/fiksne reference prije dodatnog
+treninga. Nije pokrenut. Native mobile-unit parity ostaje otvoreni TASK-040 B,
+TASK-039 odgođen; stvarni VALIDATION/TEST, fizička validacija i merge nisu rađeni.
 
 ## TASK-040 B.1 završen — zajednički PPO/reward ugovor (ADR-050, 2026-11-22)
 

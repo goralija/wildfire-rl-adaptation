@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "bundle_sha256": "a34d0d0fb2f463a2b3a8cacaa89c1907b9d6678c1663b766f6a5f96967149879",
+  "bundle_bytes": 30563393,
+  "files": 1035,
+  "manifest_sha256": "3f88cfc6e3584433601a0563fdd5931cebd7ff19122f58f97fa31b99ee248ae3",
+  "all_members_rehashed": true,
+  "scope": "Local only; existing pinned libraries required; no fresh installation or training resume"
+}

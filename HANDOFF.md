@@ -4,35 +4,38 @@ title: Handoff za nastavak projekta
 ---
 # Handoff za nastavak projekta
 
-## TASK-043 trening pokrenut u pozadini — ADR-051, 2026-11-22
+## TASK-043 završen — nijedan backend ne prolazi learning kriterij (ADR-052, 2026-11-22)
 
-Korisnik je odobrio duži lokalni upareni PPO pilot. [Plan i handoff](docs/research/PAIRED_PPO_LEARNING.md),
-`codex/paired-ppo-learning` iz720c914b; plan d586c1bc prije koda13a234ba.45TRAIN fitting
-i16ranije istraženih development evaluation,3model seeda×2backend-a×2048koraka.
-Isti B.1 encoder/MLP/reward/akcije/budžet/horizont, svi0/512/2048checkpointovi, bez
-best-selection. Stvarni VALIDATION/TEST i merge zatvoreni. Ovo još nema learning rezultat.
+[Upareni PPO izvještaj](docs/research/PAIRED_PPO_LEARNING.md), `codex/paired-ppo-learning`,
+plan d586c1bc prije numeričkog koda13a234ba. Svih6treninga završilo bez grešaka za
+52,13min:45TRAIN fit/16ranije istraženih development evaluation,3model seeda po
+backend-u,2.048koraka/model. Isti input/encoder/MLP/hiperparametri,B1,48h i charged
+reward. CA spread0 je fiksiran; model seedovi nisu novi požari ili fizičke replike.
 
-**Prije starta prošlo:**408pinned/0skip,393modern/4skip,310core/48skip,15knowledge,
-CLI/strict92. Ulazi/receipt-i svih61,122guarded no-op putanje, početni v2/maske
-svih16isti i132native putanje (puni33×prva2slučaja×2backend-a) po cijelim finalnim
-burned/line maskama i scoreu odgovaraju starim arhivama. Preflight102,47s.
+Na istih14joint-positive požara završni PPO mean saved%: **SF5,13 / CA6,03**.
+Fiksni front: **SF11,29 / CA3,35**; fixed random_legal(seed0): **SF1,17 / CA9,49**.
+Final−initial: SF−0,59pp[−2,69;+0,98], CA+1,73[−1,34;+5,45]. Final−front: SF−6,16pp
+[−17,83;+2,32], CA+2,68[−1,72;+7,07]. CA−SF relative gap+8,84pp[−0,38;+20,02].
+**Oba unaprijed zadana opisna learning kriterija su false.** Nema izbora modela/512
+checkpointa ili tvrdnje o pouzdanoj RL prednosti. Sva18checkpointa i svi seedovi sačuvani.
 
-Grana je pushana; [CI na0cb67456](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45066883345)
-prolazi sva4posla. Sva3radnika su potvrđeno prešla64koraka bez grešaka; korisniku
-preporučen povratak za oko75min. Ovo je snapshot, živi lokalni status ima prednost.
+CA greedy bira po jedan isti sektor na16/16slučajeva za sva3modela; SF2/3modela također.
+Soft distribucije ostaju gotovo ravnomjerne (najveća vjerovatnoća SF11,66–11,85%,
+CA12,00–12,28%). To je slab dokaz prilagođavanja, ne dokaz tvrde probabilističke
+kolapsirane politike. Fixed random seed0 na ovom uzorku daje sektor7svuda, nije
+Monte Carlo prosjek svih nasumičnih politika. Hektari/pooled i SFzero-noop2 su prijavljeni.
 
-**Aktivno:** koordinator PID37835 u nezavisnoj sesiji, nice19, najviše3radnika i
-jedna numerička nit po procesu. Lokalni izlaz `.local/paired-ppo-v1`, procjena45–75min.
-Prije nastavka pročitati `status.json`, `job-*/status.json`, `coordinator.lock`,
-`error.json`/`stop.json`, te `analysis.json` ako postoji. Ne pokretati dupli posao.
-PID je historija starta, ne dokaz da je još aktivan: provjeriti proces i heartbeat.
+Nezavisno12.288koraka/3.072epizode,18checkpointova,288policy/128heuristic skorova,
+96native putanja/480maski,610reference maski i132preflight putanje PASS. Restore
+iz raspakovanog sourcea/61ulaza/18modela ponavlja svih96native putanja i288odluka,
+logits/features/maske/akcije identično. Paket30.563.393B/1.035fajlova plus manifest,
+svi hashovi provjereni, lokalno.413pinned/0skip,398modern/4skip,315core/48skip,
+15knowledge,CLI/strict92PASS. Nema aktivnog treninga.
 
-Po završetku nezavisno provjeriti6poslova/3072epizode, sve18checkpointova,288policy
-skorova i96native finalnih putanja, početne težine po seedu, matematiku procenta/
-hektara i paired bootstrap po požaru. Sve seedove/0-512-2048stupnjeve prijaviti;
-PPO-minus-istoj-front-heuristici i CA-minus-SF relativni gap obavezni. Zatim figure,
-local bundle/restore, finalni testovi, ADR/experiment log i objava. NPZ nije optimizer
-resume; nepotpun posao traži dokumentovan novi pokušaj, završeni samo uz iste hashove.
+**Sljedeći prijedlog: TASK-044**, mali TRAIN audit signala nagrade/advantagea,
+stvarne promjene politike i adekvatne uniformne/fiksne reference prije dodatnog
+treninga. Nije pokrenut. Native mobile-unit parity ostaje otvoreni TASK-040 B,
+TASK-039 odgođen; stvarni VALIDATION/TEST, fizička validacija i merge nisu rađeni.
 
 ## TASK-040 B.1 završen — zajednički PPO/reward ugovor (ADR-050, 2026-11-22)
 

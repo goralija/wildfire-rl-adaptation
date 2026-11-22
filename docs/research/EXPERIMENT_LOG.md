@@ -812,3 +812,24 @@ Pozadinski koordinator PID37835, nezavisna sesija,nice19,najviše3radnika/jedna 
 Learning/evaluation još nisu završeni: nema naučnog nalaza, izbora modela ili fizičke
 validacije. Po završetku nezavisni mask/return/statistics/checkpoint audit i local restore.
 Stvarni VALIDATION/TEST, tuning, plaćeni compute i merge nisu rađeni.
+
+
+### EXP-031 završni nalaz — TASK-043 / ADR-052, 2026-11-22
+
+Svih6poslova završilo za52,13min, frozen source13a234ba/plan d586c1bc isti.
+45fit/16development,3model seeda×2backend-a×2048koraka,18checkpointova,CAspread0.
+Na14joint-positive PPO0→512→2048:SF5,72→6,75→5,13%,CA4,30→6,36→6,03%. Fiksni
+front11,29/3,35%,randomseed0reference1,17/9,49%. Oba frozen learning kriterija false;
+final−initialSF−0,59pp[−2,69;+0,98],CA+1,73[−1,34;+5,45]. Final−front−6,16/+2,68pp,
+oba intervala uključuju0; relativegapCA−SF+8,84pp[−0,38;+20,02]. Svi seedovi sačuvani.
+
+Greedy finalCA3/3iSF2/3 isti sektor16/16,softprobabilities skoro uniformne, ne tvrd
+probabilistički collapse. Random seed0percase daje sektor7svuda, nije full random
+expectation. Hektari/pooled svih16i2zero-SF slučaja prijavljeni. Nije physical/RLwin.
+413pinned/398modern(4skip)/315core(48skip),15knowledge,CLI/strict92PASS. Nezavisni
+12.288koraka/3.072epizode/18checkpointova/288policy skorova i96native putanja,128baseline
+skorova/610reference maski/132preflight putanje PASS. Paket30.563.393B/1.035fajlova,
+restore18modela/288odluka/96native putanja i480maski/logits/actions identično uz stare
+biblioteke, bez retreninga. Nema aktivnog posla. [Izvještaj](PAIRED_PPO_LEARNING.md),
+[svi rezultati](../../reports/real-fire-data/paired-ppo-learning-v1.json). TASK-044
+reward/advantage/reference dijagnoza je prijedlog prije dodatnog treninga, nije start.

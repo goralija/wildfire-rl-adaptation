@@ -4,6 +4,17 @@ title: Work log
 ---
 # Work log
 
+2026-11-22 — TASK-043 završen (ADR-052), svih6dugih poslova bez greške za52,13min.
+PPO finalSF5,13/CA6,03%na14istih slučajeva; oba frozen learning kriterija false,
+intervali final−initial i final−front preko0. Seed/model/checkpoint izbor nije rađen.
+Dijagnoza: greedy često isti sektor, softprobs ostaju gotovo uniformne; randomseed0
+reference ovdje sektor7svuda.413pinned/398modern(4skip)/315core(48skip),15knowledge,
+CLI/strict92PASS. Nezavisni12.288koraka/18checkpointova/288skorova/96native mask putanja
+i statistika PASS. Bundle30.563.393B/1.035fajlova, puni restore18modela/96putanja/480maski
+identičan, postojeće biblioteke. Figure vizualno provjerene. Nema aktivnog treninga.
+TASK-044 dijagnoza prije dodatnih treninga je novi prijedlog, bez holdouta/mergea.
+
+
 2026-11-22 — Background potvrđen nezavisno od launchera (PPID1); sva3radnika nice19,64+koraka, bez grešaka. Grana pushana; CI0cb67456sva4poslaPASS. Handoff i verification čuvaju snapshot/PID; korisniku povratak za75min, bez čekanja treninga u chatu.
 
 

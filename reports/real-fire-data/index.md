@@ -1,7 +1,13 @@
 # real-fire-data
 
+- [Paired PPO svi learning rezultati](paired-ppo-learning-v1.json) - TASK-043/ADR-052, svi6modela i0/512/2048, oba learning kriterija false.
+- [Paired PPO nezavisni audit](paired-ppo-independent-v1.json) -12.288koraka/18checkpointova/288skorova/96native putanja i greedy/entropy dijagnoza.
+- [Paired PPO figura](paired-ppo-learning-v1.png) - learning curves, iste heuristike, opisni intervali i sektorni bias.
+- [Paired PPO lokalni paket](paired-ppo-artifacts-v1.json) -1.035fajlova, svi hashovi provjereni; bez raw podataka/težina u Gitu.
+- [Paired PPO restore](paired-ppo-restore-v1.json) -18modela/288odluka/96native putanja iz raspakovanog sourcea i ulaza identično.
+
 - [Paired PPO preflight](paired-ppo-preflight-v1.json) - TASK-043:61ulaz/122reference/16parity/132native putanje PASS, reuse stare fizike.
-- [Paired PPO verifikacija](paired-ppo-verification-v1.json) -408pinned testova i start u pozadini; finalni learning još u toku.
+- [Paired PPO verifikacija](paired-ppo-verification-v1.json) -završni testovi/audit/restore i oba learning kriterija false; launch ostaje historija.
 - [Paired PPO launch](paired-ppo-launch-v1.json) - historijski PID/komanda; živo stanje čitati lokalno prije nastavka.
 
 - [Zajednički PPO tehnički smoke](common-ppo-smoke-v1.json) - TASK-040 B.1/ADR-050, sve4kratke probe i36kontrolnih/replay putanja; bez rankinga.

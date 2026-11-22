@@ -1,0 +1,61 @@
+{
+  "status": "PASS",
+  "source_root": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/paired-ppo-learning/.local/paired-ppo-artifacts/restore",
+  "checkpoints": 18,
+  "policy_decisions": 288,
+  "native_paths": 96,
+  "cumulative_masks": 480,
+  "all_logits_features_masks_actions_exact": true,
+  "nice": 19,
+  "rows": [
+    {
+      "backend": "simfire",
+      "seed": 43,
+      "checkpoints": 3,
+      "policy_decisions": 48,
+      "native_paths": 16,
+      "status": "PASS"
+    },
+    {
+      "backend": "simfire",
+      "seed": 29,
+      "checkpoints": 3,
+      "policy_decisions": 48,
+      "native_paths": 16,
+      "status": "PASS"
+    },
+    {
+      "backend": "simfire",
+      "seed": 17,
+      "checkpoints": 3,
+      "policy_decisions": 48,
+      "native_paths": 16,
+      "status": "PASS"
+    },
+    {
+      "backend": "ca",
+      "seed": 17,
+      "checkpoints": 3,
+      "policy_decisions": 48,
+      "native_paths": 16,
+      "status": "PASS"
+    },
+    {
+      "backend": "ca",
+      "seed": 29,
+      "checkpoints": 3,
+      "policy_decisions": 48,
+      "native_paths": 16,
+      "status": "PASS"
+    },
+    {
+      "backend": "ca",
+      "seed": 43,
+      "checkpoints": 3,
+      "policy_decisions": 48,
+      "native_paths": 16,
+      "status": "PASS"
+    }
+  ],
+  "scope": "Extracted source, inputs, all18 numeric inference checkpoints and all96 native final paths; existing libraries, no retraining"
+}

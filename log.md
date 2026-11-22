@@ -1,5 +1,14 @@
 # Promjene baze znanja
 
+## 2026-11-22: završen upareni PPO learning pilot
+
+[TASK-043/ADR-052](docs/research/PAIRED_PPO_LEARNING.md): finalni PPO SF5,13%/CA6,03%,
+ali oba unaprijed zadana learning kriterija false. Svi seedovi/0-512-2048 sačuvani,
+heuristike/procenti/ha i nearly-uniform greedy bias jasno odvojeni.413pinned testova,
+nezavisni mask/return/statistics audit i puni96native restore PASS. Nema aktivnog
+treninga; TASK-044 reward/advantage/reference dijagnoza je sljedeći prijedlog.
+
+
 ## 2026-11-22: background handoff objavljen
 
 Trening TASK-043 nastavlja u nezavisnoj sesiji; sva3radnika prešla64koraka. Grana pushana, [CI na0cb67456](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45066883345) prolazi sva4posla. Handoff čuva nastavak, bez tvrdnje o završenom učenju.

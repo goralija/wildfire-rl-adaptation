@@ -1,34 +1,36 @@
 {
   "task": "TASK-043",
-  "status": "RUNNING",
+  "status": "COMPLETE",
   "plan_commit": "d586c1bc",
   "numeric_source_commit": "13a234baa49bec917df97dc8664bf2a7b6c4b041",
   "plan_sha256": "6e20009c277d842dd9c310ee4f6e021fc7a156baf704840b76413a4b94e95f43",
   "preflight_sha256": "7ddc5026a81fdf7b2e5d72c1d091bfe373bc9186708a10d4c165ea10238ab6ac",
   "checks": {
     "pinned_tests": {
-      "count": 408,
+      "count": 413,
       "skipped": 0,
-      "log_sha256": "1a35103af50a7b266f32a46f00148d2cf7756757b8689efeb3f8aebfe4b7c9b4"
+      "log_sha256": "09cd8fe68b858642562cdfc82822fe37d11c9ef8bcafd138f4c412912ec2b3c0"
     },
     "modern_tests": {
-      "count": 393,
+      "count": 398,
       "skipped": 4,
-      "log_sha256": "c2409a3b36a924ee7b90225dd6bbf2d7df1f2c973df5e185232ae34325c4aa9b"
+      "log_sha256": "31d7f56e6b4690b50742bcdce9d606c0bb5691806956e0affa455a166abfd096"
     },
     "core_tests": {
-      "count": 310,
+      "count": 315,
       "skipped": 48,
-      "log_sha256": "da7939e8adc2531551b0a7c44678b982e6da2e42785883aa33ecf4c95147e016"
+      "log_sha256": "b5db3b256925e677c123ecaa221664db9cce7baf9fb2b45c72d0edab4b7a8a12"
     },
     "knowledge_tests": {
       "count": 15,
       "skipped": 0,
-      "log_sha256": "cfd453865c1719fad89f685e7e8213e324f5ce27c0ce95d9f61a678a6a642775"
+      "log_sha256": "7bce654603b2b82522ca840102a6c385a909e748e21048a85dc27f4d5367f2a7"
     },
     "cli": "PASS",
     "strict_knowledge": "PASS:92Markdown",
-    "preflight": "PASS:61input receipts,122guarded no-op trajectories,16initial v2/mask parity,132native paths whole final masks/line/reward match"
+    "preflight": "PASS:61input receipts,122guarded no-op trajectories,16initial v2/mask parity,132native paths whole final masks/line/reward match",
+    "independent_audit": "PASS",
+    "full_native_restored_replay": "PASS"
   },
   "background": {
     "pid": 37835,
@@ -39,8 +41,11 @@
     "numeric_threads": 1,
     "estimated_minutes": "45-75, revise only from observed throughput",
     "live_status_is_local": true,
-    "observed_unix": 1795379615.427756,
-    "observed_jobs": {
+    "phase": "complete",
+    "finished_unix": 1795382487.177978,
+    "elapsed_seconds": 3127.989371061325,
+    "active_training": false,
+    "launch_progress_snapshot": {
       "job-simfire-17": {
         "phase": "training",
         "pid": 37839,
@@ -75,23 +80,69 @@
         "elapsed_seconds": 237.49398803710938
       }
     },
-    "return_after_minutes": 75
+    "launch_progress_observed_unix": 1795379615.427756,
+    "initial_return_after_minutes": 75
   },
   "limitations": [
-    "training/evaluation not complete yet; no learning findings",
-    "45fitting/16development cases all previously explored TRAIN",
-    "actual VALIDATION and TEST2024 closed",
-    "numeric NPZ inference only, no optimizer resume",
-    "local process must be checked before any restart"
+    "exploratory TRAIN development, all61fires previously explored",
+    "both frozen descriptive learning criteria false; integrity PASS is not learning advantage",
+    "CA spread0 only, three model seeds averaged inside fire",
+    "fixed random_legal seed0 equals initial sector7 on all16, not full random-policy expectation",
+    "greedy direction repeats while probabilities remain near-uniform",
+    "numeric checkpoints omit optimizer resume state",
+    "local bundle not uploaded; dependencies reused, no fresh installation",
+    "actual VALIDATION/TEST2024, physical validation and native mobile-unit parity remain closed/open separately"
   ],
   "publication": {
     "branch": "codex/paired-ppo-learning",
-    "pushed": true,
-    "tested_commit": "0cb67456a823b8027d14677c9404dfe4a1c41a54",
-    "ci": "success",
-    "ci_url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45066883345",
+    "pushed_results": false,
+    "results_ci": "pending",
+    "earlier_launch_ci_url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45066883345",
     "new_pr": false,
-    "merge": false,
-    "note": "Later handoff-only receipt commit leaves numeric source/plan unchanged."
-  }
+    "merge": false
+  },
+  "integrity_status": "PASS",
+  "learning_signal": {
+    "simfire": false,
+    "ca": false
+  },
+  "analysis_sha256": "9659dea88a728bd8d8d25376bc901acb113fd21d7925fe4b346a551a8d6e2e89",
+  "independent_audit_sha256": "d2bde40823d7a9a6cf663497af61a27bb1e0b1c0e79a8258a79fd66239eaf7b1",
+  "audit_counts": {
+    "completed_jobs": 6,
+    "training_steps": 12288,
+    "training_episodes": 3072,
+    "checkpoints": 18,
+    "policy_scores": 288,
+    "native_paths": 96,
+    "native_masks": 480,
+    "reference_masks": 610,
+    "preflight_tree_paths": 132
+  },
+  "restore": {
+    "status": "PASS",
+    "checkpoints": 18,
+    "policy_decisions": 288,
+    "native_paths": 96,
+    "cumulative_masks": 480,
+    "all_logits_features_masks_actions_exact": true,
+    "receipt_sha256": "b2e7e53da500e92a2394bd40b708b9015992cc3d1b574c8bc1bb93886b1be963"
+  },
+  "artifact": {
+    "status": "PASS",
+    "bundle_sha256": "a34d0d0fb2f463a2b3a8cacaa89c1907b9d6678c1663b766f6a5f96967149879",
+    "bundle_bytes": 30563393,
+    "files": 1035,
+    "manifest_sha256": "3f88cfc6e3584433601a0563fdd5931cebd7ff19122f58f97fa31b99ee248ae3",
+    "all_members_rehashed": true,
+    "scope": "Local only; existing pinned libraries required; no fresh installation or training resume"
+  },
+  "postrun_source_sha256": {
+    "src/wildfire_rl/paired_learning_audit.py": "ec98dcaf25d28515a8b50394de89e02d3568bd1d7b7277d0b92c02bc02213be8",
+    "scripts/audit_paired_ppo_learning.py": "029d5496ca4e2b6ae71b6bd35a3e4ea597c25725e0b5d20c0ec32e3d6d5046ba",
+    "scripts/bundle_paired_ppo_learning.py": "40c70e4720221b3d86d5c0180cac310fab4b3c823b68632d7b503dcd523e8c1f",
+    "scripts/plot_paired_ppo_learning.py": "b7fc65cc3a8b37cafa361fc4a5e3ee4a4e9a5e2deadce9240c130b11b81a3b60"
+  },
+  "figure_sha256": "9877b9949d7c6daea17ea121142271791519d5b48494bd377ef7d87d07758a32",
+  "postrun_audit_commit": "2a2d20fe457a23c16451ff9044b2910a1e43260a"
 }

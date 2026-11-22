@@ -4,6 +4,18 @@ title: Claude project entry point
 ---
 # Project context
 
+**Najnovije TASK-043 / ADR-052 (2026-11-22) je završen.** [Izvještaj](docs/research/PAIRED_PPO_LEARNING.md),
+`codex/paired-ppo-learning`: svih6×2048koraka/18checkpointova,45fit/16development,
+svi modeli sačuvani. PPO SF5,13%/CA6,03%, fixed front11,29/3,35%; nijedan backend
+ne prolazi unaprijed zadani opisni learning kriterij. Ne tumačiti integrity PASS
+kao RL ili fizičku prednost. Model seedovi nisu novi požari; CAspread0 fiksiran.
+Greedy potezi često isti, soft vjerovatnoće skoro uniformne; random_legal seed0
+je ovdje isti sektor7svuda.413pinned testova, nezavisni audit i puni restore96putanja
+PASS. Nema aktivnog treninga: raniji PID37835/start tekst ispod je historija.
+Sljedeći TASK-044 je prijedlog TRAIN dijagnoze signala/reference prije novih treninga,
+ne dozvola za automatsko produžavanje. Holdouti/native unit parity/merge ostaju odvojeni.
+
+
 **Najnoviji nalog je TASK-043 / ADR-051 (2026-11-22):** korisnik odobrava nastavak,
 opsežno testiranje i duži lokalni trening uz završetak sesije dok background radi.
 [Plan/status](docs/research/PAIRED_PPO_LEARNING.md) i najnoviji NEXT_SESSION su ulaz.
