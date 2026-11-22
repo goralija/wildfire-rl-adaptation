@@ -30,6 +30,13 @@ Ovo još nije mjera učenja/generalizacije ili fizička validacija. Native mobil
 parity ostaje zaseban otvoreni dio B; TASK-039 odgođen, TASK-037 opcionalan. Nema
 automatskog dužeg treninga, stvarnog VALIDATION/TEST, novog PR-a ili mergea.
 
+### Objava B.1
+
+Grana [codex/common-ppo-interface](https://github.com/goralija/wildfire-rl-adaptation/tree/codex/common-ppo-interface)
+je pushana. [CI rezultatskog commita3ec5d5fc](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44965103408)
+prolazi sva4posla: core3.11/3.13,numeric uz exact skip listu i knowledge. Naknadna
+dopuna objave ne mijenja numerički source, plan ili rezultate. Nema novog PR-a/mergea.
+
 ## TASK-042 završen — svih 61 kompatibilnih TRAIN početaka (ADR-048, 2026-11-21)
 
 [Prošireni audit](docs/research/EXPANDED_OBSERVED_GROWTH.md) je završen na `codex/ca-expanded-growth-audit`, iz2de00136.

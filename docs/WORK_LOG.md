@@ -4,6 +4,9 @@ title: Work log
 ---
 # Work log
 
+2026-11-22 — B.1 pushan; CI na3ec5d5fc prolazi sva4posla. Verifikacija i objava usklađeni, numerički source/plan/rezultati isti. Main čist, bez PR-a/mergea.
+
+
 2026-11-22 — TASK-040 B.1 završen (ADR-050). Plan f1d46d22, finalni numerički source
 bc0b58ba. Isti PPO/terrain536/charged reward u oba backend-a;30reference maski i24native
 putanje identične starim arhivama.4×64koraka, iste težine/schedule,12replaya identično.

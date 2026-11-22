@@ -75,8 +75,19 @@
   ],
   "publication": {
     "branch": "codex/common-ppo-interface",
-    "pushed": false,
-    "ci": "pending"
+    "pushed": true,
+    "tested_results_commit": "3ec5d5fc972cab1dc9d9e408e548ad5b98c62d3d",
+    "ci": "success",
+    "ci_url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44965103408",
+    "jobs": [
+      "core (3.11)",
+      "core (3.13)",
+      "numeric",
+      "knowledge"
+    ],
+    "new_pr": false,
+    "merge": false,
+    "note": "Later publication-only receipt commit keeps all numeric sources, plan and results identical."
   },
   "artifact_attempts": [
     {

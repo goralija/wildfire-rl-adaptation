@@ -1,5 +1,10 @@
 # Promjene baze znanja
 
+## 2026-11-22: zajednički PPO ugovor objavljen
+
+Grana `codex/common-ppo-interface` je pushana; [CI na3ec5d5fc](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44965103408) prolazi sva4posla. Status/handoff/verifikacija čuvaju tehnički obim i sljedeći prijedlog.
+
+
 ## 2026-11-22: završen zajednički PPO ugovor
 
 [TASK-040 B.1/ADR-050](docs/research/COMMON_PPO_INTERFACE.md): isti encoder/model/akcije

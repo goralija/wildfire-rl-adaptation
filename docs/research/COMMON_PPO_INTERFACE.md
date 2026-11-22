@@ -119,6 +119,13 @@ TASK-039 je odgođen, TASK-037 opcionalni SimFire pravac. Ova3već istražena TR
 slučaja i64koraka ne daju generalizaciju, statistički RL dobitak ili fizičku validaciju.
 TASK-042 nalaz o opaženom rastu ostaje odvojeni raniji rezultat.
 
+### Objava B.1
+
+Grana [codex/common-ppo-interface](https://github.com/goralija/wildfire-rl-adaptation/tree/codex/common-ppo-interface)
+je pushana. [CI rezultatskog commita3ec5d5fc](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/44965103408)
+prolazi sva4posla: core3.11/3.13,numeric uz exact skip listu i knowledge. Naknadna
+dopuna objave ne mijenja numerički source, plan ili rezultate. Nema novog PR-a/mergea.
+
 ## Plan prije implementacije i ishoda — 2026-11-22, ADR-049
 
 Korisnikovo „hajde nastavi“ nastavlja predloženi TASK-040 B.1 iz ADR-048.
