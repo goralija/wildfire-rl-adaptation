@@ -13,6 +13,13 @@ sources:
 ---
 # Projektni kontekst
 
+## TASK-043 priprema — 2026-11-22, ADR-051
+
+Korisnik odobrava opsežne testove i duži lokalni upareni PPO pilot. [Plan](../docs/research/PAIRED_PPO_LEARNING.md)
+na `codex/paired-ppo-learning` iz720c914b,45TRAIN fitting/16ranije istraženih development
+evaluation,3seeda×2backend-a×2048koraka. Nema nezavisnog holdouta ili fizičke validacije.
+Nastavak prvo čita NEXT_SESSION i lokalni status da ne pokrene duple procese.
+
 ## TASK-040 B.1 završen — zajednički PPO/reward ugovor (ADR-050, 2026-11-22)
 
 [Zajednički interfejs](../docs/research/COMMON_PPO_INTERFACE.md) na `codex/common-ppo-interface`,

@@ -1,5 +1,12 @@
 # Promjene baze znanja
 
+## 2026-11-22: upareni PPO trening u pozadini
+
+[TASK-043](docs/research/PAIRED_PPO_LEARNING.md):408pinovanih testova i132native preflight
+putanje PASS; odobreni45fit/16development pilot pokrenut s3radnika,nice19. Status i
+launch receipt čuvaju operativni nastavak; rezultati tek čekaju kompletan audit.
+
+
 ## 2026-11-22: odobren upareni PPO learning pilot
 
 [TASK-043/ADR-051](docs/research/PAIRED_PPO_LEARNING.md): isti45fit/16development u oba backend-a, tri seeda i zamrznuti budžet; plan prije koda/treninga.

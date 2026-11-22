@@ -4,6 +4,14 @@ title: Work log
 ---
 # Work log
 
+2026-11-22 — TASK-043 preflight i testovi prošli:408pinned/393modern(4skip)/310core(48skip),
+15knowledge,CLI/strict92;61input receipt/122guarded no-op putanje,16initial parity,
+132native full-tree whole masks/score PASS u102,47s. Background koordinator PID37835,
+nice19/3radnika/jedna nit,45fit/16development,3seeda×2backend-a×2048koraka. Nema još
+learning rezultata. Nastavak prvo čita .local/paired-ppo-v1/status i provjeravaPID,
+bez duplih procesa; sačuvani svi logovi/modeli/receipts.
+
+
 2026-11-22 — Korisnik odobrava nastavak i duži lokalni trening uz background handoff. TASK-043 nova grana iz720c914b; ADR-051/frozen plan prije implementacije/ishoda.45fit/16development,3seeda×2backend-a×2048koraka.
 
 

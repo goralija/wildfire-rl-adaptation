@@ -1,0 +1,55 @@
+{
+  "task": "TASK-043",
+  "status": "RUNNING",
+  "plan_commit": "d586c1bc",
+  "numeric_source_commit": "13a234baa49bec917df97dc8664bf2a7b6c4b041",
+  "plan_sha256": "6e20009c277d842dd9c310ee4f6e021fc7a156baf704840b76413a4b94e95f43",
+  "preflight_sha256": "7ddc5026a81fdf7b2e5d72c1d091bfe373bc9186708a10d4c165ea10238ab6ac",
+  "checks": {
+    "pinned_tests": {
+      "count": 408,
+      "skipped": 0,
+      "log_sha256": "1a35103af50a7b266f32a46f00148d2cf7756757b8689efeb3f8aebfe4b7c9b4"
+    },
+    "modern_tests": {
+      "count": 393,
+      "skipped": 4,
+      "log_sha256": "c2409a3b36a924ee7b90225dd6bbf2d7df1f2c973df5e185232ae34325c4aa9b"
+    },
+    "core_tests": {
+      "count": 310,
+      "skipped": 48,
+      "log_sha256": "da7939e8adc2531551b0a7c44678b982e6da2e42785883aa33ecf4c95147e016"
+    },
+    "knowledge_tests": {
+      "count": 15,
+      "skipped": 0,
+      "log_sha256": "cfd453865c1719fad89f685e7e8213e324f5ce27c0ce95d9f61a678a6a642775"
+    },
+    "cli": "PASS",
+    "strict_knowledge": "PASS:92Markdown",
+    "preflight": "PASS:61input receipts,122guarded no-op trajectories,16initial v2/mask parity,132native paths whole final masks/line/reward match"
+  },
+  "background": {
+    "pid": 37835,
+    "started_unix": 1795379359.188607,
+    "out": ".local/paired-ppo-v1",
+    "nice": 19,
+    "workers": 3,
+    "numeric_threads": 1,
+    "estimated_minutes": "45-75, revise only from observed throughput",
+    "live_status_is_local": true
+  },
+  "limitations": [
+    "training/evaluation not complete yet; no learning findings",
+    "45fitting/16development cases all previously explored TRAIN",
+    "actual VALIDATION and TEST2024 closed",
+    "numeric NPZ inference only, no optimizer resume",
+    "local process must be checked before any restart"
+  ],
+  "publication": {
+    "branch": "codex/paired-ppo-learning",
+    "ci": "pending",
+    "merge": false
+  }
+}

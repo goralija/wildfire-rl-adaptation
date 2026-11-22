@@ -4,14 +4,31 @@ title: Handoff za nastavak projekta
 ---
 # Handoff za nastavak projekta
 
-## TASK-043 u pripremi — upareni PPO learning (ADR-051, 2026-11-22)
+## TASK-043 trening pokrenut u pozadini — ADR-051, 2026-11-22
 
-Korisnik odobrava opsežno testiranje i duži lokalni trening uz background handoff.
-[Plan](docs/research/PAIRED_PPO_LEARNING.md) na `codex/paired-ppo-learning` iz720c914b:45TRAIN
-fitting i16ranije istraženih development evaluation,3seeda×2backend-a×2048koraka,
-svi0/512/2048checkpointovi. Isti B.1 encoder/PPO/reward/akcije; prije starta native
-full-tree/mask/input provjere. Isti heuristički referenti, ha i procenat, bez biranja
-najboljeg. Trening još nije pokrenut. Stvarni holdouti i fizičke tvrdnje zatvoreni.
+Korisnik je odobrio duži lokalni upareni PPO pilot. [Plan i handoff](docs/research/PAIRED_PPO_LEARNING.md),
+`codex/paired-ppo-learning` iz720c914b; plan d586c1bc prije koda13a234ba.45TRAIN fitting
+i16ranije istraženih development evaluation,3model seeda×2backend-a×2048koraka.
+Isti B.1 encoder/MLP/reward/akcije/budžet/horizont, svi0/512/2048checkpointovi, bez
+best-selection. Stvarni VALIDATION/TEST i merge zatvoreni. Ovo još nema learning rezultat.
+
+**Prije starta prošlo:**408pinned/0skip,393modern/4skip,310core/48skip,15knowledge,
+CLI/strict92. Ulazi/receipt-i svih61,122guarded no-op putanje, početni v2/maske
+svih16isti i132native putanje (puni33×prva2slučaja×2backend-a) po cijelim finalnim
+burned/line maskama i scoreu odgovaraju starim arhivama. Preflight102,47s.
+
+**Aktivno:** koordinator PID37835 u nezavisnoj sesiji, nice19, najviše3radnika i
+jedna numerička nit po procesu. Lokalni izlaz `.local/paired-ppo-v1`, procjena45–75min.
+Prije nastavka pročitati `status.json`, `job-*/status.json`, `coordinator.lock`,
+`error.json`/`stop.json`, te `analysis.json` ako postoji. Ne pokretati dupli posao.
+PID je historija starta, ne dokaz da je još aktivan: provjeriti proces i heartbeat.
+
+Po završetku nezavisno provjeriti6poslova/3072epizode, sve18checkpointova,288policy
+skorova i96native finalnih putanja, početne težine po seedu, matematiku procenta/
+hektara i paired bootstrap po požaru. Sve seedove/0-512-2048stupnjeve prijaviti;
+PPO-minus-istoj-front-heuristici i CA-minus-SF relativni gap obavezni. Zatim figure,
+local bundle/restore, finalni testovi, ADR/experiment log i objava. NPZ nije optimizer
+resume; nepotpun posao traži dokumentovan novi pokušaj, završeni samo uz iste hashove.
 
 ## TASK-040 B.1 završen — zajednički PPO/reward ugovor (ADR-050, 2026-11-22)
 

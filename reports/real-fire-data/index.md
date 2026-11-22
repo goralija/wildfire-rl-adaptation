@@ -1,5 +1,9 @@
 # real-fire-data
 
+- [Paired PPO preflight](paired-ppo-preflight-v1.json) - TASK-043:61ulaz/122reference/16parity/132native putanje PASS, reuse stare fizike.
+- [Paired PPO verifikacija](paired-ppo-verification-v1.json) -408pinned testova i start u pozadini; finalni learning još u toku.
+- [Paired PPO launch](paired-ppo-launch-v1.json) - historijski PID/komanda; živo stanje čitati lokalno prije nastavka.
+
 - [Zajednički PPO tehnički smoke](common-ppo-smoke-v1.json) - TASK-040 B.1/ADR-050, sve4kratke probe i36kontrolnih/replay putanja; bez rankinga.
 - [Nezavisna provjera ugovora](common-ppo-independent-v1.json) - whole maske, union/reward i raspored.
 - [Common PPO verifikacija](common-ppo-verification-v1.json) - testovi, source/plan hashovi i pokušaji.

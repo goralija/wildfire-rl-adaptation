@@ -2284,3 +2284,13 @@ Iste heuristike i fiksni front referent, ha/mean/pooled procenat, zero-noop unde
 seed prosjek unutar požara pa opisni bootstrap. Učenje se ne svodi na veći CA procenat.
 Najviše3radnika+koordinator,nice19/jedna nit, procjena45–75min, background logs/receipts.
 Nema stvarnog VALIDATION/TEST, tuninga, plaćenog computea ili mergea.
+
+
+### ADR-051 operativni zapis — start2026-11-22
+
+Plan d586c1bc i kod13a234ba.408pinned/393modern(4skip)/310core(48skip),15knowledge,
+CLI/strict92PASS. Preflight102,47s prolazi61receipta,122guarded no-op putanje,16v2/mask
+pariteta i132native full-tree putanje po cijelim finalnim maskama/scoreu. Background
+koordinator PID37835, nice19/3radnika/jedna nit, `.local/paired-ppo-v1`, predviđeno45–75min.
+Ovo bilježi start i tehničke provjere, ne learning rezultat. Prije nastavka provjeriti
+aktuelne status/lock/PID, čuvati sve seedove/checkpointove i ne pokretati dupli run.

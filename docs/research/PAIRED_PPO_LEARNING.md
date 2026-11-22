@@ -55,5 +55,37 @@ resume. Nema tihog skraćivanja, produžavanja ili podešavanja po rezultatu.
 
 ## Status
 
-Plan je napisan prije implementacije. Trening još nije pokrenut. Native resursi i
-mobilne jedinice ostaju odvojeni otvoreni dio TASK-040 B; TASK-039 odgođen.
+Plan d586c1bc prethodi implementaciji13a234ba. Prošlo408pinned/0skip,393modern/4skip,
+310core/48skip,15knowledge,CLI/strict92. Preflight102,47s:61input receipt,122guarded
+no-op putanje,16initial v2/mask parity,132native full-tree putanje identične arhivi.
+[Preflight dokaz](../../reports/real-fire-data/paired-ppo-preflight-v1.json),
+[verifikacija](../../reports/real-fire-data/paired-ppo-verification-v1.json).
+
+Trening je pokrenut u nezavisnoj background sesiji, koordinator PID37835,
+nice19/3radnika/jedna nit. [Launch receipt](../../reports/real-fire-data/paired-ppo-launch-v1.json).
+Rezultati još nisu kompletni. Lokalni status je kanonski za trenutno stanje. Native
+resursi/mobilne jedinice ostaju otvoreni dio TASK-040 B; TASK-039 odgođen.
+
+
+## Operativni nastavak
+
+Iz task worktreea, pinovanim runtimeom, izabrati nov izlazni direktorij:
+
+```sh
+nice -n 19 .local/simfire-venv/bin/python scripts/run_paired_ppo_learning.py preflight --out .local/paired-ppo-v1
+# Samo nakon preflight PASS; run ima najviše tri radnika i jedan koordinator.
+nice -n 19 .local/simfire-venv/bin/python scripts/run_paired_ppo_learning.py run --out .local/paired-ppo-v1
+```
+
+Za background se isti `run` pokreće u nezavisnoj sesiji s preusmjerenim stdout/stderr.
+`.local/paired-ppo-v1/status.json` prati cijeli run, `job-*/status.json` fazu i broj
+koraka, `job-*/done.json` završetak s hashovima, `error.json`/`stop.json` grešku,
+`coordinator.lock` PID aktivnog koordinatora. Ne pokretati drugi proces dok prethodni
+postoji. Atomic completion se usvaja samo uz iste guardove i sve file hashove.
+
+Poslije završetka: pročitati `analysis.json`, nezavisno prebrojati svih6×512epizoda,
+288policy skorova i96native finalnih putanja; provjeriti cijele maske/score/returns,
+checkpoint hashove i početne težine po seedu. Prijaviti0/512/2048 i sve seedove, iste
+heuristike, oba razmjera i opisne intervale. Zatim figures, lokalni bundle/restore,
+finalni testovi, STATUS/NEXT_SESSION/ADR/experiment log i push. Ne mijenjati numerički
+source dok run radi; naknadni bug zahtijeva dokumentovan novi pokušaj.

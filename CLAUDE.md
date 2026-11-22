@@ -4,6 +4,17 @@ title: Claude project entry point
 ---
 # Project context
 
+**Najnoviji nalog je TASK-043 / ADR-051 (2026-11-22):** korisnik odobrava nastavak,
+opsežno testiranje i duži lokalni trening uz završetak sesije dok background radi.
+[Plan/status](docs/research/PAIRED_PPO_LEARNING.md) i najnoviji NEXT_SESSION su ulaz.
+45TRAIN fit/16ranije istraženih development evaluation,3model seeda×2backend-a×2048koraka,
+ista B.1 pravila. Maksimalno3radnika+koordinator,nice19/jedna nit. Ne pokretati dupli
+koordinator: prvo pročitati lokalni status/lock/PID i receipts. NPZ je inference-only;
+prekinut posao ne nastavlja optimizer. Holdouti/merge nisu odobreni; nema rezultata
+dok svi guardovi/evaluacije ne prođu. Ranija zabrana automatskog većeg treninga ispod
+zamijenjena je samo ovim konkretno odobrenim i zamrznutim pilotom.
+
+
 **Najnovije TASK-040 B.1 / ADR-050 (2026-11-22) je završen** na
 `codex/common-ppo-interface`, iz45d41fcf. [Izvještaj](docs/research/COMMON_PPO_INTERFACE.md):
 isti terrain536/MLP/9akcija/B1/4×12h i opt-in charged reward u oba backend-a; privatni

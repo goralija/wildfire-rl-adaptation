@@ -1,0 +1,18 @@
+{
+  "phase": "launched",
+  "pid": 37835,
+  "started_unix": 1795379359.188607,
+  "command": [
+    "/usr/bin/nice",
+    "-n",
+    "19",
+    "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/paired-ppo-learning/.local/simfire-venv/bin/python",
+    "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/paired-ppo-learning/scripts/run_paired_ppo_learning.py",
+    "run",
+    "--out",
+    "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/paired-ppo-learning/.local/paired-ppo-v1"
+  ],
+  "log": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/paired-ppo-learning/.local/paired-ppo-v1/background.log",
+  "plan_sha256": "6e20009c277d842dd9c310ee4f6e021fc7a156baf704840b76413a4b94e95f43",
+  "source_commit": "13a234baa49bec917df97dc8664bf2a7b6c4b041"
+}

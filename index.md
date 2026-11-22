@@ -5,7 +5,7 @@ okf_version: "0.2"
 
 ## Počni ovdje
 
-- [Aktivno: upareni PPO learning](docs/research/PAIRED_PPO_LEARNING.md) - TASK-043/ADR-051, zamrznuti plan prije treninga.
+- [Aktivno: upareni PPO learning](docs/research/PAIRED_PPO_LEARNING.md) - TASK-043/ADR-051, testovi/preflight PASS,45fit/16development trening u pozadini.
 
 
 - [Najnovije: zajednički PPO ugovor](docs/research/COMMON_PPO_INTERFACE.md) - TASK-040 B.1/ADR-050 završen, isti input/charged reward,4×64koraka i replay/restore PASS.

@@ -796,3 +796,19 @@ final3.326.232B/217fajlova plus manifest, svi hashovi/replay iz kopiranog source
 4modela/12putanja PASS uz postojeće biblioteke. Nema novog training resumea/instalacije.
 ADR-050 završava B.1; novi mali TRAIN learning plan je prijedlog, native resource parity
 ostaje otvoren. Stvarni holdouti/dugi trening/merge nisu rađeni.
+
+
+## EXP-031 — TASK-043 upareni PPO TRAIN pilot, pokrenut2026-11-22
+
+[Plan/status](PAIRED_PPO_LEARNING.md), ADR-051. Plan d586c1bc prije koda13a234ba.
+45TRAIN fitting/16ranije istraženih development evaluation,3seeda17/29/43,
+2backend-a×2048koraka, svi0/512/2048checkpointovi. Ista B.1 fizika/encoder/PPO/reward.
+408pinned/0skip,393modern/4skip,310core/48skip,15knowledge,CLI/strict92 PASS.
+Preflight102,47s:61input receipt,122guarded no-op putanje,16initial v2/mask parity,
+132native full-tree putanje/charged score identične starim arhivama.
+
+Pozadinski koordinator PID37835, nezavisna sesija,nice19,najviše3radnika/jedna nit;
+`.local/paired-ppo-v1` s heartbeat/status/error/atomic done receipts. Procjena45–75min.
+Learning/evaluation još nisu završeni: nema naučnog nalaza, izbora modela ili fizičke
+validacije. Po završetku nezavisni mask/return/statistics/checkpoint audit i local restore.
+Stvarni VALIDATION/TEST, tuning, plaćeni compute i merge nisu rađeni.

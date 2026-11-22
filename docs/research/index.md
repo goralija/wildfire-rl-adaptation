@@ -2,7 +2,7 @@
 
 ## Podgrupe
 
-- [Upareni PPO learning pilot](PAIRED_PPO_LEARNING.md) - TASK-043/ADR-051,45fit/16development, isti postupak oba backend-a.
+- [Upareni PPO learning pilot](PAIRED_PPO_LEARNING.md) - TASK-043/ADR-051,408pinned i132native preflight PASS; trening u pozadini, nalazi čekaju.
 
 
 - [Zajednički PPO ugovor](COMMON_PPO_INTERFACE.md) - TASK-040 B.1/ADR-050 završen, isti input/reward i tehnički smoke; nije RL nalaz.

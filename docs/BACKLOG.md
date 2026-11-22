@@ -8,6 +8,7 @@ title: Naredni zadaci
 
 | Task | Status | Sljedeće |
 | --- | --- | --- |
+| TASK-043 | background trening aktivan, ADR-051 |408pinned i132native preflight putanje PASS;45fit/16development,3seeda×2backend-a×2048koraka. Prvo provjeriti lokalni status/PID37835, bez duplih poslova; finalni nalazi još čekaju |
 | TASK-035 | završeno, ADR-040 | Native/current forcing ugovor, 240 development epizoda i15 replayeva PASS; 352 testa; sigurnost prijavljena zasebno |
 | TASK-036 | faza A završena | SimFire repair ostaje na izvedenoj bazi; nalazi ADR-038 |
 | TASK-037 | predloženo, odgođeno | Preostala SimFire fizika/gate/trening |
