@@ -95,11 +95,19 @@
   ],
   "publication": {
     "branch": "codex/paired-ppo-learning",
-    "pushed_results": false,
-    "results_ci": "pending",
-    "earlier_launch_ci_url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45066883345",
+    "pushed_results": true,
+    "tested_results_commit": "cfc2a2a1eb6d9227f3c359b0ce15b5a4d3541a48",
+    "results_ci": "success",
+    "ci_url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45076798202",
+    "jobs": [
+      "knowledge",
+      "core (3.13)",
+      "core (3.11)",
+      "numeric"
+    ],
     "new_pr": false,
-    "merge": false
+    "merge": false,
+    "note": "Later publication-only receipt commit keeps all numerical source, frozen plan and result bytes unchanged."
   },
   "integrity_status": "PASS",
   "learning_signal": {

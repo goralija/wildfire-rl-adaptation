@@ -134,6 +134,13 @@ TASK-043 je završen kao kontrolisan razvojni nalaz bez traženog learning signa
 Native mobilni resursi ostaju otvoreni dio TASK-040 B; TASK-039 odgođen. Stvarni
 VALIDATION/TEST, fizička validacija, novi PR i merge nisu rađeni.
 
+### Objava TASK-043
+
+Grana [codex/paired-ppo-learning](https://github.com/goralija/wildfire-rl-adaptation/tree/codex/paired-ppo-learning)
+je commitana i pushana. [CI rezultatskog commita cfc2a2a1](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45076798202)
+prolazi core3.11/3.13, numeric s tačnom skip listom i knowledge. Naknadna dopuna objave
+ne mijenja numerički source/plan/rezultate. Lokalni paket nije uploadovan; nema novog PR-a/mergea.
+
 ## Plan prije koda i rezultata — 2026-11-22, ADR-051
 
 Korisnik traži nastavak i opsežno testiranje, izričito dopušta duži lokalni trening

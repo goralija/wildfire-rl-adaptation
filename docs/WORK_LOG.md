@@ -4,6 +4,9 @@ title: Work log
 ---
 # Work log
 
+2026-11-22 — TASK-043 rezultati pushani; CIcfc2a2a1sva4poslaPASS. Verifikacija/status/handoff usklađeni, numerički source/plan/rezultati isti. Main čist, bez PR-a/mergea, bez aktivnog računanja.
+
+
 2026-11-22 — TASK-043 završen (ADR-052), svih6dugih poslova bez greške za52,13min.
 PPO finalSF5,13/CA6,03%na14istih slučajeva; oba frozen learning kriterija false,
 intervali final−initial i final−front preko0. Seed/model/checkpoint izbor nije rađen.

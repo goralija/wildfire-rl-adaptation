@@ -37,6 +37,13 @@ stvarne promjene politike i adekvatne uniformne/fiksne reference prije dodatnog
 treninga. Nije pokrenut. Native mobile-unit parity ostaje otvoreni TASK-040 B,
 TASK-039 odgođen; stvarni VALIDATION/TEST, fizička validacija i merge nisu rađeni.
 
+### Objava TASK-043
+
+Grana [codex/paired-ppo-learning](https://github.com/goralija/wildfire-rl-adaptation/tree/codex/paired-ppo-learning)
+je commitana i pushana. [CI rezultatskog commita cfc2a2a1](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45076798202)
+prolazi core3.11/3.13, numeric s tačnom skip listom i knowledge. Naknadna dopuna objave
+ne mijenja numerički source/plan/rezultate. Lokalni paket nije uploadovan; nema novog PR-a/mergea.
+
 ## TASK-040 B.1 završen — zajednički PPO/reward ugovor (ADR-050, 2026-11-22)
 
 [Zajednički interfejs](docs/research/COMMON_PPO_INTERFACE.md) na `codex/common-ppo-interface`,

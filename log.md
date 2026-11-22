@@ -1,5 +1,10 @@
 # Promjene baze znanja
 
+## 2026-11-22: upareni PPO rezultati objavljeni
+
+Grana `codex/paired-ppo-learning` je pushana; [CI na cfc2a2a1](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45076798202) prolazi sva četiri posla. Status, handoff i verifikacija čuvaju oba neprošla learning kriterija i predloženi TASK-044.
+
+
 ## 2026-11-22: završen upareni PPO learning pilot
 
 [TASK-043/ADR-052](docs/research/PAIRED_PPO_LEARNING.md): finalni PPO SF5,13%/CA6,03%,
