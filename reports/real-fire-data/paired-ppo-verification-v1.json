@@ -38,7 +38,44 @@
     "workers": 3,
     "numeric_threads": 1,
     "estimated_minutes": "45-75, revise only from observed throughput",
-    "live_status_is_local": true
+    "live_status_is_local": true,
+    "observed_unix": 1795379615.427756,
+    "observed_jobs": {
+      "job-simfire-17": {
+        "phase": "training",
+        "pid": 37839,
+        "steps": 128,
+        "target": 2048,
+        "saved": [
+          0
+        ],
+        "updated_unix": 1795379553.4287639,
+        "elapsed_seconds": 188.19213271141052
+      },
+      "job-simfire-29": {
+        "phase": "training",
+        "pid": 37841,
+        "steps": 128,
+        "target": 2048,
+        "saved": [
+          0
+        ],
+        "updated_unix": 1795379538.357895,
+        "elapsed_seconds": 173.12132692337036
+      },
+      "job-simfire-43": {
+        "phase": "training",
+        "pid": 37840,
+        "steps": 192,
+        "target": 2048,
+        "saved": [
+          0
+        ],
+        "updated_unix": 1795379602.730564,
+        "elapsed_seconds": 237.49398803710938
+      }
+    },
+    "return_after_minutes": 75
   },
   "limitations": [
     "training/evaluation not complete yet; no learning findings",
@@ -49,7 +86,12 @@
   ],
   "publication": {
     "branch": "codex/paired-ppo-learning",
-    "ci": "pending",
-    "merge": false
+    "pushed": true,
+    "tested_commit": "0cb67456a823b8027d14677c9404dfe4a1c41a54",
+    "ci": "success",
+    "ci_url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45066883345",
+    "new_pr": false,
+    "merge": false,
+    "note": "Later handoff-only receipt commit leaves numeric source/plan unchanged."
   }
 }

@@ -4,6 +4,9 @@ title: Work log
 ---
 # Work log
 
+2026-11-22 — Background potvrđen nezavisno od launchera (PPID1); sva3radnika nice19,64+koraka, bez grešaka. Grana pushana; CI0cb67456sva4poslaPASS. Handoff i verification čuvaju snapshot/PID; korisniku povratak za75min, bez čekanja treninga u chatu.
+
+
 2026-11-22 — TASK-043 preflight i testovi prošli:408pinned/393modern(4skip)/310core(48skip),
 15knowledge,CLI/strict92;61input receipt/122guarded no-op putanje,16initial parity,
 132native full-tree whole masks/score PASS u102,47s. Background koordinator PID37835,

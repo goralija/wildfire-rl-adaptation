@@ -20,6 +20,10 @@ CLI/strict92. Ulazi/receipt-i svih61,122guarded no-op putanje, početni v2/maske
 svih16isti i132native putanje (puni33×prva2slučaja×2backend-a) po cijelim finalnim
 burned/line maskama i scoreu odgovaraju starim arhivama. Preflight102,47s.
 
+Grana je pushana; [CI na0cb67456](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45066883345)
+prolazi sva4posla. Sva3radnika su potvrđeno prešla64koraka bez grešaka; korisniku
+preporučen povratak za oko75min. Ovo je snapshot, živi lokalni status ima prednost.
+
 **Aktivno:** koordinator PID37835 u nezavisnoj sesiji, nice19, najviše3radnika i
 jedna numerička nit po procesu. Lokalni izlaz `.local/paired-ppo-v1`, procjena45–75min.
 Prije nastavka pročitati `status.json`, `job-*/status.json`, `coordinator.lock`,

@@ -63,7 +63,9 @@ no-op putanje,16initial v2/mask parity,132native full-tree putanje identične ar
 
 Trening je pokrenut u nezavisnoj background sesiji, koordinator PID37835,
 nice19/3radnika/jedna nit. [Launch receipt](../../reports/real-fire-data/paired-ppo-launch-v1.json).
-Rezultati još nisu kompletni. Lokalni status je kanonski za trenutno stanje. Native
+Sva tri radnika su prešla64koraka bez grešaka. Grana je pushana i [CI na0cb67456](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45066883345) prolazi sva4posla.
+Korisniku preporučen povratak za oko75min. Rezultati još nisu kompletni. Lokalni status
+je kanonski za trenutno stanje. Native
 resursi/mobilne jedinice ostaju otvoreni dio TASK-040 B; TASK-039 odgođen.
 
 

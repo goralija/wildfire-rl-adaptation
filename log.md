@@ -1,5 +1,10 @@
 # Promjene baze znanja
 
+## 2026-11-22: background handoff objavljen
+
+Trening TASK-043 nastavlja u nezavisnoj sesiji; sva3radnika prešla64koraka. Grana pushana, [CI na0cb67456](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45066883345) prolazi sva4posla. Handoff čuva nastavak, bez tvrdnje o završenom učenju.
+
+
 ## 2026-11-22: upareni PPO trening u pozadini
 
 [TASK-043](docs/research/PAIRED_PPO_LEARNING.md):408pinovanih testova i132native preflight
