@@ -2268,3 +2268,19 @@ ha i procenat prema vlastitom no-op plus iste heuristike. Zero-noop ostaje undef
 bez naknadnog izbora ili automatskog dugog treninga. Native mobilni resursi ostaju
 odvojeni otvoreni dio B, TASK-039 odgođen, TASK-037 opcionalan. Stvarni VALIDATION/
 TEST, stari PPO-i, plaćeni compute, novi PR i merge nisu dio ovog koraka.
+
+
+## ADR-051 — upareni PPO learning pilot prije koda/ishoda (2026-11-22)
+
+Korisnik izričito nastavlja i dopušta duži lokalni trening uz završetak sesije dok radi.
+TASK-043 na `codex/paired-ppo-learning` iz720c914b. [Plan](../research/PAIRED_PPO_LEARNING.md)
+i [frozen zapis](../../configs/frozen/paired-ppo-learning-v1.json) prethode kodu i ishodima.
+45fitting/16development evaluation od ranije istraženih61TRAIN, ista podjela oba modela;
+nije nezavisan holdout.3model seeda17/29/43×2backend-a×2048koraka; svi0/512/2048modeli,
+završni primaran, bez izbora. B.1 fizika/encoder/PPO/reward isti. Prvo pune33native
+putanje na prva2eval slučaja oba modela, svi input/mask/statistics testovi. Finalni
+PPO native svih16/seeda/backend-a, cijele finalne maske i score odgovaraju arhivi.
+Iste heuristike i fiksni front referent, ha/mean/pooled procenat, zero-noop undefined,
+seed prosjek unutar požara pa opisni bootstrap. Učenje se ne svodi na veći CA procenat.
+Najviše3radnika+koordinator,nice19/jedna nit, procjena45–75min, background logs/receipts.
+Nema stvarnog VALIDATION/TEST, tuninga, plaćenog computea ili mergea.

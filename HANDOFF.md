@@ -4,6 +4,15 @@ title: Handoff za nastavak projekta
 ---
 # Handoff za nastavak projekta
 
+## TASK-043 u pripremi — upareni PPO learning (ADR-051, 2026-11-22)
+
+Korisnik odobrava opsežno testiranje i duži lokalni trening uz background handoff.
+[Plan](docs/research/PAIRED_PPO_LEARNING.md) na `codex/paired-ppo-learning` iz720c914b:45TRAIN
+fitting i16ranije istraženih development evaluation,3seeda×2backend-a×2048koraka,
+svi0/512/2048checkpointovi. Isti B.1 encoder/PPO/reward/akcije; prije starta native
+full-tree/mask/input provjere. Isti heuristički referenti, ha i procenat, bez biranja
+najboljeg. Trening još nije pokrenut. Stvarni holdouti i fizičke tvrdnje zatvoreni.
+
 ## TASK-040 B.1 završen — zajednički PPO/reward ugovor (ADR-050, 2026-11-22)
 
 [Zajednički interfejs](docs/research/COMMON_PPO_INTERFACE.md) na `codex/common-ppo-interface`,

@@ -4,6 +4,9 @@ title: Work log
 ---
 # Work log
 
+2026-11-22 — Korisnik odobrava nastavak i duži lokalni trening uz background handoff. TASK-043 nova grana iz720c914b; ADR-051/frozen plan prije implementacije/ishoda.45fit/16development,3seeda×2backend-a×2048koraka.
+
+
 2026-11-22 — B.1 pushan; CI na3ec5d5fc prolazi sva4posla. Verifikacija i objava usklađeni, numerički source/plan/rezultati isti. Main čist, bez PR-a/mergea.
 
 

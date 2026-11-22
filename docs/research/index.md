@@ -2,6 +2,9 @@
 
 ## Podgrupe
 
+- [Upareni PPO learning pilot](PAIRED_PPO_LEARNING.md) - TASK-043/ADR-051,45fit/16development, isti postupak oba backend-a.
+
+
 - [Zajednički PPO ugovor](COMMON_PPO_INTERFACE.md) - TASK-040 B.1/ADR-050 završen, isti input/reward i tehnički smoke; nije RL nalaz.
 
 
