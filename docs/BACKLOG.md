@@ -4,7 +4,7 @@ title: Naredni zadaci
 ---
 # Naredni zadaci
 
-## Aktivni CA pravac (2026-11-21)
+## Aktivni CA pravac (2026-11-22)
 
 | Task | Status | Sljedeće |
 | --- | --- | --- |
@@ -12,7 +12,7 @@ title: Naredni zadaci
 | TASK-036 | faza A završena | SimFire repair ostaje na izvedenoj bazi; nalazi ADR-038 |
 | TASK-037 | predloženo, odgođeno | Preostala SimFire fizika/gate/trening |
 | TASK-038 | završeno, ADR-042 |3seeda, šest modela, 288development putanja; nijedan kandidat ne prolazi; svi rezultati/sigurnost sačuvani |
-| TASK-040 | faza A završena; B.1 predloženo sljedeće | Zajednički PPO input/encoder/akcije/reward ugovor nad common-line bridgeom pa tehnički smoke; native mobile-unit parity ostaje zasebno otvoren |
+| TASK-040 | faza A i B.1 završene, ADR-050 | Zajednički encoder/PPO/charged reward,4×64koraka i replay/restore PASS; sljedeći prijedlog mali unaprijed registrovani TRAIN learning pilot. Native mobile-unit parity ostaje otvoren |
 | TASK-041 | završeno, ADR-046 | Isti16TRAIN prema FEDS-u: CA0 manja area greška86,47%, spatial interval preko0; Martin domain QC i15covered analiza;381test/replay/restore PASS |
 | TASK-042 | završeno, ADR-048 | Svih61compatible TRAIN: CA0 MAE−67,90%, IoU0,12568vs0,08664;4zero/1near/56grow,59covered,388test/reuse/restore PASS |
 | TASK-039 | predloženo, odgođeno iza zajedničkog PPO ugovora | TRAIN-only dijagnoza vlastitih putanja i pokrivenosti učitelja/encoder-a; unaprijed zadat kratki nastavak tek po nalazu |

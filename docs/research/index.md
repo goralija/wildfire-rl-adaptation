@@ -2,7 +2,7 @@
 
 ## Podgrupe
 
-- [Zajednički PPO ugovor](COMMON_PPO_INTERFACE.md) - TASK-040 B.1/ADR-049, plan prije tehničkog smokea.
+- [Zajednički PPO ugovor](COMMON_PPO_INTERFACE.md) - TASK-040 B.1/ADR-050 završen, isti input/reward i tehnički smoke; nije RL nalaz.
 
 
 - [Pregled 2026-11-11: literatura i dijagnoza](review-2026-11-11/index.md) - Research Review, odgovori na pet pitanja nakon ADR-032 i plan

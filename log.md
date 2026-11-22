@@ -1,5 +1,14 @@
 # Promjene baze znanja
 
+## 2026-11-22: završen zajednički PPO ugovor
+
+[TASK-040 B.1/ADR-050](docs/research/COMMON_PPO_INTERFACE.md): isti encoder/model/akcije
+i charged reward u oba backend-a,4×64koraka tehnički PASS.397pinovanih testova, stare
+cijele native maske/nagrade i checkpoint/restore svih12putanja identični. Nije dokaz
+učenja ili fizičke validacije. Sljedeći prijedlog je mali unaprijed registrovani TRAIN
+learning pilot s istim heuristikama i apsolutnim/procentnim metrikama.
+
+
 ## 2026-11-22: započet zajednički PPO ugovor
 
 [TASK-040 B.1/ADR-049](docs/research/COMMON_PPO_INTERFACE.md): isti encoder/charged reward i mali tehnički smoke.

@@ -5,7 +5,7 @@ okf_version: "0.2"
 
 ## Počni ovdje
 
-- [Aktivno: zajednički PPO ugovor](docs/research/COMMON_PPO_INTERFACE.md) - TASK-040 B.1/ADR-049, isti input/charged reward i mali tehnički smoke.
+- [Najnovije: zajednički PPO ugovor](docs/research/COMMON_PPO_INTERFACE.md) - TASK-040 B.1/ADR-050 završen, isti input/charged reward,4×64koraka i replay/restore PASS.
 
 
 - [Najnovije: prošireni audit opaženog rasta](docs/research/EXPANDED_OBSERVED_GROWTH.md) - TASK-042/ADR-048 završen na61TRAIN, grupe nerasta i jasne granice; sljedeći prijedlog TASK-040 B.1.

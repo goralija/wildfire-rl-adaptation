@@ -1,0 +1,4824 @@
+{
+  "schema_version": "common-ppo-technical/1.0",
+  "task": "TASK-040 B.1",
+  "plan": {
+    "schema_version": "common-ppo-smoke/1.0",
+    "task": "TASK-040 B.1",
+    "decision": "ADR-049",
+    "date": "2026-11-22",
+    "base_commit": "45d41fcf71233c9102123cf0702c46c085544824",
+    "purpose": "Shared common-line PPO contract and bounded technical smoke; no learning ranking",
+    "cases": [
+      "fpa-fod-400303584-goldstone",
+      "fpa-fod-400307379-weston-pass",
+      "fpa-fod-400505027-pine-lodge"
+    ],
+    "selection": "First three IDs in preregistered TASK040 hash order, already explored TRAIN; not an outcome-selected or heldout sample",
+    "weather_sha256": "76332f3da26fe02812ca6439fee5dec9f131793227335e0380267d12c0ab937e",
+    "table_sha256": "28627fa98b60f8dae4ac4f9246887ecd3488b541c2a9dbd5e82620811effbddc",
+    "observation": "simfire-categorical-local-v2; fixed terrain536 encoder, float32; no counterfactual footprint or future FEDS in features/masks",
+    "action": "Discrete9, no-op0 and eight existing front_edge line sectors; v2 burnable_lines mask",
+    "budget": 1,
+    "horizon_steps": 4,
+    "decision_hours": 12,
+    "physics": "Unchanged ADR043/044 bridge and ADR031 SimFire; CA primary spread replicate0 with stable TASK040 hash seed; SF seed0",
+    "reward": {
+      "version": "common-charged-increment-v1",
+      "formula": "-(C_t-C_previous)/100 - 0.01*invalid; C_t=count((burned_t | (lines_t & own_noop_final)) & ~initial); C_0=0",
+      "units": "cells / 100, each cell3.24ha; gamma1; sum reward = -final charged cells/100 - invalid penalties",
+      "no_op_reference": "same backend/case/forcing/spread seed, full48h; private reward accounting only, never policy input or legality",
+      "prior_damage": "retained in cumulative mask, excluded from new damage; line never erases burning/prior cells",
+      "invalid": "masked requests become no-op, cost0, penalty0.01; out-of-space raises; no-op always legal; full four decisions after budget0"
+    },
+    "model_seeds": [
+      17,
+      29
+    ],
+    "architecture": {
+      "algorithm": "MaskablePPO",
+      "policy": "MlpPolicy",
+      "hidden_pi": [
+        64,
+        64
+      ],
+      "hidden_vf": [
+        64,
+        64
+      ],
+      "activation": "Tanh",
+      "features": 536,
+      "device": "cpu",
+      "n_envs": 1
+    },
+    "ppo": {
+      "n_steps": 16,
+      "batch_size": 16,
+      "n_epochs": 2,
+      "learning_rate": 0.0001,
+      "gamma": 1.0,
+      "gae_lambda": 1.0,
+      "clip_range": 0.1,
+      "ent_coef": 0.001,
+      "vf_coef": 0.5,
+      "max_grad_norm": 0.5,
+      "target_kl": 0.03
+    },
+    "steps_per_run": 64,
+    "schedule": "cycle same three cases starting at index0;16 complete episodes per run (6/5/5); all four runs reported, no selection",
+    "native_checks": {
+      "sequences": [
+        [
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          0
+        ]
+      ],
+      "requirements": [
+        "native no-op whole masks match TASK042 archives (including CA in pinned runtime)",
+        "initial raw v2 observations, 536 features and masks identical across backends",
+        "four-step horizon, cumulative prior and line union, budget, requested/effective actions",
+        "sum reward matches independent final score_line_damage including explicit invalid penalty",
+        "numeric inference checkpoint roundtrip weights/logits/actions and full deterministic replay masks"
+      ]
+    },
+    "acceptance": "all invariant/guard/replay/finite-training checks pass for both backends; no threshold on reward/improvement; not an agent comparison",
+    "checkpoint": "own numeric NPZ with allow_pickle=False, guarded contract and tensors; inference only, not optimizer resume",
+    "runtime": "same pinned Python3.9/numpy1.26.4/torch2.3.1/SB3+contrib2.7.1 for both; one numerical thread; nice19; sequential single process",
+    "execution_minutes": "5-15 total after implementation; adjust duration only, no outcome-based changes",
+    "closed": [
+      "long training",
+      "hyperparameter search",
+      "real VALIDATION",
+      "TEST2024",
+      "future FEDS loading",
+      "old PPO loading",
+      "native urban/mobile-unit resource parity",
+      "paid compute",
+      "merge"
+    ],
+    "stop": [
+      "native no-op mismatch",
+      "input/source/plan guard mismatch",
+      "mask/budget/damage/horizon violation",
+      "nonfinite training or checkpoint mismatch"
+    ]
+  },
+  "guard": {
+    "plan_sha256": "7d2b9928e804cc4ff654fb8a7e3c848216ad47430bd3e69e814e974445eead8d",
+    "source_sha256": {
+      "scripts/run_paired_simulators.py": "a7394dd8860b4b105e2e83c4f3f826b9ac46f77eaa72ae4be9036de1418ba625",
+      "scripts/smoke_common_ppo.py": "192fd022d43aacffd5daa6b4f8fc0f6f280a446cc4fbdaeb06bc05520fff439f",
+      "src/wildfire_rl/common_control.py": "7ad174db3e263f1737706bb46e82a4d737e672e5dc89bb63ea11f775d3a42e10",
+      "src/wildfire_rl/common_control_rl.py": "bb7a67cc005d155d3d0297606beb85be71084d66319d7b5cdc2e0b9c68a69cda",
+      "src/wildfire_rl/feds_b1_learning.py": "3562ae7d15a58fac46ffca374b28cd1f9673a181c2943b0e4bdc8a8a32774606",
+      "src/wildfire_rl/feds_observation_audit.py": "bc7109bb81b41a5e0081d06ab7145252f6ddf1b205924de50f3b9f7dd1a64cf5",
+      "src/wildfire_rl/feds_observation_v2.py": "01cef197dfa09924deffa57055cd51b1dc78bc6d9c4a46ed4bc6a41e7854cf81",
+      "src/wildfire_rl/feds_repaired_learning.py": "bd234e75c65b9dffb8390ff34252139ec1eb7b80f38bb95730230837da66216c",
+      "src/wildfire_rl/feds_simfire_env.py": "261cb0b6565b72711aa56964a068f6749b6c49ceaa32b2b70a54c959cdb235ed",
+      "src/wildfire_rl/feds_simfire_setup.py": "78e7187113a246e9f70a0a88178b3d55345ed84ebce05b8e1c1f0b1b52b3c944",
+      "src/wildfire_rl/line_damage.py": "cab7e146e769edff04e2364c8d9874036ab154fa68f05af1c739d6b55f995ea6",
+      "src/wildfire_rl/paired_simulators.py": "58794b6d1acb6df2f23b5be678e6d6bae0345b13f6676d86cd0d72a4c3d78779",
+      "src/wildfire_rl/simfire_initial_state.py": "b73c6a7d895b28a2270b47f80897a01ef465370758b08b90fbd6b699b6f3ff22",
+      "src/wildfire_rl/simfire_timebase.py": "f873554b80b884b382fb29271d64ef2da0801b25e3c9f3aec91aa5848a21b722",
+      "src/wildfire_rl/synthetic_ca.py": "855b1d1ba50a1fd0e28f652f19d74607b1b0e485989e5424380bbf0602adb844",
+      "src/wildfire_rl/synthetic_real_cases.py": "22b2bb365207e2f5139cbd7c24d835f512a429b423387e8bfe627c9621729db6"
+    },
+    "runtime": {
+      "python": "3.9.25",
+      "packages": {
+        "numpy": "1.26.4",
+        "torch": "2.3.1",
+        "stable-baselines3": "2.7.1",
+        "sb3-contrib": "2.7.1",
+        "simfire": "2.0.1",
+        "gymnasium": "1.1.1",
+        "scipy": "1.13.1"
+      }
+    },
+    "source_commit": "bc0b58ba634530bdc66635ebb0214c04ee36f4e5"
+  },
+  "status": "PASS",
+  "scope": "Technical TRAIN smoke only; no learning ranking or physical validation",
+  "references": [
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "input_receipt_sha256": "837edb11c688ba84090d900abea9669a129e361c25015cbf5c79e9046d900d4b",
+      "archive_npz_sha256": "07aa8aa8039bd06f52cd64f51e65023007b9574cbb59318fb07ca0aea031e4eb",
+      "whole_noop_trajectory": "PASS",
+      "noop_new_cells": 9
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "input_receipt_sha256": "ca99e45bfc9d7606c9cccfea8f34397a221f82e6706354af08d164314bff89a9",
+      "archive_npz_sha256": "90c253b5f64607b28ea418922c217acc1e5e8e669f0068f39c09679e29fca502",
+      "whole_noop_trajectory": "PASS",
+      "noop_new_cells": 607
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "input_receipt_sha256": "c6aa4bcc48857b61115fe82a9690037264cefac335dd6a6cce2750fa611dbb35",
+      "archive_npz_sha256": "2e0ac9eb6abae83ce926eff6e9dacf83fca88bd20fffdc2bcfd8f19ce593ae54",
+      "whole_noop_trajectory": "PASS",
+      "noop_new_cells": 3235
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "input_receipt_sha256": "837edb11c688ba84090d900abea9669a129e361c25015cbf5c79e9046d900d4b",
+      "archive_npz_sha256": "208fb15df0a8598409cc59aaf1557d3d4ca6884ecaca02d34d685a0a99c3cc98",
+      "whole_noop_trajectory": "PASS",
+      "noop_new_cells": 96
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "input_receipt_sha256": "ca99e45bfc9d7606c9cccfea8f34397a221f82e6706354af08d164314bff89a9",
+      "archive_npz_sha256": "d1064b1ff616bbc20dd2d5efcc4c2e057d85daad7165646f1bffa9a22a4756d2",
+      "whole_noop_trajectory": "PASS",
+      "noop_new_cells": 106
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "input_receipt_sha256": "c6aa4bcc48857b61115fe82a9690037264cefac335dd6a6cce2750fa611dbb35",
+      "archive_npz_sha256": "7835a43a79dccd240fe0c0df47a6e38d486ef02039bace44d4f4d63236f820d5",
+      "whole_noop_trajectory": "PASS",
+      "noop_new_cells": 312
+    }
+  ],
+  "native_paths": [
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "sequence": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "arrays": "native-simfire-fpa-fod-400303584-goldstone-0.npz",
+      "arrays_sha256": "21cba156cceb6087c6d2fe45cbf626f8a2125b3b6a79370bf7dbd908f3783ccc",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.09,
+          "remaining_budget": 1,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 1,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": 0.0,
+          "remaining_budget": 1,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": 0.0,
+          "remaining_budget": 1,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": 0.0,
+          "remaining_budget": 1,
+          "charged_damage_cells": 9
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 9,
+        "raw_damage_cells": 9,
+        "line_cells_in_noop_footprint": 0,
+        "extra_line_charge_cells": 0,
+        "charged_damage_cells": 9,
+        "raw_saved_cells": 0,
+        "charged_saved_cells": 0
+      },
+      "return_": -0.09,
+      "invalid_requests": 0
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "sequence": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "arrays": "native-simfire-fpa-fod-400303584-goldstone-1.npz",
+      "arrays_sha256": "36edb46d088e0ebfc52b468e3ac956a797b8d2cfa4e4e55c344d9587a5c50d50",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 1,
+          "effective_action": 1,
+          "invalid": false,
+          "reward": -0.06,
+          "remaining_budget": 0,
+          "charged_damage_cells": 6
+        },
+        {
+          "step": 1,
+          "requested_action": 1,
+          "effective_action": 0,
+          "invalid": true,
+          "reward": -0.01,
+          "remaining_budget": 0,
+          "charged_damage_cells": 6
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": 0.0,
+          "remaining_budget": 0,
+          "charged_damage_cells": 6
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": 0.0,
+          "remaining_budget": 0,
+          "charged_damage_cells": 6
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 9,
+        "raw_damage_cells": 2,
+        "line_cells_in_noop_footprint": 4,
+        "extra_line_charge_cells": 4,
+        "charged_damage_cells": 6,
+        "raw_saved_cells": 7,
+        "charged_saved_cells": 3
+      },
+      "return_": -0.06999999999999999,
+      "invalid_requests": 1
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "sequence": [
+        2,
+        0,
+        0,
+        0
+      ],
+      "arrays": "native-simfire-fpa-fod-400303584-goldstone-2.npz",
+      "arrays_sha256": "10d6504a6f67c633e124efd8719ca6a1fd32564172d115c987e41158a964d62c",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 2,
+          "effective_action": 2,
+          "invalid": false,
+          "reward": -0.09,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 1,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": 0.0,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": 0.0,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": 0.0,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 9,
+        "raw_damage_cells": 9,
+        "line_cells_in_noop_footprint": 0,
+        "extra_line_charge_cells": 0,
+        "charged_damage_cells": 9,
+        "raw_saved_cells": 0,
+        "charged_saved_cells": 0
+      },
+      "return_": -0.09,
+      "invalid_requests": 0
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "sequence": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "arrays": "native-simfire-fpa-fod-400303584-goldstone-3.npz",
+      "arrays_sha256": "21cba156cceb6087c6d2fe45cbf626f8a2125b3b6a79370bf7dbd908f3783ccc",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.09,
+          "remaining_budget": 1,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 1,
+          "requested_action": 1,
+          "effective_action": 0,
+          "invalid": true,
+          "reward": -0.01,
+          "remaining_budget": 1,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": 0.0,
+          "remaining_budget": 1,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": 0.0,
+          "remaining_budget": 1,
+          "charged_damage_cells": 9
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 9,
+        "raw_damage_cells": 9,
+        "line_cells_in_noop_footprint": 0,
+        "extra_line_charge_cells": 0,
+        "charged_damage_cells": 9,
+        "raw_saved_cells": 0,
+        "charged_saved_cells": 0
+      },
+      "return_": -0.09999999999999999,
+      "invalid_requests": 1
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "sequence": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "arrays": "native-simfire-fpa-fod-400307379-weston-pass-0.npz",
+      "arrays_sha256": "98e1f2b022175fed655e4b66c2148d614e105e1cf05dc80c48adc10b910d9263",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -1.0,
+          "remaining_budget": 1,
+          "charged_damage_cells": 100
+        },
+        {
+          "step": 1,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -2.51,
+          "remaining_budget": 1,
+          "charged_damage_cells": 351
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -1.39,
+          "remaining_budget": 1,
+          "charged_damage_cells": 490
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -1.17,
+          "remaining_budget": 1,
+          "charged_damage_cells": 607
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 607,
+        "raw_damage_cells": 607,
+        "line_cells_in_noop_footprint": 0,
+        "extra_line_charge_cells": 0,
+        "charged_damage_cells": 607,
+        "raw_saved_cells": 0,
+        "charged_saved_cells": 0
+      },
+      "return_": -6.069999999999999,
+      "invalid_requests": 0
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "sequence": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "arrays": "native-simfire-fpa-fod-400307379-weston-pass-1.npz",
+      "arrays_sha256": "d92825e0c79a1496a51c7a2fbd9e1badd569aaef1ccb6b9cc387eda8cf22b668",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 1,
+          "effective_action": 1,
+          "invalid": false,
+          "reward": -0.28,
+          "remaining_budget": 0,
+          "charged_damage_cells": 28
+        },
+        {
+          "step": 1,
+          "requested_action": 1,
+          "effective_action": 0,
+          "invalid": true,
+          "reward": -0.01,
+          "remaining_budget": 0,
+          "charged_damage_cells": 28
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": 0.0,
+          "remaining_budget": 0,
+          "charged_damage_cells": 28
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": 0.0,
+          "remaining_budget": 0,
+          "charged_damage_cells": 28
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 607,
+        "raw_damage_cells": 24,
+        "line_cells_in_noop_footprint": 4,
+        "extra_line_charge_cells": 4,
+        "charged_damage_cells": 28,
+        "raw_saved_cells": 583,
+        "charged_saved_cells": 579
+      },
+      "return_": -0.29000000000000004,
+      "invalid_requests": 1
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "sequence": [
+        2,
+        0,
+        0,
+        0
+      ],
+      "arrays": "native-simfire-fpa-fod-400307379-weston-pass-2.npz",
+      "arrays_sha256": "f96ca17427423094febb7b08598925ae315715af68a926d69d4668db3f61b182",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 2,
+          "effective_action": 2,
+          "invalid": false,
+          "reward": -0.42,
+          "remaining_budget": 0,
+          "charged_damage_cells": 42
+        },
+        {
+          "step": 1,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": 0.0,
+          "remaining_budget": 0,
+          "charged_damage_cells": 42
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": 0.0,
+          "remaining_budget": 0,
+          "charged_damage_cells": 42
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": 0.0,
+          "remaining_budget": 0,
+          "charged_damage_cells": 42
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 607,
+        "raw_damage_cells": 37,
+        "line_cells_in_noop_footprint": 5,
+        "extra_line_charge_cells": 5,
+        "charged_damage_cells": 42,
+        "raw_saved_cells": 570,
+        "charged_saved_cells": 565
+      },
+      "return_": -0.42,
+      "invalid_requests": 0
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "sequence": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "arrays": "native-simfire-fpa-fod-400307379-weston-pass-3.npz",
+      "arrays_sha256": "2b3644c1f601e905bd4bba97747ef668dcf398feeb93194dcfc49db26c84c138",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -1.0,
+          "remaining_budget": 1,
+          "charged_damage_cells": 100
+        },
+        {
+          "step": 1,
+          "requested_action": 1,
+          "effective_action": 1,
+          "invalid": false,
+          "reward": -2.06,
+          "remaining_budget": 0,
+          "charged_damage_cells": 306
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -1.75,
+          "remaining_budget": 0,
+          "charged_damage_cells": 481
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -1.24,
+          "remaining_budget": 0,
+          "charged_damage_cells": 605
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 607,
+        "raw_damage_cells": 600,
+        "line_cells_in_noop_footprint": 5,
+        "extra_line_charge_cells": 5,
+        "charged_damage_cells": 605,
+        "raw_saved_cells": 7,
+        "charged_saved_cells": 2
+      },
+      "return_": -6.050000000000001,
+      "invalid_requests": 0
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "sequence": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "arrays": "native-simfire-fpa-fod-400505027-pine-lodge-0.npz",
+      "arrays_sha256": "d9b826946d815965d1fa3e145437e8a5983366c0e2805fc71d722a9f6edb8b6f",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -3.22,
+          "remaining_budget": 1,
+          "charged_damage_cells": 322
+        },
+        {
+          "step": 1,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -6.64,
+          "remaining_budget": 1,
+          "charged_damage_cells": 986
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -8.54,
+          "remaining_budget": 1,
+          "charged_damage_cells": 1840
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -13.95,
+          "remaining_budget": 1,
+          "charged_damage_cells": 3235
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 3235,
+        "raw_damage_cells": 3235,
+        "line_cells_in_noop_footprint": 0,
+        "extra_line_charge_cells": 0,
+        "charged_damage_cells": 3235,
+        "raw_saved_cells": 0,
+        "charged_saved_cells": 0
+      },
+      "return_": -32.349999999999994,
+      "invalid_requests": 0
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "sequence": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "arrays": "native-simfire-fpa-fod-400505027-pine-lodge-1.npz",
+      "arrays_sha256": "900a4a06a891b72c17a428316a323542ad05cf2d3c517a08fc1ab9005e0fa8bf",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 1,
+          "effective_action": 1,
+          "invalid": false,
+          "reward": -2.48,
+          "remaining_budget": 0,
+          "charged_damage_cells": 248
+        },
+        {
+          "step": 1,
+          "requested_action": 1,
+          "effective_action": 0,
+          "invalid": true,
+          "reward": -5.49,
+          "remaining_budget": 0,
+          "charged_damage_cells": 796
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -7.82,
+          "remaining_budget": 0,
+          "charged_damage_cells": 1578
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -13.54,
+          "remaining_budget": 0,
+          "charged_damage_cells": 2932
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 3235,
+        "raw_damage_cells": 2925,
+        "line_cells_in_noop_footprint": 7,
+        "extra_line_charge_cells": 7,
+        "charged_damage_cells": 2932,
+        "raw_saved_cells": 310,
+        "charged_saved_cells": 303
+      },
+      "return_": -29.33,
+      "invalid_requests": 1
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "sequence": [
+        2,
+        0,
+        0,
+        0
+      ],
+      "arrays": "native-simfire-fpa-fod-400505027-pine-lodge-2.npz",
+      "arrays_sha256": "6be11091e13246f3623468b723da0d8c40d4fa9fad32d16333548fcaa1d65036",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 2,
+          "effective_action": 2,
+          "invalid": false,
+          "reward": -2.63,
+          "remaining_budget": 0,
+          "charged_damage_cells": 263
+        },
+        {
+          "step": 1,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -5.65,
+          "remaining_budget": 0,
+          "charged_damage_cells": 828
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -7.98,
+          "remaining_budget": 0,
+          "charged_damage_cells": 1626
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -13.6,
+          "remaining_budget": 0,
+          "charged_damage_cells": 2986
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 3235,
+        "raw_damage_cells": 2980,
+        "line_cells_in_noop_footprint": 6,
+        "extra_line_charge_cells": 6,
+        "charged_damage_cells": 2986,
+        "raw_saved_cells": 255,
+        "charged_saved_cells": 249
+      },
+      "return_": -29.86,
+      "invalid_requests": 0
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "sequence": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "arrays": "native-simfire-fpa-fod-400505027-pine-lodge-3.npz",
+      "arrays_sha256": "d0a6d10474235d3ea0a0afc202845e9b62d8142a74c861c4951ba2e5feddba9d",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -3.22,
+          "remaining_budget": 1,
+          "charged_damage_cells": 322
+        },
+        {
+          "step": 1,
+          "requested_action": 1,
+          "effective_action": 1,
+          "invalid": false,
+          "reward": -6.51,
+          "remaining_budget": 0,
+          "charged_damage_cells": 973
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -8.37,
+          "remaining_budget": 0,
+          "charged_damage_cells": 1810
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -13.85,
+          "remaining_budget": 0,
+          "charged_damage_cells": 3195
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 3235,
+        "raw_damage_cells": 3191,
+        "line_cells_in_noop_footprint": 4,
+        "extra_line_charge_cells": 4,
+        "charged_damage_cells": 3195,
+        "raw_saved_cells": 44,
+        "charged_saved_cells": 40
+      },
+      "return_": -31.950000000000003,
+      "invalid_requests": 0
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "sequence": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "arrays": "native-ca-fpa-fod-400303584-goldstone-0.npz",
+      "arrays_sha256": "f1a033f5ad6dce40d315cc17537982aea72b285bedc49bb3bb5d58e32305ea6c",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.18,
+          "remaining_budget": 1,
+          "charged_damage_cells": 18
+        },
+        {
+          "step": 1,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.31,
+          "remaining_budget": 1,
+          "charged_damage_cells": 49
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.36,
+          "remaining_budget": 1,
+          "charged_damage_cells": 85
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.11,
+          "remaining_budget": 1,
+          "charged_damage_cells": 96
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 96,
+        "raw_damage_cells": 96,
+        "line_cells_in_noop_footprint": 0,
+        "extra_line_charge_cells": 0,
+        "charged_damage_cells": 96,
+        "raw_saved_cells": 0,
+        "charged_saved_cells": 0
+      },
+      "return_": -0.96,
+      "invalid_requests": 0
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "sequence": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "arrays": "native-ca-fpa-fod-400303584-goldstone-1.npz",
+      "arrays_sha256": "ef5a4de7dad2030bec58fa633213ca107321c3a821cced5adae10549eae4e506",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 1,
+          "effective_action": 1,
+          "invalid": false,
+          "reward": -0.18,
+          "remaining_budget": 0,
+          "charged_damage_cells": 18
+        },
+        {
+          "step": 1,
+          "requested_action": 1,
+          "effective_action": 0,
+          "invalid": true,
+          "reward": -0.32,
+          "remaining_budget": 0,
+          "charged_damage_cells": 49
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.36,
+          "remaining_budget": 0,
+          "charged_damage_cells": 85
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.11,
+          "remaining_budget": 0,
+          "charged_damage_cells": 96
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 96,
+        "raw_damage_cells": 96,
+        "line_cells_in_noop_footprint": 0,
+        "extra_line_charge_cells": 0,
+        "charged_damage_cells": 96,
+        "raw_saved_cells": 0,
+        "charged_saved_cells": 0
+      },
+      "return_": -0.97,
+      "invalid_requests": 1
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "sequence": [
+        2,
+        0,
+        0,
+        0
+      ],
+      "arrays": "native-ca-fpa-fod-400303584-goldstone-2.npz",
+      "arrays_sha256": "01918a30a6782028f0adaa2660811b0a3531ea0e8a16358247b11853fb4c3567",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 2,
+          "effective_action": 2,
+          "invalid": false,
+          "reward": -0.18,
+          "remaining_budget": 0,
+          "charged_damage_cells": 18
+        },
+        {
+          "step": 1,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.31,
+          "remaining_budget": 0,
+          "charged_damage_cells": 49
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.36,
+          "remaining_budget": 0,
+          "charged_damage_cells": 85
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.11,
+          "remaining_budget": 0,
+          "charged_damage_cells": 96
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 96,
+        "raw_damage_cells": 96,
+        "line_cells_in_noop_footprint": 0,
+        "extra_line_charge_cells": 0,
+        "charged_damage_cells": 96,
+        "raw_saved_cells": 0,
+        "charged_saved_cells": 0
+      },
+      "return_": -0.96,
+      "invalid_requests": 0
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "sequence": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "arrays": "native-ca-fpa-fod-400303584-goldstone-3.npz",
+      "arrays_sha256": "a5cb35cc50051d3c113135ce08205d6076cbd5294e90d697d13e453fc3a6f259",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.18,
+          "remaining_budget": 1,
+          "charged_damage_cells": 18
+        },
+        {
+          "step": 1,
+          "requested_action": 1,
+          "effective_action": 1,
+          "invalid": false,
+          "reward": -0.31,
+          "remaining_budget": 0,
+          "charged_damage_cells": 49
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.36,
+          "remaining_budget": 0,
+          "charged_damage_cells": 85
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.11,
+          "remaining_budget": 0,
+          "charged_damage_cells": 96
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 96,
+        "raw_damage_cells": 96,
+        "line_cells_in_noop_footprint": 0,
+        "extra_line_charge_cells": 0,
+        "charged_damage_cells": 96,
+        "raw_saved_cells": 0,
+        "charged_saved_cells": 0
+      },
+      "return_": -0.96,
+      "invalid_requests": 0
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "sequence": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "arrays": "native-ca-fpa-fod-400307379-weston-pass-0.npz",
+      "arrays_sha256": "b780ca95ba1b09bd6aa2910e5e0913374113a24b86efedaf0a1f128b5ea83f55",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.66,
+          "remaining_budget": 1,
+          "charged_damage_cells": 66
+        },
+        {
+          "step": 1,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.26,
+          "remaining_budget": 1,
+          "charged_damage_cells": 92
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.12,
+          "remaining_budget": 1,
+          "charged_damage_cells": 104
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.02,
+          "remaining_budget": 1,
+          "charged_damage_cells": 106
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 106,
+        "raw_damage_cells": 106,
+        "line_cells_in_noop_footprint": 0,
+        "extra_line_charge_cells": 0,
+        "charged_damage_cells": 106,
+        "raw_saved_cells": 0,
+        "charged_saved_cells": 0
+      },
+      "return_": -1.06,
+      "invalid_requests": 0
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "sequence": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "arrays": "native-ca-fpa-fod-400307379-weston-pass-1.npz",
+      "arrays_sha256": "872384ec58a9dc8b3e1b0215428067089e0501374ba901709fdbaa0b01145a84",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 1,
+          "effective_action": 1,
+          "invalid": false,
+          "reward": -0.61,
+          "remaining_budget": 0,
+          "charged_damage_cells": 61
+        },
+        {
+          "step": 1,
+          "requested_action": 1,
+          "effective_action": 0,
+          "invalid": true,
+          "reward": -0.27,
+          "remaining_budget": 0,
+          "charged_damage_cells": 87
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.12,
+          "remaining_budget": 0,
+          "charged_damage_cells": 99
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.02,
+          "remaining_budget": 0,
+          "charged_damage_cells": 101
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 106,
+        "raw_damage_cells": 96,
+        "line_cells_in_noop_footprint": 5,
+        "extra_line_charge_cells": 5,
+        "charged_damage_cells": 101,
+        "raw_saved_cells": 10,
+        "charged_saved_cells": 5
+      },
+      "return_": -1.02,
+      "invalid_requests": 1
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "sequence": [
+        2,
+        0,
+        0,
+        0
+      ],
+      "arrays": "native-ca-fpa-fod-400307379-weston-pass-2.npz",
+      "arrays_sha256": "57865a831e4784c9b64792b692eff2d8dd04a13c5352dedf3d0998690c3f45ba",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 2,
+          "effective_action": 2,
+          "invalid": false,
+          "reward": -0.66,
+          "remaining_budget": 0,
+          "charged_damage_cells": 66
+        },
+        {
+          "step": 1,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.26,
+          "remaining_budget": 0,
+          "charged_damage_cells": 92
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.12,
+          "remaining_budget": 0,
+          "charged_damage_cells": 104
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.02,
+          "remaining_budget": 0,
+          "charged_damage_cells": 106
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 106,
+        "raw_damage_cells": 103,
+        "line_cells_in_noop_footprint": 3,
+        "extra_line_charge_cells": 3,
+        "charged_damage_cells": 106,
+        "raw_saved_cells": 3,
+        "charged_saved_cells": 0
+      },
+      "return_": -1.06,
+      "invalid_requests": 0
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "sequence": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "arrays": "native-ca-fpa-fod-400307379-weston-pass-3.npz",
+      "arrays_sha256": "4a97f1030e6caa93c42f12a291e64533d1f4a40c38f95bc7520bed6784e90e0c",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.66,
+          "remaining_budget": 1,
+          "charged_damage_cells": 66
+        },
+        {
+          "step": 1,
+          "requested_action": 1,
+          "effective_action": 1,
+          "invalid": false,
+          "reward": -0.26,
+          "remaining_budget": 0,
+          "charged_damage_cells": 92
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.12,
+          "remaining_budget": 0,
+          "charged_damage_cells": 104
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.02,
+          "remaining_budget": 0,
+          "charged_damage_cells": 106
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 106,
+        "raw_damage_cells": 106,
+        "line_cells_in_noop_footprint": 0,
+        "extra_line_charge_cells": 0,
+        "charged_damage_cells": 106,
+        "raw_saved_cells": 0,
+        "charged_saved_cells": 0
+      },
+      "return_": -1.06,
+      "invalid_requests": 0
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "sequence": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "arrays": "native-ca-fpa-fod-400505027-pine-lodge-0.npz",
+      "arrays_sha256": "3277924b266998c2a2a2198c962aa911ddc5c70794d12ea48da459098555b1c9",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -1.26,
+          "remaining_budget": 1,
+          "charged_damage_cells": 126
+        },
+        {
+          "step": 1,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.93,
+          "remaining_budget": 1,
+          "charged_damage_cells": 219
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.69,
+          "remaining_budget": 1,
+          "charged_damage_cells": 288
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.24,
+          "remaining_budget": 1,
+          "charged_damage_cells": 312
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 312,
+        "raw_damage_cells": 312,
+        "line_cells_in_noop_footprint": 0,
+        "extra_line_charge_cells": 0,
+        "charged_damage_cells": 312,
+        "raw_saved_cells": 0,
+        "charged_saved_cells": 0
+      },
+      "return_": -3.12,
+      "invalid_requests": 0
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "sequence": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "arrays": "native-ca-fpa-fod-400505027-pine-lodge-1.npz",
+      "arrays_sha256": "940c87e3ac9a4eb317625337e88f8a8e555823b42921ab78042c8c089731c007",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 1,
+          "effective_action": 1,
+          "invalid": false,
+          "reward": -1.12,
+          "remaining_budget": 0,
+          "charged_damage_cells": 112
+        },
+        {
+          "step": 1,
+          "requested_action": 1,
+          "effective_action": 0,
+          "invalid": true,
+          "reward": -0.9400000000000001,
+          "remaining_budget": 0,
+          "charged_damage_cells": 205
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.69,
+          "remaining_budget": 0,
+          "charged_damage_cells": 274
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.24,
+          "remaining_budget": 0,
+          "charged_damage_cells": 298
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 312,
+        "raw_damage_cells": 291,
+        "line_cells_in_noop_footprint": 7,
+        "extra_line_charge_cells": 7,
+        "charged_damage_cells": 298,
+        "raw_saved_cells": 21,
+        "charged_saved_cells": 14
+      },
+      "return_": -2.99,
+      "invalid_requests": 1
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "sequence": [
+        2,
+        0,
+        0,
+        0
+      ],
+      "arrays": "native-ca-fpa-fod-400505027-pine-lodge-2.npz",
+      "arrays_sha256": "383b96ec7b00c8f7f91651639c0cdd564ef4896b9d621ed3e71ba4be38888918",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 2,
+          "effective_action": 2,
+          "invalid": false,
+          "reward": -1.21,
+          "remaining_budget": 0,
+          "charged_damage_cells": 121
+        },
+        {
+          "step": 1,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.93,
+          "remaining_budget": 0,
+          "charged_damage_cells": 214
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.69,
+          "remaining_budget": 0,
+          "charged_damage_cells": 283
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.24,
+          "remaining_budget": 0,
+          "charged_damage_cells": 307
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 312,
+        "raw_damage_cells": 300,
+        "line_cells_in_noop_footprint": 7,
+        "extra_line_charge_cells": 7,
+        "charged_damage_cells": 307,
+        "raw_saved_cells": 12,
+        "charged_saved_cells": 5
+      },
+      "return_": -3.0700000000000003,
+      "invalid_requests": 0
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "sequence": [
+        0,
+        1,
+        0,
+        0
+      ],
+      "arrays": "native-ca-fpa-fod-400505027-pine-lodge-3.npz",
+      "arrays_sha256": "e2fa8d65a8cd6ff74ff539e84d744032ac510d34eeecf393d95e57a33beeb4fb",
+      "rows": [
+        {
+          "step": 0,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -1.26,
+          "remaining_budget": 1,
+          "charged_damage_cells": 126
+        },
+        {
+          "step": 1,
+          "requested_action": 1,
+          "effective_action": 1,
+          "invalid": false,
+          "reward": -0.93,
+          "remaining_budget": 0,
+          "charged_damage_cells": 219
+        },
+        {
+          "step": 2,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.69,
+          "remaining_budget": 0,
+          "charged_damage_cells": 288
+        },
+        {
+          "step": 3,
+          "requested_action": 0,
+          "effective_action": 0,
+          "invalid": false,
+          "reward": -0.24,
+          "remaining_budget": 0,
+          "charged_damage_cells": 312
+        }
+      ],
+      "score": {
+        "noop_damage_cells": 312,
+        "raw_damage_cells": 312,
+        "line_cells_in_noop_footprint": 0,
+        "extra_line_charge_cells": 0,
+        "charged_damage_cells": 312,
+        "raw_saved_cells": 0,
+        "charged_saved_cells": 0
+      },
+      "return_": -3.12,
+      "invalid_requests": 0
+    }
+  ],
+  "runs": [
+    {
+      "backend": "simfire",
+      "seed": 17,
+      "steps": 64,
+      "completed_episodes": 16,
+      "schedule": [
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400303584-goldstone"
+      ],
+      "initial_policy_digest": "09367fc84f9fb438c22d0e0de8d35e048a5f45b9e1af8e858e0c4aba32605c37",
+      "final_policy_digest": "5e386fb52eda45120fc1e87211be6a3202377f9bc9efa63a5fe10959812aecb6",
+      "checkpoint_sha256": "91849bb2d9530d64dbd4990c45b78a728ab4f16a1454cd003f524627717e6bd4",
+      "training": [
+        {
+          "step": 1,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 6,
+          "reward": -0.09000000357627869,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 2,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 3,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 4,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 5,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 7,
+          "reward": -1.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 100
+        },
+        {
+          "step": 6,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -2.509999990463257,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 351
+        },
+        {
+          "step": 7,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -1.3899999856948853,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 490
+        },
+        {
+          "step": 8,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -1.1699999570846558,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 607
+        },
+        {
+          "step": 9,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 6,
+          "reward": -3.2300000190734863,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 323
+        },
+        {
+          "step": 10,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -6.639999866485596,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 987
+        },
+        {
+          "step": 11,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -8.510000228881836,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 1838
+        },
+        {
+          "step": 12,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -13.9399995803833,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 3232
+        },
+        {
+          "step": 13,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 4,
+          "reward": -0.09000000357627869,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 14,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 15,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 16,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 17,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 4,
+          "reward": -1.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 100
+        },
+        {
+          "step": 18,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -2.509999990463257,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 351
+        },
+        {
+          "step": 19,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -1.3899999856948853,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 490
+        },
+        {
+          "step": 20,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -1.1699999570846558,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 607
+        },
+        {
+          "step": 21,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 8,
+          "reward": -2.559999942779541,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 256
+        },
+        {
+          "step": 22,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -5.980000019073486,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 854
+        },
+        {
+          "step": 23,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -7.849999904632568,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 1639
+        },
+        {
+          "step": 24,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -13.789999961853027,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 3018
+        },
+        {
+          "step": 25,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 2,
+          "reward": -0.09000000357627869,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 26,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 27,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 28,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 29,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 1,
+          "reward": -0.2800000011920929,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 28
+        },
+        {
+          "step": 30,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 28
+        },
+        {
+          "step": 31,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 28
+        },
+        {
+          "step": 32,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": 0.0,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 28
+        },
+        {
+          "step": 33,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 7,
+          "reward": -2.690000057220459,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 269
+        },
+        {
+          "step": 34,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -6.28000020980835,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 897
+        },
+        {
+          "step": 35,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -8.180000305175781,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 1715
+        },
+        {
+          "step": 36,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -13.649999618530273,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 3080
+        },
+        {
+          "step": 37,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 6,
+          "reward": -0.09000000357627869,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 38,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 39,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 40,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 41,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 5,
+          "reward": -1.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 100
+        },
+        {
+          "step": 42,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -2.509999990463257,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 351
+        },
+        {
+          "step": 43,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -1.3899999856948853,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 490
+        },
+        {
+          "step": 44,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -1.1699999570846558,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 607
+        },
+        {
+          "step": 45,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 1,
+          "reward": -2.4800000190734863,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 248
+        },
+        {
+          "step": 46,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -5.480000019073486,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 796
+        },
+        {
+          "step": 47,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -7.820000171661377,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 1578
+        },
+        {
+          "step": 48,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -13.539999961853027,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 2932
+        },
+        {
+          "step": 49,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 3,
+          "reward": -0.09000000357627869,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 50,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 51,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 52,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 53,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 3,
+          "reward": -1.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 100
+        },
+        {
+          "step": 54,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -2.509999990463257,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 351
+        },
+        {
+          "step": 55,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -1.3899999856948853,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 490
+        },
+        {
+          "step": 56,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -1.1699999570846558,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 607
+        },
+        {
+          "step": 57,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 7,
+          "reward": -2.690000057220459,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 269
+        },
+        {
+          "step": 58,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -6.28000020980835,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 897
+        },
+        {
+          "step": 59,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -8.180000305175781,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 1715
+        },
+        {
+          "step": 60,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -13.649999618530273,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 3080
+        },
+        {
+          "step": 61,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 4,
+          "reward": -0.09000000357627869,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 62,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 63,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 64,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        }
+      ],
+      "diagnostics": {
+        "train/learning_rate": 0.0001,
+        "train/entropy_loss": -0.5493026077747345,
+        "train/policy_gradient_loss": -0.00015893951058387756,
+        "train/value_loss": 139.6895523071289,
+        "train/approx_kl": 1.601874828338623e-07,
+        "train/clip_fraction": 0.0,
+        "train/loss": 69.66329193115234,
+        "train/explained_variance": 0.027311205863952637,
+        "train/n_updates": 8.0,
+        "train/clip_range": 0.1
+      },
+      "replays": [
+        {
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "arrays": "policy-replay-simfire-17-fpa-fod-400303584-goldstone.npz",
+          "arrays_sha256": "a3fd8628ffcf04f9403d3f66e07497cdca9d20265415f19af76853d2546f1f78",
+          "exact_checkpoint_replay": "PASS",
+          "rows": [
+            {
+              "step": 0,
+              "requested_action": 4,
+              "effective_action": 4,
+              "invalid": false,
+              "reward": -0.09,
+              "remaining_budget": 0,
+              "charged_damage_cells": 9
+            },
+            {
+              "step": 1,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": 0.0,
+              "remaining_budget": 0,
+              "charged_damage_cells": 9
+            },
+            {
+              "step": 2,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": 0.0,
+              "remaining_budget": 0,
+              "charged_damage_cells": 9
+            },
+            {
+              "step": 3,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": 0.0,
+              "remaining_budget": 0,
+              "charged_damage_cells": 9
+            }
+          ],
+          "score": {
+            "noop_damage_cells": 9,
+            "raw_damage_cells": 9,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 9,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "return_": -0.09,
+          "invalid_requests": 0
+        },
+        {
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "arrays": "policy-replay-simfire-17-fpa-fod-400307379-weston-pass.npz",
+          "arrays_sha256": "c5c503b402065d9186d640a13c5cdc74e14eee4a5f12cfae86efa98b106c6eb0",
+          "exact_checkpoint_replay": "PASS",
+          "rows": [
+            {
+              "step": 0,
+              "requested_action": 4,
+              "effective_action": 4,
+              "invalid": false,
+              "reward": -1.0,
+              "remaining_budget": 0,
+              "charged_damage_cells": 100
+            },
+            {
+              "step": 1,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -2.51,
+              "remaining_budget": 0,
+              "charged_damage_cells": 351
+            },
+            {
+              "step": 2,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -1.39,
+              "remaining_budget": 0,
+              "charged_damage_cells": 490
+            },
+            {
+              "step": 3,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -1.17,
+              "remaining_budget": 0,
+              "charged_damage_cells": 607
+            }
+          ],
+          "score": {
+            "noop_damage_cells": 607,
+            "raw_damage_cells": 607,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 607,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "return_": -6.069999999999999,
+          "invalid_requests": 0
+        },
+        {
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "arrays": "policy-replay-simfire-17-fpa-fod-400505027-pine-lodge.npz",
+          "arrays_sha256": "00263876d568ef6a5a9b8998eb29308f57e31244a5527733f6d3c7a969678567",
+          "exact_checkpoint_replay": "PASS",
+          "rows": [
+            {
+              "step": 0,
+              "requested_action": 2,
+              "effective_action": 2,
+              "invalid": false,
+              "reward": -2.63,
+              "remaining_budget": 0,
+              "charged_damage_cells": 263
+            },
+            {
+              "step": 1,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -5.65,
+              "remaining_budget": 0,
+              "charged_damage_cells": 828
+            },
+            {
+              "step": 2,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -7.98,
+              "remaining_budget": 0,
+              "charged_damage_cells": 1626
+            },
+            {
+              "step": 3,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -13.6,
+              "remaining_budget": 0,
+              "charged_damage_cells": 2986
+            }
+          ],
+          "score": {
+            "noop_damage_cells": 3235,
+            "raw_damage_cells": 2980,
+            "line_cells_in_noop_footprint": 6,
+            "extra_line_charge_cells": 6,
+            "charged_damage_cells": 2986,
+            "raw_saved_cells": 255,
+            "charged_saved_cells": 249
+          },
+          "return_": -29.86,
+          "invalid_requests": 0
+        }
+      ],
+      "seconds": 38.288859083999995
+    },
+    {
+      "backend": "simfire",
+      "seed": 29,
+      "steps": 64,
+      "completed_episodes": 16,
+      "schedule": [
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400303584-goldstone"
+      ],
+      "initial_policy_digest": "393a9f254d897ad2665674877e84135ea6396e6776f9819e9e3c392c9a0717e5",
+      "final_policy_digest": "e5bdf9ac95c16c6843498cf9aa4d11758a57039b80067464348ccc87aff3810c",
+      "checkpoint_sha256": "29ff8985ce5062f869c8c9d1daecce1e859134f1fbd585a73da2de984f63bb41",
+      "training": [
+        {
+          "step": 1,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 4,
+          "reward": -0.09000000357627869,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 2,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 3,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 4,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 5,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 7,
+          "reward": -1.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 100
+        },
+        {
+          "step": 6,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -2.509999990463257,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 351
+        },
+        {
+          "step": 7,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -1.3899999856948853,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 490
+        },
+        {
+          "step": 8,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -1.1699999570846558,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 607
+        },
+        {
+          "step": 9,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 5,
+          "reward": -3.2200000286102295,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 322
+        },
+        {
+          "step": 10,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -6.639999866485596,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 986
+        },
+        {
+          "step": 11,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -8.539999961853027,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 1840
+        },
+        {
+          "step": 12,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -13.949999809265137,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 3235
+        },
+        {
+          "step": 13,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 4,
+          "reward": -0.09000000357627869,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 14,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 15,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 16,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 17,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 1,
+          "reward": -0.2800000011920929,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 28
+        },
+        {
+          "step": 18,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 28
+        },
+        {
+          "step": 19,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 28
+        },
+        {
+          "step": 20,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": 0.0,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 28
+        },
+        {
+          "step": 21,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -3.2200000286102295,
+          "done": false,
+          "remaining_budget": 1,
+          "charged_damage_cells": 322
+        },
+        {
+          "step": 22,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 4,
+          "reward": -6.639999866485596,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 986
+        },
+        {
+          "step": 23,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -8.539999961853027,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 1840
+        },
+        {
+          "step": 24,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -13.949999809265137,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 3235
+        },
+        {
+          "step": 25,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 1,
+          "reward": -0.05999999865889549,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 6
+        },
+        {
+          "step": 26,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 6
+        },
+        {
+          "step": 27,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 6
+        },
+        {
+          "step": 28,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 6
+        },
+        {
+          "step": 29,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 5,
+          "reward": -1.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 100
+        },
+        {
+          "step": 30,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -2.509999990463257,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 351
+        },
+        {
+          "step": 31,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -1.3899999856948853,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 490
+        },
+        {
+          "step": 32,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -1.1699999570846558,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 607
+        },
+        {
+          "step": 33,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 3,
+          "reward": -3.2200000286102295,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 322
+        },
+        {
+          "step": 34,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -6.639999866485596,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 986
+        },
+        {
+          "step": 35,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -8.539999961853027,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 1840
+        },
+        {
+          "step": 36,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -13.949999809265137,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 3235
+        },
+        {
+          "step": 37,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 2,
+          "reward": -0.09000000357627869,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 38,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 39,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 40,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 41,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 5,
+          "reward": -1.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 100
+        },
+        {
+          "step": 42,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -2.509999990463257,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 351
+        },
+        {
+          "step": 43,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -1.3899999856948853,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 490
+        },
+        {
+          "step": 44,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -1.1699999570846558,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 607
+        },
+        {
+          "step": 45,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 1,
+          "reward": -2.4800000190734863,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 248
+        },
+        {
+          "step": 46,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -5.480000019073486,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 796
+        },
+        {
+          "step": 47,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -7.820000171661377,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 1578
+        },
+        {
+          "step": 48,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -13.539999961853027,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 2932
+        },
+        {
+          "step": 49,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 7,
+          "reward": -0.09000000357627869,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 50,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 51,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 52,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 9
+        },
+        {
+          "step": 53,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 3,
+          "reward": -1.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 100
+        },
+        {
+          "step": 54,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -2.509999990463257,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 351
+        },
+        {
+          "step": 55,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -1.3899999856948853,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 490
+        },
+        {
+          "step": 56,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -1.1699999570846558,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 607
+        },
+        {
+          "step": 57,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 4,
+          "reward": -3.2200000286102295,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 322
+        },
+        {
+          "step": 58,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -6.639999866485596,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 986
+        },
+        {
+          "step": 59,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -8.539999961853027,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 1840
+        },
+        {
+          "step": 60,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -13.949999809265137,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 3235
+        },
+        {
+          "step": 61,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 1,
+          "reward": -0.05999999865889549,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 6
+        },
+        {
+          "step": 62,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 6
+        },
+        {
+          "step": 63,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 6
+        },
+        {
+          "step": 64,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 6
+        }
+      ],
+      "diagnostics": {
+        "train/learning_rate": 0.0001,
+        "train/entropy_loss": -0.5493017435073853,
+        "train/policy_gradient_loss": -0.0001240503042936325,
+        "train/value_loss": 160.9454803466797,
+        "train/approx_kl": 1.1920928955078125e-07,
+        "train/clip_fraction": 0.0,
+        "train/loss": 80.271728515625,
+        "train/explained_variance": 0.005451977252960205,
+        "train/n_updates": 8.0,
+        "train/clip_range": 0.1
+      },
+      "replays": [
+        {
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "arrays": "policy-replay-simfire-29-fpa-fod-400303584-goldstone.npz",
+          "arrays_sha256": "1838ddf65e9efc388449c868de03c3e9a16d4e681ec35b150e946fa2d0ce9588",
+          "exact_checkpoint_replay": "PASS",
+          "rows": [
+            {
+              "step": 0,
+              "requested_action": 2,
+              "effective_action": 2,
+              "invalid": false,
+              "reward": -0.09,
+              "remaining_budget": 0,
+              "charged_damage_cells": 9
+            },
+            {
+              "step": 1,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": 0.0,
+              "remaining_budget": 0,
+              "charged_damage_cells": 9
+            },
+            {
+              "step": 2,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": 0.0,
+              "remaining_budget": 0,
+              "charged_damage_cells": 9
+            },
+            {
+              "step": 3,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": 0.0,
+              "remaining_budget": 0,
+              "charged_damage_cells": 9
+            }
+          ],
+          "score": {
+            "noop_damage_cells": 9,
+            "raw_damage_cells": 9,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 9,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "return_": -0.09,
+          "invalid_requests": 0
+        },
+        {
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "arrays": "policy-replay-simfire-29-fpa-fod-400307379-weston-pass.npz",
+          "arrays_sha256": "4586ac99c572a827e148e0af3af07fbfe478f46c8a1349d99abf1d9f4de4966b",
+          "exact_checkpoint_replay": "PASS",
+          "rows": [
+            {
+              "step": 0,
+              "requested_action": 2,
+              "effective_action": 2,
+              "invalid": false,
+              "reward": -0.42,
+              "remaining_budget": 0,
+              "charged_damage_cells": 42
+            },
+            {
+              "step": 1,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": 0.0,
+              "remaining_budget": 0,
+              "charged_damage_cells": 42
+            },
+            {
+              "step": 2,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": 0.0,
+              "remaining_budget": 0,
+              "charged_damage_cells": 42
+            },
+            {
+              "step": 3,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": 0.0,
+              "remaining_budget": 0,
+              "charged_damage_cells": 42
+            }
+          ],
+          "score": {
+            "noop_damage_cells": 607,
+            "raw_damage_cells": 37,
+            "line_cells_in_noop_footprint": 5,
+            "extra_line_charge_cells": 5,
+            "charged_damage_cells": 42,
+            "raw_saved_cells": 570,
+            "charged_saved_cells": 565
+          },
+          "return_": -0.42,
+          "invalid_requests": 0
+        },
+        {
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "arrays": "policy-replay-simfire-29-fpa-fod-400505027-pine-lodge.npz",
+          "arrays_sha256": "f719f20032bfeee8a63f28a0895cc7fb16bdf320b09caf122ea2098e1fc4c7fe",
+          "exact_checkpoint_replay": "PASS",
+          "rows": [
+            {
+              "step": 0,
+              "requested_action": 8,
+              "effective_action": 8,
+              "invalid": false,
+              "reward": -2.56,
+              "remaining_budget": 0,
+              "charged_damage_cells": 256
+            },
+            {
+              "step": 1,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -5.98,
+              "remaining_budget": 0,
+              "charged_damage_cells": 854
+            },
+            {
+              "step": 2,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -7.85,
+              "remaining_budget": 0,
+              "charged_damage_cells": 1639
+            },
+            {
+              "step": 3,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -13.79,
+              "remaining_budget": 0,
+              "charged_damage_cells": 3018
+            }
+          ],
+          "score": {
+            "noop_damage_cells": 3235,
+            "raw_damage_cells": 3009,
+            "line_cells_in_noop_footprint": 9,
+            "extra_line_charge_cells": 9,
+            "charged_damage_cells": 3018,
+            "raw_saved_cells": 226,
+            "charged_saved_cells": 217
+          },
+          "return_": -30.18,
+          "invalid_requests": 0
+        }
+      ],
+      "seconds": 37.42479150000001
+    },
+    {
+      "backend": "ca",
+      "seed": 17,
+      "steps": 64,
+      "completed_episodes": 16,
+      "schedule": [
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400303584-goldstone"
+      ],
+      "initial_policy_digest": "09367fc84f9fb438c22d0e0de8d35e048a5f45b9e1af8e858e0c4aba32605c37",
+      "final_policy_digest": "baf363684f54ef63b5545a8de26782e0e88db9b0f6a9678f5ddf63b5e25aeefd",
+      "checkpoint_sha256": "88feb7e88a4fd2aa3f3592b2087d9ab8ac3130c2738d1c9bfea340962b8b8778",
+      "training": [
+        {
+          "step": 1,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 6,
+          "reward": -0.23999999463558197,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 24
+        },
+        {
+          "step": 2,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.10000000149011612,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 34
+        },
+        {
+          "step": 3,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.05999999865889549,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 40
+        },
+        {
+          "step": 4,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 40
+        },
+        {
+          "step": 5,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 7,
+          "reward": -0.6600000262260437,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 66
+        },
+        {
+          "step": 6,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.25999999046325684,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 92
+        },
+        {
+          "step": 7,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.11999999731779099,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 104
+        },
+        {
+          "step": 8,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.019999999552965164,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 106
+        },
+        {
+          "step": 9,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 6,
+          "reward": -1.149999976158142,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 115
+        },
+        {
+          "step": 10,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.9300000071525574,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 208
+        },
+        {
+          "step": 11,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.6899999976158142,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 277
+        },
+        {
+          "step": 12,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.23999999463558197,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 301
+        },
+        {
+          "step": 13,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 4,
+          "reward": -0.20999999344348907,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 21
+        },
+        {
+          "step": 14,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.30000001192092896,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 51
+        },
+        {
+          "step": 15,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.3400000035762787,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 85
+        },
+        {
+          "step": 16,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.10000000149011612,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 95
+        },
+        {
+          "step": 17,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 4,
+          "reward": -0.6700000166893005,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 67
+        },
+        {
+          "step": 18,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.23000000417232513,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 90
+        },
+        {
+          "step": 19,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.11999999731779099,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 102
+        },
+        {
+          "step": 20,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.019999999552965164,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 104
+        },
+        {
+          "step": 21,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 8,
+          "reward": -1.2599999904632568,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 126
+        },
+        {
+          "step": 22,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.9300000071525574,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 219
+        },
+        {
+          "step": 23,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.6899999976158142,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 288
+        },
+        {
+          "step": 24,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.23999999463558197,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 312
+        },
+        {
+          "step": 25,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 2,
+          "reward": -0.18000000715255737,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 18
+        },
+        {
+          "step": 26,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.3100000023841858,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 49
+        },
+        {
+          "step": 27,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.36000001430511475,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 85
+        },
+        {
+          "step": 28,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.10999999940395355,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 96
+        },
+        {
+          "step": 29,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 1,
+          "reward": -0.6100000143051147,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 61
+        },
+        {
+          "step": 30,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.25999999046325684,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 87
+        },
+        {
+          "step": 31,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.11999999731779099,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 99
+        },
+        {
+          "step": 32,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.019999999552965164,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 101
+        },
+        {
+          "step": 33,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 7,
+          "reward": -1.1399999856948853,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 114
+        },
+        {
+          "step": 34,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.9300000071525574,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 207
+        },
+        {
+          "step": 35,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.6899999976158142,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 276
+        },
+        {
+          "step": 36,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.23999999463558197,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 300
+        },
+        {
+          "step": 37,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 6,
+          "reward": -0.23999999463558197,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 24
+        },
+        {
+          "step": 38,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.10000000149011612,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 34
+        },
+        {
+          "step": 39,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.05999999865889549,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 40
+        },
+        {
+          "step": 40,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": 0.0,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 40
+        },
+        {
+          "step": 41,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 5,
+          "reward": -0.6600000262260437,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 66
+        },
+        {
+          "step": 42,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.25999999046325684,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 92
+        },
+        {
+          "step": 43,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.11999999731779099,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 104
+        },
+        {
+          "step": 44,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.019999999552965164,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 106
+        },
+        {
+          "step": 45,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 1,
+          "reward": -1.1200000047683716,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 112
+        },
+        {
+          "step": 46,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.9300000071525574,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 205
+        },
+        {
+          "step": 47,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.6899999976158142,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 274
+        },
+        {
+          "step": 48,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.23999999463558197,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 298
+        },
+        {
+          "step": 49,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 3,
+          "reward": -0.1899999976158142,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 19
+        },
+        {
+          "step": 50,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.3100000023841858,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 50
+        },
+        {
+          "step": 51,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.3499999940395355,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 85
+        },
+        {
+          "step": 52,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.10999999940395355,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 96
+        },
+        {
+          "step": 53,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 3,
+          "reward": -0.6299999952316284,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 63
+        },
+        {
+          "step": 54,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.23000000417232513,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 86
+        },
+        {
+          "step": 55,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.14000000059604645,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 100
+        },
+        {
+          "step": 56,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.019999999552965164,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 102
+        },
+        {
+          "step": 57,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 7,
+          "reward": -1.1399999856948853,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 114
+        },
+        {
+          "step": 58,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.9300000071525574,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 207
+        },
+        {
+          "step": 59,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.6899999976158142,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 276
+        },
+        {
+          "step": 60,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.23999999463558197,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 300
+        },
+        {
+          "step": 61,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 4,
+          "reward": -0.20999999344348907,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 21
+        },
+        {
+          "step": 62,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.30000001192092896,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 51
+        },
+        {
+          "step": 63,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.3400000035762787,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 85
+        },
+        {
+          "step": 64,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.10000000149011612,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 95
+        }
+      ],
+      "diagnostics": {
+        "train/learning_rate": 0.0001,
+        "train/entropy_loss": -0.5493014752864838,
+        "train/policy_gradient_loss": -0.00018598511815071106,
+        "train/value_loss": 0.536315381526947,
+        "train/approx_kl": 1.5273690223693848e-07,
+        "train/clip_fraction": 0.0,
+        "train/loss": 0.2633296549320221,
+        "train/explained_variance": 0.022201597690582275,
+        "train/n_updates": 8.0,
+        "train/clip_range": 0.1
+      },
+      "replays": [
+        {
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "arrays": "policy-replay-ca-17-fpa-fod-400303584-goldstone.npz",
+          "arrays_sha256": "07a20e94bc5f5a981ff40e87e135ab265ea9d23a580816b1c7332cdf98f5e629",
+          "exact_checkpoint_replay": "PASS",
+          "rows": [
+            {
+              "step": 0,
+              "requested_action": 3,
+              "effective_action": 3,
+              "invalid": false,
+              "reward": -0.19,
+              "remaining_budget": 0,
+              "charged_damage_cells": 19
+            },
+            {
+              "step": 1,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -0.31,
+              "remaining_budget": 0,
+              "charged_damage_cells": 50
+            },
+            {
+              "step": 2,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -0.35,
+              "remaining_budget": 0,
+              "charged_damage_cells": 85
+            },
+            {
+              "step": 3,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -0.11,
+              "remaining_budget": 0,
+              "charged_damage_cells": 96
+            }
+          ],
+          "score": {
+            "noop_damage_cells": 96,
+            "raw_damage_cells": 94,
+            "line_cells_in_noop_footprint": 2,
+            "extra_line_charge_cells": 2,
+            "charged_damage_cells": 96,
+            "raw_saved_cells": 2,
+            "charged_saved_cells": 0
+          },
+          "return_": -0.96,
+          "invalid_requests": 0
+        },
+        {
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "arrays": "policy-replay-ca-17-fpa-fod-400307379-weston-pass.npz",
+          "arrays_sha256": "7173da703f54bf9a44d1d2df15711c2850845fafc141f40a4eb0fe7bb1fbaa53",
+          "exact_checkpoint_replay": "PASS",
+          "rows": [
+            {
+              "step": 0,
+              "requested_action": 3,
+              "effective_action": 3,
+              "invalid": false,
+              "reward": -0.63,
+              "remaining_budget": 0,
+              "charged_damage_cells": 63
+            },
+            {
+              "step": 1,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -0.23,
+              "remaining_budget": 0,
+              "charged_damage_cells": 86
+            },
+            {
+              "step": 2,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -0.14,
+              "remaining_budget": 0,
+              "charged_damage_cells": 100
+            },
+            {
+              "step": 3,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -0.02,
+              "remaining_budget": 0,
+              "charged_damage_cells": 102
+            }
+          ],
+          "score": {
+            "noop_damage_cells": 106,
+            "raw_damage_cells": 95,
+            "line_cells_in_noop_footprint": 7,
+            "extra_line_charge_cells": 7,
+            "charged_damage_cells": 102,
+            "raw_saved_cells": 11,
+            "charged_saved_cells": 4
+          },
+          "return_": -1.02,
+          "invalid_requests": 0
+        },
+        {
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "arrays": "policy-replay-ca-17-fpa-fod-400505027-pine-lodge.npz",
+          "arrays_sha256": "69bd5636a42f0be9a9b42f9437bc140f225927f52687127bcbea7bd79b43e293",
+          "exact_checkpoint_replay": "PASS",
+          "rows": [
+            {
+              "step": 0,
+              "requested_action": 3,
+              "effective_action": 3,
+              "invalid": false,
+              "reward": -1.16,
+              "remaining_budget": 0,
+              "charged_damage_cells": 116
+            },
+            {
+              "step": 1,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -0.92,
+              "remaining_budget": 0,
+              "charged_damage_cells": 208
+            },
+            {
+              "step": 2,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -0.76,
+              "remaining_budget": 0,
+              "charged_damage_cells": 284
+            },
+            {
+              "step": 3,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -0.27,
+              "remaining_budget": 0,
+              "charged_damage_cells": 311
+            }
+          ],
+          "score": {
+            "noop_damage_cells": 312,
+            "raw_damage_cells": 307,
+            "line_cells_in_noop_footprint": 4,
+            "extra_line_charge_cells": 4,
+            "charged_damage_cells": 311,
+            "raw_saved_cells": 5,
+            "charged_saved_cells": 1
+          },
+          "return_": -3.11,
+          "invalid_requests": 0
+        }
+      ],
+      "seconds": 5.701457000000005
+    },
+    {
+      "backend": "ca",
+      "seed": 29,
+      "steps": 64,
+      "completed_episodes": 16,
+      "schedule": [
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400303584-goldstone",
+        "fpa-fod-400307379-weston-pass",
+        "fpa-fod-400505027-pine-lodge",
+        "fpa-fod-400303584-goldstone"
+      ],
+      "initial_policy_digest": "393a9f254d897ad2665674877e84135ea6396e6776f9819e9e3c392c9a0717e5",
+      "final_policy_digest": "a991a283d1bac1063ab83712fc48cae50cf727db58e6a053704e2845a9bf451d",
+      "checkpoint_sha256": "49c6704d8983836c08710ad6aa57274ef65abdd0537188ca62603ee3a01e492b",
+      "training": [
+        {
+          "step": 1,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 4,
+          "reward": -0.20999999344348907,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 21
+        },
+        {
+          "step": 2,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.30000001192092896,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 51
+        },
+        {
+          "step": 3,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.3400000035762787,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 85
+        },
+        {
+          "step": 4,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.10000000149011612,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 95
+        },
+        {
+          "step": 5,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 7,
+          "reward": -0.6600000262260437,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 66
+        },
+        {
+          "step": 6,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.25999999046325684,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 92
+        },
+        {
+          "step": 7,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.11999999731779099,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 104
+        },
+        {
+          "step": 8,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.019999999552965164,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 106
+        },
+        {
+          "step": 9,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 5,
+          "reward": -1.2400000095367432,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 124
+        },
+        {
+          "step": 10,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.9300000071525574,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 217
+        },
+        {
+          "step": 11,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.6899999976158142,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 286
+        },
+        {
+          "step": 12,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.23999999463558197,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 310
+        },
+        {
+          "step": 13,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 4,
+          "reward": -0.20999999344348907,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 21
+        },
+        {
+          "step": 14,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.30000001192092896,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 51
+        },
+        {
+          "step": 15,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.3400000035762787,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 85
+        },
+        {
+          "step": 16,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.10000000149011612,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 95
+        },
+        {
+          "step": 17,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 1,
+          "reward": -0.6100000143051147,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 61
+        },
+        {
+          "step": 18,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.25999999046325684,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 87
+        },
+        {
+          "step": 19,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.11999999731779099,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 99
+        },
+        {
+          "step": 20,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.019999999552965164,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 101
+        },
+        {
+          "step": 21,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -1.2599999904632568,
+          "done": false,
+          "remaining_budget": 1,
+          "charged_damage_cells": 126
+        },
+        {
+          "step": 22,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 4,
+          "reward": -0.6899999976158142,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 195
+        },
+        {
+          "step": 23,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.9100000262260437,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 286
+        },
+        {
+          "step": 24,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.20999999344348907,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 307
+        },
+        {
+          "step": 25,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 1,
+          "reward": -0.18000000715255737,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 18
+        },
+        {
+          "step": 26,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.3100000023841858,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 49
+        },
+        {
+          "step": 27,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.36000001430511475,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 85
+        },
+        {
+          "step": 28,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.10999999940395355,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 96
+        },
+        {
+          "step": 29,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 5,
+          "reward": -0.6600000262260437,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 66
+        },
+        {
+          "step": 30,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.25999999046325684,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 92
+        },
+        {
+          "step": 31,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.11999999731779099,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 104
+        },
+        {
+          "step": 32,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.019999999552965164,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 106
+        },
+        {
+          "step": 33,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 3,
+          "reward": -1.159999966621399,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 116
+        },
+        {
+          "step": 34,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.9200000166893005,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 208
+        },
+        {
+          "step": 35,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.7599999904632568,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 284
+        },
+        {
+          "step": 36,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.27000001072883606,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 311
+        },
+        {
+          "step": 37,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 2,
+          "reward": -0.18000000715255737,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 18
+        },
+        {
+          "step": 38,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.3100000023841858,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 49
+        },
+        {
+          "step": 39,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.36000001430511475,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 85
+        },
+        {
+          "step": 40,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.10999999940395355,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 96
+        },
+        {
+          "step": 41,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 5,
+          "reward": -0.6600000262260437,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 66
+        },
+        {
+          "step": 42,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.25999999046325684,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 92
+        },
+        {
+          "step": 43,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.11999999731779099,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 104
+        },
+        {
+          "step": 44,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.019999999552965164,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 106
+        },
+        {
+          "step": 45,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 1,
+          "reward": -1.1200000047683716,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 112
+        },
+        {
+          "step": 46,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.9300000071525574,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 205
+        },
+        {
+          "step": 47,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.6899999976158142,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 274
+        },
+        {
+          "step": 48,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": -0.23999999463558197,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 298
+        },
+        {
+          "step": 49,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 7,
+          "reward": -0.20999999344348907,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 21
+        },
+        {
+          "step": 50,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.23999999463558197,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 45
+        },
+        {
+          "step": 51,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.3100000023841858,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 76
+        },
+        {
+          "step": 52,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.10999999940395355,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 87
+        },
+        {
+          "step": 53,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 3,
+          "reward": -0.6299999952316284,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 63
+        },
+        {
+          "step": 54,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.23000000417232513,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 86
+        },
+        {
+          "step": 55,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.14000000059604645,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 100
+        },
+        {
+          "step": 56,
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "action": 0,
+          "reward": -0.019999999552965164,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 102
+        },
+        {
+          "step": 57,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 4,
+          "reward": -0.9399999976158142,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 94
+        },
+        {
+          "step": 58,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 94
+        },
+        {
+          "step": 59,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": 0.0,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 94
+        },
+        {
+          "step": 60,
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "action": 0,
+          "reward": 0.0,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 94
+        },
+        {
+          "step": 61,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 1,
+          "reward": -0.18000000715255737,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 18
+        },
+        {
+          "step": 62,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.3100000023841858,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 49
+        },
+        {
+          "step": 63,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.36000001430511475,
+          "done": false,
+          "remaining_budget": 0,
+          "charged_damage_cells": 85
+        },
+        {
+          "step": 64,
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "action": 0,
+          "reward": -0.10999999940395355,
+          "done": true,
+          "remaining_budget": 0,
+          "charged_damage_cells": 96
+        }
+      ],
+      "diagnostics": {
+        "train/learning_rate": 0.0001,
+        "train/entropy_loss": -0.549296110868454,
+        "train/policy_gradient_loss": -0.000253971666097641,
+        "train/value_loss": 0.1623823046684265,
+        "train/approx_kl": 2.60770320892334e-07,
+        "train/clip_fraction": 0.0,
+        "train/loss": 0.08139927685260773,
+        "train/explained_variance": -0.07838940620422363,
+        "train/n_updates": 8.0,
+        "train/clip_range": 0.1
+      },
+      "replays": [
+        {
+          "scenario_id": "fpa-fod-400303584-goldstone",
+          "arrays": "policy-replay-ca-29-fpa-fod-400303584-goldstone.npz",
+          "arrays_sha256": "1c8012dbb8f8ef1f1acd644f1606333c7fc52e5a11c70eadaa85e7a34a6643e7",
+          "exact_checkpoint_replay": "PASS",
+          "rows": [
+            {
+              "step": 0,
+              "requested_action": 2,
+              "effective_action": 2,
+              "invalid": false,
+              "reward": -0.18,
+              "remaining_budget": 0,
+              "charged_damage_cells": 18
+            },
+            {
+              "step": 1,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -0.31,
+              "remaining_budget": 0,
+              "charged_damage_cells": 49
+            },
+            {
+              "step": 2,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -0.36,
+              "remaining_budget": 0,
+              "charged_damage_cells": 85
+            },
+            {
+              "step": 3,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -0.11,
+              "remaining_budget": 0,
+              "charged_damage_cells": 96
+            }
+          ],
+          "score": {
+            "noop_damage_cells": 96,
+            "raw_damage_cells": 96,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 96,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "return_": -0.96,
+          "invalid_requests": 0
+        },
+        {
+          "scenario_id": "fpa-fod-400307379-weston-pass",
+          "arrays": "policy-replay-ca-29-fpa-fod-400307379-weston-pass.npz",
+          "arrays_sha256": "f5d959b6115376037150d78214faaae6ff7715281e5c6cf00e56447dc50d3a09",
+          "exact_checkpoint_replay": "PASS",
+          "rows": [
+            {
+              "step": 0,
+              "requested_action": 8,
+              "effective_action": 8,
+              "invalid": false,
+              "reward": -0.66,
+              "remaining_budget": 0,
+              "charged_damage_cells": 66
+            },
+            {
+              "step": 1,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -0.26,
+              "remaining_budget": 0,
+              "charged_damage_cells": 92
+            },
+            {
+              "step": 2,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -0.12,
+              "remaining_budget": 0,
+              "charged_damage_cells": 104
+            },
+            {
+              "step": 3,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -0.02,
+              "remaining_budget": 0,
+              "charged_damage_cells": 106
+            }
+          ],
+          "score": {
+            "noop_damage_cells": 106,
+            "raw_damage_cells": 106,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 106,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "return_": -1.06,
+          "invalid_requests": 0
+        },
+        {
+          "scenario_id": "fpa-fod-400505027-pine-lodge",
+          "arrays": "policy-replay-ca-29-fpa-fod-400505027-pine-lodge.npz",
+          "arrays_sha256": "3189e0b232e9a9df5e894d558916b342c132a837bc80e3b366dc546b2b932732",
+          "exact_checkpoint_replay": "PASS",
+          "rows": [
+            {
+              "step": 0,
+              "requested_action": 8,
+              "effective_action": 8,
+              "invalid": false,
+              "reward": -1.26,
+              "remaining_budget": 0,
+              "charged_damage_cells": 126
+            },
+            {
+              "step": 1,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -0.93,
+              "remaining_budget": 0,
+              "charged_damage_cells": 219
+            },
+            {
+              "step": 2,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -0.69,
+              "remaining_budget": 0,
+              "charged_damage_cells": 288
+            },
+            {
+              "step": 3,
+              "requested_action": 0,
+              "effective_action": 0,
+              "invalid": false,
+              "reward": -0.24,
+              "remaining_budget": 0,
+              "charged_damage_cells": 312
+            }
+          ],
+          "score": {
+            "noop_damage_cells": 312,
+            "raw_damage_cells": 311,
+            "line_cells_in_noop_footprint": 1,
+            "extra_line_charge_cells": 1,
+            "charged_damage_cells": 312,
+            "raw_saved_cells": 1,
+            "charged_saved_cells": 0
+          },
+          "return_": -3.12,
+          "invalid_requests": 0
+        }
+      ],
+      "seconds": 5.6597195829999976
+    }
+  ],
+  "initial_observations_and_masks": "PASS",
+  "initial_weights_paired": "PASS",
+  "nice": 19,
+  "numeric_threads": 1,
+  "seconds": 119.911683416
+}

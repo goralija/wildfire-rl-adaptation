@@ -2227,3 +2227,44 @@ samo2backend-a×2seeda×64koraka, ista arhitektura/hiperparametri/raspored i num
 checkpoint/replay. Prihvat je tehnički, bez reward praga ili tvrdnje o učenju. Bez
 FEDS budućnosti, stvarnog VALIDATION/TEST, starog PPO-a, velikog treninga ili mergea.
 Native mobilni resursi ostaju otvoreni. Nice19, jedna nit, sekvencijalno5–15min.
+
+
+## ADR-050 — zajednički PPO ugovor tehnički prolazi, bez learning tvrdnje (2026-11-22)
+
+TASK-040 B.1 iz ADR-049 je završen na `codex/common-ppo-interface`, iz45d41fcf.
+Plan f1d46d22 prethodi implementaciji011b85a1; zajednička metadata regresija popravljena
+u bc0b58ba prije potpunog ponavljanja istog plana. [Izvještaj](../research/COMMON_PPO_INTERFACE.md)
+i [svi rezultati](../../reports/real-fire-data/common-ppo-smoke-v1.json) su kanonski.
+
+**Ugovor.** Opt-in wrapper u oba common-line backend-a daje v2/terrain536 float32
+vektor i istu MaskablePPO MLP64×64 politiku/vrijednost.9akcija,nonfuel maska,B1,4×12h,
+isti fizički parametri i weather. Incremental charged reward: negativni prirast
+union-a nove štete i linije u vlastitom no-op otisku /100, invalid kazna0.01,gamma1.
+No-op otisak je privatna predikcija istog backend-a/case-a/spread seeda, isključivo
+za nagradu; nije future FEDS ili policy/mask ulaz. Stari raw reward i fizika nisu
+promijenjeni. Prethodna šteta monotona, bez double counta, budget0 ne završava epizodu.
+
+**Tehnički nalaz.** Prva3ranije registrovana TRAIN slučaja, svi30no-op maski odgovaraju
+TASK-042 arhivama;24scripted finalne burned/line maske i score identični starim tabelama.
+2backend-a×seed17/29×64koraka=256koraka/64epizode, iste početne težine po seedu, isti
+ciklus16epizoda6/5/5. Svi4finite updates/checkpointovi i12determinističkih replayeva
+prolaze, bez invalid PPO akcija. Svaki model je sačuvan; nema izbora najboljeg/praga
+rewarda. Numeric NPZ je inference checkpoint, ne optimizer/training resume.
+Nezavisni obračun36putanja/180maski/30reference maski/256koraka PASS.
+
+**Provjere.**397pinned/0skip,382modern/4skip,308core/46skip,15knowledge,CLI/strict91PASS.
+Smoke119,91s,nice19/jedna nit, sekvencijalno. Paket3.326.232B/217fajlova plus manifest,
+sha6d92453808dcb58314ab4b1dc842272f0a68a6be1ec7dea2f648d538c7311e9d; svi memberhashovi
+provjereni. Prvi restore otkrio nedostajući YAML template u paketu; dodan u packer,
+bez izmjene numeričkog sourcea/modela. Raspakovani source/ulazi/4modela daju svih12
+identičnih putanja/60maski/logits/feature-a/akcija uz postojeće biblioteke. Nije fresh
+install ili ponovljeni trening; paket ostaje lokalni, bez težina/raw mapa u Gitu.
+
+**Odluka.** B.1 tehnički završen; nije dokaz učenja/generalizacije/RL prednosti ili
+fizičke validacije. Prethodni observed-growth nalaz TASK-042 nije ponovo kalibrisan.
+Sljedeći prijedlog je novi mali preregistrovani TRAIN learning pilot: isti fitting/
+evaluation slučajevi, model seedovi, arhitektura i step-budget u oba backend-a, charged
+ha i procenat prema vlastitom no-op plus iste heuristike. Zero-noop ostaje undefined;
+bez naknadnog izbora ili automatskog dugog treninga. Native mobilni resursi ostaju
+odvojeni otvoreni dio B, TASK-039 odgođen, TASK-037 opcionalan. Stvarni VALIDATION/
+TEST, stari PPO-i, plaćeni compute, novi PR i merge nisu dio ovog koraka.

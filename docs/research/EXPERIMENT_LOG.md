@@ -771,3 +771,28 @@ po jedanoldreuse i305opažanja isto uz postojeće biblioteke. Nice19/max3radnika
 SFpilot15,82s/fullreuse85,24s, CApilot3,98s/full34,37s. [Izvještaj](EXPANDED_OBSERVED_GROWTH.md).
 ADR-048 zatvara61audit i predlaže TASK-040B.1 zajednički PPO/reward ugovor i tehnički smoke,
 bez većeg treninga/testnog holdouta. Native mobilni resursi odvojeno otvoreni.
+
+
+## EXP-030 — TASK-040 B.1 zajednički PPO ugovor, 2026-11-22
+
+ADR-049 plan f1d46d22 prije koda011b85a1 i metadata fix-a bc0b58ba.
+[Izvještaj](COMMON_PPO_INTERFACE.md), [plan](../../configs/frozen/common-ppo-smoke-v1.json),
+[sve4probe](../../reports/real-fire-data/common-ppo-smoke-v1.json).
+Isti v2/terrain536, MLP64×64,9akcija,maske,B1,4×12h i opt-in charged incremental
+reward uz gamma1; vlastiti no-op samo za privatno reward knjigovodstvo. Bez budućeg
+FEDS-a, novih fizičkih parametara ili starih native PPO-a.
+
+Tri ranije istražena TRAIN slučaja: Goldstone,Weston Pass,Pine Lodge. Svih30no-op
+maski i24scripted finalna burned/line maska identične starim arhivama.4×64koraka,
+256ukupno/64epizode; same initial weights per seed17/29 i isti raspored6/5/5svaki.
+Svi modeli update/replay PASS,12putanja/60maski/logits/akcije identično poslije numeric
+checkpointa. Nezavisno36putanja/180maski,30reference maski,256koraka i povrat=−charged/100
+uz invalid kazne PASS. Nema performance praga/izbora/rankinga ili learning tvrdnje.
+
+397pinned/0skip,382modern/4skip,308core/46skip,15knowledge,CLI/strict91PASS. Smoke119,91s,
+nice19/jedna nit. Prvi smoke zaustavljen radi logger metadata regresije; isti plan
+ponovljen bez tuninga. Bundle dopunjen YAML templateom nakon prvog restore failure-a;
+final3.326.232B/217fajlova plus manifest, svi hashovi/replay iz kopiranog sourcea i
+4modela/12putanja PASS uz postojeće biblioteke. Nema novog training resumea/instalacije.
+ADR-050 završava B.1; novi mali TRAIN learning plan je prijedlog, native resource parity
+ostaje otvoren. Stvarni holdouti/dugi trening/merge nisu rađeni.

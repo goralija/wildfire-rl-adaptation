@@ -4,6 +4,17 @@ title: Rad na projektu
 ---
 # Rad na projektu
 
+**Najnovije TASK-040 B.1 / ADR-050 (2026-11-22) je završen** na
+`codex/common-ppo-interface`, iz45d41fcf. [Izvještaj](docs/research/COMMON_PPO_INTERFACE.md):
+isti terrain536/MLP/9akcija/B1/4×12h i opt-in charged reward u oba backend-a; privatni
+vlastiti no-op samo za nagradu, bez future FEDS-a u opažanju/maski.4×64koraka tehnički
+PASS, iste početne težine/schedule,397pinned testova, cijele native maske/checkpoint
+replay/restore identični. Ovo ne dokazuje učenje ili fizičku validaciju. Naredni
+prijedlog je novi mali preregistrovani TRAIN learning pilot uz iste heuristike, ha i
+procente. Bez automatskog dugog treninga ili holdouta; native mobile-unit parity otvoren.
+Pročitati najnovije STATUS/NEXT_SESSION; raniji prijedlog B.1 ispod je zamijenjen.
+
+
 Repo je OKF 0.2 knowledge bundle. Na početku sesije pročitaj [index.md](index.md),
 [projektni kontekst](knowledge/project-context.md), [STATUS](docs/STATUS.md),
 [NEXT_SESSION](docs/NEXT_SESSION.md) i najnovije [odluke](docs/specs/DECISION_RECORDS.md).

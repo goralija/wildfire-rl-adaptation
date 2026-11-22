@@ -4,6 +4,16 @@ title: Work log
 ---
 # Work log
 
+2026-11-22 — TASK-040 B.1 završen (ADR-050). Plan f1d46d22, finalni numerički source
+bc0b58ba. Isti PPO/terrain536/charged reward u oba backend-a;30reference maski i24native
+putanje identične starim arhivama.4×64koraka, iste težine/schedule,12replaya identično.
+397pinned/382modern(4skip)/308core(46skip),15knowledge,CLI/strict91PASS; nezavisni
+union/reward/wholemask PASS. Restore prvog paketa otkrio nedostajući YAML template;
+packer dopunjen, finalni paket3.326.232B/217fajlova, svih12putanja iz kopiranog sourcea/
+4NPZ-a identično. Lokalni paket/težine nisu u Gitu. Samo tehnički PASS, bez learning/
+fizičkog rankinga; sljedeći prijedlog mali preregistrovani TRAIN pilot.
+
+
 2026-11-22 — B.1 prva tehnička proba na011b85a1: svih6no-op putanja (30maski) i24
 scripted putanje/charged score odgovaraju arhivama. Rano zaustavljeno na vlastitom
 PID-u zbog pregledom uočenog nedostajućeg CA scenario_id u step info; regresija prvo

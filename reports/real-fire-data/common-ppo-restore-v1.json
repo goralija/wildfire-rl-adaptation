@@ -1,0 +1,84 @@
+{
+  "status": "PASS",
+  "source_root": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/common-ppo-interface/.local/common-ppo-artifacts-v2/restore",
+  "checkpoint_paths": 4,
+  "policy_replays": 12,
+  "cumulative_masks": 60,
+  "all_weights_logits_features_masks_actions_exact": true,
+  "nice": 19,
+  "rows": [
+    {
+      "backend": "simfire",
+      "seed": 17,
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "status": "PASS"
+    },
+    {
+      "backend": "simfire",
+      "seed": 17,
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "status": "PASS"
+    },
+    {
+      "backend": "simfire",
+      "seed": 17,
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "status": "PASS"
+    },
+    {
+      "backend": "simfire",
+      "seed": 29,
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "status": "PASS"
+    },
+    {
+      "backend": "simfire",
+      "seed": 29,
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "status": "PASS"
+    },
+    {
+      "backend": "simfire",
+      "seed": 29,
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "status": "PASS"
+    },
+    {
+      "backend": "ca",
+      "seed": 17,
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "status": "PASS"
+    },
+    {
+      "backend": "ca",
+      "seed": 17,
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "status": "PASS"
+    },
+    {
+      "backend": "ca",
+      "seed": 17,
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "status": "PASS"
+    },
+    {
+      "backend": "ca",
+      "seed": 29,
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "status": "PASS"
+    },
+    {
+      "backend": "ca",
+      "seed": 29,
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "status": "PASS"
+    },
+    {
+      "backend": "ca",
+      "seed": 29,
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "status": "PASS"
+    }
+  ],
+  "scope": "Restored source, inputs and numeric inference checkpoints with existing pinned libraries; no retraining"
+}

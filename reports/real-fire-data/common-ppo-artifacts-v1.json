@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "bundle_sha256": "6d92453808dcb58314ab4b1dc842272f0a68a6be1ec7dea2f648d538c7311e9d",
+  "bundle_bytes": 3326232,
+  "files": 217,
+  "manifest_sha256": "670a36bb9e23dadd8cc971b0184e19b7a59b22c6818dfca1ae3b9bbf74e77889",
+  "all_members_rehashed": true,
+  "scope": "Local only; dependencies must already exist; no fresh installation or training resume"
+}

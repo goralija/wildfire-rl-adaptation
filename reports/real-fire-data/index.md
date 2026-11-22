@@ -1,5 +1,11 @@
 # real-fire-data
 
+- [Zajednički PPO tehnički smoke](common-ppo-smoke-v1.json) - TASK-040 B.1/ADR-050, sve4kratke probe i36kontrolnih/replay putanja; bez rankinga.
+- [Nezavisna provjera ugovora](common-ppo-independent-v1.json) - whole maske, union/reward i raspored.
+- [Common PPO verifikacija](common-ppo-verification-v1.json) - testovi, source/plan hashovi i pokušaji.
+- [Common PPO lokalni paket](common-ppo-artifacts-v1.json) - hash217fajlova, nije uploadovan.
+- [Common PPO restore](common-ppo-restore-v1.json) -4numeric modela,12putanja iz obnovljenog sourcea/ulaza.
+
 - [V2 objava i CI](feds-observation-repair-publication-v2.json) - push grane, sva četiri CI posla PASS na1cabe778, bez novog PR-a/mergea.
 
 - [V2 repair coverage](feds-observation-repair-coverage-v2.json) -98 replayeva,392 opažanja,3136 candidate geometrija; legacy i whole-noop PASS.

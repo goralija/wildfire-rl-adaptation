@@ -4,12 +4,31 @@ title: Handoff za nastavak projekta
 ---
 # Handoff za nastavak projekta
 
-## TASK-040 B.1 u radu — zajednički PPO ugovor (ADR-049, 2026-11-22)
+## TASK-040 B.1 završen — zajednički PPO/reward ugovor (ADR-050, 2026-11-22)
 
-Korisnik nastavlja [plan zajedničkog interfejsa](docs/research/COMMON_PPO_INTERFACE.md) na
-`codex/common-ppo-interface`, iz45d41fcf. Prvo testovi charged nagrade/maski/budžeta,
-zatim isti encoder/model i samo četiri tehnička64-step smokea. Plan je zamrznut prije
-implementacije/ishoda. Native unit resursi, veći trening i stvarni holdout ostaju zatvoreni.
+[Zajednički interfejs](docs/research/COMMON_PPO_INTERFACE.md) na `codex/common-ppo-interface`,
+iz45d41fcf: isti v2/terrain536, MLP64×64,9akcija,nonfuel maska,B1,48h/4×12h i opt-in
+incremental charged reward. Privatni vlastiti no-op služi samo nagradi; nema future
+FEDS-a u ulazima/maskama. Historijski raw reward/fizika ostaju nepromijenjeni.
+
+Plan f1d46d22 prije koda011b85a1; metadata regresija/popravljeno bc0b58ba. Svih30no-op
+maski identično arhivi;24scripted finalne požarne/linijske maske identične starim
+tabelama. Četiri64-step treninga (2backend-a×2seeda), iste početne težine po seedu
+i isti raspored16epizoda6/5/5. Ukupno256koraka,64epizode;12checkpoint replayeva
+identično. Svi modeli/dijagnostika sačuvani; nema biranja najboljeg ili RL rankinga.
+
+397pinned/0skip,382modern/4skip,308core/46skip,15knowledge,CLI/strict91 PASS. Nezavisni
+union/return obračun36putanja/180maski,30reference maski i256koraka PASS. Lokalni paket
+3.326.232B,217fajlova plus manifest, svi hashovi provjereni; restore iz kopiranog
+sourcea/ulaza/4numeric checkpointa ponavlja12putanja/60maski i logits/akcije. Biblioteke
+ponovo korištene, bez fresh installa/training resumea. Smoke119,91s,nice19/jedna nit.
+
+**Sljedeći prijedlog:** novi unaprijed registrovan mali TRAIN learning pilot sa istim
+slučajevima/seedovima/arhitekturom/koracima u oba backend-a. Prijaviti charged ha,
+procenat prema vlastitom no-op i odnos prema istim heuristikama, uz zero-noop pravilo.
+Ovo još nije mjera učenja/generalizacije ili fizička validacija. Native mobile-unit
+parity ostaje zaseban otvoreni dio B; TASK-039 odgođen, TASK-037 opcionalan. Nema
+automatskog dužeg treninga, stvarnog VALIDATION/TEST, novog PR-a ili mergea.
 
 ## TASK-042 završen — svih 61 kompatibilnih TRAIN početaka (ADR-048, 2026-11-21)
 

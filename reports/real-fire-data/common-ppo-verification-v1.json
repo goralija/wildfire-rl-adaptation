@@ -1,0 +1,93 @@
+{
+  "task": "TASK-040 B.1",
+  "status": "PASS",
+  "plan_commit": "f1d46d22",
+  "tested_source_commit": "bc0b58ba",
+  "summary_sha256": "eb500720ad09d72790a4abf4f92708e7ada21edca3d74345d23a0adb390ab86c",
+  "plan_sha256": "7d2b9928e804cc4ff654fb8a7e3c848216ad47430bd3e69e814e974445eead8d",
+  "source_sha256": {
+    "scripts/run_paired_simulators.py": "a7394dd8860b4b105e2e83c4f3f826b9ac46f77eaa72ae4be9036de1418ba625",
+    "scripts/smoke_common_ppo.py": "192fd022d43aacffd5daa6b4f8fc0f6f280a446cc4fbdaeb06bc05520fff439f",
+    "src/wildfire_rl/common_control.py": "7ad174db3e263f1737706bb46e82a4d737e672e5dc89bb63ea11f775d3a42e10",
+    "src/wildfire_rl/common_control_rl.py": "bb7a67cc005d155d3d0297606beb85be71084d66319d7b5cdc2e0b9c68a69cda",
+    "src/wildfire_rl/feds_b1_learning.py": "3562ae7d15a58fac46ffca374b28cd1f9673a181c2943b0e4bdc8a8a32774606",
+    "src/wildfire_rl/feds_observation_audit.py": "bc7109bb81b41a5e0081d06ab7145252f6ddf1b205924de50f3b9f7dd1a64cf5",
+    "src/wildfire_rl/feds_observation_v2.py": "01cef197dfa09924deffa57055cd51b1dc78bc6d9c4a46ed4bc6a41e7854cf81",
+    "src/wildfire_rl/feds_repaired_learning.py": "bd234e75c65b9dffb8390ff34252139ec1eb7b80f38bb95730230837da66216c",
+    "src/wildfire_rl/feds_simfire_env.py": "261cb0b6565b72711aa56964a068f6749b6c49ceaa32b2b70a54c959cdb235ed",
+    "src/wildfire_rl/feds_simfire_setup.py": "78e7187113a246e9f70a0a88178b3d55345ed84ebce05b8e1c1f0b1b52b3c944",
+    "src/wildfire_rl/line_damage.py": "cab7e146e769edff04e2364c8d9874036ab154fa68f05af1c739d6b55f995ea6",
+    "src/wildfire_rl/paired_simulators.py": "58794b6d1acb6df2f23b5be678e6d6bae0345b13f6676d86cd0d72a4c3d78779",
+    "src/wildfire_rl/simfire_initial_state.py": "b73c6a7d895b28a2270b47f80897a01ef465370758b08b90fbd6b699b6f3ff22",
+    "src/wildfire_rl/simfire_timebase.py": "f873554b80b884b382fb29271d64ef2da0801b25e3c9f3aec91aa5848a21b722",
+    "src/wildfire_rl/synthetic_ca.py": "855b1d1ba50a1fd0e28f652f19d74607b1b0e485989e5424380bbf0602adb844",
+    "src/wildfire_rl/synthetic_real_cases.py": "22b2bb365207e2f5139cbd7c24d835f512a429b423387e8bfe627c9621729db6"
+  },
+  "additional_verification_source_sha256": {
+    "scripts/verify_common_ppo.py": "abcd4a6157c0dbf2dad58a771bd24c1f8e01a5d2b6d786a6481ab526f2f14c6d",
+    "scripts/bundle_common_ppo.py": "63023f3c5fd1c24a5976b7f4e6a750a8aedda145d47ac9fb23f43651d0bab979"
+  },
+  "checks": {
+    "pinned_unittest": {
+      "tests": 397,
+      "skipped": 0,
+      "log_sha256": "0e5ff3543c74d8eb01a72ba278925709493451784ba405749c8a0e816b9ca9ef"
+    },
+    "modern_unittest": {
+      "tests": 382,
+      "skipped": 4,
+      "log_sha256": "e18e07f04f2b6ab9d344ec26c5713955b601f7a2b174e876d4adb0035599fd43"
+    },
+    "core_unittest": {
+      "tests": 308,
+      "skipped": 46,
+      "log_sha256": "09174e72f92bdd6604d2c50745c37bbb86742802a72fce984ffc0956cb692d80"
+    },
+    "knowledge_unittest": {
+      "tests": 15,
+      "skipped": 0,
+      "log_sha256": "c444f0e477a286b6fce942a6840c34b2799da22d5bb7a2201f9bdc8fd7874cd8"
+    },
+    "core_cli": "PASS",
+    "strict_knowledge": "PASS",
+    "independent_arithmetic_whole_masks": "PASS",
+    "restored_inference": "PASS: 4checkpoints/12paths/60cumulative masks; exact logits/features/actions"
+  },
+  "attempts": [
+    {
+      "code_commit": "011b85a1",
+      "folder": ".local/common-ppo-v1",
+      "status": "stopped_after_native_checks",
+      "reason": "Review found missing CA step scenario_id required by callback; metadata regression test failed before fix. No physics/reward/plan change."
+    },
+    {
+      "code_commit": "bc0b58ba",
+      "folder": ".local/common-ppo-v1-final",
+      "status": "PASS"
+    }
+  ],
+  "limitations": [
+    "technical TRAIN smoke, same three already explored training cases for replay",
+    "64 steps per model, no learning or simulator ranking",
+    "numeric inference checkpoint excludes optimizer/resume state",
+    "no physical validation, native mobile-unit parity, real VALIDATION or TEST2024",
+    "local bundle not uploaded; dependencies reused"
+  ],
+  "publication": {
+    "branch": "codex/common-ppo-interface",
+    "pushed": false,
+    "ci": "pending"
+  },
+  "artifact_attempts": [
+    {
+      "folder": ".local/common-ppo-artifacts",
+      "status": "restore_failed",
+      "reason": "Bundle omitted configs/simfire_feds_base.yml; packer amended, no numerical source or training change"
+    },
+    {
+      "folder": ".local/common-ppo-artifacts-v2",
+      "status": "PASS",
+      "bundle_sha256": "6d92453808dcb58314ab4b1dc842272f0a68a6be1ec7dea2f648d538c7311e9d"
+    }
+  ]
+}

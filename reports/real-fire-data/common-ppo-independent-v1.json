@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "summary_sha256": "eb500720ad09d72790a4abf4f92708e7ada21edca3d74345d23a0adb390ab86c",
+  "checks": {
+    "native_paths": 24,
+    "policy_paths": 12,
+    "cumulative_masks": 180,
+    "training_steps": 256,
+    "reference_masks": 30
+  },
+  "scope": "Independent final whole masks vs old archives, incremental union/return arithmetic, schedule and byte hashes; no scientific ranking"
+}
