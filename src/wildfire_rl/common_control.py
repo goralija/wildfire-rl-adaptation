@@ -89,6 +89,7 @@ class CommonControlEnv(gym.Wrapper):
         reward=-increment/100.-.01*invalid
         return encoded_observation(obs),float(reward),done,truncated,dict(
             info,**self.ledger.score,common_contract=CONTRACT_VERSION,
+            scenario_id=self.unwrapped.scenario_id,split='train',
             requested_action=requested,effective_action=effective,invalid_action=invalid,
             charged_increment_cells=increment)
 

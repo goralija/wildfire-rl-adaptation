@@ -108,6 +108,12 @@ class CommonControlTests(unittest.TestCase):
         with self.assertRaises(ValueError):env.step(9)
         self.assertEqual(env.unwrapped.decision_index,0)
 
+    def test_common_metadata_does_not_depend_on_backend_info(self):
+        env=environment();env.reset()
+        _,_,_,_,info=env.step(0)
+        self.assertEqual(info['scenario_id'],'fake')
+        self.assertEqual(info['split'],'train')
+
     def test_cyclic_schedule_and_explicit_reset(self):
         a,b,c=environment(),environment(),environment()
         env=CyclingCases({'a':a,'b':b,'c':c})

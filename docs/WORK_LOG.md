@@ -4,6 +4,14 @@ title: Work log
 ---
 # Work log
 
+2026-11-22 — B.1 prva tehnička proba na011b85a1: svih6no-op putanja (30maski) i24
+scripted putanje/charged score odgovaraju arhivama. Rano zaustavljeno na vlastitom
+PID-u zbog pregledom uočenog nedostajućeg CA scenario_id u step info; regresija prvo
+reprodukuje KeyError pa popravak u zajedničkom adapteru prolazi. Nema promjene rewarda,
+fizike, slučajeva ili PPO plana; nepotpuni izlaz ostaje .local/common-ppo-v1. Isti
+smoke ponavlja se u novom direktoriju, bez izbora po rezultatu.
+
+
 2026-11-22 — TASK-040 B.1: nova grana iz45d41fcf, ADR-049 i frozen plan prije implementacije/ishoda. Samo zajednički ugovor i4×64koraka.
 
 
