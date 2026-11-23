@@ -1,5 +1,7 @@
 # real-fire-data
 
+- [Sažeta CA/core integracija](ca-core-summary-v1.json) - Kompaktni nalazi, arhivska provenansa i tehničke provjere; bez per-case tabele.
+
 - [FPA-FOD ↔ FEDS-CONUS ↔ FLE crosswalk](fpa-feds-fle-crosswalk-v1.json) - combined 40/20 train/validation gate; FAIL u oba splita, test nije učitan.
 - [FPA-FOD/FEDS metoda i odluka](../../docs/research/FPA_FEDS_CROSSWALK.md) - izvori, metod i nastavak.
 - [Train split crosswalk](fpa-feds-fle-crosswalk-train-v1.json) - 13 od 40 slučajeva prolazi strogi vremenski uslov.

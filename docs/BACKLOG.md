@@ -4,6 +4,14 @@ title: Naredni zadaci
 ---
 # Naredni zadaci
 
+## 2026-11-24 — završetak ove faze
+
+TASK028–046 su istraženi na sačuvanoj research grani. TASK047 izdvaja malu jezgru za
+review/merge; [sažetak](research/CA_CORE_INTEGRATION.md). Nema novog optimizer testa.
+Predloženi TASK048 je zaseban CA control/native unit parity ugovor poslije integracije.
+Starije otvorene liste ispod su historijske; aktuelan je ADR-058 i NEXT_SESSION.
+
+
 ## Aktivni prioritet — 2026-11-12 (pregled nakon faze 2)
 
 Plan i razlozi: [pregled 2026-11-11](research/review-2026-11-11/SUMMARY.md). Sve stavke čekaju

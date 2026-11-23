@@ -13,6 +13,13 @@ sources:
 ---
 # Projektni kontekst
 
+**Aktuelno — 2026-11-24:** [sažeta integracija i nastavak](../docs/research/CA_CORE_INTEGRATION.md), ADR-058.
+Za review koristiti `codex/ca-core-integration` izmaina; istraživačka historija je
+sačuvana na `codex/separate-clip-pilot`/c4062a84. Treninzi su završeni, nema aktivnog
+računanja ili nove optimizer iteracije. Nijedna varijanta nema potvrđenu RL prednost.
+Za duže odobrene poslove ostaje background/ETA preferenca; max3radnika+koordinator,nice19.
+
+
 MPVI projekat istražuje prilagodbu RL agenta različitim budžetima intervencija pri
 šumskim požarima, uz poređenje sa zamrznutim modelom i heuristikama. Zahtjevi predmeta
 su sažeti u [rubrici](../docs/research/REQUIREMENTS_AND_RUBRIC.md). Aktivni benchmark

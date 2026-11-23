@@ -1435,3 +1435,10 @@ jedan kompaktan nalaz/provenance, bez dupliranja ranijih ADR033–057 iz arhivsk
 Encoder izvući bez numeričke promjene; puni testovi/parity/smoke/knowledge prije predaje.
 Runtime PASS ne dokazuje fizičku validaciju ili RL prednost; nema novog treninga ili
 otvaranja realnih holdouta. Stvarni merge dolazi poslije konkretnog pregleda manje grane.
+
+Dopuna ADR-058: TASK046finalS5,11%/CA6,36%, oba frozenkriterija false; nema nove optimizer
+iteracije. Lokalni stored-data audit6modela/3072steps/384clipupdates/96putanja i
+nezavisna statistika PASS. Manja jezgra: encoder456opažaja byte-exact, native2backend
+no-op/finalmaske identične arhivi;326pinned/311modern(3skip)/248core(35skip) PASS.
+Ovo nije freshfullrestore96putanja ili fizička validacija. Dalje review manje grane
+i odluka o mergeu, zatim odvojeni CAcontrol/native parity ugovor.

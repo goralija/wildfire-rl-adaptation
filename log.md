@@ -1,5 +1,9 @@
 # Promjene baze znanja
 
+## 2026-11-24: manja integracija iz maina
+
+[ADR-058/opseg](docs/research/CA_CORE_INTEGRATION.md): zadržana jezgra i testovi, opširna istraživačka historija sačuvana na c4062a84. Encoder456opažaja i native maske identični; nema aktivnog treninga ili promovirane PPO prednosti.
+
 ## 2026-11-12: pregled nakon faze 2 i novi HANDOFF
 
 - Pet analiza nakon ADR-032 (literatura, kratke epizode, intervencije, šta je stvarno,

@@ -4,6 +4,8 @@ title: Work log
 ---
 # Work log
 
+2026-11-24 — Na korisnikov zahtjev izdvojena mala integracija izmainf96f744f. Archive c4062a84 ostaje; bez optimizer/offline drivera i opširnih reporta. Encoder456opažaja byte-exact, native2backend maske jednake arhivi;326pinned/311modern(3skip)/248core(35skip) PASS. TASK046audit3072steps/384clipupdates/96storednativepaths PASS, oba kriterija false; bez novog treninga.
+
 2026-11-12 — Na Harunov zahtjev pet analiza nakon ADR-032 (subagenti, samo čitanje i TRAIN-only
 izračuni nad postojećim izlazima; jedan probni SimFire run `advancing_front` B=4 na 98 TRAIN
 požara) prenio sam u `docs/research/review-2026-11-11/` sa sažetkom na bosanskom. Root HANDOFF

@@ -7,6 +7,16 @@ sources:
 ---
 # Trenutno stanje — 2026-11-12
 
+## 2026-11-24 — manja grana spremna za provjeru
+
+[Opseg, nalazi i komande](research/CA_CORE_INTEGRATION.md), ADR-058. `codex/ca-core-integration` kreće izmaina
+i nosi samo runtime jezgru/testove i kompaktan rezultat. Arhiva c4062a84 ostaje.
+TASK046 završen18,49min; SF5,11%/CA6,36%, oba kriterija false. Nema aktivnog treninga.
+Sljedeće je review manje grane i odluka o mergeu, potom poseban CA control/native parity
+ugovor; bez novog optimizer testa ili automatskog treninga. TEST2024/noviVALIDATION zatvoreni.
+Raniji zapisi ispod su historija i ne predstavljaju aktivne zadatke.
+
+
 ## Najnovije — 2026-11-12: pregled nakon faze 2, bez novih treninga
 
 Harun je nakon ADR-032 postavio pet pitanja; odgovori su u
