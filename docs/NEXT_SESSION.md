@@ -1,17 +1,39 @@
 ---
 type: Handoff
-title: Naredni korak — nakon uparenog PPO pilota (2026-11-22)
+title: Naredni korak — nakon PPO signal dijagnoze (2026-11-23)
 ---
 # Naredni korak
 
-## TASK-044 priprema — PPO signal/reference (ADR-053, 2026-11-23)
+## TASK-044 završen — PPO signal/reference dijagnoza (ADR-054, 2026-11-23)
 
-Korisnik nastavlja dijagnozu na `codex/ppo-signal-diagnosis` izc160fd0e.
-[Plan](research/PPO_SIGNAL_DIAGNOSIS.md) zamrznut prije implementacije/mjerenja:
-tačan uniformni i fitting-only fiksni referent,18checkpoint pomaka, te prvi rollout
-16koraka/seeda/backend-a i4disposable jednokratne gradient probe na istom batchu.
-Testirati loss/update prema pinovanom SB3. Nema novog punog treninga, tuninga ili
-promjene TASK-043 zaključka; stvarni holdouti/fizičke tvrdnje zatvoreni.
+[Izvještaj](research/PPO_SIGNAL_DIAGNOSIS.md), `codex/ppo-signal-diagnosis` izc160fd0e.
+Plan44658302 prije kodae1a28379. Nije rađen novi puni trening, nisu promijenjeni
+TASK-043 reward/physics/checkpointovi ili oba neprošla learning kriterija.
+
+Tačan uniformni first-line referent na istih14eval: **SF5,23%/CA6,20%**, naspram
+starog finalPPO5,13/6,03%. Fiksni sektor biran samo po mean charged cells na45fit:
+SF6(NW),CA7(N), na16development daje0,23/9,49%. Svi sektori/denominatori prikazani.
+Između-požarna varijansa početnog troška je99,89/99,46%; nakon oduzimanja vlastitog
+no-op13,91/27,15%, unutarpožarna varijansa/poredak poteza isti.
+
+Svih6prvih16step rollouta ponavlja stare96training redova i početne težine.
+U24disposable Adam probama globalno clipping smanjuje actor; zasebni clip daje
+1,40–6,88×veći actor korak. Centriranje sa istim globalclipom daje1,74–4,45×u5/6
+proba, ali **CA43pada na0,62×**. To je početni mehanizam, ne dokaz za cijeli trening
+ili novu policy performance prednost. Actorparametri se jesu promijenili; Tanh
+na početnim61opažaju nije zasićen.
+
+Nezavisno405CA putanja/2.025maski i SFlinegeometrija, initialparity45,24gradient
+reprodukcije i18parameterdelta provjera PASS.423pinned/0skip,408modern/4skip,
+322core/49skip,15knowledge,CLI/strict93PASS. Lokalni49.496.735Bpaket488fajlova plus
+manifest iugrađeni1035fajlova roditelj; svi hashovi potvrđeni. Restore novog koda/
+ulaza/modela:9CA putanja svježe,32SF/CA rollout koraka,8fresh gradientmodes; ponovni
+audit405pohranjenih putanja/24modes/18modela PASS uz iste numeričke nizove.
+
+**Sljedeći prijedlog TASK-045:** preregistrovani512step centering-only pilot uz iste
+globalclip/hiperparametre/45fit/16development/3seeda oba modela, poređenje sa sačuvanim
+original512checkpointovima. Nije implementiran ili pokrenut. Nema aktivnog punog
+treninga, stvarnog VALIDATION/TEST, futureFEDS-a, fizičke validacije ili mergea.
 
 ## TASK-043 završen — nijedan backend ne prolazi learning kriterij (ADR-052, 2026-11-22)
 

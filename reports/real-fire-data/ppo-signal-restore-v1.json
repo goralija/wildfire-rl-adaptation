@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "source_root": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/ppo-signal-diagnosis/.local/signal-artifacts/restore",
+  "fresh_ca_paths": 9,
+  "fresh_rollout_steps": 32,
+  "fresh_gradient_modes": 8,
+  "independent_counts": {
+    "ca_paths": 405,
+    "ca_cumulative_masks": 2025,
+    "fitting_initial_parity": 45,
+    "gradient_modes": 24,
+    "old_training_rows": 96,
+    "models": 18
+  },
+  "all_numeric_arrays_exact": true,
+  "scope": "Extracted code and bundled dependencies; first fitting case all9CA paths, both seed17native first16rollouts, all405stored paths and24gradient modes re-audited. Existing libraries, no full training"
+}

@@ -833,3 +833,27 @@ restore18modela/288odluka/96native putanja i480maski/logits/actions identično u
 biblioteke, bez retreninga. Nema aktivnog posla. [Izvještaj](PAIRED_PPO_LEARNING.md),
 [svi rezultati](../../reports/real-fire-data/paired-ppo-learning-v1.json). TASK-044
 reward/advantage/reference dijagnoza je prijedlog prije dodatnog treninga, nije start.
+
+
+## EXP-032 — TASK-044 PPO signal/reference audit, 2026-11-23
+
+Plan44658302/ADR-053 prije kodae1a28379. [Nalaz](PPO_SIGNAL_DIAGNOSIS.md),ADR-054.
+Isti45fit/16development,CAspread0,stari18checkpointovi, bez punog treninga.
+CA405freshfirst-action putanja, SF405fitting ishoda i288eval referenci guardedreuse.
+Uniformna očekivanja na14evalSF5,23%/CA6,20%, stariPPO5,13/6,03%. Fit-only izabran
+sectorSF6/CA7 daje0,23/9,49%eval; nisu birani naeval. Case-scalevariance99,89/99,46%
+između požara, poslije no-opcentering13,91/27,15%, withinvariance/poredak poteza isti.
+
+Prvi16koraka×6ponavljaoriginal96rows/initialweights.24disposable Adamprobe otkriva
+globalclipcoupling; zasebni actor/criticclip povećava actorstep1,40–6,88×, centered
+reward+global1,74–4,45×u5/6,CA43kontraprimjer0,62×. Nema saved/evaluated novih politika.
+Tanh na61početnomopažaju nije zasićen; actorweightsdelta0,54–1,54%vscritic7,53–12,14%.
+Scopeje rani mehanizam, ne uzrok cijelog optimizerhistory/performancewin.
+
+423pinned/408modern(4skip)/322core(49skip),15knowledge,CLI/strict93PASS. Nezavisni
+405CAputanja/2025maski/SFgeometry,parity45,24gradient reprodukcije i18delta PASS.
+Float32returnaudit tolerancija lokalno ispravljena uz regresiju, stari scoreovi isti.
+Run138,80s,nice19/3workers+coordinator/1thread. Local49.496.735Bbundle,488+1035parent
+member hashovi i restore9freshCA/32SFCAsteps/8freshgradientmodes exact; stored405/24/18
+reaudit PASS. Nema fulltrain/holdouta/futureFEDS/mergea. TASK-045512stepcentering-only
+pilotje sljedeći prijedlog, nije implementacija/start.

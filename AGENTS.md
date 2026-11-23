@@ -4,6 +4,17 @@ title: Rad na projektu
 ---
 # Rad na projektu
 
+**Najnovije TASK-044 / ADR-054 (2026-11-23) je završen** na `codex/ppo-signal-diagnosis`,
+izc160fd0e. [Izvještaj](docs/research/PPO_SIGNAL_DIAGNOSIS.md): tačan uniform first-line
+SF5,23%/CA6,20%, stariPPO5,13/6,03%, sektori odabrani samo na45fit. Početni gradijentni
+mehanizam potvrđen: globalni actor/critic clipping i velika razlika među požarima.
+24disposable jednouptade probe nisu nove politike ili dokaz uspješnijeg punog treninga;
+centriranje pomaže5/6početnih koraka, CA43kontraprimjer0,62×.423pinned/audit/restorePASS,
+oldTASK043rezultati/kriteriji nepromijenjeni. Sljedeći TASK-045512step centering-only
+pilot je prijedlog, nije start ili dozvola za neograničen trening. Stvarni holdouti/
+futureFEDS/fizička validacija/nativeunitparity/merge ostaju odvojeni.
+
+
 **Najnovije TASK-043 / ADR-052 (2026-11-22) je završen.** [Izvještaj](docs/research/PAIRED_PPO_LEARNING.md),
 `codex/paired-ppo-learning`: svih6×2048koraka/18checkpointova,45fit/16development,
 svi modeli sačuvani. PPO SF5,13%/CA6,03%, fixed front11,29/3,35%; nijedan backend

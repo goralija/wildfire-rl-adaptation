@@ -2362,3 +2362,61 @@ politika ili performance evaluacije izmijenjene probe. Cilj je rana gradient/sca
 dijagnoza, ne dokaz uzroka cijelog treninga. Nema punog treninga/tuninga/holdouta,
 future FEDS-a, fizičke validacije ili mergea.5–15min native,3radnika+koordinator,
 nice19/jedna nit; TASK-043 primarni rezultati i kriteriji ne mijenjaju se.
+
+
+## ADR-054 — signal/reference dijagnoza završena, bez nove politike (2026-11-23)
+
+TASK-044 na `codex/ppo-signal-diagnosis` izc160fd0e. Plan44658302/ADR-053 prije
+kodae1a28379 i novih mjerenja; stari TASK-043source/reward/checkpointovi/primarni
+kriteriji nisu promijenjeni. [Izvještaj](../research/PPO_SIGNAL_DIAGNOSIS.md),
+[svi nalazi](../../reports/real-fire-data/ppo-signal-diagnosis-v1.json).
+
+**Reference.** Tačno očekivanje uniformnog legalnog nonzero first-action izbora:
+SF5,23%/CA6,20% na istih14joint-positive eval, stariPPO5,13/6,03%. Nije nova
+statistička potvrda/policy izbor. Sektor po mean charged saved cells svih45fit,
+SF6(NW)/CA7(N), daje0,23/9,49%naeval16; nije biran naeval. Svi9sektora/fit/eval
+i zero-noop/pooling/ha su prijavljeni. SF405ishoda transparentno reuse, CA405traženih
+native45×9putanja, invalidrequested→legalnoop. Na16eval288reference score-a reuse.
+Uniformni referent je first-decision, ne random nad svim vremenima.
+
+**Mehanizam skale.** Za equal-fire/uniform-legal-including-noop početnu tabelu na45fit,
+between-case dio cost variance99,89%SF/99,46%CA. Oduzimanje vlastitog no-opcost
+smanjuje ga na13,91/27,15%; withinvariance0,64917/0,15597 ostaje ista. Uz fiksne4
+odluke,gamma=lambda1,per-step no-opprirast/100 dodaje isti ukupniN/100 svakom potezu
+slučaja; cilj/poredakchargedtroškova se ne mijenja. Productionreward nije izmijenjen.
+
+**Gradijentne probe.** Prvih16nativekoraka/4epizode za svaki3modelseeda/backend
+tačno odgovara96starih training redova/početnim težinama, bez optimization pri
+collection. Svaki ima4od16aktivnih odluka; ostalo prisilni no-op.24jednokratne
+original/centeredreward×global/separateclip Adam probe su odbačene, nisu spremljene
+politike/performance test. Source-equivalent manual PPO loss/update testira se prema
+pinovanoj biblioteci. Originalglobalclip actorretention SF0,31–1,61%,CA1,12–22,00%.
+Criticpre-normSF31,02–159,95/CA2,18–44,52, actor0,38–0,51/0,50–0,63. Zaseban
+clip daje1,40–6,88×veći stvarni actorAdamstep; centered+global1,74–4,45×u5/6,ali
+CA43smanjuje na0,62×. Adam eps1e-5 znači da normfaktor nije isto što i weight-step
+faktor. Ovo potvrđuje rani coupling mehanizam; ne rekonstruira cijeli optimizer
+momentum/history ili dokazuje da novi puni trening pobjeđuje.
+
+**Parametri/input.** Svih18checkpointova/all61initialobs. Final actorrelativeL2
+SF0,54–0,62%,CA1,21–1,54%, critic10,36–12,14%/7,53–8,04%. Nije nepromijenjen
+checkpoint. Featureinput[−0,9994;1],115/536dimenzija constantfit. ActorTanhabs>.95
+nema na ovim početnimopažajima, ne dokaz za sve kasnije stateove.
+
+**Provjere.**423pinned/0skip,408modern/4skip,322core/49skip,15knowledge,CLI/strict93PASS.
+Nezavisno405CAputanja/2025kumulativnih maski i SFlinegeometry,parity45,96oldrows,
+24gradient reprodukcije,18parameterdelta PASS. Prva audit provjera bila prestroga za
+float32GAE~2e-8roundoff; samo returntolerancija lokalno1e-6uzregresiju, bez izmjene
+podataka/modela/scoreova. Run138,80s,nice19/max3radnika+koordinator/jedna nit.
+Paket49.496.735B,488članova+manifest+1035članova parentarchive,
+sha5ecf9840bc23384ff25ed7e649d332c0f326b1be914fbb120ecc8597a52973b7; svi memberhashovi
+pročitani. Restorefirstcase9freshCApaths,seed17SF/CA32nativekoraka/8freshgradientmodes
+identičninumericnizovi; fullstored405/24modes/18delta audit PASS. Postojeće biblioteke,
+ne drugi405native run/freshinstall/fulltraining. Paket/raw/weights ostaju lokalni.
+
+**Prijedlog.** TASK-045 preregistrovani512step centering-only matched pilot uz isti
+globalclip,arhitekturu/hiperparametre/45fit/16development/3seeda, referencu na već
+sačuvane original512checkpointove. Novi rewardugovor i budget/mask/sum/replay testovi
+prije starta. Separateclip ostaje zasebna hipoteza. TASK-045 nije implementiran ili
+pokrenut; nema dozvole za automatsko neograničeno treniranje. TASK-043 oba learning
+kriterija ostaju false; fizička validacija/nativeunitparity su odvojeno otvoreni.
+Stvarni VALIDATION/TEST,futureFEDS,plaćeni compute,noviPR/merge nisu rađeni.

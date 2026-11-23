@@ -4,12 +4,13 @@ title: Naredni zadaci
 ---
 # Naredni zadaci
 
-## Aktivni CA pravac (2026-11-22)
+## Aktivni CA pravac (2026-11-23)
 
 | Task | Status | Sljedeće |
 | --- | --- | --- |
 | TASK-043 | završen, ADR-052 |6×2048koraka/18checkpointova, PPO SF5,13%/CA6,03%, oba learning kriterija false;413pinned/audit/full96restore PASS |
-| TASK-044 | predloženo, nije pokrenuto | TRAIN dijagnoza reward/advantage signala, promjene politike i uniformne/fiksne reference prije dodatnog treninga |
+| TASK-044 | završen, ADR-054 | UniformSF5,23/CA6,20%; početni gradient coupling/scale potvrđen uz CA43counterexample;423pinned/audit/restore PASS, bez punog treninga |
+| TASK-045 | predloženo, nije pokrenuto |512step centering-only matched pilot naspram original512; isti45fit/16development/3seeda/clip, novi reward ugovor i testovi prije starta |
 | TASK-035 | završeno, ADR-040 | Native/current forcing ugovor, 240 development epizoda i15 replayeva PASS; 352 testa; sigurnost prijavljena zasebno |
 | TASK-036 | faza A završena | SimFire repair ostaje na izvedenoj bazi; nalazi ADR-038 |
 | TASK-037 | predloženo, odgođeno | Preostala SimFire fizika/gate/trening |

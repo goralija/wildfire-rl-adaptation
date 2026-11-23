@@ -1,5 +1,12 @@
 # real-fire-data
 
+- [PPO signal svi nalazi](ppo-signal-diagnosis-v1.json) - TASK-044/ADR-054, reference,18checkpoint delta i24disposable gradient probe, bez novih politika.
+- [PPO signal figura](ppo-signal-v1.png) - uniforme reference, razmjer među požarima i gradient coupling.
+- [PPO signal independent](ppo-signal-independent-v1.json) -405CAputanja/2025maski,fit-only izbor,24gradient reprodukcije.
+- [PPO signal verification](ppo-signal-verification-v1.json) -423pinned testova, audit pokušaji/sourcehashovi i granice.
+- [PPO signal local bundle](ppo-signal-artifacts-v1.json) - novi paket i ugrađeni roditelj, svi hashovi provjereni, nije uploadovan.
+- [PPO signal restore](ppo-signal-restore-v1.json) -9freshCAputanja/32rollout koraka i puni stored-data/gradient audit iz kopiranog sourcea.
+
 - [Paired PPO svi learning rezultati](paired-ppo-learning-v1.json) - TASK-043/ADR-052, svi6modela i0/512/2048, oba learning kriterija false.
 - [Paired PPO nezavisni audit](paired-ppo-independent-v1.json) -12.288koraka/18checkpointova/288skorova/96native putanja i greedy/entropy dijagnoza.
 - [Paired PPO figura](paired-ppo-learning-v1.png) - learning curves, iste heuristike, opisni intervali i sektorni bias.

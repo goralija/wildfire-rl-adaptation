@@ -1,0 +1,165 @@
+{
+  "task": "TASK-044",
+  "status": "COMPLETE",
+  "diagnostic_integrity": "PASS",
+  "plan_commit": "44658302",
+  "measurement_code_commit": "e1a28379",
+  "analysis_sha256": "040279934a64d98b0e9875ec5696a2086f01c90c4fb6f7f0d21a9ef499705479",
+  "guard": {
+    "plan_sha256": "449002fea682f6a2246a9e27edc7c9e88544ae54386b5448c10bc9a1e7d6c649",
+    "source_sha256": {
+      "scripts/diagnose_ppo_signal.py": "e1a7971d2122089c7195c34c3cff0a6e322e85e1d795a2927559affb4dd44e48",
+      "src/wildfire_rl/ppo_signal_diagnosis.py": "abc91ebefdd1958041eb1a064779435ac4ae2f72e8782845bc8a6cae36ba448b",
+      "src/wildfire_rl/ppo_signal_rl.py": "eeea24d38bd309f604d7006e43a962e8440fd1ce982ad461e21c3519e3c00d0b"
+    },
+    "parent_guard": {
+      "plan_sha256": "6e20009c277d842dd9c310ee4f6e021fc7a156baf704840b76413a4b94e95f43",
+      "source_sha256": {
+        "scripts/run_paired_simulators.py": "a7394dd8860b4b105e2e83c4f3f826b9ac46f77eaa72ae4be9036de1418ba625",
+        "scripts/smoke_common_ppo.py": "192fd022d43aacffd5daa6b4f8fc0f6f280a446cc4fbdaeb06bc05520fff439f",
+        "src/wildfire_rl/common_control.py": "7ad174db3e263f1737706bb46e82a4d737e672e5dc89bb63ea11f775d3a42e10",
+        "src/wildfire_rl/common_control_rl.py": "bb7a67cc005d155d3d0297606beb85be71084d66319d7b5cdc2e0b9c68a69cda",
+        "src/wildfire_rl/feds_b1_learning.py": "3562ae7d15a58fac46ffca374b28cd1f9673a181c2943b0e4bdc8a8a32774606",
+        "src/wildfire_rl/feds_observation_audit.py": "bc7109bb81b41a5e0081d06ab7145252f6ddf1b205924de50f3b9f7dd1a64cf5",
+        "src/wildfire_rl/feds_observation_v2.py": "01cef197dfa09924deffa57055cd51b1dc78bc6d9c4a46ed4bc6a41e7854cf81",
+        "src/wildfire_rl/feds_repaired_learning.py": "bd234e75c65b9dffb8390ff34252139ec1eb7b80f38bb95730230837da66216c",
+        "src/wildfire_rl/feds_simfire_env.py": "261cb0b6565b72711aa56964a068f6749b6c49ceaa32b2b70a54c959cdb235ed",
+        "src/wildfire_rl/feds_simfire_setup.py": "78e7187113a246e9f70a0a88178b3d55345ed84ebce05b8e1c1f0b1b52b3c944",
+        "src/wildfire_rl/line_damage.py": "cab7e146e769edff04e2364c8d9874036ab154fa68f05af1c739d6b55f995ea6",
+        "src/wildfire_rl/paired_simulators.py": "58794b6d1acb6df2f23b5be678e6d6bae0345b13f6676d86cd0d72a4c3d78779",
+        "src/wildfire_rl/simfire_initial_state.py": "b73c6a7d895b28a2270b47f80897a01ef465370758b08b90fbd6b699b6f3ff22",
+        "src/wildfire_rl/simfire_timebase.py": "f873554b80b884b382fb29271d64ef2da0801b25e3c9f3aec91aa5848a21b722",
+        "src/wildfire_rl/synthetic_ca.py": "855b1d1ba50a1fd0e28f652f19d74607b1b0e485989e5424380bbf0602adb844",
+        "src/wildfire_rl/synthetic_real_cases.py": "22b2bb365207e2f5139cbd7c24d835f512a429b423387e8bfe627c9621729db6",
+        "scripts/run_paired_ppo_learning.py": "3677165c987e4959b96449ed0924791fb3287a1cffedc8ae58045eee98bd5b8d",
+        "src/wildfire_rl/paired_ppo_learning.py": "a0adebb9272544c34263823e7f8abbfdc26d58643e6eef2a74a8d249865b4af2",
+        "src/wildfire_rl/feds_b1.py": "e2ea9af4ef7d55103cd94fb8b5f8528f9e2fec2d900f231a68cdee06541f3e02",
+        "src/wildfire_rl/feds_heuristics.py": "1f6f38ac8dfd6e6e3e822f85c3fbb6547b0c001fd11ff0d962921e6c70eb77b5",
+        "src/wildfire_rl/feds_repaired_policies.py": "835779759e093f0bd67c6cfe0ba87b8790b5ae607c9f2470fb74f3fd9310c317",
+        "src/wildfire_rl/feds_observation_dataset.py": "662561f33a7a3939ce85b5a8e1b051caf74cbad3cfdf835768c6aea84e9da8e9"
+      },
+      "runtime": {
+        "python": "3.9.25",
+        "packages": {
+          "numpy": "1.26.4",
+          "torch": "2.3.1",
+          "stable-baselines3": "2.7.1",
+          "sb3-contrib": "2.7.1",
+          "simfire": "2.0.1",
+          "gymnasium": "1.1.1",
+          "scipy": "1.13.1"
+        }
+      },
+      "source_commit": "13a234baa49bec917df97dc8664bf2a7b6c4b041"
+    },
+    "library_source": {
+      "sb3_contrib.ppo_mask.ppo_mask": {
+        "path": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/ppo-signal-diagnosis/.local/simfire-venv/lib/python3.9/site-packages/sb3_contrib/ppo_mask/ppo_mask.py",
+        "sha256": "85c09a14a05ed62f761512eb4bd60441c92de1da574b6c4bc0eaf192e8e2863a"
+      },
+      "sb3_contrib.common.maskable.policies": {
+        "path": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/ppo-signal-diagnosis/.local/simfire-venv/lib/python3.9/site-packages/sb3_contrib/common/maskable/policies.py",
+        "sha256": "25288c78d47172597f9d169659a68d7d069ed09d645d644febc108b17c6f680a"
+      },
+      "torch.optim.adam": {
+        "path": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/ppo-signal-diagnosis/.local/simfire-venv/lib/python3.9/site-packages/torch/optim/adam.py",
+        "sha256": "e28bf1445da23c19304bd84ddc5e94b083d647b04136e3d068f53668199e6c03"
+      }
+    }
+  },
+  "checks": {
+    "pinned": {
+      "tests": 423,
+      "skipped": 0,
+      "log_sha256": "8698551147c51a8309c2681538df6fe00dd6f278f52fda80c09a7b159d89aeb0"
+    },
+    "modern": {
+      "tests": 408,
+      "skipped": 4,
+      "log_sha256": "7b2c849b982223dc0981ed1b618ff4ad1829496456a3ac0eb866ba29be478970"
+    },
+    "core": {
+      "tests": 322,
+      "skipped": 49,
+      "log_sha256": "a9673664c2de59187992eff282ca05a22aa8d899c73caf2570b1c840540f9006"
+    },
+    "knowledge": {
+      "tests": 15,
+      "skipped": 0,
+      "log_sha256": "006294585e89e88203ffdd6f8757acf08d3d775a6a8bccf1097d05a020c18e90"
+    },
+    "cli": "PASS",
+    "strict_knowledge": "PASS:93Markdown",
+    "independent": {
+      "status": "PASS",
+      "counts": {
+        "ca_paths": 405,
+        "ca_cumulative_masks": 2025,
+        "fitting_initial_parity": 45,
+        "gradient_modes": 24,
+        "old_training_rows": 96,
+        "models": 18
+      },
+      "analysis_sha256": "040279934a64d98b0e9875ec5696a2086f01c90c4fb6f7f0d21a9ef499705479",
+      "scope": "Independent full CA trajectories/geometry, fit-only reference selection, complete first-rollout rows,24disposable gradient reproductions and18parameter-delta checks"
+    },
+    "restore": {
+      "status": "PASS",
+      "source_root": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/ppo-signal-diagnosis/.local/signal-artifacts/restore",
+      "fresh_ca_paths": 9,
+      "fresh_rollout_steps": 32,
+      "fresh_gradient_modes": 8,
+      "independent_counts": {
+        "ca_paths": 405,
+        "ca_cumulative_masks": 2025,
+        "fitting_initial_parity": 45,
+        "gradient_modes": 24,
+        "old_training_rows": 96,
+        "models": 18
+      },
+      "all_numeric_arrays_exact": true,
+      "scope": "Extracted code and bundled dependencies; first fitting case all9CA paths, both seed17native first16rollouts, all405stored paths and24gradient modes re-audited. Existing libraries, no full training"
+    }
+  },
+  "additional_source_sha256": {
+    "scripts/verify_ppo_signal.py": "7becf29d046f2e2bbebacd9aeb955d7eda3de9f23fa5fbe72fe8b7bcda8e2f4b",
+    "scripts/plot_ppo_signal.py": "6287f61e373d3149b89d8aa5e853f526b21fb5e4e10a9d6b701c8759796b7451",
+    "scripts/bundle_ppo_signal.py": "f422c27674eae00298ba48f40cb189ebc2bc61889eb73bcfc829908cebbdfca5"
+  },
+  "audit_attempts": [
+    {
+      "log_sha256": "664e56499e97c1135f52762598f153713095a7a3d2e9f645fde42c15ecc7b8b1",
+      "result": "float32 return roundoff near0.07exceeded generic1e-8audit tolerance; no data/model/measurement changed"
+    },
+    {
+      "log_sha256": "e5eb0f466b26aa531f3ddda04031eb38514c6e9f9800dc85c9754e75682cd6b0",
+      "result": "PASS after localized1e-6absolute/relative float32 return tolerance and regression test; integer cell counts and score checks unchanged"
+    }
+  ],
+  "artifact": {
+    "status": "PASS",
+    "bundle_bytes": 49496735,
+    "bundle_sha256": "5ecf9840bc23384ff25ed7e649d332c0f326b1be914fbb120ecc8597a52973b7",
+    "files": 488,
+    "parent_files": 1035,
+    "manifest_sha256": "8262e98015fd1b0d47f0b74fff4f1f6b2bb08def3a1a59b0798935354b783233",
+    "all_members_rehashed": true,
+    "scope": "Local nested archive, parent inputs and numeric checkpoints included; existing pinned libraries, no fresh install or optimizer resume"
+  },
+  "limits": [
+    "first-rollout/first-Adam-step diagnosis, no full optimizer history recovered",
+    "24disposable step weights not saved or performance evaluated",
+    "TASK043 original learning criteria/results unchanged",
+    "uniform reference first-decision only; fixed sector selected on mean charged fitting45",
+    "previously explored TRAIN45/16; CA spread0 only",
+    "no new full training, VALIDATION/TEST, future FEDS, physical validation, native unit parity or merge"
+  ],
+  "next_proposal": "TASK-045 preregistered512step centered-reward-only matched pilot versus frozen original512, same cases/seeds/global clipping; not started",
+  "publication": {
+    "branch": "codex/ppo-signal-diagnosis",
+    "ci": "pending",
+    "new_pr": false,
+    "merge": false
+  },
+  "audit_code_commit": "57d19a3feceb8a4efaae4455d3a3181abb86cca7"
+}

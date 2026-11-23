@@ -1,5 +1,14 @@
 # Promjene baze znanja
 
+## 2026-11-23: završena PPO signal/reference dijagnoza
+
+[TASK-044/ADR-054](docs/research/PPO_SIGNAL_DIAGNOSIS.md): stariPPO blizu tačnog uniformnog
+referenta; početni rewardscale/globalclipcoupling potvrđen. Centriranje smanjuje
+caseoffset, nije novi learning rezultat; CA43kontraprimjer ostaje vidljiv.423pinned
+testova, independent audit i lokalni restore PASS. TASK-045512stepcentering-only
+pilotje prijedlog, ne aktivan posao.
+
+
 ## 2026-11-23: odobrena PPO signal/reference dijagnoza
 
 [TASK-044/ADR-053](docs/research/PPO_SIGNAL_DIAGNOSIS.md): uniformni/fitting-only referenti, postojeći modeli i početni gradient mehanizam; plan prije mjerenja, bez novog punog treninga.

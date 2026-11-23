@@ -2,7 +2,7 @@
 
 ## Podgrupe
 
-- [PPO signal i reference](PPO_SIGNAL_DIAGNOSIS.md) - TASK-044/ADR-053, uniform/fitting referenti i početne gradient probe.
+- [PPO signal i reference](PPO_SIGNAL_DIAGNOSIS.md) - TASK-044/ADR-054 završen,423pinned/audit/restore PASS, bez novog punog treninga.
 
 
 - [Upareni PPO learning pilot](PAIRED_PPO_LEARNING.md) - TASK-043/ADR-052 završen, PPO6,03%CA/5,13%SF, oba learning kriterija false;413pinned/full restore PASS.

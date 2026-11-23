@@ -4,6 +4,16 @@ title: Work log
 ---
 # Work log
 
+2026-11-23 — TASK-044/ADR-054 završen: uniformSF5,23/CA6,20%,fit-only sektori6/7;
+case-scale i globalclipcoupling izmjereni u početnomkoraku,CA43centeringkontraprimjer
+0,62×sačuvan. Nema novih punihmodela ili promjene TASK043nalaza.423pinned,408modern
+(4skip),322core(49skip),15knowledge,CLI/strict93PASS. Independent405CAputanja/2025maski,
+SFgeometry/parity45/24gradientprobes/18modeldelta PASS. Float32GAEauditroundoff
+riješen lokalnomtolerancijomuzregresiju, mjerenja ista. Local49.496.735Bbundlehashovi
+i restore9CA/32rolloutsteps/8freshgradientprobes exact. TASK-045prijedlog512centering-only
+pilota prije novog treninga; nema aktivnog treninga, holdouta ili mergea.
+
+
 2026-11-23 — TASK-044 odobren nastavkom; nova grana izc160fd0e. ADR-053/frozen plan prije implementacije: reference,18checkpoint promjena i16step×6početnih rollouta/4disposable gradient probe. Bez punog treninga.
 
 

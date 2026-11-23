@@ -5,7 +5,7 @@ okf_version: "0.2"
 
 ## Počni ovdje
 
-- [Aktivno: PPO signal i reference](docs/research/PPO_SIGNAL_DIAGNOSIS.md) - TASK-044/ADR-053, plan prije gradient/reference dijagnoze.
+- [Najnovije: PPO signal i reference](docs/research/PPO_SIGNAL_DIAGNOSIS.md) - TASK-044/ADR-054 završen: uniformni referenti, početni gradient coupling i smjer za kontrolisani pilot.
 
 
 - [Najnovije: upareni PPO learning](docs/research/PAIRED_PPO_LEARNING.md) - TASK-043/ADR-052 završen, oba learning kriterija false; svi seedovi i puni audit/restore.
