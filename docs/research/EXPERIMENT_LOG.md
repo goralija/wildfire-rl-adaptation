@@ -891,3 +891,13 @@ adaptacije. TASK046separateclip+originalreward je novi prijedlog, nije pokrenut.
 EXP-033 završne provjere:15knowledge/strict94PASS; lokalni54.374.678Bpaket svi hashovi
 PASS. Fullrestore12modela/192odluke/96native putanja/480stanja i ponovni audit identični.
 Iste biblioteke, bez retraininga; raw/weights nisu u Gitu. Nema aktivnog računanja.
+
+
+## EXP-034 — TASK-046 separate clipping, priprema2026-11-23
+
+Plan208b95d5 /ADR057 prije implementacije. Samo originalreward+separateactorcriticclip,
+6×512/45fit/16development/seeds17/29/43.9novih testova: disjointnormbounds,nepoznati/
+shared/NaN stop,sourceASTsamojednaizmjena,2epoheglobalcontrol weights+Adam identični,
+separatefirstAdam independentexact,maskNPZroundtrip,paritybeforeupdate i partial/duplicate.
+Potom6fresh16stepnativeprobe i odobreni backgroundtraining. Ovo je posljednji optimizer
+test ove faze; TASK047 integration/synthesis zatvara fazu i s negativnim nalazom.

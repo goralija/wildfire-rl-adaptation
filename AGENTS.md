@@ -4,6 +4,18 @@ title: Rad na projektu
 ---
 # Rad na projektu
 
+**Aktivno TASK-046 / ADR-057 (2026-11-23):** korisnik nastavlja i traži konačan
+završetak ove faze prije mergea. [Plan](docs/research/SEPARATE_CLIP_PILOT.md),
+`codex/separate-clip-pilot` izb00e55e2, plan208b95d5 prije koda. Samo separate
+actor/critic norm bound0,5 uz originalreward i iste6×512/45fit/16development/seedove.
+TASK046 je posljednja optimizer ablation; TASK047 zatvara fazu synthesisom i pregledom
+cijelog stacka prema mainu, bez uslova da PPO pobijedi. Predloženi TASK048 je nova
+CA control/native parity faza, ne nova izmjena ovog benchmarka. Prvo testovi/preflight,
+potom odobreni background run/ETA; status/lock/PID provjeriti prije svakog nastavka.
+Najviše3radnika+koordinator,nice19/jedna nit. Nema više od512, tuning poslije nalaza,
+stvarnog VALIDATION/TEST/futureFEDS ili mergea prije završnog integracijskog pregleda.
+
+
 **Najnovije TASK-045 / ADR-056 (2026-11-23) je završeno.**
 [Izvještaj](docs/research/CENTERED_PPO_PILOT.md), `codex/centered-ppo-pilot` izc2e53f4c.
 Svih6×512koraka/12checkpointova bez greške,20,05min; nema aktivnog treninga ili locka.
