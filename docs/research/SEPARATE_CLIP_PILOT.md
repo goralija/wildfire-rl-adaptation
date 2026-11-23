@@ -91,3 +91,36 @@ se dodatno poredi stvarni upstreamAST. Moderni tensor/update testovi i dalje rad
 ali ne tvrde da je kopirani train generalna zamjena za2.9.2. Prazni Python3.12
 ASTtype_params se normalizuju; semantička train struktura ostaje stroga. Nema
 promjene loss/gradient pravila, mjernog plana ili frozen roditeljskih fajlova.
+
+
+## Testovi, preflight i pozadinski start
+
+447pinned/0skip,432modern/4skip,329core/52skip,15knowledge,CLI i strict95 PASS.
+Regresija descriptive relabellinga nad starim frozen centered podacima vraća tačan
+isti candidate rezultat i separate-minus-isti-centered0 sa intervalom[0;0].
+[Verifikacija](../../reports/real-fire-data/separate-clip-verification-v1.json).
+[Koddc6408a1CI](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45276786294) prolazi.
+
+[Preflight](../../reports/real-fire-data/separate-clip-preflight-v1.json)46,69s:
+šest native raw16step rollouta /96koraka /24epizode, svi bufferi i redovi identični
+TASK044; šest disposable zasebno ograničenih Adam updateova identično nezavisnom
+obračunu i frozen TASK044original/separate metrics. Disposable težine nisu sačuvane
+ili performance-evaluirane. Stari native physics checks pošteno reused uz guardove.
+
+[Launch](../../reports/real-fire-data/separate-clip-launch-v1.json):23:11CET,
+PID61440,3radnika,nice19/jedna nit, odvojena sesija. Lokalno `.local/separate-clip-v1`,
+stdout `.local/separate-training.log`. Nema novih learning nalaza pri startu.
+Pri povratku prvo status/lock/PID i done/error/stop; ne startati duplicate run.
+
+Nakon završetka: svih3072koraka/768epizoda/12checkpointova, first16rawexact, group
+norm receipts,96native final putanja, nezavisna primary/statistika i fullrestore.
+Ovdje native episode return ostaje `-charged_cells/100`, bez saved-noop offseta.
+Potom ADR058 i TASK047 završni synthesis/integration review, bez nove optimizer
+pretrage ili automatskog većeg treninga. TASK048je druga faza i uključuje postojeći
+TASK040B/native parity otvoreni dio; ovim pilotom se ne proglašava riješenim.
+
+**Potvrđeni handoff snapshot:** koordinator PPID1 i sva četiri compute procesa nice19.
+Tri SF modela napreduju, prva16raw-buffer parity PASS za sva tri prije updatea;
+3CAposla čekaju. Statusi bilježe stvarne clip updateove, bez stop/error zapisa.
+Snapshot nije konačan rezultat; živo stanje čitati lokalno. Povratak za oko30min.
+

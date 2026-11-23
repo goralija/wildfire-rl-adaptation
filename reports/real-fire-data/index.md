@@ -1,5 +1,9 @@
 # real-fire-data
 
+- [Separate clipping preflight](separate-clip-preflight-v1.json) - TASK-046:6freshrawfirst16/96native steps,6independentfirstAdam updates, no performance finding.
+- [Separate clipping verifikacija](separate-clip-verification-v1.json) -447pinned testova/source-equivalence/razgraničenje runtimea i aktivni trening.
+- [Separate clipping start](separate-clip-launch-v1.json) -detached PID/komanda i nastavak posljednjeg optimizer testa faze.
+
 - [Centered PPO svi nalazi](centered-ppo-learning-v1.json) - TASK-045/ADR-056: SF pad/CA nesiguran rast, oba frozen continuation false.
 - [Centered PPO nezavisni audit](centered-ppo-independent-v1.json) -3072step/12new+12oldmodela/192new+192oldscore/96native putanja.
 - [Centered PPO lokalni paket](centered-ppo-artifacts-v1.json) -54.374.678B/322člana plus488/1035članova roditeljskih paketa, svi hashovi provjereni.

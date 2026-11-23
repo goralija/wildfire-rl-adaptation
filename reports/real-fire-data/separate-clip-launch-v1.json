@@ -1,0 +1,110 @@
+{
+  "pid": 61440,
+  "started_unix": 1795471885.330919,
+  "started_local": "2026-11-23T23:11:25.330919",
+  "command": [
+    "/usr/bin/nice",
+    "-n",
+    "19",
+    "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/separate-clip-pilot/.local/simfire-venv/bin/python",
+    "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/separate-clip-pilot/scripts/run_separate_clip_pilot.py",
+    "run",
+    "--out",
+    "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/separate-clip-pilot/.local/separate-clip-v1"
+  ],
+  "cwd": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/separate-clip-pilot",
+  "detached": true,
+  "code_commit": "dc6408a1d3603818a714a1c717d0878703def21b",
+  "preflight_sha256": "127a8eb3c0abec45eef907200e7312c204869284822d15e4f62fa9ad27e05dbe",
+  "user_authorization": "User continues TASK046 and requests finite phase endpoint/merge preparation; standing background+ETA handoff preference",
+  "verified_progress": {
+    "observed_utc": "2026-11-23T22:14:01.569522+00:00",
+    "elapsed_seconds": 156.2386028766632,
+    "jobs": [
+      {
+        "job": "job-simfire-17",
+        "status": {
+          "phase": "training",
+          "pid": 61455,
+          "steps": 48,
+          "target": 512,
+          "clip_updates": 4,
+          "first_rollout": {
+            "status": "PASS",
+            "all_raw_buffer_fields_exact": true,
+            "before_optimizer_update": true,
+            "sha256": "9758f391178b41879184f774609380f270fae1e54bd222b8ad9a2850707172f4"
+          },
+          "updated_unix": 1795472010.176438,
+          "elapsed_seconds": 117.24467086791992
+        },
+        "first_rollout": {
+          "status": "PASS",
+          "all_raw_buffer_fields_exact": true,
+          "before_optimizer_update": true,
+          "sha256": "9758f391178b41879184f774609380f270fae1e54bd222b8ad9a2850707172f4"
+        }
+      },
+      {
+        "job": "job-simfire-29",
+        "status": {
+          "phase": "training",
+          "pid": 61454,
+          "steps": 96,
+          "target": 512,
+          "clip_updates": 10,
+          "first_rollout": {
+            "status": "PASS",
+            "all_raw_buffer_fields_exact": true,
+            "before_optimizer_update": true,
+            "sha256": "882b69461c034b7dd42f7668befe444b99c24084c050229b6bbaeb5f9cd06a5f"
+          },
+          "updated_unix": 1795472037.979043,
+          "elapsed_seconds": 145.04749298095703
+        },
+        "first_rollout": {
+          "status": "PASS",
+          "all_raw_buffer_fields_exact": true,
+          "before_optimizer_update": true,
+          "sha256": "882b69461c034b7dd42f7668befe444b99c24084c050229b6bbaeb5f9cd06a5f"
+        }
+      },
+      {
+        "job": "job-simfire-43",
+        "status": {
+          "phase": "training",
+          "pid": 61456,
+          "steps": 80,
+          "target": 512,
+          "clip_updates": 8,
+          "first_rollout": {
+            "status": "PASS",
+            "all_raw_buffer_fields_exact": true,
+            "before_optimizer_update": true,
+            "sha256": "ec01eed18e3f7eec31b17e4d276f5fdbcd36f556eeb9fb0165bd5e948db6c009"
+          },
+          "updated_unix": 1795472017.470725,
+          "elapsed_seconds": 124.53893804550171
+        },
+        "first_rollout": {
+          "status": "PASS",
+          "all_raw_buffer_fields_exact": true,
+          "before_optimizer_update": true,
+          "sha256": "ec01eed18e3f7eec31b17e4d276f5fdbcd36f556eeb9fb0165bd5e948db6c009"
+        }
+      }
+    ],
+    "queued_jobs": [
+      "job-ca-17",
+      "job-ca-29",
+      "job-ca-43"
+    ],
+    "process_snapshot": "  PID  PPID  PGID NI ELAPSED STAT\n61440     1 61440 19   02:36 SNs \n61454 61440 61440 19   02:33 RN  \n61455 61440 61440 19   02:33 RN  \n61456 61440 61440 19   02:33 RN  \n",
+    "confirmed_detached_ppid1": true,
+    "confirmed_all_nice19": true,
+    "no_stop_or_error": true,
+    "numerical_guard_unchanged": true,
+    "return_estimate_minutes": 30,
+    "scope": "Progress snapshot: three SF first16 raw buffers exact before optimizer; CA checks when queued jobs begin; no performance result yet"
+  }
+}

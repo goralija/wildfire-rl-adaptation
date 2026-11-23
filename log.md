@@ -1,5 +1,9 @@
 # Promjene baze znanja
 
+## 2026-11-23: posljednji optimizer test pokrenut u pozadini
+
+[TASK-046](docs/research/SEPARATE_CLIP_PILOT.md):447pinned testova/nativepreflight i CI PASS,6×512start. Kraj faze ostaje TASK047synthesis/integracijski pregled, i s negativnim nalazom; nema novog tuninga.
+
 ## 2026-11-23: posljednji optimizer test i granica faze
 
 [TASK-046/ADR-057](docs/research/SEPARATE_CLIP_PILOT.md) odobren: originalreward + separateclip, isti512budžet; plan prije koda. Potom TASK047 zatvara fazu i priprema pregled za merge, bez beskonačnog podešavanja.

@@ -5,7 +5,7 @@ okf_version: "0.2"
 
 ## Počni ovdje
 
-- [Aktivno: posljednji optimizer test i zatvaranje faze](docs/research/SEPARATE_CLIP_PILOT.md) — TASK-046/ADR-057, potom TASK-047 pregled i priprema mergea.
+- [Aktivno: posljednji optimizer test i zatvaranje faze](docs/research/SEPARATE_CLIP_PILOT.md) — TASK-046/ADR-057, trening u pozadini; potom TASK-047 pregled i priprema mergea.
 
 - [Najnovije: centrirana PPO nagrada](docs/research/CENTERED_PPO_PILOT.md) - TASK-045/ADR-056 završen, oba continuation kriterija false; svi seedovi i nezavisni audit.
 

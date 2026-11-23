@@ -11,7 +11,7 @@ title: Naredni zadaci
 | TASK-043 | završen, ADR-052 |6×2048koraka/18checkpointova, PPO SF5,13%/CA6,03%, oba learning kriterija false;413pinned/audit/full96restore PASS |
 | TASK-044 | završen, ADR-054 | UniformSF5,23/CA6,20%; početni gradient coupling/scale potvrđen uz CA43counterexample;423pinned/audit/restore PASS, bez punog treninga |
 | TASK-045 | završen, ADR-056 |6×512/20,05min; SF6,75→3,16%,CA6,36→7,93%,oba continuation false;438pinned/audit96native PASS |
-| TASK-046 | odobren, implementacija/testovi; ADR-057 |Posljednja optimizer ablation: originalreward+separateclip, isti6×512; plan208b95d5 prije koda |
+| TASK-046 | trening traje u pozadini, ADR-057 |Posljednja optimizer ablation;6×512 start23:11CET/PID61440 nakon447testova i6nativefirst16/independentAdam preflight PASS |
 | TASK-047 | definisan završetak faze, poslije046 |Synthesis cijelog niza, poznati gapovi, puni integration/CI pregled prema mainu i reviewable merge paket; pozitivan PPO signal nije uslov zatvaranja |
 | TASK-048 | predložena nova faza |CA control/decision ugovor beyondB1 i native units/info/budget/safety parity prije učenja; nije pokrenut |
 | TASK-035 | završeno, ADR-040 | Native/current forcing ugovor, 240 development epizoda i15 replayeva PASS; 352 testa; sigurnost prijavljena zasebno |

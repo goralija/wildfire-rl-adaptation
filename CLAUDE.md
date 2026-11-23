@@ -10,8 +10,8 @@ završetak ove faze prije mergea. [Plan](docs/research/SEPARATE_CLIP_PILOT.md),
 actor/critic norm bound0,5 uz originalreward i iste6×512/45fit/16development/seedove.
 TASK046 je posljednja optimizer ablation; TASK047 zatvara fazu synthesisom i pregledom
 cijelog stacka prema mainu, bez uslova da PPO pobijedi. Predloženi TASK048 je nova
-CA control/native parity faza, ne nova izmjena ovog benchmarka. Prvo testovi/preflight,
-potom odobreni background run/ETA; status/lock/PID provjeriti prije svakog nastavka.
+CA control/native parity faza, ne nova izmjena ovog benchmarka. 447pinned/nativepreflight/CI PASS; background start23:11CET/PID61440,
+3SFprvih16rawexact i PPID1/nice19 potvrđeni. Status/lock/PID provjeriti prije nastavka.
 Najviše3radnika+koordinator,nice19/jedna nit. Nema više od512, tuning poslije nalaza,
 stvarnog VALIDATION/TEST/futureFEDS ili mergea prije završnog integracijskog pregleda.
 

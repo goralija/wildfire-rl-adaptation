@@ -13,6 +13,52 @@ sources:
 ---
 # Projektni kontekst
 
+## TASK-046 traje u pozadini — posljednji optimizer test (ADR-057, 2026-11-23)
+
+[Plan i konačna granica faze](../docs/research/SEPARATE_CLIP_PILOT.md), `codex/separate-clip-pilot` izb00e55e2.
+Plan208b95d5 prije implementacije53fa50e8; version-test fixdc6408a1 prije mjerenja.
+Samo separate actor/critic maxnorm0,5 uz originalreward, isti6×512/45fit/16development/
+seeds17/29/43, inicijalizacija, global PPO loss/jedan Adam i B1/48h/physics. Originalni
+0/512 i centrirani512 referenti ostaju, bez izbora najboljeg seeda ili dužeg budžeta.
+
+447pinned/0skip,432modern/4skip,329core/52skip,15knowledge,CLI/strict95 PASS. Moderni
+source-test je lokalizovan na frozen2.7.1AST; tensor/global-control update testovi
+ostaju i u modernom2.9.2, ali eksperiment koristi isključivo pinovani runtime.
+Preflight46,69s:6fresh originalnih16step rollouta,96native koraka /24epizode; svi
+bufferi/redovi identični TASK044,6disposable separate Adam updateova identično
+nezavisnoj probi. Prethodne132native tree i32paired physics provjere su hashovano
+ponovo korištene, nisu prijavljene kao nova fizička mjerenja. CI kodadc6408a1prolazi.
+
+**Start23:11CET:** detached koordinator **PID61440**, nice19,3radnika/jedna nit.
+Izlaz `.local/separate-clip-v1/`, stdout `.local/separate-training.log` u ovom worktreeu.
+Prvo pročitati status/lock/PID, ne startati dupli posao. NPZ je inference-only;
+partial job nije optimizer resume. Nema novog performance nalaza pri startu.
+
+**Pri povratku:** status.json,coordinator.lock,job-*/status.json,first-rollout.json,
+clipping.json,done/error/stop receipts. Ako radi, pregledati napredak i dati ETA.
+Ako je završio, ne pokretati novu optimizer iteraciju: provjeriti svih6×512/768epizoda,
+12newcheckpointova,96native final putanja, raw first16exact i svaki actor/critic
+norm receipt (after<=0,500001, najviše64stvarna updatea/model). Training ledger i
+native returns ovdje su ORIGINALNI raw charged reward, ne centrirani reward izTASK045.
+Zatim nezavisna statistika prema original512/uniform i sekundarno centered512,
+svi seedovi/ha/pooled/zero-noop, local bundle/fullrestore i ADR058 o ishodu.
+
+**Potom nastaviti TASK-047 u istom toku rada:** zajednički završni zaključak cijelog
+niza, popis poznatih otvorenih gapova, fresh main/stack/integracijski pregled,
+testovi/CI i konkretan pregled za merge. TASK046je zadnji optimizer test; faza se
+zatvara i s negativnim nalazom. Pozitivna PPO prednost nije uslov da spojimo ispravan,
+reproduktivan istraživački kod. Realni holdouti/futureFEDS/fizička validacija ostaju
+odvojeni; stvarni merge tek poslije rezultata i konkretnog integracijskog pregleda.
+Predložena naredna faza TASK048 je CA control ugovor beyondB1, uključujući postojeći
+otvoreni TASK040B/native unit parity prije učenja; nije otvorena novim treningom.
+Korisnik i dalje preferira background/ETA handoff za odobrene duže poslove.
+
+
+**Potvrđeni handoff snapshot:** koordinator PPID1 i sva četiri compute procesa nice19.
+Tri SF modela napreduju, prva16raw-buffer parity PASS za sva tri prije updatea;
+3CAposla čekaju. Statusi bilježe stvarne clip updateove, bez stop/error zapisa.
+Snapshot nije konačan rezultat; živo stanje čitati lokalno. Povratak za oko30min.
+
 ## TASK-045 završen — centriranje nije dovoljno (ADR-056, 2026-11-23)
 
 [Izvještaj](../docs/research/CENTERED_PPO_PILOT.md), grana `codex/centered-ppo-pilot` iz `c2e53f4c`.

@@ -2516,3 +2516,22 @@ faza TASK048 je eksplicitni CA control/decision ugovor beyondB1, native unit par
 prije učenja. Stvarni holdouti/futureFEDS/fizička validacija/plaćeni compute zatvoreni;
 stvarni merge tek poslije rezultata i konkretnog integracijskog pregleda. Background
 korisnička preferenca i max3radnika+koordinator/nice19/jedna nit ostaju.
+
+
+### ADR-057 dopuna — provjeren start (2026-11-23)
+
+Plan208b95d5 /kod53fa50e8 /versiontestfixdc6408a1 prije preflighta/treninga.
+Prvi moderni source test je tražio identičnost s nepinovanim2.9.2; ispravljen na
+canonical271ASTfingerprint plus stvarni271AST, uz normalizaciju praznog Python312
+polja. Algoritam/plan nepromijenjeni; puni rerun447pinned/432modern(4skip)/329core
+(52skip),15knowledge,CLI/strict95 PASS. Frozen-data statistic relabel/diff regression
+PASS. Native preflight46,69s/6fresh raw16rollouts/96steps/24episodes/6independentAdam
+updates exact; raniji physics132tree/32pairedchecks reused, ne nova mjerenja.
+CI dc6408a1 PASS. Detached6×512start23:11CET,PID61440,nice19/3radnika+koordinator/jedna nit.
+Pri povratku završiti046audit/restore i nastaviti047closure; nema nove optimizer
+pretrage, neovisno o rezultatu. TASK048je zaseban CAcontrol ugovor i uključuje otvoreni
+TASK040B/nativeparity, nije riješen ovim testom. Nema performance nalaza pri startu.
+
+Start nezavisno potvrđen: PPID1/sva4computeprocesa nice19,3SFmodela napreduju
+i svi first16rawexact PASS;3CAposla queued,bez stop/error, source/plan nepromijenjeni.
+Handoff ETA30min; nakon046audit/restore slijedi047završni integracijski pregled.

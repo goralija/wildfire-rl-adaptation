@@ -901,3 +901,11 @@ shared/NaN stop,sourceASTsamojednaizmjena,2epoheglobalcontrol weights+Adam ident
 separatefirstAdam independentexact,maskNPZroundtrip,paritybeforeupdate i partial/duplicate.
 Potom6fresh16stepnativeprobe i odobreni backgroundtraining. Ovo je posljednji optimizer
 test ove faze; TASK047 integration/synthesis zatvara fazu i s negativnim nalazom.
+
+
+EXP-034 start2026-11-23: plan208b95d5/kod53fa50e8/fixdc6408a1 prije mjerenja.
+447pinned/432modern(4skip)/329core(52skip),15knowledge,CLI/strict95 PASS. Nativepreflight
+46,69s/96koraka/24epizode i6disposable independentseparateAdamupdates exact; physics
+reusedguardedchecks nisu nova mjerenja. Start23:11CET/PID61440,nice19/max3radnika+koordinator.
+Slijedi fixed512training, nema performance nalaza pri startu;046zadnjioptimizertest,
+047zatvara fazu synthesisom/integracijskim pregledom bez uslova pozitivne RL prednosti.

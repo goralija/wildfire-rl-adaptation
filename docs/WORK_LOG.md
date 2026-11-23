@@ -4,6 +4,10 @@ title: Work log
 ---
 # Work log
 
+2026-11-23 — TASK046 livehandoff: PPID1/nice19 sva4computeprocesa,3SFmodela32–48+koraka i prvi16rawexact PASS.3CAposla queued, clippingupdatestatus stvarno raste, source/planisti, bez stop/error. Procjena povratka30min; poslije046audit obavezni047kraj faze.
+
+2026-11-23 — TASK046 preflight46,69s/6fresh16rawrollout/6independentAdam exact PASS.447pinned,432modern(4skip),329core(52skip),15knowledge,CLI/strict95. Koddc6408a1pushan i CI zelen. Detached6×512start23:11CET,PID61440/nice19/max3radnika; pri povratku046audit pa047kraj faze, bez dodatnog optimizer tuninga.
+
 2026-11-23 — TASK046 prvi modernisuite1failure: source test neopravdano poredi pinned2.7.1copy s installed2.9.2train. Lokalizovan test na frozen271ASTfingerprint uz dodatni actualASTtest u2.7.1; normalizovan prazan Python3.12type_params. Algoritam/mjerni plan nepromijenjeni; puna provjera se ponavlja prije preflighta.
 
 2026-11-23 — TASK046 opt-in SeparateClipPPO izveden iz lokalnog pinovanog train metoda uz MITnotice; AST se razlikuje samo u clip pozivu.9novih testova PASS, globalcontrol2epohe weights/Adam identični i independentseparate1step exact. Puna provjera prije nativepreflight/starta.
