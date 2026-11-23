@@ -12,6 +12,14 @@ from wildfire_rl.ppo_signal_diagnosis import episodic_returns
 
 
 class GradientProbeTests(unittest.TestCase):
+    def test_audit_distinguishes_float32_return_roundoff_from_changed_reward(self):
+        import sys
+        from pathlib import Path
+        sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
+        from verify_ppo_signal import check_float32_returns
+        check_float32_returns(np.array([-.07,0.]),np.array([-.07000002,0.],np.float32))
+        with self.assertRaises(AssertionError):check_float32_returns([-.07,0.],[-.08,0.])
+
     def data(self):
         torch.set_num_threads(1)
         model=create_model(environment(),seed=17,settings=dict(PPO_SETTINGS,n_epochs=1))
