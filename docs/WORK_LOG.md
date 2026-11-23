@@ -4,6 +4,9 @@ title: Work log
 ---
 # Work log
 
+2026-11-23 — TASK-044 odobren nastavkom; nova grana izc160fd0e. ADR-053/frozen plan prije implementacije: reference,18checkpoint promjena i16step×6početnih rollouta/4disposable gradient probe. Bez punog treninga.
+
+
 2026-11-22 — TASK-043 rezultati pushani; CIcfc2a2a1sva4poslaPASS. Verifikacija/status/handoff usklađeni, numerički source/plan/rezultati isti. Main čist, bez PR-a/mergea, bez aktivnog računanja.
 
 

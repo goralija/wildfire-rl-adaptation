@@ -4,6 +4,15 @@ title: Handoff za nastavak projekta
 ---
 # Handoff za nastavak projekta
 
+## TASK-044 priprema — PPO signal/reference (ADR-053, 2026-11-23)
+
+Korisnik nastavlja dijagnozu na `codex/ppo-signal-diagnosis` izc160fd0e.
+[Plan](docs/research/PPO_SIGNAL_DIAGNOSIS.md) zamrznut prije implementacije/mjerenja:
+tačan uniformni i fitting-only fiksni referent,18checkpoint pomaka, te prvi rollout
+16koraka/seeda/backend-a i4disposable jednokratne gradient probe na istom batchu.
+Testirati loss/update prema pinovanom SB3. Nema novog punog treninga, tuninga ili
+promjene TASK-043 zaključka; stvarni holdouti/fizičke tvrdnje zatvoreni.
+
 ## TASK-043 završen — nijedan backend ne prolazi learning kriterij (ADR-052, 2026-11-22)
 
 [Upareni PPO izvještaj](docs/research/PAIRED_PPO_LEARNING.md), `codex/paired-ppo-learning`,

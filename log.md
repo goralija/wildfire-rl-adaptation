@@ -1,5 +1,10 @@
 # Promjene baze znanja
 
+## 2026-11-23: odobrena PPO signal/reference dijagnoza
+
+[TASK-044/ADR-053](docs/research/PPO_SIGNAL_DIAGNOSIS.md): uniformni/fitting-only referenti, postojeći modeli i početni gradient mehanizam; plan prije mjerenja, bez novog punog treninga.
+
+
 ## 2026-11-22: upareni PPO rezultati objavljeni
 
 Grana `codex/paired-ppo-learning` je pushana; [CI na cfc2a2a1](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45076798202) prolazi sva četiri posla. Status, handoff i verifikacija čuvaju oba neprošla learning kriterija i predloženi TASK-044.

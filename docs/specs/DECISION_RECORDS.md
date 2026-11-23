@@ -2346,3 +2346,19 @@ reference, prije dodatnog treninga. Nije pokrenut. Eventualna nova reward skala 
 optimizacija zahtijeva novi unaprijed zapisan jednak ugovor za oba backend-a. Native
 mobile-unit parity ostaje otvoreni TASK-040B,TASK-039odgođen. Stvarni VALIDATION/TEST,
 budući FEDS za trening, fizička validacija, plaćeni compute, novi PR i merge nisu rađeni.
+
+
+## ADR-053 — TASK-044 signal/reference audit prije novih mjerenja (2026-11-23)
+
+Korisnik nastavlja predloženu dijagnozu, nova grana `codex/ppo-signal-diagnosis`
+izc160fd0e. [Plan](../research/PPO_SIGNAL_DIAGNOSIS.md) i [frozen ugovor](../../configs/frozen/ppo-signal-diagnosis-v1.json)
+prethode kodu i rezultatima. Isti45fit/16development,3model seeda, stari18checkpointovi.
+Tačan legalni uniform first-line referent, fiksni sektor odabran samo po mean charged
+saved ćelijama na45fit; CA405native fitting putanja, SF arhivski reuse. Potom16eval.
+Početni native16step rollout/seeda/backend-a mora ponoviti stari prvi rollout.
+4disposable jednokratne Adam probe (original/centered reward × global/separate clip)
+na istom minibatchu; originalni loss/update testirati prema SB3. Bez novih spremljenih
+politika ili performance evaluacije izmijenjene probe. Cilj je rana gradient/scale
+dijagnoza, ne dokaz uzroka cijelog treninga. Nema punog treninga/tuninga/holdouta,
+future FEDS-a, fizičke validacije ili mergea.5–15min native,3radnika+koordinator,
+nice19/jedna nit; TASK-043 primarni rezultati i kriteriji ne mijenjaju se.

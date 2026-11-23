@@ -1,0 +1,179 @@
+{
+  "schema_version": "ppo-signal-diagnosis/1.0",
+  "task": "TASK-044",
+  "decision": "ADR-053",
+  "date": "2026-11-23",
+  "base_commit": "c160fd0e35a2572d98d82f38b7f0e4f5de2c71df",
+  "purpose": "Diagnose reward/gradient/reference mechanisms after TASK043; no new policy performance trial",
+  "fitting_cases": [
+    "fpa-fod-400300427-plateau",
+    "fpa-fod-400300631-ranch",
+    "fpa-fod-400300764-buzzard",
+    "fpa-fod-400301084-prospect",
+    "fpa-fod-400301104-stewart-creek",
+    "fpa-fod-400302402-silver-creek",
+    "fpa-fod-400302444-spring-creek",
+    "fpa-fod-400302533-tinder",
+    "fpa-fod-400302636-bears",
+    "fpa-fod-400302686-boot",
+    "fpa-fod-400303711-gold-hill",
+    "fpa-fod-400303744-rattlesnake-creek",
+    "fpa-fod-400303807-ryan",
+    "fpa-fod-400303966-cabin-lake",
+    "fpa-fod-400305302-sugar-pine",
+    "fpa-fod-400307462-indian-valley",
+    "fpa-fod-400307488-red-canyon",
+    "fpa-fod-400308544-winter-camp",
+    "fpa-fod-400308656-sharps",
+    "fpa-fod-400310578-ok-bar",
+    "fpa-fod-400310659-206",
+    "fpa-fod-400310945-goose-creek",
+    "fpa-fod-400310977-sheep-creek",
+    "fpa-fod-400311017-goshute-cave",
+    "fpa-fod-400313239-cedar-mountain-one",
+    "fpa-fod-400313254-lakeside",
+    "fpa-fod-400313301-bear-trap",
+    "fpa-fod-400313842-north-eden",
+    "fpa-fod-400314399-lake-wallula",
+    "fpa-fod-400376589-ute-park",
+    "fpa-fod-400500346-south",
+    "fpa-fod-400500878-cellar",
+    "fpa-fod-400501480-decker",
+    "fpa-fod-400501641-mountain",
+    "fpa-fod-400504417-shady",
+    "fpa-fod-400505118-cove-creek",
+    "fpa-fod-400507579-red-bank",
+    "fpa-fod-400508308-pot-hole",
+    "fpa-fod-400508892-north-hills",
+    "fpa-fod-400509143-ridgetop",
+    "fpa-fod-400510304-goose",
+    "fpa-fod-400510515-summit",
+    "fpa-fod-400512420-shelter-pass",
+    "fpa-fod-400513488-sage",
+    "fpa-fod-400732973-walker"
+  ],
+  "evaluation_cases": [
+    "fpa-fod-400303584-goldstone",
+    "fpa-fod-400307379-weston-pass",
+    "fpa-fod-400505027-pine-lodge",
+    "fpa-fod-400312787-black-mountain",
+    "fpa-fod-400304718-west-valley",
+    "fpa-fod-400508306-lookout-point",
+    "fpa-fod-400310914-echo",
+    "fpa-fod-400306102-rattlesnake",
+    "fpa-fod-400503581-coldwater",
+    "fpa-fod-400310583-organ",
+    "fpa-fod-400541373-mp-97",
+    "fpa-fod-400308652-dog-creek",
+    "fpa-fod-400300963-coal-hollow",
+    "fpa-fod-400311253-martin",
+    "fpa-fod-400302943-cranston",
+    "fpa-fod-400307776-bull-draw"
+  ],
+  "model_seeds": [
+    17,
+    29,
+    43
+  ],
+  "checkpoints": [
+    0,
+    512,
+    2048
+  ],
+  "guards": {
+    "parent_plan_sha256": "6e20009c277d842dd9c310ee4f6e021fc7a156baf704840b76413a4b94e95f43",
+    "parent_report_sha256": "9659dea88a728bd8d8d25376bc901acb113fd21d7925fe4b346a551a8d6e2e89",
+    "parent_analysis_sha256": "9659dea88a728bd8d8d25376bc901acb113fd21d7925fe4b346a551a8d6e2e89",
+    "parent_preflight_sha256": "7ddc5026a81fdf7b2e5d72c1d091bfe373bc9186708a10d4c165ea10238ab6ac"
+  },
+  "references": {
+    "actions": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "timing": "First decision only; then3no-ops. Requested unavailable sector becomes legal no-op without penalty",
+    "uniform": "Exact expectation over available nonzero initial actions; no-op only if no legal line. Not a Monte Carlo draw or selection on evaluation",
+    "fixed_sector_selection": "Choose one of0..8 separately in each backend by mean charged saved cells over all45fitting fires; tie lowest action; evaluation16 never chooses sector",
+    "sf_fitting": "Reuse guarded native SF action table for all45",
+    "ca_fitting": "Run all9requested first-decision paths on all45 with same frozen CAspread0, fresh no-op mask must match TASK042 guarded trajectory",
+    "evaluation": "Reuse guarded TASK040 full native tables for same16; report all sectors and uniform expectation, own/joint-positive mean%, all-case ha/pooled; preserve zero denominator undefined",
+    "old_random_reference": "Retain TASK043 fixed random_legal seed0 and explicitly show it is sector7 on16; never overwrite old primary results"
+  },
+  "policy_diagnostics": {
+    "models": "All18 own numeric inference checkpoints0/512/2048; hash/contract guards, no pickle",
+    "cases": "All61initial v2/terrain536 feature vectors and masks; report fitting and evaluation separately",
+    "measure": [
+      "actor and critic parameter delta L2/RMS relative to checkpoint0",
+      "masked action probabilities, normalized entropy, greedy sector counts, KL-to-initial",
+      "actor Tanh saturation abs>.95 and abs>.99, initial feature ranges"
+    ],
+    "no_selection": "No best model or modified policy accepted/evaluated"
+  },
+  "rollout_probe": {
+    "native_rollout_steps": 16,
+    "episodes": 4,
+    "seeds": [
+      17,
+      29,
+      43
+    ],
+    "backends": [
+      "simfire",
+      "ca"
+    ],
+    "schedule": "Exact first4fitting cases in TASK043 hash schedule per model seed, same per backend",
+    "replay": "Fresh original seed initialization must match checkpoint0 digest; collect_rollouts without train, verify actions/rewards/budget/case rows against original first16training steps",
+    "data": "Persist numeric observations/actions/masks/rewards/values/advantages/returns and batch permutation; must exactly cover4complete episodes",
+    "counterfactual_reward": "For same states/actions, add per-step same-backend no-op growth increment/100. With gamma=lambda1 the episode return differs by action-independent noop final damage/100. No feature/mask/physics changes",
+    "gradient_modes": [
+      "original_reward/global_clip",
+      "centered_reward/global_clip",
+      "original_reward/separate_actor_critic_clip",
+      "centered_reward/separate_actor_critic_clip"
+    ],
+    "one_step": "One Adam update per mode from identical original checkpoint0 on same first minibatch. Diagnostic-only disposable weights, never saved as policies or evaluated for fire performance",
+    "measure": [
+      "active-decision fraction from masks",
+      "return/advantage scale and variation between cases",
+      "actor/critic gradient norms before and after clipping",
+      "clipping coefficient, Adam eps and actual actor/critic parameter-step norms",
+      "manual source-equivalent loss/first update validated against pinned MaskablePPO unit test"
+    ],
+    "claim_limit": "May identify an early-step mechanism; does not recover full optimizer history or prove a changed reward/optimizer would improve learning"
+  },
+  "statistics": "Descriptive TRAIN diagnostics; fitting45/evaluation16 previously explored. No new significance criterion or replacement of ADR051 primary metrics",
+  "compute": {
+    "workers": 3,
+    "coordinator": 1,
+    "nice": 19,
+    "numeric_threads": 1,
+    "estimated_minutes": "5-15 native diagnosis after implementation; adjust duration only",
+    "no_long_training": true
+  },
+  "stop": [
+    "old source/plan/checkpoint/hash mismatch",
+    "no-op or original first16replay mismatch",
+    "budget/horizon/prior/charged score invariant",
+    "manual PPO loss/gradient discrepancy",
+    "nonfinite numerical probe"
+  ],
+  "closed": [
+    "new full PPO training",
+    "hyperparameter search",
+    "best-seed/checkpoint selection",
+    "VALIDATION",
+    "TEST2024",
+    "future FEDS",
+    "physical validation claim",
+    "native mobile-unit parity",
+    "paid compute",
+    "merge"
+  ]
+}
