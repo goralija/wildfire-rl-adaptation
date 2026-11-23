@@ -857,3 +857,13 @@ Run138,80s,nice19/3workers+coordinator/1thread. Local49.496.735Bbundle,488+1035p
 member hashovi i restore9freshCA/32SFCAsteps/8freshgradientmodes exact; stored405/24/18
 reaudit PASS. Nema fulltrain/holdouta/futureFEDS/mergea. TASK-045512stepcentering-only
 pilotje sljedeći prijedlog, nije implementacija/start.
+
+
+## EXP-033 — TASK-045 centered reward PPO, priprema2026-11-23
+
+[Plan ADR-055](CENTERED_PPO_PILOT.md), frozen commit0d8d3821 prije implementacije.
+Isti45fit/16development/3model seeda/B1/4×12h/globalclip;6×512koraka s novim
+`common-centered-charged-increment-v2`, fresh početne težine i original512referenti.
+11novih testova prije native32paired preflighta i starta. Bez holdouta/futureFEDS-a
+ili promjene fizike. Za duži posao korisnik traži detached start, provjeru napretka
+i završetak sesije uz ETA; sačuvano kao preferenca i za naredne taskove.

@@ -4,6 +4,18 @@ title: Claude project entry point
 ---
 # Project context
 
+**Aktivno TASK-045 / ADR-055 (2026-11-23):** korisnik odobrava nastavak malog
+centering-only pilota i trajno preferira background handoff za duže lokalne poslove:
+pokreni odobreni/zamrznuti posao, provjeri stvarni napredak, zapiši status/PID/nastavak
+i završi sesiju s procjenom povratka. To nije dozvola za neograničeno treniranje.
+[Plan](docs/research/CENTERED_PPO_PILOT.md), `codex/centered-ppo-pilot` izc2e53f4c:
+6×512koraka,45fit/16development,seeds17/29/43; mijenja se samo reward, globalclip ostaje.
+Prije starta testovi i32paired native putanje. Potom ne pokretati dupli koordinator;
+prvo status/lock/PID i receipts u `.local/centered-ppo-v1`. Najviše3radnika+koordinator,
+nice19/jedna nit. NPZ je inference-only; partial job nije optimizer resume.
+Slijedi najnoviji NEXT_SESSION za stvarno stanje. Stvarni holdouti/futureFEDS/merge zatvoreni.
+
+
 **Najnovije TASK-044 / ADR-054 (2026-11-23) je završen** na `codex/ppo-signal-diagnosis`,
 izc160fd0e. [Izvještaj](docs/research/PPO_SIGNAL_DIAGNOSIS.md): tačan uniform first-line
 SF5,23%/CA6,20%, stariPPO5,13/6,03%, sektori odabrani samo na45fit. Početni gradijentni

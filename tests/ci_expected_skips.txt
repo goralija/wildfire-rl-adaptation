@@ -8,6 +8,7 @@ unittest.loader.ModuleSkipped.test_ca_learning_rl
 unittest.loader.ModuleSkipped.test_common_control_rl
 unittest.loader.ModuleSkipped.test_paired_ppo_learning_rl
 unittest.loader.ModuleSkipped.test_ppo_signal_rl
+unittest.loader.ModuleSkipped.test_centered_control_rl
 
 # Needs the pinned SimFire runtime (Python 3.9 venv); runs locally, not in CI.
 unittest.loader.ModuleSkipped.test_feds_simfire_spread

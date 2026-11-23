@@ -51,4 +51,18 @@ dokumentovan novi pokušaj. Stari TASK-043/044rezultati ostaju historijski nepro
 
 ## Status
 
-Plan je napisan prije implementacije. Trening još nije pokrenut.
+Plan je zasebno commitovan kao `0d8d3821`, prije implementacije. Opt-in adapter i
+runner su implementirani; stari numerički source ostaje nepromijenjen. Trening još
+nije pokrenut. Jedanaest novih testova obuhvata reward invariance, reference,
+statistiku, PPO/NPZ, prekid prije updatea i odbijanje partial/duplicate poslova.
+Novi moduli imaju zaseban reward contract, a prva16step provjera čuva tačne ulaze
+i lokalnu float32toleranciju `atol=2e-5,rtol=1e-6` samo za izvedene reward tenzore.
+
+Kod: [adapter/statistika](../../src/wildfire_rl/centered_control.py),
+[runner](../../scripts/run_centered_ppo_pilot.py), [contract testovi](../../tests/test_centered_control.py),
+[RL/stop testovi](../../tests/test_centered_control_rl.py).
+
+Pozadinski posao koristi atomic exclusive coordinator lock, odvojene PID/status/
+error/stop/done zapise i numeričke checkpointove0/512. Globalni stop se zapisuje prije
+čekanja poola; nedovršen job se ne usvaja kao optimizer resume. Završeni job ima
+hash svakog fajla prije usvajanja. Fajlovi s težinama i mapama ostaju u `.local`.

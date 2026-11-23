@@ -4,6 +4,8 @@ title: Work log
 ---
 # Work log
 
+2026-11-23 — TASK-045 implementacija poslije plan commita0d8d3821: zaseban centered reward adapter i guarded512runner;11novih testova uključuje reward/NPZ/parity/stop/partial/duplicate zaštite. Puna provjera i native preflight prethode treningu; background politika zabilježena u AGENTS/CLAUDE.
+
 2026-11-23 — Korisnik odobrava TASK-045 i generalni background handoff za duže poslove. Nova grana izc2e53f4c, ADR-055/frozen512centering-only plan prije koda/mjerenja.
 
 
