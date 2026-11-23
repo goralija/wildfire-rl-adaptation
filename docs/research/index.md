@@ -1,5 +1,7 @@
 # Istraživanje i podaci
 
+- [Odvojeni clipping i kraj faze](SEPARATE_CLIP_PILOT.md) — TASK-046 plan prije implementacije; TASK-047 zatvara ovu fazu.
+
 ## Podgrupe
 
 - [Centrirana PPO nagrada](CENTERED_PPO_PILOT.md) - TASK-045/ADR-055, ista512budžeta i samo jedna promjena.

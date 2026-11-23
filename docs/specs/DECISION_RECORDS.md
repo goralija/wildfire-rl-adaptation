@@ -2494,3 +2494,25 @@ Završna dopuna ADR-056:15knowledge/strict94PASS,54.374.678Bbundle/322člana plu
 parents, SHA7dc7664ad78489b90500a00bb219a6757cb3acfddae850eb280e70c88ef2f32b. Fullrestore
 svih12modela/192odluke/96freshnative putanja/480stanja identičan, ponovni independent
 audit PASS. Postojeće biblioteke, nema freshinstalla/retraininga/aktivnog računanja.
+
+
+## ADR-057 — TASK-046 posljednji optimizer test i konačna granica faze (2026-11-23)
+
+Korisnik odobrava nastavak i traži da završimo fazu, pripremimo merge i krenemo dalje.
+[Plan](../research/SEPARATE_CLIP_PILOT.md), [frozen ugovor](../../configs/frozen/separate-clip-pilot-v1.json)
+na grani `codex/separate-clip-pilot` izb00e55e2 prethode kodu i mjerenjima. Samo zasebni
+actor/critic norm bound0,5 uz originalreward; isti jedan Adam/PPO loss/hyperparametri,
+45/16,3seedova,6×512,initialweights/B1/physics/4odluke. Testovi kopiranog upstreamtrain
+i skupova prije implementacije;6×16fresh native raw parity i independentfirstAdamstep
+prije treninga, group clip receipts i final96native provjere. Isti primary14/meanseeds
+insidefire/10kbootstrap; oba lowerCI>0 vsoriginal512 i exactuniform su TRAIN signal.
+
+Ovo je posljednja optimizer ablation ove faze. Potom TASK047 samo synthesis svih
+nalaza i poznatih gapova, pregled pune77commit/220file integracije prema aktuelnom
+mainu, testovi/CI i reviewable merge paket. Faza se zatvara neovisno o pozitivnom
+learning signalu; tehnička ispravnost i dokumentacija su uslov integracije. Nema
+automatske treće izmjene, više koraka ili boljeg-seed izbora. Predložena naredna
+faza TASK048 je eksplicitni CA control/decision ugovor beyondB1, native unit parity
+prije učenja. Stvarni holdouti/futureFEDS/fizička validacija/plaćeni compute zatvoreni;
+stvarni merge tek poslije rezultata i konkretnog integracijskog pregleda. Background
+korisnička preferenca i max3radnika+koordinator/nice19/jedna nit ostaju.

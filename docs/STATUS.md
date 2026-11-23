@@ -7,6 +7,16 @@ sources:
 ---
 # Trenutno stanje — 2026-11-23
 
+## TASK-046 odobren — posljednji optimizer test (ADR-057, 2026-11-23)
+
+[Plan i granica faze](research/SEPARATE_CLIP_PILOT.md), nova grana `codex/separate-clip-pilot` izb00e55e2.
+Samo separate actor/critic clipping uz originalreward, isti6×512/45fit/16development/
+seeds17/29/43. Plan prije koda; testovi/preflight prije treninga. Još nije pokrenut.
+Poslije rezultata TASK047 zatvara ovu fazu zajedničkim zaključkom i pregledom cijele
+integracije prema mainu. Kraj faze ne zahtijeva pozitivnu PPO prednost. Nema nove
+optimizer pretrage ili automatskog većeg treninga. Predložena naredna faza TASK048
+je CA control ugovor/native parity beyondB1. Holdouti/futureFEDS ostaju zatvoreni.
+
 ## TASK-045 završen — centriranje nije dovoljno (ADR-056, 2026-11-23)
 
 [Izvještaj](research/CENTERED_PPO_PILOT.md), grana `codex/centered-ppo-pilot` iz `c2e53f4c`.

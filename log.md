@@ -1,5 +1,9 @@
 # Promjene baze znanja
 
+## 2026-11-23: posljednji optimizer test i granica faze
+
+[TASK-046/ADR-057](docs/research/SEPARATE_CLIP_PILOT.md) odobren: originalreward + separateclip, isti512budžet; plan prije koda. Potom TASK047 zatvara fazu i priprema pregled za merge, bez beskonačnog podešavanja.
+
 ## 2026-11-23: centrirani PPO rezultati objavljeni
 
 [TASK-045](docs/research/CENTERED_PPO_PILOT.md) je pushan; [CI3f6a7679](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45272813386) prolazi sva4posla. Oba continuation false i negativan SF nalaz ostaju vidljivi, TASK-046 je prijedlog bez starta.
