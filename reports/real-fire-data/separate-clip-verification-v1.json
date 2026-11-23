@@ -190,7 +190,12 @@
     },
     "cli": "PASS",
     "strict_knowledge": "PASS:95Markdown",
-    "stats_relabel_regression_on_frozen_centered_data": "PASS"
+    "stats_relabel_regression_on_frozen_centered_data": "PASS",
+    "knowledge_handoff": {
+      "tests": 15,
+      "skipped": 0,
+      "log_sha256": "6b10c23837d29255cafe6a7317c378d014843ccb3be7682fa7a00f50f19dcb5c"
+    }
   },
   "preflight_status": "PASS",
   "test_attempts": [

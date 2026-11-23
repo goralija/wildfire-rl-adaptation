@@ -123,4 +123,3 @@ TASK040B/native parity otvoreni dio; ovim pilotom se ne proglašava riješenim.
 Tri SF modela napreduju, prva16raw-buffer parity PASS za sva tri prije updatea;
 3CAposla čekaju. Statusi bilježe stvarne clip updateove, bez stop/error zapisa.
 Snapshot nije konačan rezultat; živo stanje čitati lokalno. Povratak za oko30min.
-
