@@ -4,6 +4,8 @@ title: Work log
 ---
 # Work log
 
+2026-11-23 — TASK-045 rezultati3f6a7679 pushani; sva4CIposla PASS. Publication/status/handoff usklađeni; numerički source/plan/analysis/bundle nepromijenjeni. Nema aktivnog računanja, novog PR-a ili mergea.
+
 2026-11-23 — TASK-045 puni restore12modela/192odluke/96freshnative putanja/480stanja identičan; svi hashovi54.374.678Bpaketa provjereni.15knowledge/strict94PASS, figura vizualno provjerena. Nema aktivnog računanja; slijedi objava rezultata na istoj grani.
 
 2026-11-23 — TASK-045 svi poslovi završeni20,05min, bez aktivnog treninga. Audit svih3072koraka/96native/192new+192oldscore PASS;438pinned,423modern(4skip),328core(51skip),CLI. CenteringSF6,75→3,16%,CA6,36→7,93%;oba continuationfalse. ADR-056 i currentstatus/handoff ažurirani, noviTASK046prijedlog bez starta.

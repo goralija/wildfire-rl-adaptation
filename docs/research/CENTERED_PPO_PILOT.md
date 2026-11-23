@@ -144,6 +144,14 @@ hipoteza za narednu iteraciju, nije garancija; nema već pokrenutog novog trenin
 Stvarni VALIDATION/TEST, futureFEDS, fizička validacija i native unit parity ostaju
 odvojene teme. Korisnikova background/ETA preferenca ostaje za naredne odobrene poslove.
 
+
+### Objava TASK-045
+
+Grana `codex/centered-ppo-pilot` je commitana i pushana. [CI rezultata3f6a7679](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45272813386)
+prolazi sva4posla: core3.11/3.13,numeric s tačnom skip listom i knowledge.
+Naknadni publication receipt ne mijenja numerički kod, plan, rezultate ili paket.
+Main je nepromijenjen, nema novog PR-a/mergea ni aktivnog računanja.
+
 ---
 
 ## Plan prije implementacije i rezultata — ADR-055, 2026-11-23

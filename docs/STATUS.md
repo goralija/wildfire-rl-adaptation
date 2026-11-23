@@ -46,6 +46,14 @@ Završna provjera:15knowledge/strict94 PASS. Lokalni54.374.678Bpaket322člana pl
 12modela ponavlja192odluke/96native putanja/480stanja identičnim numeric nizovima,
 uz iste postojeće biblioteke i bez novog treninga. Nema aktivnog računanja.
 
+
+### Objava TASK-045
+
+Grana `codex/centered-ppo-pilot` je commitana i pushana. [CI rezultata3f6a7679](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45272813386)
+prolazi sva4posla: core3.11/3.13,numeric s tačnom skip listom i knowledge.
+Naknadni publication receipt ne mijenja numerički kod, plan, rezultate ili paket.
+Main je nepromijenjen, nema novog PR-a/mergea ni aktivnog računanja.
+
 ## TASK-044 završen — PPO signal/reference dijagnoza (ADR-054, 2026-11-23)
 
 [Izvještaj](research/PPO_SIGNAL_DIAGNOSIS.md), `codex/ppo-signal-diagnosis` izc160fd0e.

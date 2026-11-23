@@ -252,10 +252,19 @@
     "implementation_pushed": true,
     "ci": "success",
     "tested_commit": "273cfb62395318258f10117ddefdcf637b35a794",
-    "ci_url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45258731879",
+    "ci_url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45272813386",
     "new_pr": false,
     "merge": false,
-    "result_status": "local complete; final result push/CI pending"
+    "result_status": "pushed and CI success",
+    "results_pushed": true,
+    "tested_results_commit": "3f6a767905d02223b64c7c0b585e06233d0c7c66",
+    "jobs": [
+      "numeric",
+      "core (3.11)",
+      "knowledge",
+      "core (3.13)"
+    ],
+    "note": "Publication-only receipt follows tested result commit; numerical source, plan, analysis and bundle bytes unchanged"
   },
   "limits": [
     "Exploratory previously explored TRAIN45/16, CAspread0; no independent heldout",

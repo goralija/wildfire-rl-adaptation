@@ -1,5 +1,9 @@
 # Promjene baze znanja
 
+## 2026-11-23: centrirani PPO rezultati objavljeni
+
+[TASK-045](docs/research/CENTERED_PPO_PILOT.md) je pushan; [CI3f6a7679](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45272813386) prolazi sva4posla. Oba continuation false i negativan SF nalaz ostaju vidljivi, TASK-046 je prijedlog bez starta.
+
 ## 2026-11-23: završen centrirani PPO pilot
 
 [TASK-045/ADR-056](docs/research/CENTERED_PPO_PILOT.md): centriranjeSF6,75→3,16%,CA6,36→7,93%, oba zamrznuta kriterija false.438pinned i kompletan nezavisni audit PASS; nema aktivnog treninga. TASK-046 odvojeni clipping je prijedlog prije novog eksperimenta.
