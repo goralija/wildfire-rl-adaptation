@@ -6,7 +6,8 @@ title: Naredni zadaci
 
 ## 2026-11-24 — završetak ove faze
 
-TASK028–046 su istraženi na sačuvanoj research grani. TASK047 izdvaja malu jezgru za
+Završeni B1/optimizer rad do TASK046 je na sačuvanoj research grani. Odgođeni
+TASK037/039 i native parity nisu proglašeni završenim. TASK047 izdvaja malu jezgru za
 review/merge; [sažetak](research/CA_CORE_INTEGRATION.md). Nema novog optimizer testa.
 Predloženi TASK048 je zaseban CA control/native unit parity ugovor poslije integracije.
 Starije otvorene liste ispod su historijske; aktuelan je ADR-058 i NEXT_SESSION.
