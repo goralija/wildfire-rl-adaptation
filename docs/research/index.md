@@ -2,6 +2,9 @@
 
 ## Podgrupe
 
+- [Centrirana PPO nagrada](CENTERED_PPO_PILOT.md) - TASK-045/ADR-055, ista512budžeta i samo jedna promjena.
+
+
 - [PPO signal i reference](PPO_SIGNAL_DIAGNOSIS.md) - TASK-044/ADR-054 završen,423pinned/audit/restore PASS, bez novog punog treninga.
 
 

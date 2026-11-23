@@ -2420,3 +2420,20 @@ prije starta. Separateclip ostaje zasebna hipoteza. TASK-045 nije implementiran 
 pokrenut; nema dozvole za automatsko neograničeno treniranje. TASK-043 oba learning
 kriterija ostaju false; fizička validacija/nativeunitparity su odvojeno otvoreni.
 Stvarni VALIDATION/TEST,futureFEDS,plaćeni compute,noviPR/merge nisu rađeni.
+
+
+## ADR-055 — TASK-045 centering-only512pilot prije mjerenja (2026-11-23)
+
+Korisnik nastavlja i izričito dopušta pozadinske duže poslove uz vrijeme povratka,
+također ubuduće. [Plan](../research/CENTERED_PPO_PILOT.md) i [frozen ugovor](../../configs/frozen/centered-ppo-pilot-v1.json)
+na `codex/centered-ppo-pilot` izc2e53f4c prethode kodu i ishodima. Samo rewardv2
+(noop increment−charged increment)/100−invalidpenalty. Sve ostalo izTASK043:45fit/
+16development/3seeda/512koraka/globalclip/MLP/obs/budžet/physics/horizont. Početne
+težine iste, bez warm-starta; poređenje sa sačuvanim original512, svi0/512modeli.
+Prvo unit i32paired raw/centerednative putanje, sve maske/obs/budget/returns; prvi
+16training koraka parity sTASK044tensorprobom. Finalni novi512native svih16po modelu,
+cijele maske i score prema arhivi. Opisni centered−original512 i centered−uniform
+bootstrap po požaru naistih14, seed prosjek unutra; oba lowerCI>0 su samo continuation
+signal. Front i ostali referenti ostaju vidljivi. Bez separateclipa/tuninga/više
+koraka/holdouta/futureFEDS/mergea. Najviše3radnika+koordinator,nice19/1nit,15–25min,
+background status/error/done receipts. NPZ nije optimizerresume.

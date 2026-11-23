@@ -1,0 +1,247 @@
+{
+  "schema_version": "centered-ppo-pilot/1.0",
+  "task": "TASK-045",
+  "decision": "ADR-055",
+  "date": "2026-11-23",
+  "base_commit": "c2e53f4cde16d0704f120b5a98d66338c2d45147",
+  "authorization": "User explicitly continues proposed pilot and permits background training with return-time handoff, also for future tasks",
+  "purpose": "One-factor reward-centering matched512step TRAIN development pilot; no automatic physical or RL advantage claim",
+  "fitting_cases": [
+    "fpa-fod-400300427-plateau",
+    "fpa-fod-400300631-ranch",
+    "fpa-fod-400300764-buzzard",
+    "fpa-fod-400301084-prospect",
+    "fpa-fod-400301104-stewart-creek",
+    "fpa-fod-400302402-silver-creek",
+    "fpa-fod-400302444-spring-creek",
+    "fpa-fod-400302533-tinder",
+    "fpa-fod-400302636-bears",
+    "fpa-fod-400302686-boot",
+    "fpa-fod-400303711-gold-hill",
+    "fpa-fod-400303744-rattlesnake-creek",
+    "fpa-fod-400303807-ryan",
+    "fpa-fod-400303966-cabin-lake",
+    "fpa-fod-400305302-sugar-pine",
+    "fpa-fod-400307462-indian-valley",
+    "fpa-fod-400307488-red-canyon",
+    "fpa-fod-400308544-winter-camp",
+    "fpa-fod-400308656-sharps",
+    "fpa-fod-400310578-ok-bar",
+    "fpa-fod-400310659-206",
+    "fpa-fod-400310945-goose-creek",
+    "fpa-fod-400310977-sheep-creek",
+    "fpa-fod-400311017-goshute-cave",
+    "fpa-fod-400313239-cedar-mountain-one",
+    "fpa-fod-400313254-lakeside",
+    "fpa-fod-400313301-bear-trap",
+    "fpa-fod-400313842-north-eden",
+    "fpa-fod-400314399-lake-wallula",
+    "fpa-fod-400376589-ute-park",
+    "fpa-fod-400500346-south",
+    "fpa-fod-400500878-cellar",
+    "fpa-fod-400501480-decker",
+    "fpa-fod-400501641-mountain",
+    "fpa-fod-400504417-shady",
+    "fpa-fod-400505118-cove-creek",
+    "fpa-fod-400507579-red-bank",
+    "fpa-fod-400508308-pot-hole",
+    "fpa-fod-400508892-north-hills",
+    "fpa-fod-400509143-ridgetop",
+    "fpa-fod-400510304-goose",
+    "fpa-fod-400510515-summit",
+    "fpa-fod-400512420-shelter-pass",
+    "fpa-fod-400513488-sage",
+    "fpa-fod-400732973-walker"
+  ],
+  "evaluation_cases": [
+    "fpa-fod-400303584-goldstone",
+    "fpa-fod-400307379-weston-pass",
+    "fpa-fod-400505027-pine-lodge",
+    "fpa-fod-400312787-black-mountain",
+    "fpa-fod-400304718-west-valley",
+    "fpa-fod-400508306-lookout-point",
+    "fpa-fod-400310914-echo",
+    "fpa-fod-400306102-rattlesnake",
+    "fpa-fod-400503581-coldwater",
+    "fpa-fod-400310583-organ",
+    "fpa-fod-400541373-mp-97",
+    "fpa-fod-400308652-dog-creek",
+    "fpa-fod-400300963-coal-hollow",
+    "fpa-fod-400311253-martin",
+    "fpa-fod-400302943-cranston",
+    "fpa-fod-400307776-bull-draw"
+  ],
+  "model_seeds": [
+    17,
+    29,
+    43
+  ],
+  "checkpoints": [
+    0,
+    512
+  ],
+  "training_steps": 512,
+  "architecture": {
+    "algorithm": "MaskablePPO",
+    "policy": "MlpPolicy",
+    "hidden_pi": [
+      64,
+      64
+    ],
+    "hidden_vf": [
+      64,
+      64
+    ],
+    "activation": "Tanh",
+    "features": 536,
+    "device": "cpu",
+    "n_envs": 1
+  },
+  "ppo": {
+    "n_steps": 16,
+    "batch_size": 16,
+    "n_epochs": 2,
+    "learning_rate": 0.0001,
+    "gamma": 1.0,
+    "gae_lambda": 1.0,
+    "clip_range": 0.1,
+    "ent_coef": 0.001,
+    "vf_coef": 0.5,
+    "max_grad_norm": 0.5,
+    "target_kl": 0.03
+  },
+  "control": {
+    "encoder": "v2/terrain536 float32",
+    "actions": 9,
+    "budget": 1,
+    "horizon_hours": 48,
+    "decisions": 4,
+    "decision_hours": 12,
+    "placement": "front_edge",
+    "mask": "v2 burnable_lines; no-op always legal",
+    "reward": {
+      "version": "common-charged-increment-v1",
+      "formula": "-(C_t-C_previous)/100 - 0.01*invalid; C_t=count((burned_t | (lines_t & own_noop_final)) & ~initial); C_0=0",
+      "units": "cells / 100, each cell3.24ha; gamma1; sum reward = -final charged cells/100 - invalid penalties",
+      "no_op_reference": "same backend/case/forcing/spread seed, full48h; private reward accounting only, never policy input or legality",
+      "prior_damage": "retained in cumulative mask, excluded from new damage; line never erases burning/prior cells",
+      "invalid": "masked requests become no-op, cost0, penalty0.01; out-of-space raises; no-op always legal; full four decisions after budget0"
+    },
+    "physics": "Unchanged ADR043/044 bridge and ADR031 SimFire; CA primary spread replicate0 with stable TASK040 hash seed; SF seed0",
+    "ca_spread_replicate": 0,
+    "old_native_unit_ppo": "excluded: incompatible MDP"
+  },
+  "reward": {
+    "version": "common-centered-charged-increment-v2",
+    "formula": "(own_noop_new_increment_cells - charged_increment_cells)/100 - .01*invalid",
+    "episode_return": "(own_noop_new_final_cells - charged_new_final_cells)/100 - .01*invalid_count",
+    "base_contract": "common-charged-increment-v1",
+    "reference": "Same backend/case/spread seed, guarded five-state no-op trajectory from TASK043; only scalar reward bookkeeping, no observation/mask change",
+    "invariance": "gamma=gae_lambda=1,four complete decisions even after budget0; policy action order unchanged by case-constant total no-op offset"
+  },
+  "schedule": "Exact TASK043 SHA256 TASK043:seed:case order, cyclic128episodes; same order across both backends and both reward versions",
+  "baseline": {
+    "source": "All six frozen original TASK043checkpoint512policies; do not retrain or select best; checkpoint0 also fixed",
+    "centered": "Fresh original initialization per seed, no warm-start from512 or2048; save all0/512models",
+    "performance": "All16same cases, old full B1tables, same no-op denominators/raw/charged metrics; final new512also native whole-mask/line verification on all16permodel",
+    "references": [
+      "advancing_front64",
+      "downwind",
+      "fixed random_legal seed0",
+      "exact legal uniform first-decision expectation",
+      "fitting-only selected fixed sector from TASK044"
+    ]
+  },
+  "guards": {
+    "parent_plan_sha256": "6e20009c277d842dd9c310ee4f6e021fc7a156baf704840b76413a4b94e95f43",
+    "parent_analysis_sha256": "9659dea88a728bd8d8d25376bc901acb113fd21d7925fe4b346a551a8d6e2e89",
+    "parent_preflight_sha256": "7ddc5026a81fdf7b2e5d72c1d091bfe373bc9186708a10d4c165ea10238ab6ac",
+    "diagnosis_plan_sha256": "449002fea682f6a2246a9e27edc7c9e88544ae54386b5448c10bc9a1e7d6c649",
+    "diagnosis_analysis_sha256": "040279934a64d98b0e9875ec5696a2086f01c90c4fb6f7f0d21a9ef499705479"
+  },
+  "preflight": {
+    "cases": [
+      "fpa-fod-400300427-plateau",
+      "fpa-fod-400300631-ranch",
+      "fpa-fod-400303584-goldstone",
+      "fpa-fod-400307379-weston-pass"
+    ],
+    "requested_sequences": [
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        0
+      ],
+      [
+        2,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        1,
+        0,
+        0
+      ]
+    ],
+    "requirements": [
+      "test wrapper reward/budget/prior/masks/invalid and no-op reference binary/shape guards before implementation",
+      "same raw/centered observations/masks/budgets/actions and every cumulative burned/line mask on all32paired native paths",
+      "per-step reward offset and final identity exact up to float64 tolerance; no early termination at budget0",
+      "all61reference trajectories and old512checkpoint receipts guarded",
+      "first16centeredtraining observations/actions/masks/values/logprobs equal TASK044raw firstrollout, rewards/returns match centered tensor probe within localized float32 tolerance",
+      "fresh initial policy digests equal old checkpoint0 and paired across backends"
+    ]
+  },
+  "evaluation": {
+    "primary": "Centered512 minus original512 mean charged saved percentage on same14joint-positive fires; three model seeds paired/averaged inside fire before paired bootstrap",
+    "secondary": [
+      "centered512 versus exact uniform and fitting-selected fixed reference",
+      "centered512 versus own initial0 and fixed front, all model seeds and cases",
+      "same-time raw/centered CA-minus-SF improvement and heuristic gaps",
+      "raw/charged hectares,savedha,pooled all16,undefined zero-noop retained",
+      "first-action entropy/greedy distributions and parameter deltas"
+    ],
+    "uncertainty": "descriptive paired fire bootstrap10000draws seed0, model seeds averaged within fire, not extra fires",
+    "continuation_signal": "lower descriptive95% bound>0 for both centered-minus-original512 and centered-minus-uniform within that backend; still exploratory, not a validated model or proof against all heuristics",
+    "old_criteria": "ADR051/052 TASK043original criteria/results stay unchanged; report new-versus-front separately",
+    "selection": "Final512only, no best checkpoint/seed; all six models reported"
+  },
+  "compute": {
+    "workers": 3,
+    "coordinator": 1,
+    "nice": 19,
+    "numeric_threads": 1,
+    "expected_minutes": "15-25 after tests/preflight; revise only from observed throughput, never change step budget",
+    "background": "independent session with stdout/error/status/lock/done receipts; user returns later after confirmed live progress",
+    "resume": "completed jobs adopt only exact guard/hash match; unfinished job cannot restore Adam from inference NPZ and requires documented fresh attempt"
+  },
+  "stop": [
+    "source/plan/runtime/input/reference mismatch",
+    "first-rollout parity failure",
+    "budget/prior/horizon/mask invariant",
+    "native whole-mask/score mismatch",
+    "nonfinite reward/loss/weight",
+    "duplicate coordinator"
+  ],
+  "closed": [
+    "separate actor/critic clipping change",
+    "architecture/optimizer/hyperparameter changes",
+    "extra steps beyond512",
+    "best-seed/checkpoint choice",
+    "real VALIDATION",
+    "TEST2024",
+    "future FEDS outcomes",
+    "native mobile-unit comparison",
+    "paid compute",
+    "merge"
+  ]
+}

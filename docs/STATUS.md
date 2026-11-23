@@ -7,6 +7,15 @@ sources:
 ---
 # Trenutno stanje — 2026-11-23
 
+## TASK-045 priprema — centering-only PPO pilot (ADR-055, 2026-11-23)
+
+Korisnik nastavlja pilot i dopušta background handoff za duže poslove ubuduće.
+[Plan](research/CENTERED_PPO_PILOT.md), `codex/centered-ppo-pilot` izc2e53f4c:
+ista45fit/16development/3seeda/512koraka/hiperparametri/globalclip, jedino nova
+centrirana nagrada. Poređenje s originalnim512checkpointovima; svi modeli, seedovi
+i referenti prijavljeni. Testovi i32paired native preflight putanje prije starta.
+Trening nije pokrenut; stvarni holdouti/futureFEDS/merge zatvoreni.
+
 ## TASK-044 završen — PPO signal/reference dijagnoza (ADR-054, 2026-11-23)
 
 [Izvještaj](research/PPO_SIGNAL_DIAGNOSIS.md), `codex/ppo-signal-diagnosis` izc160fd0e.
