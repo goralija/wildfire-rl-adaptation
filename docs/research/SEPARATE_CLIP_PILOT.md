@@ -78,3 +78,16 @@ nice19/jedna numerička nit. Korisnikova background preferenca ostaje: potvrditi
 napredak, zapisati PID/status/ETA i završiti chat dok računanje radi. Checkpoint
 je numeric inference-only NPZ; partial job nije Adam resume. Veliki podaci i težine
 ostaju lokalni. Stvarni holdouti/futureFEDS/plaćeni compute ostaju zatvoreni.
+
+
+### Implementacija i testna granica verzija
+
+Plan208b95d5 prije koda53fa50e8.9novih testova prolazi u pinovanom runtimeu.
+Prvi puni moderni suite je otkrio da je source-equivalence test pogrešno zahtijevao
+identičnost i s novijim upstreamom2.9.2. Experiment runtime ostaje2.7.1; njegov
+kanonski upstreamAST SHA9139494d442a0df0ccdb3e86db439264001787898c347cc6848d62ed23a75895
+je zasebno zamrznut, a test poredi vraćeni clip izraz s tim fingerprintom. U2.7.1
+se dodatno poredi stvarni upstreamAST. Moderni tensor/update testovi i dalje rade,
+ali ne tvrde da je kopirani train generalna zamjena za2.9.2. Prazni Python3.12
+ASTtype_params se normalizuju; semantička train struktura ostaje stroga. Nema
+promjene loss/gradient pravila, mjernog plana ili frozen roditeljskih fajlova.

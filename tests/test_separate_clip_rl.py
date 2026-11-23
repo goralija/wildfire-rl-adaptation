@@ -2,6 +2,8 @@
 import ast
 import copy
 import inspect
+import hashlib
+import importlib.metadata
 from pathlib import Path
 import tempfile
 import textwrap
@@ -16,7 +18,7 @@ except ImportError as exc:
 from test_common_control import environment
 from wildfire_rl.common_control_rl import create_model as base_model,policy_digest,save_policy_arrays,load_policy_arrays
 from wildfire_rl.ppo_signal_rl import collect_initial,gradient_probe
-from wildfire_rl.separate_clip_rl import SeparateClipPPO,clip_named_gradients,create_model,CLIPPING_VERSION
+from wildfire_rl.separate_clip_rl import SeparateClipPPO,clip_named_gradients,create_model,CLIPPING_VERSION,PINNED_TRAIN_AST_SHA256
 import sys
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 import run_separate_clip_pilot as runner
@@ -75,7 +77,7 @@ class SeparateClipTests(unittest.TestCase):
         with self.assertRaises(ValueError):clip_named_gradients([('action_net.weight',a),('value_net.weight',b)],.5)
         self.assertEqual(float(a.grad),1.)
 
-    def test_train_source_differs_only_at_clip_expression(self):
+    def test_train_source_matches_pinned271_with_only_clip_expression(self):
         original=ast.parse(textwrap.dedent(inspect.getsource(MaskablePPO.train)))
         candidate=ast.parse(textwrap.dedent(inspect.getsource(SeparateClipPPO.train)))
         expected=ast.parse('th.nn.utils.clip_grad_norm_(self.policy.parameters(), self.max_grad_norm)').body[0]
@@ -85,7 +87,14 @@ class SeparateClipTests(unittest.TestCase):
                     return copy.deepcopy(expected)
                 return self.generic_visit(node)
         candidate=Restore().visit(candidate)
-        self.assertEqual(ast.dump(original,include_attributes=False),ast.dump(candidate,include_attributes=False))
+        restored=ast.dump(candidate,include_attributes=False)
+        # Python3.12 adds an empty generic-type field to ordinary FunctionDef.
+        canonical=restored.replace(', type_params=[]','')
+        self.assertEqual(hashlib.sha256(canonical.encode()).hexdigest(),PINNED_TRAIN_AST_SHA256)
+        # Modern environment tests tensor behavior, not compatibility with its
+        # different upstream train method. The experiment guard requires2.7.1.
+        if importlib.metadata.version('sb3-contrib')=='2.7.1':
+            self.assertEqual(ast.dump(original,include_attributes=False),restored)
 
     def test_global_control_matches_upstream_weights_and_adam_after_two_epochs(self):
         torch.set_num_threads(1)

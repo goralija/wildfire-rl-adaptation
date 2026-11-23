@@ -32,6 +32,8 @@ from stable_baselines3.common.utils import explained_variance
 from .common_control_rl import ShapeOnlyEnv,PPO_SETTINGS
 
 CLIPPING_VERSION='common-separate-actor-critic-clip-v1'
+# Canonical AST of upstream2.7.1 before the single clip-expression replacement.
+PINNED_TRAIN_AST_SHA256='9139494d442a0df0ccdb3e86db439264001787898c347cc6848d62ed23a75895'
 
 
 def parameter_groups(named):

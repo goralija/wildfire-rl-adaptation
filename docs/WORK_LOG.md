@@ -4,6 +4,8 @@ title: Work log
 ---
 # Work log
 
+2026-11-23 — TASK046 prvi modernisuite1failure: source test neopravdano poredi pinned2.7.1copy s installed2.9.2train. Lokalizovan test na frozen271ASTfingerprint uz dodatni actualASTtest u2.7.1; normalizovan prazan Python3.12type_params. Algoritam/mjerni plan nepromijenjeni; puna provjera se ponavlja prije preflighta.
+
 2026-11-23 — TASK046 opt-in SeparateClipPPO izveden iz lokalnog pinovanog train metoda uz MITnotice; AST se razlikuje samo u clip pozivu.9novih testova PASS, globalcontrol2epohe weights/Adam identični i independentseparate1step exact. Puna provjera prije nativepreflight/starta.
 
 2026-11-23 — Korisnik nastavlja TASK046 i traži konačan kraj faze/merge. Nova grana izb00e55e2, ADR057/frozen512separateclip plan prije koda. TASK046 posljednji optimizer test; TASK047 završni pregled/integracija bez uslova pozitivne RL prednosti. Main f96f744f je predak,77commita/220fajlova čeka integraciju.
