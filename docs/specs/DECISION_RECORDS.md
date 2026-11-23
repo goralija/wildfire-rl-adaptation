@@ -1422,3 +1422,16 @@ the review, without touching the analysis, the lock or any result:
   ties the analysis to the VALIDATION report by value, lists policies that never place a
   line and names the figure's commit separately. The record was regenerated (schema 1.1).
 - Left as is: no test pins the bootstrap percentile level or the figure title.
+
+
+## ADR-058 — Sažeta integracija umjesto cijele istraživačke historije (2026-11-24)
+
+Korisnik traži maksimalno smanjenje nerelevantnih izmjena. [Plan](../research/CA_CORE_INTEGRATION.md)
+prethodi izdvajanju. Arhivska grana `codex/separate-clip-pilot`/c4062a84 i lokalni
+artefakti ostaju sačuvani; nova `codex/ca-core-integration` kreće izmainf96f744f.
+Ostaju provjerene runtime ispravke, observation/CA/common-control interfejsi i testovi.
+Optimizer/offline pretrage i opširni izvještaji ne ulaze u ovu integraciju. Sačuvati
+jedan kompaktan nalaz/provenance, bez dupliranja ranijih ADR033–057 iz arhivske grane.
+Encoder izvući bez numeričke promjene; puni testovi/parity/smoke/knowledge prije predaje.
+Runtime PASS ne dokazuje fizičku validaciju ili RL prednost; nema novog treninga ili
+otvaranja realnih holdouta. Stvarni merge dolazi poslije konkretnog pregleda manje grane.

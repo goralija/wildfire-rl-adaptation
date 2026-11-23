@@ -5,6 +5,8 @@ okf_version: "0.2"
 
 ## Počni ovdje
 
+- [Aktivno: manja SimFire/CA integracija](docs/research/CA_CORE_INTEGRATION.md) - Sačuvan research arhiv; izdvajaju se samo jezgra i testovi.
+
 - [Projekt i pokretanje](README.md) - Cilj istraživanja i minimalni setup.
 - [Sažeti projektni kontekst](knowledge/project-context.md) - Aktivni SimFire/FEDS pravac i crosswalk gate.
 - [Handoff za kolegu](HANDOFF.md) - Prenosiv nastavak bez chat historije.
