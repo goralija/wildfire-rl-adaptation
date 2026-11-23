@@ -157,9 +157,19 @@
   "next_proposal": "TASK-045 preregistered512step centered-reward-only matched pilot versus frozen original512, same cases/seeds/global clipping; not started",
   "publication": {
     "branch": "codex/ppo-signal-diagnosis",
-    "ci": "pending",
+    "pushed_results": true,
+    "tested_results_commit": "673203af436b3402d9a1a1ed5cfbbf6e77b5fa5a",
+    "ci": "success",
+    "ci_url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45090332654",
+    "jobs": [
+      "knowledge",
+      "core (3.13)",
+      "numeric",
+      "core (3.11)"
+    ],
     "new_pr": false,
-    "merge": false
+    "merge": false,
+    "note": "Later publication-only receipt keeps all measurement source/plan/result bytes unchanged."
   },
   "audit_code_commit": "57d19a3feceb8a4efaae4455d3a3181abb86cca7"
 }

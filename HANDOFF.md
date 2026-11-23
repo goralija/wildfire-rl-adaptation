@@ -35,6 +35,13 @@ globalclip/hiperparametre/45fit/16development/3seeda oba modela, poređenje sa s
 original512checkpointovima. Nije implementiran ili pokrenut. Nema aktivnog punog
 treninga, stvarnog VALIDATION/TEST, futureFEDS-a, fizičke validacije ili mergea.
 
+### Objava TASK-044
+
+Grana [codex/ppo-signal-diagnosis](https://github.com/goralija/wildfire-rl-adaptation/tree/codex/ppo-signal-diagnosis)
+je commitana i pushana. [CI rezultatskog commita673203af](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45090332654)
+prolazi sva4posla: core3.11/3.13,numeric s tačnom skip listom i knowledge. Dopuna objave
+ne mijenja mjerenja/source/plan. Paket ostaje lokalni; novi PR ili merge nisu rađeni.
+
 ## TASK-043 završen — nijedan backend ne prolazi learning kriterij (ADR-052, 2026-11-22)
 
 [Upareni PPO izvještaj](docs/research/PAIRED_PPO_LEARNING.md), `codex/paired-ppo-learning`,

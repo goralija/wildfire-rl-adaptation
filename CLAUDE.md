@@ -8,7 +8,7 @@ title: Claude project entry point
 izc160fd0e. [Izvještaj](docs/research/PPO_SIGNAL_DIAGNOSIS.md): tačan uniform first-line
 SF5,23%/CA6,20%, stariPPO5,13/6,03%, sektori odabrani samo na45fit. Početni gradijentni
 mehanizam potvrđen: globalni actor/critic clipping i velika razlika među požarima.
-24disposable jednouptade probe nisu nove politike ili dokaz uspješnijeg punog treninga;
+24disposable jednokratne probe nisu nove politike ili dokaz uspješnijeg punog treninga;
 centriranje pomaže5/6početnih koraka, CA43kontraprimjer0,62×.423pinned/audit/restorePASS,
 oldTASK043rezultati/kriteriji nepromijenjeni. Sljedeći TASK-045512step centering-only
 pilot je prijedlog, nije start ili dozvola za neograničen trening. Stvarni holdouti/

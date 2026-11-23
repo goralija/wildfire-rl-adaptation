@@ -1,5 +1,10 @@
 # Promjene baze znanja
 
+## 2026-11-23: PPO signal dijagnoza objavljena
+
+Grana `codex/ppo-signal-diagnosis` je pushana; [CI na673203af](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45090332654) prolazi sva4posla. Nalaz i ograničenja su u statusu/handoffu/verifikaciji; TASK-045 je prijedlog prije novog treninga.
+
+
 ## 2026-11-23: završena PPO signal/reference dijagnoza
 
 [TASK-044/ADR-054](docs/research/PPO_SIGNAL_DIAGNOSIS.md): stariPPO blizu tačnog uniformnog

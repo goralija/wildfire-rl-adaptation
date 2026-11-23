@@ -144,6 +144,13 @@ TASK-043 zaključak ostaje isti: nema potvrđene RL prednosti. TASK-044 dodaje m
 pravac za provjeru uzroka, a ne novu pobjedničku politiku. Native unit parity i fizička
 validacija ostaju odvojene otvorene teme; novi PR i merge nisu rađeni.
 
+### Objava TASK-044
+
+Grana [codex/ppo-signal-diagnosis](https://github.com/goralija/wildfire-rl-adaptation/tree/codex/ppo-signal-diagnosis)
+je commitana i pushana. [CI rezultatskog commita673203af](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45090332654)
+prolazi sva4posla: core3.11/3.13,numeric s tačnom skip listom i knowledge. Dopuna objave
+ne mijenja mjerenja/source/plan. Paket ostaje lokalni; novi PR ili merge nisu rađeni.
+
 ## Plan prije mjerenja — ADR-053, 2026-11-23
 
 Korisnik nastavlja predloženi TASK-044. Nova grana `codex/ppo-signal-diagnosis`
