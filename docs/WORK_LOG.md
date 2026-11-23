@@ -4,6 +4,10 @@ title: Work log
 ---
 # Work log
 
+2026-11-23 — TASK-045 puni restore12modela/192odluke/96freshnative putanja/480stanja identičan; svi hashovi54.374.678Bpaketa provjereni.15knowledge/strict94PASS, figura vizualno provjerena. Nema aktivnog računanja; slijedi objava rezultata na istoj grani.
+
+2026-11-23 — TASK-045 svi poslovi završeni20,05min, bez aktivnog treninga. Audit svih3072koraka/96native/192new+192oldscore PASS;438pinned,423modern(4skip),328core(51skip),CLI. CenteringSF6,75→3,16%,CA6,36→7,93%;oba continuationfalse. ADR-056 i currentstatus/handoff ažurirani, noviTASK046prijedlog bez starta.
+
 2026-11-23 — TASK-045 handoff snapshot: PPID1/nice19 i stvarni48–80+step napredak potvrđeni. Sva3SFprva16parity PASS (maxrewardtensordiff1,26e-6),3CAposla čekaju. Bez stop/error. Procjena povratka30min; chat se ne drži otvoren tokom treninga.
 
 2026-11-23 — TASK-045 preflight39,90s/32paired paths/122refs PASS;434pinned,419modern(4skip),324core(51skip),15knowledge,CLI/strict94. Kod273cfb62 pushan, sva4CIposla PASS. Detached6×512start21:23CET,PID51639/PPID1/nice19/max3radnika; još nema learning rezultata.

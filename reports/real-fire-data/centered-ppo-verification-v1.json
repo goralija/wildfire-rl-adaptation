@@ -1,30 +1,30 @@
 {
   "task": "TASK-045",
   "date": "2026-11-23",
-  "status": "RUNNING",
+  "status": "COMPLETE",
   "plan_commit": "0d8d3821",
   "measurement_code_commit": "273cfb62395318258f10117ddefdcf637b35a794",
   "preflight": "PASS",
   "checks": {
     "pinned": {
-      "tests": 434,
+      "tests": 438,
       "skipped": 0,
-      "log_sha256": "5fab610cff00d6e7bfffc7bce86ab669e2e524570b0d74ff5cd977d323004061"
+      "log_sha256": "f6639b1f24185477e51fbac191c80b41d14339279cc82c35280a8bdbd3b2d2ab"
     },
     "modern": {
-      "tests": 419,
+      "tests": 423,
       "skipped": 4,
-      "log_sha256": "08c5af3098f51a7ffe9364cff6520553b652b94ec2d5ae927165bf974370e1aa"
+      "log_sha256": "fc9e0c382587b55e9cfbb36074a6f5f00553583ed7003b0b5ab3fba995a2fafa"
     },
     "core": {
-      "tests": 324,
+      "tests": 328,
       "skipped": 51,
-      "log_sha256": "98916647332b02bc2194a1daf06fff8134dfc40b2a76f66121cbff964677bd0c"
+      "log_sha256": "e5634a46b983c020a8289f985d29ff62bcb4fef9a81c4f926f50f1ebc00e77a3"
     },
     "knowledge": {
       "tests": 15,
       "skipped": 0,
-      "log_sha256": "97a6d5a23f036d30a6338f75272e516809758e26775dbe061bedfc8b87ddf682"
+      "log_sha256": "f8cb4dfad12cae4a56a933058c3a1a25285591fc664f2876f49b8a210ac0b916"
     },
     "centered": {
       "tests": 11,
@@ -36,6 +36,98 @@
     "knowledge_handoff": {
       "tests": 15,
       "log_sha256": "e52a1ced6bfb56b6d13435c0ad7f32544c2682343fca177fb4606096ed617b5d"
+    },
+    "independent": {
+      "status": "PASS",
+      "counts": {
+        "completed_jobs": 6,
+        "training_steps": 3072,
+        "training_episodes": 768,
+        "centered_checkpoints": 12,
+        "original_checkpoints": 12,
+        "policy_scores": 192,
+        "original_policy_scores": 192,
+        "native_paths": 96,
+        "cumulative_states": 480,
+        "reference_states": 610,
+        "preflight_paths": 32,
+        "first_rollout_steps": 96
+      },
+      "analysis_sha256": "7bcc4a543e92631fc9476eb7aa4d4f99dd9b28f5a1432b4bcea0e15a6aaf7c09"
+    },
+    "restore": {
+      "status": "PASS",
+      "source_root": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/centered-ppo-pilot/.local/centered-artifacts-final/restore",
+      "checkpoints": 12,
+      "policy_decisions": 192,
+      "native_paths": 96,
+      "cumulative_states": 480,
+      "all_numeric_arrays_exact": true,
+      "independent_counts": {
+        "completed_jobs": 6,
+        "training_steps": 3072,
+        "training_episodes": 768,
+        "centered_checkpoints": 12,
+        "original_checkpoints": 12,
+        "policy_scores": 192,
+        "original_policy_scores": 192,
+        "native_paths": 96,
+        "cumulative_states": 480,
+        "reference_states": 610,
+        "preflight_paths": 32,
+        "first_rollout_steps": 96
+      },
+      "rows": [
+        {
+          "backend": "ca",
+          "seed": 17,
+          "checkpoints": 2,
+          "policy_decisions": 32,
+          "native_paths": 16,
+          "status": "PASS"
+        },
+        {
+          "backend": "ca",
+          "seed": 29,
+          "checkpoints": 2,
+          "policy_decisions": 32,
+          "native_paths": 16,
+          "status": "PASS"
+        },
+        {
+          "backend": "ca",
+          "seed": 43,
+          "checkpoints": 2,
+          "policy_decisions": 32,
+          "native_paths": 16,
+          "status": "PASS"
+        },
+        {
+          "backend": "simfire",
+          "seed": 17,
+          "checkpoints": 2,
+          "policy_decisions": 32,
+          "native_paths": 16,
+          "status": "PASS"
+        },
+        {
+          "backend": "simfire",
+          "seed": 29,
+          "checkpoints": 2,
+          "policy_decisions": 32,
+          "native_paths": 16,
+          "status": "PASS"
+        },
+        {
+          "backend": "simfire",
+          "seed": 43,
+          "checkpoints": 2,
+          "policy_decisions": 32,
+          "native_paths": 16,
+          "status": "PASS"
+        }
+      ],
+      "scope": "Extracted source/inputs/all12numeric models,192checkpoint decisions,96fresh native final paths; existing libraries, no retraining"
     }
   },
   "numerical_guard": {
@@ -162,13 +254,14 @@
     "tested_commit": "273cfb62395318258f10117ddefdcf637b35a794",
     "ci_url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45258731879",
     "new_pr": false,
-    "merge": false
+    "merge": false,
+    "result_status": "local complete; final result push/CI pending"
   },
   "limits": [
-    "No new learning result until all six jobs,96native final paths and audits complete",
-    "45TRAINfit/16previously explored development, not heldout",
-    "Only512steps, global clipping unchanged",
-    "No VALIDATION/TEST/futureFEDS/physical validation/merge"
+    "Exploratory previously explored TRAIN45/16, CAspread0; no independent heldout",
+    "Both frozen continuation criteria false; CA mean gain interval crosses zero and SimFire mean falls",
+    "Nearly uniform policy probabilities and mostly fixed greedy sectors",
+    "No retraining beyond512, best-seed/checkpoint selection, VALIDATION/TEST/futureFEDS/physical validation/native unit parity/merge"
   ],
   "background_snapshot": {
     "observed_utc": "2026-11-23T20:26:21.932858+00:00",
@@ -306,5 +399,33 @@
     "original_code_guard_unchanged": true,
     "return_estimate_minutes": 30,
     "scope": "Launch/progress snapshot only; three SimFire first16parityPASS, CA first16checks happen when queued jobs start. No learning outcome yet"
+  },
+  "decision": "ADR-056",
+  "no_active_training": true,
+  "learning_continuation_signal": {
+    "simfire": false,
+    "ca": false
+  },
+  "analysis_sha256": "7bcc4a543e92631fc9476eb7aa4d4f99dd9b28f5a1432b4bcea0e15a6aaf7c09",
+  "seconds": 1203.1581377983093,
+  "audit_code_commit": "72fee0e1",
+  "figure_source_commit": "df26661c",
+  "next_proposal": "TASK-046: separately preregister original-reward + separate actor/critic clipping512pilot versus original512; not started",
+  "artifact": {
+    "status": "PASS",
+    "bundle_bytes": 54374678,
+    "bundle_sha256": "7dc7664ad78489b90500a00bb219a6757cb3acfddae850eb280e70c88ef2f32b",
+    "files": 322,
+    "diagnosis_parent_files": 488,
+    "original_parent_files": 1035,
+    "manifest_sha256": "f2e99ce01fe34f26a914971a0af6253ce264add0d8931723c77697fb42d149fc",
+    "all_members_rehashed": true,
+    "scope": "Local nested archive with numeric checkpoints and inputs; existing pinned libraries; no upload, fresh install or optimizer resume"
+  },
+  "additional_source_sha256": {
+    "scripts/audit_centered_ppo_pilot.py": "827ff1a91d43d84ed4513ab5a09bbbcfb182f104fc6d4e2c47000b0a15f3d65a",
+    "src/wildfire_rl/centered_pilot_audit.py": "4ce78d85fe474fe7d927f9641cc86d37edc48f42a396c45d3da3a58055218afc",
+    "scripts/bundle_centered_ppo_pilot.py": "25ab1e8856085b38d063d094ef64527d2af640878bbd68d4fdb90260c30188ca",
+    "scripts/plot_centered_ppo_pilot.py": "bfca98731ca19bd1eb192710b468d8d98dc994fb22e716f7a17369dfd4ae3073"
   }
 }

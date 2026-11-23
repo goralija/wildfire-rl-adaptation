@@ -4,16 +4,18 @@ title: Claude project entry point
 ---
 # Project context
 
-**Aktivno TASK-045 / ADR-055 (2026-11-23):** korisnik odobrava nastavak malog
-centering-only pilota i trajno preferira background handoff za duže lokalne poslove:
-pokreni odobreni/zamrznuti posao, provjeri stvarni napredak, zapiši status/PID/nastavak
-i završi sesiju s procjenom povratka. To nije dozvola za neograničeno treniranje.
-[Plan](docs/research/CENTERED_PPO_PILOT.md), `codex/centered-ppo-pilot` izc2e53f4c:
-6×512koraka,45fit/16development,seeds17/29/43; mijenja se samo reward, globalclip ostaje.
-Prije starta testovi i32paired native putanje. Potom ne pokretati dupli koordinator;
-prvo status/lock/PID i receipts u `.local/centered-ppo-v1`. Najviše3radnika+koordinator,
-nice19/jedna nit. NPZ je inference-only; partial job nije optimizer resume.
-Slijedi najnoviji NEXT_SESSION za stvarno stanje. Stvarni holdouti/futureFEDS/merge zatvoreni.
+**Najnovije TASK-045 / ADR-056 (2026-11-23) je završeno.**
+[Izvještaj](docs/research/CENTERED_PPO_PILOT.md), `codex/centered-ppo-pilot` izc2e53f4c.
+Svih6×512koraka/12checkpointova bez greške,20,05min; nema aktivnog treninga ili locka.
+Isti original512→centered: SF6,75→3,16%, CA6,36→7,93%; oba zamrznuta kriterija false.
+CA porast nije pouzdan, SF rezultat negativan; TRAIN razvojni nalaz, ne fizička
+validacija.438pinned/nezavisni audit svih koraka i96putanja PASS. Stari TASK043nalazi
+nepromijenjeni. TASK-046 je prijedlog originalreward+separate actor/critic clipping
+u istom512budžetu, nije pokrenut. Stvarni holdouti/futureFEDS/nativeparity/merge zatvoreni.
+Korisnik i ubuduće preferira background handoff za odobrene duže lokalne poslove:
+prvo provjeri start/napredak, zapiši status/PID/ETA i završi chat. Najviše3radnika+
+koordinator,nice19/jedna nit; to nije dozvola za neograničeno treniranje. Slijedi
+najnoviji NEXT_SESSION; stariji launch PID51639 ispod i u receipts je historija.
 
 
 **Najnovije TASK-044 / ADR-054 (2026-11-23) je završen** na `codex/ppo-signal-diagnosis`,

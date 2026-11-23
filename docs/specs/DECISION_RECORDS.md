@@ -2453,3 +2453,44 @@ Korisnikova background/ETA preferenca važi i za naredne odobrene duže poslove.
 Start potvrđen iz nezavisnog `ps`: PPID1/svi nice19;3SFmodela napreduju,
 prvih16parity PASS (max reward-derived float32diff1,26e-6), CA3posla čekaju.
 Ovo je tehnički snapshot, ne rezultat novih politika. Handoff ETA oko30min.
+
+
+## ADR-056 — TASK-045 završen: centriranje nije dovoljan learning popravak (2026-11-23)
+
+[Izvještaj](../research/CENTERED_PPO_PILOT.md), [svi nalazi](../../reports/real-fire-data/centered-ppo-learning-v1.json).
+Plan0d8d3821 / kod273cfb62 prethode treningu.6×512koraka,768epizoda,0/512 svih6
+modela;20,05min,nice19/3radnika+koordinator/jedna nit. Svi završeni, nema stop/error/lock.
+Samo reward offset je promijenjen; isti45/16/seeds/globalclip/architecture/B1/physics.
+
+**Nalaz na istih14:** original512→centered SF6,754→3,162%, CA6,357→7,925%.
+Center−original SF−3,592pp[−8,747;−0,213], CA+1,568[−5,241;+7,798]. Center−uniform
+SF−2,064[−6,426;+1,345], CA+1,729[−1,649;+5,017]. Oba unaprijed zamrznuta continuation
+kriterija false; nema izbora boljeg seeda, dodatnih koraka ili slabijeg referenta.
+Front11,286/3,350%, fit-only sektori6/7daju0,229/9,488%. Seedovi17/29/43noviSF
+8,086/1,171/0,229%, CA8,389/6,155/9,231%. Sve16ha/pooled/zero-noop prijavljeno;
+primarni denominator ostajeisti14, meanseed unutarfire,10kbootstrapseed0.
+
+**Tumačenje:** SF negativan nalaz, CA sredina raste uz interval koji uključuje
+pogoršanje. Odstranjen reward offset ne garantuje bolje finite-step PPO učenje.
+U svih96finalnih epizoda linija se postavlja pri prvoj odluci;4/6modela isti sektor16/16, ostala
+dva po dva sektora, maxmeanp11,38–11,78%, entropija99,98–99,99%uniformne.
+Parametri se mijenjaju; to nije dokaz adaptivnog odlučivanja ili tvrdi probability
+collapse. TRAIN development je ranije istražen; nije fizička validacija ili stvarni
+heldout. TASK043/ADR052nalazi i oba ranija neprošla kriterija nepromijenjeni.
+
+**Provjera:**438pinned/0skip,423modern/4skip,328core/51skip,CLI PASS. Nezavisno svih
+3.072koraka,12new+12oldcheckpointova,192new+192oldscoreova,96native/480stanja,
+610reference,32preflight i96firstrolloutstep. Svi frozen numerical guardovi isti;
+auditcode72fee0e1 i visualfixdf26661c odvojeni od measurementcode. Paket i restore
+receipt u izvještaju; veliki ulazi/težine ostaju samo lokalni.
+
+**Odluka:** ne promovirati centriranje ili automatski produžiti ove modele. Novi
+prijedlog TASK046 izoluje zaseban actor/critic clipping uz originalreward i isti512
+budžet/reference, kroz novi preregistrovani plan. Nije pokrenut u ovoj sesiji.
+Stvarni VALIDATION/TEST/futureFEDS/nativeunitparity/fizička validacija/merge ostaju
+odvojeni. Background/ETA korisnička preferenca ostaje za naredne odobrene poslove.
+
+Završna dopuna ADR-056:15knowledge/strict94PASS,54.374.678Bbundle/322člana plus488/1035
+parents, SHA7dc7664ad78489b90500a00bb219a6757cb3acfddae850eb280e70c88ef2f32b. Fullrestore
+svih12modela/192odluke/96freshnative putanja/480stanja identičan, ponovni independent
+audit PASS. Postojeće biblioteke, nema freshinstalla/retraininga/aktivnog računanja.

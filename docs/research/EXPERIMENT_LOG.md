@@ -877,3 +877,17 @@ nema performance nalaza; nakon šest kompletnih modela slijedi96native final aud
 
 EXP-033 handoff:3SFprvih16parityPASS;3CAposla queued, source/guard isti,
 PPID1/nice19 i48–80+step napredak potvrđeni bez stop/error. ETA30min.
+
+
+EXP-033 final,2026-11-23 /ADR-056: svih6×512=3072koraka/768epizoda/12modela za20,05min,
+bez greške. Original512→centered: SF6,75→3,16%,CA6,36→7,93%; oba frozen continuation
+false. SF−3,59pp CI[−8,75;−0,21],CA+1,57[−5,24;+7,80]. Fixedfront11,29/3,35%,uniform
+5,23/6,20%,fit-onlysector6/7 0,23/9,49%; svi seedovi/ha/pooled/zero-noop sačuvani.
+Nezavisni audit3072steps/192new+192oldscore/96native/480states/610refs/32preflight/
+96firstrollout PASS.438pinned,423modern(4skip),328core(51skip),CLI PASS.4/6greedy isti
+sektor16/16, maxmeanprob11,38–11,78%, gotovo uniformne distribucije; nema uvjerljive
+adaptacije. TASK046separateclip+originalreward je novi prijedlog, nije pokrenut.
+
+EXP-033 završne provjere:15knowledge/strict94PASS; lokalni54.374.678Bpaket svi hashovi
+PASS. Fullrestore12modela/192odluke/96native putanja/480stanja i ponovni audit identični.
+Iste biblioteke, bez retraininga; raw/weights nisu u Gitu. Nema aktivnog računanja.

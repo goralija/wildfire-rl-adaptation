@@ -1,8 +1,14 @@
 # real-fire-data
 
+- [Centered PPO svi nalazi](centered-ppo-learning-v1.json) - TASK-045/ADR-056: SF pad/CA nesiguran rast, oba frozen continuation false.
+- [Centered PPO nezavisni audit](centered-ppo-independent-v1.json) -3072step/12new+12oldmodela/192new+192oldscore/96native putanja.
+- [Centered PPO lokalni paket](centered-ppo-artifacts-v1.json) -54.374.678B/322člana plus488/1035članova roditeljskih paketa, svi hashovi provjereni.
+- [Centered PPO puni restore](centered-ppo-restore-v1.json) -12modela/192odluke/96fresh native putanja, svi numeric nizovi identični.
+- [Centered PPO figura](centered-ppo-v1.png) - isti512budžet i opisni upareni intervali na14požara.
+
 - [Centered PPO preflight](centered-ppo-preflight-v1.json) - TASK-045:32paired native putanje/122reference, fizički tok nepromijenjen.
-- [Centered PPO verifikacija](centered-ppo-verification-v1.json) -434pinned testova i aktivni trening; nije novi learning nalaz.
-- [Centered PPO start](centered-ppo-launch-v1.json) - detached komanda/PID/start; živo stanje uvijek pročitati lokalno.
+- [Centered PPO verifikacija](centered-ppo-verification-v1.json) -438pinned testova, završni audit i granice; tehnički PASS ne dokazuje RL prednost.
+- [Centered PPO start](centered-ppo-launch-v1.json) - historijski detached komanda/PID/start; svih6poslova završeno.
 
 - [PPO signal svi nalazi](ppo-signal-diagnosis-v1.json) - TASK-044/ADR-054, reference,18checkpoint delta i24disposable gradient probe, bez novih politika.
 - [PPO signal figura](ppo-signal-v1.png) - uniforme reference, razmjer među požarima i gradient coupling.

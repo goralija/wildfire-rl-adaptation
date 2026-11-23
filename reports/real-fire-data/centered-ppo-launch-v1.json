@@ -153,5 +153,15 @@
     "original_code_guard_unchanged": true,
     "return_estimate_minutes": 30,
     "scope": "Launch/progress snapshot only; three SimFire first16parityPASS, CA first16checks happen when queued jobs start. No learning outcome yet"
+  },
+  "historical_launch_only": true,
+  "completion": {
+    "status": "COMPLETE",
+    "jobs": 6,
+    "steps": 3072,
+    "episodes": 768,
+    "finished_unix": 1795466604.090951,
+    "seconds": 1203.1581377983093,
+    "no_active_training": true
   }
 }

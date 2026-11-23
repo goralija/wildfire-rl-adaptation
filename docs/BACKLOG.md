@@ -10,7 +10,8 @@ title: Naredni zadaci
 | --- | --- | --- |
 | TASK-043 | završen, ADR-052 |6×2048koraka/18checkpointova, PPO SF5,13%/CA6,03%, oba learning kriterija false;413pinned/audit/full96restore PASS |
 | TASK-044 | završen, ADR-054 | UniformSF5,23/CA6,20%; početni gradient coupling/scale potvrđen uz CA43counterexample;423pinned/audit/restore PASS, bez punog treninga |
-| TASK-045 | trening traje u pozadini, ADR-055 |6×512koraka, plan0d8d3821/kod273cfb62,434testa i32paired native preflight PASS; pri povratku status/PID51639 pa audit svih modela i original512referenata |
+| TASK-045 | završen, ADR-056 |6×512/20,05min; SF6,75→3,16%,CA6,36→7,93%,oba continuation false;438pinned/audit96native PASS |
+| TASK-046 | prijedlog, nije pokrenut |Original reward + odvojeni actor/critic clipping; zaseban512step preregistrovani pilot uz iste45/16,seeds i original512reference |
 | TASK-035 | završeno, ADR-040 | Native/current forcing ugovor, 240 development epizoda i15 replayeva PASS; 352 testa; sigurnost prijavljena zasebno |
 | TASK-036 | faza A završena | SimFire repair ostaje na izvedenoj bazi; nalazi ADR-038 |
 | TASK-037 | predloženo, odgođeno | Preostala SimFire fizika/gate/trening |

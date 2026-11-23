@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "bundle_bytes": 54374678,
+  "bundle_sha256": "7dc7664ad78489b90500a00bb219a6757cb3acfddae850eb280e70c88ef2f32b",
+  "files": 322,
+  "diagnosis_parent_files": 488,
+  "original_parent_files": 1035,
+  "manifest_sha256": "f2e99ce01fe34f26a914971a0af6253ce264add0d8931723c77697fb42d149fc",
+  "all_members_rehashed": true,
+  "scope": "Local nested archive with numeric checkpoints and inputs; existing pinned libraries; no upload, fresh install or optimizer resume"
+}

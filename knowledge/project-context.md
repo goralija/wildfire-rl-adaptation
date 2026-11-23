@@ -13,6 +13,45 @@ sources:
 ---
 # Projektni kontekst
 
+## TASK-045 završen — centriranje nije dovoljno (ADR-056, 2026-11-23)
+
+[Izvještaj](../docs/research/CENTERED_PPO_PILOT.md), grana `codex/centered-ppo-pilot` iz `c2e53f4c`.
+Plan0d8d3821 prije koda273cfb62; audit72fee0e1, vizualna dopunadf26661c.
+Svih6×512koraka /768epizoda /12checkpointova završeno bez greške za20,05min,
+21:43CET. Nema aktivnog treninga; raniji PID51639 i start/snapshot su historija.
+Jedino je reward centriran; isti45TRAINfit/16development,3model seeda,globalclip,
+MLP, B1,48h i vlastita fizika. Svi modeli i original512referenti sačuvani.
+
+Na istih14joint-positive, original512→centered512: **SF6,75→3,16%**, **CA6,36→7,93%**.
+Uparene razlike: SF−3,59pp[−8,75;−0,21], CA+1,57[−5,24;+7,80]. Prema tačno
+uniformnoj liniji: SF−2,06[−6,43;+1,35], CA+1,73[−1,65;+5,02]. **Oba zamrznuta
+kriterija nastavka su false.** CA sredina raste, ali opisni interval ne isključuje
+pogoršanje. SF nalaz je negativan. TRAIN development nije nezavisan test ili
+fizička validacija; stari TASK-043 nalazi ostaju nepromijenjeni.
+
+Fiksni front11,29/3,35%, uniform5,23/6,20%, fit-only sektor6/7daje0,23/9,49%.
+Novi savedha na svih16: SF138,24/CA84,04, pooled1,22/4,50%; SFzero-noop2ostaju
+undefined. Politike su skoro uniformne i četiri od šest biraju jedan isti sektor
+na16/16; sama promjena parametara nije dokaz naučene prilagodbe.
+
+Nezavisni audit3.072step,192new+192original policy score,12+12model load,
+96native putanja /480stanja,610reference stanja,32preflight i96firstrolloutstep PASS.
+438pinned/0skip,423modern/4skip,328core/51skip i CLI PASS. Audit ne mijenja frozen
+trening/fiziku. Detalji lokalnog paketa/restore i završna verifikacija u izvještaju.
+
+**Sljedeći prijedlog TASK-046:** odvojeno zamrznuti mali pilot originalne nagrade
+uz zasebni actor/critic clipping, isti512koraka i isti original512referenti. Nije
+pokrenut; nema automatskog produžavanja ovih modela ili promjene više faktora.
+Stvarni VALIDATION/TEST/futureFEDS/nativeunitparity/fizička validacija/merge ostaju
+odvojeni. Za naredne odobrene duže poslove korisnik i dalje traži background start,
+provjeren napredak, status/ETA i završetak chata dok računanje radi.
+
+
+Završna provjera:15knowledge/strict94 PASS. Lokalni54.374.678Bpaket322člana plus
+488/1035roditeljskih, svi hashovi provjereni. Puni restore iz kopiranog sourcea/ulaza/
+12modela ponavlja192odluke/96native putanja/480stanja identičnim numeric nizovima,
+uz iste postojeće biblioteke i bez novog treninga. Nema aktivnog računanja.
+
 ## TASK-044 završen — PPO signal/reference dijagnoza (ADR-054, 2026-11-23)
 
 [Izvještaj](../docs/research/PPO_SIGNAL_DIAGNOSIS.md), `codex/ppo-signal-diagnosis` izc160fd0e.

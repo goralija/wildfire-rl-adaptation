@@ -1,5 +1,9 @@
 # Promjene baze znanja
 
+## 2026-11-23: završen centrirani PPO pilot
+
+[TASK-045/ADR-056](docs/research/CENTERED_PPO_PILOT.md): centriranjeSF6,75→3,16%,CA6,36→7,93%, oba zamrznuta kriterija false.438pinned i kompletan nezavisni audit PASS; nema aktivnog treninga. TASK-046 odvojeni clipping je prijedlog prije novog eksperimenta.
+
 ## 2026-11-23: TASK-045 start u pozadini
 
 [Centering-only pilot](docs/research/CENTERED_PPO_PILOT.md):434pinned testa i32paired native preflight PASS; šest512step treninga startano u pozadini, bez novih learning nalaza. Status/PID i nastavak sačuvani; korisnik ubuduće također preferira background/ETA handoff.

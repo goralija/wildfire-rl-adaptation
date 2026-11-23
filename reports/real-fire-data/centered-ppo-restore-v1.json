@@ -1,0 +1,74 @@
+{
+  "status": "PASS",
+  "source_root": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/centered-ppo-pilot/.local/centered-artifacts-final/restore",
+  "checkpoints": 12,
+  "policy_decisions": 192,
+  "native_paths": 96,
+  "cumulative_states": 480,
+  "all_numeric_arrays_exact": true,
+  "independent_counts": {
+    "completed_jobs": 6,
+    "training_steps": 3072,
+    "training_episodes": 768,
+    "centered_checkpoints": 12,
+    "original_checkpoints": 12,
+    "policy_scores": 192,
+    "original_policy_scores": 192,
+    "native_paths": 96,
+    "cumulative_states": 480,
+    "reference_states": 610,
+    "preflight_paths": 32,
+    "first_rollout_steps": 96
+  },
+  "rows": [
+    {
+      "backend": "ca",
+      "seed": 17,
+      "checkpoints": 2,
+      "policy_decisions": 32,
+      "native_paths": 16,
+      "status": "PASS"
+    },
+    {
+      "backend": "ca",
+      "seed": 29,
+      "checkpoints": 2,
+      "policy_decisions": 32,
+      "native_paths": 16,
+      "status": "PASS"
+    },
+    {
+      "backend": "ca",
+      "seed": 43,
+      "checkpoints": 2,
+      "policy_decisions": 32,
+      "native_paths": 16,
+      "status": "PASS"
+    },
+    {
+      "backend": "simfire",
+      "seed": 17,
+      "checkpoints": 2,
+      "policy_decisions": 32,
+      "native_paths": 16,
+      "status": "PASS"
+    },
+    {
+      "backend": "simfire",
+      "seed": 29,
+      "checkpoints": 2,
+      "policy_decisions": 32,
+      "native_paths": 16,
+      "status": "PASS"
+    },
+    {
+      "backend": "simfire",
+      "seed": 43,
+      "checkpoints": 2,
+      "policy_decisions": 32,
+      "native_paths": 16,
+      "status": "PASS"
+    }
+  ],
+  "scope": "Extracted source/inputs/all12numeric models,192checkpoint decisions,96fresh native final paths; existing libraries, no retraining"
+}

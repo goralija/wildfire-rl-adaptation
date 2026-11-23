@@ -7,42 +7,44 @@ sources:
 ---
 # Trenutno stanje — 2026-11-23
 
-## TASK-045 traje u pozadini — centrirana PPO nagrada (ADR-055, 2026-11-23)
+## TASK-045 završen — centriranje nije dovoljno (ADR-056, 2026-11-23)
 
-[Plan i nastavak](research/CENTERED_PPO_PILOT.md), grana `codex/centered-ppo-pilot` iz `c2e53f4c`.
-Plan `0d8d3821` prethodi kodu `273cfb62` i mjerenjima. Odobrenih šest treninga po
-512 koraka: isti 45 TRAIN fitting / 16 razvojnih požara, seedovi17/29/43, početne
-težine, globalni clipping, budžet i fizika; mijenja se samo nagrada. Referenti su
-originalni checkpointovi na512, bez ponovnog treninga ili izbora najboljeg seeda.
+[Izvještaj](research/CENTERED_PPO_PILOT.md), grana `codex/centered-ppo-pilot` iz `c2e53f4c`.
+Plan0d8d3821 prije koda273cfb62; audit72fee0e1, vizualna dopunadf26661c.
+Svih6×512koraka /768epizoda /12checkpointova završeno bez greške za20,05min,
+21:43CET. Nema aktivnog treninga; raniji PID51639 i start/snapshot su historija.
+Jedino je reward centriran; isti45TRAINfit/16development,3model seeda,globalclip,
+MLP, B1,48h i vlastita fizika. Svi modeli i original512referenti sačuvani.
 
-434 pinned testa / bez preskakanja,419 modernih /4skip,324 core /51skip,
-15 knowledge testova,11 novih testova, CLI i strict94 prolaze.32 raw/centered para
-(64 native epizode) potvrđuju sve opažaje, maske, akcije, budžete, četiri odluke i
-svaku burned/line masku; nagrada prati tačan no-op offset.122 referentne putanje su
-guardovane. Preflight39,90s. CI implementacije273cfb62 prolazi sva četiri posla.
+Na istih14joint-positive, original512→centered512: **SF6,75→3,16%**, **CA6,36→7,93%**.
+Uparene razlike: SF−3,59pp[−8,75;−0,21], CA+1,57[−5,24;+7,80]. Prema tačno
+uniformnoj liniji: SF−2,06[−6,43;+1,35], CA+1,73[−1,65;+5,02]. **Oba zamrznuta
+kriterija nastavka su false.** CA sredina raste, ali opisni interval ne isključuje
+pogoršanje. SF nalaz je negativan. TRAIN development nije nezavisan test ili
+fizička validacija; stari TASK-043 nalazi ostaju nepromijenjeni.
 
-**Start:**2026-11-23 u21:23 CET, detached koordinator **PID51639**, PPID1,
-nice19, tri radnika / jedna numerička nit. Lokalni rezultat je u
-`.local/centered-ppo-v1/`, stdout u `.local/centered-training.log` ovog worktreea.
-Ovo je pokrenut posao, još nije novi learning ili fizički nalaz.
+Fiksni front11,29/3,35%, uniform5,23/6,20%, fit-only sektor6/7daje0,23/9,49%.
+Novi savedha na svih16: SF138,24/CA84,04, pooled1,22/4,50%; SFzero-noop2ostaju
+undefined. Politike su skoro uniformne i četiri od šest biraju jedan isti sektor
+na16/16; sama promjena parametara nije dokaz naučene prilagodbe.
 
-**Pri povratku prvo čitati status i PID, ne startati dupli posao.** Provjeriti
-`status.json`, `coordinator.lock`, `job-*/status.json`, `first-rollout.json`,
-`error.json`, `stop.json` i `done.json`. Završeni job se usvaja isključivo uz guard
-svih fajlova; nepotpun job nema optimizer resume iz inference NPZ-a. Ne brisati
-lock dok se ne provjeri stvarni PID. Ako posao radi, pročitati napredak i dati ETA.
-Ako je završio, provjeriti svih šest×512koraka,96 native final putanja, staru512
-referencu, prvi16 parity i nezavisnu statistiku; potom rezultati, audit/restore i
-ADR-056. Ne produžavati automatski budžet. Stvarni VALIDATION/TEST/futureFEDS/merge
-ostaju zatvoreni. Korisnik i ubuduće traži background handoff za duže poslove uz
-provjeren start i procjenu povratka, bez čekanja treninga u chatu.
+Nezavisni audit3.072step,192new+192original policy score,12+12model load,
+96native putanja /480stanja,610reference stanja,32preflight i96firstrolloutstep PASS.
+438pinned/0skip,423modern/4skip,328core/51skip i CLI PASS. Audit ne mijenja frozen
+trening/fiziku. Detalji lokalnog paketa/restore i završna verifikacija u izvještaju.
+
+**Sljedeći prijedlog TASK-046:** odvojeno zamrznuti mali pilot originalne nagrade
+uz zasebni actor/critic clipping, isti512koraka i isti original512referenti. Nije
+pokrenut; nema automatskog produžavanja ovih modela ili promjene više faktora.
+Stvarni VALIDATION/TEST/futureFEDS/nativeunitparity/fizička validacija/merge ostaju
+odvojeni. Za naredne odobrene duže poslove korisnik i dalje traži background start,
+provjeren napredak, status/ETA i završetak chata dok računanje radi.
 
 
-**Snapshot pri predaji:** tri SimFire radnika već napreduju; prvi16 parity PASS
-za sva tri (obs/actions/masks/values/logprobs tačno; najveći izmjereni reward-derived
-float32 error1,26e-6). CA17/29/43 su u redu čekanja. PPID1/nice19 provjereni iz `ps`,
-bez stop/error zapisa. Ovo je snapshot starta; lokalni status ima prednost.
-Korisniku procijenjen povratak za oko30min, bez držanja chata otvorenim.
+Završna provjera:15knowledge/strict94 PASS. Lokalni54.374.678Bpaket322člana plus
+488/1035roditeljskih, svi hashovi provjereni. Puni restore iz kopiranog sourcea/ulaza/
+12modela ponavlja192odluke/96native putanja/480stanja identičnim numeric nizovima,
+uz iste postojeće biblioteke i bez novog treninga. Nema aktivnog računanja.
 
 ## TASK-044 završen — PPO signal/reference dijagnoza (ADR-054, 2026-11-23)
 
