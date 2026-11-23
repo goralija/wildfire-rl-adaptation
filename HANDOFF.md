@@ -4,14 +4,42 @@ title: Handoff za nastavak projekta
 ---
 # Handoff za nastavak projekta
 
-## TASK-045 priprema — centering-only PPO pilot (ADR-055, 2026-11-23)
+## TASK-045 traje u pozadini — centrirana PPO nagrada (ADR-055, 2026-11-23)
 
-Korisnik nastavlja pilot i dopušta background handoff za duže poslove ubuduće.
-[Plan](docs/research/CENTERED_PPO_PILOT.md), `codex/centered-ppo-pilot` izc2e53f4c:
-ista45fit/16development/3seeda/512koraka/hiperparametri/globalclip, jedino nova
-centrirana nagrada. Poređenje s originalnim512checkpointovima; svi modeli, seedovi
-i referenti prijavljeni. Testovi i32paired native preflight putanje prije starta.
-Trening nije pokrenut; stvarni holdouti/futureFEDS/merge zatvoreni.
+[Plan i nastavak](docs/research/CENTERED_PPO_PILOT.md), grana `codex/centered-ppo-pilot` iz `c2e53f4c`.
+Plan `0d8d3821` prethodi kodu `273cfb62` i mjerenjima. Odobrenih šest treninga po
+512 koraka: isti 45 TRAIN fitting / 16 razvojnih požara, seedovi17/29/43, početne
+težine, globalni clipping, budžet i fizika; mijenja se samo nagrada. Referenti su
+originalni checkpointovi na512, bez ponovnog treninga ili izbora najboljeg seeda.
+
+434 pinned testa / bez preskakanja,419 modernih /4skip,324 core /51skip,
+15 knowledge testova,11 novih testova, CLI i strict94 prolaze.32 raw/centered para
+(64 native epizode) potvrđuju sve opažaje, maske, akcije, budžete, četiri odluke i
+svaku burned/line masku; nagrada prati tačan no-op offset.122 referentne putanje su
+guardovane. Preflight39,90s. CI implementacije273cfb62 prolazi sva četiri posla.
+
+**Start:**2026-11-23 u21:23 CET, detached koordinator **PID51639**, PPID1,
+nice19, tri radnika / jedna numerička nit. Lokalni rezultat je u
+`.local/centered-ppo-v1/`, stdout u `.local/centered-training.log` ovog worktreea.
+Ovo je pokrenut posao, još nije novi learning ili fizički nalaz.
+
+**Pri povratku prvo čitati status i PID, ne startati dupli posao.** Provjeriti
+`status.json`, `coordinator.lock`, `job-*/status.json`, `first-rollout.json`,
+`error.json`, `stop.json` i `done.json`. Završeni job se usvaja isključivo uz guard
+svih fajlova; nepotpun job nema optimizer resume iz inference NPZ-a. Ne brisati
+lock dok se ne provjeri stvarni PID. Ako posao radi, pročitati napredak i dati ETA.
+Ako je završio, provjeriti svih šest×512koraka,96 native final putanja, staru512
+referencu, prvi16 parity i nezavisnu statistiku; potom rezultati, audit/restore i
+ADR-056. Ne produžavati automatski budžet. Stvarni VALIDATION/TEST/futureFEDS/merge
+ostaju zatvoreni. Korisnik i ubuduće traži background handoff za duže poslove uz
+provjeren start i procjenu povratka, bez čekanja treninga u chatu.
+
+
+**Snapshot pri predaji:** tri SimFire radnika već napreduju; prvi16 parity PASS
+za sva tri (obs/actions/masks/values/logprobs tačno; najveći izmjereni reward-derived
+float32 error1,26e-6). CA17/29/43 su u redu čekanja. PPID1/nice19 provjereni iz `ps`,
+bez stop/error zapisa. Ovo je snapshot starta; lokalni status ima prednost.
+Korisniku procijenjen povratak za oko30min, bez držanja chata otvorenim.
 
 ## TASK-044 završen — PPO signal/reference dijagnoza (ADR-054, 2026-11-23)
 

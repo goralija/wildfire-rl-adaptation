@@ -867,3 +867,13 @@ Isti45fit/16development/3model seeda/B1/4×12h/globalclip;6×512koraka s novim
 11novih testova prije native32paired preflighta i starta. Bez holdouta/futureFEDS-a
 ili promjene fizike. Za duži posao korisnik traži detached start, provjeru napretka
 i završetak sesije uz ETA; sačuvano kao preferenca i za naredne taskove.
+
+
+EXP-033 start: plan0d8d3821 / code273cfb62,434pinned/419modern(4skip)/324core(51skip),
+15knowledge,CLI/strict94 PASS. Preflight32paired raw/centered native paths /64epizode,
+122guarded reference trajectories,39,90s; physics/features/masks/budget/horizon/reward
+identity PASS.21:23CET detached coordinator51639,PPID1,nice19,3workers/1thread. Još
+nema performance nalaza; nakon šest kompletnih modela slijedi96native final audit.
+
+EXP-033 handoff:3SFprvih16parityPASS;3CAposla queued, source/guard isti,
+PPID1/nice19 i48–80+step napredak potvrđeni bez stop/error. ETA30min.

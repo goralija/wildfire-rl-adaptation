@@ -1,5 +1,9 @@
 # real-fire-data
 
+- [Centered PPO preflight](centered-ppo-preflight-v1.json) - TASK-045:32paired native putanje/122reference, fizički tok nepromijenjen.
+- [Centered PPO verifikacija](centered-ppo-verification-v1.json) -434pinned testova i aktivni trening; nije novi learning nalaz.
+- [Centered PPO start](centered-ppo-launch-v1.json) - detached komanda/PID/start; živo stanje uvijek pročitati lokalno.
+
 - [PPO signal svi nalazi](ppo-signal-diagnosis-v1.json) - TASK-044/ADR-054, reference,18checkpoint delta i24disposable gradient probe, bez novih politika.
 - [PPO signal figura](ppo-signal-v1.png) - uniforme reference, razmjer među požarima i gradient coupling.
 - [PPO signal independent](ppo-signal-independent-v1.json) -405CAputanja/2025maski,fit-only izbor,24gradient reprodukcije.

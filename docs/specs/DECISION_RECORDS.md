@@ -2437,3 +2437,19 @@ bootstrap po požaru naistih14, seed prosjek unutra; oba lowerCI>0 su samo conti
 signal. Front i ostali referenti ostaju vidljivi. Bez separateclipa/tuninga/više
 koraka/holdouta/futureFEDS/mergea. Najviše3radnika+koordinator,nice19/1nit,15–25min,
 background status/error/done receipts. NPZ nije optimizerresume.
+
+
+### ADR-055 dopuna — preflight i start (2026-11-23)
+
+Plan commit0d8d3821 prije koda273cfb62.434pinned/419modern(4skip)/324core(51skip),
+15knowledge,CLI/strict94 i implementacijski CI sva4posla PASS.32paired native putanje
+(64epizode),122reference i source/runtime/oldcheckpoint guards PASS; fizički tok i
+informacije nepromijenjeni, novi reward tačan. Detached trening start21:23CET,
+PID51639, PPID1, nice19, najviše3radnika+koordinator / jedna nit. Sačuvani status,
+lock, stop/error/done i launch receipt; nema novih learning rezultata u trenutku
+starta. Pri povratku prvo status/PID, potom potpuna provjera rezultata i ADR-056.
+Korisnikova background/ETA preferenca važi i za naredne odobrene duže poslove.
+
+Start potvrđen iz nezavisnog `ps`: PPID1/svi nice19;3SFmodela napreduju,
+prvih16parity PASS (max reward-derived float32diff1,26e-6), CA3posla čekaju.
+Ovo je tehnički snapshot, ne rezultat novih politika. Handoff ETA oko30min.

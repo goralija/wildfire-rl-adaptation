@@ -52,8 +52,7 @@ dokumentovan novi pokušaj. Stari TASK-043/044rezultati ostaju historijski nepro
 ## Status
 
 Plan je zasebno commitovan kao `0d8d3821`, prije implementacije. Opt-in adapter i
-runner su implementirani; stari numerički source ostaje nepromijenjen. Trening još
-nije pokrenut. Jedanaest novih testova obuhvata reward invariance, reference,
+runner su implementirani; stari numerički source ostaje nepromijenjen. Trening je pokrenut nakon preflighta; vidi start i nastavak ispod. Jedanaest novih testova obuhvata reward invariance, reference,
 statistiku, PPO/NPZ, prekid prije updatea i odbijanje partial/duplicate poslova.
 Novi moduli imaju zaseban reward contract, a prva16step provjera čuva tačne ulaze
 i lokalnu float32toleranciju `atol=2e-5,rtol=1e-6` samo za izvedene reward tenzore.
@@ -66,3 +65,38 @@ Pozadinski posao koristi atomic exclusive coordinator lock, odvojene PID/status/
 error/stop/done zapise i numeričke checkpointove0/512. Globalni stop se zapisuje prije
 čekanja poola; nedovršen job se ne usvaja kao optimizer resume. Završeni job ima
 hash svakog fajla prije usvajanja. Fajlovi s težinama i mapama ostaju u `.local`.
+
+
+## Preflight i pozadinski start — 2026-11-23
+
+**Provjereno:**434 pinned /0skip,419 modern /4skip,324 core /51skip,15 knowledge,
+CLI i strict94.11 novih testova uključuje namjerni pogrešan prvi rollout i prekid
+prije prvog optimizer updatea, globalni stop, partial job i dupli koordinator.
+[Verifikacija](../../reports/real-fire-data/centered-ppo-verification-v1.json).
+Kod `273cfb62` je pushan i [sva četiri CI posla](https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45258731879)
+prolaze, prije novog training nalaza.
+
+[Native preflight](../../reports/real-fire-data/centered-ppo-preflight-v1.json):
+32 para (64 epizode), četiri fiksna požara×dva simulatora×četiri sekvence,39,90s.
+Jednaki svi opažaji i finalni opažaj, maske, akcije, budžeti, fizički score i svaka
+kumulativna maska požara/linije. Per-step offset i finalna saved-return jednakost
+prolaze;122 referentne putanje i originalni512checkpoint receipts provjereni.
+Ovo je tehničko očuvanje ugovora, ne rezultat novog učenja.
+
+[Launch zapis](../../reports/real-fire-data/centered-ppo-launch-v1.json):21:23 CET,
+koordinator PID51639, PPID1, nice19, tri radnika, jedna nit. Worktree
+`.worktrees/centered-ppo-pilot`, izlaz `.local/centered-ppo-v1`, stdout
+`.local/centered-training.log`. Ne pokretati istu komandu dok postoji živ koordinator.
+
+Pri nastavku prvo pregledati lokalni root i job status, lock/PID, first-rollout,
+stop/error i done receipts. Ako je kompletno, nezavisno provjeriti šest modela,
+3072 trening koraka /768 epizoda, svih96 native final putanja, isti original512,
+prve16 korake i bootstrap po požaru. Zatim objaviti sve rezultate i ograničenja,
+provesti prenosiv lokalni bundle/restore i zapisati ADR-056. Ako je nedovršeno,
+prvo utvrditi razlog; nema optimizer nastavka iz inference-only NPZ checkpointa.
+
+**Snapshot pri predaji:** tri SimFire radnika već napreduju; prvi16 parity PASS
+za sva tri (obs/actions/masks/values/logprobs tačno; najveći izmjereni reward-derived
+float32 error1,26e-6). CA17/29/43 su u redu čekanja. PPID1/nice19 provjereni iz `ps`,
+bez stop/error zapisa. Ovo je snapshot starta; lokalni status ima prednost.
+Korisniku procijenjen povratak za oko30min, bez držanja chata otvorenim.

@@ -5,7 +5,7 @@ okf_version: "0.2"
 
 ## Počni ovdje
 
-- [Aktivno: centrirana PPO nagrada](docs/research/CENTERED_PPO_PILOT.md) - TASK-045/ADR-055, frozen512step pilot prije starta.
+- [Aktivno: centrirana PPO nagrada](docs/research/CENTERED_PPO_PILOT.md) - TASK-045/ADR-055, šest512step treninga u pozadini nakon testova/preflighta; status i nastavak.
 
 
 - [Najnovije: PPO signal i reference](docs/research/PPO_SIGNAL_DIAGNOSIS.md) - TASK-044/ADR-054 završen: uniformni referenti, početni gradient coupling i smjer za kontrolisani pilot.

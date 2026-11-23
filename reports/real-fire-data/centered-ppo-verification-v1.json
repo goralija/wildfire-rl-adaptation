@@ -1,0 +1,310 @@
+{
+  "task": "TASK-045",
+  "date": "2026-11-23",
+  "status": "RUNNING",
+  "plan_commit": "0d8d3821",
+  "measurement_code_commit": "273cfb62395318258f10117ddefdcf637b35a794",
+  "preflight": "PASS",
+  "checks": {
+    "pinned": {
+      "tests": 434,
+      "skipped": 0,
+      "log_sha256": "5fab610cff00d6e7bfffc7bce86ab669e2e524570b0d74ff5cd977d323004061"
+    },
+    "modern": {
+      "tests": 419,
+      "skipped": 4,
+      "log_sha256": "08c5af3098f51a7ffe9364cff6520553b652b94ec2d5ae927165bf974370e1aa"
+    },
+    "core": {
+      "tests": 324,
+      "skipped": 51,
+      "log_sha256": "98916647332b02bc2194a1daf06fff8134dfc40b2a76f66121cbff964677bd0c"
+    },
+    "knowledge": {
+      "tests": 15,
+      "skipped": 0,
+      "log_sha256": "97a6d5a23f036d30a6338f75272e516809758e26775dbe061bedfc8b87ddf682"
+    },
+    "centered": {
+      "tests": 11,
+      "skipped": 0,
+      "log_sha256": "89fd739373e1d00ab2a235d5bfaa4c1faef57b540f26b763e8f3902978ec46ad"
+    },
+    "cli": "PASS",
+    "strict_knowledge": "PASS:94Markdown",
+    "knowledge_handoff": {
+      "tests": 15,
+      "log_sha256": "e52a1ced6bfb56b6d13435c0ad7f32544c2682343fca177fb4606096ed617b5d"
+    }
+  },
+  "numerical_guard": {
+    "plan_sha256": "de11364e74c0d884721e81a9227ca629ea218e3b1e9dc0f0b1fee25de22b2d8c",
+    "source_sha256": {
+      "scripts/run_centered_ppo_pilot.py": "d82c7c893bc95a7f64ec8811694c1ae90c152abf74de08433361615de6e07186",
+      "src/wildfire_rl/centered_control.py": "1d74cd16844ef185fe1f396f20e316c0d67f814e824dfbf88d53891f16c8bd02",
+      "src/wildfire_rl/ppo_signal_rl.py": "eeea24d38bd309f604d7006e43a962e8440fd1ce982ad461e21c3519e3c00d0b",
+      "src/wildfire_rl/ppo_signal_diagnosis.py": "abc91ebefdd1958041eb1a064779435ac4ae2f72e8782845bc8a6cae36ba448b"
+    },
+    "parent_guard": {
+      "plan_sha256": "6e20009c277d842dd9c310ee4f6e021fc7a156baf704840b76413a4b94e95f43",
+      "source_sha256": {
+        "scripts/run_paired_simulators.py": "a7394dd8860b4b105e2e83c4f3f826b9ac46f77eaa72ae4be9036de1418ba625",
+        "scripts/smoke_common_ppo.py": "192fd022d43aacffd5daa6b4f8fc0f6f280a446cc4fbdaeb06bc05520fff439f",
+        "src/wildfire_rl/common_control.py": "7ad174db3e263f1737706bb46e82a4d737e672e5dc89bb63ea11f775d3a42e10",
+        "src/wildfire_rl/common_control_rl.py": "bb7a67cc005d155d3d0297606beb85be71084d66319d7b5cdc2e0b9c68a69cda",
+        "src/wildfire_rl/feds_b1_learning.py": "3562ae7d15a58fac46ffca374b28cd1f9673a181c2943b0e4bdc8a8a32774606",
+        "src/wildfire_rl/feds_observation_audit.py": "bc7109bb81b41a5e0081d06ab7145252f6ddf1b205924de50f3b9f7dd1a64cf5",
+        "src/wildfire_rl/feds_observation_v2.py": "01cef197dfa09924deffa57055cd51b1dc78bc6d9c4a46ed4bc6a41e7854cf81",
+        "src/wildfire_rl/feds_repaired_learning.py": "bd234e75c65b9dffb8390ff34252139ec1eb7b80f38bb95730230837da66216c",
+        "src/wildfire_rl/feds_simfire_env.py": "261cb0b6565b72711aa56964a068f6749b6c49ceaa32b2b70a54c959cdb235ed",
+        "src/wildfire_rl/feds_simfire_setup.py": "78e7187113a246e9f70a0a88178b3d55345ed84ebce05b8e1c1f0b1b52b3c944",
+        "src/wildfire_rl/line_damage.py": "cab7e146e769edff04e2364c8d9874036ab154fa68f05af1c739d6b55f995ea6",
+        "src/wildfire_rl/paired_simulators.py": "58794b6d1acb6df2f23b5be678e6d6bae0345b13f6676d86cd0d72a4c3d78779",
+        "src/wildfire_rl/simfire_initial_state.py": "b73c6a7d895b28a2270b47f80897a01ef465370758b08b90fbd6b699b6f3ff22",
+        "src/wildfire_rl/simfire_timebase.py": "f873554b80b884b382fb29271d64ef2da0801b25e3c9f3aec91aa5848a21b722",
+        "src/wildfire_rl/synthetic_ca.py": "855b1d1ba50a1fd0e28f652f19d74607b1b0e485989e5424380bbf0602adb844",
+        "src/wildfire_rl/synthetic_real_cases.py": "22b2bb365207e2f5139cbd7c24d835f512a429b423387e8bfe627c9621729db6",
+        "scripts/run_paired_ppo_learning.py": "3677165c987e4959b96449ed0924791fb3287a1cffedc8ae58045eee98bd5b8d",
+        "src/wildfire_rl/paired_ppo_learning.py": "a0adebb9272544c34263823e7f8abbfdc26d58643e6eef2a74a8d249865b4af2",
+        "src/wildfire_rl/feds_b1.py": "e2ea9af4ef7d55103cd94fb8b5f8528f9e2fec2d900f231a68cdee06541f3e02",
+        "src/wildfire_rl/feds_heuristics.py": "1f6f38ac8dfd6e6e3e822f85c3fbb6547b0c001fd11ff0d962921e6c70eb77b5",
+        "src/wildfire_rl/feds_repaired_policies.py": "835779759e093f0bd67c6cfe0ba87b8790b5ae607c9f2470fb74f3fd9310c317",
+        "src/wildfire_rl/feds_observation_dataset.py": "662561f33a7a3939ce85b5a8e1b051caf74cbad3cfdf835768c6aea84e9da8e9"
+      },
+      "runtime": {
+        "python": "3.9.25",
+        "packages": {
+          "numpy": "1.26.4",
+          "torch": "2.3.1",
+          "stable-baselines3": "2.7.1",
+          "sb3-contrib": "2.7.1",
+          "simfire": "2.0.1",
+          "gymnasium": "1.1.1",
+          "scipy": "1.13.1"
+        }
+      },
+      "source_commit": "13a234baa49bec917df97dc8664bf2a7b6c4b041"
+    },
+    "diagnosis_guard": {
+      "plan_sha256": "449002fea682f6a2246a9e27edc7c9e88544ae54386b5448c10bc9a1e7d6c649",
+      "source_sha256": {
+        "scripts/diagnose_ppo_signal.py": "e1a7971d2122089c7195c34c3cff0a6e322e85e1d795a2927559affb4dd44e48",
+        "src/wildfire_rl/ppo_signal_diagnosis.py": "abc91ebefdd1958041eb1a064779435ac4ae2f72e8782845bc8a6cae36ba448b",
+        "src/wildfire_rl/ppo_signal_rl.py": "eeea24d38bd309f604d7006e43a962e8440fd1ce982ad461e21c3519e3c00d0b"
+      },
+      "parent_guard": {
+        "plan_sha256": "6e20009c277d842dd9c310ee4f6e021fc7a156baf704840b76413a4b94e95f43",
+        "source_sha256": {
+          "scripts/run_paired_simulators.py": "a7394dd8860b4b105e2e83c4f3f826b9ac46f77eaa72ae4be9036de1418ba625",
+          "scripts/smoke_common_ppo.py": "192fd022d43aacffd5daa6b4f8fc0f6f280a446cc4fbdaeb06bc05520fff439f",
+          "src/wildfire_rl/common_control.py": "7ad174db3e263f1737706bb46e82a4d737e672e5dc89bb63ea11f775d3a42e10",
+          "src/wildfire_rl/common_control_rl.py": "bb7a67cc005d155d3d0297606beb85be71084d66319d7b5cdc2e0b9c68a69cda",
+          "src/wildfire_rl/feds_b1_learning.py": "3562ae7d15a58fac46ffca374b28cd1f9673a181c2943b0e4bdc8a8a32774606",
+          "src/wildfire_rl/feds_observation_audit.py": "bc7109bb81b41a5e0081d06ab7145252f6ddf1b205924de50f3b9f7dd1a64cf5",
+          "src/wildfire_rl/feds_observation_v2.py": "01cef197dfa09924deffa57055cd51b1dc78bc6d9c4a46ed4bc6a41e7854cf81",
+          "src/wildfire_rl/feds_repaired_learning.py": "bd234e75c65b9dffb8390ff34252139ec1eb7b80f38bb95730230837da66216c",
+          "src/wildfire_rl/feds_simfire_env.py": "261cb0b6565b72711aa56964a068f6749b6c49ceaa32b2b70a54c959cdb235ed",
+          "src/wildfire_rl/feds_simfire_setup.py": "78e7187113a246e9f70a0a88178b3d55345ed84ebce05b8e1c1f0b1b52b3c944",
+          "src/wildfire_rl/line_damage.py": "cab7e146e769edff04e2364c8d9874036ab154fa68f05af1c739d6b55f995ea6",
+          "src/wildfire_rl/paired_simulators.py": "58794b6d1acb6df2f23b5be678e6d6bae0345b13f6676d86cd0d72a4c3d78779",
+          "src/wildfire_rl/simfire_initial_state.py": "b73c6a7d895b28a2270b47f80897a01ef465370758b08b90fbd6b699b6f3ff22",
+          "src/wildfire_rl/simfire_timebase.py": "f873554b80b884b382fb29271d64ef2da0801b25e3c9f3aec91aa5848a21b722",
+          "src/wildfire_rl/synthetic_ca.py": "855b1d1ba50a1fd0e28f652f19d74607b1b0e485989e5424380bbf0602adb844",
+          "src/wildfire_rl/synthetic_real_cases.py": "22b2bb365207e2f5139cbd7c24d835f512a429b423387e8bfe627c9621729db6",
+          "scripts/run_paired_ppo_learning.py": "3677165c987e4959b96449ed0924791fb3287a1cffedc8ae58045eee98bd5b8d",
+          "src/wildfire_rl/paired_ppo_learning.py": "a0adebb9272544c34263823e7f8abbfdc26d58643e6eef2a74a8d249865b4af2",
+          "src/wildfire_rl/feds_b1.py": "e2ea9af4ef7d55103cd94fb8b5f8528f9e2fec2d900f231a68cdee06541f3e02",
+          "src/wildfire_rl/feds_heuristics.py": "1f6f38ac8dfd6e6e3e822f85c3fbb6547b0c001fd11ff0d962921e6c70eb77b5",
+          "src/wildfire_rl/feds_repaired_policies.py": "835779759e093f0bd67c6cfe0ba87b8790b5ae607c9f2470fb74f3fd9310c317",
+          "src/wildfire_rl/feds_observation_dataset.py": "662561f33a7a3939ce85b5a8e1b051caf74cbad3cfdf835768c6aea84e9da8e9"
+        },
+        "runtime": {
+          "python": "3.9.25",
+          "packages": {
+            "numpy": "1.26.4",
+            "torch": "2.3.1",
+            "stable-baselines3": "2.7.1",
+            "sb3-contrib": "2.7.1",
+            "simfire": "2.0.1",
+            "gymnasium": "1.1.1",
+            "scipy": "1.13.1"
+          }
+        },
+        "source_commit": "13a234baa49bec917df97dc8664bf2a7b6c4b041"
+      },
+      "library_source": {
+        "sb3_contrib.ppo_mask.ppo_mask": {
+          "path": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/ppo-signal-diagnosis/.local/simfire-venv/lib/python3.9/site-packages/sb3_contrib/ppo_mask/ppo_mask.py",
+          "sha256": "85c09a14a05ed62f761512eb4bd60441c92de1da574b6c4bc0eaf192e8e2863a"
+        },
+        "sb3_contrib.common.maskable.policies": {
+          "path": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/ppo-signal-diagnosis/.local/simfire-venv/lib/python3.9/site-packages/sb3_contrib/common/maskable/policies.py",
+          "sha256": "25288c78d47172597f9d169659a68d7d069ed09d645d644febc108b17c6f680a"
+        },
+        "torch.optim.adam": {
+          "path": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/ppo-signal-diagnosis/.local/simfire-venv/lib/python3.9/site-packages/torch/optim/adam.py",
+          "sha256": "e28bf1445da23c19304bd84ddc5e94b083d647b04136e3d068f53668199e6c03"
+        }
+      }
+    },
+    "library_sha256": {
+      "sb3_contrib.ppo_mask.ppo_mask": "85c09a14a05ed62f761512eb4bd60441c92de1da574b6c4bc0eaf192e8e2863a",
+      "sb3_contrib.common.maskable.policies": "25288c78d47172597f9d169659a68d7d069ed09d645d644febc108b17c6f680a",
+      "torch.optim.adam": "e28bf1445da23c19304bd84ddc5e94b083d647b04136e3d068f53668199e6c03"
+    }
+  },
+  "old_numerical_source_changed": false,
+  "publication": {
+    "branch": "codex/centered-ppo-pilot",
+    "implementation_pushed": true,
+    "ci": "success",
+    "tested_commit": "273cfb62395318258f10117ddefdcf637b35a794",
+    "ci_url": "https://github.com/goralija/wildfire-rl-adaptation/actions/runs/45258731879",
+    "new_pr": false,
+    "merge": false
+  },
+  "limits": [
+    "No new learning result until all six jobs,96native final paths and audits complete",
+    "45TRAINfit/16previously explored development, not heldout",
+    "Only512steps, global clipping unchanged",
+    "No VALIDATION/TEST/futureFEDS/physical validation/merge"
+  ],
+  "background_snapshot": {
+    "observed_utc": "2026-11-23T20:26:21.932858+00:00",
+    "elapsed_seconds": 184.30508422851562,
+    "coordinator": {
+      "phase": "running",
+      "pid": 51639,
+      "started_unix": 1795465400.911766,
+      "jobs": 6,
+      "workers": 3,
+      "target_per_job": 512
+    },
+    "jobs": [
+      {
+        "job": "job-simfire-17",
+        "status": {
+          "phase": "training",
+          "pid": 51657,
+          "steps": 96,
+          "target": 512,
+          "first_rollout": {
+            "status": "PASS",
+            "exact_inputs_actions_masks_values_logprobs": true,
+            "max_reward_tensor_errors": {
+              "rewards": 6.870925410851214e-07,
+              "returns": 5.960464477539062e-07,
+              "advantages": 5.960464477539062e-07
+            },
+            "atol": 2e-05,
+            "rtol": 1e-06,
+            "before_optimizer_update": true,
+            "sha256": "9a02b5cb11735014dec819bbecbb32b404e63559375a48c3c9ec019db46043c5"
+          },
+          "updated_unix": 1795465576.959321,
+          "elapsed_seconds": 171.46157097816467
+        },
+        "first_rollout": {
+          "status": "PASS",
+          "exact_inputs_actions_masks_values_logprobs": true,
+          "max_reward_tensor_errors": {
+            "rewards": 6.870925410851214e-07,
+            "returns": 5.960464477539062e-07,
+            "advantages": 5.960464477539062e-07
+          },
+          "atol": 2e-05,
+          "rtol": 1e-06,
+          "before_optimizer_update": true,
+          "sha256": "9a02b5cb11735014dec819bbecbb32b404e63559375a48c3c9ec019db46043c5"
+        }
+      },
+      {
+        "job": "job-simfire-29",
+        "status": {
+          "phase": "training",
+          "pid": 51659,
+          "steps": 96,
+          "target": 512,
+          "first_rollout": {
+            "status": "PASS",
+            "exact_inputs_actions_masks_values_logprobs": true,
+            "max_reward_tensor_errors": {
+              "rewards": 6.103515630684342e-07,
+              "returns": 1.2516975402832031e-06,
+              "advantages": 1.1920928955078125e-06
+            },
+            "atol": 2e-05,
+            "rtol": 1e-06,
+            "before_optimizer_update": true,
+            "sha256": "5709941446bbc93ad0b5b4bfab2721d2001e704c3a3c3e8b1610bba9ed9deb18"
+          },
+          "updated_unix": 1795465545.290977,
+          "elapsed_seconds": 139.79341888427734
+        },
+        "first_rollout": {
+          "status": "PASS",
+          "exact_inputs_actions_masks_values_logprobs": true,
+          "max_reward_tensor_errors": {
+            "rewards": 6.103515630684342e-07,
+            "returns": 1.2516975402832031e-06,
+            "advantages": 1.1920928955078125e-06
+          },
+          "atol": 2e-05,
+          "rtol": 1e-06,
+          "before_optimizer_update": true,
+          "sha256": "5709941446bbc93ad0b5b4bfab2721d2001e704c3a3c3e8b1610bba9ed9deb18"
+        }
+      },
+      {
+        "job": "job-simfire-43",
+        "status": {
+          "phase": "training",
+          "pid": 51658,
+          "steps": 112,
+          "target": 512,
+          "first_rollout": {
+            "status": "PASS",
+            "exact_inputs_actions_masks_values_logprobs": true,
+            "max_reward_tensor_errors": {
+              "rewards": 2.2888183615066282e-07,
+              "returns": 4.76837158203125e-07,
+              "advantages": 4.76837158203125e-07
+            },
+            "atol": 2e-05,
+            "rtol": 1e-06,
+            "before_optimizer_update": true,
+            "sha256": "ae045f12311c35dfc083a13ba50f169f60ea44dd54ad7c79fa78292ebf6be98a"
+          },
+          "updated_unix": 1795465567.7310028,
+          "elapsed_seconds": 162.2334337234497
+        },
+        "first_rollout": {
+          "status": "PASS",
+          "exact_inputs_actions_masks_values_logprobs": true,
+          "max_reward_tensor_errors": {
+            "rewards": 2.2888183615066282e-07,
+            "returns": 4.76837158203125e-07,
+            "advantages": 4.76837158203125e-07
+          },
+          "atol": 2e-05,
+          "rtol": 1e-06,
+          "before_optimizer_update": true,
+          "sha256": "ae045f12311c35dfc083a13ba50f169f60ea44dd54ad7c79fa78292ebf6be98a"
+        }
+      }
+    ],
+    "queued_jobs": [
+      "job-ca-17",
+      "job-ca-29",
+      "job-ca-43"
+    ],
+    "process_snapshot": "  PID  PPID  PGID NI ELAPSED STAT\n51639     1 51639 19   03:04 SNs \n51657 51639 51639 19   03:01 RN  \n51658 51639 51639 19   03:01 RN  \n51659 51639 51639 19   03:01 RN  \n",
+    "confirmed_detached_ppid1": true,
+    "confirmed_all_nice19": true,
+    "stop_error_absent": true,
+    "original_code_guard_unchanged": true,
+    "return_estimate_minutes": 30,
+    "scope": "Launch/progress snapshot only; three SimFire first16parityPASS, CA first16checks happen when queued jobs start. No learning outcome yet"
+  }
+}

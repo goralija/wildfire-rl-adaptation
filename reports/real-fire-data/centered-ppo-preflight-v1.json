@@ -1,0 +1,1692 @@
+{
+  "task": "TASK-045",
+  "decision": "ADR-055",
+  "date": "2026-11-23",
+  "status": "PASS",
+  "plan_commit": "0d8d3821",
+  "code_commit": "273cfb62395318258f10117ddefdcf637b35a794",
+  "local_preflight_sha256": "3364ea76e88532a710c1ca35b2b500eb7ef868b80fba0d7c2365a3a6f7bfa8cf",
+  "guard": {
+    "plan_sha256": "de11364e74c0d884721e81a9227ca629ea218e3b1e9dc0f0b1fee25de22b2d8c",
+    "source_sha256": {
+      "scripts/run_centered_ppo_pilot.py": "d82c7c893bc95a7f64ec8811694c1ae90c152abf74de08433361615de6e07186",
+      "src/wildfire_rl/centered_control.py": "1d74cd16844ef185fe1f396f20e316c0d67f814e824dfbf88d53891f16c8bd02",
+      "src/wildfire_rl/ppo_signal_rl.py": "eeea24d38bd309f604d7006e43a962e8440fd1ce982ad461e21c3519e3c00d0b",
+      "src/wildfire_rl/ppo_signal_diagnosis.py": "abc91ebefdd1958041eb1a064779435ac4ae2f72e8782845bc8a6cae36ba448b"
+    },
+    "parent_guard": {
+      "plan_sha256": "6e20009c277d842dd9c310ee4f6e021fc7a156baf704840b76413a4b94e95f43",
+      "source_sha256": {
+        "scripts/run_paired_simulators.py": "a7394dd8860b4b105e2e83c4f3f826b9ac46f77eaa72ae4be9036de1418ba625",
+        "scripts/smoke_common_ppo.py": "192fd022d43aacffd5daa6b4f8fc0f6f280a446cc4fbdaeb06bc05520fff439f",
+        "src/wildfire_rl/common_control.py": "7ad174db3e263f1737706bb46e82a4d737e672e5dc89bb63ea11f775d3a42e10",
+        "src/wildfire_rl/common_control_rl.py": "bb7a67cc005d155d3d0297606beb85be71084d66319d7b5cdc2e0b9c68a69cda",
+        "src/wildfire_rl/feds_b1_learning.py": "3562ae7d15a58fac46ffca374b28cd1f9673a181c2943b0e4bdc8a8a32774606",
+        "src/wildfire_rl/feds_observation_audit.py": "bc7109bb81b41a5e0081d06ab7145252f6ddf1b205924de50f3b9f7dd1a64cf5",
+        "src/wildfire_rl/feds_observation_v2.py": "01cef197dfa09924deffa57055cd51b1dc78bc6d9c4a46ed4bc6a41e7854cf81",
+        "src/wildfire_rl/feds_repaired_learning.py": "bd234e75c65b9dffb8390ff34252139ec1eb7b80f38bb95730230837da66216c",
+        "src/wildfire_rl/feds_simfire_env.py": "261cb0b6565b72711aa56964a068f6749b6c49ceaa32b2b70a54c959cdb235ed",
+        "src/wildfire_rl/feds_simfire_setup.py": "78e7187113a246e9f70a0a88178b3d55345ed84ebce05b8e1c1f0b1b52b3c944",
+        "src/wildfire_rl/line_damage.py": "cab7e146e769edff04e2364c8d9874036ab154fa68f05af1c739d6b55f995ea6",
+        "src/wildfire_rl/paired_simulators.py": "58794b6d1acb6df2f23b5be678e6d6bae0345b13f6676d86cd0d72a4c3d78779",
+        "src/wildfire_rl/simfire_initial_state.py": "b73c6a7d895b28a2270b47f80897a01ef465370758b08b90fbd6b699b6f3ff22",
+        "src/wildfire_rl/simfire_timebase.py": "f873554b80b884b382fb29271d64ef2da0801b25e3c9f3aec91aa5848a21b722",
+        "src/wildfire_rl/synthetic_ca.py": "855b1d1ba50a1fd0e28f652f19d74607b1b0e485989e5424380bbf0602adb844",
+        "src/wildfire_rl/synthetic_real_cases.py": "22b2bb365207e2f5139cbd7c24d835f512a429b423387e8bfe627c9621729db6",
+        "scripts/run_paired_ppo_learning.py": "3677165c987e4959b96449ed0924791fb3287a1cffedc8ae58045eee98bd5b8d",
+        "src/wildfire_rl/paired_ppo_learning.py": "a0adebb9272544c34263823e7f8abbfdc26d58643e6eef2a74a8d249865b4af2",
+        "src/wildfire_rl/feds_b1.py": "e2ea9af4ef7d55103cd94fb8b5f8528f9e2fec2d900f231a68cdee06541f3e02",
+        "src/wildfire_rl/feds_heuristics.py": "1f6f38ac8dfd6e6e3e822f85c3fbb6547b0c001fd11ff0d962921e6c70eb77b5",
+        "src/wildfire_rl/feds_repaired_policies.py": "835779759e093f0bd67c6cfe0ba87b8790b5ae607c9f2470fb74f3fd9310c317",
+        "src/wildfire_rl/feds_observation_dataset.py": "662561f33a7a3939ce85b5a8e1b051caf74cbad3cfdf835768c6aea84e9da8e9"
+      },
+      "runtime": {
+        "python": "3.9.25",
+        "packages": {
+          "numpy": "1.26.4",
+          "torch": "2.3.1",
+          "stable-baselines3": "2.7.1",
+          "sb3-contrib": "2.7.1",
+          "simfire": "2.0.1",
+          "gymnasium": "1.1.1",
+          "scipy": "1.13.1"
+        }
+      },
+      "source_commit": "13a234baa49bec917df97dc8664bf2a7b6c4b041"
+    },
+    "diagnosis_guard": {
+      "plan_sha256": "449002fea682f6a2246a9e27edc7c9e88544ae54386b5448c10bc9a1e7d6c649",
+      "source_sha256": {
+        "scripts/diagnose_ppo_signal.py": "e1a7971d2122089c7195c34c3cff0a6e322e85e1d795a2927559affb4dd44e48",
+        "src/wildfire_rl/ppo_signal_diagnosis.py": "abc91ebefdd1958041eb1a064779435ac4ae2f72e8782845bc8a6cae36ba448b",
+        "src/wildfire_rl/ppo_signal_rl.py": "eeea24d38bd309f604d7006e43a962e8440fd1ce982ad461e21c3519e3c00d0b"
+      },
+      "parent_guard": {
+        "plan_sha256": "6e20009c277d842dd9c310ee4f6e021fc7a156baf704840b76413a4b94e95f43",
+        "source_sha256": {
+          "scripts/run_paired_simulators.py": "a7394dd8860b4b105e2e83c4f3f826b9ac46f77eaa72ae4be9036de1418ba625",
+          "scripts/smoke_common_ppo.py": "192fd022d43aacffd5daa6b4f8fc0f6f280a446cc4fbdaeb06bc05520fff439f",
+          "src/wildfire_rl/common_control.py": "7ad174db3e263f1737706bb46e82a4d737e672e5dc89bb63ea11f775d3a42e10",
+          "src/wildfire_rl/common_control_rl.py": "bb7a67cc005d155d3d0297606beb85be71084d66319d7b5cdc2e0b9c68a69cda",
+          "src/wildfire_rl/feds_b1_learning.py": "3562ae7d15a58fac46ffca374b28cd1f9673a181c2943b0e4bdc8a8a32774606",
+          "src/wildfire_rl/feds_observation_audit.py": "bc7109bb81b41a5e0081d06ab7145252f6ddf1b205924de50f3b9f7dd1a64cf5",
+          "src/wildfire_rl/feds_observation_v2.py": "01cef197dfa09924deffa57055cd51b1dc78bc6d9c4a46ed4bc6a41e7854cf81",
+          "src/wildfire_rl/feds_repaired_learning.py": "bd234e75c65b9dffb8390ff34252139ec1eb7b80f38bb95730230837da66216c",
+          "src/wildfire_rl/feds_simfire_env.py": "261cb0b6565b72711aa56964a068f6749b6c49ceaa32b2b70a54c959cdb235ed",
+          "src/wildfire_rl/feds_simfire_setup.py": "78e7187113a246e9f70a0a88178b3d55345ed84ebce05b8e1c1f0b1b52b3c944",
+          "src/wildfire_rl/line_damage.py": "cab7e146e769edff04e2364c8d9874036ab154fa68f05af1c739d6b55f995ea6",
+          "src/wildfire_rl/paired_simulators.py": "58794b6d1acb6df2f23b5be678e6d6bae0345b13f6676d86cd0d72a4c3d78779",
+          "src/wildfire_rl/simfire_initial_state.py": "b73c6a7d895b28a2270b47f80897a01ef465370758b08b90fbd6b699b6f3ff22",
+          "src/wildfire_rl/simfire_timebase.py": "f873554b80b884b382fb29271d64ef2da0801b25e3c9f3aec91aa5848a21b722",
+          "src/wildfire_rl/synthetic_ca.py": "855b1d1ba50a1fd0e28f652f19d74607b1b0e485989e5424380bbf0602adb844",
+          "src/wildfire_rl/synthetic_real_cases.py": "22b2bb365207e2f5139cbd7c24d835f512a429b423387e8bfe627c9621729db6",
+          "scripts/run_paired_ppo_learning.py": "3677165c987e4959b96449ed0924791fb3287a1cffedc8ae58045eee98bd5b8d",
+          "src/wildfire_rl/paired_ppo_learning.py": "a0adebb9272544c34263823e7f8abbfdc26d58643e6eef2a74a8d249865b4af2",
+          "src/wildfire_rl/feds_b1.py": "e2ea9af4ef7d55103cd94fb8b5f8528f9e2fec2d900f231a68cdee06541f3e02",
+          "src/wildfire_rl/feds_heuristics.py": "1f6f38ac8dfd6e6e3e822f85c3fbb6547b0c001fd11ff0d962921e6c70eb77b5",
+          "src/wildfire_rl/feds_repaired_policies.py": "835779759e093f0bd67c6cfe0ba87b8790b5ae607c9f2470fb74f3fd9310c317",
+          "src/wildfire_rl/feds_observation_dataset.py": "662561f33a7a3939ce85b5a8e1b051caf74cbad3cfdf835768c6aea84e9da8e9"
+        },
+        "runtime": {
+          "python": "3.9.25",
+          "packages": {
+            "numpy": "1.26.4",
+            "torch": "2.3.1",
+            "stable-baselines3": "2.7.1",
+            "sb3-contrib": "2.7.1",
+            "simfire": "2.0.1",
+            "gymnasium": "1.1.1",
+            "scipy": "1.13.1"
+          }
+        },
+        "source_commit": "13a234baa49bec917df97dc8664bf2a7b6c4b041"
+      },
+      "library_source": {
+        "sb3_contrib.ppo_mask.ppo_mask": {
+          "path": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/ppo-signal-diagnosis/.local/simfire-venv/lib/python3.9/site-packages/sb3_contrib/ppo_mask/ppo_mask.py",
+          "sha256": "85c09a14a05ed62f761512eb4bd60441c92de1da574b6c4bc0eaf192e8e2863a"
+        },
+        "sb3_contrib.common.maskable.policies": {
+          "path": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/ppo-signal-diagnosis/.local/simfire-venv/lib/python3.9/site-packages/sb3_contrib/common/maskable/policies.py",
+          "sha256": "25288c78d47172597f9d169659a68d7d069ed09d645d644febc108b17c6f680a"
+        },
+        "torch.optim.adam": {
+          "path": "/Users/belmindurmo/Desktop/mpvi/wildfire-rl-adaptation/.worktrees/ppo-signal-diagnosis/.local/simfire-venv/lib/python3.9/site-packages/torch/optim/adam.py",
+          "sha256": "e28bf1445da23c19304bd84ddc5e94b083d647b04136e3d068f53668199e6c03"
+        }
+      }
+    },
+    "library_sha256": {
+      "sb3_contrib.ppo_mask.ppo_mask": "85c09a14a05ed62f761512eb4bd60441c92de1da574b6c4bc0eaf192e8e2863a",
+      "sb3_contrib.common.maskable.policies": "25288c78d47172597f9d169659a68d7d069ed09d645d644febc108b17c6f680a",
+      "torch.optim.adam": "e28bf1445da23c19304bd84ddc5e94b083d647b04136e3d068f53668199e6c03"
+    }
+  },
+  "reference_trajectories": 122,
+  "reference_files": [
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "sha256": "64377145ac1ea496b87d6056285e9b9547906edd549e29ff7425a77e19a79d0e"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "sha256": "90198511a987f7cf0371afddeba4195dcba8346d454c2c6d902de8627b14ed22"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400300631-ranch",
+      "sha256": "30418c589d499bfafff54f5ea1e7813106cd87cbf7808799d8ae516e9bb67adb"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400300631-ranch",
+      "sha256": "f8673f435fb6f54aa6adb4dd2390805bc33c851b9cef9bcce159783c0f7fe316"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400300764-buzzard",
+      "sha256": "cc9d9d9bf05582a31453d73b169ba59c1dd73820fef49ad878ff428690b1f3a6"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400300764-buzzard",
+      "sha256": "27a12bd4af1861a254d06cd4575ebbf297e439c004681f88c9399e6a2ac9ecd7"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400301084-prospect",
+      "sha256": "cfcac8da40ffc682dcfac10638cb19818f121ea5fe96fef6a4a3f5c542c44bae"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400301084-prospect",
+      "sha256": "7cc7dcce810be68644b568247671eb87c43117aa3ea1b43c99a4b266bfa99e8d"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400301104-stewart-creek",
+      "sha256": "05c09a70cce461dc5643d8f2e9f7545327f6adb0bcb685a5151d973f52845191"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400301104-stewart-creek",
+      "sha256": "b87aea43f5c45e8558017746ab5dab7334eaa71157ffc7ca175d54c5c4b531c3"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400302402-silver-creek",
+      "sha256": "c3869d2d2c424cb9704ade00b588526df35183f403bcbf81be134617a74bb796"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400302402-silver-creek",
+      "sha256": "cfc7c7bcde46f39fe9758f2bbf786798226a6bda5d9a90ab2666fd4bdc59af74"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400302444-spring-creek",
+      "sha256": "8625d80ff56a95fd1e5a4d025edab1a1f92207f0a2c197df17db422094b83e8a"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400302444-spring-creek",
+      "sha256": "3b956f40595d296a27c294c5f09943d60f2dbf32cea68953900024b1b68e9921"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400302533-tinder",
+      "sha256": "498d2b997d442369933e6e33c9e82352508269ef4324e75d42c5c68d70de4826"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400302533-tinder",
+      "sha256": "c1da92c258c84a2530039be23b161685d684bc01fe358f8862291484669e19a2"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400302636-bears",
+      "sha256": "97e45c3095dbf2a55d624cfddc646f5db37bb7a23e754cbab7d32c0f0eafecb3"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400302636-bears",
+      "sha256": "a064e9d3c011b87ff195f84b96fbf9735626b508ec2edfd5cd2e496d9f47b279"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400302686-boot",
+      "sha256": "b9712469a19e335a2cd27e32e383cb451d06d063ee8a31a1d7bb32016044492b"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400302686-boot",
+      "sha256": "ab240954a1fbc8da7a1dd140a8e3fd78eeffa0b9c561206e4f0b39b3ba37e74c"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400303711-gold-hill",
+      "sha256": "ae5f87d6881621da810f933d187ee294d18a2739a1a0b8bf9094ade1b19c1588"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400303711-gold-hill",
+      "sha256": "33246bdb425a39573ad64565f7c24ac83b216cbbc6b1e73b2b045979b4b82a85"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400303744-rattlesnake-creek",
+      "sha256": "f81123bdee27dca5ae31cf01f4ad93a4fdb7005d27f6879d0058d196bc8fec2e"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400303744-rattlesnake-creek",
+      "sha256": "a23b29989f522e871976de8075a112033c8482c6fdd23e155ccceb1724f4a29c"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400303807-ryan",
+      "sha256": "8ebf8e1a061ea16be195d4611e8b8cfc736df18bf88f3538e3886c47c04c52b9"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400303807-ryan",
+      "sha256": "3f214eadff59bee786fc722b9258fd37a053f71ef04e64d159216355e5db091b"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400303966-cabin-lake",
+      "sha256": "ab02bc87960a8eb2bad9fb2542abbf1716037f7085ccbdb5226ef75568990431"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400303966-cabin-lake",
+      "sha256": "f963426dc62ef1d4a64389395b4a14b6a619194ee9ecaf26550bc9c42ea13ce9"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400305302-sugar-pine",
+      "sha256": "8aedf4fdc4d69772626bc0fad05c52e7a9a7bdc0429e155caded1f027a9b0444"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400305302-sugar-pine",
+      "sha256": "14eae3c2f388b52a9066a51567b86794edb829e852cb55c9393f2219fd50dc72"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400307462-indian-valley",
+      "sha256": "2233eca1212e0ff8ba2d238a832a20212a917c50b775dd2b62512ed2bc006d3e"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400307462-indian-valley",
+      "sha256": "9d77e43d61bb1825031c39a9554ba0736a8f39f00ce89a7530de762a19fd9128"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400307488-red-canyon",
+      "sha256": "0b9ef31672088fcdf2a80891e5c80a878ec6d40011922dd1efcc1e4921d2d1cc"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400307488-red-canyon",
+      "sha256": "1e3d91159157148e926d08b28a55ac0838230d9a62d7f5ea20fc783fe7bdea28"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400308544-winter-camp",
+      "sha256": "bc9a2e5e805b9fb8cc7125af6a5bef9205fb3ffa0e8cd5125aed1f262500931d"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400308544-winter-camp",
+      "sha256": "f0ea0c6f667b5dccd0f8cac011d5c15333b8cd30922e2dde1ef226af6c1e8469"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400308656-sharps",
+      "sha256": "bc6e943d9196e0ffe0925f6eba93d0f85bc11545854dc460992fbef7cbe82e8b"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400308656-sharps",
+      "sha256": "e583481da68f554be4678be86ac7a7683d82848566e75b694ee38bdad3a67026"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400310578-ok-bar",
+      "sha256": "89b150c5491c911dd00b19dbbd864845202d5f808c65a6c23e4534f32a334245"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400310578-ok-bar",
+      "sha256": "c451e16c5e589eaee324b29b93453dc630fd490cad9787d0eefe710b4ec8856c"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400310659-206",
+      "sha256": "0f0024ce2a6628652469dd3e3594e09e14f633825f5a456a87e11465caa8aa2f"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400310659-206",
+      "sha256": "bb1dfaa29614bf7412d23de1de998d5891acf69cafd397ec287757570124fbd1"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400310945-goose-creek",
+      "sha256": "e8f19c23ed967c7a2a5f4ed282b95d99d163fc7fe407c4d8217a2f0d25b4af67"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400310945-goose-creek",
+      "sha256": "b3abc6bd7aad8816f62b5a2f8ac4f6d45364ced0f691db2e471f1c741337acb4"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400310977-sheep-creek",
+      "sha256": "d22eddee22d7e4b1d3bdb6a210c1270d8ffd340ded859aaeebb958027b0ffc8c"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400310977-sheep-creek",
+      "sha256": "b5ccec0eb5883a765494534940ea1eb180c1ef684dc6325449abeed2c98696ce"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400311017-goshute-cave",
+      "sha256": "fb9910bd01dd80415bf93a74cc8eeb7dae67df31264658e80a8004d38baeffd2"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400311017-goshute-cave",
+      "sha256": "e6410b60b5a1b15cc7d26c073b32f88aa0e8d6314d5a59db4ba12d97efc887eb"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400313239-cedar-mountain-one",
+      "sha256": "5b564dc39261608ecc91c4fd722464aa975dcb81ac984acdd69c6b7eddf882fc"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400313239-cedar-mountain-one",
+      "sha256": "5a90536c50fae688eaf3567c04f6eadf3730bb605a1888fe8964d71e03ee3ce5"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400313254-lakeside",
+      "sha256": "a3d7b06078d73147f67cac65ab6884c023ae329a1e2239e42f9ea21b5e52df20"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400313254-lakeside",
+      "sha256": "6bd01767783f33be393129f05d8ed1bb66a19f57befdc65785f7348577fc5131"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400313301-bear-trap",
+      "sha256": "c3869d2d2c424cb9704ade00b588526df35183f403bcbf81be134617a74bb796"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400313301-bear-trap",
+      "sha256": "5657fb7f9413ff412306a423926b9cb79e2ba2299a5d2d1bae4c5628867e278a"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400313842-north-eden",
+      "sha256": "6abf62c2305d64e06841cfcf581d5e52f9fe355d026102875f8fd319bc4bf474"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400313842-north-eden",
+      "sha256": "cfc65b35065aacf3ea8a4f17bc520e99cadfcd70a26d604e2acaa5f9caeeaa5d"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400314399-lake-wallula",
+      "sha256": "c6a8f93acb976261b1b71849669c9e4cf963b0e51519420e023de514c1667fdd"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400314399-lake-wallula",
+      "sha256": "c94fe9823a8baa85b7a1d8d318817ef018fc5a64d181c40873e067d470e2590e"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400376589-ute-park",
+      "sha256": "89dbb623680011d4f33392274e729e64753a4967958a071dd57ea4783cd3f87a"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400376589-ute-park",
+      "sha256": "4dea1f1e0b0a7e0cedf8d1b9b6e14cd24feb85f4f3a83ce06338c0b375de6686"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400500346-south",
+      "sha256": "38a64c574c9a1e45afc258cd0173d60f8ed9bcaf45adcc75515aac664cec0d10"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400500346-south",
+      "sha256": "32f737a957be1f353a71788f93852f5c9df288d517945f477a9963c3ecee3e13"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400500878-cellar",
+      "sha256": "998c80118fabf08b0b2a46bd43af9d1101d7db4b62561e1a15be07ea8e23cb9c"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400500878-cellar",
+      "sha256": "c34e8ea9a61f8d19cdc6c3900e8393dd5712201de4d2d4ba4b212ec50a2b5a19"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400501480-decker",
+      "sha256": "7b308be13c200e8f21a2bf43b0274584e7a73071322506b8883e30187c4dd78f"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400501480-decker",
+      "sha256": "7cbae45c941fb1147aa8b4a563c2e1af05f8acd906003916b59d00f152d0201c"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400501641-mountain",
+      "sha256": "fbee9df32ccb25b0d4ed378e3d33bae712458322e22e0f1d7435107a5d77c725"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400501641-mountain",
+      "sha256": "1d294292a2fef5a9304d788fe1c45a655284f23f2f3ac3e019b1f5d59ddf9d53"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400504417-shady",
+      "sha256": "3c0200a674ddf37469f7566457b72b01d6c7d5259b5247385bc19e52b3afce00"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400504417-shady",
+      "sha256": "0327a2a34b926bee7923c182fa598fdffcb899f1324cf2c734505e7174bd171c"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400505118-cove-creek",
+      "sha256": "0f73b131221d27b84393c16091ec0562a0734c05a6e44bd7679f4c9eff6b30a5"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400505118-cove-creek",
+      "sha256": "1139cf2149d1a2df3e0465e96acc05f61c6c347b34880a1c8b945feb1f90256f"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400507579-red-bank",
+      "sha256": "c58e0c9145e497db05acb8ea9512976ff054c93136672a96cae4d06de3ce58d9"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400507579-red-bank",
+      "sha256": "2429dd373880ce90a33a9d35c38d5454abc6ed39a711625ea061fb270e618c49"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400508308-pot-hole",
+      "sha256": "f75481aef8144a84b331b0f9caab5d0342ae829bd6e1f0c1ea77a1b2aa5dfa13"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400508308-pot-hole",
+      "sha256": "f2f6ef607df30847edf6b5b58d12f82b435af6d17bce80e6fd246ba20888965b"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400508892-north-hills",
+      "sha256": "26bb753305c7f582e52df0a9b435af8a50bc5322ff09b8cb86e09b46d3e02bd9"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400508892-north-hills",
+      "sha256": "b39c5cd22c03aa8db0a8cd068ab4aba33b3073395fcc8bebe5c28019c756cbf7"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400509143-ridgetop",
+      "sha256": "3bad39f15f0cf0bc8bbf507d4f71646fc6fa14127d9a6676ff25a4e07716d88b"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400509143-ridgetop",
+      "sha256": "e5a8448891ca5b37b7d6a1b2a3cb34b83f093928160e33f20464a6a6bf1e32da"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400510304-goose",
+      "sha256": "121bc4d61c8d7dde6d1e62199ba2b7521beb82fd8b8b8ca7c971a43c115ea396"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400510304-goose",
+      "sha256": "d8e961061a5389868cf150513d6a41c95f25176deb450fc4ddb26002119de4c6"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400510515-summit",
+      "sha256": "3dd37182719b9672c085421c411577854a8fc1e19d62d9d8e0d96470f75a9255"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400510515-summit",
+      "sha256": "085545bb1b4d683c253ca339e15310f16fa133cdd15d6f256eccde91d99cb357"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400512420-shelter-pass",
+      "sha256": "36f0980533f887dbe4024f49bc8c0b6f13db82479e4018414b5f70b1e73dc8aa"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400512420-shelter-pass",
+      "sha256": "cbf8523dcdffa461a04702f93e6d9d893fb8902ef407b8ec69248b097ac16f27"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400513488-sage",
+      "sha256": "f8777e8d173dc4e30a2083fa2d955afc944150c4f31ff279b67253e29225a486"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400513488-sage",
+      "sha256": "c4960f24e4af4b002ac010fb096a010f2410f9e27c00eb4c8680704b6654ab5e"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400732973-walker",
+      "sha256": "8b379be53dc34fefaaff1228f21e8070cc0f32838f9e366387fe3f4b162bc833"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400732973-walker",
+      "sha256": "afe05c73d176c3d4f623b1c81038307088fde5964f7fcfdbf4b22d36f9bdbe07"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "sha256": "46ef716770e1122ef3f295704709965018cfd8538f8097723875dfaf8c8bc364"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "sha256": "8ec59dbdd8d76b6c8b6257dfcef682b94e3272414da2c4cf68ae25bcc2bcd373"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "sha256": "3f21c6a5a25c3abb8f51f4f32cecf3ff8aa5909783524545f9df6e963b5f0193"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "sha256": "9c443d9abd5ca16e5551a905ebe0def9789eef716ddb8dc6491069584ce5bb3d"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "sha256": "8acd3ea4bdabeeacea769931215f90137d6bbf1095705a97bc7271504255887d"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400505027-pine-lodge",
+      "sha256": "e46ce6ec0dd9089f5ad945f6b4a6b0a23adea9e71f5e8cf730627cbe4b3516bd"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400312787-black-mountain",
+      "sha256": "05c6822d7b86e2d0fe301ddb9aa0896c0e803b80f6f696d8458e97c1e8c4d30b"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400312787-black-mountain",
+      "sha256": "39125da5b2bbdaaabcadf5d80a3e3e4687500e300eda81f60801cbaac30dde9d"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400304718-west-valley",
+      "sha256": "ce826ee36b46898de50abd0761e2577d482b0ffb8727bbc1fd7aa6a812bfadc7"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400304718-west-valley",
+      "sha256": "a9f648dd29d33adfecb4129f9d4f4a3e6ad302f109fbfba6980e07ff2624555b"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400508306-lookout-point",
+      "sha256": "0ac9889c77ff1decdc4c4903923cbce1f465f58b1021d317e7514c7c20fbdc61"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400508306-lookout-point",
+      "sha256": "f8ec7b12a3fe831753751517be2bb75968dc4165f325b9cf8b98d66ae2e13382"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400310914-echo",
+      "sha256": "2830b51e4659ea8d216627243f9a104a732d29e44f0dfb5f8f2b0f055d37d338"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400310914-echo",
+      "sha256": "370a005914f20df4d95fcadc62fd5a48a6350bd4d74e6e96645a3e296d0b008f"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400306102-rattlesnake",
+      "sha256": "076c284f74c363e772fa2ce3d146aa3d539feaa0b03370e4ed9e4bccba2084ec"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400306102-rattlesnake",
+      "sha256": "863e15a3dd45b46a6b09100da338d82c70c12e6282114e29657442fee9b84b86"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400503581-coldwater",
+      "sha256": "d6b7cc7f509f88a14ca06b9967fd2c826b2a06b893572457edb80fe1580b44a8"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400503581-coldwater",
+      "sha256": "a7f05d4f6a2d6a4e369b86bde97eb45f024a43ba3b6f61ba19593e947b8a69d0"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400310583-organ",
+      "sha256": "d13c32f96ec7e7bf25c0a26427579852ea798f1345578d3baf9bbcbed05fdc3b"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400310583-organ",
+      "sha256": "734e6a5273d88b86980f9e3800eed1f2059c4465a5200a4607c9d749c0dec89d"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400541373-mp-97",
+      "sha256": "6fe6ff65256ddb828728f3cc79e6ce7f7290821178fb086156301817a4c853f0"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400541373-mp-97",
+      "sha256": "e3e106ac59b7b29a1debf54c543752f489873b771ae793eb18407790dd42920f"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400308652-dog-creek",
+      "sha256": "dda418e14cc31d7c7def74bb439538c8af2aa165ccfa967df4856c6d4d6bf061"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400308652-dog-creek",
+      "sha256": "c1ad47e568c27391204c2b7ac39e07b39010e7cb85d48adc4f2660805c6887e4"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400300963-coal-hollow",
+      "sha256": "d09995ee5dd33d6725618d0c67dd1f105a6dd5f41ce24a2a0a5d2f9ea0d19812"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400300963-coal-hollow",
+      "sha256": "0b006f37357144b5b08268f95ebaec3dae17d8c7b5900af9417f184558a6015e"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400311253-martin",
+      "sha256": "48e9ef8d8e7ff2c9e513d2d5141fc3f8c7bf7adaff1a7343f22a3371525b3398"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400311253-martin",
+      "sha256": "92a2592dd170593b0ecd704a5d486adbcac21c638a905a6da2e50421b20487ba"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400302943-cranston",
+      "sha256": "b5c6829fab92c979e9e844ed3f9acc0c7361d9796b1190af5ad04457cd07e93d"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400302943-cranston",
+      "sha256": "3080265487d61a65162eb82d55d80b233779c0281330d2ce1adabf8d41186edc"
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400307776-bull-draw",
+      "sha256": "e87bc38dba652a34068696f5a9225caefa73691e798106656d7ba62244f918eb"
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400307776-bull-draw",
+      "sha256": "4889c6a9a9a107c98d962a2f41d0e25e0e2fa35611037e307fa2f83f41d2a371"
+    }
+  ],
+  "paired_paths": 32,
+  "native_episodes": 64,
+  "seconds": 39.90183625,
+  "physical_features_masks_budget_horizon": "PASS",
+  "reward_identity": "PASS",
+  "files": {
+    "paths-simfire-fpa-fod-400300427-plateau.json": "45d713d658166d35bd442ecfdac0b8862fd2bcc11bd0a17021438238ef93a65a",
+    "paths-simfire-fpa-fod-400300631-ranch.json": "4a74191d592c9986aa320e97c7e2e8b068cb678d5f9423b0818c06be6196d9b1",
+    "paths-ca-fpa-fod-400307379-weston-pass.json": "c4b40f41f1d887e4f07aa8c6da10a2881e100cac97e2bbd10a7e260a4a0f8b68",
+    "paths-ca-fpa-fod-400300631-ranch.json": "11b9c238cd5f20362692ed5e6774c1740598be2cfa38e6a4efec489b37042441",
+    "paths-ca-fpa-fod-400300427-plateau.json": "9bd97349544e511ffd5db6a92ee85c26e7a78c4d7d89317b882677b204e6f005",
+    "paths-simfire-fpa-fod-400300427-plateau.npz": "c34ad6fb7c81b14bbc39ed212d384131d17bd17ef209a6b170a009f24d432a14",
+    "paths-simfire-fpa-fod-400303584-goldstone.npz": "ff491a909097a658e42298b21e2edc40743d7d639ecc57e810c2620923611c9b",
+    "paths-ca-fpa-fod-400303584-goldstone.json": "8b7f469de4edae1681185cc57c01a40bb0f6804e8d0d50e917ed30204e09d98f",
+    "paths-simfire-fpa-fod-400307379-weston-pass.json": "7f3086d776c1fd310630db4e84428948f651d7795af452570e969f0676375765",
+    "paths-simfire-fpa-fod-400300631-ranch.npz": "46f0584c2c3c1c9a528a85b68f39d2a7086fc9216e1c17abcf20b314ac2f07fb",
+    "paths-ca-fpa-fod-400300631-ranch.npz": "71713d3df4f1ea6994701ffd74e313a2b58817eec0b70ec75ba58e389e60a492",
+    "paths-simfire-fpa-fod-400303584-goldstone.json": "15b4354c89810de3f9081164abf6a9b148ff10117b2a51796e133f1585ed4a42",
+    "paths-ca-fpa-fod-400307379-weston-pass.npz": "9ab04b46def888b021c6d1036a1f858f0e7f225379c0016fac66ef9c0394d6bf",
+    "paths-ca-fpa-fod-400303584-goldstone.npz": "c11bdd3d0c09312f7822266f0b5fdf1b88f66d6460fc0141daea810409f46f35",
+    "paths-ca-fpa-fod-400300427-plateau.npz": "5be91ea099ca2ea5d186fe7811eee58d5b850843e51225b5f06acce29a9a926a",
+    "paths-simfire-fpa-fod-400307379-weston-pass.npz": "c02394ffe93b45ed5a334a6e54bec7697ab42ba4f04021b8be4456a201097214"
+  },
+  "paths": [
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "status": "PASS",
+      "arrays_sha256": "c34ad6fb7c81b14bbc39ed212d384131d17bd17ef209a6b170a009f24d432a14",
+      "sequences": [
+        {
+          "requested_sequence": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effective_actions": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 0,
+            "raw_damage_cells": 0,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 0,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": 0.0,
+          "centered_return": 0.0,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "effective_actions": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 1,
+          "score": {
+            "noop_damage_cells": 0,
+            "raw_damage_cells": 0,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 0,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": -0.01,
+          "centered_return": -0.01,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "effective_actions": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 0,
+            "raw_damage_cells": 0,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 0,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": 0.0,
+          "centered_return": 0.0,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "effective_actions": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 1,
+          "score": {
+            "noop_damage_cells": 0,
+            "raw_damage_cells": 0,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 0,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": -0.01,
+          "centered_return": -0.01,
+          "full_four_decisions": true
+        }
+      ]
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400300631-ranch",
+      "status": "PASS",
+      "arrays_sha256": "46f0584c2c3c1c9a528a85b68f39d2a7086fc9216e1c17abcf20b314ac2f07fb",
+      "sequences": [
+        {
+          "requested_sequence": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effective_actions": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 0,
+            "raw_damage_cells": 0,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 0,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": 0.0,
+          "centered_return": 0.0,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "effective_actions": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 1,
+          "score": {
+            "noop_damage_cells": 0,
+            "raw_damage_cells": 0,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 0,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": -0.01,
+          "centered_return": -0.01,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "effective_actions": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 0,
+            "raw_damage_cells": 0,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 0,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": 0.0,
+          "centered_return": 0.0,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "effective_actions": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 1,
+          "score": {
+            "noop_damage_cells": 0,
+            "raw_damage_cells": 0,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 0,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": -0.01,
+          "centered_return": -0.01,
+          "full_four_decisions": true
+        }
+      ]
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "status": "PASS",
+      "arrays_sha256": "ff491a909097a658e42298b21e2edc40743d7d639ecc57e810c2620923611c9b",
+      "sequences": [
+        {
+          "requested_sequence": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effective_actions": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 9,
+            "raw_damage_cells": 9,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 9,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": -0.09,
+          "centered_return": 0.0,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "effective_actions": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 1,
+          "score": {
+            "noop_damage_cells": 9,
+            "raw_damage_cells": 2,
+            "line_cells_in_noop_footprint": 4,
+            "extra_line_charge_cells": 4,
+            "charged_damage_cells": 6,
+            "raw_saved_cells": 7,
+            "charged_saved_cells": 3
+          },
+          "original_return": -0.06999999999999999,
+          "centered_return": 0.019999999999999997,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "effective_actions": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 9,
+            "raw_damage_cells": 9,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 9,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": -0.09,
+          "centered_return": 0.0,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "effective_actions": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 1,
+          "score": {
+            "noop_damage_cells": 9,
+            "raw_damage_cells": 9,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 9,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": -0.09999999999999999,
+          "centered_return": -0.01,
+          "full_four_decisions": true
+        }
+      ]
+    },
+    {
+      "backend": "simfire",
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "status": "PASS",
+      "arrays_sha256": "c02394ffe93b45ed5a334a6e54bec7697ab42ba4f04021b8be4456a201097214",
+      "sequences": [
+        {
+          "requested_sequence": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effective_actions": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 607,
+            "raw_damage_cells": 607,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 607,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": -6.069999999999999,
+          "centered_return": 0.0,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "effective_actions": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 1,
+          "score": {
+            "noop_damage_cells": 607,
+            "raw_damage_cells": 24,
+            "line_cells_in_noop_footprint": 4,
+            "extra_line_charge_cells": 4,
+            "charged_damage_cells": 28,
+            "raw_saved_cells": 583,
+            "charged_saved_cells": 579
+          },
+          "original_return": -0.29000000000000004,
+          "centered_return": 5.779999999999999,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "effective_actions": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 607,
+            "raw_damage_cells": 37,
+            "line_cells_in_noop_footprint": 5,
+            "extra_line_charge_cells": 5,
+            "charged_damage_cells": 42,
+            "raw_saved_cells": 570,
+            "charged_saved_cells": 565
+          },
+          "original_return": -0.42,
+          "centered_return": 5.6499999999999995,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "effective_actions": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 607,
+            "raw_damage_cells": 600,
+            "line_cells_in_noop_footprint": 5,
+            "extra_line_charge_cells": 5,
+            "charged_damage_cells": 605,
+            "raw_saved_cells": 7,
+            "charged_saved_cells": 2
+          },
+          "original_return": -6.050000000000001,
+          "centered_return": 0.020000000000000018,
+          "full_four_decisions": true
+        }
+      ]
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400300427-plateau",
+      "status": "PASS",
+      "arrays_sha256": "5be91ea099ca2ea5d186fe7811eee58d5b850843e51225b5f06acce29a9a926a",
+      "sequences": [
+        {
+          "requested_sequence": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effective_actions": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 142,
+            "raw_damage_cells": 142,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 142,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": -1.4200000000000002,
+          "centered_return": 0.0,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "effective_actions": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 1,
+          "score": {
+            "noop_damage_cells": 142,
+            "raw_damage_cells": 122,
+            "line_cells_in_noop_footprint": 4,
+            "extra_line_charge_cells": 4,
+            "charged_damage_cells": 126,
+            "raw_saved_cells": 20,
+            "charged_saved_cells": 16
+          },
+          "original_return": -1.27,
+          "centered_return": 0.15,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "effective_actions": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 142,
+            "raw_damage_cells": 123,
+            "line_cells_in_noop_footprint": 5,
+            "extra_line_charge_cells": 5,
+            "charged_damage_cells": 128,
+            "raw_saved_cells": 19,
+            "charged_saved_cells": 14
+          },
+          "original_return": -1.2799999999999998,
+          "centered_return": 0.14,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "effective_actions": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 142,
+            "raw_damage_cells": 123,
+            "line_cells_in_noop_footprint": 5,
+            "extra_line_charge_cells": 5,
+            "charged_damage_cells": 128,
+            "raw_saved_cells": 19,
+            "charged_saved_cells": 14
+          },
+          "original_return": -1.28,
+          "centered_return": 0.14,
+          "full_four_decisions": true
+        }
+      ]
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400300631-ranch",
+      "status": "PASS",
+      "arrays_sha256": "71713d3df4f1ea6994701ffd74e313a2b58817eec0b70ec75ba58e389e60a492",
+      "sequences": [
+        {
+          "requested_sequence": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effective_actions": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 309,
+            "raw_damage_cells": 309,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 309,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": -3.09,
+          "centered_return": 0.0,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "effective_actions": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 1,
+          "score": {
+            "noop_damage_cells": 309,
+            "raw_damage_cells": 235,
+            "line_cells_in_noop_footprint": 5,
+            "extra_line_charge_cells": 5,
+            "charged_damage_cells": 240,
+            "raw_saved_cells": 74,
+            "charged_saved_cells": 69
+          },
+          "original_return": -2.4099999999999997,
+          "centered_return": 0.68,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "effective_actions": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 309,
+            "raw_damage_cells": 151,
+            "line_cells_in_noop_footprint": 5,
+            "extra_line_charge_cells": 5,
+            "charged_damage_cells": 156,
+            "raw_saved_cells": 158,
+            "charged_saved_cells": 153
+          },
+          "original_return": -1.56,
+          "centered_return": 1.5299999999999998,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "effective_actions": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 309,
+            "raw_damage_cells": 309,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 309,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": -3.09,
+          "centered_return": 0.0,
+          "full_four_decisions": true
+        }
+      ]
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400303584-goldstone",
+      "status": "PASS",
+      "arrays_sha256": "c11bdd3d0c09312f7822266f0b5fdf1b88f66d6460fc0141daea810409f46f35",
+      "sequences": [
+        {
+          "requested_sequence": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effective_actions": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 96,
+            "raw_damage_cells": 96,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 96,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": -0.96,
+          "centered_return": 0.0,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "effective_actions": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 1,
+          "score": {
+            "noop_damage_cells": 96,
+            "raw_damage_cells": 96,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 96,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": -0.97,
+          "centered_return": -0.01,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "effective_actions": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 96,
+            "raw_damage_cells": 96,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 96,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": -0.96,
+          "centered_return": 0.0,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "effective_actions": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 96,
+            "raw_damage_cells": 96,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 96,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": -0.96,
+          "centered_return": 0.0,
+          "full_four_decisions": true
+        }
+      ]
+    },
+    {
+      "backend": "ca",
+      "scenario_id": "fpa-fod-400307379-weston-pass",
+      "status": "PASS",
+      "arrays_sha256": "9ab04b46def888b021c6d1036a1f858f0e7f225379c0016fac66ef9c0394d6bf",
+      "sequences": [
+        {
+          "requested_sequence": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "effective_actions": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 106,
+            "raw_damage_cells": 106,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 106,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": -1.06,
+          "centered_return": 0.0,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "effective_actions": [
+            1,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 1,
+          "score": {
+            "noop_damage_cells": 106,
+            "raw_damage_cells": 96,
+            "line_cells_in_noop_footprint": 5,
+            "extra_line_charge_cells": 5,
+            "charged_damage_cells": 101,
+            "raw_saved_cells": 10,
+            "charged_saved_cells": 5
+          },
+          "original_return": -1.02,
+          "centered_return": 0.04,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "effective_actions": [
+            2,
+            0,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 106,
+            "raw_damage_cells": 103,
+            "line_cells_in_noop_footprint": 3,
+            "extra_line_charge_cells": 3,
+            "charged_damage_cells": 106,
+            "raw_saved_cells": 3,
+            "charged_saved_cells": 0
+          },
+          "original_return": -1.06,
+          "centered_return": 0.0,
+          "full_four_decisions": true
+        },
+        {
+          "requested_sequence": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "effective_actions": [
+            0,
+            1,
+            0,
+            0
+          ],
+          "invalid_requests": 0,
+          "score": {
+            "noop_damage_cells": 106,
+            "raw_damage_cells": 106,
+            "line_cells_in_noop_footprint": 0,
+            "extra_line_charge_cells": 0,
+            "charged_damage_cells": 106,
+            "raw_saved_cells": 0,
+            "charged_saved_cells": 0
+          },
+          "original_return": -1.06,
+          "centered_return": 0.0,
+          "full_four_decisions": true
+        }
+      ]
+    }
+  ],
+  "scope": "Technical invariance only.64native episodes in32paired paths, not an RL or physical validation finding"
+}

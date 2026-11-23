@@ -1,5 +1,9 @@
 # Promjene baze znanja
 
+## 2026-11-23: TASK-045 start u pozadini
+
+[Centering-only pilot](docs/research/CENTERED_PPO_PILOT.md):434pinned testa i32paired native preflight PASS; šest512step treninga startano u pozadini, bez novih learning nalaza. Status/PID i nastavak sačuvani; korisnik ubuduće također preferira background/ETA handoff.
+
 ## 2026-11-23: odobren centering-only PPO pilot
 
 [TASK-045/ADR-055](docs/research/CENTERED_PPO_PILOT.md): isti512step budžet i sačuvani originalni referenti, jedino nova nagrada; plan prije implementacije.
