@@ -1,0 +1,146 @@
+{
+  "schema_version": "ca-core-integration/1.0",
+  "date": "2026-11-24",
+  "base_commit": "f96f744f8e7e2187133c335c80afe3784f1ce56a",
+  "code_commit": "1e1ebe6f2965bc3d3f3e7a8793def629299a058e",
+  "archive": {
+    "branch": "codex/separate-clip-pilot",
+    "commit": "c4062a84a8454f17baa3d6ac8a7cb6f39aa0c3d8",
+    "preserved": true
+  },
+  "experiment_scope": {
+    "fitting_train": 45,
+    "previously_explored_development": 16,
+    "joint_positive_denominators": 14,
+    "model_seeds": [
+      17,
+      29,
+      43
+    ],
+    "steps_per_model": 512,
+    "budget": 1,
+    "horizon_hours": 48,
+    "aggregation": "Three seeds averaged inside fire; paired10000fire bootstrapseed0; percentages use each backend own no-op; no independent holdout"
+  },
+  "methods": {
+    "simfire": {
+      "original512": 6.754146616499442,
+      "advancing_front64": 11.286360756347799,
+      "exact_uniform": 5.225609205310178,
+      "fitting_selected_fixed": 0.2285696477005911,
+      "separate512": 5.106737877364985,
+      "centered512": 3.161768471092317
+    },
+    "ca": {
+      "original512": 6.356875270253224,
+      "advancing_front64": 3.3496724148783263,
+      "exact_uniform": 6.196248233275045,
+      "fitting_selected_fixed": 9.48778615873565,
+      "separate512": 6.356875270253224,
+      "centered512": 7.925060444014229
+    }
+  },
+  "separate_clip_final": {
+    "completed_jobs": 6,
+    "steps": 3072,
+    "episodes": 768,
+    "seconds": 1109.5252680778503,
+    "continuation_signal": {
+      "simfire": false,
+      "ca": false
+    },
+    "paired_minus_original_pp": {
+      "simfire": {
+        "n": 14,
+        "mean": -1.6474087391344578,
+        "ci95": [
+          -5.817511682004075,
+          1.9617714429260227
+        ]
+      },
+      "ca": {
+        "n": 14,
+        "mean": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "stored_run_audit": {
+      "status": "PASS",
+      "counts": {
+        "jobs": 6,
+        "steps": 3072,
+        "episodes": 768,
+        "checkpoints": 12,
+        "clip_updates": 384,
+        "native_paths": 96,
+        "states": 480,
+        "first_rollout_steps": 96
+      },
+      "analysis_sha256": "08fd57021d67340edad51fe7c4db515a04005f4405e9e4cbb61172772a16afa8",
+      "audit_code_sha256": "2f243bb1775ea80cd5eafa93fc065d944a5d80ceb887921d2b89bb3fc3cdccc4",
+      "scope": "Stored native trajectory/mask/policy/ledger audit and independent statistics; no fresh physical replay or full bundle restore claimed"
+    }
+  },
+  "source_analysis_sha256": {
+    "original": "9659dea88a728bd8d8d25376bc901acb113fd21d7925fe4b346a551a8d6e2e89",
+    "centered": "7bcc4a543e92631fc9476eb7aa4d4f99dd9b28f5a1432b4bcea0e15a6aaf7c09",
+    "separate": "08fd57021d67340edad51fe7c4db515a04005f4405e9e4cbb61172772a16afa8"
+  },
+  "extraction": {
+    "status": "PASS",
+    "encoder_observations": 456,
+    "simfire_cases": 98,
+    "ca_cases": 16,
+    "all_float32_features_exact": true,
+    "max_absolute_feature_difference": 0.0,
+    "native_backends": 2,
+    "noop_states": 10,
+    "final_burned_and_line_masks_equal_archived_tables": true,
+    "reference_sha256": "eda7ad20689667deb34854b5a642cddcf235df73101188db91085009e4320325",
+    "encoder_source_sha256": "c9c14e4b92e2c293bd8a985a933265319cd49cf92c9be91c51aeefa906afaa67",
+    "smoke_sha256": "5273cdc6f9e98702f16b8a77f7fd7782c1fd0cc71f7d4f4ab2e9aa44ef0d1320"
+  },
+  "interpretation": "No tested PPO variant shows robust advantage. Original reward/global optimizer remain the baseline; no physical validation claimed.",
+  "omissions": [
+    "per-case reports and plots",
+    "offline learner searches and old representations",
+    "centered reward and separate clipping variants",
+    "experiment-specific training/plot/bundle drivers",
+    "duplicated launch/PID and status history"
+  ],
+  "limits": [
+    "Existing main/history preserved; no research branch rewritten",
+    "Full raw maps and numeric model weights remain local, not published",
+    "TASK046audit checks stored trajectories and statistics; no fresh full96native replay or full bundle restore is claimed",
+    "Native CA unit control and common-line bridge are different MDPs; native parity and physical validation remain open",
+    "No new training, real VALIDATION, TEST2024 or future FEDS access"
+  ],
+  "checks": {
+    "pinned": {
+      "tests": 326,
+      "skipped": 0,
+      "log_sha256": "bac9d5c4df143b1bebb821d324eac734bc85c16308486671877138eb33cca420"
+    },
+    "modern": {
+      "tests": 311,
+      "skipped": 3,
+      "log_sha256": "527c63967077529215b1aadf4a871b263ad6814c99fa440d7687ab5a733137a6"
+    },
+    "core": {
+      "tests": 248,
+      "skipped": 35,
+      "log_sha256": "539dff6abebfb9e533969b8bd101cc876211607449acd6698b6ecf1ea04a744d"
+    },
+    "knowledge": {
+      "tests": 15,
+      "skipped": 0,
+      "log_sha256": "ce49468da6073b8ade1de49dd41afa478b45598f1de64fba8524225399bf13fc"
+    },
+    "strict_knowledge": "PASS:83Markdown",
+    "synthetic_smoke": "PASS",
+    "native_smoke": "PASS:both backends, four full decisions each"
+  }
+}

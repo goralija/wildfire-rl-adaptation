@@ -505,3 +505,15 @@ VALIDATION reuse (its numbers are only quoted from ADR-032), TEST untouched.
   seed 0, front-edge lines. 2,179 line cells placed, none burned; peak spread rate at a line cell
   58.5 ft/min against the 980 ft/min threshold. Output was not saved to a file; numbers are in
   [INTERVENTIONS §1.9](review-2026-11-11/INTERVENTIONS.md).
+
+
+## 2026-11-24 — zatvaranje istraženog B1 bloka i manja integracija
+
+[Sažetak i provenance](../../reports/real-fire-data/ca-core-summary-v1.json): original512
+SF6,75%/CA6,36%, centered3,16/7,93%, separateclip5,11/6,36%. Svi su prethodno istraženi
+TRAIN development nalazi; nijedan kandidat ne prolazi oba zamrznuta uslova.
+TASK046 je završio6×512/18,49min; audit svih3072koraka,384clipupdateova i96storednative
+putanja PASS. Ovo nije freshfullrestore96putanja. Nove integracijske provjere:456raw
+opažaja ima identičan encoder, jedan TRAINsmoke u oba backend-a iste wholemaske kao
+arhiva. Nema novog treniranja ili holdouta. Opširna historija/ADR033–057 ostaje na
+research grani c4062a84; ovdje se ne duplira.

@@ -3,6 +3,7 @@
 # stays exact. Add an id only with its reason.
 
 # sb3_contrib/torch (RL extra) is not installed in CI.
+unittest.loader.ModuleSkipped.test_common_control_rl
 test_gym_env.GymTests.test_masks_save_load_and_short_learning
 
 # Needs the pinned SimFire runtime (Python 3.9 venv); runs locally, not in CI.

@@ -6,6 +6,8 @@
 
 ## Dokumenti
 
+- [Sažeta SimFire/CA integracija](CA_CORE_INTEGRATION.md) - Opseg manje grane i provjere.
+
 - [Dataset: šta imamo i šta ćemo koristiti](DATASET.md) - Dataset Review
 - [Experiment log](EXPERIMENT_LOG.md) - Experiment Log
 - [FPA-FOD/FEDS crosswalk i benchmark gate](FPA_FEDS_CROSSWALK.md) - Data Quality Audit

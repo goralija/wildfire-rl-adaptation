@@ -1422,3 +1422,23 @@ the review, without touching the analysis, the lock or any result:
   ties the analysis to the VALIDATION report by value, lists policies that never place a
   line and names the figure's commit separately. The record was regenerated (schema 1.1).
 - Left as is: no test pins the bootstrap percentile level or the figure title.
+
+
+## ADR-058 — Sažeta integracija umjesto cijele istraživačke historije (2026-11-24)
+
+Korisnik traži maksimalno smanjenje nerelevantnih izmjena. [Plan](../research/CA_CORE_INTEGRATION.md)
+prethodi izdvajanju. Arhivska grana `codex/separate-clip-pilot`/c4062a84 i lokalni
+artefakti ostaju sačuvani; nova `codex/ca-core-integration` kreće izmainf96f744f.
+Ostaju provjerene runtime ispravke, observation/CA/common-control interfejsi i testovi.
+Optimizer/offline pretrage i opširni izvještaji ne ulaze u ovu integraciju. Sačuvati
+jedan kompaktan nalaz/provenance, bez dupliranja ranijih ADR033–057 iz arhivske grane.
+Encoder izvući bez numeričke promjene; puni testovi/parity/smoke/knowledge prije predaje.
+Runtime PASS ne dokazuje fizičku validaciju ili RL prednost; nema novog treninga ili
+otvaranja realnih holdouta. Stvarni merge dolazi poslije konkretnog pregleda manje grane.
+
+Dopuna ADR-058: TASK046finalS5,11%/CA6,36%, oba frozenkriterija false; nema nove optimizer
+iteracije. Lokalni stored-data audit6modela/3072steps/384clipupdates/96putanja i
+nezavisna statistika PASS. Manja jezgra: encoder456opažaja byte-exact, native2backend
+no-op/finalmaske identične arhivi;326pinned/311modern(3skip)/248core(35skip) PASS.
+Ovo nije freshfullrestore96putanja ili fizička validacija. Dalje review manje grane
+i odluka o mergeu, zatim odvojeni CAcontrol/native parity ugovor.
