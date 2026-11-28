@@ -29,6 +29,7 @@ from wildfire_rl.feds_simfire_setup import WEATHER
 from wildfire_rl.line_damage import score_line_damage
 
 PLAN = ROOT/'configs/frozen/action-value-pilot-v1.json'
+ACTIVE_OUT = None
 
 
 def read(path): return json.loads(Path(path).read_text())
@@ -137,6 +138,16 @@ def load_case(out, sid):
     with np.load(path, allow_pickle=False) as a: return {key: a[key].copy() for key in a.files}
 
 
+def collect_guarded(job):
+    try:
+        return collect(job)
+    except Exception:
+        import traceback
+        print('case ERROR', job[2], flush=True)
+        traceback.print_exc()
+        raise
+
+
 def fit(out, plan):
     # No development case is opened until both fitted checkpoints have been frozen.
     cases = [load_case(out, sid) for sid in plan['fitting_cases']]
@@ -193,6 +204,7 @@ def evaluate(out, archive, plan, models):
 
 
 def main():
+    global ACTIVE_OUT
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--out', type=Path, required=True)
     parser.add_argument('--archive', type=Path, required=True)
@@ -206,6 +218,7 @@ def main():
     import fcntl
     lock = (out/'run.lock').open('w')
     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    ACTIVE_OUT = out
     def deadline(_signal, _frame): raise TimeoutError('30 minute experiment limit')
     signal.signal(signal.SIGALRM, deadline); signal.alarm(1800)
     started = time.monotonic()
@@ -217,7 +230,7 @@ def main():
         if (out/'cases'/(sid+'.json')).exists(): load_case(out, sid)
         else: pending.append((str(out), str(archive), sid))
     with ProcessPoolExecutor(3, mp_context=multiprocessing.get_context('spawn'), initializer=setup_worker) as pool:
-        jobs = [pool.submit(collect, job) for job in pending]
+        jobs = [pool.submit(collect_guarded, job) for job in pending]
         for job in as_completed(jobs):
             sid = job.result(); print('case PASS', sid, flush=True)
             status['completed_cases'] = len(list((out/'cases').glob('*.json'))); write(out/'status.json', status)
@@ -232,6 +245,9 @@ def main():
 
 if __name__ == '__main__':
     try: main()
-    except Exception:
+    except Exception as error:
         import traceback
+        if ACTIVE_OUT is not None:
+            status = read(ACTIVE_OUT/'status.json') if (ACTIVE_OUT/'status.json').exists() else {}
+            status.update(phase='failed', error=str(error)); write(ACTIVE_OUT/'status.json', status)
         traceback.print_exc(); sys.exit(1)
