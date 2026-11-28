@@ -1,5 +1,7 @@
 # real-fire-data
 
+- [Šira action-value provjera](action-value-robustness-v1.json) - Tri CA širenja i LOO61 u oba backend-a; pozitivan CA prosjek uz široku nesigurnost.
+
 - [Action-value razvojni pokušaj](action-value-summary-v1.json) - CA 14,74% prema najboljoj referenci 9,49%; interval širok, frozen kriteriji ne prolaze (ADR-060).
 
 - [Sažeta CA/core integracija](ca-core-summary-v1.json) - Kompaktni nalazi, arhivska provenansa i tehničke provjere; bez per-case tabele.

@@ -4,10 +4,12 @@ title: Rad na projektu
 ---
 # Rad na projektu
 
-**2026-11-28, ADR-060:** [TASK-047 plan/status](docs/research/ACTION_VALUE_PILOT.md)
-je završen: CA povoljan razvojni prosjek 14,74% prema 9,49%, ali frozen near/better
-kriteriji nisu prošli. Audit i testovi PASS, nema aktivnog računanja ili novog
-kandidata. Nema mergea, stvarni VALIDATION/TEST ostaju zatvoreni.
+**2026-11-28, ADR-062:** [šira action-value provjera](docs/research/ACTION_VALUE_ROBUSTNESS.md) je završena.
+Frozen CA tri širenja 10,76% prema 8,70%; LOO53/61 CA14,15% prema11,09%,
+SF2,21% prema7,30%. Pozitivan CA razvojni prosjek uz spread nestabilnost i
+near/better=false; nije potvrđena RL/budget prednost ili fizička validacija.
+Audit i testovi se čuvaju uz nalaz; nema aktivnog treninga ili novog kandidata.
+PR22/main nisu mijenjani; merge i realni holdouti ostaju zatvoreni.
 
 **Aktuelno — 2026-11-24:** [sažeta integracija i nastavak](docs/research/CA_CORE_INTEGRATION.md), ADR-058.
 Za review koristiti `codex/ca-core-integration` izmaina; istraživačka historija je

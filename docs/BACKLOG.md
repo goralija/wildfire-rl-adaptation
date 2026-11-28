@@ -4,6 +4,13 @@ title: Naredni zadaci
 ---
 # Naredni zadaci
 
+## 2026-11-28 — TASK049 završen, šira provjera bez novog kandidata
+
+[ADR-061/062](research/ACTION_VALUE_ROBUSTNESS.md): frozen CA model tri širenja i
+LOO61 oba backenda. Pozitivan CA prosjek, ali spread1 slabiji i svi kriteriji false.
+Bez aktivnog računanja, holdouta ili mergea. TASK048 native control/budget parity
+ostaje odvojen sljedeći prijedlog; drugačije treniranje traži novi plan.
+
 ## 2026-11-28 — dopuna TASK047 prije mergea
 
 [ADR-059/action-value pokušaj](research/ACTION_VALUE_PILOT.md) završio je dopunu integracijskog

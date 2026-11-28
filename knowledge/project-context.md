@@ -13,10 +13,12 @@ sources:
 ---
 # Projektni kontekst
 
-**2026-11-28, ADR-060:** [TASK-047 dopuna](../docs/research/ACTION_VALUE_PILOT.md) je
-završena. CA action-value selektor daje 14,74% prema najjačoj referenci 9,49%, ali
-oba frozen kriterija false zbog nesigurnosti; SimFire 2,40% prema 11,29%. To je
-TRAIN razvojni signal, nije PPO, nezavisan test ili fizička validacija. Nema aktivnog računanja.
+**2026-11-28, ADR-062:** [šira action-value provjera](../docs/research/ACTION_VALUE_ROBUSTNESS.md) je završena.
+Frozen CA tri širenja 10,76% prema 8,70%; LOO53/61 CA14,15% prema11,09%,
+SF2,21% prema7,30%. Pozitivan CA razvojni prosjek uz spread nestabilnost i
+near/better=false; nije potvrđena RL/budget prednost ili fizička validacija.
+Audit i testovi se čuvaju uz nalaz; nema aktivnog treninga ili novog kandidata.
+PR22/main nisu mijenjani; merge i realni holdouti ostaju zatvoreni.
 
 **Aktuelno — 2026-11-24:** [sažeta integracija i nastavak](../docs/research/CA_CORE_INTEGRATION.md), ADR-058.
 Za review koristiti `codex/ca-core-integration` izmaina; istraživačka historija je

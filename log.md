@@ -1,5 +1,12 @@
 # Promjene baze znanja
 
+## 2026-11-28: šira action-value provjera završena
+
+[TASK049/ADR-062](docs/research/ACTION_VALUE_ROBUSTNESS.md): tri širenja zamrznutog
+CA modela iLOO61 oba backenda. Pozitivan CA prosjek, ali jedna realizacija znatno
+slabija i kriteriji false. Audit1386mask-score/122folda PASS; bez novog kandidata,
+realnog holdouta ili mergea. Novi nalaz čuva sve slučajeve u jednom kompaktnom JSON-u.
+
 ## 2026-11-28: action-value pokušaj završen
 
 [ADR-059/060 i nalaz](docs/research/ACTION_VALUE_PILOT.md): jedan zaključan pokušaj,

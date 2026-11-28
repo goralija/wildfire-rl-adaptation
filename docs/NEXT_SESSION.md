@@ -4,6 +4,16 @@ title: Naredni korak — pregled nakon faze 2 (2026-11-12)
 ---
 # Naredni korak
 
+## 2026-11-28 — TASK-049 završen; odabrati narednu fazu
+
+[Šira provjera i ograničenja](research/ACTION_VALUE_ROBUSTNESS.md), ADR-062.
+CA pozitivan prosjek ostaje kroz tri širenja i LOO53/61, ali jedna realizacija
+je znatno slabija i svi near/better kriteriji false. Nema aktivnog posla ili
+razloga da se ponavlja isti run. Sve stare težine i nalazi sačuvani su nepromijenjeni.
+Legacy suite je poslije344assertionsOK zapeo pri gašenju (SIGTERM/143); napomena i sample su u izvještaju. Za review koristiti kompaktan izvještaj; dalji kandidati ili učenje na više spread
+realizacija zahtijevaju novi plan. TASK048 native control/budget parity ostaje
+odvojen predloženi zadatak. Bez automatskog mergea ili otvaranja holdouta.
+
 ## 2026-11-28 — dovršiti TASK-049
 
 [Plan i pokretanje](research/ACTION_VALUE_ROBUSTNESS.md). Jedan zamrznuti CA model,

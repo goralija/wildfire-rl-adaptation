@@ -7,6 +7,17 @@ sources:
 ---
 # Trenutno stanje — 2026-11-12
 
+## 2026-11-28 — šira provjera CA nalaza završena
+
+[TASK-049/ADR-062](research/ACTION_VALUE_ROBUSTNESS.md): zamrznuti CA model kroz
+tri širenja na istih14pozitivnih požara daje10,76% prema8,70% najjače reference.
+Jedno širenje je znatno slabije (5,24% prema12,43%). LOO na svih61TRAIN, primarno
+istih53pozitivnih: CA14,15% prema11,09%, SF2,21% prema7,30%. CA pozitivan razvojni
+prosjek opstaje, ali intervali ne prolaze near/better uslove; nema nezavisnog
+holdouta, potvrđene RL prednosti, fizičke validacije ili adaptacije budžetu.
+Puni posao138,93s i audit1386mask-score ishoda/122folda PASS. Testovi344pinned assertionsOK (shutdown hang, zaustavljen exit143);329modern(3skip)/266core(35skip),15knowledge,CLI/strict uredno PASS. Nema aktivnog računanja.
+Grana ostaje `codex/action-value-pilot`; PR22/main nisu mijenjani i nema mergea.
+
 ## 2026-11-28 — TASK-049 šira provjera u pripremi
 
 [Plan ADR-061](research/ACTION_VALUE_ROBUSTNESS.md): korisnik odobrava provjeru

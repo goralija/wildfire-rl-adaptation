@@ -1500,3 +1500,37 @@ TRAIN u LOO po požaru, oba backenda i fitting-only izabrana referenca. Čuvati 
 foldove/replike i raspon osjetljivosti na pojedinačni požar. Bez novih kandidata,
 parametara, stvarnih holdouta ili promjene postojećih rezultata. Razvojno,
 ne nezavisna fizička/RL validacija. TASK048 native parity ostaje zaseban prijedlog.
+
+
+## ADR-062 — Šira provjera završena: pozitivan CA prosjek uz spread nestabilnost (2026-11-28)
+
+TASK-049 po planu6edb724c i kodu e8ac6763 prije novih ishoda; nema izmjene learnera,
+alpha10, pragova ili izbora najboljeg seeda. Pilot r1/r2 PASS8,08s, puni32run
+završen138,93s. Zamrznuti model/16požara kroz3širenja daje10,76% prema8,70%
+najjače reference (+23,8% relativno), isti14joint-positive; svaka realizacija
+prvo ulazi kao postotak unutar požara. R0=14,74/9,49%, R1=5,24/12,43%,
+R2=12,32/7,62%: jedna realizacija jasno slabija. Aggregate opisni raspon prema
+max-reference [−4,58;+5,26]pp; near/better false.
+
+LOO61, isti53joint-positive: CA14,15% prema11,09% (+27,6%, raspon[−2,56;+7,58]pp),
+SimFire2,21% prema7,30% (raspon[−11,68;−1,28]pp). Svih122foldova isključuje svoj
+požar iz fittinga i skaliranja; fitting-only izbor reference potvrđen. Svi61ostaju
+u apsolutnom/pooled obračunu. CA prosječni efekt ostaje pozitivan pri svakoj
+pojedinačnoj delete-one ocjeni bez refita: frozen[0,37;3,21]pp iLOO[1,66;4,22]pp.
+To nije nezavisan holdout, potpuna nesigurnost refittinga ili potvrđena prednost.
+
+[Plan/nalaz](../research/ACTION_VALUE_ROBUSTNESS.md),
+[kompaktan izvještaj i svi slučajevi](../../reports/real-fire-data/action-value-robustness-v1.json).
+Audit1098parent+288novih mask-score ishoda,48frozen putanja i122fit-only refita/
+modelhasha/statistike PASS. Oba stara modela ostala byte-identična. Ovo opravdava
+nastavak CA istraživanja uz ograničenja; ne dokazuje PPO/budget korist ili fizičku
+validaciju. Zatvoriti TASK-049 bez nove pretrage; holdouti i merge ostaju zatvoreni.
+
+Završna provjera ADR-062:344pinned/0skip,329modern/3skip,266core/35skip,
+15knowledge/CLI/strict85Markdown PASS. Samo kompaktan izvještaj i izvori u Gitu;
+maske i NPZ težine ostaju lokalno.
+
+Operativna dopuna ADR-062: legacy344assertionsOK, ali Python je zatim zapeo u
+finalization/GC. Sample sačuvan lokalno, vlastiti test PID zaustavljen SIGTERM-om,
+exit143; ne tvrdi se clean legacy exit0. Modern/core/CLI/knowledge i numerical
+run/audit clean exit. Nalazi i pragovi nisu mijenjani zbog runtime gašenja.

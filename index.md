@@ -5,7 +5,8 @@ okf_version: "0.2"
 
 ## Počni ovdje
 
-- [Aktivno: šira action-value provjera](docs/research/ACTION_VALUE_ROBUSTNESS.md) - TASK-049/ADR-061, zamrznuti model i LOO61.
+- [Šira action-value provjera završena](docs/research/ACTION_VALUE_ROBUSTNESS.md) - TASK-049/ADR-062, tri širenja i LOO61; pozitivan CA prosjek, near/better kriteriji false.
+
 - [Završen action-value pokušaj](docs/research/ACTION_VALUE_PILOT.md) - TASK-047/ADR-060, pozitivan CA razvojni prosjek uz široku nesigurnost.
 
 - [Aktivno: manja SimFire/CA integracija](docs/research/CA_CORE_INTEGRATION.md) - Sačuvan research arhiv; izdvajaju se samo jezgra i testovi.

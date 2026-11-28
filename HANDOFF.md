@@ -4,11 +4,12 @@ title: Handoff za nastavak projekta
 ---
 # Handoff za nastavak projekta
 
-**2026-11-28, ADR-060:** [završni action-value pokušaj](docs/research/ACTION_VALUE_PILOT.md)
-je završen na `codex/action-value-pilot`. CA 14,74% prema najjačoj referenci 9,49%
-je pozitivan razvojni prosjek, ali široka nesigurnost ne prolazi frozen kriterije.
-SimFire je slabiji od reference. Audit i testovi PASS, nema aktivnog treninga.
-PR22 ostaje neizmijenjen; slijedi review, bez daljeg kandidata ili otvaranja holdouta.
+**2026-11-28, ADR-062:** [šira action-value provjera](docs/research/ACTION_VALUE_ROBUSTNESS.md) je završena.
+Frozen CA tri širenja 10,76% prema 8,70%; LOO53/61 CA14,15% prema11,09%,
+SF2,21% prema7,30%. Pozitivan CA razvojni prosjek uz spread nestabilnost i
+near/better=false; nije potvrđena RL/budget prednost ili fizička validacija.
+Audit i testovi se čuvaju uz nalaz; nema aktivnog treninga ili novog kandidata.
+PR22/main nisu mijenjani; merge i realni holdouti ostaju zatvoreni.
 
 **Aktuelno — 2026-11-24:** [sažeta integracija i nastavak](docs/research/CA_CORE_INTEGRATION.md), ADR-058.
 Za review koristiti `codex/ca-core-integration` izmaina; istraživačka historija je

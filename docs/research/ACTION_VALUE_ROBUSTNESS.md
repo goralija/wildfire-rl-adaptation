@@ -46,3 +46,73 @@ Testovi za odvajanje foldova, jednak ponder požara, nulte nazivnike i statistik
 prethode kodu. Max tri nice19 radnika plus koordinator, numerical threads1 i
 limit30min. Procjena novih rollouta nekoliko minuta; dugi posao ide odvojeno uz ETA.
 TEST2024, novi realni VALIDATION i future FEDS ostaju zatvoreni. Bez mergea.
+
+## Rezultat — 2026-11-28, ADR-062
+
+Plan `6edb724c` i numerički kod `e8ac6763` prethode novim ishodima. Sedam novih
+testova i svih 18 action-value testova prolaze. Tehnički pilot Goldstone r1/r2
+prošao je za 8,08 s; puni posao trajao je 138,93 s (2,32 min), tri nice19 radnika.
+Prikupljene su sve 32 nove realizacije; oba zamrznuta roditeljska modela ostala
+su byte-identična. Početna opažanja, maske i akcije CA modela ne mijenjaju se s
+realizacijom. Svaki novi no-op svih pet stanja jednak je arhivi za svoju repliku.
+
+| Provjera | Selektor saved% | Najjača referenca saved% | Selektor / referenca |
+| --- | ---: | ---: | ---: |
+| Zamrznuti CA, 14 požara × 3 širenja | 10,76 | 8,70 | 123,8% |
+| CA leave-one-fire-out, 53 pozitivna od 61 | 14,15 | 11,09 | 127,6% |
+| SimFire leave-one-fire-out, isti 53 | 2,21 | 7,30 | 30,3% |
+
+Primarno su i dalje 14 požara, ne 42 nezavisna slučaja. Prvo se računa procenat
+svake realizacije, zatim prosjek unutar požara. Svi 16 ostaju u apsolutnim rezultatima.
+Najjača fiksna CA referenca poslije prosječenja širenja je smjer1; nije prosjek
+najjačih različitih pravila pojedinačnih širenja.
+
+| CA realizacija | Zamrznuti selektor | Najjača referenca |
+| --- | ---: | ---: |
+| 0, prethodno ocijenjena | 14,74% | 9,49% |
+| 1, nova | 5,24% | 12,43% |
+| 2, nova | 12,32% | 7,62% |
+
+**Pozitivan prosjek opstaje, ali prednost nije stabilna kroz širenja.** Realizacija1
+je znatno slabija od najbolje reference. Opisni raspon prema ponovo izabranoj
+max-reference je na zajedničkom prosjeku [−4,58; +5,26] pp. CA LOO daje
+[−2,56; +7,58] pp; SimFire LOO [−11,68; −1,28] pp. Zaključani near/better kriteriji
+i dalje su false; granica −2 pp nije prilagođena rezultatu.
+
+Pri izbacivanju bilo kojeg pojedinačnog požara iz ocjene bez refita, CA prosječna
+prednost ostaje pozitivna: frozen [0,37; 3,21] pp, LOO [1,66; 4,22] pp.
+To pokazuje da pozitivan prosjek ne zavisi samo od jednog slučaja; ne uklanja
+razvojnu selekciju, nesigurnost ili negativan rezultat na širenju1.
+
+LOO fituje 122 modela istog algoritma. Požar je isključen iz svog modela i
+skaliranja, a referenca se bira samo iz fitting požara. Najbolji globalni
+fiksni referent je ujedno fitting-only izbor: CA fixed1, SF front64.
+53 zajednička pozitivna su za procente; svih 61 ostaje u ha/pooled mjerama.
+Nezavisni read-only [auditor](../../scripts/audit_action_value_robustness.py)
+provjerava 1098 roditeljskih i 288 novih mask-score ishoda, svih 48 zamrznutih
+odluka, fitting isključenja i ponovno fitovanje 122 modela, te zasebnu statistiku.
+[Kompaktan nalaz sa svim slučajevima](../../reports/real-fire-data/action-value-robustness-v1.json)
+čuva hashove, sve replike i foldove; pune maske i težine ostaju lokalno.
+
+Ovo podržava dalju CA istragu, uz preliminarnu učenu korist na B1 problemu.
+Nema potvrđene prednosti, novog PPO rezultata, fizičke validacije ili budžetske
+adaptacije. Šira provjera je završena bez pretrage modela. PR22 i main nisu mijenjani;
+merge nije urađen. Dalji trening ili native control/budget faza traže zaseban plan.
+
+**Završne provjere:** 344 pinned (0 skip), 329 modern (3 skip), 266 core (35 skip),
+15 knowledge, synthetic CLI i strict checker svih85Markdown fajlova PASS.
+Nove težine i maske nisu commitovane. Ponovljiva read-only provjera:
+
+```sh
+nice -n 19 .local/simfire-venv/bin/python scripts/audit_action_value_robustness.py \
+  --out .local/action-value-robustness-v1 --receipt .local/robustness-audit-NEW.json
+```
+
+Legacy shutdown napomena: svih344 testova ispisalo je `OK` (397,58s), ali Python3.9
+zatim nije završio proces. Lokalni macOS sample pokazuje glavni thread u
+`Py_FinalizeEx / _PyImport_Cleanup / collect`; to ne utvrđuje uzrok ili krivicu
+određene biblioteke. Vlastiti PID16659 zaustavljen je SIGTERM-om, exit143, nakon
+sačuvanog loga/sample-a. To nije uredan exit0 legacy suitea. Modern/core suite,
+CLI, knowledge i eksperimentalni runner/auditor završili su uredno. Nema aktivnog
+treninga ili test procesa iz ove provjere. Nisu mijenjani globalni runtime ili
+simulator da bi se prikrio zastoj; nalaz je operativno ograničenje ove sesije.

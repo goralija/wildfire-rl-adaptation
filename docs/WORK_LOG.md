@@ -4,6 +4,11 @@ title: Work log
 ---
 # Work log
 
+2026-11-28 — TASK049 širih provjera, plan6edb724c/kod e8ac6763 prije novih ishoda.
+Frozen CA tri širenja10,76/8,70%; LOO53/61 CA14,15/11,09%, SF2,21/7,30%.
+Spread1slabiji; svi near/better false. 1386mask-score i122fold audit PASS,
+bez novih hyperparametara/PPO-a/holdouta/mergea. Stari modeli ostali isti. Legacy344assertionsOK, naknadni shutdownzastoj zaustavljen SIGTERM143 i dokumentovan.
+
 2026-11-28 — Iz male integracije izdvojen codex/action-value-pilot. Plan eb96badb
 prije ishoda; prvo padajući test za front referencu, fix dbcddb6d i61/61parity,
 operativni17ef653f prije fittinga. Jedan ridge po backendu, run4,23min, CA14,74%

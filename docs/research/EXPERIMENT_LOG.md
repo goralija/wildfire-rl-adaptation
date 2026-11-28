@@ -4,6 +4,16 @@ title: Experiment log
 ---
 # Experiment log
 
+## TASK-049 — šira action-value provjera, 2026-11-28
+
+Plan6edb724c/kod e8ac6763 prije ishoda; sedam novih testova prije implementacije.
+Pilot8,08s, puni32nova spread slučaja138,93s, max3nice19radnika. Zamrznuti CA
+10,76% prema8,70%, ali spread1 samo5,24% prema12,43%. LOO53/61: CA14,15% prema
+11,09%, SF2,21% prema7,30%. Svi near/better false; bez best-seed izbora ili
+daljeg podešavanja. Audit1386mask-score ishoda/48frozen putanja/122fold modela i
+zasebne statistike PASS. 344pinned assertionsOK, ali shutdownhang/SIGTERM143;329modern(3skip)/266core(35skip),15knowledge/CLI/strict uredno PASS. Stari modeli/hashovi ostali isti. [Nalaz](ACTION_VALUE_ROBUSTNESS.md).
+Razvojno, ne fizička validacija; nema novih holdouta/PPO-a/budget tvrdnje ili mergea.
+
 ## TASK-047 dopuna — action-value pokušaj završen, 2026-11-28
 
 [ADR-059/060 i rezultat](ACTION_VALUE_PILOT.md): plan eb96badb prije koda/ishoda.
