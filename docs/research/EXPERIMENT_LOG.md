@@ -4,6 +4,23 @@ title: Experiment log
 ---
 # Experiment log
 
+## TASK-047 dopuna — action-value pokušaj završen, 2026-11-28
+
+[ADR-059/060 i rezultat](ACTION_VALUE_PILOT.md): plan eb96badb prije koda/ishoda.
+Prvi puni pokušaj zaustavljen prije fittinga zbog pogrešne rekonstrukcije front
+reference kad je legacy burned kanal prazan. Prvo padajući test, fix dbcddb6d,
+61/61 initial parity PASS; operativni fix17ef653f prije prvog fittinga. Metoda,
+alpha, oznake i pragovi nisu promijenjeni. Novi output v2 nije koristio v1 zapise.
+Puni run od 10:20:50 CET trajao je 253,89 s, najviše tri nice19 radnika + koordinator.
+39/45 joint-positive fitting požara, 16 razvojnih, istih14 primarnih. CA 14,74%
+prema najjačoj referenci9,49%, SF2,40% prema11,29%. Povoljan CA prosjek (155,4%
+referentnog učinka), ali opisni raspon [−10,42;+9,96] pp; oba frozen near/better
+kriterija false. Nema nove PPO/budget/physical tvrdnje ili otvaranja holdouta.
+1098mask-score ishoda, dva fit-only model refita i32odluke audit PASS;
+16fresh SF putanja, svi CA ishodi fresh u v2. 337pinned/322modern(3skip)/259core(35skip),
+15knowledge/CLI/strict PASS. Završeno bez daljeg kandidata; PR22 neizmijenjen.
+Lokalno `.local/action-value-v2`, sačuvani guard, freeze, modeli, maske i audit.
+
 ## EXP-001 — synthetic pilot
 Config `configs/pilot.json`; 5 politika × 5 B × 12 seedova = 300 epizoda.
 Namjena: provjera pipelinea i budžetskog računovodstva. Nema RL modela i nema tvrdnje

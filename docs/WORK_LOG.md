@@ -4,6 +4,13 @@ title: Work log
 ---
 # Work log
 
+2026-11-28 — Iz male integracije izdvojen codex/action-value-pilot. Plan eb96badb
+prije ishoda; prvo padajući test za front referencu, fix dbcddb6d i61/61parity,
+operativni17ef653f prije fittinga. Jedan ridge po backendu, run4,23min, CA14,74%
+prema9,49%, SF2,40% prema11,29%; široka CA nesigurnost ne prolazi frozen kriterije.
+1098mask-score / fit-only / statistički audit i337pinned/322modern/259core/CLI/knowledge
+PASS. Dopuna završena bez novog kandidata; PR22 neizmijenjen, nema aktivnog računanja.
+
 2026-11-24 — Na korisnikov zahtjev izdvojena mala integracija izmainf96f744f. Archive c4062a84 ostaje; bez optimizer/offline drivera i opširnih reporta. Encoder456opažaja byte-exact, native2backend maske jednake arhivi;326pinned/311modern(3skip)/248core(35skip) PASS. TASK046audit3072steps/384clipupdates/96storednativepaths PASS, oba kriterija false; bez novog treninga.
 
 2026-11-12 — Na Harunov zahtjev pet analiza nakon ADR-032 (subagenti, samo čitanje i TRAIN-only

@@ -1,5 +1,7 @@
 # real-fire-data
 
+- [Action-value razvojni pokušaj](action-value-summary-v1.json) - CA 14,74% prema najboljoj referenci 9,49%; interval širok, frozen kriteriji ne prolaze (ADR-060).
+
 - [Sažeta CA/core integracija](ca-core-summary-v1.json) - Kompaktni nalazi, arhivska provenansa i tehničke provjere; bez per-case tabele.
 
 - [FPA-FOD ↔ FEDS-CONUS ↔ FLE crosswalk](fpa-feds-fle-crosswalk-v1.json) - combined 40/20 train/validation gate; FAIL u oba splita, test nije učitan.

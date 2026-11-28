@@ -1,0 +1,189 @@
+{
+  "schema_version": "action-value-summary/1.0",
+  "decision": "ADR-060",
+  "plan_commit": "eb96badb",
+  "numerical_commit": "17ef653f",
+  "design": "configs/frozen/action-value-pilot-v1.json",
+  "scope": "Exploratory TRAIN development, not independent/physical validation",
+  "split": {
+    "fitting_total": 45,
+    "fitting_joint_positive": 39,
+    "development_total": 16,
+    "primary_joint_positive": 14
+  },
+  "run": {
+    "seconds": 253.887938334,
+    "fresh_ca_cases": 61,
+    "stored_mask_outcomes": 1098,
+    "fresh_simfire_policy_replays": 16,
+    "models": 2
+  },
+  "audit": {
+    "status": "PASS",
+    "cases": 61,
+    "mask_outcomes": 1098,
+    "fitted_models": 2,
+    "development_paths": 32,
+    "analysis_sha256": "65e21a29604d01becb9116d6848bfb52d254c1c93e86b5ca7e8927e3e94b1fb3",
+    "audit_source_sha256": "51686a4092c188ffebd77722782780291c4e2c3648743aeef79781158c246578",
+    "scope": "Stored-mask/fit/statistic audit; native replay is in runner"
+  },
+  "fit_freeze_sha256": "10e1100a117f2cc840612c35b680cb48fd615eca444753f27edcf47d5cbdf8e8",
+  "joint_near": false,
+  "joint_better": false,
+  "backends": {
+    "simfire": {
+      "metrics": {
+        "n": 14,
+        "mean_saved_percent": 2.402506039057215,
+        "best_reference_percent": 11.286360756347799,
+        "reference_means_percent": [
+          0.0,
+          11.286360756347799,
+          4.3172150701033996,
+          10.939154499453052,
+          11.207057014315613,
+          8.261949560021618,
+          5.19232437132282,
+          1.0706133667630127,
+          0.22856964770059104,
+          1.170610381378921,
+          3.734594801525787,
+          5.225609205310177
+        ],
+        "ratio_to_best": 0.21286808838765597,
+        "delta_best_pp": -8.883854717290584,
+        "delta_best_ci95_pp": [
+          -26.777468486665143,
+          -2.0740251674557406
+        ],
+        "near": false,
+        "better": false,
+        "mean_saved_ha_all": 139.72500000000002,
+        "pooled_saved_percent_all": 1.229573925904806,
+        "reference_names": [
+          "noop",
+          "advancing_front64",
+          "downwind",
+          "fixed_1",
+          "fixed_2",
+          "fixed_3",
+          "fixed_4",
+          "fixed_5",
+          "fixed_6",
+          "fixed_7",
+          "fixed_8",
+          "uniform_legal_exact"
+        ]
+      },
+      "strongest_reference": "advancing_front64",
+      "actions": {
+        "8": 6,
+        "6": 5,
+        "7": 1,
+        "2": 1,
+        "0": 1,
+        "4": 1,
+        "3": 1
+      },
+      "per_case": [
+        {"scenario_id": "fpa-fod-400303584-goldstone", "primary": true, "action": 8, "noop_cells": 9, "saved_cells": 0, "reference_saved_cells": 0.0},
+        {"scenario_id": "fpa-fod-400307379-weston-pass", "primary": true, "action": 8, "noop_cells": 607, "saved_cells": 4, "reference_saved_cells": 579.0},
+        {"scenario_id": "fpa-fod-400505027-pine-lodge", "primary": true, "action": 8, "noop_cells": 3235, "saved_cells": 217, "reference_saved_cells": 303.0},
+        {"scenario_id": "fpa-fod-400312787-black-mountain", "primary": true, "action": 6, "noop_cells": 11804, "saved_cells": -39, "reference_saved_cells": 155.0},
+        {"scenario_id": "fpa-fod-400304718-west-valley", "primary": true, "action": 6, "noop_cells": 11570, "saved_cells": 213, "reference_saved_cells": -11.0},
+        {"scenario_id": "fpa-fod-400508306-lookout-point", "primary": true, "action": 8, "noop_cells": 4, "saved_cells": 0, "reference_saved_cells": 0.0},
+        {"scenario_id": "fpa-fod-400310914-echo", "primary": true, "action": 6, "noop_cells": 3736, "saved_cells": 26, "reference_saved_cells": -4.0},
+        {"scenario_id": "fpa-fod-400306102-rattlesnake", "primary": true, "action": 6, "noop_cells": 13, "saved_cells": 0, "reference_saved_cells": 0.0},
+        {"scenario_id": "fpa-fod-400503581-coldwater", "primary": false, "action": 8, "noop_cells": 0, "saved_cells": 0, "reference_saved_cells": 0.0},
+        {"scenario_id": "fpa-fod-400310583-organ", "primary": false, "action": 7, "noop_cells": 0, "saved_cells": 0, "reference_saved_cells": 0.0},
+        {"scenario_id": "fpa-fod-400541373-mp-97", "primary": true, "action": 6, "noop_cells": 325, "saved_cells": 0, "reference_saved_cells": 34.0},
+        {"scenario_id": "fpa-fod-400308652-dog-creek", "primary": true, "action": 2, "noop_cells": 3553, "saved_cells": 13, "reference_saved_cells": 37.0},
+        {"scenario_id": "fpa-fod-400300963-coal-hollow", "primary": true, "action": 0, "noop_cells": 1318, "saved_cells": 0, "reference_saved_cells": 548.0},
+        {"scenario_id": "fpa-fod-400311253-martin", "primary": true, "action": 8, "noop_cells": 17709, "saved_cells": -8, "reference_saved_cells": -8.0},
+        {"scenario_id": "fpa-fod-400302943-cranston", "primary": true, "action": 4, "noop_cells": 1122, "saved_cells": 0, "reference_saved_cells": -10.0},
+        {"scenario_id": "fpa-fod-400307776-bull-draw", "primary": true, "action": 3, "noop_cells": 1112, "saved_cells": 264, "reference_saved_cells": 0.0}
+      ]
+    },
+    "ca": {
+      "metrics": {
+        "n": 14,
+        "mean_saved_percent": 14.741339335209087,
+        "best_reference_percent": 9.48778615873565,
+        "reference_means_percent": [
+          0.0,
+          3.3496724148783263,
+          1.096442688344077,
+          6.155443664311437,
+          4.923277035344307,
+          2.4506105653271013,
+          9.231175055402243,
+          6.457591073224118,
+          6.728672313970372,
+          9.48778615873565,
+          4.135429999885128,
+          6.196248233275045
+        ],
+        "ratio_to_best": 1.5537174941107157,
+        "delta_best_pp": 5.253553176473437,
+        "delta_best_ci95_pp": [
+          -10.423238197096698,
+          9.961400807839729
+        ],
+        "near": false,
+        "better": false,
+        "mean_saved_ha_all": 142.76250000000002,
+        "pooled_saved_percent_all": 7.647250244061178,
+        "reference_names": [
+          "noop",
+          "advancing_front64",
+          "downwind",
+          "fixed_1",
+          "fixed_2",
+          "fixed_3",
+          "fixed_4",
+          "fixed_5",
+          "fixed_6",
+          "fixed_7",
+          "fixed_8",
+          "uniform_legal_exact"
+        ]
+      },
+      "strongest_reference": "fixed_7",
+      "actions": {
+        "5": 1,
+        "1": 5,
+        "3": 3,
+        "7": 2,
+        "6": 2,
+        "0": 2,
+        "8": 1
+      },
+      "per_case": [
+        {"scenario_id": "fpa-fod-400303584-goldstone", "primary": true, "action": 5, "noop_cells": 96, "saved_cells": 46, "reference_saved_cells": 9.0},
+        {"scenario_id": "fpa-fod-400307379-weston-pass", "primary": true, "action": 1, "noop_cells": 106, "saved_cells": 5, "reference_saved_cells": 0.0},
+        {"scenario_id": "fpa-fod-400505027-pine-lodge", "primary": true, "action": 3, "noop_cells": 312, "saved_cells": 1, "reference_saved_cells": 12.0},
+        {"scenario_id": "fpa-fod-400312787-black-mountain", "primary": true, "action": 1, "noop_cells": 776, "saved_cells": 92, "reference_saved_cells": 1.0},
+        {"scenario_id": "fpa-fod-400304718-west-valley", "primary": true, "action": 1, "noop_cells": 595, "saved_cells": 153, "reference_saved_cells": 15.0},
+        {"scenario_id": "fpa-fod-400508306-lookout-point", "primary": true, "action": 3, "noop_cells": 53, "saved_cells": 14, "reference_saved_cells": 0.0},
+        {"scenario_id": "fpa-fod-400310914-echo", "primary": true, "action": 7, "noop_cells": 426, "saved_cells": 56, "reference_saved_cells": 56.0},
+        {"scenario_id": "fpa-fod-400306102-rattlesnake", "primary": true, "action": 1, "noop_cells": 205, "saved_cells": 27, "reference_saved_cells": 89.0},
+        {"scenario_id": "fpa-fod-400503581-coldwater", "primary": false, "action": 1, "noop_cells": 73, "saved_cells": 0, "reference_saved_cells": 0.0},
+        {"scenario_id": "fpa-fod-400310583-organ", "primary": false, "action": 6, "noop_cells": 63, "saved_cells": 12, "reference_saved_cells": 0.0},
+        {"scenario_id": "fpa-fod-400541373-mp-97", "primary": true, "action": 3, "noop_cells": 561, "saved_cells": 18, "reference_saved_cells": 0.0},
+        {"scenario_id": "fpa-fod-400308652-dog-creek", "primary": true, "action": 7, "noop_cells": 469, "saved_cells": 281, "reference_saved_cells": 281.0},
+        {"scenario_id": "fpa-fod-400300963-coal-hollow", "primary": true, "action": 6, "noop_cells": 7, "saved_cells": 0, "reference_saved_cells": 0.0},
+        {"scenario_id": "fpa-fod-400311253-martin", "primary": true, "action": 0, "noop_cells": 4761, "saved_cells": 0, "reference_saved_cells": 23.0},
+        {"scenario_id": "fpa-fod-400302943-cranston", "primary": true, "action": 0, "noop_cells": 569, "saved_cells": 0, "reference_saved_cells": 0.0},
+        {"scenario_id": "fpa-fod-400307776-bull-draw", "primary": true, "action": 8, "noop_cells": 147, "saved_cells": 0, "reference_saved_cells": 0.0}
+      ]
+    }
+  },
+  "limitations": [
+    "Repeatedly explored TRAIN development split; not an independent holdout.",
+    "One frozen CA spread replicate0; no physical validation.",
+    "Only first-decision B1 deployment or permanent no-op, full four-step48h horizon.",
+    "CA higher mean does not pass frozen near/better uncertainty criterion.",
+    "Not PPO and not evidence of budget adaptation; real VALIDATION/TEST2024 closed."
+  ]
+}

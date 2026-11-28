@@ -4,6 +4,17 @@ title: Naredni korak — pregled nakon faze 2 (2026-11-12)
 ---
 # Naredni korak
 
+## 2026-11-28 — pokušaj završen; review nalaza prije nove faze
+
+[Rezultat, komande i ograničenja](research/ACTION_VALUE_PILOT.md), ADR-060.
+Nema aktivnog računanja ili razloga za ponovno treniranje istog kandidata.
+CA 14,74% prema 9,49% je pozitivan razvojni prosjek, ali frozen near/better kriterij
+nije prošao zbog nesigurnosti. SimFire rezultat je slab. Za review prikazati oba.
+`codex/action-value-pilot` čuva ovaj mali dodatak, PR22 ostaje neizmijenjen.
+Sljedeći korak je odluka o integraciji i odvojenom planu za širu CA provjeru /
+native control i budžete. Nema dodatne pretrage modela, automatskog mergea ili
+novog otvaranja realnog VALIDATION/TEST2024. Lokalni audit i sve provjere su gotovi.
+
 ## 2026-11-24 — manja grana spremna za provjeru
 
 [Opseg, nalazi i komande](research/CA_CORE_INTEGRATION.md), ADR-058. `codex/ca-core-integration` kreće izmaina

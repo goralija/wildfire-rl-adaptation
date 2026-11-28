@@ -4,6 +4,12 @@ title: Naredni zadaci
 ---
 # Naredni zadaci
 
+## 2026-11-28 — dopuna TASK047 prije mergea
+
+[ADR-059/action-value pokušaj](research/ACTION_VALUE_PILOT.md) završio je dopunu integracijskog
+TASK047 jednim ograničenim TRAIN45/16 eksperimentom na zasebnoj grani (ADR-060).
+CA povoljan prosjek, frozen kriteriji false; audit PASS. Bez daljeg kandidata; TASK048 CA control/native parity ugovor ostaje sljedeći odvojeni pravac.
+
 ## 2026-11-24 — završetak ove faze
 
 Završeni B1/optimizer rad do TASK046 je na sačuvanoj research grani. Odgođeni

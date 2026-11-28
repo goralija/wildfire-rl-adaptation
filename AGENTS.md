@@ -4,6 +4,11 @@ title: Rad na projektu
 ---
 # Rad na projektu
 
+**2026-11-28, ADR-060:** [TASK-047 plan/status](docs/research/ACTION_VALUE_PILOT.md)
+je završen: CA povoljan razvojni prosjek 14,74% prema 9,49%, ali frozen near/better
+kriteriji nisu prošli. Audit i testovi PASS, nema aktivnog računanja ili novog
+kandidata. Nema mergea, stvarni VALIDATION/TEST ostaju zatvoreni.
+
 **Aktuelno — 2026-11-24:** [sažeta integracija i nastavak](docs/research/CA_CORE_INTEGRATION.md), ADR-058.
 Za review koristiti `codex/ca-core-integration` izmaina; istraživačka historija je
 sačuvana na `codex/separate-clip-pilot`/c4062a84. Treninzi su završeni, nema aktivnog

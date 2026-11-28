@@ -1,5 +1,12 @@
 # Promjene baze znanja
 
+## 2026-11-28: action-value pokušaj završen
+
+[ADR-059/060 i nalaz](docs/research/ACTION_VALUE_PILOT.md): jedan zaključan pokušaj,
+CA14,74% prema najjačoj referenci9,49%, SimFire2,40% prema11,29%. Povoljan CA
+razvojni prosjek, ali oba near/better kriterija false. 337pinned, audit1098maski,
+CLI/knowledge PASS. Nema aktivnog treninga; PR22 neizmijenjen, realni holdouti zatvoreni.
+
 ## 2026-11-24: manja integracija iz maina
 
 [ADR-058/opseg](docs/research/CA_CORE_INTEGRATION.md): zadržana jezgra i testovi, opširna istraživačka historija sačuvana na c4062a84. Encoder456opažaja i native maske identični; nema aktivnog treninga ili promovirane PPO prednosti.

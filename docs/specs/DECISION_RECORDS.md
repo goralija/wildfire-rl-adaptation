@@ -1454,3 +1454,27 @@ better: donja granica >0. Sve reference ponovo birane unutar bootstrap uzorka.
 Razvojni nalaz, ne fizička validacija; nema novog PPO-a ili otvaranja holdouta.
 Ovaj izuzetak od završene B1 faze u ADR-058 ne mijenja njene negativne rezultate.
 PR22 ostaje neizmijenjen, nova grana `codex/action-value-pilot`; bez mergea.
+
+## ADR-060 — Action-value pokušaj završen: povoljan CA prosjek, nepotvrđena prednost (2026-11-28)
+
+[TASK-047 dopuna](../research/ACTION_VALUE_PILOT.md) po planu eb96badb; numerički kod
+17ef653f prije prvog fittinga/razvojne ocjene. Tehnička ispravka front reference
+dbcddb6d prethodila je fittingu, poslije prvo padajućeg testa i 61/61 početnih
+parity provjera. Kandidat, podaci, kriteriji i alpha nisu podešavani po rezultatu.
+
+Jedan deterministički model po backendu; 39 od 45 joint-positive fitting požara,
+16 razvojnih, primarno istih 14 s pozitivnim no-opom u oba simulatora. Run 4,23 min.
+CA selektor 14,74% saved prema max-reference 9,49% (155,4% učinka), SimFire
+2,40% prema 11,29% (21,3%). CA bira šest smjerova i dva no-opa. Opisni raspon
+learner−max-reference CA [−10,42; +9,96] pp, SF [−26,78; −2,07] pp; reference se
+ponovo maksimiziraju u svakom uzorku. Oba frozen near/better kriterija false.
+Povoljan CA razvojni signal nije dokaz neinferiornosti, PPO napretka, fizičke
+validacije ili adaptacije budžetu; primarno poređenje ostaje B1 početni potez.
+
+[Nalaz i svi slučajevi](../../reports/real-fire-data/action-value-summary-v1.json).
+1098 stored mask-score ishoda, dva fit-only refita, 32 razvojne odluke i zasebna
+statistika audit PASS; 16 dodatnih fresh SF replayeva PASS, svi CA ishodi fresh
+u ovom runu. 337 pinned, 322 modern (3 skip), 259 core (35 skip), 15 knowledge,
+CLI/strict PASS. Arhiva i mali PR22 ostaju sačuvani, bez mergea/novog treninga.
+Zatvoriti ovaj pokušaj bez novog kandidata; šira provjera CA i native parity
+traže sljedeći zaseban plan. VALIDATION/TEST2024 ostaju zatvoreni.

@@ -13,6 +13,11 @@ sources:
 ---
 # Projektni kontekst
 
+**2026-11-28, ADR-060:** [TASK-047 dopuna](../docs/research/ACTION_VALUE_PILOT.md) je
+završena. CA action-value selektor daje 14,74% prema najjačoj referenci 9,49%, ali
+oba frozen kriterija false zbog nesigurnosti; SimFire 2,40% prema 11,29%. To je
+TRAIN razvojni signal, nije PPO, nezavisan test ili fizička validacija. Nema aktivnog računanja.
+
 **Aktuelno — 2026-11-24:** [sažeta integracija i nastavak](../docs/research/CA_CORE_INTEGRATION.md), ADR-058.
 Za review koristiti `codex/ca-core-integration` izmaina; istraživačka historija je
 sačuvana na `codex/separate-clip-pilot`/c4062a84. Treninzi su završeni, nema aktivnog

@@ -5,6 +5,10 @@ okf_version: "0.2"
 
 ## Počni ovdje
 
+- [Aktivno: završni action-value pokušaj](docs/research/ACTION_VALUE_PILOT.md) - Jedan ograničen TRAIN razvojni eksperiment prije mergea, ADR-059.
+
+- [Aktivno: jedan završni action-value pokušaj](docs/research/ACTION_VALUE_PILOT.md) - TASK-047/ADR-059, zasebna grana prije mergea.
+
 - [Aktivno: manja SimFire/CA integracija](docs/research/CA_CORE_INTEGRATION.md) - Sačuvan research arhiv; izdvajaju se samo jezgra i testovi.
 
 - [Projekt i pokretanje](README.md) - Cilj istraživanja i minimalni setup.

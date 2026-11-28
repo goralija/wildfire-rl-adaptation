@@ -7,6 +7,18 @@ sources:
 ---
 # Trenutno stanje — 2026-11-12
 
+## 2026-11-28 — action-value pokušaj završen, pozitivan CA prosjek
+
+[TASK-047 dopuna / ADR-060](research/ACTION_VALUE_PILOT.md): CA selektor 14,74%
+spašene charged no-op površine prema najjačoj referenci 9,49% (155,4% učinka).
+SimFire 2,40% prema 11,29%. CA bira šest smjerova i dva puta no-op; nije PPO.
+Opisni CA raspon prema max-reference [−10,42; +9,96] pp: frozen near/better kriteriji
+ne prolaze. Isti ranije istraženi TRAIN45/16, primarno 14 zajedničkih požara;
+nema fizičke validacije ili potvrđene RL/budget prednosti. Puni run 4,23 min,
+337 pinned / 322 modern (3 skip) / 259 core (35 skip), CLI/knowledge/audit PASS.
+Nema aktivnog računanja. Nova grana je zasebna, PR22 neizmijenjen i nije mergean.
+Ovaj pokušaj zatvoren bez dodatnog kandidata; realni holdouti ostaju zatvoreni.
+
 ## 2026-11-24 — manja grana spremna za provjeru
 
 [Opseg, nalazi i komande](research/CA_CORE_INTEGRATION.md), ADR-058. `codex/ca-core-integration` kreće izmaina
