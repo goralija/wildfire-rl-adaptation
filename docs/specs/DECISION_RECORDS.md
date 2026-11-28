@@ -1442,3 +1442,15 @@ nezavisna statistika PASS. Manja jezgra: encoder456opažaja byte-exact, native2b
 no-op/finalmaske identične arhivi;326pinned/311modern(3skip)/248core(35skip) PASS.
 Ovo nije freshfullrestore96putanja ili fizička validacija. Dalje review manje grane
 i odluka o mergeu, zatim odvojeni CAcontrol/native parity ugovor.
+
+## ADR-059 — Jedan action-value pokušaj prije odluke o mergeu (2026-11-28)
+
+Korisnik želi pokazati blizak ili bolji učinak prije mergea. Odobrava nastavak malog
+lokalnog istraživanja; [TASK-047 plan](../research/ACTION_VALUE_PILOT.md) i JSON dizajn
+zamrznuti su prije koda/novih ishoda. Jedan shared-direction ridge po backendu,
+isti45/16TRAIN i B1/48h, potpune početne kontrafaktualne oznake umjesto PPO uzorkovanja.
+Near: ≥90% najjače od zamrznutih referenci i donja paired bootstrap granica ≥−2pp;
+better: donja granica >0. Sve reference ponovo birane unutar bootstrap uzorka.
+Razvojni nalaz, ne fizička validacija; nema novog PPO-a ili otvaranja holdouta.
+Ovaj izuzetak od završene B1 faze u ADR-058 ne mijenja njene negativne rezultate.
+PR22 ostaje neizmijenjen, nova grana `codex/action-value-pilot`; bez mergea.

@@ -6,6 +6,8 @@
 
 ## Dokumenti
 
+- [Završni B1 action-value pokušaj](ACTION_VALUE_PILOT.md) - TASK-047 plan prije ishoda.
+
 - [Sažeta SimFire/CA integracija](CA_CORE_INTEGRATION.md) - Opseg manje grane i provjere.
 
 - [Dataset: šta imamo i šta ćemo koristiti](DATASET.md) - Dataset Review
