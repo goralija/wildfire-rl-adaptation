@@ -4,6 +4,13 @@ title: Naredni korak — pregled nakon faze 2 (2026-11-12)
 ---
 # Naredni korak
 
+## 2026-11-28 — dovršiti TASK-049
+
+[Plan i pokretanje](research/ACTION_VALUE_ROBUSTNESS.md). Jedan zamrznuti CA model,
+dva dodatna spread seeda na16požara, pa LOO61 istog learnera. Prvo provjeriti lokalni
+status aktivnog runa; ne pokretati duplikat ili pretraživati parametre. Poslije
+audita zapisati sve rezultate i zaključiti širu provjeru. Realni holdouti zatvoreni.
+
 ## 2026-11-28 — pokušaj završen; review nalaza prije nove faze
 
 [Rezultat, komande i ograničenja](research/ACTION_VALUE_PILOT.md), ADR-060.

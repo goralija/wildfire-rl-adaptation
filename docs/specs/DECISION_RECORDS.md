@@ -1479,6 +1479,18 @@ CLI/strict PASS. Arhiva i mali PR22 ostaju sačuvani, bez mergea/novog treninga.
 Zatvoriti ovaj pokušaj bez novog kandidata; šira provjera CA i native parity
 traže sljedeći zaseban plan. VALIDATION/TEST2024 ostaju zatvoreni.
 
+## ADR-061 — Šira provjera fiksnog action-value nalaza (2026-11-28)
+
+Korisnik traži širu provjeru nakon ADR-060. [TASK-049 plan](../research/ACTION_VALUE_ROBUSTNESS.md)
+6edb724c prethodi kodu i novim ishodima. Postojeći CA model ostaje zamrznut na
+istih 16 požara kroz spread replike0/1/2. Sekundarno LOO61 u oba backend-a koristi
+isti learner/alpha10, svaki požar isključen iz fittinga i skaliranja svog folda.
+Dodati fitting-only izabranu referencu; čuvati sve ishode, omjere i delete-one
+osjetljivost. Bootstrap klaster je požar, ne replika ili fold-fit. Raniji near/better
+uslovi ostaju; nova analiza je razvojna, s preklapajućim fitovima i bez nezavisnog
+holdouta. Nema novog kandidata, pretrage parametara, PPO treninga ili mergea.
+Max3nice19 radnika plus koordinator; stvarni VALIDATION/TEST2024 ostaju zatvoreni.
+
 ## ADR-061 — Šira provjera istog action-value algoritma (2026-11-28)
 
 Korisnik izričito traži širu provjeru nakon ADR-060. [TASK-049 plan](../research/ACTION_VALUE_ROBUSTNESS.md)

@@ -7,6 +7,14 @@ sources:
 ---
 # Trenutno stanje — 2026-11-12
 
+## 2026-11-28 — TASK-049 šira provjera u pripremi
+
+[Plan ADR-061](research/ACTION_VALUE_ROBUSTNESS.md): korisnik odobrava provjeru
+zamrznutog CA modela kroz još dvije realizacije i istog algoritma kroz LOO61 na
+oba backend-a. Bez novog kandidata ili realnih holdouta. Plan6edb724c prije koda
+i novih ishoda; sedam novih testova za odvajanje foldova/agregaciju PASS.
+Novi nalaz se ne tvrdi prije potpunog audita. PR22 ostaje neizmijenjen.
+
 ## 2026-11-28 — action-value pokušaj završen, pozitivan CA prosjek
 
 [TASK-047 dopuna / ADR-060](research/ACTION_VALUE_PILOT.md): CA selektor 14,74%
