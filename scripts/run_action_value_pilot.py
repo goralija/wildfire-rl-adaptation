@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ADR-059 bounded TRAIN-only collection, one fit, one development evaluation."""
 import argparse
+from concurrent.futures import ProcessPoolExecutor, as_completed
 import hashlib
 import importlib.metadata
 import json
@@ -215,9 +216,10 @@ def main():
     for sid in ids:
         if (out/'cases'/(sid+'.json')).exists(): load_case(out, sid)
         else: pending.append((str(out), str(archive), sid))
-    with multiprocessing.get_context('spawn').Pool(3, initializer=setup_worker) as pool:
-        for sid in pool.imap_unordered(collect, pending):
-            print('case PASS', sid, flush=True)
+    with ProcessPoolExecutor(3, mp_context=multiprocessing.get_context('spawn'), initializer=setup_worker) as pool:
+        jobs = [pool.submit(collect, job) for job in pending]
+        for job in as_completed(jobs):
+            sid = job.result(); print('case PASS', sid, flush=True)
             status['completed_cases'] = len(list((out/'cases').glob('*.json'))); write(out/'status.json', status)
     if args.pilot:
         status.update(phase='pilot_complete', seconds=time.monotonic()-started); write(out/'status.json', status); return

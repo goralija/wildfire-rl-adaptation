@@ -76,7 +76,7 @@ def reference_actions(observation, mask):
         a = int(np.argmax(directions @ [x, y])) + 1
         return a if mask[a] else 0
     wind = sector(v[1], -v[2])
-    front = sector(*v[160:162]) if v[4] > 0 and v[5] > 0 and np.hypot(*v[160:162])*63 >= 1e-6 else wind
+    front = sector(*v[160:162]) if v[5] > 0 and np.hypot(*v[160:162])*63 >= 1e-6 else wind
     return dict(noop=0, advancing_front64=front, downwind=wind,
                 **{'fixed_'+str(k): k if mask[k] else 0 for k in range(1, 9)})
 

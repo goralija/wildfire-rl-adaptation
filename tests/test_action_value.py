@@ -84,3 +84,9 @@ class ActionValueTests(unittest.TestCase):
         obs[4:6] = [1., 1.]; obs[160:162] = [1., 0.]
         refs = self.m.reference_actions(obs, np.ones(9, bool))
         self.assertEqual(refs['downwind'], 7); self.assertEqual(refs['advancing_front64'], 1)
+
+    def test_front_reference_when_legacy_burned_is_empty(self):
+        obs = np.zeros(536); obs[1:3] = [0., 1.]
+        obs[5] = .01; obs[160:162] = [-.01, .01]
+        refs = self.m.reference_actions(obs, np.ones(9, bool))
+        self.assertEqual(refs['advancing_front64'], 4)
