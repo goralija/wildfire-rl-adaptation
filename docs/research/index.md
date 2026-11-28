@@ -6,6 +6,8 @@
 
 ## Dokumenti
 
+- [Šira action-value provjera](ACTION_VALUE_ROBUSTNESS.md) - TASK-049, zamrznuti model kroz širenja i svih 61 TRAIN LOO.
+
 - [Završni B1 action-value pokušaj](ACTION_VALUE_PILOT.md) - TASK-047 plan prije ishoda.
 
 - [Sažeta SimFire/CA integracija](CA_CORE_INTEGRATION.md) - Opseg manje grane i provjere.

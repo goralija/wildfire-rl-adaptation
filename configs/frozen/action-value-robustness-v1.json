@@ -1,0 +1,92 @@
+{
+  "schema_version": "action-value-robustness/1.0",
+  "task": "TASK-049",
+  "decision": "ADR-061",
+  "date": "2026-11-28",
+  "parent_commit": "e454da16",
+  "parent_plan_sha256": "c5f57e5db28663edc1aeeb97829280cf33bb12a6ff01f666ea160e51ed009fba",
+  "parent_files_sha256": {
+    "analysis.json": "65e21a29604d01becb9116d6848bfb52d254c1c93e86b5ca7e8927e3e94b1fb3",
+    "audit.json": "dac9af1eef6784a14371d09f131da84a0a352809cdf67629852d6cefbe8a39fa",
+    "fit-freeze.json": "10e1100a117f2cc840612c35b680cb48fd615eca444753f27edcf47d5cbdf8e8",
+    "guard.json": "94291fb2e12c04624f8f4f27e62b993e361e17e94d453460b597640739790007"
+  },
+  "parent_case_set_sha256": "e3c58e279eb477febb47aa50626c9c5567d0c12796a20b26a0d91755aa00394d",
+  "frozen_models_sha256": {
+    "simfire": "e4fe17f66c2b863ff867ea5fa0a3d9e2223974067ce6d4b83219791895f8244e",
+    "ca": "5985840200523086a5e538314195a1ede3d76016daec48ad213891db66fbf780"
+  },
+  "primary": {
+    "name": "frozen_ca_spread_replication",
+    "cases": "same16development",
+    "replicates": [
+      0,
+      1,
+      2
+    ],
+    "policy": "unchanged_parent_ca_model",
+    "primary_denominator": "SF_noop_positive_and_CA_positive_in_all_three_replicates",
+    "aggregation": "percentage_per_fire_then_mean_physical_replicates_then_fire_mean",
+    "zero_noop": "undefined_percentage_excluded_jointly_only; all cases remain in hectares_and_pooled",
+    "references": [
+      "noop",
+      "advancing_front64",
+      "downwind",
+      "fixed_1",
+      "fixed_2",
+      "fixed_3",
+      "fixed_4",
+      "fixed_5",
+      "fixed_6",
+      "fixed_7",
+      "fixed_8",
+      "uniform_legal_exact"
+    ],
+    "near_ratio": 0.9,
+    "near_lower_ci_margin_pp": -2.0,
+    "better_lower_ci_pp": 0.0,
+    "bootstrap": "10000 seed0 paired fire clusters; reselect strongest reference per draw"
+  },
+  "secondary": {
+    "name": "leave_one_fire_out61",
+    "backends": [
+      "simfire",
+      "ca"
+    ],
+    "cases": "all61parent_cases",
+    "replicate": 0,
+    "learner": "unchanged_shared_direction_ridge_alpha10",
+    "held_out": "whole_fire_scaler_labels_masks_excluded_from_fit",
+    "fitting": "joint_positive_other_fires_only",
+    "references": [
+      "noop",
+      "advancing_front64",
+      "downwind",
+      "fixed_1",
+      "fixed_2",
+      "fixed_3",
+      "fixed_4",
+      "fixed_5",
+      "fixed_6",
+      "fixed_7",
+      "fixed_8",
+      "uniform_legal_exact",
+      "fit_selected_reference"
+    ],
+    "baseline_selection": "strongest original12 on fitting fires only, fixed menu order resolves ties",
+    "uncertainty": "descriptive_fire_bootstrap_of_fixed_OOF_predictions; overlapping_fits_not_independent_training_samples",
+    "leave_one_effect_out": "all_primary_case_deletions_without_refit_reselecting_reference_each_time"
+  },
+  "guardrails": [
+    "one fixed algorithm, no parameter search",
+    "no actual VALIDATION or TEST2024",
+    "no future FEDS",
+    "B1 first action only then three noops; full48h",
+    "same initial observation and mask all physical replicates",
+    "no new weights for frozen16 arm",
+    "max3 nice19 workers plus coordinator, threads1",
+    "30 minute hard run limit",
+    "no automatic merge",
+    "all seed/fold outcomes reported, no best seed selection"
+  ]
+}

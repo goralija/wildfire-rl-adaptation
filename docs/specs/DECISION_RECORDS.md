@@ -1478,3 +1478,13 @@ u ovom runu. 337 pinned, 322 modern (3 skip), 259 core (35 skip), 15 knowledge,
 CLI/strict PASS. Arhiva i mali PR22 ostaju sačuvani, bez mergea/novog treninga.
 Zatvoriti ovaj pokušaj bez novog kandidata; šira provjera CA i native parity
 traže sljedeći zaseban plan. VALIDATION/TEST2024 ostaju zatvoreni.
+
+## ADR-061 — Šira provjera istog action-value algoritma (2026-11-28)
+
+Korisnik izričito traži širu provjeru nakon ADR-060. [TASK-049 plan](../research/ACTION_VALUE_ROBUSTNESS.md)
+prethodi novim ishodima. Primarno postojeći CA model bez fittinga na istih16požara,
+replike0/1/2 sa paired-fire statistikom. Sekundarno isti algoritam/alpha10, svih61
+TRAIN u LOO po požaru, oba backenda i fitting-only izabrana referenca. Čuvati sve
+foldove/replike i raspon osjetljivosti na pojedinačni požar. Bez novih kandidata,
+parametara, stvarnih holdouta ili promjene postojećih rezultata. Razvojno,
+ne nezavisna fizička/RL validacija. TASK048 native parity ostaje zaseban prijedlog.
